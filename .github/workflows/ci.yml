@@ -21,7 +21,7 @@ jobs:
           # licensed data. Under the default fetch-depth 1 it can only see the tip and
           # would pass on a leak it cannot reach (measured 2026-08-26).
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d  # v10.0.1
         with:
           python-version: "3.12"
       - name: Sync locked environment
@@ -78,7 +78,7 @@ jobs:
         run: |
           git fetch origin main:refs/remotes/origin/main
           git fetch origin '+refs/pull/*/head:refs/pull/*/head'
-      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d  # v10.0.1
         with:
           python-version: "3.12"
       - name: Sync locked environment
@@ -114,7 +114,7 @@ jobs:
           # licensed data. Under the default fetch-depth 1 it can only see the tip and
           # would pass on a leak it cannot reach (measured 2026-08-26).
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d  # v10.0.1
         with:
           python-version: "3.12"
       - name: Sync locked environment
