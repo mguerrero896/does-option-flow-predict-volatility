@@ -35,7 +35,7 @@
   }
  ],
  "authorized_sources": {
-  ".github/workflows/ci.yml": "1b52c28fc6734ae264879c87c9164c002690876de1510960a85f87c73c9de4b9",
+  ".github/workflows/ci.yml": "f5b1490eb1b9e779a13b86bc50473b4c33f9a4e216de2e631fabb6bf3cd5a9dd",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
   "artifacts/phase9/power_deadline_audit_v1.json": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62",
