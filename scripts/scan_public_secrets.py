@@ -13,7 +13,15 @@ from pathlib import Path
 
 MAX_BLOB_BYTES = 25 * 1024 * 1024
 COMMIT_EMAILS = re.compile(rb"^(?:author|committer) .* <([^>\r\n]+)>", re.MULTILINE)
-PUBLIC_GIT_EMAIL = re.compile(rb"^[^@\s<>]+@users\.noreply\.github\.com$")
+PUBLIC_GIT_EMAIL = re.compile(
+    rb"^(?:[^@\s<>]+@users\.noreply\.github\.com|noreply@github\.com)$"
+)
+GITHUB_MERGE_COMMITTER = re.compile(
+    rb"^committer GitHub <noreply@github\.com> ", re.MULTILINE
+)
+GITHUB_SYNTHETIC_MERGE_MESSAGE = re.compile(
+    rb"^Merge [0-9a-f]{40} into [0-9a-f]{40}\n?$"
+)
 
 PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ("aws_access_key", re.compile(rb"(?:A3T[A-Z0-9]|AKIA|ASIA)[A-Z0-9]{16}")),
@@ -47,6 +55,17 @@ def _git(repo: Path, *args: str, input_bytes: bytes | None = None) -> bytes:
         capture_output=True,
         check=True,
     ).stdout
+
+
+def _is_github_synthetic_merge(content: bytes) -> bool:
+    """Recognise GitHub's temporary two-parent PR test merge."""
+    headers, separator, message = content.partition(b"\n\n")
+    return bool(
+        separator
+        and sum(line.startswith(b"parent ") for line in headers.splitlines()) == 2
+        and GITHUB_MERGE_COMMITTER.search(headers)
+        and GITHUB_SYNTHETIC_MERGE_MESSAGE.fullmatch(message)
+    )
 
 
 def scan_repository(repo: Path) -> list[Finding]:
@@ -83,10 +102,13 @@ def scan_repository(repo: Path) -> list[Finding]:
                 f"refusing to skip oversized blob {object_id[:12]} path={path} "
                 f"size={size} limit={MAX_BLOB_BYTES}"
             )
-        if object_type == "commit" and any(
-            not PUBLIC_GIT_EMAIL.fullmatch(email) for email in COMMIT_EMAILS.findall(content)
-        ):
-            findings.append(Finding("non_noreply_git_identity", object_id, path))
+        if object_type == "commit":
+            has_private_identity = any(
+                not PUBLIC_GIT_EMAIL.fullmatch(email)
+                for email in COMMIT_EMAILS.findall(content)
+            )
+            if has_private_identity and not _is_github_synthetic_merge(content):
+                findings.append(Finding("non_noreply_git_identity", object_id, path))
         for rule, pattern in PATTERNS:
             if pattern.search(content):
                 findings.append(Finding(rule, object_id, path))

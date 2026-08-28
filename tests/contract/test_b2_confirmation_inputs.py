@@ -72,9 +72,25 @@ def test_probe_and_script_are_explicitly_target_blind_before_target_stage(
 
 
 def test_b1_input_preserves_early_origin_missingness(tmp_path: Path) -> None:
-    module = _module()
+    module = _module(_target_blind_probe(tmp_path))
     module.ARTIFACT_ROOT = tmp_path / "artifacts"
+    module.B0_PREDICTORS = tmp_path / "derived" / "b0_predictors_60d.parquet"
     module.B1_ORIGINS = tmp_path / "derived" / "b1_origins_60d.parquet"
+    # The first six five-minute origins have no complete 30-minute lookback.
+    # Materialise that producer contract instead of borrowing the developer's panel.
+    module.B0_PREDICTORS.parent.mkdir(parents=True)
+    module._origins_frame().with_columns(
+        pl.when(pl.col("session_minute") <= 30)
+        .then(None)
+        .otherwise(100.0)
+        .cast(pl.Float64)
+        .alias("spot"),
+        pl.when(pl.col("session_minute") <= 30)
+        .then(pl.lit("B0V2_UNDERLYING_HISTORY_MISSING"))
+        .otherwise(None)
+        .cast(pl.String)
+        .alias("drop_reason"),
+    ).write_parquet(module.B0_PREDICTORS)
     eligible, excluded, reasons = module._prepare_b1_origins()
     assert eligible.height == 23_760
     assert excluded.height == 2_160
