@@ -28,6 +28,7 @@ import sys
 import zipfile
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
@@ -135,21 +136,27 @@ def _load_reconciler(external_root: Path) -> Any:
 
 
 def _load_verifier(external_root: Path) -> Any:
-    """Import uw_latency_verify with DATA_ROOT bound to a throwaway store.
+    """Import the verifier with production and effective roots kept distinct.
 
-    The module resolves DATA_ROOT from the environment at import time, so the
-    variable must be set before the spec is executed and the module must be
-    re-imported for every fixture.
+    The module resolves both roots at import time. The production sentinel need
+    not exist; it only proves a redirected fixture cannot raise a desktop popup.
     """
     import os
 
-    os.environ["MDS650_EXTERNAL_ROOT"] = str(external_root)
     sys.modules.pop("uw_latency_verify", None)
     spec = importlib.util.spec_from_file_location("uw_latency_verify", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules["uw_latency_verify"] = module
-    spec.loader.exec_module(module)
+    with patch.dict(
+        os.environ,
+        {
+            "MDS650_DATA_ROOT": str(external_root / "production-sentinel"),
+            "MDS650_EXTERNAL_ROOT": str(external_root),
+        },
+        clear=False,
+    ):
+        spec.loader.exec_module(module)
     return module
 
 
