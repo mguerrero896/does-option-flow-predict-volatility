@@ -1,0 +1,132 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# The default GITHUB_TOKEN is read-write; none of these jobs pushes anything,
+# so the token is scoped down to reads (CodeQL actions/missing-workflow-permissions).
+permissions:
+  contents: read
+
+jobs:
+  # Tier 1a — platform-independent static quality.
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          # Full history: tests/test_gated_history_contract.py scans git history for
+          # licensed data. Under the default fetch-depth 1 it can only see the tip and
+          # would pass on a leak it cannot reach (measured 2026-08-26).
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+        with:
+          python-version: "3.12"
+      - name: Sync locked environment
+        run: uv sync --locked
+      - name: Shell scripts parse (bash -n; CRLF or syntax breaks fail here)
+        run: find scripts -name '*.sh' -print0 | xargs -0 -n1 bash -n
+      - name: Ruff
+        run: uv run ruff check src scripts tests
+      - name: Mypy (strict)
+        run: uv run mypy src scripts
+      - name: Scan all reachable Git blobs for high-confidence secrets
+        run: uv run python scripts/scan_public_secrets.py
+      - name: Export locked runtime dependencies for audit
+        run: >
+          uv export --quiet --frozen --no-dev --no-emit-project
+          --format requirements.txt
+          --output-file "$RUNNER_TEMP/runtime-requirements.txt"
+      - name: Audit runtime dependencies
+        run: >
+          uv run pip-audit --strict --disable-pip
+          --requirement "$RUNNER_TEMP/runtime-requirements.txt"
+          --progress-spinner off
+
+  # Tier 1b — hermetic test suite: unit + property + synthetic e2e + schema/contract
+  # tests that assert only on git-tracked inputs. Evidence-bound tests self-skip
+  # (tests/evidence.py). One ignored file hard-requires the local licensed evidence
+  # store. Byte-compare contracts run here because their producers emit canonical LF.
+  # Tier 2 (full suite + licensed evidence + gated
+  # hash verification) runs locally via scripts/run_local_evidence_gates.py before
+  # every publish — see docs/ci_contract_v1.md.
+  hermetic:
+    runs-on: ubuntu-latest
+    env:
+      # The panel guards read the built RP2 panels, which are licensed-derived and never
+      # present on a hosted runner. Until 2026-08-24 they inferred that from a missing
+      # file and reported a pass; now the tier boundary is declared here, so a panel
+      # missing anywhere else -- a developer's machine, the tier-2 gate runner -- fails.
+      MDS650_PANEL_GUARD_MAY_SKIP: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          # Full history: tests/test_gated_history_contract.py scans git history for
+          # licensed data. Under the default fetch-depth 1 it can only see the tip and
+          # would pass on a leak it cannot reach (measured 2026-08-26).
+          fetch-depth: 0
+      # The mirror guard compares against the published tip. A default shallow
+      # checkout leaves no `origin/main` ref, and until 2026-08-24 the guard treated
+      # that as a pass. It now fails closed, so the ref has to actually be here.
+      #
+      # NOT --depth=1: a shallow fetch AFTER a full checkout re-shallows the
+      # repository, which silently reduced the history guard to a tree check
+      # (caught by that guard's own depth test on 2026-08-26).
+      - name: Fetch the published tip the mirror guard checks
+        run: |
+          git fetch origin main:refs/remotes/origin/main
+          git fetch origin '+refs/pull/*/head:refs/pull/*/head'
+      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+        with:
+          python-version: "3.12"
+      - name: Sync locked environment
+        run: uv sync --locked
+      - name: Hermetic pytest with coverage gate
+        run: >
+          uv run pytest tests -q
+          --ignore=tests/unit/test_independent_replication_panel.py
+          --cov=src/mds650 --cov-report=term --cov-fail-under=80
+
+
+  # Tier 1c - the contracts the scientific claims rest on. Separated from `hermetic` so a
+  # breach is legible as such in the checks list: a coverage-gate failure and an
+  # information set that stopped failing closed are not the same kind of red.
+  #
+  # Six of these assertions - the per-set panel coverage checks in
+  # `test_rp2_v3_feature_registry.py` - skip here, because they read panels built from
+  # licensed data that this runner never has. They run where the panels exist, under
+  # `scripts/run_local_evidence_gates.py`. A green check here means the contracts that can
+  # be checked without the licensed evidence hold; it does not mean coverage was measured.
+  scientific-contracts:
+    runs-on: ubuntu-latest
+    env:
+      # The panel guards read the built RP2 panels, which are licensed-derived and never
+      # present on a hosted runner. Until 2026-08-24 they inferred that from a missing
+      # file and reported a pass; now the tier boundary is declared here, so a panel
+      # missing anywhere else -- a developer's machine, the tier-2 gate runner -- fails.
+      MDS650_PANEL_GUARD_MAY_SKIP: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+        with:
+          # Full history: tests/test_gated_history_contract.py scans git history for
+          # licensed data. Under the default fetch-depth 1 it can only see the tip and
+          # would pass on a leak it cannot reach (measured 2026-08-26).
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@38f3f104447c67c051c4a08e39b64a148898af3a  # v4
+        with:
+          python-version: "3.12"
+      - name: Sync locked environment
+        run: uv sync --locked
+      - name: RP2 scientific contracts
+        run: >
+          uv run pytest
+          tests/contract/test_rp2_v3_feature_registry.py
+          tests/contract/test_rp2_v3_research_contract.py
+          tests/contract/test_rp2_v3_primary_model_producers.py
+          tests/e2e/test_rp2_b1_contemporaneous.py
+          tests/e2e/test_rp2_b2_point_in_time.py
+          tests/e2e/test_rp2_incremental_inference.py
+          tests/e2e/test_run_rp2_v3_pipeline.py
+          -q

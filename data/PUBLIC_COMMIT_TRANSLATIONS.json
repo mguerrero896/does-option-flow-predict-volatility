@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "run_id": "rp2-v3-20260827-remediation3",
+      "manifest": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
+      "recorded_code_commit": "e7728ebbaf3f353143a5faea2a54211bb5d16b12",
+      "historical_sanitized_commit_reference": "9b56466c65d63df54a97f9462c97d0cbad7f717c",
+      "recorded_git_tree_sha1": "d768a7a0ebda7443f2596b08e78eecd2098599dc",
+      "withdrawn_path_count": 5,
+      "withdrawn_path_classes": [
+        "internal planning documents",
+        "internal execution checklists",
+        "internal handoff tests"
+      ],
+      "retained_blobs_sha256": "8aee30a8c1f6922b09e68d4d7a63e48a71ff0cd2802b165eaa19edb8142bf2c1",
+      "status": "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE",
+      "verification_scope": "PRE_ROOT_SANITIZATION_AUDIT_NOT_REGENERATED_FROM_THIS_RELEASE"
+    }
+  ]
+}

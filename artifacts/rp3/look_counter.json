@@ -1,0 +1,4 @@
+{
+  "confirmatory_reads": 0,
+  "note": "The only legal trajectory is 0 until the single read of docs/rp3/PREREGISTRATION.md section 5, then 1. Any other value, at any time, invalidates the confirmatory claim. Guarded by tests/contract/test_rp3_program_guards.py."
+}

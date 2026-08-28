@@ -1,0 +1,161 @@
+{
+ "contrasts": {
+  "har_vs_har_b2": {
+   "cluster_t": {
+    "clusters": 45,
+    "estimate": -0.0006803005759706617,
+    "p_value": 0.6553730406412406,
+    "standard_error": 0.0015139100730022779,
+    "statistic": -0.44936656945649245
+   },
+   "days": 45,
+   "newey_west": {
+    "clusters": 45,
+    "estimate": -0.0006803005759706617,
+    "max_lag": 3,
+    "p_value": 0.5345275130611826,
+    "standard_error": 0.0010866846991814422,
+    "statistic": -0.6260330862145257
+   },
+   "wild_rademacher": {
+    "ci_high": 0.00230806133855126,
+    "ci_low": -0.003743351580945367,
+    "clusters": 45,
+    "estimate": -0.0006803005759706617,
+    "p_value": 0.6509,
+    "repetitions": 9999,
+    "seed": 650,
+    "statistic": -0.44936656945649245,
+    "weights": "rademacher"
+   }
+  },
+  "harq_vs_har": {
+   "cluster_t": {
+    "clusters": 45,
+    "estimate": 0.0002896463339109322,
+    "p_value": 0.42896242728996375,
+    "standard_error": 0.0003628116560775978,
+    "statistic": 0.7983380055710859
+   },
+   "days": 45,
+   "newey_west": {
+    "clusters": 45,
+    "estimate": 0.0002896463339109322,
+    "max_lag": 3,
+    "p_value": 0.4495067982867973,
+    "standard_error": 0.0003795913485073912,
+    "statistic": 0.7630477750609016
+   },
+   "wild_rademacher": {
+    "ci_high": 0.001007065593604588,
+    "ci_low": -0.00045615164711828617,
+    "clusters": 45,
+    "estimate": 0.0002896463339109322,
+    "p_value": 0.4309,
+    "repetitions": 9999,
+    "seed": 650,
+    "statistic": 0.7983380055710859,
+    "weights": "rademacher"
+   }
+  },
+  "harq_vs_harq_b2": {
+   "cluster_t": {
+    "clusters": 45,
+    "estimate": -0.0007042805711337281,
+    "p_value": 0.6345538920096914,
+    "standard_error": 0.001471372970325377,
+    "statistic": -0.47865536837881745
+   },
+   "days": 45,
+   "newey_west": {
+    "clusters": 45,
+    "estimate": -0.0007042805711337281,
+    "max_lag": 3,
+    "p_value": 0.504181899649429,
+    "standard_error": 0.0010457764193413381,
+    "statistic": -0.673452334656107
+   },
+   "wild_rademacher": {
+    "ci_high": 0.0021844339413145883,
+    "ci_low": -0.003669419637764992,
+    "clusters": 45,
+    "estimate": -0.0007042805711337281,
+    "p_value": 0.6283,
+    "repetitions": 9999,
+    "seed": 650,
+    "statistic": -0.47865536837881745,
+    "weights": "rademacher"
+   }
+  }
+ },
+ "feature_rows": 28787,
+ "feature_sessions": 75,
+ "inputs": {
+  "bars": {
+      "path": "MDS650_DATA_ROOT/data/fmp/gate3/underlying_1min_dev80.parquet",
+   "sha256": "894d6874e6910f2b54b9467a5dc9ac0e3a7b0fc56cdbc8d8b2a0235048917eb1"
+  },
+  "panel": {
+   "path": "REPOSITORY_ROOT\\artifacts\\phase5\\common_development_80d.parquet",
+   "sha256": "e5b9e04296d6dacd6c1321b760e1a253a47fcf67055a4e41b9d2c6a8b00c77da"
+  }
+ },
+ "label_convention": {
+  "chosen_shift_minutes": 0,
+  "shift_0_log_corr_vs_b0_rv_30m_lag": 1.0,
+  "shift_1_log_corr_vs_b0_rv_30m_lag": 0.9961750754974232
+ },
+ "pooled_oof_qlike": {
+  "har": 0.18041448171364158,
+  "har_b2": 0.18106916359524897,
+  "harq": 0.18012479689849553,
+  "harq_b2": 0.18080233269934393
+ },
+ "prespecified_winner_rule": "lower pooled OOF QLIKE between har and harq",
+ "schema_version": "gate3-har-v1.0",
+ "walk_forward": {
+  "folds": [
+   {
+    "har_b2_qlike": 0.16431608334801054,
+    "har_qlike": 0.16243253778736538,
+    "harq_b2_qlike": 0.16426007993300837,
+    "harq_qlike": 0.16226578968727248,
+    "test_sessions": 10,
+    "train_rows": 11367
+   },
+   {
+    "har_b2_qlike": 0.246895005788019,
+    "har_qlike": 0.24861172835412074,
+    "harq_b2_qlike": 0.2458990282836144,
+    "harq_qlike": 0.2474448516420105,
+    "test_sessions": 10,
+    "train_rows": 15172
+   },
+   {
+    "har_b2_qlike": 0.1941893475794407,
+    "har_qlike": 0.19350655619170196,
+    "harq_b2_qlike": 0.19387621721973403,
+    "harq_qlike": 0.19348145735278033,
+    "test_sessions": 10,
+    "train_rows": 19072
+   },
+   {
+    "har_b2_qlike": 0.13863488527054602,
+    "har_qlike": 0.13684821919900944,
+    "harq_b2_qlike": 0.13844997741460213,
+    "harq_qlike": 0.13653435211962947,
+    "test_sessions": 10,
+    "train_rows": 22970
+   },
+   {
+    "har_b2_qlike": 0.14005428341098242,
+    "har_qlike": 0.13937380703725127,
+    "harq_b2_qlike": 0.14077938712686205,
+    "harq_qlike": 0.14013532384374677,
+    "test_sessions": 5,
+    "train_rows": 26869
+   }
+  ]
+ },
+ "winner_base_model": "harq"
+}

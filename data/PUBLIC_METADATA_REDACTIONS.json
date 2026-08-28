@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "path": "artifacts/gate11_era_map/results.json",
+      "original_sha256": "8452ba99d0f11fc7b473bad6e0f71abcdb1a27001d45d06690abb97154b0c3ad",
+      "redacted_sha256": "08824c632631daedddf461b73b0d39a07f0414bd230cd448ca202d3070d261f0",
+      "scientific_payload_sha256": "3ba6c870c62db6f48cb8516ecfde99e2044ffbe13ebc4be655d49011fb32f357",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate12_harq_hardening/results.json",
+      "original_sha256": "79b7891fbd63715fc4c7783246cc84e8e2443f5b9d5872f70f6279342f1f275e",
+      "redacted_sha256": "4a44e6119572c964db2ab3c839baf3d9090fedf5157099eb972092b102247570",
+      "scientific_payload_sha256": "94222523fc6fe2c469f0d56070928f9fa0c62c4b6a29d82472da321b853fc9d8",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate12_harq_hardening/results_corrected_int8.json",
+      "original_sha256": "23a79c5f70c4855572fa54da0fe7e639ce8e8a0c8b31334019e031a44c00625a",
+      "redacted_sha256": "22e323688b96dde2aff79890ed4a444b682d05240d750acd5dabf3ceea265f37",
+      "scientific_payload_sha256": "cf1cd9e4faa88ac6ff0a83885c5ef8ec7b32fd5b83341dbf62b8268d19923057",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate1_inference/results.json",
+      "original_sha256": "dce0e6ac4fb78d3009b8c84bfcea63d3f9d65e135df265eb667d7ba9a459e143",
+      "redacted_sha256": "0e0728ee2c8e80b87a1d04f935895b7c215e24989cb98921e41a0427fc201cdc",
+      "scientific_payload_sha256": "d95739b64b7b6e295e2c6749a5c59aebfb50ae7b99c232a185af8c1f92911cf4",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate2_calibration/results.json",
+      "original_sha256": "6e8300b8f6ac660225b7d2072b14b02e6cb6fffb6f5c25580dcc9ee875037d1f",
+      "redacted_sha256": "9e4ba2f65b4270e9452be7e1f00516981cf5955b1ffd01fe0a0158fefd2c0c03",
+      "scientific_payload_sha256": "758ba625ab57cafc724a2f421e34492ae2ae2ff9638f58b05b9af312e270c871",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate3_har/results.json",
+      "original_sha256": "2dab3e6089f60c592c487fdd720996f691a2edca228c7374087483fc1a5db1b0",
+      "redacted_sha256": "ca6f042846e24d267c3060da83c5eaed1b444879b84f1546527c4b233ef563f5",
+      "scientific_payload_sha256": "8ce0682212502442c725244717ed0c5af5163dff5107bf93a071b69ff02a04a1",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate3_har/results_corrected_int8.json",
+      "original_sha256": "b2cf959ea5210857fc559b8d9b30fe8da73d2a82009df1578332a69981bba525",
+      "redacted_sha256": "cfe27de27d1c3e965c4b70f63888d83d9df00510ba24805a9b2e5cdc58a86f8e",
+      "scientific_payload_sha256": "c0c000dfab78862db65e849d4b8139fb770c7bdc0c92d33464e75c2f4e6dac58",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/gate4_decay_power/results.json",
+      "original_sha256": "5d014ef7bfd56c77e50818b1dd9ba84e224815c1a910d6ff5a59f29f06b510b0",
+      "redacted_sha256": "b30a27c5cc8f2ee75c1f183d492792caf6b7300a12f14767cb1ae752ac07c5eb",
+      "scientific_payload_sha256": "8ea6e4ce2b7c70e6ec5be6cf25b7f929d45a169b8f79cd0d649db7809ce7d50e",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
+      "original_sha256": "260f0e5d3f8b1dc7b29336df47395ee4a25ead01f9d9c70ce272e2bf6a1860f4",
+      "redacted_sha256": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09",
+      "scientific_payload_sha256": "cf78a4cc4e2558319b48b68fdf55eb18eff920b329a78349d187a261cf65623e",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
+      "original_sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba",
+      "redacted_sha256": "ba8ebdf127da9f23249b8dbbf2c4394b296a5ca6ec92d8e89f9174b2e90aa1dd",
+      "scientific_payload_sha256": "7829df8d5688040c651f29653f4770c7bbae0a18cd32e901a990ca5d169be864",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    }
+  ]
+}

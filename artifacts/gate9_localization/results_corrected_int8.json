@@ -1,0 +1,142 @@
+{
+ "ablation": {
+  "all_nine_vs_base": {
+   "clusters": 50,
+   "estimate": -0.0035355985662266793,
+   "p_value": 0.10193991140821294,
+   "standard_error": 0.0021212234815977792,
+   "statistic": -1.6667732546330025,
+   "wild_p": 0.0802
+  },
+  "alone_direction_concentration": {
+   "clusters": 50,
+   "estimate": -0.0007785428656038204,
+   "p_value": 0.056156447222117566,
+   "standard_error": 0.00039799092635157187,
+   "statistic": -1.9561824505418037,
+   "wild_p": 0.054
+  },
+  "alone_premium": {
+   "clusters": 50,
+   "estimate": -0.0005403525011740618,
+   "p_value": 0.035037602525245605,
+   "standard_error": 0.00024923104973043997,
+   "statistic": -2.1680785831399785,
+   "wild_p": 0.0229
+  },
+  "alone_volume": {
+   "clusters": 50,
+   "estimate": -0.001022667381593782,
+   "p_value": 0.039728119594797946,
+   "standard_error": 0.000484012845331958,
+   "statistic": -2.112893059464962,
+   "wild_p": 0.0206
+  },
+  "drop_direction_concentration": {
+   "clusters": 50,
+   "estimate": -0.0024352693340545504,
+   "p_value": 0.16994910793324552,
+   "standard_error": 0.0017483916803367116,
+   "statistic": -1.3928625727534676,
+   "wild_p": 0.1998
+  },
+  "drop_premium": {
+   "clusters": 50,
+   "estimate": -0.00014394456697485638,
+   "p_value": 0.021111267633479966,
+   "standard_error": 6.041320042263377e-05,
+   "statistic": -2.3826674628700455,
+   "wild_p": 0.0213
+  },
+  "drop_volume": {
+   "clusters": 50,
+   "estimate": -0.0014282934720304423,
+   "p_value": 0.27082630290682935,
+   "standard_error": 0.0012824353341215067,
+   "statistic": -1.1137352769594822,
+   "wild_p": 0.3434
+  }
+ },
+ "earnings_strata": {
+  "C4c": {
+   "near_earnings": {
+    "clusters": 3,
+    "estimate": -0.0117679780138148,
+    "p_value": 0.7858668159800487,
+    "standard_error": 0.03795862879052004,
+    "statistic": -0.31002115694847726,
+    "wild_p": 0.5047
+   },
+   "other_sessions": {
+    "clusters": 30,
+    "estimate": 0.03575547379351856,
+    "p_value": 7.036938486324623e-08,
+    "standard_error": 0.004994729266676463,
+    "statistic": 7.158641016254835,
+    "wild_p": 0.0001
+   }
+  },
+  "C6": {
+   "near_earnings": {
+    "clusters": 7,
+    "estimate": 0.023375522769145642,
+    "p_value": 0.3138177297302358,
+    "standard_error": 0.021265917618899524,
+    "statistic": 1.0992012283716956,
+    "wild_p": 0.3311
+   },
+   "other_sessions": {
+    "clusters": 30,
+    "estimate": 0.05480509427080419,
+    "p_value": 1.5348107515635357e-08,
+    "standard_error": 0.007076426445689871,
+    "statistic": 7.744741599650912,
+    "wild_p": 0.0001
+   }
+  }
+ },
+ "horizon_term_structure": {
+  "rv15": {
+   "b2_increment": {
+    "clusters": 45,
+    "estimate": -0.001697397787202558,
+    "p_value": 0.3365048435348095,
+    "standard_error": 0.001746808774535935,
+    "statistic": -0.9717135681628896,
+    "wild_p": 0.3386
+   },
+   "origins": 28787
+  },
+  "rv30": {
+   "b2_increment": {
+    "clusters": 45,
+    "estimate": -0.0008602963566330412,
+    "p_value": 0.5743629089728352,
+    "standard_error": 0.001520331383550168,
+    "statistic": -0.5658610786709798,
+    "wild_p": 0.5676
+   },
+   "origins": 28787
+  },
+  "rv60": {
+   "b2_increment": {
+    "clusters": 45,
+    "estimate": 0.0010900223344358353,
+    "p_value": 0.511360802426511,
+    "standard_error": 0.0016463130015113338,
+    "statistic": 0.6620990865255773,
+    "wild_p": 0.5181
+   },
+   "origins": 26088
+  }
+ },
+ "inputs": {
+  "c4c_sha256": "825359140c3f29350e1927f76b3c00e91e892d638697460a35ecf72e37c50535",
+  "c6_sha256": "a3fd362db6b34cf53225b76f37132174298a421afa754dff4563422b552a496c",
+  "dev_bars_sha256": "894d6874e6910f2b54b9467a5dc9ac0e3a7b0fc56cdbc8d8b2a0235048917eb1",
+  "panel_sha256": "e5b9e04296d6dacd6c1321b760e1a253a47fcf67055a4e41b9d2c6a8b00c77da"
+ },
+ "label": "EXPLORATORY_DEVELOPMENT_ONLY (9.2 stratifies already-read frozen deltas)",
+ "schema_version": "gate9-localization-v1.0",
+ "smooth_family_proxy_note": "ablation uses log-OLS as the smooth-family proxy for the Gamma lineage"
+}

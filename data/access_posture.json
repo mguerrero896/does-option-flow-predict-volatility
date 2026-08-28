@@ -1,0 +1,69 @@
+{
+  "anon_readable_tables": {
+    "note": "Aggregate and registry tables carrying a permissive `*_public_read` policy: `for select to anon, authenticated using (true)`. Every one of these publishes figures that already appear in the public GitHub mirror, which is why the posture is accepted rather than closed. Writes are denied everywhere: none of these carries an INSERT, UPDATE or DELETE policy.",
+    "tables": [
+      "campaigns",
+      "contrast_results",
+      "mcs_cells",
+      "rp2_blocks",
+      "rp2_extensions",
+      "rp2_power"
+    ]
+  },
+  "anon_readable_views": {
+    "note": "Curated aggregate views in the `api` schema, reachable with the `Accept-Profile: api` header. Each is security_invoker and publishes only the aggregate registry surface already documented for public use.",
+    "views": [
+      "campaign_contrasts",
+      "prospective_power",
+      "research_blocks",
+      "research_extensions"
+    ]
+  },
+  "closed_tables": {
+    "note": "RLS enabled with zero reader policies. Anonymous and authenticated roles have no table privilege on the licensed datasets or the four versioned result bases; the remaining registry and operational logs are also denied every row. The verifier accepts only an RLS-filtered empty array or an explicit SQLSTATE 42501 denial.",
+    "tables": [
+      "dev_training_all_origins",
+      "dev_training_common",
+      "c1_development_forecasts",
+      "c5_frozen_evaluation_forecasts",
+      "b1v3_features",
+      "b2_mechanism_forecasts",
+      "gated_files",
+      "access_grants",
+      "ingestion_inputs",
+      "ingestion_runs",
+      "rp2_block_results",
+      "rp2_contrast_results",
+      "rp2_extension_results",
+      "rp2_power_results"
+    ]
+  },
+  "closed_views": {
+    "note": "The four current_rp2_* convenience views remain security_invoker but are not part of the anonymous API surface. Migration 20260826210228 revoked their grants and closed the four base tables, avoiding both direct base-table access and a SECURITY DEFINER side door.",
+    "views": [
+      "current_rp2_block_results",
+      "current_rp2_contrasts",
+      "current_rp2_extension_results",
+      "current_rp2_power_results"
+    ]
+  },
+  "how_to_reverify": "uv run python scripts/verify_access_posture.py",
+  "measured_at_utc": "2026-08-28T02:06:54.607Z",
+  "project_ref": "eqpyjikcewqaegnbaemf",
+  "provenance_resolution": {
+    "note": "Migration 20260826210228 closes the contradictory versioned-result base policies and views. Migration 20260827073145 retires every current RP2 row and revokes publish_rp2_v3(jsonb) from service_role. Migration 20260828020327 closes direct service-role mutation on those retired tables and future postgres-owned public objects while preserving the six dataset-loader tables. PostgreSQL denies postgres permission to alter supabase_admin defaults; the live audit measured zero public or api relations owned by supabase_admin. The six retained public aggregate tables and four retained curated views remain the documented public surface.",
+    "migration": "supabase/migrations/20260828020327_close_service_role_sensitive_mutation_paths.sql",
+    "unsourced_policies": [
+      "rp2_blocks",
+      "rp2_extensions",
+      "rp2_power"
+    ],
+    "unsourced_views": "four retained curated aggregate views"
+  },
+  "purpose": "The access posture of the Supabase project, measured against the live REST endpoint with the anonymous key rather than inferred from policy prose. The 2026-08-24 measurement corrected an earlier claim that anonymous keys read nothing. tests/contract/test_access_posture_matches_documentation.py compares this record with the public policy, and scripts/verify_access_posture.py compares it with the endpoint wherever the anonymous key is available.",
+  "schema_version": "mds650-access-posture-v1.1",
+  "writes": {
+    "anon_may_write": false,
+    "note": "No role but service_role can write. As of 20260826020000 anon and authenticated hold no INSERT/UPDATE/DELETE/TRUNCATE grant anywhere in `public`, and default privileges were revoked so new tables do not inherit any. RLS was already denying these writes; removing the grants removes the blast radius of a mistaken policy."
+  }
+}

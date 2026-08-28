@@ -1,0 +1,88 @@
+# Target-Blind Access Boundary Incident — 2026-08-12
+
+## Classification
+
+`TARGET_BLIND_OPERATOR_CONTEXT = CONTAMINATED_BY_UNINTENTIONAL_OOS_SNIPPET`
+
+## What occurred
+
+While mapping B1Q implementation files, a broad repository text search matched
+an OOS-sealed results document and rendered search-result snippets in the
+interactive terminal. The document was not intentionally opened, parsed,
+copied or used for analysis; nevertheless, the terminal output constitutes an
+OOS access event for the operator context that issued the search.
+
+A second overly broad source allow-list search later rendered result-bearing
+strings from an evaluation/reporting script. It was stopped immediately. No
+numeric result, interpretation, model fit, metric calculation, provider call or
+decision was made from that output. This is a second OOS-access event for the
+same operator context and does not weaken the containment requirement.
+
+A subsequent project-scoped synchronization of the local code-indexing source
+was invoked in register-only mode to record newly committed target-blind files.
+Its status output nevertheless identified a result-bearing conclusion document
+as an imported file. The document contents were not rendered or queried, and no
+evaluation or interpretation followed, but that index must no longer be treated
+as target-blind. Do not query or resynchronize it until a path-allowlisted
+replacement is established and verified.
+
+On the same date, a broad text search intended to locate zero-activity timing
+references matched frozen evaluation and independent-replication artefacts and
+rendered snippets in the terminal. The search was stopped once the scope breach
+was visible. No model was run, no metric was recomputed and no conclusion was
+drawn from those snippets. This is a third OOS-access event for the same
+operator context.
+
+A subsequently fresh executor, while preparing a calendar-only PIT-preflight
+plan, ran a filename-only repository listing over `docs` and `specs`. That
+listing rendered the name `docs/independent_replication_30_session_results.md`.
+The file was not opened; no content, values, signs, metrics, models or other
+result material was rendered or read. The executor stopped immediately and
+made no files, provider calls, tests, builds, synchronizations or preflight
+requests for that subtask. This is a metadata-only OOS-boundary exposure, but
+the executor is conservatively no longer eligible to perform target-blind work
+in this research cycle.
+
+## Containment
+
+- No model, QLIKE calculation, forecast evaluation, tuning, result
+  reconciliation or provider request was run by the affected operator after
+  either event.
+- The affected operator must not use, repeat, interpret or act on the rendered
+  material.
+- The current target-blind artefacts remain evidence of their own bounded build
+  scope; they must not be relabelled as proving that this later operator context
+  had zero OOS exposure.
+- The third event does not widen the permitted scope: the affected operator may
+  only perform containment, documentation and non-interpretive hygiene work.
+- Any remaining target-blind B1Q implementation must be performed by a fresh,
+  unexposed executor that is explicitly prohibited from opening OOS-sealed
+  paths. Its work must be independently reviewed before integration.
+- The executor associated with the filename-only metadata exposure is also
+  excluded from further target-blind implementation for this cycle. A future
+  executor must start with an explicit filesystem allowlist instead of a
+  repository-wide filename search.
+- The existing project code index is not an eligible target-blind retrieval
+  source after the synchronization event. It must be replaced by an allowlisted
+  source before any semantic query is used in a target-blind task.
+
+## Consequence
+
+```text
+CURRENT_OPERATOR_ZERO_OOS_READS=NO
+SAFE_TO_RECONCILE_EXISTING_RESULTS=NO
+SAFE_TO_OPEN_OR_EVALUATE_OOS=NO
+MODEL_FIT_PERFORMED=NO
+```
+
+This incident does not produce a scientific result. It requires containment and
+an auditable executor boundary; it does not authorize reading additional OOS
+material to "complete" the picture.
+
+## Prevention
+
+Future repository searches in target-blind tasks must exclude result-bearing
+paths before execution, including `docs/independent_replication_*`,
+`artifacts/canonical_validation_v1`, evaluation scripts and any sealed OOS
+directory. This includes filename discovery, not only content search. Use
+explicit allowed-path lists rather than a broad `docs` search.

@@ -1,0 +1,427 @@
+"""Contracts for the Phase 5 development-only provider sources."""
+
+from __future__ import annotations
+
+import sys
+from datetime import UTC, date, datetime
+from pathlib import Path
+
+import httpx
+import polars as pl
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import build_b2_calibration_20d as b2_builder  # noqa: E402
+import build_phase5_common_panel as panel_builder  # noqa: E402
+import run_b1_calibration_20d as b1_builder  # noqa: E402
+import run_b1_closure as b1_closure  # noqa: E402
+
+
+def test_fmp_source_filters_exact_session_and_records_both_delays() -> None:
+    rows, returned_dates = b2_builder._normalize_fmp_session_rows(
+        "AAPL",
+        date(2026, 3, 24),
+        [
+            {
+                "date": "2026-03-24 09:30:00",
+                "open": 100,
+                "high": 101,
+                "low": 99,
+                "close": 100.5,
+                "volume": 123,
+            },
+            {
+                "date": "2026-03-25 09:30:00",
+                "open": 200,
+                "high": 201,
+                "low": 199,
+                "close": 200.5,
+                "volume": 456,
+            },
+        ],
+    )
+
+    assert returned_dates == ["2026-03-24", "2026-03-25"]
+    assert len(rows) == 1
+    assert rows[0]["bar_timestamp_raw_utc"] == datetime(
+        2026,
+        3,
+        24,
+        13,
+        30,
+        tzinfo=UTC,
+    )
+    assert rows[0]["available_at_utc"] == datetime(
+        2026,
+        3,
+        24,
+        13,
+        31,
+        tzinfo=UTC,
+    )
+    assert rows[0]["available_at_plus_2m_utc"] == datetime(
+        2026,
+        3,
+        24,
+        13,
+        32,
+        tzinfo=UTC,
+    )
+
+
+def test_b1q_reads_origins_from_explicit_fmp_source(tmp_path: Path) -> None:
+    origins_path = tmp_path / "fmp" / "origins.parquet"
+    origins_path.parent.mkdir()
+    pl.DataFrame(
+        {
+            "origin_id": ["AAPL:2026-03-24T13:35:00+00:00"],
+            "asset": ["AAPL"],
+            "session_date": ["2026-03-24"],
+            "forecast_origin_utc": [datetime(2026, 3, 24, 13, 35, tzinfo=UTC)],
+            "spot": [100.0],
+            "session_segment": ["first"],
+        }
+    ).write_parquet(origins_path)
+    config = b1_builder.B1BuildConfig(
+        output_root=tmp_path / "b1q",
+        cache_root=tmp_path / "cache",
+        sessions=("2026-03-24",),
+        origins_path=origins_path,
+    )
+
+    result = b1_builder._load_origins(config)
+
+    assert result.height == 1
+    assert result["origin_id"].to_list() == ["AAPL:2026-03-24T13:35:00+00:00"]
+    assert result["origin_ns"].to_list() == [1774359300000000000]
+
+
+def test_b1q_market_inputs_cover_full_trailing_year(tmp_path: Path) -> None:
+    config = b1_builder.B1BuildConfig(
+        output_root=tmp_path / "b1q",
+        cache_root=tmp_path / "cache",
+        sessions=("2026-03-24", "2026-06-10"),
+    )
+
+    assert b1_builder._market_input_window(config) == (
+        date(2025, 3, 24),
+        date(2026, 6, 10),
+    )
+
+
+def test_b1q_origin_records_observed_quote_pit_evidence() -> None:
+    origin_ns = 1774359300000000000
+
+    valid = b1_builder._quote_pit_evidence(
+        [
+            {"sip_timestamp": origin_ns - 2_000_000_000},
+            {"sip_timestamp": origin_ns - 1_000_000_000},
+            {"sip_timestamp": None},
+        ],
+        origin_ns,
+    )
+    assert valid == {
+        "b1q_max_sip_timestamp_ns": origin_ns - 1_000_000_000,
+        "b1q_quote_not_after_origin": True,
+        "b1q_pit_evidence_valid": True,
+    }
+
+    assert b1_builder._quote_pit_evidence([], origin_ns)["b1q_pit_evidence_valid"] is False
+    assert (
+        b1_builder._quote_pit_evidence(
+            [{"sip_timestamp": origin_ns + 1}],
+            origin_ns,
+        )["b1q_quote_not_after_origin"]
+        is False
+    )
+
+
+def test_massive_request_retries_transient_transport_failure() -> None:
+    class FlakyClient:
+        calls = 0
+
+        def get(
+            self,
+            url: str,
+            *,
+            params: dict[str, str],
+        ) -> httpx.Response:
+            self.calls += 1
+            request = httpx.Request("GET", url, params=params)
+            if self.calls == 1:
+                raise httpx.ConnectError("transient TLS EOF", request=request)
+            return httpx.Response(
+                200,
+                json={"results": []},
+                headers={"x-request-id": "request-1"},
+                request=request,
+            )
+
+    client = FlakyClient()
+    status, payload, request_id = b1_closure._request_json(
+        client,
+        "https://api.massive.com/v3/quotes/O:AAPL",
+        {"timestamp": "2026-03-24"},
+        "secret-not-emitted",
+        backoff_seconds=0,
+    )
+
+    assert client.calls == 2
+    assert status == 200
+    assert payload == {"results": []}
+    assert request_id == "request-1"
+
+
+def test_b1q_fetch_retains_paths_instead_of_quote_payloads(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cache_path = tmp_path / "quote.json"
+    cache_path.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(
+        b1_builder.closure,
+        "fetch_contract_day",
+        lambda job, key: {
+            "http_status": 200,
+            "cache_path": str(cache_path),
+            "source_request_hash": "abc",
+            "results": [{"sip_timestamp": 999}],
+            "pagination_complete": "INFERRED_TERMINAL_PARTIAL_PAGE",
+        },
+    )
+    config = b1_builder.B1BuildConfig(
+        output_root=tmp_path / "output",
+        cache_root=tmp_path / "cache",
+        sessions=("2026-03-24",),
+    )
+
+    paths, audit = b1_builder._fetch_quotes(
+        {
+            ("AAPL", "2026-03-24"): [
+                {
+                    "contract": "O:AAPL260417C00100000",
+                    "expiry": "2026-04-17",
+                    "strike": 100.0,
+                    "option_type": "call",
+                }
+            ]
+        },
+        "secret-not-emitted",
+        config,
+    )
+
+    assert paths[("AAPL", "2026-03-24", "O:AAPL260417C00100000")] == (cache_path, "abc")
+    assert audit["pagination_inferred_terminal_partial"] == 1
+
+
+def test_latest_quote_builds_a_sorted_asof_index() -> None:
+    cache = {
+        "results": [
+            {"sip_timestamp": 1_003, "bid_price": 1.0, "ask_price": 1.2},
+            {"sip_timestamp": 999, "bid_price": 0.8, "ask_price": 1.0},
+            {"sip_timestamp": 1_001, "bid_price": 0.9, "ask_price": 1.1},
+        ]
+    }
+
+    quote = b1_closure.latest_quote(cache, 1_002)
+
+    assert quote is not None
+    assert quote["sip_timestamp"] == 1_001
+    assert cache["_sip_timestamps"] == [999, 1_001, 1_003]
+
+
+def test_historical_contract_resolution_uses_asof_active_contracts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    requests: list[dict[str, str]] = []
+
+    def request_json(
+        client: object,
+        url: str,
+        params: dict[str, str],
+        key: str,
+    ) -> tuple[int, dict[str, object], str]:
+        requests.append(dict(params))
+        expiry = params["expiration_date.gte"]
+        return (
+            200,
+            {
+                "results": [
+                    {
+                        "ticker": f"O:AAPL{expiry.replace('-', '')}C00100000",
+                        "underlying_ticker": "AAPL",
+                        "expiration_date": expiry,
+                        "strike_price": 100.0,
+                        "contract_type": "call",
+                    },
+                    {
+                        "ticker": f"O:AAPL{expiry.replace('-', '')}P00100000",
+                        "underlying_ticker": "AAPL",
+                        "expiration_date": expiry,
+                        "strike_price": 100.0,
+                        "contract_type": "put",
+                    },
+                ]
+            },
+            "request-1",
+        )
+
+    monkeypatch.setattr(b1_closure, "_request_json", request_json)
+
+    contracts = b1_closure.resolve_contracts(
+        object(),  # type: ignore[arg-type]
+        "secret-not-emitted",
+        "AAPL",
+        "2026-03-24",
+        100.0,
+    )
+
+    assert len(requests) == 3
+    assert all(request["as_of"] == "2026-03-24" for request in requests)
+    assert all(request["expired"] == "false" for request in requests)
+    assert {contract["bucket"] for contract in contracts} == {
+        "short",
+        "medium",
+        "long",
+    }
+
+
+def test_fmp_list_request_retries_and_rejects_non_list_payload() -> None:
+    calls = 0
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return httpx.Response(503, json={"error": "temporary"})
+        return httpx.Response(200, json=[{"date": "2026-03-24", "month3": 4.1}])
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        payload = b1_builder._fmp_list_request(
+            client,
+            "https://financialmodelingprep.com/stable/treasury-rates",
+            {"from": "2026-03-24", "to": "2026-03-24"},
+            "secret-not-emitted",
+            backoff_seconds=0,
+        )
+    assert calls == 2
+    assert payload == [{"date": "2026-03-24", "month3": 4.1}]
+
+    with (
+        httpx.Client(
+            transport=httpx.MockTransport(
+                lambda request: httpx.Response(200, json={"unexpected": True})
+            )
+        ) as client,
+        pytest.raises(RuntimeError, match="FMP_RESPONSE_NOT_LIST"),
+    ):
+        b1_builder._fmp_list_request(
+            client,
+            "https://financialmodelingprep.com/stable/dividends",
+            {"symbol": "AAPL"},
+            "secret-not-emitted",
+            backoff_seconds=0,
+        )
+
+    with (
+        httpx.Client(
+            transport=httpx.MockTransport(lambda request: httpx.Response(200, content=b"not-json"))
+        ) as client,
+        pytest.raises(RuntimeError, match="FMP_RESPONSE_NOT_JSON"),
+    ):
+        b1_builder._fmp_list_request(
+            client,
+            "https://financialmodelingprep.com/stable/dividends",
+            {"symbol": "AAPL"},
+            "secret-not-emitted",
+            backoff_seconds=0,
+        )
+
+
+def test_rate_observation_is_never_selected_from_the_future() -> None:
+    """B1Q must use the latest Treasury observation on or before the session."""
+    source_date, rate = b1_builder._rate_observation_for(
+        "2026-03-24",
+        {"2026-03-23": 0.041, "2026-03-25": 0.042},
+    )
+    assert source_date == "2026-03-23"
+    assert rate == 0.041
+
+    with pytest.raises(RuntimeError, match="B1Q_RATE_NOT_AVAILABLE"):
+        b1_builder._rate_observation_for(
+            "2026-03-24",
+            {"2026-03-25": 0.042},
+        )
+
+
+def test_b1_attempt_ledger_is_hashed_and_pit_validated(tmp_path: Path) -> None:
+    ledger = tmp_path / "attempts.parquet"
+    frame = pl.DataFrame(
+        {
+            "session_date": ["2026-03-24"],
+            "forecast_origin_ns": [1_000],
+            "rate_source_date": ["2026-03-23"],
+            "sip_timestamp": [999],
+            "source_request_hash": ["abc"],
+        }
+    )
+    frame.write_parquet(ledger)
+
+    assert panel_builder._validate_b1_attempt_ledger(
+        ledger,
+        {"iv_attempt_rows": 1},
+    ) == {
+        "rows": 1,
+        "non_prior_rate_rows": 0,
+        "future_quote_rows": 0,
+        "missing_request_hash_rows": 0,
+    }
+
+    frame.with_columns(pl.lit(1_001).alias("sip_timestamp")).write_parquet(ledger)
+    with pytest.raises(ValueError, match="PHASE5_B1_ATTEMPT_LEDGER_INVALID"):
+        panel_builder._validate_b1_attempt_ledger(
+            ledger,
+            {"iv_attempt_rows": 1},
+        )
+
+
+def test_b1_attempt_ledger_rejects_same_session_rate_source(tmp_path: Path) -> None:
+    """A date-only same-session Treasury record is not proven pre-origin input."""
+    ledger = tmp_path / "same_session_rate.parquet"
+    pl.DataFrame(
+        {
+            "session_date": ["2026-03-24"],
+            "forecast_origin_ns": [1_000],
+            "rate_source_date": ["2026-03-24"],
+            "sip_timestamp": [999],
+            "source_request_hash": ["abc"],
+        }
+    ).write_parquet(ledger)
+
+    with pytest.raises(ValueError, match="PHASE5_B1_ATTEMPT_LEDGER_INVALID"):
+        panel_builder._validate_b1_attempt_ledger(
+            ledger,
+            {"iv_attempt_rows": 1},
+        )
+
+
+def test_b1_attempt_ledger_rejects_missing_rate_source_date(tmp_path: Path) -> None:
+    """An absent rate source date cannot prove pre-origin availability."""
+    ledger = tmp_path / "missing_rate_source.parquet"
+    pl.DataFrame(
+        {
+            "session_date": ["2026-03-24"],
+            "forecast_origin_ns": [1_000],
+            "rate_source_date": [None],
+            "sip_timestamp": [999],
+            "source_request_hash": ["abc"],
+        }
+    ).write_parquet(ledger)
+
+    with pytest.raises(ValueError, match="PHASE5_B1_ATTEMPT_LEDGER_INVALID"):
+        panel_builder._validate_b1_attempt_ledger(
+            ledger,
+            {"iv_attempt_rows": 1},
+        )

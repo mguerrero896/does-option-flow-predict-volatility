@@ -1,0 +1,21 @@
+# Strict allowlist: the Dockerfile's `COPY . .` would otherwise ship worktrees,
+# vendored skills, operational state and gitignored local evidence to the daemon.
+# Deny everything, then re-admit exactly what the image needs.
+*
+!pyproject.toml
+!uv.lock
+!README.md
+!src/
+!scripts/
+!tests/
+!configs/
+!data/GATED_DATA_POINTERS.json
+!data/access_posture.json
+!data/FROZEN_ARTIFACTS.json
+# Never, even when admitted by a parent rule above:
+**/.git
+**/.venv
+**/__pycache__
+**/*.parquet
+**/.omc
+**/.worktrees

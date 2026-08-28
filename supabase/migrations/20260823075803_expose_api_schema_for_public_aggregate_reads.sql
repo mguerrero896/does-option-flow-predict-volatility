@@ -1,0 +1,25 @@
+-- Reconstructed 2026-08-25 from supabase_migrations.schema_migrations on project
+-- eqpyjikcewqaegnbaemf: the EXACT SQL Supabase recorded as applied for this version,
+-- verified by md5 against the remote statements. Do not edit; corrections are new
+-- migrations. (Recovered a second time on 2026-08-25: PR #43's squash landed empty
+-- because these files were never git-added; tests/contract/test_supabase_migrations_present.py
+-- now pins presence and body md5 so that cannot silently happen again.)
+-- ---- verbatim applied SQL follows ----
+-- Expose the `api` schema through PostgREST so the aggregate research results the project
+-- already declares public (data/DATA_ACCESS.md, "What IS public") are reachable over HTTP.
+--
+-- What this opens, measured before applying: the four views whose security_invoker is false
+-- and which therefore read through the owner's privileges --
+--   api.current_rp2_contrasts, api.current_rp2_power_results,
+--   api.current_rp2_block_results, api.current_rp2_extension_results
+-- Each carries loss deltas, confidence intervals, MDEs and session counts. No granular or
+-- licensed provider data passes through any of them.
+--
+-- What stays closed: every table in `public` keeps row-level security with no policy, so a
+-- direct table read still returns nothing; and the four views with security_invoker = true
+-- (campaign_contrasts, prospective_power, research_blocks, research_extensions) continue to
+-- run under the caller's privileges and therefore return nothing to an anonymous client.
+--
+-- anon and authenticated already held USAGE on the schema; only the exposure was missing.
+alter role authenticator set pgrst.db_schemas = 'public, graphql_public, api';
+notify pgrst, 'reload config';

@@ -1,0 +1,106 @@
+{
+  "measured_utc": "2026-08-26T21:09:53Z",
+  "mode": "POST_MIGRATION_RECONCILIATION_VERIFIED",
+  "project_ref": "eqpyjikcewqaegnbaemf",
+  "postgres_version": "17.6",
+  "sealed_cohorts_read": 0,
+  "migrations": [
+    {
+      "version": "20260826180409",
+      "name": "loader_run_scoped_staging",
+      "remote_statements_md5": "066ad7db1e62b20cec39347e8ef24cbb",
+      "status": "APPLIED"
+    },
+    {
+      "version": "20260826194803",
+      "name": "safeupdate_compatible_reconciliation",
+      "remote_statements_md5": "b4bd1196d32c1e5b0065f6d16d8421e4",
+      "status": "APPLIED"
+    },
+    {
+      "version": "20260826210228",
+      "name": "close_versioned_result_base_tables",
+      "authorized_source": "supabase/migrations_pending/20260826205452_close_versioned_result_base_tables.sql",
+      "authorized_source_sha256": "58CFEF9E00B03C6CBDC0ED68F77883B9A117EAA34286F4467D2A749E7837F49B",
+      "remote_statements_md5": "1e65e1e1eaf9f73624a3ae8afe6d7ad8",
+      "status": "APPLIED"
+    }
+  ],
+  "schema": {
+    "load_id_columns": 6,
+    "private_tables_with_rls": 7,
+    "promote_dataset_v2_present": true,
+    "reconcile_research_catalog_present": true,
+    "legacy_service_execute": false,
+    "v2_service_execute": true,
+    "v2_public_execute": false,
+    "catalog_public_execute": false
+  },
+  "catalog_sync": {
+    "attempted": true,
+    "committed": true,
+    "counts": {
+      "campaigns": 5,
+      "contrast_results": 36,
+      "mcs_cells": 264,
+      "gated_files": 15
+    },
+    "recovered_error": "SQLSTATE 21000: DELETE requires a WHERE clause"
+  },
+  "dataset_loader": {
+    "attempted": true,
+    "committed": true,
+    "residual_staging_rows": 0,
+    "idempotent_rerun": "ALL_SIX_UNCHANGED_SKIPPED",
+    "tables": {
+      "b1v3_features": {
+        "rows": 77328,
+        "sha256": "cd93d7164d088c61070ad601379c38be8555643fec5a137e66ee9ff76cbe25a4"
+      },
+      "b2_mechanism_forecasts": {
+        "rows": 1554800,
+        "sha256": "a3ca298d5a88cd9779eb7f70df0a7e4f2b46345a3a6bbfc83255728c8991650e"
+      },
+      "c1_development_forecasts": {
+        "rows": 93288,
+        "sha256": "a6c60c5843940b1c42a5753f48cb3e40f5b91e20fec6d2e3653758f5c42e780a"
+      },
+      "c5_frozen_evaluation_forecasts": {
+        "rows": 356400,
+        "sha256": "db20b76248afce02e04009c510b408214d267a30e7cff3f8dc184d370574ce8b"
+      },
+      "dev_training_all_origins": {
+        "rows": 45440,
+        "sha256": "4730cd13589fc3e63d8736a358e290311ba27c4e277f378192591342c39d0b87"
+      },
+      "dev_training_common": {
+        "rows": 38573,
+        "sha256": "e5b9e04296d6dacd6c1321b760e1a253a47fcf67055a4e41b9d2c6a8b00c77da"
+      }
+    }
+  },
+  "anonymous_access_posture": {
+    "rest_verifier": "PASS_28_OF_28",
+    "closed_tables": 4,
+    "closed_views": 4,
+    "table_sql_audit": "anon=false; authenticated=false; service_role=true; rls=true; policies=0",
+    "view_sql_audit": "anon=false; authenticated=false; security_invoker=true",
+    "postgres_public_api_global_default_grants_to_public_anon_authenticated": 0,
+    "public_api_objects_owned_by_supabase_admin": 0
+  },
+  "operator_incidents": [
+    "The REST RPC hit the role's 2 minute statement timeout for b1v3_features and b2_mechanism_forecasts; both transactions rolled back and the same staged load IDs were promoted with a session-local 10 minute timeout.",
+    "The first manual b1v3_features retry supplied an incorrect digest to dataset_loads; a value-conditioned metadata correction restored the locally verified SHA-256 before the all-six idempotent rerun."
+  ],
+  "advisors": {
+    "security_highest_level": "INFO",
+    "performance_highest_level": "INFO",
+    "blocking_findings": 0
+  },
+  "writes": {
+    "schema_migrations_committed": 3,
+    "catalog_syncs_committed": 1,
+    "dataset_loads_committed": 6
+  },
+  "verdict": "MIGRATIONS_APPLIED_CATALOG_DATASETS_AND_ACCESS_VERIFIED"
+}

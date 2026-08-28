@@ -1,0 +1,124 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mds650-research-pipeline"
+version = "0.1.0"
+description = "Point-in-time options activity research pipeline for 30-minute realized variance."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "duckdb>=1.4,<2",
+  "httpx>=0.28,<1",
+  "polars>=1.35,<2",
+  "pydantic>=2.12,<3",
+  "pydantic-settings>=2.11,<3",
+  "pyarrow>=22,<24",
+  "tzdata>=2025.2,<2027",
+  "scikit-learn>=1.7,<2",
+  "lightgbm>=4.6,<5",
+  "exchange-calendars>=4.11,<5",
+  "numpy>=2,<3",
+  "pandas>=3.0.5,<4",
+  "scipy>=1.14,<2",
+  "jsonschema>=4.23,<5",
+  "psutil>=7,<8",
+]
+
+[project.optional-dependencies]
+# The level-4 experiment (scripts/rp2_ext12_level4_and_tensor.py) needs a CUDA GPU and
+# cannot run in hermetic CI, so torch is not a required dependency. It is declared here
+# so the requirement is discoverable rather than hidden behind an ImportError:
+#     uv sync --extra gpu
+gpu = ["torch>=2.6,<3"]
+
+# The default index serves a CPU-only wheel for torch, so `uv sync --extra gpu` installed a
+# build with `torch.cuda.is_available() == False` and the experiment fell back to the CPU
+# silently - the only trace was `"device": "cpu"` inside the artifact. The extra names a GPU
+# and must deliver one, so torch is pinned to a CUDA index. Moved cu128 -> cu130 on
+# 2026-08-25: CVE-2025-3000 is patched in torch 2.13.0, which the cu128 channel never
+# received (it stops at 2.11.0); cu130 carries 2.13.0 with Blackwell (sm_120) support.
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130" }]
+
+[dependency-groups]
+dev = [
+  "coverage>=7.10,<8",
+  "mypy>=1.18,<2",
+  "pytest>=8.4,<10",
+  "pytest-cov>=7,<8",
+  "ruff>=0.14,<1",
+  "pytest-timeout>=2.3,<3",
+  "hypothesis>=6.100,<7",
+  "types-psutil>=7,<8",
+  "pip-audit>=2.9,<3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mds650"]
+# The frozen feature sets are data the package cannot start without: importing
+# mds650.rp2.panel resolves them eagerly. Without this a non-editable wheel installs
+# cleanly and then fails on first import.
+[tool.hatch.build.targets.wheel.force-include]
+"configs/rp2_v3_feature_sets.json" = "mds650/rp2/configs/rp2_v3_feature_sets.json"
+"configs/rp2_v3_scorecard_fields.json" = "mds650/rp2/rp2_v3_scorecard_fields.json"
+"data/FROZEN_ARTIFACTS.json" = "mds650/data/FROZEN_ARTIFACTS.json"
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers -m \"not live\""
+filterwarnings = [
+  "error:The 'generic' unit for NumPy timedelta is deprecated:DeprecationWarning",
+]
+timeout = 300
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+  "live: bounded authenticated provider probe; never a backfill",
+  "e2e: fixture-only end-to-end pipeline test",
+  "evidence: requires an explicit MDS650_EVIDENCE_ROOT with hashed research artifacts",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src/mds650", "scripts"]
+mypy_path = "src"
+exclude = "(^|/)(tests|notebooks)/"
+
+[[tool.mypy.overrides]]
+module = "scipy.*"
+ignore_missing_imports = true
+
+# torch lives in the optional "gpu" extra (see [project.optional-dependencies]) because
+# the level-4 experiment needs a CUDA GPU and cannot run in hermetic CI. These overrides
+# let the script type-check identically whether or not the extra is installed.
+[[tool.mypy.overrides]]
+module = "torch.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["rp2_ext12_level4_and_tensor", "rp2_b2_exploratory_v2"]
+disallow_subclassing_any = false
+disallow_any_unimported = false
+
+[tool.coverage.run]
+branch = true
+source = ["mds650"]
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:"]
+fail_under = 80

@@ -1,0 +1,143 @@
+{
+ "contrasts": {
+  "gamma_glm_confirmatory": {
+   "B1v3a_vs_B0": {
+    "ipw_weighted": {
+     "clusters": 30,
+     "estimate": 0.04989450884796673,
+     "p_value": 3.5931603861410385e-07,
+     "standard_error": 0.007620855068019243,
+     "statistic": 6.547101132699397
+    },
+    "ipw_wild": {
+     "ci_high": 0.06520638636207757,
+     "ci_low": 0.034559097908021655,
+     "clusters": 30,
+     "estimate": 0.04989450884796673,
+     "p_value": 0.0001,
+     "repetitions": 9999,
+     "seed": 650,
+     "statistic": 6.547101132699397,
+     "weights": "rademacher"
+    },
+    "unweighted": {
+     "clusters": 30,
+     "estimate": 0.04984289686855051,
+     "p_value": 3.6033050066340246e-07,
+     "standard_error": 0.007614187351826913,
+     "statistic": 6.546056009062009
+    }
+   },
+   "B2_vs_B1v3a": {
+    "ipw_weighted": {
+     "clusters": 30,
+     "estimate": 0.05290134610026136,
+     "p_value": 9.91501984268661e-08,
+     "standard_error": 0.007526399687692784,
+     "statistic": 7.028771829214168
+    },
+    "ipw_wild": {
+     "ci_high": 0.0685084244625445,
+     "ci_low": 0.037905827817376,
+     "clusters": 30,
+     "estimate": 0.05290134610026136,
+     "p_value": 0.0001,
+     "repetitions": 9999,
+     "seed": 650,
+     "statistic": 7.028771829214168,
+     "weights": "rademacher"
+    },
+    "unweighted": {
+     "clusters": 30,
+     "estimate": 0.05279790450214434,
+     "p_value": 1.0157777885896007e-07,
+     "standard_error": 0.007521458010825807,
+     "statistic": 7.019636940889798
+    }
+   }
+  },
+  "lightgbm_robustness": {
+   "B1v3a_vs_B0": {
+    "ipw_weighted": {
+     "clusters": 30,
+     "estimate": 0.016134663466667653,
+     "p_value": 0.054423882461041406,
+     "standard_error": 0.008048887705101489,
+     "statistic": 2.004583000510902
+    },
+    "ipw_wild": {
+     "ci_high": 0.02830701158505111,
+     "ci_low": 0.004039626613286211,
+     "clusters": 30,
+     "estimate": 0.016134663466667653,
+     "p_value": 0.0009,
+     "repetitions": 9999,
+     "seed": 650,
+     "statistic": 2.004583000510902,
+     "weights": "rademacher"
+    },
+    "unweighted": {
+     "clusters": 30,
+     "estimate": 0.016181133027653786,
+     "p_value": 0.05417058311263945,
+     "standard_error": 0.008063029512719045,
+     "statistic": 2.006830435400096
+    }
+   },
+   "B2_vs_B1v3a": {
+    "ipw_weighted": {
+     "clusters": 30,
+     "estimate": -0.007391321142773285,
+     "p_value": 0.0023163042133853245,
+     "standard_error": 0.0022131527011394567,
+     "statistic": -3.339724881598912
+    },
+    "ipw_wild": {
+     "ci_high": -0.0031654947713307567,
+     "ci_low": -0.011597300995983833,
+     "clusters": 30,
+     "estimate": -0.007391321142773285,
+     "p_value": 0.0005,
+     "repetitions": 9999,
+     "seed": 650,
+     "statistic": -3.339724881598912,
+     "weights": "rademacher"
+    },
+    "unweighted": {
+     "clusters": 30,
+     "estimate": -0.007407698128048671,
+     "p_value": 0.0023162067545228755,
+     "standard_error": 0.0022180456091502945,
+     "statistic": -3.339741120511254
+    }
+   }
+  }
+ },
+ "deferred": {
+  "C4c": "bars for its sessions not on local disk; same design applies"
+ },
+ "grid_origins": 11880,
+ "included_origins": 11577,
+ "inclusion_model": {
+  "auc_proxy_mean_p_excluded": 0.5004833228869301,
+  "auc_proxy_mean_p_included": 0.9869011991805572,
+  "coefficients": {
+   "asset_AMZN": -0.033271792882566695,
+   "asset_META": 0.5879587651916084,
+   "asset_MSFT": 0.5953726679345982,
+   "asset_NVDA": 0.31147542250976645,
+   "asset_TSLA": -0.9885497590601481,
+   "log_rv_30m_lag": 0.5581563213140333,
+   "session_minute": -0.0030556457451413875
+  },
+  "marginal_inclusion": 0.9744949494949495,
+  "probability_p1": 0.014272617492843497,
+  "probability_p99": 0.9984781315136807,
+  "weight_max": 1.0560942858487816
+ },
+ "inputs": {
+  "bars_sha256": "d70001bc02a5dc9bee3e5002d4c32f0b0c770788662ae71eb596f38e92a97bba",
+  "forecasts_sha256": "a3fd362db6b34cf53225b76f37132174298a421afa754dff4563422b552a496c"
+ },
+ "schema_version": "gate8-selection-v1.0"
+}

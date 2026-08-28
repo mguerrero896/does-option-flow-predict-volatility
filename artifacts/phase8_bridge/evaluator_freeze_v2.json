@@ -1,0 +1,21 @@
+{
+ "contract_file_sha256": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
+ "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+ "evaluator": "scripts/evaluate_phase8_bridge_v2.py",
+ "evaluator_sha256": "512b9a8adde708657d1571f1c993f3033da92a3de96bb62f8d364e0579c2957d",
+ "freeze_sha256": "d0f268629ac0c1ea3ddd1d83cadfecf60f84ac83ef6e071395decbf0ebf8a408",
+ "materialization": "BLIND_STORE_TO_EXISTING_RP3_PANEL_ADAPTER",
+ "models": [
+  "gamma_glm",
+  "lightgbm"
+ ],
+ "one_shot_claim": "holdout/evaluation_claim_v2.json",
+ "protocol_id": "phase8a-exploratory-bridge-20of30-v2",
+ "schema_version": "phase8-bridge-evaluator-freeze-v2.0",
+ "sealed_cohorts_read": 0,
+ "status": "TARGET_BLIND_EXECUTABLE_FROZEN_READ_NOT_AUTHORIZED",
+ "windows": {
+  "primary_sessions": 20,
+  "sensitivity_sessions": 30
+ }
+}

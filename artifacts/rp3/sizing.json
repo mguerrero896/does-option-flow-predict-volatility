@@ -1,0 +1,766 @@
+{
+  "alpha": 0.05,
+  "measurements": {
+    "rv_30": {
+      "base_information_set": "B0+B1",
+      "contrast": "delta_b2_given_b1_via_frozen_index",
+      "evaluation_universe": "block10_common_mask",
+      "expanded_information_set": "B0+B1+b2_index",
+      "input_parquet_sha256": {
+        "b0_panel": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "b1_surface_panel": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "b2_flow_panel": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "target_panel": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      },
+      "long_run_lags": 5,
+      "long_run_variance": 2.16365959217485e-05,
+      "mde_curve": [
+        {
+          "mde": 0.007733033486414472,
+          "sessions": 5
+        },
+        {
+          "mde": 0.0046269263003263705,
+          "sessions": 10
+        },
+        {
+          "mde": 0.0036184711813977877,
+          "sessions": 15
+        },
+        {
+          "mde": 0.0030724599233620917,
+          "sessions": 20
+        },
+        {
+          "mde": 0.002717186485902801,
+          "sessions": 25
+        },
+        {
+          "mde": 0.002462324090056602,
+          "sessions": 30
+        },
+        {
+          "mde": 0.002267988650125313,
+          "sessions": 35
+        },
+        {
+          "mde": 0.0021134632810887286,
+          "sessions": 40
+        },
+        {
+          "mde": 0.0019867735238105555,
+          "sessions": 45
+        },
+        {
+          "mde": 0.001880450420922046,
+          "sessions": 50
+        },
+        {
+          "mde": 0.0017895609349213209,
+          "sessions": 55
+        },
+        {
+          "mde": 0.0017106981375978438,
+          "sessions": 60
+        },
+        {
+          "mde": 0.0016414231631128972,
+          "sessions": 65
+        },
+        {
+          "mde": 0.0015799379354665267,
+          "sessions": 70
+        },
+        {
+          "mde": 0.001524883728518315,
+          "sessions": 75
+        },
+        {
+          "mde": 0.0014752120971577804,
+          "sessions": 80
+        },
+        {
+          "mde": 0.001430099326149325,
+          "sessions": 85
+        },
+        {
+          "mde": 0.0013888880529609184,
+          "sessions": 90
+        },
+        {
+          "mde": 0.0013510464181961791,
+          "sessions": 95
+        },
+        {
+          "mde": 0.0013161388446763268,
+          "sessions": 100
+        },
+        {
+          "mde": 0.0012838047246595291,
+          "sessions": 105
+        },
+        {
+          "mde": 0.0012537426039975824,
+          "sessions": 110
+        },
+        {
+          "mde": 0.001225698262452319,
+          "sessions": 115
+        },
+        {
+          "mde": 0.0011994556043011671,
+          "sessions": 120
+        },
+        {
+          "mde": 0.001174829608251363,
+          "sessions": 125
+        },
+        {
+          "mde": 0.0011516608081261462,
+          "sessions": 130
+        },
+        {
+          "mde": 0.001129810926383557,
+          "sessions": 135
+        },
+        {
+          "mde": 0.0011091593862684608,
+          "sessions": 140
+        },
+        {
+          "mde": 0.0010896005010020303,
+          "sessions": 145
+        },
+        {
+          "mde": 0.0010710411899696921,
+          "sessions": 150
+        },
+        {
+          "mde": 0.001053399108973225,
+          "sessions": 155
+        },
+        {
+          "mde": 0.001036601108648925,
+          "sessions": 160
+        },
+        {
+          "mde": 0.001020581955080804,
+          "sessions": 165
+        },
+        {
+          "mde": 0.001005283261482465,
+          "sessions": 170
+        },
+        {
+          "mde": 0.000990652590990253,
+          "sessions": 175
+        },
+        {
+          "mde": 0.0009766426990919911,
+          "sessions": 180
+        },
+        {
+          "mde": 0.0009632108907129361,
+          "sessions": 185
+        },
+        {
+          "mde": 0.0009503184719984315,
+          "sessions": 190
+        },
+        {
+          "mde": 0.000937930280737937,
+          "sessions": 195
+        },
+        {
+          "mde": 0.0009260142824363314,
+          "sessions": 200
+        },
+        {
+          "mde": 0.0009145412214544874,
+          "sessions": 205
+        },
+        {
+          "mde": 0.0009034843185603426,
+          "sessions": 210
+        },
+        {
+          "mde": 0.000892819007765609,
+          "sessions": 215
+        },
+        {
+          "mde": 0.0008825227065562447,
+          "sessions": 220
+        },
+        {
+          "mde": 0.0008725746146214864,
+          "sessions": 225
+        },
+        {
+          "mde": 0.0008629555369959747,
+          "sessions": 230
+        },
+        {
+          "mde": 0.0008536477281907573,
+          "sessions": 235
+        },
+        {
+          "mde": 0.0008446347544314389,
+          "sessions": 240
+        },
+        {
+          "mde": 0.0008359013715688546,
+          "sessions": 245
+        },
+        {
+          "mde": 0.0008274334165977123,
+          "sessions": 250
+        },
+        {
+          "mde": 0.0008192177110262344,
+          "sessions": 255
+        },
+        {
+          "mde": 0.0008112419745964932,
+          "sessions": 260
+        },
+        {
+          "mde": 0.0008034947480701078,
+          "sessions": 265
+        },
+        {
+          "mde": 0.0007959653239746864,
+          "sessions": 270
+        },
+        {
+          "mde": 0.0007886436843588636,
+          "sessions": 275
+        },
+        {
+          "mde": 0.0007815204447327956,
+          "sessions": 280
+        },
+        {
+          "mde": 0.0007745868034805669,
+          "sessions": 285
+        },
+        {
+          "mde": 0.0007678344961242736,
+          "sessions": 290
+        },
+        {
+          "mde": 0.0007612557538992851,
+          "sessions": 295
+        },
+        {
+          "mde": 0.0007548432661684913,
+          "sessions": 300
+        },
+        {
+          "mde": 0.0007485901462620349,
+          "sessions": 305
+        },
+        {
+          "mde": 0.0007424899003795761,
+          "sessions": 310
+        },
+        {
+          "mde": 0.0007365363992358063,
+          "sessions": 315
+        },
+        {
+          "mde": 0.0007307238521677246,
+          "sessions": 320
+        },
+        {
+          "mde": 0.0007250467834550072,
+          "sessions": 325
+        },
+        {
+          "mde": 0.0007195000106333301,
+          "sessions": 330
+        },
+        {
+          "mde": 0.0007140786246054057,
+          "sessions": 335
+        },
+        {
+          "mde": 0.000708777971376223,
+          "sessions": 340
+        },
+        {
+          "mde": 0.000703593635258027,
+          "sessions": 345
+        },
+        {
+          "mde": 0.0006985214234072836,
+          "sessions": 350
+        },
+        {
+          "mde": 0.0006935573515705519,
+          "sessions": 355
+        },
+        {
+          "mde": 0.0006886976309291334,
+          "sessions": 360
+        },
+        {
+          "mde": 0.0006839386559437806,
+          "sessions": 365
+        },
+        {
+          "mde": 0.0006792769931108391,
+          "sessions": 370
+        },
+        {
+          "mde": 0.0006747093705501471,
+          "sessions": 375
+        },
+        {
+          "mde": 0.0006702326683529318,
+          "sessions": 380
+        },
+        {
+          "mde": 0.0006658439096250083,
+          "sessions": 385
+        },
+        {
+          "mde": 0.0006615402521668461,
+          "sessions": 390
+        },
+        {
+          "mde": 0.0006573189807376712,
+          "sessions": 395
+        },
+        {
+          "mde": 0.0006531774998557607,
+          "sessions": 400
+        },
+        {
+          "mde": 0.0005072365397146741,
+          "sessions": 662
+        }
+      ],
+      "model_family": "lightgbm_qlike",
+      "n_sessions": 662,
+      "observed": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0017580623633850693,
+        "ci_low": 0.0003245049535390528,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013462961943359654,
+        "equivalent": false,
+        "estimate": 0.0010148142386190782,
+        "expanded_information_set": "B0+B1+b2_index",
+        "mde": 0.0010499741765896552,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.006431630206817429,
+        "p_value": 0.005997001499250375,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0009995002498750624
+      },
+      "read_date": "2029-01-30",
+      "rows_evaluated": 152954,
+      "target": "rv_30",
+      "target_effect": 0.0005074071193095391,
+      "test_rows": 61336,
+      "test_sessions": 156,
+      "train_rows": 91618,
+      "train_share": 0.6
+    },
+    "rv_60": {
+      "base_information_set": "B0+B1",
+      "contrast": "delta_b2_given_b1_via_frozen_index",
+      "evaluation_universe": "target_panel_grid",
+      "expanded_information_set": "B0+B1+b2_index",
+      "input_parquet_sha256": {
+        "b0_panel": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "b1_surface_panel": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "b2_flow_panel": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "target_panel": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      },
+      "long_run_lags": 5,
+      "long_run_variance": 3.525067830713447e-05,
+      "mde_curve": [
+        {
+          "mde": 0.009870500224923535,
+          "sessions": 5
+        },
+        {
+          "mde": 0.005905842405610948,
+          "sessions": 10
+        },
+        {
+          "mde": 0.0046186429520333645,
+          "sessions": 15
+        },
+        {
+          "mde": 0.0039217102082762965,
+          "sessions": 20
+        },
+        {
+          "mde": 0.003468236606938353,
+          "sessions": 25
+        },
+        {
+          "mde": 0.0031429283899308946,
+          "sessions": 30
+        },
+        {
+          "mde": 0.0028948772199828645,
+          "sessions": 35
+        },
+        {
+          "mde": 0.0026976399142720374,
+          "sessions": 40
+        },
+        {
+          "mde": 0.0025359321860038745,
+          "sessions": 45
+        },
+        {
+          "mde": 0.0024002206036320517,
+          "sessions": 50
+        },
+        {
+          "mde": 0.0022842086021853457,
+          "sessions": 55
+        },
+        {
+          "mde": 0.0021835475536993907,
+          "sessions": 60
+        },
+        {
+          "mde": 0.0020951244720670004,
+          "sessions": 65
+        },
+        {
+          "mde": 0.002016644279995005,
+          "sessions": 70
+        },
+        {
+          "mde": 0.0019463726895486448,
+          "sessions": 75
+        },
+        {
+          "mde": 0.0018829714577580652,
+          "sessions": 80
+        },
+        {
+          "mde": 0.0018253891885013538,
+          "sessions": 85
+        },
+        {
+          "mde": 0.0017727868194581855,
+          "sessions": 90
+        },
+        {
+          "mde": 0.0017244854814240191,
+          "sessions": 95
+        },
+        {
+          "mde": 0.0016799292005176252,
+          "sessions": 100
+        },
+        {
+          "mde": 0.0016386576943927388,
+          "sessions": 105
+        },
+        {
+          "mde": 0.001600286184780538,
+          "sessions": 110
+        },
+        {
+          "mde": 0.00156449018311875,
+          "sessions": 115
+        },
+        {
+          "mde": 0.0015309938632542877,
+          "sessions": 120
+        },
+        {
+          "mde": 0.0014995610626624386,
+          "sessions": 125
+        },
+        {
+          "mde": 0.0014699882375545524,
+          "sessions": 130
+        },
+        {
+          "mde": 0.0014420988894696556,
+          "sessions": 135
+        },
+        {
+          "mde": 0.0014157391133599068,
+          "sessions": 140
+        },
+        {
+          "mde": 0.0013907740098515978,
+          "sessions": 145
+        },
+        {
+          "mde": 0.0013670847701708246,
+          "sessions": 150
+        },
+        {
+          "mde": 0.0013445662895836558,
+          "sessions": 155
+        },
+        {
+          "mde": 0.001323125199709862,
+          "sessions": 160
+        },
+        {
+          "mde": 0.001302678235504288,
+          "sessions": 165
+        },
+        {
+          "mde": 0.0012831508716478234,
+          "sessions": 170
+        },
+        {
+          "mde": 0.0012644761773460507,
+          "sessions": 175
+        },
+        {
+          "mde": 0.0012465938493597712,
+          "sessions": 180
+        },
+        {
+          "mde": 0.0012294493913848367,
+          "sessions": 185
+        },
+        {
+          "mde": 0.0012129934143035412,
+          "sessions": 190
+        },
+        {
+          "mde": 0.0011971810368144322,
+          "sessions": 195
+        },
+        {
+          "mde": 0.0011819713698547824,
+          "sessions": 200
+        },
+        {
+          "mde": 0.0011673270713138792,
+          "sessions": 205
+        },
+        {
+          "mde": 0.0011532139599850137,
+          "sessions": 210
+        },
+        {
+          "mde": 0.0011396006796619371,
+          "sessions": 215
+        },
+        {
+          "mde": 0.001126458405859366,
+          "sessions": 220
+        },
+        {
+          "mde": 0.001113760588909252,
+          "sessions": 225
+        },
+        {
+          "mde": 0.0011014827282181054,
+          "sessions": 230
+        },
+        {
+          "mde": 0.0010896021733146708,
+          "sessions": 235
+        },
+        {
+          "mde": 0.0010780979480097019,
+          "sessions": 240
+        },
+        {
+          "mde": 0.0010669505945602536,
+          "sessions": 245
+        },
+        {
+          "mde": 0.0010561420352032894,
+          "sessions": 250
+        },
+        {
+          "mde": 0.0010456554488159882,
+          "sessions": 255
+        },
+        {
+          "mde": 0.0010354751607877526,
+          "sessions": 260
+        },
+        {
+          "mde": 0.0010255865444633095,
+          "sessions": 265
+        },
+        {
+          "mde": 0.0010159759327469677,
+          "sessions": 270
+        },
+        {
+          "mde": 0.00100663053865269,
+          "sessions": 275
+        },
+        {
+          "mde": 0.000997538383749338,
+          "sessions": 280
+        },
+        {
+          "mde": 0.0009886882335902968,
+          "sessions": 285
+        },
+        {
+          "mde": 0.0009800695393358187,
+          "sessions": 290
+        },
+        {
+          "mde": 0.000971672384878187,
+          "sessions": 295
+        },
+        {
+          "mde": 0.0009634874388669847,
+          "sessions": 300
+        },
+        {
+          "mde": 0.0009555059111066841,
+          "sessions": 305
+        },
+        {
+          "mde": 0.0009477195128632674,
+          "sessions": 310
+        },
+        {
+          "mde": 0.000940120420672357,
+          "sessions": 315
+        },
+        {
+          "mde": 0.0009327012432895521,
+          "sessions": 320
+        },
+        {
+          "mde": 0.0009254549914655781,
+          "sessions": 325
+        },
+        {
+          "mde": 0.0009183750502652526,
+          "sessions": 330
+        },
+        {
+          "mde": 0.0009114551536810678,
+          "sessions": 335
+        },
+        {
+          "mde": 0.0009046893613199192,
+          "sessions": 340
+        },
+        {
+          "mde": 0.0008980720369658178,
+          "sessions": 345
+        },
+        {
+          "mde": 0.0008915978288427598,
+          "sessions": 350
+        },
+        {
+          "mde": 0.0008852616514206555,
+          "sessions": 355
+        },
+        {
+          "mde": 0.0008790586686237417,
+          "sessions": 360
+        },
+        {
+          "mde": 0.0008729842783154811,
+          "sessions": 365
+        },
+        {
+          "mde": 0.0008670340979468195,
+          "sessions": 370
+        },
+        {
+          "mde": 0.0008612039512661047,
+          "sessions": 375
+        },
+        {
+          "mde": 0.0008554898559990715,
+          "sessions": 380
+        },
+        {
+          "mde": 0.0008498880124163162,
+          "sessions": 385
+        },
+        {
+          "mde": 0.0008443947927136713,
+          "sessions": 390
+        },
+        {
+          "mde": 0.0008390067311380511,
+          "sessions": 395
+        },
+        {
+          "mde": 0.0008337205147976939,
+          "sessions": 400
+        }
+      ],
+      "model_family": "lightgbm_qlike",
+      "n_sessions": "NOT_ACHIEVABLE",
+      "observed": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0004720096587591507,
+        "ci_low": -0.0014366791516285612,
+        "common_mask_sha256": "27f8b8c47b929535284cfa545d9169f99f2058c7b00504ad82a489cbea9f554c",
+        "equivalence_bound": 0.001137081024842247,
+        "equivalent": false,
+        "estimate": -0.00043098830380341655,
+        "expanded_information_set": "B0+B1+b2_index",
+        "mde": 0.0013489809616162327,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.36767952511585245,
+        "p_value": 0.4057971014492754,
+        "sessions": 154,
+        "wild_cluster_p_value": 0.39480259870064965
+      },
+      "read_date": "NOT_ACHIEVABLE",
+      "rows_evaluated": 69111,
+      "target": "rv_60",
+      "target_effect": 0.0,
+      "test_rows": 27713,
+      "test_sessions": 154,
+      "train_rows": 41398,
+      "train_share": 0.6
+    }
+  },
+  "n_primary": 662,
+  "power": 0.8,
+  "primary_rationale": "rv_60 was the exploratory selection (36-target information sweep) and its measured D effect through the frozen index is negative - the winner's curse caught before sealing, recorded under measurements.rv_60. The primary is the prospective replication of the one development cell that cleared the sequential budget: delta B2|B1 via the same frozen index on rv_30.",
+  "primary_target": "rv_30",
+  "role": "D",
+  "run_id": "rp2-v3-20260824-remeasure",
+  "schema": "rp3_sizing/2",
+  "secondary": {
+    "cited_artifact": "artifacts/rp2_ext4_power/power.json",
+    "cited_caveat": "Direction power is computed from a t-statistic found by searching a family of 36 targets after the variance nulls were known. It is an upper bound on what a pre-registered test would achieve, not an unbiased estimate.",
+    "cited_detail": "y_signed_return_120 via b2_5m_strike_hhi",
+    "cited_observed_t": 5.055767543050667,
+    "cited_power_sha256": "14f7e308b95e7e50198d83edf24aef18139d8bd2a5ea5235198503239c21e3b5",
+    "cited_role": "V",
+    "cited_sessions_for_80pct": 41.665960068039716,
+    "n_secondary_nominal": 168,
+    "note": "Citation only, not re-measured. Halving the effect quadruples the required sessions; the cited row is itself an upper bound on power because the target was found by searching 36 candidates.",
+    "sessions_multiplier": 4,
+    "test": "direction_120",
+    "winner_curse_divisor": 2.0
+  },
+  "self_sha256": "b88638d268635590ee4c4b8ad2a8b6c473cc9087422029acf31c5f881df53d07",
+  "session_bank": {
+    "calendar": "Mon-Fri business days from the window opening, no exchange holiday calendar; US holidays (~9-10/year) push every date a few sessions later, never earlier.",
+    "read_date": "2029-01-30",
+    "sessions_per_month_nominal": 21,
+    "window_opens": "2026-07-18"
+  },
+  "theta_artifact": "artifacts/rp3/b2_index_theta.json",
+  "theta_self_sha256": "d3140451976ffb485a68c42ff109fcb8c5a434c810fed24055bf929ce09365b6",
+  "winner_curse_divisor": 2.0
+}

@@ -1,0 +1,60 @@
+{
+  "code_commit": "e7728ebbaf3f353143a5faea2a54211bb5d16b12",
+  "completed_steps": {
+    "build-b0": {
+      "artifacts": {
+        "rp2_block4_b0/b0_panel.parquet": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "rp2_block4_b0/ladder.json": "1c7f2cda9114c57dbbe815e7c1149bea5bdd95f3b8f46d305845be9f1ec6f5fd"
+      },
+      "content": {
+        "rp2_block4_b0/b0_panel.parquet": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "rp2_block4_b0/ladder.json": "9038505987b1043c43603bca177297d3a23c7b5e413d92a78c2b46b79628ef35"
+      }
+    },
+    "build-b1": {
+      "artifacts": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "rp2_block5_surface/surface_coverage.json": "6d09906652963582435e1104a6fed9da0c3d48dc41cb89476a624f45e7563bc3"
+      },
+      "content": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "rp2_block5_surface/surface_coverage.json": "ce518771dbcd0b84902b3f71346344e9cf08c9ecc4025aa8965328cf508ffbff"
+      }
+    },
+    "build-b2": {
+      "artifacts": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "rp2_block6_flow/flow_coverage.json": "6acfa8dbfb2d4f7a130d389634bc6ce6c95ef2039602defff29f1060aa51fb0f"
+      },
+      "content": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "rp2_block6_flow/flow_coverage.json": "d5836b7b4c12fcb6a91d2038c8f9cbb1c014a225fa7ebe13e5574f99f5a52b0f"
+      }
+    },
+    "build-targets": {
+      "artifacts": {
+        "rp2_block3_target/comparison.json": "ec400cfb9cf873e5a8e7cff3120f1389eae8cb9c7e80b2b9d1948e0586f04f0f",
+        "rp2_block3_target/target_panel.parquet": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      },
+      "content": {
+        "rp2_block3_target/comparison.json": "4ac71484a10d24ee4353d0a137ce6cf97c076de2a4703e32195584581878a3fa",
+        "rp2_block3_target/target_panel.parquet": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      }
+    }
+  },
+  "data_root": "MDS650_DATA_ROOT",
+  "feature_registry_sha256": "3c108a14a5a88e4da08bade7debd5dc05a1d51ea50c1e5adea6d1e88dc0acb9c",
+  "input_manifest_sha256": "11a158b302ade3c4c6b475f6cde973a93b275ec1c4b894ace66bccbc84ded8ab",
+  "model_config_sha256": "9ea917b7bcdf8835ef3a5abc772fc9d0fe714f6dfba0bcc6d5536ad1993d5dd8",
+  "roles": [
+    "D",
+    "V"
+  ],
+  "run_id": "rp2-v3-20260827-remediation3",
+  "seeds": {
+    "bootstrap": 650,
+    "dml_folds": 5,
+    "lightgbm": 20260818
+  },
+  "steps": []
+}

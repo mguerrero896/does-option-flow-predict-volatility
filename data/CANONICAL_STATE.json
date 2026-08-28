@@ -1,0 +1,174 @@
+{
+ "active_protocols": [
+  {
+   "artifact": "artifacts/phase8_bridge/bridge_contract_v2.json",
+   "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+   "document": "docs/phase8_bridge_protocol_v2.md",
+   "evaluator": {
+    "artifact": "artifacts/phase8_bridge/evaluator_freeze_v4.json",
+    "evaluator_sha256": "e842537a4516148e950251f47eb878b1e9c3bcf4224150fea6e9b2e5d79f4833",
+    "script": "scripts/evaluate_phase8_bridge_v2.py",
+    "sha256": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63"
+   },
+   "id": "phase8-prospective-bridge",
+   "sealed_cohorts_read": 0,
+   "sha256": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
+   "state": "FROZEN_EXPLORATORY_BRIDGE_READ_NOT_AUTHORIZED"
+  },
+  {
+   "academic_reporting": {
+    "document": "docs/phase9_academic_reporting_policy_v2.md",
+    "planning_audit": {
+     "artifact": "artifacts/phase9/power_deadline_audit_v1.json",
+     "audit_sha256": "565e7dc77838a8d24634333ee8fcd2bce9f20fb51cd686c7d5f6b2bd27e2695c",
+     "endpoint_complete_sessions": 60,
+     "endpoint_scored_sessions": 36,
+     "sha256": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62"
+    },
+    "sealed_cohorts_read": 0,
+    "state": "ONGOING_NOT_SUBMISSION_GATE_POWER_CORRECTED"
+   },
+   "document": "docs/phase9_total_contribution_protocol_v1.md",
+   "id": "phase9-total-contribution",
+   "sha256": "8cf87b4d865be2a858747079acbbcd45570ca2b2b77e547b2bba2d4142f25649",
+   "state": "frozen; collection active for sessions strictly after 2026-08-18, 60 complete/36 scored sessions, evaluation authorization ~Nov 2026; ongoing prospective follow-up, not an academic submission gate"
+  }
+ ],
+ "authorized_sources": {
+  ".github/workflows/ci.yml": "1b52c28fc6734ae264879c87c9164c002690876de1510960a85f87c73c9de4b9",
+  "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
+  "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
+  "artifacts/phase9/power_deadline_audit_v1.json": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62",
+  "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09",
+  "artifacts/rp2_v3/rp2-v3-20260827-remediation3/scorecard.json": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c",
+  "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
+  "data/FROZEN_ARTIFACTS.json": "e80bb070799b61cb83b8c935acd47a6c4e4cf38c7a968cb4a4a316fd62292107",
+  "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
+  "data/PUBLIC_COMMIT_TRANSLATIONS.json": "51eaa73539706580cd75d752e1c288b66a520459581e8826bf6fd118a768975b",
+  "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
+  "docs/ci_contract_v1.md": "11b0d0155e043eee1876b4d7a272e7f58f1984ddc1319de9ba0567e0bc0e9c3f",
+  "docs/evidence_immutability_v1.md": "78723d99e35d7350f7a281bd0a17592eaea63833224659a96792862dbced78b1",
+  "docs/methodology_decisions.md": "95571f6c25976b531f73936bb34a04b27238e5523601a2ba431eebd7e33b553b",
+  "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
+  "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
+  "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
+  "docs/pit_v22_claims_and_limitations.md": "621bcd8bb19ac3ed7dd78fac37ddd063d5189b79284d0a1d4bb6a194e5976690",
+  "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
+  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "b82502344f0f6d1508a34325ff4c0fd46206f26b9afb5c6565143f17fcf46ff8",
+  "docs/rp2_v3/VERDICT.md": "92c432345b3df81215eadb7241de9e8e7e1ebf333a7d91b015a40f74cc66d0c6",
+  "reports/final_report_draft_v2.docx": "8e009c9b232c445829b3815982b132cf904f1d1a88c8021cdaf2051c17c644c1",
+  "reports/final_report_draft_v2.md": "db336167caf48004153c4df3ad2fc94305b4829b5419bba02540050feb5b978a",
+  "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
+ },
+ "canonical_results": {
+  "headline_claims": [],
+  "status": "NO_CURRENT_ELIGIBLE_RESULT"
+ },
+ "ci": {
+  "contract": "docs/ci_contract_v1.md",
+  "coverage_min_percent": 80,
+  "publish_gate": "scripts/publish_mirror.sh refuses to push unless tier-2 passes",
+  "required_checks": [
+   "quality",
+   "hermetic",
+   "scientific-contracts"
+  ],
+  "tier2_runner": "scripts/run_local_evidence_gates.py"
+ },
+ "current_report": {
+  "evidence_cutoff": "2026-08-28",
+  "source": {
+   "path": "reports/final_report_draft_v2.md",
+   "sha256": "db336167caf48004153c4df3ad2fc94305b4829b5419bba02540050feb5b978a"
+  },
+  "submission_rendering": {
+   "path": "reports/final_report_draft_v2.docx",
+   "sha256": "8e009c9b232c445829b3815982b132cf904f1d1a88c8021cdaf2051c17c644c1"
+  }
+ },
+ "external_publication": {
+  "supabase": {
+   "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
+   "status": "NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT",
+   "writes": {
+    "catalog_syncs_committed": 1,
+    "dataset_loads_committed": 6,
+    "schema_migrations_committed": 19,
+    "this_audit": 0
+   }
+  }
+ },
+ "frozen_evidence": {
+  "artifact_count": 73,
+  "external_custody_artifact_count": 2,
+  "physical_artifact_count": 71,
+  "public_metadata_redactions": {
+   "artifact_count": 10,
+   "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
+   "ledger_sha256": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df"
+  },
+  "registry": "data/FROZEN_ARTIFACTS.json",
+  "registry_sha256": "e80bb070799b61cb83b8c935acd47a6c4e4cf38c7a968cb4a4a316fd62292107"
+ },
+ "future_campaigns": [
+  "Phase 8 bridge method is frozen; one-shot execution requires separate authorization after the 30-session acquisition completes",
+  "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
+ ],
+ "gated_data": {
+  "file_count": 15,
+  "pointer_file": "data/GATED_DATA_POINTERS.json",
+  "storage": "supabase project eqpyjikcewqaegnbaemf, private bucket 'research-data'"
+ },
+ "governance": {
+  "decision_count": 101,
+  "latest_decision": 101
+ },
+ "note": "AUTO-GENERATED by scripts/generate_canonical_state.py; never edit by hand. CI regenerates and fails on drift (decision 63).",
+ "schema_version": "canonical-state-v1.0",
+ "scientific_bundle": {
+  "eligibility": {
+   "model_fit_after_pit_v22": false,
+   "reasons": [
+    "PIT_V22_RECONCILIATION_BLOCKED"
+   ],
+   "safe_to_open_or_evaluate_oos": false,
+   "safe_to_reconcile_existing_results": false,
+   "status": "REBUILD_COMPLETE_PIT_V22_BLOCKED"
+  },
+  "historical_code_provenance": {
+   "historical_sanitized_commit_reference": "9b56466c65d63df54a97f9462c97d0cbad7f717c",
+   "manifest": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
+   "recorded_code_commit": "e7728ebbaf3f353143a5faea2a54211bb5d16b12",
+   "recorded_git_tree_sha1": "d768a7a0ebda7443f2596b08e78eecd2098599dc",
+   "retained_blobs_sha256": "8aee30a8c1f6922b09e68d4d7a63e48a71ff0cd2802b165eaa19edb8142bf2c1",
+   "run_id": "rp2-v3-20260827-remediation3",
+   "status": "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE",
+   "verification_scope": "PRE_ROOT_SANITIZATION_AUDIT_NOT_REGENERATED_FROM_THIS_RELEASE",
+   "withdrawn_path_classes": [
+    "internal planning documents",
+    "internal execution checklists",
+    "internal handoff tests"
+   ],
+   "withdrawn_path_count": 5
+  },
+  "manifest": {
+   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
+   "scientific_sha256": "386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47",
+   "sha256": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09"
+  },
+  "run_id": "rp2-v3-20260827-remediation3",
+  "scorecard": {
+   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/scorecard.json",
+   "sha256": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c"
+  },
+  "superseded_register": {
+   "path": "docs/rp2_v3/SUPERSEDED_RESULTS.md",
+   "sha256": "b82502344f0f6d1508a34325ff4c0fd46206f26b9afb5c6565143f17fcf46ff8"
+  },
+  "verdict": {
+   "path": "docs/rp2_v3/VERDICT.md",
+   "sha256": "92c432345b3df81215eadb7241de9e8e7e1ebf333a7d91b015a40f74cc66d0c6",
+   "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
+  }
+ }
+}

@@ -1,0 +1,121 @@
+Target-Blind Common Predictor Panel v2.2 — validation record
+==============================================================
+
+Scope: offline target-blind construction only. No provider request, acquired
+RV30, forecast, QLIKE, prediction, model fit, evaluation payload, or sealed
+OOS payload was read by this validation record. The selected unit suite includes
+synthetic RV30 fixtures solely to regression-test pre-existing B0 calculations.
+
+Commands and observed results
+-----------------------------
+
+1. `uv run pytest -q --cov=mds650.target_blind_panel_v22 --cov-report=term-missing tests/unit/test_target_blind_panel_v22.py tests/unit/test_build_target_blind_common_panel_v22.py tests/unit/test_target_blind_confirmation_prereg_v22.py tests/unit/test_b2_availability_v22.py tests/unit/test_provider_timing_v21.py tests/unit/test_phase6_b0.py tests/unit/test_phase6_b1.py tests/unit/test_phase6_b2.py tests/unit/test_phase6_common_panel.py`
+   Result: 74 passed; `mds650.target_blind_panel_v22` coverage 86.59% (required minimum 80%).
+
+2. `uv run ruff check .`
+   Result: all checks passed.
+
+3. `uv run mypy --show-error-codes`
+   Result: success; no issues found in 39 source files.
+
+4. `uv run python -m jsonschema -i artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json specs/001-pit-options-rv30/contracts/target-blind-common-predictor-manifest-v22.schema.json`
+   Result: passed. The installed jsonschema CLI emitted only its own deprecation warning.
+
+5. Deterministic rebuild:
+   `uv run python scripts/build_target_blind_common_panel_v22.py`
+   Result: two consecutive builds produced identical SHA-256 values:
+   - full origin-preserving panel:
+     `d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236`
+   - common-complete subset:
+     `40aee9c6e6893de213d5358ac6b2d77af8c08db73b05a24d6374b1ecd6de79d2`
+   - manifest:
+     `6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0`
+
+6. `uv run python scripts/verify_provider_timing_v21.py`
+   Result: `status=PASS`; no canonical repository hash mismatch, protected
+   tracked change, personal-path file, or secret-assignment file was reported.
+
+7. `uv run python scripts/create_target_blind_confirmation_prereg_v22.py`
+   and JSON Schema validation of the v2.0 preregistration.
+   Result: passed; the recorded preregistration SHA-256 equals the canonical
+   hash of the file with its self-hash field omitted.
+
+Gate result
+-----------
+
+```text
+TARGET_BLIND_COMMON_PREDICTOR_PANEL=PASS
+SAFE_TO_RECONCILE_EXISTING_RESULTS=NO
+SAFE_TO_OPEN_OR_EVALUATE_OOS=NO
+MODEL_FIT_PERFORMED=NO
+```
+
+Confirmation readiness v1 extension
+-----------------------------------
+
+8. `uv run pytest -q --cov=mds650.confirmation_readiness_v1 --cov-report=term-missing tests/unit/test_confirmation_readiness_v1.py tests/unit/test_target_blind_panel_v22.py tests/unit/test_build_target_blind_common_panel_v22.py tests/unit/test_target_blind_confirmation_prereg_v22.py tests/unit/test_b2_availability_v22.py tests/unit/test_provider_timing_v21.py tests/unit/test_provider_timing_v2.py tests/unit/test_provider_timing_docs.py`
+   Result: 76 scoped tests passed. `mds650.confirmation_readiness_v1` coverage
+   was 89.51% (required minimum 80%). The suite covers hash binding, exact
+   common-subset identity, target-field rejection, PIT-boundary drift, storage
+   failures, named-secret absence and the rule that operational inputs alone do
+   not authorize an acquisition. It also validates the generated readiness
+   report against its committed JSON Schema.
+
+9. `uv run ruff check .` and `uv run mypy --show-error-codes`
+   Result: all Ruff checks passed; Mypy reported no issues in 40 source files.
+
+10. `uv run python scripts/audit_confirmation_readiness_v1.py` and JSON Schema
+    validation with `confirmation-readiness-v1.schema.json`.
+    Result: `PASS_READY_FOR_CONFIRMATION_ACQUISITION_NOT_REQUESTED`; the report
+    retained `SAFE_TO_ACQUIRE_NEW_SAMPLE=NO` and
+    `SAFE_TO_OPEN_OR_EVALUATE_OOS=NO`.
+
+11. Deterministic readiness rerun.
+    Result: two consecutive local runs produced the same artifact-file
+    SHA-256: `87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0`.
+
+12. `uv run python scripts/verify_provider_timing_v21.py`
+    Result: `status=PASS`; no canonical hash mismatch, protected tracked
+    change, secret assignment or personal-path file was reported.
+
+The full pytest suite was deliberately not used as evidence for this extension:
+some collection paths are allowed to inspect historical evaluation artefacts,
+whereas this target-blind closure must preserve zero sealed-OOS reads.
+
+PIT v2.2 claim-ledger extension
+--------------------------------
+
+13. `uv run pytest -q --cov=mds650.pit_v22_claim_ledger --cov-report=term-missing`
+    over `test_pit_v22_claim_ledger.py` plus the eight v2.1/v2.2 target-blind
+    readiness, panel, preregistration, availability and provider-timing test
+    modules.
+    Result: 84 scoped tests passed; `mds650.pit_v22_claim_ledger` coverage was
+    89.33% (required minimum 80%). The contract tests prove that an extra or
+    duplicate claim identifier is rejected and that unsafe/malformed evidence
+    fails closed.
+
+14. `uv run ruff check .` and `uv run mypy --show-error-codes`.
+    Result: all Ruff checks passed; Mypy reported no issues in 41 source files.
+
+15. `uv run python scripts/build_pit_v22_claim_ledger.py` and JSON Schema
+    validation with `pit-v22-claim-ledger-v1.schema.json`.
+    Result: `PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION`; reconciliation and OOS
+    access remained `NO`. The installed jsonschema CLI emitted only its own
+    deprecation warning.
+
+16. Deterministic claim-ledger rerun.
+    Result: two consecutive local builds produced identical SHA-256 values:
+    - JSON ledger:
+      `3147f5ff7dc343c01620224f152305f02b91f52c873c6f813d97217eafa92adc`
+    - human-readable ledger:
+      `5066f606830066e6c1d433add83c782d2cfe046b1f980af035288f7bd305c207`
+
+17. `uv run python scripts/verify_provider_timing_v21.py`, scoped
+    personal-path/secret-assignment scan and `git diff --check`.
+    Result: provider-timing integrity reported `status=PASS`; no canonical hash
+    mismatch, protected tracked change, personal-path file or secret-assignment
+    file was reported. The working diff was whitespace-clean.
+
+The global pytest suite remains deliberately excluded from this record because
+its historical evaluation collection paths are outside the permitted
+target-blind scope.

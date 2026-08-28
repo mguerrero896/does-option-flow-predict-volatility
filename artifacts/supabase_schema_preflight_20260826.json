@@ -1,0 +1,30 @@
+{
+  "measured_utc": "2026-08-26T11:29:15.8929866Z",
+  "mode": "READ_ONLY_POSTGREST_OPENAPI",
+  "project_ref": "eqpyjikcewqaegnbaemf",
+  "openapi_version": "14.17",
+  "sealed_cohorts_read": 0,
+  "writes": 0,
+  "staging_tables": {
+    "dev_training_all_origins__staging": {"columns": 72, "load_id": false},
+    "dev_training_common__staging": {"columns": 72, "load_id": false},
+    "c1_development_forecasts__staging": {"columns": 14, "load_id": false},
+    "c5_frozen_evaluation_forecasts__staging": {"columns": 13, "load_id": false},
+    "b1v3_features__staging": {"columns": 33, "load_id": false},
+    "b2_mechanism_forecasts__staging": {"columns": 17, "load_id": false}
+  },
+  "catalog_tables_present": [
+    "campaigns",
+    "contrast_results",
+    "mcs_cells",
+    "gated_files",
+    "access_grants"
+  ],
+  "dataset_loads_present": true,
+  "rpc": {
+    "promote_dataset": true,
+    "promote_dataset_v2": false,
+    "reconcile_research_catalog": false
+  },
+  "verdict": "PENDING_MIGRATION_NOT_APPLIED"
+}

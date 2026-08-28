@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1200" height="900" rx="14" fill="#ffffff" stroke="#e1e6ea"/>
+
+  <text x="44" y="62" font-size="30" font-weight="700" fill="#1a2332">From raw market data to a sealed verdict</text>
+  <text x="44" y="92" font-size="17" fill="#7a8593">Protocols are hash-frozen before results are visible; sealed holdouts open exactly once</text>
+
+  <!-- ── row 1: three stages ── -->
+
+  <!-- card 1 · PROVIDERS -->
+  <rect x="44" y="130" width="340" height="310" rx="12" fill="#f5f7f9" stroke="#e1e6ea"/>
+  <text x="68" y="168" font-size="15" font-weight="700" fill="#7a8593" letter-spacing="2">PROVIDERS</text>
+  <rect x="66" y="188" width="296" height="68" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="86" y="217" font-size="19" font-weight="600" fill="#1a2332">FMP</text>
+  <text x="86" y="242" font-size="16" fill="#5a6570">1-minute bars &#183; rates</text>
+  <rect x="66" y="266" width="296" height="68" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="86" y="295" font-size="19" font-weight="600" fill="#1a2332">Massive</text>
+  <text x="86" y="320" font-size="16" fill="#5a6570">option NBBO quotes</text>
+  <rect x="66" y="344" width="296" height="68" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="86" y="373" font-size="19" font-weight="600" fill="#1a2332">Unusual Whales</text>
+  <text x="86" y="398" font-size="16" fill="#5a6570">option trade tape</text>
+
+  <!-- arrow 1 -->
+  <line x1="384" y1="285" x2="416" y2="285" stroke="#9aa3ad" stroke-width="3"/>
+  <path d="M 416 277 L 432 285 L 416 293 Z" fill="#9aa3ad"/>
+
+  <!-- card 2 · POINT-IN-TIME PANEL -->
+  <rect x="436" y="130" width="340" height="310" rx="12" fill="#f5f7f9" stroke="#e1e6ea"/>
+  <text x="460" y="168" font-size="15" font-weight="700" fill="#7a8593" letter-spacing="2">POINT-IN-TIME PANEL</text>
+  <rect x="458" y="188" width="296" height="52" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="478" y="220" font-size="17" fill="#1a2332">Authenticated audits</text>
+  <rect x="458" y="250" width="296" height="52" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="478" y="282" font-size="17" fill="#1a2332">Timestamp contracts</text>
+  <rect x="458" y="312" width="296" height="52" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="478" y="344" font-size="17" fill="#1a2332">5-min origins &#183; RV30 targets</text>
+  <rect x="458" y="374" width="296" height="52" rx="9" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.5"/>
+  <circle cx="480" cy="400" r="6" fill="#e8a33d"/>
+  <text x="496" y="406" font-size="17" fill="#1a2332">Immutable sealed store</text>
+
+  <!-- arrow 2 -->
+  <line x1="776" y1="285" x2="808" y2="285" stroke="#9aa3ad" stroke-width="3"/>
+  <path d="M 808 277 L 824 285 L 808 293 Z" fill="#9aa3ad"/>
+
+  <!-- card 3 · NESTED SETS -->
+  <rect x="828" y="130" width="328" height="310" rx="12" fill="#f5f7f9" stroke="#e1e6ea"/>
+  <text x="852" y="168" font-size="15" font-weight="700" fill="#7a8593" letter-spacing="2">NESTED INFORMATION SETS</text>
+  <rect x="850" y="188" width="284" height="70" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="870" y="218" font-size="19" font-weight="700" fill="#1a2332">B0</text>
+  <text x="870" y="244" font-size="16" fill="#5a6570">underlying + market state</text>
+  <rect x="866" y="266" width="268" height="70" rx="9" fill="#ffffff" stroke="#c9d2da"/>
+  <text x="886" y="296" font-size="19" font-weight="700" fill="#1a2332">B1 = B0 +</text>
+  <text x="886" y="322" font-size="16" fill="#5a6570">ATM implied variance</text>
+  <rect x="882" y="344" width="252" height="70" rx="9" fill="#ffffff" stroke="#8a94a0"/>
+  <text x="902" y="374" font-size="19" font-weight="700" fill="#1a2332">B2 = B1 +</text>
+  <text x="902" y="400" font-size="16" fill="#5a6570">option-trade activity</text>
+
+  <!-- elbow arrow down from card 3 to row 2 -->
+  <line x1="992" y1="440" x2="992" y2="480" stroke="#9aa3ad" stroke-width="3"/>
+  <path d="M 984 480 L 992 496 L 1000 480 Z" fill="#9aa3ad"/>
+
+  <!-- ── row 2: evaluation + verdict ── -->
+
+  <!-- card 4 · PREREGISTERED EVALUATION -->
+  <rect x="436" y="510" width="720" height="230" rx="12" fill="#f5f7f9" stroke="#e1e6ea"/>
+  <text x="460" y="548" font-size="15" font-weight="700" fill="#7a8593" letter-spacing="2">PREREGISTERED EVALUATION</text>
+  <rect x="458" y="568" width="336" height="64" rx="9" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.5"/>
+  <circle cx="480" cy="600" r="6" fill="#e8a33d"/>
+  <text x="496" y="606" font-size="17" fill="#1a2332">Hash-sealed method freeze</text>
+  <rect x="458" y="644" width="336" height="76" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="478" y="674" font-size="17" fill="#1a2332">Gamma GLM &#183; LightGBM</text>
+  <text x="478" y="700" font-size="16" fill="#5a6570">persistence &#183; HAR &#183; Ridge</text>
+  <rect x="806" y="568" width="328" height="64" rx="9" fill="#ffffff" stroke="#e1e6ea"/>
+  <text x="826" y="606" font-size="17" fill="#1a2332">Chronological folds &#183; purge</text>
+  <rect x="806" y="644" width="328" height="76" rx="9" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.5"/>
+  <circle cx="828" cy="676" r="6" fill="#e8a33d"/>
+  <text x="844" y="682" font-size="17" fill="#1a2332">One-read sealed holdouts</text>
+  <text x="844" y="706" font-size="16" fill="#5a6570">access ledger &#183; counted reads</text>
+
+  <!-- arrow left from evaluation to verdict -->
+  <line x1="436" y1="625" x2="404" y2="625" stroke="#9aa3ad" stroke-width="3"/>
+  <path d="M 404 617 L 388 625 L 404 633 Z" fill="#9aa3ad"/>
+
+  <!-- card 5 · VERDICT (navy) -->
+  <rect x="44" y="510" width="340" height="230" rx="12" fill="#1a2332"/>
+  <text x="68" y="548" font-size="15" font-weight="700" fill="#9fb0c3" letter-spacing="2">VERDICT</text>
+  <rect x="66" y="568" width="296" height="60" rx="9" fill="#243044"/>
+  <text x="86" y="604" font-size="17" fill="#ffffff">QLIKE contrasts &#183; bootstrap CIs</text>
+  <rect x="66" y="638" width="296" height="42" rx="9" fill="#243044"/>
+  <text x="86" y="665" font-size="16" fill="#ffffff">Holm-corrected families</text>
+  <rect x="66" y="690" width="296" height="42" rx="9" fill="#2c3a52" stroke="#e8a33d"/>
+  <circle cx="88" cy="711" r="6" fill="#e8a33d"/>
+  <text x="104" y="717" font-size="16" fill="#ffffff">Honest nulls outrank &#183; sealed</text>
+</svg>

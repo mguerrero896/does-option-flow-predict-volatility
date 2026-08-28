@@ -1,0 +1,359 @@
+{
+  "D": {
+    "evaluated_rows": 5758,
+    "median_cost_variance_units": 0.0009452272859468102,
+    "median_implied_variance": 0.13668649039289227,
+    "median_realized_variance": 0.028124280511771592,
+    "models": {
+      "gamma_glm": {
+        "B0": {
+          "break_even_cost": 0.11211364747571978,
+          "deflated_sharpe_probability": 0.9441087008633081,
+          "risk_utility": {
+            "certainty_equivalent": 5.988454246173131e-06,
+            "expected_shortfall_error": 2.6893030212549532e-05,
+            "target_volatility_tracking_error": 0.7282567993070308,
+            "var_breach_rate": 0.03820771101076763,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 77.6217488038694,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.028178537663152863,
+            "hit_rate": 0.9730809308787773,
+            "kurtosis": 10.415339268739586,
+            "max_drawdown": -0.8971209647581304,
+            "mean": 0.11102466228575912,
+            "periods": 5758,
+            "sharpe_annual": 77.1838254317453,
+            "skewness": -0.03401668877797228,
+            "sortino_annual": 54.50416534206647,
+            "volatility": 0.08233132557451804
+          },
+          "traded_share": 0.9991316429315734,
+          "turnover": 5753.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.11202530916246983,
+          "deflated_sharpe_probability": 0.9233357850918684,
+          "risk_utility": {
+            "certainty_equivalent": 9.686442101303308e-06,
+            "expected_shortfall_error": 3.494753067875313e-05,
+            "target_volatility_tracking_error": 0.6976037248238073,
+            "var_breach_rate": 0.03803403959708232,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 77.34123892982254,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.029657443466126334,
+            "hit_rate": 0.9727335880514068,
+            "kurtosis": 10.445885124696225,
+            "max_drawdown": -0.8748962905379045,
+            "mean": 0.11087834649066247,
+            "periods": 5758,
+            "sharpe_annual": 76.90467787989752,
+            "skewness": -0.05808466206345976,
+            "sortino_annual": 53.53814294349237,
+            "volatility": 0.08252127508101714
+          },
+          "traded_share": 0.9986106286905175,
+          "turnover": 5750.0
+        }
+      },
+      "lightgbm": {
+        "B0": {
+          "break_even_cost": 0.11212157865631996,
+          "deflated_sharpe_probability": 0.9488644200556726,
+          "risk_utility": {
+            "certainty_equivalent": 1.9057810017786614e-05,
+            "expected_shortfall_error": 0.00010467065451614209,
+            "target_volatility_tracking_error": 0.7808728595860778,
+            "var_breach_rate": 0.0399444251476207,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 77.70685215137429,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.02766826813215329,
+            "hit_rate": 0.9736019451198332,
+            "kurtosis": 10.460152029030413,
+            "max_drawdown": -0.8971209647581304,
+            "mean": 0.11107091419855214,
+            "periods": 5758,
+            "sharpe_annual": 77.26895821743842,
+            "skewness": -0.03696310952329448,
+            "sortino_annual": 54.154005578230375,
+            "volatility": 0.08227487594155593
+          },
+          "traded_share": 0.9994789857589441,
+          "turnover": 5755.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.11235556860335423,
+          "deflated_sharpe_probability": 0.969765132241328,
+          "risk_utility": {
+            "certainty_equivalent": 3.3748956525918005e-05,
+            "expected_shortfall_error": 2.4983755357468537e-05,
+            "target_volatility_tracking_error": 0.7531831961686464,
+            "var_breach_rate": 0.042375824939215004,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 78.13120492877675,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.024984074547754195,
+            "hit_rate": 0.9753386592566864,
+            "kurtosis": 10.457504060894989,
+            "max_drawdown": -0.8748962905379045,
+            "mean": 0.11128575401634463,
+            "periods": 5758,
+            "sharpe_annual": 77.69611195039005,
+            "skewness": -0.007372264576019649,
+            "sortino_annual": 53.41318320218975,
+            "volatility": 0.08198081524327924
+          },
+          "traded_share": 0.9993053143452588,
+          "turnover": 5754.0
+        }
+      },
+      "log_ols": {
+        "B0": {
+          "break_even_cost": 0.11218971930581526,
+          "deflated_sharpe_probability": 0.9484231658736932,
+          "risk_utility": {
+            "certainty_equivalent": 2.0184282134274248e-05,
+            "expected_shortfall_error": 5.8565206368524705e-05,
+            "target_volatility_tracking_error": 0.7587885503505742,
+            "var_breach_rate": 0.03681833970128517,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 77.69170697829993,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.02785522758449894,
+            "hit_rate": 0.9730809308787773,
+            "kurtosis": 10.421659369533922,
+            "max_drawdown": -0.8971209647581304,
+            "mean": 0.11106184109905261,
+            "periods": 5758,
+            "sharpe_annual": 77.25427349412416,
+            "skewness": -0.0306332124464167,
+            "sortino_annual": 54.38672421519212,
+            "volatility": 0.08228379289385258
+          },
+          "traded_share": 0.9987843001042028,
+          "turnover": 5751.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.11202844698963364,
+          "deflated_sharpe_probability": 0.9316272083397371,
+          "risk_utility": {
+            "certainty_equivalent": 2.508838217473703e-05,
+            "expected_shortfall_error": 1.1216165493505709e-05,
+            "target_volatility_tracking_error": 0.7225313842854398,
+            "var_breach_rate": 0.03647099687391455,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 77.44832896526255,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.02924256312376065,
+            "hit_rate": 0.972907259465092,
+            "kurtosis": 10.444469665253479,
+            "max_drawdown": -0.8748962905379045,
+            "mean": 0.11093939100777228,
+            "periods": 5758,
+            "sharpe_annual": 77.01015351117528,
+            "skewness": -0.05166518229022763,
+            "sortino_annual": 54.10435210450538,
+            "volatility": 0.08245362142924118
+          },
+          "traded_share": 0.9991316429315734,
+          "turnover": 5753.0
+        }
+      }
+    },
+    "rows": 90548,
+    "status": "MEASURED"
+  },
+  "V": {
+    "evaluated_rows": 1108,
+    "median_cost_variance_units": 0.0023834342332094706,
+    "median_implied_variance": 0.16369955369780698,
+    "median_realized_variance": 0.0391533953985056,
+    "models": {
+      "gamma_glm": {
+        "B0": {
+          "break_even_cost": 0.10331017213249903,
+          "deflated_sharpe_probability": 0.1874614720492907,
+          "risk_utility": {
+            "certainty_equivalent": -6.725895650503216e-05,
+            "expected_shortfall_error": 0.0004020017901131233,
+            "target_volatility_tracking_error": 1.7221334207901275,
+            "var_breach_rate": 0.039711191335740074,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 66.10787030674015,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.10926264388593886,
+            "hit_rate": 0.9431407942238267,
+            "kurtosis": 106.15109750698198,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.1002048105123796,
+            "periods": 1108,
+            "sharpe_annual": 64.58444118620633,
+            "skewness": -6.2133116466727865,
+            "sortino_annual": 27.42482612875495,
+            "volatility": 0.08880401703195162
+          },
+          "traded_share": 0.9972924187725631,
+          "turnover": 1105.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.10338406183220146,
+          "deflated_sharpe_probability": 0.19612327758242565,
+          "risk_utility": {
+            "certainty_equivalent": -5.891128490545411e-05,
+            "expected_shortfall_error": 0.00025792216503604457,
+            "target_volatility_tracking_error": 1.7592379177870274,
+            "var_breach_rate": 0.03790613718411552,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 66.35341973660324,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.10682205936538672,
+            "hit_rate": 0.944043321299639,
+            "kurtosis": 107.82759793828887,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.10018668840153512,
+            "periods": 1108,
+            "sharpe_annual": 64.8338752620789,
+            "skewness": -6.280091309175521,
+            "sortino_annual": 26.99082654767423,
+            "volatility": 0.08844636462655055
+          },
+          "traded_share": 0.9963898916967509,
+          "turnover": 1104.0
+        }
+      },
+      "lightgbm": {
+        "B0": {
+          "break_even_cost": 0.1023980468316867,
+          "deflated_sharpe_probability": 0.1444119088017729,
+          "risk_utility": {
+            "certainty_equivalent": -6.334314981714455e-05,
+            "expected_shortfall_error": 0.0001502263883946843,
+            "target_volatility_tracking_error": 1.721551792622096,
+            "var_breach_rate": 0.06046931407942238,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 64.65856555365745,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.11830890021952135,
+            "hit_rate": 0.9395306859205776,
+            "kurtosis": 101.32283204620542,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.09921034438898575,
+            "periods": 1108,
+            "sharpe_annual": 63.12638917939862,
+            "skewness": -6.1356869249048165,
+            "sortino_annual": 27.30126181502123,
+            "volatility": 0.08995347707574756
+          },
+          "traded_share": 0.9963898916967509,
+          "turnover": 1104.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.10200706486095892,
+          "deflated_sharpe_probability": 0.14197583082766924,
+          "risk_utility": {
+            "certainty_equivalent": -3.5110227549615795e-05,
+            "expected_shortfall_error": 0.0002801547907129078,
+            "target_volatility_tracking_error": 1.9069459676606086,
+            "var_breach_rate": 0.06046931407942238,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 64.5283090667409,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.11880990167546703,
+            "hit_rate": 0.9404332129963899,
+            "kurtosis": 101.96091170998368,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.09881780648021482,
+            "periods": 1108,
+            "sharpe_annual": 62.99651089975264,
+            "skewness": -6.1792166758880445,
+            "sortino_annual": 27.012995377530963,
+            "volatility": 0.08978228608519385
+          },
+          "traded_share": 0.9963898916967509,
+          "turnover": 1104.0
+        }
+      },
+      "log_ols": {
+        "B0": {
+          "break_even_cost": 0.10390487330355408,
+          "deflated_sharpe_probability": 0.20473251577065893,
+          "risk_utility": {
+            "certainty_equivalent": -4.7135519312422615e-05,
+            "expected_shortfall_error": 0.000240692660429127,
+            "target_volatility_tracking_error": 1.8584821301393262,
+            "var_breach_rate": 0.039711191335740074,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 66.640047036901,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.09581747337638478,
+            "hit_rate": 0.9449458483754513,
+            "kurtosis": 108.3760529434443,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.10052176089252668,
+            "periods": 1108,
+            "sharpe_annual": 65.12026737225386,
+            "skewness": -6.2956993627345215,
+            "sortino_annual": 26.413252515840558,
+            "volatility": 0.08835189305598501
+          },
+          "traded_share": 0.9945848375451264,
+          "turnover": 1102.0
+        },
+        "B0+B1+B2": {
+          "break_even_cost": 0.10341887919532136,
+          "deflated_sharpe_probability": 0.19795215829195228,
+          "risk_utility": {
+            "certainty_equivalent": -4.380701762726956e-05,
+            "expected_shortfall_error": 7.870849907514604e-05,
+            "target_volatility_tracking_error": 1.8992374911171346,
+            "var_breach_rate": 0.04332129963898917,
+            "var_breach_target": 0.05
+          },
+          "strategy_gross_sharpe": 66.40234609486187,
+          "strategy_net": {
+            "expected_shortfall_5pct": -0.10646893585791307,
+            "hit_rate": 0.9449458483754513,
+            "kurtosis": 108.0425595913649,
+            "max_drawdown": -1.5605967901616058,
+            "mean": 0.10022772842618094,
+            "periods": 1108,
+            "sharpe_annual": 64.89131857527443,
+            "skewness": -6.288922546080657,
+            "sortino_annual": 26.79840404885312,
+            "volatility": 0.08840426853443811
+          },
+          "traded_share": 0.9963898916967509,
+          "turnover": 1104.0
+        }
+      }
+    },
+    "rows": 18230,
+    "status": "MEASURED"
+  },
+  "block": 11,
+  "bridge_a_delta_hedged": "NOT_IMPLEMENTED: needs a full quote book through the holding period; the local tape carries NBBO only at trade instants",
+  "buffer": 0.0,
+  "economics_sha256": "8f67eab020dc27c1ae4f9b8523c2fee3977724e42dbac0b67d9d18dfa8c5b10a",
+  "generated_at_utc": "2026-08-19T07:05:35.780659+00:00",
+  "label": "EXPLORATORY_MECHANISM_DISCOVERY",
+  "models": [
+    "log_ols",
+    "gamma_glm",
+    "lightgbm"
+  ],
+  "non_overlapping_step_minutes": 30,
+  "program": "docs/research_program_v2.md"
+}

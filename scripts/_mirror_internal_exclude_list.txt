@@ -1,0 +1,39 @@
+# Classes of internal working document that must never reach the published tree.
+#
+# PATTERNS, not an inventory. An earlier version of this file listed the fifty-five
+# individual handoffs, supervision packs and superseded drafts by name — which meant
+# publishing it published the very catalogue it was meant to protect. The classes
+# below are structural: they name directories and well-known filenames, so the guard
+# in tests/test_mirror_internal_docs_contract.py keeps working in every public
+# checkout (including CI) without disclosing what any specific document is called.
+#
+# The canonical local tree carries an additional, private list of individual paths
+# used by the publisher; this file is the part that is safe to publish and is what
+# the public guard enforces.
+
+# Agent operating instructions and skill definitions
+AGENTS.md
+CLAUDE.md
+glob:.agents/**
+glob:.specify/**
+glob:.codex/**
+glob:.githooks/**
+glob:docs/superpowers/**
+glob:docs/**/*_MASTER_PLAN.md
+glob:specs/**/plan.md
+glob:specs/**/quickstart.md
+glob:specs/**/tasks.md
+glob:tests/**/*handoff*.py
+
+# Operator runbooks and incident working notes (the public disclosure lives in
+# docs/rp2_v3/LICENSED_HISTORY_INCIDENT_20260826.md instead)
+glob:docs/**/*SUPPORT*TICKET*DRAFT*.md
+glob:docs/**/*MIRROR*HAZARD*.md
+glob:docs/phase8_one_shot_protocol_v*.md
+
+# Working correspondence and internal drafts, by directory and by prefix
+glob:reports/handoffs/**
+glob:docs/handoffs/**
+glob:**/supervisor_*.md
+glob:**/*_handoff*.md
+glob:**/*_request_pack*.md

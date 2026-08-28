@@ -1,0 +1,115 @@
+{
+  "advisors": {
+    "blocking_findings": 0,
+    "performance": {
+      "no_primary_key": 12,
+      "unused_index": 9
+    },
+    "security": {
+      "highest_level": "INFO",
+      "rls_enabled_no_policy": 21
+    }
+  },
+  "dataset_registry": {
+    "b1v3_features": {
+      "live_rows": 77328,
+      "registered_rows": 77328,
+      "source_sha256": "cd93d7164d088c61070ad601379c38be8555643fec5a137e66ee9ff76cbe25a4"
+    },
+    "b2_mechanism_forecasts": {
+      "live_rows": 1554800,
+      "registered_rows": 1554800,
+      "source_sha256": "a3ca298d5a88cd9779eb7f70df0a7e4f2b46345a3a6bbfc83255728c8991650e"
+    },
+    "c1_development_forecasts": {
+      "live_rows": 93288,
+      "registered_rows": 93288,
+      "source_sha256": "a6c60c5843940b1c42a5753f48cb3e40f5b91e20fec6d2e3653758f5c42e780a"
+    },
+    "c5_frozen_evaluation_forecasts": {
+      "live_rows": 356400,
+      "registered_rows": 356400,
+      "source_sha256": "db20b76248afce02e04009c510b408214d267a30e7cff3f8dc184d370574ce8b"
+    },
+    "dev_training_all_origins": {
+      "live_rows": 45440,
+      "registered_rows": 45440,
+      "source_sha256": "4730cd13589fc3e63d8736a358e290311ba27c4e277f378192591342c39d0b87"
+    },
+    "dev_training_common": {
+      "live_rows": 38573,
+      "registered_rows": 38573,
+      "source_sha256": "e5b9e04296d6dacd6c1321b760e1a253a47fcf67055a4e41b9d2c6a8b00c77da"
+    }
+  },
+  "dataset_registry_exact": true,
+  "latest_migration": {
+    "name": "close_service_role_sensitive_mutation_paths",
+    "version": "20260828020327"
+  },
+  "measured_utc": "2026-08-28T02:06:54.607Z",
+  "migration_count": 19,
+  "mode": "READ_ONLY_LIVE_REVALIDATION",
+  "project_ref": "eqpyjikcewqaegnbaemf",
+  "post_migration": {
+    "applied_version": "20260828020327",
+    "authorized_file_sha256": "280374E465D27DDC9271A5831BCCFF641E27DE0162A75C1CF3F050EC3AFC9879",
+    "dataset_loader_table_privileges_preserved": true,
+    "retired_result_table_mutation_privileges_revoked": true,
+    "scientific_row_counts_unchanged": true,
+    "table_rows": {
+      "b1v3_features": 77328,
+      "b2_mechanism_forecasts": 1554800,
+      "c1_development_forecasts": 93288,
+      "c5_frozen_evaluation_forecasts": 356400,
+      "dev_training_all_origins": 45440,
+      "dev_training_common": 38573,
+      "rp2_block_results": 30,
+      "rp2_contrast_results": 72,
+      "rp2_extension_results": 7,
+      "rp2_power_results": 6
+    }
+  },
+  "publication": {
+    "current_rows": {
+      "api.current_rp2_block_results": 0,
+      "api.current_rp2_contrasts": 0,
+      "api.current_rp2_extension_results": 0,
+      "api.current_rp2_power_results": 0,
+      "public.rp2_block_results": 0,
+      "public.rp2_contrast_results": 0,
+      "public.rp2_extension_results": 0,
+      "public.rp2_power_results": 0
+    },
+    "publish_rp2_v3_execute": {
+      "anon": false,
+      "authenticated": false,
+      "service_role": false
+    },
+    "direct_service_role_dml": {
+      "present": false,
+      "remediation": "APPLIED_20260828020327",
+      "tables": [
+        "rp2_block_results",
+        "rp2_contrast_results",
+        "rp2_extension_results",
+        "rp2_power_results"
+      ]
+    },
+    "views_security_invoker": 4
+  },
+  "sealed_cohorts_read": 0,
+  "rest_access_posture": {
+    "checks": 28,
+    "drift": 0,
+    "verdict": "HOLDS"
+  },
+  "supabase_admin_owned_public_api_relations": 0,
+  "verdict": "NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT",
+  "writes": {
+    "catalog_syncs_committed": 1,
+    "dataset_loads_committed": 6,
+    "schema_migrations_committed": 19,
+    "this_audit": 0
+  }
+}

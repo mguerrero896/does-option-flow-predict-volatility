@@ -1,0 +1,103 @@
+/.gitattributes text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.cff text eol=lf
+
+/artifacts/preflight/date_level_pit_preflight_plan_v1.json text eol=lf
+/artifacts/preflight/date_level_pit_preflight_request_budget_v1.json text eol=lf
+/artifacts/api_audit/b2_replication_90_common_probe.json text eol=crlf
+/artifacts/api_audit/b2_replication_90_uw_metadata_probe.json text eol=crlf
+
+/artifacts/provider_timing_v21/** text eol=lf
+/artifacts/provider_timing_v22/** text eol=lf
+/artifacts/provider_timing_v21/massive_reselection_sensitivity_v21_recomputed_20260812.json text eol=crlf
+/artifacts/provider_timing_v22/b2_availability_manifest_v22.json text eol=crlf
+/artifacts/preflight/date_level_pit_preflight_status_v2_1_current.json text eol=lf
+/artifacts/target_blind_v23_sourcebound_20260812/** text eol=crlf
+/artifacts/target_blind_v24_sourcebound_20260812/** text eol=lf
+/artifacts/target_blind_v24_sourcebound_20260812/target_blind_common_predictor_manifest_v24.json text eol=crlf
+/artifacts/corrected_development_v1/source_coverage_ledger.json text eol=crlf
+
+/artifacts/b1v3_provider_preflight_v2/** text eol=lf
+/docs/recovery/b1v3_provider_preflight_v2.md text eol=lf
+/scripts/run_date_level_pit_preflight_v2.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-provider-preflight-plan-v2.schema.json text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-provider-preflight-report-v2.schema.json text eol=lf
+/src/mds650/b1v3_provider_preflight_runner_v2.py text eol=lf
+/src/mds650/b1v3_provider_preflight_v2.py text eol=lf
+/tests/unit/test_b1v3_provider_preflight_v2.py text eol=lf
+/tests/unit/test_run_b1v3_provider_preflight_v2.py text eol=lf
+/tests/unit/test_run_date_level_pit_preflight_v2_cli.py text eol=lf
+/artifacts/b1v3_confirmation_plan/confirmation_plan_provider_passed.json text eol=lf
+/scripts/freeze_b1v3_confirmation_plan.py text eol=lf
+/scripts/plan_b1v3_confirmation.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-plan.schema.json text eol=lf
+/src/mds650/b1v3_confirmation.py text eol=lf
+/tests/unit/test_b1v3_confirmation.py text eol=lf
+/tests/unit/test_freeze_b1v3_confirmation_plan.py text eol=lf
+/artifacts/b1v3_confirmation_panel/** text eol=lf
+/scripts/prepare_b1v3_confirmation_acquisition.py text eol=lf
+/scripts/acquire_b1v3_confirmation_full_tape.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-storage-reuse-v1.schema.json text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-full-tape-acquisition-manifest-v1.schema.json text eol=lf
+/src/mds650/b1v3_confirmation_acquisition.py text eol=lf
+/src/mds650/b1v3_confirmation_panel.py text eol=lf
+/src/mds650/b1v3_confirmation_build.py text eol=lf
+/tests/unit/test_b1v3_confirmation_acquisition.py text eol=lf
+/tests/unit/test_b1v3_confirmation_panel.py text eol=lf
+/tests/unit/test_b1v3_confirmation_build.py text eol=lf
+/tests/unit/test_acquire_b1v3_confirmation_full_tape.py text eol=lf
+/scripts/build_b1v3_confirmation_base.py text eol=lf
+/tests/contract/test_b1v3_confirmation_base_artifact.py text eol=lf
+/artifacts/b1v3_confirmation_panel/base_predictor_manifest.json text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-base-predictors-v1.schema.json text eol=lf
+/src/mds650/b1v3_b2_confirmation.py text eol=lf
+/scripts/build_b1v3_confirmation_b2.py text eol=lf
+/tests/unit/test_b1v3_b2_confirmation.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-b2-predictors-v1.schema.json text eol=lf
+/scripts/acquire_b1v3_confirmation_b1q.py text eol=lf
+/tests/unit/test_acquire_b1v3_confirmation_b1q.py text eol=lf
+/src/mds650/b1v3_b1q_source.py text eol=lf
+/scripts/seal_b1v3_confirmation_b1q_source.py text eol=lf
+/scripts/build_b1v3_target_blind.py text eol=lf
+/scripts/build_b1v3_confirmation_b1.py text eol=lf
+/tests/unit/test_b1v3_b1q_source.py text eol=lf
+/tests/unit/test_seal_b1v3_confirmation_b1q_source.py text eol=lf
+/tests/unit/test_build_b1v3_target_blind.py text eol=lf
+/tests/unit/test_build_b1v3_confirmation_b1.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-b1q-source-v1.schema.json text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-target-blind-source-bound-manifest-v2.schema.json text eol=lf
+/src/mds650/b1v3_confirmation_common.py text eol=lf
+/scripts/build_b1v3_confirmation_common.py text eol=lf
+/tests/unit/test_b1v3_confirmation_common.py text eol=lf
+/tests/unit/test_build_b1v3_confirmation_common.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-confirmation-common-predictor-v1.schema.json text eol=lf
+/src/mds650/b1v3_evaluation.py text eol=lf
+/scripts/seal_b1v3_preregistration.py text eol=lf
+/tests/unit/test_b1v3_evaluation.py text eol=lf
+/tests/unit/test_seal_b1v3_preregistration.py text eol=lf
+/specs/001-pit-options-rv30/contracts/b1v3-preregistration-v1.schema.json text eol=lf
+/artifacts/b1v3_confirmation_preregistration/preregistration.json text eol=lf
+/docs/b1v3_preregistration.md text eol=lf
+# Frozen RP3 model files: their SHA-256 is recorded in freeze_manifest.json over the
+# exact bytes. Any line-ending conversion at checkout would silently break every hash
+# verification on a Windows clone, so git must never touch them.
+artifacts/rp3/frozen/*.txt -text
+artifacts/rp3/frozen/freeze_manifest.json -text
+
+# Shell scripts and the reconstructed Supabase SQL are LF everywhere: bash refuses
+# CRLF scripts (the publish_mirror.sh audit finding), and the migration tripwire
+# hashes SQL bodies against the md5 Supabase reports for the applied LF text.
+*.sh text eol=lf
+# The reconstructed applied migrations are VERBATIM remote bytes (all LF), and
+# the tripwire hashes them against the remote md5. They are byte-exact records,
+# not text for git to ever convert in either direction on any platform: -text,
+# same regime as the frozen RP3 artifacts above. (With autocrlf=true a plain
+# `text` classification would smudge them to CRLF on Windows checkouts.)
+supabase/migrations/*.sql -text
+supabase/drafts/*.sql -text
+supabase/migrations_pending/*.sql -text

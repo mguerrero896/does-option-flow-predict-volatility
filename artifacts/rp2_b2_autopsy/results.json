@@ -1,0 +1,146 @@
+{
+  "autopsy_sha256": "2a92992c394e0cbed2253a583f58068576dd81195d19fc744efa70f199d20908",
+  "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+  "d3_localisation": {
+    "flow_quantile": 0.8,
+    "flow_variable": "b2_5m_premium",
+    "index": "linear_index",
+    "model_family": "lightgbm_qlike",
+    "remaining_gain": 0.0005388827497320063,
+    "sessions": 156,
+    "spearman_rho": 0.11148867569660666,
+    "top_flow_quintile_gain": 0.002859048758056482
+  },
+  "families": {
+    "gamma_glm": {
+      "linear_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0004620047128763728,
+        "ci_low": -0.000206997922123007,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013674774360260425,
+        "equivalent": true,
+        "estimate": 0.00012053167955852446,
+        "expanded_information_set": "B0+B1+linear_index",
+        "mde": 0.0004910892992139661,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 0.4889562480252496,
+        "p_value": 0.4927536231884058,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.5677161419290355
+      },
+      "tree_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": -0.003104237294021507,
+        "ci_low": -0.008218173897200278,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013674774360260425,
+        "equivalent": false,
+        "estimate": -0.005503629289299648,
+        "expanded_information_set": "B0+B1+tree_index",
+        "mde": 0.0037380745731544064,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 3.3109588702168934e-05,
+        "p_value": 0.0009995002498750624,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0004997501249375312
+      }
+    },
+    "lightgbm_qlike": {
+      "linear_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0017580623633850693,
+        "ci_low": 0.0003245049535390528,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013462961943359654,
+        "equivalent": false,
+        "estimate": 0.0010148142386190782,
+        "expanded_information_set": "B0+B1+linear_index",
+        "mde": 0.0010499741765896552,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.006431630206817429,
+        "p_value": 0.005997001499250375,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0009995002498750624
+      },
+      "tree_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": -0.0003376117311115538,
+        "ci_low": -0.003410568345977445,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013462961943359654,
+        "equivalent": false,
+        "estimate": -0.0018322773213892878,
+        "expanded_information_set": "B0+B1+tree_index",
+        "mde": 0.0021463184648375104,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.01609212774715559,
+        "p_value": 0.010994502748625687,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.025487256371814093
+      }
+    },
+    "ridge_log": {
+      "linear_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0004333653848032595,
+        "ci_low": -5.762789956031342e-05,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013714668064403527,
+        "equivalent": true,
+        "estimate": 0.00018119303270739697,
+        "expanded_information_set": "B0+B1+linear_index",
+        "mde": 0.0003588303971287364,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 0.1545521000619175,
+        "p_value": 0.15092453773113443,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.23438280859570215
+      },
+      "tree_index": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": -0.0015720765786352159,
+        "ci_low": -0.005610111598010503,
+        "common_mask_sha256": "13d72a5e8a263b2f46e2f669d0bc55b27ef24d22991719f0040b260a5f08db37",
+        "equivalence_bound": 0.0013714668064403527,
+        "equivalent": false,
+        "estimate": -0.0034708525273308742,
+        "expanded_information_set": "B0+B1+tree_index",
+        "mde": 0.002985078176012038,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 0.0010449521907004706,
+        "p_value": 0.0009995002498750624,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0004997501249375312
+      }
+    }
+  },
+  "generated_at_utc": "2026-08-24T09:40:34.838077+00:00",
+  "index_construction": {
+    "contrast_seed": 650,
+    "ridge_penalty_per_train_row": 0.001,
+    "tree_params": {
+      "deterministic": true,
+      "learning_rate": 0.05,
+      "num_leaves": 15,
+      "objective": "regression",
+      "seed": 20260818,
+      "verbosity": -1
+    },
+    "tree_rounds": 120
+  },
+  "label": "EXPLORATORY_DIAGNOSTIC",
+  "question": "where does the B2 information die on the way to a forecast?",
+  "role": "D",
+  "rows": 152954,
+  "run": "rp2-v3-20260824-remeasure",
+  "sessions_evaluated": 156,
+  "test_rows": 61336,
+  "train_rows": 91618
+}

@@ -1,0 +1,277 @@
+{
+  "code_commit": "e7728ebbaf3f353143a5faea2a54211bb5d16b12",
+  "data_root": "MDS650_DATA_ROOT",
+  "feature_registry_sha256": "3c108a14a5a88e4da08bade7debd5dc05a1d51ea50c1e5adea6d1e88dc0acb9c",
+  "finished_at_utc": "2026-08-27T01:56:41.396537+00:00",
+  "input_manifest_sha256": "11a158b302ade3c4c6b475f6cde973a93b275ec1c4b894ace66bccbc84ded8ab",
+  "model_config_sha256": "9ea917b7bcdf8835ef3a5abc772fc9d0fe714f6dfba0bcc6d5536ad1993d5dd8",
+  "roles": [
+    "D",
+    "V"
+  ],
+  "run_id": "rp2-v3-20260827-remediation3",
+  "scientific_sha256": "386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47",
+  "seeds": {
+    "bootstrap": 650,
+    "dml_folds": 5,
+    "lightgbm": 20260818
+  },
+  "started_at_utc": "2026-08-27T00:41:33.098892+00:00",
+  "steps": [
+    {
+      "artifacts": {
+        "input_manifest.json": "2102fc32628a955c5e0d6f9733caebe52e732e9a6d64b5d987f97f8eeb47acd1"
+      },
+      "command": [
+        "python",
+        "validate_inputs"
+      ],
+      "content": {
+        "input_manifest.json": "9a2a1633127623a9ff806051ee75da5b57633e277619e3005ae41d22dbd20984"
+      },
+      "exit_code": 0,
+      "name": "validate-input-manifests",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 60.354
+    },
+    {
+      "artifacts": {
+        "rp2_block3_target/comparison.json": "ec400cfb9cf873e5a8e7cff3120f1389eae8cb9c7e80b2b9d1948e0586f04f0f",
+        "rp2_block3_target/target_panel.parquet": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block3_target_panel.py",
+        "--data-root",
+        "<path>",
+        "--output-dir",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block3_target/comparison.json": "4ac71484a10d24ee4353d0a137ce6cf97c076de2a4703e32195584581878a3fa",
+        "rp2_block3_target/target_panel.parquet": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      },
+      "exit_code": 0,
+      "name": "build-targets",
+      "peak_memory_bytes": 1101148160,
+      "reused": false,
+      "runtime_seconds": 11.152
+    },
+    {
+      "artifacts": {
+        "rp2_block4_b0/b0_panel.parquet": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "rp2_block4_b0/ladder.json": "1c7f2cda9114c57dbbe815e7c1149bea5bdd95f3b8f46d305845be9f1ec6f5fd"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block4_b0_panel.py",
+        "--data-root",
+        "<path>",
+        "--output-dir",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block4_b0/b0_panel.parquet": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a",
+        "rp2_block4_b0/ladder.json": "9038505987b1043c43603bca177297d3a23c7b5e413d92a78c2b46b79628ef35"
+      },
+      "exit_code": 0,
+      "name": "build-b0",
+      "peak_memory_bytes": 1701904384,
+      "reused": false,
+      "runtime_seconds": 52.735
+    },
+    {
+      "artifacts": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "rp2_block5_surface/surface_coverage.json": "6d09906652963582435e1104a6fed9da0c3d48dc41cb89476a624f45e7563bc3"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block5_surface_panel.py",
+        "--data-root",
+        "<path>",
+        "--output-dir",
+        "<path>",
+        "--panel-root",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba",
+        "rp2_block5_surface/surface_coverage.json": "ce518771dbcd0b84902b3f71346344e9cf08c9ecc4025aa8965328cf508ffbff"
+      },
+      "exit_code": 0,
+      "name": "build-b1",
+      "peak_memory_bytes": 3545067520,
+      "reused": false,
+      "runtime_seconds": 3883.396
+    },
+    {
+      "artifacts": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "rp2_block6_flow/flow_coverage.json": "6acfa8dbfb2d4f7a130d389634bc6ce6c95ef2039602defff29f1060aa51fb0f"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block6_flow_panel.py",
+        "--data-root",
+        "<path>",
+        "--output-dir",
+        "<path>",
+        "--panel-root",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda",
+        "rp2_block6_flow/flow_coverage.json": "d5836b7b4c12fcb6a91d2038c8f9cbb1c014a225fa7ebe13e5574f99f5a52b0f"
+      },
+      "exit_code": 0,
+      "name": "build-b2",
+      "peak_memory_bytes": 7137103872,
+      "reused": false,
+      "runtime_seconds": 281.121
+    },
+    {
+      "artifacts": {
+        "feature_registry_report.json": "7c01b6673ccbb7cebd6f09d7f4e62821253867fcb4250b30fb4421db33a3ba60"
+      },
+      "command": [
+        "python",
+        "validate-feature-registry"
+      ],
+      "content": {
+        "feature_registry_report.json": "028280aa2cacbe679ae11093f27692bba96e11c891f26ec6d69d2778d40958f0"
+      },
+      "exit_code": 0,
+      "name": "validate-feature-registry",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 0.35
+    },
+    {
+      "artifacts": {
+        "common_masks.json": "e9bdc2c28d69cdfdf4d0e2fdf5d1c13e918cb7882404c18517c847de4b2510ea"
+      },
+      "command": [
+        "python",
+        "construct-common-masks"
+      ],
+      "content": {
+        "common_masks.json": "60b5a709af1db14e928b39b40648f78d54ba5689dabce6d7737177e271bbc4fc"
+      },
+      "exit_code": 0,
+      "name": "construct-common-masks",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 0.292
+    },
+    {
+      "artifacts": {
+        "rp2_block8_ladder/ladder.json": "3c60b4fb73706212c346f87ec28933cfe998ffad1ce9d8efd81bd01bd5b798fc"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block8_ladder.py",
+        "--output-dir",
+        "<path>",
+        "--panel-root",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block8_ladder/ladder.json": "112a931e51748847e40c45843785253cc63866a97657838447c746010acd7894"
+      },
+      "exit_code": 0,
+      "name": "fit-model-ladder",
+      "peak_memory_bytes": 2382905344,
+      "reused": false,
+      "runtime_seconds": 26.821
+    },
+    {
+      "artifacts": {
+        "rp2_block7_dml/dml.json": "fdb53c9685bd6b9012893694ba5c6e5161b3d2943dde1e2562e245c72a527798"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block7_dml.py",
+        "--output-dir",
+        "<path>",
+        "--panel-root",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block7_dml/dml.json": "44f0b708a3ff6cce7f8a73cdc1c5618d4e670b2a394ecfdca6c75efb5ff2c99a"
+      },
+      "exit_code": 0,
+      "name": "run-dml-diagnostics",
+      "peak_memory_bytes": 1843150848,
+      "reused": false,
+      "runtime_seconds": 112.258
+    },
+    {
+      "artifacts": {
+        "rp2_block10_inference/inference.json": "f68369e32d3aa62f34b43619b578597465a155a60df1cf5ca5ac221f974fca99"
+      },
+      "command": [
+        "python",
+        "scripts/rp2_block10_inference.py",
+        "--output-dir",
+        "<path>",
+        "--panel-root",
+        "<path>"
+      ],
+      "content": {
+        "rp2_block10_inference/inference.json": "05b059772907b6d57a7aaceeeee24a060144f8d7ac3888da42d950ad5e3ec3b2"
+      },
+      "exit_code": 0,
+      "name": "run-incremental-inference",
+      "peak_memory_bytes": 1760534528,
+      "reused": false,
+      "runtime_seconds": 18.693
+    },
+    {
+      "artifacts": {
+        "scorecard.json": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c",
+        "scorecard.md": "6ab3267e662e86000d9fe3da91d4518d52105c97be84126e5ff1754a9a81a69a"
+      },
+      "command": [
+        "python",
+        "build_scorecard"
+      ],
+      "content": {
+        "scorecard.json": "a6310e9a052ca8051db146c7b53a99cb1d38ff78e4421b90d6aa3499128c45d0",
+        "scorecard.md": "534e2b8cde0dfd5b937fbac25362e5aa99e7b3fc6de8c4f71fa54e0e88482361"
+      },
+      "exit_code": 0,
+      "name": "generate-scorecard",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 0.547
+    },
+    {
+      "artifacts": {},
+      "command": [
+        "python",
+        "write_manifest"
+      ],
+      "content": {},
+      "exit_code": 0,
+      "name": "generate-provenance",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 0.0
+    },
+    {
+      "artifacts": {},
+      "command": [
+        "python",
+        "verify_artifacts"
+      ],
+      "content": {},
+      "exit_code": 0,
+      "name": "verify-artifact-hashes",
+      "peak_memory_bytes": 0,
+      "reused": false,
+      "runtime_seconds": 0.133
+    }
+  ]
+}

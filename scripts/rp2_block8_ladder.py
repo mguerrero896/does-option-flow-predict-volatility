@@ -1,0 +1,422 @@
+"""Block 8 - the model ladder over the four contrasts registered by decision 65.
+
+Every model family is fitted on four nested information sets - B0, B0+B1, B0+B2 and
+B0+B1+B2 - on identical rows, and the five estimands are formed from the resulting QLIKE
+losses:
+
+    Delta_B1        = L(B0)       - L(B0+B1)
+    Delta_B2|B1     = L(B0+B1)    - L(B0+B1+B2)
+    Delta_B2|B0     = L(B0)       - L(B0+B2)
+    Delta_Total     = L(B0)       - L(B0+B1+B2)
+    Delta_Interaction = Delta_Total - Delta_B1 - Delta_B2|B0
+
+Selection happens only in D and V.  Every contrast is reported raw and after
+Mincer-Zarnowitz recalibration of the baseline, because Block 4 showed the baseline
+carries an era-dependent level bias that an added information set could otherwise appear
+to repair.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from collections.abc import Sequence
+from datetime import UTC, datetime
+from pathlib import Path
+
+import numpy as np
+import numpy.typing as npt
+import polars as pl
+
+from mds650.b1v3_confirmation import canonical_sha256
+from mds650.metrics import holm_adjust, qlike_losses
+from mds650.rp2.baseline import mincer_zarnowitz
+from mds650.rp2.feature_registry import assert_segment_coverage, describe_coverage
+from mds650.rp2.inference import (
+    DEFAULT_ALPHA,
+    DEFAULT_BOOTSTRAP,
+    DEFAULT_POWER,
+    DEFAULT_SEED,
+    session_contrast,
+)
+from mds650.rp2.ladder import (
+    BOOSTED_LADDER,
+    INDEPENDENT_FAMILIES,
+    LADDER,
+    PRIMARY_MODELS,
+    assert_primary_models,
+    canonical_float_array_sha256,
+    fit_ladder_model,
+    partial_pooling,
+    session_weighted_level,
+)
+from mds650.rp2.panel import (
+    B0_FEATURES,
+    B1_FEATURES,
+    B2_FEATURES,
+    CORE_SETS,
+    build_design,
+    chronological_split,
+    common_evaluation_mask,
+    describe_information_set,
+    lift_mask,
+    load_merged_panel,
+    mask_sha256,
+    panel_paths,
+    session_rank,
+)
+from mds650.rp2.preprocessing import describe_preprocessor, fold_design
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_OUTPUT = ROOT / "artifacts" / "rp2_block8_ladder"
+
+INFORMATION_SETS: dict[str, list[dict[str, str]]] = {
+    "B0": [B0_FEATURES],
+    "B0+B1": [B0_FEATURES, B1_FEATURES],
+    "B0+B2": [B0_FEATURES, B2_FEATURES],
+    "B0+B1+B2": [B0_FEATURES, B1_FEATURES, B2_FEATURES],
+}
+CONTRASTS: dict[str, tuple[str, str]] = {
+    "delta_b1": ("B0", "B0+B1"),
+    "delta_b2_given_b1": ("B0+B1", "B0+B1+B2"),
+    "delta_b2_given_b0": ("B0", "B0+B2"),
+    "delta_total": ("B0", "B0+B1+B2"),
+}
+
+type FloatArray = npt.NDArray[np.float64]
+
+
+def _recalibrate(
+    forecast: FloatArray, target: FloatArray, train: npt.NDArray[np.bool_]
+) -> tuple[FloatArray, dict[str, float]]:
+    """Apply the training-period Mincer-Zarnowitz correction, and report what it applied.
+
+    The slope and intercept were computed and thrown away. They are the scorecard's
+    statement of how far the raw forecast was from being conditionally unbiased, and a
+    correction whose size is not reported is a correction nobody can check.
+
+    The regression is on the log scale, so ``exp(a + b log f)`` is a conditional MEDIAN.
+    QLIKE scores a conditional mean, and the fitters already carry one: `fit_log_ols` and
+    `fit_ridge_log` multiply by ``exp(0.5 Var(resid_train))``. Without the ``sigma^2 / 2``
+    term below the correction undoes exactly that - on an OLS fit the residuals are
+    orthogonal to the fitted values, so the regression returns ``b = 1`` and
+    ``a = -0.5 Var(resid)``, which is the inverse of the smearing factor and nothing else.
+    """
+
+    calibration = mincer_zarnowitz(target[train], forecast[train])
+    smearing = 0.5 * float(calibration.residual_std) ** 2
+    corrected = np.exp(
+        calibration.intercept
+        + calibration.slope * np.log(np.maximum(forecast, 1e-12))
+        + smearing
+    )
+    return (
+        np.asarray(corrected, dtype=np.float64),
+        {
+            "slope": float(calibration.slope),
+            "intercept": float(calibration.intercept),
+            "smearing_log_offset": smearing,
+        },
+    )
+
+
+def _contrast(
+    losses: dict[str, FloatArray],
+    sessions: npt.NDArray[np.int64],
+    base: str,
+    expanded: str,
+    *,
+    model_family: str,
+    common_mask_sha256: str,
+) -> dict[str, object]:
+    """One nested increment, aggregated to the session before anything is inferred.
+
+    The previous estimator averaged over origins, so a session with more five-minute
+    origins weighed more than a quiet one and an early close weighed less than a full day.
+    The unit of observation is the trading session.
+    """
+
+    record = session_contrast(
+        losses[base],
+        losses[expanded],
+        sessions,
+        model_family=model_family,
+        base_information_set=base,
+        expanded_information_set=expanded,
+        common_mask_sha256=common_mask_sha256,
+        repetitions=DEFAULT_BOOTSTRAP,
+        seed=DEFAULT_SEED,
+        alpha=DEFAULT_ALPHA,
+        power=DEFAULT_POWER,
+    ).as_record()
+    # `delta` is kept as an alias of `estimate` so that documents and downstream readers
+    # written against the earlier artifact still resolve, and both names mean one number.
+    record["delta"] = record["estimate"]
+    record["equivalence_interpretation"] = (
+        "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST"
+    )
+    return record
+
+
+def run_role(
+    panel: pl.DataFrame, *, role: str, train_share: float, models: Sequence[str]
+) -> dict[str, object]:
+    """Fit every family on every information set and form the five estimands."""
+
+    frame = panel.filter(pl.col("role") == role).sort(
+        ["session_date", "asset", "origin_minute"]
+    )
+    target = np.asarray(frame["rv30"].to_numpy(), dtype=np.float64)
+    sessions_rank = session_rank(frame["session_date"].to_numpy())
+
+    # build_design still fails closed on a registered feature the panel does not carry; its
+    # matrix is discarded, because the design a fold fits is built by the preprocessor from
+    # that fold's own training statistics.
+    resolved: dict[str, tuple[str, ...]] = {}
+    features: dict[str, list[str]] = {}
+    for name, maps in INFORMATION_SETS.items():
+        _, resolved[name] = build_design(frame, maps)
+        features[name] = [column for mapping in maps for column in mapping]
+    role_frame = frame
+    keep = common_evaluation_mask(frame, target)
+    information_sets = {
+        name: describe_information_set((name,), resolved[name], keep)
+        for name in INFORMATION_SETS
+    }
+    if int(keep.sum()) < 2000:
+        return {
+            "status": "INSUFFICIENT_ROWS",
+            "rows": int(keep.sum()),
+            "information_sets": information_sets,
+        }
+
+    frame = frame.filter(pl.Series(keep))
+    target = target[keep]
+    sessions_rank = sessions_rank[keep]
+    session_labels = frame["session_date"].to_numpy()
+    assets = frame["asset"].to_numpy()
+    train, test = chronological_split(sessions_rank, train_share=train_share)
+    # One design per information set, imputed and scaled from this fold's training rows.
+    designs: dict[str, FloatArray] = {}
+    preprocessors: dict[str, object] = {}
+    for name in INFORMATION_SETS:
+        designs[name], _, fitted = fold_design(frame, features[name], train)
+        preprocessors[name] = describe_preprocessor(fitted)
+    # The floor holds on the panel and on this role; it also has to hold on the two
+    # segments this run fits and scores, which is where a held-out tail with a gap in it
+    # would otherwise become a result. The masks are lifted back onto the unfiltered role
+    # frame: checking them on the frame the common mask has already pruned would be
+    # checking that the rows which survived are the rows which survived.
+    assert_segment_coverage(
+        role_frame,
+        {"train": lift_mask(keep, train), "test": lift_mask(keep, test)},
+        *CORE_SETS.values(),
+    )
+    information_sets = {
+        name: describe_information_set((name,), resolved[name], lift_mask(keep, test))
+        for name in INFORMATION_SETS
+    }
+    # Every contrast below is scored on exactly these rows. The digest is what lets a
+    # reader confirm that the base and the expanded model were judged on one sample.
+    evaluated_mask_sha256 = mask_sha256(lift_mask(keep, test))
+    session_index = np.unique(session_labels[test], return_inverse=True)[1].astype(np.int64)
+
+    results: dict[str, object] = {
+        "status": "MEASURED",
+        "rows": int(keep.sum()),
+        "train_share": train_share,
+        "train_rows": int(train.sum()),
+        "test_rows": int(test.sum()),
+        "sessions": int(np.unique(sessions_rank).size),
+        "assets": sorted({str(a) for a in assets}),
+        "design_columns": {name: designs[name].shape[1] for name in INFORMATION_SETS},
+        "preprocessing": preprocessors,
+        "information_sets": information_sets,
+        "evaluation_mask_sha256": evaluated_mask_sha256,
+        "evaluated_sessions": int(np.unique(session_index).size),
+    }
+    per_model: dict[str, object] = {}
+    for model_name in models:
+        losses: dict[str, FloatArray] = {}
+        losses_recalibrated: dict[str, FloatArray] = {}
+        qlike_levels: dict[str, float] = {}
+        qlike_levels_recalibrated: dict[str, float] = {}
+        qlike_levels_by_origin: dict[str, float] = {}
+        calibrations: dict[str, dict[str, float]] = {}
+        forecast_hashes: dict[str, str] = {}
+        loss_hashes: dict[str, str] = {}
+        # The boosted families choose their number of rounds by early stopping on the last
+        # sessions of the training fold. The count they chose is published beside the
+        # contrast it produced: it used to be the literal 300 for every fit, and the
+        # published Delta_B1 for lightgbm_qlike tripled with it.
+        boosting: dict[str, object] = {}
+        for set_name in INFORMATION_SETS:
+            design = designs[set_name]
+            if model_name in BOOSTED_LADDER:
+                record: dict[str, object] = {}
+                forecast = fit_ladder_model(
+                    model_name, design, target, train, sessions=sessions_rank, record=record
+                )
+                boosting[set_name] = record
+            else:
+                forecast = fit_ladder_model(
+                    model_name, design, target, train, sessions=sessions_rank
+                )
+            losses[set_name] = qlike_losses(target[test], forecast[test])
+            forecast_hashes[set_name] = canonical_float_array_sha256(forecast[test])
+            loss_hashes[set_name] = canonical_float_array_sha256(losses[set_name])
+            recalibrated, calibration = _recalibrate(forecast, target, train)
+            calibrations[f"{model_name}|{set_name}"] = calibration
+            losses_recalibrated[set_name] = qlike_losses(target[test], recalibrated[test])
+            # Session-weighted, so that level(base) - level(expanded) reproduces the
+            # contrast published beside it. This was `np.mean` over every evaluated row
+            # while the contrasts already aggregated to the session, and the two disagreed
+            # by 2.2 % for gamma_glm and 2.0 % for ridge_log. The origin-weighted figure is
+            # kept under a name that says what it is rather than silently replaced.
+            qlike_levels[set_name] = session_weighted_level(losses[set_name], session_index)
+            # The recalibrated branch publishes contrasts, so it has to publish the levels
+            # those contrasts are differences of. Reporting only the raw level is what let
+            # a recalibration that shifted every level by a constant go unseen: a constant
+            # cancels in the difference and shows up nowhere else.
+            qlike_levels_recalibrated[set_name] = session_weighted_level(
+                losses_recalibrated[set_name], session_index
+            )
+            qlike_levels_by_origin[set_name] = float(np.mean(losses[set_name]))
+        contrasts: dict[str, object] = {}
+        raw_p: dict[str, float] = {}
+        for label, (base, expanded) in CONTRASTS.items():
+            stats = _contrast(
+                losses,
+                session_index,
+                base,
+                expanded,
+                model_family=model_name,
+                common_mask_sha256=evaluated_mask_sha256,
+            )
+            stats_recalibrated = _contrast(
+                losses_recalibrated,
+                session_index,
+                base,
+                expanded,
+                model_family=model_name,
+                common_mask_sha256=evaluated_mask_sha256,
+            )
+            contrasts[label] = {"raw": stats, "recalibrated": stats_recalibrated}
+            raw_p[label] = float(stats["p_value"])  # type: ignore[arg-type]
+        interaction = (
+            float(contrasts["delta_total"]["raw"]["delta"])  # type: ignore[index]
+            - float(contrasts["delta_b1"]["raw"]["delta"])  # type: ignore[index]
+            - float(contrasts["delta_b2_given_b0"]["raw"]["delta"])  # type: ignore[index]
+        )
+        per_model[model_name] = {
+            "family": INDEPENDENT_FAMILIES[model_name],
+            "boosting_rounds": boosting,
+            "forecast_sha256": forecast_hashes,
+            "loss_sha256": loss_hashes,
+            "qlike": qlike_levels,
+            "qlike_recalibrated": qlike_levels_recalibrated,
+            "qlike_by_origin": qlike_levels_by_origin,
+            "calibration": calibrations,
+            "contrasts": contrasts,
+            "delta_interaction": interaction,
+            "holm_adjusted_p": holm_adjust(raw_p),
+        }
+    results["models"] = per_model
+
+    # Level 3: hierarchical partial pooling of per-asset offsets on the best smooth model.
+    design = designs["B0+B1+B2"]
+    forecast = LADDER["log_ols"](design, target, train)
+    residual = np.log(np.maximum(target, 1e-12)) - np.log(np.maximum(forecast, 1e-12))
+    asset_index = np.unique(assets, return_inverse=True)[1].astype(np.int64)
+    # The session, not the origin, is the unit the sampling variance is measured on: the
+    # origins inside a session share overlapping thirty-minute targets, so counting them
+    # as independent draws made the subtracted term about six times too small.
+    pooled_sessions = np.unique(session_labels, return_inverse=True)[1].astype(np.int64)
+    pooled = partial_pooling(residual, asset_index, train, sessions=pooled_sessions)
+    pooled_forecast = forecast * np.exp(pooled.apply(asset_index))
+    results["hierarchical_partial_pooling"] = {
+        "between_variance": pooled.between_variance,
+        "sampling_variance_by_group": pooled.sampling_variance,
+        "qlike_without_pooling": float(np.mean(qlike_losses(target[test], forecast[test]))),
+        "qlike_with_pooling": float(
+            np.mean(qlike_losses(target[test], pooled_forecast[test]))
+        ),
+        "asset_offsets": {
+            str(np.unique(assets)[index]): value for index, value in pooled.offsets.items()
+        },
+    }
+    return results
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    # A rebuild writes its panels into its own run directory; without this the
+    # block would silently read the previous run's panels and label the result
+    # with the new run id.
+    parser.add_argument("--panel-root", type=Path, default=None)
+    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--models", default=",".join(LADDER))
+    args = parser.parse_args(argv)
+
+    models = tuple(name.strip() for name in str(args.models).split(",") if name.strip())
+    assert_primary_models(models)
+    panels = panel_paths(args.panel_root)
+    panel = load_merged_panel(panels["b0"], panels["b1"], panels["b2"])
+    document: dict[str, object] = {
+        # Which frozen sets were fitted, how complete they were, and the hash of the
+        # registry that decided them. Without it an artifact records a design width and
+        # nothing a reader can check that width against.
+        "feature_registry": describe_coverage(panel, *CORE_SETS.values()),
+        "block": 8,
+        "program": "docs/research_program_v2.md",
+        "label": "EXPLORATORY_MECHANISM_DISCOVERY",
+        "inference_alpha": DEFAULT_ALPHA,
+        "inference_power": DEFAULT_POWER,
+        "alpha_budget_scope": "FUTURE_CAMPAIGNS_ONLY_POST_HOC_SENSITIVITY_HERE",
+        "decision": 65,
+        "models": list(models),
+        # The families the research contract decides on. Everything else in the ladder
+        # is robustness: it can move a conclusion only by contradicting these three.
+        "primary_models": list(PRIMARY_MODELS),
+        "information_sets": list(INFORMATION_SETS),
+        "level_4_sequence_models": "NOT_RUN: no deep-learning stack installed; also gated "
+        "by the program behind a demonstrated tabular failure",
+    }
+    for role in ("D", "V"):
+        document[role] = run_role(
+            panel, role=role, train_share=args.train_share, models=models
+        )
+    document["ladder_sha256"] = canonical_sha256(document)
+    document["generated_at_utc"] = datetime.now(UTC).isoformat()
+
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    (args.output_dir / "ladder.json").write_text(
+        json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    for role in ("D", "V"):
+        block = document[role]
+        assert isinstance(block, dict)
+        print(f"=== role {role} ({block.get('status')}, rows={block.get('rows')}) ===")
+        per_model = block.get("models")
+        if not isinstance(per_model, dict):
+            continue
+        for model_name, stats in per_model.items():
+            assert isinstance(stats, dict)
+            qlike = stats["qlike"]
+            contrasts = stats["contrasts"]
+            assert isinstance(qlike, dict) and isinstance(contrasts, dict)
+            print(f"  {model_name:<17} B0={qlike['B0']:.5f} B0B1B2={qlike['B0+B1+B2']:.5f}")
+            for label, values in contrasts.items():
+                assert isinstance(values, dict)
+                raw = values["raw"]
+                print(
+                    f"      {label:<20} {raw['delta']:+.5f} "
+                    f"[{raw['ci_low']:+.5f},{raw['ci_high']:+.5f}] p={raw['p_value']:.4f}"
+                )
+            print(f"      delta_interaction    {stats['delta_interaction']:+.5f}")
+    return 0
+
+
+if __name__ == "__main__":  # pragma: no cover - CLI entry point
+    raise SystemExit(main())

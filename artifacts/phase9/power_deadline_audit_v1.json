@@ -1,0 +1,261 @@
+{
+ "audit_sha256": "565e7dc77838a8d24634333ee8fcd2bce9f20fb51cd686c7d5f6b2bd27e2695c",
+ "decision": {
+  "academic_submission_waits_for_phase9": false,
+  "endpoint_complete_sessions": 60,
+  "interim_activated": false,
+  "recommended_academic_use": "ONGOING_FUTURE_FOLLOW_UP_NO_PHASE9_RESULT"
+ },
+ "endpoint": {
+  "complete_sessions": 60,
+  "scored_sessions": 36,
+  "test_blocks": 3
+ },
+ "inputs": {
+  "frozen_protocol": {
+   "path": "docs/phase9_total_contribution_protocol_v1.md",
+   "sha256": "8cf87b4d865be2a858747079acbbcd45570ca2b2b77e547b2bba2d4142f25649"
+  },
+  "gate11_results": {
+   "path": "artifacts/gate11_era_map/results.json",
+   "sha256": "08824c632631daedddf461b73b0d39a07f0414bd230cd448ca202d3070d261f0"
+  },
+  "mde_contract": {
+   "path": "src/mds650/rp2/inference.py",
+   "sha256": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917"
+  },
+  "multiplicity_policy": {
+   "path": "docs/sequential_multiplicity_policy_v1.md",
+   "sha256": "32920643476da1ee7271acd5f25876a0d2e49bad0634c01e19219cc3d06ef38f"
+  },
+  "producer": {
+   "path": "scripts/build_phase9_power_deadline_audit.py",
+   "sha256": "588da0e1af8289e15b59dcfc2681f523bb775774cbcfe115a5a07c4f746a7599"
+  }
+ },
+ "issue": "The frozen protocol power table treated n=60 as 60 scored sessions; the frozen folds collect 60 but score 36 after a 24-session warm-up.",
+ "method": {
+  "binding_two_sided_alpha": 0.008333333333333333,
+  "mde_formula": "(t_(1-alpha/2,df)+t_(power,df))*session_sigma/sqrt(scored_sessions)",
+  "nominal_two_sided_alpha": 0.05,
+  "power": 0.8,
+  "session_sigma_formula": "gate11_standard_error*sqrt(gate11_clusters)"
+ },
+ "read_gate": {
+  "outcome_paths_read": [],
+  "sealed_cohorts_read": 0
+ },
+ "scenarios": {
+  "p6_lightgbm": {
+   "milestones": {
+    "20": {
+     "complete_sessions": 20,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-09-18",
+     "mde_binding_alpha_0_008333": null,
+     "mde_nominal_alpha_0_05": null,
+     "scored_sessions": 0
+    },
+    "30": {
+     "complete_sessions": 30,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-10-02",
+     "mde_binding_alpha_0_008333": 0.06277585041080273,
+     "mde_nominal_alpha_0_05": 0.04263511877182884,
+     "scored_sessions": 6
+    },
+    "36": {
+     "complete_sessions": 36,
+     "complete_test_blocks": 1,
+     "earliest_nominal_completion": "2026-10-12",
+     "mde_binding_alpha_0_008333": 0.03527444419770359,
+     "mde_nominal_alpha_0_05": 0.026574828926021896,
+     "scored_sessions": 12
+    },
+    "48": {
+     "complete_sessions": 48,
+     "complete_test_blocks": 2,
+     "earliest_nominal_completion": "2026-10-28",
+     "mde_binding_alpha_0_008333": 0.022866952530631757,
+     "mde_nominal_alpha_0_05": 0.017873043984829775,
+     "scored_sessions": 24
+    },
+    "60": {
+     "complete_sessions": 60,
+     "complete_test_blocks": 3,
+     "earliest_nominal_completion": "2026-11-13",
+     "mde_binding_alpha_0_008333": 0.018196129556172606,
+     "mde_nominal_alpha_0_05": 0.014373509663710904,
+     "scored_sessions": 36
+    }
+   },
+   "original_mde_assuming_60_scored_sessions": 0.011004769727221876,
+   "session_sigma": 0.0299227872025147,
+   "source_clusters": 96,
+   "source_contrast": "lightgbm|B0->B2_total",
+   "source_era": "era_2025H2_2026Q1_p6panel",
+   "source_standard_error": 0.003053981680335146
+  },
+  "p6_log_ols": {
+   "milestones": {
+    "20": {
+     "complete_sessions": 20,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-09-18",
+     "mde_binding_alpha_0_008333": null,
+     "mde_nominal_alpha_0_05": null,
+     "scored_sessions": 0
+    },
+    "30": {
+     "complete_sessions": 30,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-10-02",
+     "mde_binding_alpha_0_008333": 0.038120968025284856,
+     "mde_nominal_alpha_0_05": 0.025890401943092146,
+     "scored_sessions": 6
+    },
+    "36": {
+     "complete_sessions": 36,
+     "complete_test_blocks": 1,
+     "earliest_nominal_completion": "2026-10-12",
+     "mde_binding_alpha_0_008333": 0.021420593278636855,
+     "mde_nominal_alpha_0_05": 0.016137705775977264,
+     "scored_sessions": 12
+    },
+    "48": {
+     "complete_sessions": 48,
+     "complete_test_blocks": 2,
+     "earliest_nominal_completion": "2026-10-28",
+     "mde_binding_alpha_0_008333": 0.013886078174194072,
+     "mde_nominal_alpha_0_05": 0.010853500730002985,
+     "scored_sessions": 24
+    },
+    "60": {
+     "complete_sessions": 60,
+     "complete_test_blocks": 3,
+     "earliest_nominal_completion": "2026-11-13",
+     "mde_binding_alpha_0_008333": 0.011049696156333227,
+     "mde_nominal_alpha_0_05": 0.008728389957536215,
+     "scored_sessions": 36
+    }
+   },
+   "original_mde_assuming_60_scored_sessions": 0.006682704768661428,
+   "session_sigma": 0.01817077119162645,
+   "source_clusters": 96,
+   "source_contrast": "log_ols|B0->B2_total",
+   "source_era": "era_2025H2_2026Q1_p6panel",
+   "source_standard_error": 0.0018545465688478775
+  },
+  "recent_lightgbm": {
+   "milestones": {
+    "20": {
+     "complete_sessions": 20,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-09-18",
+     "mde_binding_alpha_0_008333": null,
+     "mde_nominal_alpha_0_05": null,
+     "scored_sessions": 0
+    },
+    "30": {
+     "complete_sessions": 30,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-10-02",
+     "mde_binding_alpha_0_008333": 0.07686771841385391,
+     "mde_nominal_alpha_0_05": 0.052205812949531784,
+     "scored_sessions": 6
+    },
+    "36": {
+     "complete_sessions": 36,
+     "complete_test_blocks": 1,
+     "earliest_nominal_completion": "2026-10-12",
+     "mde_binding_alpha_0_008333": 0.04319282058387985,
+     "mde_nominal_alpha_0_05": 0.0325403232837809,
+     "scored_sessions": 12
+    },
+    "48": {
+     "complete_sessions": 48,
+     "complete_test_blocks": 2,
+     "earliest_nominal_completion": "2026-10-28",
+     "mde_binding_alpha_0_008333": 0.028000106037672858,
+     "mde_nominal_alpha_0_05": 0.021885169268657183,
+     "scored_sessions": 24
+    },
+    "60": {
+     "complete_sessions": 60,
+     "complete_test_blocks": 3,
+     "earliest_nominal_completion": "2026-11-13",
+     "mde_binding_alpha_0_008333": 0.02228078080651834,
+     "mde_nominal_alpha_0_05": 0.017600062543458733,
+     "scored_sessions": 36
+    }
+   },
+   "original_mde_assuming_60_scored_sessions": 0.013475110811972798,
+   "session_sigma": 0.036639828306408107,
+   "source_clusters": 48,
+   "source_contrast": "lightgbm|B0->B2_total",
+   "source_era": "era_2026H1_devpanel",
+   "source_standard_error": 0.005288503683941598
+  },
+  "recent_log_ols": {
+   "milestones": {
+    "20": {
+     "complete_sessions": 20,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-09-18",
+     "mde_binding_alpha_0_008333": null,
+     "mde_nominal_alpha_0_05": null,
+     "scored_sessions": 0
+    },
+    "30": {
+     "complete_sessions": 30,
+     "complete_test_blocks": 0,
+     "earliest_nominal_completion": "2026-10-02",
+     "mde_binding_alpha_0_008333": 0.08649509258073391,
+     "mde_nominal_alpha_0_05": 0.0587443821346516,
+     "scored_sessions": 6
+    },
+    "36": {
+     "complete_sessions": 36,
+     "complete_test_blocks": 1,
+     "earliest_nominal_completion": "2026-10-12",
+     "mde_binding_alpha_0_008333": 0.04860254853814396,
+     "mde_nominal_alpha_0_05": 0.03661586857416555,
+     "scored_sessions": 12
+    },
+    "48": {
+     "complete_sessions": 48,
+     "complete_test_blocks": 2,
+     "earliest_nominal_completion": "2026-10-28",
+     "mde_binding_alpha_0_008333": 0.03150700728437889,
+     "mde_nominal_alpha_0_05": 0.024626199152235625,
+     "scored_sessions": 24
+    },
+    "60": {
+     "complete_sessions": 60,
+     "complete_test_blocks": 3,
+     "earliest_nominal_completion": "2026-11-13",
+     "mde_binding_alpha_0_008333": 0.02507135945228611,
+     "mde_nominal_alpha_0_05": 0.01980439995534981,
+     "scored_sessions": 36
+    }
+   },
+   "original_mde_assuming_60_scored_sessions": 0.015162814524324058,
+   "session_sigma": 0.04122882019786585,
+   "source_clusters": 48,
+   "source_contrast": "log_ols|B0->B2_total",
+   "source_era": "era_2026H1_devpanel",
+   "source_standard_error": 0.005950867609902132
+  }
+ },
+ "schema_version": "phase9-power-deadline-audit-v1.0",
+ "status": "TARGET_BLIND_PLANNING_CORRECTION_NO_OUTCOME_READ",
+ "three_week_deadline": {
+  "academic_horizon_sydney": "2026-09-18",
+  "additional_xnys_sessions_if_no_more_misses": 15,
+  "complete_sessions_before_2026_08_27": 4,
+  "last_collectable_xnys_session": "2026-09-17",
+  "maximum_complete_sessions": 19,
+  "phase9_result_possible": false,
+  "scored_sessions": 0
+ }
+}

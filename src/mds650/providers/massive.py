@@ -1,0 +1,271 @@
+"""Directed Massive/Polygon-compatible option trade and quote parsers."""
+
+from __future__ import annotations
+
+from collections.abc import Mapping
+from datetime import UTC, datetime
+from typing import Any
+
+from mds650.contracts import OptionQuote, OptionTrade
+from mds650.errors import QualityGateError, SchemaDriftError
+from mds650.providers.base import ProviderHTTPClient, ProviderResponse
+
+
+def parse_directed_trades(
+    payload: Any,
+    *,
+    contract_id: str,
+    source_response_id: str,
+    run_id: str,
+    source_contract_id: str | None = None,
+) -> list[OptionTrade]:
+    """Parse only trades for a contract returned by the event source.
+
+    Empty or missing ``results`` is retained as an empty illiquid window. No
+    attempt is made to expand the request into a historical OPRA download.
+    """
+    _validate_contract(contract_id, source_contract_id)
+    records = _results(payload, "MASSIVE_TRADES_SCHEMA_DRIFT")
+    trades: list[OptionTrade] = []
+    for record in records:
+        timestamp_ns = _timestamp_ns(record)
+        trades.append(
+            OptionTrade(
+                run_id=run_id,
+                source_provider="massive",
+                source_response_id=source_response_id,
+                observed_at_utc=_timestamp(timestamp_ns),
+                contract_id=contract_id,
+                trade_time_utc=_timestamp(timestamp_ns),
+                provider_timestamp_ns=timestamp_ns,
+                price=_number(record, "price"),
+                size=_number(record, "size"),
+                condition_codes=_conditions(record),
+            )
+        )
+    return trades
+
+
+def parse_directed_quotes(
+    payload: Any,
+    *,
+    contract_id: str,
+    source_response_id: str,
+    run_id: str,
+    source_contract_id: str | None = None,
+) -> list[OptionQuote]:
+    """Parse directed bid/ask quotes and preserve null/empty windows."""
+    _validate_contract(contract_id, source_contract_id)
+    records = _results(payload, "MASSIVE_QUOTES_SCHEMA_DRIFT")
+    quotes: list[OptionQuote] = []
+    for record in records:
+        timestamp_ns = _timestamp_ns(record)
+        quotes.append(
+            OptionQuote(
+                run_id=run_id,
+                source_provider="massive",
+                source_response_id=source_response_id,
+                observed_at_utc=_timestamp(timestamp_ns),
+                contract_id=contract_id,
+                quote_time_utc=_timestamp(timestamp_ns),
+                provider_timestamp_ns=timestamp_ns,
+                bid=_optional_number(record, "bid_price"),
+                ask=_optional_number(record, "ask_price"),
+                condition_codes=_conditions(record),
+            )
+        )
+    return quotes
+
+
+def assert_directed_only(*, full_market_download: bool) -> None:
+    """Reject an extraction request that would download all historical OPRA quotes."""
+    if full_market_download:
+        raise QualityGateError("MASSIVE_FULL_OPRA_DOWNLOAD_FORBIDDEN")
+
+
+class MassiveProvider:
+    """Directed Massive Options Advanced client; never a full OPRA downloader."""
+
+    def __init__(self, api_key: str, *, transport: Any = None, max_retries: int = 3) -> None:
+        """Create a query-authenticated Massive REST client."""
+        self._client = ProviderHTTPClient(
+            base_url="https://api.massive.com",
+            api_key=api_key,
+            api_key_header=None,
+            api_key_query_param="apiKey",
+            transport=transport,
+            max_retries=max_retries,
+        )
+
+    def contract_reference(self, contract_id: str) -> ProviderResponse:
+        """Request reference metadata for one event-source contract."""
+        return self._client.get_json(f"/v3/reference/options/contracts/{contract_id}")
+
+    def directed_trades(
+        self,
+        contract_id: str,
+        *,
+        timestamp: str,
+        cursor: str | None = None,
+    ) -> ProviderResponse:
+        """Request a bounded historical trade window for one contract."""
+        params: dict[str, str] = {"timestamp": timestamp}
+        if cursor is not None:
+            params["cursor"] = cursor
+        return self._client.get_json(f"/v3/trades/{contract_id}", params=params)
+
+    def option_contract_listing(
+        self,
+        underlying: str,
+        *,
+        expiration_gte: str,
+        expiration_lte: str,
+        strike_gte: float,
+        strike_lte: float,
+        contract_type: str = "call",
+        limit: int = 250,
+        as_of: str | None = None,
+    ) -> ProviderResponse:
+        """Request a bounded option-contract reference listing for one underlying.
+
+        Phase 9 collection only: one bounded listing per asset per session so the
+        nightly quote sweep can select the ATM contract per origin. Never a full
+        chain download.
+
+        ``as_of`` pins the listing to the chain as it stood on that date. Without it the
+        endpoint answers with today's chain, which for a historical session includes
+        contracts that had not been listed yet — asking for their quotes returns nothing,
+        and treating that silence as an illiquid strike would be a look-ahead dressed as a
+        data gap.
+        """
+        if not isinstance(underlying, str) or not underlying:
+            raise ValueError("MASSIVE_TICKER_REQUIRED")
+        if not isinstance(limit, int) or isinstance(limit, bool) or not 1 <= limit <= 1000:
+            raise ValueError("MASSIVE_LISTING_LIMIT_INVALID")
+        return self._client.get_json(
+            "/v3/reference/options/contracts",
+            params={
+                "underlying_ticker": underlying,
+                "expiration_date.gte": expiration_gte,
+                "expiration_date.lte": expiration_lte,
+                "strike_price.gte": f"{strike_gte:.4f}",
+                "strike_price.lte": f"{strike_lte:.4f}",
+                "contract_type": contract_type,
+                "limit": limit,
+                **({"as_of": as_of} if as_of else {}),
+            },
+        )
+
+    def stock_minute_aggregates(
+        self,
+        ticker: str,
+        *,
+        from_date: str,
+        to_date: str,
+    ) -> ProviderResponse:
+        """Request one-minute stock aggregates for one bounded date window.
+
+        Gate 5.1 cross-provider bar reconciliation only: an independent second
+        source for underlying one-minute closes so the FMP bar-label convention
+        (assumption A001) can be pinned empirically.
+        """
+        if not isinstance(ticker, str) or not ticker:
+            raise ValueError("MASSIVE_TICKER_REQUIRED")
+        return self._client.get_json(
+            f"/v2/aggs/ticker/{ticker}/range/1/minute/{from_date}/{to_date}",
+            params={"adjusted": "true", "sort": "asc", "limit": 50_000},
+        )
+
+    def directed_quotes(
+        self,
+        contract_id: str,
+        *,
+        forecast_origin_ns: object,
+    ) -> ProviderResponse:
+        """Request one directed quote at or before a forecast-origin nanosecond."""
+        if not isinstance(contract_id, str) or not contract_id:
+            raise ValueError("MASSIVE_CONTRACT_ID_REQUIRED")
+        if (
+            isinstance(forecast_origin_ns, bool)
+            or not isinstance(forecast_origin_ns, int)
+            or not 1_000_000_000_000_000_000 <= forecast_origin_ns <= 9_999_999_999_999_999_999
+        ):
+            raise ValueError("MASSIVE_FORECAST_ORIGIN_NS_REQUIRED")
+        params: dict[str, str | int] = {
+            "timestamp.lte": forecast_origin_ns,
+            "sort": "timestamp",
+            "order": "desc",
+            "limit": 1,
+        }
+        return self._client.get_json(f"/v3/quotes/{contract_id}", params=params)
+
+    def close(self) -> None:
+        """Close the provider connection pool."""
+        self._client.close()
+
+
+def _results(payload: Any, error_code: str) -> list[Mapping[str, Any]]:
+    if payload == {}:
+        return []
+    if not isinstance(payload, Mapping):
+        raise SchemaDriftError(error_code)
+    if "results" not in payload:
+        # A non-empty response body without a "results" key is a shape change,
+        # not a provider statement of zero rows; fail closed instead of
+        # treating the window as silently illiquid.
+        raise SchemaDriftError(error_code)
+    results = payload["results"]
+    if not isinstance(results, list) or not all(isinstance(item, Mapping) for item in results):
+        raise SchemaDriftError(error_code)
+    return list(results)
+
+
+def _validate_contract(contract_id: str, source_contract_id: str | None) -> None:
+    if source_contract_id is not None and source_contract_id != contract_id:
+        raise QualityGateError("MASSIVE_CONTRACT_MISMATCH")
+    if not contract_id:
+        raise QualityGateError("MASSIVE_CONTRACT_ID_REQUIRED")
+
+
+def _timestamp_ns(record: Mapping[str, Any]) -> int:
+    value = record.get("sip_timestamp", record.get("participant_timestamp"))
+    if not isinstance(value, int) or value <= 0:
+        raise SchemaDriftError("MASSIVE_TIMESTAMP_PRECISION_MISSING")
+    return value
+
+
+def _timestamp(value_ns: int) -> datetime:
+    seconds, remainder_ns = divmod(value_ns, 1_000_000_000)
+    return datetime.fromtimestamp(seconds, tz=UTC).replace(microsecond=remainder_ns // 1_000)
+
+
+def _number(record: Mapping[str, Any], key: str) -> float:
+    value = record.get(key)
+    if not isinstance(value, int | float):
+        raise SchemaDriftError(f"MASSIVE_FIELD_MISSING:{key}")
+    return float(value)
+
+
+def _optional_number(record: Mapping[str, Any], key: str) -> float | None:
+    """A present-but-null value is an empty window; an absent key is schema drift.
+
+    Collapsing the two loses the only signal that would reveal a renamed field: a vendor
+    that ships ``bidPrice`` instead of ``bid_price`` would otherwise produce a full series
+    of quotes with no bid, which reads as a quiet market rather than as a broken parser.
+    """
+
+    if key not in record:
+        raise SchemaDriftError(f"MASSIVE_FIELD_MISSING:{key}")
+    value = record[key]
+    if value is None:
+        return None
+    if not isinstance(value, int | float):
+        raise SchemaDriftError(f"MASSIVE_FIELD_INVALID:{key}")
+    return float(value)
+
+
+def _conditions(record: Mapping[str, Any]) -> list[str]:
+    value = record.get("conditions", [])
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise SchemaDriftError("MASSIVE_CONDITION_CODES_INVALID")
+    return list(value)
