@@ -4,7 +4,14 @@ import os
 import subprocess
 from pathlib import Path
 
-from scripts.scan_public_secrets import APPROVED_NON_NOREPLY_COMMITS, scan_repository
+from scripts.scan_public_secrets import (
+    _has_github_squash_shape,
+    _is_published_main_commit,
+    _is_verified_github_squash,
+    scan_repository,
+)
+
+REPO = Path(__file__).resolve().parents[2]
 
 
 def _git(repo: Path, *args: str) -> None:
@@ -51,17 +58,63 @@ def test_scanner_rejects_personal_git_identity_without_echoing_it(tmp_path: Path
     ]
     assert all(email not in repr(item) for item in findings)
 
-    commit = subprocess.check_output(
+
+def test_github_squash_identity_requires_a_valid_platform_signature(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init", "--quiet")
+    _git(repo, "config", "user.email", "test@users.noreply.github.com")
+    _git(repo, "config", "user.name", "Test")
+    (repo / "README.md").write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "README.md")
+    _git(repo, "commit", "--quiet", "-m", "base")
+    tree = subprocess.check_output(
+        ["git", "-C", str(repo), "rev-parse", "HEAD^{tree}"], text=True
+    ).strip()
+    parent = subprocess.check_output(
         ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
     ).strip()
-    assert scan_repository(
-        repo, allowed_non_noreply_commits=frozenset({commit})
-    ) == []
+    content = (
+        f"tree {tree}\nparent {parent}\n".encode()
+        + b"author Test <private@example.invalid> 1 +0000\n"
+        b"committer GitHub <noreply@github.com> 1 +0000\n"
+        b"gpgsig -----BEGIN PGP SIGNATURE-----\n"
+        b" signature\n"
+        b" -----END PGP SIGNATURE-----\n\n"
+        b"research: result (#16)\n"
+    )
+    object_id = subprocess.run(
+        ["git", "-C", str(repo), "hash-object", "-t", "commit", "-w", "--stdin"],
+        input=content,
+        capture_output=True,
+        check=True,
+    ).stdout.decode().strip()
+    _git(repo, "update-ref", "refs/remotes/origin/main", parent)
+    assert _has_github_squash_shape(content)
+    assert not _is_published_main_commit(repo, object_id)
+    assert not _is_verified_github_squash(repo, object_id, content)
+    assert not _has_github_squash_shape(content.replace(b"gpgsig ", b"unsigned "))
+    assert not _has_github_squash_shape(content.replace(b" (#16)", b""))
+    assert not _has_github_squash_shape(
+        content.replace(b"committer GitHub", b"committer Test")
+    )
+    assert not _has_github_squash_shape(
+        content.replace(b"parent ", b"parent " + b"3" * 40 + b"\nparent ", 1)
+    )
 
 
-def test_only_the_published_pr14_squash_identity_is_excepted() -> None:
-    expected = frozenset({"c39cfb3394aedb020e8a1a3903da66fd603cfd4d"})
-    assert expected == APPROVED_NON_NOREPLY_COMMITS
+def test_published_github_squashes_verify_with_the_pinned_web_flow_key() -> None:
+    for object_id in (
+        "c39cfb3394aedb020e8a1a3903da66fd603cfd4d",
+        "8e19546eae817095f59fc4e15ebfb4c6df2d9e42",
+    ):
+        content = subprocess.check_output(
+            ["git", "-C", str(REPO), "cat-file", "commit", object_id]
+        )
+        assert _is_published_main_commit(REPO, object_id)
+        assert _is_verified_github_squash(REPO, object_id, content)
 
 
 def test_scanner_accepts_github_service_identity(tmp_path: Path) -> None:

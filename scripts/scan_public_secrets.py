@@ -6,8 +6,11 @@ matched bytes. Run from any directory inside the repository.
 
 from __future__ import annotations
 
+import os
 import re
+import shutil
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -22,6 +25,10 @@ GITHUB_MERGE_COMMITTER = re.compile(
 GITHUB_SYNTHETIC_MERGE_MESSAGE = re.compile(
     rb"^Merge [0-9a-f]{40} into [0-9a-f]{40}\n?$"
 )
+GITHUB_SQUASH_SUBJECT = re.compile(rb"^[^\r\n]+ \(#[1-9][0-9]*\)$")
+GITHUB_WEB_FLOW_KEY = Path(__file__).with_name("github_web_flow_signing_key.asc")
+# Source: https://api.github.com/users/web-flow/gpg_keys, key B5690EEEBB952194.
+GITHUB_WEB_FLOW_FINGERPRINT = "968479A1AFF927E37D1A566BB5690EEEBB952194"
 
 PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ("aws_access_key", re.compile(rb"(?:A3T[A-Z0-9]|AKIA|ASIA)[A-Z0-9]{16}")),
@@ -39,14 +46,6 @@ PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ),
     ("private_key", re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----")),
 )
-
-# GitHub's squash merge for PR #14 published this author identity before the
-# scanner ran on the new main. The immutable object ID is the whole exception:
-# any future commit, including one with the same identity, has a different ID.
-APPROVED_NON_NOREPLY_COMMITS = frozenset(
-    {"c39cfb3394aedb020e8a1a3903da66fd603cfd4d"}
-)
-
 
 @dataclass(frozen=True)
 class Finding:
@@ -75,11 +74,108 @@ def _is_github_synthetic_merge(content: bytes) -> bool:
     )
 
 
-def scan_repository(
-    repo: Path,
-    *,
-    allowed_non_noreply_commits: frozenset[str] = APPROVED_NON_NOREPLY_COMMITS,
-) -> list[Finding]:
+def _has_github_squash_shape(content: bytes) -> bool:
+    """Recognize the one-parent squash envelope emitted by GitHub."""
+
+    headers, separator, message = content.partition(b"\n\n")
+    subject = message.splitlines()[0] if message else b""
+    return bool(
+        separator
+        and sum(line.startswith(b"parent ") for line in headers.splitlines()) == 1
+        and GITHUB_MERGE_COMMITTER.search(headers)
+        and b"\ngpgsig -----BEGIN PGP SIGNATURE-----\n" in headers
+        and GITHUB_SQUASH_SUBJECT.fullmatch(subject)
+    )
+
+
+def _gpg_program() -> str | None:
+    configured = subprocess.run(
+        ["git", "config", "--get", "gpg.program"],
+        capture_output=True,
+        text=True,
+        check=False,
+    ).stdout.strip()
+    if configured:
+        return configured
+    if located := shutil.which("gpg"):
+        return located
+    git = shutil.which("git")
+    if os.name == "nt" and git:
+        bundled = Path(git).resolve().parents[1] / "usr" / "bin" / "gpg.exe"
+        if bundled.is_file():
+            return str(bundled)
+    return None
+
+
+def _gpg_path(path: Path) -> str:
+    resolved = path.resolve()
+    if os.name == "nt":
+        drive, tail = resolved.as_posix().split(":", 1)
+        return f"/{drive.lower()}{tail}"
+    return str(resolved)
+
+
+def _is_published_main_commit(repo: Path, object_id: str) -> bool:
+    history = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "rev-list",
+            "--first-parent",
+            "refs/remotes/origin/main",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return history.returncode == 0 and object_id in history.stdout.splitlines()
+
+
+def _is_verified_github_squash(repo: Path, object_id: str, content: bytes) -> bool:
+    """Accept a published-main squash only when GitHub's pinned key verifies it."""
+
+    gpg = _gpg_program()
+    if (
+        not _has_github_squash_shape(content)
+        or not _is_published_main_commit(repo, object_id)
+        or not gpg
+        or not GITHUB_WEB_FLOW_KEY.is_file()
+    ):
+        return False
+    with tempfile.TemporaryDirectory(prefix="mds650-gpg-") as gpg_home:
+        env = os.environ.copy()
+        env["GNUPGHOME"] = _gpg_path(Path(gpg_home))
+        imported = subprocess.run(
+            [gpg, "--batch", "--quiet", "--import", _gpg_path(GITHUB_WEB_FLOW_KEY)],
+            capture_output=True,
+            env=env,
+            check=False,
+        )
+        if imported.returncode != 0:
+            return False
+        verified = subprocess.run(
+            [
+                "git",
+                "-c",
+                f"gpg.program={Path(gpg).as_posix()}",
+                "-C",
+                str(repo),
+                "verify-commit",
+                "--raw",
+                object_id,
+            ],
+            capture_output=True,
+            env=env,
+            check=False,
+        )
+    valid_signature = (
+        f"[GNUPG:] VALIDSIG {GITHUB_WEB_FLOW_FINGERPRINT} ".encode()
+    )
+    return verified.returncode == 0 and valid_signature in verified.stdout + verified.stderr
+
+
+def scan_repository(repo: Path) -> list[Finding]:
     repo_root = Path(_git(repo, "rev-parse", "--show-toplevel").decode().strip())
     objects = _git(repo_root, "rev-list", "--objects", "--all").splitlines()
     paths: dict[str, str] = {}
@@ -120,8 +216,8 @@ def scan_repository(
             )
             if (
                 has_private_identity
-                and object_id not in allowed_non_noreply_commits
                 and not _is_github_synthetic_merge(content)
+                and not _is_verified_github_squash(repo_root, object_id, content)
             ):
                 findings.append(Finding("non_noreply_git_identity", object_id, path))
         for rule, pattern in PATTERNS:
