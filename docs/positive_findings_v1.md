@@ -55,7 +55,7 @@ is numerically near-identical to log-OLS in this ladder (estimates agree to five
 decimals), so "3/3 families" is effectively **two independent families** (smooth-linear
 + gradient-boosted tree). The claim stands as *both independent families positive*;
 the pending hardening test is HARQ vs HARQ+B1 vs HARQ+B2 on the same panels
-(registered as follow-up work in `reports/remaining_work_investigation_20260818.md`),
+(registered as follow-up work in `reports/remaining_work_investigation_20260818.md` *(not part of the public release; see [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) for what was removed and why)*),
 whose outcome will be reported whatever its sign.
 
 ## What this changes (and what it does not)
