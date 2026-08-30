@@ -40,6 +40,53 @@ def test_scanner_finds_secret_deleted_from_tip_without_echoing_it(tmp_path: Path
     assert all(secret not in repr(item) for item in findings)
 
 
+def test_scanner_checks_blobs_larger_than_the_former_25_mib_limit(tmp_path: Path) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init", "--quiet")
+    _git(repo, "config", "user.email", "test@users.noreply.github.com")
+    _git(repo, "config", "user.name", "Test")
+
+    secret = b"AK" + b"IA" + b"A" * 16
+    (repo / "large.bin").write_bytes(b"\0" * (25 * 1024 * 1024 + 1) + secret)
+    _git(repo, "add", "large.bin")
+    _git(repo, "commit", "--quiet", "-m", "add large fixture")
+
+    findings = scan_repository(repo)
+
+    assert [(item.rule, item.path) for item in findings] == [("aws_access_key", "large.bin")]
+    assert all(secret.decode() not in repr(item) for item in findings)
+
+
+def test_scanner_excludes_local_only_branches_but_includes_tags(tmp_path: Path) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init", "--quiet", "--initial-branch=main")
+    _git(repo, "config", "user.email", "test@users.noreply.github.com")
+    _git(repo, "config", "user.name", "Test")
+    (repo / "README.md").write_text("public\n", encoding="utf-8")
+    _git(repo, "add", "README.md")
+    _git(repo, "commit", "--quiet", "-m", "public base")
+
+    _git(repo, "switch", "--quiet", "-c", "local-archive")
+    _git(repo, "config", "user.email", "private@example.invalid")
+    secret = "AK" + "IA" + "A" * 16
+    (repo / "private.txt").write_text(secret, encoding="utf-8")
+    _git(repo, "add", "private.txt")
+    _git(repo, "commit", "--quiet", "-m", "private archive")
+    _git(repo, "switch", "--quiet", "main")
+
+    assert scan_repository(repo) == []
+
+    _git(repo, "tag", "published-leak", "local-archive")
+    findings = scan_repository(repo, include_tags=True)
+    assert {(item.rule, item.path) for item in findings} == {
+        ("non_noreply_git_identity", "<commit>"),
+        ("aws_access_key", "private.txt"),
+    }
+    assert all(secret not in repr(item) for item in findings)
+
+
 def test_scanner_rejects_personal_git_identity_without_echoing_it(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir()

@@ -74,8 +74,9 @@ it does not authorize a scientific read.
 
 Four scheduled-task targets are intentionally local-only and absent from the public mirror:
 `sync_project_knowledge.ps1`, `phase8_run_daily.ps1`, `phase8_watch.ps1` and
-`phase8_health_watch.ps1`. The public task verifier checks their resolved files on the
-configured host without publishing absolute worktree paths.
+`phase8_health_watch.ps1`. The verifier requires the active knowledge target to resolve.
+The Phase 8 targets belong to retired tasks: their continued disabled state is the safety
+invariant, so their private files need not remain online.
 
 ## Scientific flow
 

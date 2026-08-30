@@ -55,7 +55,9 @@ here because it becomes a prerequisite again the moment a narrower window is ado
 
 ## Standing constraints
 
-- Sealed cohort reads: 0. C, Phase 8 and Phase 9 stay closed for the whole programme.
+- This rebuild read no sealed cohort. At its execution snapshot C, Phase 8 and Phase 9 all
+  had read count zero. Phase 8 later consumed its separately authorized exploratory read;
+  use `data/CANONICAL_STATE.json` for current counters and never infer them from this record.
 - Frozen artifacts are never overwritten. A superseded result is recorded in
   [`SUPERSEDED_RESULTS.md`](SUPERSEDED_RESULTS.md), not deleted.
 - No test is weakened to pass. A red test means the cause is fixed.

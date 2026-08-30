@@ -23,9 +23,9 @@ Lifecycle labels used below:
 | `scripts/run_rp2_v3_pipeline.py` | CONTROLLED | Execute the ordered RP2-v3 rebuild under one run identity and fail closed on sealed or drifting inputs. |
 | `scripts/run_public_repro_demo.py` | CURRENT | Run the redistributable methodological smoke demo on synthetic structured inputs. |
 | `scripts/run_local_evidence_gates.py` | CONTROLLED | Run Tier 2 validation against explicitly configured licensed evidence and live access posture. |
-| `scripts/scan_public_secrets.py` | CURRENT | Scan reachable Git history for high-confidence secret material. |
+| `scripts/scan_public_secrets.py` | CURRENT | Scan public checkout/origin history for secrets; CI adds clean-clone tags. |
 | `scripts/freeze_registry.py` | CONTROLLED | Maintain the append-only registry of frozen evidence. |
-| `scripts/verify_scheduled_tasks.py` | CURRENT | Validate required Windows tasks, action targets, workdirs, restart policy and future triggers. |
+| `scripts/verify_scheduled_tasks.py` | CURRENT | Validate active Windows task targets/liveness and enforce retired Phase 8 shutdown. |
 | `scripts/alert_forwarder.py` | CURRENT | Forward unattended campaign alerts without changing scientific state. |
 | `scripts/register_alert_forwarder_task.ps1` | CONTROLLED | Idempotently register the alert-forwarder Windows task. |
 | `scripts/phase8_watchdog_health.py` | CURRENT | Verify from watchdog logs that the Phase 8 watchdog actually ran, without outcome access. |

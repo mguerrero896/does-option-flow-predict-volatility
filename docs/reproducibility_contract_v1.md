@@ -7,8 +7,9 @@ reproducibility**, and the repo now states exactly which one a stranger gets.
 
 From a clean public clone with zero provider keys:
 
-1. **The hermetic suite** (189/193 test files, coverage ≥ 80 %): every
-   methodological unit, property, schema and synthetic end-to-end contract.
+1. **The hermetic suite** (coverage ≥ 80%): every methodological unit, property, schema
+   and synthetic end-to-end contract. The collected test count is reported by CI rather
+   than frozen in this document because the suite grows with maintained contracts.
 2. **The public demo pipeline** `scripts/run_public_repro_demo.py` — the complete
    methodological chain on redistributable synthetic data:
    PIT availability join (late quotes excluded, never hindsight) → feature
