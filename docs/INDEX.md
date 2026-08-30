@@ -48,7 +48,8 @@ files between directories.
 The Phase 8 row in `sequential_multiplicity_policy_v1.md` preserves its historical slot.
 It is not a confirmation threshold: the bridge contract classifies every p-value as
 descriptive, forbids confirmatory promotion and permits no second read. The dated outcome
-is published in [`reports/phase8a_exploratory_bridge_addendum_v1.md`](../reports/phase8a_exploratory_bridge_addendum_v1.md).
+and dispersion audit are published in
+[`reports/phase8a_exploratory_bridge_addendum_v6.md`](../reports/phase8a_exploratory_bridge_addendum_v6.md).
 
 ## Reproduction and data access
 

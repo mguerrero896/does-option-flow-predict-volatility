@@ -1,0 +1,239 @@
+{
+ "audit_sha256": "909d754e598f959536f8407f1ed7c3488d5006e9d9da75527488414cc402075a",
+ "cells": {
+  "D": {
+   "gamma_glm": {
+    "delta_b1": {
+     "ci_high": 0.008357314795787912,
+     "ci_low": -0.0031469818777055793,
+     "contract_reference": {
+      "effect_to_mde": 0.1871172827869067,
+      "mde_n20": 0.013974774700234465,
+      "phase8_to_reference_variance": 0.576945580282216,
+      "reference_to_phase8_sigma": 1.3165355011841007,
+      "session_sigma": 0.01828763627185435
+     },
+     "current_dv_reference": {
+      "evaluation_sessions": 156,
+      "phase8_to_reference_variance": 3.181158850874326,
+      "reference_to_phase8_sigma": 0.5606700041326725,
+      "session_sigma": 0.007788114407014077
+     },
+     "estimate": 0.0026149218694670818,
+     "holm_below_0_05": false,
+     "origins": 7917,
+     "origins_per_session_max": 396,
+     "origins_per_session_min": 395,
+     "p_value_holm_descriptive": 0.9802,
+     "p_value_raw": 0.4901,
+     "phase8_session_sigma": 0.013890727789266854,
+     "phase8_standard_error": 0.0031060611593746058
+    },
+    "delta_b2_given_b1": {
+     "ci_high": 0.0003246461415700266,
+     "ci_low": -0.0020964015242776416,
+     "estimate": -0.0008918220102451556,
+     "interval_crosses_zero": true,
+     "p_value_holm_descriptive": 0.5756,
+     "p_value_raw": 0.1439,
+     "phase8_session_sigma": 0.002588087636878052,
+     "phase8_standard_error": 0.0005787139887786115
+    }
+   },
+   "lightgbm": {
+    "delta_b1": {
+     "ci_high": 0.004785884602007887,
+     "ci_low": 0.0012950143396006032,
+     "contract_reference": {
+      "effect_to_mde": 0.20485899920785308,
+      "mde_n20": 0.014645042489584275,
+      "phase8_to_reference_variance": 0.039376127045617264,
+      "reference_to_phase8_sigma": 5.039454184197832,
+      "session_sigma": 0.01916476050457372
+     },
+     "current_dv_reference": {
+      "evaluation_sessions": 156,
+      "phase8_to_reference_variance": 0.3409471377026688,
+      "reference_to_phase8_sigma": 1.7126021132602791,
+      "session_sigma": 0.006512929404771351
+     },
+     "estimate": 0.0030001687477727197,
+     "holm_below_0_05": true,
+     "origins": 7917,
+     "origins_per_session_max": 396,
+     "origins_per_session_min": 395,
+     "p_value_holm_descriptive": 0.005,
+     "p_value_raw": 0.001,
+     "phase8_session_sigma": 0.0038029436927253892,
+     "phase8_standard_error": 0.0008503640611538043
+    },
+    "delta_b2_given_b1": {
+     "ci_high": 0.016245514511439907,
+     "ci_low": -0.0013432560628996474,
+     "estimate": 0.00745924587291646,
+     "interval_crosses_zero": true,
+     "p_value_holm_descriptive": 0.394,
+     "p_value_raw": 0.197,
+     "phase8_session_sigma": 0.027855206601782694,
+     "phase8_standard_error": 0.006228613548888701
+    }
+   }
+  },
+  "V": {
+   "gamma_glm": {
+    "delta_b1": {
+     "ci_high": 0.006178517410493495,
+     "ci_low": 0.0006357409558623104,
+     "contract_reference": {
+      "effect_to_mde": 0.44186929130472374,
+      "mde_n20": 0.007663984490830152,
+      "phase8_to_reference_variance": 0.5411322908276543,
+      "reference_to_phase8_sigma": 1.3594031592404203,
+      "session_sigma": 0.010029225069301703
+     },
+     "current_dv_reference": {
+      "evaluation_sessions": 32,
+      "phase8_to_reference_variance": 0.5235073113682147,
+      "reference_to_phase8_sigma": 1.382097318171594,
+      "session_sigma": 0.010196655037469807
+     },
+     "estimate": 0.0033864793955335135,
+     "holm_below_0_05": true,
+     "origins": 7917,
+     "origins_per_session_max": 396,
+     "origins_per_session_min": 395,
+     "p_value_holm_descriptive": 0.0208,
+     "p_value_raw": 0.0052,
+     "phase8_session_sigma": 0.00737766791339931,
+     "phase8_standard_error": 0.0016496966969779888
+    },
+    "delta_b2_given_b1": {
+     "ci_high": 0.00041156367650526976,
+     "ci_low": -0.00038678499557836073,
+     "estimate": 1.1699428740218445e-05,
+     "interval_crosses_zero": true,
+     "p_value_holm_descriptive": 0.9528,
+     "p_value_raw": 0.9528,
+     "phase8_session_sigma": 0.000856245092635015,
+     "phase8_standard_error": 0.00019146222325324978
+    }
+   },
+   "lightgbm": {
+    "delta_b1": {
+     "ci_high": 0.010003398450100594,
+     "ci_low": 0.0024005503540966405,
+     "contract_reference": {
+      "effect_to_mde": 0.3303334510670556,
+      "mde_n20": 0.018778220887990398,
+      "phase8_to_reference_variance": 0.12454852388259786,
+      "reference_to_phase8_sigma": 2.8335488721960846,
+      "session_sigma": 0.024573510542988904
+     },
+     "current_dv_reference": {
+      "evaluation_sessions": 32,
+      "phase8_to_reference_variance": 0.17147966431848688,
+      "reference_to_phase8_sigma": 2.414869618394282,
+      "session_sigma": 0.020942580030943247
+     },
+     "estimate": 0.006203074510829337,
+     "holm_below_0_05": true,
+     "origins": 7917,
+     "origins_per_session_max": 396,
+     "origins_per_session_min": 395,
+     "p_value_holm_descriptive": 0.004,
+     "p_value_raw": 0.0008,
+     "phase8_session_sigma": 0.008672343993821325,
+     "phase8_standard_error": 0.0019391950694446498
+    },
+    "delta_b2_given_b1": {
+     "ci_high": 0.0027253438508152163,
+     "ci_low": -0.0065317842014145176,
+     "estimate": -0.0018339163386164223,
+     "interval_crosses_zero": true,
+     "p_value_holm_descriptive": 1.0,
+     "p_value_raw": 0.4278,
+     "phase8_session_sigma": 0.009899303024034948,
+     "phase8_standard_error": 0.0022135514491611378
+    }
+   }
+  }
+ },
+ "checks": {
+  "cube_duplicate_keys": 0,
+  "cube_nulls": 0,
+  "cube_rows": 190000,
+  "published_statistics_replayed_exactly": true,
+  "replayed_contrast_rows": 20,
+  "replayed_statistic_fields": 140,
+  "sealed_store_reopened": false,
+  "second_evaluator_execution": false
+ },
+ "claim_classification": "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY",
+ "conclusion": {
+  "aggregation_change_supported": false,
+  "delta_b1_holm_below_0_05_cells": 3,
+  "delta_b2_given_b1_holm_below_0_05_cells": 0,
+  "delta_b2_given_b1_intervals_crossing_zero": 4,
+  "historical_reference_limitation": "The frozen design output and its producer remain hash-verifiable, but the historical D/V panel bytes are unavailable for an upstream refit and that producer predates the Phase 8 model pipeline. The current D/V panels provide the independent same-estimator comparison.",
+  "mechanism_claim": "Lower realized loss-differential dispersion is measured; a calmer market regime is not identified causally.",
+  "sub_mde_explanation": "The registered MDE is an ex-ante 80%-power design value at one-sided alpha 0.005, not a minimum significance threshold. Realized Phase 8 session dispersion is lower in every Holm-below-0.05 B1 cell than both the frozen contract reference and the current D/V same-estimator reference."
+ },
+ "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+ "method": {
+  "aggregation": "mean within XNYS session, then equal weight across sessions",
+  "confidence_interval": "95_PERCENT_STUDENTIZED_SESSION_CLUSTER",
+  "contract_mde_alpha_one_sided": 0.005,
+  "contract_mde_power": 0.8,
+  "descriptive_holm_family_size": 5,
+  "dispersion": "sample standard deviation of session means (ddof=1)",
+  "estimand": "QLIKE(base) - QLIKE(expanded)",
+  "primary_sessions": 20
+ },
+ "protocol_id": "phase8a-exploratory-bridge-20of30-v2",
+ "schema_version": "phase8-bridge-dispersion-audit-v1.0",
+ "source_identity": {
+  "contract_power_design": {
+   "comparability": "Same QLIKE contrast and session aggregation; the historical producer predates the Phase 8 preprocessing and model-selection pipeline.",
+   "design_sha256": "87b182390f5507e3682b7ff7f2b010dca65d8f452f6ada10306d372b04266cda",
+   "file_sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+   "historical_input_bytes_available_to_this_audit": false,
+   "path": "artifacts/rp2_block12_prospective/design.json",
+   "producer_commit": "9453954a2191e04e2990dbf37504dcbca5e7c6fc",
+   "producer_sha256": "7dad5bd53a400358f3aeca92e5005af84c5f4e32a58ceb1e8c2133b08cde0baa"
+  },
+  "current_dv_reference": {
+   "panels": {
+    "artifacts/rp2_block4_b0/b0_panel.parquet": {
+     "bytes": 20834560,
+     "sha256": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a"
+    },
+    "artifacts/rp2_block5_surface/b1_surface_panel.parquet": {
+     "bytes": 41698049,
+     "sha256": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba"
+    },
+    "artifacts/rp2_block6_flow/b2_flow_panel.parquet": {
+     "bytes": 85348388,
+     "sha256": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda"
+    }
+   },
+   "producer": {
+    "path": "scripts/rp2_block12_prospective_design.py",
+    "sha256": "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8"
+   },
+   "role_sessions": {
+    "D": 389,
+    "V": 80
+   }
+  },
+  "forecast_cube": {
+   "bytes": 1673406,
+   "sha256": "71e1ccf9a4970fc6053a0204ce4981634dc9fc1ba3637d093e0b76ed9fd19002"
+  },
+  "result": {
+   "file_sha256": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
+   "path": "artifacts/phase8_bridge/result_20260830_v1.json",
+   "result_sha256": "bc645dd6356b892cd319d4a1634be5427a93efe4ead86292ae1a3505cbb745b9"
+  }
+ },
+ "status": "COMPLETE"
+}

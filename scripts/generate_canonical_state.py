@@ -29,7 +29,8 @@ PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
 PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
-PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v1.md"
+PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v5.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v6.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -59,6 +60,7 @@ AUTHORIZED_SOURCES = (
     PHASE8_LAYOUT_RECOVERY.as_posix(),
     PHASE8_RECOVERY.as_posix(),
     PHASE8_RESULT.as_posix(),
+    PHASE8_DISPERSION_AUDIT.as_posix(),
     "artifacts/phase9/power_deadline_audit_v1.json",
     "reports/final_report_draft_v2.md",
     "reports/final_report_draft_v2.docx",
@@ -131,6 +133,8 @@ def build_state() -> dict[str, Any]:
     bridge_recovery = json.loads(bridge_recovery_path.read_text(encoding="utf-8"))
     bridge_result_path = REPO / PHASE8_RESULT
     bridge_result = json.loads(bridge_result_path.read_text(encoding="utf-8"))
+    bridge_dispersion_path = REPO / PHASE8_DISPERSION_AUDIT
+    bridge_dispersion = json.loads(bridge_dispersion_path.read_text(encoding="utf-8"))
     phase9_audit_path = REPO / "artifacts" / "phase9" / "power_deadline_audit_v1.json"
     phase9_audit = json.loads(phase9_audit_path.read_text(encoding="utf-8"))
     if bridge["read_gate"] != {
@@ -229,6 +233,30 @@ def build_state() -> dict[str, Any]:
     ):
         raise ValueError("PHASE8_BRIDGE_RESULT_DRIFT")
     if (
+        bridge_dispersion["status"] != "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED"
+        or bridge_dispersion["contract_sha256"] != bridge["contract_sha256"]
+        or bridge_dispersion["source_identity"]["forecast_cube"]["sha256"]
+        != bridge_result["forecast_cube_sha256"]
+        or bridge_dispersion["source_identity"]["result"]["result_sha256"]
+        != bridge_result["result_sha256"]
+        or bridge_dispersion["checks"]["sealed_store_reopened"] is not False
+        or bridge_dispersion["checks"]["second_evaluator_execution"] is not False
+        or bridge_dispersion["checks"]["published_statistics_replayed_exactly"] is not True
+        or bridge_dispersion["conclusion"]["delta_b1_holm_below_0_05_cells"] != 3
+        or bridge_dispersion["conclusion"][
+            "delta_b2_given_b1_holm_below_0_05_cells"
+        ]
+        != 0
+        or bridge_dispersion["conclusion"][
+            "delta_b2_given_b1_intervals_crossing_zero"
+        ]
+        != 4
+        or bridge_dispersion["conclusion"]["aggregation_change_supported"] is not False
+        or bridge_dispersion["audit_sha256"]
+        != _canonical_sha(bridge_dispersion, omit="audit_sha256")
+    ):
+        raise ValueError("PHASE8_BRIDGE_DISPERSION_AUDIT_DRIFT")
+    if (
         phase9_audit["endpoint"]
         != {"complete_sessions": 60, "scored_sessions": 36, "test_blocks": 3}
         or phase9_audit["read_gate"]
@@ -305,7 +333,24 @@ def build_state() -> dict[str, Any]:
                     "result_sha256": bridge_result["result_sha256"],
                     "sha256": _sha(bridge_result_path),
                 },
-                "state": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY",
+                "dispersion_audit": {
+                    "artifact": PHASE8_DISPERSION_AUDIT.as_posix(),
+                    "aggregation_change_supported": bridge_dispersion["conclusion"][
+                        "aggregation_change_supported"
+                    ],
+                    "delta_b1_holm_below_0_05_cells": bridge_dispersion["conclusion"][
+                        "delta_b1_holm_below_0_05_cells"
+                    ],
+                    "delta_b2_given_b1_holm_below_0_05_cells": bridge_dispersion[
+                        "conclusion"
+                    ]["delta_b2_given_b1_holm_below_0_05_cells"],
+                    "sha256": _sha(bridge_dispersion_path),
+                    "audit_sha256": bridge_dispersion["audit_sha256"],
+                },
+                "state": (
+                    "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
+                    "AND_DISPERSION_AUDIT"
+                ),
                 "sealed_cohorts_read": 1,
             },
             {
@@ -453,7 +498,7 @@ def render_status(state: dict[str, Any]) -> str:
         "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
         "submission rendering pinned under `current_report` in the machine state.",
         "- Post-cutoff Phase 8A result: "
-        "`reports/phase8a_exploratory_bridge_addendum_v1.md`.",
+        "`reports/phase8a_exploratory_bridge_addendum_v6.md`.",
     ]
     lines += ["", "## Future campaigns", ""]
     for campaign in state["future_campaigns"]:

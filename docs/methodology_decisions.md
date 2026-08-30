@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–103](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and Ext1 closeout policy. |
+| [97–108](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1536,3 +1536,111 @@ Requirements-consistency and preregistration gates pass.
      `artifacts/rp2_ext1_directional_v2/results.json`, semantic self-hash
      `477f21af6319de58bee2eeeca930c9cccbd497371086a0f7117ab92123e656b0`;
      `sealed_cohorts_read=0`.
+
+<a id="decision-104"></a>
+
+104. **The Phase 8 sub-MDE result is explained by direct session-dispersion evidence,
+     not by a recovery aggregation change (2026-08-30).** The pinned forecast cube was
+     read without reopening the sealed store. Replaying QLIKE, the within-session mean,
+     equal session weights, the 9,999-draw studentized bootstrap and five-contrast Holm
+     adjustment reproduces all 20 primary contrast rows and 140 published fields exactly.
+     The aggregation-change hypothesis is therefore not supported.
+
+     The registered MDE is an ex-ante 80%-power design value at one-sided alpha 0.005,
+     not a minimum significance threshold. Its D/V calibrations are distinct, and the
+     asymmetric bootstrap interval cannot be inverted as a normal-theory standard error.
+     Three of four ΔB1 cells have descriptive Holm p below 0.05; those same three have
+     lower Phase 8 session dispersion than the current same-estimator D/V reference by
+     1.71-fold, 1.38-fold and 2.41-fold in standard deviation. D/Gamma GLM is noisier in
+     Phase 8 and is the one non-significant cell. All four ΔB2\|B1 intervals cross zero;
+     no Holm p for that contrast is below 0.05.
+
+     The frozen Block 12 design supplies the contract MDEs and uses the same estimand and
+     session aggregation, but its producer and panel bytes predate the Phase 8 pipeline;
+     the historical panel bytes are unavailable for an upstream refit. The measured claim
+     is therefore lower realized loss-differential dispersion in the three favorable B1
+     cells, not a causal assertion that the market was calmer. The recovery script remains
+     outside the frozen executable closure, and the complete result remains exploratory,
+     descriptive and non-confirmatory. Evidence:
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v1.json`, self-hash
+     `96e956cf03abb648b5544f96626199756dc0acc52aaa9b32fe19a428c9d052ce`, and
+     `reports/phase8a_exploratory_bridge_addendum_v2.md`.
+
+<a id="decision-105"></a>
+
+105. **The Phase 8 dispersion comparison is bound to its measured D/V producer and
+     append-only correction paths (2026-08-30).** The current D/V comparison verifies
+     `scripts/rp2_block12_prospective_design.py` at SHA-256
+     `4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8`
+     before measurement and records that identity with the three input-panel hashes.
+     A producer mismatch fails closed. The writer invokes
+     `mds650.storage.assert_outside_frozen` before computation, so it cannot replace a
+     registered result.
+
+     Decision 104 and its v1/v2 evidence paths remain historical records. The corrected
+     machine authority is the new path
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v2.json`, self-hash
+     `909d754e598f959536f8407f1ed7c3488d5006e9d9da75527488414cc402075a`.
+     Its numerical content is identical to v1 except for the newly recorded producer
+     identity. The current narrative authority is the new path
+     `reports/phase8a_exploratory_bridge_addendum_v3.md`. The scientific conclusion and
+     exploratory, descriptive, non-confirmatory boundary do not change.
+
+<a id="decision-106"></a>
+
+106. **The historical Block 12 producer identity is recorded but unresolved from the
+     public root (2026-08-30).** The frozen design output is verified against its contract
+     digest. Commit `9453954a2191e04e2990dbf37504dcbca5e7c6fc` and recorded producer
+     SHA-256
+     `7dad5bd53a400358f3aeca92e5005af84c5f4e32a58ceb1e8c2133b08cde0baa`
+     do not resolve to producer bytes in the root-only public checkout, so that producer
+     identity cannot be independently rehashed there. The historical panel bytes also
+     remain unavailable.
+
+     The current D/V comparison remains independently reproducible: its producer and three
+     panels are verified before measurement. The new machine authority,
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v3.json`, records status
+     `COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED` and self-hash
+     `0e77b404d35e593bb3a0f5865e75137c9c6265e455782aff1eb07e92834c7713`.
+     Its cells, checks and method are byte-for-byte equivalent as JSON values to v2; only
+     the historical-provenance classification changes. The current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v4.md`. All registered v1–v3 paths
+     remain immutable.
+
+<a id="decision-107"></a>
+
+107. **The current D/V comparison is bound to its full local executable closure
+     (2026-08-30).** Before measurement,
+     `mds650.executable_closure.build_executable_closure` hashes the Block 12 wrapper,
+     the complete importable `src/mds650` tree and `uv.lock`: 126 files under
+     `sha256-of-sorted-path-and-normalized-sha256-v1`, aggregate SHA-256
+     `939a238b1ff703e57b597582bca24205bf8e2b947227e264fcc0140fb08dd95d`.
+     Any change to QLIKE, feature construction, preprocessing, model fitting, panel logic,
+     another package module or locked dependencies fails before the D/V measurement.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v4.json`, self-hash
+     `277b4bac8e2da99a31ef80e2cbfcf845dadff8965353c4d6807c431737d86c77`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v5.md`. The numerical cells, checks,
+     method, unresolved historical-producer limitation and exploratory claim boundary are
+     unchanged. All registered v1–v4 audit paths and v1–v4 addenda remain immutable.
+
+<a id="decision-108"></a>
+
+108. **The Phase 8 dispersion audit fixes every source identity before measurement
+     (2026-08-30).** Exact file digests bind the Phase 8 result, bridge contract, Block 12
+     design and `artifacts/rp2_panel_pointers.json` before JSON parsing. The result and
+     contract semantic self-hashes are then verified. The B0, B1 and B2 panel digests are
+     constants in the producer; each must match both the pinned pointer manifest and the
+     supplied parquet bytes. A coordinated manifest-and-panel substitution therefore fails
+     closed.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v5.json`, self-hash
+     `1279424dafe1baf8ab7e293adc8c01b5655adda63692770a43df53599550cb43`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v6.md`. The numerical cells, checks,
+     method, executable-closure identity, unresolved historical-producer limitation and
+     exploratory claim boundary are unchanged. All registered v1–v5 audit paths and v1–v5
+     addenda remain immutable.

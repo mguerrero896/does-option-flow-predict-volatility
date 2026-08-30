@@ -118,7 +118,8 @@ def test_canonical_state_points_to_the_frozen_bridge() -> None:
     )
     assert bridge["evaluator"]["script"] == "scripts/evaluate_phase8_bridge_v2.py"
     assert bridge["state"] == (
-        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY"
+        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
+        "AND_DISPERSION_AUDIT"
     )
     assert bridge["sealed_cohorts_read"] == 1
     assert bridge["authorization"]["authorization_id"] == (
@@ -181,6 +182,16 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "artifacts/phase8_bridge/one_shot_custody_20260830_v3.json",
         "artifacts/phase8_bridge/owner_authorization_20260830_v1.json",
         "artifacts/phase8_bridge/result_20260830_v1.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v1.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v2.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v3.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v4.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v5.json",
         "reports/phase8a_exploratory_bridge_addendum_v1.md",
+        "reports/phase8a_exploratory_bridge_addendum_v2.md",
+        "reports/phase8a_exploratory_bridge_addendum_v3.md",
+        "reports/phase8a_exploratory_bridge_addendum_v4.md",
+        "reports/phase8a_exploratory_bridge_addendum_v5.md",
+        "reports/phase8a_exploratory_bridge_addendum_v6.md",
     ):
         assert registered[relative] == _module._sha(REPO / relative)
