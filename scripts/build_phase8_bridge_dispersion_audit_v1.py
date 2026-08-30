@@ -22,13 +22,18 @@ from rp2_block12_prospective_design import measure_dispersion
 from mds650.metrics import qlike_losses
 from mds650.rp2.inference import aggregate_by_session
 from mds650.rp2.panel import load_merged_panel, session_rank
+from mds650.storage import assert_outside_frozen
 
 ROOT: Final = Path(__file__).resolve().parents[1]
 RESULT: Final = ROOT / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v1.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v2.json"
+CURRENT_DV_PRODUCER: Final = ROOT / "scripts" / "rp2_block12_prospective_design.py"
+CURRENT_DV_PRODUCER_SHA256: Final = (
+    "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8"
+)
 MODELS: Final = ("gamma_glm", "lightgbm")
 INFORMATION_SETS: Final = ("B0", "B0+B1", "B0+B2", "B0+B1+B2")
 KEYS: Final = ("session_date", "asset", "origin_minute")
@@ -156,6 +161,7 @@ def _current_dv_reference(
     b2_panel: Path,
     pointers: Mapping[str, Any],
 ) -> tuple[dict[str, dict[str, dict[str, float]]], dict[str, Any]]:
+    _assert_hash(CURRENT_DV_PRODUCER, CURRENT_DV_PRODUCER_SHA256, "CURRENT_DV_PRODUCER")
     supplied = {
         "artifacts/rp2_block4_b0/b0_panel.parquet": b0_panel,
         "artifacts/rp2_block5_surface/b1_surface_panel.parquet": b1_panel,
@@ -177,7 +183,14 @@ def _current_dv_reference(
         role_sessions[role] = int(panel.filter(pl.col("role") == role)["session_date"].n_unique())
         measured, _ = measure_dispersion(panel, role=role, train_share=0.6)
         reference[role] = measured
-    return reference, {"panels": identities, "role_sessions": role_sessions}
+    return reference, {
+        "panels": identities,
+        "producer": {
+            "path": CURRENT_DV_PRODUCER.relative_to(ROOT).as_posix(),
+            "sha256": CURRENT_DV_PRODUCER_SHA256,
+        },
+        "role_sessions": role_sessions,
+    }
 
 
 def build_audit(
@@ -356,19 +369,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--b2-panel", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args(argv)
+    output = assert_outside_frozen(args.output)
     payload = build_audit(
         forecast_cube=args.forecast_cube,
         b0_panel=args.b0_panel,
         b1_panel=args.b1_panel,
         b2_panel=args.b2_panel,
     )
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
         json.dumps(payload, indent=1, sort_keys=True) + "\n",
         encoding="utf-8",
         newline="\n",
     )
-    print(f"[phase8-dispersion] wrote {args.output}")
+    print(f"[phase8-dispersion] wrote {output}")
     return 0
 
 

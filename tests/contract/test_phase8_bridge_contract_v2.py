@@ -183,7 +183,9 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "artifacts/phase8_bridge/owner_authorization_20260830_v1.json",
         "artifacts/phase8_bridge/result_20260830_v1.json",
         "artifacts/phase8_bridge/dispersion_audit_20260830_v1.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v2.json",
         "reports/phase8a_exploratory_bridge_addendum_v1.md",
         "reports/phase8a_exploratory_bridge_addendum_v2.md",
+        "reports/phase8a_exploratory_bridge_addendum_v3.md",
     ):
         assert registered[relative] == _module._sha(REPO / relative)

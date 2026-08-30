@@ -4,14 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[2]
-AUDIT = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v1.json"
+sys.path.insert(0, str(REPO / "scripts"))
+
+from build_phase8_bridge_dispersion_audit_v1 import main as build_audit_main  # noqa: E402
+
+AUDIT_V1 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v1.json"
+AUDIT_V2 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v2.json"
 RESULT = REPO / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 REPORT_V1 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v1.md"
 REPORT_V2 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v2.md"
+REPORT_V3 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v3.md"
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
 
 
@@ -30,7 +39,7 @@ def _canonical_sha(payload: dict[str, Any]) -> str:
 
 
 def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() -> None:
-    audit = _load(AUDIT)
+    audit = _load(AUDIT_V2)
     result = _load(RESULT)
 
     assert audit["audit_sha256"] == _canonical_sha(audit)
@@ -40,6 +49,10 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert audit["source_identity"]["result"]["result_sha256"] == (
         result["result_sha256"]
     )
+    assert audit["source_identity"]["current_dv_reference"]["producer"] == {
+        "path": "scripts/rp2_block12_prospective_design.py",
+        "sha256": "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8",
+    }
     assert audit["checks"] == {
         "cube_duplicate_keys": 0,
         "cube_nulls": 0,
@@ -90,8 +103,8 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     ]
 
 
-def test_addendum_v2_publishes_all_holm_values_and_preserves_v1() -> None:
-    report = REPORT_V2.read_text(encoding="utf-8")
+def test_addendum_v3_publishes_all_holm_values_and_preserves_history() -> None:
+    report = REPORT_V3.read_text(encoding="utf-8")
     for value in ("0.9802", "0.0050", "0.0208", "0.0040"):
         assert value in report
     for value in ("0.5756", "0.3940", "0.9528", "1.0000"):
@@ -108,4 +121,25 @@ def test_addendum_v2_publishes_all_holm_values_and_preserves_v1() -> None:
     registered = {entry["path"]: entry["sha256"] for entry in _load(REGISTRY)["entries"]}
     assert registered[REPORT_V1.relative_to(REPO).as_posix()] == _sha(REPORT_V1)
     assert registered[REPORT_V2.relative_to(REPO).as_posix()] == _sha(REPORT_V2)
-    assert registered[AUDIT.relative_to(REPO).as_posix()] == _sha(AUDIT)
+    assert registered[REPORT_V3.relative_to(REPO).as_posix()] == _sha(REPORT_V3)
+    assert registered[AUDIT_V1.relative_to(REPO).as_posix()] == _sha(AUDIT_V1)
+    assert registered[AUDIT_V2.relative_to(REPO).as_posix()] == _sha(AUDIT_V2)
+
+
+def test_dispersion_producer_refuses_a_registered_output() -> None:
+    missing = str(REPO / "does-not-exist")
+    with pytest.raises(ValueError, match="FROZEN_ARTIFACT_WRITE_REJECTED"):
+        build_audit_main(
+            [
+                "--forecast-cube",
+                missing,
+                "--b0-panel",
+                missing,
+                "--b1-panel",
+                missing,
+                "--b2-panel",
+                missing,
+                "--output",
+                str(AUDIT_V2),
+            ]
+        )
