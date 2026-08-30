@@ -19,6 +19,7 @@ import polars as pl
 from evaluate_phase8_bridge_v2 import PAIRS, analyse_losses
 from rp2_block12_prospective_design import measure_dispersion
 
+from mds650.executable_closure import build_executable_closure
 from mds650.metrics import qlike_losses
 from mds650.rp2.inference import aggregate_by_session
 from mds650.rp2.panel import load_merged_panel, session_rank
@@ -29,10 +30,17 @@ RESULT: Final = ROOT / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v3.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v4.json"
 CURRENT_DV_PRODUCER: Final = ROOT / "scripts" / "rp2_block12_prospective_design.py"
 CURRENT_DV_PRODUCER_SHA256: Final = (
     "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8"
+)
+CURRENT_DV_EXECUTABLE_SOURCES: Final = (
+    "scripts/rp2_block12_prospective_design.py",
+    "uv.lock",
+)
+CURRENT_DV_EXECUTABLE_CLOSURE_SHA256: Final = (
+    "939a238b1ff703e57b597582bca24205bf8e2b947227e264fcc0140fb08dd95d"
 )
 MODELS: Final = ("gamma_glm", "lightgbm")
 INFORMATION_SETS: Final = ("B0", "B0+B1", "B0+B2", "B0+B1+B2")
@@ -161,6 +169,11 @@ def _current_dv_reference(
     b2_panel: Path,
     pointers: Mapping[str, Any],
 ) -> tuple[dict[str, dict[str, dict[str, float]]], dict[str, Any]]:
+    closure = build_executable_closure(ROOT, scripts=CURRENT_DV_EXECUTABLE_SOURCES)
+    if closure["sha256"] != CURRENT_DV_EXECUTABLE_CLOSURE_SHA256:
+        raise ValueError(
+            f"PHASE8_DISPERSION_CURRENT_DV_CLOSURE_SHA256_MISMATCH:{closure['sha256']}"
+        )
     _assert_hash(CURRENT_DV_PRODUCER, CURRENT_DV_PRODUCER_SHA256, "CURRENT_DV_PRODUCER")
     supplied = {
         "artifacts/rp2_block4_b0/b0_panel.parquet": b0_panel,
@@ -186,6 +199,7 @@ def _current_dv_reference(
     return reference, {
         "panels": identities,
         "producer": {
+            "executable_closure": closure,
             "path": CURRENT_DV_PRODUCER.relative_to(ROOT).as_posix(),
             "sha256": CURRENT_DV_PRODUCER_SHA256,
         },
@@ -355,7 +369,7 @@ def build_audit(
                 "The frozen design output is hash-verifiable. Its recorded producer commit "
                 "and digest cannot be resolved from the public root, and the historical D/V "
                 "panel bytes are unavailable for an upstream refit. The current D/V panels "
-                "provide the independently producer-bound same-estimator comparison."
+                "provide the independently closure-bound same-estimator comparison."
             ),
         },
     }
