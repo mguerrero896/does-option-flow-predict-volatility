@@ -448,6 +448,10 @@ Requirements-consistency and preregistration gates pass.
    scripts/publish_mirror.sh (filtered history). Mirror commits cannot carry
    verified signatures (history is rewritten on every publish); integrity relies on
    the publish script's dual verification, documented in the same contract.
+   **Supersession (2026-08-25):** The force-push allowance in this decision was
+   revoked by the branch-protection hardening documented in
+   `docs/ci_contract_v1.md`. Protection now rejects force pushes. Republishing
+   history requires recorded approval and a temporary, explicit protection lift.
 62. **Physical immutability of frozen evidence (2026-08-18)** — Reviewer correction
    accepted: logical immutability (write_immutable_raw refusing byte replacement)
    did not stop out-of-band writes, as the frozen-manifest overwrite incident

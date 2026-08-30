@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
+import subprocess
 from fnmatch import fnmatch
 from pathlib import Path
 
@@ -20,6 +22,16 @@ from mds650 import storage
 REPO = Path(__file__).resolve().parents[2]
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
 REDACTIONS = REPO / "data" / "PUBLIC_METADATA_REDACTIONS.json"
+LIVING_COUNT_CLAIMS = (
+    (
+        REPO / "STATUS.md",
+        re.compile(r"Frozen evidence:\s*(?P<count>\d+)\s+artifacts registered\b"),
+    ),
+    (
+        REPO / "docs" / "evidence_immutability_v1.md",
+        re.compile(r"\b(?P<count>\d+)\s+frozen artifacts\b", re.IGNORECASE),
+    ),
+)
 
 
 def _entries() -> list[dict[str, object]]:
@@ -64,11 +76,49 @@ def _scientific_payload_sha(path: Path) -> str:
     return hashlib.sha256(canonical).hexdigest()
 
 
-def test_registry_exists_and_is_nonempty() -> None:
+def test_registry_is_append_only_and_living_counts_match() -> None:
+    """The >= 61 floor could not detect later registry or living-document drift."""
     entries = _entries()
-    assert len(entries) >= 61, "registry lost entries: append-only discipline violated"
     paths = [str(entry["path"]) for entry in entries]
     assert len(paths) == len(set(paths)), "duplicate registry paths"
+
+    parent_payload = subprocess.run(
+        ["git", "show", f"HEAD^:{REGISTRY.relative_to(REPO).as_posix()}"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    parent_entries = json.loads(parent_payload)["entries"]
+    current_by_path = {str(entry["path"]): entry for entry in entries}
+    removed_or_changed = [
+        str(entry["path"])
+        for entry in parent_entries
+        if current_by_path.get(str(entry["path"])) != entry
+    ]
+    assert not removed_or_changed, (
+        "append-only registry lost or changed entries from HEAD^: "
+        + ", ".join(removed_or_changed)
+    )
+
+    expected = len(entries)
+    claims: list[str] = []
+    mismatches: list[str] = []
+    for document, pattern in LIVING_COUNT_CLAIMS:
+        relative = document.relative_to(REPO).as_posix()
+        for match in pattern.finditer(document.read_text(encoding="utf-8")):
+            stated = int(match.group("count"))
+            claims.append(relative)
+            if stated != expected:
+                mismatches.append(
+                    f"{relative} states {stated} frozen artifacts; "
+                    f"{REGISTRY.relative_to(REPO).as_posix()} contains {expected}"
+                )
+
+    assert "STATUS.md" in claims, (
+        "STATUS.md must publish the generated frozen-artifact count"
+    )
+    assert not mismatches, "frozen-artifact documentation drift: " + "; ".join(mismatches)
 
 
 def _withdrawn_paths() -> frozenset[str]:

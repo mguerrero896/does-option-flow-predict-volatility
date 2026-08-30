@@ -46,10 +46,10 @@ evidence"; tier 1 is what a stranger's PR is judged by.
 `scientific-contracts` checks (strict, admins included). **Force pushes are
 disallowed since the 2026-08-25 hardening** — this deliberately supersedes the
 original "allowed by design" stance: the whole-history republish path
-(`scripts/publish_mirror.sh`) was already blocked by its ancestry guard pending an
+(`scripts/publish_mirror.sh`) was already blocked by its ancestry guard pending a
 governance decision, so protection now also refuses the force-push it would need.
-Republishing the history therefore requires recorded approval and a temporary protection lift for the
-duration — an explicit action, never a default.
+Republishing the history therefore requires recorded approval and a temporary
+protection lift for the duration — an explicit action, never a default.
 
 ## Commit signatures — documented limitation
 
