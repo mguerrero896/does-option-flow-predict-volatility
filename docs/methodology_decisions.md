@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–108](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–112](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1644,3 +1644,103 @@ Requirements-consistency and preregistration gates pass.
      method, executable-closure identity, unresolved historical-producer limitation and
      exploratory claim boundary are unchanged. All registered v1–v5 audit paths and v1–v5
      addenda remain immutable.
+
+<a id="decision-109"></a>
+
+109. **The Phase 8 dispersion audit and replay producer have an external registered
+     freeze (2026-08-30).** Before the final audit was generated,
+     `artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json` registered a
+     128-file closure containing the audit producer, Phase 8 evaluator, Block 12 producer,
+     complete `src/mds650` tree and `uv.lock`. Its aggregate SHA-256 is
+     `363734271bfc3a16d752b38735ae8ec7432baf6693206d718a4dda1179d980f9`;
+     the freeze file SHA-256 is
+     `c786ef02f7eefdecebf2fb03fc7aa1e64c222bf024fcccfc6b7e55b8f22a8f56`
+     and its semantic self-hash is
+     `b2f24f38426263224bdc179cb85f79afb8032e79ab3054eb384ec18a9a14d4e8`.
+     The audit verifies both the runtime closure and the registry-bound freeze before any
+     replay or measurement.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v6.json`, self-hash
+     `3afcc3c5515c7977e78c49f438bc4cdee1c325917ed994afa6cadbdd8d65c073`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v7.md`. The numerical cells, checks,
+     method, source identities, unresolved historical-producer limitation and exploratory
+     claim boundary are unchanged. All registered audit and narrative paths remain
+     immutable.
+
+<a id="decision-110"></a>
+
+110. **The dependency-lock update requires an append-only Phase 8 audit supersession
+     (2026-08-30).** Dependabot PRs #8 and #9 changed `uv.lock`, which changes executable
+     identity even when the estimator outputs remain identical. The freeze, audit and
+     narrative from decision 109 therefore remain historical evidence and are not
+     rewritten.
+
+     `artifacts/phase8_bridge/dispersion_audit_producer_freeze_v2.json` registers the
+     resulting 128-file closure. Its aggregate SHA-256 is
+     `fd5fb8fe382118fda97acea9a6deed3c820f679cb10a96f6a081cf5a7ea26f2b`;
+     the freeze file SHA-256 is
+     `50441ca7213db417b772772068b824f4f4fbcc55529789a54ce726628e610067`
+     and its semantic self-hash is
+     `ede89e196877bc5505a27ac3d954238fa3cf329bc0a7619ac47ac82fc9d1f24a`.
+     The current D/V executable closure has aggregate SHA-256
+     `3b1365fa07b1457c8d3b14f8567fb17d0f38ebe8814f34c4cd98b1b3eb16de73`.
+
+     The current machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v7.json`, self-hash
+     `18fa169fba8e21d994c10ef560922dc4b29be29b2d71c88bfe3d65b791ee901a`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v8.md`. Its cells, checks, method,
+     conclusion and claim boundary equal v6 exactly; only dependency-bound source
+     identities change. The sealed store remains unopened.
+
+<a id="decision-111"></a>
+
+111. **The protected-main dependency updates require the final append-only Phase 8 audit
+     supersession (2026-08-30).** Dependabot PRs #22 and #23 changed `uv.lock` after
+     decision 110. That changes executable identity while leaving every scientific field
+     equal, so all freeze, audit and narrative paths through v2, v7 and v8 remain immutable.
+
+     `artifacts/phase8_bridge/dispersion_audit_producer_freeze_v3.json` registers the
+     current 128-file closure. Its aggregate SHA-256 is
+     `e86877661e765b78adb8409e45be2b189186eac9591d69f8f6232b32e72eded1`;
+     the freeze file SHA-256 is
+     `daa90f4329329adba6f1d383f07a248bee5e5ed5d7b302db0825fa791a8609d4`
+     and its semantic self-hash is
+     `60c9a3b4482cfe0f8746e0c121442bf5af29a714d94c0c2aeb35cce716595c16`.
+     The current D/V executable closure has aggregate SHA-256
+     `1c25e29fd697251c4ac6dec09c5b4dd750d50d2a756bef577296f4fa6ae74ed4`.
+
+     The current machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v8.json`, self-hash
+     `5afbe137f43bf6972a1628881602d975ea70b1498061855f505f802442c8824e`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v9.md`. Its cells, checks, method,
+     conclusion and claim boundary equal v7 exactly; only dependency-bound source
+     identities change. The sealed store remains unopened.
+
+<a id="decision-112"></a>
+
+112. **The completed Dependabot queue fixes the final Phase 8 audit environment
+     (2026-08-30).** PRs #24–#26 changed `uv.lock`; no dependency pull request remains
+     open. Executable identity changes while every scientific field remains equal, so all
+     freeze, audit and narrative paths through v3, v8 and v9 remain immutable.
+
+     `artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json` registers the
+     stabilized 128-file closure. Its aggregate SHA-256 is
+     `294b4d6ef9c5d822b900f37557b204f39b4b4fa39a1d23e1ee7cc09e4c3f369c`;
+     the freeze file SHA-256 is
+     `a80dfd69dcc1fcc06ce68de7fd3ca3f334d2c0f029e65ae594f4ad232eb8e2c0`
+     and its semantic self-hash is
+     `704d74479ca89c140857bea95d4b9709eb705f51ad42e4eb65a5000ec456b4b4`.
+     The current D/V executable closure has aggregate SHA-256
+     `b57e9f44731fe534f2e968581096d8b956dec23d79b218f469b1786781b56713`.
+
+     The current machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v9.json`, self-hash
+     `5a191ac22184e5f30c5ea266236ca95d8e3e8d7d3b601771461c180ce52924cc`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v10.md`. Its cells, checks, method,
+     conclusion and claim boundary equal v8 exactly; only dependency-bound source
+     identities change. The sealed store remains unopened.
