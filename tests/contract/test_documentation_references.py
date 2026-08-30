@@ -267,10 +267,21 @@ def test_every_top_level_script_is_catalogued() -> None:
     """Every runnable top-level script needs a lifecycle and purpose in the script index."""
 
     catalog = (REPO / "scripts" / "README.md").read_text(encoding="utf-8")
+    # Tracked files only. A directory scan also catches untracked local tooling that
+    # is not part of this project, which made the check fail on any machine carrying
+    # its own helpers while the repository itself was complete.
+    tracked = subprocess.run(
+        ["git", "ls-files", "scripts"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.split()
     actual = {
-        path.relative_to(REPO).as_posix()
-        for path in (REPO / "scripts").iterdir()
-        if path.is_file() and path.suffix in {".py", ".ps1", ".sh"}
+        path
+        for path in tracked
+        if Path(path).parent == Path("scripts")
+        and Path(path).suffix in {".py", ".ps1", ".sh"}
     }
     indexed = {
         path
