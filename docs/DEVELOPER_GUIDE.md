@@ -86,11 +86,22 @@ The existence of a CLI, token schema or scheduled task is not authorization to r
 sealed outcome or publish a result.
 
 Some operational wrappers are deliberately local-only: `sync_project_knowledge.ps1` and
-the three Phase 8 task wrappers are verified on the configured host but are not distributed
-in the public mirror. Publicly maintained task entrypoints include the UW latency scripts,
-Phase 9 scripts and alert forwarder. Run
-`uv run python scripts/verify_scheduled_tasks.py` on the Windows host to verify the live
-task fleet rather than copying private wrappers into the public repository.
+the three Phase 8 task wrappers are not distributed in the public mirror. The active
+knowledge task must resolve its local wrapper. The Phase 8 one-shot read is consumed, so
+its three retained tasks must remain disabled and their private targets may be offline.
+Publicly maintained entrypoints include the UW latency scripts, Phase 9 scripts and alert
+forwarder. Run `uv run python scripts/verify_scheduled_tasks.py` on the configured Windows
+host; it enforces both active-task liveness and retired-task shutdown.
+
+### Git and worktree custody
+
+`main` is the only public development line. Do not merge the unrelated archive/recovery or
+operational roots into it. The `ops/tasks-checkout` worktree supplies relative entrypoints to
+live scheduled tasks and must not be moved or removed while those tasks exist. The locked
+Phase 8 recovery worktree preserves the consumed one-shot execution lineage and is not a
+source for new development. Before deleting any branch, prove its unique commits are
+patch-equivalent or superseded and preserve any untracked files; a `[gone]` upstream alone
+is not evidence that a branch is disposable.
 
 ## Change workflow
 
@@ -138,6 +149,13 @@ Read [`supabase/README.md`](../supabase/README.md) and
 [`data/DATA_ACCESS.md`](../data/DATA_ACCESS.md) first. Compare pending SQL with live
 migration history before applying it. Destructive DDL, publication permissions and data
 mutation require their own authorization and post-change verification.
+
+GitHub issue [#2](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues/2)
+remains the known database follow-up. Its proposed Block 14 migration predates the live
+19-migration reconciliation through `20260828020327` and is not an executable plan. Treat
+`supabase/migrations_pending/rp2_block14_pending.sql` as partially superseded design
+history; compare every proposed statement with fresh live migration history and schema
+before requesting separate mutation authority.
 
 ## Commenting and naming conventions
 

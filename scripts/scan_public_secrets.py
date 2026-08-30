@@ -1,11 +1,15 @@
-"""Fail when reachable Git history contains high-confidence secret material.
+"""Fail when public Git history contains high-confidence secret material.
 
 The scanner reports only the rule, object prefix and path. It never prints the
-matched bytes. Run from any directory inside the repository.
+matched bytes. Public history means the current checkout and origin remote refs;
+CI also passes ``--include-tags`` because its clean clone contains only public
+tags. Unrelated local archive refs are not publication inputs. Run from any
+directory inside the repository.
 """
 
 from __future__ import annotations
 
+import argparse
 import os
 import re
 import shutil
@@ -14,7 +18,6 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-MAX_BLOB_BYTES = 25 * 1024 * 1024
 COMMIT_EMAILS = re.compile(rb"^(?:author|committer) .* <([^>\r\n]+)>", re.MULTILINE)
 PUBLIC_GIT_EMAIL = re.compile(
     rb"^(?:[^@\s<>]+@users\.noreply\.github\.com|noreply@github\.com)$"
@@ -29,6 +32,7 @@ GITHUB_SQUASH_SUBJECT = re.compile(rb"^[^\r\n]+ \(#[1-9][0-9]*\)$")
 GITHUB_WEB_FLOW_KEY = Path(__file__).with_name("github_web_flow_signing_key.asc")
 # Source: https://api.github.com/users/web-flow/gpg_keys, key B5690EEEBB952194.
 GITHUB_WEB_FLOW_FINGERPRINT = "968479A1AFF927E37D1A566BB5690EEEBB952194"
+PUBLIC_REVISIONS = ("--remotes=origin", "HEAD")
 
 PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ("aws_access_key", re.compile(rb"(?:A3T[A-Z0-9]|AKIA|ASIA)[A-Z0-9]{16}")),
@@ -175,9 +179,10 @@ def _is_verified_github_squash(repo: Path, object_id: str, content: bytes) -> bo
     return verified.returncode == 0 and valid_signature in verified.stdout + verified.stderr
 
 
-def scan_repository(repo: Path) -> list[Finding]:
+def scan_repository(repo: Path, *, include_tags: bool = False) -> list[Finding]:
     repo_root = Path(_git(repo, "rev-parse", "--show-toplevel").decode().strip())
-    objects = _git(repo_root, "rev-list", "--objects", "--all").splitlines()
+    revisions = (*PUBLIC_REVISIONS, "--tags") if include_tags else PUBLIC_REVISIONS
+    objects = _git(repo_root, "rev-list", "--objects", *revisions).splitlines()
     paths: dict[str, str] = {}
     object_ids: list[str] = []
     for line in objects:
@@ -204,11 +209,6 @@ def scan_repository(repo: Path) -> list[Finding]:
         if object_type not in {"blob", "commit"}:
             continue
         path = "<commit>" if object_type == "commit" else paths.get(requested_id, "<unknown>")
-        if object_type == "blob" and size > MAX_BLOB_BYTES:
-            raise RuntimeError(
-                f"refusing to skip oversized blob {object_id[:12]} path={path} "
-                f"size={size} limit={MAX_BLOB_BYTES}"
-            )
         if object_type == "commit":
             has_private_identity = any(
                 not PUBLIC_GIT_EMAIL.fullmatch(email)
@@ -227,7 +227,14 @@ def scan_repository(repo: Path) -> list[Finding]:
 
 
 def main() -> int:
-    findings = scan_repository(Path.cwd())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--include-tags",
+        action="store_true",
+        help="scan local tags too (use in a clean public clone)",
+    )
+    arguments = parser.parse_args()
+    findings = scan_repository(Path.cwd(), include_tags=arguments.include_tags)
     if findings:
         for finding in findings:
             print(

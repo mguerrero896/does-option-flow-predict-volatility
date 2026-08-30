@@ -5,8 +5,9 @@ MDS650_UW_LatencyWatchdog sat at State=Ready with an empty NextRunTime from
 carrying a seven-hour repetition rather than a daily one. Nothing noticed, and
 the collector ran unwatched through the three sessions that truncated.
 
-The verifier also rejects a missing executable, missing working directory, wrong entrypoint,
-expired trigger, unhealthy last exit and the absence of the Phase 9 restart policy. A green
+For active tasks, the verifier also rejects a missing executable, missing working directory,
+wrong entrypoint, expired trigger, unhealthy last exit and the absence of the Phase 9 restart
+policy. Retired Phase 8 tasks instead fail if re-enabled after their one-shot read. A green
 result therefore describes the configured task fleet, not merely the presence of task names.
 
 Usage:
@@ -37,6 +38,17 @@ EXPECTED = (
     "MDS650_Phase8A_HealthWatch",
     "MDS650_Phase9_Collector",
     "MDS650_Phase9_PostCheck",
+)
+# The Phase 8 one-shot read was consumed and its collection window is closed. These tasks
+# remain registered for provenance, but enabling any of them would violate the sealed-read
+# lifecycle. Their private action targets are allowed to be offline only while the tasks are
+# disabled; EXPECTED still catches accidental task deletion.
+MUST_REMAIN_DISABLED = frozenset(
+    {
+        "MDS650_Phase8A_BlindCollector",
+        "MDS650_Phase8A_CollectionWatch",
+        "MDS650_Phase8A_HealthWatch",
+    }
 )
 # Task names are stable, but a worktree root may be relocated deliberately. Checking the
 # entrypoint basename plus the resolved on-disk target catches cross-worktree wiring errors
@@ -115,7 +127,12 @@ def reasons(
 
     for task in tasks:
         name = task.get("Name", "<unnamed>")
-        if str(task.get("State", "")).lower() == "disabled":
+        state = str(task.get("State", "")).lower()
+        if str(name) in MUST_REMAIN_DISABLED:
+            if state != "disabled":
+                found.append(f"{name} must remain disabled after the consumed Phase 8 read")
+            continue
+        if state == "disabled":
             found.append(f"{name} is disabled")
             continue
 
@@ -180,8 +197,8 @@ def main() -> None:
         print(f"[tasks] FAIL: {reason}")
     if not found:
         print(
-            f"[tasks] {len(tasks)} MDS650 task(s) healthy; enabled, scheduled, "
-            "and targeting existing entrypoints"
+            f"[tasks] {len(tasks)} MDS650 task(s) healthy; active tasks enabled, "
+            "scheduled and wired, retired Phase 8 tasks disabled"
         )
     raise SystemExit(1 if found else 0)
 

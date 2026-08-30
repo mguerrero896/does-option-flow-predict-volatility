@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–112](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–113](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1744,3 +1744,24 @@ Requirements-consistency and preregistration gates pass.
      `reports/phase8a_exploratory_bridge_addendum_v10.md`. Its cells, checks, method,
      conclusion and claim boundary equal v8 exactly; only dependency-bound source
      identities change. The sealed store remains unopened.
+
+<a id="decision-113"></a>
+
+113. **No current result establishes a global incremental B2 edge; any new test must use
+     a disjoint future cohort (2026-08-31).** Phase 8 reports four B2-given-B1 intervals
+     crossing zero, and decision 103 closes the directional extension as `DO_NOT_PURSUE`.
+     Phase 9 remains unchanged: its global decision concerns total B0HAR-to-B2 contribution,
+     while B1-to-B2 is secondary and cannot by itself establish the incremental claim.
+
+     The only admissible route is sequential. Complete and report Phase 9 under its frozen
+     hash and separate one-read authority. Use its secondary B1-to-B2 estimates only as a
+     screen for whether a later protocol is worth freezing. Any later confirmation must
+     start after Phase 9's last included session, bind corrected PIT-eligible panel hashes,
+     score identical B1/B2 origins, require positive effects above its prospectively frozen
+     effect floor in both log-OLS and LightGBM, and use session-level inference with
+     multiplicity fixed before
+     outcomes. The current 36-scored-session planning dispersion implies about 565 scored
+     sessions to target a 0.005 effect at nominal alpha 0.05 under the worse recent-family
+     approximation; exact cluster-bootstrap sizing may be larger. No new collection,
+     protocol or outcome read is activated by this decision. Design:
+     `docs/rp3/B2_INCREMENTAL_EDGE_ROUTE.md`; `sealed_cohorts_read=0`.

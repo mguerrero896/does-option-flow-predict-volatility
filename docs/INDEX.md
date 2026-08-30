@@ -42,6 +42,7 @@ files between directories.
 | [`docs/phase8_bridge_protocol_v2.md`](phase8_bridge_protocol_v2.md) | Frozen exploratory 20-of-30 Phase 8 bridge; decision 102 records its consumed one-shot read, `MIXED_EXPLORATORY` result and execution recovery. |
 | [`docs/phase9_total_contribution_protocol_v1.md`](phase9_total_contribution_protocol_v1.md) | Frozen 60-complete-session Phase 9 protocol; evaluation remains one-shot and separately authorized. |
 | [`docs/phase9_academic_reporting_policy_v2.md`](phase9_academic_reporting_policy_v2.md) | Current target-blind deadline and power policy: 36 scored sessions at endpoint; Phase 9 does not gate submission. |
+| [`docs/rp3/B2_INCREMENTAL_EDGE_ROUTE.md`](rp3/B2_INCREMENTAL_EDGE_ROUTE.md) | Design-only route for a future disjoint incremental B2 test; records why no global edge exists now and activates no read. |
 | [`docs/methodology_decisions.md`](methodology_decisions.md) | Recorded methodological decisions and amendments. |
 | [`docs/branch_lineage_reconciliation_20260831.md`](branch_lineage_reconciliation_20260831.md) | Branch-lineage audit and selective replay disposition after repository recreation. |
 | [`docs/threats_to_validity_matrix_v1.md`](threats_to_validity_matrix_v1.md) | Validity threats, mitigations and residual risks. |

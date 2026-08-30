@@ -103,11 +103,37 @@ def test_disabled_expected_task_is_reported() -> None:
     assert any("disabled" in reason for reason in module.reasons(fleet, expected=[]))
 
 
-def test_failing_last_result_is_reported() -> None:
-    """0xE0434352 is what the Phase 8 watchdog returned when pwsh died."""
+def test_retired_phase8_task_must_remain_disabled() -> None:
     module = _load()
-    fleet = [_task("MDS650_Phase8A_CollectionWatch", LastResult="0xE0434352")]
-    assert module.reasons(fleet, expected=[])
+    fleet = [
+        _task(
+            "MDS650_Phase8A_BlindCollector",
+            State="Disabled",
+            Next="",
+            Arguments="-File scripts/phase8_run_daily.ps1",
+        )
+    ]
+    assert module.reasons(fleet, expected=[]) == []
+
+
+def test_reactivated_phase8_task_is_reported() -> None:
+    module = _load()
+    fleet = [
+        _task(
+            "MDS650_Phase8A_BlindCollector",
+            State="Ready",
+            Arguments="-File scripts/phase8_run_daily.ps1",
+        )
+    ]
+    found = module.reasons(fleet, expected=[])
+    assert any("must remain disabled" in reason for reason in found)
+
+
+def test_failing_last_result_is_reported() -> None:
+    module = _load()
+    fleet = [_task("MDS650_UW_LatencyCollector", LastResult="0xE0434352")]
+    found = module.reasons(fleet, expected=[])
+    assert "MDS650_UW_LatencyCollector last exited 0xE0434352" in found
 
 
 def test_missing_expected_task_is_reported() -> None:

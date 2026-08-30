@@ -154,3 +154,17 @@ def test_current_threats_and_reports_match_corrected_evidence() -> None:
             assert display.replace("-", "−") in text
         assert "−0.00102" not in text
         assert "−0.00090" not in text
+
+
+def test_future_b2_route_cannot_be_presented_as_current_edge() -> None:
+    route = _read("docs/rp3/B2_INCREMENTAL_EDGE_ROUTE.md")
+    normalized = " ".join(route.split())
+
+    assert "NO CURRENT GLOBAL B2 EDGE" in normalized
+    assert "does not authorize collection or an outcome read" in normalized
+    assert "Phase 8 cannot be reopened" in normalized
+    assert "Phase 9 cannot establish the incremental claim" in normalized
+    assert "familywise alpha" in normalized
+    assert "interval level and sidedness" in normalized
+    assert "wild-cluster bootstrap weights/repetitions/seed" in normalized
+    assert "565 scored sessions" in normalized

@@ -74,8 +74,8 @@ jobs:
         run: uv run ruff check src scripts tests
       - name: Mypy (strict)
         run: uv run mypy src scripts
-      - name: Scan all reachable Git blobs for high-confidence secrets
-        run: uv run python scripts/scan_public_secrets.py
+      - name: Scan public checkout, origin and tag history for high-confidence secrets
+        run: uv run python scripts/scan_public_secrets.py --include-tags
       - name: Export locked runtime dependencies for audit
         run: >
           uv export --quiet --frozen --no-dev --no-emit-project

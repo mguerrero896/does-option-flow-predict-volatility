@@ -83,8 +83,10 @@ mechanism, and provider source timestamps do not establish historical client rec
 - `PIT_V22_RECONCILIATION_BLOCKED` remains active.
 - `SAFE_TO_RECONCILE_EXISTING_RESULTS=NO` and
   `SAFE_TO_OPEN_OR_EVALUATE_OOS=NO` remain binding.
-- No sealed cohort was read: C, Phase 8 and Phase 9 remain closed;
-  `sealed_cohorts_read=0`.
+- This rebuild itself read no sealed cohort. At this run's execution snapshot, C,
+  Phase 8 and Phase 9 were closed and `sealed_cohorts_read=0`. Phase 8 later consumed
+  its separately authorized exploratory read; current counters live in
+  `data/CANONICAL_STATE.json`.
 - No economic, live-trading or causal claim is made; `capital_go=false`.
 
 The reproducible numerical tables are emitted by:
