@@ -601,7 +601,7 @@ provides-extras = ["gpu"]
 dev = [
     { name = "coverage", specifier = ">=7.10,<8" },
     { name = "hypothesis", specifier = ">=6.100,<7" },
-    { name = "mypy", specifier = ">=1.18,<2" },
+    { name = "mypy", specifier = ">=1.18,<3" },
     { name = "pip-audit", specifier = ">=2.9,<3" },
     { name = "pytest", specifier = ">=8.4,<10" },
     { name = "pytest-cov", specifier = ">=7,<8" },
