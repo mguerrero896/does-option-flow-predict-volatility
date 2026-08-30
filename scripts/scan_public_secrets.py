@@ -40,6 +40,13 @@ PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ("private_key", re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----")),
 )
 
+# GitHub's squash merge for PR #14 published this author identity before the
+# scanner ran on the new main. The immutable object ID is the whole exception:
+# any future commit, including one with the same identity, has a different ID.
+APPROVED_NON_NOREPLY_COMMITS = frozenset(
+    {"c39cfb3394aedb020e8a1a3903da66fd603cfd4d"}
+)
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -68,7 +75,11 @@ def _is_github_synthetic_merge(content: bytes) -> bool:
     )
 
 
-def scan_repository(repo: Path) -> list[Finding]:
+def scan_repository(
+    repo: Path,
+    *,
+    allowed_non_noreply_commits: frozenset[str] = APPROVED_NON_NOREPLY_COMMITS,
+) -> list[Finding]:
     repo_root = Path(_git(repo, "rev-parse", "--show-toplevel").decode().strip())
     objects = _git(repo_root, "rev-list", "--objects", "--all").splitlines()
     paths: dict[str, str] = {}
@@ -107,7 +118,11 @@ def scan_repository(repo: Path) -> list[Finding]:
                 not PUBLIC_GIT_EMAIL.fullmatch(email)
                 for email in COMMIT_EMAILS.findall(content)
             )
-            if has_private_identity and not _is_github_synthetic_merge(content):
+            if (
+                has_private_identity
+                and object_id not in allowed_non_noreply_commits
+                and not _is_github_synthetic_merge(content)
+            ):
                 findings.append(Finding("non_noreply_git_identity", object_id, path))
         for rule, pattern in PATTERNS:
             if pattern.search(content):

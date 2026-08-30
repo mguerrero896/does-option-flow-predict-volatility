@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–101](#decision-97) | Phase 8/9 collection, rebuild, power and deadline policy. |
+| [97–102](#decision-97) | Phase 8/9 collection, rebuild, power and deadline policy. |
 
 <a id="decision-1"></a>
 
@@ -1482,3 +1482,24 @@ Requirements-consistency and preregistration gates pass.
      RP2, RP3 sizing and this audit now share the same long-run-variance MDE producer,
      no interim is activated, the capstone proceeds from current evidence plus any
      separately authorized exploratory Phase 8 bridge, and `sealed_cohorts_read=0`.
+
+102. **The sole Phase 8A exploratory read is consumed and reconciled
+     (2026-08-30).** The owner authorized the one-shot read at
+     2026-08-29T14:52:57Z; token
+     `phase8a-one-shot-4e7c4139-97bd-4d60-8ad7-29a87da8cf75` binds protocol
+     `phase8a-exploratory-bridge-20of30-v2` and contract SHA-256
+     `b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e`.
+     The atomic claim at 2026-08-29T14:55:12Z advanced
+     `sealed_cohorts_read: 0 -> 1`; a second execution is prohibited. The frozen
+     evaluator then stopped with `RP3_EVAL_NO_SESSIONS`. Recovery reused the
+     materialized bytes without reopening the sealed store and recorded six
+     compatibility controls in
+     `artifacts/phase8_bridge/execution_recovery_20260830_v1.json`. The recovery script
+     was outside the frozen executable closure, so this is a recorded execution
+     deviation rather than a closure-conformant run. The complete result
+     is `MIXED_EXPLORATORY`: two of four primary total-effect cells are directionally
+     supportive and two are imprecise; primary B2 conditional on B1 is mixed and every
+     interval crosses zero. The result, recovery, authorization and custody record are
+     new frozen paths. The owner's 2026-08-30 instruction confirms the exploratory,
+     descriptive, non-confirmatory boundary; it does not reset the consumed counter or
+     authorize another read.

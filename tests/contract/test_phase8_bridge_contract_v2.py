@@ -117,11 +117,53 @@ def test_canonical_state_points_to_the_frozen_bridge() -> None:
         "artifacts/phase8_bridge/evaluator_freeze_v4.json"
     )
     assert bridge["evaluator"]["script"] == "scripts/evaluate_phase8_bridge_v2.py"
-    assert bridge["state"] == "FROZEN_EXPLORATORY_BRIDGE_READ_NOT_AUTHORIZED"
-    assert bridge["sealed_cohorts_read"] == 0
+    assert bridge["state"] == (
+        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY"
+    )
+    assert bridge["sealed_cohorts_read"] == 1
+    assert bridge["authorization"]["authorization_id"] == (
+        "phase8a-one-shot-4e7c4139-97bd-4d60-8ad7-29a87da8cf75"
+    )
+    assert bridge["execution_recovery"]["initial_failure"] == "RP3_EVAL_NO_SESSIONS"
+    assert bridge["execution_recovery"]["sealed_store_reopened"] is False
+    assert bridge["result"]["overall_classification"] == "MIXED_EXPLORATORY"
+    assert bridge["result"]["confirmatory_promotion_allowed"] is False
 
 
-def test_bridge_document_and_contract_are_in_the_append_only_registry() -> None:
+def test_published_result_contains_every_registered_outcome_without_private_paths() -> None:
+    result = json.loads(
+        (REPO / "artifacts" / "phase8_bridge" / "result_20260830_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected_contrasts = {
+        "delta_b1",
+        "delta_b2_given_b0",
+        "delta_b2_given_b1",
+        "delta_interaction",
+        "delta_total",
+    }
+    cells = [
+        result["evaluation"][role][model]
+        for role in ("D", "V")
+        for model in ("gamma_glm", "lightgbm")
+    ]
+    assert [cell["classification"] for cell in cells].count(
+        "DIRECTIONALLY_SUPPORTIVE_EXPLORATORY"
+    ) == 2
+    assert [cell["classification"] for cell in cells].count("IMPRECISE_EXPLORATORY") == 2
+    for cell in cells:
+        assert set(cell["windows"]) == {"primary_20", "sensitivity_30"}
+        assert all(set(window) == expected_contrasts for window in cell["windows"].values())
+        assert cell["windows"]["primary_20"]["delta_total"]["estimate"] > 0
+        b2 = cell["windows"]["primary_20"]["delta_b2_given_b1"]
+        assert b2["ci_low"] <= 0 <= b2["ci_high"]
+    encoded = json.dumps(result)
+    assert "C:\\" not in encoded
+    assert "D:\\" not in encoded
+
+
+def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
     registry = json.loads((REPO / "data" / "FROZEN_ARTIFACTS.json").read_text(encoding="utf-8"))
     registered = {row["path"]: row["sha256"] for row in registry["entries"]}
     assert registered["artifacts/phase8_bridge/bridge_contract_v2.json"] == _module._sha(ARTIFACT)
@@ -131,3 +173,14 @@ def test_bridge_document_and_contract_are_in_the_append_only_registry() -> None:
     assert registered["artifacts/phase8_bridge/evaluator_freeze_v4.json"] == _module._sha(
         evaluator
     )
+    for relative in (
+        "artifacts/phase8_bridge/execution_recovery_20260830_v1.json",
+        "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json",
+        "artifacts/phase8_bridge/one_shot_custody_20260830_v1.json",
+        "artifacts/phase8_bridge/one_shot_custody_20260830_v2.json",
+        "artifacts/phase8_bridge/one_shot_custody_20260830_v3.json",
+        "artifacts/phase8_bridge/owner_authorization_20260830_v1.json",
+        "artifacts/phase8_bridge/result_20260830_v1.json",
+        "reports/phase8a_exploratory_bridge_addendum_v1.md",
+    ):
+        assert registered[relative] == _module._sha(REPO / relative)

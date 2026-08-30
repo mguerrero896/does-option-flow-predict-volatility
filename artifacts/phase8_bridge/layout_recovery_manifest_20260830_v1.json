@@ -1,0 +1,1427 @@
+{
+  "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+  "frozen_head": "7eed06c26ab8cf4ae4e922dfabbaedc8838bfe49",
+  "manifest_sha256": "a0777ee15fd98344d0072938e017e05a5baea67c11991992ecd772c1c71db0d7",
+  "output_file_count": 30,
+  "reason": "FROZEN_DISCOVERY_EXPECTED_DIRECT_DATE_PARQUET",
+  "recovered_layout": "date/session/full_tape.parquet",
+  "schema_version": "phase8-materialized-layout-recovery-v1.0",
+  "sealed_cohorts_read": 1,
+  "sealed_store_reopened": false,
+  "session_count": 30,
+  "sessions": {
+    "2026-07-20": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4717500,
+      "output_sha256": "4e8e9ae2aaa4c24c8380dcd286a4cffaacb21beb443cb3f001d84a31959e60cc",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 304309,
+          "sha256": "f6546d1130ee3622ea9fed16627df8194b3d9eac568da1772b84745e113d9042"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 146304,
+          "sha256": "bdfe7db6a49c9a0317b81590075f80afbe61a1e267810ee822866b9328d5cabb"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 148474,
+          "sha256": "b8fab2ff7ad750830fa2337a020001145ee45b258a223c328d70a9949d3781a7"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 186329,
+          "sha256": "a028919c6fbb4b08f05d2908271e299dc475b138dc650d33cf8fb2ab9f6aa768"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 443487,
+          "sha256": "5a0a5a65328e78ac53f662b3ddc69a43b4b47401672bfb7ff26b265190db3a27"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1280432,
+          "sha256": "4aef40d58a6f80d3559b3dcb72612638111181ce24c2260ebbe1686cc1ffc71a"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1666334,
+          "sha256": "8b22d89a3b98ec99ba1877b8736be0849d2c182932120f748720f1a6c4d6656c"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 541831,
+          "sha256": "0c054e17cdc75a28f12980fd5bc513115d028672764b3816e17c251d3000dc56"
+        }
+      ]
+    },
+    "2026-07-21": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3642156,
+      "output_sha256": "480965269224030c22a9d2dce8e4d54e68e6fbc3f3a17ff8ee49d4f597ea99f9",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 222600,
+          "sha256": "78da771bcc3bc9058c3d2e773ebdab7b498ad977b57c555c3a0f20593014012c"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 101269,
+          "sha256": "5263560db6786425709cf4d958c131c428776864e93b0a3a4c6caa1decfd0e0d"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 83762,
+          "sha256": "8a163efec272d633f7eef01c02b4eed681df6560b5530815de16953d3da961b6"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 93208,
+          "sha256": "f3833b56ad4212d99fee01f6df4c60f2d77d424d2d1dad396428e534b8d9de3f"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 410134,
+          "sha256": "41b492b7925b410f69d27869d0157f4af4b4d04b3ea9b7c220104b8ae0a1a2df"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1093831,
+          "sha256": "762bdba315c1f910b6de2ebd55211166ed4d327c23ecfd9d411b724045d15948"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1387189,
+          "sha256": "26bd4f1cb06fbe9d771cc53d9420bb7c3c3ced6e07837db7cf8b34d9abc9226f"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 250163,
+          "sha256": "de23986fc7b8705ab18200ab81293a75b0c306204dabfa8192c17030d68f62f3"
+        }
+      ]
+    },
+    "2026-07-22": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3796897,
+      "output_sha256": "c6799ce3c3af2f9a69503b7cbbc93f9221e44652b0c2f76837f314d3b74172eb",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 217575,
+          "sha256": "68defcc92177f2bd14012280e7fbbb681cf3ca8c88c809ac8fd7096edd3b39ca"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 151636,
+          "sha256": "b72c6fd28cb39c6555da0487f7f63becc3c42a6cfc1ee9588686f69ac981e626"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 139197,
+          "sha256": "d703b74f60707a04fa6c73ae65375cac72ef008e9181c4d1b870e14961ed5977"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 157391,
+          "sha256": "83e75c99e168528cd37a01aec492dc18a621aa978c877ca563802db94c94db98"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 722462,
+          "sha256": "f6fd86c589bccf48bddef398e30f872720c696e42823e9d86fda949c761db019"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 905996,
+          "sha256": "cc28ad39d5298e3174a0d657d23320d0124dae3157028c139b3e34b7d2d32cf8"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1278140,
+          "sha256": "07734db88763ab2bec7e9621217e5f26ff83c39d6285cec87c679272119c1e5d"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 224500,
+          "sha256": "cbea95e3c051cb892dd32923a721de800be0575a52c1f61004bbb99e7dac6ca3"
+        }
+      ]
+    },
+    "2026-07-23": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4797028,
+      "output_sha256": "916796cc2c9a89dc9858f6225e366dd50e6857693b37d6f88ea7127ec351d841",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 147965,
+          "sha256": "dc842ee2888f2d6ed247a2a24f40a41b9f03678a479ce4afc18d14de2bb2c5ab"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 142850,
+          "sha256": "99b3982fef0d3619a00fa1587f85ca9c7c1822d0c008a4bd6c292ce696be8a39"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 125929,
+          "sha256": "093a9ad8ed3ce214d3e3bf60fe48b1c26bf2c7446843955624f31875c65645ef"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 119071,
+          "sha256": "23ce65bbf11e0460f0f8715a5e95ef20bd64b4c14f325df0773d49140898a653"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 413704,
+          "sha256": "7939febb2429b427b0ad0881739dd9ba1c6e64a863a407e108f7659a31cbb75a"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1295444,
+          "sha256": "01ba40fa6362ebf358eab9ee45b116ea2565c8da530133382ae62e1b9ef48b8f"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1768412,
+          "sha256": "24070c066dd317725012b9e16a616c46deb24aeac068edfbabc9557c07a4d97d"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 783653,
+          "sha256": "f1ea71bab68c98405e1ae960d1bf5fa99145ff876c51c6bb963fd10cece45d31"
+        }
+      ]
+    },
+    "2026-07-24": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 5144523,
+      "output_sha256": "d80f502bef4e8de1f9d098acb4504a4c51c500ca0ec965e1257288023c87191a",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 394627,
+          "sha256": "443890081ecb4cfaf40d578654e43465f03a1f08dc386812b9b3c5e9c032d985"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 125057,
+          "sha256": "6eda2180ed963f6441d21a94c782c876926de0d07b634cffede1879716fdae76"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 133574,
+          "sha256": "0b19fef22cbbbdb2afbdaa5a244576b74c6368cd9cd901b0abc611005e14342a"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 117615,
+          "sha256": "2e7928b189e6e570086ae3b7d28db7976cf140590e8004431f5334baab4e590e"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 540679,
+          "sha256": "0179ef67339bbdef3ba7b7b0379cc50cbf5bc0fc051a986b81f80d0a1a948258"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1343665,
+          "sha256": "2da4119bc82961300069ff364dd5f9fc4d3f2e411caf3b6062c43a130c804726"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1717941,
+          "sha256": "9aec65c3e5b5763407ea718d4b6aa482499fb6257c6b8dc0d1e2c8b337b12fd1"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 771365,
+          "sha256": "8884c415f1e6ae516a3bb6cada41205796cd115bfdce971423919b1e8ef2948f"
+        }
+      ]
+    },
+    "2026-07-27": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 5012467,
+      "output_sha256": "868772fbbb9dd342ef400e2bbc48ba113f079780360bd84037159127de1b8ec7",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 309900,
+          "sha256": "9217dc65242a638efa9c83fbbc0b6256f77d99d3864cf58e1c6f38a67111fdea"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 111079,
+          "sha256": "58052c0978dd01339ffd898dbb56efd4ed54df288ba2244aafcdde866e92c47d"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 129079,
+          "sha256": "328419447830ae0824e03591198c730b44c97e7c0ba2c7d8e50d915f743f8c8d"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 153791,
+          "sha256": "2a980e7345d9962000fb56acc229047b89bf51297c9bd72c3d8ff51330032052"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 639281,
+          "sha256": "224d7a1d97464e7a247b9357b9ada261aa5e38aa44997e8d223bcc3729b79af5"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1361772,
+          "sha256": "5eb841bac8a2d1c3be897023d65c8f53cc4957b8f7d39ff2e3905a9e1ff910d9"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1752266,
+          "sha256": "b1eb1cca76075e7c62bc31203d0e5e5b72fcd0197ecf05aabc276e70f983c8d9"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 555299,
+          "sha256": "3c887396a06a9947aeebc9311fa9270190517cdde4f4ca100f6bfb16d1d565a8"
+        }
+      ]
+    },
+    "2026-07-28": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4221931,
+      "output_sha256": "058c1136746bd3774fb5da7eb818463d1a3acc93afc764f0f3f1ecd045147521",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 207715,
+          "sha256": "5e50386133ac93e7e2b9b81c9e5b5f198470d8795fb12a07429d3953075ad420"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 95699,
+          "sha256": "5f1f9b1705cb365d7bab44f61172d0dd74302068ff0c112bcc08ca92e7f3ab96"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 61167,
+          "sha256": "9fa1138ee504787a99052a4c9ba1508ac78b47729222c250b404478bc7f1430e"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 79703,
+          "sha256": "2dec11206afe119a127d04ae867dfdd938c95f2ccad47ee26bf3ef7ca5228900"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 407420,
+          "sha256": "0734f8c0cc53b17ae9f7dcd82d905835195bc0804ffda4945e877b9c661040b0"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1389426,
+          "sha256": "e88b2369803df2e0d64c27979e4dae684a31e3b1e42de5604d2a807cc51d7654"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1583421,
+          "sha256": "2eee11dfa42f17be565ec15f782daa7d102bb1cda658de33381d6fc5e4820061"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 397380,
+          "sha256": "ce7e71bd4df0cd56903b0d4206cd18e054010f26c601305339e7abf3f3d4f885"
+        }
+      ]
+    },
+    "2026-07-29": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4912078,
+      "output_sha256": "5826522ecfd73ec49a58ba50236fec0beb7cc5bfc2e5fba58d74073160f16cca",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 291484,
+          "sha256": "efe2e1d7ee5d0a505d431aa4df839ea4e701eca0d0b123584a3012b054a43a8c"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 112162,
+          "sha256": "47f8fe8a0077607d608aad9d6a7a64f6eb4c4f5e70f748e1d0827dd033afedce"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 100970,
+          "sha256": "e81750b2eb8ab29a08e018f1913d808cde6f40045bbd34bb60a291b0a08f6fa0"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 112460,
+          "sha256": "18ff81430a89db8319ba77798c13625c9558a9f63466aaf6fa6390aebf976d93"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 564654,
+          "sha256": "8eca189636658af00193735bd0e6119ef4bf70f6c711464b1301d403788ba999"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1391622,
+          "sha256": "4fff1f64b899a0456738a6fe6c9302b089e6b4b2236924906ee5e5ca1cd70b75"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1848031,
+          "sha256": "7a5c869452ec1f67ceb791fb7baa099005aa1fbf7b11c43316f82296808c3522"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 490695,
+          "sha256": "94f76b090700224288ee2bc4af3a93ec9fb269fe802294c64285b70e17d90698"
+        }
+      ]
+    },
+    "2026-07-30": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4833565,
+      "output_sha256": "b53086b2f157da5519b27429c6b902df7f73c34884e200722726cc53856710c2",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 188646,
+          "sha256": "23e05929777a12491740b8233284ed7c9e5b895bc8894de07a59792ec1145f29"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 217068,
+          "sha256": "a61d7d772402f9bf3324248085406f0f587739128f9db6dcc8ff198cf7d4eba7"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 235571,
+          "sha256": "d33195b486eb9a635011bc0b6bb2e4fd865866100382e9676b78fbb7b644c493"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 397343,
+          "sha256": "1f84eb1401a47cd32ea974303717d46a5e015a4ac99f2de0da9473f57c41279a"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 434570,
+          "sha256": "b7e1ff46638a729eba09a288618d9e03c5bf67da9ad5074da9e6f8598114a4ee"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1288674,
+          "sha256": "e618d2ade50e5ed47fbee6ff5577bf56030421f3e5fe50266e8afab59837ebda"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1682464,
+          "sha256": "ec398481394a9d7c24995ba300fe52b5e7f72185142c6c15e4b1a98ba8f61336"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 389229,
+          "sha256": "0a53f58f8daa724a2822a86d10ea674fdfd8e55d641cdbc2c51da1fadfe04d21"
+        }
+      ]
+    },
+    "2026-07-31": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 5698767,
+      "output_sha256": "4be6e37d752019bc0a110c3125f51dc529fa5c807b3be52d27b543484576fcbb",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 438012,
+          "sha256": "100720e328fb7edb4548c330903744902b6180c123495acfc7c291346bf4f319"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 427554,
+          "sha256": "489100de5895ceaf8befffe3310d975790bf33d0b21a878c157e9316dd36e123"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 171378,
+          "sha256": "136f023de7012d539eca5406e7c13aeab44868af05e41f7dc0aab0ae30f87d85"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 258669,
+          "sha256": "a086a3f22f883414837bd4921d13e2e36da5eb57262aa409b09559a480706779"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 610701,
+          "sha256": "786c26adab3017cea037196c04e5b0f32ae24975b0f6b8f5371a740a050f07f7"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1334041,
+          "sha256": "568345d1777d2092344ca957962bfebcdf92b34dccf73e8f5cd8312be85a5f0f"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1886363,
+          "sha256": "5b001a86a2a20c8464a562947818c66331402af75a362681375f24e6b67212ad"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 572049,
+          "sha256": "76cf8bca2cfdc17be14170538fb3dd666cd8d56a87ca5b16f32673e020e61a50"
+        }
+      ]
+    },
+    "2026-08-03": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 5093129,
+      "output_sha256": "545d8ae866d5fd22eb0113d893b42ab44b1ff0deae7c52d78b9b8f1347c8c17e",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 315416,
+          "sha256": "c46d18dcfdf98593c066a391b79842fc3cc1958a404026df1e3b01d38a59d9be"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 287870,
+          "sha256": "4e70a05b3770e577b13f13f5f21c905ec78eec442dddea7829417b283f24d67e"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 241319,
+          "sha256": "bbcdc0e88f6fff790282d2a52db67864f1fd202014f4b9c04003cfef4dabac0f"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 277757,
+          "sha256": "d57abfc50565c4184391e0b9898304cf6f8128ede69fa53cbdbf25cba60fbb7f"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 607778,
+          "sha256": "bc7b97e7a579435c38a495d6894f3a24f804ec3baf83a1806e3c41e078e7de40"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1125986,
+          "sha256": "770da5fced106cf78b869aff3dbd44c3852ad300074dbe36cd1e5772d00fc2cd"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1585074,
+          "sha256": "662ae64a866ea1b66867c62ac2135c48d083f18910c468f3756c28f1ae6bb901"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 651929,
+          "sha256": "70ebe178ef8dedfacf56c17e1e3a4350325a61236ee28bd94ee574018f4ad4c3"
+        }
+      ]
+    },
+    "2026-08-04": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4980923,
+      "output_sha256": "afce49e6884e43b9513a82b7d97d591ef1f6026baeec9964079d7ea71995ff64",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 274169,
+          "sha256": "56593e9e9e9a2c4b8b4108562815abf7f499e62f615dfa83b8f93bc9af925ef9"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 185930,
+          "sha256": "c15cb9c0166c99a2c96860bd5c3aab5e279accca57f4d1965b3196bc07ccff9e"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 126830,
+          "sha256": "3fcebddd8ca0868165fc92440c85b5cfef356eccbefc78a11c8153c9c9ffcd0d"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 183900,
+          "sha256": "2842515e909f58c8f1ae11b75e57a7fa753bb6619df01338631e70a3151a5ab4"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 432653,
+          "sha256": "4ecb32945d905473687fc6b95b1bff54ba3c171ee3e38bb5487fea64be5db380"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1321191,
+          "sha256": "94bf0f1d60274699c486b604b6fa7affcb3ac6f5b64bb8a9478c304201eed00f"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 2043075,
+          "sha256": "0f030828f1f7bcc66acb5a93efe7247a794e2bdb00b5eb38fe2d18dd73508d76"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 413175,
+          "sha256": "50024952a8e6095f4903e694ef71ebc2f7d65a59e1c459f07d91e5fcfc069984"
+        }
+      ]
+    },
+    "2026-08-05": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4866172,
+      "output_sha256": "c974539c9cde9bb9c715d823f1c2f8d26a651c7b643e4e267c60ccfd978e8263",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 280177,
+          "sha256": "e640f5ec665b47fdc6431fb09c597506b6010abf2ea65f1fb4ab37363d153e98"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 182968,
+          "sha256": "893d9c3bdbc5c659db685b625f34c85d2a8e6f5a48629dbcb29124e25163c1b4"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 165626,
+          "sha256": "eddd3bb894dfd1241427d3cbb17d7c39218fcac1f5eac08b76b721b60c45ce95"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 148791,
+          "sha256": "b820f670d73e6a4ece2740f37ee959207135a08a1fbb27561ae68318baf9a0e3"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 829266,
+          "sha256": "f808c351edc4b023d2475945d543654c498e0d8f5cb519dc855e3c2f3970ebf5"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1146136,
+          "sha256": "9fe37650d1dd64bf73c23aa0132c48a34b79942fc5b1da5d3d246365fe8a1b66"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1689978,
+          "sha256": "99ec9a7177c84bd7b2aae54e1192abf1e0a79c088d00ca17c9b5bad408e26754"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 423230,
+          "sha256": "efb82ee1934f3f57271a1369478ca8ca7b28593f36860669a54257ddfc739359"
+        }
+      ]
+    },
+    "2026-08-06": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4271061,
+      "output_sha256": "9c09f0f25274b7c577fcd861304e9471d575d12fc4a7795ca8ccc264f7c004c5",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 262292,
+          "sha256": "542af734b75a2a35dd476db3cc10d72620bd102283d97baff50111aa08244a13"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 95309,
+          "sha256": "2724cb6038165018cc73f1ebc700a546cefe906be1c3ba30f2e8ff294d5de8de"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 96557,
+          "sha256": "a8aaa783fcb2795a8ede9b63b019e62d0f257fef64690dd5143d89a94ca008d7"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 148590,
+          "sha256": "60072b4b07e0f7022b45634f09b005da3f6924f25a6382066dc0d5cb968cec7b"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 484103,
+          "sha256": "4dde04db47415494e81be3b5cf9b9496bda0e5cd201c5a8d460b9449d4645881"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1281281,
+          "sha256": "39f5089fb307980b66600f493599a1d20f79ad91d8960c99a9c7c0d957120d15"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1597398,
+          "sha256": "7ad46c7af25b1a2f4e8a568134b31c647d0d9ef0f746879ee488f1cc1e578c9b"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 305531,
+          "sha256": "69cd38574c58d43208a02469aa68c1de88319f9a96eac1883cd262b88e7b7c40"
+        }
+      ]
+    },
+    "2026-08-07": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4427248,
+      "output_sha256": "d81a3453c081b8263dddcf86e8a5cf7ac71ecfdeb6d4838b1be5e097be01ead8",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 222968,
+          "sha256": "846ed02d6987d49324033716363711bd36d74d7bdd4c8918372eaa2eae38bb2e"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 141548,
+          "sha256": "e2ce2d5a3125cc45849fb56a95eaf33ba3c9a8470fc070aea805d07266a5d6c9"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 139305,
+          "sha256": "fd840f062db16fb457b921cc6abfcf08ff80d4ad005cce08c8c5f1b5b22ae3d8"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 171009,
+          "sha256": "589257ebef95a661893b89f8a79dca2c6e21afe4002ed00eb45a1e776e49dc0d"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 491186,
+          "sha256": "ba9259141e73b7637c7194f8d361551397b270b4d3f1665c000b254a7dd1508e"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1103555,
+          "sha256": "bdb0f09d54b9f3ab60f6a56fbe9d41b3940990454027e9de13f54980adfed9ab"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1450496,
+          "sha256": "c5d4e11a03b614be4e44556c1fd49d389df6cb4dc6b4474e576650010abbb26a"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 707181,
+          "sha256": "0e555d64f28e333370b1c530d924a0f78712b2c1cb0e48d4e415d617f72cec1f"
+        }
+      ]
+    },
+    "2026-08-10": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4009947,
+      "output_sha256": "24c0412798ae9ba93cbea1cdea533e8805b7a2820072099fb072bf62103350a9",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 211275,
+          "sha256": "a4ca1f5af21dbcd55a7ef4b521386b7520bc7b32ec439f9bb694429de5d696bb"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 157585,
+          "sha256": "29fa651ba4ddbb33ff15a672eb45897bb3672ef4cc7e902d24946484d4b2eba6"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 192961,
+          "sha256": "83bf3ba8ffe5cca65cf654a8290dec2343ae93f3d2a618fa57a0bbf7ae99fd0f"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 233686,
+          "sha256": "9dd048ffc3c72f530b1288f24956dfdbeda4b2cdced3d09b06137ddaca0e009a"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 544360,
+          "sha256": "55e74fe0345ac6ef7005ac206bbd2a6b150e4e8ae6017fa5ca76e60a6a843d6b"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 939405,
+          "sha256": "41562a126630214be971fa1556e2e454b095a08388a1a093592a7d5310b087c5"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1306363,
+          "sha256": "431e9d5263248093f915c377f50a0c2798c265fc1efc5bbfebcdfcbc30e43e7c"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 424312,
+          "sha256": "962e643798f11894c62e3e88a479db959b10b215b121da8f505b7802c54bb3bb"
+        }
+      ]
+    },
+    "2026-08-11": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3590819,
+      "output_sha256": "22fe7bd5f3c64cfe89a144c59d4f9f94d68cc24fc2876ba04ac9330f4b7504ac",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 146646,
+          "sha256": "6b6217c571d1b6048704a8d43d97c20eae2b32af4fa34cfc75eb3e723afa19bb"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 114298,
+          "sha256": "bb080f4cc0e3d2e15274e68f407199c9e5fd9801c461fff501dc78058fa2572d"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 169822,
+          "sha256": "8758b6e21d6a2b77bf48063fa8e0aee3ccf799bcbe60aeaab8a713dc324f8a09"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 103129,
+          "sha256": "93db752539f85ad1295945c26ec6ff7f708be2a57fd1970ade8965d28fef89aa"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 376949,
+          "sha256": "b3636e113c6b38b1a5511217027e984251bb316114147c771a70bcae284c4214"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1008657,
+          "sha256": "4f41491e403a41f0c78b1e823433ec1e685c40d82e97b444f3e9189304ccfb8c"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1310725,
+          "sha256": "dc45743e4fc69be27674db75db22b724f2f1d0d12a2198d6cf86d8165baaec2e"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 360593,
+          "sha256": "9bd646dd583fcd67dde14f72896d9ae8c9f040268570ff31a20e79241a691cff"
+        }
+      ]
+    },
+    "2026-08-12": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3650981,
+      "output_sha256": "63c430c3ba58662d6b58daa5cf1a694942512822b37ef4094c014768928c769c",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 194569,
+          "sha256": "948ec9ea6c33ba65fb0f1e76a82ef3645c1fe68ff185ca6fc70c0d4dc1ecd4a7"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 130169,
+          "sha256": "7b939af17edf5c65889a9e5e54a677d55d2698463c97b7785ddd59752186b694"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 205816,
+          "sha256": "3a9ebe9dd3c4dd21d61eaf718c87449d72ea2bb72398a0f356b943f55779f2e8"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 133896,
+          "sha256": "a86283d524e8555d88454f983548035c01c4a788b5391cdd0a44de5aa4c0ae99"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 557519,
+          "sha256": "247a6ecf750330c6f10035a6b35d0479d4d4ed08ec3850f4fd9631b6583a246b"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 858126,
+          "sha256": "0de38dbae1a18d43bf4f430158ec37b49edf3da3605eff6698c0e55213b66e10"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1082716,
+          "sha256": "01f02632078d8f3383774a8ed72bd4cb428de642a6f5b6ddc560626cd3db8c9b"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 488170,
+          "sha256": "4a3ecbe7fd870102cf35b184043bd2e6112e5176f0bdb13fbc0c4e5aa943c166"
+        }
+      ]
+    },
+    "2026-08-13": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3946008,
+      "output_sha256": "2ff0a2a03c15f418d1cc3e61c0d6c409d7ca1918d263a718172350b3de4d394a",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 169134,
+          "sha256": "6e18e7f90084eedb3b3c4e5f9265acd15515b6227864b73104fad1f0f26e2854"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 121886,
+          "sha256": "43d823e2f4e0ef254a61f514cebef2e5ad74e858f085d10d89537bccd4fc07b6"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 126204,
+          "sha256": "a8f67343c16ad204935d6b344a15efd7aebff22c0ba04fe7eddcdf44284dfb6e"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 111491,
+          "sha256": "657b4d734ce5cf48310121e5eca4359c7f3cd4bc0cbb6a2c544abd0881ae338d"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 410883,
+          "sha256": "cf20f7457838f05ab36dfe14895d32c9d948bd05b001355ea3b291b7ecc1a3ab"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1039555,
+          "sha256": "2e630ed633ec3f30e70b1e164c531b29a1ee2020cdb3ef69e81a47a9f0e243d5"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1495080,
+          "sha256": "88511dd2953e0e4ef519d40917cfa74de924fb838919df24928fdb654bc19aed"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 471775,
+          "sha256": "96516072c928b0caadb05f603e42e7114715925ccb261e2fa715b6c12e6a052e"
+        }
+      ]
+    },
+    "2026-08-14": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3967417,
+      "output_sha256": "c370e0c32cead1ef59e22eb7f3377d220a990cf7121caf76993d57166f9636d0",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 174935,
+          "sha256": "dee86a640b502c9f54fdca94d760b9e11aca5550023f4db15206be9d92e18f41"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 127518,
+          "sha256": "7153e2f3d676f857d89084f281b8bf1848b706f0e602349e77bba2939b7b53cc"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 120278,
+          "sha256": "2c027600d1d7f462e193eb0e969b53a84fb802ba3c407bd0c2704256ab8d615b"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 104978,
+          "sha256": "cd3216d9d5afdc5255603adc85b43ce508b5e2aa04dc1108b1c3689f173c87f6"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 408496,
+          "sha256": "78af4befbfb3c14540cfc3792bf2af6dc76f02ac6b19b0eb90ac64cf06d989fd"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 923758,
+          "sha256": "b9029b4e1c9ff36844c6e9630384330a74e871733f354fda8375ac042ce8db17"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1171077,
+          "sha256": "b7a8853471eeea6345b76ee694251cb116cf896dde20e7ccf7afa0e70999c11a"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 936377,
+          "sha256": "f05e57183e92d303b28e69dd3e6f528b12045919b5deb4108c8f7745f0806bf0"
+        }
+      ]
+    },
+    "2026-08-17": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3734567,
+      "output_sha256": "3a63ee6d343100d22c593ce6b1a95084be0b7a6d7c80c1fbcd6f5a6e0e70d18a",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 182049,
+          "sha256": "35199e30c18e5547a6b91d6bd1c097bdacfbd5658f007524f885607de1835d56"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 185770,
+          "sha256": "3187ccc27b0af02a3ee5deee62bcccef1e4023b533b765a705b4f2afb3165f2b"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 245035,
+          "sha256": "92b57c1d74a3fa81f883cf6e973db9dec99af1dc5081872c68933fc4f3d2a540"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 174627,
+          "sha256": "42d8d952caf26ee7017f9eeac9402429d5c30baf4bb0d6a6bb4665b714b60890"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 424436,
+          "sha256": "22e17137b71796775b28d132d72219b39a0ca21f235e84187592bae1db60c615"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 884983,
+          "sha256": "7cc907deb313bafab6ebee75ab0db9d8105350d64ff2bafe28a6bbf751ff2c42"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1180463,
+          "sha256": "e6251f2c1065bd005aae26a1ac57528d38cd632cf5f67d62adebe613d69255ef"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 457204,
+          "sha256": "9544b9852d2a256ed8f70a462024faa3b22cb96d2436e715335de61180451123"
+        }
+      ]
+    },
+    "2026-08-18": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3675036,
+      "output_sha256": "4460f0368b0e3777a01a4713f1e27060abb5b16724b341362ac384e2c6834b64",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 232417,
+          "sha256": "5484fcb648281d7726e2e4e2a4669293d2e2e2391c0dc445556030cffbba6165"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 142681,
+          "sha256": "ee5f81c24f938ed468dd36ab37299939ce8e1a9c26db42fb39e8668ffea2be5b"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 223991,
+          "sha256": "ff00889e27eebfeb6ce95db002b4184ae5ee0041470cf0baeda30fb29972be9b"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 84871,
+          "sha256": "108fd7243360296830e72751062ddfdba0c05eb1afbf13e162cfae1272aaec0b"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 324188,
+          "sha256": "a188dbf96db21a1abb081080d6f19c696092b028cacc36a1bf692ae65280107b"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1111772,
+          "sha256": "cfac92e47bf9b17e68929dff17059ec570611b8a6b9b87c5b1892f6e21fb8d1a"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1171361,
+          "sha256": "d36419a733ad70062ec752eca1d93eac1f50fc2d7a1afbaf1369e2cc7063fddc"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 383755,
+          "sha256": "43aa743d5d0e349970a7acb2402015af6dd65e37ce5b9992de18bee28d531fc9"
+        }
+      ]
+    },
+    "2026-08-19": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4165096,
+      "output_sha256": "db3dd3c391d17e39da605d743530212512c533beeb33c8b561602a18f4f02d16",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 360266,
+          "sha256": "e9e014a49d9388e6e410df32ac5106ce04cb2a0bc20c23c7de8e68ede4307b81"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 171073,
+          "sha256": "4052bae1f85885add3c53b2cd36b6f17ecf49d3d5cf1df85879c1cfb76a9a3fe"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 176633,
+          "sha256": "3cd05fda76d9437450661ee88fef68c375cfb6fd69b0d37a321bec6d0f0a6a96"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 112211,
+          "sha256": "9526bc91cddb11a354407b15bb79605e31645d0119c0019eae792b507ea00bc5"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 382400,
+          "sha256": "a9b2561888b141e535dcd42d2604e943adeb7f003813378ce21203a541370a7e"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1075661,
+          "sha256": "74cd9a71ee4ab05833bc0c990d31fef3e1f39cc07da93c43d6b878905021b8c0"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1263104,
+          "sha256": "8766a8a9e531ce11bc4b357ca0a4a1d90497a793f3dfa8b75ba64d3fb411af8a"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 623748,
+          "sha256": "a287f76fe3a1f904263614f99d25cd9140ba77add72bd3fc4b41c2c208b1906c"
+        }
+      ]
+    },
+    "2026-08-20": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3656820,
+      "output_sha256": "3ed5884d14d91bde78058094af49764e53152dc14a9cc06691df5935f0708435",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 208636,
+          "sha256": "9ad48b7105c165319fa0df6a49dfb1163faa3d5654c59f6d94fe95a7fa6a3e91"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 120993,
+          "sha256": "da778109ae17265cf6a62445b5fa334a93611b5f1141115804a9f17852956f00"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 100345,
+          "sha256": "6985a555771960ff4974b96218aebbde8199511e42c4d348c732c2f36f874d06"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 55373,
+          "sha256": "b156193c8f362fb3237b9f8b26f584559c64db9c07c3c7917be41edaf90d0f1d"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 305855,
+          "sha256": "260e62bd99e43495478734265015754e1c090f1c83a4bc5800a4ad1c9feefea1"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1105852,
+          "sha256": "13ff23b8d0e052269230856c91f874d9299166137821e3aacd91cca70eb48ad0"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1354531,
+          "sha256": "233f8967f4a568c1760e35f75fb093ace06f66bab603d16ae1403ebf0c992b85"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 405235,
+          "sha256": "137fb10ecf7545de26e3f75efd2cc48ace6a838c85d71026a951f03d69296090"
+        }
+      ]
+    },
+    "2026-08-21": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4182093,
+      "output_sha256": "e432299c390e314b3bfa367805b88826c3906e5b728cc795ea137fefa1449ecf",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 229325,
+          "sha256": "c192de33ed7366f98e858b63a329ccc6bb8fe5adfdf9bc186f02a58038b2becd"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 149914,
+          "sha256": "c063d089b414a35f6a875ec70cc12004ae9143d8ee6b4ecacdd25a39a3553605"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 147351,
+          "sha256": "7fa3c7fd026f74ae44d6cbe8e7371bd9f7e9e8753f8dd0d7e0ef833fce9a61a0"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 99165,
+          "sha256": "afa8f2f49b437b278fe71bd9548bfefe91be4110e4bd4ceb6fc70f87ea6396f0"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 402879,
+          "sha256": "13d4878f64e765837617806dba2c26933fa241018fc9bdaead43341cc0b6f393"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 945767,
+          "sha256": "1c40796816bec6d566dcfddf17819e916ced04f731f180caab42d983856ea4be"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1160878,
+          "sha256": "b951427799bf78304a34760fa098f46c8694ebee018298b9bd55d915ec3ba55f"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 1046814,
+          "sha256": "84f2844c61390ead6e13d0808875e3d8cef3c904c8e2a2cfe76fa8de64a44437"
+        }
+      ]
+    },
+    "2026-08-24": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4002946,
+      "output_sha256": "f98426d0f4e146389c91e043d21b89924930f40def0582102fd908afae965f98",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 213535,
+          "sha256": "c19279ae70ea70ea6a93c2cee164e1a11688e4dd8ac22444e20d7f40daf9fec0"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 184222,
+          "sha256": "c693b21c5f76439f16717e52c02b76e3fb55d4164cc681532cd3d1656d5b1bc5"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 171067,
+          "sha256": "9a86eaff746885878e369f046e3016536a8744905a1bfa7fe44ed71ab5ab0b1b"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 111375,
+          "sha256": "2b8d0739ceb8530e93b7bf7c7aa3aa9d9bf31dc818375529d1a319e5dc0e2980"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 458649,
+          "sha256": "a78a9a1fe4c856a1e28253674f71a02e8ccbb217403051cbef537e115fd4a82f"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1063352,
+          "sha256": "9a830707d553bd12e085864528a886e3f7f345628556c356ff677fb8b66aef1f"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1155296,
+          "sha256": "6ffd078fc466bf7b30254c5f849bdf7cd00f45856a2190a56ff22e2602fc4a19"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 645450,
+          "sha256": "68b3ddd5a5cd49bb00283a14a4a61f8e33d44cb20fb30a6cacddd3433fff9e58"
+        }
+      ]
+    },
+    "2026-08-25": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3344306,
+      "output_sha256": "8a41f84b3f2138099fa1e59557515782a87df0af1c436ec26e7c5d3fcd9d4d75",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 141373,
+          "sha256": "ed91597e6eab418a0a92a93abcef78cb148ac7670d4b7b201c24d197698a810e"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 122112,
+          "sha256": "ace05b4a1cf87a6516e64c437bf7f081e9f9440bc776b38593246ac9a6c61a65"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 113084,
+          "sha256": "f719f6f9146d6c51764e8a0d25364010929f86397f4c405f717e2a3f828a2095"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 72079,
+          "sha256": "a32b0c8fa47b25a5707bc14aad81207b084907f7a51007ccb12cf34301c95e58"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 318702,
+          "sha256": "1a84cf8ed6d78f5d8dbfef8cd71e6184e53706145729013b857902c7b1b929d6"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1008602,
+          "sha256": "21bdd63a8d044d07b50ae27ce76359568f2b9decc33a4392cc9a23437a7713b8"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1075321,
+          "sha256": "1fc2416bb694f9a83e046cfdfcbe2154115cfd7e302f353273826e485d954741"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 493033,
+          "sha256": "a13c0ca9bcf60fe3c090fd21fb6c365f7df02ddc9028b78448d1bfa3c8e3426a"
+        }
+      ]
+    },
+    "2026-08-26": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 3785435,
+      "output_sha256": "205143e156ed54913387acc315a22e2e8f895022c5a01d332a63b9fb31fba3cf",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 252100,
+          "sha256": "b62df5b3d34d85c95f7323189891e2400bd9c63c7442e00a2dbf2efc74cfab39"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 131826,
+          "sha256": "b3e439f54fcfbd04125af1f65324f11faba8c13d29e9dc28ae9b4c2c95ae8e0f"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 453664,
+          "sha256": "07e90f42269749a889d21a20622495b966b5767c3204169b6075d3a12d22983f"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 112913,
+          "sha256": "17504e4258f3154eea5ca2942f0fcd5426e37a27fb91b270079d0a723de1b322"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 441541,
+          "sha256": "28d33985eb9b0f238a47fe90cabca4181585dfb692d0bb1f7f0403cc77909f06"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 816508,
+          "sha256": "dabe1ad6b66b3f95a509534708f299fbb52b4194a2caf409a599e09d73a41c77"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1001570,
+          "sha256": "613b39b4cd4bc90b7dcefdf4389a1b285dd7e1b7a354d082a986db421eec87e7"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 575313,
+          "sha256": "779c50d9c7cab7cb5f701f5ac01d666205778d506dbfea6d1ee2f2eb4b70d18d"
+        }
+      ]
+    },
+    "2026-08-27": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 4433123,
+      "output_sha256": "c473582168746b3ff1ec1fd5e67c28f5e563ff89db2ab8cfdac51ab991e10e03",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 178511,
+          "sha256": "f7a13fb098a8c09cb44ca6f9cc3a5395f5ad2e3bfcb48e7c71ae64aa60465530"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 142178,
+          "sha256": "822d84957816ed67724789a33e58ef79f6e0b1f8d3df3c1e365069ab728fffa2"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 152761,
+          "sha256": "b2ef32c234780a7dbdedd8727e2271fc398a0aaa5b82f2fc6db03f01f27c95d7"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 148260,
+          "sha256": "d8fa6f4785157ce82129235a6edb670a24ed246fb950ba088e9ffa20303376c9"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 1027069,
+          "sha256": "ac3bf84e630f13a101dc54605194f5c02421c971ee84c9a11fba918d20a54152"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1041338,
+          "sha256": "a546401047c7ce46ed19ca55a651640e18a1fe5870e592dc4e848ec37b27b98a"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1318617,
+          "sha256": "88d467a0de7fbf0c5fe66ace854c7043a2d6a009791c3270b660727aa127a7fe"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 424389,
+          "sha256": "bb32ec4308f0021322650e0a7685151437c1f51c6fd0a9dea2df83851fe46398"
+        }
+      ]
+    },
+    "2026-08-28": {
+      "output_file": "full_tape.parquet",
+      "output_rows": 5153964,
+      "output_sha256": "4547bfc3be448fa471464b4bd357c090e222d020dec4f6a7624a26f9c50a3b97",
+      "source_files": [
+        {
+          "relative_path": "asset=AAPL/events.parquet",
+          "rows": 303386,
+          "sha256": "a54634cf586fd7978dc90a787263a7545deb276199fe01e172f62780d74046e6"
+        },
+        {
+          "relative_path": "asset=AMZN/events.parquet",
+          "rows": 263523,
+          "sha256": "c9c48de44bbf98a0bfb281e316ba12052b55f86573af178e1534f098d603e207"
+        },
+        {
+          "relative_path": "asset=META/events.parquet",
+          "rows": 249022,
+          "sha256": "cddd61c25d0ebd46dbb499aa1f886054319f5df0ef2acdf1d5e5cbb556068e7e"
+        },
+        {
+          "relative_path": "asset=MSFT/events.parquet",
+          "rows": 212753,
+          "sha256": "6da18cdded520fbf9c3bba281eacc9acf8c57084b4ed5b2b762e8f1e0d4f4706"
+        },
+        {
+          "relative_path": "asset=NVDA/events.parquet",
+          "rows": 787018,
+          "sha256": "b4478bbcc2c51fd9d812fbff94428707fd06144c44551686363ed439933b4baa"
+        },
+        {
+          "relative_path": "asset=QQQ/events.parquet",
+          "rows": 1177549,
+          "sha256": "4c54f0c82b901b0aabbe384270d90cc16697ff2d83c3ae59dd457062765cee41"
+        },
+        {
+          "relative_path": "asset=SPY/events.parquet",
+          "rows": 1578124,
+          "sha256": "796a48df359f2104feca5efc6ef5ba33ce5c5f26a39ff1f199663adad742c34a"
+        },
+        {
+          "relative_path": "asset=TSLA/events.parquet",
+          "rows": 582589,
+          "sha256": "b4d429c01ff6b1d60057d6091818d7ac072f6845d426c4dc9b41df41824c6b57"
+        }
+      ]
+    }
+  },
+  "source_file_count": 240,
+  "source_layout": "date/session/asset/events.parquet",
+  "status": "COMPLETE"
+}

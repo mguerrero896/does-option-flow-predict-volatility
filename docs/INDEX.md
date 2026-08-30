@@ -39,16 +39,16 @@ files between directories.
 | [`docs/pit_v22_claims_and_limitations.md`](pit_v22_claims_and_limitations.md) | Source-time PIT and availability limitations. |
 | [`docs/provider_timing_pit_contract_v22.md`](provider_timing_pit_contract_v22.md) | Governing provider-timing contract and proxy semantics. |
 | [`docs/sequential_multiplicity_policy_v1.md`](sequential_multiplicity_policy_v1.md) | Future-campaign alpha spending; retrospective D/V remains exploratory. |
-| [`docs/phase8_bridge_protocol_v2.md`](phase8_bridge_protocol_v2.md) | Frozen exploratory 20-of-30 Phase 8 bridge; its current complete executable closure is pinned by `artifacts/phase8_bridge/evaluator_freeze_v4.json`, and the sealed read remains unauthorized. |
+| [`docs/phase8_bridge_protocol_v2.md`](phase8_bridge_protocol_v2.md) | Frozen exploratory 20-of-30 Phase 8 bridge; decision 102 records its consumed one-shot read, `MIXED_EXPLORATORY` result and execution recovery. |
 | [`docs/phase9_total_contribution_protocol_v1.md`](phase9_total_contribution_protocol_v1.md) | Frozen 60-complete-session Phase 9 protocol; evaluation remains one-shot and separately authorized. |
 | [`docs/phase9_academic_reporting_policy_v2.md`](phase9_academic_reporting_policy_v2.md) | Current target-blind deadline and power policy: 36 scored sessions at endpoint; Phase 9 does not gate submission. |
 | [`docs/methodology_decisions.md`](methodology_decisions.md) | Recorded methodological decisions and amendments. |
 | [`docs/threats_to_validity_matrix_v1.md`](threats_to_validity_matrix_v1.md) | Validity threats, mitigations and residual risks. |
 
-The Phase 8 row in `sequential_multiplicity_policy_v1.md` preserves the historical slot
-that existed before methodology decision 99. It is not a current confirmation threshold:
-the bridge contract above classifies all p-values as descriptive, forbids confirmatory
-promotion and still requires separate one-shot authorization.
+The Phase 8 row in `sequential_multiplicity_policy_v1.md` preserves its historical slot.
+It is not a confirmation threshold: the bridge contract classifies every p-value as
+descriptive, forbids confirmatory promotion and permits no second read. The dated outcome
+is published in [`reports/phase8a_exploratory_bridge_addendum_v1.md`](../reports/phase8a_exploratory_bridge_addendum_v1.md).
 
 ## Reproduction and data access
 

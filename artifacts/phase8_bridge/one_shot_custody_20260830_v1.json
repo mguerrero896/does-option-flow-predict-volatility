@@ -1,0 +1,59 @@
+{
+  "access_ledger": {
+    "access_log_bytes": 178142,
+    "access_log_sha256": "ec808c40c27ce89dfbacfba6f02487f21bad79866ac20514623cb3e38c4c3ee9",
+    "append_count": 750,
+    "claim_bytes": 509,
+    "claim_sha256": "bae8c92d6d6437032fee4f4261162159eaeb172363a15be2d1ec34c1c9c0172e",
+    "claimed_at_utc": "2026-08-29T14:55:12.196140+00:00",
+    "counter_bytes": 138,
+    "counter_sha256": "ff1692a44820c13093894c78316bd3908837f1362033735bfc78e2007dfc41f8",
+    "read_count": 1
+  },
+  "authorization": {
+    "artifact": "artifacts/phase8_bridge/owner_authorization_20260830_v1.json",
+    "authorization_id": "phase8a-one-shot-4e7c4139-97bd-4d60-8ad7-29a87da8cf75",
+    "canonical_sha256": "385caa0e2a4e38b8befa4584b546a753e21d59e4b49f18c45015be447bbf0fff",
+    "file_sha256": "4e14fce59b7efc7e193fbe45e6dbede75b18b55041a1240b538a9c0f9551b315"
+  },
+  "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+  "execution": {
+    "initial_failure": "RP3_EVAL_NO_SESSIONS",
+    "layout_manifest_artifact": "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json",
+    "layout_manifest_canonical_sha256": "a0777ee15fd98344d0072938e017e05a5baea67c11991992ecd772c1c71db0d7",
+    "layout_manifest_file_sha256": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b",
+    "recovery_artifact": "artifacts/phase8_bridge/execution_recovery_20260830_v1.json",
+    "recovery_file_sha256": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf",
+    "recovery_script_bytes": 20355,
+    "recovery_script_custody": "LOCAL_EXECUTED_SOURCE_HASH_ONLY",
+    "recovery_script_sha256": "20864b1e41e686f646a9c7299d19607ff1d0baef42ad87c6f558bdc602a32692",
+    "sealed_store_reopened": false,
+    "second_execution_permitted": false,
+    "status": "COMPLETE_WITH_RECORDED_RECOVERY"
+  },
+  "owner_confirmation": {
+    "classification": "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY",
+    "effect": "CONFIRMS_EXISTING_ONE_SHOT_READ_NO_SECOND_EXECUTION",
+    "received_at_utc": "2026-08-30T04:35:47.4738899Z",
+    "statement": "Autorizo consumir la única lectura de Phase 8A (`sealed_cohorts_read: 0→1`) y ejecutar exactamente una vez `scripts/evaluate_phase8_bridge_v2.py` bajo `phase8a-exploratory-bridge-20of30-v2`, contrato SHA-256 `b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e`; acepto que el resultado será exploratorio/descriptivo, no confirmatorio."
+  },
+  "output": {
+    "confirmatory_promotion_allowed": false,
+    "forecast_cube_bytes": 1673406,
+    "forecast_cube_custody": "PRIVATE_LOCAL_GATED_EVIDENCE",
+    "forecast_cube_sha256": "71e1ccf9a4970fc6053a0204ce4981634dc9fc1ba3637d093e0b76ed9fd19002",
+    "overall_classification": "MIXED_EXPLORATORY",
+    "personal_paths_emitted": false,
+    "result_artifact": "artifacts/phase8_bridge/result_20260830_v1.json",
+    "result_bytes": 22963,
+    "result_canonical_sha256": "bc645dd6356b892cd319d4a1634be5427a93efe4ead86292ae1a3505cbb745b9",
+    "result_file_sha256": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
+    "secret_values_emitted": false,
+    "status": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE"
+  },
+  "protocol_id": "phase8a-exploratory-bridge-20of30-v2",
+  "reconciliation_classification": "POST_READ_RECONCILIATION_NO_SECOND_EXECUTION",
+  "schema_version": "phase8-one-shot-custody-v1.0",
+  "sealed_cohorts_read_after": 1,
+  "sealed_cohorts_read_before": 0
+}

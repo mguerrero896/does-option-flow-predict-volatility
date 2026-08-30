@@ -85,6 +85,24 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
             "this_audit": 0,
         },
     }
+    phase8 = next(
+        protocol
+        for protocol in state["active_protocols"]
+        if protocol["id"] == "phase8-prospective-bridge"
+    )
+    assert phase8["state"] == (
+        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY"
+    )
+    assert phase8["sealed_cohorts_read"] == 1
+    assert phase8["result"]["artifact"] == (
+        "artifacts/phase8_bridge/result_20260830_v1.json"
+    )
+    assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
+    assert phase8["result"]["confirmatory_promotion_allowed"] is False
+    assert state["current_report"]["phase8_addendum"]["path"] == (
+        "reports/phase8a_exploratory_bridge_addendum_v1.md"
+    )
+    assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])
     phase9 = next(
         protocol
         for protocol in state["active_protocols"]
