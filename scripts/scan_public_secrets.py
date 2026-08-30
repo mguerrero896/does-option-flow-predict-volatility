@@ -115,11 +115,33 @@ def _gpg_path(path: Path) -> str:
     return str(resolved)
 
 
+def _is_published_main_commit(repo: Path, object_id: str) -> bool:
+    history = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "rev-list",
+            "--first-parent",
+            "refs/remotes/origin/main",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return history.returncode == 0 and object_id in history.stdout.splitlines()
+
+
 def _is_verified_github_squash(repo: Path, object_id: str, content: bytes) -> bool:
-    """Accept a platform squash only when GitHub's pinned key verifies it."""
+    """Accept a published-main squash only when GitHub's pinned key verifies it."""
 
     gpg = _gpg_program()
-    if not _has_github_squash_shape(content) or not gpg or not GITHUB_WEB_FLOW_KEY.is_file():
+    if (
+        not _has_github_squash_shape(content)
+        or not _is_published_main_commit(repo, object_id)
+        or not gpg
+        or not GITHUB_WEB_FLOW_KEY.is_file()
+    ):
         return False
     with tempfile.TemporaryDirectory(prefix="mds650-gpg-") as gpg_home:
         env = os.environ.copy()

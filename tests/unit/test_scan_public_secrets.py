@@ -6,6 +6,7 @@ from pathlib import Path
 
 from scripts.scan_public_secrets import (
     _has_github_squash_shape,
+    _is_published_main_commit,
     _is_verified_github_squash,
     scan_repository,
 )
@@ -90,7 +91,9 @@ def test_github_squash_identity_requires_a_valid_platform_signature(
         capture_output=True,
         check=True,
     ).stdout.decode().strip()
+    _git(repo, "update-ref", "refs/remotes/origin/main", parent)
     assert _has_github_squash_shape(content)
+    assert not _is_published_main_commit(repo, object_id)
     assert not _is_verified_github_squash(repo, object_id, content)
     assert not _has_github_squash_shape(content.replace(b"gpgsig ", b"unsigned "))
     assert not _has_github_squash_shape(content.replace(b" (#16)", b""))
@@ -110,6 +113,7 @@ def test_published_github_squashes_verify_with_the_pinned_web_flow_key() -> None
         content = subprocess.check_output(
             ["git", "-C", str(REPO), "cat-file", "commit", object_id]
         )
+        assert _is_published_main_commit(REPO, object_id)
         assert _is_verified_github_squash(REPO, object_id, content)
 
 
