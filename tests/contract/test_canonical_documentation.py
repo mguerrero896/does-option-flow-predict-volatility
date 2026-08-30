@@ -133,7 +133,9 @@ def test_current_threats_and_reports_match_corrected_evidence() -> None:
     assert "MIXED_EXPLORATORY" in matrix
     assert "Phase 9 remains sealed and unread" in matrix
     assert "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM" in matrix
-    assert "has not been repeated on the current run" in matrix
+    assert "has no eligible post-PIT replication" in matrix
+    assert "The historical D/V diagnostic" in matrix
+    assert "Current diagnostic" not in matrix
     assert "exact replay recovered 20 contrast rows and 140 fields" in matrix
     assert "supports no aggregation change" in matrix
     assert "historical producer identity cannot be independently rehashed" in matrix
