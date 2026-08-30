@@ -14,7 +14,7 @@ dependencies = [
   "polars>=1.35,<2",
   "pydantic>=2.12,<3",
   "pydantic-settings>=2.11,<3",
-  "pyarrow>=22,<24",
+  "pyarrow>=22,<26",
   "tzdata>=2025.2,<2027",
   "scikit-learn>=1.7,<2",
   "lightgbm>=4.6,<5",
@@ -50,7 +50,7 @@ torch = [{ index = "pytorch-cu130" }]
 [dependency-groups]
 dev = [
   "coverage>=7.10,<8",
-  "mypy>=1.18,<2",
+  "mypy>=1.18,<3",
   "pytest>=8.4,<10",
   "pytest-cov>=7,<8",
   "ruff>=0.14,<1",
