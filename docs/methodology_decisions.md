@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–108](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–109](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1644,3 +1644,27 @@ Requirements-consistency and preregistration gates pass.
      method, executable-closure identity, unresolved historical-producer limitation and
      exploratory claim boundary are unchanged. All registered v1–v5 audit paths and v1–v5
      addenda remain immutable.
+
+<a id="decision-109"></a>
+
+109. **The Phase 8 dispersion audit and replay producer have an external registered
+     freeze (2026-08-30).** Before the final audit was generated,
+     `artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json` registered a
+     128-file closure containing the audit producer, Phase 8 evaluator, Block 12 producer,
+     complete `src/mds650` tree and `uv.lock`. Its aggregate SHA-256 is
+     `363734271bfc3a16d752b38735ae8ec7432baf6693206d718a4dda1179d980f9`;
+     the freeze file SHA-256 is
+     `c786ef02f7eefdecebf2fb03fc7aa1e64c222bf024fcccfc6b7e55b8f22a8f56`
+     and its semantic self-hash is
+     `b2f24f38426263224bdc179cb85f79afb8032e79ab3054eb384ec18a9a14d4e8`.
+     The audit verifies both the runtime closure and the registry-bound freeze before any
+     replay or measurement.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v6.json`, self-hash
+     `3afcc3c5515c7977e78c49f438bc4cdee1c325917ed994afa6cadbdd8d65c073`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v7.md`. The numerical cells, checks,
+     method, source identities, unresolved historical-producer limitation and exploratory
+     claim boundary are unchanged. All registered audit and narrative paths remain
+     immutable.

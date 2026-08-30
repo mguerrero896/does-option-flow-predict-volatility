@@ -101,13 +101,13 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert phase8["result"]["confirmatory_promotion_allowed"] is False
     assert phase8["dispersion_audit"]["artifact"] == (
-        "artifacts/phase8_bridge/dispersion_audit_20260830_v5.json"
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v6.json"
     )
     assert phase8["dispersion_audit"]["aggregation_change_supported"] is False
     assert phase8["dispersion_audit"]["delta_b1_holm_below_0_05_cells"] == 3
     assert phase8["dispersion_audit"]["delta_b2_given_b1_holm_below_0_05_cells"] == 0
     assert state["current_report"]["phase8_addendum"]["path"] == (
-        "reports/phase8a_exploratory_bridge_addendum_v6.md"
+        "reports/phase8a_exploratory_bridge_addendum_v7.md"
     )
     assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])
     phase9 = next(
@@ -163,7 +163,7 @@ def test_immutability_contract_records_the_pending_freeze_batch_honestly() -> No
     assert "`908e35610e36558a163940a8586a4e1a22a62c20`" in layer6
     assert "81-entry registry asset" in layer6
     assert "SHA-256 `e3337d0eb6703a6356c30fdf66867714dc7ffc9fd0f8bafb3e5c75c24382a571`" in layer6
-    assert "live registry adds the Phase 8 dispersion audits and addenda through v6" in layer6
+    assert "live registry adds the Phase 8 dispersion audits and addenda through v7" in layer6
     assert "fresh release snapshot is pending" in layer6
     assert "both source archives resolve" in layer6
     assert "Release ID `376899713`" in layer6

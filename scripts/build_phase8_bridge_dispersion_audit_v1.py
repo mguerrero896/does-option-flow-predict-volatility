@@ -30,7 +30,11 @@ RESULT: Final = ROOT / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v5.json"
+AUDIT_PRODUCER_FREEZE: Final = (
+    ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v1.json"
+)
+FROZEN_REGISTRY: Final = ROOT / "data" / "FROZEN_ARTIFACTS.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v6.json"
 FROZEN_INPUT_SHA256: Final = {
     RESULT: "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
     CONTRACT: "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
@@ -47,6 +51,12 @@ CURRENT_DV_EXECUTABLE_SOURCES: Final = (
 )
 CURRENT_DV_EXECUTABLE_CLOSURE_SHA256: Final = (
     "939a238b1ff703e57b597582bca24205bf8e2b947227e264fcc0140fb08dd95d"
+)
+AUDIT_EXECUTABLE_SOURCES: Final = (
+    "scripts/build_phase8_bridge_dispersion_audit_v1.py",
+    "scripts/evaluate_phase8_bridge_v2.py",
+    "scripts/rp2_block12_prospective_design.py",
+    "uv.lock",
 )
 CURRENT_DV_PANEL_SHA256: Final = {
     "artifacts/rp2_block4_b0/b0_panel.parquet": (
@@ -93,6 +103,34 @@ def _assert_hash(path: Path, expected: str, label: str) -> None:
     actual = _sha256(path)
     if actual != expected:
         raise ValueError(f"PHASE8_DISPERSION_{label}_SHA256_MISMATCH:{actual}")
+
+
+def _validate_audit_producer_freeze(contract: Mapping[str, Any]) -> dict[str, Any]:
+    freeze = _load_json(AUDIT_PRODUCER_FREEZE)
+    closure = build_executable_closure(ROOT, scripts=AUDIT_EXECUTABLE_SOURCES)
+    registry = _load_json(FROZEN_REGISTRY)
+    relative = AUDIT_PRODUCER_FREEZE.relative_to(ROOT).as_posix()
+    registered = next(
+        (entry for entry in registry["entries"] if entry["path"] == relative),
+        None,
+    )
+    file_sha256 = _sha256(AUDIT_PRODUCER_FREEZE)
+    if (
+        freeze.get("freeze_sha256") != _canonical_sha256(freeze, omit="freeze_sha256")
+        or freeze.get("status") != "PHASE8_DISPERSION_AUDIT_EXECUTABLE_CLOSURE_FROZEN"
+        or freeze.get("protocol_id") != contract["protocol_id"]
+        or freeze.get("contract_sha256") != contract["contract_sha256"]
+        or freeze.get("executable_closure") != closure
+        or registered is None
+        or registered["sha256"] != file_sha256
+    ):
+        raise ValueError("PHASE8_DISPERSION_AUDIT_PRODUCER_FREEZE_DRIFT")
+    return {
+        "path": relative,
+        "file_sha256": file_sha256,
+        "freeze_sha256": freeze["freeze_sha256"],
+        "executable_closure": closure,
+    }
 
 
 def _primary_loss_cube(
@@ -251,6 +289,7 @@ def build_audit(
         raise ValueError("PHASE8_DISPERSION_CONTRACT_SELF_HASH_MISMATCH")
     if result["result_sha256"] != _canonical_sha256(result, omit="result_sha256"):
         raise ValueError("PHASE8_DISPERSION_RESULT_SELF_HASH_MISMATCH")
+    producer_freeze = _validate_audit_producer_freeze(contract)
 
     cube = pl.read_parquet(forecast_cube)
     duplicate_keys = cube.height - cube.n_unique(
@@ -327,6 +366,7 @@ def build_audit(
         "protocol_id": contract["protocol_id"],
         "contract_sha256": contract["contract_sha256"],
         "source_identity": {
+            "audit_producer_freeze": producer_freeze,
             "forecast_cube": {
                 "bytes": forecast_cube.stat().st_size,
                 "sha256": result["forecast_cube_sha256"],
