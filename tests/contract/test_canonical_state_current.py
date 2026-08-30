@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -146,3 +147,20 @@ def test_citation_does_not_claim_an_unpublished_release() -> None:
     assert "\ndate-released:" not in citation
     assert "evidence-freeze-2026-08-18" not in citation
     assert "*.cff text eol=lf" in attributes
+
+
+def test_immutability_contract_distinguishes_current_and_historical_releases() -> None:
+    contract = (REPO / "docs" / "evidence_immutability_v1.md").read_text(encoding="utf-8")
+    layer6 = next(line for line in contract.splitlines() if line.startswith("| 6 |"))
+    registry_path = REPO / "data" / "FROZEN_ARTIFACTS.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry_digest = hashlib.sha256(registry_path.read_bytes()).hexdigest()
+
+    assert "`evidence-freeze-2026-08-30`" in layer6
+    assert "`908e35610e36558a163940a8586a4e1a22a62c20`" in layer6
+    assert f"{len(registry['entries'])}-entry registry asset" in layer6
+    assert f"SHA-256 `{registry_digest}`" in layer6
+    assert "both source archives resolve" in layer6
+    assert "Release ID `376899713`" in layer6
+    assert "`evidence-freeze-2026-08-18` tag ref and source archives are absent" in layer6
+    assert "Current off-machine mirror-tampering anchor" in layer6
