@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–103](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and Ext1 closeout policy. |
+| [97–104](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1536,3 +1536,32 @@ Requirements-consistency and preregistration gates pass.
      `artifacts/rp2_ext1_directional_v2/results.json`, semantic self-hash
      `477f21af6319de58bee2eeeca930c9cccbd497371086a0f7117ab92123e656b0`;
      `sealed_cohorts_read=0`.
+
+<a id="decision-104"></a>
+
+104. **The Phase 8 sub-MDE result is explained by direct session-dispersion evidence,
+     not by a recovery aggregation change (2026-08-30).** The pinned forecast cube was
+     read without reopening the sealed store. Replaying QLIKE, the within-session mean,
+     equal session weights, the 9,999-draw studentized bootstrap and five-contrast Holm
+     adjustment reproduces all 20 primary contrast rows and 140 published fields exactly.
+     The aggregation-change hypothesis is therefore not supported.
+
+     The registered MDE is an ex-ante 80%-power design value at one-sided alpha 0.005,
+     not a minimum significance threshold. Its D/V calibrations are distinct, and the
+     asymmetric bootstrap interval cannot be inverted as a normal-theory standard error.
+     Three of four ΔB1 cells have descriptive Holm p below 0.05; those same three have
+     lower Phase 8 session dispersion than the current same-estimator D/V reference by
+     1.71-fold, 1.38-fold and 2.41-fold in standard deviation. D/Gamma GLM is noisier in
+     Phase 8 and is the one non-significant cell. All four ΔB2\|B1 intervals cross zero;
+     no Holm p for that contrast is below 0.05.
+
+     The frozen Block 12 design supplies the contract MDEs and uses the same estimand and
+     session aggregation, but its producer and panel bytes predate the Phase 8 pipeline;
+     the historical panel bytes are unavailable for an upstream refit. The measured claim
+     is therefore lower realized loss-differential dispersion in the three favorable B1
+     cells, not a causal assertion that the market was calmer. The recovery script remains
+     outside the frozen executable closure, and the complete result remains exploratory,
+     descriptive and non-confirmatory. Evidence:
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v1.json`, self-hash
+     `96e956cf03abb648b5544f96626199756dc0acc52aaa9b32fe19a428c9d052ce`, and
+     `reports/phase8a_exploratory_bridge_addendum_v2.md`.
