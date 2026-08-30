@@ -43,6 +43,7 @@ files between directories.
 | [`docs/phase9_total_contribution_protocol_v1.md`](phase9_total_contribution_protocol_v1.md) | Frozen 60-complete-session Phase 9 protocol; evaluation remains one-shot and separately authorized. |
 | [`docs/phase9_academic_reporting_policy_v2.md`](phase9_academic_reporting_policy_v2.md) | Current target-blind deadline and power policy: 36 scored sessions at endpoint; Phase 9 does not gate submission. |
 | [`docs/methodology_decisions.md`](methodology_decisions.md) | Recorded methodological decisions and amendments. |
+| [`docs/branch_lineage_reconciliation_20260831.md`](branch_lineage_reconciliation_20260831.md) | Branch-lineage audit and selective replay disposition after repository recreation. |
 | [`docs/threats_to_validity_matrix_v1.md`](threats_to_validity_matrix_v1.md) | Validity threats, mitigations and residual risks. |
 
 The Phase 8 row in `sequential_multiplicity_policy_v1.md` preserves its historical slot.

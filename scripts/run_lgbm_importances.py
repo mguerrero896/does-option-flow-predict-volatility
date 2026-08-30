@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 from pathlib import Path
 from typing import Any
 
@@ -19,8 +18,10 @@ import numpy as np
 import polars as pl
 from lightgbm import LGBMRegressor
 
+from mds650.config import provisional_data_root
+
 REPO = Path(__file__).resolve().parents[1]
-DATA_ROOT = Path(os.environ.get("MDS650_EXTERNAL_ROOT", "D:/MDS650"))
+DATA_ROOT = provisional_data_root()
 OUTPUT = REPO / "artifacts" / "lgbm_importances"
 
 PANELS: dict[str, dict[str, Any]] = {

@@ -42,6 +42,7 @@ import numpy.typing as npt
 import polars as pl
 
 from mds650.b1v3_confirmation import canonical_sha256
+from mds650.config import provisional_data_root
 from mds650.providers.massive import (
     MassiveProvider,
     assert_directed_only,
@@ -341,7 +342,7 @@ def _json_safe(value: object) -> dict[str, object]:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-root", type=Path, default=Path("D:/MDS650"))
+    parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--sessions", type=int, default=6, help="session-assets to sample")
     parser.add_argument("--seed", type=int, default=650)

@@ -16,6 +16,7 @@ CORRECTION = ROOT / "supabase" / "migrations" / (
 MUTATION_BOUNDARY = ROOT / "supabase" / "migrations" / (
     "20260828020327_close_service_role_sensitive_mutation_paths.sql"
 )
+ACL_AUDIT = ROOT / "supabase" / "verification" / "default_acl_posture.sql"
 
 
 def test_applied_migration_matches_its_live_schema_preflight() -> None:
@@ -68,3 +69,17 @@ def test_applied_default_privilege_hardening_is_owner_scoped() -> None:
         assert f"public.{table}" in migration
     assert "public.dataset_loads" not in migration
     assert "public.dev_training_all_origins" not in migration
+
+
+def test_default_acl_audit_is_metadata_only() -> None:
+    body = "\n".join(
+        line
+        for line in ACL_AUDIT.read_text(encoding="utf-8").splitlines()
+        if not line.lstrip().startswith("--")
+    )
+    statements = [statement.strip() for statement in body.split(";") if statement.strip()]
+
+    assert len(statements) == 2
+    assert all(statement.casefold().startswith("select") for statement in statements)
+    assert "pg_default_acl" in body
+    assert "pg_class" in body

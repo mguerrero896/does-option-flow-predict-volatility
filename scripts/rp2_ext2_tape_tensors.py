@@ -30,11 +30,12 @@ import numpy.typing as npt
 import polars as pl
 
 from mds650.b1v3_confirmation import canonical_sha256
+from mds650.config import provisional_data_root
 from mds650.rp2.bars import MARKET_TZ, SESSION_OPEN_MINUTE, build_session_grid, load_bar_sources
 from mds650.rp2.flow import CONTRACT_MULTIPLIER, black_scholes_greeks
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = Path("D:/MDS650/data/rp2_ext2")
+DEFAULT_OUTPUT = provisional_data_root() / "data" / "rp2_ext2"
 INVENTORY = ROOT / "artifacts" / "rp2_block1_partition" / "inventory.jsonl"
 B0_PANEL = ROOT / "artifacts" / "rp2_block4_b0" / "b0_panel.parquet"
 CUTOFF_SECONDS = 120
@@ -219,7 +220,7 @@ def build_session_arrays(
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-root", type=Path, default=Path("D:/MDS650"))
+    parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument(
         "--panel-root",
         type=Path,

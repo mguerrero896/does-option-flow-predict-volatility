@@ -22,10 +22,11 @@ from pathlib import Path
 
 import polars as pl
 
+from mds650.config import provisional_data_root
 from mds650.providers.fmp import FMPProvider, parse_minute_payload
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = Path("D:/MDS650/data/fmp/rp2_ext3")
+DEFAULT_OUTPUT = provisional_data_root() / "data" / "fmp" / "rp2_ext3"
 ASSETS = ("AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA")
 RUN_ID = "rp2_ext3_missing_bars"
 INVENTORY = ROOT / "artifacts" / "rp2_block1_partition" / "inventory.jsonl"

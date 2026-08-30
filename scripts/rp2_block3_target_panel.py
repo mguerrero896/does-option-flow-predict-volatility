@@ -24,6 +24,7 @@ import numpy.typing as npt
 import polars as pl
 
 from mds650.b1v3_confirmation import canonical_sha256
+from mds650.config import provisional_data_root
 from mds650.metrics import qlike_losses
 from mds650.rp2.bars import (
     BAR_SOURCES,
@@ -242,7 +243,7 @@ def evaluate_target(
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-root", type=Path, default=Path("D:/MDS650"))
+    parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-fill-share", type=float, default=0.05)
     parser.add_argument("--train-share", type=float, default=0.6)

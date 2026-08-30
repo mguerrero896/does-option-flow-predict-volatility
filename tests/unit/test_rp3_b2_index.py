@@ -23,7 +23,7 @@ from typing import Final
 
 import pytest
 from scripts.rp3_freeze_b2_index import canonical_sha256, freeze_theta
-from tests.panel_guard import panel_is_available
+from tests.panel_guard import verified_panel_path
 
 from mds650.rp2.panel import B2_FEATURES
 from mds650.rp2.preprocessing import MISSING_SUFFIX
@@ -151,7 +151,7 @@ def test_recomputed_theta_matches_the_artifact() -> None:
         if path.is_file():
             continue
         if root.is_relative_to(REPO):
-            assert panel_is_available(label, path)
+            verified_panel_path(label, path)
         else:
             pytest.fail(f"RP3_B2_INDEX_PANEL_ROOT_INCOMPLETE:{label}:{path}")
 

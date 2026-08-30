@@ -1,3 +1,11 @@
+## Why
+
+<!-- State the defect or risk and why this change is necessary. -->
+
+## What
+
+<!-- State the smallest change that resolves it. -->
+
 ## Scientific integrity
 
 - [ ] No sealed cohort was read

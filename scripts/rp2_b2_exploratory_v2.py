@@ -33,8 +33,8 @@ frozen index?** — under the same discipline as v1:
 Subcommands: ``extract`` (tape -> per-origin event windows, CPU, hours),
 ``train`` (encoder on the 5090, minutes), ``evaluate`` (v1 harness verbatim).
 Windows and the learned index are licensed-derived granular data: they live under
-``D:/MDS650/rp3/exploratory_v2/`` and are never committed; the committed artifact is
-aggregates only (`artifacts/rp2_b2_exploratory_v2/results.json`).
+``MDS650_DATA_ROOT/rp3/exploratory_v2/`` and are never committed; the committed
+artifact is aggregates only (`artifacts/rp2_b2_exploratory_v2/results.json`).
 """
 
 from __future__ import annotations
@@ -52,13 +52,15 @@ import numpy as np
 import numpy.typing as npt
 import polars as pl
 
+from mds650.config import provisional_data_root
+
 type FloatArray = npt.NDArray[np.float64]
 type BoolArray = npt.NDArray[np.bool_]
 
 ROOT: Final = Path(__file__).resolve().parents[1]
 INVENTORY: Final = ROOT / "artifacts" / "rp2_block1_partition" / "inventory.jsonl"
 DEFAULT_PANEL_ROOT: Final = ROOT / "artifacts" / "rp2_v3" / "rp2-v3-20260824-remeasure"
-DEFAULT_WORK_ROOT: Final = Path("D:/MDS650/rp3/exploratory_v2")
+DEFAULT_WORK_ROOT: Final = provisional_data_root() / "rp3" / "exploratory_v2"
 DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "rp2_b2_exploratory_v2" / "results.json"
 
 TARGETS: Final = ("AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA")
