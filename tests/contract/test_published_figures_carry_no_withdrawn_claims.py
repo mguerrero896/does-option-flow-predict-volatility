@@ -122,6 +122,29 @@ def test_published_svg_figures_assert_no_withdrawn_claim() -> None:
     assert not violations, "withdrawn claims reinstated through a figure:\n" + "\n".join(violations)
 
 
+def test_no_illustration_asserts_a_withdrawn_claim_even_when_unreferenced() -> None:
+    """An unreferenced figure is still browsable, and still gets lifted into slides.
+
+    Two figures sat in `docs/figures/` referenced by nothing, drawing the withdrawn
+    decay line and per-campaign effect sizes. Nothing surfaced them, because no index
+    or review pass walks a file no document mentions.
+    """
+    violations = []
+    for figure in _tracked("docs/**/*.svg"):
+        path = REPO / figure
+        if not path.is_file():
+            continue
+        drawn = _normalize(" ".join(SVG_TEXT.findall(path.read_text(encoding="utf-8"))))
+        for claim, pattern in WITHDRAWN_CLAIMS:
+            found = re.search(pattern, drawn)
+            if found:
+                violations.append(f"{figure} draws {found.group(0)!r} — {claim}")
+    assert not violations, (
+        "illustrations under docs/ assert withdrawn claims. Being referenced by no "
+        "document is not a defence — the directory is browsable:\n" + "\n".join(violations)
+    )
+
+
 def test_public_surfaces_show_no_unreviewed_raster_figure() -> None:
     """A raster cannot be read by this contract, so it needs a recorded human check."""
     unreviewed = [
