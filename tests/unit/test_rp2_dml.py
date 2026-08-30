@@ -97,3 +97,14 @@ def test_partial_out_detects_a_real_effect_and_a_null_one() -> None:
 def test_partial_out_rejects_thin_samples() -> None:
     with pytest.raises(ValueError, match="RP2_DML_INSUFFICIENT_ROWS"):
         dml_partial_out(np.ones(4), np.ones((4, 1)), np.array([0, 0, 1, 1], dtype=np.int64), ("a",))
+
+
+def test_partial_out_rejects_a_treatment_name_width_mismatch() -> None:
+    rows = 30
+    with pytest.raises(ValueError, match="RP2_DML_TREATMENT_NAME_WIDTH"):
+        dml_partial_out(
+            np.ones(rows),
+            np.ones((rows, 2)),
+            np.repeat(np.arange(3, dtype=np.int64), 10),
+            ("only_one_name",),
+        )

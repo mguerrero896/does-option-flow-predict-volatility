@@ -441,7 +441,15 @@ def run_role(
     sessions = session_rank(frame["session_date"].to_numpy())
     train, test = chronological_split(sessions, train_share=train_share)
     nuisance, _, nuisance_fitted = fold_design(frame, nuisance_features, train)
-    treatment, _, treatment_fitted = fold_design(frame, list(treatment_map), train, intercept=False)
+    treatment, treatment_names, treatment_fitted = fold_design(
+        frame,
+        list(treatment_map),
+        train,
+        intercept=False,
+        include_missing_indicators=False,
+    )
+    if treatment_names != names:
+        raise ValueError("RP2_EXT1_TREATMENT_NAME_WIDTH")
     assets = frame["asset"].to_numpy()
 
     # Registry designs are imputed and scaled from this fold's training rows, like the

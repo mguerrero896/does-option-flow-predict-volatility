@@ -183,9 +183,14 @@ def exact_factorial_treatment_design(
 ) -> tuple[FloatArray, FittedPreprocessor]:
     """Impute and scale fold-locally while retaining only the requested treatment columns."""
 
-    fitted = fit_preprocessor(frame, features, train)
-    transformed = transform_features(frame, features, fitted, intercept=False)
-    return transformed[:, : len(features)], fitted
+    design, _, fitted = fold_design(
+        frame,
+        features,
+        train,
+        intercept=False,
+        include_missing_indicators=False,
+    )
+    return design, fitted
 
 
 def factorial_attribution(

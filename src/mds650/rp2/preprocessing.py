@@ -167,6 +167,7 @@ def fold_design(
     train_mask: BoolArray,
     *,
     intercept: bool = True,
+    include_missing_indicators: bool = True,
 ) -> tuple[FloatArray, tuple[str, ...], FittedPreprocessor]:
     """Fit on this fold's training rows and transform every row, in one call.
 
@@ -177,4 +178,8 @@ def fold_design(
 
     fitted = fit_preprocessor(frame, features, train_mask)
     design = transform_features(frame, features, fitted, intercept=intercept)
-    return design, fitted.column_names(intercept=intercept), fitted
+    names = fitted.column_names(intercept=intercept)
+    if not include_missing_indicators:
+        width = len(features) + int(intercept)
+        design, names = design[:, :width], names[:width]
+    return design, names, fitted

@@ -149,6 +149,9 @@ def dml_partial_out(
     the honest question when B2 is a block of features rather than a single variable.
     """
 
+    if treatment_residual.ndim != 2 or len(treatment_names) != treatment_residual.shape[1]:
+        raise ValueError("RP2_DML_TREATMENT_NAME_WIDTH")
+
     finite = np.isfinite(response_residual) & np.isfinite(treatment_residual).all(axis=1)
     y = response_residual[finite]
     d = treatment_residual[finite]
