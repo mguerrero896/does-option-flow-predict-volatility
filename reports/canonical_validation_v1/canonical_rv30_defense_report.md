@@ -1,10 +1,4 @@
-# MDS650 Canonical RV30 Validation — Defense Report
-
-> **Historical report (2026-08-11 evidence cutoff).** Its measurements remain auditable,
-> but its conclusions do not define the current project state. See
-> [`../final_report_draft_v2.md`](../final_report_draft_v2.md),
-> [`../../docs/rp2_v3/SUPERSEDED_RESULTS.md`](../../docs/rp2_v3/SUPERSEDED_RESULTS.md) and
-> [`../../data/CANONICAL_STATE.json`](../../data/CANONICAL_STATE.json).
+# Canonical RV30 Validation — Defense Report
 
 ## Executive answer
 

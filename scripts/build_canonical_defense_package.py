@@ -30,9 +30,9 @@ _ROLE_ORDER = {role: index for index, role in enumerate(_REGISTERED_ROLES)}
 _CONTRAST_ORDER = {"delta_b1v2": 0, "delta_b2v2": 1}
 _INPUT_FILES = ("report_manifest.json", "contrasts.json")
 _OUTPUT_FILES = (
-    Path("MDS650_Canonical_RV30_Defense_Report.md"),
-    Path("MDS650_Canonical_RV30_Defense_Report.html"),
-    Path("MDS650_Canonical_RV30_Defense_Slides.md"),
+    Path("canonical_rv30_defense_report.md"),
+    Path("canonical_rv30_defense_report.html"),
+    Path("canonical_rv30_defense_slides.md"),
     Path("tables/canonical_registered_contrasts.csv"),
     Path("figures/canonical_qlike_contrasts.svg"),
     Path("figures/canonical_design_flow.svg"),
@@ -338,7 +338,7 @@ def _report_markdown(records: Sequence[Mapping[str, str]]) -> str:
     """Render the complete professor-readable report from registered evidence only."""
 
     result_table = _markdown_result_table(records)
-    return f"""# MDS650 Canonical RV30 Validation — Defense Report
+    return f"""# Canonical RV30 Validation — Defense Report
 
 ## Executive answer
 
@@ -465,7 +465,7 @@ def _report_html(markdown: str, records: Sequence[Mapping[str, str]]) -> str:
 <head>
 <meta charset=\"utf-8\">
 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-<title>MDS650 Canonical RV30 Validation — Defense Report</title>
+<title>Canonical RV30 Validation — Defense Report</title>
 <style>
 body {{ font-family: Arial, sans-serif; color: #172033; line-height: 1.48; margin: 2rem auto; max-width: 1120px; padding: 0 1rem; }}
 h1, h2 {{ color: #123c69; }}
@@ -478,7 +478,7 @@ th {{ background: #e8f0f7; }}
 </style>
 </head>
 <body>
-<h1>MDS650 Canonical RV30 Validation — Defense Report</h1>
+<h1>Canonical RV30 Validation — Defense Report</h1>
 <p class=\"decision\">Canonical decision: MODEL_FAMILY_DEPENDENT. The package keeps every registered positive and negative sign.</p>
 <h2>Registered out-of-sample results</h2>
 <p>A positive QLIKE delta favours the expanded information set. The table displays only registered Gamma GLM and LightGBM roles.</p>
@@ -509,7 +509,7 @@ def _slides_markdown(records: Sequence[Mapping[str, str]]) -> str:
         and row["model_role"] == "lightgbm_robustness"
         and row["contrast"] == "delta_b2v2"
     )
-    return f"""# MDS650 RV30 — Defense Slide Outline
+    return f"""# Canonical RV30 — Defense Slide Outline
 
 > Portable outline only. It does not modify the approved PowerPoint source.
 
@@ -636,11 +636,11 @@ def _build_outputs(records: Sequence[Mapping[str, str]]) -> dict[Path, bytes]:
 
     markdown = _report_markdown(records)
     return {
-        Path("MDS650_Canonical_RV30_Defense_Report.md"): markdown.encode("utf-8"),
-        Path("MDS650_Canonical_RV30_Defense_Report.html"): _report_html(markdown, records).encode(
+        Path("canonical_rv30_defense_report.md"): markdown.encode("utf-8"),
+        Path("canonical_rv30_defense_report.html"): _report_html(markdown, records).encode(
             "utf-8"
         ),
-        Path("MDS650_Canonical_RV30_Defense_Slides.md"): _slides_markdown(records).encode("utf-8"),
+        Path("canonical_rv30_defense_slides.md"): _slides_markdown(records).encode("utf-8"),
         Path("tables/canonical_registered_contrasts.csv"): _csv_bytes(records),
         Path("figures/canonical_qlike_contrasts.svg"): _qlike_svg(records).encode("utf-8"),
         Path("figures/canonical_design_flow.svg"): _design_flow_svg().encode("utf-8"),
@@ -726,7 +726,7 @@ def build_defense_package(source: Path, output: Path) -> dict[str, object]:
     ]
     input_paths = [f"{_ARTIFACT_ROOT}/{name}" for name in _INPUT_FILES]
     output_paths = [relative.as_posix() for relative in _OUTPUT_FILES] + [
-        "MDS650_Defense_Package_Manifest.json"
+        "defense_package_manifest.json"
     ]
     manifest_payload: dict[str, object] = {
         "schema_version": "1.0",
@@ -751,7 +751,7 @@ def build_defense_package(source: Path, output: Path) -> dict[str, object]:
         json.dumps(manifest_payload, indent=2, sort_keys=True, ensure_ascii=True) + "\n"
     ).encode("utf-8")
     manifest_existing = _write_equal(
-        output / "MDS650_Defense_Package_Manifest.json", manifest_bytes
+        output / "defense_package_manifest.json", manifest_bytes
     )
     result = dict(manifest_payload)
     result["status"] = (
