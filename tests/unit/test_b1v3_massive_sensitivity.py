@@ -345,6 +345,86 @@ def test_writer_fails_closed_on_invalid_cache_state(
         )
 
 
+def test_single_and_variant_writers_count_no_quote(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    attempts = tmp_path / "attempts.parquet"
+    cache_root = tmp_path / "cache"
+    cache_root.mkdir()
+    _write_attempts(attempts, [_attempt()])
+    monkeypatch.setattr(timing, "_massive_cache_index", lambda _root: {})
+    monkeypatch.setattr(
+        timing,
+        "_load_and_validate_massive_cache",
+        lambda **_kwargs: ("OK", []),
+    )
+    monkeypatch.setattr(timing, "_select_prepared_quote", lambda _quotes, _cutoff: None)
+
+    single = write_massive_reselected_attempts(
+        attempts_path=attempts,
+        cache_root=cache_root,
+        output_path=tmp_path / "single.parquet",
+        cutoff_seconds=60,
+    )
+    variants = write_massive_reselected_attempt_variants(
+        attempts_path=attempts,
+        cache_root=cache_root,
+        output_paths={60: tmp_path / "variant.parquet"},
+    )
+
+    assert single["no_quote_count"] == 1
+    assert single["selected_quote_count"] == 0
+    assert variants["variants"]["60"]["no_quote_count"] == 1
+
+
+def test_variant_writer_rejects_ambiguous_cache_and_noncontiguous_inputs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cache_root = tmp_path / "cache"
+    cache_root.mkdir()
+    _install_valid_cache_stubs(monkeypatch)
+
+    ambiguous = tmp_path / "ambiguous.parquet"
+    _write_attempts(
+        ambiguous,
+        [_attempt(), {**_attempt(), "source_request_hash": "c" * 64}],
+    )
+    with pytest.raises(ValueError, match="SOURCE_HASH_AMBIGUOUS"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=ambiguous,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "ambiguous-output.parquet"},
+        )
+
+    invalid_cache = tmp_path / "invalid-cache.parquet"
+    _write_attempts(invalid_cache, [_attempt()])
+    monkeypatch.setattr(
+        timing,
+        "_load_and_validate_massive_cache",
+        lambda **_kwargs: ("CACHE_INVALID", []),
+    )
+    with pytest.raises(ValueError, match="CACHE_INVALID:CACHE_INVALID"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=invalid_cache,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "invalid-cache-output.parquet"},
+        )
+
+    _install_valid_cache_stubs(monkeypatch)
+    noncontiguous = tmp_path / "noncontiguous.parquet"
+    middle = {**_attempt(), "asset": "MSFT", "contract": "O:MSFT240830C00400000"}
+    _write_attempts(noncontiguous, [_attempt(), middle, _attempt()])
+    with pytest.raises(ValueError, match="ASSET_DAY_NONCONTIGUOUS"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=noncontiguous,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "noncontiguous-output.parquet"},
+            batch_size=1,
+        )
+
+
 def test_reselected_attempt_handles_invalid_origin_nonfinite_and_invalid_iv_result(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -450,3 +530,230 @@ def test_write_fmp_delayed_attempts_binds_exact_origin_spot(
     assert summary["origin_count"] == 1
     assert result[0]["spot"] == 198.0
     assert result[0]["fmp_delay_minutes"] == 2
+
+
+def test_fmp_repricing_rejects_source_and_quote_identity_drift() -> None:
+    row = _attempt()
+    with pytest.raises(ValueError, match="B1V3_FMP_SOURCE_INPUT_INVALID"):
+        reprice_attempt_row_for_fmp_delay(
+            {**row, "spot": None}, delayed_spot=198.0, delay_minutes=2
+        )
+
+    no_quote = reprice_attempt_row_for_fmp_delay(
+        {**row, "sip_timestamp": None, "bid": None, "ask": None},
+        delayed_spot=198.0,
+        delay_minutes=2,
+    )
+    assert no_quote["failure_reason"] == "NO_QUOTE_AT_OR_BEFORE_CUTOFF"
+
+    with pytest.raises(ValueError, match="B1V3_FMP_QUOTE_IDENTITY_INVALID"):
+        reprice_attempt_row_for_fmp_delay(
+            {
+                **row,
+                "bid": None,
+                "ask": None,
+                "iv_success": True,
+                "iv": None,
+                "failure_reason": "INVALID_SPREAD",
+            },
+            delayed_spot=198.0,
+            delay_minutes=2,
+        )
+    with pytest.raises(ValueError, match="B1V3_FMP_QUOTE_IDENTITY_INVALID"):
+        reprice_attempt_row_for_fmp_delay(
+            {**row, "sequence_number": "bad"}, delayed_spot=198.0, delay_minutes=2
+        )
+
+
+def test_massive_variant_writer_rejects_controls_paths_schema_and_empty_input(
+    tmp_path: Path,
+) -> None:
+    attempts = tmp_path / "attempts.parquet"
+    cache_root = tmp_path / "cache"
+    output = tmp_path / "output.parquet"
+
+    cases = [
+        ({}, 1, "B1V3_SENSITIVITY_CUTOFF_INVALID"),
+        ({60: output, 300: output}, 1, "B1V3_SENSITIVITY_OUTPUT_PATH_DUPLICATE"),
+        ({60: output}, 0, "B1V3_SENSITIVITY_BATCH_SIZE_INVALID"),
+    ]
+    for outputs, batch_size, error in cases:
+        with pytest.raises(ValueError, match=error):
+            write_massive_reselected_attempt_variants(
+                attempts_path=attempts,
+                cache_root=cache_root,
+                output_paths=outputs,
+                batch_size=batch_size,
+            )
+
+    with pytest.raises(FileNotFoundError, match="B1V3_SENSITIVITY_ATTEMPTS_MISSING"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=attempts,
+            cache_root=cache_root,
+            output_paths={60: output},
+        )
+    _write_attempts(attempts, [_attempt()])
+    with pytest.raises(FileNotFoundError, match="B1V3_SENSITIVITY_CACHE_ROOT_MISSING"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=attempts,
+            cache_root=cache_root,
+            output_paths={60: output},
+        )
+    cache_root.mkdir()
+    output.touch()
+    with pytest.raises(ValueError, match="B1V3_SENSITIVITY_OUTPUT_CONFLICT"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=attempts,
+            cache_root=cache_root,
+            output_paths={60: output},
+        )
+
+    output.unlink()
+    invalid = tmp_path / "invalid.parquet"
+    forbidden = tmp_path / "forbidden.parquet"
+    empty = tmp_path / "empty.parquet"
+    _write_attempts(invalid, [{"asset": "AAPL"}])
+    _write_attempts(forbidden, [{**_attempt(), "rv30": 1.0}])
+    pq.write_table(
+        pa.Table.from_pylist([], schema=pa.Table.from_pylist([_attempt()]).schema), empty
+    )
+    with pytest.raises(ValueError, match="B1V3_SENSITIVITY_ATTEMPT_SCHEMA_INVALID"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=invalid,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "invalid-output.parquet"},
+        )
+    with pytest.raises(ValueError, match="B1V3_SENSITIVITY_FORBIDDEN_COLUMN:rv30"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=forbidden,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "forbidden-output.parquet"},
+        )
+    with pytest.raises(ValueError, match="B1V3_SENSITIVITY_EMPTY_INPUT"):
+        write_massive_reselected_attempt_variants(
+            attempts_path=empty,
+            cache_root=cache_root,
+            output_paths={60: tmp_path / "empty-output.parquet"},
+        )
+
+
+def test_fmp_writer_rejects_controls_paths_spots_attempts_and_empty_input(tmp_path: Path) -> None:
+    attempts = tmp_path / "attempts.parquet"
+    spots = tmp_path / "spots.parquet"
+    output = tmp_path / "output.parquet"
+    for delay, batch, error in (
+        (3, 1, "B1V3_FMP_DELAY_INVALID"),
+        (2, 0, "B1V3_FMP_BATCH_SIZE_INVALID"),
+    ):
+        with pytest.raises(ValueError, match=error):
+            write_fmp_delayed_attempts(
+                attempts_path=attempts,
+                delayed_spots_path=spots,
+                output_path=output,
+                delay_minutes=delay,
+                batch_size=batch,
+            )
+    with pytest.raises(FileNotFoundError, match="B1V3_FMP_ATTEMPTS_MISSING"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+    _write_attempts(attempts, [_attempt()])
+    with pytest.raises(FileNotFoundError, match="B1V3_FMP_SPOTS_MISSING"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+
+    pq.write_table(pa.table({"wrong": [1]}), spots)
+    with pytest.raises(ValueError, match="B1V3_FMP_SPOT_SCHEMA_INVALID"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+    pq.write_table(
+        pa.Table.from_pylist([{"origin_id": "AAPL:origin", "spot": -1.0, "spot_available": True}]),
+        spots,
+    )
+    with pytest.raises(ValueError, match="B1V3_FMP_SPOT_IDENTITY_INVALID"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+    pq.write_table(
+        pa.Table.from_pylist(
+            [],
+            schema=pa.schema(
+                [("origin_id", pa.string()), ("spot", pa.float64()), ("spot_available", pa.bool_())]
+            ),
+        ),
+        spots,
+    )
+    with pytest.raises(ValueError, match="B1V3_FMP_SPOT_IDENTITY_INVALID"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+
+    pq.write_table(
+        pa.Table.from_pylist([{"origin_id": "AAPL:origin", "spot": 198.0, "spot_available": True}]),
+        spots,
+    )
+    invalid_attempts = tmp_path / "invalid-attempts.parquet"
+    _write_attempts(invalid_attempts, [{"origin_id": "AAPL:origin"}])
+    with pytest.raises(ValueError, match="B1V3_FMP_ATTEMPT_SCHEMA_INVALID"):
+        write_fmp_delayed_attempts(
+            attempts_path=invalid_attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+    empty_attempts = tmp_path / "empty-attempts.parquet"
+    pq.write_table(
+        pa.Table.from_pylist([], schema=pa.Table.from_pylist([_attempt()]).schema), empty_attempts
+    )
+    with pytest.raises(ValueError, match="B1V3_FMP_EMPTY_INPUT"):
+        write_fmp_delayed_attempts(
+            attempts_path=empty_attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+
+
+def test_fmp_writer_rejects_output_conflict_and_unbound_origin(tmp_path: Path) -> None:
+    attempts = tmp_path / "attempts.parquet"
+    spots = tmp_path / "spots.parquet"
+    output = tmp_path / "output.parquet"
+    _write_attempts(attempts, [_attempt()])
+    pq.write_table(
+        pa.Table.from_pylist([{"origin_id": "OTHER", "spot": 198.0, "spot_available": True}]),
+        spots,
+    )
+    output.touch()
+    with pytest.raises(ValueError, match="B1V3_FMP_OUTPUT_CONFLICT"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )
+
+    output.unlink()
+    with pytest.raises(ValueError, match="B1V3_FMP_ATTEMPT_ORIGIN_MISSING"):
+        write_fmp_delayed_attempts(
+            attempts_path=attempts,
+            delayed_spots_path=spots,
+            output_path=output,
+            delay_minutes=2,
+        )

@@ -121,4 +121,5 @@ source = ["mds650"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]
-fail_under = 80
+precision = 2
+fail_under = 90

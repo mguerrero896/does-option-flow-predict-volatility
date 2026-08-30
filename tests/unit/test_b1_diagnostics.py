@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 from pathlib import Path
+from types import SimpleNamespace
 
 import exchange_calendars as xcals
 import polars as pl
@@ -28,12 +29,10 @@ from mds650.modeling import fit_positive_model
 
 _CALENDAR = xcals.get_calendar("XNYS")
 TRAINING = tuple(
-    str(value.date())
-    for value in _CALENDAR.sessions_in_range("2024-09-16", "2024-12-09")
+    str(value.date()) for value in _CALENDAR.sessions_in_range("2024-09-16", "2024-12-09")
 )
 REPLICATION = tuple(
-    str(value.date())
-    for value in _CALENDAR.sessions_in_range("2024-12-10", "2025-01-24")
+    str(value.date()) for value in _CALENDAR.sessions_in_range("2024-12-10", "2025-01-24")
 )
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -162,11 +161,7 @@ def test_chronological_loss_delta_is_paired_and_gamma_coefficients_are_named() -
         }
     )
     deltas = chronological_b1_loss_deltas(forecasts)
-    global_delta = next(
-        row
-        for row in deltas
-        if row["scope"] == "GLOBAL" and row["fold"] == 101
-    )
+    global_delta = next(row for row in deltas if row["scope"] == "GLOBAL" and row["fold"] == 101)
     assert global_delta["observation_count"] == 2
     assert global_delta["delta_b1v3"] == pytest.approx(0.0)
 
@@ -208,9 +203,7 @@ def test_diagnostic_document_is_deterministic_target_scoped_and_self_hashed() ->
         "training_sessions": TRAINING,
         "replication_sessions": REPLICATION,
         "source_hashes": inputs,
-        "chronological_loss_deltas": [
-            {"fold": 1, "delta_b1v3": -0.01, "observations": 2}
-        ],
+        "chronological_loss_deltas": [{"fold": 1, "delta_b1v3": -0.01, "observations": 2}],
         "gamma_coefficients": [
             {"information_set": "B1v3a", "feature": B1V3A_FEATURES[0], "coefficient": 0.2}
         ],
@@ -232,10 +225,116 @@ def test_diagnostic_document_is_deterministic_target_scoped_and_self_hashed() ->
         build_b1_diagnostic_document(**{**kwargs, "feature_frame": contaminated})
 
     schema = json.loads(
-        (
-            ROOT
-            / "specs/001-pit-options-rv30/contracts/b1-diagnostic-v1.schema.json"
-        ).read_text(encoding="utf-8")
+        (ROOT / "specs/001-pit-options-rv30/contracts/b1-diagnostic-v1.schema.json").read_text(
+            encoding="utf-8"
+        )
     )
     Draft202012Validator.check_schema(schema)
     assert not list(Draft202012Validator(schema).iter_errors(first))
+
+
+def test_reason_quote_iv_and_lag_diagnostics_reject_unbound_or_duplicate_input() -> None:
+    features = _feature_rows()
+    attempts = _attempt_rows()
+
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_FEATURE_SCHEMA_INVALID"):
+        build_reason_waterfall(features.drop("asset"))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_DUPLICATE_ORIGIN"):
+        build_reason_waterfall(pl.concat([features, features.head(1)]))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_ATTEMPT_ORIGIN_UNBOUND"):
+        summarize_quote_quality(
+            attempts.with_columns(pl.lit("missing").alias("origin_id")), features
+        )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_ORIGIN_SCOPE_DUPLICATE"):
+        summarize_quote_quality(
+            attempts, pl.concat([features.select("origin_id", "session_tercile")] * 2)
+        )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_IV_GEOMETRY_SCHEMA_INVALID"):
+        summarize_iv_geometry(attempts.drop("dte"))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_LAG_ORIGIN_DUPLICATE"):
+        summarize_lag_availability(pl.concat([features, features.head(1)]))
+
+
+def test_distribution_and_collinearity_fail_closed_without_valid_finite_features() -> None:
+    features = _feature_rows()
+
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_DISTRIBUTION_FEATURE_INVALID"):
+        summarize_feature_distributions(features, ())
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_COLLINEARITY_FEATURE_INVALID"):
+        collinearity_diagnostics(features, ("missing",))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_COLLINEARITY_NO_COMPLETE_ROW"):
+        collinearity_diagnostics(pl.DataFrame({"x": [None, float("nan")]}), ("x",))
+
+
+def test_chronological_deltas_and_gamma_extraction_reject_invalid_evidence() -> None:
+    forecasts = pl.DataFrame(
+        {
+            "origin_id": ["a", "a"],
+            "asset": ["AAPL", "AAPL"],
+            "session_date": [TRAINING[0], TRAINING[0]],
+            "session_tercile": ["first", "first"],
+            "fold": [1, 1],
+            "information_set": ["B0", "B1v3a"],
+            "model_role": ["gamma_glm_confirmatory", "gamma_glm_confirmatory"],
+            "qlike_loss": [1.0, 0.9],
+        }
+    )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_OOF_CONTRACT_INVALID"):
+        chronological_b1_loss_deltas(forecasts.with_columns(pl.lit("ridge").alias("model_role")))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_OOF_UNPAIRED"):
+        chronological_b1_loss_deltas(
+            pl.concat(
+                [
+                    forecasts,
+                    forecasts.head(1).with_columns(pl.lit("b").alias("origin_id")),
+                ]
+            )
+        )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_OOF_NONFINITE"):
+        chronological_b1_loss_deltas(
+            forecasts.with_columns(pl.lit(float("nan")).alias("qlike_loss"))
+        )
+
+    invalid_role = SimpleNamespace(role="ridge", estimator=SimpleNamespace(named_steps={}))
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_GAMMA_MODEL_INVALID"):
+        extract_gamma_coefficients(invalid_role, information_set="B1v3a", selected_parameters={})
+    invalid_pipeline = SimpleNamespace(
+        role="gamma_glm_confirmatory", estimator=SimpleNamespace(named_steps={})
+    )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_GAMMA_PIPELINE_INVALID"):
+        extract_gamma_coefficients(
+            invalid_pipeline, information_set="B1v3a", selected_parameters={}
+        )
+
+
+def test_document_rejects_invalid_scope_hashes_and_nonfinite_summary_records() -> None:
+    kwargs = {
+        "feature_frame": _feature_rows(),
+        "attempt_frame": _attempt_rows(),
+        "training_sessions": TRAINING,
+        "replication_sessions": REPLICATION,
+        "source_hashes": {"features": "a" * 64},
+        "chronological_loss_deltas": [],
+        "gamma_coefficients": [],
+    }
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_SESSION_SCOPE_INVALID"):
+        build_b1_diagnostic_document(**{**kwargs, "training_sessions": TRAINING[:-1]})
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_NONTRAINING_DATE_READ"):
+        build_b1_diagnostic_document(
+            **{
+                **kwargs,
+                "feature_frame": _feature_rows().with_columns(
+                    pl.lit("2020-01-02").alias("session_date")
+                ),
+            }
+        )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_SOURCE_HASH_INVALID"):
+        build_b1_diagnostic_document(**{**kwargs, "source_hashes": {"features": "bad"}})
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_LOSS_NONFINITE"):
+        build_b1_diagnostic_document(
+            **{**kwargs, "chronological_loss_deltas": [{"delta_b1v3": float("nan")}]}
+        )
+    with pytest.raises(ValueError, match="B1_DIAGNOSTIC_COEFFICIENT_NONFINITE"):
+        build_b1_diagnostic_document(
+            **{**kwargs, "gamma_coefficients": [{"coefficient": float("inf")}]}
+        )

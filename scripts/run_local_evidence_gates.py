@@ -89,7 +89,7 @@ def main(argv: list[str] | None = None) -> None:
         "ci-sim": _run(
             "ci-sim (hermetic job replica)",
             ["uv", "run", "pytest", "tests", "-q", *CI_IGNORES,
-             "--cov=src/mds650", "--cov-report=term", "--cov-fail-under=80"],
+             "--cov=src/mds650", "--cov-report=term", "--cov-fail-under=90"],
             env=_ci_sim_env(),
         ),
         "gated-hashes": _verify_gated_hashes(),

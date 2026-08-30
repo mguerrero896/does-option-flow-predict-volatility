@@ -74,7 +74,7 @@ fi
 PUBCHECK=$(mktemp -d)/pub
 git -C "$MIRROR" worktree add --detach "$PUBCHECK" main >/dev/null 2>&1 || git clone -q "$MIRROR" "$PUBCHECK"
 echo "[publish] check 3: hermetic suite on the stripped public tree"
-(cd "$PUBCHECK" && env -u MDS650_EVIDENCE_ROOT uv run --project . pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=80) || {
+(cd "$PUBCHECK" && env -u MDS650_EVIDENCE_ROOT uv run --project . pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90) || {
     echo "PUBLISH REFUSED: hermetic suite FAILS on the stripped public tree" >&2; exit 1; }
 # Check 4: never force-push a lineage that does not contain what is already
 # published. The mirror is built from the canonical tree, which no longer

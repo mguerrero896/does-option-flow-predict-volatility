@@ -9,7 +9,9 @@ from pathlib import Path
 import polars as pl
 import pyarrow as pa
 import pyarrow.parquet as pq
+import pytest
 
+import mds650.b2_availability_v22 as availability
 from mds650.b2_availability_v22 import build_b2_availability_sidecar
 from mds650.provider_timing_v21 import B2_FEATURE_COLUMNS
 
@@ -374,3 +376,183 @@ def test_missing_created_at_in_confounded_window_is_excluded(tmp_path: Path) -> 
 
     assert sidecar.item(0, "row_status") == "PIT_EXCLUDED_MISSING_CREATED_AT"
     assert sidecar.item(0, "eligible_for_corrected_pit_panel") is False
+
+
+def test_availability_loaders_fail_closed(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_EXPECTED_ORIGINS_MISSING"):
+        availability._load_expected_origins(tmp_path / "missing.parquet")
+
+    invalid = tmp_path / "invalid.parquet"
+    pl.DataFrame({"wrong": [1]}).write_parquet(invalid)
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_EXPECTED_ORIGINS_SCHEMA_INVALID"):
+        availability._load_expected_origins(invalid)
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_CANONICAL_SCHEMA_INVALID"):
+        availability._load_canonical_matrix(invalid)
+
+    origin = _origin("AAPL", 35)
+    duplicate = tmp_path / "duplicate.parquet"
+    _write_origins(duplicate, [origin, origin])
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_EXPECTED_ORIGINS_KEY_INVALID"):
+        availability._load_expected_origins(duplicate)
+
+    missing_time = tmp_path / "missing-time.parquet"
+    _write_origins(missing_time, [{**origin, "forecast_origin_utc": None}])
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_EXPECTED_ORIGIN_TIMESTAMP_MISSING"):
+        availability._load_expected_origins(missing_time)
+
+    canonical = pl.DataFrame([_matrix_row(origin, 0.0)])
+    empty = tmp_path / "empty.parquet"
+    canonical.head(0).write_parquet(empty)
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_CANONICAL_KEY_INVALID"):
+        availability._load_canonical_matrix(empty)
+
+
+def test_traceability_and_group_keys_fail_closed() -> None:
+    valid = _trace(canonical_hash="a" * 64, state="SOURCE_AVAILABLE")[0]
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_TRACEABILITY_SCHEMA_INVALID"):
+        availability._traceability_index([{"asset": "AAPL"}])
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_TRACEABILITY_DUPLICATE"):
+        availability._traceability_index([valid, valid])
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_TRACEABILITY_KEY_INVALID"):
+        availability._trace_for(
+            {},
+            variant="primary_5m_60s",
+            session_date="2025-10-20",
+            asset="AAPL",
+        )
+
+    origin = _origin("AAPL", 35)
+    origins = pl.DataFrame([origin])
+    canonical = pl.DataFrame([_matrix_row(origin, 0.0)])
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_ORIGIN_OR_CANONICAL_GROUP_EMPTY"):
+        availability._validate_group_keys(origins.head(0), canonical)
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_ORIGIN_CANONICAL_KEY_MISMATCH"):
+        availability._validate_group_keys(
+            origins,
+            canonical.with_columns(pl.lit("other").alias("origin_id")),
+        )
+
+
+def test_availability_status_helpers_fail_closed() -> None:
+    invalid = {name: 0.0 for name in B2_FEATURE_COLUMNS}
+    invalid[B2_FEATURE_COLUMNS[0]] = None
+    nonfinite = {name: 0.0 for name in B2_FEATURE_COLUMNS}
+    nonfinite[B2_FEATURE_COLUMNS[0]] = float("nan")
+    counts = {
+        "missing_created_at_trade_count": 0,
+        "delayed_raw_window_trade_count": 0,
+        "raw_window_trade_count": 0,
+        "eligible_raw_window_trade_count": 0,
+    }
+
+    assert availability._clean_status(invalid) == "PIT_EXCLUDED_CANONICAL_FEATURE_INVALID"
+    assert availability._confounded_status(invalid, counts) == (
+        "PIT_EXCLUDED_CANONICAL_FEATURE_INVALID"
+    )
+    assert availability._canonical_feature_state(nonfinite) == "INVALID"
+    assert availability._canonical_trade_count({"option_trade_count_5m": None}) is None
+    assert availability._canonical_trade_count({"option_trade_count_5m": 1.5}) is None
+
+
+@pytest.mark.parametrize(
+    ("rows", "variants", "code"),
+    [
+        (
+            [
+                {
+                    "canonical_variant": "primary_5m_60s",
+                    "origin_id": "a",
+                    "eligible_for_corrected_pit_panel": True,
+                    "row_status": "PIT_USABLE_ELIGIBLE_ACTIVITY",
+                    "canonical_feature_state": "NONZERO",
+                    "delayed_raw_window_trade_count": 0,
+                }
+            ]
+            * 2,
+            ["primary_5m_60s"],
+            "SIDECAR_DUPLICATE",
+        ),
+        (
+            [
+                {
+                    "canonical_variant": "primary_5m_60s",
+                    "origin_id": "a",
+                    "eligible_for_corrected_pit_panel": True,
+                    "row_status": "PIT_USABLE_ELIGIBLE_ACTIVITY",
+                    "canonical_feature_state": "NONZERO",
+                    "delayed_raw_window_trade_count": 0,
+                }
+            ],
+            ["latency_5m_120s"],
+            "VARIANT_COVERAGE_INVALID",
+        ),
+        (
+            [
+                {
+                    "canonical_variant": "primary_5m_60s",
+                    "origin_id": "a",
+                    "eligible_for_corrected_pit_panel": True,
+                    "row_status": "PIT_EXCLUDED_TEST",
+                    "canonical_feature_state": "NONZERO",
+                    "delayed_raw_window_trade_count": 0,
+                }
+            ],
+            ["primary_5m_60s"],
+            "ELIGIBILITY_STATUS_CONTRADICTION",
+        ),
+        (
+            [
+                {
+                    "canonical_variant": "primary_5m_60s",
+                    "origin_id": "a",
+                    "eligible_for_corrected_pit_panel": True,
+                    "row_status": "PIT_USABLE_ZERO_NO_DELAY_INCIDENT",
+                    "canonical_feature_state": "ZERO",
+                    "delayed_raw_window_trade_count": 1,
+                }
+            ],
+            ["primary_5m_60s"],
+            "DELAYED_ZERO_NOT_EXCLUDED",
+        ),
+    ],
+)
+def test_sidecar_invariants_fail_closed(
+    rows: list[dict[str, object]],
+    variants: list[str],
+    code: str,
+) -> None:
+    with pytest.raises(ValueError, match=f"B2_AVAILABILITY_{code}"):
+        availability._validate_sidecar(
+            pl.DataFrame(rows),
+            observed_variants=variants,
+        )
+
+
+def test_empty_matrix_scope_and_invalid_raw_partition_fail_closed(tmp_path: Path) -> None:
+    origin = _origin("AAPL", 35)
+    origins_path = tmp_path / "origins.parquet"
+    _write_origins(origins_path, [origin])
+    matrix_root = tmp_path / "matrix"
+    (matrix_root / "unknown_variant").mkdir(parents=True)
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_NO_CANONICAL_ROWS"):
+        build_b2_availability_sidecar(
+            event_root=tmp_path / "events",
+            matrix_root=matrix_root,
+            expected_origins_path=origins_path,
+            traceability_rows=[],
+        )
+
+    event_root = tmp_path / "bad-events"
+    event_path = event_root / "date=2025-10-20" / "asset=AAPL" / "events.parquet"
+    event_path.parent.mkdir(parents=True)
+    event_path.write_text("not parquet", encoding="utf-8")
+    diagnostics = availability._raw_window_diagnostics(
+        event_root=event_root,
+        asset="AAPL",
+        session_date="2025-10-20",
+        origins=pl.DataFrame([origin]),
+        variant=availability.B2_AVAILABILITY_VARIANTS["primary_5m_60s"],
+    )
+    assert diagnostics is None
+    with pytest.raises(ValueError, match="B2_AVAILABILITY_MATRIX_DATE_PARTITION_INVALID"):
+        availability._session_date_from_matrix_path(Path("invalid.parquet"))

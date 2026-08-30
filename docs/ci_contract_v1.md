@@ -9,7 +9,7 @@ Jobs in `.github/workflows/ci.yml`:
 | Job | Contents |
 |---|---|
 | `quality` | `uv sync --locked`, human-PR `Why`-before-`What` body gate, Ruff, mypy strict |
-| `hermetic` | Full pytest suite minus the one licensed-evidence file below — unit tests, property-based tests (hypothesis, `tests/unit/test_property_core.py`), synthetic end-to-end pipeline tests (`tests/e2e/`, fixture-only, never a provider call), schema/contract tests over git-tracked artifacts — with a **coverage gate ≥ 80 % of `src/mds650`** (measured 81.03 % at introduction) and the critical-producer gate below |
+| `hermetic` | Full pytest suite minus the one licensed-evidence file below — unit tests, property-based tests (hypothesis, `tests/unit/test_property_core.py`), synthetic end-to-end pipeline tests (`tests/e2e/`, fixture-only, never a provider call), schema/contract tests over git-tracked artifacts — with a **coverage gate ≥ 90.00 % of `src/mds650`** (raised from 80 % on 2026-08-31; measured 90.10 % at closeout) and the critical-producer gate below |
 | `scientific-contracts` | The RP2 scientific-contract tests (`tests/contract/`) under `MDS650_PANEL_GUARD_MAY_SKIP=1`: the tier boundary is declared, so the six per-set panel-coverage assertions that need licensed panels skip HERE by name and run under tier 2 instead (added 2026-08-24) |
 
 Evidence-bound tests self-skip on the runner via `tests/evidence.py`

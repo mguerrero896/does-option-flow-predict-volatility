@@ -223,3 +223,42 @@ def test_b2_checkpoint_requires_cutoff_evidence(tmp_path) -> None:
     ).write_parquet(future)
 
     assert not b2_activity_checkpoint_valid(future, expected_rows=1)
+
+
+def test_b2_checkpoint_and_robust_scale_fallbacks_are_explicit(tmp_path) -> None:
+    assert not b2_activity_checkpoint_valid(tmp_path / "missing.parquet", expected_rows=1)
+    assert robust_prior_deviation([], 10.0) == (0.0, "CONSTANT_PRIOR_HISTORY")
+
+    score, label = robust_prior_deviation([1.0, 1.0, 1.0, 2.0], 2.0)
+    assert score > 0
+    assert label == "IQR_DIV_1_349"
+
+    score, label = robust_prior_deviation([1.0, 1.0], 2.0, asset_values=[1.0, 2.0, 3.0])
+    assert score > 0
+    assert label == "PRIOR_ASSET"
+
+
+def test_b2_raw_aggregation_rejects_unregistered_or_unsafe_inputs() -> None:
+    _, origins = _frames(days=1)
+
+    with pytest.raises(ValueError, match="B2V2_WINDOW_NOT_REGISTERED"):
+        aggregate_b2_activity(pl.DataFrame(), origins, window_minutes=10)
+    with pytest.raises(ValueError, match="B2V2_DELAY_NOT_REGISTERED"):
+        aggregate_b2_activity(pl.DataFrame(), origins, delay_seconds=1)
+    with pytest.raises(ValueError, match="B2V2_TARGET_COLUMN_FORBIDDEN"):
+        aggregate_b2_activity(pl.DataFrame({"rv30": [1.0]}), origins)
+    with pytest.raises(ValueError, match="B2V2_TRADE_COLUMNS_MISSING"):
+        aggregate_b2_activity(pl.DataFrame({"underlying_symbol": ["AAPL"]}), origins)
+
+
+def test_b2_feature_builder_rejects_schema_and_key_drift() -> None:
+    activity, origins = _frames(days=2)
+
+    with pytest.raises(ValueError, match="B2V2_ORIGIN_COLUMNS_MISSING"):
+        build_b2v2_from_activity(activity, origins.drop("asset"))
+    with pytest.raises(ValueError, match="B2V2_ORIGIN_ID_DUPLICATE"):
+        build_b2v2_from_activity(activity, pl.concat([origins, origins.head(1)]))
+    with pytest.raises(ValueError, match="B2_RAW_FEATURES_MISSING"):
+        build_b2v2_from_activity(activity.drop("option_trade_count_5m"), origins)
+    with pytest.raises(ValueError, match="B2V2_ACTIVITY_ORIGIN_DUPLICATE"):
+        build_b2v2_from_activity(pl.concat([activity, activity.head(1)]), origins)

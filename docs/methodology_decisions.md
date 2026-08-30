@@ -475,6 +475,8 @@ Requirements-consistency and preregistration gates pass.
    revoked by the branch-protection hardening documented in
    `docs/ci_contract_v1.md`. Protection now rejects force pushes. Republishing
    history requires recorded approval and a temporary, explicit protection lift.
+   **Coverage supersession (2026-08-31):** the global line-and-branch floor is now
+   90.00% with two-decimal enforcement; the 80% introduction floor is historical.
 62. **Physical immutability of frozen evidence (2026-08-18)** — Reviewer correction
    accepted: logical immutability (write_immutable_raw refusing byte replacement)
    did not stop out-of-band writes, as the frozen-manifest overwrite incident

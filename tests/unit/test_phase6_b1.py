@@ -171,3 +171,41 @@ def test_contract_resolution_cache_is_reused_without_network(
     assert b1_builder._resolve_contracts(origins, "unused", config) == {
         ("AAPL", "2025-08-04"): contracts
     }
+
+
+def test_b1v2_rejects_schema_identity_and_timestamp_drift() -> None:
+    origins = _origins(1)
+    states = _states(origins)
+    cases = [
+        (origins.drop("asset"), states, "B1V2_ORIGIN_SCHEMA_INVALID"),
+        (origins, states.drop("contract"), "B1V2_OPTION_STATE_SCHEMA_INVALID"),
+        (pl.concat([origins, origins]), states, "B1V2_DUPLICATE_ORIGIN"),
+        (
+            origins,
+            states.with_columns(pl.lit("UNKNOWN").alias("origin_id")),
+            "B1V2_UNKNOWN_ORIGIN",
+        ),
+        (
+            origins.with_columns(pl.col("forecast_origin_utc").cast(pl.String)),
+            states,
+            "B1V2_ORIGIN_TIMESTAMP_INVALID",
+        ),
+    ]
+
+    for case_origins, case_states, error in cases:
+        with pytest.raises(ValueError, match=error):
+            build_b1v2_features(case_origins, case_states)
+
+
+def test_b1v2_ignores_future_or_non_numeric_quotes_and_empty_coverage() -> None:
+    origins = _origins(1)
+    origin_ns = int(origins.item(0, "forecast_origin_utc").timestamp() * 1e9)
+    states = _states(origins).with_columns(
+        pl.lit(origin_ns + 1).alias("sip_timestamp_ns"),
+        pl.lit("bad").alias("bid"),
+    )
+
+    result = build_b1v2_features(origins, states)
+
+    assert result.item(0, "valid_contract_count") == 0
+    assert b1v2_coverage_status(pl.DataFrame()) == "REVISE_B1V2"
