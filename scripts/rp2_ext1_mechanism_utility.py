@@ -38,7 +38,7 @@ from mds650.rp2.bars import BAR_SOURCES, FULL_SESSION_MINUTES, build_session_gri
 from mds650.rp2.dml import cross_fitted_residuals, dml_partial_out, time_block_folds
 from mds650.rp2.feature_registry import describe_features, feature_map
 from mds650.rp2.inference import minimum_detectable_effect_from_long_run_variance
-from mds650.rp2.ladder import LADDER
+from mds650.rp2.ladder import LADDER, fit_ladder_model
 from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
@@ -361,6 +361,7 @@ def ranking_utility(
     designs: dict[str, FloatArray],
     train: npt.NDArray[np.bool_],
     test: npt.NDArray[np.bool_],
+    sessions: npt.NDArray[np.int64],
 ) -> dict[str, object]:
     """Does the mechanism improve the ORDERING of origins by realized variance?
 
@@ -371,7 +372,9 @@ def ranking_utility(
 
     out: dict[str, object] = {}
     for name, design in designs.items():
-        forecast = LADDER["lightgbm"](standardise(design, train), target, train)
+        forecast = fit_ladder_model(
+            "lightgbm", standardise(design, train), target, train, sessions=sessions
+        )
         predicted, realized = forecast[test], target[test]
         order = np.argsort(predicted)
         buckets = np.array_split(order, DECILES)
@@ -490,7 +493,9 @@ def run_role(
         "b_tail_classification": tail_classification(
             rv30, designs, train & finite, test & finite, assets
         ),
-        "c_execution_ranking": ranking_utility(rv30, designs, train & finite, test & finite),
+        "c_execution_ranking": ranking_utility(
+            rv30, designs, train & finite, test & finite, sessions
+        ),
     }
 
 

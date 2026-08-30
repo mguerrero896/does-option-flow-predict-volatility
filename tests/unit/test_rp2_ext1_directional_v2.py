@@ -106,6 +106,24 @@ def test_legacy_dml_keeps_coefficient_magnitudes() -> None:
     assert {"theta", "standard_error", "ci_95_low", "ci_95_high", "nominal_mde"} <= set(coefficient)
 
 
+def test_legacy_ranking_passes_sessions_to_the_booster(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    ext1 = _load("rp2_ext1_mechanism_utility")
+    rows = 20
+    target = np.linspace(0.01, 0.20, rows)
+    train = np.arange(rows) < 10
+    test = ~train
+    sessions = np.repeat(np.arange(10, dtype=np.int64), 2)
+    captured: dict[str, np.ndarray] = {}
+
+    def fitted(model, design, response, train_mask, *, sessions=None):  # type: ignore[no-untyped-def]
+        captured["sessions"] = sessions
+        return response
+
+    monkeypatch.setattr(ext1, "fit_ladder_model", fitted)
+    ext1.ranking_utility(target, {"B0+B1": target[:, None]}, train, test, sessions)
+    assert np.array_equal(captured["sessions"], sessions)
+
+
 @pytest.fixture(scope="module")
 def directional():  # type: ignore[no-untyped-def]
     return _load("rp2_ext1_directional_v2")
