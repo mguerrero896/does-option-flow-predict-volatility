@@ -16,7 +16,7 @@ physical layer.
 | 3 | Writer guard | `mds650.storage.assert_outside_frozen(path)` raises `FROZEN_ARTIFACT_WRITE_REJECTED` before a write can target a registered path; wired into the B2-confirmation builder/evaluator (the incident site). No "update frozen file" operation exists anywhere | In-process overwrites |
 | 4 | Content-addressed writes | `mds650.storage.write_content_addressed(payload, root, protocol_id)` → `root/protocol_id/<sha256>.bin`. The filename IS the hash: different bytes = different path, overwrite impossible by construction. Required write path for new frozen evidence | Future evidence |
 | 5 | Read-only flags | `scripts/freeze_registry.py --lock` sets the OS read-only bit on all registered files locally | Casual local edits |
-| 6 | Release snapshot | GitHub Release `evidence-freeze-2026-08-18` on the public mirror with the registry as asset — an off-machine, timestamped copy of the frozen state | Mirror tampering |
+| 6 | Release snapshot | GitHub release `evidence-freeze-2026-08-30` has an annotated tag that resolves to public commit `908e35610e36558a163940a8586a4e1a22a62c20`; its 81-entry registry asset has SHA-256 `e3337d0eb6703a6356c30fdf66867714dc7ffc9fd0f8bafb3e5c75c24382a571`, and both source archives resolve. Release ID `376899713` retains the historical 61-entry registry asset, but its `evidence-freeze-2026-08-18` tag ref and source archives are absent | Current off-machine mirror-tampering anchor plus historical custody |
 
 Hash convention: text files are hashed over LF-normalized bytes (equal to the git
 blob under `.gitattributes eol=lf`, so identical on Windows and the ubuntu runner);
@@ -26,15 +26,15 @@ parquet is hashed raw. A pure EOL flip is checkout smudge, not content mutation.
 
 - **WORM/Object Lock**: Supabase Storage has no Object Lock; the service-role key
   can technically delete bucket objects. Compensating controls: hashes pinned in
-  `data/GATED_DATA_POINTERS.json` + registry (layer 1–2), upload/fetch scripts
-  verify round-trip, and the GitHub Release snapshot is provider-independent. True
-  WORM would require an S3 bucket with Object Lock — available if the residual ever
-  matters, at extra cost.
+  `data/GATED_DATA_POINTERS.json` + registry (layer 1–2), and upload/fetch scripts
+  verify round-trip. The current GitHub Release snapshot is provider-independent
+  custody, but it is not WORM. True WORM would require an S3 bucket with Object
+  Lock — available if the residual ever matters, at extra cost.
 - **Signed tags**: the mirror rewrite limitation of `docs/ci_contract_v1.md`
-  applies; a "Verified" release tag requires an SSH signing key registered in
-  GitHub settings.
-- Layer 5 is advisory on Windows (any admin can clear the bit); layers 2 and 6 are
-  the ones that cannot be silently bypassed.
+  applies. The current tag is annotated but not cryptographically signed; a
+  "Verified" release tag requires an SSH signing key registered in GitHub settings.
+- Layer 5 is advisory on Windows (any admin can clear the bit). Layer 2 is the active
+  content gate; Layer 6 supplies the resolvable off-machine copy.
 
 ## Rules going forward
 
@@ -43,5 +43,6 @@ parquet is hashed raw. A pure EOL flip is checkout smudge, not content mutation.
    registered as a new entry.
 3. New evidence-producing scripts call `assert_outside_frozen()` before writes and
    use `write_content_addressed()` for primary payloads.
-4. After each freeze batch: `--lock` locally and a fresh release snapshot on the
-   next publish.
+4. After each freeze batch: `--lock` locally and publish a fresh release snapshot;
+   verify its tag ref, both source archives, and registry asset against the tagged
+   commit.

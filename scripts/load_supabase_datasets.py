@@ -46,6 +46,7 @@ import polars as pl
 import polars.selectors as cs
 
 from mds650.sealed import guard_sealed_access
+from mds650.supabase_auth import api_key_headers
 
 REPO = Path(__file__).resolve().parents[1]
 PROJECT_REF = "eqpyjikcewqaegnbaemf"
@@ -203,7 +204,7 @@ def main() -> None:
     if not key:
         raise SystemExit("SUPABASE_SERVICE_KEY missing (User env var; see DATA_ACCESS.md).")
 
-    headers = {"Authorization": f"Bearer {key}", "apikey": key}
+    headers = api_key_headers(key)
     with httpx.Client(timeout=300, headers=headers) as client:
         for table, path in sources.items():
             relative = DATASETS[table]

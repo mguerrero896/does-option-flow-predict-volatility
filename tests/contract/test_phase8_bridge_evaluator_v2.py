@@ -1,7 +1,8 @@
-"""The Phase 8 bridge executable remains sealed and implements all five estimands."""
+"""The consumed Phase 8 closure stays auditable and implements all five estimands."""
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -20,7 +21,20 @@ SPEC.loader.exec_module(MODULE)
 
 def test_evaluator_fails_closed_and_reports_all_five_estimands() -> None:
     contract = MODULE.load_contract(MODULE.DEFAULT_CONTRACT)
-    freeze = MODULE.validate_evaluator_freeze(MODULE.DEFAULT_EVALUATOR_FREEZE, contract)
+    freeze = json.loads(MODULE.DEFAULT_EVALUATOR_FREEZE.read_text(encoding="utf-8"))
+    assert freeze["freeze_sha256"] == MODULE._canonical_sha256(
+        freeze, omit="freeze_sha256"
+    )
+    evaluator_hash = hashlib.sha256(
+        (ROOT / freeze["evaluator"]).read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()
+    assert freeze["evaluator_sha256"] == evaluator_hash
+    assert next(
+        row["sha256"]
+        for row in freeze["executable_closure"]["files"]
+        if row["path"] == freeze["evaluator"]
+    ) == evaluator_hash
+    assert freeze["contract_sha256"] == contract["contract_sha256"]
     assert freeze["sealed_cohorts_read"] == 0
     with pytest.raises(
         PermissionError, match="PHASE8_BRIDGE_ONE_SHOT_AUTHORIZATION_REQUIRED"

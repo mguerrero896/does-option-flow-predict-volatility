@@ -23,6 +23,13 @@ STATE_PATH = REPO / "data" / "CANONICAL_STATE.json"
 STATUS_PATH = REPO / "STATUS.md"
 CURRENT_RUN_ID = "rp2-v3-20260827-remediation3"
 CURRENT_RUN = Path("artifacts") / "rp2_v3" / CURRENT_RUN_ID
+PHASE8_DIR = Path("artifacts") / "phase8_bridge"
+PHASE8_AUTHORIZATION = PHASE8_DIR / "owner_authorization_20260830_v1.json"
+PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
+PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
+PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
+PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v1.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -47,9 +54,15 @@ AUTHORIZED_SOURCES = (
     "docs/phase9_academic_reporting_policy_v2.md",
     "artifacts/phase8_bridge/bridge_contract_v2.json",
     "artifacts/phase8_bridge/evaluator_freeze_v4.json",
+    PHASE8_AUTHORIZATION.as_posix(),
+    PHASE8_CUSTODY.as_posix(),
+    PHASE8_LAYOUT_RECOVERY.as_posix(),
+    PHASE8_RECOVERY.as_posix(),
+    PHASE8_RESULT.as_posix(),
     "artifacts/phase9/power_deadline_audit_v1.json",
     "reports/final_report_draft_v2.md",
     "reports/final_report_draft_v2.docx",
+    PHASE8_ADDENDUM.as_posix(),
 )
 
 
@@ -58,6 +71,12 @@ def _sha(path: Path) -> str:
     if path.suffix.lower() in TEXT_SUFFIXES:
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
+
+
+def _canonical_sha(payload: dict[str, Any], *, omit: str) -> str:
+    body = {key: value for key, value in payload.items() if key != omit}
+    encoded = json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def build_state() -> dict[str, Any]:
@@ -100,6 +119,18 @@ def build_state() -> dict[str, Any]:
         REPO / "artifacts" / "phase8_bridge" / "evaluator_freeze_v4.json"
     )
     bridge_evaluator = json.loads(bridge_evaluator_path.read_text(encoding="utf-8"))
+    bridge_authorization_path = REPO / PHASE8_AUTHORIZATION
+    bridge_authorization = json.loads(
+        bridge_authorization_path.read_text(encoding="utf-8")
+    )
+    bridge_custody_path = REPO / PHASE8_CUSTODY
+    bridge_custody = json.loads(bridge_custody_path.read_text(encoding="utf-8"))
+    bridge_layout_path = REPO / PHASE8_LAYOUT_RECOVERY
+    bridge_layout = json.loads(bridge_layout_path.read_text(encoding="utf-8"))
+    bridge_recovery_path = REPO / PHASE8_RECOVERY
+    bridge_recovery = json.loads(bridge_recovery_path.read_text(encoding="utf-8"))
+    bridge_result_path = REPO / PHASE8_RESULT
+    bridge_result = json.loads(bridge_result_path.read_text(encoding="utf-8"))
     phase9_audit_path = REPO / "artifacts" / "phase9" / "power_deadline_audit_v1.json"
     phase9_audit = json.loads(phase9_audit_path.read_text(encoding="utf-8"))
     if bridge["read_gate"] != {
@@ -113,6 +144,90 @@ def build_state() -> dict[str, Any]:
         or bridge_evaluator["sealed_cohorts_read"] != 0
     ):
         raise ValueError("PHASE8_BRIDGE_EVALUATOR_FREEZE_DRIFT")
+    authorization_required = {
+        "authorization_type": "PHASE8_BRIDGE_ONE_SHOT_READ",
+        "protocol_id": bridge["protocol_id"],
+        "contract_sha256": bridge["contract_sha256"],
+        "authorize_read_and_evaluation": True,
+        "sealed_cohorts_read_before": 0,
+    }
+    if any(
+        bridge_authorization.get(key) != expected
+        for key, expected in authorization_required.items()
+    ):
+        raise ValueError("PHASE8_BRIDGE_AUTHORIZATION_DRIFT")
+    if (
+        bridge_custody["authorization"]["authorization_id"]
+        != bridge_authorization["authorization_id"]
+        or bridge_custody["authorization"]["file_sha256"]
+        != _sha(bridge_authorization_path)
+        or bridge_custody["authorization"]["canonical_sha256"]
+        != _canonical_sha(bridge_authorization, omit="__never__")
+        or bridge_custody["access_ledger"]["read_count"] != 1
+        or bridge_custody["sealed_cohorts_read_before"] != 0
+        or bridge_custody["sealed_cohorts_read_after"] != 1
+        or bridge_custody["reconciliation_classification"]
+        != "POST_READ_RECONCILIATION_NO_SECOND_EXECUTION"
+        or bridge_custody["owner_instruction_after_consumption"]["effect"]
+        != "RECORDS_OWNER_INTENT_AND_CLASSIFICATION_NO_SECOND_EXECUTION"
+        or bridge_custody["owner_instruction_after_consumption"][
+            "received_after_claim"
+        ]
+        is not True
+        or "statement" in bridge_custody["owner_instruction_after_consumption"]
+        or bridge_custody["execution"]["closure_deviation"] is not True
+        or bridge_custody["execution"]["recovery_script_in_frozen_closure"]
+        is not False
+        or bridge_custody["execution"]["second_execution_permitted"] is not False
+    ):
+        raise ValueError("PHASE8_BRIDGE_ONE_SHOT_CUSTODY_DRIFT")
+    if (
+        bridge_layout["status"] != "COMPLETE"
+        or bridge_layout["session_count"] != 30
+        or bridge_layout["sealed_cohorts_read"] != 1
+        or bridge_layout["sealed_store_reopened"] is not False
+        or bridge_custody["execution"]["layout_manifest_file_sha256"]
+        != _sha(bridge_layout_path)
+        or bridge_custody["execution"]["layout_manifest_canonical_sha256"]
+        != bridge_layout["manifest_sha256"]
+        or bridge_layout["manifest_sha256"]
+        != _canonical_sha(bridge_layout, omit="manifest_sha256")
+    ):
+        raise ValueError("PHASE8_BRIDGE_LAYOUT_RECOVERY_DRIFT")
+    if (
+        bridge_recovery["status"] != "RESUME_COMPLETE"
+        or bridge_recovery["initial_failure"] != "RP3_EVAL_NO_SESSIONS"
+        or bridge_recovery["sealed_cohorts_read"] != 1
+        or bridge_recovery["sealed_store_reopened"] is not False
+        or bridge_recovery["recovery_sha256"]
+        != _canonical_sha(bridge_recovery, omit="recovery_sha256")
+        or bridge_custody["execution"]["recovery_file_sha256"]
+        != _sha(bridge_recovery_path)
+    ):
+        raise ValueError("PHASE8_BRIDGE_EXECUTION_RECOVERY_DRIFT")
+    if (
+        bridge_result["status"] != "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE"
+        or bridge_result["claim_classification"]
+        != "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY"
+        or bridge_result["contract_sha256"] != bridge["contract_sha256"]
+        or bridge_result["sealed_cohorts_read"] != 1
+        or bridge_result["confirmatory_promotion_allowed"] is not False
+        or bridge_result["personal_paths_emitted"] is not False
+        or bridge_result["secret_values_emitted"] is not False
+        or bridge_result["evaluation"]["overall_classification"]
+        != "MIXED_EXPLORATORY"
+        or bridge_result["store_preflight"]
+        != {"completed_count": 30, "records": 750, "sealed_cohorts_read": 0, "sessions": 30}
+        or bridge_result["result_sha256"]
+        != _canonical_sha(bridge_result, omit="result_sha256")
+        or bridge_custody["output"]["result_file_sha256"] != _sha(bridge_result_path)
+        or bridge_custody["output"]["forecast_cube_sha256"]
+        != bridge_result["forecast_cube_sha256"]
+        or bridge_recovery["result_sha256"] != bridge_result["result_sha256"]
+        or bridge_recovery["forecast_cube_sha256"]
+        != bridge_result["forecast_cube_sha256"]
+    ):
+        raise ValueError("PHASE8_BRIDGE_RESULT_DRIFT")
     if (
         phase9_audit["endpoint"]
         != {"complete_sessions": 60, "scored_sessions": 36, "test_blocks": 3}
@@ -167,8 +282,31 @@ def build_state() -> dict[str, Any]:
                     "sha256": _sha(bridge_evaluator_path),
                     "evaluator_sha256": bridge_evaluator["evaluator_sha256"],
                 },
-                "state": "FROZEN_EXPLORATORY_BRIDGE_READ_NOT_AUTHORIZED",
-                "sealed_cohorts_read": 0,
+                "authorization": {
+                    "artifact": PHASE8_AUTHORIZATION.as_posix(),
+                    "authorization_id": bridge_authorization["authorization_id"],
+                    "sha256": _sha(bridge_authorization_path),
+                },
+                "execution_recovery": {
+                    "artifact": PHASE8_RECOVERY.as_posix(),
+                    "initial_failure": bridge_recovery["initial_failure"],
+                    "sealed_store_reopened": bridge_recovery["sealed_store_reopened"],
+                    "sha256": _sha(bridge_recovery_path),
+                },
+                "result": {
+                    "artifact": PHASE8_RESULT.as_posix(),
+                    "claim_classification": bridge_result["claim_classification"],
+                    "confirmatory_promotion_allowed": bridge_result[
+                        "confirmatory_promotion_allowed"
+                    ],
+                    "overall_classification": bridge_result["evaluation"][
+                        "overall_classification"
+                    ],
+                    "result_sha256": bridge_result["result_sha256"],
+                    "sha256": _sha(bridge_result_path),
+                },
+                "state": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY",
+                "sealed_cohorts_read": 1,
             },
             {
                 "id": "phase9-total-contribution",
@@ -237,13 +375,13 @@ def build_state() -> dict[str, Any]:
                 "path": "reports/final_report_draft_v2.docx",
                 "sha256": _sha(REPO / "reports" / "final_report_draft_v2.docx"),
             },
+            "phase8_addendum": {
+                "path": PHASE8_ADDENDUM.as_posix(),
+                "sha256": _sha(REPO / PHASE8_ADDENDUM),
+            },
             "evidence_cutoff": "2026-08-28",
         },
         "future_campaigns": [
-            (
-                "Phase 8 bridge method is frozen; one-shot execution requires separate "
-                "authorization after the 30-session acquisition completes"
-            ),
             (
                 "Phase 9 requires 60 complete (36 scored), previously unseen sessions and "
                 "a separate read gate; academic submission does not wait for its outcome"
@@ -287,7 +425,7 @@ def render_status(state: dict[str, Any]) -> str:
         f"{state['external_publication']['supabase']['writes']['catalog_syncs_committed']} "
         "catalog reconciliation, and "
         f"{state['external_publication']['supabase']['writes']['dataset_loads_committed']} "
-        "dataset manifests committed; sealed reads 0).",
+        "dataset manifests committed; sealed reads: Phase 8 = 1, Phase 9 = 0).",
         "",
         "## Active protocols",
         "",
@@ -314,6 +452,8 @@ def render_status(state: dict[str, Any]) -> str:
         "`docs/rp2_v3/SUPERSEDED_RESULTS.md`; they are not current claims.",
         "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
         "submission rendering pinned under `current_report` in the machine state.",
+        "- Post-cutoff Phase 8A result: "
+        "`reports/phase8a_exploratory_bridge_addendum_v1.md`.",
     ]
     lines += ["", "## Future campaigns", ""]
     for campaign in state["future_campaigns"]:

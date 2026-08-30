@@ -11,10 +11,12 @@ ineligible.
 |---|---|
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative evidence-cutoff thesis source; Phase 8/9 are reported as unopened/ongoing rather than as placeholders. |
 | [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Submission-ready Word rendering generated from the current Markdown source on 2026-08-28. |
+| [`phase8a_exploratory_bridge_addendum_v1.md`](phase8a_exploratory_bridge_addendum_v1.md) | Dated post-cutoff Phase 8A result, one-shot custody and recorded execution-recovery limitation. |
 
-Both files are hash-pinned under `current_report` in
-[`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json). The Markdown file governs
-meaning; the Word file is its submission rendering.
+The evidence-cutoff pair and post-cutoff addendum are hash-pinned under `current_report`
+in [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json). The Markdown thesis governs
+the cutoff report; the Word file is its submission rendering; the addendum governs the
+Phase 8A outcome.
 
 Retired proposal, defense-deck and gate-cascade drafts are absent from the public release.
 Their withdrawn numerical claims and reasons remain in

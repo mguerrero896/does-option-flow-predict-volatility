@@ -39,13 +39,14 @@ named in the README, without any assistant.
 
 ## Attribution policy for commits
 
-From 2026-08-26, commits use GitHub's `noreply` address rather than a personal
-one, and assistant co-authorship trailers are not added. The disclosure above is
-the deliberate, single place where computational assistance is declared; a
-trailer on each of several hundred commits states the same fact worse, and
-publishes a personal address alongside it.
+From 2026-08-26, author-created branch commits use GitHub's `noreply` address,
+and assistant co-authorship trailers are not added. GitHub-generated squash
+commits can carry the account-configured author email; the history scanner accepts
+that identity only for a `web-flow`-signed commit on the published mainline. The
+disclosure above is the deliberate, single place where computational assistance is
+declared; a trailer on each of several hundred commits states the same fact worse.
 
-Commits before that date carry a personal address and, in some cases, an
-assistant trailer. They are not rewritten: this repository does not rewrite its
-own history to look tidier than it was, and the record of how the work was
-actually produced is part of its evidence.
+Author-created commits before that date carry a personal address and, in some
+cases, an assistant trailer. They are not rewritten: this repository does not
+rewrite its own history to look tidier than it was, and the record of how the work
+was actually produced is part of its evidence.

@@ -22,6 +22,7 @@ from typing import Any
 import httpx
 
 from mds650.sealed import guard_sealed_access
+from mds650.supabase_auth import api_key_headers
 
 REPO = Path(__file__).resolve().parents[1]
 PROJECT_REF = "eqpyjikcewqaegnbaemf"
@@ -171,7 +172,7 @@ def main(argv: list[str] | None = None) -> None:
         operation="catalog sync",
     )
     rows = build_rows(gate1, mcs, pointers)
-    headers = {"Authorization": f"Bearer {key}", "apikey": key}
+    headers = api_key_headers(key)
     with httpx.Client(timeout=120, headers=headers) as client:
         _sync(client, rows)
     print("[sync] done")

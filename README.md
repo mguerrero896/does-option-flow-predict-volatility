@@ -34,6 +34,13 @@ Historical measurements remain available for audit, not as current findings:
 No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
 claimed from the PIT-blocked bundle.
 
+Separately, the sole Phase 8A bridge read is complete and classified
+`MIXED_EXPLORATORY`. Two of four primary total-effect cells are directionally supportive
+and two are imprecise; incremental B2 conditional on B1 is mixed. The read is descriptive,
+not confirmatory, and cannot make the PIT-blocked bundle eligible. The exact aggregate
+result and execution-recovery limitation are in the
+[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v1.md).
+
 ## Research design
 
 Forecast origins occur every five minutes during the New York trading session. Models

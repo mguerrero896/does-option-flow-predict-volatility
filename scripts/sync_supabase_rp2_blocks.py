@@ -24,6 +24,7 @@ from typing import Any
 import httpx
 
 from mds650.sealed import guard_sealed_access
+from mds650.supabase_auth import api_key_headers
 
 REPO = Path(__file__).resolve().parents[1]
 PROJECT_REF = "eqpyjikcewqaegnbaemf"
@@ -182,9 +183,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     # script has no business inventing. An upsert would insert a stub row for any block_id
     # that had drifted, which is how a provenance sync turns into a data loss.
     updated = 0
-    with httpx.Client(
-        timeout=30.0, headers={"apikey": key, "Authorization": f"Bearer {key}"}
-    ) as client:
+    with httpx.Client(timeout=30.0, headers=api_key_headers(key)) as client:
         for table, body, conflict in (
             ("ingestion_runs", [run], "run_id"),
             ("ingestion_inputs", run_inputs, "run_id,input_name"),

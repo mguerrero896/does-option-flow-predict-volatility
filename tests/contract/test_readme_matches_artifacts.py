@@ -37,6 +37,13 @@ def test_readme_contains_no_withdrawn_headline_figures() -> None:
     assert not [claim for claim in withdrawn if claim in readme]
 
 
+def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> None:
+    readme = README.read_text(encoding="utf-8")
+    assert "MIXED_EXPLORATORY" in readme
+    assert "reports/phase8a_exploratory_bridge_addendum_v1.md" in readme
+    assert "not confirmatory" in readme
+
+
 def test_readme_routes_history_and_evidence_to_researcher_documents() -> None:
     readme = README.read_text(encoding="utf-8")
     required = (
