@@ -46,9 +46,9 @@ def test_report_names_the_measured_result_and_its_limits() -> None:
     assert "previously" not in report.lower()
 
 
-def test_methodology_decision_102_binds_the_follow_up() -> None:
+def test_methodology_decision_103_binds_the_follow_up() -> None:
     decisions = DECISIONS.read_text(encoding="utf-8")
-    assert '<a id="decision-102"></a>' in decisions
+    assert '<a id="decision-103"></a>' in decisions
     assert "fc083b0d9df26e913f4348d9c64f4cd8e83b8e963169743d0d5cd6dd5488ebde" in decisions
     assert "DO_NOT_PURSUE" in decisions
 

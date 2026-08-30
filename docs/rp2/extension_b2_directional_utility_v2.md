@@ -226,7 +226,7 @@ and its contract test are present:
 | Check | Result |
 |---|---|
 | Ruff | PASS: `All checks passed!` |
-| Mypy strict | PASS: no issues in 323 source files |
+| Mypy strict | PASS: no issues in 324 source files |
 | Full pytest suite | PASS: 100%, exit 0; three contract skips |
 | Frozen artifact SHA-256 | PASS: `604e1e4099...f263f499` |
 | New semantic self-hash | PASS: `477f21af63...3e656b0` |
