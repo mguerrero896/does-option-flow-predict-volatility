@@ -4,7 +4,7 @@ import os
 import subprocess
 from pathlib import Path
 
-from scripts.scan_public_secrets import scan_repository
+from scripts.scan_public_secrets import APPROVED_NON_NOREPLY_COMMITS, scan_repository
 
 
 def _git(repo: Path, *args: str) -> None:
@@ -50,6 +50,18 @@ def test_scanner_rejects_personal_git_identity_without_echoing_it(tmp_path: Path
         ("non_noreply_git_identity", "<commit>")
     ]
     assert all(email not in repr(item) for item in findings)
+
+    commit = subprocess.check_output(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
+    ).strip()
+    assert scan_repository(
+        repo, allowed_non_noreply_commits=frozenset({commit})
+    ) == []
+
+
+def test_only_the_published_pr14_squash_identity_is_excepted() -> None:
+    expected = frozenset({"c39cfb3394aedb020e8a1a3903da66fd603cfd4d"})
+    assert expected == APPROVED_NON_NOREPLY_COMMITS
 
 
 def test_scanner_accepts_github_service_identity(tmp_path: Path) -> None:
