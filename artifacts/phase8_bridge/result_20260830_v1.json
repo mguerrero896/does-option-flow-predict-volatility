@@ -1,0 +1,564 @@
+{
+  "claim_classification": "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY",
+  "confirmatory_promotion_allowed": false,
+  "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+  "evaluation": {
+    "D": {
+      "gamma_glm": {
+        "classification": "IMPRECISE_EXPLORATORY",
+        "fit_records": {},
+        "loss_sha256": {
+          "B0": "2f99d0ce64cd04fad79e864e63720a71847d05e5645a6ad561464c3b7857b5ba",
+          "B0+B1": "d68f94450865bde54517e03e6aa555c54258f62906f7fb130b9e32c315e6b2cb",
+          "B0+B1+B2": "178558024d7b7fa98ab6c3f15772f47f43dcca94c3f125ea1e668940594e0f28",
+          "B0+B2": "3abd8a698b1ab57c67bb36f81959d5da1e73801c6157229fbad86b152b71651b"
+        },
+        "windows": {
+          "primary_20": {
+            "delta_b1": {
+              "ci_high": 0.008357314795787912,
+              "ci_low": -0.0031469818777055793,
+              "estimate": 0.0026149218694670818,
+              "newey_west_p_value": 0.27361652160571137,
+              "p_value_holm_descriptive": 0.9802,
+              "p_value_raw": 0.4901,
+              "sessions": 20
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.0019422153357163408,
+              "ci_low": -0.0003022765239008402,
+              "estimate": 0.0008021427057378107,
+              "newey_west_p_value": 0.12469140094992212,
+              "p_value_holm_descriptive": 0.5756,
+              "p_value_raw": 0.1481,
+              "sessions": 20
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.0003246461415700266,
+              "ci_low": -0.0020964015242776416,
+              "estimate": -0.0008918220102451556,
+              "newey_west_p_value": 0.045634130996251916,
+              "p_value_holm_descriptive": 0.5756,
+              "p_value_raw": 0.1439,
+              "sessions": 20
+            },
+            "delta_interaction": {
+              "ci_high": -0.0003351306993348445,
+              "ci_low": -0.0030426296331364866,
+              "estimate": -0.0016939647159829661,
+              "newey_west_p_value": 0.0011853461604419777,
+              "p_value_holm_descriptive": 0.093,
+              "p_value_raw": 0.0186,
+              "sessions": 20
+            },
+            "delta_total": {
+              "ci_high": 0.008022867144940939,
+              "ci_low": -0.004424302372667268,
+              "estimate": 0.0017230998592219255,
+              "newey_west_p_value": 0.518306255075609,
+              "p_value_holm_descriptive": 0.9802,
+              "p_value_raw": 0.6888,
+              "sessions": 20
+            }
+          },
+          "sensitivity_30": {
+            "delta_b1": {
+              "ci_high": 0.004347261497677032,
+              "ci_low": -0.006476566700022965,
+              "estimate": -0.0010679573169285973,
+              "newey_west_p_value": 0.7459259576605447,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.7215,
+              "sessions": 30
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.0015649990893688746,
+              "ci_low": -0.00035915750136613755,
+              "estimate": 0.000585230326950834,
+              "newey_west_p_value": 0.0898734538328219,
+              "p_value_holm_descriptive": 0.8828,
+              "p_value_raw": 0.2207,
+              "sessions": 30
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.0006103380715404877,
+              "ci_low": -0.0017236006078945598,
+              "estimate": -0.0005641904507326741,
+              "newey_west_p_value": 0.1967274781488707,
+              "p_value_holm_descriptive": 0.9948,
+              "p_value_raw": 0.3316,
+              "sessions": 30
+            },
+            "delta_interaction": {
+              "ci_high": 4.0706334940622925e-05,
+              "ci_low": -0.0023273624412628352,
+              "estimate": -0.0011494207776835074,
+              "newey_west_p_value": 0.012039188039383817,
+              "p_value_holm_descriptive": 0.2865,
+              "p_value_raw": 0.0573,
+              "sessions": 30
+            },
+            "delta_total": {
+              "ci_high": 0.003773069004875442,
+              "ci_low": -0.007090550963319307,
+              "estimate": -0.0016321477676612705,
+              "newey_west_p_value": 0.6069459932304246,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.5857,
+              "sessions": 30
+            }
+          }
+        }
+      },
+      "lightgbm": {
+        "classification": "DIRECTIONALLY_SUPPORTIVE_EXPLORATORY",
+        "fit_records": {
+          "B0": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.14076840893912237,
+            "inner_validation_loss_at_superseded": null,
+            "inner_validation_rows": 30450,
+            "inner_validation_sessions": 78,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "0fe72eeed735c5f2b2e79e2e2c0e051f31a19ce5b2abbf793c91f354e2d474f4",
+            "max_rounds": 2000,
+            "selected_rounds": 221,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B1": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.13365917113038867,
+            "inner_validation_loss_at_superseded": 0.1338573733235201,
+            "inner_validation_rows": 30450,
+            "inner_validation_sessions": 78,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "0fe72eeed735c5f2b2e79e2e2c0e051f31a19ce5b2abbf793c91f354e2d474f4",
+            "max_rounds": 2000,
+            "selected_rounds": 327,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B1+B2": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.13384347770235144,
+            "inner_validation_loss_at_superseded": 0.13431667197464234,
+            "inner_validation_rows": 30450,
+            "inner_validation_sessions": 78,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "0fe72eeed735c5f2b2e79e2e2c0e051f31a19ce5b2abbf793c91f354e2d474f4",
+            "max_rounds": 2000,
+            "selected_rounds": 365,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B2": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.13857887744586853,
+            "inner_validation_loss_at_superseded": 0.13884885454628437,
+            "inner_validation_rows": 30450,
+            "inner_validation_sessions": 78,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "0fe72eeed735c5f2b2e79e2e2c0e051f31a19ce5b2abbf793c91f354e2d474f4",
+            "max_rounds": 2000,
+            "selected_rounds": 415,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          }
+        },
+        "loss_sha256": {
+          "B0": "317c038d5c64c094152a0acda66009850251a2f79f652ee76de05cdcd8c51868",
+          "B0+B1": "96cf89e1f8eb3c060775d5ae1df522d3b1fb2befceea090facf2003dfd407032",
+          "B0+B1+B2": "8964ab728198de3acf86a51a338e2d5c9bb255d62bb91cfb0f6ed799ed5824f3",
+          "B0+B2": "b967959b78ff09450226b3dd6198dbe259a5bcce5e6f5699c306b9ef5ab8d598"
+        },
+        "windows": {
+          "primary_20": {
+            "delta_b1": {
+              "ci_high": 0.004785884602007887,
+              "ci_low": 0.0012950143396006032,
+              "estimate": 0.0030001687477727197,
+              "newey_west_p_value": 4.7419717887014554e-07,
+              "p_value_holm_descriptive": 0.005,
+              "p_value_raw": 0.001,
+              "sessions": 20
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.014047156698978335,
+              "ci_low": -0.002637851574235681,
+              "estimate": 0.005694335373920611,
+              "newey_west_p_value": 0.250920516892589,
+              "p_value_holm_descriptive": 0.473,
+              "p_value_raw": 0.473,
+              "sessions": 20
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.016245514511439907,
+              "ci_low": -0.0013432560628996474,
+              "estimate": 0.00745924587291646,
+              "newey_west_p_value": 0.13216618566896424,
+              "p_value_holm_descriptive": 0.394,
+              "p_value_raw": 0.197,
+              "sessions": 20
+            },
+            "delta_interaction": {
+              "ci_high": 0.003681535216198727,
+              "ci_low": -0.00021519407721983614,
+              "estimate": 0.0017649104989958492,
+              "newey_west_p_value": 0.062358810052299166,
+              "p_value_holm_descriptive": 0.2304,
+              "p_value_raw": 0.0768,
+              "sessions": 20
+            },
+            "delta_total": {
+              "ci_high": 0.0194787066047102,
+              "ci_low": 0.0015140448155414772,
+              "estimate": 0.010459414620689179,
+              "newey_west_p_value": 0.02303832401720502,
+              "p_value_holm_descriptive": 0.0276,
+              "p_value_raw": 0.0069,
+              "sessions": 20
+            }
+          },
+          "sensitivity_30": {
+            "delta_b1": {
+              "ci_high": 0.004821707477773256,
+              "ci_low": 0.00019997030535539358,
+              "estimate": 0.0024930974577697666,
+              "newey_west_p_value": 0.01485553789059184,
+              "p_value_holm_descriptive": 0.1416,
+              "p_value_raw": 0.0354,
+              "sessions": 30
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.010072997266446008,
+              "ci_low": -0.0007232364979290161,
+              "estimate": 0.004694996001650282,
+              "newey_west_p_value": 0.1676816549222233,
+              "p_value_holm_descriptive": 0.2948,
+              "p_value_raw": 0.1717,
+              "sessions": 30
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.011482637662199462,
+              "ci_low": 0.0001543394340041953,
+              "estimate": 0.0058228763421929635,
+              "newey_west_p_value": 0.10129800104117845,
+              "p_value_holm_descriptive": 0.1416,
+              "p_value_raw": 0.0361,
+              "sessions": 30
+            },
+            "delta_interaction": {
+              "ci_high": 0.002660207128966749,
+              "ci_low": -0.00047817963599216737,
+              "estimate": 0.0011278803405426806,
+              "newey_west_p_value": 0.17508710847720332,
+              "p_value_holm_descriptive": 0.2948,
+              "p_value_raw": 0.1474,
+              "sessions": 30
+            },
+            "delta_total": {
+              "ci_high": 0.01453278099130768,
+              "ci_low": 0.0021488063103971096,
+              "estimate": 0.00831597379996273,
+              "newey_west_p_value": 0.015760706629616275,
+              "p_value_holm_descriptive": 0.0055000000000000005,
+              "p_value_raw": 0.0011,
+              "sessions": 30
+            }
+          }
+        }
+      }
+    },
+    "V": {
+      "gamma_glm": {
+        "classification": "DIRECTIONALLY_SUPPORTIVE_EXPLORATORY",
+        "fit_records": {},
+        "loss_sha256": {
+          "B0": "9573196a0864d40b7ec7c75d2f31b25f38cffce58c23d78e4b1164c70f1b3740",
+          "B0+B1": "031d969b5a81c1e6bd68c04d40bada69070f4fa9c7113644b121eb3adbcc9834",
+          "B0+B1+B2": "78be0487595212dfd0d11b3d405f9c73e4de98383daab2aef96829e18f83adce",
+          "B0+B2": "cba5703d504ed7e6d26e252797e0f8205b6f425203ec98444d3c67a234b4873e"
+        },
+        "windows": {
+          "primary_20": {
+            "delta_b1": {
+              "ci_high": 0.006178517410493495,
+              "ci_low": 0.0006357409558623104,
+              "estimate": 0.0033864793955335135,
+              "newey_west_p_value": 0.0014334967405273845,
+              "p_value_holm_descriptive": 0.0208,
+              "p_value_raw": 0.0052,
+              "sessions": 20
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.0017062764908552137,
+              "ci_low": 8.068669242913091e-05,
+              "estimate": 0.0008944833880859648,
+              "newey_west_p_value": 0.019174230912981573,
+              "p_value_holm_descriptive": 0.0639,
+              "p_value_raw": 0.0213,
+              "sessions": 20
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.00041156367650526976,
+              "ci_low": -0.00038678499557836073,
+              "estimate": 1.1699428740218445e-05,
+              "newey_west_p_value": 0.9606402780322467,
+              "p_value_holm_descriptive": 0.9528,
+              "p_value_raw": 0.9528,
+              "sessions": 20
+            },
+            "delta_interaction": {
+              "ci_high": 5.142574588636636e-05,
+              "ci_low": -0.0018177882842695013,
+              "estimate": -0.0008827839593457464,
+              "newey_west_p_value": 0.10438314081956596,
+              "p_value_holm_descriptive": 0.1682,
+              "p_value_raw": 0.0841,
+              "sessions": 20
+            },
+            "delta_total": {
+              "ci_high": 0.006102679749328802,
+              "ci_low": 0.0007415718722591988,
+              "estimate": 0.003398178824273733,
+              "newey_west_p_value": 9.241239731236048e-05,
+              "p_value_holm_descriptive": 0.013,
+              "p_value_raw": 0.0026,
+              "sessions": 20
+            }
+          },
+          "sensitivity_30": {
+            "delta_b1": {
+              "ci_high": 0.004103113532292596,
+              "ci_low": -0.00028226848625012894,
+              "estimate": 0.0019259721259879813,
+              "newey_west_p_value": 0.10698632275332931,
+              "p_value_holm_descriptive": 0.31320000000000003,
+              "p_value_raw": 0.1044,
+              "sessions": 30
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.0013156754817961178,
+              "ci_low": 0.00024661295977802995,
+              "estimate": 0.0007837785315093146,
+              "newey_west_p_value": 0.0037669785632264323,
+              "p_value_holm_descriptive": 0.002,
+              "p_value_raw": 0.0004,
+              "sessions": 30
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.00025136449457902825,
+              "ci_low": -0.00031075400042715945,
+              "estimate": -2.9916721660696702e-05,
+              "newey_west_p_value": 0.8582196459901639,
+              "p_value_holm_descriptive": 0.8347,
+              "p_value_raw": 0.8347,
+              "sessions": 30
+            },
+            "delta_interaction": {
+              "ci_high": -0.00017313340816998502,
+              "ci_low": -0.0014521094425863517,
+              "estimate": -0.0008136952531700113,
+              "newey_west_p_value": 0.02881937291229556,
+              "p_value_holm_descriptive": 0.008,
+              "p_value_raw": 0.002,
+              "sessions": 30
+            },
+            "delta_total": {
+              "ci_high": 0.0040749126576080305,
+              "ci_low": -0.0003202955382025745,
+              "estimate": 0.001896055404327285,
+              "newey_west_p_value": 0.09911954255114343,
+              "p_value_holm_descriptive": 0.31320000000000003,
+              "p_value_raw": 0.1068,
+              "sessions": 30
+            }
+          }
+        }
+      },
+      "lightgbm": {
+        "classification": "IMPRECISE_EXPLORATORY",
+        "fit_records": {
+          "B0": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.14649549452154917,
+            "inner_validation_loss_at_superseded": null,
+            "inner_validation_rows": 6336,
+            "inner_validation_sessions": 16,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "25db1d96d7b9ee5a35157e171e115d016653e8f9c0b59b4b590f09c8e2dbdf29",
+            "max_rounds": 2000,
+            "selected_rounds": 129,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B1": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.14772142560349766,
+            "inner_validation_loss_at_superseded": null,
+            "inner_validation_rows": 6336,
+            "inner_validation_sessions": 16,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "25db1d96d7b9ee5a35157e171e115d016653e8f9c0b59b4b590f09c8e2dbdf29",
+            "max_rounds": 2000,
+            "selected_rounds": 100,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B1+B2": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.14604147220982924,
+            "inner_validation_loss_at_superseded": null,
+            "inner_validation_rows": 6336,
+            "inner_validation_sessions": 16,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "25db1d96d7b9ee5a35157e171e115d016653e8f9c0b59b4b590f09c8e2dbdf29",
+            "max_rounds": 2000,
+            "selected_rounds": 219,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          },
+          "B0+B2": {
+            "cap_reached": false,
+            "early_stopping_rounds": 50,
+            "inner_validation_loss_at_selected": 0.14706002716312058,
+            "inner_validation_loss_at_superseded": null,
+            "inner_validation_rows": 6336,
+            "inner_validation_sessions": 16,
+            "inner_validation_share": 0.2,
+            "inner_validation_split_sha256": "25db1d96d7b9ee5a35157e171e115d016653e8f9c0b59b4b590f09c8e2dbdf29",
+            "max_rounds": 2000,
+            "selected_rounds": 179,
+            "selection_metric": "qlike",
+            "superseded_rounds": 300
+          }
+        },
+        "loss_sha256": {
+          "B0": "18f0d216d3e4c877706c83dd51585fca18e9f8a814580c05c5651b721043c8db",
+          "B0+B1": "2c0f1c01d488a3a20bfdd64c0cf09a7744206386def43b336d062001d632d5c3",
+          "B0+B1+B2": "05246e3771635f6bf1f1534d89550a5035293ad77b38855a844ff4439013fb89",
+          "B0+B2": "4e568f97674688a71b27bea4e419889bf3174c7d314868ae4697f0c2705cfe90"
+        },
+        "windows": {
+          "primary_20": {
+            "delta_b1": {
+              "ci_high": 0.010003398450100594,
+              "ci_low": 0.0024005503540966405,
+              "estimate": 0.006203074510829337,
+              "newey_west_p_value": 0.00041264383388577735,
+              "p_value_holm_descriptive": 0.004,
+              "p_value_raw": 0.0008,
+              "sessions": 20
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.00479880175538757,
+              "ci_low": -0.005758282299168007,
+              "estimate": -0.000471198621299753,
+              "newey_west_p_value": 0.8528191916332358,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.8773,
+              "sessions": 20
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.0027253438508152163,
+              "ci_low": -0.0065317842014145176,
+              "estimate": -0.0018339163386164223,
+              "newey_west_p_value": 0.34522548735693936,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.4278,
+              "sessions": 20
+            },
+            "delta_interaction": {
+              "ci_high": 0.0029037896397741004,
+              "ci_low": -0.0055314389007660334,
+              "estimate": -0.001362717717316669,
+              "newey_west_p_value": 0.512810908304716,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.5399,
+              "sessions": 20
+            },
+            "delta_total": {
+              "ci_high": 0.009303958550246042,
+              "ci_low": -0.0005671460177422609,
+              "estimate": 0.0043691581722129155,
+              "newey_west_p_value": 0.05035523319029859,
+              "p_value_holm_descriptive": 0.3704,
+              "p_value_raw": 0.0926,
+              "sessions": 20
+            }
+          },
+          "sensitivity_30": {
+            "delta_b1": {
+              "ci_high": 0.00628527012849697,
+              "ci_low": -0.0006883663353520896,
+              "estimate": 0.0028188327200449133,
+              "newey_west_p_value": 0.23299759752089821,
+              "p_value_holm_descriptive": 0.6055,
+              "p_value_raw": 0.1211,
+              "sessions": 30
+            },
+            "delta_b2_given_b0": {
+              "ci_high": 0.002372473431755075,
+              "ci_low": -0.004537914811096025,
+              "estimate": -0.0010972553861514768,
+              "newey_west_p_value": 0.5259569123022165,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.5685,
+              "sessions": 30
+            },
+            "delta_b2_given_b1": {
+              "ci_high": 0.002028590589576408,
+              "ci_low": -0.004718821168290565,
+              "estimate": -0.0013731578003249743,
+              "newey_west_p_value": 0.33628428768056284,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.4182,
+              "sessions": 30
+            },
+            "delta_interaction": {
+              "ci_high": 0.0028027125923953057,
+              "ci_low": -0.00333744779463868,
+              "estimate": -0.0002759024141734978,
+              "newey_west_p_value": 0.8683225900058891,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.8703,
+              "sessions": 30
+            },
+            "delta_total": {
+              "ci_high": 0.005638694225163223,
+              "ci_low": -0.002672338530158014,
+              "estimate": 0.0014456749197199396,
+              "newey_west_p_value": 0.5568410955803058,
+              "p_value_holm_descriptive": 1.0,
+              "p_value_raw": 0.5041,
+              "sessions": 30
+            }
+          }
+        }
+      }
+    },
+    "overall_classification": "MIXED_EXPLORATORY"
+  },
+  "forecast_cube_sha256": "71e1ccf9a4970fc6053a0204ce4981634dc9fc1ba3637d093e0b76ed9fd19002",
+  "personal_paths_emitted": false,
+  "protocol_id": "phase8a-exploratory-bridge-20of30-v2",
+  "result_sha256": "bc645dd6356b892cd319d4a1634be5427a93efe4ead86292ae1a3505cbb745b9",
+  "schema_version": "phase8-exploratory-bridge-result-v2.0",
+  "sealed_cohorts_read": 1,
+  "secret_values_emitted": false,
+  "status": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE",
+  "store_preflight": {
+    "completed_count": 30,
+    "records": 750,
+    "sealed_cohorts_read": 0,
+    "sessions": 30
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "compatibility_overrides": [
+    "LOSSLESS_PER_DATE_FULL_TAPE_VIEW",
+    "POLARS_NATIVE_DATE_WINDOW_COMPARISON",
+    "LEGACY_BAR_LOADER_HARDLINK_TO_RP3_STORE",
+    "SHARED_BAR_LOADER_PRESERVES_OHLCV",
+    "TARGET_BLIND_FIVE_SESSION_WARMUP_FROM_FROZEN_DEVELOPMENT_BARS",
+    "FILTER_WARMUP_ROWS_BEFORE_PANEL_WRITE"
+  ],
+  "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+  "forecast_cube_sha256": "71e1ccf9a4970fc6053a0204ce4981634dc9fc1ba3637d093e0b76ed9fd19002",
+  "frozen_head": "7eed06c26ab8cf4ae4e922dfabbaedc8838bfe49",
+  "initial_failure": "RP3_EVAL_NO_SESSIONS",
+  "layout_recovery_manifest_sha256": "a0777ee15fd98344d0072938e017e05a5baea67c11991992ecd772c1c71db0d7",
+  "legacy_bar_alias": {
+    "alias_relative_path": "data/fmp/rp2_ohlcv_repair/underlying_1min_repair.parquet",
+    "hardlink": true,
+    "scientific_bytes_changed": false,
+    "sha256": "e9b1c01891304d21b7a128342636f35eda05e97b712d7055fac400ec197e5135",
+    "source_relative_path": "rp3/data/fmp/underlying_1min_eval.parquet"
+  },
+  "recovery_sha256": "17761b9cf39a545083ca6404d2985636ac73ef016dbe8f722661d4c38cdde9f1",
+  "result_sha256": "bc645dd6356b892cd319d4a1634be5427a93efe4ead86292ae1a3505cbb745b9",
+  "root_cause": "ASSET_PARTITIONED_MATERIALIZATION_VS_DIRECT_DATE_DISCOVERY",
+  "schema_version": "phase8-execution-recovery-v1.0",
+  "sealed_cohorts_read": 1,
+  "sealed_store_reopened": false,
+  "status": "RESUME_COMPLETE",
+  "warmup": {
+    "assets": [
+      "AAPL",
+      "AMZN",
+      "META",
+      "MSFT",
+      "NVDA",
+      "TSLA"
+    ],
+    "purpose": "LAGGED_FEATURE_INITIALIZATION_ONLY",
+    "rows": 11700,
+    "sessions": [
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17"
+    ],
+    "source_relative_path": "data/fmp/gate3/underlying_1min_dev80.parquet",
+    "source_sha256": "894d6874e6910f2b54b9467a5dc9ac0e3a7b0fc56cdbc8d8b2a0235048917eb1",
+    "target_or_forecast_read": false,
+    "written_or_scored_as_phase8": false
+  }
+}

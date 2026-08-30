@@ -256,6 +256,51 @@
    "sha256": "27b5002ae11efeabfb15a48f20d2722f1259ab7586cf05acaf5fe8f80100174a"
   },
   {
+   "bytes": 19376,
+   "path": "artifacts/phase8_bridge/evaluator_freeze_v3.json",
+   "sha256": "2820de3bb66257702f837619d0e2947827fe4ffe2b4d9fd8a015f35498e7373b"
+  },
+  {
+   "bytes": 19376,
+   "path": "artifacts/phase8_bridge/evaluator_freeze_v4.json",
+   "sha256": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63"
+  },
+  {
+   "bytes": 2015,
+   "path": "artifacts/phase8_bridge/execution_recovery_20260830_v1.json",
+   "sha256": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf"
+  },
+  {
+   "bytes": 52877,
+   "path": "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json",
+   "sha256": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b"
+  },
+  {
+   "bytes": 3413,
+   "path": "artifacts/phase8_bridge/one_shot_custody_20260830_v1.json",
+   "sha256": "f3010c11dee81e646843a5cb4ab1ed734e173b572baa9ebf189d3031ff0efed5"
+  },
+  {
+   "bytes": 3628,
+   "path": "artifacts/phase8_bridge/one_shot_custody_20260830_v2.json",
+   "sha256": "50990645efb63c861dee45371e25ad67b8504ff42296e73e1346b5245c632e79"
+  },
+  {
+   "bytes": 3255,
+   "path": "artifacts/phase8_bridge/one_shot_custody_20260830_v3.json",
+   "sha256": "52a9e50de191bb6391267b6e423fffe190c5b42120ac699b74f1131d7ad34067"
+  },
+  {
+   "bytes": 465,
+   "path": "artifacts/phase8_bridge/owner_authorization_20260830_v1.json",
+   "sha256": "4e14fce59b7efc7e193fbe45e6dbede75b18b55041a1240b538a9c0f9551b315"
+  },
+  {
+   "bytes": 22963,
+   "path": "artifacts/phase8_bridge/result_20260830_v1.json",
+   "sha256": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491"
+  },
+  {
    "bytes": 379,
    "path": "artifacts/phase9/protocol_freeze.json",
    "sha256": "852f0ad00f2eabd42de98833f6a06ac6f80ab6babb999c188b57e3f69ad56207"
@@ -264,6 +309,16 @@
    "bytes": 1094,
    "path": "artifacts/provider_timing_v22/next_confirmation_preregistration_v1.json",
    "sha256": "643774ffbe534cbc176420b6d2d4cdbec699c2089869c1a8e561775fa8871ca5"
+  },
+  {
+   "bytes": 2749,
+   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
+   "sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba"
+  },
+  {
+   "bytes": 8755,
+   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
+   "sha256": "260f0e5d3f8b1dc7b29336df47395ee4a25ead01f9d9c70ce272e2bf6a1860f4"
   },
   {
    "bytes": 4596,
@@ -299,6 +354,11 @@
    "bytes": 3574,
    "path": "docs/phase9_total_contribution_protocol_v1.md",
    "sha256": "8cf87b4d865be2a858747079acbbcd45570ca2b2b77e547b2bba2d4142f25649"
+  },
+  {
+   "bytes": 3218,
+   "path": "reports/phase8a_exploratory_bridge_addendum_v1.md",
+   "sha256": "ad9014b339e63c5e9f0220c13792c02665367d95d44adf3c31bad9b3d5afb4f2"
   },
   {
    "bytes": 4104,
@@ -344,26 +404,6 @@
    "bytes": 9000,
    "path": "specs/001-pit-options-rv30/contracts/target-blind-confirmation-preregistration-v4.schema.json",
    "sha256": "f00c426addf63c484de6f183c2b93672c3b39a94151eccd034dac7d27aebb78b"
-  },
-  {
-   "bytes": 8755,
-   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
-   "sha256": "260f0e5d3f8b1dc7b29336df47395ee4a25ead01f9d9c70ce272e2bf6a1860f4"
-  },
-  {
-   "bytes": 2749,
-   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
-   "sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba"
-  },
-  {
-   "bytes": 19376,
-   "path": "artifacts/phase8_bridge/evaluator_freeze_v3.json",
-   "sha256": "2820de3bb66257702f837619d0e2947827fe4ffe2b4d9fd8a015f35498e7373b"
-  },
-  {
-   "bytes": 19376,
-   "path": "artifacts/phase8_bridge/evaluator_freeze_v4.json",
-   "sha256": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63"
   }
  ],
  "note": "Append-only registry of frozen evidence. Entries are never edited or removed; amendments are new paths. Physical mutation of any listed file fails the test suite (tests/contract/test_frozen_artifacts_registry.py).",

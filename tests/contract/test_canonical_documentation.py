@@ -129,7 +129,9 @@ def test_current_threats_and_reports_match_corrected_evidence() -> None:
     assert "NO_CURRENT_ELIGIBLE_RESULT" in matrix
     assert "PIT_V22_RECONCILIATION_BLOCKED" in matrix
     assert "NOT_EVALUATED_AFTER_PIT_CORRECTION" in matrix
-    assert "sealed_cohorts_read=0" in matrix
+    assert "Phase 8 consumed its sole exploratory" in matrix
+    assert "MIXED_EXPLORATORY" in matrix
+    assert "Phase 9 remains sealed and unread" in matrix
 
     corrected = json.loads(_read("artifacts/gate3_har/results_corrected_int8.json"))
     displays = (

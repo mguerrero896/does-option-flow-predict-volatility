@@ -1,0 +1,10 @@
+{
+  "authorization_type": "PHASE8_BRIDGE_ONE_SHOT_READ",
+  "protocol_id": "phase8a-exploratory-bridge-20of30-v2",
+  "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
+  "authorize_read_and_evaluation": true,
+  "sealed_cohorts_read_before": 0,
+  "authorization_id": "phase8a-one-shot-4e7c4139-97bd-4d60-8ad7-29a87da8cf75",
+  "authorized_by": "Miguel Guerrero Quijano",
+  "authorized_at_utc": "2026-08-29T14:54:29.7326484+00:00"
+}
