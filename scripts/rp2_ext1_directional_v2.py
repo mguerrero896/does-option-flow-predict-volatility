@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
@@ -20,6 +21,7 @@ from mds650.b1v3_confirmation import canonical_sha256, sha256_file
 from mds650.metrics import holm_adjust
 from mds650.rp2.bars import BAR_SOURCES
 from mds650.rp2.dml import cross_fitted_residuals, dml_partial_out, time_block_folds
+from mds650.rp2.feature_registry import feature_map, registry_sha256
 from mds650.rp2.inference import (
     clustered_mean_test,
     inference_config_digest,
@@ -28,7 +30,17 @@ from mds650.rp2.inference import (
     newey_west_variance,
     wild_cluster_bootstrap,
 )
-from mds650.rp2.panel import B0_FEATURES, B1_FEATURES, load_merged_panel, mask_sha256
+from mds650.rp2.panel import (
+    B0_FEATURES,
+    B1_FEATURES,
+    B2_FEATURES,
+    chronological_split,
+    common_evaluation_mask,
+    lift_mask,
+    load_merged_panel,
+    mask_sha256,
+    session_rank,
+)
 from mds650.rp2.preprocessing import (
     describe_preprocessor,
     fit_preprocessor,
@@ -39,6 +51,8 @@ from mds650.rp2.preprocessing import (
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "configs" / "rp2_ext1_directional_v2.json"
 OUTPUT = ROOT / "artifacts" / "rp2_ext1_directional_v2"
+FACTORIAL_CONTRACT = ROOT / "configs" / "rp2_ext1_directional_factorial_v1.json"
+FACTORIAL_OUTPUT = ROOT / "artifacts" / "rp2_ext1_directional_factorial_v1"
 FROZEN_ARTIFACT = ROOT / "artifacts" / "rp2_ext1_mechanism_utility" / "mechanism_utility.json"
 PANEL_PATHS = {
     "B0": ROOT / "artifacts" / "rp2_block4_b0" / "b0_panel.parquet",
@@ -78,6 +92,144 @@ def load_contract(path: Path = CONTRACT) -> dict[str, Any]:
     ):
         raise ValueError("RP2_EXT1_DIRECTIONAL_FAMILY_MISMATCH")
     return document
+
+
+def load_factorial_contract(path: Path = FACTORIAL_CONTRACT) -> dict[str, Any]:
+    """Load the result-blind treatment-by-coverage contract and fail on drift."""
+
+    document: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+    stored = document.get("contract_sha256")
+    unsigned = dict(document)
+    unsigned.pop("contract_sha256", None)
+    if stored != canonical_sha256(unsigned):
+        raise ValueError("RP2_EXT1_FACTORIAL_CONTRACT_HASH_MISMATCH")
+
+    frozen = json.loads(FROZEN_ARTIFACT.read_text(encoding="utf-8"))
+    if sha256_file(FROZEN_ARTIFACT) != document["frozen_ext1"]["artifact_file_sha256"]:
+        raise ValueError("RP2_EXT1_FACTORIAL_FROZEN_ARTIFACT_DRIFT")
+    if frozen.get("core_treatments") != document["treatment_sets"]["ext1_exact"]["features"]:
+        raise ValueError("RP2_EXT1_FACTORIAL_FROZEN_TREATMENTS_DRIFT")
+
+    b2 = document["treatment_sets"]["b2_panel_12"]
+    if b2["features"] != list(B2_FEATURES) or len(b2["features"]) != 12:
+        raise ValueError("RP2_EXT1_FACTORIAL_B2_FEATURES_DRIFT")
+    if b2["feature_registry_sha256"] != registry_sha256():
+        raise ValueError("RP2_EXT1_FACTORIAL_FEATURE_REGISTRY_DRIFT")
+
+    source_names = [name for name, _, _ in BAR_SOURCES]
+    coverage = document["coverage_cells"]
+    if coverage["complete"]["source_names"] != source_names:
+        raise ValueError("RP2_EXT1_FACTORIAL_COMPLETE_COVERAGE_DRIFT")
+    august = coverage["august"]["source_names"]
+    if not august or not set(august) < set(source_names):
+        raise ValueError("RP2_EXT1_FACTORIAL_AUGUST_COVERAGE_INVALID")
+
+    expected = (
+        len(document["treatment_sets"])
+        * len(coverage)
+        * len(document["roles"])
+        * len(document["outcome"]["horizons_minutes"])
+    )
+    if document["family"]["size"] != expected:
+        raise ValueError("RP2_EXT1_FACTORIAL_FAMILY_MISMATCH")
+    return document
+
+
+def factorial_cells(contract: Mapping[str, Any]) -> tuple[tuple[str, str], ...]:
+    """The four treatment-by-coverage cells in their frozen declaration order."""
+
+    return tuple(
+        (treatment, coverage)
+        for treatment in contract["treatment_sets"]
+        for coverage in contract["coverage_cells"]
+    )
+
+
+def resolve_treatment_design(
+    panel: pl.DataFrame,
+    requested: Sequence[str],
+    aliases: Mapping[str, Mapping[str, str]],
+) -> tuple[list[str], tuple[str, ...], list[dict[str, str]]]:
+    """Resolve historical labels to current columns without changing their values."""
+
+    available = feature_map("B2_CORE", "B2_RICH")
+    resolved: list[str] = []
+    provenance: list[dict[str, str]] = []
+    for name in requested:
+        alias = aliases.get(name)
+        source = name if alias is None else alias["panel_column"]
+        if source not in available:
+            raise ValueError(f"RP2_EXT1_FACTORIAL_UNKNOWN_TREATMENT:{name}:{source}")
+        if source not in panel.columns:
+            raise ValueError(f"RP2_EXT1_FACTORIAL_PANEL_COLUMN_MISSING:{name}:{source}")
+        if source in resolved:
+            raise ValueError(f"RP2_EXT1_FACTORIAL_DUPLICATE_RESOLUTION:{source}")
+        resolved.append(source)
+        if alias is not None:
+            provenance.append(
+                {
+                    "requested_feature": name,
+                    "panel_column": source,
+                    "resolution": alias["status"],
+                    "value_operation": "IN_MEMORY_DESIGN_ALIAS_NO_RECOMPUTATION",
+                }
+            )
+    return resolved, tuple(requested), provenance
+
+
+def factorial_attribution(
+    tests: Mapping[str, Mapping[str, object]], contract: Mapping[str, Any]
+) -> dict[str, object]:
+    """Describe the two main shifts on log(Wald/df), with the frozen classification rule."""
+
+    treatment_effects: list[float] = []
+    coverage_effects: list[float] = []
+    interactions: list[dict[str, object]] = []
+
+    def evidence(key: str) -> float:
+        record = tests[key]
+        value = _number(record["joint_wald"]) / _number(record["treatment_df"])
+        if value <= 0.0:
+            raise ValueError(f"RP2_EXT1_FACTORIAL_WALD_NONPOSITIVE:{key}")
+        return math.log(value)
+
+    for role in contract["roles"]:
+        for horizon in contract["attribution"]["primary_horizons_minutes"]:
+            core_august = evidence(f"ext1_exact/august/{role}/h{horizon}")
+            core_complete = evidence(f"ext1_exact/complete/{role}/h{horizon}")
+            b2_august = evidence(f"b2_panel_12/august/{role}/h{horizon}")
+            b2_complete = evidence(f"b2_panel_12/complete/{role}/h{horizon}")
+            treatment = ((b2_august - core_august) + (b2_complete - core_complete)) / 2.0
+            coverage = ((core_complete - core_august) + (b2_complete - b2_august)) / 2.0
+            interaction = (b2_complete - b2_august) - (core_complete - core_august)
+            treatment_effects.append(treatment)
+            coverage_effects.append(coverage)
+            interactions.append(
+                {
+                    "role": role,
+                    "horizon": horizon,
+                    "treatment_main_effect": treatment,
+                    "coverage_main_effect": coverage,
+                    "interaction": interaction,
+                }
+            )
+
+    treatment_shift = float(np.median(np.abs(treatment_effects)))
+    coverage_shift = float(np.median(np.abs(coverage_effects)))
+    if treatment_shift > 0.0 and treatment_shift >= 2.0 * coverage_shift:
+        classification = "TREATMENT_SET"
+    elif coverage_shift > 0.0 and coverage_shift >= 2.0 * treatment_shift:
+        classification = "COVERAGE"
+    else:
+        classification = "MIXED_OR_INTERACTION"
+    return {
+        "classification": classification,
+        "evidence_scale": contract["attribution"]["evidence_scale"],
+        "median_abs_treatment_main_effect": treatment_shift,
+        "median_abs_coverage_main_effect": coverage_shift,
+        "primary_contrasts": interactions,
+        "interpretation": contract["attribution"]["interpretation"],
+    }
 
 
 def analysis_mask(frame: pl.DataFrame, cell: BoolArray, horizon: int, mode: str) -> BoolArray:
@@ -274,6 +426,246 @@ def _source_hashes(data_root: Path) -> dict[str, object]:
             raise FileNotFoundError(f"RP2_EXT1_DIRECTIONAL_BAR_SOURCE_MISSING:{name}:{relative}")
         out[name] = {"role": role, "path": relative, "sha256": sha256_file(path)}
     return out
+
+
+def _coverage_sources(names: Sequence[str]) -> tuple[tuple[str, str, str], ...]:
+    selected = tuple(source for source in BAR_SOURCES if source[0] in names)
+    if [name for name, _, _ in selected] != list(names):
+        raise ValueError("RP2_EXT1_FACTORIAL_COVERAGE_SOURCE_DRIFT")
+    return selected
+
+
+def _factorial_role_results(
+    panel: pl.DataFrame,
+    targets: pl.DataFrame,
+    *,
+    role: str,
+    requested: Sequence[str],
+    aliases: Mapping[str, Mapping[str, str]],
+    horizons: Sequence[int],
+    train_share: float,
+    folds: int,
+) -> tuple[dict[int, dict[str, object]], dict[int, BoolArray], dict[str, object]]:
+    actual, labels, alias_provenance = resolve_treatment_design(panel, requested, aliases)
+    frame = (
+        panel.filter(pl.col("role") == role)
+        .join(targets, on=["asset", "session_date", "origin_minute"], how="left")
+        .sort(["session_date", "asset", "origin_minute"])
+    )
+    rv30 = np.asarray(frame["rv30"].to_numpy(), dtype=np.float64)
+    keep = common_evaluation_mask(frame, rv30)
+    if int(keep.sum()) < 2000:
+        raise ValueError(f"RP2_EXT1_FACTORIAL_INSUFFICIENT_BASE_ROWS:{role}")
+    available = frame.filter(pl.Series(keep))
+    sessions = session_rank(
+        np.asarray(available["session_date"].cast(pl.Utf8).to_numpy(), dtype=np.str_)
+    )
+    train, _ = chronological_split(sessions, train_share=train_share)
+    nuisance_features = [*B0_FEATURES, *B1_FEATURES]
+    nuisance, _, nuisance_fitted = fold_design(available, nuisance_features, train)
+    treatment, treatment_names, treatment_fitted = fold_design(
+        available, actual, train, intercept=False
+    )
+    if len(treatment_names) != len(labels):
+        raise ValueError(
+            f"RP2_EXT1_FACTORIAL_TREATMENT_DESIGN_WIDTH:{len(labels)}:{len(treatment_names)}"
+        )
+
+    results: dict[int, dict[str, object]] = {}
+    masks: dict[int, BoolArray] = {}
+    for horizon in horizons:
+        response = np.asarray(
+            available[f"y_signed_return_{horizon}"].to_numpy(), dtype=np.float64
+        )
+        measured = ext1._dml_on_target(
+            nuisance,
+            treatment,
+            response,
+            sessions,
+            labels,
+            folds=folds,
+            evaluation_base=keep,
+            frame=available,
+            nuisance_features=nuisance_features,
+        )
+        if measured is None:
+            raise ValueError(f"RP2_EXT1_FACTORIAL_UNMEASURED:{role}:h{horizon}")
+        mask = lift_mask(keep, np.isfinite(response))
+        if measured["evaluation_mask_sha256"] != mask_sha256(mask):
+            raise ValueError("RP2_EXT1_FACTORIAL_MASK_HASH_MISMATCH")
+        measured.update(
+            {
+                "treatment_df": len(labels),
+                "wald_per_df": _number(measured["joint_wald"]) / len(labels),
+                "requested_treatments": list(labels),
+                "resolved_panel_columns": actual,
+            }
+        )
+        results[horizon] = measured
+        masks[horizon] = mask
+    design = {
+        "requested_treatments": list(labels),
+        "resolved_panel_columns": actual,
+        "alias_resolution": alias_provenance,
+        "nuisance_preprocessing": describe_preprocessor(nuisance_fitted),
+        "treatment_preprocessing": describe_preprocessor(treatment_fitted),
+    }
+    return results, masks, design
+
+
+def _factorial_mask_invariants(
+    masks: Mapping[str, Mapping[int, BoolArray]], contract: Mapping[str, Any]
+) -> dict[str, object]:
+    same_treatment_masks: list[dict[str, object]] = []
+    coverage_subsets: list[dict[str, object]] = []
+    for role in contract["roles"]:
+        for horizon in contract["outcome"]["horizons_minutes"]:
+            for coverage in contract["coverage_cells"]:
+                core = masks[f"ext1_exact/{coverage}/{role}"][horizon]
+                b2 = masks[f"b2_panel_12/{coverage}/{role}"][horizon]
+                if not np.array_equal(core, b2):
+                    raise ValueError(
+                        f"RP2_EXT1_FACTORIAL_TREATMENT_MASK_DRIFT:{coverage}:{role}:h{horizon}"
+                    )
+                same_treatment_masks.append(
+                    {
+                        "coverage": coverage,
+                        "role": role,
+                        "horizon": horizon,
+                        "rows": int(core.sum()),
+                        "evaluation_mask_sha256": mask_sha256(core),
+                    }
+                )
+            for treatment in contract["treatment_sets"]:
+                august = masks[f"{treatment}/august/{role}"][horizon]
+                complete = masks[f"{treatment}/complete/{role}"][horizon]
+                if not np.all(~august | complete):
+                    raise ValueError(
+                        f"RP2_EXT1_FACTORIAL_COVERAGE_NOT_NESTED:{treatment}:{role}:h{horizon}"
+                    )
+                coverage_subsets.append(
+                    {
+                        "treatment_set": treatment,
+                        "role": role,
+                        "horizon": horizon,
+                        "august_rows": int(august.sum()),
+                        "complete_rows": int(complete.sum()),
+                        "added_rows": int((complete & ~august).sum()),
+                    }
+                )
+    return {
+        "same_coverage_role_horizon_same_mask_across_treatment_sets": True,
+        "august_mask_subset_of_complete_mask": True,
+        "treatment_mask_checks": same_treatment_masks,
+        "coverage_subset_checks": coverage_subsets,
+    }
+
+
+def run_factorial(
+    data_root: Path,
+    output_dir: Path,
+    *,
+    contract_path: Path = FACTORIAL_CONTRACT,
+) -> Path:
+    """Execute the frozen 2x2 treatment-by-coverage directional comparison."""
+
+    contract = load_factorial_contract(contract_path)
+    source_hashes = _source_hashes(data_root)
+    panel = load_merged_panel(PANEL_PATHS["B0"], PANEL_PATHS["B1"], PANEL_PATHS["B2"])
+    origins = _origins(panel)
+    targets: dict[str, pl.DataFrame] = {}
+    coverage_records: dict[str, dict[str, object]] = {}
+    for coverage_name, coverage_spec in contract["coverage_cells"].items():
+        coverage_record: dict[str, object] = {}
+        sources = _coverage_sources(coverage_spec["source_names"])
+        targets[coverage_name] = ext1.build_target_battery(
+            data_root,
+            origins,
+            sources=sources,
+            coverage=coverage_record,
+        )
+        coverage_records[coverage_name] = coverage_record
+
+    tests: dict[str, dict[str, object]] = {}
+    masks: dict[str, dict[int, BoolArray]] = {}
+    designs: dict[str, object] = {}
+    raw_p: dict[str, float] = {}
+    for treatment_name, coverage_name in factorial_cells(contract):
+        treatment = contract["treatment_sets"][treatment_name]
+        for role in contract["roles"]:
+            records, cell_masks, design = _factorial_role_results(
+                panel,
+                targets[coverage_name],
+                role=role,
+                requested=treatment["features"],
+                aliases=contract["aliases"],
+                horizons=contract["outcome"]["horizons_minutes"],
+                train_share=contract["estimator"]["train_share_for_feature_preprocessing"],
+                folds=contract["estimator"]["folds"],
+            )
+            cell = f"{treatment_name}/{coverage_name}/{role}"
+            masks[cell] = cell_masks
+            designs[cell] = design
+            for horizon, record in records.items():
+                key = f"{cell}/h{horizon}"
+                tests[key] = record
+                raw_p[key] = _number(record["joint_p_value"])
+
+    if len(tests) != contract["family"]["size"]:
+        raise ValueError(f"RP2_EXT1_FACTORIAL_FAMILY_REALIZED:{len(tests)}")
+    for key, adjusted in holm_adjust(raw_p).items():
+        tests[key]["holm_p"] = adjusted
+    invariants = _factorial_mask_invariants(masks, contract)
+    attribution = factorial_attribution(tests, contract)
+
+    document: dict[str, object] = {
+        "schema_version": "rp2-ext1-directional-factorial-results-v1.0",
+        "label": contract["label"],
+        "generated_at_utc": datetime.now(UTC).isoformat(),
+        "code_commit": _git_head(),
+        "sealed_cohorts_read": 0,
+        "contract": {
+            "path": contract_path.relative_to(ROOT).as_posix(),
+            "contract_sha256": contract["contract_sha256"],
+            "file_sha256": sha256_file(contract_path),
+        },
+        "inference_config_digest": inference_config_digest(),
+        "inputs": {
+            "panels": {
+                name: {"path": path.relative_to(ROOT).as_posix(), "sha256": sha256_file(path)}
+                for name, path in PANEL_PATHS.items()
+            },
+            "bar_sources": source_hashes,
+            "frozen_ext1": {
+                "path": FROZEN_ARTIFACT.relative_to(ROOT).as_posix(),
+                "sha256": sha256_file(FROZEN_ARTIFACT),
+            },
+            "feature_registry_sha256": registry_sha256(),
+        },
+        "coverage": coverage_records,
+        "designs": designs,
+        "tests": tests,
+        "mask_invariants": invariants,
+        "attribution": attribution,
+        "limits": [
+            "The two treatment sets are not nested, so attribution is descriptive.",
+            "D and V are already-observed exploratory partitions, not confirmation cohorts.",
+            (
+                "No trading profit, costs, slippage, capacity, calibration, or causal "
+                "effect is measured."
+            ),
+        ],
+    }
+    document["self_sha256"] = canonical_sha256(document)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / "results.json"
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(
+        json.dumps(document, indent=2, sort_keys=True, allow_nan=False) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+    return path
 
 
 def _survivors(battery: Mapping[str, object]) -> list[str]:
@@ -526,10 +918,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=Path("D:/MDS650"))
     parser.add_argument("--output-dir", type=Path, default=OUTPUT)
+    parser.add_argument("--factorial-only", action="store_true")
+    parser.add_argument("--factorial-contract", type=Path, default=FACTORIAL_CONTRACT)
+    parser.add_argument("--factorial-output-dir", type=Path, default=FACTORIAL_OUTPUT)
     parser.add_argument("--train-share", type=float, default=0.6)
     parser.add_argument("--folds", type=int, default=5)
     args = parser.parse_args(argv)
-    path = run(args.data_root, args.output_dir, train_share=args.train_share, folds=args.folds)
+    if args.factorial_only:
+        path = run_factorial(
+            args.data_root,
+            args.factorial_output_dir,
+            contract_path=args.factorial_contract,
+        )
+    else:
+        path = run(args.data_root, args.output_dir, train_share=args.train_share, folds=args.folds)
     print(path)
     return 0
 

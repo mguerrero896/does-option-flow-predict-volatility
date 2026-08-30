@@ -95,7 +95,7 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/rp2_b2_exploratory_campaign.py` | HISTORICAL/EXPLORATORY | Reproduce the registered B2 exploratory campaign. |
 | `scripts/rp2_b2_exploratory_v2.py` | HISTORICAL/EXPLORATORY | Reproduce the learned-index B2 diagnostic. |
 | `scripts/rp2_ext1_mechanism_utility.py` | HISTORICAL/EXPLORATORY | Test whether the Block 7 association generalizes beyond RV30 level. |
-| `scripts/rp2_ext1_directional_v2.py` | HISTORICAL/EXPLORATORY | Reproduce the preregistered horizon and time-of-day directional closeout from D/V only. |
+| `scripts/rp2_ext1_directional_v2.py` | HISTORICAL/EXPLORATORY | Reproduce the directional closeout and its treatment-by-coverage factorial from D/V only. |
 | `scripts/rp2_ext2_tape_tensors.py` | HISTORICAL/EXPLORATORY | Produce tape tensors shared by recorded extensions. |
 | `scripts/rp2_ext3_acquire_missing_bars.py` | CONTROLLED | Acquire bars missing from a recorded extension inventory. |
 | `scripts/rp2_ext4_power_both_contrasts.py` | HISTORICAL/EXPLORATORY | Reproduce prospective power for both historical contrasts. |

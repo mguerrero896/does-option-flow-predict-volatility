@@ -191,3 +191,67 @@ def test_directional_metric_is_session_balanced(directional) -> None:  # type: i
     assert record["theta"] == pytest.approx(0.5)
     assert record["sessions"] == 4
     assert record["evaluation_mask_sha256"] == "b" * 64
+
+
+def test_factorial_contract_freezes_exact_four_cells(directional) -> None:  # type: ignore[no-untyped-def]
+    contract = directional.load_factorial_contract(
+        ROOT / "configs" / "rp2_ext1_directional_factorial_v1.json"
+    )
+
+    assert list(directional.factorial_cells(contract)) == [
+        ("ext1_exact", "august"),
+        ("ext1_exact", "complete"),
+        ("b2_panel_12", "august"),
+        ("b2_panel_12", "complete"),
+    ]
+    assert len(contract["treatment_sets"]["ext1_exact"]["features"]) == 10
+    assert len(contract["treatment_sets"]["b2_panel_12"]["features"]) == 12
+    assert contract["family"]["size"] == 40
+
+
+def test_factorial_hawkes_name_is_an_in_memory_design_alias(directional) -> None:  # type: ignore[no-untyped-def]
+    panel = pl.DataFrame({"b2_5m_decay_intensity_innovation": [0.1, -0.2]})
+    contract = directional.load_factorial_contract(
+        ROOT / "configs" / "rp2_ext1_directional_factorial_v1.json"
+    )
+
+    resolved, labels, provenance = directional.resolve_treatment_design(
+        panel,
+        ["b2_5m_hawkes_innovation"],
+        contract["aliases"],
+    )
+
+    assert resolved == ["b2_5m_decay_intensity_innovation"]
+    assert labels == ("b2_5m_hawkes_innovation",)
+    assert provenance == [
+        {
+            "requested_feature": "b2_5m_hawkes_innovation",
+            "panel_column": "b2_5m_decay_intensity_innovation",
+            "resolution": "RECORDED_SEMANTIC_RENAME",
+            "value_operation": "IN_MEMORY_DESIGN_ALIAS_NO_RECOMPUTATION",
+        }
+    ]
+
+
+def test_factorial_attribution_uses_dimension_normalized_wald(directional) -> None:  # type: ignore[no-untyped-def]
+    tests: dict[str, dict[str, object]] = {}
+    for role in ("D", "V"):
+        for horizon in (60, 120):
+            for coverage in ("august", "complete"):
+                tests[f"ext1_exact/{coverage}/{role}/h{horizon}"] = {
+                    "joint_wald": 10.0,
+                    "treatment_df": 10,
+                }
+                tests[f"b2_panel_12/{coverage}/{role}/h{horizon}"] = {
+                    "joint_wald": 120.0,
+                    "treatment_df": 12,
+                }
+    contract = directional.load_factorial_contract(
+        ROOT / "configs" / "rp2_ext1_directional_factorial_v1.json"
+    )
+
+    summary = directional.factorial_attribution(tests, contract)
+
+    assert summary["classification"] == "TREATMENT_SET"
+    assert summary["median_abs_treatment_main_effect"] > 0.0
+    assert summary["median_abs_coverage_main_effect"] == pytest.approx(0.0)
