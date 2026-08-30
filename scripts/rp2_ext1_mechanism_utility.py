@@ -38,7 +38,7 @@ from mds650.rp2.bars import BAR_SOURCES, FULL_SESSION_MINUTES, build_session_gri
 from mds650.rp2.dml import cross_fitted_residuals, dml_partial_out, time_block_folds
 from mds650.rp2.feature_registry import describe_features, feature_map
 from mds650.rp2.inference import minimum_detectable_effect_from_long_run_variance
-from mds650.rp2.ladder import LADDER, fit_ladder_model
+from mds650.rp2.ladder import fit_ladder_model
 from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
@@ -175,6 +175,14 @@ def build_target_battery(
                 "requested_without_bar_group": len(set(origins_by_key) - candidate),
                 "session_minutes": dict(sorted(session_minutes.items())),
                 **{key: int(value) for key, value in sorted(counters.items())},
+                **{
+                    key: int(counters[key])
+                    for key in (
+                        "rejected_fill_share",
+                        "rejected_nonfinite_close",
+                        "rejected_nonpositive_close",
+                    )
+                },
             }
         )
     if not rows:

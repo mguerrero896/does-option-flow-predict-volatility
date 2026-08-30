@@ -77,6 +77,9 @@ def test_target_builder_accepts_a_true_early_close(monkeypatch) -> None:  # type
     assert np.isfinite(targets["y_signed_return_120"][0])
     assert coverage["early_close_asset_sessions"] == 1
     assert coverage["session_minutes"] == {"210": 1}
+    assert coverage["rejected_fill_share"] == 0
+    assert coverage["rejected_nonfinite_close"] == 0
+    assert coverage["rejected_nonpositive_close"] == 0
 
 
 def test_legacy_dml_keeps_coefficient_magnitudes() -> None:
@@ -175,9 +178,16 @@ def test_directional_metric_is_session_balanced(directional) -> None:  # type: i
     response = np.array([0.2, -0.1] * 4)
     sessions = np.repeat(np.arange(4, dtype=np.int64), 2)
 
-    record = directional.directional_metric(score, response, sessions, family_size=68)
+    record = directional.directional_metric(
+        score,
+        response,
+        sessions,
+        family_size=68,
+        evaluation_mask_sha256="b" * 64,
+    )
 
     assert record["sign_accuracy"] == pytest.approx(1.0)
     assert record["balanced_accuracy"] == pytest.approx(1.0)
     assert record["theta"] == pytest.approx(0.5)
     assert record["sessions"] == 4
+    assert record["evaluation_mask_sha256"] == "b" * 64

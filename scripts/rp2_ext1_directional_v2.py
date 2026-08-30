@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import subprocess
 from collections.abc import Mapping, Sequence
@@ -129,7 +128,12 @@ def effect_record(
 
 
 def directional_metric(
-    score: FloatArray, response: FloatArray, sessions: IntArray, *, family_size: int
+    score: FloatArray,
+    response: FloatArray,
+    sessions: IntArray,
+    *,
+    family_size: int,
+    evaluation_mask_sha256: str,
 ) -> dict[str, object]:
     """Session-balanced sign accuracy; descriptive hit rate is retained separately."""
 
@@ -165,7 +169,7 @@ def directional_metric(
         p_value=measured.p_value_two_sided,
         rows=int(score.size),
         clusters=measured.clusters,
-        evaluation_mask_sha256=hashlib.sha256(finite.tobytes()).hexdigest(),
+        evaluation_mask_sha256=evaluation_mask_sha256,
         family_size=family_size,
     )
     record.update(
@@ -383,15 +387,27 @@ def _directional_results(
         for horizon in (60, 120):
             keep = analysis_mask(frame, cell, horizon, "matched120_tod")
             response = np.asarray(frame[f"y_signed_return_{horizon}"].to_numpy(), dtype=np.float64)
-            kept_frame = frame.filter(pl.Series(keep))
+            metric_keep = keep & np.isfinite(score) & np.isfinite(response) & (response != 0.0)
+            dates = np.asarray(frame["session_date"].cast(pl.Utf8).to_numpy(), dtype=np.str_)
+            candidate_dates = np.unique(dates[metric_keep])
+            eligible_dates = [
+                session
+                for session in candidate_dates
+                if np.unique(response[metric_keep & (dates == session)] > 0.0).size == 2
+            ]
+            excluded_sessions = len(candidate_dates) - len(eligible_dates)
+            metric_keep &= np.isin(dates, eligible_dates)
+            kept_frame = frame.filter(pl.Series(metric_keep))
             sessions = kept_frame["session_date"].rank("dense").cast(pl.Int64).to_numpy() - 1
             key = f"metric/{cell_name}/matched120_tod/h{horizon}"
             record = directional_metric(
-                score[keep],
-                response[keep],
+                score[metric_keep],
+                response[metric_keep],
                 np.asarray(sessions, dtype=np.int64),
                 family_size=family_size,
+                evaluation_mask_sha256=mask_sha256(metric_keep),
             )
+            record["excluded_single_class_sessions"] = excluded_sessions
             record.update(
                 {
                     "test_type": "balanced_sign_accuracy",
@@ -497,10 +513,12 @@ def run(data_root: Path, output_dir: Path, *, train_share: float, folds: int) ->
     document["self_sha256"] = canonical_sha256(document)
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / "results.json"
-    path.write_text(
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(
         json.dumps(document, indent=2, sort_keys=True, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+    temporary.replace(path)
     return path
 
 
