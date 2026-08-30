@@ -4,8 +4,8 @@
 > `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.
 > This file supersedes any narrative document that disagrees with it.
 
-- Governance: decision 109 is the latest (109 recorded).
-- Frozen evidence: 94 artifacts registered; 92 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
+- Governance: decision 110 is the latest (110 recorded).
+- Frozen evidence: 97 artifacts registered; 95 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
 - Public metadata redactions: 10 frozen artifacts retain original and redacted SHA-256 custody in `data/PUBLIC_METADATA_REDACTIONS.json`.
 - Gated data: 15 files in private storage (`data/GATED_DATA_POINTERS.json`).
 - Supabase publication: **NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT** (19 schema migrations, 1 catalog reconciliation, and 6 dataset manifests committed; sealed reads: Phase 8 = 1, Phase 9 = 0).
@@ -25,7 +25,7 @@
 - Current eligible headline results: none.
 - Historical measurements remain traceable in `docs/rp2_v3/SUPERSEDED_RESULTS.md`; they are not current claims.
 - Current academic report: `reports/final_report_draft_v2.md` with the Word submission rendering pinned under `current_report` in the machine state.
-- Post-cutoff Phase 8A result: `reports/phase8a_exploratory_bridge_addendum_v7.md`.
+- Post-cutoff Phase 8A result: `reports/phase8a_exploratory_bridge_addendum_v8.md`.
 
 ## Future campaigns
 

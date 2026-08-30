@@ -56,6 +56,7 @@ Lifecycle labels used below:
 | `scripts/evaluate_phase8_bridge_v2.py` | CONTROLLED | Perform the separately authorized one-shot Phase 8 bridge evaluation; metadata-only preflight remains safe. |
 | `scripts/build_phase8_bridge_dispersion_audit_v1.py` | CONTROLLED | Replay Phase 8 inference from the pinned cube and compare session dispersion with the frozen and current D/V references without reopening the sealed store. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v1.py` | CONTROLLED | Bind the Phase 8 dispersion auditor and replay dependencies before producing evidence. |
+| `scripts/freeze_phase8_dispersion_audit_producer_v2.py` | CONTROLLED | Refreeze the same audit closure after the Dependabot lock update. |
 | `scripts/rp3_freeze_b2_index.py` | CONTROLLED | Freeze the development-only B2 index for the RP3 primary test. |
 | `scripts/rp3_freeze_forecasters.py` | CONTROLLED | Freeze the two RP3 forecasters and their verified-byte manifest. |
 | `scripts/rp3_sizing.py` | CURRENT | Reproduce target-blind RP3 sample-size planning. |
