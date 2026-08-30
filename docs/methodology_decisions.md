@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–104](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–105](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1565,3 +1565,23 @@ Requirements-consistency and preregistration gates pass.
      `artifacts/phase8_bridge/dispersion_audit_20260830_v1.json`, self-hash
      `96e956cf03abb648b5544f96626199756dc0acc52aaa9b32fe19a428c9d052ce`, and
      `reports/phase8a_exploratory_bridge_addendum_v2.md`.
+
+<a id="decision-105"></a>
+
+105. **The Phase 8 dispersion comparison is bound to its measured D/V producer and
+     append-only correction paths (2026-08-30).** The current D/V comparison verifies
+     `scripts/rp2_block12_prospective_design.py` at SHA-256
+     `4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8`
+     before measurement and records that identity with the three input-panel hashes.
+     A producer mismatch fails closed. The writer invokes
+     `mds650.storage.assert_outside_frozen` before computation, so it cannot replace a
+     registered result.
+
+     Decision 104 and its v1/v2 evidence paths remain historical records. The corrected
+     machine authority is the new path
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v2.json`, self-hash
+     `909d754e598f959536f8407f1ed7c3488d5006e9d9da75527488414cc402075a`.
+     Its numerical content is identical to v1 except for the newly recorded producer
+     identity. The current narrative authority is the new path
+     `reports/phase8a_exploratory_bridge_addendum_v3.md`. The scientific conclusion and
+     exploratory, descriptive, non-confirmatory boundary do not change.
