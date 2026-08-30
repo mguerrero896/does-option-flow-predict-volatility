@@ -4,7 +4,7 @@ Compiled 2026-08-17. Re-analysis of already-read frozen forecasts only (decision
 compliant). Code: `src/mds650/calibration.py`, runner `scripts/run_gate2_calibration.py`,
 artifact `artifacts/gate2_calibration/results.json` (+ `.sha256`; input parquet sha256s
 recorded inside). Design and interpretation rules were pre-stated in the runner docstring
-and `docs/execution_backlog_20260817.md` before any delta was computed.
+and `docs/execution_backlog_20260817.md` *(not part of the public release; see [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) for what was removed and why)* before any delta was computed.
 
 ## Question
 

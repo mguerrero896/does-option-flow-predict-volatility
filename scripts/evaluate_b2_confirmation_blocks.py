@@ -524,8 +524,11 @@ def main() -> None:
         model_card_path = ARTIFACT_ROOT / "model_card.md"
     _write_effect_figure(contrasts, figure_path)
     _write_model_card(result_payload, model_card_path)
-    result_payload["figure_path"] = "artifacts/b2_confirmation/frozen_evaluation_qlike_effects.svg"
-    result_payload["model_card_path"] = "docs/b2_confirmation_model_card.md"
+    # Record the paths this run actually wrote. These were hardcoded to the delay-0
+    # locations, so every delay rerun pointed a reader at another run's figure and
+    # model card while its own sat beside it unreferenced.
+    result_payload["figure_path"] = figure_path.relative_to(ROOT).as_posix()
+    result_payload["model_card_path"] = model_card_path.relative_to(ROOT).as_posix()
     _write_json(ARTIFACT_ROOT / "frozen_evaluation_results.json", result_payload)
     print(
         json.dumps(

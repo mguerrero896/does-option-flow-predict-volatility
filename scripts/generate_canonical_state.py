@@ -15,6 +15,7 @@ import hashlib
 import json
 import re
 import subprocess
+import tomllib
 from pathlib import Path
 from typing import Any
 
@@ -66,6 +67,20 @@ AUTHORIZED_SOURCES = (
     "reports/final_report_draft_v2.docx",
     PHASE8_ADDENDUM.as_posix(),
 )
+
+
+
+def _enforced_coverage_floor() -> int:
+    """Read the floor CI actually enforces instead of restating a remembered number.
+
+    This value was hardcoded at 80 while CI moved to 90, so the machine-readable
+    authority published a threshold no gate used. Deriving it from the same file pytest
+    reads means the authority cannot drift from the rule again.
+    """
+
+    config = tomllib.loads((REPO / "pyproject.toml").read_text(encoding="utf-8"))
+    floor = config["tool"]["coverage"]["report"]["fail_under"]
+    return int(floor)
 
 
 def _sha(path: Path) -> str:
@@ -435,7 +450,7 @@ def build_state() -> dict[str, Any]:
         "ci": {
             "contract": "docs/ci_contract_v1.md",
             "required_checks": ["quality", "hermetic", "scientific-contracts"],
-            "coverage_min_percent": 80,
+            "coverage_min_percent": _enforced_coverage_floor(),
             "tier2_runner": "scripts/run_local_evidence_gates.py",
             "publish_gate": "scripts/publish_mirror.sh refuses to push unless tier-2 passes",
         },

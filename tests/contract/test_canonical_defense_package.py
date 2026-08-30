@@ -26,8 +26,8 @@ def test_defense_package_is_evidence_bound_and_safe(tmp_path: Path) -> None:
         "delta_b1v2": "MODEL_FAMILY_DEPENDENT",
         "delta_b2v2": "MODEL_FAMILY_DEPENDENT",
     }
-    assert (tmp_path / "MDS650_Canonical_RV30_Defense_Report.html").is_file()
-    assert (tmp_path / "MDS650_Canonical_RV30_Defense_Slides.md").is_file()
+    assert (tmp_path / "canonical_rv30_defense_report.html").is_file()
+    assert (tmp_path / "canonical_rv30_defense_slides.md").is_file()
     assert (tmp_path / "tables" / "canonical_registered_contrasts.csv").is_file()
     assert (tmp_path / "figures" / "canonical_qlike_contrasts.svg").is_file()
     assert all("C:\\Users\\" not in value for value in manifest["input_paths"])
@@ -40,7 +40,7 @@ def test_defense_package_preserves_registered_signs_and_forbids_overclaim(
     """A presentation artifact cannot erase the adverse registered robustness result."""
 
     defense.build_defense_package(SOURCE, tmp_path)
-    report = (tmp_path / "MDS650_Canonical_RV30_Defense_Report.md").read_text(encoding="utf-8")
+    report = (tmp_path / "canonical_rv30_defense_report.md").read_text(encoding="utf-8")
     table_rows = list(
         __import__("csv").DictReader(
             (tmp_path / "tables" / "canonical_registered_contrasts.csv").open(
@@ -49,7 +49,7 @@ def test_defense_package_preserves_registered_signs_and_forbids_overclaim(
         )
     )
     manifest = json.loads(
-        (tmp_path / "MDS650_Defense_Package_Manifest.json").read_text(encoding="utf-8")
+        (tmp_path / "defense_package_manifest.json").read_text(encoding="utf-8")
     )
 
     assert "MODEL_FAMILY_DEPENDENT" in report

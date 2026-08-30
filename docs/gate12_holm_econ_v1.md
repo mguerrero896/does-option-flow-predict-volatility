@@ -1,5 +1,7 @@
 # Gate 12 + global Holm + economic significance (v1, 2026-08-18)
 
+> **SUPERSEDED MEASUREMENT.** The `+0.057` effect this gate reports as surviving HAR-class baselines is a withdrawn headline figure, and the decision-56 findings it hardens are retired. The method record remains auditable; the numbers do not support a current claim. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) and [`positive_findings_v1.md`](positive_findings_v1.md).
+
 Three hardening deliverables from the remaining-work investigation. Labels:
 EXPLORATORY_DESCRIPTIVE (Gate 12), conservative-bound (Holm), TOY/DESCRIPTIVE (econ).
 Artifacts: `artifacts/gate12_harq_hardening/`, `artifacts/global_multiplicity/`,

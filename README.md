@@ -19,8 +19,11 @@ contribution in discovery and in the single sealed prospective read, but that co
 does **not** replicate under validation, and it is not promoted to a confirmatory claim.
 Nine of the twelve headline contrasts fall below their own minimum detectable effect.
 
-Underneath both sits a third observation: the contribution visible in 2024 weakens across
-the sample and is no longer detectable by 2026.
+The repository does not claim the effect faded over time. Era-split point estimates rise
+rather than fall, every era estimate sits below its familywise minimum detectable effect,
+and a time split cannot separate a regime change from a smaller training sample. A
+decay reading was tested, withdrawn, and is
+[recorded as invalidated](docs/rp2_v3/SUPERSEDED_RESULTS.md).
 
 This repository exists to make that null result *credible* rather than merely asserted.
 Any single test that fails to find an effect can be dismissed as a weak test. The design
@@ -44,7 +47,7 @@ flowchart LR
     Q --> I1["<b>Level forecasting</b><br/>QLIKE loss on RV30"]
     Q --> I2["<b>Directional utility</b><br/>signed-return factorial"]
     Q --> I3["<b>Prospective read</b><br/>sealed, one-shot"]
-    Q --> I4["<b>Economic value</b><br/>variance risk premium"]
+    Q --> I4["<b>Economic value</b><br/>implied minus trailing<br/>variance spread"]
 
     I1 --> A(["<b>No incremental contribution</b><br/>from flow, given state"])
     I2 --> A
@@ -61,10 +64,10 @@ by one flawed choice than agreement within any single one of them.
 
 | Instrument | What it would have caught | Record |
 | --- | --- | --- |
-| Level forecasting | A real reduction in QLIKE loss on RV30 | [`block10_inference_v1.md`](docs/rp2/block10_inference_v1.md) |
+| Level forecasting | A real reduction in QLIKE loss on RV30 | [`rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) |
 | Directional utility | Value in the sign of returns that a variance loss cannot score | [`extension_b2_directional_utility_v2.md`](docs/rp2/extension_b2_directional_utility_v2.md) |
 | Prospective read | An effect that survives on data sealed before the protocol was written | [`phase8a addendum v10`](reports/phase8a_exploratory_bridge_addendum_v10.md) |
-| Economic value | A tradable premium that statistical loss functions miss | [`block11_economics_v1.md`](docs/rp2/block11_economics_v1.md) |
+| Economic value | A tradable spread that statistical loss functions miss | [`block11_economics_v1.md`](docs/rp2/block11_economics_v1.md) |
 
 ## Research design
 
@@ -107,6 +110,8 @@ sealed before future observations and read under its specific access contract ca
 described as prospective or one-read.
 
 ## Evidence and data access
+
+![From raw market data to a sealed verdict](docs/figures/pipeline_diagram.svg)
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,
 schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in

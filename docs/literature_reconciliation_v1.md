@@ -1,5 +1,7 @@
 # Literature reconciliation and contribution statement (v1, 2026-08-18)
 
+> **PARTIALLY SUPERSEDED.** The contribution statement below claims a design "with a second prospective, TOST-armed read scheduled". Phase 8 was never TOST-armed, and its one read is now consumed with result `MIXED_EXPLORATORY`. The literature reconciliation itself stands; the contribution wording does not. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+
 Ex-ante predictions of each relevant literature strand versus what this project observed,
 so the null/adverse findings read as *findings*, not defects. Citation discipline: only
 ledger-verified sources (`docs/literature_evidence_ledger_v2.csv`) may be cited in the

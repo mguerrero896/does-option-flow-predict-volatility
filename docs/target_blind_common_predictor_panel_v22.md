@@ -1,5 +1,7 @@
 # Target-Blind Common Predictor Panel v2.2
 
+> **SUPERSEDED BY v2.3.** This document claims to describe the only panel eligible for a future confirmation study. Version 2.3 rebuilt the predictor-only matrix after the Unusual Whales availability correction, and the successor protocol binds to it. See [`target_blind_common_predictor_panel_v23.md`](target_blind_common_predictor_panel_v23.md) and [`confirmation_protocol_v4_sourcebound.md`](confirmation_protocol_v4_sourcebound.md).
+
 ## Scope
 
 This artefact is an offline, target-blind input layer. It joins one canonical

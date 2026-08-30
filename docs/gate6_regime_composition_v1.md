@@ -1,5 +1,7 @@
 # Gate 6 — Regime/event composition (v1)
 
+> **SUPERSEDED REFERENCE.** This gate states that the prospective read's TOST bound is fixed by the Gate 4 amendment. Phase 8 was never TOST-armed, and `docs/gate4_prospective_design_v1.md` was removed from the public release for that framing. The regime analysis stands; the prospective-design clause does not. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+
 Compiled 2026-08-17. Code: `scripts/run_gate6_regimes.py`; artifact
 `artifacts/gate6_regimes/results.json` (+ sha256). Frozen-artifact re-analysis plus the
 public ^VIX end-of-day series; decision-52 compliant.

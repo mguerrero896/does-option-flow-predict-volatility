@@ -32,6 +32,6 @@ Commands and results
    PASS_DEFENSE_PACKAGE_STRUCTURAL_VALIDATION.
 
 Manifest
-- reports/canonical_validation_v1/MDS650_Defense_Package_Manifest.json
+- reports/canonical_validation_v1/defense_package_manifest.json
 - SHA-256: e1469f47639307aa74e9961be52d6b71f62a287168d4710d8f178e0c58f9566d
 - Claim eligibility: MODEL_FAMILY_DEPENDENT for delta_b1v2 and delta_b2v2.

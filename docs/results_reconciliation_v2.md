@@ -129,7 +129,7 @@ blocks (rebuilt B2 features from the local raw tape; frozen evaluators unchanged
 artifacts under `artifacts/b2_confirmation_delay{120,300}/`). The Gamma Δ(B2) barely
 moves — block A +0.0784 → +0.0763 → +0.0766, block B +0.0348 → +0.0346 → +0.0329 —
 and LightGBM stays adverse throughout. Per the pre-stated rule in
-`docs/timing_sensitivity_execution_plan_v1.md`, C5's results are **not** conditional on
+`docs/timing_sensitivity_execution_plan_v1.md` *(not part of the public release; see [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) for what was removed and why)*, C5's results are **not** conditional on
 the exact 60 s cutoff; R-023's exposure narrows to the unproven sub-60-second band
 (under live measurement, decision 57). The C4 replication mirror remains to be run and
 is the explicitly stated residual of the plan.

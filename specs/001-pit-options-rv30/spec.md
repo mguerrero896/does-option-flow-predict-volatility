@@ -1113,11 +1113,15 @@ original task list, is incorporated by reference under decisions 54–59 in
 
 - **Gates 1–12** (`docs/gate*_v1.md`, `docs/gate12_holm_econ_v1.md`): studentized
   inference, calibration-vs-information, HAR/HARQ baselines, decay-aware prospective
-  design (TOST amendment to Phase 8), measured PIT foundations (A001 retired; A002
+  design (TOST amendment to Phase 8 - **withdrawn**; see below), measured PIT foundations (A001 retired; A002
   live campaign under decision 57), regime/noise/selection robustness, signal
   localization, cross-family positive formalization, era map, HARQ hardening, global
   Holm, and the economic-significance appendix. Labels: confirmatory claims unchanged;
   all decision-56 findings are `EXPLORATORY_DESCRIPTIVE`.
+  The decay-aware design and its TOST amendment is withdrawn: Phase 8 was never
+  TOST-armed, its source gate document was removed from the public release, and the
+  executed read returned `MIXED_EXPLORATORY`. See
+  [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](../../docs/rp2_v3/SUPERSEDED_RESULTS.md).
 - **Phase 9** (decisions 58–59): frozen prospective total-contribution protocol
   (`docs/phase9_total_contribution_protocol_v1.md`, hash in
   `artifacts/phase9/protocol_freeze.json`) with nightly collection active and

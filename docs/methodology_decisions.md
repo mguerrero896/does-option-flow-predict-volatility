@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–113](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–114](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout policy and published-surface consistency remediation. |
 
 <a id="decision-1"></a>
 
@@ -283,7 +283,7 @@ Requirements-consistency and preregistration gates pass.
    and null signs must all remain in the variant ledger; no route may be promoted because it
    produces a favorable sign.
 45. **Institutional authority and narrative (2026-08-14)** —
-   `reports/MDS650_MASTER_PROJECT_DOSSIER.md` is the human-readable index of code, data,
+   `reports/MDS650_MASTER_PROJECT_DOSSIER.md` *(not part of the public release; see [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) for what was removed and why)* is the human-readable index of code, data,
    artifacts, joins, models, results and roadmap. It does not supersede immutable manifests,
    schemas, execution logs, hashes or registered contracts. Any conflict is resolved in favor
    of the lower-level signed evidence and documented as a supersession, never silently edited.
@@ -1487,7 +1487,7 @@ Requirements-consistency and preregistration gates pass.
 
 102. **The sole Phase 8A exploratory read is consumed and reconciled
      (2026-08-30).** The owner authorized the one-shot read at
-     2026-08-29T14:52:57Z; token
+     2026-08-29T14:54:29Z; token
      `phase8a-one-shot-4e7c4139-97bd-4d60-8ad7-29a87da8cf75` binds protocol
      `phase8a-exploratory-bridge-20of30-v2` and contract SHA-256
      `b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e`.
@@ -1767,3 +1767,65 @@ Requirements-consistency and preregistration gates pass.
      approximation; exact cluster-bootstrap sizing may be larger. No new collection,
      protocol or outcome read is activated by this decision. Design:
      `docs/rp3/B2_INCREMENTAL_EDGE_ROUTE.md`; `sealed_cohorts_read=0`.
+
+<a id="decision-114"></a>
+
+114. **Consistency remediation of the published surface after an adversarial audit
+     (2026-08-31).** A 79-agent audit of the published repository confirmed 40 defects
+     across figures, retracted-claim leakage, dates, cross-document contradictions and
+     citations. The recurring shape was not error in the science but drift between what
+     the evidence supports and what the surface says.
+
+     Three of the most severe were introduced the same day by a README rewrite: a
+     temporal-decay sentence that restated the withdrawn `-0.0277/year` line in prose, a
+     diagram naming the economic instrument a "variance risk premium" when
+     `docs/rp2/block11_economics_v1.md` explicitly denies that reading, and an evidence
+     table citing a document whose artifact is superseded and whose reported increments
+     point the other way. All three are retracted.
+
+     Two illustrations under `docs/figures/` were deleted. They drew the withdrawn decay
+     line, the withdrawn TOST-armed framing of Phase 8, `+0.057`, `+0.013`, a positive
+     five-of-five B2 claim, and a Phase 8 read dated a day early and labelled still
+     ahead. Both were referenced by no document, so no index or review pass could reach
+     them.
+
+     Eight documents asserting retracted content received supersession banners naming the
+     current authority. Content is retained: its hashes and citations are what let a
+     reviewer audit a replacement against the thing it replaced.
+
+     Four contracts now hold these properties rather than trusting review:
+     `test_published_figures_carry_no_withdrawn_claims` reads text out of figures and
+     matches on the claim rather than one spelling, covering unreferenced illustrations
+     because a browsable directory is still published;
+     `test_withdrawn_claims_are_labelled` requires a notice, distinguishing a document
+     that asserts a retracted claim from one that retracts it;
+     `test_defense_package_matches_its_producer` compares the published package to a
+     fresh build byte for byte; `test_coverage_floor_is_stated_once` binds the floor in
+     `pyproject.toml`, the workflow and the canonical state to one number.
+
+     Two long-standing drifts surfaced through that work. The published defense package
+     had never matched its producer, because its figures carried CRLF while the builder
+     emits LF and `.gitattributes` did not cover `.svg`, `.html` or `.txt`; and its
+     historical notice had been hand-added after generation, so it was absent from the
+     HTML rendering entirely and was destroyed by the first regeneration. The producer
+     now emits the notice in both formats. Separately,
+     `data/CANONICAL_STATE.json` published an 80% coverage floor that no gate had used
+     since the raise to 90%, because the generator held the number as a literal.
+
+     Deliberately not changed: nothing registered in `data/FROZEN_ARTIFACTS.json`; the
+     `figure_path` and `model_card_path` pointers already written into the delay-120 and
+     delay-300 confirmation artifacts, which name the delay-0 run's files - the producer
+     is fixed for future runs and the existing artifacts stay untouched under decision
+     62; and `reports/final_report_draft_v2.md`, which names its course on the title
+     page because that document is submitted for course credit.
+
+     One defect is knowingly left standing.
+     `docs/DISCOVERY_VALIDATION_CONFIRMATION_PROTOCOL.md` cites
+     `docs/phase8_one_shot_protocol_v1.md`, which is not in this release, and cannot be
+     annotated: its bytes are hashed into the frozen Phase 8 bridge contract, so adding
+     an explanatory note breaks the seal it was written under. Annotating it was
+     attempted and reverted when
+     `test_frozen_contract_matches_target_blind_regeneration` refused the change. The
+     citation contract exempts it, and a companion test requires any such exemption to
+     be justified by an artifact that actually hashes the file, so the exemption cannot
+     be claimed for a document that is merely awkward to edit.
