@@ -155,17 +155,20 @@ def test_citation_does_not_claim_an_unpublished_release() -> None:
     assert "*.cff text eol=lf" in attributes
 
 
-def test_immutability_contract_records_the_pending_freeze_batch_honestly() -> None:
+def test_immutability_contract_records_the_current_release_anchor() -> None:
     contract = (REPO / "docs" / "evidence_immutability_v1.md").read_text(encoding="utf-8")
     layer6 = next(line for line in contract.splitlines() if line.startswith("| 6 |"))
 
-    assert "`evidence-freeze-2026-08-30`" in layer6
-    assert "`908e35610e36558a163940a8586a4e1a22a62c20`" in layer6
-    assert "81-entry registry asset" in layer6
-    assert "SHA-256 `e3337d0eb6703a6356c30fdf66867714dc7ffc9fd0f8bafb3e5c75c24382a571`" in layer6
-    assert "live registry adds the Phase 8 dispersion audits and addenda through v10" in layer6
-    assert "fresh release snapshot is pending" in layer6
+    assert "`evidence-freeze-2026-08-30-phase8-dispersion`" in layer6
+    assert "`8429f73933e378e3ad03572af44ed0d4f83c6c9b`" in layer6
+    assert "103-entry registry asset" in layer6
+    assert "SHA-256 `cf69c349671cd1cda636fdc4fb0c0c0a45e976d93a7563b82b64cd1befee9bad`" in layer6
     assert "both source archives resolve" in layer6
+    assert "`evidence-freeze-2026-08-30`" in layer6
+    assert "81-entry asset" in layer6
+    assert "SHA-256 `e3337d0eb6703a6356c30fdf66867714dc7ffc9fd0f8bafb3e5c75c24382a571`" in layer6
     assert "Release ID `376899713`" in layer6
     assert "`evidence-freeze-2026-08-18` tag ref and source archives are absent" in layer6
-    assert "current freeze batch awaiting its release anchor" in layer6
+    assert "Off-machine anchor through the 103-entry batch" in layer6
+    assert "fresh release snapshot is pending" not in layer6
+    assert "awaiting its release anchor" not in layer6
