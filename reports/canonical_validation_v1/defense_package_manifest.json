@@ -13,8 +13,8 @@
     "artifacts/canonical_validation_v1/contrasts.json"
   ],
   "output_hashes": {
-    "canonical_rv30_defense_report.html": "d26de1bd4f6ea446129c9e22b5ce08c6d3d00fc824ebd109d4c661127167ae47",
-    "canonical_rv30_defense_report.md": "9e7c8c726ca76239e05932a44d4cbb227fb338152776ee0703feaeafd1f1c0b1",
+    "canonical_rv30_defense_report.html": "0fd3ce20b9a4b510f63f5a7f6fce595b1f70e698588cff49561bff52d0a667b4",
+    "canonical_rv30_defense_report.md": "1db4249be057e0ada883a6b33ea08112af22de311e53461a284da36d1b29f696",
     "canonical_rv30_defense_slides.md": "b5c942555a95defb4acb9ee057d164f1fd49a232f27d76a7cd00474fbc01979b",
     "figures/canonical_design_flow.svg": "0a632ca67443a5ea66cca4791ce1c6ef63d6bd254fbaed7a29655471301af287",
     "figures/canonical_qlike_contrasts.svg": "e44784d79cd35d96a457401bf9299bca2984155441ff894ae38b665ff58e2adf",

@@ -15,6 +15,7 @@ import html
 import io
 import json
 import os
+import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -334,11 +335,26 @@ def _markdown_result_table(records: Sequence[Mapping[str, str]]) -> str:
     return "\n".join(lines)
 
 
+# The package is a dated snapshot of the 2026-08-11 evidence. Its conclusions were later
+# superseded, so every rendering must carry the notice; a reader who meets the HTML alone
+# must not take MODEL_FAMILY_DEPENDENT for the project's current answer. Emitting it from
+# the producer rather than hand-editing the output keeps the published package reproducible.
+_HISTORICAL_NOTICE_LINES = (
+    "**Historical report (2026-08-11 evidence cutoff).** Its measurements remain "
+    "auditable, but its conclusions do not define the current project state.",
+    "See `../final_report_draft_v2.md`, `../../docs/rp2_v3/SUPERSEDED_RESULTS.md` and "
+    "`../../data/CANONICAL_STATE.json`.",
+)
+
+
 def _report_markdown(records: Sequence[Mapping[str, str]]) -> str:
     """Render the complete professor-readable report from registered evidence only."""
 
     result_table = _markdown_result_table(records)
+    notice = chr(10).join("> " + line for line in _HISTORICAL_NOTICE_LINES)
     return f"""# Canonical RV30 Validation — Defense Report
+
+{notice}
 
 ## Executive answer
 
@@ -460,6 +476,11 @@ def _report_html(markdown: str, records: Sequence[Mapping[str, str]]) -> str:
         for record in records
     )
     narrative = html.escape(markdown).replace("\n", "<br>\n")
+    notice_html = re.sub(
+        r"\*\*(.+?)\*\*",
+        r"<strong>\1</strong>",
+        " ".join(html.escape(line) for line in _HISTORICAL_NOTICE_LINES),
+    )
     return f"""<!doctype html>
 <html lang=\"en\">
 <head>
@@ -469,6 +490,7 @@ def _report_html(markdown: str, records: Sequence[Mapping[str, str]]) -> str:
 <style>
 body {{ font-family: Arial, sans-serif; color: #172033; line-height: 1.48; margin: 2rem auto; max-width: 1120px; padding: 0 1rem; }}
 h1, h2 {{ color: #123c69; }}
+.historical {{ background: #fdf3e3; border-left: .35rem solid #b8860b; padding: 1rem; }}
 .decision {{ background: #eef5fb; border-left: .35rem solid #123c69; padding: 1rem; font-weight: 700; }}
 table {{ border-collapse: collapse; width: 100%; font-size: .9rem; margin: 1rem 0 2rem; }}
 th, td {{ border: 1px solid #c9d3df; padding: .55rem; vertical-align: top; text-align: left; }}
@@ -479,6 +501,7 @@ th {{ background: #e8f0f7; }}
 </head>
 <body>
 <h1>Canonical RV30 Validation — Defense Report</h1>
+<p class=\"historical\">{notice_html}</p>
 <p class=\"decision\">Canonical decision: MODEL_FAMILY_DEPENDENT. The package keeps every registered positive and negative sign.</p>
 <h2>Registered out-of-sample results</h2>
 <p>A positive QLIKE delta favours the expanded information set. The table displays only registered Gamma GLM and LightGBM roles.</p>

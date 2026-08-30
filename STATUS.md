@@ -33,5 +33,5 @@
 
 ## CI
 
-- Required checks: quality, hermetic, scientific-contracts (coverage >= 80%).
+- Required checks: quality, hermetic, scientific-contracts (coverage >= 90%).
 - Tier 2 (licensed evidence): `scripts/run_local_evidence_gates.py`; scripts/publish_mirror.sh refuses to push unless tier-2 passes.

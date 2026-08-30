@@ -1,5 +1,7 @@
 # RP2-v2 remediation — validation report
 
+> **SUPERSEDED MEASUREMENT.** The Block 7 joint test reported below (`p = 3 x 10^-46`) was re-measured; `../rp2_v3/SUPERSEDED_RESULTS.md` records the replacement. The narrative that the finding "survived the control" describes the withdrawn run, not the current one. Use [`data/CANONICAL_STATE.json`](../../data/CANONICAL_STATE.json) for current eligibility.
+
 **Branch:** `rp2-v2-remediation` from `dbd571d`
 **Scope:** audit of the Research Program v2 feature and inference layer, and remediation of
 the defects that audit found.

@@ -1,5 +1,7 @@
 # Gate 9 — Signal localization (v1, exploratory)
 
+> **SUPERSEDED FRAMING.** This gate describes Phase 8 as `TOST-armed` and positioned to state a conclusion affirmatively. That framing is withdrawn: the implementation checked interval compatibility with a margin, not TOST, and the executed read returned `MIXED_EXPLORATORY`. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) and [`phase8_bridge_protocol_v2.md`](phase8_bridge_protocol_v2.md).
+
 Compiled 2026-08-17. Code: `scripts/run_gate9_localization.py`; artifact
 `artifacts/gate9_localization/results.json` (+ sha256; all input hashes recorded).
 Label: EXPLORATORY_DEVELOPMENT_ONLY (the earnings section stratifies already-read

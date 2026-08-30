@@ -100,7 +100,7 @@
  },
  "ci": {
   "contract": "docs/ci_contract_v1.md",
-  "coverage_min_percent": 80,
+  "coverage_min_percent": 90,
   "publish_gate": "scripts/publish_mirror.sh refuses to push unless tier-2 passes",
   "required_checks": [
    "quality",
