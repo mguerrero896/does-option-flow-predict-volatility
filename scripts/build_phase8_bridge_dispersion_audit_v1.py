@@ -30,7 +30,13 @@ RESULT: Final = ROOT / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v4.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v5.json"
+FROZEN_INPUT_SHA256: Final = {
+    RESULT: "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
+    CONTRACT: "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
+    DESIGN: "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+    POINTERS: "2bf6a92c8ae46bbca56f4ce8e7943ed13abd04f91c2aa7f37f33b740b315e125",
+}
 CURRENT_DV_PRODUCER: Final = ROOT / "scripts" / "rp2_block12_prospective_design.py"
 CURRENT_DV_PRODUCER_SHA256: Final = (
     "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8"
@@ -42,6 +48,17 @@ CURRENT_DV_EXECUTABLE_SOURCES: Final = (
 CURRENT_DV_EXECUTABLE_CLOSURE_SHA256: Final = (
     "939a238b1ff703e57b597582bca24205bf8e2b947227e264fcc0140fb08dd95d"
 )
+CURRENT_DV_PANEL_SHA256: Final = {
+    "artifacts/rp2_block4_b0/b0_panel.parquet": (
+        "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a"
+    ),
+    "artifacts/rp2_block5_surface/b1_surface_panel.parquet": (
+        "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba"
+    ),
+    "artifacts/rp2_block6_flow/b2_flow_panel.parquet": (
+        "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda"
+    ),
+}
 MODELS: Final = ("gamma_glm", "lightgbm")
 INFORMATION_SETS: Final = ("B0", "B0+B1", "B0+B2", "B0+B1+B2")
 KEYS: Final = ("session_date", "asset", "origin_minute")
@@ -182,7 +199,9 @@ def _current_dv_reference(
     }
     identities: dict[str, Any] = {}
     for logical_path, path in supplied.items():
-        expected = str(pointers["panels"][logical_path]["sha256"])
+        expected = CURRENT_DV_PANEL_SHA256[logical_path]
+        if pointers["panels"][logical_path]["sha256"] != expected:
+            raise ValueError(f"PHASE8_DISPERSION_CURRENT_DV_POINTER_DRIFT:{logical_path}")
         _assert_hash(path, expected, "CURRENT_DV_PANEL")
         identities[logical_path] = {
             "bytes": path.stat().st_size,
@@ -198,6 +217,10 @@ def _current_dv_reference(
         reference[role] = measured
     return reference, {
         "panels": identities,
+        "pointer_manifest": {
+            "path": POINTERS.relative_to(ROOT).as_posix(),
+            "sha256": FROZEN_INPUT_SHA256[POINTERS],
+        },
         "producer": {
             "executable_closure": closure,
             "path": CURRENT_DV_PRODUCER.relative_to(ROOT).as_posix(),
@@ -210,6 +233,8 @@ def _current_dv_reference(
 def build_audit(
     *, forecast_cube: Path, b0_panel: Path, b1_panel: Path, b2_panel: Path
 ) -> dict[str, Any]:
+    for path, expected in FROZEN_INPUT_SHA256.items():
+        _assert_hash(path, expected, "FROZEN_INPUT")
     result = _load_json(RESULT)
     contract = _load_json(CONTRACT)
     design = _load_json(DESIGN)
@@ -222,6 +247,10 @@ def build_audit(
     )
     if result["contract_sha256"] != contract["contract_sha256"]:
         raise ValueError("PHASE8_DISPERSION_CONTRACT_IDENTITY_MISMATCH")
+    if contract["contract_sha256"] != _canonical_sha256(contract, omit="contract_sha256"):
+        raise ValueError("PHASE8_DISPERSION_CONTRACT_SELF_HASH_MISMATCH")
+    if result["result_sha256"] != _canonical_sha256(result, omit="result_sha256"):
+        raise ValueError("PHASE8_DISPERSION_RESULT_SELF_HASH_MISMATCH")
 
     cube = pl.read_parquet(forecast_cube)
     duplicate_keys = cube.height - cube.n_unique(
@@ -306,6 +335,11 @@ def build_audit(
                 "path": RESULT.relative_to(ROOT).as_posix(),
                 "file_sha256": _sha256(RESULT),
                 "result_sha256": result["result_sha256"],
+            },
+            "contract": {
+                "path": CONTRACT.relative_to(ROOT).as_posix(),
+                "file_sha256": FROZEN_INPUT_SHA256[CONTRACT],
+                "contract_sha256": contract["contract_sha256"],
             },
             "contract_power_design": {
                 "path": DESIGN.relative_to(ROOT).as_posix(),

@@ -10,11 +10,11 @@
    "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
    "dispersion_audit": {
     "aggregation_change_supported": false,
-    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260830_v4.json",
-    "audit_sha256": "277b4bac8e2da99a31ef80e2cbfcf845dadff8965353c4d6807c431737d86c77",
+    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260830_v5.json",
+    "audit_sha256": "1279424dafe1baf8ab7e293adc8c01b5655adda63692770a43df53599550cb43",
     "delta_b1_holm_below_0_05_cells": 3,
     "delta_b2_given_b1_holm_below_0_05_cells": 0,
-    "sha256": "573010f18ca96b1050a480bf488d2afbb577b6132eab00cdb0f6aa304e74957a"
+    "sha256": "84ccd0148b9c3012dfc82dfca3baba47d00cc0bb37e83862359c95ab566ed812"
    },
    "document": "docs/phase8_bridge_protocol_v2.md",
    "evaluator": {
@@ -64,7 +64,7 @@
  "authorized_sources": {
   ".github/workflows/ci.yml": "67cf4d90c5dd1b6941f5a434635accd6aea59d500b53e6b25d9136006c86f951",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
-  "artifacts/phase8_bridge/dispersion_audit_20260830_v4.json": "573010f18ca96b1050a480bf488d2afbb577b6132eab00cdb0f6aa304e74957a",
+  "artifacts/phase8_bridge/dispersion_audit_20260830_v5.json": "84ccd0148b9c3012dfc82dfca3baba47d00cc0bb37e83862359c95ab566ed812",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
   "artifacts/phase8_bridge/execution_recovery_20260830_v1.json": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf",
   "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b",
@@ -75,13 +75,13 @@
   "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09",
   "artifacts/rp2_v3/rp2-v3-20260827-remediation3/scorecard.json": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
-  "data/FROZEN_ARTIFACTS.json": "11e994f5701a83904b2c14f53f90f4d4c856b9ea0ac8b0d3d76a4d5bfd796b28",
+  "data/FROZEN_ARTIFACTS.json": "3584a04d877c8c9a6f7a073d890e8f0b577336454cb979dd63254d6da252e93e",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "51eaa73539706580cd75d752e1c288b66a520459581e8826bf6fd118a768975b",
   "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
   "docs/ci_contract_v1.md": "527e5e7730a423c465be5c3987d4e90edc6e10744a170b5d61ded46ff3387c9d",
-  "docs/evidence_immutability_v1.md": "f0a6025a2e187d6bbc43fc0cbffa8329ab0e542eb93629ef959b4b85fb466111",
-  "docs/methodology_decisions.md": "46d67b493b86c27b45e00815228b65427125a2fbffa621a9df9cffd9abe52cab",
+  "docs/evidence_immutability_v1.md": "c37bb2c770eec85875dc91065f852edebc43c56ccb406b07ef1b70720b9015c8",
+  "docs/methodology_decisions.md": "3bdc7e264ecff348f7801933986924022f29cfc156ddecabbbe908a638f3fed2",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
@@ -91,7 +91,7 @@
   "docs/rp2_v3/VERDICT.md": "92c432345b3df81215eadb7241de9e8e7e1ebf333a7d91b015a40f74cc66d0c6",
   "reports/final_report_draft_v2.docx": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08",
   "reports/final_report_draft_v2.md": "f5c13b5f214a0d397954d0e95f81710f8d5462282bb404ff123c6ba4aad7fc4a",
-  "reports/phase8a_exploratory_bridge_addendum_v5.md": "eced5dcfd5ed8063273d4a2fd02d57178ce340a45ba6983b27aaf3dbcac35bff",
+  "reports/phase8a_exploratory_bridge_addendum_v6.md": "2473311580d2467c5e08277464c72e593f4f99a9d10135f5ff8a274b99231642",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
  "canonical_results": {
@@ -112,8 +112,8 @@
  "current_report": {
   "evidence_cutoff": "2026-08-28",
   "phase8_addendum": {
-   "path": "reports/phase8a_exploratory_bridge_addendum_v5.md",
-   "sha256": "eced5dcfd5ed8063273d4a2fd02d57178ce340a45ba6983b27aaf3dbcac35bff"
+   "path": "reports/phase8a_exploratory_bridge_addendum_v6.md",
+   "sha256": "2473311580d2467c5e08277464c72e593f4f99a9d10135f5ff8a274b99231642"
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
@@ -137,16 +137,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 89,
+  "artifact_count": 91,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 87,
+  "physical_artifact_count": 89,
   "public_metadata_redactions": {
    "artifact_count": 10,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "11e994f5701a83904b2c14f53f90f4d4c856b9ea0ac8b0d3d76a4d5bfd796b28"
+  "registry_sha256": "3584a04d877c8c9a6f7a073d890e8f0b577336454cb979dd63254d6da252e93e"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
@@ -157,8 +157,8 @@
   "storage": "supabase project eqpyjikcewqaegnbaemf, private bucket 'research-data'"
  },
  "governance": {
-  "decision_count": 107,
-  "latest_decision": 107
+  "decision_count": 108,
+  "latest_decision": 108
  },
  "note": "AUTO-GENERATED by scripts/generate_canonical_state.py; never edit by hand. CI regenerates and fails on drift (decision 63).",
  "schema_version": "canonical-state-v1.0",
