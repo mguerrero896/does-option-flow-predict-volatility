@@ -251,6 +251,11 @@
    "sha256": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf"
   },
   {
+   "bytes": 9026,
+   "path": "artifacts/phase8_bridge/dispersion_audit_20260830_v1.json",
+   "sha256": "7727ff7c662f0853884dba20ceba47d3f151324aec0e89d4209d1f05b29b0c11"
+  },
+  {
    "bytes": 857,
    "path": "artifacts/phase8_bridge/evaluator_freeze_v2.json",
    "sha256": "27b5002ae11efeabfb15a48f20d2722f1259ab7586cf05acaf5fe8f80100174a"
@@ -359,6 +364,11 @@
    "bytes": 3218,
    "path": "reports/phase8a_exploratory_bridge_addendum_v1.md",
    "sha256": "ad9014b339e63c5e9f0220c13792c02665367d95d44adf3c31bad9b3d5afb4f2"
+  },
+  {
+   "bytes": 5847,
+   "path": "reports/phase8a_exploratory_bridge_addendum_v2.md",
+   "sha256": "783d1a42a548979706f7d8b9942ff558a3e11b5a110b25195af4c457242195b3"
   },
   {
    "bytes": 4104,

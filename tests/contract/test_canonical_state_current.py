@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -92,7 +91,8 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
         if protocol["id"] == "phase8-prospective-bridge"
     )
     assert phase8["state"] == (
-        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY"
+        "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
+        "AND_DISPERSION_AUDIT"
     )
     assert phase8["sealed_cohorts_read"] == 1
     assert phase8["result"]["artifact"] == (
@@ -100,8 +100,14 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     )
     assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert phase8["result"]["confirmatory_promotion_allowed"] is False
+    assert phase8["dispersion_audit"]["artifact"] == (
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v1.json"
+    )
+    assert phase8["dispersion_audit"]["aggregation_change_supported"] is False
+    assert phase8["dispersion_audit"]["delta_b1_holm_below_0_05_cells"] == 3
+    assert phase8["dispersion_audit"]["delta_b2_given_b1_holm_below_0_05_cells"] == 0
     assert state["current_report"]["phase8_addendum"]["path"] == (
-        "reports/phase8a_exploratory_bridge_addendum_v1.md"
+        "reports/phase8a_exploratory_bridge_addendum_v2.md"
     )
     assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])
     phase9 = next(
@@ -149,18 +155,19 @@ def test_citation_does_not_claim_an_unpublished_release() -> None:
     assert "*.cff text eol=lf" in attributes
 
 
-def test_immutability_contract_distinguishes_current_and_historical_releases() -> None:
+def test_immutability_contract_records_the_pending_freeze_batch_honestly() -> None:
     contract = (REPO / "docs" / "evidence_immutability_v1.md").read_text(encoding="utf-8")
     layer6 = next(line for line in contract.splitlines() if line.startswith("| 6 |"))
     registry_path = REPO / "data" / "FROZEN_ARTIFACTS.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
-    registry_digest = hashlib.sha256(registry_path.read_bytes()).hexdigest()
 
     assert "`evidence-freeze-2026-08-30`" in layer6
     assert "`908e35610e36558a163940a8586a4e1a22a62c20`" in layer6
-    assert f"{len(registry['entries'])}-entry registry asset" in layer6
-    assert f"SHA-256 `{registry_digest}`" in layer6
+    assert "81-entry registry asset" in layer6
+    assert "SHA-256 `e3337d0eb6703a6356c30fdf66867714dc7ffc9fd0f8bafb3e5c75c24382a571`" in layer6
+    assert f"{len(registry['entries'])}-entry live registry" in layer6
+    assert "fresh release snapshot is pending" in layer6
     assert "both source archives resolve" in layer6
     assert "Release ID `376899713`" in layer6
     assert "`evidence-freeze-2026-08-18` tag ref and source archives are absent" in layer6
-    assert "Current off-machine mirror-tampering anchor" in layer6
+    assert "current freeze batch awaiting its release anchor" in layer6

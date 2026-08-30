@@ -11,7 +11,7 @@ ineligible.
 |---|---|
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative evidence-cutoff thesis source; Phase 8/9 are reported as unopened/ongoing rather than as placeholders. |
 | [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Submission-ready Word rendering generated from the current Markdown source on 2026-08-28. |
-| [`phase8a_exploratory_bridge_addendum_v1.md`](phase8a_exploratory_bridge_addendum_v1.md) | Dated post-cutoff Phase 8A result, one-shot custody and recorded execution-recovery limitation. |
+| [`phase8a_exploratory_bridge_addendum_v2.md`](phase8a_exploratory_bridge_addendum_v2.md) | Current post-cutoff Phase 8A interpretation: all Holm p-values for B1 and B2 conditional on B1, cube-level dispersion audit and execution-recovery limitation. |
 
 The evidence-cutoff pair and post-cutoff addendum are hash-pinned under `current_report`
 in [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json). The Markdown thesis governs
@@ -24,6 +24,9 @@ Their withdrawn numerical claims and reasons remain in
 current canonical state.
 
 ## Historical (audit trail)
+
+[`phase8a_exploratory_bridge_addendum_v1.md`](phase8a_exploratory_bridge_addendum_v1.md)
+— frozen Phase 8A interpretation retained at its registered SHA-256; v2 is current.
 
 [`literature_review_20260811/`](literature_review_20260811/),
 [`literature_fulltext_audit_20260811/`](literature_fulltext_audit_20260811/) — literature
