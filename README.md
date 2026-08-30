@@ -139,7 +139,17 @@ or publish results.
 
 Hosted CI runs static quality, hermetic tests and scientific contracts against tracked
 public inputs. Exact commands and exclusions are in
-[`docs/ci_contract_v1.md`](docs/ci_contract_v1.md). The local Tier 2 gate additionally
+[`docs/ci_contract_v1.md`](docs/ci_contract_v1.md).
+
+Running `pytest` on a fresh clone reports failures from the panel guard, by design. It
+fails closed when the licensed panels are absent rather than skipping, because a silent
+skip would let an unverified run look green; each failure names
+`RP2_PANEL_UNVERIFIED` and the panel it wanted. To reproduce what hosted CI reproduces,
+set the same opt-out CI sets:
+
+```powershell
+$env:MDS650_PANEL_GUARD_MAY_SKIP = "1"; uv run pytest
+``` The local Tier 2 gate additionally
 requires licensed evidence and live access-posture credentials:
 
 ```powershell
