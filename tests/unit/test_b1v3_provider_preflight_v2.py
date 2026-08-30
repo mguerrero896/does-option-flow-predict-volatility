@@ -263,3 +263,97 @@ def test_candidate_plan_rejects_tampered_confirmation_plan_hash() -> None:
             assets=("SPY", "QQQ", "AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "META"),
             calendar_sessions=(),
         )
+
+
+@pytest.mark.parametrize(
+    ("asset_count", "session_count"),
+    [(True, 1), (1, 0), ("8", 90)],
+)
+def test_request_budget_rejects_non_positive_or_non_integer_dimensions(
+    asset_count: object, session_count: object
+) -> None:
+    with pytest.raises(B1V3PreflightError, match="B1V3_PREFLIGHT_BUDGET_DIMENSIONS_INVALID"):
+        build_request_budget(asset_count=asset_count, session_count=session_count)  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    ("payload", "expected_minutes", "origin", "error"),
+    [
+        ({}, 1, datetime(2024, 8, 2, tzinfo=UTC), "FMP_SCHEMA_INVALID"),
+        ([{}], 1, datetime(2024, 8, 2, tzinfo=UTC), "FMP_TIMESTAMP_INVALID"),
+        (
+            [{"date": "2024-08-02 09:30:00", "open": 1, "high": 0.5, "low": 1, "close": 1}],
+            1,
+            datetime(2024, 8, 2, 14, 31, tzinfo=UTC),
+            "FMP_OHLC_INVALID",
+        ),
+        (
+            [{"date": "2024-08-02 15:59:00", "open": 1, "high": 2, "low": 1, "close": 2}],
+            1,
+            datetime(2024, 8, 2, 13, 0, tzinfo=UTC),
+            "FMP_SPOT_UNAVAILABLE",
+        ),
+    ],
+)
+def test_fmp_contract_fails_closed_for_invalid_or_unavailable_bars(
+    payload: object, expected_minutes: int, origin: datetime, error: str
+) -> None:
+    with pytest.raises(B1V3PreflightError, match=f"B1V3_PREFLIGHT_{error}"):
+        validate_fmp_session(
+            payload,
+            session_date="2024-08-02",
+            expected_minutes=expected_minutes,
+            forecast_origin_utc=origin,
+        )
+
+
+@pytest.mark.parametrize(
+    ("headers", "method", "request_headers", "error"),
+    [
+        ({"content-length": "invalid"}, "GET", {"Accept": "application/json"}, "CONTENT_LENGTH"),
+        (
+            {"content-type": "application/zip", "content-length": "1"},
+            "HEAD",
+            {},
+            "RESPONSE_INVALID",
+        ),
+    ],
+)
+def test_uw_headers_fail_closed_for_non_contract_responses(
+    headers: dict[str, str], method: str, request_headers: dict[str, str], error: str
+) -> None:
+    with pytest.raises(B1V3PreflightError, match=f"B1V3_PREFLIGHT_UW_{error}"):
+        validate_uw_zip_headers(
+            status_code=200,
+            headers=headers,
+            method=method,
+            request_headers=request_headers,
+        )
+
+
+@pytest.mark.parametrize(
+    ("payload", "contract_id", "error"),
+    [
+        ({}, "O:AAPL240920C00200000", "QUOTE_MISSING"),
+        ({"results": [{"sip_timestamp": True}]}, "O:AAPL240920C00200000", "SIP_TIMESTAMP_INVALID"),
+        (
+            {
+                "results": [
+                    {"sip_timestamp": 1_722_603_299_000_000_000, "bid_price": "x", "ask_price": 2}
+                ]
+            },
+            "O:AAPL240920C00200000",
+            "NBBO_INVALID",
+        ),
+        ({"results": []}, "AAPL", "QUOTE_SCHEMA_INVALID"),
+    ],
+)
+def test_massive_quote_fails_closed_for_invalid_evidence(
+    payload: object, contract_id: str, error: str
+) -> None:
+    with pytest.raises(B1V3PreflightError, match=f"B1V3_PREFLIGHT_MASSIVE_{error}"):
+        validate_massive_quote(
+            payload,
+            forecast_origin_ns=1_722_603_300_000_000_000,
+            contract_id=contract_id,
+        )

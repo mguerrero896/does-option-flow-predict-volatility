@@ -62,7 +62,7 @@
   }
  ],
  "authorized_sources": {
-  ".github/workflows/ci.yml": "a0bcf64700ea4c6199869e269243fd8840e01868fe1262e21e4cf7f4cf3efa79",
+  ".github/workflows/ci.yml": "7dbb6abda0ce46a13c857633efd3f0859d50b636dec6dee348451fe64146777e",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json": "e1353f6338dfa35526caee3df6c8d5ff675f14380250398324ef9cd8aaff341b",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
@@ -79,9 +79,9 @@
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "51eaa73539706580cd75d752e1c288b66a520459581e8826bf6fd118a768975b",
   "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
-  "docs/ci_contract_v1.md": "8e1cbdf7a3b0a8c2b01f8a12181d66c24116b9df6c83fcb5b8e5d97d024f4737",
+  "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "f5f2c6c857834be9d78abb29ca6cafdb67a07fff11d8cea5231817c135d26896",
+  "docs/methodology_decisions.md": "cc450e7a47930f88ff945deff2b45e5e9b791cf981f13b604c6925be29b649c6",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",

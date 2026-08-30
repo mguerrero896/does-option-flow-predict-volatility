@@ -275,6 +275,19 @@ def test_run_preflight_execute_rejects_a_mismatched_approved_plan_hash() -> None
     assert transport.calls == []
 
 
+def test_run_preflight_execute_rejects_an_invalid_plan_self_hash() -> None:
+    plan = _plan()
+    plan["semantic_self_hash"] = "sha256:" + "0" * 64
+    transport = RecordingTransport()
+    kwargs = _executing_kwargs(_plan())
+
+    report = run_date_level_pit_preflight(plan, **kwargs, request_fn=transport)
+
+    assert report["status"] == "FAILED_CLOSED"
+    assert report["blocking_reasons"] == ["PLAN_SELF_HASH_INVALID", "APPROVED_PLAN_HASH_MISMATCH"]
+    assert transport.calls == []
+
+
 def test_run_preflight_execute_requires_eighty_gib_free_on_d_drive() -> None:
     plan = _plan()
     transport = RecordingTransport()
@@ -284,6 +297,32 @@ def test_run_preflight_execute_requires_eighty_gib_free_on_d_drive() -> None:
 
     assert report["status"] == "FAILED_CLOSED"
     assert report["blocking_reasons"] == ["D_DRIVE_FREE_SPACE_INSUFFICIENT"]
+    assert transport.calls == []
+
+
+def test_run_preflight_execute_fails_closed_when_d_drive_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    plan = _plan()
+    transport = RecordingTransport()
+    monkeypatch.setattr(
+        preflight,
+        "d_drive_free_bytes_for_execution",
+        lambda: (_ for _ in ()).throw(PreflightError("D_DRIVE_FREE_SPACE_UNAVAILABLE")),
+    )
+
+    report = run_date_level_pit_preflight(
+        plan,
+        execute=True,
+        approved_plan_semantic_hash=cast(str, plan["semantic_self_hash"]),
+        zero_incremental_spend_asserted=True,
+        secret_presence=_all_keys_present(),
+        endpoint_descriptors=_descriptors(),
+        request_fn=transport,
+    )
+
+    assert report["status"] == "FAILED_CLOSED"
+    assert report["blocking_reasons"] == ["D_DRIVE_FREE_SPACE_UNAVAILABLE"]
     assert transport.calls == []
 
 
@@ -333,6 +372,25 @@ def test_run_preflight_execute_fails_closed_for_unconfigured_endpoints() -> None
     assert transport.calls == []
 
 
+def test_run_preflight_execute_rejects_a_descriptor_bound_to_the_wrong_provider() -> None:
+    plan = _plan()
+    transport = RecordingTransport()
+    descriptors = _descriptors()
+    descriptors["fmp"] = EndpointDescriptor("massive", "fmp-preflight", "GET", "opaque")
+    kwargs = _executing_kwargs(plan)
+    kwargs["endpoint_descriptors"] = descriptors
+
+    report = run_date_level_pit_preflight(plan, **kwargs, request_fn=transport)
+
+    assert report["status"] == "FAILED_CLOSED"
+    assert report["blocking_reasons"] == ["UNCONFIGURED_ENDPOINT"]
+    assert {check["request_status"] for check in _checks(report)} == {
+        "NOT_ATTEMPTED_GATE_BLOCKED",
+        "NOT_ATTEMPTED_UNCONFIGURED_ENDPOINT",
+    }
+    assert transport.calls == []
+
+
 def test_run_preflight_execute_does_not_wire_a_real_network_transport() -> None:
     plan = _plan()
     report = run_date_level_pit_preflight(plan, **_executing_kwargs(plan))
@@ -340,6 +398,75 @@ def test_run_preflight_execute_does_not_wire_a_real_network_transport() -> None:
     assert report["status"] == "FAILED_CLOSED"
     assert report["blocking_reasons"] == ["NETWORK_TRANSPORT_UNCONFIGURED"]
     assert {check["request_status"] for check in _checks(report)} == {"NOT_ATTEMPTED_GATE_BLOCKED"}
+
+
+def test_run_preflight_execute_reports_injected_transport_failure_without_response_data() -> None:
+    plan = _plan()
+    calls = 0
+
+    def failing_transport(_descriptor: EndpointDescriptor, _request: PreflightRequest) -> object:
+        nonlocal calls
+        calls += 1
+        raise RuntimeError("provider response must not leak into the report")
+
+    report = run_date_level_pit_preflight(
+        plan, **_executing_kwargs(plan), request_fn=failing_transport
+    )
+
+    assert report["status"] == "FAILED_CLOSED"
+    assert report["blocking_reasons"] == ["INJECTED_TRANSPORT_REQUEST_FAILURE"]
+    assert report["gates"]["transport"] == "INJECTED_TRANSPORT_FAILURE"
+    assert calls == 7 * 8 * 3
+    assert {check["request_status"] for check in _checks(report)} == {"INJECTED_TRANSPORT_FAILURE"}
+    assert {check["response"] for check in _checks(report)} == {None}
+
+
+@pytest.mark.parametrize(
+    "catalog",
+    (
+        {"endpoints": []},
+        {
+            "endpoints": [
+                {
+                    "provider": "fmp",
+                    "endpoint_id": "one",
+                    "method": "GET",
+                    "request_target": "opaque",
+                },
+                {
+                    "provider": "fmp",
+                    "endpoint_id": "two",
+                    "method": "GET",
+                    "request_target": "opaque",
+                },
+            ]
+        },
+    ),
+    ids=("missing_required_providers", "duplicate_provider"),
+)
+def test_load_endpoint_descriptors_rejects_schema_valid_but_unsafe_catalogs(
+    tmp_path: Path, catalog: Mapping[str, object]
+) -> None:
+    path = tmp_path / "catalog.json"
+    path.write_text(json.dumps(catalog), encoding="utf-8")
+
+    with pytest.raises(PreflightError, match="ENDPOINT_CATALOG_SCHEMA_INVALID"):
+        preflight.load_endpoint_descriptors(path)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    ("[]", "{not-json"),
+    ids=("non_mapping", "malformed_json"),
+)
+def test_load_plan_fails_closed_for_invalid_local_plan_payloads(
+    tmp_path: Path, payload: str
+) -> None:
+    path = tmp_path / "plan.json"
+    path.write_text(payload, encoding="utf-8")
+
+    with pytest.raises(PreflightError, match="PLAN_(FORMAT_INVALID|READ_FAILED)"):
+        preflight.load_plan(path)
 
 
 def test_run_preflight_report_is_deterministic() -> None:

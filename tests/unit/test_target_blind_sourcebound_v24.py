@@ -11,6 +11,7 @@ import polars as pl
 import pytest
 from jsonschema import Draft202012Validator
 
+import mds650.target_blind_sourcebound_v24 as sourcebound
 from mds650.target_blind_panel_v22 import (
     B0V2_FEATURES,
     B1V2A_FEATURES,
@@ -27,6 +28,7 @@ from mds650.target_blind_sourcebound_v24 import (
     assert_preflight_hashes_unchanged_v24,
     assert_safe_target_blind_paths_v24,
     build_sourcebound_manifest_v24,
+    validate_sourcebound_manifest_v24,
     validate_sourcebound_panel_v24,
     write_if_new_or_identical_v24,
 )
@@ -171,36 +173,7 @@ def test_v24_manifest_is_deterministic_schema_valid_and_explicitly_oos_closed(
     tmp_path: Path,
 ) -> None:
     """A source-bound manifest records hashes and cannot turn OOS/reconciliation on."""
-    _, panel, common = _valid_frames()
-    panel_path = tmp_path / "panel.parquet"
-    common_path = tmp_path / "common.parquet"
-    panel.write_parquet(panel_path)
-    common.write_parquet(common_path)
-    kwargs = {
-        "panel": panel,
-        "common": common,
-        "panel_path": panel_path,
-        "common_path": common_path,
-        "provenance_hashes": _provenance_hashes(),
-        "source_hashes": {
-            "fmp_bars_sha256": "1" * 64,
-            "b1q_source_sha256": "2" * 64,
-            "b2_primary_inputs_sha256": "3" * 64,
-            "origins_sha256": "4" * 64,
-            "b2_availability_sidecar_sha256": "5" * 64,
-            "massive_reselection_sensitivity_v21_sha256": "6" * 64,
-        },
-        "summary": _summary(),
-        "builder_hashes": {
-            "script_sha256": "7" * 64,
-            "panel_module_sha256": "8" * 64,
-            "base_panel_module_sha256": "9" * 64,
-            "provenance_module_sha256": "a" * 64,
-        },
-        "source_commit": "b" * 40,
-        "panel_location": "D:/MDS650/phase6/derived/target_blind_v24_sourcebound/panel.parquet",
-        "common_location": "D:/MDS650/phase6/derived/target_blind_v24_sourcebound/common.parquet",
-    }
+    kwargs = _manifest_kwargs(tmp_path)
 
     first = build_sourcebound_manifest_v24(**kwargs)
     second = build_sourcebound_manifest_v24(**kwargs)
@@ -212,6 +185,145 @@ def test_v24_manifest_is_deterministic_schema_valid_and_explicitly_oos_closed(
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
     assert not list(Draft202012Validator(schema).iter_errors(first))
+
+
+@pytest.mark.parametrize(
+    ("mutation", "code"),
+    [
+        ("origin", "ORIGIN_PRESERVATION_FAILURE"),
+        ("common", "COMMON_SUBSET_MISMATCH"),
+        ("flag", "B2_EXCLUSION_FLAG_NULL"),
+        ("reason", "B2_EXCLUSION_CODE_INVALID"),
+        ("extra", "COLUMN_NOT_ALLOWLISTED:origins"),
+        ("missing", "REQUIRED_COLUMNS_MISSING:panel"),
+        ("null_origin", "DUPLICATE_ORIGIN:origins"),
+    ],
+)
+def test_v24_panel_contract_guards_fail_closed(mutation: str, code: str) -> None:
+    origins, panel, common = _valid_frames()
+    if mutation == "origin":
+        panel = panel.head(1)
+    elif mutation == "common":
+        common = common.head(0)
+    elif mutation == "flag":
+        panel = panel.with_columns(
+            pl.when(pl.col("origin_id") == "origin-b")
+            .then(None)
+            .otherwise(pl.col("b2v2_availability_eligible"))
+            .alias("b2v2_availability_eligible")
+        )
+    elif mutation == "reason":
+        panel = panel.with_columns(
+            pl.when(pl.col("origin_id") == "origin-b")
+            .then(pl.lit("WRONG"))
+            .otherwise(pl.col("b2v2_predictor_missing_reason"))
+            .alias("b2v2_predictor_missing_reason")
+        )
+    elif mutation == "extra":
+        origins = origins.with_columns(pl.lit(1).alias("unexpected"))
+    elif mutation == "missing":
+        panel = panel.drop("predictor_exclusion_reason")
+    else:
+        origins = origins.with_columns(
+            pl.when(pl.col("origin_id") == "origin-b")
+            .then(None)
+            .otherwise(pl.col("origin_id"))
+            .alias("origin_id")
+        )
+
+    with pytest.raises(ValueError, match=f"TARGET_BLIND_V24_{code}"):
+        validate_sourcebound_panel_v24(origins=origins, panel=panel, common=common)
+
+
+def test_v24_panel_accepts_no_b2_exclusions() -> None:
+    origins, panel, _ = _valid_frames()
+    panel = panel.with_columns(
+        pl.lit(True).alias("b2v2_availability_eligible"),
+        *(pl.col(feature).fill_null(1.0) for feature in B2V2_FEATURES),
+    )
+    common = panel.filter(pl.col("common_predictor_complete"))
+
+    validate_sourcebound_panel_v24(origins=origins, panel=panel, common=common)
+
+
+@pytest.mark.parametrize(
+    ("mutation", "code"),
+    [
+        ("before", "PREFLIGHT_HASH_INVALID"),
+        ("after", "POSTBUILD_HASH_INVALID"),
+        ("drift", "PROVENANCE_CHANGED_AFTER_PREFLIGHT"),
+    ],
+)
+def test_v24_preflight_hash_guards_fail_closed(mutation: str, code: str) -> None:
+    before = _provenance_hashes()
+    after = dict(before)
+    if mutation == "before":
+        before["origins_sha256"] = "bad"
+    elif mutation == "after":
+        after["origins_sha256"] = "bad"
+    else:
+        after["origins_sha256"] = "f" * 64
+
+    with pytest.raises(ValueError, match=f"TARGET_BLIND_V24_{code}"):
+        assert_preflight_hashes_unchanged_v24(before=before, after=after)
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "code"),
+    [
+        ("provenance_hashes", {}, "PROVENANCE_HASH_INVALID"),
+        ("source_hashes", {}, "SOURCE_HASH_INVALID"),
+        ("builder_hashes", {}, "BUILDER_HASH_INVALID"),
+        ("source_commit", "bad", "SOURCE_COMMIT_INVALID"),
+        ("panel_location", "relative.parquet", "OUTPUT_LOCATION_INVALID"),
+    ],
+)
+def test_v24_manifest_inputs_fail_closed(
+    tmp_path: Path,
+    field: str,
+    value: object,
+    code: str,
+) -> None:
+    kwargs = _manifest_kwargs(tmp_path)
+    kwargs[field] = value
+    with pytest.raises(ValueError, match=f"TARGET_BLIND_V24_{code}"):
+        build_sourcebound_manifest_v24(**kwargs)
+
+
+def test_v24_manifest_validator_covers_schema_and_self_hash(tmp_path: Path) -> None:
+    manifest = build_sourcebound_manifest_v24(**_manifest_kwargs(tmp_path))
+    validate_sourcebound_manifest_v24(manifest, SCHEMA_PATH)
+
+    with pytest.raises(ValueError, match="TARGET_BLIND_V24_OUTPUT_MANIFEST_SCHEMA_UNREADABLE"):
+        validate_sourcebound_manifest_v24(manifest, tmp_path / "missing.schema.json")
+
+    permissive_schema = tmp_path / "permissive.schema.json"
+    permissive_schema.write_text('{"type":"object"}', encoding="utf-8")
+    with pytest.raises(ValueError, match="TARGET_BLIND_V24_OUTPUT_MANIFEST_SELF_HASH_INVALID"):
+        validate_sourcebound_manifest_v24({}, permissive_schema)
+    with pytest.raises(ValueError, match="TARGET_BLIND_V24_OUTPUT_MANIFEST_SELF_HASH_MISMATCH"):
+        validate_sourcebound_manifest_v24(
+            {**manifest, "manifest_sha256": "0" * 64},
+            permissive_schema,
+        )
+
+    with pytest.raises(ValueError, match="TARGET_BLIND_V24_OUTPUT_MANIFEST_SCHEMA_VIOLATION"):
+        validate_sourcebound_manifest_v24({}, SCHEMA_PATH)
+
+
+def test_v24_runtime_validator_and_file_identity_guards(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(sourcebound, "import_module", lambda _: object())
+    with pytest.raises(RuntimeError, match="TARGET_BLIND_V24_JSONSCHEMA_VALIDATOR_UNAVAILABLE"):
+        sourcebound._load_draft202012_validator()
+
+    left = tmp_path / "left.bin"
+    right = tmp_path / "right.bin"
+    left.write_bytes(b"a")
+    right.write_bytes(b"bb")
+    assert sourcebound._files_equal(left, right) is False
 
 
 def _valid_frames() -> tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
@@ -289,6 +401,39 @@ def _summary() -> dict[str, object]:
         "row_count": 2,
         "completion_counts": {"common_predictor_complete": 1},
         "completion_rates": {"common_predictor_complete": 0.5},
+    }
+
+
+def _manifest_kwargs(tmp_path: Path) -> dict[str, object]:
+    _, panel, common = _valid_frames()
+    panel_path = tmp_path / "panel.parquet"
+    common_path = tmp_path / "common.parquet"
+    panel.write_parquet(panel_path)
+    common.write_parquet(common_path)
+    return {
+        "panel": panel,
+        "common": common,
+        "panel_path": panel_path,
+        "common_path": common_path,
+        "provenance_hashes": _provenance_hashes(),
+        "source_hashes": {
+            "fmp_bars_sha256": "1" * 64,
+            "b1q_source_sha256": "2" * 64,
+            "b2_primary_inputs_sha256": "3" * 64,
+            "origins_sha256": "4" * 64,
+            "b2_availability_sidecar_sha256": "5" * 64,
+            "massive_reselection_sensitivity_v21_sha256": "6" * 64,
+        },
+        "summary": _summary(),
+        "builder_hashes": {
+            "script_sha256": "7" * 64,
+            "panel_module_sha256": "8" * 64,
+            "base_panel_module_sha256": "9" * 64,
+            "provenance_module_sha256": "a" * 64,
+        },
+        "source_commit": "b" * 40,
+        "panel_location": ("D:/MDS650/phase6/derived/target_blind_v24_sourcebound/panel.parquet"),
+        "common_location": ("D:/MDS650/phase6/derived/target_blind_v24_sourcebound/common.parquet"),
     }
 
 

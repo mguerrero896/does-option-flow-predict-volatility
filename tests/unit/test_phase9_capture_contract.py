@@ -50,9 +50,7 @@ def _manifest(module: Any) -> dict[str, Any]:
         "tape_bytes": 1_000_000,
         "quote_rows": expected,
         "quote_ok": expected,
-        "quote_ok_by_asset": {
-            asset: expected // len(contract.ASSETS) for asset in contract.ASSETS
-        },
+        "quote_ok_by_asset": {asset: expected // len(contract.ASSETS) for asset in contract.ASSETS},
         "sha256": {
             "bars.parquet": "a" * 64,
             f"full_tape_{session}.zip": "b" * 64,
@@ -108,3 +106,59 @@ def test_phase9_checkpoint_survives_before_a_manifest_exists(tmp_path: Path) -> 
 def test_last_closed_session_uses_the_previous_date_before_new_york_close() -> None:
     early_friday = datetime(2026, 8, 28, 1, 0, tzinfo=ZoneInfo("America/New_York"))
     assert contract.last_closed_session(early_friday).isoformat() == "2026-08-27"
+
+
+def test_phase9_checkpoint_states_are_fail_closed(tmp_path: Path) -> None:
+    assert contract.last_checkpoint(tmp_path) is None
+
+    checkpoint = tmp_path / "collector_checkpoint.json"
+    checkpoint.write_text("not json", encoding="utf-8")
+    assert contract.last_checkpoint(tmp_path) == "unreadable"
+
+    checkpoint.write_text("[]", encoding="utf-8")
+    assert contract.last_checkpoint(tmp_path) == "invalid"
+
+    checkpoint.write_text(json.dumps({"stage": "quotes"}), encoding="utf-8")
+    assert contract.last_checkpoint(tmp_path) == "invalid"
+
+
+def test_last_closed_session_returns_none_when_calendar_has_no_session(monkeypatch: Any) -> None:
+    class NoSessions:
+        @staticmethod
+        def is_session(_day: str) -> bool:
+            return False
+
+    monkeypatch.setattr(contract.exchange_calendars, "get_calendar", lambda _name: NoSessions())
+    probe = datetime(2026, 8, 28, 18, 0, tzinfo=ZoneInfo("America/New_York"))
+
+    assert contract.last_closed_session(probe) is None
+
+
+def test_phase9_reports_every_incomplete_manifest_dimension() -> None:
+    problems = contract.capture_problems({"session": "2026-08-19"})
+
+    assert "bars_by_asset missing" in problems
+    assert "bars_rows=None" in problems
+    assert "tape_bytes=None" in problems
+    assert "quote_ok_by_asset missing" in problems
+    assert "quote_rows=None" in problems
+    assert "quote_ok=None" in problems
+    assert "sha256 missing" in problems
+
+
+def test_phase9_reports_each_per_asset_shortfall() -> None:
+    module = _load()
+    manifest = _manifest(module)
+    manifest["bars_by_asset"] = {asset: 379 for asset in contract.ASSETS}
+    manifest["quote_ok_by_asset"] = {asset: 0 for asset in contract.ASSETS}
+
+    problems = contract.capture_problems(manifest)
+
+    for asset in contract.ASSETS:
+        assert f"bars_by_asset[{asset}]=379" in problems
+        assert f"quote_ok_by_asset[{asset}]=0" in problems
+
+
+def test_phase9_rejects_an_invalid_session() -> None:
+    assert contract.capture_problems({}) == ["session is absent or invalid"]
+    assert contract.capture_problems({"session": "not-a-date"}) == ["session is absent or invalid"]

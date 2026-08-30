@@ -11,6 +11,7 @@ from pathlib import Path
 import polars as pl
 import pytest
 
+import mds650.b1v3_b1q_source as source
 from mds650.b1v3_b1q_source import seal_b1q_source
 from mds650.b1v3_confirmation import canonical_sha256, sha256_file
 from mds650.b1v3_confirmation_build import (
@@ -233,6 +234,18 @@ def _seal(paths: Fixture) -> object:
     )
 
 
+def _refresh_base_binding(paths: Fixture) -> None:
+    origins = pl.read_parquet(paths.origins_path)
+    base = json.loads(paths.base_manifest_path.read_text(encoding="utf-8"))
+    base["origin_count"] = origins.height
+    base["origin_identity_sha256"] = source._origin_identity_sha256(origins)
+    base["outputs"]["b1_origins"]["sha256"] = sha256_file(paths.origins_path)
+    base["manifest_sha256"] = canonical_sha256(
+        {key: value for key, value in base.items() if key != "manifest_sha256"}
+    )
+    _write_json(paths.base_manifest_path, base)
+
+
 def test_sealer_binds_attempts_contract_grid_and_raw_caches(tmp_path: Path) -> None:
     paths = _fixture(tmp_path)
     first = _seal(paths)
@@ -312,9 +325,7 @@ def test_sealer_rejects_invalid_attempt_provenance(
     code: str,
 ) -> None:
     paths = _fixture(tmp_path)
-    attempts = pl.read_parquet(paths.attempts_path).with_columns(
-        pl.lit(value).alias(column)
-    )
+    attempts = pl.read_parquet(paths.attempts_path).with_columns(pl.lit(value).alias(column))
     attempts.write_parquet(paths.attempts_path)
 
     with pytest.raises(ValueError, match=f"B1V3_B1Q_SOURCE_{code}"):
@@ -418,3 +429,240 @@ def test_sealer_rejects_inventory_conflict_and_missing_schema(tmp_path: Path) ->
             manifest_path=paths.manifest_path,
             manifest_schema_path=tmp_path / "missing.schema.json",
         )
+
+
+def test_json_and_attempt_schema_fail_closed(tmp_path: Path) -> None:
+    invalid_json = tmp_path / "invalid.json"
+    invalid_json.write_text("{", encoding="utf-8")
+    with pytest.raises(ValueError, match="INVALID_DOCUMENT"):
+        source._json_object(invalid_json, code="INVALID_DOCUMENT")
+
+    invalid_json.write_text("[]", encoding="utf-8")
+    with pytest.raises(ValueError, match="INVALID_DOCUMENT"):
+        source._json_object(invalid_json, code="INVALID_DOCUMENT")
+
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_ATTEMPTS_INVALID"):
+        source._validate_attempt_schema(tmp_path / "missing.parquet")
+
+    paths = _fixture(tmp_path / "schema")
+    attempts = pl.read_parquet(paths.attempts_path)
+    attempts.drop("ask").write_parquet(paths.attempts_path)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_ATTEMPT_SCHEMA_INVALID"):
+        source._validate_attempt_schema(paths.attempts_path)
+
+    attempts.with_columns(pl.lit(1).alias("unexpected")).write_parquet(paths.attempts_path)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_COLUMN_NOT_ALLOWLISTED"):
+        source._validate_attempt_schema(paths.attempts_path)
+
+
+@pytest.mark.parametrize(
+    ("mutation", "code"),
+    [
+        ("missing", "ORIGIN_SCHEMA_INVALID"),
+        ("target", "TARGET_COLUMN_FORBIDDEN"),
+        ("scope", "ORIGIN_SCOPE_INVALID"),
+    ],
+)
+def test_base_and_origin_validation_fail_closed(
+    tmp_path: Path,
+    mutation: str,
+    code: str,
+) -> None:
+    paths = _fixture(tmp_path)
+    origins = pl.read_parquet(paths.origins_path)
+    if mutation == "missing":
+        origins = origins.drop("spot")
+    elif mutation == "target":
+        origins = origins.with_columns(pl.lit(0.1).alias("rv30"))
+    else:
+        origins = origins.with_columns(pl.lit(0.0).alias("spot"))
+    origins.write_parquet(paths.origins_path)
+    _refresh_base_binding(paths)
+
+    with pytest.raises(ValueError, match=f"B1V3_B1Q_SOURCE_{code}"):
+        source._validate_base_and_origins(
+            inputs=paths.inputs,
+            base_manifest_path=paths.base_manifest_path,
+            origins_path=paths.origins_path,
+        )
+
+
+def test_base_gate_and_attempt_semantics_fail_closed(tmp_path: Path) -> None:
+    paths = _fixture(tmp_path / "base")
+    base = json.loads(paths.base_manifest_path.read_text(encoding="utf-8"))
+    base["status"] = "FAIL"
+    base["manifest_sha256"] = canonical_sha256(
+        {key: value for key, value in base.items() if key != "manifest_sha256"}
+    )
+    _write_json(paths.base_manifest_path, base)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_BASE_GATE_INVALID"):
+        source._validate_base_and_origins(
+            inputs=paths.inputs,
+            base_manifest_path=paths.base_manifest_path,
+            origins_path=paths.origins_path,
+        )
+
+    paths = _fixture(tmp_path / "attempts")
+    origins = pl.read_parquet(paths.origins_path)
+    attempts = pl.read_parquet(paths.attempts_path)
+    attempts.head(0).write_parquet(paths.attempts_path)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_ATTEMPTS_EMPTY"):
+        source._load_and_validate_attempts(paths.attempts_path, origins=origins)
+
+    attempts.with_columns(pl.lit("unknown").alias("origin_id")).write_parquet(paths.attempts_path)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_ATTEMPT_ORIGIN_SCOPE_INVALID"):
+        source._load_and_validate_attempts(paths.attempts_path, origins=origins)
+
+    attempts.with_columns((pl.col("spot") + 1.0).alias("spot")).write_parquet(paths.attempts_path)
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_ATTEMPT_ORIGIN_METADATA_INVALID"):
+        source._load_and_validate_attempts(paths.attempts_path, origins=origins)
+
+    attempts.with_columns(pl.lit("f" * 64).alias("source_request_hash")).write_parquet(
+        paths.attempts_path
+    )
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_REQUEST_HASH_REUSED"):
+        source._load_and_validate_attempts(paths.attempts_path, origins=origins)
+
+
+def test_contract_grid_shape_and_scope_fail_closed(tmp_path: Path) -> None:
+    paths = _fixture(tmp_path)
+    origins = pl.read_parquet(paths.origins_path)
+    identities, _, _ = source._load_and_validate_attempts(
+        paths.attempts_path,
+        origins=origins,
+    )
+    valid = json.loads(paths.contract_grid_path.read_text(encoding="utf-8"))
+
+    def assert_rejected(document: object, code: str) -> None:
+        _write_json(paths.contract_grid_path, document)
+        with pytest.raises(ValueError, match=f"B1V3_B1Q_SOURCE_{code}"):
+            source._load_contract_grid(
+                paths.contract_grid_path,
+                origins=origins,
+                identities=identities,
+            )
+
+    assert_rejected(
+        {"schema_version": "wrong", "records": []},
+        "CONTRACT_GRID_INVALID",
+    )
+    assert_rejected(
+        {"schema_version": "b1q-contract-grid-3.0", "records": [None]},
+        "CONTRACT_GRID_RECORD_INVALID",
+    )
+
+    document = json.loads(json.dumps(valid))
+    document["records"][0]["spot"] = True
+    assert_rejected(document, "CONTRACT_GRID_SCOPE_INVALID")
+
+    document = json.loads(json.dumps(valid))
+    document["records"][0]["contracts"] = []
+    assert_rejected(document, "CONTRACT_GRID_EMPTY")
+
+    document = json.loads(json.dumps(valid))
+    document["records"][0]["contracts"] = [None]
+    assert_rejected(document, "CONTRACT_GRID_RECORD_INVALID")
+
+    document = json.loads(json.dumps(valid))
+    document["records"][0]["contracts"].append(dict(document["records"][0]["contracts"][0]))
+    assert_rejected(document, "CONTRACT_GRID_DUPLICATE")
+
+    document = json.loads(json.dumps(valid))
+    document["records"].pop()
+    assert_rejected(document, "CONTRACT_GRID_SCOPE_INVALID")
+
+    document = json.loads(json.dumps(valid))
+    document["records"][0]["contracts"][0]["contract"] = "O:DIFFERENT"
+    assert_rejected(document, "CONTRACT_SCOPE_INVALID")
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["secret", "invalid_json", "non_object", "pages", "row", "price"],
+)
+def test_cache_envelope_fail_closed(tmp_path: Path, mutation: str) -> None:
+    paths = _fixture(tmp_path)
+    cache_path = next(paths.cache_root.glob("*.json"))
+    cache = json.loads(cache_path.read_text(encoding="utf-8"))
+    if mutation == "secret":
+        cache["api_key"] = "redacted"
+        _write_json(cache_path, cache)
+    elif mutation == "invalid_json":
+        cache_path.write_text("{", encoding="utf-8")
+    elif mutation == "non_object":
+        _write_json(cache_path, [])
+    elif mutation == "pages":
+        cache["pages"] = 0
+        _write_json(cache_path, cache)
+    elif mutation == "row":
+        cache["results"] = [1]
+        _write_json(cache_path, cache)
+    else:
+        cache["results"][0]["bid_price"] = True
+        _write_json(cache_path, cache)
+
+    with pytest.raises(
+        ValueError,
+        match="B1V3_B1Q_SOURCE_CACHE_(?:SECRET_OR_PATH|INVALID)",
+    ):
+        _seal(paths)
+
+
+def test_inventory_and_manifest_guards_fail_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_CACHE_ROOT_INVALID"):
+        source._cache_index(tmp_path / "missing")
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_MANIFEST_HYGIENE_INVALID"):
+        source._write_json_if_identical(
+            tmp_path / "manifest.json",
+            {"path": "C:/Users/example"},
+        )
+
+    paths = _fixture(tmp_path / "inventory")
+    origins = pl.read_parquet(paths.origins_path)
+    identities, _, _ = source._load_and_validate_attempts(
+        paths.attempts_path,
+        origins=origins,
+    )
+    _, _, contracts = source._load_contract_grid(
+        paths.contract_grid_path,
+        origins=origins,
+        identities=identities,
+    )
+    first = identities.row(0, named=True)
+    prefix = f"{first['asset']}_{first['session_date']}_{str(first['contract']).replace(':', '_')}"
+    outside = tmp_path / "outside.json"
+    outside.write_text("{}", encoding="utf-8")
+    real_cache_index = source._cache_index
+    monkeypatch.setattr(source, "_cache_index", lambda _: {prefix: (outside,)})
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_CACHE_PATH_INVALID"):
+        source._build_inventory(
+            cache_root=paths.cache_root,
+            identities=identities,
+            contracts=contracts,
+        )
+
+    monkeypatch.setattr(source, "_cache_index", real_cache_index)
+    monkeypatch.setattr(
+        source,
+        "_validate_cache_payload",
+        lambda **_: {"cache_file_sha256": "same"},
+    )
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_DUPLICATE_PAYLOAD_HASH"):
+        source._build_inventory(
+            cache_root=paths.cache_root,
+            identities=identities,
+            contracts=contracts,
+        )
+
+
+def test_inventory_scope_guard_fails_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    paths = _fixture(tmp_path)
+    monkeypatch.setattr(source, "_build_inventory", lambda **_: pl.DataFrame())
+    with pytest.raises(ValueError, match="B1V3_B1Q_SOURCE_INVENTORY_SCOPE_INVALID"):
+        _seal(paths)

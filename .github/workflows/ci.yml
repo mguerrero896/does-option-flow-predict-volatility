@@ -129,7 +129,7 @@ jobs:
         run: >
           uv run pytest tests -q
           --ignore=tests/unit/test_independent_replication_panel.py
-          --cov=src/mds650 --cov-report=term --cov-fail-under=80
+          --cov=src/mds650 --cov-report=term --cov-fail-under=90
       - name: Critical scientific producers have complete branch coverage
         run: >
           uv run coverage report

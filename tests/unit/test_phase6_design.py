@@ -6,6 +6,7 @@ from typing import Any
 
 import pytest
 
+import mds650.phase6 as phase6
 from mds650.phase6 import (
     B2V2_FEATURES,
     build_phase6_preregistration,
@@ -78,3 +79,33 @@ def test_phase6_preregistration_rejects_incomplete_provenance() -> None:
         build_phase6_preregistration(
             {key: value for key, value in PROVENANCE.items() if key != "spec_sha256"}
         )
+
+
+def test_phase6_preregistration_rejects_each_invalid_provenance_identity() -> None:
+    cases = [
+        {**PROVENANCE, "branch": ""},
+        {**PROVENANCE, "repository_commit": "A" * 40},
+        {**PROVENANCE, "python_version": "3.11.0"},
+        {**PROVENANCE, "worktree_dirty": "no"},
+        {**PROVENANCE, "schema_sha256": "A" * 64},
+    ]
+    for provenance in cases:
+        with pytest.raises(ValueError, match="PHASE6_PROVENANCE_INVALID"):
+            build_phase6_preregistration(provenance)
+
+
+def test_phase6_sessions_and_folds_fail_closed_on_calendar_drift(monkeypatch) -> None:
+    monkeypatch.setattr(phase6, "PHASE6_BLOCKS", (("bad", "2026-01-05", "2026-01-05", 2),))
+    with pytest.raises(ValueError, match="PHASE6_SESSION_BLOCK_INVALID"):
+        phase6_sessions()
+
+    monkeypatch.setattr(phase6, "PHASE6_BLOCKS", (("one", "2026-01-05", "2026-01-05", 1),))
+    with pytest.raises(ValueError, match="PHASE6_SESSION_ALLOWLIST_INVALID"):
+        phase6_sessions()
+
+    rows = [
+        {"session_date": f"2025-01-{index + 1:02d}", "role": "initial_train"} for index in range(28)
+    ]
+    monkeypatch.setattr(phase6, "phase6_sessions", lambda: rows)
+    with pytest.raises(ValueError, match="PHASE6_FOLD_INVALID:1"):
+        phase6_folds()

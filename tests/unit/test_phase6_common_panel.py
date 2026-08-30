@@ -139,3 +139,23 @@ def test_phase6_common_panel_separates_valid_target_from_missing_b0() -> None:
     assert row["target_complete"] is True
     assert row["b0v2_complete"] is False
     assert row["exclusion_reason"] == "B0V2_MISSING_OR_PIT_FAILURE"
+
+
+def test_phase6_common_panel_rejects_missing_columns_cutoff_and_nesting_drift() -> None:
+    origins, b0, b1, b2 = _inputs()
+
+    with pytest.raises(ValueError, match="PHASE6_REQUIRED_COLUMNS_MISSING:b0:rv30"):
+        build_phase6_common_panel(origins, b0.drop("rv30"), b1, b2)
+
+    cutoff_after_origin = b2.with_columns(
+        (pl.col("forecast_origin_utc") + pl.duration(seconds=1)).alias("b2v2_cutoff_utc")
+    )
+    with pytest.raises(ValueError, match="PHASE6_B2_CUTOFF_AFTER_ORIGIN"):
+        build_phase6_common_panel(origins, b0, b1, cutoff_after_origin)
+
+    non_nested = b1.with_columns(
+        pl.lit(False).alias("b1v2a_complete"),
+        pl.lit(True).alias("b1v2b_complete"),
+    )
+    with pytest.raises(ValueError, match="PHASE6_B1_NESTED_INVARIANT_FAILURE"):
+        build_phase6_common_panel(origins, b0, non_nested, b2)

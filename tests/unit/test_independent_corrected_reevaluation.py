@@ -176,3 +176,151 @@ def test_evaluation_run_lock_is_exclusive_and_preserves_first_claim(tmp_path: Pa
     with pytest.raises(RuntimeError, match="CORRECTED_EVALUATION_ALREADY_ATTEMPTED"):
         runner._claim_evaluation_run(lock, "second-preregistration")
     assert lock.read_text(encoding="ascii") == "first-preregistration"
+
+
+def test_corrected_b1_rejects_schema_identity_and_outcome_drift() -> None:
+    origins, features, attempts = _frames()
+    cases = [
+        (origins.drop("asset"), features, attempts, "CORRECTED_B1_ORIGIN_SCHEMA"),
+        (origins, features.drop("forecast_origin_ns"), attempts, "CORRECTED_B1_FEATURE_SCHEMA"),
+        (origins, features, attempts.drop("contract"), "CORRECTED_B1_ATTEMPT_SCHEMA"),
+        (
+            origins,
+            features.with_columns(pl.lit(1.0).alias("rv30")),
+            attempts,
+            "CORRECTED_B1_OUTCOME_COLUMN",
+        ),
+        (
+            pl.concat([origins, origins.head(1)]),
+            features,
+            attempts,
+            "CORRECTED_B1_DUPLICATE_ORIGIN",
+        ),
+        (
+            origins,
+            pl.concat([features, features.head(1)]),
+            attempts,
+            "CORRECTED_B1_DUPLICATE_FEATURE_ORIGIN",
+        ),
+        (
+            origins,
+            features.filter(pl.col("origin_id") != "AAPL:2"),
+            attempts,
+            "CORRECTED_B1_ORIGIN_ALIGNMENT",
+        ),
+        (
+            origins,
+            features,
+            pl.concat([attempts, attempts.head(1)]),
+            "CORRECTED_B1_DUPLICATE_ATTEMPT",
+        ),
+    ]
+
+    for case_origins, case_features, case_attempts, error in cases:
+        with pytest.raises(ValueError, match=error):
+            audit_corrected_b1(
+                origins=case_origins,
+                features=case_features,
+                attempts=case_attempts,
+            )
+
+
+def test_corrected_b1_rejects_each_timing_and_provenance_violation() -> None:
+    origins, features, attempts = _frames()
+    cases = [
+        (
+            features.with_columns((pl.col("forecast_origin_ns") + 1).alias("max_sip_timestamp_ns")),
+            attempts,
+            "CORRECTED_B1_FUTURE_QUOTE",
+        ),
+        (
+            features,
+            attempts.with_columns(pl.lit(-1.0).alias("quote_age_seconds")),
+            "CORRECTED_B1_NEGATIVE_QUOTE_AGE",
+        ),
+        (
+            features,
+            attempts.with_columns(pl.col("session_date").alias("rate_source_date")),
+            "CORRECTED_B1_NONCAUSAL_RATE",
+        ),
+        (
+            features,
+            attempts.with_columns(pl.lit(False).alias("exogenous_pit_verified")),
+            "CORRECTED_B1_EXOGENOUS_NOT_VERIFIED",
+        ),
+        (
+            features,
+            attempts.with_columns(pl.lit(float("nan")).alias("implied_volatility")),
+            "CORRECTED_B1_NONFINITE_IV",
+        ),
+        (
+            features.with_columns(
+                pl.lit(False).alias("b1v2b_complete"),
+                pl.lit(True).alias("b1v2c_complete"),
+            ),
+            attempts,
+            "CORRECTED_B1_NESTING_INVALID",
+        ),
+    ]
+
+    for case_features, case_attempts, error in cases:
+        with pytest.raises(ValueError, match=error):
+            audit_corrected_b1(origins=origins, features=case_features, attempts=case_attempts)
+
+
+def test_corrected_preregistration_rejects_every_gate_and_identity_drift() -> None:
+    valid = {
+        "status": "PASS_TARGET_BLIND_CORRECTED_B1",
+        "nested_coverage_monotonic": True,
+        "quote_after_origin_count": 0,
+        "rate_not_strictly_prior_count": 0,
+        "outcome_columns_present": [],
+    }
+    audit_cases = [
+        ({**valid, "status": "FAIL"}, "CORRECTED_PREREG_B1_AUDIT_INVALID"),
+        ({**valid, "nested_coverage_monotonic": False}, "CORRECTED_PREREG_B1_NESTING_INVALID"),
+        ({**valid, "quote_after_origin_count": 1}, "CORRECTED_PREREG_FUTURE_QUOTE"),
+        ({**valid, "rate_not_strictly_prior_count": 1}, "CORRECTED_PREREG_NONCAUSAL_RATE"),
+        ({**valid, "outcome_columns_present": ["rv30"]}, "CORRECTED_PREREG_OUTCOME_COLUMN"),
+    ]
+
+    for audit, error in audit_cases:
+        with pytest.raises(ValueError, match=error):
+            build_preregistration(
+                b1_audit=audit,
+                input_hashes={"input": "a" * 64},
+                source_hashes={"source": "b" * 64},
+                source_commit="c" * 40,
+            )
+
+    identity_cases = [
+        ({}, {"source": "b" * 64}, "c" * 40, "CORRECTED_PREREG_INPUT_HASH_INVALID"),
+        (
+            {"input": "A" * 64},
+            {"source": "b" * 64},
+            "c" * 40,
+            "CORRECTED_PREREG_INPUT_HASH_INVALID",
+        ),
+        ({"input": "a" * 64}, {}, "c" * 40, "CORRECTED_PREREG_SOURCE_HASH_INVALID"),
+        (
+            {"input": "a" * 64},
+            {"source": "b" * 63},
+            "c" * 40,
+            "CORRECTED_PREREG_SOURCE_HASH_INVALID",
+        ),
+        (
+            {"input": "a" * 64},
+            {"source": "b" * 64},
+            "C" * 40,
+            "CORRECTED_PREREG_SOURCE_COMMIT_INVALID",
+        ),
+    ]
+
+    for input_hashes, source_hashes, commit, error in identity_cases:
+        with pytest.raises(ValueError, match=error):
+            build_preregistration(
+                b1_audit=valid,
+                input_hashes=input_hashes,
+                source_hashes=source_hashes,
+                source_commit=commit,
+            )
