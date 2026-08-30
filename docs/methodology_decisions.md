@@ -4,6 +4,19 @@ Status: Phase 5 design approved, 2026-07-29. Earlier bounded phase restrictions 
 historical controls; current acquisition, modeling and QLIKE authority begins only after
 Requirements-consistency and preregistration gates pass.
 
+## Decision index
+
+| Range | Topics |
+| --- | --- |
+| [1–34](#decision-1) | Target, data, providers, features and preregistration. |
+| [35–49](#decision-35) | Provider timing, B1, calibration and sealed cohorts. |
+| [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
+| [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
+| [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
+| [97–101](#decision-97) | Phase 8/9 collection, rebuild, power and deadline policy. |
+
+<a id="decision-1"></a>
+
 1. **Target** — RV30 only. At origin `t`, use the fully observed close `C(i,t)` and the next
    thirty consecutive one-minute closes. Compute `r(i,t+j)=ln[C(i,t+j)/C(i,t+j-1)]` for
    `j=1..30` and `RV(i,t:t+30)=Σ(r(i,t+j)^2)`. Exactly 31 prices and 30 returns are required.
@@ -162,6 +175,9 @@ Requirements-consistency and preregistration gates pass.
    provider request before `2026-07-31T20:00:00Z`, runs under the isolated
    `<DATA_ROOT>\data\phase5_holdout` root, may construct and hash the common panel and timing
    sidecar, and must leave `holdout_reads=0` without model fitting, QLIKE or outcome summaries.
+
+<a id="decision-35"></a>
+
 35. **Provider timing gate amendment v1 (2026-08-11)** — Existing canonical evidence is
    `VALID_UNDER_REGISTERED_TIMING_ASSUMPTIONS` and its scientific reconciliation is
    `CONDITIONAL_GO_NOW`. A new historical sample remains
@@ -302,6 +318,9 @@ Requirements-consistency and preregistration gates pass.
    derived Parquet outputs after testing the exact consumed-ledger transition, target identity,
    schema, hashes and secret hygiene. The incident and immutable hashes are recorded in
    `docs/recovery/b1v3_one_read_serialization_incident.md`.
+
+<a id="decision-50"></a>
+
 50. **Repository consolidation and single history (2026-08-17)** — The five local branches
    were verified to form one linear chain; `main` was created at `37146ce`, the validated
    tip of that chain, and is the sole canonical branch. The
@@ -342,6 +361,10 @@ Requirements-consistency and preregistration gates pass.
    model/sample must appear beside it; (4) the bare word "confirmed" may not be used for any
    global effect while `confirmed_contrasts` is empty in the underlying artifact. The
    canonical cross-campaign numbers live in `docs/results_reconciliation_v2.md`.
+   **Supersession, 2026-08-30:** The numerical-authority clause is revoked by decision 63.
+   `data/CANONICAL_STATE.json` and its generated `STATUS.md` are the only current
+   eligibility and run-pointer authorities; this reconciliation remains a historical
+   cross-campaign record.
 54. **D005 resolved: 2024 confirmation blocks remain exploratory (2026-08-17)** — A
    recorded decision on 2026-08-17 confirmed that the two out-of-window 2024
    evaluation blocks keep the `EXPLORATORY_RETROSPECTIVE` classification from decision 51 as
@@ -553,6 +576,9 @@ Requirements-consistency and preregistration gates pass.
    evidence available to this project is a cohort collected under a frozen protocol
    and read once; none has been read (`sealed_cohorts_read = 0`). This decision
    changes no frozen result; it changes what may be claimed from one.
+
+<a id="decision-68"></a>
+
 68. **Clark-West restricted to nested linear models (2026-08-19)** — The Clark-West
    adjustment is derived for a linear model whose restricted form is a parameter
    restriction of the unrestricted one. A gradient-boosted tree fitted on a larger
@@ -625,6 +651,9 @@ Requirements-consistency and preregistration gates pass.
    after, growing the panel from 183,744 to 185,351 origins. Block 3's published
    conclusions move only in the fourth decimal, because its first origin is minute 120.
    All results computed on the previous panels are superseded by the rebuild.
+
+<a id="decision-75"></a>
+
 75. **WITHDRAWN AND REPLACED — B0 was market-blind in *both* samples (2026-08-19)** —
    This decision originally recorded that "B0 means underlying state plus market-wide
    state in discovery and underlying state alone in validation". **That was wrong.**
@@ -886,6 +915,8 @@ Requirements-consistency and preregistration gates pass.
     sample was widened, nothing was re-fitted, and the artifacts are exactly the ones that
     existed before it. It records which of two written statements governs, and
     `configs/rp2_v3_study_window.json` is where publication reads it.
+
+<a id="decision-85"></a>
 
 85. **The sequence arm's apparent deficit was a padding sentinel, not a finding (2026-08-21)** —
     the DeepSets encoder pools its trade set two ways, mean and max. The max pool drops padded
@@ -1390,6 +1421,8 @@ Requirements-consistency and preregistration gates pass.
     survivor. **The global Holm survivor sets are identical entry-for-entry in both
     families.** Living documents carry corrected numbers with a correction note; the
     dated 2026-08-17 cascade snapshot keeps its body and gains a correction header. Per the registry doctrine (decision 62: no update operation), the frozen originals are untouched and each corrected artifact is a NEW registered path — `results_corrected_int8.json` beside its original in gates 3, 8, 9, 12 and the global Holm; gate 11 needed no correction (numerically identical).
+
+<a id="decision-97"></a>
 
 97. **Phase 9 collection moves from 08:10 to 09:45 local after the provider-publication
     race is measured (2026-08-27).** The 08:10 run authenticated and received the

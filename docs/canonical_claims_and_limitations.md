@@ -5,8 +5,9 @@
 > current eligibility and [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md)
 > for withdrawn numerical claims.
 
-This ledger is the only allowed source for numerical claims in the capstone
-report, presentation and oral defense. `SUPPORTED` means the stated artifact
+At its 2026-08-17 freeze, this ledger controlled numerical claims in the capstone
+report, presentation and oral defense. It remains a scoped historical audit record and
+does not authorize a current claim. `SUPPORTED` means the stated artifact
 directly supports the bounded statement; it does not imply a universal effect.
 `CONDITIONAL` means it is limited to the exact model/block. `NOT_SUPPORTED`
 must be reported as a negative result or omitted from positive-result framing.

@@ -6,13 +6,14 @@ favors the expanded information set. "Null known" marks whether the prospective 
 holdout null (read 2026-08-01) was already known when the campaign's protocol was frozen.
 
 > [!NOTE]
-> **This document reports the v2 cascade (run compiled 2026-08-17).** Three of its headline
-> figures were superseded by the v3 remeasure of 2026-08-24, which repaired six defects
-> in the measurement code: the joint DML test, the market-index control statistic, and
-> Hansen's SPA. The current figures are in
-> [`docs/rp2_v3/VERDICT.md`](rp2_v3/VERDICT.md); what each one replaced, and why, is in
-> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md). It is kept
-> unedited because a published result stays findable in the form it was published.
+> **HISTORICAL CROSS-CAMPAIGN VIEW.** This document reports the v2 cascade compiled
+> 2026-08-17. Three headline figures were superseded by the v3 remeasure of 2026-08-24,
+> which repaired six measurement defects. The v3 measurement in
+> [`docs/rp2_v3/VERDICT.md`](rp2_v3/VERDICT.md) is historical too, not a current claim.
+> Current eligibility lives only in
+> [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json);
+> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) preserves each
+> replacement and its reason.
 
 ## Campaign register
 
@@ -104,8 +105,9 @@ SAMPLE_DEPENDENT; R-020 alone no longer dismisses C6, and no global claim change
 
 Field-standard baselines added development-only (`docs/gate3_har_harq_ladder_v1.md`,
 `artifacts/gate3_har/`): HARQ wins the ladder (pooled OOF QLIKE 0.18012, corrected 2026-08-25, decision 96) and **B2 adds
-a null-to-negative increment on both HAR baselines** (HAR→HAR+B2 −0.00102, p 0.52–0.62;
-HARQ→HARQ+B2 −0.00090). The reconstructed 30-minute RV matches `b0_rv_30m_lag` with
+a null-to-negative increment on both HAR baselines** (HAR→HAR+B2 −0.00068;
+HARQ→HARQ+B2 −0.00070; all cluster/Newey–West/wild p ≥ 0.50). The reconstructed
+30-minute RV matches `b0_rv_30m_lag` with
 log-correlation 1.0000 (bar-label convention empirically pinned; re-downloaded FMP
 history reproduces the frozen panel). HARQ is the preregistered base model for the
 prospective amendment.

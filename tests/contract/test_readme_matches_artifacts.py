@@ -55,3 +55,11 @@ def test_readme_does_not_publish_operator_or_agent_instructions() -> None:
     readme = README.read_text(encoding="utf-8").lower()
     forbidden = ("@codex", "agent instruction", "owner directive", "claude.md", "agents.md")
     assert not [phrase for phrase in forbidden if phrase in readme]
+
+
+def test_ci_badge_names_the_hosted_tier() -> None:
+    readme = README.read_text(encoding="utf-8")
+    workflow = (REPO / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+
+    assert "[![Tier 1 CI]" in readme
+    assert workflow.startswith("name: Tier 1 CI\n")

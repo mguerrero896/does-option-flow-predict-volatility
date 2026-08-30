@@ -30,10 +30,12 @@ HEADLINE_DOCUMENTS: tuple[str, ...] = (
     "supabase/README.md",
 )
 
-# These are the five maintained navigation surfaces. Keeping the list here makes a
+# Keeping the maintained navigation surfaces here makes a
 # missing onboarding link fail in CI instead of becoming tribal knowledge.
 MAINTAINER_NAVIGATION: tuple[str, ...] = (
+    "CONTRIBUTING.md",
     "docs/INDEX.md",
+    "docs/AI_ASSISTANCE_STATEMENT.md",
     "docs/DEVELOPER_GUIDE.md",
     "scripts/README.md",
     "reports/INDEX.md",
@@ -219,6 +221,32 @@ def test_readme_links_every_maintainer_navigation_surface() -> None:
     readme = (REPO / "README.md").read_text(encoding="utf-8")
     missing = [path for path in MAINTAINER_NAVIGATION if f"]({path})" not in readme]
     assert not missing, f"README does not link maintainer navigation: {missing}"
+    assert "[Issues](" in readme, "README does not link the public issue tracker"
+
+
+def test_methodology_decision_index_covers_every_decision() -> None:
+    """Numbered references must resolve without searching the decision ledger."""
+
+    text = (REPO / "docs" / "methodology_decisions.md").read_text(encoding="utf-8")
+    index, separator, _ = text.partition('<a id="decision-1"></a>')
+    assert separator, "methodology decision index has no decision-1 anchor"
+
+    indexed: list[int] = []
+    targets: set[int] = set()
+    for first, last, anchor in re.findall(
+        r"\[(\d+)–(\d+)\]\(#decision-(\d+)\)", index
+    ):
+        assert first == anchor
+        targets.add(int(anchor))
+        indexed.extend(range(int(first), int(last) + 1))
+
+    decisions = [int(number) for number in re.findall(r"(?m)^(\d+)\. \*\*", text)]
+    assert indexed == decisions, "methodology decision index does not cover the ledger"
+    targets.add(75)
+    for target in targets:
+        anchor = f'<a id="decision-{target}"></a>'
+        assert f"\n\n{anchor}\n\n" in text
+    assert "(#decision-75)" in index
 
 
 def test_every_top_level_script_is_catalogued() -> None:

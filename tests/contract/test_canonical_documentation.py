@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +26,10 @@ REQUIRED_CLAIM_COLUMNS = (
     "limitation",
     "allowed_presentation_context",
 )
+
+
+def _read(relative_path: str) -> str:
+    return (ROOT / relative_path).read_text(encoding="utf-8")
 
 
 def _claim_rows() -> list[dict[str, str]]:
@@ -96,3 +101,47 @@ def test_conclusion_retains_model_family_dependent_decision() -> None:
 
     assert "MODEL_FAMILY_DEPENDENT" in text
     assert "GLOBAL_EDGE" not in text
+
+
+def test_historical_claim_ledgers_cannot_authorize_current_results() -> None:
+    claims = _read("docs/canonical_claims_and_limitations.md")
+    final_report = _read("docs/rp2/FINAL_REPORT.md")
+    reconciliation = _read("docs/results_reconciliation_v2.md")
+    decisions = _read("docs/methodology_decisions.md")
+    superseded = _read("docs/rp2_v3/SUPERSEDED_RESULTS.md")
+
+    assert "**SUPERSEDED AUTHORITY.**" in claims
+    assert "This ledger is the only allowed source" not in claims
+    assert "**HISTORICAL CROSS-CAMPAIGN VIEW.**" in reconciliation
+    assert "The current figures are in" not in reconciliation
+    assert "**HISTORICAL RP2-V2 REPORT.**" in final_report
+    assert "The current figures are in" not in final_report
+    assert "canonical cross-campaign numbers live in" in decisions
+    assert "**Supersession, 2026-08-30:**" in decisions
+    assert "CLM-016" in superseded
+    assert "rival v2 numerical-authority claims" in superseded
+    assert "+0.03396090" in superseded
+    assert "−0.00002" in superseded
+
+
+def test_current_threats_and_reports_match_corrected_evidence() -> None:
+    matrix = _read("docs/threats_to_validity_matrix_v1.md")
+    assert "NO_CURRENT_ELIGIBLE_RESULT" in matrix
+    assert "PIT_V22_RECONCILIATION_BLOCKED" in matrix
+    assert "NOT_EVALUATED_AFTER_PIT_CORRECTION" in matrix
+    assert "sealed_cohorts_read=0" in matrix
+
+    corrected = json.loads(_read("artifacts/gate3_har/results_corrected_int8.json"))
+    displays = (
+        f"{corrected['contrasts']['har_vs_har_b2']['cluster_t']['estimate']:.5f}",
+        f"{corrected['contrasts']['harq_vs_harq_b2']['cluster_t']['estimate']:.5f}",
+    )
+    for relative_path in (
+        "docs/results_reconciliation_v2.md",
+        "reports/final_report_draft_v2.md",
+    ):
+        text = _read(relative_path)
+        for display in displays:
+            assert display.replace("-", "−") in text
+        assert "−0.00102" not in text
+        assert "−0.00090" not in text

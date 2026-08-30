@@ -481,7 +481,8 @@ the HARQ implementation is the strongest baseline of the ladder (pooled out-of-s
 0.18012 against HAR's 0.18041; both remeasured 2026-08-25 after the Int8
 seasonality-covariate correction of decision 96, ordering unchanged), and adding the
 nine activity features to HAR or to HARQ
-makes forecasts marginally worse (−0.00102 and −0.00090, neither significant)
+makes forecasts marginally worse (−0.00068 and −0.00070; all cluster/Newey–West/wild
+p ≥ 0.50)
 (`docs/gate3_har_harq_ladder_v1.md`). This historical diagnostic does not establish a
 universal absence of flow information; it shows that the registered activity block did not
 improve those HAR/HARQ specifications on the measured sessions.

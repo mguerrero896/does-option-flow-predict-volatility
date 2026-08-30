@@ -11,6 +11,7 @@ The current state is `REBUILD_COMPLETE_PIT_V22_BLOCKED`, so no RP2-v3 headline i
 | [`README.md`](../README.md) | Scope, current eligibility, information sets and reproducibility boundary. |
 | [`STATUS.md`](../STATUS.md) | Generated human-readable projection of the canonical state. |
 | [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json) | One current run pointer, evidence hashes and fail-closed eligibility reasons. |
+| [`docs/AI_ASSISTANCE_STATEMENT.md`](AI_ASSISTANCE_STATEMENT.md) | Computational-assistance disclosure and scientific decision boundaries. |
 | [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) | Withdrawn or invalidated measurements and their reasons. |
 | [`docs/rp2_v3/VERDICT.md`](rp2_v3/VERDICT.md) | Corrected-protocol 2026-08-27 measurement, explicitly not a current claim. |
 
