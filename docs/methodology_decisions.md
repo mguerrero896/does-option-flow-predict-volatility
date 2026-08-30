@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–107](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–108](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1625,3 +1625,22 @@ Requirements-consistency and preregistration gates pass.
      `reports/phase8a_exploratory_bridge_addendum_v5.md`. The numerical cells, checks,
      method, unresolved historical-producer limitation and exploratory claim boundary are
      unchanged. All registered v1–v4 audit paths and v1–v4 addenda remain immutable.
+
+<a id="decision-108"></a>
+
+108. **The Phase 8 dispersion audit fixes every source identity before measurement
+     (2026-08-30).** Exact file digests bind the Phase 8 result, bridge contract, Block 12
+     design and `artifacts/rp2_panel_pointers.json` before JSON parsing. The result and
+     contract semantic self-hashes are then verified. The B0, B1 and B2 panel digests are
+     constants in the producer; each must match both the pinned pointer manifest and the
+     supplied parquet bytes. A coordinated manifest-and-panel substitution therefore fails
+     closed.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v5.json`, self-hash
+     `1279424dafe1baf8ab7e293adc8c01b5655adda63692770a43df53599550cb43`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v6.md`. The numerical cells, checks,
+     method, executable-closure identity, unresolved historical-producer limitation and
+     exploratory claim boundary are unchanged. All registered v1–v5 audit paths and v1–v5
+     addenda remain immutable.
