@@ -51,13 +51,6 @@ def test_scanner_rejects_personal_git_identity_without_echoing_it(tmp_path: Path
     ]
     assert all(email not in repr(item) for item in findings)
 
-    commit = subprocess.check_output(
-        ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
-    ).strip()
-    assert scan_repository(
-        repo, allowed_non_noreply_commits=frozenset({commit})
-    ) == []
-
 
 def test_only_the_published_pr14_squash_identity_is_excepted() -> None:
     expected = frozenset({"c39cfb3394aedb020e8a1a3903da66fd603cfd4d"})

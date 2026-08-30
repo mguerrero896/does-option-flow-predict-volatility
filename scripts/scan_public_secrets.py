@@ -75,11 +75,7 @@ def _is_github_synthetic_merge(content: bytes) -> bool:
     )
 
 
-def scan_repository(
-    repo: Path,
-    *,
-    allowed_non_noreply_commits: frozenset[str] = APPROVED_NON_NOREPLY_COMMITS,
-) -> list[Finding]:
+def scan_repository(repo: Path) -> list[Finding]:
     repo_root = Path(_git(repo, "rev-parse", "--show-toplevel").decode().strip())
     objects = _git(repo_root, "rev-list", "--objects", "--all").splitlines()
     paths: dict[str, str] = {}
@@ -120,7 +116,7 @@ def scan_repository(
             )
             if (
                 has_private_identity
-                and object_id not in allowed_non_noreply_commits
+                and object_id not in APPROVED_NON_NOREPLY_COMMITS
                 and not _is_github_synthetic_merge(content)
             ):
                 findings.append(Finding("non_noreply_git_identity", object_id, path))
