@@ -22,8 +22,6 @@ Nine of the twelve headline contrasts fall below their own minimum detectable ef
 Underneath both sits a third observation: the contribution visible in 2024 weakens across
 the sample and is no longer detectable by 2026.
 
-![Option-information content from 2024 to 2026](docs/figures/story_timeline.svg)
-
 This repository exists to make that null result *credible* rather than merely asserted.
 Any single test that fails to find an effect can be dismissed as a weak test. The design
 answer is pre-registration, sealed one-shot reads, hash-pinned evidence and a fail-closed
@@ -109,8 +107,6 @@ sealed before future observations and read under its specific access contract ca
 described as prospective or one-read.
 
 ## Evidence and data access
-
-![From raw market data to a sealed verdict](docs/figures/pipeline_diagram.svg)
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,
 schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in
