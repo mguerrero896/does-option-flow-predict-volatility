@@ -17,10 +17,12 @@ from build_phase8_bridge_dispersion_audit_v1 import main as build_audit_main  # 
 
 AUDIT_V1 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v1.json"
 AUDIT_V2 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v2.json"
+AUDIT_V3 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v3.json"
 RESULT = REPO / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 REPORT_V1 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v1.md"
 REPORT_V2 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v2.md"
 REPORT_V3 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v3.md"
+REPORT_V4 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v4.md"
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
 
 
@@ -39,7 +41,7 @@ def _canonical_sha(payload: dict[str, Any]) -> str:
 
 
 def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() -> None:
-    audit = _load(AUDIT_V2)
+    audit = _load(AUDIT_V3)
     result = _load(RESULT)
 
     assert audit["audit_sha256"] == _canonical_sha(audit)
@@ -53,6 +55,10 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
         "path": "scripts/rp2_block12_prospective_design.py",
         "sha256": "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8",
     }
+    historical = audit["source_identity"]["contract_power_design"]
+    assert historical["producer_bytes_available_to_this_audit"] is False
+    assert historical["producer_identity_status"] == "RECORDED_UNRESOLVABLE_FROM_PUBLIC_ROOT"
+    assert audit["status"] == "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED"
     assert audit["checks"] == {
         "cube_duplicate_keys": 0,
         "cube_nulls": 0,
@@ -103,8 +109,8 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     ]
 
 
-def test_addendum_v3_publishes_all_holm_values_and_preserves_history() -> None:
-    report = REPORT_V3.read_text(encoding="utf-8")
+def test_addendum_v4_publishes_all_holm_values_and_preserves_history() -> None:
+    report = REPORT_V4.read_text(encoding="utf-8")
     for value in ("0.9802", "0.0050", "0.0208", "0.0040"):
         assert value in report
     for value in ("0.5756", "0.3940", "0.9528", "1.0000"):
@@ -114,6 +120,7 @@ def test_addendum_v3_publishes_all_holm_values_and_preserves_history() -> None:
         "alpha = 0.005",
         "aggregation-change hypothesis is not supported",
         "historical panel bytes are not available",
+        "cannot be independently rehashed",
         "sealed_store_reopened = false",
     ):
         assert phrase in report
@@ -122,8 +129,10 @@ def test_addendum_v3_publishes_all_holm_values_and_preserves_history() -> None:
     assert registered[REPORT_V1.relative_to(REPO).as_posix()] == _sha(REPORT_V1)
     assert registered[REPORT_V2.relative_to(REPO).as_posix()] == _sha(REPORT_V2)
     assert registered[REPORT_V3.relative_to(REPO).as_posix()] == _sha(REPORT_V3)
+    assert registered[REPORT_V4.relative_to(REPO).as_posix()] == _sha(REPORT_V4)
     assert registered[AUDIT_V1.relative_to(REPO).as_posix()] == _sha(AUDIT_V1)
     assert registered[AUDIT_V2.relative_to(REPO).as_posix()] == _sha(AUDIT_V2)
+    assert registered[AUDIT_V3.relative_to(REPO).as_posix()] == _sha(AUDIT_V3)
 
 
 def test_dispersion_producer_refuses_a_registered_output() -> None:
@@ -140,6 +149,6 @@ def test_dispersion_producer_refuses_a_registered_output() -> None:
                 "--b2-panel",
                 missing,
                 "--output",
-                str(AUDIT_V2),
+                str(AUDIT_V3),
             ]
         )

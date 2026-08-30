@@ -29,8 +29,8 @@ PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
 PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
-PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v2.json"
-PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v3.md"
+PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v3.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v4.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -233,7 +233,7 @@ def build_state() -> dict[str, Any]:
     ):
         raise ValueError("PHASE8_BRIDGE_RESULT_DRIFT")
     if (
-        bridge_dispersion["status"] != "COMPLETE"
+        bridge_dispersion["status"] != "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED"
         or bridge_dispersion["contract_sha256"] != bridge["contract_sha256"]
         or bridge_dispersion["source_identity"]["forecast_cube"]["sha256"]
         != bridge_result["forecast_cube_sha256"]
@@ -498,7 +498,7 @@ def render_status(state: dict[str, Any]) -> str:
         "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
         "submission rendering pinned under `current_report` in the machine state.",
         "- Post-cutoff Phase 8A result: "
-        "`reports/phase8a_exploratory_bridge_addendum_v3.md`.",
+        "`reports/phase8a_exploratory_bridge_addendum_v4.md`.",
     ]
     lines += ["", "## Future campaigns", ""]
     for campaign in state["future_campaigns"]:

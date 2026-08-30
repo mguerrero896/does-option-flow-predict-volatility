@@ -49,7 +49,7 @@ The Phase 8 row in `sequential_multiplicity_policy_v1.md` preserves its historic
 It is not a confirmation threshold: the bridge contract classifies every p-value as
 descriptive, forbids confirmatory promotion and permits no second read. The dated outcome
 and dispersion audit are published in
-[`reports/phase8a_exploratory_bridge_addendum_v3.md`](../reports/phase8a_exploratory_bridge_addendum_v3.md).
+[`reports/phase8a_exploratory_bridge_addendum_v4.md`](../reports/phase8a_exploratory_bridge_addendum_v4.md).
 
 ## Reproduction and data access
 
