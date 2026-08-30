@@ -29,7 +29,7 @@ RESULT: Final = ROOT / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v2.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v3.json"
 CURRENT_DV_PRODUCER: Final = ROOT / "scripts" / "rp2_block12_prospective_design.py"
 CURRENT_DV_PRODUCER_SHA256: Final = (
     "4ab2d426cdf92f96d3e6a2fefd5b768db382c362ca924b604c82d7d0543694a8"
@@ -38,7 +38,7 @@ MODELS: Final = ("gamma_glm", "lightgbm")
 INFORMATION_SETS: Final = ("B0", "B0+B1", "B0+B2", "B0+B1+B2")
 KEYS: Final = ("session_date", "asset", "origin_minute")
 CHECKED_CONTRASTS: Final = ("delta_b1", "delta_b2_given_b1")
-HISTORICAL_DESIGN_PRODUCER_SHA256: Final = (
+RECORDED_HISTORICAL_DESIGN_PRODUCER_SHA256: Final = (
     "7dad5bd53a400358f3aeca92e5005af84c5f4e32a58ceb1e8c2133b08cde0baa"
 )
 
@@ -279,7 +279,7 @@ def build_audit(
     b2_cells = [cells[role][model]["delta_b2_given_b1"] for role in ("D", "V") for model in MODELS]
     audit: dict[str, Any] = {
         "schema_version": "phase8-bridge-dispersion-audit-v1.0",
-        "status": "COMPLETE",
+        "status": "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED",
         "claim_classification": "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY",
         "protocol_id": contract["protocol_id"],
         "contract_sha256": contract["contract_sha256"],
@@ -297,8 +297,10 @@ def build_audit(
                 "path": DESIGN.relative_to(ROOT).as_posix(),
                 "file_sha256": _sha256(DESIGN),
                 "design_sha256": design["design_sha256"],
-                "producer_commit": "9453954a2191e04e2990dbf37504dcbca5e7c6fc",
-                "producer_sha256": HISTORICAL_DESIGN_PRODUCER_SHA256,
+                "recorded_producer_commit": "9453954a2191e04e2990dbf37504dcbca5e7c6fc",
+                "recorded_producer_sha256": RECORDED_HISTORICAL_DESIGN_PRODUCER_SHA256,
+                "producer_bytes_available_to_this_audit": False,
+                "producer_identity_status": "RECORDED_UNRESOLVABLE_FROM_PUBLIC_ROOT",
                 "historical_input_bytes_available_to_this_audit": False,
                 "comparability": (
                     "Same QLIKE contrast and session aggregation; the historical producer "
@@ -350,10 +352,10 @@ def build_audit(
                 "regime is not identified causally."
             ),
             "historical_reference_limitation": (
-                "The frozen design output and its producer remain hash-verifiable, but the "
-                "historical D/V panel bytes are unavailable for an upstream refit and that "
-                "producer predates the Phase 8 model pipeline. The current D/V panels provide "
-                "the independent same-estimator comparison."
+                "The frozen design output is hash-verifiable. Its recorded producer commit "
+                "and digest cannot be resolved from the public root, and the historical D/V "
+                "panel bytes are unavailable for an upstream refit. The current D/V panels "
+                "provide the independently producer-bound same-estimator comparison."
             ),
         },
     }

@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–105](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–106](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1585,3 +1585,24 @@ Requirements-consistency and preregistration gates pass.
      identity. The current narrative authority is the new path
      `reports/phase8a_exploratory_bridge_addendum_v3.md`. The scientific conclusion and
      exploratory, descriptive, non-confirmatory boundary do not change.
+
+<a id="decision-106"></a>
+
+106. **The historical Block 12 producer identity is recorded but unresolved from the
+     public root (2026-08-30).** The frozen design output is verified against its contract
+     digest. Commit `9453954a2191e04e2990dbf37504dcbca5e7c6fc` and recorded producer
+     SHA-256
+     `7dad5bd53a400358f3aeca92e5005af84c5f4e32a58ceb1e8c2133b08cde0baa`
+     do not resolve to producer bytes in the root-only public checkout, so that producer
+     identity cannot be independently rehashed there. The historical panel bytes also
+     remain unavailable.
+
+     The current D/V comparison remains independently reproducible: its producer and three
+     panels are verified before measurement. The new machine authority,
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v3.json`, records status
+     `COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED` and self-hash
+     `0e77b404d35e593bb3a0f5865e75137c9c6265e455782aff1eb07e92834c7713`.
+     Its cells, checks and method are byte-for-byte equivalent as JSON values to v2; only
+     the historical-provenance classification changes. The current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v4.md`. All registered v1–v3 paths
+     remain immutable.

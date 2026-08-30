@@ -41,7 +41,7 @@ zero-crossing intervals and no Holm p below 0.05. A cube-level audit reproduces 
 registered inference exactly and finds no aggregation change. The read is descriptive,
 not confirmatory, and cannot make the PIT-blocked bundle eligible. The exact result,
 dispersion comparison and execution-recovery limitation are in the
-[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v3.md).
+[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v4.md).
 
 ## Research design
 
