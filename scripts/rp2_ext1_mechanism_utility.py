@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from collections.abc import Sequence
 from datetime import UTC, datetime
 from pathlib import Path
@@ -33,10 +34,11 @@ from sklearn.linear_model import LogisticRegression  # type: ignore[import-untyp
 
 from mds650.b1v3_confirmation import canonical_sha256
 from mds650.metrics import holm_adjust
-from mds650.rp2.bars import FULL_SESSION_MINUTES, build_session_grid, load_bar_sources
+from mds650.rp2.bars import BAR_SOURCES, FULL_SESSION_MINUTES, build_session_grid, load_bar_sources
 from mds650.rp2.dml import cross_fitted_residuals, dml_partial_out, time_block_folds
 from mds650.rp2.feature_registry import describe_features, feature_map
-from mds650.rp2.ladder import LADDER
+from mds650.rp2.inference import minimum_detectable_effect_from_long_run_variance
+from mds650.rp2.ladder import fit_ladder_model
 from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
@@ -93,21 +95,43 @@ type FloatArray = npt.NDArray[np.float64]
 
 
 def build_target_battery(
-    data_root: Path, origins_by_key: dict[tuple[str, str], FloatArray]
+    data_root: Path,
+    origins_by_key: dict[tuple[str, str], FloatArray],
+    *,
+    sources: tuple[tuple[str, str, str], ...] | None = None,
+    coverage: dict[str, object] | None = None,
 ) -> pl.DataFrame:
     """Forward realized measures at several horizons on the production origin grid."""
 
-    bars = load_bar_sources(data_root)
+    selected_sources = BAR_SOURCES if sources is None else sources
+    bars = load_bar_sources(data_root) if sources is None else load_bar_sources(data_root, sources)
     rows: list[pl.DataFrame] = []
+    candidate: set[tuple[str, str]] = set()
+    counters: Counter[str] = Counter()
+    session_minutes: Counter[str] = Counter()
     for (asset, session_date), group in bars.sort(["asset", "session_date", "minute"]).group_by(
         ["asset", "session_date"], maintain_order=True
     ):
         key = (str(asset), str(session_date))
+        counters["bar_asset_sessions_seen"] += 1
         origins = origins_by_key.get(key)
         if origins is None:
+            counters["without_panel_origins"] += 1
             continue
+        candidate.add(key)
+        counters["candidate_asset_sessions"] += 1
         grid = build_session_grid(group, session=session_date)
-        if grid.fill_share > 0.05 or grid.close.min() <= 0.0:
+        session_minutes[str(grid.minutes)] += 1
+        if grid.minutes < FULL_SESSION_MINUTES:
+            counters["early_close_asset_sessions"] += 1
+        if grid.fill_share > 0.05:
+            counters["rejected_fill_share"] += 1
+            continue
+        if not np.isfinite(grid.close).all():
+            counters["rejected_nonfinite_close"] += 1
+            continue
+        if np.any(grid.close <= 0.0):
+            counters["rejected_nonpositive_close"] += 1
             continue
         returns = log_returns(grid.close)
         cumulative = np.concatenate([[0.0], np.cumsum(returns)])
@@ -141,6 +165,26 @@ def build_target_battery(
             np.nan,
         )
         rows.append(pl.DataFrame(record))
+        counters["accepted_asset_sessions"] += 1
+        counters["target_rows_emitted"] += index.size
+    if coverage is not None:
+        coverage.update(
+            {
+                "source_names": [source[0] for source in selected_sources],
+                "requested_asset_sessions": len(origins_by_key),
+                "requested_without_bar_group": len(set(origins_by_key) - candidate),
+                "session_minutes": dict(sorted(session_minutes.items())),
+                **{key: int(value) for key, value in sorted(counters.items())},
+                **{
+                    key: int(counters[key])
+                    for key in (
+                        "rejected_fill_share",
+                        "rejected_nonfinite_close",
+                        "rejected_nonpositive_close",
+                    )
+                },
+            }
+        )
     if not rows:
         raise SystemExit("RP2_EXT1_EMPTY_TARGETS")
     return pl.concat(rows, how="vertical")
@@ -190,6 +234,7 @@ def _dml_on_target(
         estimate = dml_partial_out(response_residual, treatment_residual, sessions[finite], names)
     except ValueError:
         return None
+    critical = float(stats.t.ppf(0.975, df=max(estimate.clusters - 1, 1)))
     return {
         "joint_wald": estimate.joint_statistic,
         "joint_p_value": estimate.joint_p_value,
@@ -197,7 +242,18 @@ def _dml_on_target(
         "clusters": estimate.clusters,
         "evaluation_mask_sha256": mask_sha256(lift_mask(evaluation_base, finite)),
         "coefficients": {
-            name: {"t": float(estimate.t_statistic[i]), "p": float(estimate.p_value[i])}
+            name: {
+                "theta": float(estimate.theta[i]),
+                "standard_error": float(estimate.standard_error[i]),
+                "ci_95_low": float(estimate.theta[i] - critical * estimate.standard_error[i]),
+                "ci_95_high": float(estimate.theta[i] + critical * estimate.standard_error[i]),
+                "nominal_mde": minimum_detectable_effect_from_long_run_variance(
+                    float(estimate.standard_error[i] ** 2 * estimate.clusters),
+                    estimate.clusters,
+                ),
+                "t": float(estimate.t_statistic[i]),
+                "p": float(estimate.p_value[i]),
+            }
             for i, name in enumerate(estimate.treatment_names)
         },
     }
@@ -313,6 +369,7 @@ def ranking_utility(
     designs: dict[str, FloatArray],
     train: npt.NDArray[np.bool_],
     test: npt.NDArray[np.bool_],
+    sessions: npt.NDArray[np.int64],
 ) -> dict[str, object]:
     """Does the mechanism improve the ORDERING of origins by realized variance?
 
@@ -323,7 +380,9 @@ def ranking_utility(
 
     out: dict[str, object] = {}
     for name, design in designs.items():
-        forecast = LADDER["lightgbm"](standardise(design, train), target, train)
+        forecast = fit_ladder_model(
+            "lightgbm", standardise(design, train), target, train, sessions=sessions
+        )
         predicted, realized = forecast[test], target[test]
         order = np.argsort(predicted)
         buckets = np.array_split(order, DECILES)
@@ -382,9 +441,15 @@ def run_role(
     sessions = session_rank(frame["session_date"].to_numpy())
     train, test = chronological_split(sessions, train_share=train_share)
     nuisance, _, nuisance_fitted = fold_design(frame, nuisance_features, train)
-    treatment, _, treatment_fitted = fold_design(
-        frame, list(treatment_map), train, intercept=False
+    treatment, treatment_names, treatment_fitted = fold_design(
+        frame,
+        list(treatment_map),
+        train,
+        intercept=False,
+        include_missing_indicators=False,
     )
+    if treatment_names != names:
+        raise ValueError("RP2_EXT1_TREATMENT_NAME_WIDTH")
     assets = frame["asset"].to_numpy()
 
     # Registry designs are imputed and scaled from this fold's training rows, like the
@@ -444,7 +509,9 @@ def run_role(
         "b_tail_classification": tail_classification(
             rv30, designs, train & finite, test & finite, assets
         ),
-        "c_execution_ranking": ranking_utility(rv30, designs, train & finite, test & finite),
+        "c_execution_ranking": ranking_utility(
+            rv30, designs, train & finite, test & finite, sessions
+        ),
     }
 
 

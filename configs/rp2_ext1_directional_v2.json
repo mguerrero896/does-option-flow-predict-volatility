@@ -1,0 +1,79 @@
+{
+  "schema_version": "rp2-ext1-directional-v2-preregistration-v1.0",
+  "label": "EXPLORATORY_DIRECTIONAL_REANALYSIS",
+  "question": "Does a fixed B2 mechanism score carry signed-return information beyond B0+B1 after horizon and time-of-day controls?",
+  "sealed_cohorts_read": 0,
+  "outcome": {
+    "name": "signed_return",
+    "horizons_minutes": [5, 15, 30, 60, 120],
+    "scale": "log return",
+    "zero_policy": "exclude only from sign metrics"
+  },
+  "instrument": {
+    "name": "equal_weight_three_feature_directional_score",
+    "features": [
+      "b2_5m_strike_hhi",
+      "b2_5m_premium",
+      "b2_5m_buy_premium_share"
+    ],
+    "weights": [
+      0.5773502691896258,
+      -0.5773502691896258,
+      -0.5773502691896258
+    ],
+    "orientation_source": "frozen 2026-08-18 Ext1 same-sign coefficients in D and V",
+    "preprocessing": "registry transform, median, mean, and scale fitted on all D rows without outcomes; missing values contribute zero after imputation",
+    "interpretation": "positive score predicts positive signed return"
+  },
+  "modes": {
+    "native_tod": {
+      "sample": "all rows with the requested horizon",
+      "nuisance": "B0_CORE+B1_CORE including minutes_since_open and minutes_to_close"
+    },
+    "matched120_no_tod": {
+      "sample": "rows with signed_return_120, identical at every horizon",
+      "nuisance": "B0_CORE+B1_CORE excluding minutes_since_open and minutes_to_close"
+    },
+    "matched120_tod": {
+      "sample": "rows with signed_return_120, identical at every horizon",
+      "nuisance": "B0_CORE+B1_CORE including minutes_since_open and minutes_to_close"
+    }
+  },
+  "cells": {
+    "D_all": {"role": "D", "start": "2024-08-02", "end": "2026-03-23"},
+    "D_early": {"role": "D", "start": "2024-08-02", "end": "2025-06-11"},
+    "D_late": {"role": "D", "start": "2025-06-12", "end": "2026-03-23"},
+    "V_all": {"role": "V", "start": "2026-03-24", "end": "2026-07-17"}
+  },
+  "family": {
+    "dml_effect_tests": 60,
+    "directional_metric_tests": 8,
+    "size": 68,
+    "adjustment": "Holm across every two-sided primary p-value",
+    "alpha": 0.05,
+    "familywise_mde_alpha": 0.0007352941176470588,
+    "power": 0.8,
+    "directional_metric_scope": "matched120_tod, horizons 60 and 120, all four cells"
+  },
+  "decision_rule": {
+    "pursue": "V_all matched120_tod h60 and h120 must each have theta > 0, ci_95_low > 0, Holm p <= 0.05, and absolute theta >= familywise MDE; native_tod h60 and h120 must have the same positive sign",
+    "operational_falsifier": "Any pursue condition fails: the directional lead is not established strongly enough to justify a new program",
+    "strict_directional_falsifier": "V_all matched120_tod h120 has ci_95_high <= 0",
+    "status_values": ["PURSUE", "DO_NOT_PURSUE", "FALSIFIED_DIRECTION"]
+  },
+  "legacy_reproduction": {
+    "artifact": "artifacts/rp2_ext1_mechanism_utility/mechanism_utility.json",
+    "artifact_file_sha256": "604e1e40990b1a9a6e0800691f0cb1dca0db658781f23838b8f49d47f263f499",
+    "source_names": ["ohlcv_repair", "phase6_180d", "gate3_dev80"],
+    "expected_sessions": {"D": 230, "V": 80},
+    "comparison_rule": "Run the current corrected estimator on the same bar-source universe and report every design, input, row, and numerical difference; do not call it exact when the frozen artifact lacks input hashes"
+  },
+  "historical_decay_comparator": {
+    "value_per_year": -0.0277,
+    "rounded_value_per_year": -0.028,
+    "status": "WITHDRAWN_INVALIDATED",
+    "authority": "docs/rp2_v3/SUPERSEDED_RESULTS.md",
+    "use": "historical context only; never a numerical acceptance benchmark"
+  },
+  "contract_sha256": "fc083b0d9df26e913f4348d9c64f4cd8e83b8e963169743d0d5cd6dd5488ebde"
+}

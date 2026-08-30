@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–102](#decision-97) | Phase 8/9 collection, rebuild, power and deadline policy. |
+| [97–103](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and Ext1 closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1503,3 +1503,36 @@ Requirements-consistency and preregistration gates pass.
      new frozen paths. The owner's 2026-08-30 instruction confirms the exploratory,
      descriptive, non-confirmatory boundary; it does not reset the consumed counter or
      authorize another read.
+
+<a id="decision-103"></a>
+
+103. **The three-feature B2 directional lead does not justify another research program
+     (2026-08-30).** Rules were frozen before measurement in
+     `configs/rp2_ext1_directional_v2.json`, SHA-256
+     `fc083b0d9df26e913f4348d9c64f4cd8e83b8e963169743d0d5cd6dd5488ebde`: one
+     normalized score from `strike_hhi` (+), log premium (-), and buy-premium share (-);
+     five horizons; native, 120-minute-matched, and matched-without-time-controls modes;
+     four role/era cells; 60 DML tests plus eight balanced-sign tests; and one 68-test Holm
+     family. `minutes_since_open` and `minutes_to_close` are explicit nuisance controls.
+
+     The registered decision is **`DO_NOT_PURSUE`**. On 22,944 validation rows, the matched
+     time-controlled score gives +1.645 bp at 60 minutes (95% interval -0.341 to +3.632,
+     raw p 0.103, Holm p 1.0, MDE 4.351 bp) and +3.034 bp at 120 minutes (+0.238 to
+     +5.831, raw p 0.0338, Holm p 1.0, MDE 6.125 bp). Both are below their MDE. Balanced
+     sign accuracy is 50.589% and 51.006%, also null after clustered, wild-cluster,
+     Newey-West, and Holm inference. Matching removes the nominal 60-minute rejection;
+     explicit time controls barely move either theta. The strict nonpositive-upper-bound
+     falsifier does not fire, so the result is not proof of zero; it fails the higher bar
+     for spending another program.
+
+     The frozen Ext1 file remains byte-unchanged. Exact reproduction cannot be claimed:
+     it has no input/session/code hashes, and the corrected same-source route has 240 D
+     sessions against its 230. Its stated premise also omitted a volatility survivor:
+     validation `y_rs_up_60` has Holm p 0.03576. Under the corrected same-source battery no
+     validation target survives. The `-0.0277/year` decay line is withdrawn and is not a
+     comparator for signed-return theta. RP3 remains sealed and unchanged; a future
+     directional program requires a new result-blind contract and a virgin window rather
+     than reusing D/V. Artifact:
+     `artifacts/rp2_ext1_directional_v2/results.json`, semantic self-hash
+     `477f21af6319de58bee2eeeca930c9cccbd497371086a0f7117ab92123e656b0`;
+     `sealed_cohorts_read=0`.

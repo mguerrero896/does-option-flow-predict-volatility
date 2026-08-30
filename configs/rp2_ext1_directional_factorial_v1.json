@@ -1,0 +1,122 @@
+{
+  "schema_version": "rp2-ext1-directional-factorial-preregistration-v1.0",
+  "label": "EXPLORATORY_EXT1_TREATMENT_COVERAGE_FACTORIAL",
+  "question": "Does the change in Ext1 directional joint evidence come from the treatment registry or from bar coverage?",
+  "sealed_cohorts_read": 0,
+  "frozen_ext1": {
+    "artifact": "artifacts/rp2_ext1_mechanism_utility/mechanism_utility.json",
+    "artifact_file_sha256": "604e1e40990b1a9a6e0800691f0cb1dca0db658781f23838b8f49d47f263f499"
+  },
+  "treatment_sets": {
+    "ext1_exact": {
+      "source": "frozen Ext1 artifact /core_treatments",
+      "features": [
+        "b2_5m_vega_flow",
+        "b2_5m_gamma_flow",
+        "b2_5m_delta_flow",
+        "b2_5m_premium",
+        "b2_5m_trades",
+        "b2_5m_hawkes_innovation",
+        "b2_5m_d_iv",
+        "b2_5m_buy_premium_share",
+        "b2_5m_strike_hhi",
+        "b2_5m_otm_premium_share"
+      ]
+    },
+    "b2_panel_12": {
+      "source": "configs/rp2_v3_feature_sets.json#/sets/B2_CORE",
+      "feature_registry_sha256": "3c108a14a5a88e4da08bade7debd5dc05a1d51ea50c1e5adea6d1e88dc0acb9c",
+      "features": [
+        "b2_5m_buy_premium_share",
+        "b2_5m_d_iv",
+        "b2_5m_decay_intensity_innovation",
+        "b2_5m_delta_flow",
+        "b2_5m_mean_provider_latency_s",
+        "b2_5m_multileg_size_share",
+        "b2_5m_premium",
+        "b2_5m_strike_hhi",
+        "b2_5m_trades",
+        "b2_5m_vega_flow",
+        "b2_5m_vega_flow_short_dte",
+        "b2_5m_zero_dte_premium_share"
+      ]
+    }
+  },
+  "aliases": {
+    "b2_5m_hawkes_innovation": {
+      "panel_column": "b2_5m_decay_intensity_innovation",
+      "status": "RECORDED_SEMANTIC_RENAME",
+      "authority": "docs/rp2/block7_dml_v1.md",
+      "operation": "map the historical design label to the current panel column in memory, preserve the historical coefficient label, and do not recompute the feature",
+      "limit": "the obsolete column is absent, so historical byte equality cannot be tested"
+    }
+  },
+  "coverage_cells": {
+    "august": {
+      "source_names": [
+        "ohlcv_repair",
+        "phase6_180d",
+        "gate3_dev80"
+      ],
+      "interpretation": "the same three BAR_SOURCES names used for the August Ext1 comparison"
+    },
+    "complete": {
+      "source_names": [
+        "ohlcv_repair",
+        "phase6_180d",
+        "gate3_dev80",
+        "ext3_missing",
+        "validation_market"
+      ],
+      "interpretation": "all current BAR_SOURCES"
+    }
+  },
+  "roles": [
+    "D",
+    "V"
+  ],
+  "outcome": {
+    "name": "signed_return",
+    "horizons_minutes": [
+      5,
+      15,
+      30,
+      60,
+      120
+    ],
+    "scale": "log return",
+    "sample": "native horizon availability, matching the Ext1 joint-target battery"
+  },
+  "estimator": {
+    "name": "Ext1 cross-fitted partial-out DML joint Wald",
+    "nuisance": "B0_CORE+B1_CORE",
+    "treatment_design": "registry transform plus fold-training median and scale; omit missingness-indicator columns so the joint block remains exactly 10 or 12 requested treatments",
+    "cluster": "session_date",
+    "folds": 5,
+    "purge_sessions": 1,
+    "train_share_for_feature_preprocessing": 0.6
+  },
+  "family": {
+    "size": 40,
+    "calculation": "2 treatment sets * 2 coverages * 2 roles * 5 horizons",
+    "adjustment": "Holm across all joint two-sided p-values",
+    "alpha": 0.05
+  },
+  "mask_invariants": {
+    "same_coverage_role_horizon_same_mask_across_treatment_sets": true,
+    "august_mask_subset_of_complete_mask": true
+  },
+  "attribution": {
+    "primary_horizons_minutes": [
+      60,
+      120
+    ],
+    "evidence_scale": "log(joint_wald / treatment_df)",
+    "treatment_main_effect": "mean over coverages of b2_panel_12 minus ext1_exact",
+    "coverage_main_effect": "mean over treatment sets of complete minus august",
+    "aggregation": "median absolute main effect across roles and primary horizons",
+    "classification": "TREATMENT_SET if treatment shift is at least twice coverage shift; COVERAGE if coverage shift is at least twice treatment shift; otherwise MIXED_OR_INTERACTION",
+    "interpretation": "descriptive attribution only because the treatment sets are not nested"
+  },
+  "contract_sha256": "290debdca033737e386c5abe9cca4e0b1d7632435e07f747823198864da256a4"
+}
