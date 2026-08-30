@@ -90,6 +90,7 @@
   "estimator": {
     "name": "Ext1 cross-fitted partial-out DML joint Wald",
     "nuisance": "B0_CORE+B1_CORE",
+    "treatment_design": "registry transform plus fold-training median and scale; omit missingness-indicator columns so the joint block remains exactly 10 or 12 requested treatments",
     "cluster": "session_date",
     "folds": 5,
     "purge_sessions": 1,
@@ -117,5 +118,5 @@
     "classification": "TREATMENT_SET if treatment shift is at least twice coverage shift; COVERAGE if coverage shift is at least twice treatment shift; otherwise MIXED_OR_INTERACTION",
     "interpretation": "descriptive attribution only because the treatment sets are not nested"
   },
-  "contract_sha256": "f4180bbdd6658a2c8e14f0724da7b120926cd00f44030d8581d5605aa51e4979"
+  "contract_sha256": "290debdca033737e386c5abe9cca4e0b1d7632435e07f747823198864da256a4"
 }

@@ -233,6 +233,19 @@ def test_factorial_hawkes_name_is_an_in_memory_design_alias(directional) -> None
     ]
 
 
+def test_factorial_treatment_matrix_keeps_the_requested_width(directional) -> None:  # type: ignore[no-untyped-def]
+    frame = pl.DataFrame({"b2_5m_premium": [100.0, None, 120.0]})
+    train = np.array([True, True, False])
+
+    design, fitted = directional.exact_factorial_treatment_design(
+        frame, ["b2_5m_premium"], train
+    )
+
+    assert design.shape == (3, 1)
+    assert fitted.missing_indicator_features == ("b2_5m_premium",)
+    assert np.isfinite(design).all()
+
+
 def test_factorial_attribution_uses_dimension_normalized_wald(directional) -> None:  # type: ignore[no-untyped-def]
     tests: dict[str, dict[str, object]] = {}
     for role in ("D", "V"):

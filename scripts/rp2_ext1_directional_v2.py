@@ -42,6 +42,7 @@ from mds650.rp2.panel import (
     session_rank,
 )
 from mds650.rp2.preprocessing import (
+    FittedPreprocessor,
     describe_preprocessor,
     fit_preprocessor,
     fold_design,
@@ -175,6 +176,16 @@ def resolve_treatment_design(
                 }
             )
     return resolved, tuple(requested), provenance
+
+
+def exact_factorial_treatment_design(
+    frame: pl.DataFrame, features: Sequence[str], train: BoolArray
+) -> tuple[FloatArray, FittedPreprocessor]:
+    """Impute and scale fold-locally while retaining only the requested treatment columns."""
+
+    fitted = fit_preprocessor(frame, features, train)
+    transformed = transform_features(frame, features, fitted, intercept=False)
+    return transformed[:, : len(features)], fitted
 
 
 def factorial_attribution(
@@ -463,13 +474,7 @@ def _factorial_role_results(
     train, _ = chronological_split(sessions, train_share=train_share)
     nuisance_features = [*B0_FEATURES, *B1_FEATURES]
     nuisance, _, nuisance_fitted = fold_design(available, nuisance_features, train)
-    treatment, treatment_names, treatment_fitted = fold_design(
-        available, actual, train, intercept=False
-    )
-    if len(treatment_names) != len(labels):
-        raise ValueError(
-            f"RP2_EXT1_FACTORIAL_TREATMENT_DESIGN_WIDTH:{len(labels)}:{len(treatment_names)}"
-        )
+    treatment, treatment_fitted = exact_factorial_treatment_design(available, actual, train)
 
     results: dict[int, dict[str, object]] = {}
     masks: dict[int, BoolArray] = {}
@@ -507,6 +512,10 @@ def _factorial_role_results(
         "requested_treatments": list(labels),
         "resolved_panel_columns": actual,
         "alias_resolution": alias_provenance,
+        "treatment_design_policy": "EXACT_REQUESTED_FEATURES_NO_MISSING_INDICATORS",
+        "excluded_missing_indicator_features": list(
+            treatment_fitted.missing_indicator_features
+        ),
         "nuisance_preprocessing": describe_preprocessor(nuisance_fitted),
         "treatment_preprocessing": describe_preprocessor(treatment_fitted),
     }
