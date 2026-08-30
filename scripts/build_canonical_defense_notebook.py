@@ -224,7 +224,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("notebooks/MDS650_Canonical_RV30_Defense.ipynb"),
+        default=Path("notebooks/canonical_rv30_defense.ipynb"),
     )
     args = parser.parse_args(argv)
     print(json.dumps(write_notebook(args.output), sort_keys=True))
