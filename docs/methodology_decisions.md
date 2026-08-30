@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–106](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
+| [97–107](#decision-97) | Phase 8/9 collection, rebuild, power, deadline and exploratory closeout policy. |
 
 <a id="decision-1"></a>
 
@@ -1606,3 +1606,22 @@ Requirements-consistency and preregistration gates pass.
      the historical-provenance classification changes. The current narrative authority is
      `reports/phase8a_exploratory_bridge_addendum_v4.md`. All registered v1–v3 paths
      remain immutable.
+
+<a id="decision-107"></a>
+
+107. **The current D/V comparison is bound to its full local executable closure
+     (2026-08-30).** Before measurement,
+     `mds650.executable_closure.build_executable_closure` hashes the Block 12 wrapper,
+     the complete importable `src/mds650` tree and `uv.lock`: 126 files under
+     `sha256-of-sorted-path-and-normalized-sha256-v1`, aggregate SHA-256
+     `939a238b1ff703e57b597582bca24205bf8e2b947227e264fcc0140fb08dd95d`.
+     Any change to QLIKE, feature construction, preprocessing, model fitting, panel logic,
+     another package module or locked dependencies fails before the D/V measurement.
+
+     The new machine authority is
+     `artifacts/phase8_bridge/dispersion_audit_20260830_v4.json`, self-hash
+     `277b4bac8e2da99a31ef80e2cbfcf845dadff8965353c4d6807c431737d86c77`;
+     the current narrative authority is
+     `reports/phase8a_exploratory_bridge_addendum_v5.md`. The numerical cells, checks,
+     method, unresolved historical-producer limitation and exploratory claim boundary are
+     unchanged. All registered v1–v4 audit paths and v1–v4 addenda remain immutable.
