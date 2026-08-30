@@ -197,6 +197,11 @@ def build_audit(
         raise ValueError("PHASE8_DISPERSION_CONTRACT_IDENTITY_MISMATCH")
 
     cube = pl.read_parquet(forecast_cube)
+    duplicate_keys = cube.height - cube.n_unique(
+        ["training_role", "model_family", "information_set", *KEYS]
+    )
+    if duplicate_keys:
+        raise ValueError(f"PHASE8_DISPERSION_DUPLICATE_CUBE_KEYS:{duplicate_keys}")
     replay = _replay_phase8(cube, result, contract)
     current_reference, current_identity = _current_dv_reference(
         b0_panel, b1_panel, b2_panel, pointers
@@ -302,7 +307,7 @@ def build_audit(
         "checks": {
             "sealed_store_reopened": False,
             "second_evaluator_execution": False,
-            "cube_duplicate_keys": 0,
+            "cube_duplicate_keys": duplicate_keys,
             "cube_nulls": int(cube.null_count().sum_horizontal().item()),
             "cube_rows": cube.height,
             "published_statistics_replayed_exactly": True,
