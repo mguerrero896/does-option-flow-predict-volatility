@@ -190,9 +190,11 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "artifacts/phase8_bridge/dispersion_audit_20260830_v6.json",
         "artifacts/phase8_bridge/dispersion_audit_20260830_v7.json",
         "artifacts/phase8_bridge/dispersion_audit_20260830_v8.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v2.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v3.json",
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json",
         "reports/phase8a_exploratory_bridge_addendum_v1.md",
         "reports/phase8a_exploratory_bridge_addendum_v2.md",
         "reports/phase8a_exploratory_bridge_addendum_v3.md",
@@ -202,5 +204,6 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "reports/phase8a_exploratory_bridge_addendum_v7.md",
         "reports/phase8a_exploratory_bridge_addendum_v8.md",
         "reports/phase8a_exploratory_bridge_addendum_v9.md",
+        "reports/phase8a_exploratory_bridge_addendum_v10.md",
     ):
         assert registered[relative] == _module._sha(REPO / relative)

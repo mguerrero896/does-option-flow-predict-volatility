@@ -25,6 +25,7 @@ AUDIT_V5 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v5.
 AUDIT_V6 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v6.json"
 AUDIT_V7 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v7.json"
 AUDIT_V8 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v8.json"
+AUDIT_V9 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v9.json"
 PRODUCER_FREEZE_V1 = (
     REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v1.json"
 )
@@ -33,6 +34,9 @@ PRODUCER_FREEZE_V2 = (
 )
 PRODUCER_FREEZE_V3 = (
     REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v3.json"
+)
+PRODUCER_FREEZE_V4 = (
+    REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v4.json"
 )
 RESULT = REPO / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 REPORT_V1 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v1.md"
@@ -44,6 +48,7 @@ REPORT_V6 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v6.md"
 REPORT_V7 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v7.md"
 REPORT_V8 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v8.md"
 REPORT_V9 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v9.md"
+REPORT_V10 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v10.md"
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
 
 
@@ -62,8 +67,8 @@ def _canonical_sha(payload: dict[str, Any]) -> str:
 
 
 def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() -> None:
-    audit = _load(AUDIT_V8)
-    prior_audit = _load(AUDIT_V7)
+    audit = _load(AUDIT_V9)
+    prior_audit = _load(AUDIT_V8)
     result = _load(RESULT)
 
     assert audit["audit_sha256"] == _canonical_sha(audit)
@@ -82,7 +87,7 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert closure["algorithm"] == "sha256-of-sorted-path-and-normalized-sha256-v1"
     assert closure["file_count"] == 126
     assert closure["sha256"] == (
-        "1c25e29fd697251c4ac6dec09c5b4dd750d50d2a756bef577296f4fa6ae74ed4"
+        "b57e9f44731fe534f2e968581096d8b956dec23d79b218f469b1786781b56713"
     )
     assert {row["path"] for row in closure["files"]} >= {
         "scripts/rp2_block12_prospective_design.py",
@@ -114,20 +119,20 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert audit["status"] == "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED"
     producer_freeze = audit["source_identity"]["audit_producer_freeze"]
     assert producer_freeze["path"] == (
-        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v3.json"
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json"
     )
     assert producer_freeze["file_sha256"] == (
-        "daa90f4329329adba6f1d383f07a248bee5e5ed5d7b302db0825fa791a8609d4"
+        "a80dfd69dcc1fcc06ce68de7fd3ca3f334d2c0f029e65ae594f4ad232eb8e2c0"
     )
     assert producer_freeze["freeze_sha256"] == (
-        "60c9a3b4482cfe0f8746e0c121442bf5af29a714d94c0c2aeb35cce716595c16"
+        "704d74479ca89c140857bea95d4b9709eb705f51ad42e4eb65a5000ec456b4b4"
     )
-    freeze_document = _load(PRODUCER_FREEZE_V3)
+    freeze_document = _load(PRODUCER_FREEZE_V4)
     assert freeze_document["supersedes"] == (
-        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v2.json"
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v3.json"
     )
     assert freeze_document["supersession_reason"] == (
-        "DEPENDENCY_LOCK_UPDATED_BY_DEPENDABOT_PRS_22_AND_23"
+        "DEPENDENCY_LOCK_UPDATED_BY_DEPENDABOT_PRS_24_TO_26"
     )
     expected_audit_closure = build_executable_closure(
         REPO,
@@ -141,7 +146,7 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert producer_freeze["executable_closure"] == expected_audit_closure
     assert expected_audit_closure["file_count"] == 128
     assert expected_audit_closure["sha256"] == (
-        "e86877661e765b78adb8409e45be2b189186eac9591d69f8f6232b32e72eded1"
+        "294b4d6ef9c5d822b900f37557b204f39b4b4fa39a1d23e1ee7cc09e4c3f369c"
     )
     for field in (
         "cells",
@@ -205,8 +210,8 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     ]
 
 
-def test_addendum_v9_publishes_all_holm_values_and_preserves_history() -> None:
-    report = REPORT_V9.read_text(encoding="utf-8")
+def test_addendum_v10_publishes_all_holm_values_and_preserves_history() -> None:
+    report = REPORT_V10.read_text(encoding="utf-8")
     for value in ("0.9802", "0.0050", "0.0208", "0.0040"):
         assert value in report
     for value in ("0.5756", "0.3940", "0.9528", "1.0000"):
@@ -235,6 +240,7 @@ def test_addendum_v9_publishes_all_holm_values_and_preserves_history() -> None:
     assert registered[REPORT_V7.relative_to(REPO).as_posix()] == _sha(REPORT_V7)
     assert registered[REPORT_V8.relative_to(REPO).as_posix()] == _sha(REPORT_V8)
     assert registered[REPORT_V9.relative_to(REPO).as_posix()] == _sha(REPORT_V9)
+    assert registered[REPORT_V10.relative_to(REPO).as_posix()] == _sha(REPORT_V10)
     assert registered[AUDIT_V1.relative_to(REPO).as_posix()] == _sha(AUDIT_V1)
     assert registered[AUDIT_V2.relative_to(REPO).as_posix()] == _sha(AUDIT_V2)
     assert registered[AUDIT_V3.relative_to(REPO).as_posix()] == _sha(AUDIT_V3)
@@ -243,6 +249,7 @@ def test_addendum_v9_publishes_all_holm_values_and_preserves_history() -> None:
     assert registered[AUDIT_V6.relative_to(REPO).as_posix()] == _sha(AUDIT_V6)
     assert registered[AUDIT_V7.relative_to(REPO).as_posix()] == _sha(AUDIT_V7)
     assert registered[AUDIT_V8.relative_to(REPO).as_posix()] == _sha(AUDIT_V8)
+    assert registered[AUDIT_V9.relative_to(REPO).as_posix()] == _sha(AUDIT_V9)
     assert registered[PRODUCER_FREEZE_V1.relative_to(REPO).as_posix()] == _sha(
         PRODUCER_FREEZE_V1
     )
@@ -251,6 +258,9 @@ def test_addendum_v9_publishes_all_holm_values_and_preserves_history() -> None:
     )
     assert registered[PRODUCER_FREEZE_V3.relative_to(REPO).as_posix()] == _sha(
         PRODUCER_FREEZE_V3
+    )
+    assert registered[PRODUCER_FREEZE_V4.relative_to(REPO).as_posix()] == _sha(
+        PRODUCER_FREEZE_V4
     )
 
 
@@ -268,6 +278,6 @@ def test_dispersion_producer_refuses_a_registered_output() -> None:
                 "--b2-panel",
                 missing,
                 "--output",
-                str(AUDIT_V8),
+                str(AUDIT_V9),
             ]
         )

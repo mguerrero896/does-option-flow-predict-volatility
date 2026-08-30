@@ -29,8 +29,8 @@ PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
 PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
-PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v8.json"
-PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v9.md"
+PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v9.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v10.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -498,7 +498,7 @@ def render_status(state: dict[str, Any]) -> str:
         "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
         "submission rendering pinned under `current_report` in the machine state.",
         "- Post-cutoff Phase 8A result: "
-        "`reports/phase8a_exploratory_bridge_addendum_v9.md`.",
+        "`reports/phase8a_exploratory_bridge_addendum_v10.md`.",
     ]
     lines += ["", "## Future campaigns", ""]
     for campaign in state["future_campaigns"]:

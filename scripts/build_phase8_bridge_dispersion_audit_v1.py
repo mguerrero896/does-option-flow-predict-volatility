@@ -31,10 +31,10 @@ CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.jso
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
 AUDIT_PRODUCER_FREEZE: Final = (
-    ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v3.json"
+    ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v4.json"
 )
 FROZEN_REGISTRY: Final = ROOT / "data" / "FROZEN_ARTIFACTS.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v8.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v9.json"
 FROZEN_INPUT_SHA256: Final = {
     RESULT: "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
     CONTRACT: "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
@@ -50,7 +50,7 @@ CURRENT_DV_EXECUTABLE_SOURCES: Final = (
     "uv.lock",
 )
 CURRENT_DV_EXECUTABLE_CLOSURE_SHA256: Final = (
-    "1c25e29fd697251c4ac6dec09c5b4dd750d50d2a756bef577296f4fa6ae74ed4"
+    "b57e9f44731fe534f2e968581096d8b956dec23d79b218f469b1786781b56713"
 )
 AUDIT_EXECUTABLE_SOURCES: Final = (
     "scripts/build_phase8_bridge_dispersion_audit_v1.py",
