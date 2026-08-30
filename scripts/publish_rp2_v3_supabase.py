@@ -43,6 +43,7 @@ from mds650.rp2.run_manifest import (  # noqa: E402
     tape_fingerprint,
 )
 from mds650.sealed import guard_sealed_access  # noqa: E402
+from mds650.supabase_auth import api_key_headers  # noqa: E402
 
 PROJECT_REF = "eqpyjikcewqaegnbaemf"
 REST = f"https://{PROJECT_REF}.supabase.co/rest/v1"
@@ -565,11 +566,7 @@ def build_payload(run_dir: Path, *, branch: str) -> dict[str, Any]:
 def publish(payload: dict[str, Any], key: str, *, timeout: float = 120.0) -> dict[str, Any]:
     """One call, one transaction. A failure is recorded by a separate call, not by a retry."""
 
-    headers = {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-    }
+    headers = {**api_key_headers(key), "Content-Type": "application/json"}
     with httpx.Client(timeout=timeout, headers=headers) as client:
         try:
             response = client.post(f"{REST}/rpc/publish_rp2_v3", json={"payload": payload})

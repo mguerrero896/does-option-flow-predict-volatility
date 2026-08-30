@@ -21,6 +21,7 @@ from pathlib import Path
 import httpx
 
 from mds650.sealed import guard_sealed_access
+from mds650.supabase_auth import api_key_headers
 
 REPO = Path(__file__).resolve().parents[1]
 POINTERS = REPO / "data" / "GATED_DATA_POINTERS.json"
@@ -37,7 +38,7 @@ def main() -> None:
             "-> Settings -> API keys -> service_role (secret) -> copy, then set the "
             "env var and rerun. Never commit or share this key."
         )
-    headers = {"Authorization": f"Bearer {key}", "apikey": key}
+    headers = api_key_headers(key)
     entries = json.loads(POINTERS.read_text(encoding="utf-8"))["files"]
     # Guard the entries this run will actually upload.
     guard_sealed_access([e["path"] for e in entries], operation="gated upload")

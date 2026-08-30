@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Final
 
 from mds650.sealed import guard_sealed_access
+from mds650.supabase_auth import anon_api_key_headers
 
 ROOT: Final = Path(__file__).resolve().parents[1]
 POSTURE: Final = ROOT / "data" / "access_posture.json"
@@ -37,8 +38,8 @@ TIMEOUT_SECONDS: Final = 20
 
 def _get(url: str, key: str, profile: str | None = None) -> tuple[int, str]:
     request = urllib.request.Request(url, method="GET")
-    request.add_header("apikey", key)
-    request.add_header("Authorization", f"Bearer {key}")
+    for name, value in anon_api_key_headers(key).items():
+        request.add_header(name, value)
     if profile is not None:
         request.add_header("Accept-Profile", profile)
     try:
@@ -84,6 +85,11 @@ def main() -> int:
             f"project's publishable anonymous key and run again.",
             file=sys.stderr,
         )
+        return 2
+    try:
+        anon_api_key_headers(key)
+    except ValueError as error:
+        print(f"ACCESS_POSTURE_UNVERIFIED: {error}", file=sys.stderr)
         return 2
 
     base = f"https://{posture['project_ref']}.supabase.co/rest/v1"
