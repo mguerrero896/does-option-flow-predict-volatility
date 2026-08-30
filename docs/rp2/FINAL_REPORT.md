@@ -6,13 +6,14 @@
 **Sealed cohorts read: 0.**
 
 > [!NOTE]
-> **This document reports the v2 cascade (run 2026-08-18 to 2026-08-19).** Three of its headline
-> figures were superseded by the v3 remeasure of 2026-08-24, which repaired six defects
-> in the measurement code: the joint DML test, the market-index control statistic, and
-> Hansen's SPA. The current figures are in
-> [`docs/rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md); what each one replaced, and why, is in
-> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md). It is kept
-> unedited because a published result stays findable in the form it was published.
+> **HISTORICAL RP2-V2 REPORT.** This document reports the cascade run from 2026-08-18 to
+> 2026-08-19. Three headline figures were superseded by the v3 remeasure of 2026-08-24,
+> which repaired six measurement defects. The v3 measurement in
+> [`docs/rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md) is historical too, not a current claim.
+> Current eligibility lives only in
+> [`data/CANONICAL_STATE.json`](../../data/CANONICAL_STATE.json);
+> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md) preserves each
+> replacement and its reason.
 
 ---
 

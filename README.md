@@ -1,6 +1,6 @@
 # Does option-market information improve intraday volatility forecasts?
 
-[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
+[![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
 ![Research status](https://img.shields.io/badge/current_result-none_eligible-critical)
 
@@ -122,6 +122,11 @@ frozen evidence.
 
 This repository reports research evidence. It is not investment advice, an order-routing
 system or evidence of live profitability. `capital_go=false`.
+
+[Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues) and
+methodological discussion are welcome. Contribution boundaries are in
+[`CONTRIBUTING.md`](CONTRIBUTING.md), and computational assistance is disclosed in
+[`docs/AI_ASSISTANCE_STATEMENT.md`](docs/AI_ASSISTANCE_STATEMENT.md).
 
 See [`CITATION.cff`](CITATION.cff) for citation metadata, [`LICENSE`](LICENSE) for the MIT
 license covering project-authored material and [`SECURITY.md`](SECURITY.md) for private

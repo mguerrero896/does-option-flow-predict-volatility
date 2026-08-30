@@ -35,7 +35,7 @@
   }
  ],
  "authorized_sources": {
-  ".github/workflows/ci.yml": "f5b1490eb1b9e779a13b86bc50473b4c33f9a4e216de2e631fabb6bf3cd5a9dd",
+  ".github/workflows/ci.yml": "67cf4d90c5dd1b6941f5a434635accd6aea59d500b53e6b25d9136006c86f951",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
   "artifacts/phase9/power_deadline_audit_v1.json": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62",
@@ -46,18 +46,18 @@
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "51eaa73539706580cd75d752e1c288b66a520459581e8826bf6fd118a768975b",
   "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
-  "docs/ci_contract_v1.md": "aa4ce184488d1d83c9597dd1bb7d864218475d23b6f04b4bf8913b37f8629d7b",
-  "docs/evidence_immutability_v1.md": "78723d99e35d7350f7a281bd0a17592eaea63833224659a96792862dbced78b1",
-  "docs/methodology_decisions.md": "95571f6c25976b531f73936bb34a04b27238e5523601a2ba431eebd7e33b553b",
+  "docs/ci_contract_v1.md": "527e5e7730a423c465be5c3987d4e90edc6e10744a170b5d61ded46ff3387c9d",
+  "docs/evidence_immutability_v1.md": "2dbf92572297f23d338f389274b1c0d46ad38ee9183971a5f17cc23a29a69e2d",
+  "docs/methodology_decisions.md": "5be6584c8c9d49401dd4b2ba9f7e80452d674fa21f23c616567b27cee68efc9a",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "621bcd8bb19ac3ed7dd78fac37ddd063d5189b79284d0a1d4bb6a194e5976690",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
-  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "b82502344f0f6d1508a34325ff4c0fd46206f26b9afb5c6565143f17fcf46ff8",
+  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "40a9b348231e1864345484b9fd456ab8733ce09fdedef7851536aede6d8bfe30",
   "docs/rp2_v3/VERDICT.md": "92c432345b3df81215eadb7241de9e8e7e1ebf333a7d91b015a40f74cc66d0c6",
-  "reports/final_report_draft_v2.docx": "8e009c9b232c445829b3815982b132cf904f1d1a88c8021cdaf2051c17c644c1",
-  "reports/final_report_draft_v2.md": "db336167caf48004153c4df3ad2fc94305b4829b5419bba02540050feb5b978a",
+  "reports/final_report_draft_v2.docx": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08",
+  "reports/final_report_draft_v2.md": "f5c13b5f214a0d397954d0e95f81710f8d5462282bb404ff123c6ba4aad7fc4a",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
  "canonical_results": {
@@ -79,11 +79,11 @@
   "evidence_cutoff": "2026-08-28",
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "db336167caf48004153c4df3ad2fc94305b4829b5419bba02540050feb5b978a"
+   "sha256": "f5c13b5f214a0d397954d0e95f81710f8d5462282bb404ff123c6ba4aad7fc4a"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",
-   "sha256": "8e009c9b232c445829b3815982b132cf904f1d1a88c8021cdaf2051c17c644c1"
+   "sha256": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08"
   }
  },
  "external_publication": {
@@ -163,7 +163,7 @@
   },
   "superseded_register": {
    "path": "docs/rp2_v3/SUPERSEDED_RESULTS.md",
-   "sha256": "b82502344f0f6d1508a34325ff4c0fd46206f26b9afb5c6565143f17fcf46ff8"
+   "sha256": "40a9b348231e1864345484b9fd456ab8733ce09fdedef7851536aede6d8bfe30"
   },
   "verdict": {
    "path": "docs/rp2_v3/VERDICT.md",

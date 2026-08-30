@@ -11,6 +11,7 @@ The current state is `REBUILD_COMPLETE_PIT_V22_BLOCKED`, so no RP2-v3 headline i
 | [`README.md`](../README.md) | Scope, current eligibility, information sets and reproducibility boundary. |
 | [`STATUS.md`](../STATUS.md) | Generated human-readable projection of the canonical state. |
 | [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json) | One current run pointer, evidence hashes and fail-closed eligibility reasons. |
+| [`docs/AI_ASSISTANCE_STATEMENT.md`](AI_ASSISTANCE_STATEMENT.md) | Computational-assistance disclosure and scientific decision boundaries. |
 | [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) | Withdrawn or invalidated measurements and their reasons. |
 | [`docs/rp2_v3/VERDICT.md`](rp2_v3/VERDICT.md) | Corrected-protocol 2026-08-27 measurement, explicitly not a current claim. |
 
@@ -77,6 +78,7 @@ summary reproduces the run it names:
 | --- | --- |
 | [`docs/rp2/block7_dml_v1.md`](rp2/block7_dml_v1.md) | Historical run: discovery joint p = 9.673e-17; validation p = 0.832088; no replicates across universes were found with the same sign at p < 0.05. |
 | [`docs/rp2/FINAL_REPORT.md`](rp2/FINAL_REPORT.md) | Historical programme report; consult supersession markers before using any result. |
+| [`docs/canonical_claims_and_limitations.md`](canonical_claims_and_limitations.md) | RP2-v2 claim ledger retained for audit under its `SUPERSEDED AUTHORITY` banner; it has no current claim authority. |
 | [`docs/research_program_v2.md`](research_program_v2.md) | Historical design record; executed and superseded, not current operating authority. |
 | [`docs/rp2_v3/IMPLEMENTATION_STATUS.md`](rp2_v3/IMPLEMENTATION_STATUS.md) | Gate completion record plus current invalidation banner. |
 

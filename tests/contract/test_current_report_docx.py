@@ -1,5 +1,6 @@
 """Keep the submission Word report on the current evidence-cutoff narrative."""
 
+import json
 from pathlib import Path
 from xml.etree import ElementTree
 from zipfile import ZipFile
@@ -29,3 +30,14 @@ def test_current_word_report_is_not_the_superseded_draft() -> None:
     assert "[D003]" not in text
     assert "[PHASE8]" not in text
     assert "[PHASE9-NOTE]" not in text
+
+    corrected = json.loads(
+        (ROOT / "artifacts" / "gate3_har" / "results_corrected_int8.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for contrast in ("har_vs_har_b2", "harq_vs_harq_b2"):
+        estimate = corrected["contrasts"][contrast]["cluster_t"]["estimate"]
+        assert f"{estimate:.5f}".replace("-", "−") in text
+    assert "−0.00102" not in text
+    assert "−0.00090" not in text
