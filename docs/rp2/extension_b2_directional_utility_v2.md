@@ -58,14 +58,19 @@ identity, feature-registry digest, or code commit. Its B2 treatment list also co
 
 The closest auditable comparison runs the corrected estimator on the three named bar
 sources in the frozen campaign. Even that route has 240 discovery clusters rather than the
-frozen 230, so it is a same-source comparison, not a claim of equal inputs.
+frozen 230, so it is a same-source comparison, not a claim of equal inputs. The exact-width
+factorial supersedes the earlier discovery entries `45.721` and `39.153`: those entries
+silently tested 12 columns (10 named treatments plus two missingness indicators) while
+serializing only 10 coefficient names. The validation design had no treatment missingness
+indicators, so its Wald values are unchanged; its Holm values change because this battery
+has 40 tests rather than 68.
 
-| Role / target | Frozen rows / sessions | Frozen Wald / Holm p | Corrected same-source rows / sessions | Corrected Wald / Holm p |
+| Role / target | Frozen rows / sessions | Frozen Wald / Holm p | Exact-10 August rows / sessions | Wald / df / raw p / 40-test Holm p |
 |---|---:|---:|---:|---:|
-| D signed return 60m | 81,790 / 230 | 28.896 / 0.01554 | 84,972 / 240 | 45.721 / 0.000139 |
-| D signed return 120m | 65,653 / 230 | 25.878 / 0.03908 | 67,812 / 240 | 39.153 / 0.001490 |
-| V signed return 60m | 28,328 / 80 | 34.253 / 0.005855 | 28,680 / 80 | 24.581 / 0.21699 |
-| V signed return 120m | 22,784 / 80 | 46.317 / 0.0000452 | 22,944 / 80 | 28.608 / 0.05191 |
+| D signed return 60m | 81,790 / 230 | 28.896 / 0.01554 | 84,972 / 240 | 15.138 / 10 / 0.12710 / 1.00000 |
+| D signed return 120m | 65,653 / 230 | 25.878 / 0.03908 | 67,812 / 240 | 14.079 / 10 / 0.16940 / 1.00000 |
+| V signed return 60m | 28,328 / 80 | 34.253 / 0.005855 | 28,680 / 80 | 24.581 / 10 / 0.006200 / 0.21079 |
+| V signed return 120m | 22,784 / 80 | 46.317 / 0.0000452 | 22,944 / 80 | 28.608 / 10 / 0.001442 / 0.05479 |
 
 No validation target survives Holm in the corrected same-source battery. The frozen
 directional conclusion therefore changes under the current corrected inputs and estimator.
@@ -77,8 +82,8 @@ semivariance target, survives its 36-test Holm family at `0.03576`. The frozen v
 survivors are `y_rs_up_60`, `y_signed_return_60`, and `y_signed_return_120`, not two
 directional targets alone.
 
-Source for the table and survivor lists:
-`artifacts/rp2_ext1_directional_v2/results.json#/reproduction`. Frozen source:
+Source for the exact-width table:
+`artifacts/rp2_ext1_directional_factorial_v1/results.json#/tests`. Frozen source:
 `artifacts/rp2_ext1_mechanism_utility/mechanism_utility.json#/D|V/a_other_targets`.
 
 ## Coverage and repaired guards
@@ -109,6 +114,66 @@ the measured count is zero. The 12 leading-price gaps remain explicit exclusions
 744 panel origins from the target frame.
 
 Source: `artifacts/rp2_ext1_directional_v2/results.json#/coverage`.
+
+## Treatment x coverage factorial
+
+The frozen contract names these exact 10 `CORE_TREATMENTS`:
+`vega_flow`, `gamma_flow`, `delta_flow`, `premium`, `trades`,
+`hawkes_innovation`, `d_iv`, `buy_premium_share`, `strike_hhi`, and
+`otm_premium_share`, each with the `b2_5m_` prefix. The comparison set is the exact current
+12-feature `B2_CORE` registry: `buy_premium_share`, `d_iv`,
+`decay_intensity_innovation`, `delta_flow`, `mean_provider_latency_s`,
+`multileg_size_share`, `premium`, `strike_hhi`, `trades`, `vega_flow`,
+`vega_flow_short_dte`, and `zero_dte_premium_share`, also with that prefix.
+
+The four requested cells use the same cross-fitted partial-out DML joint Wald, session
+clustering, five folds, one-session purge, and B0+B1 nuisance block. The family is the 40
+two-sided joint tests formed by 2 treatment sets x 2 coverages x 2 roles x 5 horizons, with
+one global Holm adjustment. Each table entry is `Wald / df / raw p / Holm p`.
+
+| Treatment set / coverage | D 60m | D 120m | V 60m | V 120m |
+|---|---:|---:|---:|---:|
+| Exact Ext1 / August | 15.138 / 10 / 0.12710 / 1.00000 | 14.079 / 10 / 0.16940 / 1.00000 | 24.581 / 10 / 0.006200 / 0.21079 | 28.608 / 10 / 0.001442 / 0.05479 |
+| Exact Ext1 / complete | 16.673 / 10 / 0.081921 / 1.00000 | 21.702 / 10 / 0.016694 / 0.43405 | 24.581 / 10 / 0.006200 / 0.21079 | 28.608 / 10 / 0.001442 / 0.05479 |
+| B2 panel 12 / August | 31.326 / 12 / 0.001757 / 0.063246 | 24.797 / 12 / 0.015812 / 0.42693 | 27.287 / 12 / 0.007024 / 0.22477 | 26.729 / 12 / 0.008451 / 0.24507 |
+| B2 panel 12 / complete | 35.129 / 12 / 0.0004467 / 0.017421 | 41.035 / 12 / 0.00004835 / 0.001934 | 27.287 / 12 / 0.007024 / 0.22477 | 26.729 / 12 / 0.008451 / 0.24507 |
+
+The preregistered descriptive scale is `log(Wald / df)`. Across D/V and the 60/120-minute
+targets, the median absolute treatment-set shift is `0.33471`; the coverage shift is
+`0.052785`, a ratio of `6.34`. The registered classification is therefore
+`TREATMENT_SET`, not `COVERAGE`. This is not universal across contrasts: at D 120 minutes
+the coverage main effect (`0.46820`) is slightly larger than the treatment main effect
+(`0.41919`). The sets are not nested, so the classification is descriptive, not causal.
+Only B2-panel-12 with complete coverage at D 60 and D 120 survives the global 40-test Holm
+family.
+
+That result does **not** explain the historical validation decline. Complete coverage adds
+894 accepted asset-sessions and 58,788 target rows to D, but zero rows to every V horizon;
+the August and complete V statistics are therefore identical. Holding the exact Ext1 set
+and August sources still gives V Wald `24.581` and `28.608`, below the frozen `34.253` and
+`46.317`. Switching to B2 panel 12 gives `27.287` and `26.729`, so it does not restore the
+120-minute statistic. For the frozen-to-current validation decline, the answer is
+`NEITHER_TREATMENT_SET_NOR_COVERAGE`; the unresolved remainder lies in corrected inputs,
+estimator/preprocessing, or session identity that the frozen artifact did not hash.
+
+The obsolete `b2_5m_hawkes_innovation` label was resolved as a
+`RECORDED_SEMANTIC_RENAME` to `b2_5m_decay_intensity_innovation`, as documented in
+`docs/rp2/block7_dml_v1.md`: the feature was built with fixed baseline/excitation/decay
+inputs and is a decay-intensity innovation, not an estimated Hawkes process. The producer
+maps the historical label to the current panel column in memory, retains the historical
+coefficient label, applies the registered signed transform, and does not recompute values.
+The old column is absent, so historical byte equality cannot be tested.
+
+The exact-width run also exposed the missingness-indicator defect described above. The
+producer now omits treatment missingness indicators so the blocks remain exactly 10 and
+12 columns, while retaining fold-local imputation and scaling. The shared DML function now
+fails closed with `RP2_DML_TREATMENT_NAME_WIDTH` if names and matrix width diverge.
+
+Contract: `configs/rp2_ext1_directional_factorial_v1.json`, semantic SHA-256
+`290debdca033737e386c5abe9cca4e0b1d7632435e07f747823198864da256a4`. Result:
+`artifacts/rp2_ext1_directional_factorial_v1/results.json`, semantic self-hash
+`34cd6d52722692c03207625011d15160d5a4e27bb08676aad191e63ffc054913`, file SHA-256
+`9c93ad6a16471cc52034edf55d3a3c127117db5dbe06f226e75de98ceda50825`.
 
 ## Horizon and time of day
 
@@ -211,6 +276,12 @@ The aggregate result has semantic self-hash
 commit `b93ee32e5f149038cd042fe706c5b0a94f5e2f08`, all three panel hashes, all five bar-source
 hashes, `inference_config_digest`, 68 test records, and `sealed_cohorts_read=0`.
 
+The factorial result has semantic self-hash
+`34cd6d52722692c03207625011d15160d5a4e27bb08676aad191e63ffc054913` and file SHA-256
+`9c93ad6a16471cc52034edf55d3a3c127117db5dbe06f226e75de98ceda50825`. It records code
+commit `8758d4686bef2403a8f716eb79a5d9a2be60c985`, the same input identities, 40 test records,
+both mask invariants, exact requested/resolved treatment names, and `sealed_cohorts_read=0`.
+
 Final verification commands:
 
 ```powershell
@@ -230,8 +301,11 @@ and its contract test are present:
 | Full pytest suite | PASS: 100%, exit 0; three contract skips |
 | Frozen artifact SHA-256 | PASS: `604e1e4099...f263f499` |
 | New semantic self-hash | PASS: `477f21af63...3e656b0` |
+| Factorial semantic self-hash | PASS: `34cd6d5272...c054913` |
 | Licensed parquet or CSV in Git status | PASS: none tracked or untracked |
 
-Artifact source for all new numerical claims:
+Artifact sources for the numerical claims:
 `artifacts/rp2_ext1_directional_v2/results.json` (`schema_version`
-`rp2-ext1-directional-v2-results-v1.0`).
+`rp2-ext1-directional-v2-results-v1.0`) and
+`artifacts/rp2_ext1_directional_factorial_v1/results.json` (`schema_version`
+`rp2-ext1-directional-factorial-results-v1.0`).
