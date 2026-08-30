@@ -26,10 +26,11 @@ Anywhere else -- a developer's machine, the tier-2 gate runner -- an absent pane
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 import pytest
 
@@ -40,15 +41,19 @@ REPO: Final = Path(__file__).resolve().parents[1]
 POINTERS: Final = REPO / "artifacts" / "rp2_panel_pointers.json"
 #: The one deliberate way out. Named, so that skipping is a decision someone wrote down.
 OPT_OUT: Final = "MDS650_PANEL_GUARD_MAY_SKIP"
+PANEL_ROOT: Final = "MDS650_RP2_PANEL_ROOT"
 
 
-def declared_panels() -> frozenset[str]:
-    """The repo-relative panel paths the pointer manifest declares."""
+def declared_panels() -> dict[str, dict[str, Any]]:
+    """The repo-relative panel paths and identities declared by the manifest."""
 
     if not POINTERS.is_file():
         pytest.fail(f"RP2_PANEL_POINTERS_MISSING: {POINTERS}")
     payload = json.loads(POINTERS.read_text(encoding="utf-8"))
-    return frozenset(payload.get("panels", {}))
+    panels = payload.get("panels")
+    if not isinstance(panels, dict):
+        pytest.fail(f"RP2_PANEL_POINTERS_INVALID: {POINTERS}")
+    return panels
 
 
 #: Panels under a dated run directory are copies produced BY that run, not registry
@@ -62,15 +67,9 @@ def _is_run_scoped(relative: str) -> bool:
     return relative.startswith(_RUN_SCOPED_PREFIX)
 
 
-def panel_is_available(label: str, path: Path) -> bool:
-    """True when ``path`` can be read; otherwise skip deliberately or fail closed.
+def verified_panel_path(label: str, path: Path) -> Path:
+    """Resolve a panel and verify its declared byte length and SHA-256."""
 
-    Returns rather than raises so a caller iterating several panels can move on after a
-    deliberate skip, which a bare `continue` did silently and this does loudly.
-    """
-
-    if path.is_file():
-        return True
     relative = path.relative_to(REPO).as_posix()
 
     # Declaration is checked BEFORE the opt-out, and deliberately so. Until
@@ -79,17 +78,40 @@ def panel_is_available(label: str, path: Path) -> bool:
     # could never be reported: the tripwire was unreachable in the only
     # configuration anyone runs. A missing declaration is a defect in the code,
     # not a consequence of absent data, so the flag must not hide it.
-    if not _is_run_scoped(relative) and relative not in declared_panels():
+    identity = None if _is_run_scoped(relative) else declared_panels().get(relative)
+    if not _is_run_scoped(relative) and identity is None:
         pytest.fail(
             f"RP2_PANEL_NOT_DECLARED: {relative} is read by a contract check but is not in "
             f"{POINTERS.name}, so nothing records that it should exist. Register it, or "
             f"stop reading it here."
         )
+    resolved = path
+    panel_root = os.environ.get(PANEL_ROOT)
+    if identity is not None and panel_root:
+        resolved = Path(panel_root).expanduser().resolve() / relative
+    if resolved.is_file():
+        if identity is not None:
+            expected_bytes = identity.get("bytes")
+            expected_sha256 = identity.get("sha256")
+            actual_bytes = resolved.stat().st_size
+            if actual_bytes != expected_bytes:
+                pytest.fail(
+                    f"RP2_PANEL_SIZE_MISMATCH: {relative}: expected {expected_bytes}, "
+                    f"got {actual_bytes} at {resolved}"
+                )
+            with resolved.open("rb") as handle:
+                actual_sha256 = hashlib.file_digest(handle, "sha256").hexdigest()
+            if actual_sha256 != expected_sha256:
+                pytest.fail(
+                    f"RP2_PANEL_SHA256_MISMATCH: {relative}: expected {expected_sha256}, "
+                    f"got {actual_sha256} at {resolved}"
+                )
+        return resolved
     if os.environ.get(OPT_OUT) == "1":
         pytest.skip(f"{label} panel absent; skipped deliberately via {OPT_OUT}=1")
     pytest.fail(
         f"RP2_PANEL_UNVERIFIED: {label} is declared in {POINTERS.name} and is not at "
-        f"{relative}, so the registry invariant is UNVERIFIED, not satisfied. Build the "
+        f"{resolved}, so the registry invariant is UNVERIFIED, not satisfied. Build the "
         f"panels, or set {OPT_OUT}=1 to accept an unverified run deliberately."
     )
     raise AssertionError("unreachable")  # pragma: no cover - pytest.fail does not return

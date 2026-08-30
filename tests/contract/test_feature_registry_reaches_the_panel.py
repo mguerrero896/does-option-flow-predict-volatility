@@ -25,7 +25,7 @@ from pathlib import Path
 
 import polars as pl
 import pytest
-from tests.panel_guard import panel_is_available
+from tests.panel_guard import verified_panel_path
 
 from mds650.rp2.feature_registry import feature_map, registry
 from mds650.rp2.panel import B0_FEATURES, B1_FEATURES, B2_FEATURES
@@ -115,7 +115,7 @@ DECLARED_DIAGNOSTIC_PREFIXES: tuple[str, ...] = ("b1_quote_age_bin_", "b2_latenc
 def test_every_registered_feature_exists_in_its_panel(
     name: str, path: Path, features: dict[str, str]
 ) -> None:
-    panel_is_available(name, path)
+    path = verified_panel_path(name, path)
     columns = set(pl.read_parquet_schema(path))
     missing = sorted(set(features) - columns)
     assert not missing, f"{name} registers features the panel does not carry: {missing}"
@@ -139,8 +139,7 @@ def test_no_panel_column_is_a_feature_nobody_registered() -> None:
     for name, path, _ in PANELS:
         # This was a bare `continue`: with no panel the loop body never ran, `unregistered`
         # stayed empty and the check reported PASSED without leaving even an `s`.
-        if not panel_is_available(name, path):
-            continue
+        path = verified_panel_path(name, path)
         columns = set(pl.read_parquet_schema(path))
         prefix = {"B1": "b1_", "B2": "b2_"}.get(name)
         # Registered means in the frozen registry, core *or* rich. A rich feature is out of

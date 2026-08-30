@@ -15,6 +15,10 @@ executable by `anon`, `authenticated` or `service_role`, and `service_role` cann
 the four retired result tables. The six hash-verified dataset tables retain the privileges
 required by their atomic loader.
 
+`verification/default_acl_posture.sql` is the read-only catalog query for repeating the
+owner and default-privilege audit. It reads metadata only and does not inspect scientific
+rows.
+
 What the reconciliation established, for the record:
 
 - The one migration previously versioned here (`20260820170000_...`, 36.9 KB)

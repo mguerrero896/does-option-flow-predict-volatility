@@ -26,6 +26,48 @@ jobs:
           python-version: "3.12"
       - name: Sync locked environment
         run: uv sync --locked
+      - name: Require Why before What in human PRs
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot'
+        run: |
+          uv run python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          event = json.loads(
+              Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8")
+          )
+          body = re.sub(
+              r"<!--.*?-->",
+              "",
+              event["pull_request"].get("body") or "",
+              flags=re.DOTALL,
+          )
+          headings = [
+              line.strip().casefold()
+              for line in body.splitlines()
+          ]
+          try:
+              why = headings.index("## why")
+              what = headings.index("## what")
+          except ValueError as exc:
+              raise SystemExit("PR_BODY_REQUIRES_WHY_BEFORE_WHAT") from exc
+          if why >= what:
+              raise SystemExit("PR_BODY_REQUIRES_WHY_BEFORE_WHAT")
+          next_heading = next(
+              (
+                  index
+                  for index, line in enumerate(headings[what + 1 :], what + 1)
+                  if line.startswith("## ")
+              ),
+              len(headings),
+          )
+          if not "".join(headings[why + 1 : what]) or not "".join(
+              headings[what + 1 : next_heading]
+          ):
+              raise SystemExit("PR_BODY_REQUIRES_NONEMPTY_WHY_AND_WHAT")
+          PY
       - name: Shell scripts parse (bash -n; CRLF or syntax breaks fail here)
         run: find scripts -name '*.sh' -print0 | xargs -0 -n1 bash -n
       - name: Ruff
@@ -88,6 +130,11 @@ jobs:
           uv run pytest tests -q
           --ignore=tests/unit/test_independent_replication_panel.py
           --cov=src/mds650 --cov-report=term --cov-fail-under=80
+      - name: Critical scientific producers have complete branch coverage
+        run: >
+          uv run coverage report
+          --include=src/mds650/date_level_pit_preflight_request_budget_v1.py,src/mds650/temporal_validation.py,src/mds650/b1_replication_common.py,src/mds650/b1_replication_b2.py,src/mds650/b1_replication_build.py,src/mds650/rp3/frozen_forecasters.py,src/mds650/rp2/scorecard.py
+          --fail-under=100
 
 
   # Tier 1c - the contracts the scientific claims rest on. Separated from `hermetic` so a

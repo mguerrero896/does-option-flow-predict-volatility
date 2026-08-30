@@ -29,9 +29,10 @@ import polars as pl
 from lightgbm import LGBMRegressor
 
 from mds650 import har, inference
+from mds650.config import provisional_data_root
 
 REPO = Path(__file__).resolve().parents[1]
-DATA_ROOT = Path(os.environ.get("MDS650_EXTERNAL_ROOT", "D:/MDS650"))
+DATA_ROOT = provisional_data_root()
 EVIDENCE_ROOT = Path(os.environ.get("MDS650_EVIDENCE_ROOT", DATA_ROOT / "evidence_root"))
 OUTPUT = REPO / "artifacts" / "gate12_harq_hardening"
 FLOOR = 1e-12

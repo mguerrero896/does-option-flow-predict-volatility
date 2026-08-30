@@ -218,3 +218,73 @@ def test_request_budget_materials_emit_no_personal_paths_secrets_or_raw_routes(
         assert "/v3/" not in content, path
         assert "apiKey=" not in content, path
         assert "apikey=" not in content, path
+
+
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"required_contract_pages": True, "contract_resolution_succeeds": True},
+        {"required_contract_pages": 1.5, "contract_resolution_succeeds": True},
+        {"required_contract_pages": 0, "contract_resolution_succeeds": True},
+        {"required_contract_pages": 1, "contract_resolution_succeeds": "yes"},
+    ],
+)
+def test_massive_asset_day_plan_rejects_invalid_dimensions(kwargs: dict[str, object]) -> None:
+    module = _module()
+
+    with pytest.raises(module.RequestBudgetError, match="REQUEST_BUDGET_PAGINATION_INPUT_INVALID"):
+        module.plan_massive_asset_day_requests(**kwargs)
+
+
+@pytest.mark.parametrize(
+    "mutate",
+    [
+        lambda plan: plan.__setitem__("assets", "not-a-list"),
+        lambda plan: plan.__setitem__("sentinel_sessions", "not-a-list"),
+        lambda plan: plan["assets"].__setitem__(0, ""),
+        lambda plan: plan["assets"].__setitem__(1, plan["assets"][0]),
+        lambda plan: plan["sentinel_sessions"].__setitem__(0, "not-a-mapping"),
+        lambda plan: plan["sentinel_sessions"][0].__setitem__("date", ""),
+        lambda plan: plan["sentinel_sessions"].pop(),
+        lambda plan: plan["sentinel_sessions"][1].__setitem__(
+            "date", plan["sentinel_sessions"][0]["date"]
+        ),
+    ],
+)
+def test_request_budget_rejects_invalid_plan_dimensions(
+    mutate: Callable[[dict[str, object]], object],
+) -> None:
+    plan = _json_mapping(PLAN_PATH)
+    mutate(plan)
+
+    with pytest.raises(_module().RequestBudgetError, match="REQUEST_BUDGET_DIMENSIONS_INVALID"):
+        _module().build_request_budget(plan, _json_mapping(CATALOG_PATH))
+
+
+@pytest.mark.parametrize(
+    "mutate",
+    [
+        lambda catalog: catalog.__setitem__("endpoints", "not-a-list"),
+        lambda catalog: catalog["endpoints"].__setitem__(0, "not-a-mapping"),
+        lambda catalog: catalog["endpoints"][0].__setitem__("provider", 7),
+        lambda catalog: catalog["endpoints"][1].__setitem__("provider", "fmp"),
+        lambda catalog: catalog["endpoints"].pop(),
+        lambda catalog: catalog["endpoints"][0].__setitem__("method", "POST"),
+        lambda catalog: catalog["endpoints"][1].__setitem__("range_probe", "invalid"),
+        lambda catalog: catalog["endpoints"][2].__setitem__("routes", "invalid"),
+        lambda catalog: catalog["endpoints"][2]["routes"].__setitem__(0, "invalid"),
+        lambda catalog: catalog["endpoints"][2]["routes"][0].__setitem__("operation", 7),
+        lambda catalog: catalog["endpoints"][2]["routes"].reverse(),
+    ],
+)
+def test_request_budget_rejects_every_catalog_descriptor_drift(
+    mutate: Callable[[dict[str, object]], object],
+) -> None:
+    catalog = _json_mapping(CATALOG_PATH)
+    mutate(catalog)
+
+    with pytest.raises(
+        _module().RequestBudgetError,
+        match="REQUEST_BUDGET_CATALOG_DESCRIPTOR_INVALID",
+    ):
+        _module().build_request_budget(_json_mapping(PLAN_PATH), catalog)

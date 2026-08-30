@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import polars as pl
 import pytest
-from tests.panel_guard import panel_is_available
+from tests.panel_guard import verified_panel_path
 
 from mds650.rp2.feature_registry import (
     CONFIG,
@@ -171,7 +171,7 @@ def test_the_run_record_carries_the_registry_and_its_coverage() -> None:
 
 @pytest.mark.parametrize(("name", "block", "path"), PANELS, ids=[row[0] for row in PANELS])
 def test_every_registered_feature_exists_in_its_panel(name: str, block: str, path: Path) -> None:
-    panel_is_available(block, path)
+    path = verified_panel_path(block, path)
     columns = set(pl.read_parquet_schema(path))
     missing = sorted(set(registry()[name].features) - columns)
     assert not missing, f"{name} registers features the panel does not carry: {missing}"
@@ -187,8 +187,7 @@ def test_the_core_coverage_floors_hold_on_the_real_panels() -> None:
     for name, block, path in PANELS:
         if not name.endswith("_CORE"):
             continue
-        if panel_is_available(block, path):
-            built.append((name, path))
+        built.append((name, verified_panel_path(block, path)))
     for name, path in built:
         panel = pl.read_parquet(path)
         assert_minimum_coverage(panel, name)

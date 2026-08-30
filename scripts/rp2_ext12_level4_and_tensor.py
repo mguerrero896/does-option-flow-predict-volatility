@@ -48,6 +48,7 @@ except ModuleNotFoundError as error:  # pragma: no cover - explicit, actionable 
     ) from error
 
 from mds650.b1v3_confirmation import canonical_sha256
+from mds650.config import provisional_data_root
 from mds650.metrics import paired_day_bootstrap, qlike_losses
 from mds650.rp2.baseline import mincer_zarnowitz
 from mds650.rp2.feature_registry import assert_segment_coverage, describe_coverage
@@ -74,7 +75,7 @@ from mds650.rp2.run_manifest import normalised_digest
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "artifacts" / "rp2_ext12_level4"
-INPUTS = Path("D:/MDS650/data/rp2_ext2")
+INPUTS = provisional_data_root() / "data" / "rp2_ext2"
 B0_PANEL = ROOT / "artifacts" / "rp2_block4_b0" / "b0_panel.parquet"
 B1_PANEL = ROOT / "artifacts" / "rp2_block5_surface" / "b1_surface_panel.parquet"
 B2_PANEL = ROOT / "artifacts" / "rp2_block6_flow" / "b2_flow_panel.parquet"

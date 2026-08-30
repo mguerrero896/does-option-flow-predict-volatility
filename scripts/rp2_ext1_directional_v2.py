@@ -18,6 +18,7 @@ import rp2_ext1_mechanism_utility as ext1
 from scipy import stats
 
 from mds650.b1v3_confirmation import canonical_sha256, sha256_file
+from mds650.config import provisional_data_root
 from mds650.metrics import holm_adjust
 from mds650.rp2.bars import BAR_SOURCES
 from mds650.rp2.dml import cross_fitted_residuals, dml_partial_out, time_block_folds
@@ -930,7 +931,7 @@ def run(data_root: Path, output_dir: Path, *, train_share: float, folds: int) ->
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-root", type=Path, default=Path("D:/MDS650"))
+    parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=OUTPUT)
     parser.add_argument("--factorial-only", action="store_true")
     parser.add_argument("--factorial-contract", type=Path, default=FACTORIAL_CONTRACT)

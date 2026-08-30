@@ -39,9 +39,7 @@ def test_missing_data_root_fails_closed(monkeypatch: pytest.MonkeyPatch) -> None
 def test_active_entrypoints_do_not_embed_the_workstation_drive() -> None:
     root = Path(__file__).resolve().parents[2]
     index = (root / "scripts" / "README.md").read_text(encoding="utf-8")
-    table = index.split("## Current control plane", 1)[1].split(
-        "## Data, Supabase and publication controls", 1
-    )[0]
+    table = index.split("## Frozen evidence", 1)[0]
     active = tuple(
         line.split("`", 2)[1]
         for line in table.splitlines()
@@ -56,6 +54,7 @@ def test_active_entrypoints_do_not_embed_the_workstation_drive() -> None:
         "scripts/phase9_verify.py",
     }
     assert required <= set(active)
+    assert len(active) == len(set(active))
 
     offenders = [
         relative

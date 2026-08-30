@@ -37,6 +37,7 @@ MAINTAINER_NAVIGATION: tuple[str, ...] = (
     "docs/INDEX.md",
     "docs/AI_ASSISTANCE_STATEMENT.md",
     "docs/DEVELOPER_GUIDE.md",
+    "docs/threats_to_validity_matrix_v1.md",
     "scripts/README.md",
     "reports/INDEX.md",
     "supabase/README.md",
@@ -222,6 +223,19 @@ def test_readme_links_every_maintainer_navigation_surface() -> None:
     missing = [path for path in MAINTAINER_NAVIGATION if f"]({path})" not in readme]
     assert not missing, f"README does not link maintainer navigation: {missing}"
     assert "[Issues](" in readme, "README does not link the public issue tracker"
+
+
+def test_pr_template_and_ci_require_why_before_what() -> None:
+    """A human PR cannot erase the rationale fields and leave only checkboxes."""
+    template = (REPO / ".github" / "pull_request_template.md").read_text(encoding="utf-8")
+    why = template.find("## Why")
+    what = template.find("## What")
+    assert 0 <= why < what, "PR template must request Why before What"
+
+    workflow = (REPO / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    assert "pull_request.user.type != 'Bot'" in workflow
+    assert "PR_BODY_REQUIRES_WHY_BEFORE_WHAT" in workflow
+    assert "PR_BODY_REQUIRES_NONEMPTY_WHY_AND_WHAT" in workflow
 
 
 def test_methodology_decision_index_covers_every_decision() -> None:

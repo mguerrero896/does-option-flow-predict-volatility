@@ -34,6 +34,7 @@ import polars as pl
 
 sys.path.insert(0, "src")
 
+from mds650.config import provisional_data_root  # noqa: E402
 from mds650.providers.massive import MassiveProvider  # noqa: E402
 from mds650.rp2.bars import BAR_SOURCES, MARKET_TZ  # noqa: E402
 
@@ -54,7 +55,7 @@ SHIFTED_LABEL_AGREEMENT = 3.66e-4
 MINIMUM_HEALTHY_MINUTES = 100
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--data-root", default="D:/MDS650")
+parser.add_argument("--data-root", type=Path, default=provisional_data_root())
 parser.add_argument("--out", required=True)
 parser.add_argument("--limit-pairs", type=int, default=0)
 #: The second provider returned HTTP 429 on 416 of 501 unpaced requests. Its own client

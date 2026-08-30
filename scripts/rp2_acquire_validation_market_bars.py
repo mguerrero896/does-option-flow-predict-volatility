@@ -30,10 +30,11 @@ from pathlib import Path
 
 import polars as pl
 
+from mds650.config import provisional_data_root
 from mds650.providers.fmp import FMPProvider, parse_minute_payload
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = Path("D:/MDS650/data/fmp/rp2_validation_market")
+DEFAULT_OUTPUT = provisional_data_root() / "data" / "fmp" / "rp2_validation_market"
 MARKET_ASSETS = ("SPY", "QQQ")
 RUN_ID = "rp2_validation_market_bars"
 

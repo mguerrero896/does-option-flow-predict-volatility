@@ -34,6 +34,9 @@ Historical measurements remain available for audit, not as current findings:
 No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
 claimed from the PIT-blocked bundle.
 
+The current [threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md) records
+the evidence boundary, mitigations and residual risks.
+
 Separately, the sole Phase 8A bridge read is complete and classified
 `MIXED_EXPLORATORY`. ΔB1 is positive in all four primary cells and has descriptive Holm
 p below 0.05 in three; incremental B2 conditional on B1 has mixed signs, four
