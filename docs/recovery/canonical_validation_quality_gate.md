@@ -12,7 +12,7 @@ Audit checkpoint: 2026-08-11, historical validation snapshot.
 | Coverage | `uv run coverage run -m pytest -q; uv run coverage report` | **PASS** — 80% total, configured floor met |
 | Notebook contract | `uv run pytest tests/contract/test_canonical_notebook.py -q` | **PASS** — 2 tests |
 | Package rerender | `uv run python scripts/build_canonical_defense_package.py --source artifacts/canonical_validation_v1 --output <temporary-output>` | **PASS** — source validated; output hashes equal the recorded package hashes |
-| Notebook execution | execute every code cell in `notebooks/MDS650_Canonical_RV30_Defense.ipynb` with `uv run python` | **PASS** |
+| Notebook execution | execute every code cell in `notebooks/canonical_rv30_defense.ipynb` with `uv run python` | **PASS** |
 | Notebook reproducibility | regenerate twice and compare SHA-256 | **PASS** — `B8884E0496D2035C3C0DEACE894FC5E50965A150F58100B41359BC8A02003A9B` |
 | Diff hygiene | `git diff --check` | **PASS** |
 | Sanitized artifact scan | scan new notebook/report/script for secrets and personal paths | **PASS** |

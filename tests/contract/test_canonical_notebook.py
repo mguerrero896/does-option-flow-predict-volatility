@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-NOTEBOOK = Path("notebooks/MDS650_Canonical_RV30_Defense.ipynb")
+NOTEBOOK = Path("notebooks/canonical_rv30_defense.ipynb")
 
 
 def _read_notebook() -> dict[str, object]:

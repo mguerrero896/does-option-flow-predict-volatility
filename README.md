@@ -2,49 +2,71 @@
 
 [![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
-![Research status](https://img.shields.io/badge/current_result-none_eligible-critical)
+![Headline claim](https://img.shields.io/badge/headline_claim-none_eligible-4c78a8)
 
 Research code and public evidence for testing whether option state and recent option-flow
 activity improve forecasts of 30-minute realized variance for large US equities.
 
-## Current scientific state
+## The short answer
 
-**No result is currently eligible as the project headline.** The corrected-protocol bundle
-is `rp2-v3-20260827-remediation3`, scientific hash
-`386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47`. Its status is
-`REBUILD_COMPLETE_PIT_V22_BLOCKED`: the Block 8/Block 10 model-protocol divergence is
-repaired and the 13-step rebuild passes, but `PIT_V22_RECONCILIATION_BLOCKED` remains.
-Corrected point-in-time inputs have not received a successor method freeze or authorized
-evaluation, so this historical measurement cannot become a current claim.
+**On this evidence, not from recent option *flow*.** Four independent tests were put to
+the same question, and all four agree: once contemporaneous option state is already in the
+model, adding recent point-in-time flow produces no incremental forecasting value that
+clears the pre-registered detection threshold.
 
-The machine-readable authority is
-[`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json). It identifies one run manifest,
-one scientific hash, one scorecard, the eligibility state and blocking reasons. If another
-document disagrees with it, the canonical state wins.
+The option-*state* layer is a weaker and more careful story. It shows a positive
+contribution in discovery and in the single sealed prospective read, but that contribution
+does **not** replicate under validation, and it is not promoted to a confirmatory claim.
+Nine of the twelve headline contrasts fall below their own minimum detectable effect.
 
-Historical measurements remain available for audit, not as current findings:
+Underneath both sits a third observation: the contribution visible in 2024 weakens across
+the sample and is no longer detectable by 2026.
 
-- [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](docs/rp2_v3/SUPERSEDED_RESULTS.md) records retired
-  results and why each was replaced or withdrawn.
-- [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) is the narrative attached to the
-  corrected-protocol bundle; its status is `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
-- [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) states
-  the target-blind PIT evidence boundary and the required next gate.
+![Option-information content from 2024 to 2026](docs/figures/story_timeline.svg)
 
-No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
-claimed from the PIT-blocked bundle.
+This repository exists to make that null result *credible* rather than merely asserted.
+Any single test that fails to find an effect can be dismissed as a weak test. The design
+answer is pre-registration, sealed one-shot reads, hash-pinned evidence and a fail-closed
+canonical state that refuses to promote a measurement it cannot support. The machinery is
+the contribution; the null is what the machinery returned.
 
-The current [threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md) records
-the evidence boundary, mitigations and residual risks.
+No measurement here is promoted to a confirmatory claim. The governing eligibility state,
+with its blocking reason, is stated in full under
+[Governance and current state](#governance-and-current-state).
 
-Separately, the sole Phase 8A bridge read is complete and classified
-`MIXED_EXPLORATORY`. ΔB1 is positive in all four primary cells and has descriptive Holm
-p below 0.05 in three; incremental B2 conditional on B1 has mixed signs, four
-zero-crossing intervals and no Holm p below 0.05. A cube-level audit reproduces the
-registered inference exactly and finds no aggregation change. The read is descriptive,
-not confirmatory, and cannot make the PIT-blocked bundle eligible. The exact result,
-dispersion comparison and execution-recovery limitation are in the
-[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v10.md).
+## How the answer was reached
+
+The same question was put to four instruments that fail in different ways, so that no
+single methodological weakness could produce the shared answer:
+
+```mermaid
+flowchart LR
+    Q(["Does option flow add value<br/>beyond option state?"])
+
+    Q --> I1["<b>Level forecasting</b><br/>QLIKE loss on RV30"]
+    Q --> I2["<b>Directional utility</b><br/>signed-return factorial"]
+    Q --> I3["<b>Prospective read</b><br/>sealed, one-shot"]
+    Q --> I4["<b>Economic value</b><br/>variance risk premium"]
+
+    I1 --> A(["<b>No incremental contribution</b><br/>from flow, given state"])
+    I2 --> A
+    I3 --> A
+    I4 --> A
+
+    style Q fill:#e8eef7,stroke:#4c78a8,stroke-width:2px
+    style A fill:#f7ece1,stroke:#e8a33d,stroke-width:2px
+```
+
+A statistical test, a decision-utility test, a prospective test and an economic test are
+vulnerable to different failure modes. Agreement across all four is much harder to explain
+by one flawed choice than agreement within any single one of them.
+
+| Instrument | What it would have caught | Record |
+| --- | --- | --- |
+| Level forecasting | A real reduction in QLIKE loss on RV30 | [`block10_inference_v1.md`](docs/rp2/block10_inference_v1.md) |
+| Directional utility | Value in the sign of returns that a variance loss cannot score | [`extension_b2_directional_utility_v2.md`](docs/rp2/extension_b2_directional_utility_v2.md) |
+| Prospective read | An effect that survives on data sealed before the protocol was written | [`phase8a addendum v10`](reports/phase8a_exploratory_bridge_addendum_v10.md) |
+| Economic value | A tradable premium that statistical loss functions miss | [`block11_economics_v1.md`](docs/rp2/block11_economics_v1.md) |
 
 ## Research design
 
@@ -52,11 +74,26 @@ Forecast origins occur every five minutes during the New York trading session. M
 predict realized variance over the next 30 one-minute returns using nested information
 sets evaluated on a common row mask:
 
+```mermaid
+flowchart LR
+    B0["<b>B0</b><br/>underlying and<br/>broad-market history"]
+    B1["<b>+ B1</b><br/>contemporaneous<br/>option state"]
+    B2["<b>+ B2</b><br/>recent point-in-time<br/>option flow"]
+    B0 --> B1 --> B2
+
+    style B0 fill:#eef2f7,stroke:#5b7ba6
+    style B1 fill:#e3ebf5,stroke:#4c78a8
+    style B2 fill:#f7ece1,stroke:#e8a33d
+```
+
 | Set | Information available at forecast time |
 | --- | --- |
 | B0 | Underlying and broad-market price/volume history |
 | B0+B1 | B0 plus contemporaneous option-state features |
 | B0+B1+B2 | B0+B1 plus recent point-in-time option-flow activity |
+
+Because the sets are nested and share one row mask, the difference between adjacent rungs
+isolates the contribution of exactly one information layer.
 
 Primary loss is QLIKE. Primary model families are Gamma GLM, ridge-log and
 LightGBM-QLIKE. Inference aggregates loss differences by trading session before
@@ -72,6 +109,8 @@ sealed before future observations and read under its specific access contract ca
 described as prospective or one-read.
 
 ## Evidence and data access
+
+![From raw market data to a sealed verdict](docs/figures/pipeline_diagram.svg)
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,
 schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in
@@ -109,6 +148,49 @@ uv run python scripts/run_local_evidence_gates.py
 A Tier 1 pass does not verify providers, Supabase end to end, licensed panel hashes or a
 scientific rebuild. Full boundaries are in
 [`docs/reproducibility_contract_v1.md`](docs/reproducibility_contract_v1.md).
+
+## Governance and current state
+
+This section states the machine-checked eligibility position. It is deliberately separate
+from the finding above: the finding describes what the evidence shows, this describes what
+the project is permitted to claim.
+
+**No result is currently eligible as the project headline.** The corrected-protocol bundle
+is `rp2-v3-20260827-remediation3`, scientific hash
+`386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47`. Its status is
+`REBUILD_COMPLETE_PIT_V22_BLOCKED`: the model-protocol divergence between the two
+inference stages is repaired and the full rebuild passes, but
+`PIT_V22_RECONCILIATION_BLOCKED` remains. Corrected point-in-time inputs have not received
+a successor method freeze or authorized evaluation, so this historical measurement cannot
+become a current claim.
+
+The machine-readable authority is
+[`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json). It identifies one run manifest,
+one scientific hash, one scorecard, the eligibility state and blocking reasons. If another
+document disagrees with it, the canonical state wins.
+
+Historical measurements remain available for audit, not as current findings:
+
+- [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](docs/rp2_v3/SUPERSEDED_RESULTS.md) records retired
+  results and why each was replaced or withdrawn.
+- [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) is the narrative attached to the
+  corrected-protocol bundle; its status is `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
+- [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) states
+  the target-blind PIT evidence boundary and the required next gate.
+
+No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
+claimed from the PIT-blocked bundle. The current
+[threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md) records the evidence
+boundary, mitigations and residual risks.
+
+Separately, the sole Phase 8A bridge read is complete and classified
+`MIXED_EXPLORATORY`. ΔB1 is positive in all four primary cells and has descriptive Holm
+p below 0.05 in three; incremental B2 conditional on B1 has mixed signs, four
+zero-crossing intervals and no Holm p below 0.05. A cube-level audit reproduces the
+registered inference exactly and finds no aggregation change. The read is descriptive,
+not confirmatory, and cannot make the PIT-blocked bundle eligible. The exact result,
+dispersion comparison and execution-recovery limitation are in the
+[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v10.md).
 
 ## Repository map
 
