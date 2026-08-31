@@ -1,7 +1,7 @@
 """A publish that would erase published history must abort before the push.
 
-``scripts/publish_mirror.sh`` ends in ``git push --force`` twice, against a
-public remote, with no ancestry validation. ``docs/rp2_v3/MIRROR_HAZARD.md``
+``scripts/publish_mirror.sh`` ends in ``git push --force`` against a public
+remote. ``docs/rp2_v3/MIRROR_HAZARD.md``
 measures the consequence: the canonical tree and ``origin/main`` have no merge
 base, and running the script as it stood would replace 392 published commits
 with a lineage that never contained them.
@@ -163,7 +163,7 @@ def test_explicit_base_mismatch_aborts(tmp_path: Path) -> None:
     assert "base" in _refusal(result)
 
 
-PUSH_LINES = ['push --force "$REMOTE" main', 'push --force "$REMOTE" --tags']
+PUSH_LINES = ['push --force "$REMOTE" main']
 
 
 @pytest.mark.parametrize("push_line", PUSH_LINES)
@@ -176,12 +176,8 @@ def test_publish_script_guards_before_every_push(push_line: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# The tag push. publish_mirror.sh runs `git push --force "$REMOTE" --tags`
-# immediately after the branch push. Check 4 as first written resolved
-# refs/heads/<branch> only, so every tag ref went out unguarded — and with two
-# disjoint lineages, a same-named tag on the remote would be silently replaced
-# by a commit from an unrelated history. The tags are the frozen-evidence
-# anchors, so that is the worst possible ref to leave uncovered.
+# The guard retains an explicit tag-checking mode for separately authorized tag
+# workflows. The mirror publisher itself must never bulk-push canonical tags.
 # ---------------------------------------------------------------------------
 
 
@@ -244,11 +240,16 @@ def test_local_only_tag_is_allowed(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-def test_publish_script_guards_the_tag_push() -> None:
-    """--tags force-updates every tag ref; the guard call must cover them."""
+def test_publish_script_never_bulk_pushes_tags() -> None:
     source = PUBLISH.read_text(encoding="utf-8")
-    assert "--check-tags" in source, "check 4 must validate tags, not only the branch"
-    assert source.index("--check-tags") < source.index('push --force "$REMOTE" --tags')
+    assert 'push --force "$REMOTE" --tags' not in source
+
+
+def test_publish_script_scans_filtered_tree_before_branch_push() -> None:
+    source = PUBLISH.read_text(encoding="utf-8")
+    scan_at = source.index("scan_public_secrets.py")
+    push_at = source.index('push --force "$REMOTE" main')
+    assert scan_at < push_at
 
 
 def test_publish_script_does_not_compare_the_remote_to_itself() -> None:
