@@ -1,0 +1,40 @@
+{
+  "amendment_reason": "RESTORE_THE_TARGET_BLIND_FIVE_SESSION_LAG_INITIALIZATION_RECORDED_BY_THE_HISTORICAL_EXECUTION_RECOVERY",
+  "amendment_sha256": "6216fa3640177a585196689000890b2745bd3dbfa9d462fce71daf87130158db",
+  "amends_contract_sha256": "5f02db3c46b220f38b22a43147fe9738522a2effb66909621a372f259ab1ec51",
+  "authority": "CURRENT_THREAD_OWNER_DIRECTION_REUSE_EXISTING_BYTES_NO_NEW_COLLECTION",
+  "historical_recovery": {
+    "file_sha256": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf",
+    "path": "artifacts/phase8_bridge/execution_recovery_20260830_v1.json",
+    "recovery_sha256": "17761b9cf39a545083ca6404d2985636ac73ef016dbe8f722661d4c38cdde9f1"
+  },
+  "invariants": {
+    "new_phase8_sessions_collected": 0,
+    "phase8_scoring_started_before_amendment": false,
+    "target_or_forecast_read_from_warmup": false,
+    "warmup_rows_written_or_scored_as_phase8": false
+  },
+  "schema_version": "phase8-materialized-remediation-contract-amendment-v1.0",
+  "status": "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT",
+  "warmup": {
+    "assets": [
+      "AAPL",
+      "AMZN",
+      "META",
+      "MSFT",
+      "NVDA",
+      "TSLA"
+    ],
+    "purpose": "LAGGED_FEATURE_INITIALIZATION_ONLY",
+    "rows": 11700,
+    "sessions": [
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17"
+    ],
+    "source_relative_path": "data/fmp/gate3/underlying_1min_dev80.parquet",
+    "source_sha256": "894d6874e6910f2b54b9467a5dc9ac0e3a7b0fc56cdbc8d8b2a0235048917eb1"
+  }
+}
