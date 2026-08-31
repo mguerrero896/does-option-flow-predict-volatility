@@ -11,7 +11,8 @@ confirmation on 2026-08-14 (decision 48): binding result `POSITIVE_BUT_NOT_GLOBA
 timing sensitivities, while the fixed LightGBM challenger reverses it and B1v3a does not beat
 B0. The prospective Phase 5 holdout remains the only confirmatory test (null, both contrasts).
 Cross-campaign numbers: `docs/results_reconciliation_v2.md`. Sealed cohorts (Validation A/B,
-Phase 8) remain closed pending D006; the 2024 blocks are `EXPLORATORY_RETROSPECTIVE`
+Phase 8) remain closed pending D006 - **superseded**: the Phase 8 read executed on
+2026-08-30 and returned `MIXED_EXPLORATORY`; see `data/CANONICAL_STATE.json`; the 2024 blocks are `EXPLORATORY_RETROSPECTIVE`
 (decision 51); new retrospective campaigns are under moratorium (decision 52). The
 post-Phase-6 campaigns (independent replication, 2024 blocks, mechanism search, B1v3) were
 executed outside this spec's FR/task governance and are retroactively covered by decisions

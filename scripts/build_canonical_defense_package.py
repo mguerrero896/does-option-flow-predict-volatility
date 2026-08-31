@@ -532,7 +532,10 @@ def _slides_markdown(records: Sequence[Mapping[str, str]]) -> str:
         and row["model_role"] == "lightgbm_robustness"
         and row["contrast"] == "delta_b2v2"
     )
+    notice = chr(10).join("> " + line for line in _HISTORICAL_NOTICE_LINES)
     return f"""# Canonical RV30 — Defense Slide Outline
+
+{notice}
 
 > Portable outline only. It does not modify the approved PowerPoint source.
 
@@ -586,6 +589,14 @@ remove or replace a model.
 """
 
 
+_FIGURE_HISTORICAL_FOOTER = (
+    "Historical: 2026-08-11 evidence cutoff. Not the current project state; see "
+    "data/CANONICAL_STATE.json."
+)
+#: A figure travels alone. Lifted into a slide it carries no banner from its report,
+#: so the dated status has to be drawn inside the image itself.
+
+
 def _qlike_svg(records: Sequence[Mapping[str, str]]) -> str:
     """Render a standalone signed-bar SVG for all registered contrasts."""
 
@@ -594,15 +605,18 @@ def _qlike_svg(records: Sequence[Mapping[str, str]]) -> str:
     axis_x = 570
     scale = 390 / maximum
     line_height = 42
-    height = 90 + line_height * len(records)
+    height = 112 + line_height * len(records)
     elements = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{height}" viewBox="0 0 1200 {height}">',
-        "<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:20px;font-weight:bold}.label{font-size:12px}.value{font-size:12px;font-weight:bold}</style>",
+        "<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:20px;font-weight:bold}.label{font-size:12px}.value{font-size:12px;font-weight:bold}.historic{font-size:11px;fill:#8a6d3b}</style>",
         '<rect width="100%" height="100%" fill="white"/>',
         '<text x="24" y="32" class="title">Registered QLIKE contrasts: all signs retained</text>',
         '<text x="24" y="54" class="label">Positive bars favour the expanded information set; zero is the vertical reference.</text>',
         f'<line x1="{axis_x}" y1="68" x2="{axis_x}" y2="{height - 18}" stroke="#34495e" stroke-width="2"/>',
     ]
+    elements.append(
+        f'<text x="24" y="{height - 14}" class="historic">{_FIGURE_HISTORICAL_FOOTER}</text>'
+    )
     for index, record in enumerate(records):
         value = _table_float(record["qlike_delta"])
         y = 86 + index * line_height
@@ -633,9 +647,10 @@ def _design_flow_svg() -> str:
     )
     elements = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="220" viewBox="0 0 1120 220">',
-        "<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:19px;font-weight:bold}.head{font-size:14px;font-weight:bold}.body{font-size:11px}</style>",
+        "<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:19px;font-weight:bold}.head{font-size:14px;font-weight:bold}.body{font-size:11px}.historic{font-size:11px;fill:#8a6d3b}</style>",
         '<rect width="100%" height="100%" fill="white"/>',
         '<text x="20" y="28" class="title">Canonical RV30 design: evidence before conclusion</text>',
+        f'<text x="20" y="206" class="historic">{_FIGURE_HISTORICAL_FOOTER}</text>',
         '<defs><marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#123c69"/></marker></defs>',
     ]
     for index, (x, heading, body) in enumerate(boxes):

@@ -1,5 +1,8 @@
 # Canonical RV30 — Defense Slide Outline
 
+> **Historical report (2026-08-11 evidence cutoff).** Its measurements remain auditable, but its conclusions do not define the current project state.
+> See `../final_report_draft_v2.md`, `../../docs/rp2_v3/SUPERSEDED_RESULTS.md` and `../../data/CANONICAL_STATE.json`.
+
 > Portable outline only. It does not modify the approved PowerPoint source.
 
 ## Slide 1 — One question

@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="426" viewBox="0 0 1200 426">
-<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:20px;font-weight:bold}.label{font-size:12px}.value{font-size:12px;font-weight:bold}</style>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="448" viewBox="0 0 1200 448">
+<style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:20px;font-weight:bold}.label{font-size:12px}.value{font-size:12px;font-weight:bold}.historic{font-size:11px;fill:#8a6d3b}</style>
 <rect width="100%" height="100%" fill="white"/>
 <text x="24" y="32" class="title">Registered QLIKE contrasts: all signs retained</text>
 <text x="24" y="54" class="label">Positive bars favour the expanded information set; zero is the vertical reference.</text>
-<line x1="570" y1="68" x2="570" y2="408" stroke="#34495e" stroke-width="2"/>
+<line x1="570" y1="68" x2="570" y2="430" stroke="#34495e" stroke-width="2"/>
+<text x="24" y="434" class="historic">Historical: 2026-08-11 evidence cutoff. Not the current project state; see data/CANONICAL_STATE.json.</text>
 <text x="20" y="101" class="label">phase6 | gamma_glm_confirmatory | delta_b1v2</text>
 <rect x="570.00" y="86" width="52.92" height="20" fill="#167a49"/>
 <text x="578.00" y="101" class="value">+0.01180281</text>
