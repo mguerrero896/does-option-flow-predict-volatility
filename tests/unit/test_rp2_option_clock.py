@@ -130,12 +130,17 @@ def test_the_expiry_close_follows_the_exchange_calendar() -> None:
 
     normal = np.array(["2025-11-26"], dtype="datetime64[D]")
     early = np.array(["2025-11-28"], dtype="datetime64[D]")
+    non_session = np.array(["2025-11-29"], dtype="datetime64[D]")
     normal_close = expiry_close_timestamps(normal, "America/New_York")[0]
     early_close = expiry_close_timestamps(early, "America/New_York")[0]
+    non_session_close = expiry_close_timestamps(non_session, "America/New_York")[0]
 
     def minute_of_day(stamp: int) -> int:
         return int(stamp // MICROSECONDS // 60) % (24 * 60)
 
     assert minute_of_day(early_close) < minute_of_day(normal_close), (
         "2025-11-28 is an early close; a fixed 16:00 adds hours the contract never had"
+    )
+    assert minute_of_day(non_session_close) == minute_of_day(normal_close), (
+        "a listed expiry on a non-session date keeps the regular 16:00 ET fallback"
     )

@@ -9,10 +9,14 @@ from __future__ import annotations
 
 import importlib.util
 import sys
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from types import ModuleType
 
+import numpy as np
+import polars as pl
 import pytest
+from polars.testing import assert_frame_equal
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -59,6 +63,59 @@ def test_block5_reads_expiry_close_from_the_shared_exchange_calendar() -> None:
     assert "datetime.combine(day.astype" not in source
 
 
+def test_b1_spot_stops_at_the_same_underlying_cutoff_as_its_quotes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Bars after the quote cutoff cannot move any surface feature."""
+
+    block5 = _load("rp2_block5_surface_panel")
+    origin = 35
+    asof = origin - 3
+    rows: list[dict[str, object]] = []
+    first_quote = datetime(2025, 6, 20, 13, 50, tzinfo=UTC)
+    for repeat in range(5):
+        created_at = first_quote + timedelta(seconds=repeat)
+        for expiry in (date(2025, 6, 27), date(2025, 7, 18)):
+            for strike in (90.0, 100.0, 110.0):
+                for option_type in ("call", "put"):
+                    intrinsic = max(
+                        100.0 - strike if option_type == "call" else strike - 100.0,
+                        0.0,
+                    )
+                    rows.append(
+                        {
+                            "created_at": created_at,
+                            "strike": strike,
+                            "expiry": expiry,
+                            "implied_volatility": 0.25 + 0.001 * abs(strike - 100.0),
+                            "nbbo_bid": intrinsic + 5.0,
+                            "nbbo_ask": intrinsic + 5.2,
+                            "option_type": option_type,
+                        }
+                    )
+    tape = pl.DataFrame(rows).sort("created_at")
+    monkeypatch.setattr(block5, "_read_tape", lambda _paths, _asset: tape)
+
+    closes = np.linspace(99.0, 101.0, 390, dtype=np.float64)
+    changed = closes.copy()
+    changed[asof + 1 : origin + 1] *= 2.0
+    arguments = (
+        "AAPL",
+        "2025-06-20",
+        ["synthetic.parquet"],
+        np.array([origin], dtype=np.int64),
+    )
+    left = block5.build_session_surface(
+        *arguments, closes, np.array([0.001], dtype=np.float64)
+    )
+    right = block5.build_session_surface(
+        *arguments, changed, np.array([0.001], dtype=np.float64)
+    )
+
+    assert left is not None and right is not None
+    assert_frame_equal(left, right, check_exact=False, rel_tol=1e-12, abs_tol=1e-12)
+
+
 def test_the_core_surface_features_are_emitted() -> None:
     """B1-core is ten high-coverage features; two of them did not exist before."""
 
@@ -84,7 +141,9 @@ def test_a_failed_implied_rate_does_not_discard_the_origin() -> None:
     """A diagnostic that would not fit is a missing diagnostic, not a missing row."""
 
     source = (REPO / "scripts" / "rp2_block5_surface_panel.py").read_text(encoding="utf-8")
-    spec = (REPO / "docs" / "rp2_v3" / "B1_CONTEMPORANEOUS_SPEC.md").read_text(encoding="utf-8")
+    spec = (REPO / "docs" / "rp2_v3" / "B1_CONTEMPORANEOUS_SPEC_V2.md").read_text(
+        encoding="utf-8"
+    )
     assert "A row is never discarded because implied rate" in spec
     assert "b1_implied_rate" in source
 

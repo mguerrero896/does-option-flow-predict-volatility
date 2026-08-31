@@ -24,7 +24,7 @@ import polars as pl
 from mds650.b1v3_confirmation import canonical_sha256
 from mds650.config import provisional_data_root
 from mds650.metrics import qlike_losses
-from mds650.rp2.b1_snapshot import CUTOFF_SECONDS
+from mds650.rp2.b1_snapshot import CUTOFF_SECONDS, UNDERLYING_ASOF_LAG_MINUTES
 from mds650.rp2.bars import FULL_SESSION_MINUTES, build_session_grid, load_bar_sources
 from mds650.rp2.baseline import (
     EWMA_LAMBDA,
@@ -46,10 +46,6 @@ ORIGIN_STEP = 5
 MARKET_ASSETS = ("SPY", "QQQ")
 WEEK_SESSIONS = 5
 SEASONALITY_BUCKETS = FULL_SESSION_MINUTES // ORIGIN_STEP + 1
-# Bars are labelled by their start minute. At a forecast origin, the close of that minute
-# is one minute in the future; the final close at the 120-second availability cutoff is
-# therefore three bar indices behind the origin.
-UNDERLYING_ASOF_LAG_MINUTES = CUTOFF_SECONDS // 60 + 1
 
 type FloatArray = npt.NDArray[np.float64]
 

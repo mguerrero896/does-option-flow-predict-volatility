@@ -8,7 +8,7 @@ smile shape, wing quotes, term structure, variance risk premium and quote qualit
 
 Point-in-time rule: only rows with ``created_at <= origin - 120 s`` are visible, the
 empirical cutoff established in Block 2, and no row older than 30 minutes.  Sealed cohorts
-are never read.  See ``docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC.md``.
+are never read.  See ``docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md``.
 
 **Overlap with B2 is allowed.**  RP2-v2 ended this snapshot 1 920 seconds before the origin
 so that no tape row could feed both B1 and B2.  The contrast is conditional —
@@ -43,6 +43,7 @@ from mds650.rp2.b1_snapshot import (
     CUTOFF_SECONDS,
     MAX_QUOTE_AGE_SECONDS,
     SENSITIVITY_MAX_AGE_SECONDS,
+    UNDERLYING_ASOF_LAG_MINUTES,
     ContemporaneousSnapshot,
     latest_quote_per_contract,
     snapshot_window,
@@ -184,8 +185,8 @@ def _surface_at(
     mid = 0.5 * (k_bid + k_ask)
     relative_spread = (k_ask - k_bid) / np.maximum(mid, 1e-9)
     age_seconds = snapshot.quote_age_seconds
-    # Exact time to the 16:00 ET close on the expiry date, measured from THIS origin.  A
-    # contract expiring this afternoon gets the hours it has left, not a floor of one day.
+    # Exact time to the XNYS close on the expiry date, measured from THIS origin. A contract
+    # expiring on an early-close afternoon gets its actual remaining hours, not a full day.
     k_tenor = (expiry_close_us[picked] - origin_us) / 1e6 / SECONDS_PER_YEAR
     live = k_tenor > 0.0
     if int(live.sum()) < 3:
@@ -354,6 +355,14 @@ def build_session_surface(
 ) -> pl.DataFrame | None:
     """Surface features at every origin of one session-asset."""
 
+    if origins.ndim != 1 or closes.ndim != 1 or rv_back_30.shape != origins.shape:
+        raise ValueError("RP2_B1_SESSION_INPUT_SHAPE_MISMATCH")
+    asof_minutes = origins - UNDERLYING_ASOF_LAG_MINUTES
+    if origins.size and (
+        bool(np.any(asof_minutes < 0)) or bool(np.any(origins >= closes.size))
+    ):
+        raise ValueError("RP2_B1_UNDERLYING_ASOF_OUT_OF_RANGE")
+
     tape = _read_tape(paths, asset)
     if tape is None:
         # No file to read. A provider failure.
@@ -395,7 +404,7 @@ def build_session_surface(
             bid,
             ask,
             is_call,
-            float(closes[minute]),
+            float(closes[int(minute) - UNDERLYING_ASOF_LAG_MINUTES]),
         )
         features["origin_minute"] = float(minute)
         # Measured, not assumed. `post_cutoff_selected` is zero by construction - the
@@ -490,7 +499,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         # origin is only usable if the grid actually holds that minute — indexing past it
         # would read whatever `closes[-1]` happens to be, silently.
         origin_minutes = group["origin_minute"].to_numpy().astype(np.int64)
-        inside = origin_minutes < closes.size
+        inside = (origin_minutes >= UNDERLYING_ASOF_LAG_MINUTES) & (
+            origin_minutes < closes.size
+        )
         if not inside.any():
             continue
         jobs.append(
@@ -544,10 +555,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         "program": "docs/research_program_v2.md",
         "label": "EXPLORATORY_MECHANISM_DISCOVERY",
         "cutoff_seconds": CUTOFF_SECONDS,
+        "underlying_cutoff_seconds": CUTOFF_SECONDS,
+        "underlying_asof_lag_minutes": UNDERLYING_ASOF_LAG_MINUTES,
         "max_quote_age_seconds": int(args.max_quote_age_seconds),
         "sensitivity_max_quote_age_seconds": SENSITIVITY_MAX_AGE_SECONDS,
         "source_label": "trade_sampled_contemporaneous_nbbo",
-        "spec": "docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC.md",
+        "spec": "docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md",
         "constant_maturities_days": list(CONSTANT_MATURITY_DAYS),
         "session_assets_requested": len(jobs),
         "session_assets_without_tape": failures + unresolved,

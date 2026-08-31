@@ -4,7 +4,7 @@ One place decides which tape rows are visible at a forecast origin and which obs
 of each contract survives, so the point-in-time rule is stated once and tested once rather
 than being re-derived inside the origin loop.
 
-See `docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC.md` for the frozen parameters.
+See `docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md` for the current frozen parameters.
 """
 
 from __future__ import annotations
@@ -22,6 +22,9 @@ MICROSECONDS: Final = 1_000_000
 #: Provider availability lag established in Block 2: a row is visible this long after it
 #: happened, so an origin may only read rows created at or before ``t - 120 s``.
 CUTOFF_SECONDS: Final = 120
+#: One-minute bars are labelled by their start. The close aligned with ``t - 120 s``
+#: is therefore two cutoff minutes plus the still-open origin bar behind ``t``.
+UNDERLYING_ASOF_LAG_MINUTES: Final = CUTOFF_SECONDS // 60 + 1
 #: How stale a contract's last quote may be and still describe the state at the origin.
 MAX_QUOTE_AGE_SECONDS: Final = 1_800
 #: The relaxed bound used only for sensitivity, never for the primary panel.
