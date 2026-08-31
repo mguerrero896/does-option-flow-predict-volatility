@@ -19,11 +19,14 @@ AGGREGATE_MAX_BYTES = 512 * 1024  # tiny stability/audit summaries are aggregate
 PRE_PUSH_HOOK = REPO / "scripts" / "hooks" / "pre-push"
 
 
-def _portable_sh() -> str:
-    if shell := shutil.which("sh"):
-        return shell
+def _portable_bash() -> str:
     git = Path(shutil.which("git") or "git")
-    return str(git.parent.parent / "bin" / "sh.exe")
+    git_bash = git.parent.parent / "bin" / "bash.exe"
+    if git_bash.is_file():
+        return str(git_bash)
+    if shell := shutil.which("bash"):
+        return shell
+    raise FileNotFoundError("bash is required to exercise the versioned pre-push hook")
 
 
 def _git(repo: Path, *args: str) -> subprocess.CompletedProcess[str]:
@@ -61,7 +64,7 @@ def _push_fixture(tmp_path: Path) -> tuple[Path, str, str, str]:
 def _run_pre_push(repo: Path, ref: str, sha: str) -> subprocess.CompletedProcess[str]:
     payload = f"{ref} {sha} {ref} {'0' * 40}\n"
     return subprocess.run(
-        [_portable_sh(), PRE_PUSH_HOOK.as_posix(), "origin", "unused"],
+        [_portable_bash(), PRE_PUSH_HOOK.as_posix(), "origin", "unused"],
         cwd=repo,
         input=payload,
         capture_output=True,
