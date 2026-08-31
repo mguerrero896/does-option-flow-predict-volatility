@@ -1,0 +1,117 @@
+{
+  "authority": {
+    "basis": "CURRENT_THREAD_OWNER_DIRECTION",
+    "date": "2026-08-31",
+    "scope": "REUSE_THE_ALREADY_MATERIALIZED_30_PHASE8_SESSIONS_WITHOUT_NEW_COLLECTION"
+  },
+  "claim_classification": "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY",
+  "contract_sha256": "5f02db3c46b220f38b22a43147fe9738522a2effb66909621a372f259ab1ec51",
+  "decision_rules": {
+    "all_cells_and_information_sets_reported": true,
+    "cell_improved": "REMEDIATED_MEAN_QLIKE_IS_STRICTLY_LOWER_THAN_HISTORICAL_MEAN_QLIKE",
+    "confirmatory_promotion_allowed": false,
+    "global_label": {
+      "MIXED": "AT_LEAST_ONE_B1_INCLUSIVE_PRIMARY_CELL_IMPROVES_AND_AT_LEAST_ONE_DOES_NOT",
+      "NO_B1_INCLUSIVE_IMPROVEMENT": "NO_B1_INCLUSIVE_PRIMARY_CELL_IMPROVES",
+      "UNANIMOUS_B1_INCLUSIVE_IMPROVEMENT": "ALL_B1_INCLUSIVE_PRIMARY_CELLS_IMPROVE"
+    },
+    "historical_one_shot_result_preserved": true,
+    "primary_comparison_window": "primary_20",
+    "reported_windows": [
+      "primary_20",
+      "sensitivity_30"
+    ]
+  },
+  "execution": {
+    "current_code_commit": "d67fe13cb7abbc299ebdf795a9ff36b2fd800254",
+    "development_panel_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation",
+    "models": [
+      "gamma_glm",
+      "lightgbm"
+    ],
+    "new_sessions_collected": 0,
+    "phase8_rows_used_for_fit_or_selection": 0,
+    "sealed_cohorts_read": 0,
+    "sealed_store_reopened": false,
+    "training_roles": [
+      "D",
+      "V"
+    ]
+  },
+  "fixed_inputs": {
+    "bridge_contract": {
+      "path": "artifacts/phase8_bridge/bridge_contract_v2.json",
+      "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e"
+    },
+    "development_panels": {
+      "b0_sha256": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20",
+      "b1_sha256": "7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33",
+      "b2_sha256": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6"
+    },
+    "historical_forecast_cube": {
+      "rows": 190000,
+      "sha256": "71e1ccf9a4970fc6053a0204ce4981634dc9fc1ba3637d093e0b76ed9fd19002"
+    },
+    "historical_result": {
+      "file_sha256": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
+      "frozen_code_commit": "7eed06c26ab8cf4ae4e922dfabbaedc8838bfe49",
+      "path": "artifacts/phase8_bridge/result_20260830_v1.json"
+    },
+    "materialized_bar_store_sha256": "e9b1c01891304d21b7a128342636f35eda05e97b712d7055fac400ec197e5135",
+    "materialized_layout_manifest": {
+      "file_sha256": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b",
+      "manifest_sha256": "a0777ee15fd98344d0072938e017e05a5baea67c11991992ecd772c1c71db0d7"
+    },
+    "sessions": [
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-03",
+      "2026-08-04",
+      "2026-08-05",
+      "2026-08-06",
+      "2026-08-07",
+      "2026-08-10",
+      "2026-08-11",
+      "2026-08-12",
+      "2026-08-13",
+      "2026-08-14",
+      "2026-08-17",
+      "2026-08-18",
+      "2026-08-19",
+      "2026-08-20",
+      "2026-08-21",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27",
+      "2026-08-28"
+    ]
+  },
+  "information_sets": [
+    "B0",
+    "B0+B1",
+    "B0+B2",
+    "B0+B1+B2"
+  ],
+  "invariants": {
+    "b0_forecasts_exactly_equal_to_historical": true,
+    "b0_plus_b2_forecasts_exactly_equal_to_historical": true,
+    "forecast_keysets_exactly_equal_to_historical": true,
+    "historical_artifacts_immutable": true,
+    "materialized_tape_hashes_match_layout_manifest": true,
+    "rv30_exactly_equal_to_historical": true,
+    "sessions_exactly_equal_to_contract": true
+  },
+  "protocol_id": "phase8a-materialized-posthoc-remediation-same30-v1",
+  "rationale": "THE_HISTORICAL_PHASE8_B1_PANEL_USED_CLOSE_AT_THE_ORIGIN_BAR; THE_CORRECTED_PRODUCER_USES_THE_LAST_BAR_CLOSE_AVAILABLE_AT_THE_T_MINUS_120_SECOND_CUTOFF",
+  "schema_version": "phase8-materialized-remediation-contract-v1.0",
+  "status": "PRECOMMITTED_BEFORE_REMEDIATION_MEASUREMENT"
+}
