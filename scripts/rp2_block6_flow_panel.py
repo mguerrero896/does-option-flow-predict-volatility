@@ -54,6 +54,7 @@ from mds650.rp2.option_clock import (
 )
 from mds650.rp2.panel import panel_paths
 from mds650.rp2.scorecard import DURATION_BIN_EDGES, duration_bins
+from mds650.rp3.eval_inventory import load_eval_bars
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "artifacts" / "rp2_block6_flow"
@@ -787,13 +788,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     # RP3 evaluation batches carry their own inventory of post-window tape files;
     # the default is byte-for-byte the behaviour every frozen run was built with.
     parser.add_argument("--inventory", type=Path, default=INVENTORY)
+    parser.add_argument("--eval-bars", action="store_true")
     parser.add_argument("--workers", type=int, default=6)
     parser.add_argument("--limit-sessions", type=int, default=0)
     args = parser.parse_args(argv)
 
     panel = pl.read_parquet(panel_paths(args.panel_root)["b0"])
     inventory = load_inventory(args.inventory)
-    bars = load_bar_sources(args.data_root)
+    if args.eval_bars and args.panel_root is None:
+        raise SystemExit("RP3_EVAL_BARS_REQUIRE_OWN_PANEL_ROOT")
+    bars = load_eval_bars(args.data_root) if args.eval_bars else load_bar_sources(args.data_root)
     grids: dict[tuple[str, str], tuple[FloatArray, FloatArray]] = {}
     for (asset, session_date), group in bars.sort(["asset", "session_date", "minute"]).group_by(
         ["asset", "session_date"], maintain_order=True

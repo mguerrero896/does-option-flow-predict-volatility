@@ -21,6 +21,9 @@ import re
 from pathlib import Path
 from typing import Final
 
+import polars as pl
+
+from mds650.rp2.bars import normalise_bars
 from mds650.rp3.frozen_forecasters import TRAINING_WINDOW_END
 
 #: Role label carried by every RP3 evaluation row, in the same column the RP2 partition
@@ -35,6 +38,24 @@ EVAL_ROLE: Final = "RP3"
 EVAL_BAR_SOURCES: Final[tuple[tuple[str, str, str], ...]] = (
     ("rp3_eval", EVAL_ROLE, "rp3/data/fmp/underlying_1min_eval.parquet"),
 )
+
+
+def load_eval_bars(data_root: Path) -> pl.DataFrame:
+    """Load post-window bars with the explicit RP3 role, never a D/V assignment."""
+
+    frames: list[pl.DataFrame] = []
+    for name, role, relative in EVAL_BAR_SOURCES:
+        path = data_root / relative
+        if not path.is_file():
+            raise FileNotFoundError(f"RP3_EVAL_BAR_STORE_MISSING:{name}:{path}")
+        frame = normalise_bars(pl.read_parquet(path))
+        for session in frame["session_date"].unique().to_list():
+            assert_eval_session(str(session))
+        frames.append(frame.with_columns(source=pl.lit(name), role=pl.lit(role)))
+    if not frames:
+        raise ValueError("RP3_EVAL_NO_BAR_SOURCES")
+    return pl.concat(frames, how="diagonal")
+
 
 #: A tape directory is one session of one store, named ``date=YYYY-MM-DD`` exactly as the
 #: five RP2 tape stores on disk are partitioned.

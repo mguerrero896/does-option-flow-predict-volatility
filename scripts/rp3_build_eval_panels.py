@@ -29,19 +29,19 @@ import argparse
 import json
 import subprocess
 import sys
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Final
 
 import polars as pl
 
 from mds650.config import provisional_data_root
-from mds650.rp2.bars import normalise_bars
 from mds650.rp2.panel import TARGET_ASSETS
 from mds650.rp3.eval_inventory import (
     EVAL_BAR_SOURCES,
     EVAL_ROLE,
     discover_tape_sessions,
+    load_eval_bars,
     write_eval_inventory,
 )
 
@@ -81,24 +81,6 @@ def join_market_controls(b0_panel: pl.DataFrame, controls: pl.DataFrame) -> pl.D
     return b0_panel.join(controls, on=["session_date", "origin_minute"], how="left")
 
 
-def _load_eval_bars(data_root: Path) -> pl.DataFrame:
-    """Concatenate the batch's bar stores with the RP3 role, in block 3's own shape."""
-
-    frames: list[pl.DataFrame] = []
-    for name, role, relative in EVAL_BAR_SOURCES:
-        path = data_root / relative
-        if not path.is_file():
-            raise FileNotFoundError(f"RP3_EVAL_BAR_STORE_MISSING:{name}:{path}")
-        normalised = normalise_bars(pl.read_parquet(path))
-        frames.append(normalised.with_columns(source=pl.lit(name), role=pl.lit(role)))
-    bars = pl.concat(frames, how="vertical")
-    stale = bars.filter(pl.col("session_date") <= date(2026, 7, 17))
-    if stale.height:
-        earliest = str(stale["session_date"].min())
-        raise ValueError(f"RP3_EVAL_WINDOW_VIOLATION:{earliest}")
-    return bars
-
-
 def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, object]:
     """Blocks 3 → 4 → 5 → 6 over one batch; returns the batch summary."""
 
@@ -108,7 +90,7 @@ def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, 
         tape_sessions, list(TARGET_ASSETS), inventory_path
     )
 
-    bars = _load_eval_bars(data_root)
+    bars = load_eval_bars(data_root)
     block3 = _load_block("rp2_block3_target_panel")
     block4 = _load_block("rp2_block4_b0_panel")
 
@@ -140,6 +122,7 @@ def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, 
                 str(batch_dir),
                 "--inventory",
                 str(inventory_path),
+                "--eval-bars",
                 "--workers",
                 str(workers),
             ],

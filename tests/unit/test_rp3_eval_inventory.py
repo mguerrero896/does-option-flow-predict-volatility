@@ -20,6 +20,7 @@ from mds650.rp3.eval_inventory import (
     EVAL_ROLE,
     assert_eval_session,
     discover_tape_sessions,
+    load_eval_bars,
     write_eval_inventory,
 )
 
@@ -138,7 +139,7 @@ def test_eval_bar_loader_uses_the_shared_normalizer(tmp_path: Path) -> None:
         }
     ).write_parquet(store)
 
-    bars = driver._load_eval_bars(tmp_path)  # noqa: SLF001
+    bars = load_eval_bars(tmp_path)
     assert bars.select("session_date", "minute", "role").row(0) == (
         datetime(2026, 7, 20).date(),
         0,
