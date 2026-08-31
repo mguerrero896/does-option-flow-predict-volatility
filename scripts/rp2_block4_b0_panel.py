@@ -24,6 +24,7 @@ import polars as pl
 from mds650.b1v3_confirmation import canonical_sha256
 from mds650.config import provisional_data_root
 from mds650.metrics import qlike_losses
+from mds650.rp2.b1_snapshot import CUTOFF_SECONDS
 from mds650.rp2.bars import FULL_SESSION_MINUTES, build_session_grid, load_bar_sources
 from mds650.rp2.baseline import (
     EWMA_LAMBDA,
@@ -41,11 +42,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "artifacts" / "rp2_block4_b0"
 TARGET_HORIZON = 30
 FIRST_ORIGIN = 30
-LAST_ORIGIN = FULL_SESSION_MINUTES - TARGET_HORIZON
 ORIGIN_STEP = 5
 MARKET_ASSETS = ("SPY", "QQQ")
 WEEK_SESSIONS = 5
 SEASONALITY_BUCKETS = FULL_SESSION_MINUTES // ORIGIN_STEP + 1
+# Bars are labelled by their start minute. At a forecast origin, the close of that minute
+# is one minute in the future; the final close at the 120-second availability cutoff is
+# therefore three bar indices behind the origin.
+UNDERLYING_ASOF_LAG_MINUTES = CUTOFF_SECONDS // 60 + 1
 
 type FloatArray = npt.NDArray[np.float64]
 
@@ -127,20 +131,21 @@ def build_market_controls(bars: pl.DataFrame) -> pl.DataFrame:
             continue
         usable = first_valid_minute(grid.valid)
         origins = session_origins(grid.minutes)
-        origins = origins[origins >= usable + TARGET_HORIZON]
+        origins = origins[origins >= usable + TARGET_HORIZON + UNDERLYING_ASOF_LAG_MINUTES]
         close = grid.close[usable:]
         if origins.size == 0 or not np.isfinite(close).all() or close.min() <= 0.0:
             continue
         returns = log_returns(close)
         prefix = np.concatenate([[0.0], np.cumsum(returns)])
         local = origins - usable
+        asof = local - UNDERLYING_ASOF_LAG_MINUTES
         rows.append(
             pl.DataFrame(
                 {
                     "session_date": [str(session_date)] * origins.size,
                     "origin_minute": origins,
-                    f"{asset!s}_rv_30": backward_rv(returns, local, TARGET_HORIZON),
-                    f"{asset!s}_ret_30": prefix[local] - prefix[local - TARGET_HORIZON],
+                    f"{asset!s}_rv_30": backward_rv(returns, asof, TARGET_HORIZON),
+                    f"{asset!s}_ret_30": prefix[asof] - prefix[asof - TARGET_HORIZON],
                 }
             )
         )
@@ -183,9 +188,9 @@ def build_b0_panel(
             continue
         usable = first_valid_minute(grid.valid)
         origins = session_origins(grid.minutes)
-        # Every window reaches a full horizon back from its origin, so an origin closer to
-        # the first observed minute than that horizon would read the fill, not the market.
-        origins = origins[origins >= usable + TARGET_HORIZON]
+        # The trailing window ends at the availability cutoff, so it needs both the full
+        # horizon and the three-minute as-of lag after the first observed minute.
+        origins = origins[origins >= usable + TARGET_HORIZON + UNDERLYING_ASOF_LAG_MINUTES]
         close = grid.close[usable:]
         if origins.size == 0:
             counters["dropped_short_session"] += 1
@@ -194,6 +199,7 @@ def build_b0_panel(
             counters["dropped_fill"] += 1
             continue
         local = origins - usable
+        asof = local - UNDERLYING_ASOF_LAG_MINUTES
         returns = log_returns(close)
         cumulative_return = np.concatenate([[0.0], np.cumsum(returns)])
         session_squared = np.cumsum(returns**2)
@@ -202,7 +208,7 @@ def build_b0_panel(
         week = float(np.mean(past[-WEEK_SESSIONS:])) if len(past) >= WEEK_SESSIONS else float("nan")
 
         forward = forward_measures(returns, local, TARGET_HORIZON)
-        back30 = forward_measures(returns - 0.0, local - TARGET_HORIZON, TARGET_HORIZON)
+        back30 = forward_measures(returns, asof - TARGET_HORIZON, TARGET_HORIZON)
         record: dict[str, object] = {
             "asset": [str(asset)] * origins.size,
             "session_date": [str(session_date)] * origins.size,
@@ -211,25 +217,21 @@ def build_b0_panel(
             "origin_minute": origins,
             "rv30": forward.rv,
             "jump30": forward.jump,
-            "rv_back_5": backward_rv(returns, local, 5),
-            "rv_back_15": backward_rv(returns, local, 15),
+            "rv_back_5": backward_rv(returns, asof, 5),
+            "rv_back_15": backward_rv(returns, asof, 15),
             "rv_back_30": back30.rv,
             "rq_back_30": back30.quarticity,
             "rs_up_back_30": back30.semivariance_up,
             "rs_down_back_30": back30.semivariance_down,
             "jump_back_30": back30.jump,
-            "rv_session_to_date": session_squared[local - 1],
+            "rv_session_to_date": session_squared[asof - 1],
             "rv_prev_day": np.full(origins.size, prev_day),
             "rv_week": np.full(origins.size, week),
-            "ret_5": cumulative_return[local] - cumulative_return[local - 5],
-            "ret_30": cumulative_return[local] - cumulative_return[local - TARGET_HORIZON],
-            "parkinson_30": _parkinson(
-                grid.high[usable:], grid.low[usable:], local, TARGET_HORIZON
-            ),
-            "volume_30": _window_sum(grid.volume[usable:], local - 1, TARGET_HORIZON),
-            "dollar_volume_30": _window_sum(
-                grid.volume[usable:] * close, local - 1, TARGET_HORIZON
-            ),
+            "ret_5": cumulative_return[asof] - cumulative_return[asof - 5],
+            "ret_30": cumulative_return[asof] - cumulative_return[asof - TARGET_HORIZON],
+            "parkinson_30": _parkinson(grid.high[usable:], grid.low[usable:], asof, TARGET_HORIZON),
+            "volume_30": _window_sum(grid.volume[usable:], asof, TARGET_HORIZON),
+            "dollar_volume_30": _window_sum(grid.volume[usable:] * close, asof, TARGET_HORIZON),
             "minutes_since_open": origins.astype(np.float64),
             # Against the session's own close, not a fixed 390-minute one.
             "minutes_to_close": (grid.minutes - origins).astype(np.float64),
@@ -497,7 +499,7 @@ def causal_ewma_forecasts(
         if key not in series:
             continue
         levels = series[key]
-        position = int(origins[index]) - offsets.get(key, 0)
+        position = int(origins[index]) - offsets.get(key, 0) - UNDERLYING_ASOF_LAG_MINUTES
         if 0 <= position < levels.size:
             out[index] = levels[position]
     return out
@@ -561,7 +563,7 @@ def fit_intraday_garch(
             cache[key] = filtered
         # Iterate the recursion forward TARGET_HORIZON steps from the origin, rebased
         # onto the observed slice.
-        position = int(origins[index]) - offsets.get(key, 0)
+        position = int(origins[index]) - offsets.get(key, 0) - UNDERLYING_ASOF_LAG_MINUTES
         if not 0 <= position < filtered.size:
             continue
         state = float(filtered[position])
@@ -613,9 +615,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             train_share=args.train_share,
             max_fill_share=args.max_fill_share,
         )
-        ewma = causal_ewma_forecasts(
-            bars, panel, role=role, max_fill_share=args.max_fill_share
-        )
+        ewma = causal_ewma_forecasts(bars, panel, role=role, max_fill_share=args.max_fill_share)
         results[role] = evaluate_role(
             panel, role=role, train_share=args.train_share, garch=garch, ewma=ewma
         )
@@ -625,7 +625,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         "program": "docs/research_program_v2.md",
         "label": "EXPLORATORY_MECHANISM_DISCOVERY",
         "target": "rv30",
-        "origin_grid": {"first": FIRST_ORIGIN, "last": LAST_ORIGIN, "step": ORIGIN_STEP},
+        "underlying_cutoff_seconds": CUTOFF_SECONDS,
+        "underlying_asof_lag_minutes": UNDERLYING_ASOF_LAG_MINUTES,
+        "origin_grid": {
+            "first": int(np.asarray(panel["origin_minute"].to_numpy(), dtype=np.int64).min()),
+            "last": int(np.asarray(panel["origin_minute"].to_numpy(), dtype=np.int64).max()),
+            "step": ORIGIN_STEP,
+        },
         "session_counters": dict(counters),
         "panel_rows": panel.height,
         "panel_columns": len(panel.columns),

@@ -10,12 +10,13 @@ builder being used, not merely present.
 from __future__ import annotations
 
 import importlib.util
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from types import ModuleType
 
 import numpy as np
 import polars as pl
+import pytest
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -43,6 +44,24 @@ def test_role_counts_keep_each_label_attached_to_its_count() -> None:
     panel = pl.DataFrame({"role": ["D", "D", "D", "V"]})
 
     assert BLOCK3.rows_by_role(panel) == {"D": 3, "V": 1}
+
+
+def test_block3_cannot_bypass_the_shared_date_role_guard(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "a" / "bars.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    pl.DataFrame(
+        {
+            "asset": ["AAPL"],
+            "bar_start_utc": [datetime(2026, 3, 24, 13, 30)],
+            "close": [100.0],
+        }
+    ).with_columns(pl.col("bar_start_utc").dt.replace_time_zone("UTC")).write_parquet(path)
+    monkeypatch.setattr(BLOCK3, "BAR_SOURCES", (("wrong-role", "D", "a/bars.parquet"),))
+
+    with pytest.raises(ValueError, match="RP2_BAR_SOURCE_ROLE_MISMATCH"):
+        BLOCK3.load_bars(tmp_path)
 
 
 def test_origins_are_sized_from_the_session_rather_than_a_constant() -> None:

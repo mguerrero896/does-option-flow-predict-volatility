@@ -29,6 +29,8 @@ import numpy as np
 import numpy.typing as npt
 import polars as pl
 
+from mds650.rp2.partition import assign_role
+
 type FloatArray = npt.NDArray[np.float64]
 type BoolArray = npt.NDArray[np.bool_]
 
@@ -39,7 +41,9 @@ MARKET_TZ: Final = "America/New_York"
 SESSION_OPEN_MINUTE: Final = 9 * 60 + 30
 CALENDAR: Final = "XNYS"
 
-#: ``(name, partition role, path relative to the store root)``, oldest window first.
+#: ``(name, allowed partition-role scope, path relative to the store root)``, oldest first.
+#: The scope is provenance and a fail-closed constraint; row roles always come from the
+#: frozen date rule in :func:`mds650.rp2.partition.assign_role`.
 BAR_SOURCES: Final[tuple[tuple[str, str, str], ...]] = (
     # Replaces gate7_c6 and gate8_c4c, which held only (asset, bar_start_utc, close). Their
     # missing range and volume were being fabricated as high == low == close and volume == 0,
@@ -56,10 +60,13 @@ BAR_SOURCES: Final[tuple[tuple[str, str, str], ...]] = (
     # The 153 tape sessions (2024-08-02..2025-12-24) that had no bars. Already-observed
     # eras, so Discovery only: they buy precision on the estimate, never confirmation.
     ("ext3_missing", "D", "data/fmp/rp2_ext3/underlying_1min_ext3.parquet"),
-    # SPY and QQQ across the validation sessions. Without these, B0 carried market-wide
-    # state in discovery and none in validation, so every D-versus-V contrast compared two
-    # different baselines (decision 75).
-    ("validation_market", "V", "data/fmp/rp2_validation_market/market_1min_validation.parquet"),
+    # SPY and QQQ across both observed roles. The store spans 209 D and 80 V sessions, so
+    # its scope is mixed and each row's exact role must come from its date.
+    (
+        "validation_market",
+        "D+V",
+        "data/fmp/rp2_validation_market/market_1min_validation.parquet",
+    ),
 )
 
 _OPTIONAL_COLUMNS: Final = ("open", "high", "low", "volume")
@@ -221,17 +228,34 @@ def load_bar_sources(
     """
 
     frames: list[pl.DataFrame] = []
-    for name, role, relative in sources:
+    for name, role_scope, relative in sources:
         path = data_root / relative
         if not path.is_file():
             continue
         frame = normalise_bars(pl.read_parquet(path))
-        frames.append(frame.with_columns(source=pl.lit(name), role=pl.lit(role)))
+        frames.append(_tag_validated_bar_source(frame, name=name, role_scope=role_scope))
     if not frames:
         raise ValueError("RP2_BARS_NO_SOURCES")
     return apply_volume_repair(
         deduplicate_bar_sources(pl.concat(frames, how="diagonal")), data_root
     )
+
+
+def _tag_validated_bar_source(frame: pl.DataFrame, *, name: str, role_scope: str) -> pl.DataFrame:
+    """Derive each row's role from its date and reject dates outside the source scope."""
+
+    allowed = set(role_scope.split("+"))
+    if not allowed or not allowed <= {"D", "V"}:
+        raise ValueError(f"RP2_BAR_SOURCE_ROLE_SCOPE_INVALID:{name}:{role_scope}")
+    dates = sorted(frame["session_date"].unique().to_list())
+    roles = [assign_role(day) for day in dates]
+    for day, role in zip(dates, roles, strict=True):
+        if role not in allowed:
+            raise ValueError(
+                f"RP2_BAR_SOURCE_ROLE_MISMATCH:{name}:{role_scope}:{role}:{day.isoformat()}"
+            )
+    role_by_date = pl.DataFrame({"session_date": dates, "role": roles})
+    return frame.join(role_by_date, on="session_date", how="left").with_columns(source=pl.lit(name))
 
 
 def apply_volume_repair(bars: pl.DataFrame, data_root: Path) -> pl.DataFrame:

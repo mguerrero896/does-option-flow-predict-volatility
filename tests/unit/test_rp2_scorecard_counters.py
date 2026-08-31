@@ -250,7 +250,8 @@ def test_block_three_and_block_four_read_one_list_of_bar_stores() -> None:
     # itself is not the invariant: it went from six to five when `gate7_c6` and
     # `gate8_c4c`, which carried no high, low or volume, were replaced by the re-acquired
     # `ohlcv_repair` covering the same 360 asset-sessions with the same closes.
-    assert {role for _, role, _ in BAR_SOURCES} == {"D", "V"}
+    covered_roles = {role for _, role_scope, _ in BAR_SOURCES for role in role_scope.split("+")}
+    assert covered_roles == {"D", "V"}
     assert len({path for _, _, path in BAR_SOURCES}) == len(BAR_SOURCES)
     assert len({name for name, _, _ in BAR_SOURCES}) == len(BAR_SOURCES)
 
@@ -320,9 +321,7 @@ def test_a_panel_without_the_latency_bins_is_refused_rather_than_read_as_zero(
     from mds650.rp2.scorecard import DURATION_BIN_EDGES, duration_histogram
 
     panel = tmp_path / "b2.parquet"
-    complete = {
-        f"b2_latency_bin_{index}": [0.0] for index in range(len(DURATION_BIN_EDGES) + 1)
-    }
+    complete = {f"b2_latency_bin_{index}": [0.0] for index in range(len(DURATION_BIN_EDGES) + 1)}
     pl.DataFrame(complete).write_parquet(panel)
     assert duration_histogram(panel, "b2_latency_bin_").sum() == 0
 

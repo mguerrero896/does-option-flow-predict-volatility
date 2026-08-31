@@ -53,6 +53,12 @@ def test_block5_reads_the_snapshot_through_the_shared_rule() -> None:
     )
 
 
+def test_block5_reads_expiry_close_from_the_shared_exchange_calendar() -> None:
+    source = (REPO / "scripts" / "rp2_block5_surface_panel.py").read_text(encoding="utf-8")
+    assert "expiry_close_timestamps(" in source
+    assert "datetime.combine(day.astype" not in source
+
+
 def test_the_core_surface_features_are_emitted() -> None:
     """B1-core is ten high-coverage features; two of them did not exist before."""
 
@@ -112,9 +118,7 @@ def test_the_measurement_audit_reads_the_same_window_as_the_panel() -> None:
     was not the surface the panel carried.
     """
 
-    source = (REPO / "scripts" / "rp2_block5b_independent_surface.py").read_text(
-        encoding="utf-8"
-    )
+    source = (REPO / "scripts" / "rp2_block5b_independent_surface.py").read_text(encoding="utf-8")
     assert "from mds650.rp2.b1_snapshot import" in source
     assert "latest_quote_per_contract(" in source
     assert "LOOKBACK_SECONDS = " not in source, "the audit may not define its own window"
@@ -140,9 +144,7 @@ def test_the_independent_side_obeys_the_same_staleness_bound() -> None:
     trade-sampling bias it is meant to isolate.
     """
 
-    source = (REPO / "scripts" / "rp2_block5b_independent_surface.py").read_text(
-        encoding="utf-8"
-    )
+    source = (REPO / "scripts" / "rp2_block5b_independent_surface.py").read_text(encoding="utf-8")
     assert "MAX_QUOTE_AGE_SECONDS" in source
     assert 'counters["quotes_stale"]' in source, (
         "quotes rejected for age must be counted, not silently dropped"

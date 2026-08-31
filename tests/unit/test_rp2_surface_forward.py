@@ -48,6 +48,12 @@ def test_an_early_origin_sees_more_than_a_whole_day_to_a_next_day_expiry() -> No
     assert tenor == pytest.approx(30.0 / 24.0 / 365.0, rel=1e-6)
 
 
+def test_tenor_ends_at_the_exchange_close_on_an_early_close_session() -> None:
+    origin = datetime(2025, 11, 28, 17, 0, tzinfo=UTC)  # 12:00 ET
+    tenor = tenor_years_to_expiry(origin, date(2025, 11, 28))
+    assert tenor == pytest.approx(1.0 / 24.0 / 365.0, rel=1e-6)
+
+
 def _parity_quotes(
     strikes: np.ndarray, *, forward: float, discount: float
 ) -> tuple[np.ndarray, np.ndarray]:

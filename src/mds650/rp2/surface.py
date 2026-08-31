@@ -23,12 +23,13 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from datetime import date, datetime, time
+from datetime import UTC, date, datetime
 from typing import Final
-from zoneinfo import ZoneInfo
 
 import numpy as np
 import numpy.typing as npt
+
+from mds650.rp2.option_clock import MICROSECONDS, expiry_close_timestamps
 
 type FloatArray = npt.NDArray[np.float64]
 type BoolArray = npt.NDArray[np.bool_]
@@ -41,9 +42,8 @@ CALENDAR_DAYS_PER_YEAR: Final = 365.0
 WING_DELTA: Final = 0.25
 MIN_IV: Final = 0.01
 MAX_IV: Final = 5.0
-#: Exchange time zone and the hour at which US equity options expire (16:00 ET).
+#: Exchange time zone used to resolve each expiry session's actual close.
 MARKET_TIME_ZONE: Final = "America/New_York"
-EXPIRY_CLOSE: Final = time(16, 0)
 SECONDS_PER_YEAR: Final = CALENDAR_DAYS_PER_YEAR * 86400.0
 #: Implied financing rates outside this band mean the parity fit is reading noise, not a
 #: curve.  Wide on purpose: it rejects nonsense, it does not impose a view.
@@ -53,7 +53,7 @@ PLAUSIBLE_RATE_BAND: Final[tuple[float, float]] = (-0.05, 0.25)
 def tenor_years_to_expiry(
     origin: datetime, expiry: date, *, time_zone: str = MARKET_TIME_ZONE
 ) -> float:
-    """Exact time to expiry in years, measured to the 16:00 ET close on the expiry date.
+    """Exact time to expiry in years, measured to the expiry session's XNYS close.
 
     Rounding a tenor to whole calendar days destroys the front of the surface: a contract
     expiring this afternoon is not a one-day option and is not a zero-day option either -
@@ -65,9 +65,14 @@ def tenor_years_to_expiry(
     Returns ``0.0`` once the close has passed, so an expired contract can never be priced.
     """
 
-    zone = ZoneInfo(time_zone)
-    close = datetime.combine(expiry, EXPIRY_CLOSE, tzinfo=zone)
-    seconds = (close - origin).total_seconds()
+    close_us = int(expiry_close_timestamps(np.array([np.datetime64(expiry, "D")]), time_zone)[0])
+    origin_us = int(
+        np.datetime64(
+            origin.astimezone(UTC).replace(tzinfo=None),
+            "us",
+        ).astype(np.int64)
+    )
+    seconds = (close_us - origin_us) / MICROSECONDS
     return max(seconds, 0.0) / SECONDS_PER_YEAR
 
 

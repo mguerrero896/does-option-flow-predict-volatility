@@ -171,12 +171,46 @@ def test_a_source_without_a_range_reports_it_as_unknown() -> None:
 def test_load_bar_sources_tags_role_and_source_and_skips_absent_files(tmp_path: Path) -> None:
     path = tmp_path / "a" / "bars.parquet"
     path.parent.mkdir(parents=True, exist_ok=True)
-    _frame([datetime(2026, 6, 15, 13, 30)]).write_parquet(path)
+    _frame([datetime(2025, 6, 20, 13, 30)]).write_parquet(path)
     out = load_bar_sources(
         tmp_path, (("present", "D", "a/bars.parquet"), ("missing", "V", "b/bars.parquet"))
     )
     assert out["source"].unique().to_list() == ["present"]
     assert out["role"].unique().to_list() == ["D"]
+
+
+def test_load_bar_sources_rejects_a_date_outside_its_declared_role_scope(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "a" / "bars.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _frame([datetime(2026, 3, 24, 13, 30)]).write_parquet(path)
+
+    with pytest.raises(
+        ValueError,
+        match="RP2_BAR_SOURCE_ROLE_MISMATCH:wrong-role:D:V:2026-03-24",
+    ):
+        load_bar_sources(tmp_path, (("wrong-role", "D", "a/bars.parquet"),))
+
+
+def test_a_mixed_role_source_is_tagged_by_date_not_by_its_file_scope(tmp_path: Path) -> None:
+    path = tmp_path / "a" / "bars.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _frame([datetime(2025, 6, 20, 13, 30), datetime(2026, 6, 15, 13, 30)]).write_parquet(path)
+
+    out = load_bar_sources(tmp_path, (("mixed", "D+V", "a/bars.parquet"),))
+
+    roles = dict(out.select("session_date", "role").iter_rows())
+    assert roles == {date(2025, 6, 20): "D", date(2026, 6, 15): "V"}
+
+
+def test_bar_source_role_scope_refuses_unknown_partition_labels(tmp_path: Path) -> None:
+    path = tmp_path / "a" / "bars.parquet"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _frame([datetime(2025, 6, 20, 13, 30)]).write_parquet(path)
+
+    with pytest.raises(ValueError, match=r"RP2_BAR_SOURCE_ROLE_SCOPE_INVALID:mixed:D\+C"):
+        load_bar_sources(tmp_path, (("mixed", "D+C", "a/bars.parquet"),))
 
 
 def test_load_bar_sources_refuses_an_empty_selection(tmp_path: Path) -> None:

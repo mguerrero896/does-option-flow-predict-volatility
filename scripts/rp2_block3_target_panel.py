@@ -30,7 +30,7 @@ from mds650.rp2.bars import (
     BAR_SOURCES,
     FULL_SESSION_MINUTES,
     build_session_grid,
-    deduplicate_bar_sources,
+    load_bar_sources,
 )
 from mds650.rp2.realized import (
     HORIZONS,
@@ -51,53 +51,15 @@ def first_valid_minute(valid: npt.NDArray[np.bool_]) -> int:
     return int(present[0]) if present.size else int(valid.size)
 
 
-MARKET_TZ = "America/New_York"
-SESSION_OPEN_MINUTE = 9 * 60 + 30
 MAX_HORIZON = max(HORIZONS)
 ORIGIN_STEP = 5
 VARIANCE_FLOOR = 1e-12
 
 
-
-def _normalise(frame: pl.DataFrame) -> pl.DataFrame:
-    """Reduce either on-disk bar schema to ``asset, session_date, minute, close``."""
-
-    timestamp = "bar_start_utc" if "bar_start_utc" in frame.columns else "bar_timestamp_raw_utc"
-    # Session minutes are measured from the 09:30 New York open, not from a fixed UTC
-    # hour: the UTC open shifts by an hour across daylight saving, which would otherwise
-    # silently truncate every winter session.
-    out = frame.select(
-        pl.col("asset"),
-        pl.col(timestamp).dt.convert_time_zone(MARKET_TZ).alias("bar_ny"),
-        pl.col("close").cast(pl.Float64),
-    ).with_columns(pl.col("bar_ny").dt.date().alias("session_date"))
-    return out.with_columns(
-        (
-            pl.col("bar_ny").dt.hour().cast(pl.Int64) * 60
-            + pl.col("bar_ny").dt.minute().cast(pl.Int64)
-            - SESSION_OPEN_MINUTE
-        ).alias("minute")
-    )
-
-
 def load_bars(data_root: Path) -> pl.DataFrame:
-    """Concatenate every available one-minute bar store with its partition role."""
+    """Read the same date-validated, deduplicated bar stores as every later block."""
 
-    frames: list[pl.DataFrame] = []
-    for name, role, relative in BAR_SOURCES:
-        path = data_root / relative
-        if not path.is_file():
-            continue
-        frame = _normalise(pl.read_parquet(path))
-        frames.append(frame.with_columns(source=pl.lit(name), role=pl.lit(role)))
-    if not frames:
-        raise SystemExit("RP2_BLOCK3_NO_BARS")
-    # The acquisitions overlap: the backfill re-acquires sessions an earlier campaign
-    # already held. Concatenated and grouped by source, the same origin appears twice and
-    # is double-weighted in every statistic built from it. Block 4 has always deduplicated;
-    # sharing the source list without sharing this would have introduced the duplication
-    # rather than removing a discrepancy.
-    return deduplicate_bar_sources(pl.concat(frames, how="vertical"))
+    return load_bar_sources(data_root, BAR_SOURCES)
 
 
 def session_origins(minutes: int) -> npt.NDArray[np.int64]:

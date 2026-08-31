@@ -28,7 +28,7 @@ import argparse
 import json
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
-from datetime import UTC, date, datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Final
 from zoneinfo import ZoneInfo
@@ -48,11 +48,11 @@ from mds650.rp2.b1_snapshot import (
     snapshot_window,
 )
 from mds650.rp2.bars import MARKET_TZ, SESSION_OPEN_MINUTE, build_session_grid, load_bar_sources
+from mds650.rp2.option_clock import expiry_close_timestamps
 from mds650.rp2.panel import panel_paths
 from mds650.rp2.scorecard import QUOTE_AGE_BIN_EDGES, duration_bins
 from mds650.rp2.surface import (
     CONSTANT_MATURITY_DAYS,
-    EXPIRY_CLOSE,
     SECONDS_PER_YEAR,
     annualise_intraday_variance,
     black_scholes_delta,
@@ -366,23 +366,8 @@ def build_session_surface(
     created = tape["created_at"].dt.replace_time_zone(None).cast(pl.Int64).to_numpy()
     strike = tape["strike"].cast(pl.Float64).to_numpy().astype(np.float64)
     expiry = tape["expiry"].cast(pl.Date).to_numpy()
-    # UTC microsecond stamp of the 16:00 ET close on each contract's expiry date.  Building
-    # it once per session keeps the exact-tenor arithmetic inside the origin loop cheap.
-    expiry_close_us = np.array(
-        [
-            int(
-                np.datetime64(
-                    datetime.combine(day.astype("datetime64[D]").astype(date), EXPIRY_CLOSE)
-                    .replace(tzinfo=NY)
-                    .astimezone(UTC)
-                    .replace(tzinfo=None),
-                    "us",
-                ).astype(np.int64)
-            )
-            for day in expiry
-        ],
-        dtype=np.int64,
-    )
+    # One calendar authority for B1 and B2, including 13:00 ET early closes.
+    expiry_close_us = expiry_close_timestamps(expiry, MARKET_TZ)
     iv = tape["implied_volatility"].cast(pl.Float64).to_numpy().astype(np.float64)
     bid = tape["nbbo_bid"].cast(pl.Float64).to_numpy().astype(np.float64)
     ask = tape["nbbo_ask"].cast(pl.Float64).to_numpy().astype(np.float64)
@@ -418,9 +403,7 @@ def build_session_surface(
         # a zero nobody measured cannot notice a regression.
         features["b1_quote_duplicates_dropped"] = float(snapshot.duplicates_dropped)
         features["b1_post_cutoff_selected"] = float(snapshot.post_cutoff_selected)
-        features["b1_duplicate_contracts_remaining"] = float(
-            snapshot.duplicate_contracts_remaining
-        )
+        features["b1_duplicate_contracts_remaining"] = float(snapshot.duplicate_contracts_remaining)
         # A rate that fails the plausibility band is recorded as NaN and the origin is
         # kept: the row is not dropped, and counting those nulls as drops would report
         # retained rows as lost ones. The count of actual drops is measured here, at the
