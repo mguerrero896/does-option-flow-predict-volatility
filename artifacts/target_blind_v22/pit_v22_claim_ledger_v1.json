@@ -1,5 +1,5 @@
 {
-  "claim_ledger_sha256": "a7dcb76316c577e12cdcb085628922c85fa69b0a6b6819eb17fc4a9d05a3f25c",
+  "claim_ledger_sha256": "d51ed0544137828e2e46afc763aa8ce9cd1f12b5816c7aec8933b1409f69915c",
   "claims": [
     {
       "allowed_presentation_context": "data_engineering_and_pit_readiness",
@@ -8,11 +8,11 @@
       "evidence": [
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         },
         {
           "path": "artifacts/target_blind_v22/confirmation_readiness_v1.json",
-          "sha256": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0"
+          "sha256": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa"
         }
       ],
       "limitation": "These are input-coverage counts, not predictive metrics.",
@@ -21,18 +21,22 @@
     {
       "allowed_presentation_context": "timing_assumption",
       "claim_id": "PITV22-C002",
-      "claim_text": "Unusual Whales created_at is retained only as an operational availability proxy at the registered cutoff.",
+      "claim_text": "The measured live receipt latency campaign is RECONCILED_PARTIAL; Unusual Whales created_at remains only an operational availability proxy at the registered cutoff.",
       "evidence": [
         {
           "path": "docs/provider_timing_pit_contract_v21.md",
-          "sha256": "986d464f25c0002ec06a447537a07c3f5579a9c21b993b563c8cffc4afa06e51"
+          "sha256": "60f026243085eb781491ef19de6fdcdbe1d04e80ef2342e9140b1522ad9c2fbd"
         },
         {
           "path": "docs/provider_timing_claim_matrix_v21.md",
-          "sha256": "75d2f353049e386b07d00a547e3697907e0fff27be63498df8b79f8867d04797"
+          "sha256": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8"
+        },
+        {
+          "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
+          "sha256": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
         }
       ],
-      "limitation": "It is not provider-proven publication time or client receipt time.",
+      "limitation": "The cross-channel design cannot identify backfill or revision and does not prove provider publication time or client receipt time.",
       "status": "PROXY_ONLY"
     },
     {
@@ -42,11 +46,11 @@
       "evidence": [
         {
           "path": "docs/provider_timing_pit_contract_v21.md",
-          "sha256": "986d464f25c0002ec06a447537a07c3f5579a9c21b993b563c8cffc4afa06e51"
+          "sha256": "60f026243085eb781491ef19de6fdcdbe1d04e80ef2342e9140b1522ad9c2fbd"
         },
         {
           "path": "docs/provider_timing_claim_matrix_v21.md",
-          "sha256": "75d2f353049e386b07d00a547e3697907e0fff27be63498df8b79f8867d04797"
+          "sha256": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8"
         }
       ],
       "limitation": "They do not prove provider or client-side message receipt latency.",
@@ -63,11 +67,11 @@
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_summary_v22.json",
-          "sha256": "970c56523ac387c6d68840b0d8ac8a5444d010556a2189633f0a32c50e3dc9bf"
+          "sha256": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b"
         },
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         }
       ],
       "limitation": "The correction changes eligibility only; it does not validate performance.",
@@ -80,11 +84,11 @@
       "evidence": [
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         },
         {
           "path": "artifacts/target_blind_v22/confirmation_readiness_v1.json",
-          "sha256": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0"
+          "sha256": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa"
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_manifest_v22.json",
@@ -92,11 +96,11 @@
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_summary_v22.json",
-          "sha256": "970c56523ac387c6d68840b0d8ac8a5444d010556a2189633f0a32c50e3dc9bf"
+          "sha256": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b"
         },
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         }
       ],
       "limitation": "No prior sign, metric or ranking may be carried into a corrected claim.",
@@ -109,11 +113,11 @@
       "evidence": [
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         },
         {
           "path": "artifacts/target_blind_v22/confirmation_readiness_v1.json",
-          "sha256": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0"
+          "sha256": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa"
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_manifest_v22.json",
@@ -121,11 +125,11 @@
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_summary_v22.json",
-          "sha256": "970c56523ac387c6d68840b0d8ac8a5444d010556a2189633f0a32c50e3dc9bf"
+          "sha256": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b"
         },
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         }
       ],
       "limitation": "A successor method freeze and authorized evaluation are required.",
@@ -138,11 +142,11 @@
       "evidence": [
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         },
         {
           "path": "artifacts/target_blind_v22/confirmation_readiness_v1.json",
-          "sha256": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0"
+          "sha256": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa"
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_manifest_v22.json",
@@ -150,11 +154,11 @@
         },
         {
           "path": "artifacts/provider_timing_v22/b2_availability_summary_v22.json",
-          "sha256": "970c56523ac387c6d68840b0d8ac8a5444d010556a2189633f0a32c50e3dc9bf"
+          "sha256": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b"
         },
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         }
       ],
       "limitation": "The target-blind ledger contains no loss or model output.",
@@ -167,19 +171,19 @@
       "evidence": [
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
-          "sha256": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0"
+          "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
         },
         {
           "path": "artifacts/target_blind_v22/confirmation_readiness_v1.json",
-          "sha256": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0"
+          "sha256": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa"
         },
         {
           "path": "docs/provider_timing_pit_contract_v21.md",
-          "sha256": "986d464f25c0002ec06a447537a07c3f5579a9c21b993b563c8cffc4afa06e51"
+          "sha256": "60f026243085eb781491ef19de6fdcdbe1d04e80ef2342e9140b1522ad9c2fbd"
         },
         {
           "path": "docs/provider_timing_claim_matrix_v21.md",
-          "sha256": "75d2f353049e386b07d00a547e3697907e0fff27be63498df8b79f8867d04797"
+          "sha256": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8"
         }
       ],
       "limitation": "No corrected forecasts, contrasts or stability payloads were read.",
@@ -212,11 +216,12 @@
   "scope": "target_blind_pit_and_readiness_claims_only",
   "source_hashes": {
     "availability_manifest": "9e1717bb059e938b32280a0b11a26247fe19e5c3f934359fe04e79733f9ec585",
-    "availability_summary": "970c56523ac387c6d68840b0d8ac8a5444d010556a2189633f0a32c50e3dc9bf",
-    "claim_matrix_v21": "75d2f353049e386b07d00a547e3697907e0fff27be63498df8b79f8867d04797",
-    "confirmation_readiness": "87a1577fc5dd34a4bd57bed57140113322a7eb42e0f3a6c46879a6ff9a6ccfd0",
-    "panel_manifest": "6403e1b121c694b4c02708ecb35edfa30f53f4c715fa4ba9a45596245a8fccc0",
-    "pit_contract_v21": "986d464f25c0002ec06a447537a07c3f5579a9c21b993b563c8cffc4afa06e51"
+    "availability_summary": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b",
+    "claim_matrix_v21": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8",
+    "confirmation_readiness": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa",
+    "panel_manifest": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+    "pit_contract_v21": "60f026243085eb781491ef19de6fdcdbe1d04e80ef2342e9140b1522ad9c2fbd",
+    "uw_latency_campaign_state": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
   },
   "status": "PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION"
 }

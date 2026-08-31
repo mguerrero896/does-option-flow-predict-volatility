@@ -1,0 +1,199 @@
+{
+ "alerting": {
+  "desktop_popup": true,
+  "new_channel_created": false,
+  "operational_path": "logs/UW_LATENCY_ALERT.txt"
+ },
+ "anomaly": {
+  "classification": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+  "disposition": "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT",
+  "evidence_self_sha256": "7bec93a37b89e27308d0f4aa21b19edee326b46d82ff51ea1d49c3ead8d6108a",
+  "session": "2026-08-21"
+ },
+ "as_of_date": "2026-09-01",
+ "backfill": {
+  "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE",
+  "value": null
+ },
+ "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+ "contract_window_support": {
+  "flow_alerts": 2418,
+  "sessions_reconciled": 6,
+  "support_rate": 1.0,
+  "supported": 2418,
+  "unmatched": 0
+ },
+ "model_fit_performed": false,
+ "operational_latency": {
+  "by_asset": {
+   "method": "MEDIAN_OF_INCLUDED_SESSION_MEDIANS",
+   "values_seconds": {
+    "AAPL": 30.191226,
+    "AMZN": 29.750699,
+    "META": 29.807567,
+    "MSFT": 32.3701485,
+    "NVDA": 30.684475,
+    "TSLA": 24.1304245
+   }
+  },
+  "by_ny_hour": {
+   "reason": "SESSION_RECONCILIATIONS_DID_NOT_PERSIST_NY_HOUR_AGGREGATES; CAMPAIGN_HARVEST_MAY_NOT_READ_LICENSED_ROW_DATA",
+   "status": "NOT_AVAILABLE_IN_RECONCILIATION_JSON",
+   "values_seconds": null
+  },
+  "estimand": "LOCAL_RECEIPT_UTC_MINUS_PROVIDER_CREATED_AT",
+  "excluded_sessions": [
+   {
+    "reason": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+    "session": "2026-08-21"
+   }
+  ],
+  "included_sessions": 5,
+  "p50_cross_session_median_seconds": 29.500069,
+  "per_session": {
+   "2026-08-17": {
+    "by_asset_median_seconds": {
+     "AAPL": 34.372111,
+     "AMZN": 37.646568,
+     "META": 29.807567,
+     "MSFT": 32.3701485,
+     "NVDA": 27.649805,
+     "TSLA": 24.1304245
+    },
+    "exclusion_reason": null,
+    "included": true,
+    "quantiles_seconds": {
+     "0.1": 5.00147,
+     "0.5": 29.500069,
+     "0.9": 53.133085,
+     "0.99": 59.83116
+    }
+   },
+   "2026-08-18": {
+    "by_asset_median_seconds": {
+     "AAPL": 30.191226,
+     "AMZN": 16.182712,
+     "META": 35.3144635,
+     "MSFT": 38.758573,
+     "NVDA": 34.118998500000004,
+     "TSLA": 23.8723295
+    },
+    "exclusion_reason": null,
+    "included": true,
+    "quantiles_seconds": {
+     "0.1": 7.287751,
+     "0.5": 33.065344499999995,
+     "0.9": 56.7957679,
+     "0.99": 60.628643060000016
+    }
+   },
+   "2026-08-19": {
+    "by_asset_median_seconds": {
+     "AAPL": 27.026517,
+     "AMZN": 35.582308499999996,
+     "META": 29.638937,
+     "MSFT": 45.848894,
+     "NVDA": 29.983483,
+     "TSLA": 26.53339
+    },
+    "exclusion_reason": null,
+    "included": true,
+    "quantiles_seconds": {
+     "0.1": 5.496144600000002,
+     "0.5": 28.934705,
+     "0.9": 56.0931704,
+     "0.99": 60.58475828
+    }
+   },
+   "2026-08-20": {
+    "by_asset_median_seconds": {
+     "AAPL": 43.170342500000004,
+     "AMZN": 27.193761,
+     "META": 16.769453,
+     "MSFT": 29.217529499999998,
+     "NVDA": 30.684475,
+     "TSLA": 32.489537
+    },
+    "exclusion_reason": null,
+    "included": true,
+    "quantiles_seconds": {
+     "0.1": 4.9390714000000004,
+     "0.5": 32.207282,
+     "0.9": 55.246699,
+     "0.99": 59.77623226
+    }
+   },
+   "2026-08-21": {
+    "by_asset_median_seconds": {
+     "AAPL": 5104.469063,
+     "AMZN": 6083.523637,
+     "META": 5398.390172,
+     "MSFT": 7203.052287,
+     "NVDA": 6337.959186,
+     "TSLA": 571.286698
+    },
+    "exclusion_reason": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+    "included": false,
+    "quantiles_seconds": {
+     "0.1": 15.034587,
+     "0.5": 4294.886974,
+     "0.9": 17050.7741358,
+     "0.99": 19610.59946976
+    }
+   },
+   "2026-08-24": {
+    "by_asset_median_seconds": {
+     "AAPL": 27.567908,
+     "AMZN": 29.750699,
+     "META": 30.726337,
+     "MSFT": 19.085064000000003,
+     "NVDA": 31.70506,
+     "TSLA": 23.738748
+    },
+    "exclusion_reason": null,
+    "included": true,
+    "quantiles_seconds": {
+     "0.1": 4.517667,
+     "0.5": 28.97307,
+     "0.9": 54.746811,
+     "0.99": 60.52060488
+    }
+   }
+  }
+ },
+ "revision": {
+  "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+  "value": null
+ },
+ "schema_version": "uw-latency-campaign-v1.0",
+ "scope": "TARGET_BLIND_OPERATIONAL_PROVIDER_TIMING",
+ "sealed_cohort_read": false,
+ "self_sha256": "412a0645b9ffe635cefc905e897150b66f7bda5c1bddcf30fe8e70ee242268eb",
+ "source_reconciliations": [
+  {
+   "session": "2026-08-17",
+   "sha256": "d2ad5d6f88e731e458633f39b3c1e8632310826026d52460c6d068fb0a08aa1a"
+  },
+  {
+   "session": "2026-08-18",
+   "sha256": "7cb12eb46a794876e66701d1f75c8ec5d2db2c3bf3ee44ea529f744aca811375"
+  },
+  {
+   "session": "2026-08-19",
+   "sha256": "b90bef31693af05cf4e689dde4bd039dec412dfaad131d4b7cb5257caae665d4"
+  },
+  {
+   "session": "2026-08-20",
+   "sha256": "5f5796d5bea6de7279826dbf019a0425860f08016488ec18f842f96e5cfbfd32"
+  },
+  {
+   "session": "2026-08-21",
+   "sha256": "29b956f79ffff96d342542b65659e6f2c38a1c24e51c6030dc6f643edfea4e9e"
+  },
+  {
+   "session": "2026-08-24",
+   "sha256": "f2bd26ed4a4d0a63d944cf68d787f32e496dc3ab5b053c0042c3340841448df8"
+  }
+ ],
+ "target_blind": true
+}

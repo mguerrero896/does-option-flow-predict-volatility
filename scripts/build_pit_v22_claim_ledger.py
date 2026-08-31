@@ -36,6 +36,9 @@ DEFAULT_AVAILABILITY_SUMMARY = (
 )
 DEFAULT_PIT_CONTRACT = ROOT / "docs" / "provider_timing_pit_contract_v21.md"
 DEFAULT_CLAIM_MATRIX = ROOT / "docs" / "provider_timing_claim_matrix_v21.md"
+DEFAULT_UW_LATENCY_STATE = (
+    ROOT / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v1.json"
+)
 DEFAULT_OUTPUT = ROOT / "artifacts" / "target_blind_v22" / "pit_v22_claim_ledger_v1.json"
 DEFAULT_MARKDOWN = ROOT / "docs" / "pit_v22_claims_and_limitations.md"
 
@@ -71,6 +74,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--availability-summary", type=Path, default=DEFAULT_AVAILABILITY_SUMMARY)
     parser.add_argument("--pit-contract", type=Path, default=DEFAULT_PIT_CONTRACT)
     parser.add_argument("--claim-matrix", type=Path, default=DEFAULT_CLAIM_MATRIX)
+    parser.add_argument("--uw-latency-state", type=Path, default=DEFAULT_UW_LATENCY_STATE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MARKDOWN)
     args = parser.parse_args(argv)
@@ -82,6 +86,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "availability_summary": args.availability_summary,
         "pit_contract_v21": args.pit_contract,
         "claim_matrix_v21": args.claim_matrix,
+        "uw_latency_campaign_state": args.uw_latency_state,
     }
     ledger = build_claim_ledger(
         _read_mapping(args.panel_manifest, "PIT_V22_CLAIM_LEDGER_PANEL_JSON_INVALID"),
@@ -93,6 +98,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         _read_mapping(
             args.availability_summary,
             "PIT_V22_CLAIM_LEDGER_AVAILABILITY_SUMMARY_JSON_INVALID",
+        ),
+        _read_mapping(
+            args.uw_latency_state,
+            "PIT_V22_CLAIM_LEDGER_UW_LATENCY_STATE_JSON_INVALID",
         ),
         {key: _sha256_file(path) for key, path in source_paths.items()},
     )
@@ -131,7 +140,11 @@ def _write_json_atomic(path: Path, payload: Mapping[str, Any]) -> None:
     """Write deterministic JSON atomically to a local target-blind artefact."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
     os.replace(temporary, path)
 
 
@@ -139,7 +152,7 @@ def _write_text_atomic(path: Path, value: str) -> None:
     """Write deterministic UTF-8 text atomically with a single trailing newline."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(value.rstrip() + "\n", encoding="utf-8")
+    temporary.write_text(value.rstrip() + "\n", encoding="utf-8", newline="\n")
     os.replace(temporary, path)
 
 
