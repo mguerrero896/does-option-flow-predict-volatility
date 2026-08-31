@@ -25,6 +25,13 @@ sessions that mostly did not exist when it was sealed. It is read once, at 662 e
 sessions, estimated 2029-01-30. Finding your own exception and sealing it is the part of
 this repository worth looking at.
 
+![Twelve contrasts against the minimum detectable effect each declared](docs/figures/contrasts_against_their_threshold.svg)
+
+Every contrast registers a detection threshold before it is measured. Three of the
+twelve clear their own: two are option state, and the orange one is the flow cell above.
+The chart is generated from the inference artifact named by the canonical state, so it
+cannot drift from the evidence.
+
 Three of the four instruments are clean nulls; the exception is confined to the fourth.
 Only some of the four were sealed before their data existed: the prospective read was,
 under a protocol frozen and hashed in advance and opened once. The level-forecasting
@@ -130,12 +137,12 @@ described as prospective or one-read.
 
 ## Evidence and data access
 
-![How licensed provider data becomes a sealed, hash-pinned verdict](docs/figures/architecture.png)
+![How licensed provider data becomes a sealed, hash-pinned verdict](docs/figures/system-architecture.png)
 
 Two planes, and the rule that separates them. Everything above the line runs on one machine
 and is never redistributed; everything below it is what this repository publishes —
 aggregates, schemas and SHA-256 pointers, with a canonical state that refuses to promote a
-measurement it cannot support. An [explorable version](docs/figures/architecture.html) of
+measurement it cannot support. An [explorable version](docs/figures/system-architecture.html) of
 the same diagram, and the specification it is generated from, are in the repository.
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,

@@ -1,6 +1,6 @@
 """Render the README architecture figure from the delivered Archify artifact.
 
-The diagram is authored as `docs/figures/architecture.json` and delivered by Archify as a
+The diagram is authored as `docs/figures/system-architecture.json` and delivered by Archify as a
 self-contained interactive page. That page is built for a browser: it carries a viewer
 chrome, a background, and a theme that follows the reader. A README needs the opposite —
 one static image, cropped to its own content, in a fixed theme.
@@ -24,8 +24,8 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SOURCE = REPO / "docs" / "figures" / "architecture.html"
-TARGET = REPO / "docs" / "figures" / "architecture.png"
+SOURCE = REPO / "docs" / "figures" / "system-architecture.html"
+TARGET = REPO / "docs" / "figures" / "system-architecture.png"
 
 #: Chrome renders the page; Archify already requires it for its own visual check.
 CHROME_CANDIDATES = (
