@@ -20,7 +20,12 @@ Install the versioned fail-closed hook once per clone:
 
 ```bash
 git config core.hooksPath scripts/hooks
+uv run python scripts/scan_public_secrets.py --check-hook
 ```
+
+The verifier distinguishes an unset hook path, a path pointing elsewhere, and bytes
+that differ from the tracked hook. The test suite and local evidence gate fail until
+the active hook prints `PRE_PUSH_HOOK_OK`.
 
 Before pushing a branch, scan the candidate `HEAD` and public remote refs:
 

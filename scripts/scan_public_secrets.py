@@ -14,6 +14,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -33,6 +34,7 @@ GITHUB_WEB_FLOW_KEY = Path(__file__).with_name("github_web_flow_signing_key.asc"
 # Source: https://api.github.com/users/web-flow/gpg_keys, key B5690EEEBB952194.
 GITHUB_WEB_FLOW_FINGERPRINT = "968479A1AFF927E37D1A566BB5690EEEBB952194"
 PUBLIC_REVISIONS = ("--remotes=origin", "HEAD")
+VERSIONED_PRE_PUSH = Path("scripts/hooks/pre-push")
 
 PATTERNS: tuple[tuple[str, re.Pattern[bytes]], ...] = (
     ("aws_access_key", re.compile(rb"(?:A3T[A-Z0-9]|AKIA|ASIA)[A-Z0-9]{16}")),
@@ -65,6 +67,41 @@ def _git(repo: Path, *args: str, input_bytes: bytes | None = None) -> bytes:
         capture_output=True,
         check=True,
     ).stdout
+
+
+def check_versioned_pre_push_hook(repo: Path) -> str | None:
+    """Return a stable failure code when Git would not execute the tracked hook."""
+
+    repo_root = Path(_git(repo, "rev-parse", "--show-toplevel").decode().strip())
+    configured = subprocess.run(
+        ["git", "-C", str(repo_root), "config", "--get", "core.hooksPath"],
+        capture_output=True,
+        check=False,
+    )
+    if configured.returncode == 1 or not configured.stdout.strip():
+        return "PRE_PUSH_HOOKS_PATH_UNSET"
+    if configured.returncode != 0:
+        raise RuntimeError("cannot resolve core.hooksPath")
+
+    active = Path(
+        _git(
+            repo_root,
+            "rev-parse",
+            "--path-format=absolute",
+            "--git-path",
+            "hooks/pre-push",
+        )
+        .decode()
+        .strip()
+    ).resolve()
+    expected = (repo_root / VERSIONED_PRE_PUSH).resolve()
+    if os.path.normcase(str(active)) != os.path.normcase(str(expected)):
+        return "PRE_PUSH_HOOKS_PATH_WRONG"
+
+    versioned = _git(repo_root, "cat-file", "blob", f"HEAD:{VERSIONED_PRE_PUSH.as_posix()}")
+    if not active.is_file() or active.read_bytes() != versioned:
+        return "PRE_PUSH_HOOK_BYTES_MISMATCH"
+    return None
 
 
 def _is_github_synthetic_merge(content: bytes) -> bool:
@@ -233,7 +270,19 @@ def main() -> int:
         action="store_true",
         help="scan local tags too (use in a clean public clone)",
     )
+    parser.add_argument(
+        "--check-hook",
+        action="store_true",
+        help="verify that Git would execute the byte-exact tracked pre-push hook",
+    )
     arguments = parser.parse_args()
+    if arguments.check_hook:
+        failure = check_versioned_pre_push_hook(Path.cwd())
+        if failure:
+            print(failure, file=sys.stderr)
+            return 1
+        print("PRE_PUSH_HOOK_OK")
+        return 0
     findings = scan_repository(Path.cwd(), include_tags=arguments.include_tags)
     if findings:
         for finding in findings:

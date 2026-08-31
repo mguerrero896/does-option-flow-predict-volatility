@@ -94,7 +94,7 @@
   }
  ],
  "authorized_sources": {
-  ".github/workflows/ci.yml": "7dbb6abda0ce46a13c857633efd3f0859d50b636dec6dee348451fe64146777e",
+  ".github/workflows/ci.yml": "0a7427ebcf0ba3feee08f35924747cdd60a8bde44427cf2d5b9b570c77d037b6",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
