@@ -142,7 +142,8 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/run_gate1_inference.py` | Gate 1: studentized inference (cluster-t, DM, wild bootstrap, MCS) over every frozen forecast artifact. |
 | `scripts/run_gate2_calibration.py` | Gate 2: calibration-vs-information recalibration analysis on the binding frozen samples. |
 | `scripts/run_gate3_har.py` | Gate 3: HAR/HARQ intraday ladder on development data selecting the prospective base model. |
-| `scripts/render_architecture_figure.py` | Renders `docs/figures/architecture.png` from the delivered Archify artifact: strips the viewer grid, crops to the drawing and captures at 2x, so the README figure is regenerable from the committed specification. |
+| `scripts/render_evidence_figure.py` | Draws `docs/figures/contrasts_against_their_threshold.svg` from the inference artifact named by the canonical state: every nested contrast against the minimum detectable effect it declared. No number is authored by hand. |
+| `scripts/render_architecture_figure.py` | Renders `docs/figures/system-architecture.png` from the delivered Archify artifact: strips the viewer grid, crops to the drawing and captures at 2x, so the README figure is regenerable from the committed specification. |
 | `scripts/run_gate4_decay_power.py` | Gate 4: effect-decay regression and decay-aware power. **Superseded**: the decay line it fits is withdrawn and Phase 8 was read on 2026-08-30 as `MIXED_EXPLORATORY`, not under a decay-aware design. Retained for audit. |
 | `scripts/run_gate5_bar_reconciliation.py` | Gate 5.1: cross-provider FMP-vs-Massive 1-minute bar reconciliation measuring assumption A001. |
 | `scripts/run_gate6_regimes.py` | Gate 6: regime/event composition table and leave-event-week-out sensitivity. |
