@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "From licensed market data to a sealed verdict",
+    "output": "architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "evidence-path",
+        "label": "Evidence path",
+        "focus": [
+          "providers",
+          "pit",
+          "sets",
+          "models",
+          "inference"
+        ],
+        "note": "Provider payloads become one point-in-time panel, three nested information sets, frozen models, and session-clustered inference."
+      },
+      {
+        "id": "two-tiers",
+        "label": "Two verification tiers",
+        "focus": [
+          "tier1",
+          "tier2",
+          "evidence",
+          "canonical"
+        ],
+        "note": "Hosted CI proves the public repository is sound. Only the local tier sees licensed panels and can verify their hashes."
+      },
+      {
+        "id": "sealed-reads",
+        "label": "Sealed cohorts",
+        "focus": [
+          "sealed",
+          "inference",
+          "canonical"
+        ],
+        "note": "A sealed cohort opens once, under a protocol frozen before the data existed. Phase 8 is spent; Phase 9 is still collecting."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "providers",
+      "type": "external",
+      "label": "Market data providers",
+      "sublabel": "FMP / Massive / UW",
+      "pos": [
+        60,
+        390
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "licensed, not redistributed"
+    },
+    {
+      "id": "pit",
+      "type": "backend",
+      "label": "Point-in-time panel",
+      "sublabel": "rp2.panel, pit_ledger",
+      "pos": [
+        320,
+        390
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "availability, not source time"
+    },
+    {
+      "id": "sets",
+      "type": "backend",
+      "label": "Nested information sets",
+      "sublabel": "B0 in B1 in B2",
+      "pos": [
+        580,
+        390
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "models",
+      "type": "backend",
+      "label": "Frozen model families",
+      "sublabel": "Gamma / ridge / LGBM",
+      "pos": [
+        840,
+        390
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "method freeze, hashed"
+    },
+    {
+      "id": "inference",
+      "type": "backend",
+      "label": "Session-clustered inference",
+      "sublabel": "rp2.dml, rp2.inference",
+      "pos": [
+        1100,
+        390
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "bootstrap, Holm"
+    },
+    {
+      "id": "tier2",
+      "type": "backend",
+      "label": "Tier 2 local gates",
+      "sublabel": "run_local_evidence_gates.py",
+      "pos": [
+        300,
+        595
+      ],
+      "size": [
+        220,
+        76
+      ],
+      "tag": "verifies gated hashes"
+    },
+    {
+      "id": "sealed",
+      "type": "database",
+      "label": "Sealed cohorts",
+      "sublabel": "Phase 8 spent, 9 open",
+      "pos": [
+        1100,
+        595
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "read exactly once"
+    },
+    {
+      "id": "evidence",
+      "type": "database",
+      "label": "Frozen evidence",
+      "sublabel": "artifacts/ + SHA-256",
+      "pos": [
+        1100,
+        160
+      ],
+      "size": [
+        180,
+        76
+      ]
+    },
+    {
+      "id": "canonical",
+      "type": "security",
+      "label": "CANONICAL_STATE.json",
+      "sublabel": "fail-closed eligibility",
+      "pos": [
+        720,
+        160
+      ],
+      "size": [
+        180,
+        76
+      ],
+      "tag": "wins over any document"
+    },
+    {
+      "id": "tier1",
+      "type": "cloud",
+      "label": "Tier 1 hosted CI",
+      "sublabel": "hermetic, public only",
+      "pos": [
+        340,
+        160
+      ],
+      "size": [
+        180,
+        76
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Licensed plane: local machine only, never redistributed",
+      "wraps": [
+        "pit",
+        "sets",
+        "models",
+        "inference",
+        "tier2",
+        "sealed"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "Public plane: aggregates, schemas and hashes",
+      "wraps": [
+        "evidence",
+        "canonical",
+        "tier1"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "acquire",
+      "from": "providers",
+      "to": "pit",
+      "label": "acquire",
+      "variant": "emphasis"
+    },
+    {
+      "id": "build-sets",
+      "from": "pit",
+      "to": "sets",
+      "label": "common row mask"
+    },
+    {
+      "id": "fit",
+      "from": "sets",
+      "to": "models",
+      "label": "fit per set"
+    },
+    {
+      "id": "score",
+      "from": "models",
+      "to": "inference",
+      "label": "QLIKE deltas"
+    },
+    {
+      "id": "verify-panels",
+      "from": "tier2",
+      "to": "pit",
+      "label": "verify gated hashes",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "one-read",
+      "from": "sealed",
+      "to": "inference",
+      "label": "one authorized read",
+      "variant": "security"
+    },
+    {
+      "id": "freeze",
+      "from": "inference",
+      "to": "evidence",
+      "label": "freeze + hash"
+    },
+    {
+      "id": "govern",
+      "from": "evidence",
+      "to": "canonical",
+      "label": "eligibility",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gate-ci",
+      "from": "tier1",
+      "to": "canonical",
+      "label": "blocks drift",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "What crosses the line",
+      "items": [
+        "Provider panels never leave the local machine",
+        "Only aggregates, schemas and SHA-256 pointers are published"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Why the null is credible",
+      "items": [
+        "Nested sets share one row mask, so a rung isolates one layer",
+        "The method freeze is hashed before any outcome is seen"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Fail-closed by default",
+      "items": [
+        "The canonical state refuses to promote what it cannot support",
+        "Absent licensed panels fail the guard rather than skipping"
+      ]
+    }
+  ]
+}

@@ -11,8 +11,14 @@ activity improve forecasts of 30-minute realized variance for large US equities.
 
 **On this evidence, not from recent option *flow*.** Four independent tests were put to
 the same question, and all four agree: once contemporaneous option state is already in the
-model, adding recent point-in-time flow produces no incremental forecasting value that
-clears the pre-registered detection threshold.
+model, adding recent point-in-time flow produces no incremental contribution above the
+minimum detectable effect each test declared for itself.
+
+Only some of those tests were sealed before their data existed. The prospective read was,
+under a protocol frozen and hashed in advance and opened once. The level-forecasting
+comparison was not: it is retrospective and exploratory, because validation was consulted
+adaptively during development, and its stricter sequential alpha is a conservative
+post-hoc sensitivity rather than a preregistered confirmation.
 
 The option-*state* layer is a weaker and more careful story. It shows a positive
 contribution in discovery and in the single sealed prospective read, but that contribution
@@ -111,7 +117,14 @@ described as prospective or one-read.
 
 ## Evidence and data access
 
-![From raw market data to a sealed verdict](docs/figures/pipeline_diagram.svg)
+![How licensed provider data becomes a sealed, hash-pinned verdict](docs/figures/architecture.png)
+
+Two planes, and the rule that separates them. Licensed panels stay on one machine and are
+never redistributed, so hosted CI can prove the public repository is internally sound but
+can never verify a licensed hash; only the local Tier 2 run can. Everything published is an
+aggregate, a schema or a SHA-256 pointer. An
+[explorable version](docs/figures/architecture.html) of the same diagram is in the
+repository.
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,
 schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in

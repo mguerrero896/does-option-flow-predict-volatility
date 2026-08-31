@@ -31,7 +31,9 @@ PUBLIC_SURFACES = ("README.md", "STATUS.md", "docs/README.md", "reports/README.m
 MARKDOWN_IMAGE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)")
 SVG_TEXT = re.compile(r">([^<>]{2,200})<")
 
-REVIEWED_RASTERS: frozenset[str] = frozenset()
+# Reviewed 2026-08-31 against data/CANONICAL_STATE.json: the diagram states structure and
+# custody rules only. It carries no effect size, p-value, date or eligibility claim.
+REVIEWED_RASTERS: frozenset[str] = frozenset({"docs/figures/architecture.png"})
 
 
 def _tracked(pattern: str) -> list[str]:
