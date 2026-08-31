@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–115](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
+| [97–116](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
 
 <a id="decision-1"></a>
 
@@ -1919,3 +1919,36 @@ Requirements-consistency and preregistration gates pass.
      cells do, and all four B2-given-B1 intervals cross zero. The append-only current D/V
      dispersion reference is `dispersion_audit_20260831_v10.json` with
      `sealed_store_reopened=false`.
+
+<a id="decision-116"></a>
+
+116. **B1 spot is bound to the same 120-second cutoff as its option snapshot; the first
+     2026-08-31 rerun is superseded before publication (2026-08-31).** Adversarial review
+     after decision 115 found that Block 5 correctly stopped option rows at `t-120 s` but
+     passed `close[m]` into parity, moneyness and delta calculations. With start-labelled
+     one-minute bars that close ends at `t+60 s`, three minutes after the last admissible
+     close. A regression that changed only bars after the cutoff changed the emitted
+     implied-dividend diagnostic from `-0.106403` to `8.850404`, proving that this was a
+     result-changing point-in-time defect rather than a documentation ambiguity.
+
+     Commit `79e19d7cbe0b7fe9a6d5343b41308710bfb53885` moves the lag definition into the
+     shared B1 snapshot module and makes both B0 and B1 observe `close[m-3]`. Option rows,
+     the underlying spot, every derived surface diagnostic and every B0 nuisance input now
+     share the same information boundary; the forward target remains anchored at `t`.
+     `B1_CONTEMPORANEOUS_SPEC_V2.md` is the append-only corrected contract, and a regression
+     mutates every underlying bar after the cutoff while requiring the complete emitted B1
+     row to remain unchanged.
+
+     The run `rp2-v3-20260831-timing-role-remediation`, its bundle hash and
+     `artifacts/rp2_ext1_directional_factorial_v2/results.json` remain historical evidence
+     of the defect and are not current measurements. Before observing replacement results,
+     this decision freezes the replacement run id as
+     `rp2-v3-20260831-b1-spot-cutoff-remediation`, requires all 13 pipeline steps with roles
+     D/V and `--forbid-sealed-cohorts`, and freezes the replacement factorial destination as
+     `artifacts/rp2_ext1_directional_factorial_v3/results.json`. The factorial must reuse
+     `configs/rp2_ext1_directional_factorial_v1.json` unchanged: the exact ten Ext1
+     `CORE_TREATMENTS`, the exact twelve current-panel `B2_CORE` features, August and
+     complete bar coverage, both roles and all five horizons. The registered historical
+     Hawkes label remains an in-memory semantic alias to
+     `b2_5m_decay_intensity_innovation`; no obsolete bytes may be fabricated. No Phase 8
+     or Phase 9 outcome may be reopened by this rerun.

@@ -38,6 +38,7 @@ files between directories.
 | [`docs/rp2/block3_target_validation_v1.md`](rp2/block3_target_validation_v1.md) | Current target-horizon diagnostic: RV60 leads in D, RV30 leads in V. |
 | [`docs/pit_v22_claims_and_limitations.md`](pit_v22_claims_and_limitations.md) | Source-time PIT and availability limitations. |
 | [`docs/provider_timing_pit_contract_v22.md`](provider_timing_pit_contract_v22.md) | Governing provider-timing contract and proxy semantics. |
+| [`docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md`](rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md) | Current B1 option-state contract: option rows and underlying spot share the `t-120 s` cutoff; v1 remains historical. |
 | [`docs/sequential_multiplicity_policy_v1.md`](sequential_multiplicity_policy_v1.md) | Future-campaign alpha spending; retrospective D/V remains exploratory. |
 | [`docs/phase8_bridge_protocol_v2.md`](phase8_bridge_protocol_v2.md) | Frozen exploratory 20-of-30 Phase 8 bridge; decision 102 records its consumed one-shot read, `MIXED_EXPLORATORY` result and execution recovery. |
 | [`docs/phase9_total_contribution_protocol_v1.md`](phase9_total_contribution_protocol_v1.md) | Frozen 60-complete-session Phase 9 protocol; evaluation remains one-shot and separately authorized. |
