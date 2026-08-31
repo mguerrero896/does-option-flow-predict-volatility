@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+  echo "PRE_PUSH_REPO_ROOT_UNRESOLVED" >&2
+  exit 1
+}
+exclude_list="$root/scripts/_gated_exclude_list.txt"
+[[ -s "$exclude_list" ]] || {
+  echo "PRE_PUSH_GATED_LIST_MISSING: scripts/_gated_exclude_list.txt" >&2
+  exit 1
+}
+
+gated=$(mktemp) || exit 1
+trap 'rm -f "$gated"' EXIT
+tr -d '\r' < "$exclude_list" | sed '/^[[:space:]]*$/d' > "$gated"
+[[ -s "$gated" ]] || {
+  echo "PRE_PUSH_GATED_LIST_EMPTY" >&2
+  exit 1
+}
+
+status=0
+while read -r local_ref local_sha _remote_ref _remote_sha; do
+  [[ -n "${local_ref:-}" && -n "${local_sha:-}" ]] || continue
+  [[ "$local_sha" =~ ^0+$ ]] && continue
+  git cat-file -e "${local_sha}^{tree}" 2>/dev/null || {
+    echo "PRE_PUSH_REF_UNREADABLE: $local_ref $local_sha" >&2
+    status=1
+    continue
+  }
+  matches=$(git ls-tree -r --name-only "$local_sha" | tr -d '\r' | grep -Fxf "$gated" || true)
+  if [[ -n "$matches" ]]; then
+    echo "PRE_PUSH_GATED_PATH_REJECTED: $local_ref" >&2
+    echo "$matches" >&2
+    status=1
+  fi
+done
+
+exit "$status"

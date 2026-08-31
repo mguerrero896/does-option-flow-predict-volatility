@@ -87,6 +87,8 @@ def _contrasts() -> list[dict[str, Any]]:
 
 def evidence() -> Canvas:
     rows = _contrasts()
+    state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
+    lifecycle = state["canonical_results"]["status"]
     state_clears = sum(not row["flow"] and row["clears"] for row in rows)
     flow_clears = sum(row["flow"] and row["clears"] for row in rows)
     left, plot, row_h, top = 300, 440, 32, 132
@@ -166,7 +168,7 @@ def evidence() -> Canvas:
     footnote(
         canvas,
         bottom + 92,
-        "The amber cell is the one the sealed RP3 program exists to settle.",
+        f"{lifecycle} · {flow_clears} option-flow contrasts clear their declared MDE.",
     )
     return canvas
 

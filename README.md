@@ -134,7 +134,7 @@ skip would let an unverified run look green. Each failure names `RP2_PANEL_UNVER
 reproduce what hosted CI reproduces, set the same opt-out CI sets:
 
 ```powershell
-$env:MDS650_PANEL_GUARD_MAY_SKIP = "1"; uv run pytest
+$env:MDS650_PANEL_GUARD_MAY_SKIP = "1"; uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
 ```
 
 The local Tier 2 gate additionally requires licensed evidence and live credentials:

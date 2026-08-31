@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–118](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
+| [97–119](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation and publication-custody audit. |
 
 <a id="decision-1"></a>
 
@@ -2069,3 +2069,33 @@ Requirements-consistency and preregistration gates pass.
      bar store through an explicit `RP3` role rather than weakening D/V partition checks.
      The adapter filters warm-up rows before every panel write. Commits `1406e6a8`,
      `019335d8` and `6456ab64` carry those repairs and regression tests.
+
+<a id="decision-119"></a>
+
+119. **The publication-readiness audit is closed additively without changing a scientific
+     result (2026-09-01).** The audit snapshot is retained here because several findings
+     concern local custody that cannot be inferred from the public `main` tree. A fresh
+     read-only recount was used where mutable refs had changed since the diagnostic. The
+     dispositions are:
+
+     | Finding | Recorded disposition and evidence |
+     | --- | --- |
+     | 2 | **PRESERVE / BLOCK AT PUSH.** Six disjoint local refs have gated paths in their tip trees: one archive branch (15), one recovery branch (4), and four archive tags (10, 15, 15 and 15). Their lack of a merge base with `origin/main` is why the public-line history contract correctly omits them; the versioned pre-push hook now rejects any explicit push while a gated path remains in the proposed tip tree. No ref was deleted. |
+     | 3 | **DOCUMENTED RISK / EXPLICIT REFS ONLY.** The live recount found 20 local tags, two remote tags and 18 local-only tags, superseding the diagnostic's count of 19 local-only tags. Some are dirty-tree custody snapshots that the default scanner does not visit. `CONTRIBUTING.md` therefore forbids blind `git push --tags`; a tag may be published only from a clean public clone after its `--include-tags` scan passes. |
+     | 4 | **RESOLVED BY DECISION 115.** `src/mds650/rp2/bars.py` now derives every row role through `assign_role(session_date)` and treats the source label only as an allowed scope, failing closed on mismatch. The audit found no contamination before the repair; this publication task changes no panel. |
+     | 6 | **PRESERVE / NO CLEANUP.** The locked Phase 8 recovery worktree currently has 80 tracked modifications and 150 untracked paths; those paths map to 147 distinct blob hashes, 18 absent from the shared Git object database. They remain unique local custody and were neither moved nor deleted. |
+     | 7 | **PRESERVE / BACKUP BOUNDARY RECORDED.** Eighteen of 20 local tags are absent from the public remote and retain retired branch lineages. Loss of the common local object database can lose that custody; tag publication is not the backup mechanism and remains prohibited without explicit review. |
+     | 8 | **RESOLVED BY DECISIONS 115–116.** B0 and the B1 underlying spot now share the registered 120-second as-of boundary (`close[m-3]` for start-labelled one-minute bars). The corrected 13-step bundle and same-30-session Phase 8 sensitivity are already recorded in decisions 117–118; no additional cohort was collected. |
+     | 9 | **OPEN REPRODUCIBILITY LIMIT.** The canonical run manifest records code commit, roles, configuration digests, seeds and step digests, but not the producing Python or library versions. Frozen result bytes remain auditable; exact environment reconstruction is not claimed. |
+     | 12 | **NO REORGANIZATION.** Splitting `src/mds650` would touch 435 references and change module paths embedded in provenance. Existing cohesive packages (`rp2`, `rp3`, `providers`) remain the boundary; auditability takes precedence over a cosmetic tree rewrite. |
+     | 18 | **OPEN FUTURE-DRIFT RISK.** `run_rp2_v3_pipeline.py` hashes `DEFAULT_TRAIN_SHARE = 0.6`, while Blocks 8 and 10 own independent CLI defaults of `0.6`. They agree for the canonical bundle, so its provenance is correct, but the literals can diverge in a future run and must be reconciled before another scientific execution. |
+     | 19 | **OPEN, WITH PRE-PUSH MITIGATION.** Hosted secret scanning still occurs only after objects reach GitHub, and direct publication can precede that gate. Maintainers must run `scripts/scan_public_secrets.py` against candidate `HEAD` before a branch push and install `scripts/hooks/pre-push`; tag publication is separately clean-clone gated as finding 3 records. The hook covers gated paths, not every secret format; finding 20's scanner expansion remains separate future work. |
+     | 21 | **RESOLVED BY DECISION 115.** Block 5 obtains expiry timestamps from the shared XNYS calendar helper, including early closes, instead of hardcoding 16:00 ET. The remediated bundle is the recorded measurement; this task does not remeasure it. |
+     | 22 | **OPEN GUARD-ORDER DEFECT.** `cross_fitted_residuals` checks the current `design.shape[1]` before a fold-specific `design_builder` replaces that design. The audit measured no numerical change, so changing DML in this publication-only task would be an unregistered scientific modification; repair requires its own pre-fit contract and regression. |
+     | 24 | **OPEN LIFECYCLE CLOSEOUT.** `docs/gate5_pit_foundations_v1.md` still labels the UW latency campaign `RUNNING` and names an expired first-reconciliation date. The configured collector/watchdog/reconcile jobs are operational evidence, not a tracked scientific closeout; no versioned artifact currently distinguishes collecting, collected-unreconciled or abandoned. No status promotion is made here. |
+
+     The additive controls attached to this decision are the clone-portable `.gitignore`
+     rules, their executable contract, the tip-tree pre-push hook, lifecycle banners,
+     exact hermetic CI command, provider-key alias correction, rebuild-guide navigation and
+     artifact-derived figure footer. They alter no frozen result, estimate, interval,
+     verdict, Phase 8 read count or Phase 9 collection state.

@@ -14,13 +14,33 @@ changing code, evidence or documentation. It identifies the source-of-truth hier
 safe execution planes, script-registration rule and required verification. The current
 system map is [`docs/architecture.md`](docs/architecture.md).
 
+## Before any push
+
+Install the versioned fail-closed hook once per clone:
+
+```bash
+git config core.hooksPath scripts/hooks
+```
+
+Before pushing a branch, scan the candidate `HEAD` and public remote refs:
+
+```bash
+uv run python scripts/scan_public_secrets.py
+```
+
+The hook rejects a pushed ref whose tip tree contains any exact path in
+`scripts/_gated_exclude_list.txt`. Push explicit reviewed refs; never use a blind
+`git push --tags`, because local archive tags are custody records rather than publication
+candidates. Publish a tag only from a clean public clone after
+`uv run python scripts/scan_public_secrets.py --include-tags` passes there.
+
 ## If you are reproducing the analysis
 
 The hermetic Tier 1 suite runs from a clean clone with no credentials:
 
 ```bash
 uv sync --locked
-MDS650_PANEL_GUARD_MAY_SKIP=1 uv run pytest -q
+MDS650_PANEL_GUARD_MAY_SKIP=1 uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
 ```
 
 The flag allows only explicitly guarded licensed-panel checks to skip. Provider calls,

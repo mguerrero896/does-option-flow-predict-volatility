@@ -61,6 +61,7 @@ published in
 | --- | --- |
 | [`docs/reproducibility_contract_v1.md`](reproducibility_contract_v1.md) | Hermetic/Tier 2 boundary and methodological smoke demo. |
 | [`docs/ci_contract_v1.md`](ci_contract_v1.md) | Hosted hermetic checks versus licensed-evidence checks. |
+| [`docs/rp2_v3/REBUILD_GUIDE.md`](rp2_v3/REBUILD_GUIDE.md) | Ordered 13-step licensed rebuild, exact invocation, storage budget and resume flags. |
 | [`data/DATA_ACCESS.md`](../data/DATA_ACCESS.md) | Controlled access to licensed-derived evidence and licence scope. |
 | [`data/GATED_DATA_POINTERS.json`](../data/GATED_DATA_POINTERS.json) | Hash and size pointers for gated datasets. |
 | [`SECURITY.md`](../SECURITY.md) | Private vulnerability reporting and data-leak scope. |
