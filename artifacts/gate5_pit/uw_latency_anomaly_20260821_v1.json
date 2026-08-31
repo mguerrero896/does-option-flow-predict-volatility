@@ -1,0 +1,85 @@
+{
+ "all_receipts_p50_seconds": 4294.886974,
+ "campaign_disposition": "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT",
+ "classification": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+ "contaminates_latency_distribution": true,
+ "contract_window_support_contaminated": false,
+ "duplicate_lines": 2378,
+ "first_receipt_p50_seconds": 34.172432,
+ "latency_seconds": {
+  "all_receipts": {
+   "p10": 15.034587,
+   "p50": 4294.886974,
+   "p90": 17050.7741358,
+   "p99": 19610.59946976
+  },
+  "first_receipt_per_record": {
+   "p10": 6.7775870000000005,
+   "p50": 34.172432,
+   "p90": 56.711107,
+   "p99": 581.8073248499984
+  }
+ },
+ "line_counts": {
+  "distinct_records": 1836,
+  "duplicate_lines": 2378,
+  "file_lines": 4214,
+  "in_market_window_lines": 1482,
+  "in_session_distinct_records": 636,
+  "in_session_lines": 1482,
+  "invalid_json_lines": 0,
+  "multiplicity_histogram": {
+   "1": 636,
+   "2": 22,
+   "3": 1178
+  },
+  "observation_lines": 4214,
+  "out_of_session_distinct_records": 1200
+ },
+ "model_fit_performed": false,
+ "operational_metadata": {
+  "capture_complete": true,
+  "capture_total": 4214,
+  "collector_finished_utc": "2026-08-21T20:05:39.039634+00:00",
+  "collector_observed_records": 1299,
+  "collector_termination": null,
+  "final_heartbeat_utc": "2026-08-21T20:04:39.035944+00:00",
+  "heartbeat_observed_records": 1299,
+  "poll_errors": 0
+ },
+ "receipt_ny_hour_line_counts": {
+  "10": 179,
+  "11": 128,
+  "12": 41,
+  "13": 57,
+  "14": 1233,
+  "15": 1294,
+  "16": 5,
+  "9": 1277
+ },
+ "receipt_range_utc": {
+  "max": "2026-08-21T20:00:29.865407+00:00",
+  "min": "2026-08-21T13:30:02.256288+00:00"
+ },
+ "schema_version": "uw-latency-anomaly-v1.0",
+ "scope": "TARGET_BLIND_OPERATIONAL_STRUCTURE_ONLY",
+ "sealed_cohort_read": false,
+ "self_sha256": "7bec93a37b89e27308d0f4aa21b19edee326b46d82ff51ea1d49c3ead8d6108a",
+ "session": "2026-08-21",
+ "source_sha256": {
+  "capture_report": "502f34567c79bf84d01696165f014208bc7f910e2657d876df7bdb51afbd6b4c",
+  "collector_summary": "89ab65829a1199ee61fb5dc0ad5c47bca263cd41993e911ed739e95dd83e7c9d",
+  "heartbeat": "17293992570db64da7e57f66cf1231c54aaf964b19a7621822afc58f9fa74044",
+  "licensed_observation_log": "e853de04ace3a5f60256e1fc9226c829281031f18573abf2c34b61b573f7066d"
+ },
+ "start_date_line_counts": {
+  "2026-08-13": 55,
+  "2026-08-14": 94,
+  "2026-08-17": 455,
+  "2026-08-18": 585,
+  "2026-08-19": 796,
+  "2026-08-20": 747,
+  "2026-08-21": 1482
+ },
+ "target_blind": true
+}

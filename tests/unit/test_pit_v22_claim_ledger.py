@@ -82,6 +82,24 @@ def _availability_summary() -> dict[str, object]:
     }
 
 
+def _uw_latency_state() -> dict[str, object]:
+    """Return the target-blind reconciled-partial campaign authority."""
+    return {
+        "schema_version": "uw-latency-campaign-state-v1.0",
+        "state": "RECONCILED_PARTIAL",
+        "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+        "counts": {"collected": 11, "reconciled": 6, "unreconciled": 5},
+        "backfill": {"value": None, "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE"},
+        "revision": {
+            "value": None,
+            "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+        },
+        "target_blind": True,
+        "safe_to_reconcile_existing_results": "NO",
+        "safe_to_open_or_evaluate_oos": "NO",
+    }
+
+
 def _source_hashes() -> dict[str, str]:
     """Return deterministic logical-source hashes without paths or secret values."""
     return {
@@ -91,6 +109,7 @@ def _source_hashes() -> dict[str, str]:
         "availability_summary": "4" * 64,
         "pit_contract_v21": "5" * 64,
         "claim_matrix_v21": "6" * 64,
+        "uw_latency_campaign_state": "7" * 64,
     }
 
 
@@ -101,6 +120,7 @@ def test_claim_ledger_preserves_proxy_and_not_evaluated_boundaries() -> None:
         _readiness(),
         _availability_manifest(),
         _availability_summary(),
+        _uw_latency_state(),
         _source_hashes(),
     )
 
@@ -112,6 +132,14 @@ def test_claim_ledger_preserves_proxy_and_not_evaluated_boundaries() -> None:
     assert ledger["safe_to_open_or_evaluate_oos"] == "NO"
     assert ledger["model_fit_performed"] is False
     assert all(claim["evidence"] for claim in ledger["claims"])
+    c002 = next(claim for claim in ledger["claims"] if claim["claim_id"] == "PITV22-C002")
+    assert "measured live receipt latency" in c002["claim_text"]
+    assert "cross-channel" in c002["limitation"]
+    assert any(
+        item["path"]
+        == "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json"
+        for item in c002["evidence"]
+    )
     assert (
         canonical_sha256(
             {key: value for key, value in ledger.items() if key != "claim_ledger_sha256"}
@@ -131,6 +159,7 @@ def test_claim_ledger_rejects_any_input_that_opens_reconciliation_or_oos() -> No
             readiness,
             _availability_manifest(),
             _availability_summary(),
+            _uw_latency_state(),
             _source_hashes(),
         )
 
@@ -142,6 +171,7 @@ def test_claim_ledger_markdown_is_evidence_bound_and_forbids_universal_edge() ->
         _readiness(),
         _availability_manifest(),
         _availability_summary(),
+        _uw_latency_state(),
         _source_hashes(),
     )
     markdown = render_claims_markdown(ledger)
@@ -160,6 +190,7 @@ def test_claim_ledger_conforms_to_committed_json_schema() -> None:
         _readiness(),
         _availability_manifest(),
         _availability_summary(),
+        _uw_latency_state(),
         _source_hashes(),
     )
     schema_path = (
@@ -181,6 +212,7 @@ def test_claim_ledger_schema_rejects_extra_or_duplicate_claims() -> None:
         _readiness(),
         _availability_manifest(),
         _availability_summary(),
+        _uw_latency_state(),
         _source_hashes(),
     )
     schema_path = (
@@ -212,6 +244,7 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             _readiness(),
             _availability_manifest(),
             _availability_summary(),
+            _uw_latency_state(),
             _source_hashes(),
         )
 
@@ -223,6 +256,7 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             invalid_readiness,
             _availability_manifest(),
             _availability_summary(),
+            _uw_latency_state(),
             _source_hashes(),
         )
 
@@ -234,6 +268,7 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             _readiness(),
             _availability_manifest(),
             _availability_summary(),
+            _uw_latency_state(),
             invalid_hashes,
         )
 
@@ -248,6 +283,7 @@ def test_claim_ledger_rejects_malformed_target_blind_availability_totals() -> No
             _readiness(),
             invalid_manifest,
             _availability_summary(),
+            _uw_latency_state(),
             _source_hashes(),
         )
 
@@ -262,6 +298,7 @@ def test_claim_ledger_rejects_malformed_target_blind_availability_totals() -> No
             _readiness(),
             _availability_manifest(),
             invalid_summary,
+            _uw_latency_state(),
             _source_hashes(),
         )
 
@@ -273,6 +310,7 @@ def test_claim_ledger_markdown_rejects_unsafe_or_malformed_structures() -> None:
         _readiness(),
         _availability_manifest(),
         _availability_summary(),
+        _uw_latency_state(),
         _source_hashes(),
     )
 
@@ -297,3 +335,19 @@ def test_claim_ledger_markdown_rejects_unsafe_or_malformed_structures() -> None:
     malformed_questions["evaluation_questions"] = ["not-a-question"]
     with pytest.raises(ValueError, match="PIT_V22_CLAIM_LEDGER_RENDER_INPUT_INVALID"):
         render_claims_markdown(malformed_questions)
+
+
+def test_claim_ledger_rejects_campaign_state_promotion_or_boundary_drift() -> None:
+    """The measured latency result cannot promote cross-channel availability semantics."""
+    invalid_state = _uw_latency_state()
+    invalid_state["safe_to_open_or_evaluate_oos"] = "YES"
+
+    with pytest.raises(ValueError, match="PIT_V22_CLAIM_LEDGER_UW_LATENCY_STATE_INVALID"):
+        build_claim_ledger(
+            _panel_manifest(),
+            _readiness(),
+            _availability_manifest(),
+            _availability_summary(),
+            invalid_state,
+            _source_hashes(),
+        )

@@ -95,6 +95,9 @@
  ],
  "authorized_sources": {
   ".github/workflows/ci.yml": "0a7427ebcf0ba3feee08f35924747cdd60a8bde44427cf2d5b9b570c77d037b6",
+  "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63",
+  "artifacts/gate5_pit/uw_latency_campaign_20260901_v1.json": "33cf674df47875a2ea756d146877e4e9b62685cf87efe160c45f31ed6d921235",
+  "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
@@ -111,7 +114,7 @@
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a",
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
-  "data/FROZEN_ARTIFACTS.json": "d241d97198cd33d7b3341cfc85c90bf624034ebcc412ed3d251231b51f336b48",
+  "data/FROZEN_ARTIFACTS.json": "d6be5a56b0f2ef57c7e56be5bed002ca9fbb4b2601b27412e7553193f634b83f",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
@@ -121,7 +124,7 @@
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
-  "docs/pit_v22_claims_and_limitations.md": "621bcd8bb19ac3ed7dd78fac37ddd063d5189b79284d0a1d4bb6a194e5976690",
+  "docs/pit_v22_claims_and_limitations.md": "521763c5844f5d4667fd1268ecfee26d39be94c9800d6136ac611f4f1be98bcb",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
@@ -173,16 +176,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 120,
+  "artifact_count": 123,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 118,
+  "physical_artifact_count": 121,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "d241d97198cd33d7b3341cfc85c90bf624034ebcc412ed3d251231b51f336b48"
+  "registry_sha256": "d6be5a56b0f2ef57c7e56be5bed002ca9fbb4b2601b27412e7553193f634b83f"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
@@ -234,5 +237,30 @@
    "sha256": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
    "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
   }
+ },
+ "uw_latency_campaign": {
+  "aggregate_artifact": "artifacts/gate5_pit/uw_latency_campaign_20260901_v1.json",
+  "aggregate_self_sha256": "412a0645b9ffe635cefc905e897150b66f7bda5c1bddcf30fe8e70ee242268eb",
+  "anomaly_artifact": "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json",
+  "anomaly_classification": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+  "backfill": {
+   "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE",
+   "value": null
+  },
+  "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+  "counts": {
+   "collected": 11,
+   "reconciled": 6,
+   "unreconciled": 5
+  },
+  "revision": {
+   "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+   "value": null
+  },
+  "safe_to_open_or_evaluate_oos": "NO",
+  "safe_to_reconcile_existing_results": "NO",
+  "state": "RECONCILED_PARTIAL",
+  "state_artifact": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
+  "state_self_sha256": "49bd39cbec49cd497724956ec638315f0a3314c771aa5ef971583896b3f9b96f"
  }
 }

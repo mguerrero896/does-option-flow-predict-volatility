@@ -42,6 +42,15 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 )
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
+UW_LATENCY_AGGREGATE = (
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260901_v1.json"
+)
+UW_LATENCY_STATE = (
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260901_v1.json"
+)
+UW_LATENCY_ANOMALY = (
+    Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
+)
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -57,6 +66,9 @@ AUTHORIZED_SOURCES = (
     "docs/ci_contract_v1.md",
     "docs/evidence_immutability_v1.md",
     "docs/provider_license_review_v1.md",
+    UW_LATENCY_AGGREGATE.as_posix(),
+    UW_LATENCY_STATE.as_posix(),
+    UW_LATENCY_ANOMALY.as_posix(),
     (CURRENT_RUN / "run_manifest.json").as_posix(),
     (CURRENT_RUN / "scorecard.json").as_posix(),
     "docs/pit_v22_claims_and_limitations.md",
@@ -186,6 +198,9 @@ def build_state() -> dict[str, Any]:
     remediation_result = json.loads(remediation_result_path.read_text(encoding="utf-8"))
     phase9_audit_path = REPO / "artifacts" / "phase9" / "power_deadline_audit_v1.json"
     phase9_audit = json.loads(phase9_audit_path.read_text(encoding="utf-8"))
+    uw_latency_aggregate = json.loads((REPO / UW_LATENCY_AGGREGATE).read_text(encoding="utf-8"))
+    uw_latency_state = json.loads((REPO / UW_LATENCY_STATE).read_text(encoding="utf-8"))
+    uw_latency_anomaly = json.loads((REPO / UW_LATENCY_ANOMALY).read_text(encoding="utf-8"))
     if bridge["read_gate"] != {
         "one_shot_authorization_required": True,
         "safe_to_open_or_evaluate_oos": False,
@@ -411,6 +426,29 @@ def build_state() -> dict[str, Any]:
         != {"outcome_paths_read": [], "sealed_cohorts_read": 0}
     ):
         raise ValueError("PHASE9_POWER_DEADLINE_AUDIT_DRIFT")
+    if (
+        uw_latency_aggregate.get("self_sha256")
+        != _canonical_sha(uw_latency_aggregate, omit="self_sha256")
+        or uw_latency_state.get("self_sha256")
+        != _canonical_sha(uw_latency_state, omit="self_sha256")
+        or uw_latency_anomaly.get("self_sha256")
+        != _canonical_sha(uw_latency_anomaly, omit="self_sha256")
+        or uw_latency_state.get("state") != "RECONCILED_PARTIAL"
+        or uw_latency_state.get("counts")
+        != {"collected": 11, "reconciled": 6, "unreconciled": 5}
+        or uw_latency_state.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
+        or uw_latency_state.get("safe_to_reconcile_existing_results") != "NO"
+        or uw_latency_state.get("safe_to_open_or_evaluate_oos") != "NO"
+        or uw_latency_state.get("aggregate", {}).get("path")
+        != UW_LATENCY_AGGREGATE.as_posix()
+        or uw_latency_state.get("aggregate", {}).get("self_sha256")
+        != uw_latency_aggregate.get("self_sha256")
+        or uw_latency_anomaly.get("classification")
+        != "COLLECTOR_RESTART_REPLAY_DUPLICATION"
+        or uw_latency_anomaly.get("campaign_disposition")
+        != "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT"
+    ):
+        raise ValueError("UW_LATENCY_CAMPAIGN_AUTHORITY_DRIFT")
     return {
         "schema_version": "canonical-state-v1.0",
         "note": (
@@ -444,6 +482,25 @@ def build_state() -> dict[str, Any]:
                 "status": supabase_state["verdict"],
                 "writes": supabase_state["writes"],
             }
+        },
+        "uw_latency_campaign": {
+            "state": uw_latency_state["state"],
+            "counts": uw_latency_state["counts"],
+            "claim_classification": uw_latency_state["claim_classification"],
+            "state_artifact": UW_LATENCY_STATE.as_posix(),
+            "state_self_sha256": uw_latency_state["self_sha256"],
+            "aggregate_artifact": UW_LATENCY_AGGREGATE.as_posix(),
+            "aggregate_self_sha256": uw_latency_aggregate["self_sha256"],
+            "anomaly_artifact": UW_LATENCY_ANOMALY.as_posix(),
+            "anomaly_classification": uw_latency_anomaly["classification"],
+            "backfill": uw_latency_state["backfill"],
+            "revision": uw_latency_state["revision"],
+            "safe_to_reconcile_existing_results": uw_latency_state[
+                "safe_to_reconcile_existing_results"
+            ],
+            "safe_to_open_or_evaluate_oos": uw_latency_state[
+                "safe_to_open_or_evaluate_oos"
+            ],
         },
         "active_protocols": [
             {
@@ -666,6 +723,18 @@ def render_status(state: dict[str, Any]) -> str:
     for protocol in state["active_protocols"]:
         document = f" — `{protocol['document']}`" if protocol.get("document") else ""
         lines.append(f"- **{protocol['id']}**{document}: {protocol['state']}")
+    uw_latency = state["uw_latency_campaign"]
+    lines += [
+        "",
+        "## UW latency campaign",
+        "",
+        f"- Lifecycle: **{uw_latency['state']}** "
+        f"({uw_latency['counts']['reconciled']}/{uw_latency['counts']['collected']} "
+        "sessions reconciled).",
+        f"- Claim boundary: **{uw_latency['claim_classification']}**; backfill and "
+        "revision remain non-identifiable under the cross-channel design.",
+        f"- State authority: `{uw_latency['state_artifact']}`.",
+    ]
     bundle = state["scientific_bundle"]
     eligibility = bundle["eligibility"]
     provenance = bundle["historical_code_provenance"]

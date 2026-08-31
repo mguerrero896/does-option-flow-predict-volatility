@@ -21,6 +21,7 @@ _SOURCE_KEYS = (
     "availability_summary",
     "pit_contract_v21",
     "claim_matrix_v21",
+    "uw_latency_campaign_state",
 )
 
 
@@ -51,6 +52,7 @@ def build_claim_ledger(
     readiness: Mapping[str, Any],
     availability_manifest: Mapping[str, Any],
     availability_summary: Mapping[str, Any],
+    uw_latency_state: Mapping[str, Any],
     source_hashes: Mapping[str, str],
 ) -> dict[str, Any]:
     """Build a self-hashing PIT v2.2 claim ledger without evaluation data.
@@ -63,6 +65,8 @@ def build_claim_ledger(
         Confirmation-readiness v1 report.
     availability_manifest, availability_summary:
         Target-blind B2 availability-sidecar evidence.
+    uw_latency_state:
+        Target-blind UW campaign lifecycle and cross-channel boundary.
     source_hashes:
         SHA-256 values keyed by the fixed logical evidence identifiers.
 
@@ -88,6 +92,7 @@ def build_claim_ledger(
     _validate_panel_manifest(panel_manifest)
     _validate_readiness(readiness)
     _validate_availability_manifest(availability_manifest)
+    _validate_uw_latency_state(uw_latency_state)
     _validate_source_hashes(source_hashes)
     primary = _primary_availability_totals(availability_summary)
 
@@ -248,6 +253,9 @@ def _claims(
     """Create fixed claims whose status cannot depend on an evaluation result."""
     panel_evidence = _evidence(source_hashes, "panel_manifest", "confirmation_readiness")
     timing_evidence = _evidence(source_hashes, "pit_contract_v21", "claim_matrix_v21")
+    measured_timing_evidence = timing_evidence + _evidence(
+        source_hashes, "uw_latency_campaign_state"
+    )
     availability_evidence = _evidence(
         source_hashes,
         "availability_manifest",
@@ -271,12 +279,16 @@ def _claims(
             "claim_id": "PITV22-C002",
             "status": "PROXY_ONLY",
             "claim_text": (
-                "Unusual Whales created_at is retained only as an operational availability "
-                "proxy at the registered cutoff."
+                "The measured live receipt latency campaign is RECONCILED_PARTIAL; "
+                "Unusual Whales created_at remains only an operational availability proxy "
+                "at the registered cutoff."
             ),
-            "limitation": "It is not provider-proven publication time or client receipt time.",
+            "limitation": (
+                "The cross-channel design cannot identify backfill or revision and does not "
+                "prove provider publication time or client receipt time."
+            ),
             "allowed_presentation_context": "timing_assumption",
-            "evidence": timing_evidence,
+            "evidence": measured_timing_evidence,
         },
         {
             "claim_id": "PITV22-C003",
@@ -389,6 +401,35 @@ def _validate_availability_manifest(availability_manifest: Mapping[str, Any]) ->
         raise ValueError("PIT_V22_CLAIM_LEDGER_AVAILABILITY_MANIFEST_INVALID")
 
 
+def _validate_uw_latency_state(state: Mapping[str, Any]) -> None:
+    """Keep measured latency evidence inside its target-blind proxy boundary."""
+    required = {
+        "schema_version": "uw-latency-campaign-state-v1.0",
+        "state": "RECONCILED_PARTIAL",
+        "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+        "target_blind": True,
+        "safe_to_reconcile_existing_results": "NO",
+        "safe_to_open_or_evaluate_oos": "NO",
+    }
+    counts = state.get("counts")
+    backfill = state.get("backfill")
+    revision = state.get("revision")
+    if (
+        any(state.get(key) != value for key, value in required.items())
+        or not isinstance(counts, Mapping)
+        or counts.get("collected") != 11
+        or counts.get("reconciled") != 6
+        or counts.get("unreconciled") != 5
+        or backfill != {"value": None, "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE"}
+        or revision
+        != {
+            "value": None,
+            "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+        }
+    ):
+        raise ValueError("PIT_V22_CLAIM_LEDGER_UW_LATENCY_STATE_INVALID")
+
+
 def _validate_source_hashes(source_hashes: Mapping[str, str]) -> None:
     """Require every fixed logical source to carry a complete SHA-256 value."""
     if set(source_hashes) != set(_SOURCE_KEYS):
@@ -452,6 +493,9 @@ def _evidence(source_hashes: Mapping[str, str], *keys: str) -> list[dict[str, st
         "availability_summary": "artifacts/provider_timing_v22/b2_availability_summary_v22.json",
         "pit_contract_v21": "docs/provider_timing_pit_contract_v21.md",
         "claim_matrix_v21": "docs/provider_timing_claim_matrix_v21.md",
+        "uw_latency_campaign_state": (
+            "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json"
+        ),
     }
     return [{"path": logical_paths[key], "sha256": source_hashes[key]} for key in keys]
 

@@ -35,7 +35,8 @@
         "availability_manifest",
         "availability_summary",
         "pit_contract_v21",
-        "claim_matrix_v21"
+        "claim_matrix_v21",
+        "uw_latency_campaign_state"
       ],
       "properties": {
         "panel_manifest": { "$ref": "#/$defs/sha256" },
@@ -43,7 +44,8 @@
         "availability_manifest": { "$ref": "#/$defs/sha256" },
         "availability_summary": { "$ref": "#/$defs/sha256" },
         "pit_contract_v21": { "$ref": "#/$defs/sha256" },
-        "claim_matrix_v21": { "$ref": "#/$defs/sha256" }
+        "claim_matrix_v21": { "$ref": "#/$defs/sha256" },
+        "uw_latency_campaign_state": { "$ref": "#/$defs/sha256" }
       }
     },
     "claims": {

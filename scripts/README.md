@@ -119,6 +119,7 @@ every producer receives the same run identity, configuration and invariant check
 | Script | Purpose |
 |---|---|
 | `scripts/aggregate_pit_reconciliation_gate_v21.py` | Build the local target-blind PIT v2.1 reconciliation gate. |
+| `scripts/audit_uw_latency_session_anomaly.py` | Classify one UW latency session from safe metadata and structural aggregates without emitting provider rows. |
 | `scripts/assess_provider_timing_semantics_evidence_v1.py` | Offline intake assessor for future sanitized provider-timing evidence submissions. |
 | `scripts/build_b2_confirmation_inputs.py` | Staged builder of target-free inputs and frozen RV30 target for the two 2024 confirmation blocks. |
 | `scripts/build_canonical_defense_notebook.py` | Generate the portable evidence-only canonical RV30 defense notebook. |
@@ -132,6 +133,7 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/emit_date_level_pit_preflight_status_v2.py` | Emit the current no-network date-level PIT-preflight v2 status record. |
 | `scripts/evaluate_b2_confirmation_blocks.py` | One-read frozen B0/B1a/B2 evaluator over the two 2024 confirmation blocks. |
 | `scripts/generate_date_level_pit_preflight_plan_v1.py` | Generate the calendar-derived candidate plan for a date-level PIT preflight. |
+| `scripts/harvest_uw_latency_campaign.py` | Consolidate explicit session reconciliations into target-blind campaign, lifecycle and alert artifacts. |
 | `scripts/log_uw_option_trade_receipts.py` | Build sanitized UW receipt logs from a local replay for timing evidence. |
 | `scripts/publish_mirror.sh` | Recovery-only whole-history publisher; mandatory Tier 2 and ancestry guards currently refuse replacing the disjoint public lineage. Normal changes start from `origin/main`. |
 | `scripts/register_uw_latency_tasks.ps1` | Idempotently registers the UW latency collector/watchdog Windows scheduled tasks (Gate 5.3). |

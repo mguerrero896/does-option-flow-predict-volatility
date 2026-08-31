@@ -106,6 +106,21 @@
    "sha256": "9018e7ab0cbf45591a40df7313f3702de3c8d9986931d38ec377389cb0a4f805"
   },
   {
+   "bytes": 2427,
+   "path": "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json",
+   "sha256": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63"
+  },
+  {
+   "bytes": 5024,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_20260901_v1.json",
+   "sha256": "33cf674df47875a2ea756d146877e4e9b62685cf87efe160c45f31ed6d921235"
+  },
+  {
+   "bytes": 3349,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
+   "sha256": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
+  },
+  {
    "bytes": 7606,
    "path": "artifacts/gate6_regimes/results.json",
    "sha256": "56ccbde429a23911594fce2af4c7143d814213157b60b4087246f277ff031f6e"
