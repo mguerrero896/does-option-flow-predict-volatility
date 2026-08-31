@@ -83,6 +83,10 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.parse_args(argv)
     results = {
+        "versioned-hook": _run(
+            "versioned-hook",
+            ["uv", "run", "python", "scripts/scan_public_secrets.py", "--check-hook"],
+        ),
         "ruff": _run("ruff", ["uv", "run", "ruff", "check", "src", "scripts", "tests"]),
         "mypy": _run("mypy", ["uv", "run", "mypy", "src", "scripts"]),
         "full-pytest": _run("full-pytest", ["uv", "run", "pytest", "tests", "-q"]),

@@ -96,6 +96,7 @@ artifacts/rp3/frozen/freeze_manifest.json -text
 # CRLF scripts (the publish_mirror.sh audit finding), and the migration tripwire
 # hashes SQL bodies against the md5 Supabase reports for the applied LF text.
 *.sh text eol=lf
+/scripts/hooks/pre-push text eol=lf
 # The reconstructed applied migrations are VERBATIM remote bytes (all LF), and
 # the tripwire hashes them against the remote md5. They are byte-exact records,
 # not text for git to ever convert in either direction on any platform: -text,

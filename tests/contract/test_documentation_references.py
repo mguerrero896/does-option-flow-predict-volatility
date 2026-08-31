@@ -226,16 +226,22 @@ def test_readme_links_every_maintainer_navigation_surface() -> None:
 
 
 def test_pr_template_and_ci_require_why_before_what() -> None:
-    """A human PR cannot erase the rationale fields and leave only checkboxes."""
+    """Human PRs retain rationale and observable RED/GREEN evidence after squash."""
     template = (REPO / ".github" / "pull_request_template.md").read_text(encoding="utf-8")
     why = template.find("## Why")
     what = template.find("## What")
-    assert 0 <= why < what, "PR template must request Why before What"
+    red = template.find("## RED evidence")
+    green = template.find("## GREEN evidence")
+    assert 0 <= why < what < red < green, (
+        "PR template must request Why, What, RED evidence, then GREEN evidence"
+    )
 
     workflow = (REPO / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
     assert "pull_request.user.type != 'Bot'" in workflow
     assert "PR_BODY_REQUIRES_WHY_BEFORE_WHAT" in workflow
     assert "PR_BODY_REQUIRES_NONEMPTY_WHY_AND_WHAT" in workflow
+    assert "PR_BODY_REQUIRES_RED_BEFORE_GREEN" in workflow
+    assert "PR_BODY_REQUIRES_NONEMPTY_RED_AND_GREEN" in workflow
 
 
 def test_methodology_decision_index_covers_every_decision() -> None:
