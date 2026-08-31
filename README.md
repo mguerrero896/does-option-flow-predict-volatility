@@ -119,12 +119,11 @@ described as prospective or one-read.
 
 ![How licensed provider data becomes a sealed, hash-pinned verdict](docs/figures/architecture.png)
 
-Two planes, and the rule that separates them. Licensed panels stay on one machine and are
-never redistributed, so hosted CI can prove the public repository is internally sound but
-can never verify a licensed hash; only the local Tier 2 run can. Everything published is an
-aggregate, a schema or a SHA-256 pointer. An
-[explorable version](docs/figures/architecture.html) of the same diagram is in the
-repository.
+Two planes, and the rule that separates them. Everything above the line runs on one machine
+and is never redistributed; everything below it is what this repository publishes —
+aggregates, schemas and SHA-256 pointers, with a canonical state that refuses to promote a
+measurement it cannot support. An [explorable version](docs/figures/architecture.html) of
+the same diagram, and the specification it is generated from, are in the repository.
 
 Commercial provider data is not distributed. Public artifacts contain aggregate results,
 schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in
