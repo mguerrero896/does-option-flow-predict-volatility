@@ -640,7 +640,7 @@ def run_factorial(
         "code_commit": _git_head(),
         "sealed_cohorts_read": 0,
         "contract": {
-            "path": contract_path.relative_to(ROOT).as_posix(),
+            "path": contract_path.resolve().relative_to(ROOT).as_posix(),
             "contract_sha256": contract["contract_sha256"],
             "file_sha256": sha256_file(contract_path),
         },
