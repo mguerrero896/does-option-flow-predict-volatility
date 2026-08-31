@@ -1,5 +1,17 @@
 # Sealed-cohort disposition record (D006)
 
+> **LIFECYCLE NOTICE — PHASE 8 INVENTORY ROW SUPERSEDED ON 2026-08-30.** This
+> document remains the sealed 2026-08-17 D006 snapshot; its body is preserved unchanged.
+> Phase 8 completed 30/30 on 2026-08-29, was consumed in 1 authorized scientific read
+> on 2026-08-30, and returned `MIXED_EXPLORATORY`. Current authority is
+> [decision 102](methodology_decisions.md), the
+> [owner authorization](../artifacts/phase8_bridge/owner_authorization_20260830_v1.json),
+> [one-shot custody](../artifacts/phase8_bridge/one_shot_custody_20260830_v3.json), the
+> [result](../artifacts/phase8_bridge/result_20260830_v1.json), and the collector-retirement
+> safety invariant in [architecture.md](architecture.md). The collector is disabled because
+> its frozen calendar completed, not because the cohort was abandoned. Validation A/B remain
+> `CLOSED_UNREAD_20260817` under decision 55.
+
 Status: `RESOLVED_20260817` (decision 55). Created 2026-08-17 under decision 52.
 
 ## Inventory of sealed, unread cohorts
