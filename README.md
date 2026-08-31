@@ -9,26 +9,39 @@ activity improve forecasts of 30-minute realized variance for large US equities.
 
 ## The short answer
 
-**On this evidence, not from recent option *flow*.** Four independent tests were put to
-the same question, and all four agree: once contemporaneous option state is already in the
-model, adding recent point-in-time flow produces no incremental contribution above the
-minimum detectable effect each test declared for itself.
+**Almost never — and the one exception is why a sealed program exists.** Eleven of the
+twelve headline contrasts are consistent with no incremental contribution from recent
+option *flow* once contemporaneous option *state* is already in the model.
 
-Only some of those tests were sealed before their data existed. The prospective read was,
+The twelfth is not. Under the tree family in discovery, ΔB2|B1 is **+0.00060** with a 95 %
+interval of [+0.00022, +0.00100] — above its own declared minimum detectable effect of
+0.00056. That single cell may be information, or it may be an artefact of how that family
+estimates. This study cannot tell which, and says so.
+
+Rather than argue it away, the question was frozen.
+[`docs/rp3/PREREGISTRATION.md`](docs/rp3/PREREGISTRATION.md) registers a closed list of two
+hypotheses on an evaluation window that begins where this study's validation role ends, on
+sessions that mostly did not exist when it was sealed. It is read once, at 662 evaluable
+sessions, estimated 2029-01-30. Finding your own exception and sealing it is the part of
+this repository worth looking at.
+
+Three of the four instruments are clean nulls; the exception is confined to the fourth.
+Only some of the four were sealed before their data existed: the prospective read was,
 under a protocol frozen and hashed in advance and opened once. The level-forecasting
-comparison was not: it is retrospective and exploratory, because validation was consulted
-adaptively during development, and its stricter sequential alpha is a conservative
-post-hoc sensitivity rather than a preregistered confirmation.
+comparison was not — it is retrospective and exploratory, because validation was consulted
+adaptively during development, and its stricter sequential alpha is a conservative post-hoc
+sensitivity rather than a preregistered confirmation.
 
 The option-*state* layer is a weaker and more careful story. It shows a positive
 contribution in discovery and in the single sealed prospective read, but that contribution
 does **not** replicate under validation, and it is not promoted to a confirmatory claim.
-Nine of the twelve headline contrasts fall below their own minimum detectable effect.
+Of the three contrasts that clear their own minimum detectable effect, two are state and
+one is the flow cell above.
 
 The repository does not claim the effect faded over time. Era-split point estimates rise
 rather than fall, every era estimate sits below its familywise minimum detectable effect,
-and a time split cannot separate a regime change from a smaller training sample. A
-decay reading was tested, withdrawn, and is
+and a time split cannot separate a regime change from a smaller training sample. A decay
+reading was tested, withdrawn, and is
 [recorded as invalidated](docs/rp2_v3/SUPERSEDED_RESULTS.md).
 
 This repository exists to make that null result *credible* rather than merely asserted.
@@ -55,7 +68,7 @@ flowchart LR
     Q --> I3["<b>Prospective read</b><br/>sealed, one-shot"]
     Q --> I4["<b>Economic value</b><br/>implied minus trailing<br/>variance spread"]
 
-    I1 --> A(["<b>No incremental contribution</b><br/>from flow, given state"])
+    I1 --> A(["<b>No incremental contribution</b><br/>from flow, given state<br/>— except one sealed cell"])
     I2 --> A
     I3 --> A
     I4 --> A
@@ -72,7 +85,7 @@ by one flawed choice than agreement within any single one of them.
 | --- | --- | --- |
 | Level forecasting | A real reduction in QLIKE loss on RV30 | [`rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) |
 | Directional utility | Value in the sign of returns that a variance loss cannot score | [`extension_b2_directional_utility_v2.md`](docs/rp2/extension_b2_directional_utility_v2.md) |
-| Prospective read | An effect that survives on data sealed before the protocol was written | [`phase8a addendum v10`](reports/phase8a_exploratory_bridge_addendum_v10.md) |
+| Prospective read | An effect that survives on data that did not exist when the protocol was sealed | [`phase8a addendum v10`](reports/phase8a_exploratory_bridge_addendum_v10.md) |
 | Economic value | A tradable spread that statistical loss functions miss | [`block11_economics_v1.md`](docs/rp2/block11_economics_v1.md) |
 
 ## Research design

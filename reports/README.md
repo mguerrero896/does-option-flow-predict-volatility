@@ -5,7 +5,7 @@
 | File | Role |
 | --- | --- |
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative thesis source at the evidence cutoff |
-| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Submission rendering of the Markdown source |
+| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Word rendering of the Markdown source. **Out of date**: it predates the 2026-08-31 numeric corrections and must be re-exported before submission |
 | [`phase8a_exploratory_bridge_addendum_v10.md`](phase8a_exploratory_bridge_addendum_v10.md) | Current post-cutoff Phase 8A interpretation |
 
 Everything else in this directory is retained audit history. The full classification,

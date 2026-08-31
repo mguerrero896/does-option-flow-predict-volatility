@@ -90,6 +90,7 @@ def test_each_pattern_matches_a_real_spelling_of_its_claim(claim: str, _pattern:
     spellings = {
         "invalidated -0.0277/year decay line": "a decay of -0.028 / year",
         "withdrawn formal-equivalence claim": "the families are formally equivalent",
+        "withdrawn temporal-decay reading": "the decay pattern remains time-linked",
         "withdrawn mechanism claim": "The mechanism is real",
         "Phase 8 was never TOST-armed or confirmatory": "Phase 8 is TOST-armed and sealed",
     }

@@ -18,7 +18,7 @@
       ],
       "size": [
         520,
-        92
+        78
       ],
       "tag": "licensed, never redistributed"
     },
@@ -29,11 +29,11 @@
       "sublabel": "availability, not source time",
       "pos": [
         100,
-        200
+        180
       ],
       "size": [
         520,
-        92
+        78
       ]
     },
     {
@@ -43,11 +43,11 @@
       "sublabel": "B0 in B1 in B2, one shared row mask",
       "pos": [
         100,
-        360
+        320
       ],
       "size": [
         520,
-        92
+        78
       ]
     },
     {
@@ -57,11 +57,11 @@
       "sublabel": "QLIKE, session bootstrap, Holm",
       "pos": [
         100,
-        520
+        460
       ],
       "size": [
         520,
-        92
+        78
       ],
       "tag": "method freeze hashed first"
     },
@@ -72,11 +72,11 @@
       "sublabel": "aggregates and SHA-256 manifests",
       "pos": [
         100,
-        710
+        630
       ],
       "size": [
         520,
-        92
+        78
       ]
     },
     {
@@ -86,11 +86,11 @@
       "sublabel": "fail-closed eligibility",
       "pos": [
         100,
-        870
+        770
       ],
       "size": [
         520,
-        92
+        78
       ],
       "tag": "wins over any document"
     }

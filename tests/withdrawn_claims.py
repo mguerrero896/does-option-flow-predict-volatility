@@ -32,6 +32,12 @@ Claim = tuple[str, str]
 WITHDRAWN_NARRATIVE_CLAIMS: tuple[Claim, ...] = (
     ("invalidated -0.0277/year decay line", r"-?0\.02(7\d*|8)\s*(/|per)\s*(year|yr)"),
     ("withdrawn formal-equivalence claim", r"formally\s+equivalent"),
+    # The decay reading also travels in words. gate6 asserted it as "time-linked ...
+    # has since disappeared" with no number, so the numeric pattern above missed it.
+    (
+        "withdrawn temporal-decay reading",
+        r"decay[^.]{0,90}(time-linked|disappeared)|signal[^.]{0,70}has since disappeared",
+    ),
     ("withdrawn mechanism claim", r"the\s+mechanism\s+is\s+real"),
     # The retraction is Phase 8 being TOST-armed, not the existence of TOST. Phase 9 may
     # legitimately specify an equivalence test for a read that has not happened.

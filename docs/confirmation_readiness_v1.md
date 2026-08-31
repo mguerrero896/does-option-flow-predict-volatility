@@ -1,5 +1,7 @@
 # Confirmation Readiness v1 — Target-Blind Operational Gate
 
+> **SUPERSEDED TWICE.** This v1 gate describes the v2.2 panel state as current. The operative protocol is [`confirmation_protocol_v4_sourcebound.md`](confirmation_protocol_v4_sourcebound.md), bound to the v2.3 panel. Retained for audit.
+
 ## Purpose and boundary
 
 This gate converts the current v2.2 target-blind state into one explicit,

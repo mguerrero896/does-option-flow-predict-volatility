@@ -1,5 +1,8 @@
 # Temporal validation protocol v2 (specification only)
 
+> **Evidence file not in this release.** The artifact named above is not present in the public tree and is not a gated dataset; it did not survive the repository recreations. The reasoning below is retained for audit, but its numbers cannot be recomputed from this checkout. See [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+
+
 Evidence of proposed dates: `artifacts/validation/proposed_temporal_folds_v1.csv`.
 No model has been trained and no fold has been evaluated.
 

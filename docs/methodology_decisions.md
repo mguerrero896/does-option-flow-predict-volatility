@@ -1850,3 +1850,28 @@ Requirements-consistency and preregistration gates pass.
      and three numeric statements in `reports/final_report_draft_v2.md` were corrected or
      marked unreproducible. The Word rendering predates those corrections and must be
      re-exported before submission; `reports/INDEX.md` records that.
+
+     **Third pass.** A third run confirmed 17 findings and produced a blocker on the front
+     page's own answer. The README claimed all four instruments found no flow contribution
+     above the minimum detectable effect each declared. The primary artifact falsifies that
+     in one of twelve cells: `lightgbm_qlike` D delta-B2-given-B1 estimates +0.00060 against
+     a declared MDE of 0.00056, with a 95 per cent interval excluding zero. That cell is
+     precisely why the sealed RP3 program exists, and the front page did not mention it.
+
+     The page now states the exception, its magnitude and its interval, routes to the sealed
+     program, and says which of the three MDE-clearing contrasts are state and which is flow.
+     A contract counts those cells from the artifact and requires the page to match, so the
+     claim cannot drift from the evidence again.
+
+     The gate 6 banner written in the first pass made its own document worse: it certified
+     "the regime analysis stands", and that analysis is where the withdrawn decay reading is
+     asserted in words rather than numbers. The withdrawn-claims guard matched the decay
+     line only by its figure, so prose escaped it; it now matches the reading as well.
+
+     Also corrected: the instrument table inverted the sealing order, saying the data were
+     sealed before the protocol was written; the economics block bounded the deflated Sharpe
+     probability at 0.19 "anywhere" when that holds only of the buffer sweep, its co-pinned
+     artifact recording 0.92-0.97 for discovery in both arms; three documents cite evidence
+     files that are neither gated nor present and now say so; and blocks 4 and 5, the v1
+     confirmation-readiness gate and the gate 4 script entry received the supersession
+     notices they lacked.
