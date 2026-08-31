@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="424" viewBox="0 0 880 424" role="img" aria-labelledby="sets-title sets-desc">
+<title id="sets-title">Three nested information sets on one shared row mask</title>
+<desc id="sets-desc">B0 holds underlying and market history; B1 adds contemporaneous option state; B2 adds recent option flow. Because the sets nest and share one row mask, the step between two rungs isolates exactly one layer.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<rect x="72" y="132" width="736" height="232" rx="8" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.2"/>
+<rect x="120" y="176" width="640" height="144" rx="8" fill="#ffffff" stroke="#1a2332" stroke-width="1.2"/>
+<rect x="168" y="220" width="544" height="56" rx="8" fill="#ffffff" stroke="#1a2332" stroke-width="1.2"/>
+<text x="32" y="30" fill="#7a8593" font-family="'Cascadia Mono','SF Mono',Consolas,monospace" font-size="10" letter-spacing="0.14em">WHAT WAS COMPARED</text><text x="32" y="62" fill="#1a2332" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" font-weight="600">Each rung adds one layer, and nothing else</text><text x="32" y="88" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14">The sets nest and share one row mask, so a step isolates a single information layer.</text>
+<text x="92" y="158" fill="#e8a33d" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600">B0 + B1 + B2</text><text x="236" y="158" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12">adds recent point-in-time option flow</text>
+<text x="140" y="202" fill="#1a2332" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600">B0 + B1</text><text x="224" y="202" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12">adds contemporaneous option state</text>
+<text x="188" y="246" fill="#1a2332" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="600">B0</text><text x="212" y="246" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12">underlying and broad-market history</text>
+<text x="32" y="392" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14">The contrast under test is the outermost step: what recent option flow adds once option state is already known.</text>
+</svg>

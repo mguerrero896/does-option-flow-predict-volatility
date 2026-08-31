@@ -10,7 +10,7 @@ mention it.
 
 The sentence was checkable and nothing checked it. This contract counts the cells that
 clear their own MDE, splits them into state and flow, and requires the README to state
-both counts and to name the flow exception whenever one exists. A future run that removes
+the count and to name the flow exception whenever one exists. A future run that removes
 the exception fails this test too, which is correct: the claim would have changed and the
 page would need to say so.
 """
@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 import pytest
 
@@ -31,15 +31,21 @@ STATE = REPO / "data" / "CANONICAL_STATE.json"
 #: Nested-test keys, and whether each isolates the state layer or the flow layer.
 LAYER: Final = {"b1_over_b0": "state", "b2_over_b1": "flow"}
 
+SPELLED: Final = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}
 
-def _inference_artifact() -> dict:
+#: The count must be stated about the thing it counts, not merely appear on the page.
+NEAR_THRESHOLD: Final = r"[^.]{0,120}(threshold|minimum detectable effect)"
+
+
+def _inference_artifact() -> dict[str, Any]:
     """Follow the canonical state to the bundle rather than hardcoding a run id."""
     state = json.loads(STATE.read_text(encoding="utf-8"))
     run_id = state["scientific_bundle"]["run_id"]
     path = REPO / "artifacts" / "rp2_v3" / run_id / "rp2_block10_inference" / "inference.json"
     if not path.is_file():
         pytest.skip(f"inference artifact for {run_id} is not in this checkout")
-    return json.loads(path.read_text(encoding="utf-8"))
+    artifact: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+    return artifact
 
 
 def _cells_clearing_their_mde() -> dict[str, list[str]]:
@@ -64,8 +70,11 @@ def test_the_readme_states_the_number_of_contrasts_that_clear_their_mde() -> Non
     count = len(clearing["state"]) + len(clearing["flow"])
     readme = README.read_text(encoding="utf-8")
 
-    spelled = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}[count]
-    assert f"{spelled} contrasts that clear their own minimum detectable effect" in readme, (
+    # Match the statement, not one wording of it. The page may say "three of the twelve
+    # beat their own threshold" or "the three contrasts that clear their own minimum
+    # detectable effect". Only the count, and what it counts, are load-bearing.
+    stated = re.search(SPELLED[count] + NEAR_THRESHOLD, readme, re.IGNORECASE)
+    assert stated, (
         f"{count} of twelve contrasts exceed their own MDE "
         f"({', '.join(clearing['state'] + clearing['flow'])}), and README.md does not say so."
     )
@@ -115,6 +124,6 @@ def test_the_stated_mde_for_that_cell_is_the_artifacts() -> None:
     readme = README.read_text(encoding="utf-8")
 
     assert f"{mde:.5f}" in readme, (
-        f"README.md compares the exception against a threshold it does not take from the "
+        "README.md compares the exception against a threshold it does not take from the "
         f"artifact; the declared MDE is {mde:.5f}."
     )

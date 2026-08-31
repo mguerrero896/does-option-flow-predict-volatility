@@ -1,270 +1,213 @@
 # Does option-market information improve intraday volatility forecasts?
 
 [![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
-![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
-![Headline claim](https://img.shields.io/badge/headline_claim-none_eligible-4c78a8)
+![Python 3.12](https://img.shields.io/badge/python-3.12-1a2332)
+![Headline claim](https://img.shields.io/badge/headline_claim-none_eligible-e8a33d)
 
-Research code and public evidence for testing whether option state and recent option-flow
-activity improve forecasts of 30-minute realized variance for large US equities.
+Six large US equities. Every five minutes of the New York session, predict how much the
+stock will actually move over the next thirty minutes. Then ask whether knowing what the
+options market is doing makes that prediction better.
 
-## The short answer
+---
 
-**Almost never — and the one exception is why a sealed program exists.** Eleven of the
-twelve headline contrasts are consistent with no incremental contribution from recent
-option *flow* once contemporaneous option *state* is already in the model.
+## The answer
 
-The twelfth is not. Under the tree family in discovery, ΔB2|B1 is **+0.00060** with a 95 %
-interval of [+0.00022, +0.00100] — above its own declared minimum detectable effect of
-0.00056. That single cell may be information, or it may be an artefact of how that family
-estimates. This study cannot tell which, and says so.
+**Almost never — and the one exception is why a sealed program exists.**
 
-Rather than argue it away, the question was frozen.
-[`docs/rp3/PREREGISTRATION.md`](docs/rp3/PREREGISTRATION.md) registers a closed list of two
-hypotheses on an evaluation window that begins where this study's validation role ends, on
-sessions that mostly did not exist when it was sealed. It is read once, at 662 evaluable
-sessions, estimated 2029-01-30. Finding your own exception and sealing it is the part of
-this repository worth looking at.
+Eleven of the twelve headline comparisons show no gain from adding recent option *flow*
+once contemporaneous option *state* is already in the model.
 
-![Twelve contrasts against the minimum detectable effect each declared](docs/figures/contrasts_against_their_threshold.svg)
+![Twelve contrasts against the threshold each one declared](docs/figures/evidence.svg)
 
-Every contrast registers a detection threshold before it is measured. Three of the
-twelve clear their own: two are option state, and the orange one is the flow cell above.
-The chart is generated from the inference artifact named by the canonical state, so it
-cannot drift from the evidence.
+Every comparison registers a detection threshold before it is run, so it cannot be
+declared a success after the fact. Three of the twelve beat their own threshold. Two of
+those are option state. The third — the amber one — is option flow, and it is the reason
+the rest of this repository exists.
 
-Three of the four instruments are clean nulls; the exception is confined to the fourth.
-Only some of the four were sealed before their data existed: the prospective read was,
-under a protocol frozen and hashed in advance and opened once. The level-forecasting
-comparison was not — it is retrospective and exploratory, because validation was consulted
-adaptively during development, and its stricter sequential alpha is a conservative post-hoc
-sensitivity rather than a preregistered confirmation.
+That cell estimates **+0.00060** against a threshold of **0.00056**, with a 95 % interval
+of [+0.00022, +0.00100]. It may be real information. It may be an artefact of how that one
+model family estimates. **This study cannot tell which, and does not pretend to.**
 
-The option-*state* layer is a weaker and more careful story. It shows a positive
-contribution in discovery and in the single sealed prospective read, but that contribution
-does **not** replicate under validation, and it is not promoted to a confirmatory claim.
-Of the three contrasts that clear their own minimum detectable effect, two are state and
-one is the flow cell above.
+So the question was frozen rather than argued.
+[`docs/rp3/PREREGISTRATION.md`](docs/rp3/PREREGISTRATION.md) fixes two hypotheses, on
+sessions that mostly did not exist when it was written, to be opened once at 662 sessions
+— estimated 2029-01-30.
 
-The repository does not claim the effect faded over time. Era-split point estimates rise
-rather than fall, every era estimate sits below its familywise minimum detectable effect,
-and a time split cannot separate a regime change from a smaller training sample. A decay
-reading was tested, withdrawn, and is
-[recorded as invalidated](docs/rp2_v3/SUPERSEDED_RESULTS.md).
+Two further points a reader should have before going on:
 
-This repository exists to make that null result *credible* rather than merely asserted.
-Any single test that fails to find an effect can be dismissed as a weak test. The design
-answer is pre-registration, sealed one-shot reads, hash-pinned evidence and a fail-closed
-canonical state that refuses to promote a measurement it cannot support. The machinery is
-the contribution; the null is what the machinery returned.
+- **Did the option-*state* layer help?** In discovery, yes. It did not hold up under
+  validation, so it is not stated as a finding.
+- **Did the signal weaken over time?** That cannot be claimed. The data do not show that
+  fall, and splitting by date cannot separate a change in the market from simply having
+  less data to train on.
 
-No measurement here is promoted to a confirmatory claim. The governing eligibility state,
-with its blocking reason, is stated in full under
-[Governance and current state](#governance-and-current-state).
+---
 
-## How the answer was reached
+## When it was tested
 
-The same question was put to four instruments that fail in different ways, so that no
-single methodological weakness could produce the shared answer:
+![One read is spent, one is collecting, one is sealed until 2029](docs/figures/programme-timeline.svg)
 
-```mermaid
-flowchart LR
-    Q(["Does option flow add value<br/>beyond option state?"])
+Retrospective work can always be re-run until it agrees with you. The defence against that
+is a cohort you are allowed to look at only once, under a protocol written and hashed
+before that data existed.
 
-    Q --> I1["<b>Level forecasting</b><br/>QLIKE loss on RV30"]
-    Q --> I2["<b>Directional utility</b><br/>signed-return factorial"]
-    Q --> I3["<b>Prospective read</b><br/>sealed, one-shot"]
-    Q --> I4["<b>Economic value</b><br/>implied minus trailing<br/>variance spread"]
+One such read is spent. Phase 8A opened on 2026-08-30 and returned `MIXED_EXPLORATORY`:
+the state layer was positive in all four cells with descriptive Holm p below 0.05 in
+three, while the flow layer crossed zero in all four and cleared Holm in none. An audit
+reproduced the registered inference exactly and found **no aggregation change**. The read
+is descriptive, **not confirmatory**, and cannot promote anything. Full result in the
+[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v10.md).
 
-    I1 --> A(["<b>No incremental contribution</b><br/>from flow, given state<br/>— except one sealed cell"])
-    I2 --> A
-    I3 --> A
-    I4 --> A
+One cohort is still collecting, and one is sealed until 2029.
 
-    style Q fill:#e8eef7,stroke:#4c78a8,stroke-width:2px
-    style A fill:#f7ece1,stroke:#e8a33d,stroke-width:2px
-```
+---
 
-A statistical test, a decision-utility test, a prospective test and an economic test are
-vulnerable to different failure modes. Agreement across all four is much harder to explain
-by one flawed choice than agreement within any single one of them.
+## What was compared
 
-| Instrument | What it would have caught | Record |
-| --- | --- | --- |
-| Level forecasting | A real reduction in QLIKE loss on RV30 | [`rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) |
-| Directional utility | Value in the sign of returns that a variance loss cannot score | [`extension_b2_directional_utility_v2.md`](docs/rp2/extension_b2_directional_utility_v2.md) |
-| Prospective read | An effect that survives on data that did not exist when the protocol was sealed | [`phase8a addendum v10`](reports/phase8a_exploratory_bridge_addendum_v10.md) |
-| Economic value | A tradable spread that statistical loss functions miss | [`block11_economics_v1.md`](docs/rp2/block11_economics_v1.md) |
+![Three nested information sets on one shared row mask](docs/figures/information-sets.svg)
 
-## Research design
+Three models see three progressively larger pictures of the same moment, scored on
+identical rows. Because the sets nest and share one row mask, the difference between two
+rungs is attributable to exactly one layer of information and nothing else.
 
-Forecast origins occur every five minutes during the New York trading session. Models
-predict realized variance over the next 30 one-minute returns using nested information
-sets evaluated on a common row mask:
+The loss function is QLIKE. The model families are Gamma GLM, ridge-log and
+LightGBM-QLIKE. Results are aggregated by trading session before any interval is computed,
+because minutes within one session are not independent observations.
 
-```mermaid
-flowchart LR
-    B0["<b>B0</b><br/>underlying and<br/>broad-market history"]
-    B1["<b>+ B1</b><br/>contemporaneous<br/>option state"]
-    B2["<b>+ B2</b><br/>recent point-in-time<br/>option flow"]
-    B0 --> B1 --> B2
-
-    style B0 fill:#eef2f7,stroke:#5b7ba6
-    style B1 fill:#e3ebf5,stroke:#4c78a8
-    style B2 fill:#f7ece1,stroke:#e8a33d
-```
-
-| Set | Information available at forecast time |
-| --- | --- |
-| B0 | Underlying and broad-market price/volume history |
-| B0+B1 | B0 plus contemporaneous option-state features |
-| B0+B1+B2 | B0+B1 plus recent point-in-time option-flow activity |
-
-Because the sets are nested and share one row mask, the difference between adjacent rungs
-isolates the contribution of exactly one information layer.
-
-Primary loss is QLIKE. Primary model families are Gamma GLM, ridge-log and
-LightGBM-QLIKE. Inference aggregates loss differences by trading session before
-bootstrap or long-run variance estimation.
-
-The distinction between information time and client availability is material. Unusual
-Whales `created_at` is `PROXY_ONLY`; Massive SIP timestamps establish source time, not
-historical client receipt. See
+One distinction does a lot of work here: knowing *when a fact was true* is not the same as
+knowing *when you could have seen it*. Unusual Whales `created_at` is `PROXY_ONLY`, and
+Massive SIP timestamps establish when something happened at the source, not when a
+subscriber received it. The rules used are in
 [`docs/provider_timing_pit_contract_v22.md`](docs/provider_timing_pit_contract_v22.md).
 
-Development and validation partitions are retrospective research samples. Only a protocol
-sealed before future observations and read under its specific access contract can be
-described as prospective or one-read.
+---
 
-## Evidence and data access
+## Why you can trust it
 
-![How licensed provider data becomes a sealed, hash-pinned verdict](docs/figures/system-architecture.png)
+![How a measurement becomes an eligible claim, or does not](docs/figures/eligibility-gates.svg)
 
-Two planes, and the rule that separates them. Everything above the line runs on one machine
-and is never redistributed; everything below it is what this repository publishes —
-aggregates, schemas and SHA-256 pointers, with a canonical state that refuses to promote a
-measurement it cannot support. An [explorable version](docs/figures/system-architecture.html) of
-the same diagram, and the specification it is generated from, are in the repository.
+A number in this repository is not a claim until it passes three gates. Failing one does
+not delete the number — it keeps it auditable and marks it as history.
 
-Commercial provider data is not distributed. Public artifacts contain aggregate results,
-schemas and SHA-256 pointers. Custody, licensing and access boundaries are documented in
-[`data/DATA_ACCESS.md`](data/DATA_ACCESS.md) and
+The current bundle stops at the third gate. Its point-in-time inputs have not received a
+successor method freeze, so every number it produced stays historical. That is the state
+this repository publishes, stated in full under
+[Governance and current state](#governance-and-current-state).
+
+---
+
+## Where the data comes from
+
+![From licensed provider data to a published, hash-pinned record](docs/figures/data-pipeline.svg)
+
+Provider data is licensed and is not redistributed. Panels are built and evaluated on one
+machine; what reaches this repository is aggregate results, schemas and SHA-256 pointers.
+Custody and access boundaries are in [`data/DATA_ACCESS.md`](data/DATA_ACCESS.md) and
 [`data/GATED_DATA_POINTERS.json`](data/GATED_DATA_POINTERS.json).
 
-The project uses Financial Modeling Prep, Unusual Whales and Massive. Provider timestamps
-and subscription access are not interchangeable with proof of client receipt time.
+That boundary has a consequence worth stating plainly: hosted CI can prove this repository
+is internally consistent, but it can never verify a licensed panel, because it cannot see
+one. Only a local run can.
 
-## Reproduction levels
+---
 
-The public repository is repo-first; the wheel is not presented as a standalone research
-distribution.
+## Reproducing it
 
-Methodological smoke demo using synthetic, already-structured inputs:
+A methodological smoke demo, on synthetic inputs, exercising the primitives only:
 
 ```powershell
 uv sync --locked
 uv run python scripts/run_public_repro_demo.py
 ```
 
-This demo exercises methodological primitives only. It does not acquire provider data,
-normalize raw payloads, build licensed panels, run the full RP2 cascade, create manifests
-or publish results.
+It does not acquire provider data, build licensed panels, run the cascade or publish
+anything.
 
 Hosted CI runs static quality, hermetic tests and scientific contracts against tracked
-public inputs. Exact commands and exclusions are in
-[`docs/ci_contract_v1.md`](docs/ci_contract_v1.md).
+public inputs; exact commands are in [`docs/ci_contract_v1.md`](docs/ci_contract_v1.md).
 
-Running `pytest` on a fresh clone reports failures from the panel guard, by design. It
+Running `pytest` on a fresh clone reports failures from the panel guard, by design: it
 fails closed when the licensed panels are absent rather than skipping, because a silent
-skip would let an unverified run look green; each failure names
-`RP2_PANEL_UNVERIFIED` and the panel it wanted. To reproduce what hosted CI reproduces,
-set the same opt-out CI sets:
+skip would let an unverified run look green. Each failure names `RP2_PANEL_UNVERIFIED`. To
+reproduce what hosted CI reproduces, set the same opt-out CI sets:
 
 ```powershell
 $env:MDS650_PANEL_GUARD_MAY_SKIP = "1"; uv run pytest
-``` The local Tier 2 gate additionally
-requires licensed evidence and live access-posture credentials:
+```
+
+The local Tier 2 gate additionally requires licensed evidence and live credentials:
 
 ```powershell
 uv run python scripts/run_local_evidence_gates.py
 ```
 
-A Tier 1 pass does not verify providers, Supabase end to end, licensed panel hashes or a
-scientific rebuild. Full boundaries are in
+Boundaries between the two tiers are in
 [`docs/reproducibility_contract_v1.md`](docs/reproducibility_contract_v1.md).
+
+---
 
 ## Governance and current state
 
-This section states the machine-checked eligibility position. It is deliberately separate
-from the finding above: the finding describes what the evidence shows, this describes what
-the project is permitted to claim.
+This section is the machine-checked position, kept separate from the finding above: the
+finding says what the evidence shows, this says what the project is permitted to claim.
 
 **No result is currently eligible as the project headline.** The corrected-protocol bundle
 is `rp2-v3-20260827-remediation3`, scientific hash
-`386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47`. Its status is
-`REBUILD_COMPLETE_PIT_V22_BLOCKED`: the model-protocol divergence between the two
-inference stages is repaired and the full rebuild passes, but
-`PIT_V22_RECONCILIATION_BLOCKED` remains. Corrected point-in-time inputs have not received
-a successor method freeze or authorized evaluation, so this historical measurement cannot
-become a current claim.
+`386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47`, status
+`REBUILD_COMPLETE_PIT_V22_BLOCKED`. The divergence between the two inference stages is
+repaired and the full rebuild passes, but `PIT_V22_RECONCILIATION_BLOCKED` remains.
 
-The machine-readable authority is
-[`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json). It identifies one run manifest,
-one scientific hash, one scorecard, the eligibility state and blocking reasons. If another
-document disagrees with it, the canonical state wins.
+The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run
+manifest, one hash, one eligibility state and its blocking reasons. If any document
+disagrees with it, the canonical state wins.
 
-Historical measurements remain available for audit, not as current findings:
+Superseded measurements stay available for audit, never as current findings:
 
-- [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](docs/rp2_v3/SUPERSEDED_RESULTS.md) records retired
-  results and why each was replaced or withdrawn.
-- [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) is the narrative attached to the
-  corrected-protocol bundle; its status is `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
-- [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) states
-  the target-blind PIT evidence boundary and the required next gate.
+- [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](docs/rp2_v3/SUPERSEDED_RESULTS.md) — what was
+  retired, and why.
+- [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) — the narrative for the
+  corrected-protocol bundle, marked `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
+- [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) — the
+  point-in-time evidence boundary and the gate it still needs.
 
 No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
-claimed from the PIT-blocked bundle. The current
-[threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md) records the evidence
-boundary, mitigations and residual risks.
+claimed. Residual risks are in the
+[threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md).
 
-Separately, the sole Phase 8A bridge read is complete and classified
-`MIXED_EXPLORATORY`. ΔB1 is positive in all four primary cells and has descriptive Holm
-p below 0.05 in three; incremental B2 conditional on B1 has mixed signs, four
-zero-crossing intervals and no Holm p below 0.05. A cube-level audit reproduces the
-registered inference exactly and finds no aggregation change. The read is descriptive,
-not confirmatory, and cannot make the PIT-blocked bundle eligible. The exact result,
-dispersion comparison and execution-recovery limitation are in the
-[`Phase 8A addendum`](reports/phase8a_exploratory_bridge_addendum_v10.md).
+---
 
 ## Repository map
 
-| Path | Purpose and maintained index |
+| Path | What is there |
 | --- | --- |
-| `src/mds650/` | Reusable research and validation code |
-| `scripts/` | Explicit producers and verification entrypoints; see [`scripts/README.md`](scripts/README.md) |
-| `tests/` | Unit, behavioral, contract and synthetic end-to-end tests |
-| `configs/` | Frozen research configuration |
-| `schemas/`, `specs/` | Machine-readable contracts |
+| `src/mds650/` | Research and validation code |
+| `scripts/` | Producers and verification entrypoints; see [`scripts/README.md`](scripts/README.md) |
+| `tests/` | Unit, behavioural, contract and synthetic end-to-end tests |
+| `configs/`, `schemas/`, `specs/` | Frozen configuration and machine-readable contracts |
 | `artifacts/` | Public aggregates and frozen evidence records |
-| `supabase/` | Versioned database schema and access controls; see [`supabase/README.md`](supabase/README.md) |
+| `supabase/` | Database schema and access controls; see [`supabase/README.md`](supabase/README.md) |
 | `docs/` | Methodology, limitations and history; see [`docs/INDEX.md`](docs/INDEX.md) |
-| `reports/` | Current and historical deliverables; see [`reports/INDEX.md`](reports/INDEX.md) |
+| `reports/` | Deliverables; see [`reports/INDEX.md`](reports/INDEX.md) |
 
-Maintainers and new programmers should begin with the
-[`developer guide`](docs/DEVELOPER_GUIDE.md) and the current
-[`architecture map`](docs/architecture.md). They define the source-of-truth hierarchy,
-safe execution planes, change workflow and commenting conventions without relocating
-frozen evidence.
+The figures above are generated by `scripts/render_figures.py` from the evidence they
+describe, in the palette defined in `scripts/figure_style.py`.
+
+New readers of the code should start with the
+[developer guide](docs/DEVELOPER_GUIDE.md) and the
+[architecture map](docs/architecture.md).
+
+---
 
 ## Scope
 
-This repository reports research evidence. It is not investment advice, an order-routing
-system or evidence of live profitability. `capital_go=false`.
+Research evidence. Not investment advice, not an order-routing system, not evidence of
+live profitability. `capital_go=false`.
 
 [Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues) and
-methodological discussion are welcome. Contribution boundaries are in
+methodological discussion are welcome; boundaries are in
 [`CONTRIBUTING.md`](CONTRIBUTING.md), and computational assistance is disclosed in
 [`docs/AI_ASSISTANCE_STATEMENT.md`](docs/AI_ASSISTANCE_STATEMENT.md).
 
-See [`CITATION.cff`](CITATION.cff) for citation metadata, [`LICENSE`](LICENSE) for the MIT
-license covering project-authored material and [`SECURITY.md`](SECURITY.md) for private
-vulnerability reporting.
+See [`CITATION.cff`](CITATION.cff), [`LICENSE`](LICENSE) for the MIT licence covering
+project-authored material, and [`SECURITY.md`](SECURITY.md) for private vulnerability
+reporting.
