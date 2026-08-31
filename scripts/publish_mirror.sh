@@ -91,7 +91,7 @@ echo "[publish] check 4: public-history secret scan on the stripped tree"
 # what protects this one.
 uv run python "$CANON/scripts/publish_ancestry_guard.py" \
     --mirror "$MIRROR" --remote "$REMOTE" --branch main || exit 1
-git -C "$MIRROR" push --force "$REMOTE" main
+git -C "$MIRROR" push --force --no-follow-tags "$REMOTE" refs/heads/main:refs/heads/main
 # Tags are intentionally excluded. Publish an explicitly selected tag only from
 # a clean public clone after scan_public_secrets.py --include-tags succeeds.
 echo "mirror published: canonical $(git rev-parse --short HEAD) -> mirror $(git -C "$MIRROR" rev-parse --short main) (gated data stripped)"

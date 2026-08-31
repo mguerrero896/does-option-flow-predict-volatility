@@ -163,7 +163,9 @@ def test_explicit_base_mismatch_aborts(tmp_path: Path) -> None:
     assert "base" in _refusal(result)
 
 
-PUSH_LINES = ['push --force "$REMOTE" main']
+PUSH_LINES = [
+    'push --force --no-follow-tags "$REMOTE" refs/heads/main:refs/heads/main'
+]
 
 
 @pytest.mark.parametrize("push_line", PUSH_LINES)
@@ -245,10 +247,32 @@ def test_publish_script_never_bulk_pushes_tags() -> None:
     assert 'push --force "$REMOTE" --tags' not in source
 
 
+def test_no_follow_tags_overrides_global_push_config(tmp_path: Path) -> None:
+    remote, source = _remote_with_history(tmp_path)
+    mirror = tmp_path / "mirror"
+    _git(tmp_path, "clone", "-q", str(source), str(mirror))
+    _commit(mirror, "new-work")
+    _git(mirror, "tag", "-a", "archive-tag", "-m", "must remain local")
+
+    _git(
+        mirror,
+        "-c",
+        "push.followTags=true",
+        "push",
+        "-q",
+        "--force",
+        "--no-follow-tags",
+        str(remote),
+        "refs/heads/main:refs/heads/main",
+    )
+
+    assert _git(remote, "for-each-ref", "--format=%(refname)", "refs/tags") == ""
+
+
 def test_publish_script_scans_filtered_tree_before_branch_push() -> None:
     source = PUBLISH.read_text(encoding="utf-8")
     scan_at = source.index("scan_public_secrets.py")
-    push_at = source.index('push --force "$REMOTE" main')
+    push_at = source.index(PUSH_LINES[0])
     assert scan_at < push_at
 
 
