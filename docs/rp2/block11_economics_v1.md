@@ -18,8 +18,8 @@ is left unimplemented and named as a gap.
 
 ## 2. Bridge B — the honest reading of a very large Sharpe
 
-Evaluation is on **non-overlapping origins only** (30-minute spacing, 6,012 rows in D and
-2,080 in V); overlapping payoffs would count the same variance six times and inflate every
+Evaluation is on **non-overlapping origins only** (30-minute spacing, 5,758 rows in D and
+1,108 in V); overlapping payoffs would count the same variance six times and inflate every
 Sharpe by roughly √6. Transaction cost is measured, not assumed: half the round-trip option
 relative spread at the origin, converted to annualised variance units (median ≈ 0.0009 in
 variance units against an implied-minus-trailing variance spread of ≈ 0.069). That spread is
@@ -71,22 +71,26 @@ once its own selection and its fat tails are accounted for.
 Volatility targeting, VaR breach rate at 5 %, and mean-variance certainty equivalent, using
 each forecast to size positions:
 
-| Universe | model | vol-target tracking error | VaR breach rate (target 0.05) |
-|---|---|---|---|
-| D | log-OLS B0 | 0.914 | 0.047 |
-| D | log-OLS **B0+B1+B2** | **0.776** | **0.044** |
-| D | Gamma B0 → B0+B1+B2 | 0.880 → **0.740** | 0.047 → 0.045 |
-| D | LightGBM B0 → B0+B1+B2 | 0.981 → 0.934 | 0.051 → 0.052 |
-| V | log-OLS B0 → B0+B1+B2 | 1.523 → **1.590** | 0.069 → 0.064 |
-| V | Gamma B0 → B0+B1+B2 | 1.441 → **1.474** | 0.070 → 0.062 |
-| V | LightGBM B0 → B0+B1+B2 | 1.683 → 1.640 | 0.076 → 0.081 |
+<!-- BLOCK11_CURRENT_RISK_UTILITY -->
 
-**The one place option information consistently helps is volatility targeting in discovery**:
-tracking error falls 15 % (log-OLS 0.914 → 0.776) and 16 % (Gamma 0.880 → 0.740). In
-validation it degrades for two of three models. VaR breach rates improve slightly with option
-information in five of six comparisons, but the validation-era breach rates (0.062 – 0.081
-against a 0.05 nominal) are poorly calibrated for **both** information sets, so this is not a
-claim that options fix VaR.
+| Universe | model | vol-target tracking error | change | VaR breach rate (nominal 0.05) |
+|---|---|---|---|---|
+| D | log-OLS B0 &rarr; B0+B1+B2 | 0.7588 &rarr; 0.7225 | -4.8 % | 0.0368 &rarr; 0.0365 |
+| V | log-OLS B0 &rarr; B0+B1+B2 | 1.8585 &rarr; 1.8992 | +2.2 % | 0.0397 &rarr; 0.0433 |
+| D | Gamma B0 &rarr; B0+B1+B2 | 0.7283 &rarr; 0.6976 | -4.2 % | 0.0382 &rarr; 0.0380 |
+| V | Gamma B0 &rarr; B0+B1+B2 | 1.7221 &rarr; 1.7592 | +2.2 % | 0.0397 &rarr; 0.0379 |
+| D | LightGBM B0 &rarr; B0+B1+B2 | 0.7809 &rarr; 0.7532 | -3.5 % | 0.0399 &rarr; 0.0424 |
+| V | LightGBM B0 &rarr; B0+B1+B2 | 1.7216 &rarr; 1.9069 | +10.8 % | 0.0605 &rarr; 0.0605 |
+
+<!-- /BLOCK11_CURRENT_RISK_UTILITY -->
+
+**The one place option information helps at all is volatility targeting in discovery**:
+tracking error falls 4.8 % under log-OLS, 4.2 % under Gamma and 3.5 % under LightGBM. In
+validation it degrades under all three. VaR breach rates move in both directions and by
+little: three of six comparisons improve, two worsen and one is unchanged. The validation
+breach rates run 0.0379 – 0.0605 against a 0.05 nominal, five of six of them below it, so
+these arms are conservative rather than mis-sized; either way this is not a claim that
+options fix VaR.
 
 ## 4. Economic success criterion
 
@@ -99,6 +103,6 @@ buffer; and no interval is reported as compatible with positive profitability be
 underlying strategy is unconditional carry rather than a forecast product.
 
 **Advance rule "positive net value": FAIL.** The single economically interesting residue is
-the discovery-era volatility-targeting improvement (≈ 15 % lower tracking error), which is
+the discovery-era volatility-targeting improvement (≈ 4 – 5 % lower tracking error), which is
 risk-management utility rather than P&L, does not replicate in validation, and is reported as
 exploratory.
