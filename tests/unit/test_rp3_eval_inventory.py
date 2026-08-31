@@ -147,6 +147,28 @@ def test_eval_bar_loader_uses_the_shared_normalizer(tmp_path: Path) -> None:
     )
 
 
+def test_warmup_rows_are_filtered_before_panel_write() -> None:
+    import importlib.util
+
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location(
+        "rp3_build_eval_panels", root / "scripts" / "rp3_build_eval_panels.py"
+    )
+    assert spec is not None and spec.loader is not None
+    driver = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(driver)
+
+    frame = pl.DataFrame(
+        {
+            "session_date": ["2026-07-17", "2026-07-20"],
+            "asset": ["AAPL", "AAPL"],
+            "origin_minute": [35, 35],
+        }
+    )
+    filtered = driver.filter_eval_sessions(frame, {"2026-07-20"})
+    assert filtered["session_date"].to_list() == ["2026-07-20"]
+
+
 def test_join_market_controls_uses_the_origin_key(tmp_path: Path) -> None:
     """The b0-controls join is keyed on origin_minute (block 4's own key), and an
     empty controls frame skips the join — the inline version briefly used a

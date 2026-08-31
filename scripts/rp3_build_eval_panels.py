@@ -81,7 +81,23 @@ def join_market_controls(b0_panel: pl.DataFrame, controls: pl.DataFrame) -> pl.D
     return b0_panel.join(controls, on=["session_date", "origin_minute"], how="left")
 
 
-def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, object]:
+def filter_eval_sessions(frame: pl.DataFrame, sessions: set[str]) -> pl.DataFrame:
+    """Remove target-blind warmup rows before any evaluation panel is written."""
+
+    filtered = frame.filter(pl.col("session_date").cast(pl.String).is_in(sorted(sessions)))
+    observed = set(filtered["session_date"].cast(pl.String).unique().to_list())
+    if observed != sessions:
+        raise ValueError(f"RP3_EVAL_BUILT_SESSION_MISMATCH:{sorted(observed)}")
+    return filtered
+
+
+def build_batch(
+    data_root: Path,
+    batch_dir: Path,
+    *,
+    workers: int,
+    warmup_bars: pl.DataFrame | None = None,
+) -> dict[str, object]:
     """Blocks 3 → 4 → 5 → 6 over one batch; returns the batch summary."""
 
     tape_sessions = discover_tape_sessions(data_root / TAPE_RELATIVE)
@@ -90,13 +106,22 @@ def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, 
         tape_sessions, list(TARGET_ASSETS), inventory_path
     )
 
-    bars = load_eval_bars(data_root)
+    evaluation_bars = load_eval_bars(data_root)
+    warmup_sessions: list[str] = []
+    if warmup_bars is not None:
+        warmup_sessions = sorted(
+            str(value) for value in warmup_bars["session_date"].unique().to_list()
+        )
+        bars = pl.concat([warmup_bars, evaluation_bars], how="diagonal")
+    else:
+        bars = evaluation_bars
     block3 = _load_block("rp2_block3_target_panel")
     block4 = _load_block("rp2_block4_b0_panel")
 
     target_dir = batch_dir / "rp2_block3_target"
     target_dir.mkdir(parents=True, exist_ok=True)
     target_panel, target_counters = block3.build_panel(bars, max_fill_share=0.05)  # noqa: SLF001
+    target_panel = filter_eval_sessions(target_panel, set(tape_sessions))
     target_panel.write_parquet(target_dir / "target_panel.parquet")
 
     b0_dir = batch_dir / "rp2_block4_b0"
@@ -104,6 +129,7 @@ def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, 
     b0_panel, b0_counters = block4.build_b0_panel(bars, max_fill_share=0.05)  # noqa: SLF001
     controls = block4.build_market_controls(bars)  # noqa: SLF001
     b0_panel = join_market_controls(b0_panel, controls)
+    b0_panel = filter_eval_sessions(b0_panel, set(tape_sessions))
     b0_panel.write_parquet(b0_dir / "b0_panel.parquet")
 
     for script, out_name in (
@@ -137,6 +163,8 @@ def build_batch(data_root: Path, batch_dir: Path, *, workers: int) -> dict[str, 
         "role": EVAL_ROLE,
         "sessions": sorted(tape_sessions),
         "inventory_rows": inventory_rows,
+        "warmup_rows_written_or_scored": 0,
+        "warmup_sessions": warmup_sessions,
         "target_counters": target_counters,
         "b0_counters": b0_counters,
     }
