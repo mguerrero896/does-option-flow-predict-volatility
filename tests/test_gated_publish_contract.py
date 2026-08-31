@@ -8,6 +8,7 @@ here fails the suite BEFORE it can leak into the public repository.
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -61,7 +62,9 @@ def _push_fixture(tmp_path: Path) -> tuple[Path, str, str, str]:
     return repo, gated_path, clean_sha, archive_sha
 
 
-def _run_pre_push(repo: Path, ref: str, sha: str) -> subprocess.CompletedProcess[str]:
+def _run_pre_push(
+    repo: Path, ref: str, sha: str, *, env: dict[str, str] | None = None
+) -> subprocess.CompletedProcess[str]:
     payload = f"{ref} {sha} {ref} {'0' * 40}\n"
     return subprocess.run(
         [_portable_bash(), PRE_PUSH_HOOK.as_posix(), "origin", "unused"],
@@ -69,6 +72,7 @@ def _run_pre_push(repo: Path, ref: str, sha: str) -> subprocess.CompletedProcess
         input=payload,
         capture_output=True,
         text=True,
+        env=env,
     )
 
 
@@ -109,6 +113,21 @@ def test_pre_push_allows_clean_tip(tmp_path: Path) -> None:
     repo, _, clean_sha, _ = _push_fixture(tmp_path)
     result = _run_pre_push(repo, "refs/heads/main", clean_sha)
     assert result.returncode == 0, result.stderr
+
+
+def test_pre_push_fails_closed_when_path_scan_errors(tmp_path: Path) -> None:
+    repo, _, _, archive_sha = _push_fixture(tmp_path)
+    bash_env = tmp_path / "force-grep-error.sh"
+    bash_env.write_text("grep() { return 2; }\n", encoding="utf-8")
+    env = os.environ.copy()
+    env["BASH_ENV"] = bash_env.as_posix()
+
+    result = _run_pre_push(
+        repo, "refs/heads/archive", archive_sha, env=env
+    )
+
+    assert result.returncode != 0
+    assert "PRE_PUSH_GATED_SCAN_FAILED" in result.stderr
 
 
 def test_every_large_parquet_is_gated() -> None:

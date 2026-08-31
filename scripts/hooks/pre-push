@@ -12,8 +12,15 @@ exclude_list="$root/scripts/_gated_exclude_list.txt"
 }
 
 gated=$(mktemp) || exit 1
-trap 'rm -f "$gated"' EXIT
-tr -d '\r' < "$exclude_list" | sed '/^[[:space:]]*$/d' > "$gated"
+tree=$(mktemp) || {
+  rm -f "$gated"
+  exit 1
+}
+trap 'rm -f "$gated" "$tree"' EXIT
+if ! tr -d '\r' < "$exclude_list" | sed '/^[[:space:]]*$/d' > "$gated"; then
+  echo "PRE_PUSH_GATED_LIST_UNREADABLE: scripts/_gated_exclude_list.txt" >&2
+  exit 1
+fi
 [[ -s "$gated" ]] || {
   echo "PRE_PUSH_GATED_LIST_EMPTY" >&2
   exit 1
@@ -28,10 +35,17 @@ while read -r local_ref local_sha _remote_ref _remote_sha; do
     status=1
     continue
   }
-  matches=$(git ls-tree -r --name-only "$local_sha" | tr -d '\r' | grep -Fxf "$gated" || true)
-  if [[ -n "$matches" ]]; then
+  if ! git ls-tree -r --name-only "$local_sha" | tr -d '\r' > "$tree"; then
+    echo "PRE_PUSH_TREE_SCAN_FAILED: $local_ref" >&2
+    status=1
+    continue
+  fi
+  if matches=$(grep -Fxf "$gated" "$tree"); then
     echo "PRE_PUSH_GATED_PATH_REJECTED: $local_ref" >&2
     echo "$matches" >&2
+    status=1
+  elif [[ $? -ne 1 ]]; then
+    echo "PRE_PUSH_GATED_SCAN_FAILED: $local_ref" >&2
     status=1
   fi
 done
