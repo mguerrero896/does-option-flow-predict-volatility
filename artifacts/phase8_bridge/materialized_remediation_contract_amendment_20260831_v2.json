@@ -1,0 +1,30 @@
+{
+  "amendment_reason": "CURRENT_B0_USES_THE_T_MINUS_120_SECOND_ASOF_LAG_AND_THEREFORE_REMOVES_ORIGIN_MINUTE_30",
+  "amendment_sha256": "72edf9700265ed2e53d39bcaeb742f6f629ddb028bcfa7b8d5139475d51eb447",
+  "amends_contract_sha256": "5f02db3c46b220f38b22a43147fe9738522a2effb66909621a372f259ab1ec51",
+  "comparison_grid": {
+    "historical_only_origins": 175,
+    "historical_only_origin_minute": 30,
+    "historical_rows": 11875,
+    "paired_common_origins": 11700,
+    "remediated_only_origins": 0,
+    "remediated_rows": 11700
+  },
+  "decision_rules": {
+    "improvement_is_lower_mean_qlike_on_the_paired_common_grid": true,
+    "report_current_grid_qlike_separately": true,
+    "report_every_role_model_information_set_and_window": true
+  },
+  "invariants": {
+    "b2_core_features_exact_on_paired_common_grid": true,
+    "forecast_exact_equality_not_required_because_b0_changed_by_design": true,
+    "new_phase8_sessions_collected": 0,
+    "phase8_scoring_started_before_amendment": false,
+    "rv30_exact_on_paired_common_grid": true
+  },
+  "schema_version": "phase8-materialized-remediation-contract-amendment-v2.0",
+  "status": "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT",
+  "supersedes": "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v1.json",
+  "supersedes_amendment_sha256": "6216fa3640177a585196689000890b2745bd3dbfa9d462fce71daf87130158db",
+  "warmup_amendment_remains_in_force": true
+}
