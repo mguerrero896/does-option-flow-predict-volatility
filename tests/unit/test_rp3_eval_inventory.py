@@ -10,8 +10,10 @@ here — their contracts do that — only the adapter's promises.
 from __future__ import annotations
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
+import polars as pl
 import pytest
 
 from mds650.rp3.eval_inventory import (
@@ -112,14 +114,44 @@ def test_the_dry_run_reports_the_wiring_it_found(tmp_path: Path) -> None:
     # The fixture has no bar store: the dry run must SAY so, not fail or pretend.
     assert all(store["present"] is False for store in stores.values())
 
+
+def test_eval_bar_loader_uses_the_shared_normalizer(tmp_path: Path) -> None:
+    """The adapter survives Block 3 moving normalization into the shared bar module."""
+
+    import importlib.util
+
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location(
+        "rp3_build_eval_panels", root / "scripts" / "rp3_build_eval_panels.py"
+    )
+    assert spec is not None and spec.loader is not None
+    driver = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(driver)
+
+    store = tmp_path / "rp3" / "data" / "fmp" / "underlying_1min_eval.parquet"
+    store.parent.mkdir(parents=True)
+    pl.DataFrame(
+        {
+            "asset": ["AAPL"],
+            "bar_start_utc": [datetime(2026, 7, 20, 13, 30, tzinfo=UTC)],
+            "close": [200.0],
+        }
+    ).write_parquet(store)
+
+    bars = driver._load_eval_bars(tmp_path)  # noqa: SLF001
+    assert bars.select("session_date", "minute", "role").row(0) == (
+        datetime(2026, 7, 20).date(),
+        0,
+        EVAL_ROLE,
+    )
+
+
 def test_join_market_controls_uses_the_origin_key(tmp_path: Path) -> None:
     """The b0-controls join is keyed on origin_minute (block 4's own key), and an
     empty controls frame skips the join — the inline version briefly used a
     nonexistent ``minute`` column, which only a real build would have hit."""
 
     import importlib.util
-
-    import polars as pl
 
     root = Path(__file__).resolve().parents[2]
     spec = importlib.util.spec_from_file_location(

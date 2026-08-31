@@ -5,7 +5,7 @@ excludes every post-window date, so it can never build panels for the sessions R
 to score. This driver runs the same four block builders over an RP3 batch instead,
 without touching anything the sealed programme depends on:
 
-- Blocks 3 and 4 are driven **by import**: their pure functions (`_normalise`,
+- Blocks 3 and 4 are driven **by import**: their pure functions (`normalise_bars`,
   `build_panel`, `build_b0_panel`, `build_market_controls`) run over the batch's own bar
   stores (`mds650.rp3.eval_inventory.EVAL_BAR_SOURCES`), so `BAR_SOURCES` — the frozen
   registry every RP2 input manifest names — is never edited.
@@ -29,13 +29,14 @@ import argparse
 import json
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Final
 
 import polars as pl
 
 from mds650.config import provisional_data_root
+from mds650.rp2.bars import normalise_bars
 from mds650.rp2.panel import TARGET_ASSETS
 from mds650.rp3.eval_inventory import (
     EVAL_BAR_SOURCES,
@@ -83,16 +84,15 @@ def join_market_controls(b0_panel: pl.DataFrame, controls: pl.DataFrame) -> pl.D
 def _load_eval_bars(data_root: Path) -> pl.DataFrame:
     """Concatenate the batch's bar stores with the RP3 role, in block 3's own shape."""
 
-    block3 = _load_block("rp2_block3_target_panel")
     frames: list[pl.DataFrame] = []
     for name, role, relative in EVAL_BAR_SOURCES:
         path = data_root / relative
         if not path.is_file():
             raise FileNotFoundError(f"RP3_EVAL_BAR_STORE_MISSING:{name}:{path}")
-        normalised = block3._normalise(pl.read_parquet(path))  # noqa: SLF001
+        normalised = normalise_bars(pl.read_parquet(path))
         frames.append(normalised.with_columns(source=pl.lit(name), role=pl.lit(role)))
     bars = pl.concat(frames, how="vertical")
-    stale = bars.filter(pl.col("session_date") <= "2026-07-17")
+    stale = bars.filter(pl.col("session_date") <= date(2026, 7, 17))
     if stale.height:
         earliest = str(stale["session_date"].min())
         raise ValueError(f"RP3_EVAL_WINDOW_VIOLATION:{earliest}")
