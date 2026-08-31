@@ -4,160 +4,79 @@
   "meta": {
     "title": "From licensed market data to a sealed verdict",
     "output": "architecture.html",
-    "quality_profile": "showcase",
-    "views": [
-      {
-        "id": "evidence-path",
-        "label": "Evidence path",
-        "focus": [
-          "providers",
-          "pit",
-          "sets",
-          "models",
-          "inference"
-        ],
-        "note": "Provider payloads become one point-in-time panel, three nested information sets, frozen models, and session-clustered inference."
-      },
-      {
-        "id": "two-tiers",
-        "label": "Two verification tiers",
-        "focus": [
-          "tier1",
-          "tier2",
-          "evidence",
-          "canonical"
-        ],
-        "note": "Hosted CI proves the public repository is sound. Only the local tier sees licensed panels and can verify their hashes."
-      },
-      {
-        "id": "sealed-reads",
-        "label": "Sealed cohorts",
-        "focus": [
-          "sealed",
-          "inference",
-          "canonical"
-        ],
-        "note": "A sealed cohort opens once, under a protocol frozen before the data existed. Phase 8 is spent; Phase 9 is still collecting."
-      }
-    ]
+    "quality_profile": "showcase"
   },
   "components": [
     {
       "id": "providers",
       "type": "external",
       "label": "Market data providers",
-      "sublabel": "FMP / Massive / UW",
+      "sublabel": "FMP, Massive, Unusual Whales",
       "pos": [
-        60,
-        390
+        100,
+        40
       ],
       "size": [
-        180,
-        76
+        520,
+        78
       ],
-      "tag": "licensed, not redistributed"
+      "tag": "licensed, never redistributed"
     },
     {
-      "id": "pit",
+      "id": "panel",
       "type": "backend",
       "label": "Point-in-time panel",
-      "sublabel": "rp2.panel, pit_ledger",
+      "sublabel": "availability, not source time",
       "pos": [
-        320,
-        390
+        100,
+        180
       ],
       "size": [
-        180,
-        76
-      ],
-      "tag": "availability, not source time"
+        520,
+        78
+      ]
     },
     {
       "id": "sets",
       "type": "backend",
       "label": "Nested information sets",
-      "sublabel": "B0 in B1 in B2",
+      "sublabel": "B0 in B1 in B2, one shared row mask",
       "pos": [
-        580,
-        390
+        100,
+        320
       ],
       "size": [
-        180,
-        76
+        520,
+        78
       ]
     },
     {
       "id": "models",
       "type": "backend",
-      "label": "Frozen model families",
-      "sublabel": "Gamma / ridge / LGBM",
+      "label": "Frozen models and inference",
+      "sublabel": "QLIKE, session bootstrap, Holm",
       "pos": [
-        840,
-        390
+        100,
+        460
       ],
       "size": [
-        180,
-        76
+        520,
+        78
       ],
-      "tag": "method freeze, hashed"
-    },
-    {
-      "id": "inference",
-      "type": "backend",
-      "label": "Session-clustered inference",
-      "sublabel": "rp2.dml, rp2.inference",
-      "pos": [
-        1100,
-        390
-      ],
-      "size": [
-        180,
-        76
-      ],
-      "tag": "bootstrap, Holm"
-    },
-    {
-      "id": "tier2",
-      "type": "backend",
-      "label": "Tier 2 local gates",
-      "sublabel": "run_local_evidence_gates.py",
-      "pos": [
-        300,
-        595
-      ],
-      "size": [
-        220,
-        76
-      ],
-      "tag": "verifies gated hashes"
-    },
-    {
-      "id": "sealed",
-      "type": "database",
-      "label": "Sealed cohorts",
-      "sublabel": "Phase 8 spent, 9 open",
-      "pos": [
-        1100,
-        595
-      ],
-      "size": [
-        180,
-        76
-      ],
-      "tag": "read exactly once"
+      "tag": "method freeze hashed first"
     },
     {
       "id": "evidence",
       "type": "database",
       "label": "Frozen evidence",
-      "sublabel": "artifacts/ + SHA-256",
+      "sublabel": "aggregates and SHA-256 manifests",
       "pos": [
-        1100,
-        160
+        100,
+        630
       ],
       "size": [
-        180,
-        76
+        520,
+        78
       ]
     },
     {
@@ -166,50 +85,32 @@
       "label": "CANONICAL_STATE.json",
       "sublabel": "fail-closed eligibility",
       "pos": [
-        720,
-        160
+        100,
+        770
       ],
       "size": [
-        180,
-        76
+        520,
+        78
       ],
       "tag": "wins over any document"
-    },
-    {
-      "id": "tier1",
-      "type": "cloud",
-      "label": "Tier 1 hosted CI",
-      "sublabel": "hermetic, public only",
-      "pos": [
-        340,
-        160
-      ],
-      "size": [
-        180,
-        76
-      ]
     }
   ],
   "boundaries": [
     {
       "kind": "region",
-      "label": "Licensed plane: local machine only, never redistributed",
+      "label": "Licensed plane: local machine only",
       "wraps": [
-        "pit",
+        "panel",
         "sets",
-        "models",
-        "inference",
-        "tier2",
-        "sealed"
+        "models"
       ]
     },
     {
       "kind": "security-group",
-      "label": "Public plane: aggregates, schemas and hashes",
+      "label": "Public plane: what the repository publishes",
       "wraps": [
         "evidence",
-        "canonical",
-        "tier1"
+        "canonical"
       ]
     }
   ],
@@ -217,63 +118,39 @@
     {
       "id": "acquire",
       "from": "providers",
-      "to": "pit",
+      "to": "panel",
       "label": "acquire",
-      "variant": "emphasis"
+      "variant": "emphasis",
+      "labelDy": 24
     },
     {
-      "id": "build-sets",
-      "from": "pit",
+      "id": "build",
+      "from": "panel",
       "to": "sets",
-      "label": "common row mask"
+      "label": "one common mask",
+      "labelDy": 24
     },
     {
       "id": "fit",
       "from": "sets",
       "to": "models",
-      "label": "fit per set"
-    },
-    {
-      "id": "score",
-      "from": "models",
-      "to": "inference",
-      "label": "QLIKE deltas"
-    },
-    {
-      "id": "verify-panels",
-      "from": "tier2",
-      "to": "pit",
-      "label": "verify gated hashes",
-      "variant": "security",
-      "fromSide": "top",
-      "toSide": "bottom"
-    },
-    {
-      "id": "one-read",
-      "from": "sealed",
-      "to": "inference",
-      "label": "one authorized read",
-      "variant": "security"
+      "label": "fit per set",
+      "labelDy": 24
     },
     {
       "id": "freeze",
-      "from": "inference",
+      "from": "models",
       "to": "evidence",
-      "label": "freeze + hash"
+      "label": "freeze and hash",
+      "variant": "emphasis",
+      "labelDy": 24
     },
     {
       "id": "govern",
       "from": "evidence",
       "to": "canonical",
-      "label": "eligibility",
-      "variant": "emphasis"
-    },
-    {
-      "id": "gate-ci",
-      "from": "tier1",
-      "to": "canonical",
-      "label": "blocks drift",
-      "variant": "dashed"
+      "label": "decides eligibility",
+      "labelDy": 24
     }
   ],
   "cards": [
@@ -298,7 +175,7 @@
       "title": "Fail-closed by default",
       "items": [
         "The canonical state refuses to promote what it cannot support",
-        "Absent licensed panels fail the guard rather than skipping"
+        "A sealed cohort opens once, under a protocol written first"
       ]
     }
   ]

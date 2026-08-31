@@ -1,5 +1,7 @@
 # Block 5 — Gate 4: B1 as a volatility surface, not an isolated ATM IV
 
+> **SUPERSEDED ARTIFACT.** The artifact this document pins in its header is registered as superseded in [`../rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md). The figures below are historical; the current record is [`../rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md).
+
 **Status:** `EXECUTED — 2026-08-19` · label `EXPLORATORY_MECHANISM_DISCOVERY`
 **Artifacts:** `artifacts/rp2_block5_surface/surface_coverage.json`
 (`surface_sha256 = 5fa3134d70da680e6339aa45653949acff1ba44f018d77e9b6e893198f7c02f5`);

@@ -1,5 +1,8 @@
 # Effective sample size and planning-only feasibility
 
+> **Evidence file not in this release.** The artifact named above is not present in the public tree and is not a gated dataset; it did not survive the repository recreations. The reasoning below is retained for audit, but its numbers cannot be recomputed from this checkout. See [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+
+
 Evidence: `artifacts/feasibility/effective_sample_size_v1.json`.
 
 The availability-aware matrix has 13,240 rows, 25 observed trading days and

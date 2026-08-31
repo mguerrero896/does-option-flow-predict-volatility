@@ -1,5 +1,7 @@
 # Block 4 — Gate 3: a B0 that is genuinely hard to beat
 
+> **SUPERSEDED RESULTS.** The EWMA challenger figures printed below are withdrawn, and the approval rule stated here rests on them. The current corrected-protocol record is [`../rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md); withdrawals are in [`../rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md).
+
 **Status:** `EXECUTED — 2026-08-18` · label `EXPLORATORY_MECHANISM_DISCOVERY`
 **Artifacts:** `artifacts/rp2_block4_b0/{b0_panel.parquet, ladder.json}`
 **Ladder SHA-256:** `e4a44706c283fb2a31896db8f7859ce6d90f193f307e9c1b644e610f2a258af3`

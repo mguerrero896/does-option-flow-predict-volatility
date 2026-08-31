@@ -62,7 +62,7 @@ consistent economic gain.
 
 The Bailey–López de Prado deflated Sharpe probability — the probability the Sharpe is not the
 maximum one would expect from the number of configurations tried, given the payoff's skew and
-kurtosis — is **at most 0.19 anywhere, and 0.000 at the selective buffer**. Every strategy in
+kurtosis — is **at most 0.19 anywhere in the buffer sweep, and 0.000 at the selective buffer**. Every strategy in
 this block, with or without option information, is statistically indistinguishable from luck
 once its own selection and its fat tails are accounted for.
 
@@ -97,8 +97,10 @@ options fix VaR.
 The program's criterion is `E[P&L_net] > 0` with an interval compatible with positive
 profitability, plus stability by asset and period.
 
-**Not met, and not close.** No configuration produces a deflated Sharpe probability above
-0.19; the option-informed arm is worse than the underlying-only arm in discovery at every
+**Not met, and not close.** No configuration in the buffer sweep produces a deflated Sharpe probability above 0.19.
+The co-pinned `economics.json` records 0.92-0.97 for the six discovery configurations, but
+those are high for the underlying-only arm as well, so they measure the degenerate carry
+trade of section 2 rather than any option-information content; the option-informed arm is worse than the underlying-only arm in discovery at every
 buffer; and no interval is reported as compatible with positive profitability because the
 underlying strategy is unconditional carry rather than a forecast product.
 

@@ -1,6 +1,6 @@
 # Gate 6 — Regime/event composition (v1)
 
-> **SUPERSEDED REFERENCE.** This gate states that the prospective read's TOST bound is fixed by the Gate 4 amendment. Phase 8 was never TOST-armed, and `docs/gate4_prospective_design_v1.md` was removed from the public release for that framing. The regime analysis stands; the prospective-design clause does not. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+> **SUPERSEDED REFERENCE.** This gate states that the prospective read's TOST bound is fixed by the Gate 4 amendment. Phase 8 was never TOST-armed, and `docs/gate4_prospective_design_v1.md` was removed from the public release for that framing. The regime composition table stands. Its **reading** does not: the passage concluding that the decay is time-linked and that the signal "has since disappeared" restates the withdrawn decay line. The current position is that no decay is claimed - era point estimates rise rather than fall and every one sits below its familywise MDE. See [`rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
 
 Compiled 2026-08-17. Code: `scripts/run_gate6_regimes.py`; artifact
 `artifacts/gate6_regimes/results.json` (+ sha256). Frozen-artifact re-analysis plus the
@@ -34,7 +34,9 @@ get larger. The composition confound also fails to explain the decay: C6, the ca
 window by VIX median (15.1), carries the largest effect, while the 2026 windows (VIX
 17–18, unremarkable) are null. The decay pattern remains time-linked, not regime-linked
 — consistent with a signal that existed in the 2024–mid-2025 provider/market
-configuration and has since disappeared, whatever its cause.
+configuration and has since disappeared, whatever its cause. *(Withdrawn reading: see
+the banner above. Era point estimates rise rather than fall, all below their familywise
+MDE, and a time split cannot separate a regime change from a smaller training sample.)*
 
 Registration for the prospective read: the Gate 4 amendment already fixes the TOST
 bound; a regime-conditional secondary (top lagged-RV tercile) is unnecessary as a
