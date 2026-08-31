@@ -46,14 +46,14 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     bundle = state["scientific_bundle"]
 
-    assert bundle["run_id"] == "rp2-v3-20260831-timing-role-remediation"
+    assert bundle["run_id"] == "rp2-v3-20260831-b1-spot-cutoff-remediation"
     translation = bundle["historical_code_provenance"]
     manifest = json.loads((REPO / translation["manifest"]).read_text(encoding="utf-8"))
     assert translation["recorded_code_commit"] == manifest["code_commit"]
     assert translation["status"] == "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE"
     assert translation["verification_scope"] == "GIT_ANCESTOR_OF_CANONICAL_STATE_COMMIT"
     assert bundle["manifest"]["scientific_sha256"] == (
-        "7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3"
+        "033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4"
     )
     assert bundle["eligibility"]["status"] == "REBUILD_COMPLETE_PIT_V22_BLOCKED"
     assert bundle["eligibility"]["reasons"] == ["PIT_V22_RECONCILIATION_BLOCKED"]
@@ -63,7 +63,7 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     }
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
-    assert redactions["artifact_count"] == 12
+    assert redactions["artifact_count"] == 14
     assert state["external_publication"]["supabase"] == {
         "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
         "status": (
@@ -84,7 +84,7 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     )
     assert phase8["state"] == (
         "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
-        "AND_DISPERSION_AUDIT"
+        "AND_DISPERSION_AUDIT_AND_POSTHOC_MATERIALIZED_REMEDIATION"
     )
     assert phase8["sealed_cohorts_read"] == 1
     assert phase8["result"]["artifact"] == (
@@ -93,13 +93,24 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert phase8["result"]["confirmatory_promotion_allowed"] is False
     assert phase8["dispersion_audit"]["artifact"] == (
-        "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json"
+        "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json"
     )
     assert phase8["dispersion_audit"]["aggregation_change_supported"] is False
     assert phase8["dispersion_audit"]["delta_b1_holm_below_0_05_cells"] == 3
     assert phase8["dispersion_audit"]["delta_b2_given_b1_holm_below_0_05_cells"] == 0
+    remediation = phase8["posthoc_materialized_remediation"]
+    assert remediation["historical_result_preserved"] is True
+    assert remediation["new_sessions_collected"] == 0
+    assert remediation["sealed_cohorts_read"] == 0
+    assert remediation["sealed_store_reopened"] is False
+    assert remediation["result"]["claim_classification"] == (
+        "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY"
+    )
+    assert remediation["result"]["overall_classification"] == "MIXED_EXPLORATORY"
+    assert remediation["result"]["primary_b1_inclusive_cells"] == 8
+    assert remediation["result"]["primary_b1_inclusive_cells_improved"] == 1
     assert state["current_report"]["phase8_addendum"]["path"] == (
-        "reports/phase8a_exploratory_bridge_addendum_v11.md"
+        "reports/phase8a_exploratory_bridge_addendum_v13.md"
     )
     assert state["current_report"]["evidence_cutoff"] == "2026-08-31"
     assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])

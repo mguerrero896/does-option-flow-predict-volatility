@@ -11,7 +11,7 @@ ineligible.
 |---|---|
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative 2026-08-31 evidence-cutoff thesis source; Phase 8 is reported as `MIXED_EXPLORATORY` and Phase 9 as ongoing. |
 | [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Word rendering generated from the Markdown source at the 2026-08-31 evidence cutoff. |
-| [`phase8a_exploratory_bridge_addendum_v11.md`](phase8a_exploratory_bridge_addendum_v11.md) | Current post-cutoff Phase 8A interpretation: all Holm p-values for B1 and B2 conditional on B1, frozen audit/replay closure, timing-remediated current D/V comparison and historical-provenance limitation. |
+| [`phase8a_exploratory_bridge_addendum_v13.md`](phase8a_exploratory_bridge_addendum_v13.md) | Current post-cutoff Phase 8A interpretation: historical replay plus the precommitted same-30-session information-clock remediation, paired QLIKE comparison, custody and claim boundary. |
 
 The evidence-cutoff pair and post-cutoff addendum are hash-pinned under `current_report`
 in [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json). The Markdown thesis governs
@@ -34,8 +34,10 @@ current canonical state.
 [`phase8a_exploratory_bridge_addendum_v7.md`](phase8a_exploratory_bridge_addendum_v7.md),
 [`phase8a_exploratory_bridge_addendum_v8.md`](phase8a_exploratory_bridge_addendum_v8.md),
 [`phase8a_exploratory_bridge_addendum_v9.md`](phase8a_exploratory_bridge_addendum_v9.md),
-and [`phase8a_exploratory_bridge_addendum_v10.md`](phase8a_exploratory_bridge_addendum_v10.md)
-— frozen Phase 8A interpretations retained at their registered SHA-256 values; v11 is
+[`phase8a_exploratory_bridge_addendum_v10.md`](phase8a_exploratory_bridge_addendum_v10.md),
+[`phase8a_exploratory_bridge_addendum_v11.md`](phase8a_exploratory_bridge_addendum_v11.md),
+and [`phase8a_exploratory_bridge_addendum_v12.md`](phase8a_exploratory_bridge_addendum_v12.md)
+— immutable prior interpretations retained at their registered SHA-256 values; v13 is
 current.
 
 [`literature_review_20260811/`](literature_review_20260811/),

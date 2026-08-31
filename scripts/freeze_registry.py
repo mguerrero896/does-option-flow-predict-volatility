@@ -19,10 +19,16 @@ import hashlib
 import json
 import stat
 import sys
+from fnmatch import fnmatch
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
+REDACTIONS = REPO / "data" / "PUBLIC_METADATA_REDACTIONS.json"
+WITHDRAWAL_LISTS = (
+    REPO / "scripts" / "_gated_exclude_list.txt",
+    REPO / "scripts" / "_mirror_internal_exclude_list.txt",
+)
 
 
 def _load() -> dict[str, object]:
@@ -50,6 +56,23 @@ def _sha256(path: Path) -> str:
     if path.suffix not in BINARY_SUFFIXES:
         data = data.replace(b"\r\n", b"\n")
     return hashlib.sha256(data).hexdigest()
+
+
+def _redactions() -> dict[str, dict[str, object]]:
+    if not REDACTIONS.is_file():
+        return {}
+    entries = json.loads(REDACTIONS.read_text(encoding="utf-8"))["entries"]
+    return {str(entry["path"]): entry for entry in entries}
+
+
+def _withdrawn(relative: str) -> bool:
+    patterns = (
+        line.strip().removeprefix("glob:")
+        for source in WITHDRAWAL_LISTS
+        for line in source.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    )
+    return any(fnmatch(relative, pattern) for pattern in patterns)
 
 
 def add(paths: list[str]) -> int:
@@ -89,17 +112,36 @@ def add(paths: list[str]) -> int:
 def verify() -> int:
     registry = _load()
     failures = 0
+    accepted_redactions = 0
+    accepted_withdrawals = 0
+    redactions = _redactions()
     entries: list[dict[str, object]] = registry["entries"]  # type: ignore[assignment]
     for entry in entries:
-        path = REPO / str(entry["path"])
+        relative = str(entry["path"])
+        path = REPO / relative
         if not path.is_file():
+            if _withdrawn(relative):
+                accepted_withdrawals += 1
+                continue
             print(f"[freeze] MISSING {entry['path']}")
             failures += 1
             continue
-        if _sha256(path) != entry["sha256"]:
+        actual = _sha256(path)
+        if actual != entry["sha256"]:
+            redaction = redactions.get(relative)
+            if redaction and (
+                redaction["original_sha256"] == entry["sha256"]
+                and redaction["redacted_sha256"] == actual
+            ):
+                accepted_redactions += 1
+                continue
             print(f"[freeze] MUTATED {entry['path']}")
             failures += 1
-    print(f"[freeze] verify: {len(entries) - failures}/{len(entries)} intact")
+    print(
+        f"[freeze] verify: {len(entries) - failures}/{len(entries)} intact "
+        f"({accepted_redactions} public metadata redactions, "
+        f"{accepted_withdrawals} withdrawn)"
+    )
     return 0 if failures == 0 else 1
 
 

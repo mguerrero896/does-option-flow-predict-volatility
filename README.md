@@ -53,9 +53,12 @@ before that data existed.
 One such read is spent. Phase 8A opened on 2026-08-30 and returned `MIXED_EXPLORATORY`:
 the state layer was positive in all four cells with descriptive Holm p below 0.05 in
 three, while the flow layer crossed zero in all four and cleared Holm in none. An audit
-reproduced the registered inference exactly and found **no aggregation change**. The read
-is descriptive, **not confirmatory**, and cannot promote anything. Full result in the
-[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v11.md).
+reproduced the registered inference exactly and found **no aggregation change**. A separate
+post-hoc rebuild then corrected the information clock on the same 30 materialized sessions:
+only one of eight B1-inclusive primary cells lowered paired QLIKE, although the qualitative
+B1-positive/B2-conditional-null pattern survived. Both exercises are descriptive,
+**not confirmatory**, and cannot promote anything. Full result in the
+[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).
 
 One cohort is still collecting, and one is sealed until 2029.
 
@@ -151,10 +154,11 @@ This section is the machine-checked position, kept separate from the finding abo
 finding says what the evidence shows, this says what the project is permitted to claim.
 
 **No result is currently eligible as the project headline.** The corrected-protocol bundle
-is `rp2-v3-20260831-timing-role-remediation`, scientific hash
-`7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3`, status
+is `rp2-v3-20260831-b1-spot-cutoff-remediation`, scientific hash
+`033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`, status
 `REBUILD_COMPLETE_PIT_V22_BLOCKED`. Partition roles, the shared 120-second market cutoff
-and the XNYS expiry calendar are repaired and the 13-step rebuild passes, but
+for both B0 and B1 spot, and the XNYS expiry calendar are repaired and the 13-step rebuild
+passes, but
 `PIT_V22_RECONCILIATION_BLOCKED` remains.
 
 The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run

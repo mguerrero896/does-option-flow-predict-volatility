@@ -10,11 +10,11 @@
    "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
    "dispersion_audit": {
     "aggregation_change_supported": false,
-    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json",
-    "audit_sha256": "340edd4f9c5303a949c58fd3f3e474f54a6dba06efebd62a7f9f8c7e03a5be35",
+    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json",
+    "audit_sha256": "552e02a0dd4d2194b0a96f6972647a9b5fcaefab1473eacaf12623294ccede48",
     "delta_b1_holm_below_0_05_cells": 3,
     "delta_b2_given_b1_holm_below_0_05_cells": 0,
-    "sha256": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84"
+    "sha256": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363"
    },
    "document": "docs/phase8_bridge_protocol_v2.md",
    "evaluator": {
@@ -30,6 +30,38 @@
     "sha256": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf"
    },
    "id": "phase8-prospective-bridge",
+   "posthoc_materialized_remediation": {
+    "amendments": [
+     {
+      "amendment_sha256": "6216fa3640177a585196689000890b2745bd3dbfa9d462fce71daf87130158db",
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v1.json",
+      "sha256": "3c43f92da606cb357759c0433ce39b408e942377493020498f93e510924a6750"
+     },
+     {
+      "amendment_sha256": "72edf9700265ed2e53d39bcaeb742f6f629ddb028bcfa7b8d5139475d51eb447",
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v2.json",
+      "sha256": "9b9a08509b44735ee7b24454777d980b51e767f16cbd5ef1f3d935f27f803d37"
+     }
+    ],
+    "contract": {
+     "artifact": "artifacts/phase8_bridge/materialized_remediation_contract_20260831_v1.json",
+     "contract_sha256": "5f02db3c46b220f38b22a43147fe9738522a2effb66909621a372f259ab1ec51",
+     "sha256": "f8de2fe815462d297447b18e1bb03ab7a4095947eb5790728b9e6c8c001bda05"
+    },
+    "historical_result_preserved": true,
+    "new_sessions_collected": 0,
+    "result": {
+     "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+     "claim_classification": "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY",
+     "overall_classification": "MIXED_EXPLORATORY",
+     "primary_b1_inclusive_cells": 8,
+     "primary_b1_inclusive_cells_improved": 1,
+     "result_sha256": "1b10d63d344cb460add2ed1d0fe54d6f432f7f98909717a5cff31dd8c29855d4",
+     "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df"
+    },
+    "sealed_cohorts_read": 0,
+    "sealed_store_reopened": false
+   },
    "result": {
     "artifact": "artifacts/phase8_bridge/result_20260830_v1.json",
     "claim_classification": "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY",
@@ -40,7 +72,7 @@
    },
    "sealed_cohorts_read": 1,
    "sha256": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
-   "state": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_AND_DISPERSION_AUDIT"
+   "state": "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_AND_DISPERSION_AUDIT_AND_POSTHOC_MATERIALIZED_REMEDIATION"
   },
   {
    "academic_reporting": {
@@ -64,34 +96,38 @@
  "authorized_sources": {
   ".github/workflows/ci.yml": "7dbb6abda0ce46a13c857633efd3f0859d50b636dec6dee348451fe64146777e",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
-  "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84",
+  "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
   "artifacts/phase8_bridge/execution_recovery_20260830_v1.json": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf",
   "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b",
+  "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+  "artifacts/phase8_bridge/materialized_remediation_contract_20260831_v1.json": "f8de2fe815462d297447b18e1bb03ab7a4095947eb5790728b9e6c8c001bda05",
+  "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v1.json": "3c43f92da606cb357759c0433ce39b408e942377493020498f93e510924a6750",
+  "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v2.json": "9b9a08509b44735ee7b24454777d980b51e767f16cbd5ef1f3d935f27f803d37",
   "artifacts/phase8_bridge/one_shot_custody_20260830_v3.json": "52a9e50de191bb6391267b6e423fffe190c5b42120ac699b74f1131d7ad34067",
   "artifacts/phase8_bridge/owner_authorization_20260830_v1.json": "4e14fce59b7efc7e193fbe45e6dbede75b18b55041a1240b538a9c0f9551b315",
   "artifacts/phase8_bridge/result_20260830_v1.json": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
   "artifacts/phase9/power_deadline_audit_v1.json": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62",
-  "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json": "d3be36d2d1de1baa9e6b6a041805c803a77296aabb0497475eede36281b7d737",
-  "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/scorecard.json": "71698092f333e4bc7146967d1b069f4f69d6a866d971e7a7298fbc0389a54045",
+  "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a",
+  "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
-  "data/FROZEN_ARTIFACTS.json": "21618262fcfb4af2eefbb65ee88dbed28ab7b8f24fdd8546abeed144af0ebc4e",
+  "data/FROZEN_ARTIFACTS.json": "d241d97198cd33d7b3341cfc85c90bf624034ebcc412ed3d251231b51f336b48",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
-  "data/PUBLIC_COMMIT_TRANSLATIONS.json": "d70d1db64136b2753752c4ba2741cba796cdb9237cfef8ff11e0845d3c69452c",
-  "data/PUBLIC_METADATA_REDACTIONS.json": "75633878ed417dde2f8859760fdfbfac5f1ad245485929309d8aa782c457679d",
+  "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
+  "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "ff68396c0770dbbc34c2fc95a075ecde803e399c82caa2b8f08c5b53ebbf68c9",
+  "docs/methodology_decisions.md": "b432b653605dbe4bf915f388740bde7c37965ae53b8e0a9d88b64f2122211631",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "621bcd8bb19ac3ed7dd78fac37ddd063d5189b79284d0a1d4bb6a194e5976690",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
-  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "08455100ae6a86c81828e7c7b837ae72e7bd54683ee9f573ee4e3189f07b7d88",
-  "docs/rp2_v3/VERDICT.md": "77af171a7877190aca60d9d29288630b76a81af4a61d8522b49ce2ede48b3f4d",
-  "reports/final_report_draft_v2.docx": "45f8f67a4dd626b66d38ff273934bd86bdc52ca2fc43c49e7b1a1176529512ce",
-  "reports/final_report_draft_v2.md": "0a23308bfca826058f5c291dffbe8bb116df31f10046666b47c1d9254180f786",
-  "reports/phase8a_exploratory_bridge_addendum_v11.md": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b",
+  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
+  "docs/rp2_v3/VERDICT.md": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
+  "reports/final_report_draft_v2.docx": "b34f21d7d87e7e74bb52f98a96d8cfe09e44c9696845e7b74fec22092cd8f28d",
+  "reports/final_report_draft_v2.md": "c69e33b461ad6e6d9672c1d41dfabd735cabc5ba0e762c6f50b9f52a683598c5",
+  "reports/phase8a_exploratory_bridge_addendum_v13.md": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
  "canonical_results": {
@@ -112,16 +148,16 @@
  "current_report": {
   "evidence_cutoff": "2026-08-31",
   "phase8_addendum": {
-   "path": "reports/phase8a_exploratory_bridge_addendum_v11.md",
-   "sha256": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b"
+   "path": "reports/phase8a_exploratory_bridge_addendum_v13.md",
+   "sha256": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca"
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "0a23308bfca826058f5c291dffbe8bb116df31f10046666b47c1d9254180f786"
+   "sha256": "c69e33b461ad6e6d9672c1d41dfabd735cabc5ba0e762c6f50b9f52a683598c5"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",
-   "sha256": "45f8f67a4dd626b66d38ff273934bd86bdc52ca2fc43c49e7b1a1176529512ce"
+   "sha256": "b34f21d7d87e7e74bb52f98a96d8cfe09e44c9696845e7b74fec22092cd8f28d"
   }
  },
  "external_publication": {
@@ -137,16 +173,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 109,
+  "artifact_count": 120,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 107,
+  "physical_artifact_count": 118,
   "public_metadata_redactions": {
-   "artifact_count": 12,
+   "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
-   "ledger_sha256": "75633878ed417dde2f8859760fdfbfac5f1ad245485929309d8aa782c457679d"
+   "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "21618262fcfb4af2eefbb65ee88dbed28ab7b8f24fdd8546abeed144af0ebc4e"
+  "registry_sha256": "d241d97198cd33d7b3341cfc85c90bf624034ebcc412ed3d251231b51f336b48"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
@@ -157,8 +193,8 @@
   "storage": "supabase project eqpyjikcewqaegnbaemf, private bucket 'research-data'"
  },
  "governance": {
-  "decision_count": 115,
-  "latest_decision": 115
+  "decision_count": 118,
+  "latest_decision": 118
  },
  "note": "AUTO-GENERATED by scripts/generate_canonical_state.py; never edit by hand. CI regenerates and fails on drift (decision 63).",
  "schema_version": "canonical-state-v1.0",
@@ -173,29 +209,29 @@
    "status": "REBUILD_COMPLETE_PIT_V22_BLOCKED"
   },
   "historical_code_provenance": {
-   "manifest": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
-   "recorded_code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
-   "run_id": "rp2-v3-20260831-timing-role-remediation",
+   "manifest": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json",
+   "recorded_code_commit": "b70c54ba14fdda2197efd6bcf0aa676c4ba3d4f1",
+   "run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation",
    "status": "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE",
    "verification_scope": "GIT_ANCESTOR_OF_CANONICAL_STATE_COMMIT"
   },
   "manifest": {
-   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
-   "scientific_sha256": "7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3",
-   "sha256": "d3be36d2d1de1baa9e6b6a041805c803a77296aabb0497475eede36281b7d737"
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json",
+   "scientific_sha256": "033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4",
+   "sha256": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a"
   },
-  "run_id": "rp2-v3-20260831-timing-role-remediation",
+  "run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation",
   "scorecard": {
-   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/scorecard.json",
-   "sha256": "71698092f333e4bc7146967d1b069f4f69d6a866d971e7a7298fbc0389a54045"
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json",
+   "sha256": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5"
   },
   "superseded_register": {
    "path": "docs/rp2_v3/SUPERSEDED_RESULTS.md",
-   "sha256": "08455100ae6a86c81828e7c7b837ae72e7bd54683ee9f573ee4e3189f07b7d88"
+   "sha256": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833"
   },
   "verdict": {
    "path": "docs/rp2_v3/VERDICT.md",
-   "sha256": "77af171a7877190aca60d9d29288630b76a81af4a61d8522b49ce2ede48b3f4d",
+   "sha256": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
    "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
   }
  }

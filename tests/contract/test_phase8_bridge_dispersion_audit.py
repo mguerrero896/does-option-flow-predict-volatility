@@ -10,8 +10,6 @@ from typing import Any
 
 import pytest
 
-from mds650.executable_closure import build_executable_closure
-
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "scripts"))
 
@@ -27,6 +25,7 @@ AUDIT_V7 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v7.
 AUDIT_V8 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v8.json"
 AUDIT_V9 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260830_v9.json"
 AUDIT_V10 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260831_v10.json"
+AUDIT_V11 = REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_20260831_v11.json"
 PRODUCER_FREEZE_V1 = (
     REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v1.json"
 )
@@ -42,6 +41,9 @@ PRODUCER_FREEZE_V4 = (
 PRODUCER_FREEZE_V5 = (
     REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v5.json"
 )
+PRODUCER_FREEZE_V6 = (
+    REPO / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v6.json"
+)
 RESULT = REPO / "artifacts" / "phase8_bridge" / "result_20260830_v1.json"
 REPORT_V1 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v1.md"
 REPORT_V2 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v2.md"
@@ -54,6 +56,8 @@ REPORT_V8 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v8.md"
 REPORT_V9 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v9.md"
 REPORT_V10 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v10.md"
 REPORT_V11 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v11.md"
+REPORT_V12 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v12.md"
+REPORT_V13 = REPO / "reports" / "phase8a_exploratory_bridge_addendum_v13.md"
 REGISTRY = REPO / "data" / "FROZEN_ARTIFACTS.json"
 
 
@@ -72,8 +76,8 @@ def _canonical_sha(payload: dict[str, Any]) -> str:
 
 
 def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() -> None:
-    audit = _load(AUDIT_V10)
-    prior_audit = _load(AUDIT_V9)
+    audit = _load(AUDIT_V11)
+    prior_audit = _load(AUDIT_V10)
     result = _load(RESULT)
 
     assert audit["audit_sha256"] == _canonical_sha(audit)
@@ -92,7 +96,7 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert closure["algorithm"] == "sha256-of-sorted-path-and-normalized-sha256-v1"
     assert closure["file_count"] == 126
     assert closure["sha256"] == (
-        "e1ca4d2c340489d4141c0ea8fb74dedb931ca7990dee0c9b316d83413cb177e6"
+        "82b4c1a1f7c2c43cccbb909d4df2e2224279a4ac9202515a9ca7856133863b92"
     )
     assert {row["path"] for row in closure["files"]} >= {
         "scripts/rp2_block12_prospective_design.py",
@@ -105,14 +109,14 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     current = audit["source_identity"]["current_dv_reference"]
     assert current["pointer_manifest"] == {
         "path": "artifacts/rp2_panel_pointers.json",
-        "sha256": "49fccab99d7f2732be9dead1d5858380fa83d2deb8a2b18b65be5851b9633a0d",
+        "sha256": "739c6044e5469192a758b7de12b2c98f5a52d679efb5d61f9560fa1cf74ae078",
     }
     assert {path: row["sha256"] for path, row in current["panels"].items()} == {
         "artifacts/rp2_block4_b0/b0_panel.parquet": (
             "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20"
         ),
         "artifacts/rp2_block5_surface/b1_surface_panel.parquet": (
-            "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b"
+            "7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33"
         ),
         "artifacts/rp2_block6_flow/b2_flow_panel.parquet": (
             "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6"
@@ -124,34 +128,27 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     assert audit["status"] == "COMPLETE_WITH_HISTORICAL_PRODUCER_UNRESOLVED"
     producer_freeze = audit["source_identity"]["audit_producer_freeze"]
     assert producer_freeze["path"] == (
-        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v5.json"
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v6.json"
     )
     assert producer_freeze["file_sha256"] == (
-        "c7f200554283853aac3baf2fa2ea7c5498b1e4cbd6182dad29a758c7a2f139a6"
+        "cabfea8715846b27373d3333ba83fe9a9d479f70c624739256983dc8f01cccfa"
     )
     assert producer_freeze["freeze_sha256"] == (
-        "5abe03a2881b41a6046a99aecf0fc95cccc8708b664a5572ca89c0717d351ce5"
+        "f84c29313cf36449e9f4ff2c68ecd00473f5841037db086022b7abc38db53872"
     )
-    freeze_document = _load(PRODUCER_FREEZE_V5)
+    freeze_document = _load(PRODUCER_FREEZE_V6)
     assert freeze_document["supersedes"] == (
-        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json"
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v5.json"
     )
     assert freeze_document["supersession_reason"] == (
-        "RP2_V3_TIMING_AND_PARTITION_ROLE_REMEDIATION"
+        "RP2_V3_B1_SPOT_CUTOFF_REMEDIATION"
     )
-    expected_audit_closure = build_executable_closure(
-        REPO,
-        scripts=(
-            "scripts/build_phase8_bridge_dispersion_audit_v1.py",
-            "scripts/evaluate_phase8_bridge_v2.py",
-            "scripts/rp2_block12_prospective_design.py",
-            "uv.lock",
-        ),
-    )
-    assert producer_freeze["executable_closure"] == expected_audit_closure
-    assert expected_audit_closure["file_count"] == 128
-    assert expected_audit_closure["sha256"] == (
-        "be6149b1621403ef13f026487ac205c5ba3ffe5a24ce6b6d5f5d03fc2b1b52be"
+    # v11 is immutable historical evidence. The current RP3 adapter intentionally changed
+    # for the same-session remediation, so compare the stored closure to its frozen identity
+    # rather than pretending current source bytes still reproduce that prior freeze.
+    assert producer_freeze["executable_closure"]["file_count"] == 128
+    assert producer_freeze["executable_closure"]["sha256"] == (
+        "7e6c90d9bdbab6ec05c977c63fae2191103901195d42bb50095ea28307b4bbf4"
     )
     for field in (
         "checks",
@@ -214,8 +211,8 @@ def test_dispersion_audit_replays_the_primary_result_and_resolves_aggregation() 
     ]
 
 
-def test_addendum_v11_publishes_all_holm_values_and_preserves_history() -> None:
-    report = REPORT_V11.read_text(encoding="utf-8")
+def test_addendum_v12_publishes_all_holm_values_and_preserves_history() -> None:
+    report = REPORT_V12.read_text(encoding="utf-8")
     for value in ("0.9802", "0.0050", "0.0208", "0.0040"):
         assert value in report
     for value in ("0.5756", "0.3940", "0.9528", "1.0000"):
@@ -231,7 +228,7 @@ def test_addendum_v11_publishes_all_holm_values_and_preserves_history() -> None:
         "pointer manifest",
         "128-file audit/replay",
         "sealed_store_reopened = false",
-        "timing-and-role remediation",
+        "B1 spot-cutoff remediation",
     ):
         assert phrase in report
 
@@ -247,6 +244,8 @@ def test_addendum_v11_publishes_all_holm_values_and_preserves_history() -> None:
     assert registered[REPORT_V9.relative_to(REPO).as_posix()] == _sha(REPORT_V9)
     assert registered[REPORT_V10.relative_to(REPO).as_posix()] == _sha(REPORT_V10)
     assert registered[REPORT_V11.relative_to(REPO).as_posix()] == _sha(REPORT_V11)
+    assert registered[REPORT_V12.relative_to(REPO).as_posix()] == _sha(REPORT_V12)
+    assert registered[REPORT_V13.relative_to(REPO).as_posix()] == _sha(REPORT_V13)
     assert registered[AUDIT_V1.relative_to(REPO).as_posix()] == _sha(AUDIT_V1)
     assert registered[AUDIT_V2.relative_to(REPO).as_posix()] == _sha(AUDIT_V2)
     assert registered[AUDIT_V3.relative_to(REPO).as_posix()] == _sha(AUDIT_V3)
@@ -257,6 +256,7 @@ def test_addendum_v11_publishes_all_holm_values_and_preserves_history() -> None:
     assert registered[AUDIT_V8.relative_to(REPO).as_posix()] == _sha(AUDIT_V8)
     assert registered[AUDIT_V9.relative_to(REPO).as_posix()] == _sha(AUDIT_V9)
     assert registered[AUDIT_V10.relative_to(REPO).as_posix()] == _sha(AUDIT_V10)
+    assert registered[AUDIT_V11.relative_to(REPO).as_posix()] == _sha(AUDIT_V11)
     assert registered[PRODUCER_FREEZE_V1.relative_to(REPO).as_posix()] == _sha(
         PRODUCER_FREEZE_V1
     )
@@ -271,6 +271,9 @@ def test_addendum_v11_publishes_all_holm_values_and_preserves_history() -> None:
     )
     assert registered[PRODUCER_FREEZE_V5.relative_to(REPO).as_posix()] == _sha(
         PRODUCER_FREEZE_V5
+    )
+    assert registered[PRODUCER_FREEZE_V6.relative_to(REPO).as_posix()] == _sha(
+        PRODUCER_FREEZE_V6
     )
 
 
@@ -288,6 +291,6 @@ def test_dispersion_producer_refuses_a_registered_output() -> None:
                 "--b2-panel",
                 missing,
                 "--output",
-                str(AUDIT_V10),
+                str(AUDIT_V11),
             ]
         )

@@ -301,6 +301,11 @@
    "sha256": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84"
   },
   {
+   "bytes": 48536,
+   "path": "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json",
+   "sha256": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363"
+  },
+  {
    "bytes": 19070,
    "path": "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json",
    "sha256": "c786ef02f7eefdecebf2fb03fc7aa1e64c222bf024fcccfc6b7e55b8f22a8f56"
@@ -326,6 +331,11 @@
    "sha256": "c7f200554283853aac3baf2fa2ea7c5498b1e4cbd6182dad29a758c7a2f139a6"
   },
   {
+   "bytes": 19214,
+   "path": "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v6.json",
+   "sha256": "cabfea8715846b27373d3333ba83fe9a9d479f70c624739256983dc8f01cccfa"
+  },
+  {
    "bytes": 857,
    "path": "artifacts/phase8_bridge/evaluator_freeze_v2.json",
    "sha256": "27b5002ae11efeabfb15a48f20d2722f1259ab7586cf05acaf5fe8f80100174a"
@@ -349,6 +359,26 @@
    "bytes": 52877,
    "path": "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json",
    "sha256": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b"
+  },
+  {
+   "bytes": 116847,
+   "path": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+   "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df"
+  },
+  {
+   "bytes": 4164,
+   "path": "artifacts/phase8_bridge/materialized_remediation_contract_20260831_v1.json",
+   "sha256": "f8de2fe815462d297447b18e1bb03ab7a4095947eb5790728b9e6c8c001bda05"
+  },
+  {
+   "bytes": 1536,
+   "path": "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v1.json",
+   "sha256": "3c43f92da606cb357759c0433ce39b408e942377493020498f93e510924a6750"
+  },
+  {
+   "bytes": 1437,
+   "path": "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v2.json",
+   "sha256": "9b9a08509b44735ee7b24454777d980b51e767f16cbd5ef1f3d935f27f803d37"
   },
   {
    "bytes": 3413,
@@ -391,6 +421,11 @@
    "sha256": "04b5b94fd60d53defbca29282ba7ae86dd22e80779591479552ddae5b829a7c2"
   },
   {
+   "bytes": 295935,
+   "path": "artifacts/rp2_ext1_directional_factorial_v3/results.json",
+   "sha256": "c412c8ec5b2d0a39c91c99fda06da8db58548d38e38260bd2594010e1cf94e7f"
+  },
+  {
    "bytes": 2749,
    "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
    "sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba"
@@ -399,6 +434,16 @@
    "bytes": 8755,
    "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
    "sha256": "260f0e5d3f8b1dc7b29336df47395ee4a25ead01f9d9c70ce272e2bf6a1860f4"
+  },
+  {
+   "bytes": 2823,
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_identity.json",
+   "sha256": "3882ce44a1ce0cc3b0dbeb5d407f5c3c77f15da301c52e37f65efff5b48d08d0"
+  },
+  {
+   "bytes": 9047,
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json",
+   "sha256": "0a9826b8dce43cc60569d10df031d19a3a3cc8424c2bc6346c4abaf03844c016"
   },
   {
    "bytes": 2820,
@@ -459,6 +504,16 @@
    "bytes": 8182,
    "path": "reports/phase8a_exploratory_bridge_addendum_v11.md",
    "sha256": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b"
+  },
+  {
+   "bytes": 8236,
+   "path": "reports/phase8a_exploratory_bridge_addendum_v12.md",
+   "sha256": "d3a04eecb5d1959ece3e66e107dad5e2033af32a5a710a3c168d4d3555e34e10"
+  },
+  {
+   "bytes": 7666,
+   "path": "reports/phase8a_exploratory_bridge_addendum_v13.md",
+   "sha256": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca"
   },
   {
    "bytes": 5847,

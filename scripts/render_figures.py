@@ -87,6 +87,8 @@ def _contrasts() -> list[dict[str, Any]]:
 
 def evidence() -> Canvas:
     rows = _contrasts()
+    state_clears = sum(not row["flow"] and row["clears"] for row in rows)
+    flow_clears = sum(row["flow"] and row["clears"] for row in rows)
     left, plot, row_h, top = 300, 440, 32, 132
     bottom = top + row_h * len(rows)
     canvas = Canvas(
@@ -94,8 +96,8 @@ def evidence() -> Canvas:
         bottom + 108,
         "Twelve contrasts against the threshold each one declared",
         "Each nested contrast registered a minimum detectable effect before it was "
-        "measured. Three of twelve exceed their own threshold; two of those are option "
-        "state and one is option flow.",
+        f"measured. {state_clears + flow_clears} of twelve exceed their own threshold: "
+        f"{state_clears} option state and {flow_clears} option flow.",
         "evidence",
     )
     header(

@@ -40,10 +40,11 @@ def test_readme_contains_no_withdrawn_headline_figures() -> None:
 def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> None:
     readme = README.read_text(encoding="utf-8")
     assert "MIXED_EXPLORATORY" in readme
-    assert "reports/phase8a_exploratory_bridge_addendum_v11.md" in readme
+    assert "reports/phase8a_exploratory_bridge_addendum_v13.md" in readme
     assert "Holm" in readme
     assert "no aggregation change" in readme
     assert "not confirmatory" in readme
+    assert "one of eight B1-inclusive primary cells" in readme
 
 
 def test_readme_routes_history_and_evidence_to_researcher_documents() -> None:

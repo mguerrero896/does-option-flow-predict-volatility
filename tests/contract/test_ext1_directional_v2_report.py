@@ -9,7 +9,7 @@ from mds650.b1v3_confirmation import canonical_sha256, sha256_file
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "artifacts" / "rp2_ext1_directional_v2" / "results.json"
-FACTORIAL_RESULTS = ROOT / "artifacts" / "rp2_ext1_directional_factorial_v1" / "results.json"
+FACTORIAL_RESULTS = ROOT / "artifacts" / "rp2_ext1_directional_factorial_v3" / "results.json"
 FROZEN = ROOT / "artifacts" / "rp2_ext1_mechanism_utility" / "mechanism_utility.json"
 REPORT = ROOT / "docs" / "rp2" / "extension_b2_directional_utility_v2.md"
 DECISIONS = ROOT / "docs" / "methodology_decisions.md"

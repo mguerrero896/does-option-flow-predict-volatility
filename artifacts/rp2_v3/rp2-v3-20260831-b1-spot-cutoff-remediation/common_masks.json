@@ -1,0 +1,14 @@
+{
+  "D": {
+    "evaluation_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+    "panel_mask_sha256": "b876265e43f575a5e2f595d4e7ff96fc55eb65b196e57c053a061491b31af503",
+    "rows": 150629,
+    "usable_rows": 150629
+  },
+  "V": {
+    "evaluation_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+    "panel_mask_sha256": "c533ee9fa2ba3f8a7c5ab2cdfdc5d66f7ad0470bb4f9a1e73a10133eed491645",
+    "rows": 31200,
+    "usable_rows": 31200
+  }
+}

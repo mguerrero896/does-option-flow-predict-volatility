@@ -9,8 +9,8 @@
       "sha256": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20"
     },
     "artifacts/rp2_block5_surface/b1_surface_panel.parquet": {
-      "bytes": 41146313,
-      "sha256": "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b"
+      "bytes": 41142479,
+      "sha256": "7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33"
     },
     "artifacts/rp2_block6_flow/b2_flow_panel.parquet": {
       "bytes": 84072219,

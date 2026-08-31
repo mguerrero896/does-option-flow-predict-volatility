@@ -28,7 +28,7 @@ import pytest
 REPO = Path(__file__).resolve().parents[2]
 DOC = REPO / "docs" / "rp2_v3" / "VERDICT.md"
 REPORT = REPO / "reports" / "final_report_draft_v2.md"
-FACTORIAL = REPO / "artifacts" / "rp2_ext1_directional_factorial_v2" / "results.json"
+FACTORIAL = REPO / "artifacts" / "rp2_ext1_directional_factorial_v3" / "results.json"
 
 #: `ΔB2\|B1` escapes the pipe so the cell survives the markdown table; mask it before
 #: splitting on the column separator.
@@ -320,15 +320,15 @@ def test_the_six_pair_count_matches_the_artifact(document, inference) -> None:
     )
 
 
-def test_timing_remediated_factorial_and_alias_match_both_reports() -> None:
+def test_spot_remediated_factorial_and_alias_match_both_reports() -> None:
     result = json.loads(FACTORIAL.read_text(encoding="utf-8"))
     body = {key: value for key, value in result.items() if key != "self_sha256"}
     encoded = json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")
     assert result["self_sha256"] == hashlib.sha256(encoded).hexdigest()
     assert result["self_sha256"] == (
-        "42f919d3a88d840c41e357c54f27de1bfee9b119fdf9360f92aed6d357fc7fdb"
+        "ca495aa4b6a7b3745d1ddb6eaae8a849fa5ed58eef92021140bed796632d6121"
     )
-    assert result["code_commit"] == "cbdd0b5840da9ae685e2dff90a113ba33e7a7806"
+    assert result["code_commit"] == "d67fe13cb7abbc299ebdf795a9ff36b2fd800254"
     assert result["sealed_cohorts_read"] == 0
     assert len(result["tests"]) == 40
     assert result["mask_invariants"]["august_mask_subset_of_complete_mask"] is True
@@ -353,10 +353,10 @@ def test_timing_remediated_factorial_and_alias_match_both_reports() -> None:
     assert len(result["designs"]["b2_panel_12/august/D"]["requested_treatments"]) == 12
     assert result["attribution"]["classification"] == "TREATMENT_SET"
     assert result["attribution"]["median_abs_treatment_main_effect"] == pytest.approx(
-        0.40576416469527093
+        0.405476229618715
     )
     assert result["attribution"]["median_abs_coverage_main_effect"] == pytest.approx(
-        0.036811159471867694
+        0.0376801712403497
     )
 
     row_specs = {

@@ -31,15 +31,15 @@ CONTRACT: Final = ROOT / "artifacts" / "phase8_bridge" / "bridge_contract_v2.jso
 DESIGN: Final = ROOT / "artifacts" / "rp2_block12_prospective" / "design.json"
 POINTERS: Final = ROOT / "artifacts" / "rp2_panel_pointers.json"
 AUDIT_PRODUCER_FREEZE: Final = (
-    ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v5.json"
+    ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_producer_freeze_v6.json"
 )
 FROZEN_REGISTRY: Final = ROOT / "data" / "FROZEN_ARTIFACTS.json"
-DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260831_v10.json"
+DEFAULT_OUTPUT: Final = ROOT / "artifacts" / "phase8_bridge" / "dispersion_audit_20260831_v11.json"
 FROZEN_INPUT_SHA256: Final = {
     RESULT: "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
     CONTRACT: "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
     DESIGN: "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
-    POINTERS: "49fccab99d7f2732be9dead1d5858380fa83d2deb8a2b18b65be5851b9633a0d",
+    POINTERS: "739c6044e5469192a758b7de12b2c98f5a52d679efb5d61f9560fa1cf74ae078",
 }
 CURRENT_DV_PRODUCER: Final = ROOT / "scripts" / "rp2_block12_prospective_design.py"
 CURRENT_DV_PRODUCER_SHA256: Final = (
@@ -50,7 +50,7 @@ CURRENT_DV_EXECUTABLE_SOURCES: Final = (
     "uv.lock",
 )
 CURRENT_DV_EXECUTABLE_CLOSURE_SHA256: Final = (
-    "e1ca4d2c340489d4141c0ea8fb74dedb931ca7990dee0c9b316d83413cb177e6"
+    "82b4c1a1f7c2c43cccbb909d4df2e2224279a4ac9202515a9ca7856133863b92"
 )
 AUDIT_EXECUTABLE_SOURCES: Final = (
     "scripts/build_phase8_bridge_dispersion_audit_v1.py",
@@ -63,7 +63,7 @@ CURRENT_DV_PANEL_SHA256: Final = {
         "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20"
     ),
     "artifacts/rp2_block5_surface/b1_surface_panel.parquet": (
-        "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b"
+        "7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33"
     ),
     "artifacts/rp2_block6_flow/b2_flow_panel.parquet": (
         "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6"

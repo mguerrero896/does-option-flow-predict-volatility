@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-RUN_ID = "rp2-v3-20260831-timing-role-remediation"
+RUN_ID = "rp2-v3-20260831-b1-spot-cutoff-remediation"
 ARTIFACT = ROOT / "artifacts" / "rp2_v3" / RUN_ID / "rp2_block3_target" / "comparison.json"
 DOCUMENT = ROOT / "docs" / "rp2" / "block3_target_validation_v1.md"
 

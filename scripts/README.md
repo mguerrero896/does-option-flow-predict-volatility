@@ -54,12 +54,14 @@ Lifecycle labels used below:
 | `scripts/freeze_phase8_bridge_evaluator_v3.py` | CONTROLLED | Bind the Phase 8 evaluator, dynamic producer scripts and package source closure. |
 | `scripts/freeze_phase8_bridge_evaluator_v4.py` | CONTROLLED | Refreeze that complete closure after the shared Phase 9 calendar correction. |
 | `scripts/evaluate_phase8_bridge_v2.py` | CONTROLLED | Perform the separately authorized one-shot Phase 8 bridge evaluation; metadata-only preflight remains safe. |
+| `scripts/replay_phase8_materialized_remediation_v1.py` | CONTROLLED | Rebuild and rescore the same 30 materialized Phase 8 sessions under the corrected B0/B1 cutoff as a non-confirmatory post-hoc sensitivity; collect no new session and never reopen the sealed store. |
 | `scripts/build_phase8_bridge_dispersion_audit_v1.py` | CONTROLLED | Replay Phase 8 inference from the pinned cube and compare session dispersion with the frozen and current D/V references without reopening the sealed store. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v1.py` | CONTROLLED | Bind the Phase 8 dispersion auditor and replay dependencies before producing evidence. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v2.py` | CONTROLLED | Refreeze the same audit closure after the Dependabot lock update. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v3.py` | CONTROLLED | Refreeze the same audit closure at the current protected main lock. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v4.py` | CONTROLLED | Refreeze the same audit closure after the completed Dependabot queue. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v5.py` | CONTROLLED | Refreeze the audit/replay closure after the RP2-v3 timing-and-role remediation. |
+| `scripts/freeze_phase8_dispersion_audit_producer_v6.py` | CONTROLLED | Refreeze the audit/replay closure after the B1 spot-cutoff remediation. |
 | `scripts/rp3_freeze_b2_index.py` | CONTROLLED | Freeze the development-only B2 index for the RP3 primary test. |
 | `scripts/rp3_freeze_forecasters.py` | CONTROLLED | Freeze the two RP3 forecasters and their verified-byte manifest. |
 | `scripts/rp3_sizing.py` | CURRENT | Reproduce target-blind RP3 sample-size planning. |

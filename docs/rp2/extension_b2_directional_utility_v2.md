@@ -1,8 +1,9 @@
 # B2 directional utility: the lead is not strong enough to pursue
 
-> **SUPERSEDED MEASUREMENT (2026-08-31).** The B0/B1 clock remediation changes the
-> factorial nuisance block. The append-only v2 result and current four-cell table are in
-> `artifacts/rp2_ext1_directional_factorial_v2/results.json` and
+> **HISTORICAL DIRECTIONAL BATTERY; CURRENT FACTORIAL REPLACEMENT (2026-08-31).** The
+> B1 spot-cutoff remediation changes the factorial nuisance block. The append-only v3
+> result and current four-cell table are in
+> `artifacts/rp2_ext1_directional_factorial_v3/results.json` and
 > `docs/rp2_v3/VERDICT.md`; the figures below remain as historical audit evidence.
 
 Status: `EXPLORATORY_DIRECTIONAL_REANALYSIS`
@@ -138,25 +139,25 @@ one global Holm adjustment. Each table entry is `Wald / df / raw p / Holm p`.
 
 | Treatment set / coverage | D 60m | D 120m | V 60m | V 120m |
 |---|---:|---:|---:|---:|
-| Exact Ext1 / August | 15.138 / 10 / 0.12710 / 1.00000 | 14.079 / 10 / 0.16940 / 1.00000 | 24.581 / 10 / 0.006200 / 0.21079 | 28.608 / 10 / 0.001442 / 0.05479 |
-| Exact Ext1 / complete | 16.673 / 10 / 0.081921 / 1.00000 | 21.702 / 10 / 0.016694 / 0.43405 | 24.581 / 10 / 0.006200 / 0.21079 | 28.608 / 10 / 0.001442 / 0.05479 |
-| B2 panel 12 / August | 31.326 / 12 / 0.001757 / 0.063246 | 24.797 / 12 / 0.015812 / 0.42693 | 27.287 / 12 / 0.007024 / 0.22477 | 26.729 / 12 / 0.008451 / 0.24507 |
-| B2 panel 12 / complete | 35.129 / 12 / 0.0004467 / 0.017421 | 41.035 / 12 / 0.00004835 / 0.001934 | 27.287 / 12 / 0.007024 / 0.22477 | 26.729 / 12 / 0.008451 / 0.24507 |
+| Exact Ext1 / August | 12.567 / 10 / 0.248901 / 1.000000 | 11.793 / 10 / 0.299176 / 1.000000 | 27.846 / 10 / 0.001910 / 0.068774 | 29.575 / 10 / 0.001005 / 0.038196 |
+| Exact Ext1 / complete | 12.981 / 10 / 0.224741 / 1.000000 | 17.623 / 10 / 0.061665 / 1.000000 | 27.846 / 10 / 0.001910 / 0.068774 | 29.575 / 10 / 0.001005 / 0.038196 |
+| B2 panel 12 / August | 29.378 / 12 / 0.003461 / 0.110753 | 22.729 / 12 / 0.030119 / 0.813202 | 30.497 / 12 / 0.002349 / 0.079872 | 26.468 / 12 / 0.009209 / 0.267060 |
+| B2 panel 12 / complete | 33.068 / 12 / 0.000945 / 0.036843 | 37.078 / 12 / 0.000217 / 0.008680 | 30.497 / 12 / 0.002349 / 0.079872 | 26.468 / 12 / 0.009209 / 0.267060 |
 
 The preregistered descriptive scale is `log(Wald / df)`. Across D/V and the 60/120-minute
-targets, the median absolute treatment-set shift is `0.33471`; the coverage shift is
-`0.052785`, a ratio of `6.34`. The registered classification is therefore
+targets, the median absolute treatment-set shift is `0.405476`; the coverage shift is
+`0.037680`, a ratio of `10.76`. The registered classification is therefore
 `TREATMENT_SET`, not `COVERAGE`. This is not universal across contrasts: at D 120 minutes
 the coverage main effect (`0.46820`) is slightly larger than the treatment main effect
 (`0.41919`). The sets are not nested, so the classification is descriptive, not causal.
-Only B2-panel-12 with complete coverage at D 60 and D 120 survives the global 40-test Holm
-family.
+Only Ext1 at V 120 and B2-panel-12 with complete coverage at D 60 and D 120 survive the
+global 40-test Holm family.
 
 That result does **not** explain the historical validation decline. Complete coverage adds
 894 accepted asset-sessions and 58,788 target rows to D, but zero rows to every V horizon;
 the August and complete V statistics are therefore identical. Holding the exact Ext1 set
-and August sources still gives V Wald `24.581` and `28.608`, below the frozen `34.253` and
-`46.317`. Switching to B2 panel 12 gives `27.287` and `26.729`, so it does not restore the
+and August sources still gives V Wald `27.846` and `29.575`, below the frozen `34.253` and
+`46.317`. Switching to B2 panel 12 gives `30.497` and `26.468`, so it does not restore the
 120-minute statistic. For the frozen-to-current validation decline, the answer is
 `NEITHER_TREATMENT_SET_NOR_COVERAGE`; the unresolved remainder lies in corrected inputs,
 estimator/preprocessing, or session identity that the frozen artifact did not hash.
@@ -176,9 +177,9 @@ fails closed with `RP2_DML_TREATMENT_NAME_WIDTH` if names and matrix width diver
 
 Contract: `configs/rp2_ext1_directional_factorial_v1.json`, semantic SHA-256
 `290debdca033737e386c5abe9cca4e0b1d7632435e07f747823198864da256a4`. Result:
-`artifacts/rp2_ext1_directional_factorial_v1/results.json`, semantic self-hash
-`34cd6d52722692c03207625011d15160d5a4e27bb08676aad191e63ffc054913`, file SHA-256
-`9c93ad6a16471cc52034edf55d3a3c127117db5dbe06f226e75de98ceda50825`.
+`artifacts/rp2_ext1_directional_factorial_v3/results.json`, semantic self-hash
+`ca495aa4b6a7b3745d1ddb6eaae8a849fa5ed58eef92021140bed796632d6121`, file SHA-256
+`1a3f5783a16f67877d80919c7635d1b0df6740d49e88c9725afeff1113dfccc4`.
 
 ## Horizon and time of day
 
@@ -282,9 +283,9 @@ commit `b93ee32e5f149038cd042fe706c5b0a94f5e2f08`, all three panel hashes, all f
 hashes, `inference_config_digest`, 68 test records, and `sealed_cohorts_read=0`.
 
 The factorial result has semantic self-hash
-`34cd6d52722692c03207625011d15160d5a4e27bb08676aad191e63ffc054913` and file SHA-256
-`9c93ad6a16471cc52034edf55d3a3c127117db5dbe06f226e75de98ceda50825`. It records code
-commit `8758d4686bef2403a8f716eb79a5d9a2be60c985`, the same input identities, 40 test records,
+`ca495aa4b6a7b3745d1ddb6eaae8a849fa5ed58eef92021140bed796632d6121` and file SHA-256
+`1a3f5783a16f67877d80919c7635d1b0df6740d49e88c9725afeff1113dfccc4`. It records code
+commit `d67fe13cb7abbc299ebdf795a9ff36b2fd800254`, the current input identities, 40 test records,
 both mask invariants, exact requested/resolved treatment names, and `sealed_cohorts_read=0`.
 
 Final verification commands:
@@ -306,11 +307,11 @@ and its contract test are present:
 | Full pytest suite | PASS: 100%, exit 0; three contract skips |
 | Frozen artifact SHA-256 | PASS: `604e1e4099...f263f499` |
 | New semantic self-hash | PASS: `477f21af63...3e656b0` |
-| Factorial semantic self-hash | PASS: `34cd6d5272...c054913` |
+| Factorial semantic self-hash | PASS: `ca495aa4b6...632d6121` |
 | Licensed parquet or CSV in Git status | PASS: none tracked or untracked |
 
 Artifact sources for the numerical claims:
 `artifacts/rp2_ext1_directional_v2/results.json` (`schema_version`
 `rp2-ext1-directional-v2-results-v1.0`) and
-`artifacts/rp2_ext1_directional_factorial_v1/results.json` (`schema_version`
+`artifacts/rp2_ext1_directional_factorial_v3/results.json` (`schema_version`
 `rp2-ext1-directional-factorial-results-v1.0`).

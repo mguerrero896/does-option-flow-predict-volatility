@@ -84,6 +84,20 @@
       "redacted_sha256": "9c43521f442b52ea27a793b112c84d3bd45732a25d0702b0c1db4fe0cb261792",
       "scientific_payload_sha256": "e57fead96a6715d07ff2579585b569f974bfef24a7313a20aabe623b2a6a71a3",
       "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json",
+      "original_sha256": "0a9826b8dce43cc60569d10df031d19a3a3cc8424c2bc6346c4abaf03844c016",
+      "redacted_sha256": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a",
+      "scientific_payload_sha256": "ad3a8990b5093261ae80cd3f3d3b6e995e51a0984d4d5b7ba0da5b4df79a8000",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_identity.json",
+      "original_sha256": "3882ce44a1ce0cc3b0dbeb5d407f5c3c77f15da301c52e37f65efff5b48d08d0",
+      "redacted_sha256": "a832164fd790295cd81cfdf7dfe279bc2b04638526e46979db0a1fff4178c9c0",
+      "scientific_payload_sha256": "900382ae949c1d7e2300665803625760784a016c2c977438234f1cccfe04ba78",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
     }
   ]
 }

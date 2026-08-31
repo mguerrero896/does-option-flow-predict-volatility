@@ -119,7 +119,7 @@ def test_canonical_state_points_to_the_frozen_bridge() -> None:
     assert bridge["evaluator"]["script"] == "scripts/evaluate_phase8_bridge_v2.py"
     assert bridge["state"] == (
         "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
-        "AND_DISPERSION_AUDIT"
+        "AND_DISPERSION_AUDIT_AND_POSTHOC_MATERIALIZED_REMEDIATION"
     )
     assert bridge["sealed_cohorts_read"] == 1
     assert bridge["authorization"]["authorization_id"] == (
@@ -129,6 +129,11 @@ def test_canonical_state_points_to_the_frozen_bridge() -> None:
     assert bridge["execution_recovery"]["sealed_store_reopened"] is False
     assert bridge["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert bridge["result"]["confirmatory_promotion_allowed"] is False
+    remediation = bridge["posthoc_materialized_remediation"]
+    assert remediation["historical_result_preserved"] is True
+    assert remediation["new_sessions_collected"] == 0
+    assert remediation["sealed_cohorts_read"] == 0
+    assert remediation["result"]["primary_b1_inclusive_cells_improved"] == 1
 
 
 def test_published_result_contains_every_registered_outcome_without_private_paths() -> None:
@@ -192,11 +197,17 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "artifacts/phase8_bridge/dispersion_audit_20260830_v8.json",
         "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json",
         "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json",
+        "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v2.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v3.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json",
         "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v5.json",
+        "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v6.json",
+        "artifacts/phase8_bridge/materialized_remediation_contract_20260831_v1.json",
+        "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v1.json",
+        "artifacts/phase8_bridge/materialized_remediation_contract_amendment_20260831_v2.json",
+        "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
         "reports/phase8a_exploratory_bridge_addendum_v1.md",
         "reports/phase8a_exploratory_bridge_addendum_v2.md",
         "reports/phase8a_exploratory_bridge_addendum_v3.md",
@@ -208,5 +219,7 @@ def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:
         "reports/phase8a_exploratory_bridge_addendum_v9.md",
         "reports/phase8a_exploratory_bridge_addendum_v10.md",
         "reports/phase8a_exploratory_bridge_addendum_v11.md",
+        "reports/phase8a_exploratory_bridge_addendum_v12.md",
+        "reports/phase8a_exploratory_bridge_addendum_v13.md",
     ):
         assert registered[relative] == _module._sha(REPO / relative)

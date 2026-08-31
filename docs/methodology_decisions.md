@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–116](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
+| [97–118](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
 
 <a id="decision-1"></a>
 
@@ -1952,3 +1952,120 @@ Requirements-consistency and preregistration gates pass.
      Hawkes label remains an in-memory semantic alias to
      `b2_5m_decay_intensity_innovation`; no obsolete bytes may be fabricated. No Phase 8
      or Phase 9 outcome may be reopened by this rerun.
+
+<a id="decision-117"></a>
+
+117. **The B1 spot-cutoff replacement completes; treatment definition, not coverage,
+     dominates the registered directional factorial (2026-08-31).** The preregistered
+     replacement `rp2-v3-20260831-b1-spot-cutoff-remediation` completed all 13 steps for
+     D/V with `--forbid-sealed-cohorts`, scientific SHA-256
+     `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4` at code
+     commit `b70c54ba14fdda2197efd6bcf0aa676c4ba3d4f1`. The common panel remains 181,829
+     rows over 389 D and 80 V sessions. B1 core coverage is 99.3389%, B1 expiry coverage
+     is 99.7828%, all twelve B2 core features are 100% covered, and provider failures,
+     post-cutoff observations, B2 PIT violations and sealed-cohort reads are zero.
+
+     Eight of the twelve registered QLIKE deltas are positive, nine intervals contain
+     zero and ten estimates sit below their own MDE. All three discovery ΔB1 intervals
+     exclude zero; every validation ΔB1 interval and every ΔB2|B1 interval contains zero.
+     The result remains `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM` because
+     `PIT_V22_RECONCILIATION_BLOCKED` is unchanged; `capital_go=false`.
+
+     The unchanged factorial contract emitted 40 tests to
+     `artifacts/rp2_ext1_directional_factorial_v3/results.json`. The four requested rows,
+     each ordered D60, D120, V60, V120 as `Wald / df / raw p / Holm p`, are:
+
+     - Ext1/August: `12.567/10/0.248901/1.000000`,
+       `11.793/10/0.299176/1.000000`, `27.846/10/0.001910/0.068774`,
+       `29.575/10/0.001005/0.038196`;
+     - Ext1/complete: `12.981/10/0.224741/1.000000`,
+       `17.623/10/0.061665/1.000000`, with the same two V cells;
+     - panel-12/August: `29.378/12/0.003461/0.110753`,
+       `22.729/12/0.030119/0.813202`, `30.497/12/0.002349/0.079872`,
+       `26.468/12/0.009209/0.267060`;
+     - panel-12/complete: `33.068/12/0.000945/0.036843`,
+       `37.078/12/0.000217/0.008680`, with the same two V cells.
+
+     On registered `log(Wald/df)`, the median absolute treatment-set effect is 0.405476
+     versus 0.037680 for coverage, ratio 10.76 and classification `TREATMENT_SET`.
+     This is descriptive because the treatment sets are not nested. Complete coverage
+     adds only D rows, so August and complete V masks are identical. The historical Ext1
+     name `b2_5m_hawkes_innovation` is resolved only in memory to
+     `b2_5m_decay_intensity_innovation` as `RECORDED_SEMANTIC_RENAME`; the ten-column
+     identity is preserved, no feature is recomputed and byte equality with the absent
+     historical column is not claimed. The artifact semantic self-hash is
+     `ca495aa4b6a7b3745d1ddb6eaae8a849fa5ed58eef92021140bed796632d6121`.
+
+     The already materialised Phase 8 cube replayed exactly without reopening its sealed
+     store or running a second evaluator. Audit v11 retains `MIXED_EXPLORATORY`: 3/4 B1
+     cells have descriptive Holm p below 0.05, 0/4 B2|B1 cells do, and every B2|B1
+     interval crosses zero. Its producer-freeze v6 and audit closures are append-only.
+
+     Two failed factorial invocations changed no scientific artifact. Passing the RP2 run
+     directory as `--data-root` failed closed with
+     `RP2_EXT1_DIRECTIONAL_BAR_SOURCE_MISSING`; the registered producer requires the raw
+     bar root. A second attempt exposed a Windows-relative-path serialization defect after
+     computation but before output; commit
+     `d67fe13cb7abbc299ebdf795a9ff36b2fd800254` resolves the contract path before making it
+     repository-relative. The successful rerun used `<DATA_ROOT>`; no failed attempt was
+     promoted or registered.
+
+<a id="decision-118"></a>
+
+118. **Phase 8 is regenerated from the same already materialized thirty sessions under
+     the corrected B0/B1 cutoff; validity improves, paired QLIKE does not improve
+     generally (2026-08-31).** Audit v11 was an exact statistical replay of the frozen
+     190,000-row forecast cube, but that cube contains only targets and forecasts. It
+     cannot replace the historical B0/B1 feature rows with their `close[m-3]` values.
+     The owner therefore directed a same-session reconstruction without collecting
+     another cohort.
+
+     Before the first remediation model fit, contract SHA-256
+     `5f02db3c46b220f38b22a43147fe9738522a2effb66909621a372f259ab1ec51`
+     fixed the same thirty dates, D/V training roles, two model families, four
+     information sets, both windows, all cells and lower paired QLIKE as the improvement
+     rule. Two pre-fit amendments restored the five target-blind lag-initialization
+     sessions recorded by the historical recovery and fixed the paired current grid;
+     their semantic hashes are
+     `6216fa3640177a585196689000890b2745bd3dbfa9d462fce71daf87130158db`
+     and `72edf9700265ed2e53d39bcaeb742f6f629ddb028bcfa7b8d5139475d51eb447`.
+     Warm-up targets and forecasts were not read, and no warm-up row was written or
+     scored as Phase 8.
+
+     The corrected grid contains 11,700 origins. The historical grid contains 11,875;
+     its 175 extra rows are all `origin_minute=30`, where a full trailing thirty-minute
+     B0 window is unavailable at the registered `t-120 s` as-of point. There are no
+     remediated-only origins, and `rv30` is exactly equal on every paired key. All 180
+     session-assets have bar and tape inputs. Nine B1 core features are finite on all
+     11,700 current-grid origins; `b1_risk_reversal_25` is finite on 11,664/11,700
+     (99.6923%). All twelve B2 core features are finite on the current grid, and their
+     values are exact historical controls on all paired keys.
+
+     Absolute primary QLIKE falls in only one of the eight B1-inclusive paired cells;
+     the registered global label is `MIXED`. The corrected primary ΔB1 estimates are
+     +0.001413, +0.004267, +0.004317 and +0.005253 for D/Gamma, D/LightGBM,
+     V/Gamma and V/LightGBM; descriptive Holm p-values are 1.0000, 0.0164, 0.0350
+     and 0.0055. The corresponding ΔB2|B1 estimates are −0.000638, +0.004846,
+     +0.000374 and +0.000530; all four intervals cross zero and Holm p-values are
+     1.0000, 0.4410, 0.3186 and 1.0000. Thus the qualitative
+     `MIXED_EXPLORATORY` reading survives while the inadmissibly favorable absolute loss
+     does not.
+
+     The path-free result
+     `artifacts/phase8_bridge/materialized_remediation_20260831_v1.json` has file
+     SHA-256 `bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df`
+     and semantic self-hash
+     `1b10d63d344cb460add2ed1d0fe54d6f432f7f98909717a5cff31dd8c29855d4`.
+     Its private 187,200-row cube has SHA-256
+     `54dcb9bf7b9a0377b0965839a3d3d43161884bf8790bf84ed66ae164358fc4d5`,
+     no nulls and no duplicate keys; the 132-file execution closure SHA-256 is
+     `404dbed679e43badd7bd325848bcafc1c1aa2a5ee9af6fc0a93c7b3a68348fdc`.
+     The run collected zero sessions, reopened no sealed store and leaves the canonical
+     one-shot read count at one. It is append-only post-hoc sensitivity evidence, not a
+     second canonical execution or confirmation.
+
+     The reconstruction also closed three dormant adapter incompatibilities before any
+     fit: RP3 now calls the shared bar normalizer, compares native dates, and routes its
+     bar store through an explicit `RP3` role rather than weakening D/V partition checks.
+     The adapter filters warm-up rows before every panel write. Commits `1406e6a8`,
+     `019335d8` and `6456ab64` carry those repairs and regression tests.

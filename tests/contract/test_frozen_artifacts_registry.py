@@ -12,6 +12,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from fnmatch import fnmatch
 from pathlib import Path
 
@@ -222,6 +223,19 @@ def test_every_frozen_artifact_is_physically_intact() -> None:
             ):
                 mutated.append(f"MUTATED {relative}")
     assert not mutated, mutated
+
+
+def test_registry_cli_verifier_uses_the_same_redaction_and_withdrawal_rules() -> None:
+    completed = subprocess.run(
+        [sys.executable, "scripts/freeze_registry.py", "--verify"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    count = len(_entries())
+    assert f"{count}/{count} intact" in completed.stdout
 
 
 def test_gate_sidecars_agree_with_registry() -> None:

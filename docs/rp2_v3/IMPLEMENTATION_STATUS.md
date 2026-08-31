@@ -1,6 +1,6 @@
 # RP2-v3 implementation status
 
-> **Current eligibility:** the timing-and-role rebuild is an historical audit
+> **Current eligibility:** the B1 spot-cutoff rebuild is an historical audit
 > record, not a current scientific claim. `data/CANONICAL_STATE.json` records
 > `REBUILD_COMPLETE_PIT_V22_BLOCKED`: bar roles and B0/B1 market clocks now fail closed,
 > while PIT v2.2 still forbids reconciliation into a current claim.
@@ -27,8 +27,8 @@ its final commit.
 
 ## Historical completion record
 
-The timing-and-role run `rp2-v3-20260831-timing-role-remediation` recorded thirteen steps,
-every exit code zero, scientific hash `7d544aa334b70ce8…` at commit `cbdd0b5840da`. Its
+The spot-cutoff run `rp2-v3-20260831-b1-spot-cutoff-remediation` recorded thirteen steps,
+every exit code zero, scientific hash `033f2eb6be35e5db…` at commit `b70c54ba14fd`. Its
 aggregate bundle, twelve contrasts and treatment-by-coverage factorial are in
 [`VERDICT.md`](VERDICT.md). The measurement has no current section-21 classification
 because the PIT v2.2 gate remains closed. Earlier published runs remain historical in
@@ -41,7 +41,9 @@ because the PIT v2.2 gate remains closed. Earlier published runs remain historic
 - Block 4 uses the shared 120-second cutoff and observes `close[m-3]`; its first valid
   origin is minute 35 and its target remains forward from the origin.
 - Block 5 delegates expiry close to the shared XNYS calendar used by B2, including early
-  closes. B1 core coverage is 99.34% and all twelve B2 core features are 100% covered.
+  closes, and supplies `close[m-3]` to every B1 spot-derived diagnostic so underlying and
+  option rows share the same `t-120 s` boundary. B1 core coverage is 99.34% and all twelve
+  B2 core features are 100% covered.
 - The licensed cascade used `--forbid-sealed-cohorts`, completed 13/13 steps and emitted
   new append-only panel pointers, run identity, manifest and Phase 8 dispersion closure.
 

@@ -1,8 +1,8 @@
 # Block 3 — target-horizon validation
 
 **Status:** `CURRENT BLOCK-LEVEL MEASUREMENT` · exploratory, not confirmatory
-**Run:** `rp2-v3-20260831-timing-role-remediation`
-**Artifact:** `artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/rp2_block3_target/comparison.json`
+**Run:** `rp2-v3-20260831-b1-spot-cutoff-remediation`
+**Artifact:** `artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block3_target/comparison.json`
 **Recorded comparison SHA-256:** `10ed954256a12b882569596d8731dc7e6100b18c0f8c78e394f04db4c7680dd3`
 
 The overall RP2-v3 run remains ineligible because PIT v2.2 forbids reconciliation into a

@@ -22,7 +22,7 @@ from typing import Any
 REPO = Path(__file__).resolve().parents[1]
 STATE_PATH = REPO / "data" / "CANONICAL_STATE.json"
 STATUS_PATH = REPO / "STATUS.md"
-CURRENT_RUN_ID = "rp2-v3-20260831-timing-role-remediation"
+CURRENT_RUN_ID = "rp2-v3-20260831-b1-spot-cutoff-remediation"
 CURRENT_RUN = Path("artifacts") / "rp2_v3" / CURRENT_RUN_ID
 PHASE8_DIR = Path("artifacts") / "phase8_bridge"
 PHASE8_AUTHORIZATION = PHASE8_DIR / "owner_authorization_20260830_v1.json"
@@ -30,8 +30,18 @@ PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
 PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
-PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260831_v10.json"
-PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v11.md"
+PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260831_v11.json"
+PHASE8_REMEDIATION_CONTRACT = (
+    PHASE8_DIR / "materialized_remediation_contract_20260831_v1.json"
+)
+PHASE8_REMEDIATION_WARMUP_AMENDMENT = (
+    PHASE8_DIR / "materialized_remediation_contract_amendment_20260831_v1.json"
+)
+PHASE8_REMEDIATION_GRID_AMENDMENT = (
+    PHASE8_DIR / "materialized_remediation_contract_amendment_20260831_v2.json"
+)
+PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -62,6 +72,10 @@ AUTHORIZED_SOURCES = (
     PHASE8_RECOVERY.as_posix(),
     PHASE8_RESULT.as_posix(),
     PHASE8_DISPERSION_AUDIT.as_posix(),
+    PHASE8_REMEDIATION_CONTRACT.as_posix(),
+    PHASE8_REMEDIATION_WARMUP_AMENDMENT.as_posix(),
+    PHASE8_REMEDIATION_GRID_AMENDMENT.as_posix(),
+    PHASE8_REMEDIATION_RESULT.as_posix(),
     "artifacts/phase9/power_deadline_audit_v1.json",
     "reports/final_report_draft_v2.md",
     "reports/final_report_draft_v2.docx",
@@ -160,6 +174,16 @@ def build_state() -> dict[str, Any]:
     bridge_result = json.loads(bridge_result_path.read_text(encoding="utf-8"))
     bridge_dispersion_path = REPO / PHASE8_DISPERSION_AUDIT
     bridge_dispersion = json.loads(bridge_dispersion_path.read_text(encoding="utf-8"))
+    remediation_contract_path = REPO / PHASE8_REMEDIATION_CONTRACT
+    remediation_contract = json.loads(
+        remediation_contract_path.read_text(encoding="utf-8")
+    )
+    remediation_warmup_path = REPO / PHASE8_REMEDIATION_WARMUP_AMENDMENT
+    remediation_warmup = json.loads(remediation_warmup_path.read_text(encoding="utf-8"))
+    remediation_grid_path = REPO / PHASE8_REMEDIATION_GRID_AMENDMENT
+    remediation_grid = json.loads(remediation_grid_path.read_text(encoding="utf-8"))
+    remediation_result_path = REPO / PHASE8_REMEDIATION_RESULT
+    remediation_result = json.loads(remediation_result_path.read_text(encoding="utf-8"))
     phase9_audit_path = REPO / "artifacts" / "phase9" / "power_deadline_audit_v1.json"
     phase9_audit = json.loads(phase9_audit_path.read_text(encoding="utf-8"))
     if bridge["read_gate"] != {
@@ -282,6 +306,105 @@ def build_state() -> dict[str, Any]:
     ):
         raise ValueError("PHASE8_BRIDGE_DISPERSION_AUDIT_DRIFT")
     if (
+        remediation_contract["status"]
+        != "PRECOMMITTED_BEFORE_REMEDIATION_MEASUREMENT"
+        or remediation_contract["claim_classification"]
+        != "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY"
+        or remediation_contract["execution"]["new_sessions_collected"] != 0
+        or remediation_contract["execution"]["sealed_cohorts_read"] != 0
+        or remediation_contract["execution"]["sealed_store_reopened"] is not False
+        or remediation_contract["decision_rules"]["confirmatory_promotion_allowed"]
+        is not False
+        or remediation_contract["decision_rules"]["historical_one_shot_result_preserved"]
+        is not True
+        or remediation_contract["contract_sha256"]
+        != _canonical_sha(remediation_contract, omit="contract_sha256")
+    ):
+        raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_CONTRACT_DRIFT")
+    if (
+        remediation_warmup["status"]
+        != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
+        or remediation_warmup["amends_contract_sha256"]
+        != remediation_contract["contract_sha256"]
+        or remediation_warmup["invariants"]["new_phase8_sessions_collected"] != 0
+        or remediation_warmup["invariants"]["phase8_scoring_started_before_amendment"]
+        is not False
+        or remediation_warmup["invariants"]["target_or_forecast_read_from_warmup"]
+        is not False
+        or remediation_warmup["amendment_sha256"]
+        != _canonical_sha(remediation_warmup, omit="amendment_sha256")
+    ):
+        raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_WARMUP_DRIFT")
+    if (
+        remediation_grid["status"]
+        != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
+        or remediation_grid["amends_contract_sha256"]
+        != remediation_contract["contract_sha256"]
+        or remediation_grid["supersedes_amendment_sha256"]
+        != remediation_warmup["amendment_sha256"]
+        or remediation_grid["comparison_grid"]
+        != {
+            "historical_only_origins": 175,
+            "historical_only_origin_minute": 30,
+            "historical_rows": 11875,
+            "paired_common_origins": 11700,
+            "remediated_only_origins": 0,
+            "remediated_rows": 11700,
+        }
+        or remediation_grid["invariants"]["b2_core_features_exact_on_paired_common_grid"]
+        is not True
+        or remediation_grid["invariants"]["rv30_exact_on_paired_common_grid"] is not True
+        or remediation_grid["amendment_sha256"]
+        != _canonical_sha(remediation_grid, omit="amendment_sha256")
+    ):
+        raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_GRID_DRIFT")
+    if (
+        remediation_result["status"]
+        != "POST_HOC_REMEDIATION_SENSITIVITY_COMPLETE"
+        or remediation_result["claim_classification"]
+        != "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY"
+        or remediation_result["confirmatory_promotion_allowed"] is not False
+        or remediation_result["historical_result_preserved"] is not True
+        or remediation_result["session_count"] != 30
+        or remediation_result["new_sessions_collected"] != 0
+        or remediation_result["sealed_cohorts_read"] != 0
+        or remediation_result["sealed_store_reopened"] is not False
+        or remediation_result["personal_paths_emitted"] is not False
+        or remediation_result["secret_values_emitted"] is not False
+        or remediation_result["bridge_contract_sha256"] != bridge["contract_sha256"]
+        or remediation_result["contract_sha256"]
+        != remediation_contract["contract_sha256"]
+        or remediation_result["warmup_amendment_sha256"]
+        != remediation_warmup["amendment_sha256"]
+        or remediation_result["grid_amendment_sha256"]
+        != remediation_grid["amendment_sha256"]
+        or remediation_result["evaluation"]["overall_classification"]
+        != "MIXED_EXPLORATORY"
+        or remediation_result["forecast_comparison"]["global_label"] != "MIXED"
+        or remediation_result["forecast_comparison"]["grid"]
+        != {
+            "historical_only_origins": 175,
+            "historical_rows": 11875,
+            "paired_common_origins": 11700,
+            "remediated_only_origins": 0,
+            "remediated_rows": 11700,
+        }
+        or remediation_result["forecast_comparison"]["rv30_exactly_equal_on_paired_grid"]
+        is not True
+        or remediation_result["b2_panel_negative_control"][
+            "all_features_exact_on_paired_grid"
+        ]
+        is not True
+        or remediation_result["forecast_comparison"]["primary_b1_inclusive_cells"] != 8
+        or remediation_result["forecast_comparison"][
+            "primary_b1_inclusive_cells_improved"
+        ]
+        != 1
+        or remediation_result["result_sha256"]
+        != _canonical_sha(remediation_result, omit="result_sha256")
+    ):
+        raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_RESULT_DRIFT")
+    if (
         phase9_audit["endpoint"]
         != {"complete_sessions": 60, "scored_sessions": 36, "test_blocks": 3}
         or phase9_audit["read_gate"]
@@ -372,9 +495,49 @@ def build_state() -> dict[str, Any]:
                     "sha256": _sha(bridge_dispersion_path),
                     "audit_sha256": bridge_dispersion["audit_sha256"],
                 },
+                "posthoc_materialized_remediation": {
+                    "contract": {
+                        "artifact": PHASE8_REMEDIATION_CONTRACT.as_posix(),
+                        "contract_sha256": remediation_contract["contract_sha256"],
+                        "sha256": _sha(remediation_contract_path),
+                    },
+                    "amendments": [
+                        {
+                            "artifact": PHASE8_REMEDIATION_WARMUP_AMENDMENT.as_posix(),
+                            "amendment_sha256": remediation_warmup["amendment_sha256"],
+                            "sha256": _sha(remediation_warmup_path),
+                        },
+                        {
+                            "artifact": PHASE8_REMEDIATION_GRID_AMENDMENT.as_posix(),
+                            "amendment_sha256": remediation_grid["amendment_sha256"],
+                            "sha256": _sha(remediation_grid_path),
+                        },
+                    ],
+                    "result": {
+                        "artifact": PHASE8_REMEDIATION_RESULT.as_posix(),
+                        "claim_classification": remediation_result[
+                            "claim_classification"
+                        ],
+                        "overall_classification": remediation_result["evaluation"][
+                            "overall_classification"
+                        ],
+                        "primary_b1_inclusive_cells": remediation_result[
+                            "forecast_comparison"
+                        ]["primary_b1_inclusive_cells"],
+                        "primary_b1_inclusive_cells_improved": remediation_result[
+                            "forecast_comparison"
+                        ]["primary_b1_inclusive_cells_improved"],
+                        "result_sha256": remediation_result["result_sha256"],
+                        "sha256": _sha(remediation_result_path),
+                    },
+                    "historical_result_preserved": True,
+                    "new_sessions_collected": 0,
+                    "sealed_cohorts_read": 0,
+                    "sealed_store_reopened": False,
+                },
                 "state": (
                     "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE_WITH_RECORDED_RECOVERY_"
-                    "AND_DISPERSION_AUDIT"
+                    "AND_DISPERSION_AUDIT_AND_POSTHOC_MATERIALIZED_REMEDIATION"
                 ),
                 "sealed_cohorts_read": 1,
             },
