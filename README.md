@@ -12,23 +12,22 @@ options market is doing makes that prediction better.
 
 ## The answer
 
-**Almost never — and the one exception is why a sealed program exists.**
+**The corrected measurement does not establish an incremental option-flow contribution.**
 
-Eleven of the twelve headline comparisons show no gain from adding recent option *flow*
-once contemporaneous option *state* is already in the model.
+The twelve headline comparisons separate option *state* (B1 over B0) from recent option
+*flow* (B2 over B1), across three model families and two calendar roles.
 
 ![Twelve contrasts against the threshold each one declared](docs/figures/evidence.svg)
 
 Every comparison registers a detection threshold before it is run, so it cannot be
-declared a success after the fact. Three of the twelve beat their own threshold. Two of
-those are option state. The third — the amber one — is option flow, and it is the reason
-the rest of this repository exists.
+declared a success after the fact. Two of the twelve beat their own threshold (their
+registered minimum detectable effect), and both are discovery option-state contrasts. No flow contrast clears its own
+MDE. Discovery LightGBM flow is positive with an interval excluding zero, but its
++0.00096 estimate remains below its 0.00129 MDE; all three validation flow estimates are
+negative. **The result is mixed by family and role, not a universal flow finding.**
 
-That cell estimates **+0.00060** against a threshold of **0.00056**, with a 95 % interval
-of [+0.00022, +0.00100]. It may be real information. It may be an artefact of how that one
-model family estimates. **This study cannot tell which, and does not pretend to.**
-
-So the question was frozen rather than argued.
+The earlier flow exception motivated a sealed question before this timing remediation;
+that programme remains frozen rather than rewritten around the updated retrospective run.
 [`docs/rp3/PREREGISTRATION.md`](docs/rp3/PREREGISTRATION.md) fixes two hypotheses, on
 sessions that mostly did not exist when it was written, to be opened once at 662 sessions
 — estimated 2029-01-30.
@@ -56,7 +55,7 @@ the state layer was positive in all four cells with descriptive Holm p below 0.0
 three, while the flow layer crossed zero in all four and cleared Holm in none. An audit
 reproduced the registered inference exactly and found **no aggregation change**. The read
 is descriptive, **not confirmatory**, and cannot promote anything. Full result in the
-[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v10.md).
+[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v11.md).
 
 One cohort is still collecting, and one is sealed until 2029.
 
@@ -152,10 +151,11 @@ This section is the machine-checked position, kept separate from the finding abo
 finding says what the evidence shows, this says what the project is permitted to claim.
 
 **No result is currently eligible as the project headline.** The corrected-protocol bundle
-is `rp2-v3-20260827-remediation3`, scientific hash
-`386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47`, status
-`REBUILD_COMPLETE_PIT_V22_BLOCKED`. The divergence between the two inference stages is
-repaired and the full rebuild passes, but `PIT_V22_RECONCILIATION_BLOCKED` remains.
+is `rp2-v3-20260831-timing-role-remediation`, scientific hash
+`7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3`, status
+`REBUILD_COMPLETE_PIT_V22_BLOCKED`. Partition roles, the shared 120-second market cutoff
+and the XNYS expiry calendar are repaired and the 13-step rebuild passes, but
+`PIT_V22_RECONCILIATION_BLOCKED` remains.
 
 The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run
 manifest, one hash, one eligibility state and its blocking reasons. If any document

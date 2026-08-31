@@ -5,21 +5,21 @@
 | File | Role |
 | --- | --- |
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative thesis source at the evidence cutoff |
-| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Word rendering of the Markdown source. **Out of date**: it predates the 2026-08-31 numeric corrections and must be re-exported before submission |
-| [`phase8a_exploratory_bridge_addendum_v10.md`](phase8a_exploratory_bridge_addendum_v10.md) | Current post-cutoff Phase 8A interpretation |
+| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Word rendering of the Markdown source at the 2026-08-31 evidence cutoff |
+| [`phase8a_exploratory_bridge_addendum_v11.md`](phase8a_exploratory_bridge_addendum_v11.md) | Current post-cutoff Phase 8A interpretation |
 
 Everything else in this directory is retained audit history. The full classification,
 including the role of each historical package, is in [`INDEX.md`](INDEX.md).
 
 ## Why earlier versions are still here
 
-The numbered `phase8a_exploratory_bridge_addendum_v1` … `v9` files are superseded drafts
-of the current `v10`. They are kept because each was registered at a specific SHA-256 and
+The numbered `phase8a_exploratory_bridge_addendum_v1` … `v10` files are superseded drafts
+of the current `v11`. They are kept because each was registered at a specific SHA-256 and
 the sealed-read governance requires that a reader be able to confirm no interpretation was
 revised after the fact. Their presence is evidence of an unbroken record, not an
 unfinished cleanup.
 
-**Only `v10` is current.** The three files in the table above are hash-pinned under
+**Only `v11` is current.** The three files in the table above are hash-pinned under
 `current_report` in [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json), which
 governs whenever a document disagrees with it.
 

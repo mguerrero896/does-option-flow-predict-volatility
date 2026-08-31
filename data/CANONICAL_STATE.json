@@ -10,11 +10,11 @@
    "contract_sha256": "b383ef36210f3f0c2d38b55f97e3ee0cc85fabc1c357f18be54a534982e0801e",
    "dispersion_audit": {
     "aggregation_change_supported": false,
-    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json",
-    "audit_sha256": "5a191ac22184e5f30c5ea266236ca95d8e3e8d7d3b601771461c180ce52924cc",
+    "artifact": "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json",
+    "audit_sha256": "340edd4f9c5303a949c58fd3f3e474f54a6dba06efebd62a7f9f8c7e03a5be35",
     "delta_b1_holm_below_0_05_cells": 3,
     "delta_b2_given_b1_holm_below_0_05_cells": 0,
-    "sha256": "e1353f6338dfa35526caee3df6c8d5ff675f14380250398324ef9cd8aaff341b"
+    "sha256": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84"
    },
    "document": "docs/phase8_bridge_protocol_v2.md",
    "evaluator": {
@@ -64,7 +64,7 @@
  "authorized_sources": {
   ".github/workflows/ci.yml": "7dbb6abda0ce46a13c857633efd3f0859d50b636dec6dee348451fe64146777e",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
-  "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json": "e1353f6338dfa35526caee3df6c8d5ff675f14380250398324ef9cd8aaff341b",
+  "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
   "artifacts/phase8_bridge/execution_recovery_20260830_v1.json": "a88c057d41c903699e0f683490e1c98cb0fea95ce935e0b728eb5a2286f17daf",
   "artifacts/phase8_bridge/layout_recovery_manifest_20260830_v1.json": "e374f751c1e64270a7928f132da6f3dc6251599fbe4cb87587108fb41c0d158b",
@@ -72,26 +72,26 @@
   "artifacts/phase8_bridge/owner_authorization_20260830_v1.json": "4e14fce59b7efc7e193fbe45e6dbede75b18b55041a1240b538a9c0f9551b315",
   "artifacts/phase8_bridge/result_20260830_v1.json": "558507315c55a6283f5053a369ca1bb9615cfbae0f9383060b4e9b8a2bf10491",
   "artifacts/phase9/power_deadline_audit_v1.json": "5091b572579b257ddaeab79a1a4763c57ebb852d8c32f2890ee18e9aa6a17c62",
-  "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09",
-  "artifacts/rp2_v3/rp2-v3-20260827-remediation3/scorecard.json": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c",
+  "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json": "d3be36d2d1de1baa9e6b6a041805c803a77296aabb0497475eede36281b7d737",
+  "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/scorecard.json": "71698092f333e4bc7146967d1b069f4f69d6a866d971e7a7298fbc0389a54045",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
-  "data/FROZEN_ARTIFACTS.json": "cf69c349671cd1cda636fdc4fb0c0c0a45e976d93a7563b82b64cd1befee9bad",
+  "data/FROZEN_ARTIFACTS.json": "21618262fcfb4af2eefbb65ee88dbed28ab7b8f24fdd8546abeed144af0ebc4e",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
-  "data/PUBLIC_COMMIT_TRANSLATIONS.json": "51eaa73539706580cd75d752e1c288b66a520459581e8826bf6fd118a768975b",
-  "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
+  "data/PUBLIC_COMMIT_TRANSLATIONS.json": "d70d1db64136b2753752c4ba2741cba796cdb9237cfef8ff11e0845d3c69452c",
+  "data/PUBLIC_METADATA_REDACTIONS.json": "75633878ed417dde2f8859760fdfbfac5f1ad245485929309d8aa782c457679d",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "78bb5cd2bee1416a0995a3e76b980c1edd663e0ffc606f8c9e765ce0fa6ef6bb",
+  "docs/methodology_decisions.md": "ff68396c0770dbbc34c2fc95a075ecde803e399c82caa2b8f08c5b53ebbf68c9",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "621bcd8bb19ac3ed7dd78fac37ddd063d5189b79284d0a1d4bb6a194e5976690",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
-  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "40a9b348231e1864345484b9fd456ab8733ce09fdedef7851536aede6d8bfe30",
-  "docs/rp2_v3/VERDICT.md": "5a5f639c1b8f9a5a3c5c693dcd8ae09abbd7da9f8535c4681dd87a678283ad09",
-  "reports/final_report_draft_v2.docx": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08",
-  "reports/final_report_draft_v2.md": "77fc5bbd625e69406d2bf9658bb733053e26d51b1a3cfb795eaf3e0eef438b57",
-  "reports/phase8a_exploratory_bridge_addendum_v10.md": "62755d983bfae75eeeeece38678329e6d1f5ed51f25a8138d804aabe0008cbdb",
+  "docs/rp2_v3/SUPERSEDED_RESULTS.md": "08455100ae6a86c81828e7c7b837ae72e7bd54683ee9f573ee4e3189f07b7d88",
+  "docs/rp2_v3/VERDICT.md": "77af171a7877190aca60d9d29288630b76a81af4a61d8522b49ce2ede48b3f4d",
+  "reports/final_report_draft_v2.docx": "45f8f67a4dd626b66d38ff273934bd86bdc52ca2fc43c49e7b1a1176529512ce",
+  "reports/final_report_draft_v2.md": "0a23308bfca826058f5c291dffbe8bb116df31f10046666b47c1d9254180f786",
+  "reports/phase8a_exploratory_bridge_addendum_v11.md": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
  "canonical_results": {
@@ -110,18 +110,18 @@
   "tier2_runner": "scripts/run_local_evidence_gates.py"
  },
  "current_report": {
-  "evidence_cutoff": "2026-08-28",
+  "evidence_cutoff": "2026-08-31",
   "phase8_addendum": {
-   "path": "reports/phase8a_exploratory_bridge_addendum_v10.md",
-   "sha256": "62755d983bfae75eeeeece38678329e6d1f5ed51f25a8138d804aabe0008cbdb"
+   "path": "reports/phase8a_exploratory_bridge_addendum_v11.md",
+   "sha256": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b"
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "77fc5bbd625e69406d2bf9658bb733053e26d51b1a3cfb795eaf3e0eef438b57"
+   "sha256": "0a23308bfca826058f5c291dffbe8bb116df31f10046666b47c1d9254180f786"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",
-   "sha256": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08"
+   "sha256": "45f8f67a4dd626b66d38ff273934bd86bdc52ca2fc43c49e7b1a1176529512ce"
   }
  },
  "external_publication": {
@@ -137,16 +137,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 103,
+  "artifact_count": 109,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 101,
+  "physical_artifact_count": 107,
   "public_metadata_redactions": {
-   "artifact_count": 10,
+   "artifact_count": 12,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
-   "ledger_sha256": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df"
+   "ledger_sha256": "75633878ed417dde2f8859760fdfbfac5f1ad245485929309d8aa782c457679d"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "cf69c349671cd1cda636fdc4fb0c0c0a45e976d93a7563b82b64cd1befee9bad"
+  "registry_sha256": "21618262fcfb4af2eefbb65ee88dbed28ab7b8f24fdd8546abeed144af0ebc4e"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
@@ -157,8 +157,8 @@
   "storage": "supabase project eqpyjikcewqaegnbaemf, private bucket 'research-data'"
  },
  "governance": {
-  "decision_count": 114,
-  "latest_decision": 114
+  "decision_count": 115,
+  "latest_decision": 115
  },
  "note": "AUTO-GENERATED by scripts/generate_canonical_state.py; never edit by hand. CI regenerates and fails on drift (decision 63).",
  "schema_version": "canonical-state-v1.0",
@@ -173,38 +173,29 @@
    "status": "REBUILD_COMPLETE_PIT_V22_BLOCKED"
   },
   "historical_code_provenance": {
-   "historical_sanitized_commit_reference": "9b56466c65d63df54a97f9462c97d0cbad7f717c",
-   "manifest": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
-   "recorded_code_commit": "e7728ebbaf3f353143a5faea2a54211bb5d16b12",
-   "recorded_git_tree_sha1": "d768a7a0ebda7443f2596b08e78eecd2098599dc",
-   "retained_blobs_sha256": "8aee30a8c1f6922b09e68d4d7a63e48a71ff0cd2802b165eaa19edb8142bf2c1",
-   "run_id": "rp2-v3-20260827-remediation3",
-   "status": "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE",
-   "verification_scope": "PRE_ROOT_SANITIZATION_AUDIT_NOT_REGENERATED_FROM_THIS_RELEASE",
-   "withdrawn_path_classes": [
-    "internal planning documents",
-    "internal execution checklists",
-    "internal handoff tests"
-   ],
-   "withdrawn_path_count": 5
+   "manifest": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
+   "recorded_code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
+   "run_id": "rp2-v3-20260831-timing-role-remediation",
+   "status": "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE",
+   "verification_scope": "GIT_ANCESTOR_OF_CANONICAL_STATE_COMMIT"
   },
   "manifest": {
-   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
-   "scientific_sha256": "386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47",
-   "sha256": "aa0490153ea0ead2b3131d56b0ab10da1852bd6469a41fd521241a53007e0f09"
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
+   "scientific_sha256": "7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3",
+   "sha256": "d3be36d2d1de1baa9e6b6a041805c803a77296aabb0497475eede36281b7d737"
   },
-  "run_id": "rp2-v3-20260827-remediation3",
+  "run_id": "rp2-v3-20260831-timing-role-remediation",
   "scorecard": {
-   "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/scorecard.json",
-   "sha256": "7efa57a23cf25609168088a3a3be752617af56a3c5a87c5f26090592e8c3e70c"
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/scorecard.json",
+   "sha256": "71698092f333e4bc7146967d1b069f4f69d6a866d971e7a7298fbc0389a54045"
   },
   "superseded_register": {
    "path": "docs/rp2_v3/SUPERSEDED_RESULTS.md",
-   "sha256": "40a9b348231e1864345484b9fd456ab8733ce09fdedef7851536aede6d8bfe30"
+   "sha256": "08455100ae6a86c81828e7c7b837ae72e7bd54683ee9f573ee4e3189f07b7d88"
   },
   "verdict": {
    "path": "docs/rp2_v3/VERDICT.md",
-   "sha256": "5a5f639c1b8f9a5a3c5c693dcd8ae09abbd7da9f8535c4681dd87a678283ad09",
+   "sha256": "77af171a7877190aca60d9d29288630b76a81af4a61d8522b49ce2ede48b3f4d",
    "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
   }
  }

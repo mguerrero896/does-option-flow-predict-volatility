@@ -296,6 +296,11 @@
    "sha256": "e1353f6338dfa35526caee3df6c8d5ff675f14380250398324ef9cd8aaff341b"
   },
   {
+   "bytes": 48535,
+   "path": "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json",
+   "sha256": "d0fa31009c9b91e286a1202057247200290dc9c405d4e5e6c4c2d4af78485e84"
+  },
+  {
    "bytes": 19070,
    "path": "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v1.json",
    "sha256": "c786ef02f7eefdecebf2fb03fc7aa1e64c222bf024fcccfc6b7e55b8f22a8f56"
@@ -314,6 +319,11 @@
    "bytes": 19231,
    "path": "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v4.json",
    "sha256": "a80dfd69dcc1fcc06ce68de7fd3ca3f334d2c0f029e65ae594f4ad232eb8e2c0"
+  },
+  {
+   "bytes": 19225,
+   "path": "artifacts/phase8_bridge/dispersion_audit_producer_freeze_v5.json",
+   "sha256": "c7f200554283853aac3baf2fa2ea7c5498b1e4cbd6182dad29a758c7a2f139a6"
   },
   {
    "bytes": 857,
@@ -376,6 +386,11 @@
    "sha256": "643774ffbe534cbc176420b6d2d4cdbec699c2089869c1a8e561775fa8871ca5"
   },
   {
+   "bytes": 288047,
+   "path": "artifacts/rp2_ext1_directional_factorial_v2/results.json",
+   "sha256": "04b5b94fd60d53defbca29282ba7ae86dd22e80779591479552ddae5b829a7c2"
+  },
+  {
    "bytes": 2749,
    "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
    "sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba"
@@ -384,6 +399,16 @@
    "bytes": 8755,
    "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_manifest.json",
    "sha256": "260f0e5d3f8b1dc7b29336df47395ee4a25ead01f9d9c70ce272e2bf6a1860f4"
+  },
+  {
+   "bytes": 2820,
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_identity.json",
+   "sha256": "ab5a6fcfff35c96780408bc5d0d9a568228f21edcb561ebdb6f4e999cb245164"
+  },
+  {
+   "bytes": 9042,
+   "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
+   "sha256": "096fd343e2caaf50206993c29e4e7e9e1209540e673f7f42d76b71432e440acf"
   },
   {
    "bytes": 4596,
@@ -429,6 +454,11 @@
    "bytes": 7728,
    "path": "reports/phase8a_exploratory_bridge_addendum_v10.md",
    "sha256": "62755d983bfae75eeeeece38678329e6d1f5ed51f25a8138d804aabe0008cbdb"
+  },
+  {
+   "bytes": 8182,
+   "path": "reports/phase8a_exploratory_bridge_addendum_v11.md",
+   "sha256": "a5b301876dd7b8c686d7c2177da05c1a759f3f67b9e08350b295d18b20de746b"
   },
   {
    "bytes": 5847,

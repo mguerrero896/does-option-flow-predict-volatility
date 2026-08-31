@@ -1,5 +1,10 @@
 # B2 directional utility: the lead is not strong enough to pursue
 
+> **SUPERSEDED MEASUREMENT (2026-08-31).** The B0/B1 clock remediation changes the
+> factorial nuisance block. The append-only v2 result and current four-cell table are in
+> `artifacts/rp2_ext1_directional_factorial_v2/results.json` and
+> `docs/rp2_v3/VERDICT.md`; the figures below remain as historical audit evidence.
+
 Status: `EXPLORATORY_DIRECTIONAL_REANALYSIS`
 Decision: `DO_NOT_PURSUE`
 Capital status: `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`, `capital_go=false`

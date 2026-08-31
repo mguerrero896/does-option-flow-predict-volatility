@@ -59,6 +59,7 @@ Lifecycle labels used below:
 | `scripts/freeze_phase8_dispersion_audit_producer_v2.py` | CONTROLLED | Refreeze the same audit closure after the Dependabot lock update. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v3.py` | CONTROLLED | Refreeze the same audit closure at the current protected main lock. |
 | `scripts/freeze_phase8_dispersion_audit_producer_v4.py` | CONTROLLED | Refreeze the same audit closure after the completed Dependabot queue. |
+| `scripts/freeze_phase8_dispersion_audit_producer_v5.py` | CONTROLLED | Refreeze the audit/replay closure after the RP2-v3 timing-and-role remediation. |
 | `scripts/rp3_freeze_b2_index.py` | CONTROLLED | Freeze the development-only B2 index for the RP3 primary test. |
 | `scripts/rp3_freeze_forecasters.py` | CONTROLLED | Freeze the two RP3 forecasters and their verified-byte manifest. |
 | `scripts/rp3_sizing.py` | CURRENT | Reproduce target-blind RP3 sample-size planning. |

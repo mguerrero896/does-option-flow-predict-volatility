@@ -69,3 +69,10 @@ find the old value with nothing saying it has been replaced.
 | Superseded artifact or claim | Replacement | Reason | Date |
 | --- | --- | --- | --- |
 | `artifacts/rp2_v3/rp2-v3-20260824-remeasure/` and its Block 8/10 interpretation | `rp2-v3-20260827-remediation3`, scientific hash `386610a4908d601c…` at commit `e7728ebb` | The new run harmonizes session-aware boosting-round selection between the ladder and inference and verifies identical forecasts, losses and rounds for all three primary families. The corrected run completed 13/13 steps, but remains historical because `PIT_V22_RECONCILIATION_BLOCKED` still forbids a current claim | 2026-08-27 |
+
+## Timing-and-role replacement — 2026-08-31
+
+| Superseded artifact or claim | Replacement | Reason | Date |
+| --- | --- | --- | --- |
+| `artifacts/rp2_v3/rp2-v3-20260827-remediation3/` and its twelve-contrast interpretation | `rp2-v3-20260831-timing-role-remediation`, scientific hash `7d544aa334b70ce8…` at commit `cbdd0b58` | Three result-changing defects remained: source roles were trusted rather than derived by date, B0 observed the underlying 180 seconds later than the 120-second B1/B2 cutoff, and B1 hardcoded a 16:00 ET expiry close instead of XNYS. The replacement completed 13/13 steps with `--forbid-sealed-cohorts`; PIT v2.2 still blocks a current claim | 2026-08-31 |
+| `artifacts/rp2_ext1_directional_factorial_v1/results.json` and the factorial table in `docs/rp2/extension_b2_directional_utility_v2.md` | `artifacts/rp2_ext1_directional_factorial_v2/results.json` and the current table in `docs/rp2_v3/VERDICT.md` | The factorial nuisance block uses B0+B1, so the clock repairs require remeasurement. The new result preserves the exact 10/12 treatment widths, same masks within coverage cells and `sealed_cohorts_read=0`; its registered attribution remains `TREATMENT_SET`, while the frozen-to-current V decline remains unexplained by either coverage or the 12-feature set | 2026-08-31 |

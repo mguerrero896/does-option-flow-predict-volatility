@@ -1,0 +1,582 @@
+{
+  "block": 6,
+  "concentration_window": "5m",
+  "coverage": {
+    "b2_30m_buy_premium_share": {
+      "coverage": 1.0,
+      "median": 0.3505037195456606
+    },
+    "b2_30m_contracts": {
+      "coverage": 1.0,
+      "median": 692.0
+    },
+    "b2_30m_d_iv": {
+      "coverage": 1.0,
+      "median": -4.037431536578355e-05
+    },
+    "b2_30m_d_mid_rel": {
+      "coverage": 1.0,
+      "median": 7.48700672284655e-05
+    },
+    "b2_30m_d_spread": {
+      "coverage": 1.0,
+      "median": -6.596735943862323e-05
+    },
+    "b2_30m_decay_intensity_innovation": {
+      "coverage": 1.0,
+      "median": -31.000758667105025
+    },
+    "b2_30m_decay_intensity_last": {
+      "coverage": 1.0,
+      "median": 281.56744892209457
+    },
+    "b2_30m_delta_flow": {
+      "coverage": 1.0,
+      "median": 604737.914805755
+    },
+    "b2_30m_gamma_flow": {
+      "coverage": 1.0,
+      "median": 18455341.029387236
+    },
+    "b2_30m_is_empty_window": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_30m_late_arrival_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_30m_mean_age_s": {
+      "coverage": 1.0,
+      "median": 922.2274260520935
+    },
+    "b2_30m_mean_provider_latency_s": {
+      "coverage": 1.0,
+      "median": 0.07580610205883632
+    },
+    "b2_30m_multileg_premium_share": {
+      "coverage": 1.0,
+      "median": 0.20540439934787508
+    },
+    "b2_30m_multileg_size_share": {
+      "coverage": 1.0,
+      "median": 0.14711394625079524
+    },
+    "b2_30m_observed_span_s": {
+      "coverage": 1.0,
+      "median": 1799.322239
+    },
+    "b2_30m_otm_premium_share": {
+      "coverage": 1.0,
+      "median": 0.1892732605579325
+    },
+    "b2_30m_p95_provider_latency_s": {
+      "coverage": 1.0,
+      "median": 0.12120569999999999
+    },
+    "b2_30m_passive_premium_share": {
+      "coverage": 1.0,
+      "median": 0.285719679773237
+    },
+    "b2_30m_premium": {
+      "coverage": 1.0,
+      "median": 29715972.0
+    },
+    "b2_30m_rate_per_second": {
+      "coverage": 1.0,
+      "median": 5.187777777777778
+    },
+    "b2_30m_sell_premium_share": {
+      "coverage": 1.0,
+      "median": 0.3474298419394838
+    },
+    "b2_30m_size": {
+      "coverage": 1.0,
+      "median": 52249.0
+    },
+    "b2_30m_sweep_premium_share": {
+      "coverage": 1.0,
+      "median": 0.017272455083846935
+    },
+    "b2_30m_trades": {
+      "coverage": 1.0,
+      "median": 9338.0
+    },
+    "b2_30m_vega_flow": {
+      "coverage": 1.0,
+      "median": -611211.6719412293
+    },
+    "b2_30m_vega_flow_abs": {
+      "coverage": 1.0,
+      "median": 85465067.8258388
+    },
+    "b2_30m_vega_flow_call": {
+      "coverage": 1.0,
+      "median": -426341.792940069
+    },
+    "b2_30m_vega_flow_long_dte": {
+      "coverage": 1.0,
+      "median": -730929.7097678557
+    },
+    "b2_30m_vega_flow_put": {
+      "coverage": 1.0,
+      "median": -223833.29454565234
+    },
+    "b2_30m_vega_flow_short_dte": {
+      "coverage": 1.0,
+      "median": 21783.876637074864
+    },
+    "b2_30m_zero_dte_premium_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_30m_zero_dte_signed_premium": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_30m_zero_dte_trade_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_buy_premium_share": {
+      "coverage": 1.0,
+      "median": 0.35046256307378476
+    },
+    "b2_5m_contract_entropy": {
+      "coverage": 1.0,
+      "median": 0.7217133940960067
+    },
+    "b2_5m_contracts": {
+      "coverage": 1.0,
+      "median": 269.0
+    },
+    "b2_5m_d_iv": {
+      "coverage": 1.0,
+      "median": -4.165908167456107e-05
+    },
+    "b2_5m_d_mid_rel": {
+      "coverage": 1.0,
+      "median": -8.018844796025105e-05
+    },
+    "b2_5m_d_spread": {
+      "coverage": 1.0,
+      "median": -6.663867133355854e-05
+    },
+    "b2_5m_decay_intensity_innovation": {
+      "coverage": 1.0,
+      "median": -8.229837521932069
+    },
+    "b2_5m_decay_intensity_last": {
+      "coverage": 1.0,
+      "median": 281.56744892209457
+    },
+    "b2_5m_delta_flow": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_expiry_hhi": {
+      "coverage": 1.0,
+      "median": 0.10939147532614579
+    },
+    "b2_5m_gamma_flow": {
+      "coverage": 1.0,
+      "median": 52233.56047566305
+    },
+    "b2_5m_interarrival_cv": {
+      "coverage": 1.0,
+      "median": 1.7460079118987084
+    },
+    "b2_5m_is_empty_window": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_late_arrival_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_mean_age_s": {
+      "coverage": 1.0,
+      "median": 150.82052278518677
+    },
+    "b2_5m_mean_provider_latency_s": {
+      "coverage": 1.0,
+      "median": 0.0733912919580152
+    },
+    "b2_5m_multileg_premium_share": {
+      "coverage": 1.0,
+      "median": 0.18639583986761143
+    },
+    "b2_5m_multileg_size_share": {
+      "coverage": 1.0,
+      "median": 0.1337539807732373
+    },
+    "b2_5m_observed_span_s": {
+      "coverage": 1.0,
+      "median": 299.2967349999999
+    },
+    "b2_5m_otm_premium_share": {
+      "coverage": 1.0,
+      "median": 0.18203545041102484
+    },
+    "b2_5m_p95_provider_latency_s": {
+      "coverage": 1.0,
+      "median": 0.113871
+    },
+    "b2_5m_passive_premium_share": {
+      "coverage": 1.0,
+      "median": 0.266735109427034
+    },
+    "b2_5m_premium": {
+      "coverage": 1.0,
+      "median": 4365114.0
+    },
+    "b2_5m_rate_per_second": {
+      "coverage": 1.0,
+      "median": 4.8
+    },
+    "b2_5m_sell_premium_share": {
+      "coverage": 1.0,
+      "median": 0.3482853133962274
+    },
+    "b2_5m_size": {
+      "coverage": 1.0,
+      "median": 7890.0
+    },
+    "b2_5m_strike_hhi": {
+      "coverage": 1.0,
+      "median": 0.07897828006706603
+    },
+    "b2_5m_sweep_premium_share": {
+      "coverage": 1.0,
+      "median": 0.014262181132893754
+    },
+    "b2_5m_trades": {
+      "coverage": 1.0,
+      "median": 1440.0
+    },
+    "b2_5m_vega_flow": {
+      "coverage": 1.0,
+      "median": -93915.85844080523
+    },
+    "b2_5m_vega_flow_abs": {
+      "coverage": 1.0,
+      "median": 12749815.547089875
+    },
+    "b2_5m_vega_flow_call": {
+      "coverage": 1.0,
+      "median": -69482.97055493947
+    },
+    "b2_5m_vega_flow_long_dte": {
+      "coverage": 1.0,
+      "median": -92580.46410719771
+    },
+    "b2_5m_vega_flow_put": {
+      "coverage": 1.0,
+      "median": -35089.52382750972
+    },
+    "b2_5m_vega_flow_short_dte": {
+      "coverage": 1.0,
+      "median": 175.30053408144158
+    },
+    "b2_5m_zero_dte_premium_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_zero_dte_signed_premium": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_5m_zero_dte_trade_share": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_counting_mean_latency_s": {
+      "coverage": 1.0,
+      "median": 0.07345536291390728
+    },
+    "b2_counting_p95_latency_s": {
+      "coverage": 1.0,
+      "median": 0.11414950000000001
+    },
+    "b2_counting_trades": {
+      "coverage": 1.0,
+      "median": 1447.0
+    },
+    "b2_latency_bin_0": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_1": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_10": {
+      "coverage": 1.0,
+      "median": 153.0
+    },
+    "b2_latency_bin_11": {
+      "coverage": 1.0,
+      "median": 43.0
+    },
+    "b2_latency_bin_12": {
+      "coverage": 1.0,
+      "median": 17.0
+    },
+    "b2_latency_bin_13": {
+      "coverage": 1.0,
+      "median": 6.0
+    },
+    "b2_latency_bin_14": {
+      "coverage": 1.0,
+      "median": 2.0
+    },
+    "b2_latency_bin_15": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_16": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_17": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_18": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_19": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_2": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_20": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_21": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_22": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_23": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_24": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_25": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_26": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_27": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_28": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_29": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_3": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_30": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_31": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_32": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_33": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_34": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_35": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_36": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_37": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_38": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_39": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_4": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_40": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_41": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_42": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_43": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_44": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_45": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_46": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_47": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_48": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_49": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_5": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_50": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_51": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_52": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_53": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_54": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_55": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_56": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_57": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_58": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_59": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_6": {
+      "coverage": 1.0,
+      "median": 31.0
+    },
+    "b2_latency_bin_60": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_latency_bin_7": {
+      "coverage": 1.0,
+      "median": 170.0
+    },
+    "b2_latency_bin_8": {
+      "coverage": 1.0,
+      "median": 406.0
+    },
+    "b2_latency_bin_9": {
+      "coverage": 1.0,
+      "median": 460.0
+    },
+    "b2_pit_violations": {
+      "coverage": 1.0,
+      "median": 0.0
+    },
+    "b2_zero_dte_trades": {
+      "coverage": 1.0,
+      "median": 0.0
+    }
+  },
+  "cutoff_seconds": 120,
+  "decay_seconds": 60.0,
+  "empty_window_share_30m": 0.0021778704167102056,
+  "empty_window_share_5m": 0.0023153622359469613,
+  "feature_count": 138,
+  "flow_sha256": "17b94ba97e7b1252bb2634e0735541e80d0164c0c625d6ef5a219a0d3acc9483",
+  "generated_at_utc": "2026-08-31T04:58:12.953469+00:00",
+  "label": "EXPLORATORY_MECHANISM_DISCOVERY",
+  "limit_sessions": 0,
+  "minimum_session_prints": 50,
+  "missing_bar_grid": [],
+  "missing_tape_inventory": [],
+  "program": "docs/research_program_v2.md",
+  "provider_failures": [],
+  "rows": 181829,
+  "session_assets_attempted": 2814,
+  "session_assets_in_b0_panel": 2814,
+  "session_assets_requested": 2814,
+  "session_assets_without_tape": 0,
+  "sparse_sessions": [],
+  "windows_seconds": {
+    "30m": 1800,
+    "5m": 300
+  }
+}

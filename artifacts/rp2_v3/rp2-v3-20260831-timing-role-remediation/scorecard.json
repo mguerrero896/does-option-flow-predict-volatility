@@ -1,0 +1,285 @@
+{
+  "b1": {
+    "b1_core_coverage": 0.9933673946400189,
+    "b1_duplicate_contracts_per_snapshot": 0,
+    "b1_median_quote_age_s": 550.0,
+    "b1_missing_rate_share": 0.4303053968288887,
+    "b1_p95_quote_age_s": 1725.0,
+    "b1_post_cutoff_observations": 0,
+    "b1_rows_dropped_for_rate_or_dividend": 0,
+    "b1_surface_contracts_per_origin": 778.7895715204945,
+    "b1_surface_expiry_coverage": 0.9978276292560593
+  },
+  "b2": {
+    "b2_empty_window_share": 0.0023153622359469613,
+    "b2_mean_provider_latency_s": 1.221522874453539,
+    "b2_multileg_share": 0.23970385449719134,
+    "b2_p95_provider_latency_s": 0.3555064279213946,
+    "b2_pit_violation_count": 0,
+    "b2_provider_failure_share": 0.0,
+    "b2_zero_dte_count": 102568762
+  },
+  "code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
+  "data": {
+    "assets": 6,
+    "b0_rows": 181829,
+    "b1_rows": 181829,
+    "b2_rows": 181829,
+    "common_evaluation_rows": {
+      "D": 60407,
+      "V": 12480
+    },
+    "duplicate_keys": 0,
+    "masked_rows_by_role": {
+      "D": 150629,
+      "V": 31200
+    },
+    "provider_failures": 0,
+    "sessions_by_role": {
+      "D": 389,
+      "V": 80
+    },
+    "sparse_session_assets": 0
+  },
+  "engineering": {
+    "artifact_sha256": {
+      "common_masks.json": "47c36bd19a7d7bffef74afde3744fdc7bdcae65038cc932c32c05f39c9c68c5c",
+      "feature_registry_report.json": "174a68286c2292cb4ca04df84a4454e3c04d89900f5d527079de41c3b4ece5ef",
+      "input_manifest.json": "98c83e398520b99d526b4935230bbb7249e7d5ee6f7d5e54e10e827e4c02a17c",
+      "rp2_block10_inference/inference.json": "271f179988023064635155b65031ccd2f75aa6441332a52a0de3d6548b72b486",
+      "rp2_block3_target/comparison.json": "a0555ebf4d0184f17be0a95c87b866c87f83a8362193d21ce46a0a8c73d0c508",
+      "rp2_block3_target/target_panel.parquet": "fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831",
+      "rp2_block4_b0/b0_panel.parquet": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20",
+      "rp2_block4_b0/ladder.json": "031ae58644be1bb5580fd301f4d053113d51faa8c98d021efe6f3388aa23f84f",
+      "rp2_block5_surface/b1_surface_panel.parquet": "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b",
+      "rp2_block5_surface/surface_coverage.json": "0339bf12529cee5cdd83d4f120633f311c9cd59ae680e487b8348e2a34c862ed",
+      "rp2_block6_flow/b2_flow_panel.parquet": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6",
+      "rp2_block6_flow/flow_coverage.json": "67f6252bec075b16f0f913c5e8ea747fe65ff14a1c31b3abeda605e1a89f940c",
+      "rp2_block7_dml/dml.json": "eae323a11eeede693aeeb04bf17b1c253f1056239a672c8cd62fdf8d0f79e7fa",
+      "rp2_block8_ladder/ladder.json": "0146654727f8970851bb0c60b7002b708a414b91b2f091d0fc0375111e942112"
+    },
+    "code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
+    "feature_registry_sha256": "3c108a14a5a88e4da08bade7debd5dc05a1d51ea50c1e5adea6d1e88dc0acb9c",
+    "input_manifest_sha256": "53b252ec1c1cf094b3eac963332b2a0f0edf78c7740cb75970d79916bfd8ad8f",
+    "model_config_sha256": "6a088cb19f30bcf65bd3552affa52d2093dbe1f2de14be74bb22f8cfbb67c66f",
+    "peak_memory_bytes": 6836768768,
+    "runtime_seconds": 1694.783
+  },
+  "forecast": {
+    "gamma_glm": {
+      "D": {
+        "ci_by_session": {
+          "delta_b1": [
+            0.0010241477402965413,
+            0.004183733284092516
+          ],
+          "delta_b2_given_b1": [
+            -0.00033145230660764106,
+            0.0007379175085086083
+          ],
+          "delta_total": [
+            0.001044214491693162,
+            0.0045225626402176835
+          ]
+        },
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "delta_b1": 0.002575214402292808,
+        "delta_b2_given_b1": 0.00017649871130231629,
+        "delta_total": 0.0027517131135951244,
+        "mde": {
+          "delta_b1": 0.0023120392099736835,
+          "delta_b2_given_b1": 0.0007550433836807761,
+          "delta_total": 0.002487215952883546
+        },
+        "qlike_b0": 0.145218361160984,
+        "qlike_b0_b1": 0.14264314675869116,
+        "qlike_b0_b1_b2": 0.14246664804738884
+      },
+      "V": {
+        "ci_by_session": {
+          "delta_b1": [
+            -0.005004510880172685,
+            0.002232461313805527
+          ],
+          "delta_b2_given_b1": [
+            -0.005978236977167864,
+            -0.00010794415231390943
+          ],
+          "delta_total": [
+            -0.007066106693949392,
+            -0.001044629948411657
+          ]
+        },
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "delta_b1": -0.0015167306497060609,
+        "delta_b2_given_b1": -0.002722689466943246,
+        "delta_total": -0.004239420116649307,
+        "mde": {
+          "delta_b1": 0.004957357563729767,
+          "delta_b2_given_b1": 0.004363807703268117,
+          "delta_total": 0.003561022815458335
+        },
+        "qlike_b0": 0.18346843253443001,
+        "qlike_b0_b1": 0.1849851631841361,
+        "qlike_b0_b1_b2": 0.18770785265107934
+      }
+    },
+    "lightgbm_qlike": {
+      "D": {
+        "ci_by_session": {
+          "delta_b1": [
+            0.0005957028350952535,
+            0.005188478930727134
+          ],
+          "delta_b2_given_b1": [
+            0.00012342697019843612,
+            0.0018346730119951236
+          ],
+          "delta_total": [
+            0.00126646287059064,
+            0.006394549817647301
+          ]
+        },
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "delta_b1": 0.0026694369687699886,
+        "delta_b2_given_b1": 0.0009557536693504548,
+        "delta_total": 0.0036251906381204427,
+        "mde": {
+          "delta_b1": 0.003410456206117904,
+          "delta_b2_given_b1": 0.0012851618485425701,
+          "delta_total": 0.0038243058003500446
+        },
+        "qlike_b0": 0.14238958709147398,
+        "qlike_b0_b1": 0.13972015012270397,
+        "qlike_b0_b1_b2": 0.13876439645335353
+      },
+      "V": {
+        "ci_by_session": {
+          "delta_b1": [
+            -0.005479908613170996,
+            0.008191883309031249
+          ],
+          "delta_b2_given_b1": [
+            -0.005169503079626516,
+            0.001310776100225018
+          ],
+          "delta_total": [
+            -0.007516273643106786,
+            0.0054964964874136876
+          ]
+        },
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "delta_b1": 0.0013555797374435999,
+        "delta_b2_given_b1": -0.002016484692364664,
+        "delta_total": -0.0006609049549210644,
+        "mde": {
+          "delta_b1": 0.010372109081040764,
+          "delta_b2_given_b1": 0.004786302356781157,
+          "delta_total": 0.009671716474384901
+        },
+        "qlike_b0": 0.21303739128706364,
+        "qlike_b0_b1": 0.21168181154962,
+        "qlike_b0_b1_b2": 0.21369829624198472
+      }
+    },
+    "ridge_log": {
+      "D": {
+        "ci_by_session": {
+          "delta_b1": [
+            0.0015353683640820662,
+            0.004381057118240345
+          ],
+          "delta_b2_given_b1": [
+            -0.0002895278344802844,
+            0.0008734043665502524
+          ],
+          "delta_total": [
+            0.0013960836815080895,
+            0.005059531356821057
+          ]
+        },
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "delta_b1": 0.0028798594814925045,
+        "delta_b2_given_b1": 0.0002805399822605305,
+        "delta_total": 0.0031603994637530355,
+        "mde": {
+          "delta_b1": 0.0020785774819295695,
+          "delta_b2_given_b1": 0.0008390136366821934,
+          "delta_total": 0.002676708476081775
+        },
+        "qlike_b0": 0.14575714577765303,
+        "qlike_b0_b1": 0.14287728629616053,
+        "qlike_b0_b1_b2": 0.14259674631389999
+      },
+      "V": {
+        "ci_by_session": {
+          "delta_b1": [
+            -0.0031840676172430406,
+            0.0014795546840945398
+          ],
+          "delta_b2_given_b1": [
+            -0.00675745451218328,
+            0.0005037235866932122
+          ],
+          "delta_total": [
+            -0.007557855036558916,
+            1.6985059442866117e-05
+          ]
+        },
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "delta_b1": -0.0009236824043408881,
+        "delta_b2_given_b1": -0.0025110401389386847,
+        "delta_total": -0.0034347225432795727,
+        "mde": {
+          "delta_b1": 0.0031083198063802274,
+          "delta_b2_given_b1": 0.00534225697359012,
+          "delta_total": 0.005017787661392766
+        },
+        "qlike_b0": 0.1872414613033872,
+        "qlike_b0_b1": 0.18816514370772808,
+        "qlike_b0_b1_b2": 0.19067618384666676
+      }
+    }
+  },
+  "forecast_calibration": {
+    "by_role_and_family": {
+      "D": {
+        "gamma_glm": {
+          "intercept": -0.11855062680751288,
+          "slope": 1.0020639365592003
+        },
+        "lightgbm_qlike": {
+          "intercept": 0.13222061691179254,
+          "slope": 1.0202895568451738
+        },
+        "ridge_log": {
+          "intercept": -0.11435682638642843,
+          "slope": 1.000011556658302
+        }
+      },
+      "V": {
+        "gamma_glm": {
+          "intercept": 0.16979814236930116,
+          "slope": 1.0271290882447595
+        },
+        "lightgbm_qlike": {
+          "intercept": 0.8648811666296644,
+          "slope": 1.0820442216266688
+        },
+        "ridge_log": {
+          "intercept": -0.11688366896970141,
+          "slope": 1.0000777534662915
+        }
+      }
+    },
+    "calibration_intercept": 0.13222061691179254,
+    "calibration_slope": 1.0202895568451738,
+    "headline": "lightgbm_qlike on D at B0+B1+B2"
+  },
+  "inference_sessions": {
+    "D": 156,
+    "V": 32
+  },
+  "run_id": "rp2-v3-20260831-timing-role-remediation",
+  "schema_version": "rp2-v3-scorecard-v1.0"
+}

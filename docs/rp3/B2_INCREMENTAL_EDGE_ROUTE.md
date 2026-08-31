@@ -84,9 +84,11 @@ a separate protocol is defensible.
 
 - Current state: `data/CANONICAL_STATE.json`.
 - Phase 8 evidence: `artifacts/phase8_bridge/result_20260830_v1.json` and
-  `artifacts/phase8_bridge/dispersion_audit_20260830_v9.json`.
-- Directional closeout: `artifacts/rp2_ext1_directional_v2/results.json` and
-  `docs/rp2/extension_b2_directional_utility_v2.md`.
+  `artifacts/phase8_bridge/dispersion_audit_20260831_v10.json`.
+- Directional closeout: `artifacts/rp2_ext1_directional_v2/results.json`, the
+  timing-remediated factorial in
+  `artifacts/rp2_ext1_directional_factorial_v2/results.json`, and
+  `docs/rp2_v3/VERDICT.md`.
 - Frozen Phase 9 design: `docs/phase9_total_contribution_protocol_v1.md`.
 - Target-blind sizing inputs: `docs/phase9_academic_reporting_policy_v2.md` and
   `artifacts/phase9/power_deadline_audit_v1.json`.

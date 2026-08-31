@@ -15,6 +15,7 @@ and was a defect in the parser.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import re
@@ -26,6 +27,8 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[2]
 DOC = REPO / "docs" / "rp2_v3" / "VERDICT.md"
+REPORT = REPO / "reports" / "final_report_draft_v2.md"
+FACTORIAL = REPO / "artifacts" / "rp2_ext1_directional_factorial_v2" / "results.json"
 
 #: `ΔB2\|B1` escapes the pipe so the cell survives the markdown table; mask it before
 #: splitting on the column separator.
@@ -136,13 +139,21 @@ def tables(document: str) -> tuple[list[tuple], list[tuple], list[tuple]]:
             family, effect, mde, note = cells
             power.append((family.strip("`"), _number(effect), _number(mde), note))
         elif len(cells) == 3 and "→" in cells[1]:
-            # The rebuild's before/after table. Its "unchanged" column is a claim about
-            # validation, so it is parsed and checked rather than skipped.
-            family, moved, in_validation = cells
+            # The rebuild's before/after table reports both roles; parse both sides so a
+            # later repair cannot silently preserve only the development comparison.
+            family, moved, moved_validation = cells
             before, after = (part.strip(" *") for part in moved.split("→"))
+            validation_before, validation_after = (
+                part.strip(" *") for part in moved_validation.split("→")
+            )
             movement.append(
-                (family.strip("`"), _number(before), _number(after),
-                 _number(in_validation.split(",")[0]), "unchanged" in in_validation)
+                (
+                    family.strip("`"),
+                    _number(before),
+                    _number(after),
+                    _number(validation_before),
+                    _number(validation_after),
+                )
             )
         else:
             unparsed.append((line[:80], len(cells)))
@@ -250,14 +261,7 @@ def test_alpha_contract_is_not_mixed_with_future_spending(document, inference) -
 
 
 def test_the_rebuild_table_matches_both_runs(document, tables, inference) -> None:
-    """The before/after table states that validation did not move. That is checkable.
-
-    The page argues the development effect fell because the baseline was repaired, and
-    points at validation as the control: no deficient bar store supplied it, so nothing
-    there should have changed. Each row's "after" is checked against the run this document
-    names, and each row's "before" against the run it says it supersedes, so the claim of
-    an unchanged control is verified rather than asserted.
-    """
+    """Every before/after value must match the superseded and current run."""
     _, _, movement = tables
     assert len(movement) == 3, (
         f"expected three families in the rebuild table, parsed {len(movement)}"
@@ -272,23 +276,25 @@ def test_the_rebuild_table_matches_both_runs(document, tables, inference) -> Non
     older = json.loads(older_path.read_text(encoding="utf-8")) if older_path.is_file() else None
 
     wrong: list[str] = []
-    for family, before, after, in_validation, claims_unchanged in movement:
+    for family, before, after, validation_before, validation_after in movement:
         current_d = inference["D"]["nested_tests"][family]["b1_over_b0"]["estimate"]
         current_v = inference["V"]["nested_tests"][family]["b1_over_b0"]["estimate"]
         if abs(after - current_d) >= TOLERANCE:
             wrong.append(f"{family}: table says the rebuild gives {after}, run gives {current_d}")
-        if abs(in_validation - current_v) >= TOLERANCE:
-            wrong.append(f"{family}: table says V is {in_validation}, run gives {current_v}")
+        if abs(validation_after - current_v) >= TOLERANCE:
+            wrong.append(
+                f"{family}: table says current V is {validation_after}, run gives {current_v}"
+            )
         if older is None:
             continue
         previous_d = older["D"]["nested_tests"][family]["b1_over_b0"]["estimate"]
         previous_v = older["V"]["nested_tests"][family]["b1_over_b0"]["estimate"]
         if abs(before - previous_d) >= TOLERANCE:
             wrong.append(f"{family}: table says the old run gave {before}, it gave {previous_d}")
-        if claims_unchanged and abs(previous_v - current_v) >= TOLERANCE:
+        if abs(validation_before - previous_v) >= TOLERANCE:
             wrong.append(
-                f"{family}: the table calls validation unchanged, but it moved from "
-                f"{previous_v} to {current_v}"
+                f"{family}: table says previous V was {validation_before}, "
+                f"older run gives {previous_v}"
             )
     joined = "\n  ".join(wrong)
     assert not wrong, f"the rebuild table does not match the runs:\n  {joined}"
@@ -312,3 +318,67 @@ def test_the_six_pair_count_matches_the_artifact(document, inference) -> None:
     assert negative == claimed.pop(), (
         f"{label}: measured {negative} of six, document says {stated[0]}"
     )
+
+
+def test_timing_remediated_factorial_and_alias_match_both_reports() -> None:
+    result = json.loads(FACTORIAL.read_text(encoding="utf-8"))
+    body = {key: value for key, value in result.items() if key != "self_sha256"}
+    encoded = json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    assert result["self_sha256"] == hashlib.sha256(encoded).hexdigest()
+    assert result["self_sha256"] == (
+        "42f919d3a88d840c41e357c54f27de1bfee9b119fdf9360f92aed6d357fc7fdb"
+    )
+    assert result["code_commit"] == "cbdd0b5840da9ae685e2dff90a113ba33e7a7806"
+    assert result["sealed_cohorts_read"] == 0
+    assert len(result["tests"]) == 40
+    assert result["mask_invariants"]["august_mask_subset_of_complete_mask"] is True
+    assert (
+        result["mask_invariants"][
+            "same_coverage_role_horizon_same_mask_across_treatment_sets"
+        ]
+        is True
+    )
+
+    ext1 = result["designs"]["ext1_exact/august/D"]
+    assert len(ext1["requested_treatments"]) == 10
+    assert len(ext1["resolved_panel_columns"]) == 10
+    assert ext1["alias_resolution"] == [
+        {
+            "requested_feature": "b2_5m_hawkes_innovation",
+            "panel_column": "b2_5m_decay_intensity_innovation",
+            "resolution": "RECORDED_SEMANTIC_RENAME",
+            "value_operation": "IN_MEMORY_DESIGN_ALIAS_NO_RECOMPUTATION",
+        }
+    ]
+    assert len(result["designs"]["b2_panel_12/august/D"]["requested_treatments"]) == 12
+    assert result["attribution"]["classification"] == "TREATMENT_SET"
+    assert result["attribution"]["median_abs_treatment_main_effect"] == pytest.approx(
+        0.40576416469527093
+    )
+    assert result["attribution"]["median_abs_coverage_main_effect"] == pytest.approx(
+        0.036811159471867694
+    )
+
+    row_specs = {
+        "Ext1 exact / August": ("ext1_exact", "august"),
+        "Ext1 exact / complete": ("ext1_exact", "complete"),
+        "B2 panel 12 / August": ("b2_panel_12", "august"),
+        "B2 panel 12 / complete": ("b2_panel_12", "complete"),
+    }
+    for path in (DOC, REPORT):
+        rows = {
+            cells[0]: cells[1:]
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.startswith("| Ext1 exact /") or line.startswith("| B2 panel 12 /")
+            for cells in [_cells(line)]
+        }
+        assert set(rows) == set(row_specs)
+        for label, (treatment, coverage) in row_specs.items():
+            expected = []
+            for role, horizon in (("D", 60), ("D", 120), ("V", 60), ("V", 120)):
+                test = result["tests"][f"{treatment}/{coverage}/{role}/h{horizon}"]
+                expected.append(
+                    f"{test['joint_wald']:.3f} / {test['treatment_df']} / "
+                    f"{test['joint_p_value']:.6f} / {test['holm_p']:.6f}"
+                )
+            assert rows[label] == expected

@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–114](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout policy and published-surface consistency remediation. |
+| [97–115](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, published-surface consistency and RP2 timing/role remediation. |
 
 <a id="decision-1"></a>
 
@@ -1875,3 +1875,47 @@ Requirements-consistency and preregistration gates pass.
      files that are neither gated nor present and now say so; and blocks 4 and 5, the v1
      confirmation-readiness gate and the gate 4 script entry received the supersession
      notices they lacked.
+
+<a id="decision-115"></a>
+
+115. **RP2-v3 derives partition roles by date and uses one 120-second market clock
+     (2026-08-31).** Three result-changing defects invalidated the 2026-08-27 bundle as the
+     latest historical measurement. Bar files carried a literal role that was never
+     checked against the frozen partition; B0 used `close[m]` while B1/B2 stopped at
+     origin minus 120 seconds, a 180-second information advantage for start-labelled
+     one-minute bars; and B1 priced tenor to a hardcoded 16:00 ET expiry while B2 used
+     XNYS, including early closes.
+
+     The shared bar loader now derives every row's D/V role from its session date and
+     treats each source role only as an allowed scope. Block 3 delegates to that loader.
+     Every B0 predictor, SPY/QQQ control and EWMA/GARCH state now observes `m-3`; the
+     forward RV30 target remains anchored at the origin. B1 now delegates expiry close to
+     the shared XNYS helper. Regression tests cover mixed-role files, Block 3 bypass,
+     post-cutoff perturbations, market controls, recursive states and the 2025-11-28 early
+     close.
+
+     The pre-measurement commit is `cbdd0b5840da9ae685e2dff90a113ba33e7a7806`.
+     `rp2-v3-20260831-timing-role-remediation` completed 13/13 steps with
+     `--forbid-sealed-cohorts`; scientific SHA-256
+     `7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3`.
+     B1 core coverage is 99.3367%, all twelve B2 core features are 100% covered, B2 PIT
+     violations and provider failures are zero, and the common panel has 181,829 rows over
+     389 D and 80 V sessions. `PIT_V22_RECONCILIATION_BLOCKED` still prevents a current
+     headline; `capital_go=false`.
+
+     The exact 10-treatment Ext1 versus 12-feature panel factorial was remeasured because
+     its nuisance block is B0+B1. On `log(Wald/df)`, the median absolute treatment-set
+     effect is 0.405764 versus 0.036811 for coverage, ratio 11.02 and registered
+     classification `TREATMENT_SET`. That is descriptive: the sets are not nested.
+     Complete coverage adds no V row, and the twelve-feature set does not restore the
+     frozen V 120-minute statistic, so the frozen-to-current V decline remains
+     `NEITHER_TREATMENT_SET_NOR_COVERAGE`. The historical
+     `b2_5m_hawkes_innovation` label is mapped in memory to the current
+     `b2_5m_decay_intensity_innovation` column as a recorded semantic rename; the old
+     column bytes do not exist and byte equality cannot be confirmed.
+
+     Phase 8 was not rerun and no sealed store was reopened. Its pinned 190,000-row cube
+     replayed exactly; 3/4 B1 cells retain descriptive Holm p below 0.05, 0/4 B2-given-B1
+     cells do, and all four B2-given-B1 intervals cross zero. The append-only current D/V
+     dispersion reference is `dispersion_audit_20260831_v10.json` with
+     `sealed_store_reopened=false`.

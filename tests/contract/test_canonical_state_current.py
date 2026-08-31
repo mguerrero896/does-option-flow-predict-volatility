@@ -46,22 +46,14 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     bundle = state["scientific_bundle"]
 
-    assert bundle["run_id"] == "rp2-v3-20260827-remediation3"
+    assert bundle["run_id"] == "rp2-v3-20260831-timing-role-remediation"
     translation = bundle["historical_code_provenance"]
     manifest = json.loads((REPO / translation["manifest"]).read_text(encoding="utf-8"))
     assert translation["recorded_code_commit"] == manifest["code_commit"]
-    assert translation["status"] == "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE"
-    assert len(translation["historical_sanitized_commit_reference"]) == 40
-    assert len(translation["recorded_git_tree_sha1"]) == 40
-    assert len(translation["retained_blobs_sha256"]) == 64
-    assert translation["withdrawn_path_count"] == 5
-    assert translation["withdrawn_path_classes"] == [
-        "internal planning documents",
-        "internal execution checklists",
-        "internal handoff tests",
-    ]
+    assert translation["status"] == "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE"
+    assert translation["verification_scope"] == "GIT_ANCESTOR_OF_CANONICAL_STATE_COMMIT"
     assert bundle["manifest"]["scientific_sha256"] == (
-        "386610a4908d601c1ad09688d8371cfa3fdd70e4e7ddf50c416e8d3b0907cb47"
+        "7d544aa334b70ce8bc2d25d26bd1f984068b8f753aebe039fc59ae2a44719db3"
     )
     assert bundle["eligibility"]["status"] == "REBUILD_COMPLETE_PIT_V22_BLOCKED"
     assert bundle["eligibility"]["reasons"] == ["PIT_V22_RECONCILIATION_BLOCKED"]
@@ -71,7 +63,7 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     }
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
-    assert redactions["artifact_count"] == 10
+    assert redactions["artifact_count"] == 12
     assert state["external_publication"]["supabase"] == {
         "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
         "status": (
@@ -101,14 +93,15 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert phase8["result"]["confirmatory_promotion_allowed"] is False
     assert phase8["dispersion_audit"]["artifact"] == (
-        "artifacts/phase8_bridge/dispersion_audit_20260830_v9.json"
+        "artifacts/phase8_bridge/dispersion_audit_20260831_v10.json"
     )
     assert phase8["dispersion_audit"]["aggregation_change_supported"] is False
     assert phase8["dispersion_audit"]["delta_b1_holm_below_0_05_cells"] == 3
     assert phase8["dispersion_audit"]["delta_b2_given_b1_holm_below_0_05_cells"] == 0
     assert state["current_report"]["phase8_addendum"]["path"] == (
-        "reports/phase8a_exploratory_bridge_addendum_v10.md"
+        "reports/phase8a_exploratory_bridge_addendum_v11.md"
     )
+    assert state["current_report"]["evidence_cutoff"] == "2026-08-31"
     assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])
     phase9 = next(
         protocol

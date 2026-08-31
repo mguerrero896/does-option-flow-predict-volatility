@@ -22,7 +22,7 @@ from typing import Any
 REPO = Path(__file__).resolve().parents[1]
 STATE_PATH = REPO / "data" / "CANONICAL_STATE.json"
 STATUS_PATH = REPO / "STATUS.md"
-CURRENT_RUN_ID = "rp2-v3-20260827-remediation3"
+CURRENT_RUN_ID = "rp2-v3-20260831-timing-role-remediation"
 CURRENT_RUN = Path("artifacts") / "rp2_v3" / CURRENT_RUN_ID
 PHASE8_DIR = Path("artifacts") / "phase8_bridge"
 PHASE8_AUTHORIZATION = PHASE8_DIR / "owner_authorization_20260830_v1.json"
@@ -30,8 +30,8 @@ PHASE8_CUSTODY = PHASE8_DIR / "one_shot_custody_20260830_v3.json"
 PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json"
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
-PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260830_v9.json"
-PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v10.md"
+PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260831_v10.json"
+PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v11.md"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -124,10 +124,20 @@ def build_state() -> dict[str, Any]:
     )
     if translation["recorded_code_commit"] != manifest.get("code_commit"):
         raise ValueError("CANONICAL_PUBLIC_COMMIT_TRANSLATION_MISMATCH")
-    if translation.get("status") != "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE":
+    translation_status = translation.get("status")
+    if translation_status == "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE":
+        if "published_equivalent_commit" in translation:
+            raise ValueError("CANONICAL_PUBLIC_COMMIT_REACHABILITY_OVERCLAIM")
+    elif translation_status == "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE":
+        reachable = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", str(manifest["code_commit"]), "HEAD"],
+            cwd=REPO,
+            check=False,
+        )
+        if reachable.returncode != 0:
+            raise ValueError("CANONICAL_RECORDED_COMMIT_NOT_REACHABLE")
+    else:
         raise ValueError("CANONICAL_PUBLIC_COMMIT_PROVENANCE_STATUS_INVALID")
-    if "published_equivalent_commit" in translation:
-        raise ValueError("CANONICAL_PUBLIC_COMMIT_REACHABILITY_OVERCLAIM")
     decisions_text = (REPO / "docs" / "methodology_decisions.md").read_text(encoding="utf-8")
     decision_numbers = [int(match) for match in re.findall(r"^(\d+)\.\s", decisions_text, re.M)]
     bridge_path = REPO / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
@@ -439,7 +449,7 @@ def build_state() -> dict[str, Any]:
                 "path": PHASE8_ADDENDUM.as_posix(),
                 "sha256": _sha(REPO / PHASE8_ADDENDUM),
             },
-            "evidence_cutoff": "2026-08-28",
+            "evidence_cutoff": "2026-08-31",
         },
         "future_campaigns": [
             (
@@ -495,16 +505,27 @@ def render_status(state: dict[str, Any]) -> str:
         lines.append(f"- **{protocol['id']}**{document}: {protocol['state']}")
     bundle = state["scientific_bundle"]
     eligibility = bundle["eligibility"]
+    provenance = bundle["historical_code_provenance"]
+    if provenance["status"] == "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE":
+        provenance_line = (
+            "- Code provenance: recorded run commit "
+            f"`{provenance['recorded_code_commit'][:12]}` is reachable from this root "
+            "release."
+        )
+    else:
+        provenance_line = (
+            "- Historical code provenance: recorded run commit "
+            f"`{provenance['recorded_code_commit'][:12]}` and the pre-root sanitization "
+            "audit are external references; neither is claimed reachable from this "
+            "root-only public release."
+        )
     lines += [
         "",
         "## Current scientific bundle",
         "",
         f"- Run: `{bundle['run_id']}`.",
         f"- Scientific hash: `{bundle['manifest']['scientific_sha256']}`.",
-        "- Historical code provenance: recorded run commit "
-        f"`{bundle['historical_code_provenance']['recorded_code_commit'][:12]}` and "
-        "the pre-root sanitization audit are external references; neither is claimed "
-        "reachable from this root-only public release.",
+        provenance_line,
         f"- Eligibility: **{eligibility['status']}**.",
         f"- Blocking reasons: {', '.join(eligibility['reasons'])}.",
         "- Current eligible headline results: none.",
@@ -513,7 +534,7 @@ def render_status(state: dict[str, Any]) -> str:
         "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
         "submission rendering pinned under `current_report` in the machine state.",
         "- Post-cutoff Phase 8A result: "
-        "`reports/phase8a_exploratory_bridge_addendum_v10.md`.",
+        f"`{PHASE8_ADDENDUM.as_posix()}`.",
     ]
     lines += ["", "## Future campaigns", ""]
     for campaign in state["future_campaigns"]:

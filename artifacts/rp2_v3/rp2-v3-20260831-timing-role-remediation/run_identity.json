@@ -1,0 +1,60 @@
+{
+  "code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
+  "completed_steps": {
+    "build-b0": {
+      "artifacts": {
+        "rp2_block4_b0/b0_panel.parquet": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20",
+        "rp2_block4_b0/ladder.json": "9539bd548351f1ef90c67b5c86dcf9eacd2260ee548f94bfc8397d432ef397cd"
+      },
+      "content": {
+        "rp2_block4_b0/b0_panel.parquet": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20",
+        "rp2_block4_b0/ladder.json": "031ae58644be1bb5580fd301f4d053113d51faa8c98d021efe6f3388aa23f84f"
+      }
+    },
+    "build-b1": {
+      "artifacts": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b",
+        "rp2_block5_surface/surface_coverage.json": "df8cc6660b4b72c0ded6868b9ecf17f707db7feb41dcc0fe44d3ff571eac4b5c"
+      },
+      "content": {
+        "rp2_block5_surface/b1_surface_panel.parquet": "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b",
+        "rp2_block5_surface/surface_coverage.json": "0339bf12529cee5cdd83d4f120633f311c9cd59ae680e487b8348e2a34c862ed"
+      }
+    },
+    "build-b2": {
+      "artifacts": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6",
+        "rp2_block6_flow/flow_coverage.json": "6c9d6ea3ddd1f1aff97609eb7c73b067391c34ef83b740c9025c16a6a6504678"
+      },
+      "content": {
+        "rp2_block6_flow/b2_flow_panel.parquet": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6",
+        "rp2_block6_flow/flow_coverage.json": "67f6252bec075b16f0f913c5e8ea747fe65ff14a1c31b3abeda605e1a89f940c"
+      }
+    },
+    "build-targets": {
+      "artifacts": {
+        "rp2_block3_target/comparison.json": "7630df33888279fcb01380f496e1a5b7e3b12424522db2c3e41767d2d723f928",
+        "rp2_block3_target/target_panel.parquet": "fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831"
+      },
+      "content": {
+        "rp2_block3_target/comparison.json": "a0555ebf4d0184f17be0a95c87b866c87f83a8362193d21ce46a0a8c73d0c508",
+        "rp2_block3_target/target_panel.parquet": "fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831"
+      }
+    }
+  },
+  "data_root": "MDS650_DATA_ROOT",
+  "feature_registry_sha256": "3c108a14a5a88e4da08bade7debd5dc05a1d51ea50c1e5adea6d1e88dc0acb9c",
+  "input_manifest_sha256": "53b252ec1c1cf094b3eac963332b2a0f0edf78c7740cb75970d79916bfd8ad8f",
+  "model_config_sha256": "6a088cb19f30bcf65bd3552affa52d2093dbe1f2de14be74bb22f8cfbb67c66f",
+  "roles": [
+    "D",
+    "V"
+  ],
+  "run_id": "rp2-v3-20260831-timing-role-remediation",
+  "seeds": {
+    "bootstrap": 650,
+    "dml_folds": 5,
+    "lightgbm": 20260818
+  },
+  "steps": []
+}

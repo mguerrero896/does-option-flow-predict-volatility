@@ -1,20 +1,20 @@
 {
   "panels": {
     "artifacts/rp2_block3_target/target_panel.parquet": {
-      "bytes": 37063494,
-      "sha256": "4723e433b7feb2043270c463924cfbc975ccf44cc665845f9ee80346770ba992"
+      "bytes": 37068944,
+      "sha256": "fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831"
     },
     "artifacts/rp2_block4_b0/b0_panel.parquet": {
-      "bytes": 20834560,
-      "sha256": "0fad590d0c12825b82b556c904e0d25f4e36e0fa616bb5bbfe80e27a6cd80a2a"
+      "bytes": 20655471,
+      "sha256": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20"
     },
     "artifacts/rp2_block5_surface/b1_surface_panel.parquet": {
-      "bytes": 41698049,
-      "sha256": "3da2195176468f0f2fd83c6e3a085cb6436d026989cfdec7e6d4627ea2dec5ba"
+      "bytes": 41146313,
+      "sha256": "446d64cf0e6369eaa99cbeae09337602924d2217953d817bd79d6d14ca2c714b"
     },
     "artifacts/rp2_block6_flow/b2_flow_panel.parquet": {
-      "bytes": 85348388,
-      "sha256": "5375ef33a13f188ebaa84dd4db5bb7813aecd2eb19f5b09027d725a8f9053eda"
+      "bytes": 84072219,
+      "sha256": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6"
     }
   },
   "purpose": "Content hashes of the Research Program v2 derived panels, which are not versioned in git: they are large and are derived works of licensed provider data (see docs/provider_license_review_v1.md).",

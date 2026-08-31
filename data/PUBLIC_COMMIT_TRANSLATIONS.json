@@ -16,6 +16,13 @@
       "retained_blobs_sha256": "8aee30a8c1f6922b09e68d4d7a63e48a71ff0cd2802b165eaa19edb8142bf2c1",
       "status": "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE",
       "verification_scope": "PRE_ROOT_SANITIZATION_AUDIT_NOT_REGENERATED_FROM_THIS_RELEASE"
+    },
+    {
+      "run_id": "rp2-v3-20260831-timing-role-remediation",
+      "manifest": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
+      "recorded_code_commit": "cbdd0b5840da9ae685e2dff90a113ba33e7a7806",
+      "status": "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE",
+      "verification_scope": "GIT_ANCESTOR_OF_CANONICAL_STATE_COMMIT"
     }
   ]
 }

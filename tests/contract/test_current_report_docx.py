@@ -21,11 +21,16 @@ def test_current_word_report_is_not_the_superseded_draft() -> None:
         " ".join(node.text or "" for node in document.iter(WORD_TEXT)).split()
     )
     assert "EVIDENCE_CUTOFF_COMPLETE" in text
-    assert "rp2-v3-20260827-remediation3" in text
+    assert "rp2-v3-20260831-timing-role-remediation" in text
+    assert "DO_NOT_PURSUE" in text
+    assert "MIXED_EXPLORATORY" in text
+    assert "12.593 / 10 / 0.247302 / 1.000000" in text
+    assert "RECORDED_SEMANTIC_RENAME" in text
     assert "Phase 9 is an ongoing 60-session prospective follow-up" in text
     assert "60 complete sessions produce 36 scored sessions" in text
     assert "zero scored sessions" in text
     assert "sealed_cohorts_read=0" in text
+    assert "Phase 8 remains an unopened exploratory bridge" not in text
     assert "PROSE_COMPLETE_PENDING_D003_AND_PHASE8" not in text
     assert "[D003]" not in text
     assert "[PHASE8]" not in text

@@ -70,6 +70,20 @@
       "redacted_sha256": "ba8ebdf127da9f23249b8dbbf2c4394b296a5ca6ec92d8e89f9174b2e90aa1dd",
       "scientific_payload_sha256": "7829df8d5688040c651f29653f4770c7bbae0a18cd32e901a990ca5d169be864",
       "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_manifest.json",
+      "original_sha256": "096fd343e2caaf50206993c29e4e7e9e1209540e673f7f42d76b71432e440acf",
+      "redacted_sha256": "d3be36d2d1de1baa9e6b6a041805c803a77296aabb0497475eede36281b7d737",
+      "scientific_payload_sha256": "55943408968bd4e9d023aef21cc65218a611f4a3b7d94f588e7a3ece5073a492",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
+    },
+    {
+      "path": "artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/run_identity.json",
+      "original_sha256": "ab5a6fcfff35c96780408bc5d0d9a568228f21edcb561ebdb6f4e999cb245164",
+      "redacted_sha256": "9c43521f442b52ea27a793b112c84d3bd45732a25d0702b0c1db4fe0cb261792",
+      "scientific_payload_sha256": "e57fead96a6715d07ff2579585b569f974bfef24a7313a20aabe623b2a6a71a3",
+      "redaction": "PERSONAL_PATH_METADATA_ONLY"
     }
   ]
 }

@@ -1,9 +1,9 @@
 # RP2-v3 implementation status
 
-> **Current eligibility:** the corrected-protocol rebuild is an historical audit
+> **Current eligibility:** the timing-and-role rebuild is an historical audit
 > record, not a current scientific claim. `data/CANONICAL_STATE.json` records
-> `REBUILD_COMPLETE_PIT_V22_BLOCKED`: Block 8 and Block 10 now share primary-model
-> provenance, while PIT v2.2 still forbids reconciliation into a current claim.
+> `REBUILD_COMPLETE_PIT_V22_BLOCKED`: bar roles and B0/B1 market clocks now fail closed,
+> while PIT v2.2 still forbids reconciliation into a current claim.
 
 One row per gate of the registered twelve-gate sequence, in its binding order. A gate is `merged`
 only when its own PR carried failing-first tests, the minimal fix, measured before/after
@@ -23,16 +23,27 @@ its final commit.
 | 9 | `fix/rp2-v3-session-inference` | Session-level, family-matched inference | merged |
 | 10 | `feat/rp2-v3-pipeline-runner` | One reproducible runner | merged |
 | 11 | `db/rp2-v3-versioned-results` | Versioned Supabase results | merged |
-| 12 | `results/rp2-v3-rebuild` | Rebuild, scorecard, publication | rebuilt locally; external republication not authorized |
+| 12 | `results/rp2-v3-rebuild` | Rebuild, scorecard, publication | rebuilt; repository delivery recorded by commit and PR history |
 
 ## Historical completion record
 
-The corrected-protocol run `rp2-v3-20260827-remediation3` recorded thirteen steps, every
-exit code zero, scientific hash `386610a4908d601c…` at commit `e7728ebbaf3f`. Its aggregate
-bundle and twelve contrasts remain in [`VERDICT.md`](VERDICT.md) for auditability. The
-measurement has no current section-21 classification because the PIT v2.2 gate remains
-closed. Earlier published runs remain historical and are listed in
+The timing-and-role run `rp2-v3-20260831-timing-role-remediation` recorded thirteen steps,
+every exit code zero, scientific hash `7d544aa334b70ce8…` at commit `cbdd0b5840da`. Its
+aggregate bundle, twelve contrasts and treatment-by-coverage factorial are in
+[`VERDICT.md`](VERDICT.md). The measurement has no current section-21 classification
+because the PIT v2.2 gate remains closed. Earlier published runs remain historical in
 [`SUPERSEDED_RESULTS.md`](SUPERSEDED_RESULTS.md).
+
+## 2026-08-31 remediation
+
+- `src/mds650/rp2/bars.py` derives D/V from each session date and rejects a source outside
+  its declared role scope; Block 3 now delegates to that shared loader.
+- Block 4 uses the shared 120-second cutoff and observes `close[m-3]`; its first valid
+  origin is minute 35 and its target remains forward from the origin.
+- Block 5 delegates expiry close to the shared XNYS calendar used by B2, including early
+  closes. B1 core coverage is 99.34% and all twelve B2 core features are 100% covered.
+- The licensed cascade used `--forbid-sealed-cohorts`, completed 13/13 steps and emitted
+  new append-only panel pointers, run identity, manifest and Phase 8 dispersion closure.
 
 ## Settled decision
 

@@ -1,9 +1,9 @@
 # Block 3 — target-horizon validation
 
 **Status:** `CURRENT BLOCK-LEVEL MEASUREMENT` · exploratory, not confirmatory
-**Run:** `rp2-v3-20260827-remediation3`
-**Artifact:** `artifacts/rp2_v3/rp2-v3-20260827-remediation3/rp2_block3_target/comparison.json`
-**Recorded comparison SHA-256:** `054848bf3253f185e55459a19cb3783cb8aebb60b18312d4fed96853571fca0d`
+**Run:** `rp2-v3-20260831-timing-role-remediation`
+**Artifact:** `artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/rp2_block3_target/comparison.json`
+**Recorded comparison SHA-256:** `10ed954256a12b882569596d8731dc7e6100b18c0f8c78e394f04db4c7680dd3`
 
 The overall RP2-v3 run remains ineligible because PIT v2.2 forbids reconciliation into a
 current claim. That does not turn this block into a headline; it remains the latest
@@ -20,8 +20,8 @@ The current artifact contains 111,348 rows over 464 sessions:
 
 | Role | Rows |
 | --- | ---: |
-| Development (D) | 79,790 |
-| Validation (V) | 31,558 |
+| Development (D) | 92,150 |
+| Validation (V) | 19,198 |
 
 The session audit records 3,752 session-assets seen, 40 rejected as too short, and none
 rejected for the missing-grid threshold.
@@ -32,8 +32,8 @@ Out-of-sample log-scale R² for the price-history RV baseline:
 
 | Role | RV5 | RV15 | RV30 | RV60 | RV120 |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| D | 0.59654 | 0.77049 | 0.82413 | **0.83944** | 0.80557 |
-| V | 0.59966 | 0.74588 | **0.78528** | 0.77994 | 0.72262 |
+| D | 0.55242 | 0.73767 | 0.79624 | **0.81260** | 0.76951 |
+| V | 0.53287 | 0.69509 | 0.74621 | **0.74980** | 0.71474 |
 
 Median relative measurement noise falls with the horizon:
 
@@ -41,9 +41,10 @@ Median relative measurement noise falls with the horizon:
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Relative noise | 52.07% | 34.22% | 25.62% | 19.00% | 14.07% |
 
-The old statement that RV60 wins in both roles is withdrawn. RV60 exceeds RV30 in D by
-0.01531 log-R², while RV30 exceeds RV60 in V by 0.00534. The horizon preference is therefore
-role-dependent, not a replicated universal ranking.
+The date-derived role repair moves 12,360 rows previously mislabelled V back to D. Under
+the corrected partition, RV60 exceeds RV30 by 0.01636 log-R² in D and 0.00359 in V. This is
+a retrospective ranking on already-read roles, not authority to replace the frozen RV30
+target or a claim that RV60 has adequate prospective power.
 
 Jump variation remains much less predictable than total RV, but this is room for an
 exploratory association test, not evidence that option information causes a volatility

@@ -1,6 +1,6 @@
 # Point-in-time options information for forecasting next-30-minute realised variance
 
-**Capstone report — evidence-cutoff version (2026-08-28)**
+**Capstone report — evidence-cutoff version (2026-08-31)**
 
 > Status: `EVIDENCE_CUTOFF_COMPLETE`. Supersedes the v1 skeleton. Phase 8 and Phase 9 are
 > reported at their actual evidence-cutoff status rather than left as result placeholders.
@@ -8,12 +8,13 @@
 > exploratory findings carry their labels and the `positive_findings_v1.md` citation
 > rule. Numbers are drawn only from the frozen artifacts cited in each section.
 >
-> **Evidence status (2026-08-28).** The current reproducible bundle is
-> `rp2-v3-20260827-remediation3` (scientific hash `386610a4908d601c...`). It repairs the
-> Block 8/Block 10 LightGBM protocol divergence, but remains a historical D/V measurement
-> because `PIT_V22_RECONCILIATION_BLOCKED` is still active. No number in this report is an
-> eligible current headline; `STATUS.md` and `docs/rp2_v3/VERDICT.md` govern if a dated
-> narrative disagrees.
+> **Evidence status (2026-08-31).** The current reproducible bundle is
+> `rp2-v3-20260831-timing-role-remediation` (scientific hash
+> `7d544aa334b70ce8...`). It repairs partition-role assignment, aligns B0 with the
+> documented 120-second B1/B2 cutoff and gives B1 the same XNYS expiry calendar as B2.
+> It remains a historical D/V measurement because `PIT_V22_RECONCILIATION_BLOCKED` is
+> active. No number in this report is an eligible current headline; `STATUS.md` and
+> `docs/rp2_v3/VERDICT.md` govern if a dated narrative disagrees.
 
 ## Title page
 
@@ -25,7 +26,7 @@
 
 **Document:** Capstone report, evidence-cutoff version
 
-**Evidence cutoff:** 28 August 2026 (Australia/Sydney)
+**Evidence cutoff:** 31 August 2026 (Australia/Sydney)
 
 ## Abstract
 
@@ -37,15 +38,17 @@ point-in-time option-trade flow (B2). The current corrected-protocol run measure
 discovery sessions and 80 later validation sessions with three model families and QLIKE.
 It is retrospective and exploratory: validation was used adaptively during development,
 and the stricter sequential alpha is a conservative post-hoc sensitivity rather than a
-preregistered confirmation. Discovery ΔB1 is positive in all three families; validation
-does not establish a replicated option-state contribution. ΔB2|B1 is small, mixed by
-family and partition, and does not establish a universal flow contribution. Nine of the
-twelve contrasts are below their own minimum detectable effect. Provider source-time and
-record-creation rules prevent look-ahead under documented assumptions, but they do not
-prove historical client receipt time; PIT v2.2 reconciliation therefore remains blocked.
-Phase 8 is an unopened exploratory bridge and Phase 9 is an ongoing 60-session prospective
-follow-up, not a submission gate. No causal, directional, confirmatory or profitability
-claim is made, and `sealed_cohorts_read=0`.
+preregistered confirmation. The decision-relevant B2 result is negative. The registered
+directional rule returns `DO_NOT_PURSUE`; Phase 8 places the positive contribution in the
+B1 option-state block while every ΔB2|B1 interval crosses zero. In the retrospective run,
+discovery ΔB1 is positive in all three families, validation does not establish replication,
+and ΔB2|B1 changes sign by family and partition. Ten of twelve contrasts are below their
+own minimum detectable effect. Provider source-time and record-creation rules prevent
+look-ahead under documented assumptions, but they do not prove historical client receipt
+time; PIT v2.2 reconciliation therefore remains blocked. Phase 8 consumed its sole
+exploratory read and is `MIXED_EXPLORATORY`; Phase 9 is an ongoing 60-session prospective
+follow-up, not a submission gate. No causal, confirmatory or profitability claim is made;
+the current read counters are Phase 8 = 1 and Phase 9 = 0.
 
 ## 1. Introduction
 
@@ -200,7 +203,7 @@ thirty-one consecutive closes following each forecast origin. Origins lie on a f
 grid from session minute 30 to 355 of the regular XNYS session, sixty-six per session-asset.
 The outcome universe is six liquid mega-cap equities (AAPL, AMZN, META, MSFT, NVDA, TSLA),
 with SPY and QQQ entering only as market controls — a deliberate, stated scope limitation
-(§7). The assembled panel holds 184,632 origins over 2,814 session-assets, none dropped for
+(§7). The assembled panel holds 181,829 origins over 2,814 session-assets, none dropped for
 a sparse minute grid. One property of the target matters before any model does: its relative
 standard error at this horizon has a median of 25.6 per cent in discovery, so roughly a
 quarter of what is being predicted is the estimator's own sampling error.
@@ -210,7 +213,7 @@ option-state snapshot: the last observation of every contract timestamped at or 
 origin minus 120 seconds and no older than thirty minutes, from which implied variance at
 fixed maturities, term and smile shape, a 25-delta risk reversal and quote-quality fields
 are computed. Coverage of the ten B1-core features is 99.3 per cent and the average snapshot
-carries 783 contracts. B2 adds the point-in-time trade tape under the same cutoff, and the
+carries 779 contracts. B2 adds the point-in-time trade tape under the same cutoff, and the
 panel records zero availability violations. Because the surface is reconstructed from the
 quotes carried on trades, a contract enters only if somebody traded it; that selection was
 measured rather than assumed: against a directly quoted chain the traded surface understates
@@ -375,9 +378,9 @@ The order below is binding (decision 53).
 ### 5.1 Retrospective results
 
 The current reproducible retrospective evidence is
-`rp2-v3-20260827-remediation3` (scientific hash `386610a4908d601c...`, code commit
-`e7728ebbaf3f`). It covers the two disjoint calendar roles frozen in §3 — discovery D and
-validation V — on six outcome assets, with 61,336 and 12,672 common evaluation rows.
+`rp2-v3-20260831-timing-role-remediation` (scientific hash `7d544aa334b70ce8...`, code
+commit `cbdd0b5840da`). It covers the two disjoint calendar roles frozen in §3 — discovery
+D and validation V — on six outcome assets, with 60,407 and 12,480 common evaluation rows.
 Three fixed families crossed with two nested contrasts and two roles give twelve
 comparisons. A positive delta is an improvement in QLIKE: the loss of the smaller
 information set minus the loss of the larger one. Seven deltas are positive and seven
@@ -385,45 +388,46 @@ intervals contain zero. These are retrospective exploratory measurements. Applyi
 0.00417 sequential budget is a conservative post-hoc sensitivity, not preregistered
 confirmation, and no validation contrast clears it.
 
-In discovery ΔB1 is +0.00219 for `gamma_glm` (95 percent interval [+0.00098,
-+0.00342]), +0.00229 for `ridge_log` ([+0.00121, +0.00352]) and +0.00253 for
-`lightgbm_qlike` ([+0.00064, +0.00502]). All three intervals exclude zero, but their
+In discovery ΔB1 is +0.00258 for `gamma_glm` (95 percent interval [+0.00102,
++0.00418]), +0.00288 for `ridge_log` ([+0.00154, +0.00438]) and +0.00267 for
+`lightgbm_qlike` ([+0.00060, +0.00519]). All three intervals exclude zero, but their
 retrospective origin and adaptive validation use cap them at exploratory evidence. The
 effects are small relative to their B0 loss levels.
 
-Validation does not establish replication. ΔB1 is −0.00113 for `gamma_glm`
-([−0.00411, +0.00198]), −0.00083 for `ridge_log` ([−0.00283, +0.00131]) and +0.00211
-for `lightgbm_qlike` ([−0.00797, +0.01211]); every interval contains zero. The tree-family
-sign no longer reverses after the Block 8/Block 10 protocol repair, but its interval is too
-wide to support replication. B0 QLIKE also rises from 0.13860 to 0.17501 for `gamma_glm`
-and from 0.13550 to 0.19866 for `lightgbm_qlike`, so the later role is both shorter and
-harder in level.
+Validation does not establish replication. ΔB1 is −0.00152 for `gamma_glm`
+([−0.00500, +0.00223]), −0.00092 for `ridge_log` ([−0.00318, +0.00148]) and +0.00136
+for `lightgbm_qlike` ([−0.00548, +0.00819]); every interval contains zero. B0 QLIKE also
+rises from 0.14522 to 0.18347 for `gamma_glm` and from 0.14239 to 0.21304 for
+`lightgbm_qlike`, so the later role is both shorter and harder in level.
 
 The conditional flow increment is mixed rather than globally null. In discovery
-ΔB2|B1 is −0.00002 for `gamma_glm`, +0.00017 for `ridge_log` and +0.00060 for
-`lightgbm_qlike`; in validation it is −0.00215, −0.00194 and +0.00336. Three of the six
-family-role pairs are negative, and only the validation gamma interval excludes zero on
-the adverse side. The small smooth-family development estimates are compatible with the
-recorded margin, but the implementation does not establish formal multiplicity-adjusted
-TOST equivalence. The family- and partition-dependent signs do not support a universal B2
-contribution.
+ΔB2|B1 is +0.00018 for `gamma_glm`, +0.00028 for `ridge_log` and +0.00096 for
+`lightgbm_qlike`; in validation it is −0.00272, −0.00251 and −0.00202. Three of the six
+family-role pairs are negative. The discovery LightGBM interval excludes zero on the
+positive side and the validation gamma interval excludes zero on the adverse side; the
+other four cross zero. The small smooth-family development estimates are compatible with
+the recorded margin, but the implementation does not establish formal
+multiplicity-adjusted TOST equivalence. The family- and partition-dependent signs do not
+support a universal B2 contribution.
 
-The current run also repairs a producer inconsistency that an equal-row-mask gate could not
-detect: Block 8 and Block 10 previously selected LightGBM rounds under different session
-rules. Harmonising that path moves LightGBM ΔB1 from +0.00123 to +0.00253 in discovery and
-from −0.00383 to +0.00211 in validation. The smooth families are unchanged. This movement
-is why the 2026-08-24 run is retained only in `SUPERSEDED_RESULTS.md` and why the corrected
-run is still described as a historical measurement rather than silently promoted.
+The current run repairs three result-changing defects jointly. It derives bar roles from
+partition dates instead of trusting file literals; shifts every B0 predictor, market
+control and volatility state back three one-minute bars so B0 shares the documented
+120-second B1/B2 cutoff; and gives B1 the XNYS expiry-close calendar already used by B2.
+The common panel falls from 184,632 to 181,829 origins. These changes move discovery ΔB1
+from +0.00219, +0.00229 and +0.00253 to the values above; validation moves from −0.00113,
+−0.00083 and +0.00211. Because the rebuild changes all three defects together, it is not
+an ablation and does not assign each movement to one repair.
 
 Whether the validation nulls refute the discovery effect is a question about power. The
-validation MDEs are 0.00411 for `gamma_glm`, 0.00271 for `ridge_log` and 0.01517 for
-`lightgbm_qlike`, against discovery ΔB1 estimates of 0.00219, 0.00229 and 0.00253.
-Approximate session requirements under the same exploratory α = 0.05 contract are 113,
-45 and 1,148. They are not requirements computed under the separate 0.00417 future
+validation MDEs are 0.00496 for `gamma_glm`, 0.00311 for `ridge_log` and 0.01037 for
+`lightgbm_qlike`, against discovery ΔB1 estimates of 0.00258, 0.00288 and 0.00267.
+Approximate session requirements under the same exploratory α = 0.05 contract are 119,
+38 and 484. They are not requirements computed under the separate 0.00417 future
 campaign budget. None of the three validation designs was equipped to detect its corresponding
 discovery effect. These are ex-ante-style planning quantities, not post-hoc observed power.
 
-Nine of the twelve contrasts sit below their own minimum detectable effect. Where a
+Ten of the twelve contrasts sit below their own minimum detectable effect. Where a
 contrast lies below that threshold, a wide interval is a statement about the design, not
 proof that the market effect is zero. The retrospective evidence therefore shows that the
 discovery result is not confirmed in validation and that validation lacked the precision
@@ -431,14 +435,56 @@ to settle effects of that size. That is absence of evidence, not evidence of abs
 
 ### 5.2 Phase 8 exploratory bridge at the evidence cutoff
 
-The bridge method is frozen for a twenty-session strictly unobserved primary analysis and
-a thirty-session sensitivity, but the cohort remains unopened. A separately authorised
-one-shot evaluation will be published as a dated addendum under the bridge's exploratory,
-non-confirmatory label. This report therefore contains no Phase 8 estimate, interval,
-p-value or verdict, and records `sealed_cohorts_read=0` instead of filling the gap with an
-assumption.
+The owner-authorised bridge consumed its sole read on 2026-08-30 under the frozen
+twenty-session primary window and thirty-session sensitivity. Its classification is
+`MIXED_EXPLORATORY`, descriptive and non-confirmatory. In the primary window all four ΔB1
+estimates are positive; three of four descriptive Holm p-values are below 0.05. For
+ΔB2 conditional on B1, all four intervals cross zero and every Holm p-value exceeds 0.39.
+The positive prospective contribution is therefore concentrated in the B1 option-state
+block, not established in B2 flow.
 
-### 5.3 Calibration, and what the loss is rewarding
+The append-only dispersion audit replays all 20 primary contrast rows and all 140 published
+fields exactly from the materialised cube, without reopening the sealed store or running a
+second evaluator. It finds no aggregation change. The read count is Phase 8 = 1; the full
+cells, asymmetric intervals, descriptive Holm values, recovery boundary and frozen
+producer closure are reported in
+`reports/phase8a_exploratory_bridge_addendum_v11.md`.
+
+### 5.3 Directional B2 extension and treatment-by-coverage attribution
+
+The registered directional extension returned `DO_NOT_PURSUE` with
+`pursue_rule_passed = false`; its stricter sign falsifier did not fire. That means the
+selected directional lead was not strong enough to justify a new programme, not that its
+population effect was proved zero. The timing-remediated run did not reopen that 68-test
+battery. It did rerun the preregistered 2 × 2 factorial that asks whether movement in the
+joint statistic is attributable to treatment definition or data coverage. Each entry
+below is `Wald / df / raw p / 40-test Holm p`.
+
+| Treatment set / coverage | D 60m | D 120m | V 60m | V 120m |
+| --- | ---: | ---: | ---: | ---: |
+| Ext1 exact / August | 12.593 / 10 / 0.247302 / 1.000000 | 11.769 / 10 / 0.300784 / 1.000000 | 27.793 / 10 / 0.001948 / 0.070123 | 29.554 / 10 / 0.001013 / 0.038488 |
+| Ext1 exact / complete | 12.976 / 10 / 0.225014 / 1.000000 | 17.634 / 10 / 0.061464 / 1.000000 | 27.793 / 10 / 0.001948 / 0.070123 | 29.554 / 10 / 0.001013 / 0.038488 |
+| B2 panel 12 / August | 29.405 / 12 / 0.003429 / 0.109729 | 22.717 / 12 / 0.030231 / 0.816240 | 30.457 / 12 / 0.002382 / 0.080985 | 26.444 / 12 / 0.009284 / 0.269236 |
+| B2 panel 12 / complete | 33.065 / 12 / 0.000946 / 0.036878 | 37.072 / 12 / 0.000217 / 0.008699 | 30.457 / 12 / 0.002382 / 0.080985 | 26.444 / 12 / 0.009284 / 0.269236 |
+
+On the registered `log(Wald / df)` scale, the median absolute treatment-set main effect
+is 0.405764 and the coverage main effect is 0.036811, a ratio of 11.02. The registered
+classification is `TREATMENT_SET`, descriptively rather than causally because the sets are
+not nested. It does not explain the historical validation decline: August and complete
+coverage have identical V masks, and the 12-feature panel set does not restore the frozen
+V 120-minute statistic. For that decline the result is
+`NEITHER_TREATMENT_SET_NOR_COVERAGE`.
+
+The exact Ext1 contract names `b2_5m_hawkes_innovation`, which no longer exists in the
+panel. The producer records a `RECORDED_SEMANTIC_RENAME` to
+`b2_5m_decay_intensity_innovation`, maps the historical label in memory, retains the
+ten-column Ext1 coefficient identity and does not recompute the feature. The obsolete
+column bytes are unavailable, so historical byte equality cannot be confirmed. The full
+factorial, requested/resolved names and hashes are in
+`artifacts/rp2_ext1_directional_factorial_v2/results.json`; it records
+`sealed_cohorts_read=0`.
+
+### 5.4 Calibration, and what the loss is rewarding
 
 QLIKE penalises calibration error, so a feature block that repairs a biased conditional
 mean is scored as information (§4.2; Patton 2011). The ladder measures that channel rather
@@ -451,20 +497,20 @@ itself a finding. An earlier version of this section reported recalibration lift
 cell and turning both smooth families positive in validation, +0.00635 for `gamma_glm` and
 +0.00315 for `ridge_log`; most of that lift was a defect, not a channel — the
 recalibration was undoing the smearing correction it was applied on top of, one of the six
-repairs of decision 92. Remeasured, discovery ΔB1 moves from +0.00219 to +0.00237 for
-`gamma_glm`, stays at +0.00229 for `ridge_log` and moves from +0.00253 to +0.00264 for
-`lightgbm_qlike`; validation reads −0.00057, −0.00082 and +0.00196, none significant
+repairs of decision 92. Under the timing-remediated bundle, recalibrated discovery ΔB1 is
++0.00276 for `gamma_glm`, +0.00288 for `ridge_log` and +0.00285 for
+`lightgbm_qlike`; validation reads −0.00084, −0.00091 and −0.00101, none significant
 (`rp2_block8_ladder/ladder.json`). These figures are diagnostics and not the study's
 result: the recalibration is estimated from data outside the evaluation, and the
 primary raw contrast remains the one reported in §5.1, on which the report's claims
 rest. The baselines are not equally well calibrated across the two roles — the fitted
 slope of the gamma family's B0 forecasts is 1.00 in discovery and 1.03 in validation, and
-the tree family's is 1.02 against 1.07 — so the raw validation nulls and the recalibrated
+the tree family's is 1.02 against 1.11 — so the raw validation nulls and the recalibrated
 readings are measuring partly different things, and neither alone settles what the option
 surface is worth.
 
 The flow block does not benefit from the same treatment. Recalibrated discovery ΔB2|B1
-is +0.00001 for `gamma_glm`, +0.00017 for `ridge_log` and +0.00062 for
+is +0.00024 for `gamma_glm`, +0.00028 for `ridge_log` and +0.00096 for
 `lightgbm_qlike`. Their bootstrap intervals may be compatible with the recorded margins,
 but the artifact explicitly labels that diagnostic
 `EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST`. It is therefore not formal equivalence
@@ -474,7 +520,7 @@ The general point is the one Patton (2011) supplies. Where families disagree, th
 does not pool them or elect the agreeable one; it reports each as measured and treats the
 disagreement itself as evidence about the loss rather than about the market.
 
-### 5.4 Field-standard baselines and the activity block
+### 5.5 Field-standard baselines and the activity block
 
 The activity block was also tested against the baselines the field would demand, on the
 separate development ladder of the earlier gate programme — forty-five out-of-fold sessions
@@ -494,9 +540,10 @@ improve those HAR/HARQ specifications on the measured sessions.
 Three statements survive the evidence assembled above. First, discovery ΔB1 is positive
 with an interval excluding zero in all three fixed families, while ΔB2|B1 is smaller and
 changes sign across families and roles; neither pattern is a universal information claim.
-The separate HAR/HARQ diagnostic also finds no improvement from its activity block.
-Second, the discovery result is not confirmed on the later validation sample, and the
-design cannot say why: nine of the twelve contrasts sit
+The separate HAR/HARQ diagnostic also finds no improvement from its activity block, the
+directional rule returns `DO_NOT_PURSUE`, and Phase 8 adds no incremental B2 result on top
+of B1. Second, the discovery result is not confirmed on the later validation sample, and
+the design cannot say why: ten of the twelve contrasts sit
 below their own minimum detectable effect, so the validation nulls are absence of evidence
 and not evidence of absence. The report can state that it did not see the effect again; it
 cannot state that the effect is gone, and it declines to. Third, what QLIKE reports depends
@@ -514,8 +561,9 @@ study is still a null measured at a stated precision, not a demonstration that t
 tape is empty of information.
 
 The closing campaigns follow from the same logic, but neither is used to hold the report
-open. Phase 8 remains an unopened exploratory bridge. Phase 9 (decision 58) remains a
-frozen, collecting, 60-session one-read test of total contribution. Decisions 100–101
+open. Phase 8 is complete as a one-read `MIXED_EXPLORATORY` bridge and cannot be promoted
+or rerun. Phase 9 (decision 58) remains a frozen, collecting, 60-session one-read test of
+total contribution. Decisions 100–101
 make it a prospective follow-up rather than an academic submission gate and correct its
 planning denominator: the 24-session warm-up means that 60 complete sessions produce 36
 scored sessions. At 80% power, the corrected endpoint MDE spans 0.01105–0.02507 under the
@@ -530,27 +578,27 @@ academic deadline. No Phase 9 outcome is included, and `sealed_cohorts_read=0`.
 The governing threat is that validation was not equipped to decide the question it was
 asked. Inference is at session level, and validation contributes thirty-two evaluated
 sessions against discovery's one hundred and fifty-six. The minimum detectable effects
-that follow — 0.00411 for `gamma_glm`, 0.00271 for `ridge_log`, 0.01517 for
-`lightgbm_qlike` — stand against discovery increments of +0.00219, +0.00229 and +0.00253,
-and nine of the twelve contrasts sit below their own bound (§5.1). Every validation null
+that follow — 0.00496 for `gamma_glm`, 0.00311 for `ridge_log`, 0.01037 for
+`lightgbm_qlike` — stand against discovery increments of +0.00258, +0.00288 and +0.00267,
+and ten of the twelve contrasts sit below their own bound (§5.1). Every validation null
 reported above is therefore absence of evidence: the report cannot claim that the option
 surface or the point-in-time flow carries nothing, only that a design of this size would
 not have seen them had they been there.
 
-The threat is not one-sided. The `gamma_glm` validation ΔB2|B1 of −0.00215 at
-[−0.00437, −0.00032] excludes zero at 95 percent without clearing the budget, and carries
+The threat is not one-sided. The `gamma_glm` validation ΔB2|B1 of −0.00272 at
+[−0.00598, −0.00011] excludes zero at 95 percent without clearing the budget, and carries
 a measured caveat: on the run this one supersedes, its interval's empirical coverage was
 0.784 against a nominal 0.95, and that measurement has not been repeated on the current
 run. Its sign survives; its stated confidence does not read as stated.
 
 Model family is the second threat, exposed by the design rather than removed by it. The
-three fixed families give discovery ΔB1 of +0.00219, +0.00229 and +0.00253, while
-validation gives −0.00113, −0.00083 and +0.00211 and their minimum detectable effects
-differ by a factor of 5.6. The family therefore fixes both the estimate and what the experiment
+three fixed families give discovery ΔB1 of +0.00258, +0.00288 and +0.00267, while
+validation gives −0.00152, −0.00092 and +0.00136 and their minimum detectable effects
+differ by a factor of 3.3. The family therefore fixes both the estimate and what the experiment
 could have detected, and because all three are fitted to the same origins, their
 agreement is not replication.
 
-Scope is bounded and permanent. The panel holds 184,632 origins, but they come from six
+Scope is bounded and permanent. The panel holds 181,829 origins, but they come from six
 mega-cap US equities on one exchange calendar, so the cross-section carries far less
 independent information than the row count suggests, and nothing here extends to less
 liquid underlyings, other option markets, or other session structures. The per-era and
@@ -583,11 +631,12 @@ is only a conservative post-hoc sensitivity. They therefore remain exploratory.
 
 The defensible contribution is the bounded measurement and its infrastructure: nested
 information sets on identical origins, session-level uncertainty, explicit MDE accounting,
-a corrected shared LightGBM producer contract, and source-time PIT rules that fail closed
-instead of claiming client latency they do not observe. The remaining PIT v2.2 blocker is
-part of the result, not something concealed by a headline. Phase 8 remains unopened and
-exploratory; Phase 9 continues to 60 as prospective future evidence while the capstone is
-written and submitted from the evidence available at its editorial cutoff.
+date-derived partition roles, one market-information cutoff, one XNYS expiry calendar and
+source-time PIT rules that fail closed instead of claiming client latency they do not
+observe. The remaining PIT v2.2 blocker is part of the result, not something concealed by
+a headline. Phase 8 is complete and exploratory; Phase 9 continues to 60 as prospective
+future evidence while the capstone is written and submitted from the evidence available at
+its editorial cutoff.
 
 ### Future work: the sealed RP3 program (preregistered 2026-08-24)
 
@@ -631,6 +680,6 @@ E. Preregistration, freeze and target-blind planning hashes (Phase 9 freeze
    `artifacts/phase9/power_deadline_audit_v1.json`).
 F. Supervisor feedback mapping, restricted to source-verified comments; unverified
    paraphrases are excluded.
-G. Primary run artifacts (`artifacts/rp2_v3/rp2-v3-20260827-remediation3/`: `scorecard.md`,
+G. Primary run artifacts (`artifacts/rp2_v3/rp2-v3-20260831-timing-role-remediation/`: `scorecard.md`,
    `rp2_block8_ladder/ladder.json`, `rp2_block10_inference/inference.json`,
    `run_identity.json`) and the run verdict (`docs/rp2_v3/VERDICT.md`).
