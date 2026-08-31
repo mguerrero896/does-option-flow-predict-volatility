@@ -1,5 +1,11 @@
 # Gate 1 — Studentized inference over the frozen campaigns (v1)
 
+> **SUPERSEDED MEASUREMENT.** The C6 +0.0532 measurement and verdicts below are
+> retrospective audit history, not current findings. Eligibility is governed by
+> [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json); withdrawn measurements and
+> replacements are indexed in
+> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md).
+
 Compiled 2026-08-17. Re-analysis of already-read frozen forecast artifacts only (no new
 data exposure; decision-52 compliant). Code: `src/mds650/inference.py`, runner
 `scripts/run_gate1_inference.py`, artifact `artifacts/gate1_inference/results.json`

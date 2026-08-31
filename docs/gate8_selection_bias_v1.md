@@ -1,5 +1,11 @@
 # Gate 8 — Common-complete selection bias (v1)
 
+> **CORRECTED MEASUREMENT — DECISION 96.** The original artifact and values below retain
+> the pre-correction `Int8` session-minute overflow for audit. The corrected authority is
+> [`results_corrected_int8.json`](../artifacts/gate8_selection/results_corrected_int8.json);
+> no conclusion changed. Current claim eligibility remains governed by
+> [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json).
+
 Compiled 2026-08-17. Code: `scripts/run_gate8_selection.py`; artifact
 `artifacts/gate8_selection/results.json` (+ sha256; input hashes recorded). C6 only —
 its bars are on disk from Gate 7; the same design applies to C4c when its bars are

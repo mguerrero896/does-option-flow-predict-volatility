@@ -1,5 +1,13 @@
 # Extensions 1–4 — what was tried after the cascade closed
 
+> **SUPERSEDED MEASUREMENT.** This retained audit narrative has no current claim
+> authority; [`data/CANONICAL_STATE.json`](../../data/CANONICAL_STATE.json) governs
+> eligibility. Its Extension 2 discovery row below has a historical sign transcription
+> error: the corrected artifact reports Δ tensor-over-tabular = **+0.00043533**, 95% CI
+> [−0.00017018, +0.00104644], p = 0.15992. The interval contains zero and the null
+> interpretation is unchanged. See
+> [`SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md).
+
 **Status:** `EXECUTED — 2026-08-19` · label `EXPLORATORY_MECHANISM_DISCOVERY`
 **Artifacts:** `artifacts/rp2_ext1_mechanism_utility/`, `artifacts/rp2_ext12_level4/`,
 `artifacts/rp2_ext4_power/`, `<DATA_ROOT>/data/fmp/rp2_ext3/acquisition.json`

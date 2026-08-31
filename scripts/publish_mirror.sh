@@ -76,18 +76,22 @@ git -C "$MIRROR" worktree add --detach "$PUBCHECK" main >/dev/null 2>&1 || git c
 echo "[publish] check 3: hermetic suite on the stripped public tree"
 (cd "$PUBCHECK" && env -u MDS650_EVIDENCE_ROOT uv run --project . pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90) || {
     echo "PUBLISH REFUSED: hermetic suite FAILS on the stripped public tree" >&2; exit 1; }
-# Check 4: never force-push a lineage that does not contain what is already
+# Check 4: scan the exact stripped branch history before it reaches GitHub.
+echo "[publish] check 4: public-history secret scan on the stripped tree"
+(cd "$PUBCHECK" && uv run --project . python scripts/scan_public_secrets.py) || {
+    echo "PUBLISH REFUSED: secret scan FAILS on the stripped public tree" >&2; exit 1; }
+# Check 5: never force-push a lineage that does not contain what is already
 # published. The mirror is built from the canonical tree, which no longer
 # projects the public repository — the RP2-v3 gates landed there as pull
 # requests. docs/rp2_v3/MIRROR_HAZARD.md measures the two histories as disjoint,
 # and --force means the remote would not refuse the loss.
-# --check-tags covers the --tags push below: it force-updates every tag ref, and
-# the tags are this project's frozen-evidence anchors. No --expect-remote here:
-# passing $REMOTE as both the destination and the expectation compares a variable
-# to itself and can never fire. The expectation belongs to a caller that knows
-# the remote independently; the ancestry check is what protects this one.
+# No --expect-remote here: passing $REMOTE as both the destination and the
+# expectation compares a variable to itself and can never fire. The expectation
+# belongs to a caller that knows the remote independently; the ancestry check is
+# what protects this one.
 uv run python "$CANON/scripts/publish_ancestry_guard.py" \
-    --mirror "$MIRROR" --remote "$REMOTE" --branch main --check-tags || exit 1
-git -C "$MIRROR" push --force "$REMOTE" main
-git -C "$MIRROR" push --force "$REMOTE" --tags
+    --mirror "$MIRROR" --remote "$REMOTE" --branch main || exit 1
+git -C "$MIRROR" push --force --no-follow-tags "$REMOTE" refs/heads/main:refs/heads/main
+# Tags are intentionally excluded. Publish an explicitly selected tag only from
+# a clean public clone after scan_public_secrets.py --include-tags succeeds.
 echo "mirror published: canonical $(git rev-parse --short HEAD) -> mirror $(git -C "$MIRROR" rev-parse --short main) (gated data stripped)"

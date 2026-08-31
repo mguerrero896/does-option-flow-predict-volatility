@@ -1,5 +1,10 @@
 # Gate 2 — Calibration repair vs information (v1)
 
+> **SUPERSEDED MEASUREMENT.** The C6 +0.0532 rows and “Survives ≫ MDE” verdicts below
+> are retained historical measurements, not current eligible claims. Authority is
+> [`data/CANONICAL_STATE.json`](../data/CANONICAL_STATE.json); consult
+> [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md) before citing them.
+
 Compiled 2026-08-17. Re-analysis of already-read frozen forecasts only (decision-52
 compliant). Code: `src/mds650/calibration.py`, runner `scripts/run_gate2_calibration.py`,
 artifact `artifacts/gate2_calibration/results.json` (+ `.sha256`; input parquet sha256s

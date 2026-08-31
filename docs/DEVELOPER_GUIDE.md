@@ -17,6 +17,8 @@ Read these files in order:
 5. [`scripts/README.md`](../scripts/README.md) — every runnable script and its lifecycle.
 6. [`reports/INDEX.md`](../reports/INDEX.md) — current submission source and historical
    report packages.
+7. [`docs/rp2_v3/REBUILD_GUIDE.md`](rp2_v3/REBUILD_GUIDE.md) — exact 13-step licensed
+   rebuild, storage budget and `--skip-panels`/`--dry-run` semantics.
 
 ## Sources of truth
 
@@ -60,7 +62,7 @@ uv sync --locked
 uv run ruff check src scripts tests
 uv run mypy src scripts
 $env:MDS650_PANEL_GUARD_MAY_SKIP = "1"
-uv run pytest -q
+uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
 ```
 
 The skip flag acknowledges that licensed panels are absent. It does not convert the run
@@ -102,6 +104,10 @@ Phase 8 recovery worktree preserves the consumed one-shot execution lineage and 
 source for new development. Before deleting any branch, prove its unique commits are
 patch-equivalent or superseded and preserve any untracked files; a `[gone]` upstream alone
 is not evidence that a branch is disposable.
+
+The complete licensed rebuild is intentionally outside the public-clone tier. Its ordered
+steps, exact invocation, approximately 85 GB storage requirement and resume flags are in
+[`docs/rp2_v3/REBUILD_GUIDE.md`](rp2_v3/REBUILD_GUIDE.md).
 
 ## Change workflow
 
