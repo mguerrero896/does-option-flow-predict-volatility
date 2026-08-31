@@ -202,14 +202,14 @@ The outcome universe is six liquid mega-cap equities (AAPL, AMZN, META, MSFT, NV
 with SPY and QQQ entering only as market controls — a deliberate, stated scope limitation
 (§7). The assembled panel holds 184,632 origins over 2,814 session-assets, none dropped for
 a sparse minute grid. One property of the target matters before any model does: its relative
-standard error at this horizon has a median of 25.7 per cent in discovery, so roughly a
+standard error at this horizon has a median of 25.6 per cent in discovery, so roughly a
 quarter of what is being predicted is the estimator's own sampling error.
 
 Both option blocks are defined by availability, not by convenience. B1 is a contemporaneous
 option-state snapshot: the last observation of every contract timestamped at or before the
 origin minus 120 seconds and no older than thirty minutes, from which implied variance at
 fixed maturities, term and smile shape, a 25-delta risk reversal and quote-quality fields
-are computed. Coverage of the ten B1-core features is 99.3 per cent and the median snapshot
+are computed. Coverage of the ten B1-core features is 99.3 per cent and the average snapshot
 carries 783 contracts. B2 adds the point-in-time trade tape under the same cutoff, and the
 panel records zero availability violations. Because the surface is reconstructed from the
 quotes carried on trades, a contract enters only if somebody traded it; that selection was
@@ -247,7 +247,9 @@ whose window the VIX reached 38.6, and the November 2024 election week; the stre
 from 2026-05-20 to 2026-07-17 is unremarkable by comparison, with a VIX median of 16.7. The
 eras also differ in difficulty: the same three-term price-history regression attains an
 out-of-sample log R² of 0.796 in D and 0.553 in V, so the underlying itself became less
-forecastable, and any comparison of effect sizes across the two must carry that. A third
+forecastable, and any comparison of effect sizes across the two must carry that. Those two
+figures are carried over from the superseded RP2-v2 cascade and are not reproducible from
+any artifact in this release; the difficulty gap they illustrate is qualitative here. A third
 cohort, sealed and prospective, is recorded by protocol reference only; it is never
 enumerated, sampled or read here. Its exploratory bridge is described separately in §5.2
 without inventing an outcome.

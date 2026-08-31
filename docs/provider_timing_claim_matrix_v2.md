@@ -1,5 +1,7 @@
 # Provider Timing Claim Matrix v2
 
+> **SUPERSEDED BY v2.1.** The operative provider-timing claim matrix is [`provider_timing_claim_matrix_v21.md`](provider_timing_claim_matrix_v21.md), and the governing contract is [`provider_timing_pit_contract_v22.md`](provider_timing_pit_contract_v22.md). This version is retained for audit.
+
 This matrix separates provider documentation, local payload observations, conservative study rules, and unresolved claims. It contains no target, prediction, or performance result.
 
 | Provider | Field or topic | Claim class | Evidence locator | Permitted conclusion |

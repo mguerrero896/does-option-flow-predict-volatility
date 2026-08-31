@@ -81,7 +81,7 @@
   "data/PUBLIC_METADATA_REDACTIONS.json": "416f09f66431df218fd9de505b8ccb7da91e6d7a3c3dee3276619a0835f416df",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "8c1e4473b43c9d5c0bb1bbd0fe33427802f1e9c93bc1da9183d256ccc49efd88",
+  "docs/methodology_decisions.md": "18a2112f84df7e972777f99dda3bee4d3941dc4f07ee7754c5dc3b6b396edd73",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
@@ -90,7 +90,7 @@
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "40a9b348231e1864345484b9fd456ab8733ce09fdedef7851536aede6d8bfe30",
   "docs/rp2_v3/VERDICT.md": "5a5f639c1b8f9a5a3c5c693dcd8ae09abbd7da9f8535c4681dd87a678283ad09",
   "reports/final_report_draft_v2.docx": "9bc284ab0a86c8ae8d87968ba21364cc80afbdb960fb6f1d7e26a7cdca49ab08",
-  "reports/final_report_draft_v2.md": "f5c13b5f214a0d397954d0e95f81710f8d5462282bb404ff123c6ba4aad7fc4a",
+  "reports/final_report_draft_v2.md": "77fc5bbd625e69406d2bf9658bb733053e26d51b1a3cfb795eaf3e0eef438b57",
   "reports/phase8a_exploratory_bridge_addendum_v10.md": "62755d983bfae75eeeeece38678329e6d1f5ed51f25a8138d804aabe0008cbdb",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
@@ -117,7 +117,7 @@
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "f5c13b5f214a0d397954d0e95f81710f8d5462282bb404ff123c6ba4aad7fc4a"
+   "sha256": "77fc5bbd625e69406d2bf9658bb733053e26d51b1a3cfb795eaf3e0eef438b57"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",

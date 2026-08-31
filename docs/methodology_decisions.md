@@ -1829,3 +1829,24 @@ Requirements-consistency and preregistration gates pass.
      citation contract exempts it, and a companion test requires any such exemption to
      be justified by an artifact that actually hashes the file, so the exemption cannot
      be claimed for a document that is merely awkward to edit.
+
+     **Second pass.** Re-running the same audit against the remediated repository took
+     confirmed findings from 40 to 19, with the withdrawn-claim and citation dimensions
+     reaching zero. The numeric dimension, whose agent had crashed on an API error in the
+     first run, executed this time and produced nine findings including the pass's only
+     blocker: section 3 of `docs/rp2/block11_economics_v1.md` published twelve
+     risk-utility figures that appear in no artifact, and the prose built on them
+     overstated the block's only positive economic residue roughly threefold and reported
+     the validation VaR arms as mis-sized when five of six sit below nominal. That table
+     is now generated from its artifact, anchored, and read back by a contract.
+
+     Also corrected in this pass: the front page no longer attributes a pre-registered
+     threshold to the retrospective level comparison; `pipeline_diagram.svg` is replaced
+     by a validated specification-authored diagram after it was found to demote ridge-log
+     from the registered primary families; the defense package's slide outline and both
+     of its figures now carry the historical notice their sibling report already had, a
+     figure being the surface most likely to be lifted into a slide alone; supersession
+     notices were added where a document asserted the opposite of the current position;
+     and three numeric statements in `reports/final_report_draft_v2.md` were corrected or
+     marked unreproducible. The Word rendering predates those corrections and must be
+     re-exported before submission; `reports/INDEX.md` records that.

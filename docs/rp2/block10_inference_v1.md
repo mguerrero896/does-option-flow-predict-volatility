@@ -1,6 +1,6 @@
 # Block 10 — the inference that was still missing
 
-> **SUPERSEDED ARTIFACT.** Every contrast estimate and p-value in `artifacts/rp2_block10_inference/inference.json` is superseded, twice, by [`../rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md). The positive discovery increments below are not current findings, and the claim that validation B0 carries no market-wide state preserves a defect decision 75 had already fixed. The current corrected-protocol record is [`../rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md).
+> **SUPERSEDED ARTIFACT.** Every contrast estimate and p-value in `artifacts/rp2_block10_inference/inference.json` is superseded, twice, by [`../rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md). The positive discovery increments below are not current findings, and the claim that validation B0 carries no market-wide state preserves a defect decision 75 had already fixed. Independently of that supersession, the discovery and validation tables below do not reproduce from the artifact this document pins by hash: the Clark-West statistics, session QLIKE deltas and blocked p-values all disagree with it. The current corrected-protocol record is [`../rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md).
 
 **Status:** `EXECUTED — 2026-08-19` · label `EXPLORATORY_MECHANISM_DISCOVERY`
 **Artifact:** `artifacts/rp2_block10_inference/inference.json`

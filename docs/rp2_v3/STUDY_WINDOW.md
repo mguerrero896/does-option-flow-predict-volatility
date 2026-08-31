@@ -44,8 +44,9 @@ sessions do, so adopting it would have discarded 219 development sessions, requi
 to be re-run with a lower bound it does not have, and superseded every frozen result the
 repository cites.
 
-Nothing was rebuilt and no number changed. The completed rebuild
-`rp2-v3-20260820-1710` builds a publishable payload under this window — 7 blocks, 24
+Nothing was rebuilt and no number changed. The rebuild described here,
+`rp2-v3-20260820-1710`, has no artifact bundle in this release and is four runs behind the
+canonical one; the current bundle is named in `data/CANONICAL_STATE.json`. As written it builds a publishable payload under this window — 7 blocks, 24
 contrasts, scientific hash `bae01ab50013077e` — which is the same run, the same artifacts and
 the same digests that existed before the decision. What changed is that the repository now
 says once, in a place publication reads, which of its two statements governs.

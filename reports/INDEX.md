@@ -10,7 +10,7 @@ ineligible.
 | File | Role |
 |---|---|
 | [`final_report_draft_v2.md`](final_report_draft_v2.md) | Authoritative evidence-cutoff thesis source; Phase 8/9 are reported as unopened/ongoing rather than as placeholders. |
-| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Submission-ready Word rendering generated from the current Markdown source on 2026-08-28. |
+| [`final_report_draft_v2.docx`](final_report_draft_v2.docx) | Word rendering generated from the Markdown source on 2026-08-28. It predates the 2026-08-31 numeric corrections in that source and must be re-exported before submission. |
 | [`phase8a_exploratory_bridge_addendum_v10.md`](phase8a_exploratory_bridge_addendum_v10.md) | Current post-cutoff Phase 8A interpretation: all Holm p-values for B1 and B2 conditional on B1, frozen audit/replay closure, source-bound current D/V comparison and historical-provenance limitation. |
 
 The evidence-cutoff pair and post-cutoff addendum are hash-pinned under `current_report`

@@ -1,5 +1,7 @@
 # Block 8 — the model ladder over the four contrasts of decision 65
 
+> **SUPERSEDED CONCLUSION.** This block reads Block 7 jointly with its own ladder and concludes that B2 carries real incremental information. Both the Block 7 artifact and the discrete increments quoted below are superseded, and no current run supports an incremental B2 contribution. The current position is in [`../../README.md`](../../README.md) and [`../rp2_v3/VERDICT.md`](../rp2_v3/VERDICT.md); withdrawals are in [`../rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md).
+
 **Status:** `EXECUTED — 2026-08-19` · label `EXPLORATORY_MECHANISM_DISCOVERY`
 **Artifact:** `artifacts/rp2_block8_ladder/ladder.json`
 (`ladder_sha256 = 04a465b7fb3614228707443aed31647f6d7236e14414e50b173580f4cda6eafb`)
