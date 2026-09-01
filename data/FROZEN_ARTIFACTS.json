@@ -261,6 +261,11 @@
    "sha256": "7da74938f4110fed8136b6b14f1270de1656dc8e408a1715fba0b1c0492965e2"
   },
   {
+   "bytes": 1130,
+   "path": "artifacts/local_evidence_gates/pr55_remediation_20260902_v8.json",
+   "sha256": "7001dca86d857a888471f4f260d9688ecfc54f019ab9de0135664abe0e9db24f"
+  },
+  {
    "bytes": 16110,
    "path": "artifacts/mcs_block_sensitivity/results.json",
    "sha256": "ca17c1e028885b49269e2feb4a06c7fb01537169e15f511b76b24f8d114be6f3"

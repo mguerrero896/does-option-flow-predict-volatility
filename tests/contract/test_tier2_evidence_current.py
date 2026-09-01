@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-EVIDENCE = REPO / "artifacts/local_evidence_gates/pr55_remediation_20260902_v7.json"
+EVIDENCE = REPO / "artifacts/local_evidence_gates/pr55_remediation_20260902_v8.json"
 EXPECTED_GATES = (
     "versioned-hook",
     "ruff",
@@ -22,14 +22,12 @@ EXPECTED_GATES = (
 )
 EVIDENCE_OVERLAY = {
     "STATUS.md",
-    "artifacts/local_evidence_gates/pr55_remediation_20260902_v7.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v8.json",
     "data/CANONICAL_STATE.json",
     "data/FROZEN_ARTIFACTS.json",
     "docs/methodology_decisions.md",
     "scripts/generate_canonical_state.py",
-    "scripts/record_progress_video.sh",
     "tests/contract/test_tier2_evidence_current.py",
-    "tests/contract/test_progress_video_script.py",
 }
 
 
@@ -41,7 +39,7 @@ def test_pr55_remediation_tier2_evidence_is_complete_and_registered() -> None:
 
     assert payload["schema_version"] == "mds650-tier2-evidence-v1.0"
     assert payload["runner"] == "scripts/run_local_evidence_gates.py"
-    assert payload["required_ancestor"] == "7ceec586636a65ce4d49290408885fb294ff0639"
+    assert payload["required_ancestor"] == "e951a6b30961588bcc51066505b5604944120e14"
     assert payload["overall_exit_code"] == 0
     assert [(gate["name"], gate["exit_code"]) for gate in payload["gates"]] == [
         (name, 0) for name in EXPECTED_GATES
