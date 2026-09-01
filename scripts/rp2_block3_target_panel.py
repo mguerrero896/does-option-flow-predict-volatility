@@ -32,6 +32,7 @@ from mds650.rp2.bars import (
     build_session_grid,
     load_bar_sources,
 )
+from mds650.rp2.panel import DEFAULT_TRAIN_SHARE
 from mds650.rp2.realized import (
     HORIZONS,
     backward_rv,
@@ -208,7 +209,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-fill-share", type=float, default=0.05)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     args = parser.parse_args(argv)
 
     bars = load_bars(args.data_root)

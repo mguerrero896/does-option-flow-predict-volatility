@@ -35,7 +35,7 @@ from mds650.rp2.baseline import (
     seasonality_index,
     smearing_factor,
 )
-from mds650.rp2.panel import TARGET_ASSETS
+from mds650.rp2.panel import DEFAULT_TRAIN_SHARE, TARGET_ASSETS
 from mds650.rp2.realized import backward_rv, forward_measures, log_returns
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -591,7 +591,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-fill-share", type=float, default=0.05)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     args = parser.parse_args(argv)
 
     bars = load_bar_sources(args.data_root)

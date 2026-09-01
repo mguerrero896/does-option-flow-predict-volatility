@@ -41,7 +41,7 @@ from mds650.rp2.feature_registry import CONFIG as REGISTRY_CONFIG  # noqa: E402
 from mds650.rp2.feature_registry import registry_sha256  # noqa: E402
 from mds650.rp2.inference import DEFAULT_SEED  # noqa: E402
 from mds650.rp2.ladder import BOOSTED_LADDER, PRIMARY_MODELS  # noqa: E402
-from mds650.rp2.panel import TARGET_ASSETS  # noqa: E402
+from mds650.rp2.panel import DEFAULT_TRAIN_SHARE, TARGET_ASSETS  # noqa: E402
 from mds650.rp2.run_manifest import (  # noqa: E402
     PIPELINE_STEPS,
     STEP_NAMES,
@@ -78,9 +78,6 @@ MODEL_CONFIG = ROOT / "configs" / "rp2_v3_feature_sets.json"
 #: Seeds are part of the run's identity, so they are declared here rather than left to
 #: each script's default and discovered afterwards.
 SEEDS = {"bootstrap": DEFAULT_SEED, "lightgbm": 20260818, "dml_folds": 5}
-#: The chronological split every producer uses. Part of the model configuration, so it is
-#: stated here rather than left to each script's default and discovered afterwards.
-DEFAULT_TRAIN_SHARE: Final = 0.6
 #: The roles every producer fits. Blocks 8 and 10 iterate these internally rather than
 #: taking a flag, so the runner refuses any other selection instead of recording one.
 PRODUCER_ROLES: Final[tuple[str, ...]] = ("D", "V")

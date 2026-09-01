@@ -35,6 +35,7 @@ from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
     B2_FEATURES,
+    DEFAULT_TRAIN_SHARE,
     chronological_split,
     common_evaluation_mask,
     lift_mask,
@@ -392,7 +393,10 @@ def _dml_effect(
     def nuisance_for(train: BoolArray) -> FloatArray:
         key = id(train)
         if key not in designs:
-            designs[key] = fold_design(subset, nuisance_features, train)[0]
+            design = fold_design(subset, nuisance_features, train)[0]
+            if design.shape[1] != placeholder.shape[1]:
+                raise ValueError("RP2_EXT1_DIRECTIONAL_NUISANCE_WIDTH_MISMATCH")
+            designs[key] = design
         return designs[key]
 
     y_residual = cross_fitted_residuals(placeholder, y, blocks, design_builder=nuisance_for)
@@ -936,7 +940,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--factorial-only", action="store_true")
     parser.add_argument("--factorial-contract", type=Path, default=FACTORIAL_CONTRACT)
     parser.add_argument("--factorial-output-dir", type=Path, default=FACTORIAL_OUTPUT)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     parser.add_argument("--folds", type=int, default=5)
     args = parser.parse_args(argv)
     if args.factorial_only:
