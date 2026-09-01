@@ -566,6 +566,8 @@ def validate_registered_panel_source(
         raise SystemExit("RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID:validate-input-manifests")
     if source_input.get("source_lineage_mode") == "registered_panel_reuse":
         raise SystemExit(f"RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN:{source_run.name}")
+    if source_input.get("tape_inventory_sha256") != normalised_digest(TAPE_INVENTORY):
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_INVENTORY_MISMATCH:{source_run.name}")
     artifacts[input_name] = expected_input
     contents[input_name] = expected_input_content
 

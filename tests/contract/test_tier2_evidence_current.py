@@ -26,8 +26,11 @@ EVIDENCE_OVERLAY = {
     "data/CANONICAL_STATE.json",
     "data/FROZEN_ARTIFACTS.json",
     "docs/methodology_decisions.md",
+    "docs/rp2_v3/REBUILD_GUIDE.md",
     "scripts/generate_canonical_state.py",
+    "scripts/run_rp2_v3_pipeline.py",
     "tests/contract/test_tier2_evidence_current.py",
+    "tests/unit/test_rp2_run_invariants.py",
 }
 
 

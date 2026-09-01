@@ -571,7 +571,11 @@ def test_a_reused_panel_does_not_change_what_the_run_says_it_did() -> None:
 
 
 def _registered_panel_source(
-    runner: ModuleType, source: Path, *, source_lineage_mode: str | None = None
+    runner: ModuleType,
+    source: Path,
+    *,
+    source_lineage_mode: str | None = None,
+    tape_inventory_sha256: str | None = None,
 ) -> Path:
     from mds650.rp2.run_manifest import (
         PIPELINE_STEPS,
@@ -584,9 +588,12 @@ def _registered_panel_source(
 
     source.mkdir(parents=True)
     source_input = source / "input_manifest.json"
-    input_record = {} if source_lineage_mode is None else {
-        "source_lineage_mode": source_lineage_mode
+    input_record = {
+        "tape_inventory_sha256": tape_inventory_sha256
+        or runner.normalised_digest(runner.TAPE_INVENTORY)
     }
+    if source_lineage_mode is not None:
+        input_record["source_lineage_mode"] = source_lineage_mode
     source_input.write_text(
         json.dumps(input_record, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
@@ -759,6 +766,20 @@ def test_registered_panel_reuse_rejects_a_reused_source(tmp_path: Path) -> None:
     )
 
     with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN"):
+        runner.validate_registered_panel_source(source)
+
+
+def test_registered_panel_reuse_rejects_a_different_source_inventory(
+    tmp_path: Path,
+) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    source = _registered_panel_source(
+        runner,
+        tmp_path / "source",
+        tape_inventory_sha256="f" * 64,
+    )
+
+    with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_INVENTORY_MISMATCH"):
         runner.validate_registered_panel_source(source)
 
 
