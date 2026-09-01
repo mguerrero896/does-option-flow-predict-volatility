@@ -1,0 +1,10 @@
+{
+  "authorization_basis": "Owner accepted the chronological 0.6 split and instructed to proceed, in session, 2026-09-01.",
+  "authorization_type": "PIT_V22_SUCCESSOR_ONE_SHOT_EVALUATION",
+  "authorize_read_and_evaluation": true,
+  "authorized_at_utc": "2026-09-01T09:12:33.628014+00:00",
+  "authorized_by": "Miguel Guerrero Quijano",
+  "contract_sha256": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf",
+  "protocol_id": "pit-v22-successor-method-freeze-v1",
+  "sealed_cohorts_read_before": 0
+}
