@@ -37,6 +37,15 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "canonical state": "data/CANONICAL_STATE.json",
         "canonical inference": "rp2_block10_inference/inference.json",
         "checked hash links": "SHA256_MISMATCH",
+        "UW fixed-cohort authority": ".uw_latency_campaign.state_artifact",
+        "UW maturity producer": "show_def scripts/uw_latency_reconcile.py main",
+        "UW early-marker guard": (
+            "show_def src/mds650/uw_latency_campaign.py "
+            "_validated_reconciliation_age"
+        ),
+        "UW twelve-session maturity table": "eligible_NY_date",
+        "UW eligible-session distinction": "ELIGIBLE_AWAITING_RECONCILIATION",
+        "UW claim boundary": "contract_window_support, backfill, revision",
         "figure-open handshake": "EDGE_FIGURE_WINDOW_NOT_FOUND",
         "private guest figure session": '"--guest",',
         "disabled figure sync": '"--disable-sync",',

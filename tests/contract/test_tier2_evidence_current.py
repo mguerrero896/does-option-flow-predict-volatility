@@ -91,9 +91,26 @@ def test_pr55_remediation_tier2_evidence_is_complete_and_registered() -> None:
             ).returncode
             == 0
         )
+        registration_commit = subprocess.run(
+            ["git", "log", "--diff-filter=A", "-n", "1", "--format=%H", "--", relative],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        assert re.fullmatch(r"[0-9a-f]{40}", registration_commit)
+        assert (
+            subprocess.run(
+                ["git", "merge-base", "--is-ancestor", registration_commit, "HEAD"],
+                cwd=REPO,
+                capture_output=True,
+                check=False,
+            ).returncode
+            == 0
+        )
         overlay = set(
             subprocess.run(
-                ["git", "diff", "--name-only", f"{tested_commit}..HEAD"],
+                ["git", "diff", "--name-only", f"{tested_commit}..{registration_commit}"],
                 cwd=REPO,
                 capture_output=True,
                 text=True,

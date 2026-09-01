@@ -870,6 +870,37 @@ run "jq '{status, endpoint, read_gate, academic_submission_waits_for_phase9:.dec
   jq '{status, endpoint, read_gate, academic_submission_waits_for_phase9:.decision.academic_submission_waits_for_phase9, recommended_academic_use:.decision.recommended_academic_use}' \
   artifacts/phase9/power_deadline_audit_v1.json
 
+say "UW latency: a fixed twelve-session cohort with seven canonical reconciliations"
+UW_STATE=$(jq -er '.uw_latency_campaign.state_artifact' data/CANONICAL_STATE.json)
+UW_AGGREGATE=$(jq -er '.uw_latency_campaign.aggregate_artifact' data/CANONICAL_STATE.json)
+[[ -f $UW_STATE && -f $UW_AGGREGATE ]] || die "UW_LATENCY_AUTHORITY_MISSING"
+show_def scripts/uw_latency_reconcile.py main
+show_def src/mds650/uw_latency_campaign.py _validated_reconciliation_age
+run "jq '{as_of_date, counts, claim_classification}' $UW_STATE" \
+  jq '{as_of_date, counts, claim_classification}' "$UW_STATE"
+run "jq '<session, plus-seven date, maturity status>' $UW_STATE" \
+  jq -r '
+    .as_of_date as $as_of_date |
+    ["session", "eligible_NY_date", "status"],
+    (.session_inventory[] |
+      (((.session + "T00:00:00Z") | fromdateiso8601) + 604800 |
+        strftime("%Y-%m-%d")) as $eligible_date |
+      [
+        .session,
+        $eligible_date,
+        (if .reconciliation_present then
+           "RECONCILED"
+         elif $eligible_date <= $as_of_date then
+           "ELIGIBLE_AWAITING_RECONCILIATION"
+         else
+           "PENDING_MATURITY"
+         end)
+      ]) |
+    @tsv
+  ' "$UW_STATE"
+run "jq '{contract_window_support, backfill, revision}' $UW_AGGREGATE" \
+  jq '{contract_window_support, backfill, revision}' "$UW_AGGREGATE"
+
 say "The PIT v2.2 successor attempt was consumed and failed closed before any OOS read"
 run "sha256sum artifacts/target_blind_v22/successor_method_freeze_v1.json artifacts/target_blind_v22/successor_owner_authorization_v1.json" \
   sha256sum artifacts/target_blind_v22/successor_method_freeze_v1.json \
