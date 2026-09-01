@@ -30,6 +30,12 @@ def test_current_word_report_is_not_the_superseded_draft() -> None:
     assert "60 complete sessions produce 36 scored sessions" in text
     assert "zero scored sessions" in text
     assert "sealed_cohorts_read=0" in text
+    assert "Operational timing result: the 60-second opening bound" in text
+    assert "6/406 (1.48 per cent)" in text
+    assert "p99 was 60.216898 seconds" in text
+    assert "0/406 exceeded 120 seconds" in text
+    assert "does not hold as a strict conservative bound at the NY opening" in text
+    assert "two of 95 receipts in hour 14 exceeded 120 seconds" in text
     assert "Phase 8 remains an unopened exploratory bridge" not in text
     assert "PROSE_COMPLETE_PENDING_D003_AND_PHASE8" not in text
     assert "[D003]" not in text
