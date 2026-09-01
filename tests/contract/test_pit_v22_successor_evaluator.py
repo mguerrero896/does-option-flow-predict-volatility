@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 
+import ast
 import hashlib
+import importlib.util
 import json
+from datetime import date, timedelta
 from pathlib import Path
+from types import ModuleType
 from typing import Any
+
+import pytest
 
 from mds650.phase6 import (
     B0V2_FEATURES,
@@ -30,6 +36,15 @@ RUNNER = REPO / "scripts" / "run_pit_v22_successor_once.py"
 def _load(path: Path) -> dict[str, Any]:
     payload: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
     return payload
+
+
+def _runner_module() -> ModuleType:
+    assert RUNNER.is_file(), "PIT_V22_SUCCESSOR_RUNNER_MISSING"
+    spec = importlib.util.spec_from_file_location("pit_v22_successor_runner", RUNNER)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def test_signed_successor_authorization_is_accepted_by_oos_gate() -> None:
@@ -90,6 +105,55 @@ def test_successor_folds_accept_development_validation_and_holdout() -> None:
     assert folds[1].test_start.isoformat() == "2026-01-05"
 
 
+def test_successor_split_fixes_equal_remainder_halves_before_targets() -> None:
+    runner = _runner_module()
+    start = date(2025, 8, 4)
+    sessions = [(start + timedelta(days=index)).isoformat() for index in range(159)]
+
+    split = runner.successor_session_split(sessions)
+
+    assert len(split["development"]) == 95
+    assert len(split["validation"]) == 32
+    assert len(split["holdout"]) == 32
+    assert [*split["development"], *split["validation"], *split["holdout"]] == sessions
+
+
+def test_one_shot_claim_rejects_a_second_process(tmp_path: Path) -> None:
+    runner = _runner_module()
+    claim = tmp_path / "successor.claim"
+
+    runner.claim_one_shot(claim, {"contract_sha256": "a" * 64})
+
+    with pytest.raises(FileExistsError, match="PIT_V22_SUCCESSOR_ALREADY_CLAIMED"):
+        runner.claim_one_shot(claim, {"contract_sha256": "a" * 64})
+
+
+def test_public_outputs_are_exclusive_and_reject_absolute_paths(tmp_path: Path) -> None:
+    runner = _runner_module()
+    output = tmp_path / "result.json"
+    runner._write_new_json(output, {"status": "PASS"})
+
+    with pytest.raises(FileExistsError, match="TRACKED_OUTPUT_ALREADY_EXISTS"):
+        runner._write_new_json(output, {"status": "OVERWRITE"})
+    with pytest.raises(RuntimeError, match="PERSONAL_PATH_IN_PUBLIC_PAYLOAD"):
+        runner._assert_public_payload({"path": "X:/private/outcome.parquet"})
+
+
+def test_evaluator_is_called_once_on_holdout_only() -> None:
+    tree = ast.parse(RUNNER.read_text(encoding="utf-8"))
+    calls = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "evaluate_phase6"
+    ]
+
+    assert len(calls) == 1
+    assert isinstance(calls[0].args[0], ast.Name)
+    assert calls[0].args[0].id == "holdout_predictions"
+
+
 def test_one_shot_runner_wires_only_the_frozen_producers() -> None:
     assert RUNNER.is_file(), "PIT_V22_SUCCESSOR_RUNNER_MISSING"
     source = RUNNER.read_text(encoding="utf-8")
@@ -97,11 +161,12 @@ def test_one_shot_runner_wires_only_the_frozen_producers() -> None:
         "build_phase6_common_panel",
         "build_phase6_origins",
         "validate_phase6_evaluation_panel",
-        "estimate_training_mde",
+        "training_mde_from_forecasts",
         "authorize_phase6_oos",
         "training_only_oof_forecasts",
         "forecast_phase6_fold",
         "evaluate_phase6",
         "DEFAULT_TRAIN_SHARE",
     }
-    assert not (required - set(source.split())), sorted(required - set(source.split()))
+    assert not (missing := {name for name in required if name not in source}), sorted(missing)
+    assert "D:\\MDS650" not in source

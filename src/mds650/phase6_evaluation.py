@@ -22,6 +22,8 @@ from mds650.modeling import fit_positive_model
 from mds650.phase6 import (
     B0V2_FEATURES,
     B1V2A_FEATURES,
+    B1V2B_FEATURES,
+    B1V2C_FEATURES,
     B2V2_FEATURES,
 )
 from mds650.study_design import canonical_sha256
@@ -73,6 +75,7 @@ def estimate_training_mde(
     *,
     draws: int,
     seed: int,
+    daily_counts: Sequence[int] | None = None,
 ) -> float:
     """Estimate the Holm-two, 80%-power MDE from training days only.
 
@@ -89,9 +92,17 @@ def estimate_training_mde(
         or float(values.std(ddof=1)) == 0.0
     ):
         raise ValueError("PHASE6_TRAINING_MDE_INPUT_INVALID")
-    centered = values - values.mean()
+    counts = (
+        np.ones(values.size, dtype=np.float64)
+        if daily_counts is None
+        else np.asarray(daily_counts, dtype=np.float64)
+    )
+    if counts.shape != values.shape or not np.isfinite(counts).all() or np.any(counts <= 0):
+        raise ValueError("PHASE6_TRAINING_MDE_INPUT_INVALID")
+    centered = values - float(np.average(values, weights=counts))
     generator = np.random.default_rng(seed)
-    samples = centered[generator.integers(0, values.size, size=(draws, values.size))].mean(axis=1)
+    sampled = generator.integers(0, values.size, size=(draws, values.size))
+    samples = (centered[sampled] * counts[sampled]).sum(axis=1) / counts[sampled].sum(axis=1)
     null_critical = float(np.quantile(samples, 0.9875))
     power_tail = float(np.quantile(samples, 0.20))
     mde = null_critical - power_tail
@@ -106,8 +117,43 @@ def authorize_phase6_oos(
     common_panel_sha256: str,
     preregistration_manifest_sha256: str,
     results_exist: bool,
+    contract_sha256: str | None = None,
 ) -> dict[str, Any]:
     """Consume the sole Phase 6 evaluation authorization fail-closed."""
+    if ledger.get("authorization_type") == "PIT_V22_SUCCESSOR_ONE_SHOT_EVALUATION":
+        if (
+            contract_sha256 is None
+            or ledger.get("contract_sha256") != contract_sha256
+            or ledger.get("protocol_id") != "pit-v22-successor-method-freeze-v1"
+            or ledger.get("authorize_read_and_evaluation") is not True
+            or ledger.get("sealed_cohorts_read_before") != 0
+            or not ledger.get("authorized_by")
+            or not ledger.get("authorized_at_utc")
+        ):
+            raise ValueError("PHASE6_OOS_ACCESS_DENIED")
+        owner_authorization = {
+            key: ledger[key]
+            for key in (
+                "authorization_type",
+                "authorization_basis",
+                "authorized_at_utc",
+                "authorized_by",
+                "contract_sha256",
+                "protocol_id",
+            )
+        }
+        prepared: dict[str, Any] = {
+            "schema_version": "pit-v22-successor-oos-access-ledger-1.0",
+            "status": "SEALED_BEFORE_OOS",
+            "oos_read_count": 0,
+            "evaluation_attempt_count": 0,
+            "common_panel_sha256": common_panel_sha256,
+            "preregistration_manifest_sha256": preregistration_manifest_sha256,
+            "results_inspected": False,
+            "owner_authorization": owner_authorization,
+        }
+        prepared["manifest_sha256"] = canonical_sha256(prepared)
+        ledger = prepared
     unsigned = {key: value for key, value in ledger.items() if key != "manifest_sha256"}
     if (
         ledger.get("manifest_sha256") != canonical_sha256(unsigned)
@@ -516,8 +562,13 @@ def training_only_oof_forecasts(
     """Create three training-only OOF blocks for the MDE freeze."""
     registered = preregistration["folds"][0]
     dates = [str(day) for day in registered["train_dates"]]
-    if len(dates) != 60 or set(panel["session_date"].cast(pl.String)) != set(dates):
+    if (
+        len(dates) < 60
+        or dates != sorted(set(dates))
+        or set(panel["session_date"].cast(pl.String)) != set(dates)
+    ):
         raise ValueError("PHASE6_MDE_TRAINING_DATES_INVALID")
+    first_oof = len(dates) - 30
     guard = int(preregistration["models"]["purge_embargo_minutes"])
     information_sets = phase6_information_sets()
     forecast_parts: list[pl.DataFrame] = []
@@ -525,9 +576,9 @@ def training_only_oof_forecasts(
     for index in range(3):
         fold = FoldDefinition(
             fold=101 + index,
-            train_end=date.fromisoformat(dates[29 + 10 * index]),
-            test_start=date.fromisoformat(dates[30 + 10 * index]),
-            test_end=date.fromisoformat(dates[39 + 10 * index]),
+            train_end=date.fromisoformat(dates[first_oof - 1 + 10 * index]),
+            test_start=date.fromisoformat(dates[first_oof + 10 * index]),
+            test_end=date.fromisoformat(dates[first_oof + 9 + 10 * index]),
         )
         training, testing = split_expanding_fold(
             panel,
@@ -595,28 +646,39 @@ def training_mde_from_forecasts(
             .sort("session_date", "fold", "origin_id")
             .partition_by("session_date", maintain_order=True)
         )
+        daily_effects = [
+            math.fsum(group["loss_difference"].to_list()) / group.height for group in daily_groups
+        ]
         output[name] = estimate_training_mde(
-            [
-                math.fsum(group["loss_difference"].to_list()) / group.height
-                for group in daily_groups
-            ],
+            daily_effects,
             draws=draws,
             seed=seed,
+            daily_counts=[group.height for group in daily_groups],
         )
     return output
 
 
-def phase6_information_sets() -> dict[str, tuple[str, ...]]:
-    """Return the three frozen, strictly nested Phase 6 predictor sets.
+def phase6_information_sets(*, include_b1_robustness: bool = False) -> dict[str, tuple[str, ...]]:
+    """Return the frozen Phase 6 predictor sets.
 
     Returns
     -------
     dict[str, tuple[str, ...]]
-        B0v2, B1v2a and B2v2 feature names in preregistered order.
+        Primary B0v2, B1v2a and B2v2 names, plus B1v2b/B1v2c when requested.
     """
     b0 = B0V2_FEATURES
     b1 = (*b0, *B1V2A_FEATURES)
-    return {"B0v2": b0, "B1v2a": b1, "B2v2": (*b1, *B2V2_FEATURES)}
+    primary = {"B0v2": b0, "B1v2a": b1, "B2v2": (*b1, *B2V2_FEATURES)}
+    if not include_b1_robustness:
+        return primary
+    b1b = (*b1, *B1V2B_FEATURES)
+    return {
+        "B0v2": b0,
+        "B1v2a": b1,
+        "B1v2b": b1b,
+        "B1v2c": (*b1b, *B1V2C_FEATURES),
+        "B2v2": primary["B2v2"],
+    }
 
 
 def add_training_volatility_regime(
@@ -644,7 +706,7 @@ def add_training_volatility_regime(
 def phase6_fold_definitions(
     preregistration: Mapping[str, Any],
 ) -> tuple[FoldDefinition, ...]:
-    """Parse and verify the five frozen expanding Phase 6 folds.
+    """Parse and verify the frozen expanding Phase 6 folds.
 
     Parameters
     ----------
@@ -654,7 +716,7 @@ def phase6_fold_definitions(
     Returns
     -------
     tuple[FoldDefinition, ...]
-        Five chronological expanding folds.
+        Chronological expanding folds.
 
     Raises
     ------
@@ -662,7 +724,11 @@ def phase6_fold_definitions(
         If counts, chronology, expansion or test disjointness drift.
     """
     rows = preregistration.get("folds")
-    if not isinstance(rows, list) or len(rows) != 5:
+    successor = str(preregistration.get("schema_version", "")).startswith(
+        "pit-v22-successor-runtime-preregistration-"
+    )
+    expected_fold_count = 2 if successor else 5
+    if not isinstance(rows, list) or len(rows) != expected_fold_count:
         raise ValueError("PHASE6_FOLD_CONTRACT_INVALID")
     parsed: list[FoldDefinition] = []
     prior_train: set[str] = set()
@@ -674,8 +740,9 @@ def phase6_fold_definitions(
         test = [str(value) for value in row.get("test_dates", ())]
         if (
             int(row.get("fold", -1)) != expected_fold
-            or len(train) != 60 + 20 * (expected_fold - 1)
-            or len(test) != 20
+            or (not successor and len(train) != 60 + 20 * (expected_fold - 1))
+            or (not successor and len(test) != 20)
+            or (successor and (not train or not test))
             or train != sorted(set(train))
             or test != sorted(set(test))
             or set(train) & set(test)

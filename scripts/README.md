@@ -246,6 +246,7 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/run_independent_replication.py` | Frozen 60/30-session replication runner with one guarded outcome read. |
 | `scripts/run_phase5_development_evaluation.py` | Runs the preregistered Phase 5 development-only RV30 evaluation. |
 | `scripts/run_phase5_holdout.py` | Executes the sole prospective Phase 5 holdout read after every gate passes. |
+| `scripts/run_pit_v22_successor_once.py` | Executes the signed PIT v2.2 successor evaluation once with fail-closed custody. |
 | `scripts/run_provider_timing_capture_once.ps1` | Operator wrapper for the prospective timing capture (Prepare prints the sequence; Replay validated a local source). |
 | `scripts/run_window_pipeline.py` | Runs the bounded real pilot and the authorized frozen-window backfill acquisition. |
 | `scripts/seal_b1_independent_replication_b1q_source.py` | Seals independent-replication B1Q attempts to immutable Massive payloads. |
