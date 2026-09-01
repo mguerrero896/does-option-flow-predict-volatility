@@ -30,15 +30,12 @@ from figure_style import (  # noqa: E402
     MONO,
     MUTED,
     PAPER,
+    PAPER_2,
     RULE_STRONG,
     SANS,
     SOFT,
-    T_EDGE,
-    T_SUB,
-    T_TAG,
     Canvas,
     arrow_down,
-    arrow_right,
     esc,
     footnote,
     header,
@@ -51,8 +48,8 @@ FIGURES = REPO / "docs" / "figures"
 WIDTH = 880
 
 FAMILY = {"gamma_glm": "Gamma GLM", "ridge_log": "ridge-log", "lightgbm_qlike": "LightGBM"}
-UNIVERSE = {"D": "discovery", "V": "validation"}
-CONTRAST = {"b1_over_b0": "ΔB1 · state", "b2_over_b1": "ΔB2|B1 · flow"}
+UNIVERSE = {"D": "model development", "V": "held-out check"}
+CONTRAST = {"b1_over_b0": "option state", "b2_over_b1": "option flow"}
 
 
 # --- 1. the answer -----------------------------------------------------------------
@@ -71,12 +68,17 @@ def _contrasts() -> list[dict[str, Any]]:
                 if key not in contrasts:
                     continue
                 cell = contrasts[key]
+                mde = cell["mde"]
                 rows.append(
                     {
-                        "name": f"{UNIVERSE[universe]} · {FAMILY[family]} · {CONTRAST[key]}",
+                        "group": UNIVERSE[universe],
+                        "name": f"{FAMILY[family]} · {CONTRAST[key]}",
                         "estimate": cell["estimate"],
-                        "ratio": cell["estimate"] / cell["mde"],
-                        "clears": abs(cell["estimate"]) > cell["mde"],
+                        "ratio": cell["estimate"] / mde,
+                        "lo": cell["ci_low"] / mde,
+                        "hi": cell["ci_high"] / mde,
+                        "sessions": cell["sessions"],
+                        "clears": abs(cell["estimate"]) > mde,
                         "flow": key == "b2_over_b1",
                     }
                 )
@@ -85,200 +87,381 @@ def _contrasts() -> list[dict[str, Any]]:
     return rows
 
 
+# --- 1. the answer -----------------------------------------------------------------
 def evidence() -> Canvas:
     rows = _contrasts()
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     lifecycle = state["canonical_results"]["status"]
-    state_clears = sum(not row["flow"] and row["clears"] for row in rows)
-    flow_clears = sum(row["flow"] and row["clears"] for row in rows)
-    left, plot, row_h, top = 300, 440, 32, 132
-    bottom = top + row_h * len(rows)
+    state_clears = sum(not r["flow"] and r["clears"] for r in rows)
+    flow_clears = sum(r["flow"] and r["clears"] for r in rows)
+
+    gutter, plot_x, plot_w, row_h, top = 286, 306, 372, 31, 150
+    span = 2.6
+    groups: list[str] = []
+    for r in rows:
+        if r["group"] not in groups:
+            groups.append(r["group"])
+    gap = 26
+    bottom = top + row_h * len(rows) + gap * (len(groups) - 1)
+
     canvas = Canvas(
         WIDTH,
-        bottom + 108,
-        "Twelve contrasts against the threshold each one declared",
-        "Each nested contrast registered a minimum detectable effect before it was "
-        f"measured. {state_clears + flow_clears} of twelve exceed their own threshold: "
+        bottom + 104,
+        "Twelve tests, and the bar each one set for itself before it ran",
+        "Each test fixed in advance the smallest effect it could detect. "
+        f"{state_clears + flow_clears} of twelve exceed their own threshold: "
         f"{state_clears} option state and {flow_clears} option flow.",
         "evidence",
     )
     header(
         canvas,
         "the answer",
-        "Twelve contrasts, and the bar each one set for itself",
-        "Past ±1 a contrast beat the threshold it registered before being measured.",
+        "Twelve tests, and the bar each one set for itself",
+        "Option flow is always measured on top of option state. The line is the point "
+        "estimate's uncertainty range.",
     )
 
     def x_of(ratio: float) -> float:
-        clamped = max(-2.0, min(2.0, ratio))
-        return left + plot * (clamped + 2.0) / 4.0
+        return plot_x + plot_w * (max(-span, min(span, ratio)) + span) / (2 * span)
 
-    zero = x_of(0.0)
-    for ratio, dash in ((-1.0, "5,4"), (1.0, "5,4")):
+    for ratio, style in ((-1.0, "5,4"), (1.0, "5,4"), (0.0, "")):
+        dash = f' stroke-dasharray="{style}"' if style else ""
         canvas.back(
-            f'<line x1="{x_of(ratio):.0f}" y1="{top - 16}" x2="{x_of(ratio):.0f}" '
-            f'y2="{bottom + 8}" stroke="{RULE_STRONG}" stroke-width="1" '
-            f'stroke-dasharray="{dash}"/>'
+            f'<line x1="{x_of(ratio):.0f}" y1="{top - 30}" x2="{x_of(ratio):.0f}" '
+            f'y2="{bottom - 4}" stroke="{RULE_STRONG}" stroke-width="1.1"{dash}/>'
         )
     canvas.back(
-        f'<line x1="{zero:.0f}" y1="{top - 16}" x2="{zero:.0f}" y2="{bottom + 8}" '
-        f'stroke="{RULE_STRONG}" stroke-width="1.2"/>'
-        f'<text x="{x_of(1.0):.0f}" y="{top - 24}" fill="{SOFT}" font-family="{MONO}" '
-        f'font-size="{T_TAG}" text-anchor="middle" letter-spacing="0.08em">'
-        f"DECLARED THRESHOLD</text>"
+        f'<text x="{x_of(1.0):.0f}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'font-size="10" text-anchor="middle" letter-spacing="0.08em">'
+        f"THE BAR IT SET BEFORE RUNNING</text>"
+        f'<text x="{x_of(0.0):.0f}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'font-size="10" text-anchor="middle" letter-spacing="0.08em">NO EFFECT</text>'
     )
 
-    for index, row in enumerate(rows):
-        mid = top + index * row_h + row_h // 2
-        if row["clears"]:
-            colour = ACCENT if row["flow"] else INK
-            weight = 5
-        else:
-            colour = RULE_STRONG
-            weight = 3
-        canvas.back(
-            f'<text x="{left - 20}" y="{mid + 5}" fill="'
-            f'{INK if row["clears"] else MUTED}" font-family="{SANS}" '
-            f'font-size="{T_SUB}" text-anchor="end">{esc(row["name"])}</text>'
-            f'<line x1="{zero:.0f}" y1="{mid}" x2="{x_of(row["ratio"]):.0f}" y2="{mid}" '
-            f'stroke="{colour}" stroke-width="{weight}" stroke-linecap="round"/>'
-            f'<circle cx="{x_of(row["ratio"]):.0f}" cy="{mid}" '
-            f'r="{6 if row["clears"] else 4}" fill="{colour}"/>'
-        )
-        if row["clears"]:
-            canvas.back(
-                f'<text x="{x_of(row["ratio"]) + 16:.0f}" y="{mid + 5}" fill="{colour}" '
-                f'font-family="{MONO}" font-size="{T_EDGE}">'
-                f'{row["estimate"]:+.5f}</text>'
+    y = top
+    current = None
+    for row in rows:
+        if row["group"] != current:
+            current = row["group"]
+            if row is not rows[0]:
+                y += gap
+            canvas.front(
+                f'<text x="40" y="{y - 9}" fill="{SOFT}" font-family="{MONO}" font-size="10" '
+                f'letter-spacing="0.1em">{esc(current.upper())}</text>'
             )
-
-    for ratio in (-2, -1, 0, 1, 2):
+        cy = y + row_h // 2
+        ink = INK if row["clears"] else MUTED
+        band = INK if row["clears"] else RULE_STRONG
+        lo, hi = x_of(row["lo"]), x_of(row["hi"])
         canvas.back(
-            f'<text x="{x_of(ratio):.0f}" y="{bottom + 28}" fill="{SOFT}" '
-            f'font-family="{MONO}" font-size="{T_TAG}" text-anchor="middle">'
-            f'{"0" if ratio == 0 else f"{ratio:+d}×"}</text>'
+            f'<rect x="{lo:.1f}" y="{cy - 4}" width="{max(2.0, hi - lo):.1f}" height="8" '
+            f'rx="4" fill="{band}" opacity="{0.28 if row["clears"] else 0.55}"/>'
         )
+        canvas.front(
+            f'<text x="{gutter}" y="{cy + 4}" fill="{ink}" font-family="{SANS}" '
+            f'font-size="12.5" text-anchor="end">{esc(row["name"])}</text>'
+            f'<circle cx="{x_of(row["ratio"]):.1f}" cy="{cy}" r="4.6" fill="{ink}"/>'
+            f'<text x="{plot_x + plot_w + 22}" y="{cy + 4}" fill="{ink}" font-family="{MONO}" '
+            f'font-size="11.5">{row["ratio"]:+.2f}\u00d7</text>'
+            f'<text x="{plot_x + plot_w + 94}" y="{cy + 4}" fill="{MUTED}" '
+            f'font-family="{MONO}" font-size="11">{row["estimate"]:+.5f}</text>'
+        )
+        y += row_h
 
-    legend(
-        canvas,
-        bottom + 62,
-        [(INK, "cleared · option state"), (ACCENT, "cleared · option flow"),
-         (RULE_STRONG, "below its threshold")],
+    for tick in (-2, -1, 0, 1, 2):
+        canvas.front(
+            f'<text x="{x_of(tick):.0f}" y="{bottom + 14}" fill="{SOFT}" '
+            f'font-family="{MONO}" font-size="11" text-anchor="middle">'
+            f'{"0" if tick == 0 else f"{tick:+d}\u00d7"}</text>'
+        )
+    canvas.front(
+        f'<text x="{plot_x + plot_w + 22}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'font-size="10" letter-spacing="0.08em">VS BAR</text>'
+        f'<text x="{plot_x + plot_w + 94}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'font-size="10" letter-spacing="0.08em">EFFECT</text>'
     )
+
+    items = [(INK, "cleared the bar it set"), (RULE_STRONG, "did not clear it")]
+    legend(canvas, bottom + 52, items, x=40)
     footnote(
         canvas,
-        bottom + 92,
-        f"{lifecycle} · {flow_clears} option-flow contrasts clear their declared MDE.",
+        bottom + 84,
+        f"{flow_clears} option-flow tests cleared their own bar. Status: {lifecycle}.",
+        x=40,
     )
     return canvas
 
 
 # --- 2. the programme in time ------------------------------------------------------
+_A0, _A1 = "2024-07-01", "2026-07-17"   # panel A: the retrospective span
+_B0, _B1 = "2026-07-18", "2026-12-31"   # panel B: the sealed programme, expanded
+_AX, _AW = 214.0, 258.0
+_BX, _BW = 516.0, 196.0
+
+
+def _pos(day: str) -> float:
+    """Two honest scales: a wide retrospective span, an expanded recent window."""
+    from datetime import date
+
+    d = date.fromisoformat(day)
+    a0, a1 = date.fromisoformat(_A0), date.fromisoformat(_A1)
+    b0, b1 = date.fromisoformat(_B0), date.fromisoformat(_B1)
+    if d <= a1:
+        f = (d - a0).days / (a1 - a0).days
+        return _AX + max(0.0, min(1.0, f)) * _AW
+    f = (d - b0).days / (b1 - b0).days
+    return _BX + max(0.0, min(1.0, f)) * _BW
+
+
 def timeline() -> Canvas:
     canvas = Canvas(
         WIDTH,
-        330,
-        "The programme from retrospective study to sealed future read",
-        "A timeline: retrospective discovery and validation, one sealed prospective read "
-        "already consumed, a cohort still collecting, and a preregistered read scheduled "
-        "for 2029.",
+        446,
+        "How the evidence accumulated, and what remains sealed",
+        "Two years of retrospective sessions, one sealed read already spent, one cohort "
+        "still collecting, and one read sealed until 2029.",
         "timeline",
     )
     header(
         canvas,
         "when it was tested",
-        "One read is spent, one is collecting, one is sealed until 2029",
-        "A sealed cohort opens exactly once, under a protocol written before it existed.",
+        "What has been measured, and what is still sealed",
+        "Bar length is time. A sealed test may be opened only once, and never reopened.",
     )
 
-    axis_y = 188
+    top, step, bar_h = 168, 46, 20
+    base, foot = top - 16, top + step * 4 - 12
+
+    for x, w, label in ((_AX, _AW, "past data  2024 – 2026"),
+                        (_BX, _BW, "sealed tests  from 2026")):
+        canvas.back(
+            f'<rect x="{x - 10}" y="{base}" width="{w + 20}" height="{foot - base}" rx="6" '
+            f'fill="{PAPER_2}"/>'
+            f'<text x="{x + w / 2}" y="{foot + 18}" fill="{SOFT}" font-family="{MONO}" '
+            f'font-size="11" letter-spacing="0.08em" text-anchor="middle">{esc(label)}</text>'
+        )
+
+    for year in ("2025-01-01", "2026-01-01"):
+        gx = _pos(year)
+        canvas.back(
+            f'<line x1="{gx:.1f}" y1="{base}" x2="{gx:.1f}" y2="{foot}" '
+            f'stroke="{RULE_STRONG}" stroke-width="1" stroke-dasharray="3,4"/>'
+            f'<text x="{gx:.1f}" y="{base - 8}" fill="{SOFT}" font-family="{MONO}" '
+            f'font-size="12" text-anchor="middle">{year[:4]}</text>'
+        )
+
+    tx = _pos("2026-09-01")
     canvas.back(
-        f'<line x1="56" y1="{axis_y}" x2="{WIDTH - 56}" y2="{axis_y}" '
-        f'stroke="{RULE_STRONG}" stroke-width="2"/>'
+        f'<line x1="{tx:.1f}" y1="{base}" x2="{tx:.1f}" y2="{foot}" stroke="{MUTED}" '
+        f'stroke-width="1.4"/>'
+        f'<text x="{tx:.1f}" y="{base - 8}" fill="{MUTED}" font-family="{MONO}" '
+        f'font-size="12" text-anchor="middle">today</text>'
     )
 
-    stops = [
-        (108, "2024–2026", "Discovery", "retrospective", False, True),
-        (268, "to 2026-05", "Validation", "not replicated", False, True),
-        (436, "2026-08-30", "Phase 8 read", "MIXED_EXPLORATORY", False, False),
-        (596, "~2026-11", "Phase 9", "still collecting", False, False),
-        (768, "est. 2029-01-30", "RP3 sealed read", "662 sessions", True, False),
+    rows = [
+        ("Model development", "2024-08-02", "2026-03-23", "389 trading days", "solid"),
+        ("Held-out check", "2026-03-24", "2026-07-17", "80 trading days", "hollow"),
+        ("Sealed test 1", "2026-07-20", "2026-08-28", "30 days · opened", "solid"),
+        ("Sealed test 2", "2026-08-19", "2026-12-31", "10 of 60 days so far", "fade"),
     ]
-    for x, when, name, note, focal, above in stops:
-        colour = ACCENT if focal else INK
-        canvas.back(
-            f'<circle cx="{x}" cy="{axis_y}" r="8" fill="{PAPER}" stroke="{colour}" '
-            f'stroke-width="2.4"/>'
-        )
-        if focal:
-            canvas.back(f'<circle cx="{x}" cy="{axis_y}" r="3.5" fill="{ACCENT}"/>')
-        tick_y = axis_y - 20 if above else axis_y + 20
-        text_y = axis_y - 84 if above else axis_y + 44
-        canvas.back(
-            f'<line x1="{x}" y1="{tick_y}" x2="{x}" y2="{axis_y - 8 if above else axis_y + 8}" '
-            f'stroke="{RULE_STRONG}" stroke-width="1"/>'
-        )
+    canvas.back(
+        f'<defs><linearGradient id="collecting" x1="0" x2="1">'
+        f'<stop offset="0" stop-color="{INK}" stop-opacity="0.9"/>'
+        f'<stop offset="1" stop-color="{INK}" stop-opacity="0.10"/></linearGradient></defs>'
+    )
+
+    for i, (name, a, b, note, kind) in enumerate(rows):
+        y = top + i * step
+        x0, x1 = _pos(a), _pos(b)
+        w = max(7.0, x1 - x0)
         canvas.front(
-            f'<text x="{x}" y="{text_y}" fill="{SOFT}" font-family="{MONO}" '
-            f'font-size="{T_TAG}" text-anchor="middle" letter-spacing="0.06em">'
-            f"{esc(when.upper())}</text>"
-            f'<text x="{x}" y="{text_y + 22}" fill="{colour}" font-family="{SANS}" '
-            f'font-size="{T_SUB + 2}" font-weight="600" text-anchor="middle">'
-            f"{esc(name)}</text>"
-            f'<text x="{x}" y="{text_y + 40}" fill="{MUTED}" font-family="{SANS}" '
-            f'font-size="{T_SUB}" text-anchor="middle">{esc(note)}</text>'
+            f'<text x="40" y="{y + 14}" fill="{INK}" font-family="{SANS}" font-size="16" '
+            f'font-weight="600">{esc(name)}</text>'
+            f'<text x="40" y="{y + 32}" fill="{MUTED}" font-family="{SANS}" '
+            f'font-size="12">{esc(note)}</text>'
         )
+        fill = {"solid": INK, "hollow": PAPER, "fade": "url(#collecting)"}[kind]
+        stroke = f' stroke="{INK}" stroke-width="1.6"' if kind == "hollow" else ""
+        canvas.front(
+            f'<rect x="{x0:.1f}" y="{y}" width="{w:.1f}" height="{bar_h}" rx="3" '
+            f'fill="{fill}"{stroke}/>'
+        )
+
+    ry = top + 2 * step + bar_h // 2
+    rx = _pos("2026-08-30")
+    canvas.front(
+        f'<circle cx="{rx:.1f}" cy="{ry}" r="7.5" fill="{PAPER}" stroke="{INK}" '
+        f'stroke-width="2.4"/><circle cx="{rx:.1f}" cy="{ry}" r="3.2" fill="{INK}"/>'
+    )
+
+    for dx in (0, 8):
+        canvas.back(
+            f'<path d="M {486 + dx} {base + 8} l 8 12 l -8 12" fill="none" '
+            f'stroke="{RULE_STRONG}" stroke-width="1.4"/>'
+        )
+
+    fx, fy = 748, top + step
+    canvas.front(
+        f'<rect x="{fx}" y="{fy}" width="88" height="74" rx="6" fill="{ACCENT_TINT}" '
+        f'stroke="{ACCENT}" stroke-width="1.4"/>'
+        f'<text x="{fx + 44}" y="{fy + 24}" fill="{INK}" font-family="{SANS}" font-size="15" '
+        f'font-weight="600" text-anchor="middle">Sealed</text>'
+        f'<text x="{fx + 44}" y="{fy + 42}" fill="{MUTED}" font-family="{SANS}" '
+        f'font-size="11" text-anchor="middle">test 3</text>'
+        f'<text x="{fx + 44}" y="{fy + 60}" fill="{ACCENT}" font-family="{MONO}" '
+        f'font-size="12" text-anchor="middle">2029</text>'
+    )
 
     legend(
         canvas,
-        300,
-        [(INK, "measured or consumed"), (ACCENT, "sealed, not yet opened")],
+        400,
+        [(INK, "measured and reported"), (MUTED, "still collecting"),
+         (ACCENT, "sealed, not yet opened")],
+        x=40,
+    )
+    canvas.front(
+        f'<circle cx="46" cy="{426}" r="6" fill="{PAPER}" stroke="{INK}" stroke-width="2"/>'
+        f'<circle cx="46" cy="{426}" r="2.6" fill="{INK}"/>'
+        f'<text x="60" y="{430}" fill="{INK}" font-family="{SANS}" font-size="13">'
+        f'Sealed test 1 was opened on 2026-08-30 and gave a mixed result, not a confirmation. '
+        f'Each test is locked to a written protocol before its data exists, and opens '
+        f'only once.</text>'
     )
     return canvas
 
 
-# --- 3. what was compared ----------------------------------------------------------
+def _layer_counts() -> list[int]:
+    """Feature counts read from the run the canonical state names."""
+    state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
+    run = state["scientific_bundle"]["run_id"]
+    path = REPO / "artifacts" / "rp2_v3" / run / "rp2_block10_inference" / "inference.json"
+    sets = json.loads(path.read_text(encoding="utf-8"))["D"]["information_sets"]
+    seen: list[str] = []
+    counts: list[int] = []
+    for key in ("B0", "B0+B1", "B0+B1+B2"):
+        names = sets[key]["resolved_feature_names"]
+        counts.append(len([n for n in names if n not in seen]))
+        seen = list(names)
+    return counts
+
+
 def information_sets() -> Canvas:
+    """Each chip is a plain reading of a registered feature name; nothing is added."""
+    base, first, second = _layer_counts()
+    total = base + first + second
+
+    layers = [
+        (
+            "The stock and the market",
+            base,
+            ["movement 5, 15, 30 min", "previous day", "week", "session so far",
+             "returns", "up and down moves", "jumps", "volume", "dollar volume",
+             "time of day", "S&P 500", "Nasdaq"],
+            False,
+        ),
+        (
+            "The option surface, at that moment",
+            first,
+            ["implied volatility 7, 30, 60 days", "term slope", "smile", "risk reversal",
+             "quote age", "spread width", "surface coverage", "implied minus realised"],
+            False,
+        ),
+        (
+            "Option trading, last five minutes",
+            second,
+            ["premium traded", "trade count", "buy share", "delta flow", "vega flow",
+             "short-dated vega", "strike concentration", "same-day expiries",
+             "multi-leg share", "implied-volatility change", "arrival intensity",
+             "provider latency"],
+            True,
+        ),
+    ]
+
+    top, gap, pad = 132, 18, 26
+    x0, x1 = 40, WIDTH - 40
+    chip_h, chip_gap, line_h = 22, 7, 29
+
+    def chip_w(text: str) -> float:
+        return 6.05 * len(text) + 20
+
+    def rows_for(chips: list[str]) -> list[list[str]]:
+        out: list[list[str]] = []
+        line: list[str] = []
+        used = 0.0
+        span = (x1 - pad) - (x0 + pad)
+        for c in chips:
+            w = chip_w(c)
+            if line and used + w + chip_gap > span:
+                out.append(line)
+                line, used = [c], w
+            else:
+                line.append(c)
+                used += w + chip_gap
+        if line:
+            out.append(line)
+        return out
+
+    laid = [rows_for(c) for _, _, c, _ in layers]
+    heights = [58 + len(r) * line_h for r in laid]
+    height = top + sum(heights) + gap * 2 + 76
+
     canvas = Canvas(
         WIDTH,
-        424,
-        "Three nested information sets on one shared row mask",
-        "B0 holds underlying and market history; B1 adds contemporaneous option state; "
-        "B2 adds recent option flow. Because the sets nest and share one row mask, the "
-        "step between two rungs isolates exactly one layer.",
-        "sets",
+        height,
+        "What went into each model",
+        f"Three information sets on identical rows: {base} measures of the stock and market, "
+        f"{first} of the option surface and {second} of recent option trading, {total} in all.",
+        "information-sets",
     )
     header(
         canvas,
         "what was compared",
-        "Each rung adds one layer, and nothing else",
-        "The sets nest and share one row mask, so a step isolates a single information layer.",
+        "What went into each model",
+        "Each step adds one kind of information and nothing else.",
     )
 
-    boxes = [
-        (72, 132, 736, 232, "B0 + B1 + B2", "adds recent point-in-time option flow", True),
-        (120, 176, 640, 144, "B0 + B1", "adds contemporaneous option state", False),
-        (168, 220, 544, 56, "B0", "underlying and broad-market history", False),
-    ]
-    for x, y, w, h, label, note, focal in boxes:
-        fill = ACCENT_TINT if focal else PAPER
-        stroke = ACCENT if focal else INK
+    y = top
+    for index, ((name, count, _, focal), lines) in enumerate(zip(layers, laid, strict=True)):
+        band_h = heights[index]
         canvas.back(
-            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="{fill}" '
-            f'stroke="{stroke}" stroke-width="1.2"/>'
+            f'<rect x="{x0}" y="{y}" width="{x1 - x0}" height="{band_h}" rx="8" '
+            f'fill="{ACCENT_TINT if focal else PAPER}" stroke="{ACCENT if focal else RULE_STRONG}" '
+            f'stroke-width="1.4"/>'
         )
         canvas.front(
-            f'<text x="{x + 20}" y="{y + 26}" fill="{stroke}" font-family="{SANS}" '
-            f'font-size="{T_SUB + 3}" font-weight="600">{esc(label)}</text>'
-            f'<text x="{x + 20 + 12 * len(label)}" y="{y + 26}" fill="{MUTED}" '
-            f'font-family="{SANS}" font-size="{T_SUB}">{esc(note)}</text>'
+            f'<text x="{x0 + pad}" y="{y + 32}" fill="{INK}" font-family="{SANS}" '
+            f'font-size="17" font-weight="600">{esc(name)}</text>'
+            f'<text x="{x1 - pad}" y="{y + 32}" fill="{ACCENT if focal else MUTED}" '
+            f'font-family="{MONO}" font-size="13" text-anchor="end">'
+            f'{"+" if index else ""}{count}</text>'
         )
+        cy = y + 52
+        for line in lines:
+            cx = float(x0 + pad)
+            for text in line:
+                w = chip_w(text)
+                canvas.front(
+                    f'<rect x="{cx:.1f}" y="{cy}" width="{w:.1f}" height="{chip_h}" rx="11" '
+                    f'fill="{PAPER}" stroke="{RULE_STRONG}" stroke-width="1"/>'
+                    f'<text x="{cx + w / 2:.1f}" y="{cy + 15}" fill="{MUTED}" '
+                    f'font-family="{SANS}" font-size="11.5" text-anchor="middle">'
+                    f"{esc(text)}</text>"
+                )
+                cx += w + chip_gap
+            cy += line_h
+        if index < 2:
+            canvas.back(
+                f'<text x="{WIDTH // 2}" y="{y + band_h + 14}" fill="{SOFT}" '
+                f'font-family="{SANS}" font-size="17" text-anchor="middle">+</text>'
+            )
+        y += band_h + gap
 
     footnote(
         canvas,
-        392,
-        "The contrast under test is the outermost step: what recent option flow adds once "
-        "option state is already known.",
+        height - 30,
+        f"All three are scored on the same moments, so each step measures only what it adds. "
+        f"{total} measures in total.",
+        x=40,
     )
     return canvas
 
@@ -305,13 +488,13 @@ def pipeline() -> Canvas:
     plane(canvas, 56, 468, 768, 96, "public plane · what the repository publishes", amber=True)
 
     node(canvas, 264, 120, 352, 60, "Market data providers", "FMP · Massive · Unusual Whales")
-    node(canvas, 264, 244, 352, 60, "Point-in-time panel", "availability, not source time")
-    node(canvas, 264, 352, 352, 60, "Frozen models and inference", "QLIKE · bootstrap · Holm")
-    node(canvas, 264, 488, 352, 60, "Published record", "aggregates and SHA-256 pointers",
+    node(canvas, 264, 244, 352, 60, "Point-in-time panel", "what was knowable at the time")
+    node(canvas, 264, 352, 352, 60, "Frozen models and inference", "scored, then error bars")
+    node(canvas, 264, 488, 352, 60, "Published record", "summary results and fingerprints",
          focal=True)
 
     arrow_down(canvas, 440, 180, 240, "acquire")
-    arrow_down(canvas, 440, 304, 348, "fit per information set")
+    arrow_down(canvas, 440, 304, 348, "one model per step")
     arrow_down(canvas, 440, 412, 484, "freeze and hash", accent=True)
 
     legend(canvas, 582, [(RULE_STRONG, "stays local"), (ACCENT, "leaves the machine")])
@@ -320,55 +503,87 @@ def pipeline() -> Canvas:
 
 # --- 5. why a measurement may become a claim ---------------------------------------
 def eligibility() -> Canvas:
+    """The three permissions the canonical state actually records, and their real values."""
+    state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
+    flags = state["scientific_bundle"]["eligibility"]
+    headline = state["canonical_results"]["status"]
+    reasons = ", ".join(flags["reasons"])
+
+    checks = [
+        (
+            "Can earlier results be carried into a corrected claim?",
+            "safe_to_reconcile_existing_results",
+            "The timing correction changed the inputs, so no earlier sign, metric or "
+            "ranking may be reused.",
+        ),
+        (
+            "Can a sealed test be opened and scored?",
+            "safe_to_open_or_evaluate_oos",
+            "A sealed test opens once, and only under a separate written authorisation.",
+        ),
+        (
+            "Has any model been fitted since the correction?",
+            "model_fit_after_pit_v22",
+            "Nothing has been measured on the corrected inputs, so there is no new number "
+            "to promote.",
+        ),
+    ]
+
+    card_h, gap, top = 96, 16, 138
+    height = top + card_h * 3 + gap * 2 + 132
     canvas = Canvas(
         WIDTH,
-        560,
-        "How a measurement becomes an eligible claim, or does not",
-        "A measurement passes three gates: its method must have been frozen and hashed "
-        "before any outcome was seen, its cohort must be opened only under an authorised "
-        "one-shot read, and its point-in-time inputs must reconcile. Failing any gate "
-        "keeps the number auditable but not current.",
-        "eligibility",
+        height,
+        "The three permissions this project checks before a number becomes a claim",
+        "All three are currently withheld, for one recorded reason, so every number the "
+        "run produced stays historical.",
+        "eligibility-gates",
     )
     header(
         canvas,
         "why you can trust it",
-        "Three gates, and what happens when one does not open",
-        "The canonical state refuses to promote a measurement it cannot support.",
+        "Three permissions, and all three are currently withheld",
+        "The project stops itself here. Nothing below is hidden; it is simply not promoted.",
     )
 
-    node(canvas, 40, 132, 232, 64, "A measurement", "produced by a run")
-    node(canvas, 324, 132, 232, 64, "Method frozen first?", "hashed before any outcome")
-    node(canvas, 608, 132, 232, 64, "Read authorised?", "sealed cohort, opened once")
-    node(canvas, 608, 268, 232, 64, "PIT inputs reconcile?", "availability proven")
-    node(canvas, 608, 404, 232, 64, "Eligible claim", "may be stated as current", focal=True)
-    node(canvas, 40, 404, 448, 64, "Historical measurement",
-         "auditable, never a current claim", quiet=True)
+    for index, (question, key, why) in enumerate(checks):
+        y = top + index * (card_h + gap)
+        granted = bool(flags[key])
+        mark = "YES" if granted else "NO"
+        canvas.back(
+            f'<rect x="40" y="{y}" width="{WIDTH - 80}" height="{card_h}" rx="8" fill="{PAPER}" '
+            f'stroke="{RULE_STRONG}" stroke-width="1.4"/>'
+            f'<rect x="40" y="{y}" width="5" height="{card_h}" rx="2.5" fill="{INK}"/>'
+        )
+        canvas.front(
+            f'<text x="70" y="{y + 34}" fill="{INK}" font-family="{SANS}" font-size="16" '
+            f'font-weight="600">{esc(question)}</text>'
+            f'<text x="70" y="{y + 62}" fill="{MUTED}" font-family="{SANS}" '
+            f'font-size="12.5">{esc(why[:96])}</text>'
+            f'<rect x="{WIDTH - 122}" y="{y + 30}" width="52" height="26" rx="13" '
+            f'fill="{PAPER_2}" stroke="{INK}" stroke-width="1.4"/>'
+            f'<text x="{WIDTH - 96}" y="{y + 48}" fill="{INK}" font-family="{MONO}" '
+            f'font-size="13" font-weight="600" text-anchor="middle">{mark}</text>'
+        )
 
-    arrow_right(canvas, 272, 320, 164, "")
-    arrow_right(canvas, 556, 604, 164, "")
-    arrow_down(canvas, 724, 196, 264, "yes")
-    arrow_down(canvas, 724, 332, 400, "yes", accent=True)
-
-    # Any gate that does not open routes to the same place.
+    band = top + card_h * 3 + gap * 2 + 22
     canvas.back(
-        f'<path d="M 608 300 H 520 Q 512 300 512 308 V 396" fill="none" stroke="{MUTED}" '
-        f'stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#head)"/>'
-        f'<rect x="450" y="330" width="60" height="18" rx="3" fill="{PAPER}"/>'
-        f'<text x="480" y="344" fill="{MUTED}" font-family="{SANS}" font-size="{T_EDGE}" '
-        f'text-anchor="middle">no</text>'
+        f'<rect x="40" y="{band}" width="{WIDTH - 80}" height="60" rx="8" fill="{ACCENT_TINT}" '
+        f'stroke="{ACCENT}" stroke-width="1.4"/>'
     )
-
+    canvas.front(
+        f'<text x="70" y="{band + 26}" fill="{INK}" font-family="{SANS}" font-size="15" '
+        f'font-weight="600">No result is currently eligible as a headline.</text>'
+        f'<text x="70" y="{band + 47}" fill="{MUTED}" font-family="{SANS}" font-size="12.5">'
+        f'Recorded reason: {esc(reasons)}. Lifting it needs a successor method freeze and '
+        f'one authorised evaluation.</text>'
+    )
     footnote(
         canvas,
-        512,
-        "The current bundle stops at the third gate, so its numbers stay historical. "
-        "That is the state the repository publishes.",
-    )
-    legend(
-        canvas,
-        532,
-        [(ACCENT, "eligible as a current claim"), (RULE_STRONG, "retained for audit")],
+        height - 26,
+        f"Every number stays on record and stays auditable; none is stated as current. "
+        f"Machine status: {headline}.",
+        x=40,
     )
     return canvas
 

@@ -44,7 +44,9 @@ Two further points a reader should have before going on:
 
 ## When it was tested
 
-![One read is spent, one is collecting, one is sealed until 2029](docs/figures/programme-timeline.svg)
+![Two retrospective samples, then three sealed tests: one opened, one collecting, one locked until 2029](docs/figures/programme-timeline.svg)
+
+*Bar length is time. The dark bars are measured and reported; the amber card is a test that has never been opened.*
 
 Retrospective work can always be re-run until it agrees with you. The defence against that
 is a cohort you are allowed to look at only once, under a protocol written and hashed
@@ -68,9 +70,9 @@ One cohort is still collecting, and one is sealed until 2029.
 
 ![Three nested information sets on one shared row mask](docs/figures/information-sets.svg)
 
-Three models see three progressively larger pictures of the same moment, scored on
-identical rows. Because the sets nest and share one row mask, the difference between two
-rungs is attributable to exactly one layer of information and nothing else.
+Three models see three progressively larger pictures of the same moment, and all three are
+scored on exactly the same moments. That is what lets the difference between two steps be
+attributed to the information added and to nothing else.
 
 The loss function is QLIKE. The model families are Gamma GLM, ridge-log and
 LightGBM-QLIKE. Results are aggregated by trading session before any interval is computed,

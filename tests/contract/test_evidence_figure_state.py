@@ -33,7 +33,7 @@ def test_evidence_figure_uses_canonical_lifecycle_and_measured_flow_count() -> N
     rendered = render_figures.evidence().render()
     status = state["canonical_results"]["status"]
     assert status in rendered
-    assert f"{flow_clears} option-flow contrasts clear their declared MDE." in rendered
+    assert f"{flow_clears} option-flow tests cleared their own bar." in rendered
     assert "amber cell" not in rendered.casefold()
     assert (REPO / "docs" / "figures" / "evidence.svg").read_text(
         encoding="utf-8"
