@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–125](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening and successor-v2 closeout. |
+| [97–126](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout and PR #55 remediation. |
 
 <a id="decision-1"></a>
 
@@ -2293,3 +2293,45 @@ Requirements-consistency and preregistration gates pass.
      `PROXY_ONLY_CROSS_CHANNEL` claim boundary are unchanged. The successor OOS result
      remains bound to its pre-OOS data hashes and exactly one consumed read; no model,
      contrast, MDE, Holm result, eligibility rule or capital state changed.
+<a id="decision-126"></a>
+
+126. **The PR #55 panel-reuse record is corrected additively: source admission is
+     self-hash verified rather than externally authenticated, figure regeneration is
+     public, reuse depth is one, and Tier 2 is durable (2026-09-02).** Decision 122 is
+     retained as the historical record of the original merge. Where this decision and
+     decision 122 differ, this decision is the current authority. The remediation tree is
+     based on `6aabae13`, which contains the owner-required `c1e331e2` successor freeze,
+     the later main-line fixes through PR #65 and the PIT v2.2 successor closeout in PR #63.
+
+     | Boundary | Corrected disposition and evidence |
+     | --- | --- |
+     | Source identity | **THE SOURCE MANIFEST'S OWN SCIENTIFIC HASH IS RECOMPUTED; THIS IS NOT EXTERNAL AUTHENTICATION.** `assert_manifest_identity_intact` verifies the unkeyed scientific hash declared by the supplied bundle itself. There is no repository-anchored signature or independent digest for an arbitrary caller-supplied source. Admission therefore also verifies the registered step inventory, D/V roles, input-manifest identity, eight panel artifacts and their stable-content hashes. The first operation remains `assert_no_sealed_paths([source_run])`, before `is_dir()`, manifest access or any child read; `_source_artifact` repeats containment before file access. A mutation test that removes the root call fails on the first observed event, so the test fixes order rather than merely searching for the function name. |
+     | Inventory binding | **THE HISTORICAL REUSE BRANCH OMITTED `assert_inventory_is_frozen`; BOTH BRANCHES NOW REQUIRE IT.** The default rebuild already bound `inventory.jsonl` to the partition before session or tape use. The opt-in branch now performs the same comparison immediately after the root sealed-path guard and before manifest interpretation, `assert_partition_matches` or `assert_tape_covers_panel`. No inventory is accepted merely because a reused panel bundle names it. |
+     | Lineage depth | **REUSE OF A REUSE IS REJECTED.** A source input manifest whose `source_lineage_mode` is `registered_panel_reuse` stops with `RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN`. This fixes lineage depth at one and avoids an externally unauditable chain of licensed local intermediates. The original seven named registration failures remain unchanged. Without `--reuse-panels-from`, `source_run` is still `None`, `validate_inputs(..., forbid_sealed=True)` still runs, and the complete original producer path is unchanged. |
+     | Figure purpose | **THE SECOND FIGURE SHOWS CONCENTRATION AND ENDPOINT FRAGILITY, NOT A DUPLICATE SIGN TEST.** Each model lane contains the observed cumulative difference, the same series with its three largest absolute session contributions set to zero, and two lines from the origin with slopes equal to the model's full-window per-session minimum-detectable difference. Development and held-out lanes use exactly 4 px per session (624 px for 156 sessions; 128 px for 32), one shared ±0.31 vertical scale, and an explicit zero tick. The held-out LightGBM counterfactual ends at −0.0546055133 instead of +0.0633301526; development ridge also reverses sign. The held-out top-three dates are 2026-06-05, 2026-06-08 and 2026-06-11 for all three models; their signed shares of the endpoints are 55.730%, 69.933% and 186.224%. The SVG contains no temporal-causal or decay reading. |
+     | Wedge interpretation | **ALL SIX FULL-WINDOW ENDPOINTS ARE BELOW THEIR OWN FINAL BOUNDARY; THE PATHS DO NOT REMAIN INSIDE ITS PREFIX EXTENSION.** Final absolute ratios for development Gamma, ridge and LightGBM are 0.160511, 0.336487 and 0.586733; held-out ratios are 0.602535, 0.469611 and 0.217958. The maximum is 0.6025346517, which rounds to 0.60 and is below 61%. However, the observed paths exceed the straight-line visual extension at 13, 14, 16, 8, 7 and 9 early prefixes respectively; maximum prefix ratios are 4.3276, 2.9726, 4.6552, 2.5654, 2.7510 and 1.9929. Therefore the wedge is labelled and tested as a visual extension of a full-window threshold, not a valid sequential or prefix-specific inference boundary. The proposed criterion that every path remain inside it is falsified by the source data and is not asserted. |
+     | Public regeneration | **THE MINIMAL SESSION AGGREGATE IS PUBLISHED AND FROZEN; THE LICENSED RUN REMAINS LOCAL.** `artifacts/rp2_v3/cumulative_loss_session_series_v1.json` contains only shared session dates, six `delta_loss` arrays, counts, masks, estimates, thresholds and source identities. It contains no individual loss pair, origin, panel or external path. Its canonical LF SHA-256 is `d40608c8a55c2e42408c7a08db4ddcd4a32fc69ad9d3e56077eb186ade32de0c`; it is registered in `data/FROZEN_ARTIFACTS.json` and `data/CANONICAL_STATE.json`. The deterministic renderer reproduces `docs/figures/cumulative-loss-difference.svg` byte for byte (SHA-256 `1dffc37e4970816c1d6110295747d83afff2efe987afe5473f867e1bb879ad8e`) in a public clone. The figure remains absent from the root README. |
+     | Reproduction identity | **THE TWELVE HEADLINE AGGREGATES REPRODUCE EXACTLY.** The public source records twelve comparisons over `{b1_over_b0, b2_over_b1}` with maximum absolute difference `0.0`; its maximum serialized session-mean difference is `4.336808689942018e-19`. The complete inference artifact contains 24 contrasts (four contrasts × three families × two roles), seven of which exceed their minimum-detectable difference. The twelve headline contrasts are a subset: two exceed, both are state contrasts, and no flow contrast exceeds. The canonical `rp2-v3-20260831-b1-spot-cutoff-remediation` manifest is unchanged at file SHA-256 `95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a`; it still records its own code commit `b70c54ba14fdda2197efd6bcf0aa676c4ba3d4f1` and scientific SHA-256 `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`. |
+     | Tier 2 | **SEVEN OF SEVEN GATES PASSED WITH THE LICENSED OPT-OUTS ABSENT.** `scripts/run_local_evidence_gates.py` constructs an explicit inherited environment after removing `MDS650_PANEL_GUARD_MAY_SKIP` and `MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP` case-insensitively for every licensed gate. Only the hermetic CI replica declares both as `1`. At `2026-09-01T19:12:43.324455+00:00`, implementation commit `56c8ec3201bd0759242de0bc785944794ecce78e` (tree `e747bc4077e702e720317145d1bfba8668861c38`) returned code zero for `versioned-hook`, `ruff`, `mypy`, `full-pytest`, `ci-sim`, `gated-hashes` and `access-posture`; `c1e331e247d411eb21141b1cd271130ae16bfd89` is a required ancestor. The immutable JSON is `artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json`, canonical LF SHA-256 `5a37e9b8cd47ab1d9c0e42f9872dd8237aff2bd1d90f189e568bf16751f54b0e`. A prior clean-tree run was RED at 5/7, exposing the stale UW inventory and the now-landed PR #62 `ProgramFiles` omission before this GREEN run. |
+     | UW freshness needed by Tier 2 | **NO FROZEN SNAPSHOT WAS OVERWRITTEN.** Live regeneration found a new collected, unreconciled 2026-09-01 session, so current state advances additively to `uw_latency_campaign_20260902_v1.json` and `uw_latency_campaign_state_20260902_v1.json`: 12 collected, six reconciled and six unreconciled. The prior v2 file SHA-256 values remain `68a3cd98d5a3bcda2d003a379a3f8f7fdbb28fb19504f59cf12f18ca400068ca` and `82f3ee29e8b3623d56bb85f8783bbed69378680c7af2c6bae3b60fa5ebf52915`. No reconciliation or latency statistic changed; no provider row is versioned and `sealed_cohort_read=false`. |
+     | PR #55 publication record | **THE HEAD AND SQUASH HAVE DIFFERENT CHECK COUNTS.** PR head `1deac71f` had five successful check runs: CodeQL, hermetic, quality, analyze and scientific-contracts. Squash `6c309db5` has four successful runs: analyze, hermetic, scientific-contracts and quality; the separate CodeQL run did not recur. Both SHAs also have `claude` and `supabase` suites permanently `queued`, conclusion `null`, with zero check runs, so those suites are neither failures nor green. `6c309db5` is a single-parent squash whose parent is `b8657bfa`, not a two-parent merge. PR #55 also legitimately regenerated `data/CANONICAL_STATE.json` in two hunks; only the canonical scientific bundle and `artifacts/target_blind_v22/` remained byte-unchanged. |
+
+     A public clone regenerates and verifies the figure and all twelve aggregate
+     identities without the licensed run:
+
+     ```powershell
+     $stagedSvg = Join-Path $env:TEMP "cumulative-loss-difference.svg"
+     uv run python scripts/render_cumulative_loss_figure.py `
+         --series-source artifacts/rp2_v3/cumulative_loss_session_series_v1.json `
+         --output $stagedSvg
+     uv run pytest -q tests/contract/test_cumulative_loss_figure.py
+     ```
+
+     RED-before-GREEN evidence consists of the natural missing-session-series renderer
+     failure, the figure contract before the aggregate/CLI existed, the root-guard order
+     mutation, the missing inventory/reuse-depth contracts, the inherited-opt-out runner
+     contract, the stale UW snapshot and the 5/7 Tier 2 run. This remediation reads no
+     sealed cohort, changes no frozen artifact bytes, and modifies nothing under
+     `artifacts/target_blind_v22/`. It creates no new eligibility, causal, decay or
+     investment claim; `capital_go=false`, `RESEARCH_ONLY`, and
+     `NOT INVESTMENT ADVICE` remain binding.
