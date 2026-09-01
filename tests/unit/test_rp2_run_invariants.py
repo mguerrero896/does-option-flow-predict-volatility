@@ -19,6 +19,9 @@ import numpy as np
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
+CANONICAL_TAPE_FINGERPRINT = (
+    "0a54fcea4801f8592f8b5c92aa8cbdf9cd97ad328ae8e5975c0c6f86b6710d3a"
+)
 
 
 def _load(name: str) -> ModuleType:
@@ -576,6 +579,9 @@ def _registered_panel_source(
     *,
     source_lineage_mode: str | None = None,
     tape_inventory_sha256: str | None = None,
+    tape_fingerprint_sha256: str = CANONICAL_TAPE_FINGERPRINT,
+    tape_fingerprint_mode: str = "content",
+    include_tape_fingerprint: bool = True,
 ) -> Path:
     from mds650.rp2.run_manifest import (
         PIPELINE_STEPS,
@@ -592,6 +598,13 @@ def _registered_panel_source(
         "tape_inventory_sha256": tape_inventory_sha256
         or runner.normalised_digest(runner.TAPE_INVENTORY)
     }
+    if include_tape_fingerprint:
+        input_record.update(
+            {
+                "tape_fingerprint_sha256": tape_fingerprint_sha256,
+                "tape_fingerprint_mode": tape_fingerprint_mode,
+            }
+        )
     if source_lineage_mode is not None:
         input_record["source_lineage_mode"] = source_lineage_mode
     source_input.write_text(
@@ -781,6 +794,52 @@ def test_registered_panel_reuse_rejects_a_different_source_inventory(
 
     with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_INVENTORY_MISMATCH"):
         runner.validate_registered_panel_source(source)
+
+
+@pytest.mark.parametrize(
+    ("fingerprint", "mode", "include"),
+    [
+        ("e" * 64, "content", True),
+        (CANONICAL_TAPE_FINGERPRINT, "path_size_mtime", True),
+        (CANONICAL_TAPE_FINGERPRINT, "content", False),
+    ],
+)
+def test_registered_panel_reuse_requires_the_canonical_content_fingerprint(
+    tmp_path: Path,
+    fingerprint: str,
+    mode: str,
+    include: bool,
+) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    source = _registered_panel_source(
+        runner,
+        tmp_path / "source",
+        tape_fingerprint_sha256=fingerprint,
+        tape_fingerprint_mode=mode,
+        include_tape_fingerprint=include,
+    )
+
+    with pytest.raises(
+        SystemExit, match="RP2_RUN_PANEL_SOURCE_TAPE_FINGERPRINT_MISMATCH"
+    ):
+        runner.validate_registered_panel_source(source)
+
+
+def test_canonical_tape_fingerprint_anchor_matches_the_published_input() -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    path = (
+        REPO
+        / "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation"
+        / "input_manifest.json"
+    )
+    record = json.loads(path.read_text(encoding="utf-8"))
+
+    assert record["tape_fingerprint_mode"] == "content"
+    assert (
+        record["tape_fingerprint_sha256"]
+        == runner.CANONICAL_TAPE_FINGERPRINT_SHA256
+        == CANONICAL_TAPE_FINGERPRINT
+    )
 
 
 def test_registered_panel_source_cannot_overlap_destination(tmp_path: Path) -> None:

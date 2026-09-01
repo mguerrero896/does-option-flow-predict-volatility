@@ -73,6 +73,10 @@ GATED_MANIFEST = ROOT / "data" / "GATED_DATA_POINTERS.json"
 #: The option tape the producers actually open, one JSON record per session-asset file.
 #: The frozen partition. The sessions a rebuild produces have to be these sessions.
 PARTITION = ROOT / "artifacts" / "rp2_block1_partition" / "partition.json"
+#: Content-mode tape identity recorded by the frozen canonical RP2-v3 input manifest.
+CANONICAL_TAPE_FINGERPRINT_SHA256: Final = (
+    "0a54fcea4801f8592f8b5c92aa8cbdf9cd97ad328ae8e5975c0c6f86b6710d3a"
+)
 SCORECARD_FIELDS = ROOT / "configs" / "rp2_v3_scorecard_fields.json"
 #: The feature registry. Recorded separately as `feature_registry_sha256`; it is not the
 #: model configuration, and using it for both would report one digest twice under two names.
@@ -568,6 +572,14 @@ def validate_registered_panel_source(
         raise SystemExit(f"RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN:{source_run.name}")
     if source_input.get("tape_inventory_sha256") != normalised_digest(TAPE_INVENTORY):
         raise SystemExit(f"RP2_RUN_PANEL_SOURCE_INVENTORY_MISMATCH:{source_run.name}")
+    if (
+        source_input.get("tape_fingerprint_mode") != "content"
+        or source_input.get("tape_fingerprint_sha256")
+        != CANONICAL_TAPE_FINGERPRINT_SHA256
+    ):
+        raise SystemExit(
+            f"RP2_RUN_PANEL_SOURCE_TAPE_FINGERPRINT_MISMATCH:{source_run.name}"
+        )
     artifacts[input_name] = expected_input
     contents[input_name] = expected_input_content
 

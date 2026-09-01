@@ -27,7 +27,9 @@ EVIDENCE_OVERLAY = {
     "data/FROZEN_ARTIFACTS.json",
     "docs/methodology_decisions.md",
     "scripts/generate_canonical_state.py",
+    "scripts/record_progress_video.sh",
     "tests/contract/test_tier2_evidence_current.py",
+    "tests/contract/test_progress_video_script.py",
 }
 
 
