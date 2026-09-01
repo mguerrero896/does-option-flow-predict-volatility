@@ -351,6 +351,12 @@ def test_watchdog_trigger_is_daily_not_once() -> None:
     assert "$trigger = New-ScheduledTaskTrigger -Once" not in source
 
 
+def test_collector_runs_through_battery_power() -> None:
+    source = REGISTER_SCRIPT.read_text(encoding="utf-8")
+    assert "-AllowStartIfOnBatteries" in source
+    assert "-DontStopIfGoingOnBatteries" in source
+
+
 def test_cooperative_cancellation_raises_keyboard_interrupt() -> None:
     """Signals must unwind through Python so the terminal summary reaches disk."""
     import signal as signal_module

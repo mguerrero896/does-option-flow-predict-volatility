@@ -53,7 +53,8 @@ function Register-MDSTask {
     # returns instead of losing the rest of the session.
     $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
         -ExecutionTimeLimit (New-TimeSpan -Hours 8) -MultipleInstances IgnoreNew `
-        -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 5)
+        -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 5) `
+        -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
     Register-ScheduledTask -TaskName $Name -Action $action -Trigger $trigger -Settings $settings -Force | Out-Null
     Write-Host "registered $Name"
 }

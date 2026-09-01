@@ -23,6 +23,7 @@ edge or capital claim is eligible.
 | --- | --- |
 | [`docs/DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) | Onboarding, source-of-truth hierarchy, safe commands and change workflow. |
 | [`docs/architecture.md`](architecture.md) | Current code, evidence, canonical-state and live-operation architecture. |
+| [`docs/operational_control_board_proposal.md`](operational_control_board_proposal.md) | Four-section proposal that projects existing custody, task-health, experiment and claim authorities without a new state store. |
 | [`scripts/README.md`](../scripts/README.md) | Lifecycle and purpose of every top-level executable script. |
 | [`reports/INDEX.md`](../reports/INDEX.md) | Current submission source and historical report packages. |
 | [`supabase/README.md`](../supabase/README.md) | Reproducible database structure, migration order and access boundaries. |

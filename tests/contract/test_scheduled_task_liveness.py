@@ -54,6 +54,8 @@ def _task(name: str, **overrides: Any) -> dict[str, Any]:
         "WorkingDirectory": str(ROOT),
         "RestartCount": 3,
         "RestartInterval": "PT5M",
+        "DisallowStartIfOnBatteries": False,
+        "StopIfGoingOnBatteries": False,
     }
     task.update(overrides)
     return task
@@ -178,6 +180,14 @@ def test_phase9_requires_restart_after_transient_failure() -> None:
     module = _load()
     no_retry = _task("MDS650_Phase9_Collector", RestartCount=0, RestartInterval="")
     assert any("restart policy" in reason for reason in module.reasons([no_retry], expected=[]))
+
+
+def test_battery_stop_policy_is_reported() -> None:
+    module = _load()
+    unsafe = _task("MDS650_UW_LatencyCollector", StopIfGoingOnBatteries=True)
+    assert module.reasons([unsafe], expected=[]) == [
+        "MDS650_UW_LatencyCollector can skip or stop collection while on battery"
+    ]
 
 
 def test_phase9_registration_has_three_five_minute_retries() -> None:
