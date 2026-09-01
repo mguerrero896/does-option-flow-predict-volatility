@@ -65,6 +65,12 @@ def _canonical_sha256(document: Mapping[str, object]) -> str:
     return "sha256:" + hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _read_object(path: Path) -> dict[str, object]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    assert isinstance(value, dict)
+    return value
+
+
 def test_existing_v24_panel_is_not_admissible_for_evaluation() -> None:
     """A target-blind panel cannot bypass the current blocked B1Q ledger."""
     decision = _module().build_target_blind_panel_b1q_eligibility_v1(
@@ -165,3 +171,140 @@ def test_malformed_decision_hash_fails_closed() -> None:
     """A decision without a valid semantic hash cannot be accepted."""
     with pytest.raises(ValueError, match="B1Q_PANEL_ELIGIBILITY_SELF_HASH_INVALID"):
         _module().validate_target_blind_panel_b1q_eligibility_v1({})
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("manifest_hash", "B1Q_PANEL_ELIGIBILITY_MANIFEST_INVALID"),
+        ("manifest_policy", "B1Q_PANEL_ELIGIBILITY_MANIFEST_INVALID"),
+        ("coverage_hash", "B1Q_PANEL_ELIGIBILITY_SOURCE_COVERAGE_INVALID"),
+        ("coverage_components", "B1Q_PANEL_ELIGIBILITY_SOURCE_COVERAGE_INVALID"),
+        ("coverage_b1q", "B1Q_PANEL_ELIGIBILITY_SOURCE_COVERAGE_INVALID"),
+        ("coverage_target_binding", "B1Q_PANEL_ELIGIBILITY_SOURCE_COVERAGE_INVALID"),
+    ],
+)
+def test_registered_source_contracts_reject_rehashed_policy_drift(
+    monkeypatch: pytest.MonkeyPatch, case: str, error: str
+) -> None:
+    """A valid self-hash cannot authorize a changed target-blind source policy."""
+    module = importlib.import_module(MODULE_NAME)
+    if case.startswith("manifest"):
+        document = _read_object(MANIFEST)
+        if case == "manifest_hash":
+            document["manifest_sha256"] = "0" * 64
+        else:
+            document["status"] = "PASS"
+            unsigned = {
+                key: value for key, value in document.items() if key != "manifest_sha256"
+            }
+            digest = _canonical_sha256(unsigned)[7:]
+            document["manifest_sha256"] = digest
+            monkeypatch.setattr(module, "_MANIFEST_SELF_HASH", digest)
+        with pytest.raises(ValueError, match=error):
+            module._validate_manifest(document)
+        return
+
+    document = _read_object(SOURCE_COVERAGE)
+    if case == "coverage_hash":
+        document["ledger_sha256"] = "0" * 64
+    else:
+        components = document["components"]
+        assert isinstance(components, dict)
+        if case == "coverage_components":
+            document["components"] = []
+        elif case == "coverage_b1q":
+            b1q = components["B1Q"]
+            assert isinstance(b1q, dict)
+            b1q["status"] = "PASS"
+        else:
+            document["target_binding_permitted"] = True
+        unsigned = {key: value for key, value in document.items() if key != "ledger_sha256"}
+        digest = _canonical_sha256(unsigned)[7:]
+        document["ledger_sha256"] = digest
+        monkeypatch.setattr(module, "_SOURCE_COVERAGE_SELF_HASH", digest)
+    with pytest.raises(ValueError, match=error):
+        module._validate_source_coverage(document)
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("hash", "B1Q_PANEL_ELIGIBILITY_SELF_HASH_INVALID"),
+        ("unsafe", "B1Q_PANEL_ELIGIBILITY_UNSAFE_CONTENT"),
+    ],
+)
+def test_decision_validator_rejects_hash_and_unsafe_content(case: str, error: str) -> None:
+    """A decision cannot be altered or made unsafe even when an attacker rehashes it."""
+    module = _module()
+    decision = module.build_target_blind_panel_b1q_eligibility_v1(
+        panel_manifest_path=MANIFEST,
+        source_coverage_path=SOURCE_COVERAGE,
+    )
+    if case == "hash":
+        decision["reason_codes"] = []
+    else:
+        decision["note"] = "owner@example.com"
+        decision["semantic_self_hash"] = _canonical_sha256(
+            {key: value for key, value in decision.items() if key != "semantic_self_hash"}
+        )
+    with pytest.raises(ValueError, match=error):
+        module.validate_target_blind_panel_b1q_eligibility_v1(decision)
+
+
+@pytest.mark.parametrize("case", ["non_object", "malformed", "instance"])
+def test_schema_validation_fails_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str
+) -> None:
+    """A malformed schema or schema-invalid decision never degrades to a pass."""
+    module = importlib.import_module(MODULE_NAME)
+    decision: Mapping[str, object] = module.build_target_blind_panel_b1q_eligibility_v1(
+        panel_manifest_path=MANIFEST,
+        source_coverage_path=SOURCE_COVERAGE,
+    )
+    if case == "instance":
+        decision = {}
+    else:
+        schema = tmp_path / "schema.json"
+        schema.write_text("[]" if case == "non_object" else "{", encoding="utf-8")
+        monkeypatch.setattr(module, "_SCHEMA_PATH", schema)
+    with pytest.raises(ValueError, match="B1Q_PANEL_ELIGIBILITY_SCHEMA_INVALID"):
+        module._validate_schema(decision)
+
+
+@pytest.mark.parametrize(
+    ("mode", "error"),
+    [
+        ("race", "B1Q_PANEL_ELIGIBILITY_OUTPUT_CONFLICT"),
+        ("io", "B1Q_PANEL_ELIGIBILITY_OUTPUT_UNWRITABLE"),
+    ],
+)
+def test_writer_fails_closed_on_race_or_io_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mode: str, error: str
+) -> None:
+    """Atomic creation cannot overwrite a racing writer or hide an I/O failure."""
+    module = importlib.import_module(MODULE_NAME)
+    output = tmp_path / "eligibility.json"
+
+    def fail_link(source: Path, target: Path) -> None:
+        if mode == "race":
+            Path(target).write_bytes(b"different")
+            raise FileExistsError
+        raise OSError("synthetic write failure")
+
+    monkeypatch.setattr(module.os, "link", fail_link)
+    with pytest.raises(ValueError, match=error):
+        module.write_target_blind_panel_b1q_eligibility_v1(
+            panel_manifest_path=MANIFEST,
+            source_coverage_path=SOURCE_COVERAGE,
+            output_path=output,
+        )
+
+
+def test_validator_dependency_absence_fails_closed(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Missing jsonschema capability is an explicit startup failure."""
+    module = importlib.import_module(MODULE_NAME)
+    monkeypatch.setattr(module, "import_module", lambda _name: object())
+
+    with pytest.raises(RuntimeError, match="B1Q_PANEL_ELIGIBILITY_JSONSCHEMA_UNAVAILABLE"):
+        module._load_validator()

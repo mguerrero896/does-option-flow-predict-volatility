@@ -13,6 +13,8 @@ from typing import Protocol, cast
 
 import pytest
 
+import mds650.target_blind_comparison_contract_v1 as comparison
+
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 _SCRIPT_PATH = _REPOSITORY_ROOT / "scripts" / "seal_target_blind_comparison_contract_v1.py"
 _PARENT_PATH = (
@@ -314,3 +316,103 @@ def test_contract_rejects_self_hashed_method_or_b1a_changes(
             output_dir=tmp_path / "b1a-output",
             source_commit=_SOURCE_COMMIT,
         )
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("source_commit", "COMPARISON_CONTRACT_V1_SOURCE_COMMIT_INVALID"),
+        ("missing_parent", "COMPARISON_CONTRACT_V1_PARENT_UNREADABLE"),
+        ("non_object_parent", "COMPARISON_CONTRACT_V1_PARENT_UNREADABLE"),
+        ("parent_hash", "COMPARISON_CONTRACT_V1_PARENT_HASH_INVALID"),
+        ("parent_commit", "COMPARISON_CONTRACT_V1_PARENT_COMMIT_INVALID"),
+        ("metrics_mapping", "COMPARISON_CONTRACT_V1_PARENT_METHOD_INVALID"),
+        ("information_keys", "COMPARISON_CONTRACT_V1_INFORMATION_SETS_INVALID"),
+        ("information_list", "COMPARISON_CONTRACT_V1_INFORMATION_SETS_INVALID"),
+        ("frozen_b2", "COMPARISON_CONTRACT_V1_B2_FEATURES_INVALID"),
+    ],
+)
+def test_contract_rejects_malformed_or_rehashed_parent_drift(
+    sealer: _ComparisonContractSealer, tmp_path: Path, case: str, error: str
+) -> None:
+    """Self-consistency cannot authorize malformed metadata or a changed frozen design."""
+    output = tmp_path / "output"
+    if case == "source_commit":
+        parent_path = _copy_parent(tmp_path / "source")
+        source_commit = "not-a-commit"
+    elif case == "missing_parent":
+        parent_path = tmp_path / "missing.json"
+        source_commit = _SOURCE_COMMIT
+    else:
+        parent_path = _copy_parent(tmp_path / "source")
+        source_commit = _SOURCE_COMMIT
+        if case == "non_object_parent":
+            parent_path.write_text("[]", encoding="utf-8")
+        else:
+            parent = _read_json(parent_path)
+            if case == "parent_hash":
+                parent["preregistration_sha256"] = "0" * 64
+            elif case == "parent_commit":
+                parent["source_commit"] = ""
+            elif case == "metrics_mapping":
+                parent["metrics"] = []
+            else:
+                information_sets = parent["information_sets"]
+                assert isinstance(information_sets, dict)
+                if case == "information_keys":
+                    information_sets.pop("B1c_addition")
+                elif case == "information_list":
+                    information_sets["B1b_addition"] = ["duplicate", "duplicate"]
+                else:
+                    b2 = information_sets["B2_addition"]
+                    assert isinstance(b2, list)
+                    b2[0] = "invented_b2_feature"
+            if case != "parent_hash":
+                _replace_parent_self_hash(parent)
+            parent_path.write_text(
+                json.dumps(parent, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+            )
+
+    with pytest.raises(ValueError, match=error):
+        sealer.seal_target_blind_comparison_contract(
+            preregistration_v4_path=parent_path,
+            output_dir=output,
+            source_commit=source_commit,
+        )
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("output", "COMPARISON_CONTRACT_V1_OUTPUT_SCHEMA_INVALID"),
+        ("runtime", "COMPARISON_CONTRACT_V1_SCHEMA_INVALID"),
+        ("unreadable", "COMPARISON_CONTRACT_V1_SCHEMA_UNREADABLE"),
+    ],
+)
+def test_contract_schema_boundary_fails_closed(
+    sealer: _ComparisonContractSealer,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    case: str,
+    error: str,
+) -> None:
+    """Schema-invalid output, validator failure and absent schema all block sealing."""
+    if case == "runtime":
+
+        class BrokenValidator:
+            def check_schema(self, _schema: Mapping[str, object]) -> None:
+                raise TypeError("synthetic validator failure")
+
+        monkeypatch.setattr(comparison, "_DRAFT202012_VALIDATOR", BrokenValidator())
+    elif case == "unreadable":
+        monkeypatch.setattr(comparison, "_SCHEMA_PATH", tmp_path / "missing-schema.json")
+
+    with pytest.raises(ValueError, match=error):
+        if case == "unreadable":
+            _seal(
+                sealer,
+                source_directory=tmp_path / "source",
+                output_directory=tmp_path / "output",
+            )
+        else:
+            comparison._validate_output_schema({})

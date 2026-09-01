@@ -99,3 +99,96 @@ def test_unregistered_timing_variant_fails_closed() -> None:
         apply_fmp_delay(frame, delay_minutes=3)
     with pytest.raises(ValueError, match="B2_DELAY_NOT_PREREGISTERED"):
         apply_b2_delay(frame, delay_seconds=30)
+
+
+@pytest.mark.parametrize(
+    ("feature", "delay_seconds", "error"),
+    [
+        ("not_registered", 60, "B2_FEATURE_NOT_PREREGISTERED:not_registered"),
+        (B2_FEATURE_NAMES[0], 61, "B2_DELAY_NOT_PREREGISTERED:61"),
+    ],
+)
+def test_sensitivity_column_rejects_unregistered_contract_values(
+    feature: str, delay_seconds: int, error: str
+) -> None:
+    """Neither an invented feature nor an invented delay may enter a sidecar name."""
+    with pytest.raises(ValueError, match=error):
+        b2_sensitivity_column(feature, delay_seconds)
+
+
+@pytest.mark.parametrize(
+    ("values", "error"),
+    [
+        (None, "STABILITY_VOLATILITY_SOURCE_MISSING"),
+        ([], "STABILITY_VOLATILITY_SOURCE_INVALID"),
+        ([1.0, None], "STABILITY_VOLATILITY_SOURCE_INVALID"),
+        ([1.0, float("inf")], "STABILITY_VOLATILITY_SOURCE_INVALID"),
+        ([1.0, 1.0, 1.0], "STABILITY_VOLATILITY_CUTPOINTS_DEGENERATE"),
+    ],
+)
+def test_volatility_cutpoints_reject_invalid_b0_sources(
+    values: list[float | None] | None, error: str
+) -> None:
+    """A missing, empty, incomplete, non-finite or degenerate B0 source fails closed."""
+    frame = (
+        pl.DataFrame({"other": [1.0]})
+        if values is None
+        else pl.DataFrame({"b0_rv_30m_lag": values}, schema={"b0_rv_30m_lag": pl.Float64})
+    )
+    with pytest.raises(ValueError, match=error):
+        development_volatility_cutpoints(frame)
+
+
+@pytest.mark.parametrize(
+    ("frame", "lower", "upper", "error"),
+    [
+        (
+            pl.DataFrame({"b0_session_minute": [30]}),
+            1.0,
+            2.0,
+            "STABILITY_STRATA_COLUMNS_MISSING:b0_rv_30m_lag",
+        ),
+        (
+            pl.DataFrame({"b0_session_minute": [30], "b0_rv_30m_lag": [1.0]}),
+            2.0,
+            2.0,
+            "STABILITY_VOLATILITY_CUTPOINTS_DEGENERATE",
+        ),
+    ],
+)
+def test_stability_strata_reject_missing_sources_and_degenerate_bounds(
+    frame: pl.DataFrame, lower: float, upper: float, error: str
+) -> None:
+    """Strata cannot be computed from an incomplete or degenerate frozen design."""
+    with pytest.raises(ValueError, match=error):
+        add_stability_strata(frame, lower=lower, upper=upper)
+
+
+def test_primary_registered_delays_preserve_every_input_value() -> None:
+    """The primary timing convention must not alter columns or metadata-only rows."""
+    frame = pl.DataFrame({"origin_id": ["one"]})
+
+    fmp = apply_fmp_delay(frame, delay_minutes=1)
+    b2 = apply_b2_delay(frame, delay_seconds=60)
+
+    assert fmp.columns == b2.columns == frame.columns
+    assert fmp.equals(frame)
+    assert b2.equals(frame)
+
+
+@pytest.mark.parametrize(
+    ("kind", "error"),
+    [
+        ("FMP", "FMP_PLUS2_COLUMNS_MISSING"),
+        ("B2", "B2_SENSITIVITY_COLUMNS_MISSING"),
+    ],
+)
+def test_secondary_delays_require_every_registered_sidecar(kind: str, error: str) -> None:
+    """A partial timing sidecar cannot silently fall back to primary columns."""
+    frame = pl.DataFrame({"origin_id": ["one"]})
+
+    with pytest.raises(ValueError, match=error):
+        if kind == "FMP":
+            apply_fmp_delay(frame, delay_minutes=2)
+        else:
+            apply_b2_delay(frame, delay_seconds=120)

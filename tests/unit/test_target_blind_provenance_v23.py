@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+import mds650.target_blind_provenance_v23 as provenance
 from mds650.target_blind_provenance_v23 import validate_target_blind_provenance_v23
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -90,6 +91,117 @@ def test_provenance_preflight_rejects_gate_massive_hash_drift(tmp_path: Path) ->
             reconciliation_gate_path=sources["reconciliation_gate_path"],
             reconciliation_gate_schema_path=GATE_SCHEMA,
         )
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("missing", "TARGET_BLIND_V23_ORIGINS_MISSING"),
+        ("invalid_json", "TARGET_BLIND_V23_MASSIVE_RESELECTION_INVALID_JSON"),
+        ("non_object", "TARGET_BLIND_V23_MASSIVE_RESELECTION_NOT_OBJECT"),
+        ("schema", "TARGET_BLIND_V23_AVAILABILITY_MANIFEST_SCHEMA_VIOLATION"),
+        ("origin_hash", "TARGET_BLIND_V23_ORIGIN_HASH_MISMATCH"),
+    ],
+)
+def test_provenance_boundary_rejects_missing_or_malformed_evidence(
+    tmp_path: Path, case: str, error: str
+) -> None:
+    """Missing files, malformed JSON, schema drift and origin drift all fail closed."""
+    sources = _write_valid_sources(tmp_path)
+    if case == "missing":
+        sources["origins_path"].unlink()
+    elif case == "invalid_json":
+        sources["massive_reselection_path"].write_text("{", encoding="utf-8")
+    elif case == "non_object":
+        sources["massive_reselection_path"].write_text("[]", encoding="utf-8")
+    else:
+        manifest = _read_json(sources["availability_manifest_path"])
+        if case == "schema":
+            manifest.pop("schema_version")
+        else:
+            manifest["expected_origins_sha256"] = "f" * 64
+        _write_json(sources["availability_manifest_path"], manifest)
+
+    with pytest.raises((FileNotFoundError, ValueError), match=error):
+        validate_target_blind_provenance_v23(
+            availability_manifest_path=sources["availability_manifest_path"],
+            availability_manifest_schema_path=AVAILABILITY_SCHEMA,
+            availability_sidecar_path=sources["availability_sidecar_path"],
+            massive_reselection_path=sources["massive_reselection_path"],
+            origins_path=sources["origins_path"],
+            reconciliation_gate_path=sources["reconciliation_gate_path"],
+            reconciliation_gate_schema_path=GATE_SCHEMA,
+        )
+
+
+@pytest.mark.parametrize(
+    ("case", "error"),
+    [
+        ("massive_hash_type", "TARGET_BLIND_V23_MASSIVE_SELF_HASH_INVALID"),
+        ("massive_hash", "TARGET_BLIND_V23_MASSIVE_SELF_HASH_MISMATCH"),
+        ("massive_contract", "TARGET_BLIND_V23_MASSIVE_CONTRACT_INVALID"),
+        ("gate_hash_type", "TARGET_BLIND_V23_GATE_SELF_HASH_INVALID"),
+        ("gate_hash", "TARGET_BLIND_V23_GATE_SELF_HASH_MISMATCH"),
+        ("gate_contract", "TARGET_BLIND_V23_GATE_CONTRACT_INVALID"),
+        ("gate_evidence", "TARGET_BLIND_V23_GATE_EVIDENCE_INVALID"),
+        ("gate_b2_binding", "TARGET_BLIND_V23_GATE_B2_MANIFEST_HASH_MISMATCH"),
+    ],
+)
+def test_provider_contract_records_reject_hash_policy_and_binding_drift(
+    tmp_path: Path, case: str, error: str
+) -> None:
+    """Defense-in-depth validators reject self-consistent but unauthorized records."""
+    sources = _write_valid_sources(tmp_path)
+    massive = _read_json(sources["massive_reselection_path"])
+    gate = _read_json(sources["reconciliation_gate_path"])
+    hashes = {
+        "massive_reselection_recomputed_v21_sha256": _sha256_file(
+            sources["massive_reselection_path"]
+        ),
+        "b2_availability_manifest_v22_sha256": _sha256_file(
+            sources["availability_manifest_path"]
+        ),
+    }
+
+    if case.startswith("massive"):
+        if case == "massive_hash_type":
+            massive["recomputed_result_sha256"] = None
+        elif case == "massive_hash":
+            massive["recomputed_result_sha256"] = "f" * 64
+        else:
+            massive["status"] = "FAIL"
+            unsigned = {
+                key: value
+                for key, value in massive.items()
+                if key != "recomputed_result_sha256"
+            }
+            massive["recomputed_result_sha256"] = _canonical_sha256(unsigned)
+        with pytest.raises(ValueError, match=error):
+            provenance._validate_massive_reselection(massive)
+        return
+
+    if case == "gate_hash_type":
+        gate["aggregation_sha256"] = None
+    elif case == "gate_hash":
+        gate["aggregation_sha256"] = "f" * 64
+    elif case == "gate_contract":
+        gate["status"] = "PASS"
+    elif case == "gate_evidence":
+        gate["source_evidence"] = {}
+    else:
+        evidence = gate["source_evidence"]
+        assert isinstance(evidence, list)
+        binding = next(
+            item
+            for item in evidence
+            if isinstance(item, dict) and item.get("role") == "UW_AVAILABILITY_MANIFEST_V22"
+        )
+        binding["file_sha256"] = "f" * 64
+    if case not in {"gate_hash_type", "gate_hash"}:
+        unsigned = {key: value for key, value in gate.items() if key != "aggregation_sha256"}
+        gate["aggregation_sha256"] = _canonical_sha256(unsigned)
+    with pytest.raises(ValueError, match=error):
+        provenance._validate_reconciliation_gate(gate, hashes)
 
 
 def _write_valid_sources(tmp_path: Path) -> dict[str, Path]:
