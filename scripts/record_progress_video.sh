@@ -38,6 +38,7 @@ STATE_DIR=$(mktemp -d "${TMPDIR:-/tmp}/mds650-video.XXXXXX")
 : >"$GATE_LOG"
 
 T0_MS=0
+CODE_ZOOM_ACTIVE=0
 now_ms() { date +%s%3N; }
 
 mark() {
@@ -61,10 +62,11 @@ type_command() {
 run() {
   local shown=$1
   shift
-  mark CMD "$shown"
+  printf '\033[2J\033[H'
   type_command "$shown"
   "$@"
-  sleep 4
+  mark CMD "$shown"
+  sleep 6
 }
 
 run_shell() {
@@ -77,42 +79,119 @@ expect_fail() {
   local needle=$1 shown=$2 rc log
   shift 2
   log="$STATE_DIR/expected-$((++FAIL_NO)).log"
-  mark CMD "$shown"
+  printf '\033[2J\033[H'
   type_command "$shown"
   set +e
-  "$@" 2>&1 | tee "$log"
-  rc=${PIPESTATUS[0]}
+  "$@" >"$log" 2>&1
+  rc=$?
   set -e
   ((rc != 0)) || die "EXPECTED_FAILURE_DID_NOT_FAIL:$shown"
   grep -Fq -- "$needle" "$log" || die "EXPECTED_FAILURE_WRONG_REASON:$needle"
+  printf '\033[2J\033[H'
+  printf '\033[1;33m# DELIBERATELY INJECTED FAULT\033[0m\n\n'
+  printf 'COMMAND: %s\n' "$shown"
+  printf 'EXPECTED_REASON_MATCHED: %s\n' "$needle"
   printf '\033[1;33mEXPECTED_FAILURE_VERIFIED (exit %d)\033[0m\n' "$rc"
-  sleep 4
+  mark CMD "$shown"
+  sleep 6
 }
 
 act() {
   local number=$1 title=$2
   printf '\033[2J\033[H'
-  mark ACT "$number | $title"
   printf '\n\033[1;33m════════════════════════════════════════════════════════════\n'
   printf '  ACT %s · %s\n' "$number" "$title"
   printf '════════════════════════════════════════════════════════════\033[0m\n\n'
-  sleep 3
+  mark ACT "$number | $title"
+  sleep 4
 }
 
 say() {
-  mark SAY "$1"
   printf '\n\033[1;36m# %s\033[0m\n' "$1"
-  sleep 2
+  mark SAY "$1"
+  sleep 4
+}
+
+terminal_code_zoom_on() {
+  pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.SendKeys]::SendWait("^0")
+    1..6 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("^{ADD}") }
+  '
+  CODE_ZOOM_ACTIVE=1
+}
+
+terminal_code_zoom_off() {
+  ((CODE_ZOOM_ACTIVE)) || return 0
+  pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+    Add-Type -AssemblyName System.Windows.Forms
+    [System.Windows.Forms.SendKeys]::SendWait("^0")
+  '
+  CODE_ZOOM_ACTIVE=0
+}
+
+symbol_bounds() {
+  local file=$1 symbol=$2 bounds
+  bounds=$(uv run python -c '
+import ast
+import sys
+from pathlib import Path
+
+tree = ast.parse(Path(sys.argv[1]).read_text(encoding="utf-8"))
+matches = [
+    node
+    for node in tree.body
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    and node.name == sys.argv[2]
+]
+if len(matches) != 1:
+    raise SystemExit(2)
+node = matches[0]
+print(f"{node.lineno}:{node.end_lineno}")
+' "$file" "$symbol") || die "FUNCTION_NOT_FOUND:$symbol"
+  printf '%s\n' "$bounds"
+}
+
+show_code() {
+  local file=$1 start=$2 end=$3 label=$4 page_start page_end page pages
+  [[ -f $file ]] || die "CODE_FILE_NOT_FOUND:$file"
+  [[ $start =~ ^[0-9]+$ && $end =~ ^[0-9]+$ && $start -le $end ]] ||
+    die "CODE_RANGE_INVALID:$file:$start:$end"
+  pages=$(( (end - start + 18) / 18 ))
+  page=0
+  terminal_code_zoom_on
+  for ((page_start = start; page_start <= end; page_start += 18)); do
+    page=$((page + 1))
+    page_end=$((page_start + 17))
+    ((page_end <= end)) || page_end=$end
+    printf '\033[2J\033[H'
+    printf '\033[1;35m# CODE · %s · %s:%d-%d · page %d/%d\033[0m\n\n' \
+      "$label" "$file" "$page_start" "$page_end" "$page" "$pages"
+    type_command "bat --line-range ${page_start}:${page_end} $file"
+    bat --color=always --style=numbers --paging=never \
+      --line-range "${page_start}:${page_end}" "$file"
+    mark CODE "$label | $file:$page_start-$page_end | page $page/$pages"
+    sleep 5
+  done
+  terminal_code_zoom_off
 }
 
 show_def() {
-  local file=$1 symbol=$2 span=${3:-24} line end
-  line=$(rg -n -m1 "^def ${symbol}\\b" "$file" | cut -d: -f1)
-  [[ $line =~ ^[0-9]+$ ]] || die "FUNCTION_NOT_FOUND:$symbol"
-  end=$((line + span))
-  run "bat --style=numbers --paging=never --line-range ${line}:${end} $file" \
-    bat --color=always --style=numbers --paging=never \
-    --line-range "${line}:${end}" "$file"
+  local file=$1 symbol=$2 bounds start end
+  bounds=$(symbol_bounds "$file" "$symbol")
+  IFS=: read -r start end <<<"$bounds"
+  show_code "$file" "$start" "$end" "complete function $symbol"
+}
+
+show_range() {
+  show_code "$1" "$2" "$3" "critical excerpt: $4"
+}
+
+verify_sha256() {
+  local expected=$1 file=$2 actual
+  actual=$(sha256sum "$file" | awk '{print $1}')
+  [[ $actual == "$expected" ]] || die "SHA256_MISMATCH:$file"
+  printf 'SHA256_MATCH  %s  %s\n' "$actual" "$file"
 }
 
 close_edge_profile() {
@@ -265,8 +344,9 @@ public static class VideoEdgeWindow {
       }
     '
   [[ -s $(cygpath -au "$marker") ]] || die "EDGE_FIGURE_WINDOW_NOT_FOUND"
+  sleep 8
   mark VISUAL "$file"
-  sleep 9
+  sleep 10
   close_edge_profile "$profile"
   ACTIVE_EDGE_PROFILE=''
   sleep 2
@@ -390,6 +470,7 @@ cleanup() {
     close_edge_profile "$ACTIVE_EDGE_PROFILE" || cleanup_rc=94
     ACTIVE_EDGE_PROFILE=''
   fi
+  terminal_code_zoom_off || cleanup_rc=95
   ((GATE_TAB_STARTED)) && : >"$GATE_RELEASE"
   stop_recorder || { ((cleanup_rc != 0)) || cleanup_rc=91; }
   if ((cleanup_rc == 0 && NORMAL_EXIT)); then
@@ -494,6 +575,7 @@ show_gate_result() {
   done
 
   wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 1
+  sleep 5
   mark VISUAL "completed seven-gate summary in the evidence terminal"
   sleep 12
   wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 0
@@ -578,56 +660,63 @@ start_recorder
 
 act 1 "THE QUESTION"
 say "A forecast question, stated before any result"
-run "bat --style=numbers --paging=never --line-range 1:37 README.md" \
-  bat --color=always --style=numbers --paging=never --line-range 1:37 README.md
+show_range README.md 1 37 "registered question, boundary, and evidence contract"
 show_svg docs/figures/evidence.svg "Twelve contrasts against their registered thresholds"
 
 act 2 "THE MACHINE"
 say "The full local evidence gate starts now in a second terminal"
 start_gate_tab
-say "Three provider clients, not a hand-curated CSV"
-run "wc -l src/mds650/providers/*.py" wc -l src/mds650/providers/*.py
+say "FMP normalizes observed one-minute bars and rejects malformed rows"
+show_def src/mds650/providers/fmp.py parse_minute_payload
+say "Massive preserves directed bid and ask quotes, including empty windows"
+show_def src/mds650/providers/massive.py parse_directed_quotes
+say "Unusual Whales parses aggregate alerts without inventing trade intent"
+show_def src/mds650/providers/unusual_whales.py parse_flow_alert_payload
 
 say "The information clock is an engineered object"
-run "wc -l src/mds650/provider_timing_v21.py" wc -l src/mds650/provider_timing_v21.py
-run "rg -c '^def ' src/mds650/provider_timing_v21.py" \
-  rg -c '^def ' src/mds650/provider_timing_v21.py
-show_def src/mds650/provider_timing_v21.py audit_forecast_origin_session_bounds 22
-show_def src/mds650/provider_timing_v21.py reselect_last_quote_asof 26
-show_def src/mds650/provider_timing_v21.py audit_massive_reselection 24
-show_def src/mds650/provider_timing_v21.py audit_b2_canonical_traceability 22
+say "This function rejects unresolved timestamps and forecast origins outside their XNYS session"
+show_def src/mds650/provider_timing_v21.py audit_forecast_origin_session_bounds
+say "This wrapper selects the final quote in the supplied cache at or before the cutoff"
+show_def src/mds650/provider_timing_v21.py reselect_last_quote_asof
+say "These helpers validate, deduplicate, sort, and bisect the supplied quote cache"
+show_def src/mds650/provider_timing_v21.py _prepare_quotes
+show_def src/mds650/provider_timing_v21.py _select_prepared_quote
+say "This audit reports provider identity, reselection coverage, and monotonicity as separate facts"
+show_def src/mds650/provider_timing_v21.py audit_massive_reselection
+say "This audit classifies B2 coding and preserves the source incident and file hash"
+show_def src/mds650/provider_timing_v21.py audit_b2_canonical_traceability
 
 say "One canonical thirteen-step pipeline"
-run "bat --style=numbers --paging=never --line-range 54:121 src/mds650/rp2/run_manifest.py" \
-  bat --color=always --style=numbers --paging=never --line-range 54:121 \
-  src/mds650/rp2/run_manifest.py
-run "bat --style=numbers --paging=never --line-range 297:339 scripts/run_rp2_v3_pipeline.py" \
-  bat --color=always --style=numbers --paging=never --line-range 297:339 \
-  scripts/run_rp2_v3_pipeline.py
-run "bat --style=numbers --paging=never --line-range 935:950 scripts/run_rp2_v3_pipeline.py" \
-  bat --color=always --style=numbers --paging=never --line-range 935:950 \
-  scripts/run_rp2_v3_pipeline.py
-run "bat --style=numbers --paging=never --line-range 1344:1358 scripts/run_rp2_v3_pipeline.py" \
-  bat --color=always --style=numbers --paging=never --line-range 1344:1358 \
-  scripts/run_rp2_v3_pipeline.py
+show_range src/mds650/rp2/run_manifest.py 54 121 \
+  "thirteen declared steps and their required outputs"
+show_range scripts/run_rp2_v3_pipeline.py 290 339 \
+  "step execution, exit checks, and output digests"
+show_range scripts/run_rp2_v3_pipeline.py 907 953 \
+  "input and registered-artifact revalidation"
+show_range scripts/run_rp2_v3_pipeline.py 1336 1399 \
+  "verify-before-manifest closeout"
+show_range src/mds650/rp2/run_manifest.py 333 388 \
+  "stable digest rules for JSON and byte-preserved formats"
 
 say "Econometrics, power, and dependent-data inference"
-run "wc -l src/mds650/rp2/inference.py src/mds650/phase6_evaluation.py" \
-  wc -l src/mds650/rp2/inference.py src/mds650/phase6_evaluation.py
 run "rg -n '^def (session_block_bootstrap|wild_cluster_bootstrap|stationary_bootstrap_indices|newey_west_variance|newey_west_p_value|giacomini_white|session_giacomini_white|hansen_spa|minimum_detectable_effect|minimum_detectable_effect_from_long_run_variance|clark_west_terms|clustered_mean_test|session_contrast)' src/mds650/rp2/inference.py" \
   rg -n '^def (session_block_bootstrap|wild_cluster_bootstrap|stationary_bootstrap_indices|newey_west_variance|newey_west_p_value|giacomini_white|session_giacomini_white|hansen_spa|minimum_detectable_effect|minimum_detectable_effect_from_long_run_variance|clark_west_terms|clustered_mean_test|session_contrast)' \
   src/mds650/rp2/inference.py
-show_def src/mds650/rp2/inference.py minimum_detectable_effect_from_long_run_variance 54
+say "This complete function converts long-run variance and the prospective session count into the MDE"
+show_def src/mds650/rp2/inference.py minimum_detectable_effect_from_long_run_variance
 
-say "A published number traced through a closed hash chain"
+say "A canonical recorded estimate traced through checked SHA-256 links"
 run "jq '{run_id:.scientific_bundle.run_id, manifest:.scientific_bundle.manifest}' data/CANONICAL_STATE.json" \
   jq '{run_id:.scientific_bundle.run_id, manifest:.scientific_bundle.manifest}' \
   data/CANONICAL_STATE.json
-run "sha256sum $MANIFEST" sha256sum "$MANIFEST"
+run "verify canonical manifest SHA-256" verify_sha256 \
+  "$(jq -er '.scientific_bundle.manifest.sha256' data/CANONICAL_STATE.json)" "$MANIFEST"
 run "jq '.steps[] | select(.name == \"run-incremental-inference\") | {name, artifacts, content}' $MANIFEST" \
   jq '.steps[] | select(.name == "run-incremental-inference") | {name, artifacts, content}' \
   "$MANIFEST"
-run "sha256sum $INFERENCE" sha256sum "$INFERENCE"
+run "verify manifest-recorded inference SHA-256" verify_sha256 \
+  "$(jq -er '.steps[] | select(.name == "run-incremental-inference") | .artifacts["rp2_block10_inference/inference.json"]' "$MANIFEST")" \
+  "$INFERENCE"
 run "jq '.D.nested_tests.gamma_glm.b1_over_b0 | {estimate, ci_low, ci_high, p_value, mde}' $INFERENCE" \
   jq '.D.nested_tests.gamma_glm.b1_over_b0 | {estimate, ci_low, ci_high, p_value, mde}' \
   "$INFERENCE"
@@ -649,7 +738,7 @@ say "E: the complete local evidence gate"
 show_gate_result
 show_clean
 
-say "D: one frozen result, three independent defenses"
+say "D: one frozen result, three enforcement layers"
 run "pwsh: (Get-Item $FROZEN).IsReadOnly" \
   pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
   "(Get-Item -LiteralPath '$(cygpath -aw "$FROZEN")').IsReadOnly"
@@ -660,9 +749,8 @@ expect_fail "PermissionError" \
   "$FROZEN"
 arm 0
 clear_attrs "$FROZEN"
-run "bat --style=numbers --paging=never --line-range 180:199 src/mds650/storage.py" \
-  bat --color=always --style=numbers --paging=never --line-range 180:199 \
-  src/mds650/storage.py
+show_range src/mds650/storage.py 178 199 \
+  "shared immutable-file guard"
 expect_fail "FROZEN_ARTIFACT_WRITE_REJECTED" \
   "uv run python -c '<writer guard against frozen result>'" \
   uv run python -c \
@@ -747,7 +835,7 @@ run "rg -c '^[0-9]+\\. \\*\\*' docs/methodology_decisions.md" \
   rg -c '^[0-9]+\. \*\*' docs/methodology_decisions.md
 run "rg -c '\\S' scripts/_gated_exclude_list.txt" \
   rg -c '\S' scripts/_gated_exclude_list.txt
-run "git log --oneline -20" git log --oneline -20
+run "git log --oneline -8" git log --oneline -8
 
 say "Phase Eight A: one read spent, exploratory only"
 run "jq '<Phase 8A custody and post-hoc fields>' data/CANONICAL_STATE.json" \
