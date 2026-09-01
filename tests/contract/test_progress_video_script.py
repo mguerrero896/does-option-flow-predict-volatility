@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import os
 import re
 import subprocess
@@ -35,6 +36,7 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "frozen-registry test": "test_frozen_artifacts_registry.py",
         "canonical state": "data/CANONICAL_STATE.json",
         "canonical inference": "rp2_block10_inference/inference.json",
+        "checked hash links": "SHA256_MISMATCH",
         "figure-open handshake": "EDGE_FIGURE_WINDOW_NOT_FOUND",
         "private guest figure session": '"--guest",',
         "disabled figure sync": '"--disable-sync",',
@@ -116,3 +118,107 @@ validate_chapters "$DURATION_MS"
         )
         assert result.returncode != 0
         assert "CHAPTER_LEDGER_INVALID" in result.stderr
+
+
+def _bash_function(text: str, name: str) -> str:
+    start = text.index(f"{name}() {{")
+    return text[start : text.index("\n}\n", start) + 3]
+
+
+def test_code_presenter_uses_complete_ast_bounds_and_bounded_pages() -> None:
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "end_lineno" in _bash_function(text, "symbol_bounds")
+    assert "show_code" in _bash_function(text, "show_def")
+    assert "mark CODE" in _bash_function(text, "show_code")
+    assert "printf '\\033[2J\\033[H'" in _bash_function(text, "show_code")
+    assert "1..6" in _bash_function(text, "terminal_code_zoom_on")
+    assert 'SendWait("^0")' in _bash_function(text, "terminal_code_zoom_off")
+    assert all(
+        len(line.split()) == 3
+        for line in text.splitlines()
+        if line.startswith("show_def ")
+    ), "show_def must derive the complete function range instead of accepting a span"
+    assert not re.search(r'^run "bat .*--line-range', text, re.M), (
+        "code ranges must go through the bounded, clearing paginator"
+    )
+    for line in text.splitlines():
+        if not line.startswith("show_def "):
+            continue
+        _, relative, symbol = line.split()
+        tree = ast.parse((REPO / relative).read_text(encoding="utf-8"))
+        matches = [
+            node
+            for node in tree.body
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            and node.name == symbol
+        ]
+        assert len(matches) == 1, f"{relative} must contain one top-level {symbol}"
+
+    harness = f"""\
+set -euo pipefail
+die() {{ printf '%s\\n' "$*" >&2; return 1; }}
+show_code() {{ printf '%s|%s|%s|%s\\n' "$1" "$2" "$3" "$4"; }}
+{_bash_function(text, "symbol_bounds")}
+{_bash_function(text, "show_def")}
+show_def "$SOURCE" "$SYMBOL"
+"""
+    source = REPO / "src" / "mds650" / "provider_timing_v21.py"
+    env = os.environ | {
+        "SOURCE": str(source),
+        "SYMBOL": "audit_massive_reselection",
+    }
+    git_bash = Path(os.environ.get("PROGRAMFILES", "")) / "Git" / "bin" / "bash.exe"
+    bash = str(git_bash) if git_bash.is_file() else "bash"
+    result = subprocess.run([bash, "-c", harness], env=env, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+    tree = ast.parse(source.read_text(encoding="utf-8"))
+    node = next(
+        item
+        for item in tree.body
+        if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef))
+        and item.name == env["SYMBOL"]
+    )
+    assert result.stdout.strip() == (
+        f"{source}|{node.lineno}|{node.end_lineno}|complete function {env['SYMBOL']}"
+    )
+
+    page_harness = f"""\
+set -euo pipefail
+mark() {{ printf '%s|%s\\n' "$1" "$2"; }}
+type_command() {{ :; }}
+bat() {{ :; }}
+sleep() {{ :; }}
+terminal_code_zoom_on() {{ :; }}
+terminal_code_zoom_off() {{ :; }}
+{_bash_function(text, "show_code")}
+show_code "$SOURCE" 10 48 "complete function demo"
+"""
+    result = subprocess.run(
+        [bash, "-c", page_harness], env=env, capture_output=True, text=True
+    )
+    assert result.returncode == 0, result.stderr
+    marks = re.findall(r"CODE\|[^\r\n]+", result.stdout)
+    assert marks == [
+        f"CODE|complete function demo | {source}:10-27 | page 1/3",
+        f"CODE|complete function demo | {source}:28-45 | page 2/3",
+        f"CODE|complete function demo | {source}:46-48 | page 3/3",
+    ]
+
+
+def test_chapter_marks_point_to_settled_visual_states() -> None:
+    text = SCRIPT.read_text(encoding="utf-8")
+    run = _bash_function(text, "run")
+    expected_failure = _bash_function(text, "expect_fail")
+    code = _bash_function(text, "show_code")
+    figure_start = text.index("show_svg() {")
+    figure = text[figure_start : text.index("\nFROZEN=", figure_start)]
+
+    assert run.index('"$@"') < run.index('mark CMD "$shown"')
+    assert expected_failure.index("EXPECTED_FAILURE_VERIFIED") < expected_failure.index(
+        'mark CMD "$shown"'
+    )
+    assert "tee" not in expected_failure
+    assert "DELIBERATELY INJECTED FAULT" in expected_failure
+    assert code.index("bat --color=always") < code.index("mark CODE")
+    assert figure.index("sleep 8") < figure.index('mark VISUAL "$file"')
