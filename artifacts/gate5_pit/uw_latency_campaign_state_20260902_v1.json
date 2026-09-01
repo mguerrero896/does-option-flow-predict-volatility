@@ -1,0 +1,138 @@
+{
+ "abandonment_marker_present": false,
+ "aggregate": {
+  "path": "artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json",
+  "self_sha256": "b806b5101298798695628effdae73191b42191902ab06a37673aa00b0dde6729"
+ },
+ "artifact_lifecycle": {
+  "freshness_check": "REGENERATE_AND_COMPARE_WITH_LIVE_SESSION_INVENTORY",
+  "on_drift": "PUBLISH_NEW_DATED_SNAPSHOT_NEVER_OVERWRITE",
+  "policy": "IMMUTABLE_DATED_SNAPSHOT"
+ },
+ "as_of_date": "2026-09-02",
+ "backfill": {
+  "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE",
+  "value": null
+ },
+ "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+ "counts": {
+  "collected": 12,
+  "reconciled": 6,
+  "unreconciled": 6
+ },
+ "derived_from_session_files": true,
+ "revision": {
+  "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+  "value": null
+ },
+ "safe_to_open_or_evaluate_oos": "NO",
+ "safe_to_reconcile_existing_results": "NO",
+ "schema_version": "uw-latency-campaign-state-v2.0",
+ "self_sha256": "4d4cfd98db02c82a9138895b80830898e1a3c8e69528b170f072e817bb9f316b",
+ "session_inventory": [
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-17"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": false,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-18"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": false,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-19"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": false,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-20"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-21"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": true,
+   "session": "2026-08-24"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-08-25"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-08-26"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-08-27"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-08-28"
+  },
+  {
+   "capture_report_present": true,
+   "collection_payload_present": true,
+   "collector_summary_present": true,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-08-31"
+  },
+  {
+   "capture_report_present": false,
+   "collection_payload_present": true,
+   "collector_summary_present": false,
+   "heartbeat_present": true,
+   "reconciliation_present": false,
+   "session": "2026-09-01"
+  }
+ ],
+ "state": "RECONCILED_PARTIAL",
+ "state_space": [
+  "COLLECTING",
+  "COLLECTED_UNRECONCILED",
+  "RECONCILED_PARTIAL",
+  "ABANDONED"
+ ],
+ "target_blind": true
+}

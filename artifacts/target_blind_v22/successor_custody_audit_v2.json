@@ -1,0 +1,47 @@
+{
+  "access_ledger_file_sha256": "77077ad6d6546b64c7302a02c045f0edbace44061f992eb69e09cf6a04a97f7a",
+  "access_ledger_status": "OOS_CONSUMED_RESULTS_REPORTED",
+  "audit_sha256": "652aba6ca5d358b5368ea63e46ecd8e9a97268b5d23ea1377875b3b8ec1bc957",
+  "claim_file_sha256": "ec066121d4f9a44a6570f9cf92b84e58dd0a991d53e9c166513cffd2a7918ad0",
+  "claim_status": "COMPLETE_REPORTED",
+  "contract_sha256": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
+  "evaluation_attempt_count": 1,
+  "full_log_file_sha256": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
+  "gated_root_path_sha256": "b0f7f75c38470bb9a6965c6187cf4814cfe8cf93109e18ca2c058e3b6a1bafb9",
+  "independent_review": {
+    "method": "SEPARATE_READ_ONLY_AGENT_PLUS_PRIMARY_HASH_REPRODUCTION",
+    "status": "PASS"
+  },
+  "oos_read_count": 1,
+  "public_safety": {
+    "licensed_rows_emitted": false,
+    "personal_paths_emitted": false,
+    "secret_values_emitted": false
+  },
+  "rerun_allowed": false,
+  "result_file_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+  "result_manifest_sha256": "8cc4d8dc1b25edfea03680ed603b92b01c816b4c40ca40a926c983aff26c4168",
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
+  "schema_version": "pit-v22-successor-custody-audit-v2.0",
+  "status": "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT",
+  "target_linkage": {
+    "all_eligible_origins": 62254,
+    "all_excluded_origins": 12,
+    "all_predictor_complete_origins": 62266,
+    "development_eligible_origins": 37306,
+    "development_excluded_origins": 6,
+    "development_predictor_complete_origins": 37312
+  },
+  "verified_content_addressed_payloads": {
+    "b1-robustness-predictions": "efee930a3479ad4c6124288d2568547b75ac08d42b11fc7380d18c248cc8955b",
+    "development-linked-panel": "c1cbb96277c383db964ffe147484ca8353f23e2d9c40b74111d65e21da180cf2",
+    "development-mde-forecasts": "eb622f3c8c1b5faf14125ce59ce8a7a07f18b665a6916e65c10da9686efbbc21",
+    "linked-common-panel": "10c023ed01ec16b8de95ef4bcfac0d24e8acd84152b7459d298ef169af78f27a",
+    "primary-predictions": "f24afa0dc7ba9305a8cc693753d9b948bd95a382afe0f3620250e948dc670185",
+    "runtime-method-freeze": "97e4b1c9991735671a37aa30320cc2408462c432ad9b01982eb1f6d89329f1b4",
+    "runtime-preregistration": "42ab589e3601188696b0e5041312d9fea8487536980f4bc651fa567c5475c4f7",
+    "successor-log": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
+    "successor-result": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+    "variant-ledger": "3e4fb6c640310e4fbd33ce18585ab90261307dbf67ed3f842b0d88b09ce2311d"
+  }
+}

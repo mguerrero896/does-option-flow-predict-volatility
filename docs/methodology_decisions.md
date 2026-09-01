@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–123](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
+| [97–125](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening and successor-v2 closeout. |
 
 <a id="decision-1"></a>
 
@@ -2229,3 +2229,67 @@ Requirements-consistency and preregistration gates pass.
      The execution and fix commit identifiers above are pre-squash PR records; this
      decision does not claim that either identifier will be an ancestor of the final
      squash-merge commit.
+
+<a id="decision-124"></a>
+
+124. **The replacement PIT v2.2 successor completed its single authorized OOS read;
+     the scientific result is custody-valid, but no global edge or capital promotion is
+     eligible (2026-09-02).** Decision 123's failed v1 attempt remains immutable and was
+     not rerun. The owner authorized a new contract, run id, gated root and zero-read
+     ledger. The replacement used run
+     `pit-v22-successor-evaluation-v2-20260902`, signed-freeze SHA-256
+     `d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40`,
+     owner-authorization SHA-256
+     `b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1`
+     and the unchanged target-free panel SHA-256
+     `d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236`.
+
+     | Boundary | Recorded disposition and evidence |
+     | --- | --- |
+     | Missing TSLA minute | **EXISTENCE CONFIRMED; CROSS-PROVIDER REPAIR REJECTED.** The FMP source lacks `2025-10-28T17:45:00Z`. Massive returned the exact minute (O 464.0927, H 464.3899, L 460.7, C 460.91, volume 731810, VWAP 462.3639, 16357 trades); Unusual Whales returned only the daily 2025-10-28 close, and the FMP plugin required reauthentication. Because adjacent Massive and FMP bars are not numerically interchangeable, no Massive row was inserted into the frozen FMP series. The public disposition is frozen in `target_source_discrepancy_resolution_v1.json`, file SHA-256 `794a2ef5594cdb77c4ad72b63639eaac8cccaf3a8b7447338e5e7c097d93a5c1`. |
+     | Eligibility fixed before OOS | **COMPLETE CASE, NO IMPUTATION.** An origin is eligible only when predictor-complete and target-complete with exactly 31 prices, 30 returns and finite positive RV30. Interpolation, imputation and cross-provider substitution are forbidden. Development changed from 37,312 predictor-complete to 37,306 eligible origins (six exclusions); the full 159-session panel changed from 62,266 to 62,254 (twelve exclusions). |
+     | One-shot custody | **CONSUMED ONCE AND CLOSED.** Development-only MDE was frozen before `OOS_AUTHORIZATION_CONSUMED`. The ledger records one evaluation attempt and one OOS read; claim status is `COMPLETE_REPORTED`, ledger status is `OOS_CONSUMED_RESULTS_REPORTED`, and no rerun is permitted. Private claim SHA-256 is `ec066121d4f9a44a6570f9cf92b84e58dd0a991d53e9c166513cffd2a7918ad0`; private access-ledger SHA-256 is `77077ad6d6546b64c7302a02c045f0edbace44061f992eb69e09cf6a04a97f7a`. |
+     | Immutable outputs | **HASHED AND CONTENT-ADDRESSED.** The public result file SHA-256 is `ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775` (semantic manifest SHA-256 `8cc4d8dc1b25edfea03680ed603b92b01c816b4c40ca40a926c983aff26c4168`); the full public log SHA-256 is `0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3`. Eight primary payloads plus result and log were independently rehashed from content-addressed custody. `successor_custody_audit_v2.json` records the sanitized audit. |
+
+     The two registered global contrasts and the LightGBM robustness mirror are:
+
+     | Model role | Contrast | Estimate | 95% paired-session bootstrap interval | raw p | Holm p | development MDE | Estimate >= MDE |
+     | --- | --- | ---: | --- | ---: | ---: | ---: | --- |
+     | Gamma confirmatory | B1a over B0 | +0.008171247318411104 | [+0.0026577746715989023, +0.014024232307083271] | 0.004199580041995801 | 0.008399160083991601 | 0.008416143460160036 | no |
+     | Gamma confirmatory | B2 over B0+B1a | -0.0031266210509440827 | [-0.013923357122674115, +0.008608549835794906] | 0.5595440455954405 | 0.5595440455954405 | 0.0066762275830901255 | no |
+     | LightGBM robustness | B1a over B0 | +0.004175806123377246 | [+0.001381712462904281, +0.0071251569526431845] | 0.0023997600239976003 | not confirmatory | 0.008416143460160036 | no |
+     | LightGBM robustness | B2 over B0+B1a | +0.001368014097550589 | [-0.0006242036721119073, +0.0036821862450517493] | 0.20177982201779823 | not confirmatory | 0.0066762275830901255 | no |
+
+     Gamma B1a excludes zero and survives Holm, but its estimate is below the MDE fixed
+     from development. No registered estimate meets its MDE. The evaluator therefore
+     records `GLOBAL_EDGE_NOT_CONFIRMED`; the signed freeze also contains no binary
+     edge-promotion rule. Independent custody validation makes the result scientifically
+     eligible to report, not edge-claim eligible or capital eligible. `capital_go=false`,
+     `RESEARCH_ONLY`, and `NOT INVESTMENT ADVICE` remain binding.
+
+     The twelve historical RP2-v3 aggregates use different partitions, information sets
+     and estimands, so direct contradiction is not identifiable. Descriptively, the new
+     Gamma signs agree with historical development for B1a and historical validation for
+     B2, while the LightGBM signs agree with both historical roles. This is not a
+     one-to-one replication, causal evidence, timing-sensitivity result, universal edge or
+     trading-profitability claim. No post-OOS retuning, feature search or recalibration is
+     authorized.
+
+<a id="decision-125"></a>
+
+125. **The post-OOS Tier 2 freshness check advances only the target-blind UW inventory
+     authority; it does not alter the successor contract, inputs or result
+     (2026-09-02).** The licensed store gained the 2026-09-01 collected session after the
+     prior dated snapshot. Following `IMMUTABLE_DATED_SNAPSHOT`, the v1/v2 artifacts were
+     not overwritten. New aggregate
+     `artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json` has file SHA-256
+     `c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4` and semantic
+     SHA-256 `b806b5101298798695628effdae73191b42191902ab06a37673aa00b0dde6729`;
+     its state sibling has file SHA-256
+     `72181a9bd0edf30b42086830938ceff4facafed7374a4e63d1e34a9648db56b1` and semantic
+     SHA-256 `4d4cfd98db02c82a9138895b80830898e1a3c8e69528b170f072e817bb9f316b`.
+     The inventory is 12 collected, six reconciled and six unreconciled; the measured
+     six-session operational-latency aggregates, `RECONCILED_PARTIAL` lifecycle and
+     `PROXY_ONLY_CROSS_CHANNEL` claim boundary are unchanged. The successor OOS result
+     remains bound to its pre-OOS data hashes and exactly one consumed read; no model,
+     contrast, MDE, Holm result, eligibility rule or capital state changed.

@@ -42,7 +42,7 @@ def test_public_commit_provenance_does_not_claim_reachability() -> None:
     assert len(translation["historical_sanitized_commit_reference"]) == 40
 
 
-def test_scientific_bundle_is_single_and_fail_closed() -> None:
+def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     bundle = state["scientific_bundle"]
 
@@ -55,33 +55,60 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
     assert bundle["manifest"]["scientific_sha256"] == (
         "033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4"
     )
-    assert bundle["eligibility"]["status"] == "REBUILD_COMPLETE_PIT_V22_BLOCKED"
-    assert bundle["eligibility"]["reasons"] == [
-        "PIT_V22_RECONCILIATION_BLOCKED",
-        "PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS",
-    ]
-    assert state["canonical_results"] == {
-        "status": "NO_CURRENT_ELIGIBLE_RESULT",
-        "headline_claims": [],
-    }
+    assert bundle["eligibility"]["status"] == "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
+    assert bundle["eligibility"]["reasons"] == ["SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2"]
+    canonical = state["canonical_results"]
+    assert canonical["status"] == "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
+    assert canonical["run_id"] == "pit-v22-successor-evaluation-v2-20260902"
+    assert canonical["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
+    assert canonical["scientific_result_eligible"] is True
+    assert canonical["edge_claim_eligible"] is False
+    assert canonical["capital_go"] is False
+    assert canonical["headline_claims"] == []
     successor = state["pit_v22_successor_evaluation"]
-    assert successor["status"] == "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
-    assert successor["failure_code"] == "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID"
+    assert successor["status"] == "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED"
+    assert successor["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
     assert successor["evaluation_attempt_count"] == 1
-    assert successor["oos_read_count"] == 0
-    assert successor["results_inspected"] is False
+    assert successor["oos_read_count"] == 1
+    assert successor["results_inspected"] is True
     assert successor["rerun_allowed"] is False
-    assert successor["development_mde_estimated"] is False
-    assert successor["confirmatory_contrasts_evaluated"] is False
-    assert successor["historical_bundle_aggregate_comparison_performed"] is False
+    assert successor["development_mde_estimated"] is True
+    assert successor["confirmatory_contrasts_evaluated"] is True
+    assert successor["historical_bundle_aggregate_comparison_performed"] is True
+    assert successor["previous_attempt"]["status"] == "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
+    assert successor["previous_attempt"]["failure_code"] == (
+        "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID"
+    )
+    assert successor["previous_attempt"]["oos_read_count"] == 0
     assert successor["scientific_result"] == {
-        "exists": False,
-        "eligible": False,
-        "reason": "NO_RESULT_FAIL_CLOSED_PRE_OOS",
+        "exists": True,
+        "eligible": True,
+        "reason": "PASS_POST_OOS_CUSTODY_VALIDATION",
+        "path": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+        "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+        "manifest_sha256": "8cc4d8dc1b25edfea03680ed603b92b01c816b4c40ca40a926c983aff26c4168",
+        "immutable_payload_status": "SCIENTIFIC_EVALUATION_COMPLETE_PENDING_CUSTODY_VALIDATION",
     }
     assert successor["full_log"]["sha256"] == (
-        "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
+        "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3"
     )
+    assert successor["target_linkage"] == {
+        "all_eligible_origins": 62_254,
+        "all_excluded_origins": 12,
+        "all_predictor_complete_origins": 62_266,
+        "development_eligible_origins": 37_306,
+        "development_excluded_origins": 6,
+        "development_predictor_complete_origins": 37_312,
+    }
+    assert successor["custody_audit"]["status"] == (
+        "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT"
+    )
+    gamma = successor["registered_contrasts"]["gamma_glm_confirmatory"]
+    assert gamma["delta_b1v2"]["estimate"] == 0.008171247318411104
+    assert gamma["delta_b1v2"]["p_value_holm"] == 0.008399160083991601
+    assert gamma["delta_b1v2"]["estimate_at_least_mde"] is False
+    assert gamma["delta_b2v2"]["estimate"] == -0.0031266210509440827
+    assert gamma["delta_b2v2"]["estimate_at_least_mde"] is False
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
     assert redactions["artifact_count"] == 14

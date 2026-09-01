@@ -1,0 +1,77 @@
+{
+  "events": [
+    {
+      "event": "ONE_SHOT_CLAIMED",
+      "recorded_at_utc": "2026-09-01T18:34:21.749017+00:00",
+      "run_id": "pit-v22-successor-evaluation-v2-20260902"
+    },
+    {
+      "event": "RUNTIME_PREREGISTRATION_FROZEN",
+      "recorded_at_utc": "2026-09-01T18:34:21.754659+00:00",
+      "sha256": "42ab589e3601188696b0e5041312d9fea8487536980f4bc651fa567c5475c4f7"
+    },
+    {
+      "development_panel_sha256": "c1cbb96277c383db964ffe147484ca8353f23e2d9c40b74111d65e21da180cf2",
+      "event": "DEVELOPMENT_RV30_LINKED",
+      "recorded_at_utc": "2026-09-01T18:34:27.292485+00:00",
+      "rows": 37306,
+      "target_linkage_excluded_origins": 6
+    },
+    {
+      "event": "DEVELOPMENT_MDE_FROZEN",
+      "method_sha256": "97e4b1c9991735671a37aa30320cc2408462c432ad9b01982eb1f6d89329f1b4",
+      "recorded_at_utc": "2026-09-01T18:34:31.862963+00:00",
+      "training_mde": {
+        "delta_b1v2": 0.008416143460160036,
+        "delta_b2v2": 0.0066762275830901255
+      }
+    },
+    {
+      "evaluation_attempt_count": 1,
+      "event": "OOS_AUTHORIZATION_CONSUMED",
+      "oos_read_count": 1,
+      "recorded_at_utc": "2026-09-01T18:34:31.968931+00:00"
+    },
+    {
+      "event": "OOS_RV30_LINKED_AND_VALIDATED",
+      "linked_panel_sha256": "10c023ed01ec16b8de95ef4bcfac0d24e8acd84152b7459d298ef169af78f27a",
+      "recorded_at_utc": "2026-09-01T18:34:36.941878+00:00",
+      "rows": 62254,
+      "target_linkage_excluded_origins": 12
+    },
+    {
+      "evaluated_origins": 24948,
+      "event": "TWO_EXPANDING_FOLDS_FORECAST",
+      "prediction_rows": 149688,
+      "recorded_at_utc": "2026-09-01T18:36:42.839910+00:00"
+    },
+    {
+      "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
+      "edge_claim_eligible": false,
+      "event": "EVALUATION_COMPLETE",
+      "recorded_at_utc": "2026-09-01T18:36:43.362414+00:00"
+    },
+    {
+      "event": "PRIMARY_PAYLOADS_CONTENT_ADDRESSED",
+      "payload_count": 8,
+      "recorded_at_utc": "2026-09-01T18:36:43.413551+00:00"
+    },
+    {
+      "event": "RESULT_WRITTEN",
+      "recorded_at_utc": "2026-09-01T18:36:43.428418+00:00",
+      "result_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775"
+    },
+    {
+      "event": "LEDGER_CLOSED",
+      "recorded_at_utc": "2026-09-01T18:36:43.434068+00:00",
+      "status": "OOS_CONSUMED_RESULTS_REPORTED"
+    },
+    {
+      "event": "CLAIM_CLOSED",
+      "recorded_at_utc": "2026-09-01T18:36:43.440219+00:00",
+      "status": "COMPLETE_REPORTED"
+    }
+  ],
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
+  "schema_version": "pit-v22-successor-evaluation-log-1.0"
+}

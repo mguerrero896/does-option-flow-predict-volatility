@@ -43,5 +43,5 @@
 <line x1="40" y1="580" x2="840" y2="580" stroke="#e1e6ea" stroke-width="1"/>
 <rect x="40" y="592" width="12" height="12" rx="3" fill="#1a2332" stroke="none"/><text x="60" y="602" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="11">cleared the bar it set</text>
 <rect x="208" y="592" width="12" height="12" rx="3" fill="#c9d2da" stroke="none"/><text x="228" y="602" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="11">did not clear it</text>
-<text x="40" y="632" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14">0 option-flow tests cleared their own bar. Status: NO_CURRENT_ELIGIBLE_RESULT.</text>
+<text x="40" y="632" fill="#5a6570" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14">0 option-flow tests cleared their own bar. Status: HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM.</text>
 </svg>

@@ -586,7 +586,7 @@ sample; they cannot certify future sessions. The estimand is local
 `receipt_utc − created_at`, not provider publication time or historical client receipt.
 Accordingly, `created_at` remains `PROXY_ONLY_CROSS_CHANNEL`, backfill and revision remain
 non-identifiable, and `PIT_V22_RECONCILIATION_BLOCKED` remains in force
-(`artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json`;
+(`artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json`;
 `docs/gate5_pit_foundations_v1.md`).
 
 ## 6. Discussion

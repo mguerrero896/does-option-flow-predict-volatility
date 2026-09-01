@@ -13,8 +13,14 @@ from tests.withdrawn_claims import carries_supersession_notice, normalize
 from mds650.uw_latency_campaign import canonical_sha256
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v2.json"
-STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v2.json"
+AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
+STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
+PRIOR_AGGREGATE = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v2.json"
+)
+PRIOR_STATE = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v2.json"
+)
 LEGACY_AGGREGATE = (
     REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v1.json"
 )
@@ -60,7 +66,15 @@ def _asserts_outdated_campaign_state(text: str) -> bool:
 
 
 def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
-    for path in (AGGREGATE, STATE, LEGACY_AGGREGATE, LEGACY_STATE, ANOMALY):
+    for path in (
+        AGGREGATE,
+        STATE,
+        PRIOR_AGGREGATE,
+        PRIOR_STATE,
+        LEGACY_AGGREGATE,
+        LEGACY_STATE,
+        ANOMALY,
+    ):
         payload = _load(path)
         assert payload["self_sha256"] == canonical_sha256(payload)
         serialized = json.dumps(payload).lower()

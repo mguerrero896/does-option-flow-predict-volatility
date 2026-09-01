@@ -2,7 +2,7 @@
 
 [![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-1a2332)
-![Headline claim](https://img.shields.io/badge/headline_claim-none_eligible-e8a33d)
+![Headline claim](https://img.shields.io/badge/global_edge-not_confirmed-e8a33d)
 
 Six large US equities. Every five minutes of the New York session, predict how much the
 stock will actually move over the next thirty minutes. Then ask whether knowing what the
@@ -12,20 +12,31 @@ options market is doing makes that prediction better.
 
 ## The answer
 
-**The corrected measurement does not establish an incremental option-flow contribution.**
+**The one-shot PIT v2.2 result is scientifically reportable, but it does not confirm a
+global option-information edge.**
 
-The twelve headline comparisons separate option *state* (B1 over B0) from recent option
+On the 32-session holdout, the confirmatory Gamma B1a-over-B0 QLIKE contrast is
++0.00817125 [0.00265777, 0.01402423], Holm p=0.00839916. That estimate is still below
+the development-frozen MDE of 0.00841614. Gamma B2-over-B0+B1a is -0.00312662
+[-0.01392336, 0.00860855], Holm p=0.55954405, versus MDE 0.00667623. Neither registered
+contrast reaches its MDE. LightGBM robustness is positive for B1a (+0.00417581) and B2
+(+0.00136801), but both remain below the same descriptive MDE references; B2's interval
+contains zero. The disposition is `GLOBAL_EDGE_NOT_CONFIRMED`, `capital_go=false`,
+`RESEARCH_ONLY`, and `NOT INVESTMENT ADVICE`.
+
+The twelve comparisons below are the historical RP2-v3 context, not the current
+confirmatory authority. They separate option *state* (B1 over B0) from recent option
 *flow* (B2 over B1), across three model families and two calendar roles.
 
-![Twelve contrasts against the threshold each one declared](docs/figures/evidence.svg)
+![Twelve historical contrasts against the threshold each one declared](docs/figures/evidence.svg)
 
 Every comparison registers a detection threshold before it is run, so it cannot be
 declared a success after the fact. Two of the twelve beat their own threshold (their
 registered minimum detectable effect), and both are discovery option-state contrasts. No flow contrast clears its own
 MDE. Discovery LightGBM flow is positive at +0.00052, but its 95% interval
 [-0.00013, +0.00111] contains zero and its estimate remains below its 0.00089 MDE.
-Validation flow estimates have mixed signs. **The result is mixed by family and role,
-not a universal flow finding.**
+Validation flow estimates have mixed signs. **That historical bundle is mixed by family
+and role, not a universal flow finding.**
 
 The earlier flow exception motivated a sealed question before this timing remediation;
 that programme remains frozen rather than rewritten around the updated retrospective run.
@@ -94,9 +105,9 @@ subscriber received it. The rules used are in
 A number in this repository is not a claim until it passes three gates. Failing one does
 not delete the number — it keeps it auditable and marks it as history.
 
-The current bundle stops at the third gate. Its point-in-time inputs have not received a
-successor method freeze, so every number it produced stays historical. That is the state
-this repository publishes, stated in full under
+The successor passed scientific-custody validation after one authorized OOS read. It did
+not pass the separate edge or capital gates, and the read cannot be repeated. That is the
+state this repository publishes, stated in full under
 [Governance and current state](#governance-and-current-state).
 
 ---
@@ -156,13 +167,18 @@ Boundaries between the two tiers are in
 This section is the machine-checked position, kept separate from the finding above: the
 finding says what the evidence shows, this says what the project is permitted to claim.
 
-**No result is currently eligible as the project headline.** The corrected-protocol bundle
-is `rp2-v3-20260831-b1-spot-cutoff-remediation`, scientific hash
-`033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`, status
-`REBUILD_COMPLETE_PIT_V22_BLOCKED`. Partition roles, the shared 120-second market cutoff
-for both B0 and B1 spot, and the XNYS expiry calendar are repaired and the 13-step rebuild
-passes, but `PIT_V22_RECONCILIATION_BLOCKED` remains and the consumed successor attempt adds
-`PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS`.
+**The current scientific result is the custody-validated PIT v2.2 successor-v2 run.** Its
+result SHA-256 is
+`ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775`; its full-log
+SHA-256 is `0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3`.
+It consumed exactly one OOS read after development-only MDE freeze. Independent custody
+validation makes the result eligible to report scientifically, while edge and capital
+eligibility remain false.
+
+The prior bundle `rp2-v3-20260831-b1-spot-cutoff-remediation` (scientific SHA-256
+`033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`) remains
+`HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM` for reason
+`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`.
 
 The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run
 manifest, one hash, one eligibility state and its blocking reasons. If any document
@@ -175,7 +191,9 @@ Superseded measurements stay available for audit, never as current findings:
 - [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) — the narrative for the
   corrected-protocol bundle, marked `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
 - [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) — the
-  point-in-time evidence boundary, consumed pre-OOS failure and future-authority boundary.
+  historical v1 point-in-time boundary and consumed pre-OOS failure.
+- [`docs/pit_v22_claims_and_limitations_v2.md`](docs/pit_v22_claims_and_limitations_v2.md)
+  — the current successor-v2 contrasts, data-defect disposition and claim limits.
 
 No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
 claimed. Residual risks are in the

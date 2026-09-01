@@ -31,7 +31,7 @@ def test_evidence_figure_uses_canonical_lifecycle_and_measured_flow_count() -> N
     )
 
     rendered = render_figures.evidence().render()
-    status = state["canonical_results"]["status"]
+    status = state["scientific_bundle"]["eligibility"]["status"]
     assert status in rendered
     assert f"{flow_clears} option-flow tests cleared their own bar." in rendered
     assert "amber cell" not in rendered.casefold()

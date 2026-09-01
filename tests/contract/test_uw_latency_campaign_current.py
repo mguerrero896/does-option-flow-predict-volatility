@@ -10,8 +10,8 @@ from pathlib import Path
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json"
-STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json"
+AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json"
+STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json"
 ANOMALY = REPO / "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json"
 OPTOUT = "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP"
 CONFIGURED_ROOT = os.environ.get("MDS650_EXTERNAL_ROOT") or os.environ.get(
@@ -48,7 +48,7 @@ def test_uw_latency_snapshot_matches_live_regeneration() -> None:
         external_root=_external_root(),
         anomaly_artifact=ANOMALY,
         aggregate_path=AGGREGATE.relative_to(REPO).as_posix(),
-        as_of_date="2026-09-01",
+        as_of_date="2026-09-02",
     )
     committed_aggregate = json.loads(AGGREGATE.read_text(encoding="utf-8"))
     committed_state = json.loads(STATE.read_text(encoding="utf-8"))

@@ -96,8 +96,8 @@
  "authorized_sources": {
   ".github/workflows/ci.yml": "d5fab918f066795a244700d21cdc2c653e04fc80e12c0f284a9cec58295a76bf",
   "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63",
-  "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json": "68a3cd98d5a3bcda2d003a379a3f8f7fdbb28fb19504f59cf12f18ca400068ca",
-  "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json": "82f3ee29e8b3623d56bb85f8783bbed69378680c7af2c6bae3b60fa5ebf52915",
+  "artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4",
+  "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json": "72181a9bd0edf30b42086830938ceff4facafed7374a4e63d1e34a9648db56b1",
   "artifacts/phase8_bridge/bridge_contract_v2.json": "936b7e2cc90d86fa5ed8878bd2c33f9a7e6813d8c3b027c6f52c3dc2b3a187bf",
   "artifacts/phase8_bridge/dispersion_audit_20260831_v11.json": "39334cb03e0a7fe99ef79bf4591ab31e2f273ca29a8a3ec2399c827480cbe363",
   "artifacts/phase8_bridge/evaluator_freeze_v4.json": "2852464e1bd4a1c506843ed42debea3bccb88e58ef63872608d1fbfcbd3f2f63",
@@ -115,32 +115,106 @@
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
   "artifacts/target_blind_v22/next_confirmation_preregistration_v2.json": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560",
+  "artifacts/target_blind_v22/next_confirmation_preregistration_v3.json": "3dc3ca514f922f69b8b6bd124d2faa54a8797fdafec4cd85a636e107d44042f4",
   "artifacts/target_blind_v22/pit_v22_claim_ledger_v1.json": "ecac2027756f88dcfe75055bcb7b7ef3e675c85bf0be66470d88080f86a3520d",
+  "artifacts/target_blind_v22/pit_v22_claim_ledger_v2.json": "292751bec10f347cf5b3abcb29be840e3b7b7c95e63f9f9b60ab39eb83962a88",
+  "artifacts/target_blind_v22/successor_custody_audit_v2.json": "c293257271cafe05d99f5102e78d7dc07d46c5d1f5203213e245957955003eca",
+  "artifacts/target_blind_v22/successor_evaluation_result_v2.json": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
   "artifacts/target_blind_v22/successor_evaluation_run_v1.json": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
+  "artifacts/target_blind_v22/successor_evaluation_run_v2.json": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
   "artifacts/target_blind_v22/successor_method_freeze_v1.json": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf",
+  "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
-  "data/FROZEN_ARTIFACTS.json": "3984592a2720913866bad01b0ed3176027988565d388731353ecdf2f25db54d4",
+  "artifacts/target_blind_v22/successor_owner_authorization_v2.json": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1",
+  "data/FROZEN_ARTIFACTS.json": "f9c01bc0d1e9c036fecff61f7492ec1c4470ac63e18c078070881a2e757c27fe",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "e0c40886c0108d8f855d8f80eb8cecc8decee1d2a7e01ef44b4aae8e476bd765",
+  "docs/methodology_decisions.md": "8dca7744d3898f6329e209783eb440ca239f00aa799eeb3921b7ae94269674fb",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
+  "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
-  "docs/rp2_v3/VERDICT.md": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
+  "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
   "reports/final_report_draft_v2.docx": "cb9e3d76a738a6aee79a9371b802480f4a586efc419af75c4b1629bce0fbf6c7",
-  "reports/final_report_draft_v2.md": "c9bf1c219cb05e3f59ec599ca261926832d315b3e7765e08ab127183a650a3df",
+  "reports/final_report_draft_v2.md": "a7db75e54f683bf758bce87b776315d8cc0e56e4ff69e5cda386f9cdca6687ea",
   "reports/phase8a_exploratory_bridge_addendum_v13.md": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
  "canonical_results": {
+  "capital_go": false,
+  "confirmatory_contrasts": {
+   "delta_b1v2": {
+    "ci_high": 0.014024232307083271,
+    "ci_low": 0.0026577746715989023,
+    "clusters": 32,
+    "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+    "estimate": 0.008171247318411104,
+    "estimate_at_least_mde": false,
+    "mde_role": "CONFIRMATORY_THRESHOLD",
+    "observations": 12640,
+    "p_value_holm": 0.008399160083991601,
+    "p_value_raw": 0.004199580041995801,
+    "result_sign": "POSITIVE",
+    "training_mde": 0.008416143460160036
+   },
+   "delta_b2v2": {
+    "ci_high": 0.008608549835794906,
+    "ci_low": -0.013923357122674115,
+    "clusters": 32,
+    "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+    "estimate": -0.0031266210509440827,
+    "estimate_at_least_mde": false,
+    "mde_role": "CONFIRMATORY_THRESHOLD",
+    "observations": 12640,
+    "p_value_holm": 0.5595440455954405,
+    "p_value_raw": 0.5595440455954405,
+    "result_sign": "NEGATIVE",
+    "training_mde": 0.0066762275830901255
+   }
+  },
+  "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
+  "edge_claim_eligible": false,
   "headline_claims": [],
-  "status": "NO_CURRENT_ELIGIBLE_RESULT"
+  "result_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+  "robustness_contrasts": {
+   "delta_b1v2": {
+    "ci_high": 0.0071251569526431845,
+    "ci_low": 0.001381712462904281,
+    "clusters": 32,
+    "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+    "estimate": 0.004175806123377246,
+    "estimate_at_least_mde": false,
+    "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+    "observations": 12640,
+    "p_value_holm": null,
+    "p_value_raw": 0.0023997600239976003,
+    "result_sign": "POSITIVE",
+    "training_mde": 0.008416143460160036
+   },
+   "delta_b2v2": {
+    "ci_high": 0.0036821862450517493,
+    "ci_low": -0.0006242036721119073,
+    "clusters": 32,
+    "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+    "estimate": 0.001368014097550589,
+    "estimate_at_least_mde": false,
+    "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+    "observations": 12640,
+    "p_value_holm": null,
+    "p_value_raw": 0.20177982201779823,
+    "result_sign": "POSITIVE",
+    "training_mde": 0.0066762275830901255
+   }
+  },
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
+  "scientific_result_eligible": true,
+  "status": "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
  },
  "ci": {
   "contract": "docs/ci_contract_v1.md",
@@ -161,7 +235,7 @@
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "c9bf1c219cb05e3f59ec599ca261926832d315b3e7765e08ab127183a650a3df"
+   "sha256": "a7db75e54f683bf758bce87b776315d8cc0e56e4ff69e5cda386f9cdca6687ea"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",
@@ -181,16 +255,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 132,
+  "artifact_count": 139,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 130,
+  "physical_artifact_count": 137,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "3984592a2720913866bad01b0ed3176027988565d388731353ecdf2f25db54d4"
+  "registry_sha256": "f9c01bc0d1e9c036fecff61f7492ec1c4470ac63e18c078070881a2e757c27fe"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
@@ -201,8 +275,8 @@
   "storage": "supabase project eqpyjikcewqaegnbaemf, private bucket 'research-data'"
  },
  "governance": {
-  "decision_count": 123,
-  "latest_decision": 123
+  "decision_count": 125,
+  "latest_decision": 125
  },
  "note": "AUTO-GENERATED by scripts/generate_canonical_state.py; never edit by hand. CI regenerates and fails on drift (decision 63).",
  "pit_v22_successor_evaluation": {
@@ -213,59 +287,213 @@
   },
   "capital_eligible": false,
   "capital_go": false,
-  "confirmatory_contrasts_evaluated": false,
-  "development_mde_estimated": false,
+  "claims_and_limitations": {
+   "ledger_sha256": "7aa8765a8b4610d54ec4b38145588029e0c8c6940ab43075bf816ff366fcc69a",
+   "markdown": "docs/pit_v22_claims_and_limitations_v2.md",
+   "path": "artifacts/target_blind_v22/pit_v22_claim_ledger_v2.json",
+   "sha256": "292751bec10f347cf5b3abcb29be840e3b7b7c95e63f9f9b60ab39eb83962a88"
+  },
+  "confirmatory_contrasts_evaluated": true,
+  "custody_audit": {
+   "audit_sha256": "652aba6ca5d358b5368ea63e46ecd8e9a97268b5d23ea1377875b3b8ec1bc957",
+   "path": "artifacts/target_blind_v22/successor_custody_audit_v2.json",
+   "sha256": "c293257271cafe05d99f5102e78d7dc07d46c5d1f5203213e245957955003eca",
+   "status": "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT"
+  },
+  "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
+  "development_mde_estimated": true,
   "edge_claim_eligible": false,
   "evaluation_attempt_count": 1,
-  "failure_code": "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID",
   "full_log": {
    "events": [
     "ONE_SHOT_CLAIMED",
     "RUNTIME_PREREGISTRATION_FROZEN",
-    "FAIL_CLOSED"
+    "DEVELOPMENT_RV30_LINKED",
+    "DEVELOPMENT_MDE_FROZEN",
+    "OOS_AUTHORIZATION_CONSUMED",
+    "OOS_RV30_LINKED_AND_VALIDATED",
+    "TWO_EXPANDING_FOLDS_FORECAST",
+    "EVALUATION_COMPLETE",
+    "PRIMARY_PAYLOADS_CONTENT_ADDRESSED",
+    "RESULT_WRITTEN",
+    "LEDGER_CLOSED",
+    "CLAIM_CLOSED"
    ],
-   "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
-   "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
+   "path": "artifacts/target_blind_v22/successor_evaluation_run_v2.json",
+   "sha256": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3"
   },
-  "historical_bundle_aggregate_comparison_performed": false,
-  "oos_read_count": 0,
+  "historical_bundle_aggregate_comparison_performed": true,
+  "historical_bundle_comparison": {
+   "comparable_model_contrasts": [
+    {
+     "historical_development_estimate": 0.0025639982914761753,
+     "historical_model": "gamma_glm",
+     "historical_validation_estimate": -0.0014957704208387985,
+     "new_contrast": "delta_b1v2",
+     "new_estimate": 0.008171247318411104,
+     "new_model_role": "gamma_glm_confirmatory",
+     "sign_vs_historical_development": "SAME",
+     "sign_vs_historical_validation": "DIFFERENT"
+    },
+    {
+     "historical_development_estimate": 0.00012249251000936656,
+     "historical_model": "gamma_glm",
+     "historical_validation_estimate": -0.002635234963296121,
+     "new_contrast": "delta_b2v2",
+     "new_estimate": -0.0031266210509440827,
+     "new_model_role": "gamma_glm_confirmatory",
+     "sign_vs_historical_development": "DIFFERENT",
+     "sign_vs_historical_validation": "SAME"
+    },
+    {
+     "historical_development_estimate": 0.0032003429488117506,
+     "historical_model": "lightgbm_qlike",
+     "historical_validation_estimate": 0.0028022776274997324,
+     "new_contrast": "delta_b1v2",
+     "new_estimate": 0.004175806123377246,
+     "new_model_role": "lightgbm_robustness",
+     "sign_vs_historical_development": "SAME",
+     "sign_vs_historical_validation": "SAME"
+    },
+    {
+     "historical_development_estimate": 0.0005205742246090278,
+     "historical_model": "lightgbm_qlike",
+     "historical_validation_estimate": 0.0019790672702443076,
+     "new_contrast": "delta_b2v2",
+     "new_estimate": 0.001368014097550589,
+     "new_model_role": "lightgbm_robustness",
+     "sign_vs_historical_development": "SAME",
+     "sign_vs_historical_validation": "SAME"
+    }
+   ],
+   "comparison_scope": "DESCRIPTIVE_SIGN_CHECK_NOT_ONE_TO_ONE_REPLICATION",
+   "direct_contradiction_disposition": "NOT_IDENTIFIABLE_DIFFERENT_PARTITION_INFORMATION_SETS_AND_ESTIMANDS",
+   "historical_aggregate_count": 12,
+   "historical_bundle_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation"
+  },
+  "oos_read_count": 1,
+  "previous_attempt": {
+   "evaluation_attempt_count": 1,
+   "failure_code": "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID",
+   "log": {
+    "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
+    "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
+   },
+   "oos_read_count": 0,
+   "rerun_allowed": false,
+   "run_id": "pit-v22-successor-evaluation-v1-20260901",
+   "status": "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
+  },
+  "registered_contrasts": {
+   "gamma_glm_confirmatory": {
+    "delta_b1v2": {
+     "ci_high": 0.014024232307083271,
+     "ci_low": 0.0026577746715989023,
+     "clusters": 32,
+     "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+     "estimate": 0.008171247318411104,
+     "estimate_at_least_mde": false,
+     "mde_role": "CONFIRMATORY_THRESHOLD",
+     "observations": 12640,
+     "p_value_holm": 0.008399160083991601,
+     "p_value_raw": 0.004199580041995801,
+     "result_sign": "POSITIVE",
+     "training_mde": 0.008416143460160036
+    },
+    "delta_b2v2": {
+     "ci_high": 0.008608549835794906,
+     "ci_low": -0.013923357122674115,
+     "clusters": 32,
+     "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+     "estimate": -0.0031266210509440827,
+     "estimate_at_least_mde": false,
+     "mde_role": "CONFIRMATORY_THRESHOLD",
+     "observations": 12640,
+     "p_value_holm": 0.5595440455954405,
+     "p_value_raw": 0.5595440455954405,
+     "result_sign": "NEGATIVE",
+     "training_mde": 0.0066762275830901255
+    }
+   },
+   "lightgbm_robustness": {
+    "delta_b1v2": {
+     "ci_high": 0.0071251569526431845,
+     "ci_low": 0.001381712462904281,
+     "clusters": 32,
+     "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+     "estimate": 0.004175806123377246,
+     "estimate_at_least_mde": false,
+     "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+     "observations": 12640,
+     "p_value_holm": null,
+     "p_value_raw": 0.0023997600239976003,
+     "result_sign": "POSITIVE",
+     "training_mde": 0.008416143460160036
+    },
+    "delta_b2v2": {
+     "ci_high": 0.0036821862450517493,
+     "ci_low": -0.0006242036721119073,
+     "clusters": 32,
+     "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+     "estimate": 0.001368014097550589,
+     "estimate_at_least_mde": false,
+     "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+     "observations": 12640,
+     "p_value_holm": null,
+     "p_value_raw": 0.20177982201779823,
+     "result_sign": "POSITIVE",
+     "training_mde": 0.0066762275830901255
+    }
+   }
+  },
   "rerun_allowed": false,
   "research_only": true,
-  "results_inspected": false,
-  "run_id": "pit-v22-successor-evaluation-v1-20260901",
+  "results_inspected": true,
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
   "scientific_result": {
-   "eligible": false,
-   "exists": false,
-   "reason": "NO_RESULT_FAIL_CLOSED_PRE_OOS"
+   "eligible": true,
+   "exists": true,
+   "immutable_payload_status": "SCIENTIFIC_EVALUATION_COMPLETE_PENDING_CUSTODY_VALIDATION",
+   "manifest_sha256": "8cc4d8dc1b25edfea03680ed603b92b01c816b4c40ca40a926c983aff26c4168",
+   "path": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+   "reason": "PASS_POST_OOS_CUSTODY_VALIDATION",
+   "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775"
   },
   "signed_inputs": {
    "method_freeze": {
-    "path": "artifacts/target_blind_v22/successor_method_freeze_v1.json",
-    "sha256": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
+    "path": "artifacts/target_blind_v22/successor_method_freeze_v2.json",
+    "sha256": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40"
    },
    "owner_authorization": {
-    "path": "artifacts/target_blind_v22/successor_owner_authorization_v1.json",
-    "sha256": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
+    "path": "artifacts/target_blind_v22/successor_owner_authorization_v2.json",
+    "sha256": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1"
    },
    "preregistration": {
-    "file_sha256": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560",
-    "path": "artifacts/target_blind_v22/next_confirmation_preregistration_v2.json",
-    "semantic_sha256": "8de28f3dbbb355751cad599d639346c6f773f6b76bdc141258481756a5930500"
+    "file_sha256": "3dc3ca514f922f69b8b6bd124d2faa54a8797fdafec4cd85a636e107d44042f4",
+    "path": "artifacts/target_blind_v22/next_confirmation_preregistration_v3.json",
+    "semantic_sha256": "4b98bb7c77c5535686b74682177d48e0a487ea58502e87bdcd56d82ea2c143af"
    }
   },
-  "status": "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
+  "status": "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED",
+  "target_linkage": {
+   "all_eligible_origins": 62254,
+   "all_excluded_origins": 12,
+   "all_predictor_complete_origins": 62266,
+   "development_eligible_origins": 37306,
+   "development_excluded_origins": 6,
+   "development_predictor_complete_origins": 37312
+  }
  },
  "schema_version": "canonical-state-v1.0",
  "scientific_bundle": {
   "eligibility": {
    "model_fit_after_pit_v22": false,
    "reasons": [
-    "PIT_V22_RECONCILIATION_BLOCKED",
-    "PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS"
+    "SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2"
    ],
    "safe_to_open_or_evaluate_oos": false,
    "safe_to_reconcile_existing_results": false,
-   "status": "REBUILD_COMPLETE_PIT_V22_BLOCKED"
+   "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
   },
   "historical_code_provenance": {
    "manifest": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json",
@@ -290,13 +518,13 @@
   },
   "verdict": {
    "path": "docs/rp2_v3/VERDICT.md",
-   "sha256": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
+   "sha256": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
    "status": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
   }
  },
  "uw_latency_campaign": {
-  "aggregate_artifact": "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json",
-  "aggregate_self_sha256": "376169d46465c52ff822a24de7cd4ed1b4c433d301d3b242552a95b268e8c0d4",
+  "aggregate_artifact": "artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json",
+  "aggregate_self_sha256": "b806b5101298798695628effdae73191b42191902ab06a37673aa00b0dde6729",
   "anomaly_artifact": "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json",
   "anomaly_classification": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
   "artifact_lifecycle": {
@@ -310,9 +538,9 @@
   },
   "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
   "counts": {
-   "collected": 11,
+   "collected": 12,
    "reconciled": 6,
-   "unreconciled": 5
+   "unreconciled": 6
   },
   "opening_receipt_hour": {
    "count": 406,
@@ -339,7 +567,7 @@
   "safe_to_open_or_evaluate_oos": "NO",
   "safe_to_reconcile_existing_results": "NO",
   "state": "RECONCILED_PARTIAL",
-  "state_artifact": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json",
-  "state_self_sha256": "3d088abfa1cd3a3684aec78626b4f69c17fa963d4e4e0581a49321d6928e312b"
+  "state_artifact": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json",
+  "state_self_sha256": "4d4cfd98db02c82a9138895b80830898e1a3c8e69528b170f072e817bb9f316b"
  }
 }
