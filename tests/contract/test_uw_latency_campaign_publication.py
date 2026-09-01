@@ -13,12 +13,18 @@ from tests.withdrawn_claims import carries_supersession_notice, normalize
 from mds650.uw_latency_campaign import canonical_sha256
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v2.json"
-STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v2.json"
-SAME_DAY_PRIOR_AGGREGATE = (
+AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v3.json"
+STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v3.json"
+SAME_DAY_PRIOR_AGGREGATE_V2 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v2.json"
+)
+SAME_DAY_PRIOR_STATE_V2 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v2.json"
+)
+SAME_DAY_PRIOR_AGGREGATE_V1 = (
     REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
 )
-SAME_DAY_PRIOR_STATE = (
+SAME_DAY_PRIOR_STATE_V1 = (
     REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
 )
 PRIOR_AGGREGATE = (
@@ -75,8 +81,10 @@ def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
     for path in (
         AGGREGATE,
         STATE,
-        SAME_DAY_PRIOR_AGGREGATE,
-        SAME_DAY_PRIOR_STATE,
+        SAME_DAY_PRIOR_AGGREGATE_V2,
+        SAME_DAY_PRIOR_STATE_V2,
+        SAME_DAY_PRIOR_AGGREGATE_V1,
+        SAME_DAY_PRIOR_STATE_V1,
         PRIOR_AGGREGATE,
         PRIOR_STATE,
         LEGACY_AGGREGATE,

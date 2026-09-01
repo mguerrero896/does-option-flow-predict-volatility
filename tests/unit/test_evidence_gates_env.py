@@ -113,6 +113,46 @@ def test_help_exits_without_running_any_gate(monkeypatch) -> None:  # type: igno
     assert exited.value.code == 0
 
 
+def test_existing_evidence_fails_before_running_any_gate(
+    monkeypatch, tmp_path: Path
+) -> None:  # type: ignore[no-untyped-def]
+    module = _load()
+    evidence = tmp_path / "already-exists.json"
+    evidence.write_text("frozen\n", encoding="utf-8")
+
+    def must_not_run(*args, **kwargs):  # type: ignore[no-untyped-def]
+        pytest.fail(f"existing evidence path executed a gate: {args!r} {kwargs!r}")
+
+    monkeypatch.setattr(module, "_run", must_not_run)
+    monkeypatch.setattr(module, "_verify_gated_hashes", must_not_run)
+    with pytest.raises(SystemExit, match="TIER2_EVIDENCE_ALREADY_EXISTS"):
+        module.main(
+            [
+                "--evidence-output",
+                str(evidence),
+                "--required-ancestor",
+                "HEAD",
+            ]
+        )
+
+
+def test_evidence_writer_cannot_overwrite_a_frozen_receipt(tmp_path: Path) -> None:
+    module = _load()
+    evidence = tmp_path / "already-exists.json"
+    evidence.write_text("frozen\n", encoding="utf-8")
+
+    with pytest.raises(SystemExit, match="TIER2_EVIDENCE_ALREADY_EXISTS"):
+        module._write_evidence(
+            evidence,
+            required_ancestor="a" * 40,
+            tested_commit="b" * 40,
+            tested_tree="c" * 40,
+            results={"full-pytest": 0},
+        )
+
+    assert evidence.read_text(encoding="utf-8") == "frozen\n"
+
+
 def test_ci_does_not_hide_portable_byte_contracts() -> None:
     module = _load()
     portable = {

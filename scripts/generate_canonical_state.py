@@ -43,10 +43,10 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
 UW_LATENCY_AGGREGATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v2.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v3.json"
 )
 UW_LATENCY_STATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v2.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v3.json"
 )
 UW_LATENCY_ANOMALY = (
     Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"

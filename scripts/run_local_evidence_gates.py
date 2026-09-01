@@ -140,7 +140,12 @@ def _write_evidence(
         "overall_exit_code": 0 if all(code == 0 for code in results.values()) else 1,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    try:
+        with path.open("x", encoding="utf-8", newline="\n") as handle:
+            json.dump(payload, handle, indent=2, sort_keys=True)
+            handle.write("\n")
+    except FileExistsError as exc:
+        raise SystemExit("TIER2_EVIDENCE_ALREADY_EXISTS") from exc
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -156,6 +161,9 @@ def main(argv: list[str] | None = None) -> None:
     tested_commit = ""
     tested_tree = ""
     if args.evidence_output is not None:
+        evidence_output = args.evidence_output.resolve()
+        if evidence_output.exists():
+            raise SystemExit("TIER2_EVIDENCE_ALREADY_EXISTS")
         if _git_output("status", "--porcelain", env=licensed_env):
             raise SystemExit("TIER2_EVIDENCE_DIRTY_WORKTREE")
         required_ancestor = _git_output(
@@ -215,7 +223,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     if args.evidence_output is not None:
         _write_evidence(
-            args.evidence_output.resolve(),
+            evidence_output,
             required_ancestor=required_ancestor,
             tested_commit=tested_commit,
             tested_tree=tested_tree,
