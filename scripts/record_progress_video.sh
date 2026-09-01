@@ -117,16 +117,25 @@ show_def() {
 
 VISUAL_NO=0
 show_svg() {
-  local file=$1 title=$2 profile
+  local file=$1 title=$2 profile marker
   [[ -f $file ]] || die "FIGURE_NOT_FOUND:$file"
   VISUAL_NO=$((VISUAL_NO + 1))
   profile=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO")
-  mark VISUAL "$file"
+  marker=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO.open")
   printf '\n\033[1;35m# FIGURE · %s\033[0m\n' "$title"
   VIDEO_EDGE_EXE=$(cygpath -aw "$EDGE_EXE") \
   VIDEO_SVG=$(cygpath -aw "$file") \
   VIDEO_EDGE_PROFILE="$profile" \
+  VIDEO_EDGE_MARKER="$marker" \
     pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+      function Get-ProfileProcesses {
+        Get-CimInstance Win32_Process |
+          Where-Object {
+            $_.Name -eq "msedge.exe" -and $_.CommandLine -and
+            $_.CommandLine.Contains($env:VIDEO_EDGE_PROFILE)
+          } |
+          ForEach-Object { Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue }
+      }
       $url = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
       $args = @(
         "--user-data-dir=$($env:VIDEO_EDGE_PROFILE)",
@@ -134,17 +143,44 @@ show_svg() {
         "--window-position=3840,0",
         "--window-size=2560,1440",
         "--no-first-run",
+        "--disable-background-mode",
         "--disable-features=msEdgeFirstRunExperience"
       )
-      $p = Start-Process -FilePath $env:VIDEO_EDGE_EXE -ArgumentList $args -PassThru
-      Start-Sleep -Seconds 9
-      if (-not $p.HasExited) {
-        [void] $p.CloseMainWindow()
-        [void] $p.WaitForExit(5000)
+      Start-Process -FilePath $env:VIDEO_EDGE_EXE -ArgumentList $args | Out-Null
+      $deadline = (Get-Date).AddSeconds(10)
+      do {
+        $window = Get-ProfileProcesses |
+          Where-Object MainWindowHandle -ne 0 |
+          Select-Object -First 1
+        if (-not $window) { Start-Sleep -Milliseconds 200 }
+      } until ($window -or (Get-Date) -ge $deadline)
+      if (-not $window) { throw "EDGE_FIGURE_WINDOW_NOT_FOUND" }
+      [IO.File]::WriteAllText($env:VIDEO_EDGE_MARKER, "OPEN")
+    '
+  [[ -s $(cygpath -au "$marker") ]] || die "EDGE_FIGURE_WINDOW_NOT_FOUND"
+  mark VISUAL "$file"
+  sleep 9
+  VIDEO_EDGE_PROFILE="$profile" pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+      function Get-ProfileProcesses {
+        @(Get-CimInstance Win32_Process |
+          Where-Object {
+            $_.Name -eq "msedge.exe" -and $_.CommandLine -and
+            $_.CommandLine.Contains($env:VIDEO_EDGE_PROFILE)
+          } |
+          ForEach-Object { Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue })
       }
-      Start-Sleep -Seconds 1
+      Get-ProfileProcesses |
+        Where-Object MainWindowHandle -ne 0 |
+        ForEach-Object { [void] $_.CloseMainWindow() }
+      $deadline = (Get-Date).AddSeconds(10)
+      while ((Get-ProfileProcesses).Count -gt 0 -and (Get-Date) -lt $deadline) {
+        Start-Sleep -Milliseconds 200
+      }
+      if ((Get-ProfileProcesses).Count -gt 0) {
+        throw "EDGE_FIGURE_CLOSE_TIMEOUT"
+      }
       if (Test-Path -LiteralPath $env:VIDEO_EDGE_PROFILE) {
-        try { Remove-Item -LiteralPath $env:VIDEO_EDGE_PROFILE -Recurse -Force } catch {}
+        Remove-Item -LiteralPath $env:VIDEO_EDGE_PROFILE -Recurse -Force -ErrorAction Stop
       }
     '
   sleep 2
@@ -263,6 +299,12 @@ cleanup() {
   done
   ((GATE_TAB_STARTED)) && : >"$GATE_RELEASE"
   stop_recorder || { ((cleanup_rc != 0)) || cleanup_rc=91; }
+  if ((cleanup_rc == 0 && NORMAL_EXIT)); then
+    [[ -e $GATE_EXITED ]] || cleanup_rc=92
+    if ((cleanup_rc == 0)); then
+      rm -r -- "$STATE_DIR" || cleanup_rc=93
+    fi
+  fi
   if ((cleanup_rc != 0)); then
     printf 'VIDEO_RECOVERY_STATE_RETAINED: %s\n' "$STATE_DIR" >&2
   fi
@@ -340,13 +382,15 @@ GATE
 
 show_gate_result() {
   local deadline gate_rc
-  mark VISUAL "live progress and seven-gate summary in the evidence terminal"
-  wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 1
+  mark WAIT "local evidence gate completion"
+  printf 'LOCAL_EVIDENCE_GATE_RUNNING_IN_BACKGROUND'
   deadline=$((SECONDS + 900))
   until [[ -s $GATE_DONE ]]; do
     ((SECONDS < deadline)) || die "LOCAL_GATE_TIMEOUT"
-    sleep 0.25
+    printf '.'
+    sleep 2
   done
+  printf '\n'
   gate_rc=$(<"$GATE_DONE")
   [[ $gate_rc =~ ^[0-9]+$ ]] || die "LOCAL_GATE_RESULT_INVALID"
   : >"$GATE_SHOW"
@@ -356,6 +400,8 @@ show_gate_result() {
     sleep 0.1
   done
 
+  wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 1
+  mark VISUAL "completed seven-gate summary in the evidence terminal"
   sleep 12
   wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 0
   sleep 1
@@ -401,6 +447,33 @@ threshold_counts() {
      clear_own_mde: ([$cells[] | select((.estimate|abs) >= .mde)]|length),
      flow_clear_own_mde: ([$flow[] | select((.estimate|abs) >= .mde)]|length)}
   ' "$INFERENCE"
+}
+
+validate_chapters() {
+  local duration_ms=$1
+  [[ $duration_ms =~ ^[0-9]+$ && -s $CH ]] || die "CHAPTER_LEDGER_INVALID"
+  awk -F'\t' -v duration_ms="$duration_ms" '
+    BEGIN { expected_act = 1 }
+    {
+      if (NF != 3 || $1 !~ /^[0-9]+$/) bad = 1
+      timestamp = $1 + 0
+      if (NR > 1 && timestamp < previous) bad = 1
+      if ($2 == "ACT") {
+        prefix = expected_act " | "
+        if (index($3, prefix) != 1) bad = 1
+        expected_act++
+      }
+      if ($2 == "END") {
+        end_count++
+        end_ms = timestamp
+      }
+      previous = timestamp
+    }
+    END {
+      if (NR == 0 || bad || expected_act != 6 || end_count != 1 ||
+          end_ms > duration_ms || previous > duration_ms) exit 1
+    }
+  ' "$CH" || die "CHAPTER_LEDGER_INVALID"
 }
 
 MANIFEST=$(jq -er '.scientific_bundle.manifest.path' data/CANONICAL_STATE.json)
@@ -642,7 +715,11 @@ jq -e '
     .width == 2560 and .height == 1440)] | length) == 1 and
   ((.format.duration | tonumber) > 0)
 ' "$STATE_DIR/video-probe.json" >/dev/null || die "VIDEO_PROBE_FAILED"
+VIDEO_DURATION_MS=$(jq -er '((.format.duration | tonumber) * 1000 | floor)' \
+  "$STATE_DIR/video-probe.json")
+validate_chapters "$VIDEO_DURATION_MS"
 [[ -z $(git status --porcelain=v1 --untracked-files=all) ]] || die "FINAL_WORKTREE_NOT_CLEAN"
 
 NORMAL_EXIT=1
-printf 'VIDEO_CAPTURE_VERIFIED\nVIDEO=%s\nCHAPTERS=%s\n' "$VIDEO" "$CH"
+printf 'VIDEO_CAPTURE_VERIFIED\nCHAPTER_LEDGER_VERIFIED\nVIDEO=%s\nCHAPTERS=%s\n' \
+  "$VIDEO" "$CH"
