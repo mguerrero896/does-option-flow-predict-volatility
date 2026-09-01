@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–119](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation and publication-custody audit. |
+| [97–120](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
 
 <a id="decision-1"></a>
 
@@ -2099,3 +2099,28 @@ Requirements-consistency and preregistration gates pass.
      exact hermetic CI command, provider-key alias correction, rebuild-guide navigation and
      artifact-derived figure footer. They alter no frozen result, estimate, interval,
      verdict, Phase 8 read count or Phase 9 collection state.
+
+<a id="decision-120"></a>
+
+120. **The six deferred publication-hardening tasks are closed without changing scientific
+     evidence (2026-09-01).** Accepted PR #45 was neither reopened nor modified. The four
+     additive follow-up PRs preserve every frozen result, estimate, interval, verdict,
+     evaluation mask and sealed-cohort read count. Their dispositions are:
+
+     | Task | Recorded disposition and evidence |
+     | --- | --- |
+     | 1 | **LANDED — CLONE HOOK ACTIVATION FAILS CLOSED.** PR #46 (merge `fd54b03d`) made the tracked `scripts/hooks/pre-push` the required active hook and added byte-exact verification. Fresh-clone contracts distinguish `PRE_PUSH_HOOKS_PATH_UNSET`, `PRE_PUSH_HOOKS_PATH_WRONG` and `PRE_PUSH_HOOK_BYTES_MISMATCH`; only the correct tracked hook returns `PRE_PUSH_HOOK_OK`. CI and the licensed local-evidence gate both execute the verifier, so a clone cannot silently rely on an unversioned `.githooks` copy. |
+     | 6A | **LANDED — SIX RECONCILIATIONS HARVESTED TARGET-BLIND.** PR #47 (merge `188b528c`) added a reproducible aggregate built only from session `reconciliation.json` files. It records 11 collected sessions, six reconciled, 2,418/2,418 supported alerts, zero unmatched alerts and five clean-session median p50 latency of 29.500069 seconds. The requested NY-hour aggregate is explicitly declined as `NOT_AVAILABLE_IN_RECONCILIATION_JSON`; producing it would require reading licensed row data outside the allowed harvest boundary. |
+     | 6B | **LANDED — MACHINE STATE IS AUTHORITATIVE.** The registered state artifact is `RECONCILED_PARTIAL` (6/11 reconciled), appears in `data/CANONICAL_STATE.json`, and governs published Markdown through an artifact-derived contract. `PROXY_ONLY_CROSS_CHANNEL` remains the claim boundary; backfill is `None` because `CROSS_CHANNEL_NOT_IDENTIFIABLE`, and revision is `None` because `AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE`. Count alone therefore cannot promote the promised timing statement. |
+     | 6C | **LANDED — 2026-08-21 DISPOSED WITHOUT EDITING CUSTODY.** Metadata-only diagnosis classified the 4,294.886-second p50 as `COLLECTOR_RESTART_REPLAY_DUPLICATION`, not measured provider degradation. That session remains in custody and in support-rate totals but is excluded from latency distributions with the reason registered. A threshold guard now routes comparable excursions through the existing `logs/UW_LATENCY_ALERT.txt` plus desktop-popup path. |
+     | 6D | **LANDED — LIVE GATE PROSE RECONCILED AFTER THE ARTIFACT.** Gate 5 now separates the measured 100% contract-window support and approximately 30-second clean-session p50 from the structurally non-identifiable backfill/revision half. The dated amendment to A002/PITV22-C002 retains `created_at` as `PROXY_ONLY`; it makes no eligibility promotion. |
+     | 6E | **DELIVERED AS A PROPOSAL, NOT BUILT.** The same-channel design records what a live individual-trade receipt collector, retention budget and campaign would require. No scheduled task was activated, no provider data was acquired and no collector was implemented; quota, storage and campaign length remain an owner resource decision. |
+     | 3 | **LANDED — DML CALLER-WIDTH TRIPWIRE ONLY.** PR #48 (merge `8853e79f`) fails before estimation if the Ext1 fold-built nuisance width differs from the placeholder width. The contract was mutation-proven by changing the placeholder from `+1` to `+2`. `src/mds650/rp2/dml.py` is unchanged, so decision 119's guard-order defect remains an explicitly unmodified scientific-logic issue rather than a covert repair. |
+     | 2 | **LANDED — ONE `train_share` AUTHORITY.** PR #48 moved the sole effective default to `src/mds650/rp2/panel.py`; the pipeline and all twelve RP2 CLI producers consume the same `0.6` value. An AST contract rejects a new local default. The canonical bundle manifest SHA-256 remains `95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a`. |
+     | 4 | **LANDED — RISK-WEIGHTED COVERAGE MARGIN.** PR #49 (merge `1dac40c5`) added fail-closed tests only: no production module changed. Against a declared 90.50% global target, Gate A rose from 90.08% to 90.65% over 16,783 statements and 5,858 branches; the named weak-module cohort rose from 81.37% to 94.16% against a 92% target; Gate B remains 100.00% over 1,055 statements and 358 branches. `uw_anomaly_evidence_v21.py` remains at 85.08% because task 6 already mutation-tested the campaign outlier guard. Synthetic impossible-calendar paths, a byte-identical concurrent-writer path and duplicate dependency/SHA failure branches remain deliberately uncovered rather than being exercised with trivial tests. |
+     | 5 | **LANDED AND USED — RED/GREEN EVIDENCE SURVIVES SQUASH.** PR #46 replaced the unverifiable chronology checkbox with required durable RED-before/GREEN-after evidence, enforced by CI ordering and non-empty-body contracts. PRs #47–#49 record the exact reversible mutations, failing commands, restored passing commands and versioned-hook output; all five hosted checks passed before each merge. |
+
+     These dispositions leave `PIT_V22_RECONCILIATION_BLOCKED` in force. They do not
+     authorize a Phase 8 reread, a Phase 9 read, a method-freeze promotion, a same-channel
+     collector, or publication of licensed provider rows. No sealed external cohort was
+     opened and no previously frozen artifact was modified for this closeout.
