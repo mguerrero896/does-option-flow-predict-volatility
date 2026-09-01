@@ -51,15 +51,18 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "disabled figure sync": '"--disable-sync",',
         "DPI-aware figure placement": "SetProcessDpiAwareness(2)",
         "physical figure placement": "SetWindowPos(",
+        "non-activating figure placement": "SWP_NOACTIVATE",
         "verified figure geometry": "EDGE_FIGURE_GEOMETRY_NOT_VERIFIED",
-        "verified figure focus": "GetForegroundWindow()",
-        "readable figure zoom": 'SendWait("^{ADD}")',
+        "verified figure topmost": "EDGE_FIGURE_TOPMOST_NOT_VERIFIED",
+        "readable figure fit": "object-fit: contain",
         "interrupt-safe figure cleanup": "ACTIVE_EDGE_PROFILE",
         "figure-close handshake": "EDGE_FIGURE_CLOSE_TIMEOUT",
     }
     missing = [name for name, token in required.items() if token not in text]
     assert not missing, f"progress-video script is missing: {', '.join(missing)}"
-    assert "if (-not [VideoEdgeWindow]::SetForegroundWindow" not in text
+    figure = text[text.index("show_svg() {") : text.index("\nFROZEN=")]
+    assert "GetForegroundWindow" not in figure
+    assert "SendKeys" not in figure
 
     forbidden = {
         "bc dependency": r"\bbc\b",

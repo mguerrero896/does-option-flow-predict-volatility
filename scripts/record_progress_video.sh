@@ -224,17 +224,19 @@ close_edge_profile() {
 VISUAL_NO=0
 ACTIVE_EDGE_PROFILE=''
 show_svg() {
-  local file=$1 title=$2 profile marker
+  local file=$1 title=$2 profile marker wrapper
   [[ -f $file ]] || die "FIGURE_NOT_FOUND:$file"
   VISUAL_NO=$((VISUAL_NO + 1))
   profile=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO")
   ACTIVE_EDGE_PROFILE=$profile
   marker=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO.open")
+  wrapper=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO.html")
   printf '\n\033[1;35m# FIGURE · %s\033[0m\n' "$title"
   VIDEO_EDGE_EXE=$(cygpath -aw "$EDGE_EXE") \
   VIDEO_SVG=$(cygpath -aw "$file") \
   VIDEO_EDGE_PROFILE="$profile" \
   VIDEO_EDGE_MARKER="$marker" \
+  VIDEO_EDGE_WRAPPER="$wrapper" \
     pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
       function Get-ProfileProcesses {
         Get-CimInstance Win32_Process |
@@ -244,10 +246,23 @@ show_svg() {
           } |
           ForEach-Object { Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue }
       }
-      $url = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
+      $svgUrl = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
+      $wrapperUrl = "file:///" + ($env:VIDEO_EDGE_WRAPPER -replace "\\", "/")
+      $escapedSvgUrl = [Net.WebUtility]::HtmlEncode($svgUrl)
+      $html = @"
+<!doctype html><html><head><meta charset="utf-8"><style>
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: white; }
+img { display: block; width: 100vw; height: 100vh; object-fit: contain; }
+</style></head><body><img src="$escapedSvgUrl" alt=""></body></html>
+"@
+      [IO.File]::WriteAllText(
+        $env:VIDEO_EDGE_WRAPPER,
+        $html,
+        [Text.UTF8Encoding]::new($false)
+      )
       $args = @(
         "--user-data-dir=$($env:VIDEO_EDGE_PROFILE)",
-        "--app=$url",
+        "--app=$wrapperUrl",
         "--guest",
         "--disable-sync",
         "--no-default-browser-check",
@@ -272,6 +287,8 @@ show_svg() {
 using System;
 using System.Runtime.InteropServices;
 public static class VideoEdgeWindow {
+  public const uint SWP_NOACTIVATE = 0x0010;
+  public const uint SWP_SHOWWINDOW = 0x0040;
   [StructLayout(LayoutKind.Sequential)] public struct RECT {
     public int Left, Top, Right, Bottom;
   }
@@ -283,8 +300,7 @@ public static class VideoEdgeWindow {
   [DllImport("shcore.dll")] public static extern int SetProcessDpiAwareness(int value);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
   [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr after, int x, int y, int width, int height, uint flags);
-  [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
-  [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll", EntryPoint="GetWindowLongW")] public static extern int GetWindowLong(IntPtr hWnd, int index);
   [DllImport("user32.dll")] public static extern IntPtr MonitorFromWindow(IntPtr hWnd, uint flags);
   [DllImport("user32.dll")] public static extern bool GetMonitorInfo(IntPtr monitor, ref MONITORINFO info);
   [DllImport("user32.dll")] public static extern bool IsZoomed(IntPtr hWnd);
@@ -294,25 +310,17 @@ public static class VideoEdgeWindow {
         $handle = [IntPtr] $window.MainWindowHandle
         [void] [VideoEdgeWindow]::ShowWindow($handle, 9)
         Start-Sleep -Milliseconds 200
-        if (-not [VideoEdgeWindow]::SetWindowPos($handle, [IntPtr]::Zero, 3840, 0, 2560, 1440, 0x0040)) {
+        $noActivateAndShow = [VideoEdgeWindow]::SWP_NOACTIVATE -bor [VideoEdgeWindow]::SWP_SHOWWINDOW
+        if (-not [VideoEdgeWindow]::SetWindowPos($handle, [IntPtr](-1), 3840, 0, 2560, 1440, $noActivateAndShow)) {
           throw "EDGE_FIGURE_POSITION_FAILED"
         }
         Start-Sleep -Milliseconds 200
         [void] [VideoEdgeWindow]::ShowWindow($handle, 3)
-        Add-Type -AssemblyName Microsoft.VisualBasic
-        $deadline = (Get-Date).AddSeconds(3)
-        do {
-          [void] [VideoEdgeWindow]::SetForegroundWindow($handle)
-          if ([VideoEdgeWindow]::GetForegroundWindow() -ne $handle) {
-            [void] [Microsoft.VisualBasic.Interaction]::AppActivate($window.Id)
-            Start-Sleep -Milliseconds 100
-          }
-        } until (
-          [VideoEdgeWindow]::GetForegroundWindow() -eq $handle -or
-          (Get-Date) -ge $deadline
-        )
-        if ([VideoEdgeWindow]::GetForegroundWindow() -ne $handle) {
-          throw "EDGE_FIGURE_FOCUS_FAILED"
+        if (-not [VideoEdgeWindow]::SetWindowPos($handle, [IntPtr](-1), 0, 0, 0, 0, ($noActivateAndShow -bor 0x0003))) {
+          throw "EDGE_FIGURE_TOPMOST_FAILED"
+        }
+        if (([VideoEdgeWindow]::GetWindowLong($handle, -20) -band 0x00000008) -eq 0) {
+          throw "EDGE_FIGURE_TOPMOST_NOT_VERIFIED"
         }
         $geometryOk = $false
         $deadline = (Get-Date).AddSeconds(5)
@@ -331,15 +339,9 @@ public static class VideoEdgeWindow {
           if (-not $geometryOk) { Start-Sleep -Milliseconds 100 }
         } until ($geometryOk -or (Get-Date) -ge $deadline)
         if (-not $geometryOk) { throw "EDGE_FIGURE_GEOMETRY_NOT_VERIFIED" }
-        Add-Type -AssemblyName System.Windows.Forms
-        Start-Sleep -Milliseconds 300
-        1..5 | ForEach-Object {
-          [System.Windows.Forms.SendKeys]::SendWait("^{ADD}")
-          Start-Sleep -Milliseconds 80
-        }
         [IO.File]::WriteAllText(
           $env:VIDEO_EDGE_MARKER,
-          "OPEN`tmonitor=3840,0,6400,1440`tmaximized=true"
+          "OPEN`tmonitor=3840,0,6400,1440`tmaximized=true`ttopmost=true`tfit=contain"
         )
       } catch {
         $failure = $_
