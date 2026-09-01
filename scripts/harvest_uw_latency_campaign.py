@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from collections.abc import Sequence
+from datetime import date
 from pathlib import Path
 
 from mds650.uw_latency_campaign import (
@@ -14,6 +15,13 @@ from mds650.uw_latency_campaign import (
     read_artifact,
     write_new_json,
 )
+
+
+def _parse_iso_date(value: str, error_code: str) -> date:
+    try:
+        return date.fromisoformat(value)
+    except (TypeError, ValueError) as error:
+        raise ValueError(error_code) from error
 
 
 def build_snapshot(
@@ -28,7 +36,12 @@ def build_snapshot(
     sessions_root = external_root / "uw_latency" / "sessions"
     if not sessions_root.is_dir():
         raise ValueError("UW_LATENCY_SESSION_STORE_MISSING")
-    session_dirs = sorted(path for path in sessions_root.iterdir() if path.is_dir())
+    cutoff = _parse_iso_date(as_of_date, "UW_LATENCY_AS_OF_DATE_INVALID")
+    session_dirs = []
+    for path in sorted(path for path in sessions_root.iterdir() if path.is_dir()):
+        session_date = _parse_iso_date(path.name, "UW_LATENCY_SESSION_NAME_INVALID")
+        if session_date <= cutoff:
+            session_dirs.append(path)
     reconciliations = [
         path / "reconciliation.json"
         for path in session_dirs
@@ -82,6 +95,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     else:
         if not args.reconciliation or not args.session_dir:
             parser.error("provide --external-root or both explicit input lists")
+        cutoff = _parse_iso_date(args.as_of_date, "UW_LATENCY_AS_OF_DATE_INVALID")
+        explicit_sessions = [
+            (path.name, "UW_LATENCY_SESSION_NAME_INVALID")
+            for path in args.session_dir
+        ] + [
+            (path.parent.name, "UW_LATENCY_RECONCILIATION_SESSION_INVALID")
+            for path in args.reconciliation
+        ]
+        for session, error_code in explicit_sessions:
+            if _parse_iso_date(session, error_code) > cutoff:
+                raise ValueError("UW_LATENCY_EXPLICIT_INPUT_AFTER_AS_OF_DATE")
         anomaly = read_artifact(
             args.anomaly_artifact, "UW_LATENCY_ANOMALY_ARTIFACT_INVALID"
         )
