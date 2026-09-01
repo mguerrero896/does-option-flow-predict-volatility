@@ -44,6 +44,7 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
             "_validated_reconciliation_age"
         ),
         "UW twelve-session maturity table": "eligible_NY_date",
+        "UW eligible-session distinction": "ELIGIBLE_AWAITING_RECONCILIATION",
         "UW claim boundary": "contract_window_support, backfill, revision",
         "figure-open handshake": "EDGE_FIGURE_WINDOW_NOT_FOUND",
         "private guest figure session": '"--guest",',

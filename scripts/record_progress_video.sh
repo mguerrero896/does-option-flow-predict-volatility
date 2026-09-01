@@ -880,14 +880,18 @@ run "jq '{as_of_date, counts, claim_classification}' $UW_STATE" \
   jq '{as_of_date, counts, claim_classification}' "$UW_STATE"
 run "jq '<session, plus-seven date, maturity status>' $UW_STATE" \
   jq -r '
+    .as_of_date as $as_of_date |
     ["session", "eligible_NY_date", "status"],
     (.session_inventory[] |
+      (((.session + "T00:00:00Z") | fromdateiso8601) + 604800 |
+        strftime("%Y-%m-%d")) as $eligible_date |
       [
         .session,
-        (((.session + "T00:00:00Z") | fromdateiso8601) + 604800 |
-          strftime("%Y-%m-%d")),
+        $eligible_date,
         (if .reconciliation_present then
            "RECONCILED"
+         elif $eligible_date <= $as_of_date then
+           "ELIGIBLE_AWAITING_RECONCILIATION"
          else
            "PENDING_MATURITY"
          end)
