@@ -155,6 +155,15 @@ def test_v24_rejects_forbidden_input_paths_without_echoing_them(
         assert_safe_target_blind_paths_v24(paths)
 
 
+def test_v24_ignores_forbidden_tokens_in_a_trusted_checkout_root(tmp_path: Path) -> None:
+    trusted_root = tmp_path / "evaluation-worktree"
+
+    assert_safe_target_blind_paths_v24(
+        {"schema": trusted_root / "specs" / "manifest.schema.json"},
+        trusted_root=trusted_root,
+    )
+
+
 def test_v24_writer_is_idempotent_and_refuses_conflict(tmp_path: Path) -> None:
     """The new version retains byte-identical replay and conflict failure semantics."""
     path = tmp_path / "artifact.bin"

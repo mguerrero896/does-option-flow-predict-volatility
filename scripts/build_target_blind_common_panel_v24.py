@@ -251,7 +251,8 @@ def _assert_safe_paths_and_output_roots(args: argparse.Namespace) -> None:
             "availability_manifest_schema": args.availability_manifest_schema,
             "reconciliation_gate_schema": args.reconciliation_gate_schema,
             "output_manifest_schema": args.output_manifest_schema,
-        }
+        },
+        trusted_root=ROOT,
     )
     if not args.output_root.as_posix().startswith("D:/MDS650/"):
         raise ValueError("TARGET_BLIND_V24_OUTPUT_ROOT_INVALID")
