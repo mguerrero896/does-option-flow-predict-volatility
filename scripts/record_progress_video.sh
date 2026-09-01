@@ -338,7 +338,7 @@ start_recorder() {
   exec {rec_out_fd}<&-
   REC_RUNNING=1
 
-  local deadline=$((SECONDS + 20)) out_us wall_ms
+  local deadline=$((SECONDS + 20)) out_us wall_ms tick=0
   until awk -F= '$1=="out_time_us" && $2+0>0 {ok=1} END {exit !ok}' \
       "$FF_PROGRESS" 2>/dev/null; do
     ps -p "$REC_PID" >/dev/null 2>&1 || {
@@ -346,8 +346,11 @@ start_recorder() {
       die "FFMPEG_START_FAILED"
     }
     ((SECONDS < deadline)) || die "FFMPEG_NO_FRAME_TIMEOUT"
+    printf '\r\033[2KRECORDER_PREFLIGHT %03d' "$tick"
+    tick=$((tick + 1))
     sleep 0.1
   done
+  printf '\r\033[2K'
 
   out_us=$(awk -F= '$1=="out_time_us"{value=$2} END{print value+0}' "$FF_PROGRESS")
   wall_ms=$(now_ms)
@@ -642,6 +645,10 @@ run "threshold_counts $INFERENCE" threshold_counts
 show_svg docs/figures/cumulative-loss-difference.svg "Cumulative loss differences by information layer"
 
 act 4 "BREAK IT LIVE"
+say "E: the complete local evidence gate"
+show_gate_result
+show_clean
+
 say "D: one frozen result, three independent defenses"
 run "pwsh: (Get-Item $FROZEN).IsReadOnly" \
   pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
@@ -721,10 +728,6 @@ expect_fail "the authorization points at a different freeze" \
 restore_idx 2
 run "uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q" \
   uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q
-show_clean
-
-say "E: the complete local evidence gate"
-show_gate_result
 show_clean
 
 act 5 "SCALE AND THE FINAL POSITION"

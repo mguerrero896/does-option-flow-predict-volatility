@@ -48,7 +48,7 @@ def _ci_sim_env() -> dict[str, str]:
     # not survive this function.
     keep = (
         "PATH", "PATHEXT", "SYSTEMROOT", "WINDIR", "COMSPEC", "OS",
-        "TEMP", "TMP", "LOCALAPPDATA", "APPDATA", "PROGRAMDATA",
+        "TEMP", "TMP", "LOCALAPPDATA", "APPDATA", "PROGRAMDATA", "PROGRAMFILES",
         "USERPROFILE", "HOMEDRIVE", "HOMEPATH", "USERNAME",
         "NUMBER_OF_PROCESSORS", "PROCESSOR_ARCHITECTURE", "PROCESSOR_IDENTIFIER",
         "PROCESSOR_LEVEL", "PROCESSOR_REVISION",
