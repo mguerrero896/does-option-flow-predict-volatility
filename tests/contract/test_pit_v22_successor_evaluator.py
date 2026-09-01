@@ -191,6 +191,9 @@ def test_one_shot_runner_wires_only_the_frozen_producers() -> None:
 
 def test_public_log_is_sealed_after_result_and_custody_closeout() -> None:
     source = RUNNER.read_text(encoding="utf-8")
+    writer = source[
+        source.index("def _write_new_json") : source.index("def _assert_public_payload")
+    ]
     result_write = source.index("_write_new_json(TRACKED_RESULT, result)")
     ledger_close = source.index('_write_json(paths["ledger"], completed_ledger)', result_write)
     claim_close = source.index('paths["claim"]', ledger_close)
@@ -201,3 +204,5 @@ def test_public_log_is_sealed_after_result_and_custody_closeout() -> None:
 
     assert result_write < result_event < ledger_close < ledger_event
     assert ledger_event < claim_close < claim_event < log_write
+    assert writer.index("digest =") < writer.index("os.link")
+    assert '_sha256(paths["method"]) != runtime_method_sha256' in source

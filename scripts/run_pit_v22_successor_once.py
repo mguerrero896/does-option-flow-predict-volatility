@@ -130,6 +130,7 @@ def _write_new_json(path: Path, payload: Mapping[str, Any]) -> str:
     assert_outside_frozen(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     payload_bytes = _json_bytes(payload)
+    digest = hashlib.sha256(payload_bytes).hexdigest()
     with tempfile.NamedTemporaryFile(
         mode="wb", dir=path.parent, prefix=f".{path.name}.", suffix=".part", delete=False
     ) as target:
@@ -144,7 +145,7 @@ def _write_new_json(path: Path, payload: Mapping[str, Any]) -> str:
     finally:
         with suppress(OSError):
             temporary.unlink(missing_ok=True)
-    return hashlib.sha256(payload_bytes).hexdigest()
+    return digest
 
 
 def _assert_public_payload(payload: Mapping[str, Any]) -> None:
@@ -710,12 +711,13 @@ def _execute() -> dict[str, Any]:
             training_mde=training_mde,
         )
         _write_json(paths["method"], method)
+        runtime_method_sha256 = _sha256(paths["method"])
         _event(
             events,
             paths["log"],
             "DEVELOPMENT_MDE_FROZEN",
             training_mde=training_mde,
-            method_sha256=_sha256(paths["method"]),
+            method_sha256=runtime_method_sha256,
         )
 
         result_paths = (
@@ -732,6 +734,7 @@ def _execute() -> dict[str, Any]:
             or authorization_sha256 != preflight["owner_authorization_sha256"]
             or _sha256(SOURCE_PANEL) != preflight["source_panel_sha256"]
             or _sha256(SOURCE_BARS) != preflight["source_bars_sha256"]
+            or _sha256(paths["method"]) != runtime_method_sha256
             or _git("status", "--porcelain").stdout.strip()
         ):
             raise RuntimeError("PIT_V22_SIGNED_INPUT_CHANGED_BEFORE_AUTHORIZATION")
@@ -768,6 +771,7 @@ def _execute() -> dict[str, Any]:
         if (
             _sha256(SOURCE_PANEL) != preflight["source_panel_sha256"]
             or _sha256(SOURCE_BARS) != preflight["source_bars_sha256"]
+            or _sha256(paths["method"]) != runtime_method_sha256
         ):
             raise RuntimeError("PIT_V22_SOURCE_CHANGED_DURING_OOS_MATERIALIZATION")
         remaining_all, remaining_common = _linked_panel(remaining_source, remaining_bars)
@@ -850,6 +854,8 @@ def _execute() -> dict[str, Any]:
             content_addressed_payloads[protocol_id] = digest
         if content_addressed_payloads["linked-common-panel"] != linked_panel_sha256:
             raise RuntimeError("PIT_V22_LINKED_PANEL_SNAPSHOT_MISMATCH")
+        if content_addressed_payloads["runtime-method-freeze"] != runtime_method_sha256:
+            raise RuntimeError("PIT_V22_RUNTIME_METHOD_SNAPSHOT_MISMATCH")
         _event(
             events,
             paths["log"],
