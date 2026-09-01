@@ -284,6 +284,7 @@ public static class VideoEdgeWindow {
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
   [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr after, int x, int y, int width, int height, uint flags);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
   [DllImport("user32.dll")] public static extern IntPtr MonitorFromWindow(IntPtr hWnd, uint flags);
   [DllImport("user32.dll")] public static extern bool GetMonitorInfo(IntPtr monitor, ref MONITORINFO info);
   [DllImport("user32.dll")] public static extern bool IsZoomed(IntPtr hWnd);
@@ -298,7 +299,19 @@ public static class VideoEdgeWindow {
         }
         Start-Sleep -Milliseconds 200
         [void] [VideoEdgeWindow]::ShowWindow($handle, 3)
-        if (-not [VideoEdgeWindow]::SetForegroundWindow($handle)) {
+        Add-Type -AssemblyName Microsoft.VisualBasic
+        $deadline = (Get-Date).AddSeconds(3)
+        do {
+          [void] [VideoEdgeWindow]::SetForegroundWindow($handle)
+          if ([VideoEdgeWindow]::GetForegroundWindow() -ne $handle) {
+            [void] [Microsoft.VisualBasic.Interaction]::AppActivate($window.Id)
+            Start-Sleep -Milliseconds 100
+          }
+        } until (
+          [VideoEdgeWindow]::GetForegroundWindow() -eq $handle -or
+          (Get-Date) -ge $deadline
+        )
+        if ([VideoEdgeWindow]::GetForegroundWindow() -ne $handle) {
           throw "EDGE_FIGURE_FOCUS_FAILED"
         }
         $geometryOk = $false

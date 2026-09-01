@@ -52,12 +52,14 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "DPI-aware figure placement": "SetProcessDpiAwareness(2)",
         "physical figure placement": "SetWindowPos(",
         "verified figure geometry": "EDGE_FIGURE_GEOMETRY_NOT_VERIFIED",
+        "verified figure focus": "GetForegroundWindow()",
         "readable figure zoom": 'SendWait("^{ADD}")',
         "interrupt-safe figure cleanup": "ACTIVE_EDGE_PROFILE",
         "figure-close handshake": "EDGE_FIGURE_CLOSE_TIMEOUT",
     }
     missing = [name for name, token in required.items() if token not in text]
     assert not missing, f"progress-video script is missing: {', '.join(missing)}"
+    assert "if (-not [VideoEdgeWindow]::SetForegroundWindow" not in text
 
     forbidden = {
         "bc dependency": r"\bbc\b",
