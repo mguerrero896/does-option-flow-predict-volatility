@@ -18,6 +18,7 @@ import numpy as np
 from mds650.storage import assert_outside_frozen
 
 ASSETS = ("AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA")
+RECONCILE_AFTER_DAYS = 7
 BACKFILL_REASON = "CROSS_CHANNEL_NOT_IDENTIFIABLE"
 REVISION_REASON = "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE"
 ANOMALY_CLASSIFICATION = "COLLECTOR_RESTART_REPLAY_DUPLICATION"
@@ -311,6 +312,13 @@ def build_campaign_state(
         if session in seen or not directory.is_dir():
             raise ValueError("UW_LATENCY_SESSION_INVENTORY_INVALID")
         seen.add(session)
+        reconciliation_path = directory / "reconciliation.json"
+        reconciliation_present = reconciliation_path.is_file()
+        if reconciliation_present:
+            reconciliation = _load_mapping(
+                reconciliation_path, "UW_LATENCY_RECONCILIATION_JSON_INVALID"
+            )
+            _validated_reconciliation_age(reconciliation, reconciliation_path)
         inventory.append(
             {
                 "session": session,
@@ -318,7 +326,7 @@ def build_campaign_state(
                 "collector_summary_present": (directory / "collector_summary.json").is_file(),
                 "capture_report_present": (directory / "capture_report.json").is_file(),
                 "heartbeat_present": (directory / "heartbeat.json").is_file(),
-                "reconciliation_present": (directory / "reconciliation.json").is_file(),
+                "reconciliation_present": reconciliation_present,
             }
         )
     inventory.sort(key=lambda item: str(item["session"]))
@@ -594,7 +602,7 @@ def _validated_reconciliation(payload: Mapping[str, Any], path: Path) -> dict[st
     session = payload.get("session")
     if not isinstance(session, str) or path.parent.name != session:
         raise ValueError("UW_LATENCY_RECONCILIATION_SESSION_INVALID")
-    _iso_date(session, "UW_LATENCY_RECONCILIATION_SESSION_INVALID")
+    _validated_reconciliation_age(payload, path)
     if payload.get("status") != "PROXY_ONLY_CROSS_CHANNEL":
         raise ValueError("UW_LATENCY_RECONCILIATION_STATUS_INVALID")
     live = _nonnegative_int(payload, "live_flow_alerts_in_session")
@@ -634,6 +642,25 @@ def _validated_reconciliation(payload: Mapping[str, Any], path: Path) -> dict[st
         "revision_rate_among_matched": None,
         "revision_rate_reason": REVISION_REASON,
     }
+
+
+def _validated_reconciliation_age(payload: Mapping[str, Any], path: Path) -> None:
+    session = payload.get("session")
+    if not isinstance(session, str) or path.parent.name != session:
+        raise ValueError("UW_LATENCY_RECONCILIATION_SESSION_INVALID")
+    session_date = _iso_date(session, "UW_LATENCY_RECONCILIATION_SESSION_INVALID")
+    value = payload.get("reconciled_utc")
+    if not isinstance(value, str):
+        raise ValueError("UW_LATENCY_RECONCILED_UTC_INVALID")
+    try:
+        reconciled_at = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise ValueError("UW_LATENCY_RECONCILED_UTC_INVALID") from error
+    if reconciled_at.tzinfo is None:
+        raise ValueError("UW_LATENCY_RECONCILED_UTC_INVALID")
+    age = (reconciled_at.astimezone(NY).date() - session_date).days
+    if age < RECONCILE_AFTER_DAYS:
+        raise ValueError("UW_LATENCY_RECONCILIATION_BEFORE_MINIMUM_AGE")
 
 
 def _validate_anomaly(anomaly: Mapping[str, Any]) -> None:
