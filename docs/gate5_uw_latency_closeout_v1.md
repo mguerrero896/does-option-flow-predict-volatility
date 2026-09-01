@@ -2,7 +2,7 @@
 
 > **SUPERSEDED FOR CURRENT USE (2026-09-01).** This frozen-snapshot closeout is retained
 > as historical context. The current hourly correction and authority are in
-> `docs/gate5_pit_foundations_v1.md` and the sibling `uw_latency_campaign_20260902_v1`
+> `docs/gate5_pit_foundations_v1.md` and the sibling `uw_latency_campaign_20260902_v4`
 > aggregate/state artifacts. The v1 artifacts were not modified.
 
 **As of 2026-09-01: `RECONCILED_PARTIAL`. Target-blind operational timing evidence

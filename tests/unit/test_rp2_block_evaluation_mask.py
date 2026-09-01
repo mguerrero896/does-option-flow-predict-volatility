@@ -226,7 +226,10 @@ def test_cumulative_figure_analysis_preserves_endpoint_and_concentration() -> No
     role = {
         "clusters": 3,
         "evaluation_mask_sha256": "a" * 64,
-        "nested_tests": {family: {"b2_over_b1": {"estimate": mean}} for family in PRIMARY_MODELS},
+        "nested_tests": {
+            family: {"b2_over_b1": {"estimate": mean, "mde": 1.0}}
+            for family in PRIMARY_MODELS
+        },
         "flow_loss_series": {
             "schema_version": 1,
             "evaluation_mask_sha256": "a" * 64,

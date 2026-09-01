@@ -126,6 +126,21 @@
    "sha256": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4"
   },
   {
+   "bytes": 19010,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_20260902_v2.json",
+   "sha256": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4"
+  },
+  {
+   "bytes": 19010,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_20260902_v3.json",
+   "sha256": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4"
+  },
+  {
+   "bytes": 20957,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json",
+   "sha256": "e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c"
+  },
+  {
    "bytes": 3349,
    "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
    "sha256": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
@@ -139,6 +154,21 @@
    "bytes": 3768,
    "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json",
    "sha256": "72181a9bd0edf30b42086830938ceff4facafed7374a4e63d1e34a9648db56b1"
+  },
+  {
+   "bytes": 3767,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v2.json",
+   "sha256": "7a252d6cb3e7e5ab1bd409af832423c7fde307527f40be8cd1dbd61743c43feb"
+  },
+  {
+   "bytes": 3766,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v3.json",
+   "sha256": "29448ec0188c1a2ab4a6fcb9904c9a6f838e3925826e0f351d250ab42785dea9"
+  },
+  {
+   "bytes": 3765,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json",
+   "sha256": "6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721"
   },
   {
    "bytes": 7606,
@@ -204,6 +234,26 @@
    "bytes": 5055,
    "path": "artifacts/lgbm_importances/results.json",
    "sha256": "451ad4eed3b29761732d6fb3f91c142c6fb269fb05533e39ca13a1eb9807bd93"
+  },
+  {
+   "bytes": 1130,
+   "path": "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json",
+   "sha256": "fdb96ec95738868a41a1c3296a88c5af7999573668cfbcd5f17b7d65b510aa60"
+  },
+  {
+   "bytes": 1130,
+   "path": "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json",
+   "sha256": "cfc71d0dc41e75d1ab32bbf939a48ecd21d83faef172251698c3f98ef3d4d490"
+  },
+  {
+   "bytes": 1130,
+   "path": "artifacts/local_evidence_gates/pr55_remediation_20260902_v3.json",
+   "sha256": "109f8c863fd2b3246dfa1b7b94861a16941483e0b697c6208a0b0eccbd35ed6e"
+  },
+  {
+   "bytes": 1130,
+   "path": "artifacts/local_evidence_gates/pr55_remediation_20260902_v6.json",
+   "sha256": "c85cadd69ef8c6406d3d5d53582cae7a222d255ba4d5d4a30e392d9ae7c21754"
   },
   {
    "bytes": 16110,
@@ -459,6 +509,11 @@
    "bytes": 295935,
    "path": "artifacts/rp2_ext1_directional_factorial_v3/results.json",
    "sha256": "c412c8ec5b2d0a39c91c99fda06da8db58548d38e38260bd2594010e1cf94e7f"
+  },
+  {
+   "bytes": 26382,
+   "path": "artifacts/rp2_v3/cumulative_loss_session_series_v1.json",
+   "sha256": "d40608c8a55c2e42408c7a08db4ddcd4a32fc69ad9d3e56077eb186ade32de0c"
   },
   {
    "bytes": 2749,

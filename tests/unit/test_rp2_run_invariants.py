@@ -570,8 +570,9 @@ def test_a_reused_panel_does_not_change_what_the_run_says_it_did() -> None:
     assert manifest(True).as_record()["steps"][0]["reused"] is True  # type: ignore[index]
 
 
-def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) -> None:
-    runner = _load("run_rp2_v3_pipeline")
+def _registered_panel_source(
+    runner: ModuleType, source: Path, *, source_lineage_mode: str | None = None
+) -> Path:
     from mds650.rp2.run_manifest import (
         PIPELINE_STEPS,
         RunManifest,
@@ -581,12 +582,22 @@ def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) 
         write_manifest,
     )
 
-    source = tmp_path / "source"
+    source.mkdir(parents=True)
+    source_input = source / "input_manifest.json"
+    input_record = {} if source_lineage_mode is None else {
+        "source_lineage_mode": source_lineage_mode
+    }
+    source_input.write_text(
+        json.dumps(input_record, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     records: list[StepRecord] = []
     for step in PIPELINE_STEPS:
         artifacts: dict[str, str] = {}
         content: dict[str, str] = {}
-        if step.name in runner.PANEL_STEP_NAMES:
+        if step.name == "validate-input-manifests":
+            artifacts["input_manifest.json"] = artifact_digest(source_input)
+            content["input_manifest.json"] = stable_content_digest(source_input)
+        elif step.name in runner.PANEL_STEP_NAMES:
             for output in step.outputs:
                 path = source / output
                 path.parent.mkdir(parents=True, exist_ok=True)
@@ -612,7 +623,7 @@ def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) 
             data_root="D:/MDS650",
             roles=("D", "V"),
             feature_registry_sha256="a" * 64,
-            input_manifest_sha256="b" * 64,
+            input_manifest_sha256=stable_content_digest(source_input),
             model_config_sha256="c" * 64,
             seeds={"bootstrap": 650},
             steps=tuple(records),
@@ -620,6 +631,14 @@ def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) 
             finished_at_utc="t",
         ),
     )
+    return source
+
+
+def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    from mds650.rp2.run_manifest import stable_content_digest
+
+    source = _registered_panel_source(runner, tmp_path / "source")
 
     input_record, digest, integrity = runner.validate_registered_panel_source(source)
     assert len(digest) == 64
@@ -640,6 +659,107 @@ def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) 
     (source / first).write_text("tampered\n", encoding="utf-8")
     with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_CHANGED"):
         runner.assert_registered_panel_source_unchanged(source, integrity)
+
+
+def test_registered_source_guards_before_probes_and_binds_inventory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    source = tmp_path / "source"
+    source.mkdir()
+    manifest = source / "run_manifest.json"
+    manifest.write_text("{}", encoding="utf-8")
+    events: list[tuple[str, Path]] = []
+
+    original_is_dir = type(source).is_dir
+    original_is_file = type(source).is_file
+    original_read_text = type(source).read_text
+
+    def guard(paths: list[Path]) -> None:
+        events.append(("guard", paths[0]))
+
+    def is_dir(path: Path) -> bool:
+        if path == source:
+            events.append(("is_dir", path))
+        return original_is_dir(path)
+
+    def is_file(path: Path) -> bool:
+        if path == manifest:
+            events.append(("is_file", path))
+        return original_is_file(path)
+
+    class StopBeforeManifestRead(Exception):
+        pass
+
+    def read_text(path: Path, *args: object, **kwargs: object) -> str:
+        if path == manifest:
+            events.append(("read_text", path))
+            raise StopBeforeManifestRead
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(runner, "assert_no_sealed_paths", guard)
+    monkeypatch.setattr(
+        runner,
+        "assert_inventory_is_frozen",
+        lambda inventory, _partition: events.append(("inventory_frozen", inventory)),
+    )
+    monkeypatch.setattr(type(source), "is_dir", is_dir)
+    monkeypatch.setattr(type(source), "is_file", is_file)
+    monkeypatch.setattr(type(source), "read_text", read_text)
+
+    with pytest.raises(StopBeforeManifestRead):
+        runner.validate_registered_panel_source(source)
+
+    assert events == [
+        ("guard", source),
+        ("is_dir", source),
+        ("inventory_frozen", runner.TAPE_INVENTORY),
+        ("guard", manifest),
+        ("is_file", manifest),
+        ("read_text", manifest),
+    ]
+
+
+def test_default_validation_binds_inventory_before_interpreting_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    inventory = tmp_path / "inventory.jsonl"
+    inventory.write_text("", encoding="utf-8")
+    events: list[str] = []
+
+    class StopBeforeInventoryRead(Exception):
+        pass
+
+    monkeypatch.setattr(runner, "TAPE_INVENTORY", inventory)
+    monkeypatch.setattr(runner, "assert_data_root_matches", lambda _root: None)
+    monkeypatch.setattr(runner, "declared_inputs", lambda _manifest: ([], "a" * 64))
+    monkeypatch.setattr(
+        runner,
+        "assert_inventory_is_frozen",
+        lambda _inventory, _partition: events.append("inventory_frozen"),
+    )
+
+    def stop_inventory_read(_inventory: Path) -> object:
+        events.append("inventory_paths")
+        raise StopBeforeInventoryRead
+
+    monkeypatch.setattr(runner, "inventory_paths", stop_inventory_read)
+    with pytest.raises(StopBeforeInventoryRead):
+        runner.validate_inputs(tmp_path / "run", data_root=tmp_path, forbid_sealed=True)
+    assert events == ["inventory_frozen", "inventory_paths"]
+
+
+def test_registered_panel_reuse_rejects_a_reused_source(tmp_path: Path) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    source = _registered_panel_source(
+        runner,
+        tmp_path / "source",
+        source_lineage_mode="registered_panel_reuse",
+    )
+
+    with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN"):
+        runner.validate_registered_panel_source(source)
 
 
 def test_registered_panel_source_cannot_overlap_destination(tmp_path: Path) -> None:

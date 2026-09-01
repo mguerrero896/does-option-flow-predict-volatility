@@ -13,8 +13,26 @@ from tests.withdrawn_claims import carries_supersession_notice, normalize
 from mds650.uw_latency_campaign import canonical_sha256
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
-STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
+AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
+STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
+SAME_DAY_PRIOR_AGGREGATE_V3 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v3.json"
+)
+SAME_DAY_PRIOR_STATE_V3 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v3.json"
+)
+SAME_DAY_PRIOR_AGGREGATE_V2 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v2.json"
+)
+SAME_DAY_PRIOR_STATE_V2 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v2.json"
+)
+SAME_DAY_PRIOR_AGGREGATE_V1 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
+)
+SAME_DAY_PRIOR_STATE_V1 = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
+)
 PRIOR_AGGREGATE = (
     REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v2.json"
 )
@@ -69,6 +87,12 @@ def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
     for path in (
         AGGREGATE,
         STATE,
+        SAME_DAY_PRIOR_AGGREGATE_V3,
+        SAME_DAY_PRIOR_STATE_V3,
+        SAME_DAY_PRIOR_AGGREGATE_V2,
+        SAME_DAY_PRIOR_STATE_V2,
+        SAME_DAY_PRIOR_AGGREGATE_V1,
+        SAME_DAY_PRIOR_STATE_V1,
         PRIOR_AGGREGATE,
         PRIOR_STATE,
         LEGACY_AGGREGATE,
@@ -135,13 +159,13 @@ def test_gate5_publishes_partial_state_and_cross_channel_boundary() -> None:
         "PROXY_ONLY_CROSS_CHANNEL",
         "CROSS_CHANNEL_NOT_IDENTIFIABLE",
         "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
-        "2,418",
+        "2,846",
         "100%",
         "2026-08-21",
         "COLLECTOR_RESTART_REPLAY_DUPLICATION",
-        "406 first receipts across all five clean sessions",
-        "6/406 (1.48%)",
-        "0/406",
+        "480 first receipts across all six clean sessions",
+        "8/480 (1.67%)",
+        "0/480",
         "does not hold as a strict conservative bound at the NY opening",
     )
     folded = normalize(text)
@@ -170,9 +194,9 @@ def test_final_report_carries_the_hourly_cutoff_finding() -> None:
     abstract_folded = normalize(abstract)
     timing_results_folded = normalize(timing_results)
     assert not [token for token in required if normalize(token) not in folded]
-    assert "6/406" in abstract_folded
+    assert "8/480" in abstract_folded
     assert "not a strict conservative opening bound" in abstract_folded
-    assert "6/406" in timing_results_folded
+    assert "8/480" in timing_results_folded
     assert "PROXY_ONLY_CROSS_CHANNEL" in timing_results
 
 
@@ -183,13 +207,13 @@ def test_hourly_distribution_answers_the_registered_opening_cutoff() -> None:
     assert latency["by_ny_hour"]["status"] == (
         "MEASURED_FROM_LICENSED_OBSERVATION_AGGREGATES"
     )
-    assert latency["by_ny_hour"]["included_first_receipts"] == 1768
+    assert latency["by_ny_hour"]["included_first_receipts"] == 2196
     opening = latency["by_ny_hour"]["values"]["9"]
-    assert opening["count"] == 406
-    assert opening["session_count"] == 5
-    assert opening["over_60_seconds"] == {"count": 6, "rate": 6 / 406}
+    assert opening["count"] == 480
+    assert opening["session_count"] == 6
+    assert opening["over_60_seconds"] == {"count": 8, "rate": 8 / 480}
     assert opening["over_120_seconds"] == {"count": 0, "rate": 0.0}
-    assert opening["quantiles_seconds"]["p99"] == 60.2168978
+    assert opening["quantiles_seconds"]["p99"] == 60.24905
     assert latency["by_ny_hour"]["values"]["14"]["over_120_seconds"]["count"] == 2
     assert set(latency["by_ny_hour_asset"]["values"]["9"]) == {
         "AAPL",
@@ -198,8 +222,8 @@ def test_hourly_distribution_answers_the_registered_opening_cutoff() -> None:
         "TSLA",
     }
     assert latency["by_ny_hour_asset"]["insufficient"]["9"] == {
-        "AMZN": {"count": 25, "reason": "COUNT_BELOW_30", "session_count": 5},
-        "MSFT": {"count": 24, "reason": "COUNT_BELOW_30", "session_count": 4},
+        "AMZN": {"count": 26, "reason": "COUNT_BELOW_30", "session_count": 6},
+        "MSFT": {"count": 27, "reason": "COUNT_BELOW_30", "session_count": 5},
     }
 
 

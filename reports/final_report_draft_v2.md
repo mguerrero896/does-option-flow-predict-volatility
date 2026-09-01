@@ -55,7 +55,7 @@ discovery ΔB1 is positive in all three families, validation does not establish 
 and ΔB2|B1 changes sign by family and partition. Ten of twelve contrasts are below their
 own minimum detectable effect. Provider source-time and record-creation rules prevent
 look-ahead under documented assumptions, but they do not prove historical client receipt
-time. A five-clean-session receipt audit found 6/406 (1.48 per cent) opening receipts
+time. A six-clean-session receipt audit found 8/480 (1.67 per cent) opening receipts
 beyond 60 seconds and none beyond 120 seconds, so the 60-second UW proxy is not a strict
 conservative opening bound in this sample; PIT v2.2 reconciliation therefore remains
 blocked. Phase 8 consumed its sole
@@ -569,24 +569,24 @@ improve those HAR/HARQ specifications on the measured sessions.
 ### 5.6 Operational timing result: the 60-second opening bound
 
 Gate 5 produced a separate target-blind operational timing result; it is not a predictive
-result and uses no target, forecast or loss. Across all six reconciled sessions,
-2,418/2,418 live flow alerts had support inside the registered contract window. The
+result and uses no target, forecast or loss. Across all seven reconciled sessions,
+2,846/2,846 live flow alerts had support inside the registered contract window. The
 receipt-latency distribution preserves the registered exclusion of the 2026-08-21
-collector-replay anomaly, leaving five clean sessions and 1,768 first valid receipts.
+collector-replay anomaly, leaving six clean sessions and 2,196 first valid receipts.
 
-The New York opening hour contains 406 first receipts. Of these, 6/406 (1.48 per cent)
-arrived more than 60 seconds after `created_at`; p99 was 60.216898 seconds, and 0/406
+The New York opening hour contains 480 first receipts. Of these, 8/480 (1.67 per cent)
+arrived more than 60 seconds after `created_at`; p99 was 60.249050 seconds, and 0/480
 exceeded 120 seconds. The registered 60-second UW availability buffer therefore does not
 hold as a strict conservative bound at the NY opening in this sample. The 120-second
-sensitivity has no opening exceedance, but two of 95 receipts in hour 14 exceeded 120
+sensitivity has no opening exceedance, but two of 133 receipts in hour 14 exceeded 120
 seconds, so it is not a strict all-day bound in the observed sessions.
 
-Five sessions and 406 opening receipts can falsify a zero-exceedance claim in the observed
+Six sessions and 480 opening receipts can falsify a zero-exceedance claim in the observed
 sample; they cannot certify future sessions. The estimand is local
 `receipt_utc − created_at`, not provider publication time or historical client receipt.
 Accordingly, `created_at` remains `PROXY_ONLY_CROSS_CHANNEL`, backfill and revision remain
 non-identifiable, and `PIT_V22_RECONCILIATION_BLOCKED` remains in force
-(`artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json`;
+(`artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json`;
 `docs/gate5_pit_foundations_v1.md`).
 
 ## 6. Discussion

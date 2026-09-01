@@ -10,8 +10,8 @@ from pathlib import Path
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260902_v1.json"
-STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json"
+AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json"
+STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json"
 ANOMALY = REPO / "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json"
 OPTOUT = "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP"
 CONFIGURED_ROOT = os.environ.get("MDS650_EXTERNAL_ROOT") or os.environ.get(
@@ -55,12 +55,12 @@ def test_uw_latency_snapshot_matches_live_regeneration() -> None:
     assert committed_aggregate == fresh_aggregate, (
         "UW latency aggregate is stale; run scripts/harvest_uw_latency_campaign.py "
         "with --external-root and new dated --aggregate-output/--state-output paths, "
-        "then advance the current v2 authority"
+        "then advance the current authority"
     )
     assert committed_state == fresh_state, (
         "UW latency lifecycle state is stale; run scripts/harvest_uw_latency_campaign.py "
         "with --external-root and new dated --aggregate-output/--state-output paths, "
-        "then advance the current v2 authority"
+        "then advance the current authority"
     )
 
 

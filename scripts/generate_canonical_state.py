@@ -43,10 +43,10 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
 UW_LATENCY_AGGREGATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
 )
 UW_LATENCY_STATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
 )
 UW_LATENCY_ANOMALY = (
     Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
@@ -83,6 +83,11 @@ AUTHORIZED_SOURCES = (
     UW_LATENCY_AGGREGATE.as_posix(),
     UW_LATENCY_STATE.as_posix(),
     UW_LATENCY_ANOMALY.as_posix(),
+    "artifacts/rp2_v3/cumulative_loss_session_series_v1.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v3.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v6.json",
     PIT_V22_PREREGISTRATION.as_posix(),
     PIT_V22_FREEZE.as_posix(),
     PIT_V22_AUTHORIZATION.as_posix(),
@@ -608,7 +613,7 @@ def build_state() -> dict[str, Any]:
         != _canonical_sha(uw_latency_anomaly, omit="self_sha256")
         or uw_latency_state.get("state") != "RECONCILED_PARTIAL"
         or uw_latency_state.get("counts")
-        != {"collected": 12, "reconciled": 6, "unreconciled": 6}
+        != {"collected": 12, "reconciled": 7, "unreconciled": 5}
         or uw_latency_state.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
         or uw_latency_state.get("artifact_lifecycle", {}).get("policy")
         != "IMMUTABLE_DATED_SNAPSHOT"
@@ -627,7 +632,7 @@ def build_state() -> dict[str, Any]:
         .get("values", {})
         .get("9", {})
         .get("over_60_seconds", {})
-        != {"count": 6, "rate": 6 / 406}
+        != {"count": 8, "rate": 8 / 480}
     ):
         raise ValueError("UW_LATENCY_CAMPAIGN_AUTHORITY_DRIFT")
     return {
