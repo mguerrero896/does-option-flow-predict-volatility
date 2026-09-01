@@ -45,6 +45,7 @@ def test_no_planted_secret_survives_the_simulation_env(monkeypatch) -> None:  # 
     }
     for name, value in fakes.items():
         monkeypatch.setenv(name, value)
+    monkeypatch.setenv("PROGRAMFILES", "C:/Program Files")
 
     module = _load()
     env = module._ci_sim_env()
@@ -54,7 +55,9 @@ def test_no_planted_secret_survives_the_simulation_env(monkeypatch) -> None:  # 
     for value in fakes.values():
         assert value not in env.values(), "a planted secret VALUE survived under another name"
     # The simulation still has to be able to run a subprocess on Windows.
-    assert "PATH" in {k.upper() for k in env}
+    normalized = {key.upper(): value for key, value in env.items()}
+    assert "PATH" in normalized
+    assert normalized["PROGRAMFILES"] == "C:/Program Files"
     assert env["MDS650_EXTERNAL_ROOT"].endswith(".ci-sim-nonexistent")
     assert env["MDS650_PANEL_GUARD_MAY_SKIP"] == "1"
 

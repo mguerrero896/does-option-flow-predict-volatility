@@ -645,6 +645,10 @@ run "threshold_counts $INFERENCE" threshold_counts
 show_svg docs/figures/cumulative-loss-difference.svg "Cumulative loss differences by information layer"
 
 act 4 "BREAK IT LIVE"
+say "E: the complete local evidence gate"
+show_gate_result
+show_clean
+
 say "D: one frozen result, three independent defenses"
 run "pwsh: (Get-Item $FROZEN).IsReadOnly" \
   pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
@@ -724,10 +728,6 @@ expect_fail "the authorization points at a different freeze" \
 restore_idx 2
 run "uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q" \
   uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q
-show_clean
-
-say "E: the complete local evidence gate"
-show_gate_result
 show_clean
 
 act 5 "SCALE AND THE FINAL POSITION"
