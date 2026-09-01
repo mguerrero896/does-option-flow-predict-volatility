@@ -39,6 +39,12 @@ INTERNAL_PROSE = re.compile(
     r"(?i)(@codex|codex|claude|AGENTS\.md|\.agents/|\.specify|"
     r"docs/superpowers|[A-Z]:[\\/]Users[\\/])"
 )
+# GitHub exposes these two third-party app names as public check-suite metadata.
+# Remove only their literal paired provenance phrase before looking for private
+# workflow/tooling references; any other mention of either name remains forbidden.
+PUBLIC_CHECK_SUITE_PROVENANCE = re.compile(
+    r"(?i)`claude` and `supabase` suites"
+)
 INTERNAL_WORKFLOW_PROSE = re.compile(r"(?i)(\bspec kit\b|\bfor agents\b)")
 PRIVATE_WORKFLOW_PROSE = re.compile(
     r"(?i)([A-Z]:[\\/]MDS650(?:[\\/]|`|\s|$)|"
@@ -155,7 +161,10 @@ def test_public_research_prose_has_no_internal_tooling_or_personal_paths() -> No
         except (UnicodeDecodeError, OSError):
             continue
         prose = path.suffix.lower() in {".md", ".csv", ".txt"}
-        if INTERNAL_PROSE.search(content) or (
+        internal_scan = PUBLIC_CHECK_SUITE_PROVENANCE.sub(
+            "external check suites", content
+        )
+        if INTERNAL_PROSE.search(internal_scan) or (
             prose
             and (
                 PRIVATE_WORKFLOW_PROSE.search(content)
@@ -167,6 +176,18 @@ def test_public_research_prose_has_no_internal_tooling_or_personal_paths() -> No
         "public research prose still exposes private tooling or personal paths:\n  "
         + "\n  ".join(violations)
     )
+
+
+def test_public_check_suite_provenance_exception_is_literal_and_narrow() -> None:
+    allowed = PUBLIC_CHECK_SUITE_PROVENANCE.sub(
+        "external check suites", "`claude` and `supabase` suites"
+    )
+    unrelated = PUBLIC_CHECK_SUITE_PROVENANCE.sub(
+        "external check suites", "claude generated this prose"
+    )
+
+    assert INTERNAL_PROSE.search(allowed) is None
+    assert INTERNAL_PROSE.search(unrelated) is not None
 
 
 def test_public_tree_uses_research_facing_document_names() -> None:
