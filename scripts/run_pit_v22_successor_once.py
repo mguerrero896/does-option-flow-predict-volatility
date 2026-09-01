@@ -49,25 +49,116 @@ from mds650.temporal_validation import split_expanding_fold
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = ROOT / "artifacts" / "target_blind_v22"
-SOURCE_PREREGISTRATION = ARTIFACTS / "next_confirmation_preregistration_v2.json"
-SIGNED_FREEZE = ARTIFACTS / "successor_method_freeze_v1.json"
-OWNER_AUTHORIZATION = ARTIFACTS / "successor_owner_authorization_v1.json"
 METHOD_TEMPLATE = ROOT / "artifacts" / "phase6" / "method_freeze.json"
-RUN_ID = "pit-v22-successor-evaluation-v1-20260901"
+TARGET_LINKAGE_POLICY: dict[str, Any] = {
+    "eligible_origin_set": "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE",
+    "required_target_price_count": 31,
+    "required_target_return_count": 30,
+    "require_finite_rv30": True,
+    "require_positive_rv30": True,
+    "missing_target_action": "EXCLUDE_ORIGIN",
+    "imputation": "FORBIDDEN",
+    "cross_provider_bar_substitution": "FORBIDDEN",
+}
+PROTOCOL_CONFIGS = {
+    "v1": {
+        "source_preregistration": "next_confirmation_preregistration_v2.json",
+        "signed_freeze": "successor_method_freeze_v1.json",
+        "owner_authorization": "successor_owner_authorization_v1.json",
+        "run_id": "pit-v22-successor-evaluation-v1-20260901",
+        "base_commit": "b8657bfa7e280b75fddd7ee818cbaa5987c495d2",
+        "signed_freeze_sha256": (
+            "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
+        ),
+        "owner_authorization_sha256": (
+            "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
+        ),
+        "gated_root_path_sha256": (
+            "0348aa63962b19714303dccd0a8f8d273f1dc0152e9e2dc15353fad1956fea94"
+        ),
+        "data_defect_resolution": "",
+        "data_defect_resolution_sha256": "",
+    },
+    "v2": {
+        "source_preregistration": "next_confirmation_preregistration_v3.json",
+        "signed_freeze": "successor_method_freeze_v2.json",
+        "owner_authorization": "successor_owner_authorization_v2.json",
+        "run_id": "pit-v22-successor-evaluation-v2-20260902",
+        "base_commit": "b9ec78d6b368aa7ecc5d1e8dcc0c2a0c62a2cbcf",
+        "signed_freeze_sha256": (
+            "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40"
+        ),
+        "owner_authorization_sha256": (
+            "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1"
+        ),
+        "gated_root_path_sha256": (
+            "b0f7f75c38470bb9a6965c6187cf4814cfe8cf93109e18ca2c058e3b6a1bafb9"
+        ),
+        "data_defect_resolution": "target_source_discrepancy_resolution_v1.json",
+        "data_defect_resolution_sha256": (
+            "794a2ef5594cdb77c4ad72b63639eaac8cccaf3a8b7447338e5e7c097d93a5c1"
+        ),
+    },
+}
+
+PROTOCOL_VERSION: str
+SOURCE_PREREGISTRATION: Path
+SIGNED_FREEZE: Path
+OWNER_AUTHORIZATION: Path
+RUN_ID: str
 SOURCE_PANEL: Path
 SOURCE_BARS: Path
 GATED_ROOT: Path
-TRACKED_RESULT = ARTIFACTS / "successor_evaluation_result_v1.json"
-TRACKED_LOG = ARTIFACTS / "successor_evaluation_run_v1.json"
-BASE_COMMIT = "b8657bfa7e280b75fddd7ee818cbaa5987c495d2"
-EXPECTED_SIGNED_FREEZE_SHA256 = "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
-EXPECTED_OWNER_AUTHORIZATION_SHA256 = (
-    "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
-)
+TRACKED_RESULT: Path
+TRACKED_LOG: Path
+BASE_COMMIT: str
+EXPECTED_SIGNED_FREEZE_SHA256: str
+EXPECTED_OWNER_AUTHORIZATION_SHA256: str
+EXPECTED_GATED_ROOT_PATH_SHA256: str
+DATA_DEFECT_RESOLUTION: Path | None
+EXPECTED_DATA_DEFECT_RESOLUTION_SHA256: str | None
 EXPECTED_SOURCE_PANEL_SHA256 = "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236"
-EXPECTED_GATED_ROOT_PATH_SHA256 = "0348aa63962b19714303dccd0a8f8d273f1dc0152e9e2dc15353fad1956fea94"
 MODEL_ROLES = ("gamma_glm_confirmatory", "lightgbm_robustness")
 KEYS = ("origin_id", "asset", "session_date", "forecast_origin_utc")
+
+
+def configure_protocol(version: str) -> None:
+    """Select one closed protocol configuration without weakening either contract."""
+    global BASE_COMMIT
+    global DATA_DEFECT_RESOLUTION
+    global EXPECTED_DATA_DEFECT_RESOLUTION_SHA256
+    global EXPECTED_GATED_ROOT_PATH_SHA256
+    global EXPECTED_OWNER_AUTHORIZATION_SHA256
+    global EXPECTED_SIGNED_FREEZE_SHA256
+    global OWNER_AUTHORIZATION
+    global PROTOCOL_VERSION
+    global RUN_ID
+    global SIGNED_FREEZE
+    global SOURCE_PREREGISTRATION
+    global TRACKED_LOG
+    global TRACKED_RESULT
+
+    try:
+        config = PROTOCOL_CONFIGS[version]
+    except KeyError as error:
+        raise ValueError("PIT_V22_SUCCESSOR_PROTOCOL_VERSION_INVALID") from error
+    PROTOCOL_VERSION = version
+    SOURCE_PREREGISTRATION = ARTIFACTS / config["source_preregistration"]
+    SIGNED_FREEZE = ARTIFACTS / config["signed_freeze"]
+    OWNER_AUTHORIZATION = ARTIFACTS / config["owner_authorization"]
+    RUN_ID = config["run_id"]
+    TRACKED_RESULT = ARTIFACTS / f"successor_evaluation_result_{version}.json"
+    TRACKED_LOG = ARTIFACTS / f"successor_evaluation_run_{version}.json"
+    BASE_COMMIT = config["base_commit"]
+    EXPECTED_SIGNED_FREEZE_SHA256 = config["signed_freeze_sha256"]
+    EXPECTED_OWNER_AUTHORIZATION_SHA256 = config["owner_authorization_sha256"]
+    EXPECTED_GATED_ROOT_PATH_SHA256 = config["gated_root_path_sha256"]
+    resolution = config["data_defect_resolution"]
+    DATA_DEFECT_RESOLUTION = ARTIFACTS / resolution if resolution else None
+    EXPECTED_DATA_DEFECT_RESOLUTION_SHA256 = config["data_defect_resolution_sha256"] or None
+
+
+configure_protocol("v1")
 
 
 def _sha256(path: Path) -> str:
@@ -214,7 +305,11 @@ def _runtime_preregistration(
         ],
         "outcome_assets": list(OUTCOME_ASSETS),
         "train_share": DEFAULT_TRAIN_SHARE,
-        "session_universe": "COMMON_PREDICTOR_COMPLETE_SESSIONS",
+        "session_universe": (
+            "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE"
+            if PROTOCOL_VERSION == "v2"
+            else "COMMON_PREDICTOR_COMPLETE_SESSIONS"
+        ),
         "session_universe_count": len([*development, *validation, *holdout]),
         "remainder_rule": "EQUAL_CHRONOLOGICAL_VALIDATION_AND_HOLDOUT",
         "remainder_boundary_fixed_target_free": True,
@@ -233,6 +328,9 @@ def _runtime_preregistration(
             },
         ],
     }
+    if PROTOCOL_VERSION == "v2":
+        payload["target_linkage_eligibility_policy"] = dict(TARGET_LINKAGE_POLICY)
+        payload["linked_common_complete_rows_at_freeze"] = "NOT_READ_OUTCOME_DEPENDENT"
     payload["manifest_sha256"] = canonical_sha256(payload)
     phase6_fold_definitions(payload)
     return payload
@@ -261,6 +359,27 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
     freeze, freeze_sha256 = _read_json_with_sha256(SIGNED_FREEZE)
     authorization, authorization_sha256 = _read_json_with_sha256(OWNER_AUTHORIZATION)
     method_template, method_template_sha256 = _read_json_with_sha256(METHOD_TEMPLATE)
+    resolution_sha256: str | None = None
+    protocol_specific_valid = True
+    if DATA_DEFECT_RESOLUTION is not None:
+        resolution, resolution_sha256 = _read_json_with_sha256(DATA_DEFECT_RESOLUTION)
+        resolution_unsigned = {
+            key: value for key, value in resolution.items() if key != "manifest_sha256"
+        }
+        protocol_specific_valid = (
+            resolution_sha256 == EXPECTED_DATA_DEFECT_RESOLUTION_SHA256
+            and resolution.get("manifest_sha256") == canonical_sha256(resolution_unsigned)
+            and resolution.get("status") == "FROZEN_BEFORE_OOS"
+            and resolution.get("oos_read_count") == 0
+            and resolution.get("eligibility_policy") == TARGET_LINKAGE_POLICY
+            and source_preregistration.get("target_linkage_eligibility_policy")
+            == TARGET_LINKAGE_POLICY
+            and freeze.get("target_linkage_eligibility_policy") == TARGET_LINKAGE_POLICY
+            and freeze.get("data_defect_resolution_sha256") == resolution_sha256
+            and authorization.get("protocol_id") == "pit-v22-successor-method-freeze-v2"
+            and authorization.get("run_id") == RUN_ID
+            and authorization.get("data_defect_decision") == resolution.get("decision")
+        )
     prereg_unsigned = {
         key: value
         for key, value in source_preregistration.items()
@@ -287,6 +406,7 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         or freeze.get("bound_panel_sha256") != panel_sha256
         or source_preregistration["bound_panel"]["panel_sha256"] != panel_sha256
         or source_preregistration["bound_panel"]["source_hashes"]["fmp_bars_sha256"] != bars_sha256
+        or not protocol_specific_valid
     ):
         raise RuntimeError("PIT_V22_SUCCESSOR_SIGNED_INPUT_INVALID")
     schema = pl.read_parquet_schema(SOURCE_PANEL)
@@ -340,6 +460,7 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         "source_common_complete_rows": common.height,
         "split_session_counts": expected_counts,
         "runtime_preregistration_sha256": preregistration["manifest_sha256"],
+        "data_defect_resolution_sha256": resolution_sha256,
     }
 
 
@@ -349,6 +470,7 @@ def _validate_target_linkage(
     source_common_ids = source.filter(pl.col("common_predictor_complete")).select("origin_id")
     target_complete_ids = targets.filter(
         pl.col("rv30").is_finite()
+        & (pl.col("rv30") > 0)
         & (pl.col("target_price_count") == 31)
         & (pl.col("target_return_count") == 30)
     ).select("origin_id")
@@ -598,6 +720,9 @@ def _runtime_method(
             )
         },
     }
+    if PROTOCOL_VERSION == "v2":
+        payload["target_linkage_eligibility_policy"] = dict(TARGET_LINKAGE_POLICY)
+        payload["data_defect_resolution_sha256"] = EXPECTED_DATA_DEFECT_RESOLUTION_SHA256
     payload["manifest_sha256"] = canonical_sha256(payload)
     return payload
 
@@ -629,7 +754,7 @@ def _execute() -> dict[str, Any]:
     GATED_ROOT.mkdir(parents=True, exist_ok=False)
     paths = {
         "claim": GATED_ROOT / "one_shot_claim.json",
-        "log": GATED_ROOT / "successor_evaluation_run_v1.json",
+        "log": GATED_ROOT / TRACKED_LOG.name,
         "preregistration": GATED_ROOT / "runtime_preregistration.json",
         "development_panel": GATED_ROOT / "development_linked_common_panel.parquet",
         "panel": GATED_ROOT / "linked_common_panel.parquet",
@@ -639,7 +764,7 @@ def _execute() -> dict[str, Any]:
         "predictions": GATED_ROOT / "oos_primary_predictions.parquet",
         "robustness_predictions": GATED_ROOT / "oos_b1_robustness_predictions.parquet",
         "variants": GATED_ROOT / "variant_ledger.json",
-        "result": GATED_ROOT / "successor_evaluation_result_v1.json",
+        "result": GATED_ROOT / TRACKED_RESULT.name,
     }
     claim = {
         "schema_version": "pit-v22-successor-one-shot-claim-1.0",
@@ -693,12 +818,19 @@ def _execute() -> dict[str, Any]:
             .collect()
         )
         development_all, development = _linked_panel(development_source, development_bars)
+        development_predictor_complete_rows = development_source.filter(
+            pl.col("common_predictor_complete")
+        ).height
+        development_target_exclusions = development_predictor_complete_rows - development.height
+        if PROTOCOL_VERSION == "v2" and development_target_exclusions != 6:
+            raise RuntimeError("PIT_V22_DEVELOPMENT_TARGET_EXCLUSION_COUNT_INVALID")
         _write_parquet(paths["development_panel"], development)
         _event(
             events,
             paths["log"],
             "DEVELOPMENT_RV30_LINKED",
             rows=development.height,
+            target_linkage_excluded_origins=development_target_exclusions,
             development_panel_sha256=_sha256(paths["development_panel"]),
         )
 
@@ -793,7 +925,12 @@ def _execute() -> dict[str, Any]:
         common = pl.concat([development, remaining_common]).sort(
             ["session_date", "forecast_origin_utc", "asset"]
         )
-        if all_rows.height != 77_328 or common.height != 62_266:
+        target_linkage_excluded_origins = preflight["source_common_complete_rows"] - common.height
+        if (
+            all_rows.height != preflight["source_rows"]
+            or common.height <= 0
+            or target_linkage_excluded_origins < 0
+        ):
             raise RuntimeError("PIT_V22_TARGET_LINKAGE_COUNTS_INVALID")
         _write_parquet(paths["panel"], common)
         linked_panel_sha256 = _sha256(paths["panel"])
@@ -803,6 +940,7 @@ def _execute() -> dict[str, Any]:
             paths["log"],
             "OOS_RV30_LINKED_AND_VALIDATED",
             rows=common.height,
+            target_linkage_excluded_origins=target_linkage_excluded_origins,
             linked_panel_sha256=linked_panel_sha256,
         )
 
@@ -886,6 +1024,7 @@ def _execute() -> dict[str, Any]:
             "validation_forecasts_retained_without_confirmatory_inference": True,
             "source_rows": preflight["source_rows"],
             "linked_common_complete_rows": common.height,
+            "target_linkage_excluded_origins": target_linkage_excluded_origins,
             "holdout_evaluated_origins": holdout_predictions["origin_id"].n_unique(),
             "evaluation": evaluation,
             "mde_annotations": annotations,
@@ -931,6 +1070,11 @@ def _execute() -> dict[str, Any]:
             "personal_paths_emitted": False,
             "secret_values_emitted": False,
         }
+        if PROTOCOL_VERSION == "v2":
+            result["target_linkage_eligibility_policy"] = dict(TARGET_LINKAGE_POLICY)
+            result["hashes"]["data_defect_resolution_sha256"] = preflight[
+                "data_defect_resolution_sha256"
+            ]
         result["manifest_sha256"] = canonical_sha256(result)
         _assert_public_payload(result)
         result_payload = _json_bytes(result)
@@ -1049,10 +1193,12 @@ def main() -> None:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--preflight-only", action="store_true")
     mode.add_argument("--execute", action="store_true")
+    parser.add_argument("--protocol-version", choices=tuple(PROTOCOL_CONFIGS), default="v1")
     parser.add_argument("--source-panel", type=Path, required=True)
     parser.add_argument("--source-bars", type=Path, required=True)
     parser.add_argument("--gated-root", type=Path, required=True)
     args = parser.parse_args()
+    configure_protocol(args.protocol_version)
     SOURCE_PANEL = args.source_panel
     SOURCE_BARS = args.source_bars
     GATED_ROOT = args.gated_root

@@ -12,7 +12,6 @@ from typing import Any
 from mds650.phase6_evaluation import authorize_phase6_oos
 from mds650.study_design import canonical_sha256
 
-
 REPO = Path(__file__).resolve().parents[2]
 ARTIFACTS = REPO / "artifacts" / "target_blind_v22"
 FREEZE = ARTIFACTS / "successor_method_freeze_v2.json"
@@ -53,10 +52,12 @@ def test_v2_contract_binds_complete_case_resolution_and_fresh_authorization() ->
         "missing_target_action": "EXCLUDE_ORIGIN",
         "imputation": "FORBIDDEN",
         "cross_provider_bar_substitution": "FORBIDDEN",
+        "require_positive_rv30": True,
     }
-    assert freeze["data_defect_resolution_sha256"] == hashlib.sha256(
-        RESOLUTION.read_bytes()
-    ).hexdigest()
+    assert (
+        freeze["data_defect_resolution_sha256"]
+        == hashlib.sha256(RESOLUTION.read_bytes()).hexdigest()
+    )
     assert authorization["protocol_id"] == "pit-v22-successor-method-freeze-v2"
     assert authorization["contract_sha256"] == hashlib.sha256(FREEZE.read_bytes()).hexdigest()
     assert authorization["sealed_cohorts_read_before"] == 0
@@ -96,5 +97,5 @@ def test_runner_selects_a_fresh_v2_run_without_mutating_v1_defaults() -> None:
 def test_v2_runner_does_not_equate_predictor_complete_with_target_complete_count() -> None:
     source = RUNNER.read_text(encoding="utf-8")
 
-    assert 'common.height != 62_266' not in source
+    assert "common.height != 62_266" not in source
     assert "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE" in source

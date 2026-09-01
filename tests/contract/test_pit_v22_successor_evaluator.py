@@ -133,16 +133,16 @@ def test_target_linkage_excludes_predictor_complete_rows_with_missing_rv30() -> 
     runner = _runner_module()
     source = pl.DataFrame(
         {
-            "origin_id": ["kept", "target-missing"],
-            "common_predictor_complete": [True, True],
+            "origin_id": ["kept", "target-missing", "zero-variance"],
+            "common_predictor_complete": [True, True, True],
         }
     )
     targets = pl.DataFrame(
         {
-            "origin_id": ["kept", "target-missing"],
-            "target_price_count": [31, 30],
-            "target_return_count": [30, 0],
-            "rv30": [0.1, None],
+            "origin_id": ["kept", "target-missing", "zero-variance"],
+            "target_price_count": [31, 30, 31],
+            "target_return_count": [30, 0, 30],
+            "rv30": [0.1, None, 0.0],
         }
     )
     common = pl.DataFrame({"origin_id": ["kept"]})

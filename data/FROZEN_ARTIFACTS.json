@@ -486,6 +486,11 @@
    "sha256": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560"
   },
   {
+   "bytes": 2090,
+   "path": "artifacts/target_blind_v22/next_confirmation_preregistration_v3.json",
+   "sha256": "3dc3ca514f922f69b8b6bd124d2faa54a8797fdafec4cd85a636e107d44042f4"
+  },
+  {
    "bytes": 742,
    "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
    "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
@@ -496,9 +501,24 @@
    "sha256": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
   },
   {
+   "bytes": 3178,
+   "path": "artifacts/target_blind_v22/successor_method_freeze_v2.json",
+   "sha256": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40"
+  },
+  {
    "bytes": 515,
    "path": "artifacts/target_blind_v22/successor_owner_authorization_v1.json",
    "sha256": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
+  },
+  {
+   "bytes": 726,
+   "path": "artifacts/target_blind_v22/successor_owner_authorization_v2.json",
+   "sha256": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1"
+  },
+  {
+   "bytes": 3731,
+   "path": "artifacts/target_blind_v22/target_source_discrepancy_resolution_v1.json",
+   "sha256": "794a2ef5594cdb77c4ad72b63639eaac8cccaf3a8b7447338e5e7c097d93a5c1"
   },
   {
    "bytes": 5890,

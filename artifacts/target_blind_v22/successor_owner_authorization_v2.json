@@ -1,0 +1,12 @@
+{
+  "authorization_basis": "Owner explicitly authorized a new contract, new run ID, new custody root, zero-read ledger, development-only MDE, and one OOS read in session on 2026-09-02 Australia/Sydney.",
+  "authorization_type": "PIT_V22_SUCCESSOR_ONE_SHOT_EVALUATION",
+  "authorize_read_and_evaluation": true,
+  "authorized_at_utc": "2026-09-01T18:19:14.1223791Z",
+  "authorized_by": "Miguel Guerrero Quijano",
+  "contract_sha256": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
+  "data_defect_decision": "PROSPECTIVE_COMPLETE_CASE_EXCLUSION_NO_IMPUTATION",
+  "protocol_id": "pit-v22-successor-method-freeze-v2",
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
+  "sealed_cohorts_read_before": 0
+}

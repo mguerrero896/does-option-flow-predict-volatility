@@ -1,0 +1,84 @@
+{
+  "B0_B1a_and_B2_nested_contrasts": [
+    "B1a_over_B0",
+    "B2_over_B0_plus_B1a"
+  ],
+  "B1a_primary_and_B1b_B1c_robustness_role": {
+    "feature_counts": {
+      "B0": 12,
+      "B1a_addition": 3,
+      "B1b_addition": 2,
+      "B1c_addition": 4,
+      "B2_addition": 9
+    },
+    "primary": "B1a",
+    "robustness": [
+      "B1b",
+      "B1c"
+    ]
+  },
+  "MDE_estimated_from_development_only": true,
+  "QLIKE_primary_MAE_RMSE_secondary": {
+    "primary": "QLIKE",
+    "secondary": [
+      "MAE",
+      "RMSE"
+    ]
+  },
+  "bound_panel_common_complete_rows": 62266,
+  "bound_panel_rows": 77328,
+  "bound_panel_sha256": "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236",
+  "data_defect_resolution_sha256": "794a2ef5594cdb77c4ad72b63639eaac8cccaf3a8b7447338e5e7c097d93a5c1",
+  "linked_common_complete_rows_at_freeze": "NOT_READ_OUTCOME_DEPENDENT",
+  "model_fit_performed_at_freeze": false,
+  "no_recalibration_no_feature_search_after_holdout_access": true,
+  "paired_day_cluster_bootstrap_and_Holm_policy": {
+    "multiplicity": "Holm across the registered contrast family",
+    "uncertainty": "paired bootstrap over whole trading sessions"
+  },
+  "previous_attempt": {
+    "evaluation_attempt_count": 1,
+    "oos_read_count": 0,
+    "public_log_sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
+    "rerun_allowed": false,
+    "run_id": "pit-v22-successor-evaluation-v1-20260901",
+    "status": "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
+  },
+  "provenance": {
+    "data_defect_resolution_artifact": "artifacts/target_blind_v22/target_source_discrepancy_resolution_v1.json",
+    "note": "The target-complete eligibility rule and missing-bar disposition were fixed before any validation or holdout outcome was read.",
+    "preregistration_sha256": "4b98bb7c77c5535686b74682177d48e0a487ea58502e87bdcd56d82ea2c143af",
+    "source_commit": "b9ec78d6b368aa7ecc5d1e8dcc0c2a0c62a2cbcf"
+  },
+  "purpose": "replacement_successor_method_freeze_with_complete_case_target_linkage",
+  "schema_version": "pit-v22-successor-method-freeze-v2.0",
+  "target_linkage_eligibility_policy": {
+    "cross_provider_bar_substitution": "FORBIDDEN",
+    "eligible_origin_set": "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE",
+    "imputation": "FORBIDDEN",
+    "missing_target_action": "EXCLUDE_ORIGIN",
+    "require_finite_rv30": true,
+    "require_positive_rv30": true,
+    "required_target_price_count": 31,
+    "required_target_return_count": 30
+  },
+  "temporal_train_validation_holdout_definition": {
+    "authority": "mds650.rp2.panel.DEFAULT_TRAIN_SHARE",
+    "chosen_without_outcomes": true,
+    "method": "chronological_by_session",
+    "remainder": "split chronologically into validation and a never-touched holdout",
+    "train_share": 0.6
+  },
+  "timing_rules": {
+    "b1q_primary_state": "SIP_ASOF_ORIGIN_MAX_AGE_60S",
+    "b2_created_at_rule": "OPERATIONAL_AVAILABILITY_PROXY_ORIGIN_MINUS_60_SECONDS",
+    "b2_primary_variant": "primary_5m_60s",
+    "fmp_primary_delay_minutes": 1,
+    "fmp_sensitivity_delay_minutes": 2,
+    "massive_reselection_sensitivity_cutoff_seconds": [
+      60,
+      300
+    ]
+  },
+  "zero_oos_reads_at_freeze": true
+}

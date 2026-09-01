@@ -120,11 +120,20 @@ def authorize_phase6_oos(
     contract_sha256: str | None = None,
 ) -> dict[str, Any]:
     """Consume the sole Phase 6 evaluation authorization fail-closed."""
-    if ledger.get("authorization_type") == "PIT_V22_SUCCESSOR_ONE_SHOT_EVALUATION":
+    successor_protocols = {
+        "PIT_V22_SUCCESSOR_ONE_SHOT_EVALUATION": frozenset(
+            {
+                "pit-v22-successor-method-freeze-v1",
+                "pit-v22-successor-method-freeze-v2",
+            }
+        )
+    }
+    authorization_type = ledger.get("authorization_type")
+    if authorization_type in successor_protocols:
         if (
             contract_sha256 is None
             or ledger.get("contract_sha256") != contract_sha256
-            or ledger.get("protocol_id") != "pit-v22-successor-method-freeze-v1"
+            or ledger.get("protocol_id") not in successor_protocols[authorization_type]
             or ledger.get("authorize_read_and_evaluation") is not True
             or ledger.get("sealed_cohorts_read_before") != 0
             or not ledger.get("authorized_by")
@@ -142,6 +151,9 @@ def authorize_phase6_oos(
                 "protocol_id",
             )
         }
+        run_id = ledger.get("run_id")
+        if run_id:
+            owner_authorization["run_id"] = run_id
         prepared: dict[str, Any] = {
             "schema_version": "pit-v22-successor-oos-access-ledger-1.0",
             "status": "SEALED_BEFORE_OOS",
@@ -152,6 +164,8 @@ def authorize_phase6_oos(
             "results_inspected": False,
             "owner_authorization": owner_authorization,
         }
+        if run_id:
+            prepared["run_id"] = run_id
         prepared["manifest_sha256"] = canonical_sha256(prepared)
         ledger = prepared
     unsigned = {key: value for key, value in ledger.items() if key != "manifest_sha256"}
