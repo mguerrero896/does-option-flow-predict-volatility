@@ -754,6 +754,8 @@ show_gate_result
 show_clean
 
 say "D: one frozen result, three enforcement layers"
+arm 0
+set_attrs "$FROZEN" "$((ATTRS[0] | 1))"
 run "pwsh: (Get-Item $FROZEN).IsReadOnly" \
   pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
   "(Get-Item -LiteralPath '$(cygpath -aw "$FROZEN")').IsReadOnly"
@@ -762,7 +764,6 @@ expect_fail "PermissionError" \
   uv run python -c \
   'from pathlib import Path; import sys; p=Path(sys.argv[1]); assert not (p.stat().st_mode & 0o200), "READ_ONLY_ATTRIBUTE_MISSING"; p.open("ab").write(b"x")' \
   "$FROZEN"
-arm 0
 clear_attrs "$FROZEN"
 show_range src/mds650/storage.py 178 199 \
   "shared immutable-file guard"
