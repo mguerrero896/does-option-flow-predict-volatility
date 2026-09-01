@@ -12,8 +12,14 @@
 # The collector itself is XNYS-calendar aware and exits when there is no session,
 # so weekend/holiday firings are harmless no-ops. All tasks StartWhenAvailable.
 
+param([string]$RepositoryRoot)
+
 $ErrorActionPreference = "Stop"
-$repo = Split-Path -Parent $PSScriptRoot  # this script lives in <repo>/scripts
+$repo = if ($RepositoryRoot) {
+    (Resolve-Path -LiteralPath $RepositoryRoot -ErrorAction Stop).Path
+} else {
+    Split-Path -Parent $PSScriptRoot  # this script lives in <repo>/scripts
+}
 $uv = (Get-Command uv).Source
 
 $nyZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("Eastern Standard Time")

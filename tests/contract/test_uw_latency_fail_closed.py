@@ -353,6 +353,8 @@ def test_watchdog_trigger_is_daily_not_once() -> None:
 
 def test_collector_runs_through_battery_power() -> None:
     source = REGISTER_SCRIPT.read_text(encoding="utf-8")
+    assert "param([string]$RepositoryRoot)" in source
+    assert "Resolve-Path -LiteralPath $RepositoryRoot" in source
     assert "-AllowStartIfOnBatteries" in source
     assert "-DontStopIfGoingOnBatteries" in source
 
