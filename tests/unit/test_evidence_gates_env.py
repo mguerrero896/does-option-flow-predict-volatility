@@ -62,6 +62,44 @@ def test_no_planted_secret_survives_the_simulation_env(monkeypatch) -> None:  # 
     assert env["MDS650_PANEL_GUARD_MAY_SKIP"] == "1"
 
 
+def test_licensed_tier2_env_removes_operator_optouts(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    monkeypatch.setenv("MDS650_PANEL_GUARD_MAY_SKIP", "1")
+    monkeypatch.setenv("mds650_uw_latency_freshness_may_skip", "1")
+    monkeypatch.setenv("TIER2_HARMLESS_SENTINEL", "preserved")
+
+    env = _load()._licensed_tier2_env()
+
+    names = {name.upper() for name in env}
+    assert "MDS650_PANEL_GUARD_MAY_SKIP" not in names
+    assert "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP" not in names
+    assert env["TIER2_HARMLESS_SENTINEL"] == "preserved"
+
+
+def test_full_pytest_receives_the_explicit_licensed_env(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    module = _load()
+    monkeypatch.setenv("MDS650_PANEL_GUARD_MAY_SKIP", "1")
+    monkeypatch.setenv("MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP", "1")
+    calls: dict[str, dict[str, str] | None] = {}
+
+    def record(name, _command, env=None):  # type: ignore[no-untyped-def]
+        calls[name] = env
+        return 0
+
+    monkeypatch.setattr(module, "_run", record)
+    monkeypatch.setattr(module, "_verify_gated_hashes", lambda *_args, **_kwargs: 0)
+    with pytest.raises(SystemExit) as exited:
+        module.main([])
+
+    assert exited.value.code == 0
+    full_env = calls["full-pytest"]
+    assert full_env is not None
+    full_names = {name.upper() for name in full_env}
+    assert "MDS650_PANEL_GUARD_MAY_SKIP" not in full_names
+    assert "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP" not in full_names
+    assert calls["ci-sim (hermetic job replica)"]["MDS650_PANEL_GUARD_MAY_SKIP"] == "1"  # type: ignore[index]
+    assert calls["ci-sim (hermetic job replica)"]["MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP"] == "1"  # type: ignore[index]
+
+
 def test_help_exits_without_running_any_gate(monkeypatch) -> None:  # type: ignore[no-untyped-def]
     module = _load()
 
@@ -121,4 +159,4 @@ def test_gated_hashes_use_the_explicit_evidence_root(monkeypatch, tmp_path: Path
     monkeypatch.setattr(module, "REPO", repo)
     monkeypatch.setenv("MDS650_EVIDENCE_ROOT", str(evidence))
 
-    assert module._verify_gated_hashes()
+    assert module._verify_gated_hashes() == 0

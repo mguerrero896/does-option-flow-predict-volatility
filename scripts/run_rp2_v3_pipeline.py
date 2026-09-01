@@ -501,6 +501,7 @@ def validate_registered_panel_source(
     assert_no_sealed_paths([source_run])
     if not source_run.is_dir():
         raise SystemExit(f"RP2_RUN_PANEL_SOURCE_UNREGISTERED:{source_run.name}")
+    assert_inventory_is_frozen(TAPE_INVENTORY, PARTITION)
     manifest_path = _source_artifact(source_run, "run_manifest.json")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert_manifest_identity_intact(manifest)
@@ -534,6 +535,39 @@ def validate_registered_panel_source(
                 raise SystemExit(f"RP2_RUN_PANEL_SOURCE_CONTENT_CHANGED:{name}:{output}")
             artifacts[output] = expected
             contents[output] = expected_content
+
+    input_step = by_name["validate-input-manifests"]
+    input_artifacts = input_step.get("artifacts", {})
+    input_content = input_step.get("content", {})
+    input_name = "input_manifest.json"
+    if not isinstance(input_artifacts, dict) or not isinstance(input_content, dict):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID:validate-input-manifests")
+    expected_input = str(input_artifacts.get(input_name, ""))
+    expected_input_content = str(input_content.get(input_name, ""))
+    if len(expected_input) != 64 or len(expected_input_content) != 64:
+        raise SystemExit(
+            "RP2_RUN_PANEL_SOURCE_ARTIFACT_UNRECORDED:"
+            f"validate-input-manifests:{input_name}"
+        )
+    input_path = _source_artifact(source_run, input_name)
+    assert_artifact_stable(input_path, expected_input)
+    if stable_content_digest(input_path) != expected_input_content:
+        raise SystemExit(
+            "RP2_RUN_PANEL_SOURCE_CONTENT_CHANGED:"
+            f"validate-input-manifests:{input_name}"
+        )
+    try:
+        source_input = json.loads(input_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        raise SystemExit(
+            "RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID:validate-input-manifests"
+        ) from None
+    if not isinstance(source_input, dict):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID:validate-input-manifests")
+    if source_input.get("source_lineage_mode") == "registered_panel_reuse":
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_REUSE_CHAIN_FORBIDDEN:{source_run.name}")
+    artifacts[input_name] = expected_input
+    contents[input_name] = expected_input_content
 
     partition = json.loads(PARTITION.read_text(encoding="utf-8"))
     record: dict[str, object] = {
