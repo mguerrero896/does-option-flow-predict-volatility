@@ -246,7 +246,6 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/run_independent_replication.py` | Frozen 60/30-session replication runner with one guarded outcome read. |
 | `scripts/run_phase5_development_evaluation.py` | Runs the preregistered Phase 5 development-only RV30 evaluation. |
 | `scripts/run_phase5_holdout.py` | Executes the sole prospective Phase 5 holdout read after every gate passes. |
-| `scripts/run_pit_v22_successor_once.py` | Executes the signed PIT v2.2 successor evaluation once with fail-closed custody. |
 | `scripts/run_provider_timing_capture_once.ps1` | Operator wrapper for the prospective timing capture (Prepare prints the sequence; Replay validated a local source). |
 | `scripts/run_window_pipeline.py` | Runs the bounded real pilot and the authorized frozen-window backfill acquisition. |
 | `scripts/seal_b1_independent_replication_b1q_source.py` | Seals independent-replication B1Q attempts to immutable Massive payloads. |
@@ -272,6 +271,7 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/prepare_phase5_storage.py` | Copies retained Phase 5 evidence to the external SSD with SHA-256 verification, without deleting sources. |
 | `scripts/provider_audit_v1.py` | Bounded authenticated provider audit emitting sanitized hash/schema evidence only. |
 | `scripts/run_phase4b.py` | Builds the local-only Phase 4B repair package from retained calibration and pilot parquets. |
+| `scripts/run_pit_v22_successor_once.py` | Consumed the signed PIT v2.2 attempt once; its pre-OOS failure is frozen and rerun is prohibited. |
 | `scripts/window_probe_v1.py` | Bounded ~25-request probe measuring each provider's usable historical window. |
 
 ## Archived candidates (see scripts/archive/)

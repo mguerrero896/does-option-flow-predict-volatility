@@ -51,6 +51,12 @@ UW_LATENCY_STATE = (
 UW_LATENCY_ANOMALY = (
     Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
 )
+PIT_V22_DIR = Path("artifacts") / "target_blind_v22"
+PIT_V22_PREREGISTRATION = PIT_V22_DIR / "next_confirmation_preregistration_v2.json"
+PIT_V22_FREEZE = PIT_V22_DIR / "successor_method_freeze_v1.json"
+PIT_V22_AUTHORIZATION = PIT_V22_DIR / "successor_owner_authorization_v1.json"
+PIT_V22_LOG = PIT_V22_DIR / "successor_evaluation_run_v1.json"
+PIT_V22_RESULT = PIT_V22_DIR / "successor_evaluation_result_v1.json"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -69,8 +75,13 @@ AUTHORIZED_SOURCES = (
     UW_LATENCY_AGGREGATE.as_posix(),
     UW_LATENCY_STATE.as_posix(),
     UW_LATENCY_ANOMALY.as_posix(),
+    PIT_V22_PREREGISTRATION.as_posix(),
+    PIT_V22_FREEZE.as_posix(),
+    PIT_V22_AUTHORIZATION.as_posix(),
+    PIT_V22_LOG.as_posix(),
     (CURRENT_RUN / "run_manifest.json").as_posix(),
     (CURRENT_RUN / "scorecard.json").as_posix(),
+    "artifacts/target_blind_v22/pit_v22_claim_ledger_v1.json",
     "docs/pit_v22_claims_and_limitations.md",
     "docs/rp2_v3/VERDICT.md",
     "docs/rp2_v3/SUPERSEDED_RESULTS.md",
@@ -128,6 +139,47 @@ def build_state() -> dict[str, Any]:
     frozen_present = sum(
         1 for entry in frozen["entries"] if (REPO / str(entry["path"])).is_file()
     )
+    frozen_by_path = {str(entry["path"]): entry for entry in frozen["entries"]}
+    for relative in (
+        PIT_V22_PREREGISTRATION,
+        PIT_V22_FREEZE,
+        PIT_V22_AUTHORIZATION,
+        PIT_V22_LOG,
+    ):
+        entry = frozen_by_path.get(relative.as_posix())
+        if entry is None or entry.get("sha256") != _sha(REPO / relative):
+            raise ValueError(f"PIT_V22_SUCCESSOR_FROZEN_ARTIFACT_DRIFT:{relative.as_posix()}")
+    successor_preregistration = json.loads(
+        (REPO / PIT_V22_PREREGISTRATION).read_text(encoding="utf-8")
+    )
+    successor_freeze = json.loads((REPO / PIT_V22_FREEZE).read_text(encoding="utf-8"))
+    successor_authorization = json.loads(
+        (REPO / PIT_V22_AUTHORIZATION).read_text(encoding="utf-8")
+    )
+    successor_log = json.loads((REPO / PIT_V22_LOG).read_text(encoding="utf-8"))
+    successor_events = successor_log.get("events", [])
+    successor_event_names = [event.get("event") for event in successor_events]
+    successor_failure = successor_events[-1] if successor_events else {}
+    if (
+        successor_preregistration.get("preregistration_sha256")
+        != _canonical_sha(successor_preregistration, omit="preregistration_sha256")
+        or successor_freeze.get("provenance", {}).get("preregistration_sha256")
+        != successor_preregistration.get("preregistration_sha256")
+        or successor_authorization.get("contract_sha256") != _sha(REPO / PIT_V22_FREEZE)
+        or successor_authorization.get("authorize_read_and_evaluation") is not True
+        or successor_authorization.get("sealed_cohorts_read_before") != 0
+        or successor_freeze.get("bound_panel_sha256")
+        != successor_preregistration.get("bound_panel", {}).get("panel_sha256")
+        or successor_freeze.get("bound_panel_rows") != 77_328
+        or successor_freeze.get("bound_panel_common_complete_rows") != 62_266
+        or successor_log.get("run_id") != "pit-v22-successor-evaluation-v1-20260901"
+        or successor_event_names
+        != ["ONE_SHOT_CLAIMED", "RUNTIME_PREREGISTRATION_FROZEN", "FAIL_CLOSED"]
+        or successor_failure.get("error") != "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID"
+        or successor_failure.get("rerun_allowed") is not False
+        or (REPO / PIT_V22_RESULT).exists()
+    ):
+        raise ValueError("PIT_V22_SUCCESSOR_FAILURE_CUSTODY_DRIFT")
     redactions = json.loads(
         (REPO / "data" / "PUBLIC_METADATA_REDACTIONS.json").read_text(encoding="utf-8")
     )
@@ -633,6 +685,54 @@ def build_state() -> dict[str, Any]:
                 },
             },
         ],
+        "pit_v22_successor_evaluation": {
+            "run_id": successor_log["run_id"],
+            "status": "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION",
+            "failure_code": successor_failure["error"],
+            "evaluation_attempt_count": 1,
+            "oos_read_count": 0,
+            "results_inspected": False,
+            "rerun_allowed": False,
+            "development_mde_estimated": False,
+            "confirmatory_contrasts_evaluated": False,
+            "historical_bundle_aggregate_comparison_performed": False,
+            "bound_target_free_panel": {
+                "sha256": successor_freeze["bound_panel_sha256"],
+                "rows": successor_freeze["bound_panel_rows"],
+                "predictor_common_rows": successor_freeze[
+                    "bound_panel_common_complete_rows"
+                ],
+            },
+            "signed_inputs": {
+                "preregistration": {
+                    "path": PIT_V22_PREREGISTRATION.as_posix(),
+                    "file_sha256": _sha(REPO / PIT_V22_PREREGISTRATION),
+                    "semantic_sha256": successor_preregistration["preregistration_sha256"],
+                },
+                "method_freeze": {
+                    "path": PIT_V22_FREEZE.as_posix(),
+                    "sha256": _sha(REPO / PIT_V22_FREEZE),
+                },
+                "owner_authorization": {
+                    "path": PIT_V22_AUTHORIZATION.as_posix(),
+                    "sha256": _sha(REPO / PIT_V22_AUTHORIZATION),
+                },
+            },
+            "full_log": {
+                "path": PIT_V22_LOG.as_posix(),
+                "sha256": _sha(REPO / PIT_V22_LOG),
+                "events": successor_event_names,
+            },
+            "scientific_result": {
+                "exists": False,
+                "eligible": False,
+                "reason": "NO_RESULT_FAIL_CLOSED_PRE_OOS",
+            },
+            "edge_claim_eligible": False,
+            "capital_eligible": False,
+            "capital_go": False,
+            "research_only": True,
+        },
         "scientific_bundle": {
             "run_id": CURRENT_RUN_ID,
             "manifest": {
@@ -658,6 +758,7 @@ def build_state() -> dict[str, Any]:
                 "status": "REBUILD_COMPLETE_PIT_V22_BLOCKED",
                 "reasons": [
                     "PIT_V22_RECONCILIATION_BLOCKED",
+                    "PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS",
                 ],
                 "safe_to_reconcile_existing_results": False,
                 "safe_to_open_or_evaluate_oos": False,
@@ -746,6 +847,22 @@ def render_status(state: dict[str, Any]) -> str:
         f"- Claim boundary: **{uw_latency['claim_classification']}**; backfill and "
         "revision remain non-identifiable under the cross-channel design.",
         f"- State authority: `{uw_latency['state_artifact']}`.",
+    ]
+    successor = state["pit_v22_successor_evaluation"]
+    lines += [
+        "",
+        "## PIT v2.2 successor evaluation",
+        "",
+        f"- Status: **{successor['status']}**; failure: `{successor['failure_code']}`.",
+        f"- One-shot custody: {successor['evaluation_attempt_count']} attempt, "
+        f"{successor['oos_read_count']} OOS reads, rerun allowed = "
+        f"{str(successor['rerun_allowed']).lower()}.",
+        "- Scientific result: none; development MDE and confirmatory contrasts were not "
+        "computed, so no historical-bundle comparison exists.",
+        f"- Frozen public log: `{successor['full_log']['path']}` "
+        f"(SHA-256 `{successor['full_log']['sha256']}`).",
+        "- Eligibility: scientific result = false, edge claim = false, capital = false; "
+        "`capital_go=false`, `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`.",
     ]
     bundle = state["scientific_bundle"]
     eligibility = bundle["eligibility"]

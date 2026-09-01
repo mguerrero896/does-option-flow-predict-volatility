@@ -1,0 +1,23 @@
+{
+  "events": [
+    {
+      "event": "ONE_SHOT_CLAIMED",
+      "recorded_at_utc": "2026-09-01T10:44:20.701807+00:00",
+      "run_id": "pit-v22-successor-evaluation-v1-20260901"
+    },
+    {
+      "event": "RUNTIME_PREREGISTRATION_FROZEN",
+      "recorded_at_utc": "2026-09-01T10:44:20.707021+00:00",
+      "sha256": "09eabe94a9189e4fad1d832a67e4cf8b35f103016497f8252f7f6c56ab16baf9"
+    },
+    {
+      "error": "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID",
+      "error_type": "RuntimeError",
+      "event": "FAIL_CLOSED",
+      "recorded_at_utc": "2026-09-01T10:44:26.706860+00:00",
+      "rerun_allowed": false
+    }
+  ],
+  "run_id": "pit-v22-successor-evaluation-v1-20260901",
+  "schema_version": "pit-v22-successor-evaluation-log-1.0"
+}

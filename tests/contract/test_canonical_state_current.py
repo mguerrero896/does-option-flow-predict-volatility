@@ -56,11 +56,32 @@ def test_scientific_bundle_is_single_and_fail_closed() -> None:
         "033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4"
     )
     assert bundle["eligibility"]["status"] == "REBUILD_COMPLETE_PIT_V22_BLOCKED"
-    assert bundle["eligibility"]["reasons"] == ["PIT_V22_RECONCILIATION_BLOCKED"]
+    assert bundle["eligibility"]["reasons"] == [
+        "PIT_V22_RECONCILIATION_BLOCKED",
+        "PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS",
+    ]
     assert state["canonical_results"] == {
         "status": "NO_CURRENT_ELIGIBLE_RESULT",
         "headline_claims": [],
     }
+    successor = state["pit_v22_successor_evaluation"]
+    assert successor["status"] == "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
+    assert successor["failure_code"] == "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID"
+    assert successor["evaluation_attempt_count"] == 1
+    assert successor["oos_read_count"] == 0
+    assert successor["results_inspected"] is False
+    assert successor["rerun_allowed"] is False
+    assert successor["development_mde_estimated"] is False
+    assert successor["confirmatory_contrasts_evaluated"] is False
+    assert successor["historical_bundle_aggregate_comparison_performed"] is False
+    assert successor["scientific_result"] == {
+        "exists": False,
+        "eligible": False,
+        "reason": "NO_RESULT_FAIL_CLOSED_PRE_OOS",
+    }
+    assert successor["full_log"]["sha256"] == (
+        "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
+    )
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
     assert redactions["artifact_count"] == 14

@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–122](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
+| [97–123](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
 
 <a id="decision-1"></a>
 
@@ -2195,3 +2195,37 @@ Requirements-consistency and preregistration gates pass.
      This decision changes no canonical panel, mask, estimate, interval, model, verdict,
      frozen artifact or sealed-cohort read count. `PIT_V22_RECONCILIATION_BLOCKED` and
      `capital_go=false` remain in force.
+
+<a id="decision-123"></a>
+
+123. **The only PIT v2.2 successor attempt is frozen `FAIL_CLOSED` before OOS
+     authorization; no scientific result exists and no rerun is permitted
+     (2026-09-01).** Decision 122 was already occupied when this isolated branch rebased,
+     so this append-only closeout uses the next free number rather than duplicating an
+     anchor. The attempt ran from commit
+     `344addbefe41c449a8571ec31dc17de81abc851a` under signed-freeze file SHA-256
+     `0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf`,
+     owner-authorization file SHA-256
+     `db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2`,
+     and target-free panel SHA-256
+     `d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236`
+     (77,328 rows; 62,266 predictor-common rows).
+
+     | Boundary | Recorded disposition and evidence |
+     | --- | --- |
+     | One-shot custody | **CONSUMED ONCE, FAIL-CLOSED.** The claim and attempt ledger record one evaluation attempt, zero OOS reads, `results_inspected=false`, `rerun_allowed=false` and failure `RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID`. Their gated file SHA-256 values are `65e4b159d5925ab280ae8531030644c0b94ed76a79e5300bce73c38ce7cf812e` and `9c76fe727fe91c7d9fef4288c92c6b4184d338454e32e364fa34c5e5fc7ddbdf`. The runtime preregistration was frozen before the failure with semantic SHA-256 `1bfe4fbce95195cd64d875e5586357b8b4e78d6dcefbb71fd768ea8d7649e1c5` and file SHA-256 `09eabe94a9189e4fad1d832a67e4cf8b35f103016497f8252f7f6c56ab16baf9`. |
+     | Public execution log | **FROZEN AS THE ONLY PUBLIC RUN OUTPUT.** `artifacts/target_blind_v22/successor_evaluation_run_v1.json` contains exactly `ONE_SHOT_CLAIMED`, `RUNTIME_PREREGISTRATION_FROZEN` and `FAIL_CLOSED`; its file SHA-256 is `33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169`. No `OOS_AUTHORIZATION_CONSUMED` event exists. |
+     | Development-only diagnosis | **PRODUCER INVARIANT, NOT A MODEL RESULT.** The 95-session development slice had 37,312 predictor-common origins. RV30 was valid for 37,306. Six TSLA origins on 2025-10-28 had 30 rather than 31 consecutive closes, `target_return_count=0`, and `RV30_CONSECUTIVE_CLOSE_MISSING`. The physical trigger was the absent TSLA `2025-10-28T17:45:00Z` bar: the source manifest recorded 389 of 390 rows and one missing calendar row while retaining global `PASS` with `reused_existing=true`. The runner incorrectly required the predictor-common ID set to equal the predictor-plus-target-complete ID set. Commit `10e67d8961ff5550c2a0de7fd5cfdcf66add1206` separates those two completeness concepts and adds a regression guard; it cannot retroactively reopen this attempt. |
+     | Statistical outputs | **NOT COMPUTED.** Failure preceded the development MDE, runtime method freeze, model fitting, validation forecasts, holdout access and confirmatory evaluation. Consequently there are no B1a/B0 or B2/(B0+B1a) estimates, confidence intervals, raw or Holm-adjusted p-values, MDE comparisons, B1b/B1c robustness estimates, or comparison with the twelve historical bundle aggregates. Absence is not a null result and neither confirms nor contradicts the historical signs. |
+     | Result and eligibility | **NO RESULT ARTIFACT EXISTS.** No `successor_evaluation_result_v1.json` is created or inferred. Scientific-result eligibility, edge-claim eligibility and capital eligibility are false; `capital_go=false`, `RESEARCH_ONLY`, and `NOT INVESTMENT ADVICE` remain binding. The existing RP2-v3 bundle remains historical and blocked rather than being replaced. |
+     | Future authority | **NO RERUN UNDER THIS CONTRACT.** The existing gated root, claim, ledger and public log are immutable evidence of the consumed attempt. Any future evaluation would require a new method contract, new run id, new owner authorization and a separately justified read gate; this decision grants none of them. |
+
+     The canonical state therefore records `FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION`,
+     attempt count one, OOS read count zero, no current eligible result and the additional
+     blocker `PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS`. Five hosted checks or local Tier 2
+     gates can validate this closeout's code and custody, but cannot turn the absent
+     scientific result into a successful evaluation.
+
+     The execution and fix commit identifiers above are pre-squash PR records; this
+     decision does not claim that either identifier will be an ancestor of the final
+     squash-merge commit.
