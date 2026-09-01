@@ -115,51 +115,8 @@ show_def() {
     --line-range "${line}:${end}" "$file"
 }
 
-VISUAL_NO=0
-show_svg() {
-  local file=$1 title=$2 profile marker
-  [[ -f $file ]] || die "FIGURE_NOT_FOUND:$file"
-  VISUAL_NO=$((VISUAL_NO + 1))
-  profile=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO")
-  marker=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO.open")
-  printf '\n\033[1;35m# FIGURE · %s\033[0m\n' "$title"
-  VIDEO_EDGE_EXE=$(cygpath -aw "$EDGE_EXE") \
-  VIDEO_SVG=$(cygpath -aw "$file") \
-  VIDEO_EDGE_PROFILE="$profile" \
-  VIDEO_EDGE_MARKER="$marker" \
-    pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
-      function Get-ProfileProcesses {
-        Get-CimInstance Win32_Process |
-          Where-Object {
-            $_.Name -eq "msedge.exe" -and $_.CommandLine -and
-            $_.CommandLine.Contains($env:VIDEO_EDGE_PROFILE)
-          } |
-          ForEach-Object { Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue }
-      }
-      $url = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
-      $args = @(
-        "--user-data-dir=$($env:VIDEO_EDGE_PROFILE)",
-        "--app=$url",
-        "--window-position=3840,0",
-        "--window-size=2560,1440",
-        "--no-first-run",
-        "--disable-background-mode",
-        "--disable-features=msEdgeFirstRunExperience"
-      )
-      Start-Process -FilePath $env:VIDEO_EDGE_EXE -ArgumentList $args | Out-Null
-      $deadline = (Get-Date).AddSeconds(10)
-      do {
-        $window = Get-ProfileProcesses |
-          Where-Object MainWindowHandle -ne 0 |
-          Select-Object -First 1
-        if (-not $window) { Start-Sleep -Milliseconds 200 }
-      } until ($window -or (Get-Date) -ge $deadline)
-      if (-not $window) { throw "EDGE_FIGURE_WINDOW_NOT_FOUND" }
-      [IO.File]::WriteAllText($env:VIDEO_EDGE_MARKER, "OPEN")
-    '
-  [[ -s $(cygpath -au "$marker") ]] || die "EDGE_FIGURE_WINDOW_NOT_FOUND"
-  mark VISUAL "$file"
-  sleep 9
+close_edge_profile() {
+  local profile=$1
   VIDEO_EDGE_PROFILE="$profile" pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
       function Get-ProfileProcesses {
         @(Get-CimInstance Win32_Process |
@@ -183,6 +140,135 @@ show_svg() {
         Remove-Item -LiteralPath $env:VIDEO_EDGE_PROFILE -Recurse -Force -ErrorAction Stop
       }
     '
+}
+
+VISUAL_NO=0
+ACTIVE_EDGE_PROFILE=''
+show_svg() {
+  local file=$1 title=$2 profile marker
+  [[ -f $file ]] || die "FIGURE_NOT_FOUND:$file"
+  VISUAL_NO=$((VISUAL_NO + 1))
+  profile=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO")
+  ACTIVE_EDGE_PROFILE=$profile
+  marker=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO.open")
+  printf '\n\033[1;35m# FIGURE · %s\033[0m\n' "$title"
+  VIDEO_EDGE_EXE=$(cygpath -aw "$EDGE_EXE") \
+  VIDEO_SVG=$(cygpath -aw "$file") \
+  VIDEO_EDGE_PROFILE="$profile" \
+  VIDEO_EDGE_MARKER="$marker" \
+    pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+      function Get-ProfileProcesses {
+        Get-CimInstance Win32_Process |
+          Where-Object {
+            $_.Name -eq "msedge.exe" -and $_.CommandLine -and
+            $_.CommandLine.Contains($env:VIDEO_EDGE_PROFILE)
+          } |
+          ForEach-Object { Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue }
+      }
+      $url = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
+      $args = @(
+        "--user-data-dir=$($env:VIDEO_EDGE_PROFILE)",
+        "--app=$url",
+        "--guest",
+        "--disable-sync",
+        "--no-default-browser-check",
+        "--lang=en-US",
+        "--window-position=3840,0",
+        "--window-size=2560,1440",
+        "--no-first-run",
+        "--disable-background-mode",
+        "--disable-features=msEdgeFirstRunExperience"
+      )
+      try {
+        Start-Process -FilePath $env:VIDEO_EDGE_EXE -ArgumentList $args | Out-Null
+        $deadline = (Get-Date).AddSeconds(10)
+        do {
+          $window = Get-ProfileProcesses |
+            Where-Object MainWindowHandle -ne 0 |
+            Select-Object -First 1
+          if (-not $window) { Start-Sleep -Milliseconds 200 }
+        } until ($window -or (Get-Date) -ge $deadline)
+        if (-not $window) { throw "EDGE_FIGURE_WINDOW_NOT_FOUND" }
+        Add-Type -TypeDefinition @"
+using System;
+using System.Runtime.InteropServices;
+public static class VideoEdgeWindow {
+  [StructLayout(LayoutKind.Sequential)] public struct RECT {
+    public int Left, Top, Right, Bottom;
+  }
+  [StructLayout(LayoutKind.Sequential)] public struct MONITORINFO {
+    public int cbSize;
+    public RECT rcMonitor, rcWork;
+    public uint dwFlags;
+  }
+  [DllImport("shcore.dll")] public static extern int SetProcessDpiAwareness(int value);
+  [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int command);
+  [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr after, int x, int y, int width, int height, uint flags);
+  [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern IntPtr MonitorFromWindow(IntPtr hWnd, uint flags);
+  [DllImport("user32.dll")] public static extern bool GetMonitorInfo(IntPtr monitor, ref MONITORINFO info);
+  [DllImport("user32.dll")] public static extern bool IsZoomed(IntPtr hWnd);
+}
+"@
+        try { [void] [VideoEdgeWindow]::SetProcessDpiAwareness(2) } catch {}
+        $handle = [IntPtr] $window.MainWindowHandle
+        [void] [VideoEdgeWindow]::ShowWindow($handle, 9)
+        Start-Sleep -Milliseconds 200
+        if (-not [VideoEdgeWindow]::SetWindowPos($handle, [IntPtr]::Zero, 3840, 0, 2560, 1440, 0x0040)) {
+          throw "EDGE_FIGURE_POSITION_FAILED"
+        }
+        Start-Sleep -Milliseconds 200
+        [void] [VideoEdgeWindow]::ShowWindow($handle, 3)
+        if (-not [VideoEdgeWindow]::SetForegroundWindow($handle)) {
+          throw "EDGE_FIGURE_FOCUS_FAILED"
+        }
+        $geometryOk = $false
+        $deadline = (Get-Date).AddSeconds(5)
+        do {
+          $monitor = [VideoEdgeWindow]::MonitorFromWindow($handle, 0)
+          if ($monitor -ne [IntPtr]::Zero) {
+            $info = [VideoEdgeWindow+MONITORINFO]::new()
+            $info.cbSize = [Runtime.InteropServices.Marshal]::SizeOf($info)
+            if ([VideoEdgeWindow]::GetMonitorInfo($monitor, [ref] $info)) {
+              $rect = $info.rcMonitor
+              $geometryOk = [VideoEdgeWindow]::IsZoomed($handle) -and
+                $rect.Left -eq 3840 -and $rect.Top -eq 0 -and
+                $rect.Right -eq 6400 -and $rect.Bottom -eq 1440
+            }
+          }
+          if (-not $geometryOk) { Start-Sleep -Milliseconds 100 }
+        } until ($geometryOk -or (Get-Date) -ge $deadline)
+        if (-not $geometryOk) { throw "EDGE_FIGURE_GEOMETRY_NOT_VERIFIED" }
+        Add-Type -AssemblyName System.Windows.Forms
+        Start-Sleep -Milliseconds 300
+        1..5 | ForEach-Object {
+          [System.Windows.Forms.SendKeys]::SendWait("^{ADD}")
+          Start-Sleep -Milliseconds 80
+        }
+        [IO.File]::WriteAllText(
+          $env:VIDEO_EDGE_MARKER,
+          "OPEN`tmonitor=3840,0,6400,1440`tmaximized=true"
+        )
+      } catch {
+        $failure = $_
+        Get-ProfileProcesses |
+          Where-Object MainWindowHandle -ne 0 |
+          ForEach-Object { [void] $_.CloseMainWindow() }
+        $deadline = (Get-Date).AddSeconds(10)
+        while ((Get-ProfileProcesses).Count -gt 0 -and (Get-Date) -lt $deadline) {
+          Start-Sleep -Milliseconds 200
+        }
+        if ((Get-ProfileProcesses).Count -gt 0) {
+          throw "EDGE_FIGURE_OPEN_CLEANUP_TIMEOUT:$failure"
+        }
+        throw $failure
+      }
+    '
+  [[ -s $(cygpath -au "$marker") ]] || die "EDGE_FIGURE_WINDOW_NOT_FOUND"
+  mark VISUAL "$file"
+  sleep 9
+  close_edge_profile "$profile"
+  ACTIVE_EDGE_PROFILE=''
   sleep 2
 }
 
@@ -297,6 +383,10 @@ cleanup() {
   for ((i = ${#DEMO_FILES[@]} - 1; i >= 0; i--)); do
     restore_idx "$i" || cleanup_rc=90
   done
+  if [[ -n $ACTIVE_EDGE_PROFILE ]]; then
+    close_edge_profile "$ACTIVE_EDGE_PROFILE" || cleanup_rc=94
+    ACTIVE_EDGE_PROFILE=''
+  fi
   ((GATE_TAB_STARTED)) && : >"$GATE_RELEASE"
   stop_recorder || { ((cleanup_rc != 0)) || cleanup_rc=91; }
   if ((cleanup_rc == 0 && NORMAL_EXIT)); then

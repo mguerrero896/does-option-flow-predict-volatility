@@ -35,6 +35,13 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "canonical state": "data/CANONICAL_STATE.json",
         "canonical inference": "rp2_block10_inference/inference.json",
         "figure-open handshake": "EDGE_FIGURE_WINDOW_NOT_FOUND",
+        "private guest figure session": '"--guest",',
+        "disabled figure sync": '"--disable-sync",',
+        "DPI-aware figure placement": "SetProcessDpiAwareness(2)",
+        "physical figure placement": "SetWindowPos(",
+        "verified figure geometry": "EDGE_FIGURE_GEOMETRY_NOT_VERIFIED",
+        "readable figure zoom": 'SendWait("^{ADD}")',
+        "interrupt-safe figure cleanup": "ACTIVE_EDGE_PROFILE",
         "figure-close handshake": "EDGE_FIGURE_CLOSE_TIMEOUT",
     }
     missing = [name for name, token in required.items() if token not in text]
@@ -57,6 +64,9 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
     assert gate.index("until [[ -s $GATE_DONE ]]") < gate.index("focus-tab --target 1"), (
         "the evidence tab must not be focused until its gate has finished"
     )
+
+    cleanup = text[text.index("cleanup() {") : text.index("trap cleanup")]
+    assert 'close_edge_profile "$ACTIVE_EDGE_PROFILE"' in cleanup
 
 
 def test_chapter_validator_rejects_incomplete_or_impossible_ledgers() -> None:
