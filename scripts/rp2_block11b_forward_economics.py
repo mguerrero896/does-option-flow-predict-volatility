@@ -56,6 +56,7 @@ from mds650.rp2.panel import (
     B1_FEATURES,
     B2_FEATURES,
     CORE_SETS,
+    DEFAULT_TRAIN_SHARE,
     build_design,
     chronological_split,
     common_evaluation_mask,
@@ -480,7 +481,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=6)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     parser.add_argument("--limit-sessions", type=int, default=0)
     parser.add_argument("--rebuild-legs", action="store_true", help="redo the tape pass")
     parser.add_argument("--models", default=",".join(DEFAULT_MODELS))

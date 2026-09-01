@@ -23,6 +23,7 @@ type IntArray = npt.NDArray[np.int64]
 JOIN_KEYS: Final[tuple[str, ...]] = ("asset", "session_date", "origin_minute")
 TARGET: Final = "rv30"
 VARIANCE_FLOOR: Final = 1e-12
+DEFAULT_TRAIN_SHARE: Final = 0.6
 
 #: The three primary information sets, loaded from the frozen registry rather than restated
 #: here. A second copy of a feature list is a copy that drifts; the registry decides, and

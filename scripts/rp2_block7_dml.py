@@ -27,6 +27,7 @@ from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
     B2_FEATURES,
+    DEFAULT_TRAIN_SHARE,
     VARIANCE_FLOOR,
     build_design,
     chronological_split,
@@ -275,7 +276,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     # with the new run id.
     parser.add_argument("--panel-root", type=Path, default=None)
     parser.add_argument("--folds", type=int, default=5)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     args = parser.parse_args(argv)
 
     panels = panel_paths(args.panel_root)

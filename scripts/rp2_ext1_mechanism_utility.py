@@ -44,6 +44,7 @@ from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
     B2_FEATURES,
+    DEFAULT_TRAIN_SHARE,
     VARIANCE_FLOOR,
     build_design,
     chronological_split,
@@ -520,7 +521,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=provisional_data_root())
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     parser.add_argument("--folds", type=int, default=5)
     args = parser.parse_args(argv)
 

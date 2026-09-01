@@ -59,6 +59,7 @@ from mds650.rp2.panel import (
     B1_FEATURES,
     B2_FEATURES,
     CORE_SETS,
+    DEFAULT_TRAIN_SHARE,
     VARIANCE_FLOOR,
     build_design,
     chronological_split,
@@ -463,7 +464,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="directory holding rp2_blockN_* panels; a run directory reads that run",
     )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     args = parser.parse_args(argv)
     global B0_PANEL, B1_PANEL, B2_PANEL, TARGET_PANEL  # noqa: PLW0603
     for _name, _sub in (

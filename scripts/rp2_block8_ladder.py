@@ -55,6 +55,7 @@ from mds650.rp2.panel import (
     B1_FEATURES,
     B2_FEATURES,
     CORE_SETS,
+    DEFAULT_TRAIN_SHARE,
     build_design,
     chronological_split,
     common_evaluation_mask,
@@ -355,7 +356,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     # block would silently read the previous run's panels and label the result
     # with the new run id.
     parser.add_argument("--panel-root", type=Path, default=None)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     parser.add_argument("--models", default=",".join(LADDER))
     args = parser.parse_args(argv)
 

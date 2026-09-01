@@ -246,6 +246,43 @@ def test_factorial_treatment_matrix_keeps_the_requested_width(directional) -> No
     assert np.isfinite(design).all()
 
 
+def test_directional_dml_rejects_fold_placeholder_width_drift(
+    directional, monkeypatch: pytest.MonkeyPatch
+) -> None:  # type: ignore[no-untyped-def]
+    """The known DML guard-order defect must fail closed if its manual widths diverge."""
+    rows = 2_000
+    rng = np.random.default_rng(20260901)
+    nuisance_feature = "QQQ_ret_30"
+    frame = pl.DataFrame(
+        {
+            "session_date": np.repeat([f"2026-07-{day:02d}" for day in range(1, 21)], rows // 20),
+            nuisance_feature: rng.normal(size=rows),
+        }
+    )
+    original = directional.fold_design
+
+    def widened(frame, features, train):  # type: ignore[no-untyped-def]
+        design, columns, fitted = original(frame, features, train)
+        return (
+            np.column_stack([design, np.zeros(design.shape[0])]),
+            (*columns, "drift"),
+            fitted,
+        )
+
+    monkeypatch.setattr(directional, "fold_design", widened)
+
+    with pytest.raises(ValueError, match="RP2_EXT1_DIRECTIONAL_NUISANCE_WIDTH_MISMATCH"):
+        directional._dml_effect(
+            frame,
+            rng.normal(size=rows),
+            rng.normal(size=rows),
+            np.ones(rows, dtype=bool),
+            [nuisance_feature],
+            folds=2,
+            family_size=1,
+        )
+
+
 def test_factorial_attribution_uses_dimension_normalized_wald(directional) -> None:  # type: ignore[no-untyped-def]
     tests: dict[str, dict[str, object]] = {}
     for role in ("D", "V"):

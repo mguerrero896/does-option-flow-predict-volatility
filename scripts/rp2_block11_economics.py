@@ -38,6 +38,7 @@ from mds650.rp2.panel import (
     B1_FEATURES,
     B2_FEATURES,
     CORE_SETS,
+    DEFAULT_TRAIN_SHARE,
     build_design,
     chronological_split,
     common_evaluation_mask,
@@ -221,7 +222,7 @@ def run_role(
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--train-share", type=float, default=0.6)
+    parser.add_argument("--train-share", type=float, default=DEFAULT_TRAIN_SHARE)
     parser.add_argument("--models", default=",".join(DEFAULT_MODELS))
     parser.add_argument("--buffer", type=float, default=0.0)
     args = parser.parse_args(argv)
