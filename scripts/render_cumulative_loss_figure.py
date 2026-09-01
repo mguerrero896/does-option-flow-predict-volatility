@@ -35,6 +35,7 @@ from mds650.rp2.ladder import PRIMARY_MODELS  # noqa: E402
 from mds650.rp2.run_manifest import (  # noqa: E402
     artifact_digest,
     assert_manifest_identity_intact,
+    assert_no_sealed_paths,
     stable_content_digest,
 )
 
@@ -59,12 +60,24 @@ def _read(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _contained_file(run_dir: Path, relative: str) -> Path:
+    root = run_dir.resolve()
+    try:
+        path = (root / relative).resolve(strict=True)
+    except OSError:
+        raise ValueError(f"RP2_FIGURE_ARTIFACT_MISSING:{relative}") from None
+    if not path.is_relative_to(root):
+        raise ValueError(f"RP2_FIGURE_ARTIFACT_ESCAPE:{relative}")
+    assert_no_sealed_paths([path])
+    if not path.is_file():
+        raise ValueError(f"RP2_FIGURE_ARTIFACT_MISSING:{relative}")
+    return path
+
+
 def _registered_artifact(
     run_dir: Path, manifest: dict[str, Any], step_name: str, output: str
 ) -> Path:
-    path = (run_dir / output).resolve(strict=True)
-    if not path.is_relative_to(run_dir):
-        raise ValueError(f"RP2_FIGURE_ARTIFACT_ESCAPE:{output}")
+    path = _contained_file(run_dir, output)
     step = next((item for item in manifest["steps"] if item["name"] == step_name), None)
     if not isinstance(step, dict):
         raise ValueError(f"RP2_FIGURE_STEP_MISSING:{step_name}")
@@ -183,7 +196,7 @@ def render(
     )
     header(
         canvas,
-        "RP2 · DESCRIPTIVE PATH",
+        "how forecast loss accumulated",
         "Cumulative difference in forecast loss",
         "The same scored sessions compare forecasts without and with option flow",
     )
@@ -314,11 +327,12 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     run_dir = args.run_dir.resolve()
+    assert_no_sealed_paths([run_dir])
     output = args.output.resolve()
     if output.is_relative_to(ROOT):
         raise SystemExit("RP2_FIGURE_OUTPUT_MUST_BE_OUTSIDE_REPOSITORY")
 
-    manifest = _read(run_dir / "run_manifest.json")
+    manifest = _read(_contained_file(run_dir, "run_manifest.json"))
     assert_manifest_identity_intact(manifest)
     inference_path = _registered_artifact(
         run_dir, manifest, "run-incremental-inference", INFERENCE_OUTPUT
@@ -352,7 +366,7 @@ def main() -> int:
     if any(term.lower() in svg.lower() for term in forbidden):
         raise SystemExit("RP2_FIGURE_FORBIDDEN_JARGON")
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(svg, encoding="utf-8")
+    output.write_bytes(svg.encode("utf-8"))
     analysis["svg_path"] = str(output)
     analysis["svg_sha256"] = artifact_digest(output)
     print(json.dumps(analysis, indent=2, sort_keys=True))

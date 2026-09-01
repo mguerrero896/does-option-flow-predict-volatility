@@ -467,6 +467,15 @@ def write_input_manifest(run_dir: Path, record: Mapping[str, object]) -> Path:
     return path
 
 
+def assert_panel_source_is_disjoint(source_run: Path, run_dir: Path) -> None:
+    """Reject either directory being nested inside the other before the first write."""
+
+    source = source_run.resolve()
+    destination = run_dir.resolve()
+    if destination.is_relative_to(source) or source.is_relative_to(destination):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_IS_DESTINATION")
+
+
 def _source_artifact(source_run: Path, relative: str) -> Path:
     """Resolve one source artifact without allowing a child link to escape the run."""
 
@@ -996,6 +1005,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
     run_dir = Path(args.output_root) / str(args.run_id)
+    source_run = args.reuse_panels_from.resolve() if args.reuse_panels_from else None
+    if source_run is not None:
+        assert_panel_source_is_disjoint(source_run, run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     started = datetime.now(UTC).isoformat()
     wall = time.perf_counter()
@@ -1042,7 +1054,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     steps: list[StepRecord] = []
     validation_started = time.perf_counter()
-    source_run = args.reuse_panels_from.resolve() if args.reuse_panels_from else None
     source_integrity: Mapping[str, object] | None = None
     if source_run is None:
         input_record, manifest_digest = validate_inputs(
@@ -1052,8 +1063,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             hash_tape_contents=not args.fast_tape_fingerprint,
         )
     else:
-        if source_run == run_dir.resolve():
-            raise SystemExit("RP2_RUN_PANEL_SOURCE_IS_DESTINATION")
         input_record, manifest_digest, source_integrity = validate_registered_panel_source(
             source_run
         )

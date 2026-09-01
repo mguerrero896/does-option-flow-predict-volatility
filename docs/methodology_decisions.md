@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–121](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
+| [97–122](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
 
 <a id="decision-1"></a>
 
@@ -2143,3 +2143,55 @@ Requirements-consistency and preregistration gates pass.
      count or provider collection schedule. The 2026-08-21 exclusion and cross-channel
      non-identifiability reasons remain exactly those recorded by decision 120. No sealed
      cohort was opened and no previously frozen artifact was modified.
+
+<a id="decision-122"></a>
+
+122. **Registered-panel reuse is an opt-in downstream execution path; its licensed run
+     remains local while the deterministic descriptive figure is versioned
+     (2026-09-01).** The capability is `--reuse-panels-from`, not a replacement for the
+     canonical producer. Without that flag, `source_run` is `None`, the runner still calls
+     `validate_inputs(..., forbid_sealed=True)` and every original panel producer runs.
+     The default rebuild path and its input guard are unchanged. The dispositions are:
+
+     | Concern | Recorded disposition and evidence |
+     | --- | --- |
+     | Source admission | **HASH-BOUND AND SEALED-PATH GUARDED.** The opt-in branch begins with `assert_no_sealed_paths([source_run])`, resolves every declared child inside that source root, verifies the completed 13-step manifest and D/V roles, then verifies both artifact and stable-content SHA-256 for all eight outputs of the four panel-producing steps before copying them. The new branch does not replace the sealed-data guard with trust in a path supplied by the caller. |
+     | Fail-closed outcomes | **SEVEN REGISTRATION/MANIFEST FAILURES ARE NAMED.** `RP2_RUN_PANEL_SOURCE_IS_DESTINATION`, `RP2_RUN_PANEL_SOURCE_UNREGISTERED`, `RP2_RUN_PANEL_SOURCE_INCOMPLETE`, `RP2_RUN_PANEL_SOURCE_ROLES_INVALID`, `RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID`, `RP2_RUN_PANEL_SOURCE_ARTIFACT_UNRECORDED` and `RP2_RUN_PANEL_SOURCE_CONTENT_CHANGED` stop reuse before downstream inference. Containment and post-copy mutation checks remain additional lower-level failures. |
+     | End-of-run integrity | **THE ORIGINAL CHECK WAS MADE CONDITIONAL, NOT REMOVED.** A full rebuild still closes with `assert_inputs_unchanged`. A reuse run closes with `assert_registered_panel_source_unchanged`, which rechecks the source manifest and all eight source artifacts against the identities admitted before execution. |
+     | Registered evidence | **EXACT REPRODUCTION, NOT A NEW CLAIM.** Local registered run `rp2-v3-20260901-flow-session-loss-registration`, produced by local-only code commit `d8a3c64cc6029b224747b5b3c114d427fc720dda`, completed 13/13 steps. Its ported PR commit `82076ab79087b6044654d7a494827f8b0c604ca0` has the same stable patch id, `1c4ed4c63a00bee1b375827f9aaa7e3de6d510a0`; the run manifest is not rewritten to claim the ported hash. Against `rp2-v3-20260831-b1-spot-cutoff-remediation`, all twelve published nested estimates matched with maximum absolute difference `0.0`; the maximum difference between a serialized session-series mean and its aggregate was `4.336808689942018e-19`. Evaluation-mask and model-provenance identities also matched. |
+     | Canonical custody | **THE SOURCE BUNDLE IS NOT REWRITTEN.** The source manifest continues to identify code commit `b70c54ba14fdda2197efd6bcf0aa676c4ba3d4f1` and scientific SHA-256 `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`. Its 18-file inventory was byte-identical before and after the registered run. |
+     | Run and figure custody | **LICENSED RUN LOCAL; DERIVED SVG PUBLIC.** The registered run stays under the external registered-run root because it contains copied licensed-derived panels and is not suitable for Git. `docs/figures/cumulative-loss-difference.svg` is the byte-identical LF output of `scripts/render_cumulative_loss_figure.py` (SHA-256 `49837f70fa1d8840245783e0df5f1ee69ae9bceb2488f874853e3d12df106858`). It uses the shared `figure_style.py` system and plain labels `model development` and `held-out check`; it is not linked from the root README. |
+
+     Reproduction does not require preserving the local output run. An authorized
+     custodian with the hash-valid canonical source bundle can choose a fresh run id and
+     execute the complete pipeline, render and byte-comparison sequence:
+
+     ```powershell
+     $ErrorActionPreference = "Stop"
+     $PSNativeCommandUseErrorActionPreference = $true
+     $dataRoot = "D:/MDS650"
+     $outputRoot = Join-Path $dataRoot "registered_runs/rp2_v3"
+     $runId = "<NEW_REGISTERED_RUN_ID>"
+     $sourceRun = (Resolve-Path "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation").Path
+     $runDir = Join-Path $outputRoot $runId
+     $stagedSvg = Join-Path $env:TEMP "cumulative-loss-difference.svg"
+
+     uv run python scripts/run_rp2_v3_pipeline.py `
+         --data-root $dataRoot --output-root $outputRoot --run-id $runId --roles D V `
+         --reuse-panels-from $sourceRun
+     uv run python scripts/render_cumulative_loss_figure.py `
+         --run-dir $runDir --output $stagedSvg
+     if ((Get-FileHash $stagedSvg).Hash -ne
+         (Get-FileHash "docs/figures/cumulative-loss-difference.svg").Hash) {
+         throw "RP2_FIGURE_BYTE_MISMATCH"
+     }
+     ```
+
+     A public clone without the licensed panel artifacts cannot reproduce the run and
+     fails closed; it does not substitute unverified panels.
+
+     The plotted session paths are descriptive decompositions of already published
+     aggregates, not a new test, causal attribution, eligibility rule or universal edge.
+     This decision changes no canonical panel, mask, estimate, interval, model, verdict,
+     frozen artifact or sealed-cohort read count. `PIT_V22_RECONCILIATION_BLOCKED` and
+     `capital_go=false` remain in force.

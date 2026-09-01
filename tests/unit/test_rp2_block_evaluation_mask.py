@@ -241,6 +241,22 @@ def test_cumulative_figure_analysis_preserves_endpoint_and_concentration() -> No
     assert curves[PRIMARY_MODELS[0]][1] == [1.0, 0.0, 2.0]
 
 
+def test_cumulative_figure_artifacts_cannot_escape_the_run(tmp_path: Path) -> None:
+    renderer = _load("render_cumulative_loss_figure")
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    outside = tmp_path / "outside.json"
+    outside.write_text("{}", encoding="utf-8")
+    link = run_dir / "run_manifest.json"
+    try:
+        link.symlink_to(outside)
+    except OSError as error:
+        pytest.skip(f"symlink unavailable: {error}")
+
+    with pytest.raises(ValueError, match="RP2_FIGURE_ARTIFACT_ESCAPE:run_manifest.json"):
+        renderer._contained_file(run_dir, "run_manifest.json")
+
+
 def test_an_early_exit_records_the_pre_split_mask() -> None:
     """Nothing was evaluated, so the usable rows are the honest thing to hash."""
 

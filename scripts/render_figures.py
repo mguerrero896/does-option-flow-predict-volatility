@@ -1,6 +1,6 @@
-"""Generate the repository's figure set from evidence, in one visual system.
+"""Generate the five README figures from evidence, in one visual system.
 
-Five figures, one palette, one type scale, one drawing grammar — see `figure_style`.
+Five README figures, one palette, one type scale, one drawing grammar — see `figure_style`.
 They are built to be read in order, and the README places them that way: what was found,
 when it was tested, what was compared, where the data comes from, and why a measurement is
 allowed to become a claim.

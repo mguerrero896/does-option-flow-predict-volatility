@@ -642,6 +642,78 @@ def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) 
         runner.assert_registered_panel_source_unchanged(source, integrity)
 
 
+def test_registered_panel_source_cannot_overlap_destination(tmp_path: Path) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+
+    source = tmp_path / "source"
+    destination = tmp_path / "destination"
+    for source_run, run_dir in (
+        (source, source),
+        (source, source / "child"),
+        (destination / "child", destination),
+    ):
+        with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_IS_DESTINATION"):
+            runner.assert_panel_source_is_disjoint(source_run, run_dir)
+
+
+def test_registered_panel_source_rejects_each_invalid_registration_state(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    missing = tmp_path / "missing"
+    with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_UNREGISTERED"):
+        runner.validate_registered_panel_source(missing)
+
+    source = tmp_path / "source"
+    source.mkdir()
+    steps = [
+        {"name": step.name, "exit_code": 0, "artifacts": {}, "content": {}}
+        for step in runner.PIPELINE_STEPS
+    ]
+    base: dict[str, object] = {"run_id": "source", "roles": ["D", "V"], "steps": steps}
+    manifest_path = source / "run_manifest.json"
+    monkeypatch.setattr(runner, "assert_manifest_identity_intact", lambda _record: None)
+
+    def check(payload: dict[str, object], expected: str) -> None:
+        manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+        with pytest.raises(SystemExit, match=expected):
+            runner.validate_registered_panel_source(source)
+
+    payload = json.loads(json.dumps(base))
+    payload["steps"] = payload["steps"][:-1]
+    check(payload, "RP2_RUN_PANEL_SOURCE_INCOMPLETE")
+
+    payload = json.loads(json.dumps(base))
+    payload["roles"] = ["D"]
+    check(payload, "RP2_RUN_PANEL_SOURCE_ROLES_INVALID")
+
+    payload = json.loads(json.dumps(base))
+    first_panel = next(
+        step for step in payload["steps"] if step["name"] == runner.PANEL_STEP_NAMES[0]
+    )
+    first_panel["artifacts"] = []
+    check(payload, "RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID")
+
+    payload = json.loads(json.dumps(base))
+    check(payload, "RP2_RUN_PANEL_SOURCE_ARTIFACT_UNRECORDED")
+
+    payload = json.loads(json.dumps(base))
+    first_panel = next(
+        step for step in payload["steps"] if step["name"] == runner.PANEL_STEP_NAMES[0]
+    )
+    declared = next(
+        step for step in runner.PIPELINE_STEPS if step.name == runner.PANEL_STEP_NAMES[0]
+    )
+    output = declared.outputs[0]
+    artifact = source / output
+    artifact.parent.mkdir(parents=True, exist_ok=True)
+    artifact.write_text("unchanged bytes\n", encoding="utf-8")
+    first_panel["artifacts"] = {output: "a" * 64}
+    first_panel["content"] = {output: "b" * 64}
+    monkeypatch.setattr(runner, "assert_artifact_stable", lambda *_args: None)
+    check(payload, "RP2_RUN_PANEL_SOURCE_CONTENT_CHANGED")
+
+
 def test_a_swapped_interior_session_is_caught(tmp_path: Path) -> None:
     """One session lost and another gained leaves the count and the endpoints unchanged."""
 
