@@ -343,6 +343,22 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
     }
 
 
+def _validate_target_linkage(
+    source: pl.DataFrame, targets: pl.DataFrame, common: pl.DataFrame
+) -> None:
+    source_common_ids = source.filter(pl.col("common_predictor_complete")).select("origin_id")
+    target_complete_ids = targets.filter(
+        pl.col("rv30").is_finite()
+        & (pl.col("target_price_count") == 31)
+        & (pl.col("target_return_count") == 30)
+    ).select("origin_id")
+    expected_ids = source_common_ids.join(
+        target_complete_ids, on="origin_id", how="inner", validate="1:1"
+    ).sort("origin_id")
+    if not common.select("origin_id").sort("origin_id").equals(expected_ids):
+        raise RuntimeError("PIT_V22_TARGET_LINKAGE_INVALID")
+
+
 def _linked_panel(source: pl.DataFrame, bars: pl.DataFrame) -> tuple[pl.DataFrame, pl.DataFrame]:
     sessions = sorted(source["session_date"].unique().to_list())
     origins = build_phase6_origins(sessions)
@@ -392,11 +408,7 @@ def _linked_panel(source: pl.DataFrame, bars: pl.DataFrame) -> tuple[pl.DataFram
         "b2v2_max_created_at_utc",
     )
     all_rows, common = build_phase6_common_panel(origins, b0, b1, b2)
-    source_common_ids = (
-        source.filter(pl.col("common_predictor_complete")).select("origin_id").sort("origin_id")
-    )
-    if not common.select("origin_id").sort("origin_id").equals(source_common_ids):
-        raise RuntimeError("PIT_V22_TARGET_LINKAGE_INVALID")
+    _validate_target_linkage(source, targets, common)
     return all_rows, common
 
 

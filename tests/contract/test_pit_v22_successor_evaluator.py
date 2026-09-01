@@ -11,6 +11,7 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any
 
+import polars as pl
 import pytest
 
 from mds650.phase6 import (
@@ -126,6 +127,27 @@ def test_successor_split_fixes_equal_remainder_halves_before_targets() -> None:
     assert len(split["validation"]) == 32
     assert len(split["holdout"]) == 32
     assert [*split["development"], *split["validation"], *split["holdout"]] == sessions
+
+
+def test_target_linkage_excludes_predictor_complete_rows_with_missing_rv30() -> None:
+    runner = _runner_module()
+    source = pl.DataFrame(
+        {
+            "origin_id": ["kept", "target-missing"],
+            "common_predictor_complete": [True, True],
+        }
+    )
+    targets = pl.DataFrame(
+        {
+            "origin_id": ["kept", "target-missing"],
+            "target_price_count": [31, 30],
+            "target_return_count": [30, 0],
+            "rv30": [0.1, None],
+        }
+    )
+    common = pl.DataFrame({"origin_id": ["kept"]})
+
+    runner._validate_target_linkage(source, targets, common)
 
 
 def test_one_shot_claim_rejects_a_second_process(tmp_path: Path) -> None:
