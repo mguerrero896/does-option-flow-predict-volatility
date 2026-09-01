@@ -10,8 +10,8 @@ from pathlib import Path
 import pytest
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260902_v2.json"
-STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v2.json"
+AGGREGATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_20260902_v3.json"
+STATE = REPO / "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v3.json"
 ANOMALY = REPO / "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json"
 OPTOUT = "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP"
 CONFIGURED_ROOT = os.environ.get("MDS650_EXTERNAL_ROOT") or os.environ.get(

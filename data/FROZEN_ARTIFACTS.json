@@ -131,6 +131,11 @@
    "sha256": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4"
   },
   {
+   "bytes": 19010,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_20260902_v3.json",
+   "sha256": "c234b7cf0f13a177b398955b282124da1a4f69d35da64481f64c8037b10eb6f4"
+  },
+  {
    "bytes": 3349,
    "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
    "sha256": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
@@ -149,6 +154,11 @@
    "bytes": 3767,
    "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v2.json",
    "sha256": "7a252d6cb3e7e5ab1bd409af832423c7fde307527f40be8cd1dbd61743c43feb"
+  },
+  {
+   "bytes": 3766,
+   "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v3.json",
+   "sha256": "29448ec0188c1a2ab4a6fcb9904c9a6f838e3925826e0f351d250ab42785dea9"
   },
   {
    "bytes": 7606,
