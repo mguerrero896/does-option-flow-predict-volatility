@@ -22,9 +22,10 @@ The twelve headline comparisons separate option *state* (B1 over B0) from recent
 Every comparison registers a detection threshold before it is run, so it cannot be
 declared a success after the fact. Two of the twelve beat their own threshold (their
 registered minimum detectable effect), and both are discovery option-state contrasts. No flow contrast clears its own
-MDE. Discovery LightGBM flow is positive with an interval excluding zero, but its
-+0.00096 estimate remains below its 0.00129 MDE; all three validation flow estimates are
-negative. **The result is mixed by family and role, not a universal flow finding.**
+MDE. Discovery LightGBM flow is positive at +0.00052, but its 95% interval
+[-0.00013, +0.00111] contains zero and its estimate remains below its 0.00089 MDE.
+Validation flow estimates have mixed signs. **The result is mixed by family and role,
+not a universal flow finding.**
 
 The earlier flow exception motivated a sealed question before this timing remediation;
 that programme remains frozen rather than rewritten around the updated retrospective run.

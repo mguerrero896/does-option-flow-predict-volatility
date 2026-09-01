@@ -1,18 +1,10 @@
-"""The front page's answer must survive a count against the primary artifact.
+"""The front page's answer must remain bound to the canonical inference artifact.
 
-On 2026-08-31 the README said four independent tests agreed that option flow produces
-"no incremental contribution above the minimum detectable effect each test declared for
-itself". The repository's own primary artifact falsifies that in one of twelve cells:
-`lightgbm_qlike` D ΔB2|B1 estimates +0.00060 against a declared MDE of 0.00056, with a
-95 % interval excluding zero. That cell is the reason `docs/rp3/PREREGISTRATION.md`
-exists — the thesis calls it the one question it leaves open — and the front page did not
-mention it.
-
-The sentence was checkable and nothing checked it. This contract counts the cells that
-clear their own MDE, splits them into state and flow, and requires the README to state
-the count and to name the flow exception whenever one exists. A future run that removes
-the exception fails this test too, which is correct: the claim would have changed and the
-page would need to say so.
+The README once kept an illustrative flow estimate, interval, MDE and sign summary after
+their source run had been superseded. The numeric checks skipped whenever no flow cell
+cleared its MDE, so that stale prose passed. This contract always checks the largest
+discovery-flow illustration, its interval and MDE, the validation sign summary, and the
+count of cells clearing their registered thresholds.
 """
 
 from __future__ import annotations
@@ -92,38 +84,51 @@ def test_the_readme_does_not_claim_a_clean_sweep_while_a_flow_cell_clears_its_md
     )
 
 
-def test_the_readme_names_the_flow_exception_and_its_sealed_programme() -> None:
-    clearing = _cells_clearing_their_mde()
-    if not clearing["flow"]:
-        pytest.skip("no flow contrast clears its MDE in the current bundle")
+def _largest_discovery_flow_cell() -> tuple[str, dict[str, Any]]:
+    nested_tests = _inference_artifact()["D"]["nested_tests"]
+    family, contrasts = max(
+        nested_tests.items(), key=lambda item: abs(item[1]["b2_over_b1"]["estimate"])
+    )
+    return family, contrasts["b2_over_b1"]
 
+
+def test_the_readme_names_the_largest_discovery_flow_estimate_and_sealed_programme() -> None:
     readme = README.read_text(encoding="utf-8")
-    artifact = _inference_artifact()
-    universe, family, key = clearing["flow"][0].split()
-    cell = artifact[universe]["nested_tests"][family][key]
+    family, cell = _largest_discovery_flow_cell()
 
     estimate = f"{cell['estimate']:+.5f}"
     assert estimate in readme, (
-        f"the flow contrast that clears its MDE estimates {estimate}; README.md does not "
-        "state it, so a reader cannot see the exception the sealed programme exists for."
+        f"the largest discovery flow estimate is {estimate} for {family}; README.md does "
+        "not take its illustrative flow estimate from the canonical artifact."
+    )
+    interval = f"[{cell['ci_low']:+.5f}, {cell['ci_high']:+.5f}]"
+    assert interval in readme, (
+        f"the {family} discovery flow interval is {interval}; README.md does not take "
+        "its illustrative interval from the canonical artifact."
+    )
+    assert f"{interval} contains zero" in readme, (
+        f"the {family} discovery flow interval contains zero, but README.md does not say so."
     )
     assert "docs/rp3/PREREGISTRATION.md" in readme, (
-        "README.md states the exception without routing to the sealed programme that "
-        "settles it."
+        "README.md states the exception without routing to the sealed programme that settles it."
     )
 
 
-def test_the_stated_mde_for_that_cell_is_the_artifacts() -> None:
-    clearing = _cells_clearing_their_mde()
-    if not clearing["flow"]:
-        pytest.skip("no flow contrast clears its MDE in the current bundle")
-
-    artifact = _inference_artifact()
-    universe, family, key = clearing["flow"][0].split()
-    mde = artifact[universe]["nested_tests"][family][key]["mde"]
+def test_the_stated_mde_for_the_largest_discovery_flow_cell_comes_from_the_artifact() -> None:
+    family, cell = _largest_discovery_flow_cell()
     readme = README.read_text(encoding="utf-8")
 
-    assert f"{mde:.5f}" in readme, (
-        "README.md compares the exception against a threshold it does not take from the "
-        f"artifact; the declared MDE is {mde:.5f}."
+    assert f"{cell['mde']:.5f}" in readme, (
+        f"README.md compares the {family} flow estimate against a threshold it does not "
+        f"take from the canonical artifact; the declared MDE is {cell['mde']:.5f}."
     )
+
+
+def test_the_readme_states_that_validation_flow_estimates_have_mixed_signs() -> None:
+    cells = [
+        contrasts["b2_over_b1"] for contrasts in _inference_artifact()["V"]["nested_tests"].values()
+    ]
+    assert any(cell["estimate"] > 0 for cell in cells)
+    assert any(cell["estimate"] < 0 for cell in cells)
+    readme = README.read_text(encoding="utf-8")
+    assert "validation flow estimates have mixed signs" in readme.lower()
