@@ -23,6 +23,7 @@ LEGACY_STATE = (
 )
 ANOMALY = REPO / "artifacts" / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
 GATE5 = REPO / "docs" / "gate5_pit_foundations_v1.md"
+REPORT = REPO / "reports" / "final_report_draft_v2.md"
 REGISTERS = {"docs/methodology_decisions.md"}
 CAMPAIGN = re.compile(r"(?:UW|Unusual Whales).{0,80}(?:latency|created_at)", re.I | re.S)
 OUTDATED = re.compile(
@@ -131,6 +132,34 @@ def test_gate5_publishes_partial_state_and_cross_channel_boundary() -> None:
     )
     folded = normalize(text)
     assert not [token for token in required if normalize(token) not in folded]
+
+
+def test_final_report_carries_the_hourly_cutoff_finding() -> None:
+    values = _load(AGGREGATE)["operational_latency"]["by_ny_hour"]["values"]
+    opening = values["9"]
+    hour_14 = values["14"]
+    report = REPORT.read_text(encoding="utf-8")
+    abstract = report.partition("## Abstract")[2].partition("## 1. Introduction")[0]
+    timing_results = report.partition(
+        "### 5.6 Operational timing result: the 60-second opening bound"
+    )[2].partition("## 6. Discussion")[0]
+    required = (
+        f"{opening['over_60_seconds']['count']}/{opening['count']} "
+        f"({opening['over_60_seconds']['rate'] * 100:.2f} per cent)",
+        f"p99 was {opening['quantiles_seconds']['p99']:.6f} seconds",
+        f"{opening['over_120_seconds']['count']}/{opening['count']} exceeded 120 seconds",
+        "does not hold as a strict conservative bound at the NY opening in this sample",
+        f"two of {hour_14['count']} receipts in hour 14 exceeded 120 seconds",
+        "cannot certify future sessions",
+    )
+    folded = normalize(report)
+    abstract_folded = normalize(abstract)
+    timing_results_folded = normalize(timing_results)
+    assert not [token for token in required if normalize(token) not in folded]
+    assert "6/406" in abstract_folded
+    assert "not a strict conservative opening bound" in abstract_folded
+    assert "6/406" in timing_results_folded
+    assert "PROXY_ONLY_CROSS_CHANNEL" in timing_results
 
 
 def test_hourly_distribution_answers_the_registered_opening_cutoff() -> None:

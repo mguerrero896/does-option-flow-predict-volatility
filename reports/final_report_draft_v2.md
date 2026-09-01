@@ -1,6 +1,6 @@
 # Point-in-time options information for forecasting next-30-minute realised variance
 
-**Capstone report — evidence-cutoff version (2026-08-31)**
+**Capstone report — scientific-result cutoff 2026-08-31; timing amendment 2026-09-01**
 
 > Status: `EVIDENCE_CUTOFF_COMPLETE`. Supersedes the v1 skeleton. Phase 8 and Phase 9 are
 > reported at their actual evidence-cutoff status rather than left as result placeholders.
@@ -16,6 +16,11 @@
 > It remains a historical D/V measurement because `PIT_V22_RECONCILIATION_BLOCKED` is
 > active. No number in this report is an eligible current headline; `STATUS.md` and
 > `docs/rp2_v3/VERDICT.md` govern if a dated narrative disagrees.
+>
+> **Methodological timing amendment (2026-09-01).** The predictive-result cutoff above
+> is unchanged. A later target-blind UW receipt-latency snapshot is included only to
+> correct the operational-availability limitation in §§3, 7 and 8. It changes no panel,
+> mask, estimate, interval or verdict and reads no sealed outcome cohort.
 
 ## Title page
 
@@ -28,6 +33,8 @@
 **Document:** Capstone report, evidence-cutoff version
 
 **Evidence cutoff:** 31 August 2026 (Australia/Sydney)
+
+**Methodological timing amendment:** 1 September 2026 (target-blind; no result re-evaluation)
 
 ## Abstract
 
@@ -48,7 +55,10 @@ discovery ΔB1 is positive in all three families, validation does not establish 
 and ΔB2|B1 changes sign by family and partition. Ten of twelve contrasts are below their
 own minimum detectable effect. Provider source-time and record-creation rules prevent
 look-ahead under documented assumptions, but they do not prove historical client receipt
-time; PIT v2.2 reconciliation therefore remains blocked. Phase 8 consumed its sole
+time. A five-clean-session receipt audit found 6/406 (1.48 per cent) opening receipts
+beyond 60 seconds and none beyond 120 seconds, so the 60-second UW proxy is not a strict
+conservative opening bound in this sample; PIT v2.2 reconciliation therefore remains
+blocked. Phase 8 consumed its sole
 exploratory read and is `MIXED_EXPLORATORY`; an append-only post-hoc reconstruction uses
 only those already materialized sessions and does not create a second read. Phase 9 is an ongoing 60-session prospective
 follow-up, not a submission gate. No causal, confirmatory or profitability claim is made;
@@ -233,6 +243,11 @@ delayed records as zero activity, and it keeps
 `SAFE_TO_RECONCILE_EXISTING_RESULTS=NO`. The timing machinery prevents source-time
 look-ahead under its documented assumptions; it does not establish a universal provider-
 latency claim.
+
+A target-blind live receipt audit dated 2026-09-01 tests that operational assumption
+without changing the historical panel. Its measured result and sample boundary are
+reported separately in §5.6. It leaves `created_at` as `PROXY_ONLY`, preserves
+`PIT_V22_RECONCILIATION_BLOCKED`, and does not re-score any forecast.
 
 Discipline also means repairing data rather than smoothing over it. Two discovery bar
 stores carried only closes, and the session grid had reconstructed the absent range and
@@ -551,6 +566,29 @@ p ≥ 0.50)
 universal absence of flow information; it shows that the registered activity block did not
 improve those HAR/HARQ specifications on the measured sessions.
 
+### 5.6 Operational timing result: the 60-second opening bound
+
+Gate 5 produced a separate target-blind operational timing result; it is not a predictive
+result and uses no target, forecast or loss. Across all six reconciled sessions,
+2,418/2,418 live flow alerts had support inside the registered contract window. The
+receipt-latency distribution preserves the registered exclusion of the 2026-08-21
+collector-replay anomaly, leaving five clean sessions and 1,768 first valid receipts.
+
+The New York opening hour contains 406 first receipts. Of these, 6/406 (1.48 per cent)
+arrived more than 60 seconds after `created_at`; p99 was 60.216898 seconds, and 0/406
+exceeded 120 seconds. The registered 60-second UW availability buffer therefore does not
+hold as a strict conservative bound at the NY opening in this sample. The 120-second
+sensitivity has no opening exceedance, but two of 95 receipts in hour 14 exceeded 120
+seconds, so it is not a strict all-day bound in the observed sessions.
+
+Five sessions and 406 opening receipts can falsify a zero-exceedance claim in the observed
+sample; they cannot certify future sessions. The estimand is local
+`receipt_utc − created_at`, not provider publication time or historical client receipt.
+Accordingly, `created_at` remains `PROXY_ONLY_CROSS_CHANNEL`, backfill and revision remain
+non-identifiable, and `PIT_V22_RECONCILIATION_BLOCKED` remains in force
+(`artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json`;
+`docs/gate5_pit_foundations_v1.md`).
+
 ## 6. Discussion
 
 Three statements survive the evidence assembled above. First, discovery ΔB1 is positive
@@ -633,6 +671,13 @@ no row was dropped for it — so a null on B1 is a null on a surface of that age
 fit quality. B2 is one vendor's option-trade tape read through an availability proxy,
 with an empty flow window on 0.23 per cent of measurements.
 
+That availability threat is now measured rather than merely asserted. The five-session
+receipt audit falsifies a zero-exceedance interpretation of the 60-second opening buffer,
+but its short span cannot identify a future-session tail probability, and the separate
+cross-channel design still cannot identify backfill or revision. The absence of opening
+exceedances beyond 120 seconds is therefore a bounded sample result, not proof of a
+universal provider-latency guarantee.
+
 Finally, the chronological separation limits what the validation null can mean. It
 preserves temporal ordering within each measurement, but adaptive use of V prevents a
 confirmatory interpretation and a time split cannot distinguish regime change from a
@@ -659,8 +704,11 @@ The defensible contribution is the bounded measurement and its infrastructure: n
 information sets on identical origins, session-level uncertainty, explicit MDE accounting,
 date-derived partition roles, one market-information cutoff, one XNYS expiry calendar and
 source-time PIT rules that fail closed instead of claiming client latency they do not
-observe. The remaining PIT v2.2 blocker is part of the result, not something concealed by
-a headline. Phase 8 is complete and exploratory; its corrected same-session sensitivity
+observe. That machinery produced a substantive negative methodological result: the
+60-second UW availability buffer is not a strict conservative opening bound in the five
+clean sessions, while the 120-second opening sensitivity remains sample-bounded rather
+than provider-certified. The remaining PIT v2.2 blocker is part of the result, not
+something concealed by a headline. Phase 8 is complete and exploratory; its corrected same-session sensitivity
 does not improve paired QLIKE generally and does not create a confirmatory result. Phase 9
 continues to 60 as prospective
 future evidence while the capstone is written and submitted from the evidence available at
