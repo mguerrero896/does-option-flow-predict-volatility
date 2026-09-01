@@ -9,6 +9,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 import pytest
+from scripts.harvest_uw_latency_campaign import build_snapshot, main
 
 from mds650.uw_latency_campaign import (
     BACKFILL_REASON,
@@ -256,6 +257,86 @@ def _write_clean_hourly_session(root: Path, session: str) -> Path:
         "\n".join(rows) + "\n", encoding="utf-8"
     )
     return session_dir
+
+
+def test_snapshot_excludes_sessions_after_as_of_date(tmp_path: Path) -> None:
+    reconciliations = []
+    for index, session in enumerate(DATES):
+        _write_clean_hourly_session(tmp_path, session)
+        reconciliations.append(_write_reconciliation(tmp_path, index))
+
+    future_session = "2026-09-02"
+    future_dir = _write_clean_hourly_session(tmp_path, future_session)
+    future_payload = json.loads(reconciliations[0].read_text(encoding="utf-8"))
+    future_payload.update(
+        session=future_session,
+        reconciled_utc=f"{future_session}T21:00:00+00:00",
+    )
+    (future_dir / "reconciliation.json").write_text(
+        json.dumps(future_payload), encoding="utf-8"
+    )
+    anomaly_path = tmp_path / "anomaly.json"
+    anomaly_path.write_text(json.dumps(_anomaly_payload()), encoding="utf-8")
+
+    aggregate, state = build_snapshot(
+        external_root=tmp_path,
+        anomaly_artifact=anomaly_path,
+        aggregate_path="artifacts/gate5_pit/uw_latency_campaign_20260901_v3.json",
+        as_of_date="2026-09-01",
+    )
+
+    assert aggregate["contract_window_support"]["sessions_reconciled"] == 6
+    assert future_session not in aggregate["operational_latency"]["per_session"]
+    assert state["counts"] == {"collected": 6, "reconciled": 6, "unreconciled": 0}
+    assert future_session not in {
+        item["session"] for item in state["session_inventory"]
+    }
+
+
+@pytest.mark.parametrize("future_input", ("session-dir", "reconciliation"))
+def test_explicit_input_after_as_of_date_fails_closed(
+    tmp_path: Path, future_input: str
+) -> None:
+    reconciliations = [_write_reconciliation(tmp_path, index) for index in range(6)]
+    session_dirs = [path.parent for path in reconciliations]
+    future_session = "2026-09-02"
+    future_dir = tmp_path / "uw_latency" / "sessions" / future_session
+    future_dir.mkdir(parents=True)
+    future_payload = json.loads(reconciliations[0].read_text(encoding="utf-8"))
+    future_payload.update(
+        session=future_session,
+        reconciled_utc=f"{future_session}T21:00:00+00:00",
+    )
+    future_reconciliation = future_dir / "reconciliation.json"
+    future_reconciliation.write_text(json.dumps(future_payload), encoding="utf-8")
+    if future_input == "session-dir":
+        session_dirs.append(future_dir)
+    else:
+        reconciliations.append(future_reconciliation)
+    anomaly_path = tmp_path / "anomaly.json"
+    anomaly_path.write_text(json.dumps(_anomaly_payload()), encoding="utf-8")
+    aggregate_path = tmp_path / "aggregate.json"
+    state_path = tmp_path / "state.json"
+    argv = [
+        "--anomaly-artifact",
+        str(anomaly_path),
+        "--aggregate-output",
+        str(aggregate_path),
+        "--state-output",
+        str(state_path),
+        "--as-of-date",
+        "2026-09-01",
+    ]
+    for path in reconciliations:
+        argv.extend(("--reconciliation", str(path)))
+    for path in session_dirs:
+        argv.extend(("--session-dir", str(path)))
+
+    with pytest.raises(ValueError, match="^UW_LATENCY_EXPLICIT_INPUT_AFTER_AS_OF_DATE$"):
+        main(argv)
+
+    assert not aggregate_path.exists()
+    assert not state_path.exists()
 
 
 def test_hourly_latency_uses_receipt_hour_first_receipt_and_session_rows(
