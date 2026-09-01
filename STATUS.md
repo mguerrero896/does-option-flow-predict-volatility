@@ -4,8 +4,8 @@
 > `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.
 > This file supersedes any narrative document that disagrees with it.
 
-- Governance: decision 122 is the latest (122 recorded).
-- Frozen evidence: 125 artifacts registered; 123 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
+- Governance: decision 123 is the latest (123 recorded).
+- Frozen evidence: 128 artifacts registered; 126 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
 - Public metadata redactions: 14 frozen artifacts retain original and redacted SHA-256 custody in `data/PUBLIC_METADATA_REDACTIONS.json`.
 - Gated data: 15 files in private storage (`data/GATED_DATA_POINTERS.json`).
 - Supabase publication: **NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT** (19 schema migrations, 1 catalog reconciliation, and 6 dataset manifests committed; sealed reads: Phase 8 = 1, Phase 9 = 0).
@@ -21,13 +21,21 @@
 - Claim boundary: **PROXY_ONLY_CROSS_CHANNEL**; backfill and revision remain non-identifiable under the cross-channel design.
 - State authority: `artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json`.
 
+## PIT v2.2 successor evaluation
+
+- Status: **FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION**; failure: `RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID`.
+- One-shot custody: 1 attempt, 0 OOS reads, rerun allowed = false.
+- Scientific result: none; development MDE and confirmatory contrasts were not computed, so no historical-bundle comparison exists.
+- Frozen public log: `artifacts/target_blind_v22/successor_evaluation_run_v1.json` (SHA-256 `33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169`).
+- Eligibility: scientific result = false, edge claim = false, capital = false; `capital_go=false`, `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`.
+
 ## Current scientific bundle
 
 - Run: `rp2-v3-20260831-b1-spot-cutoff-remediation`.
 - Scientific hash: `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`.
 - Code provenance: recorded run commit `b70c54ba14fd` is reachable from this root release.
 - Eligibility: **REBUILD_COMPLETE_PIT_V22_BLOCKED**.
-- Blocking reasons: PIT_V22_RECONCILIATION_BLOCKED.
+- Blocking reasons: PIT_V22_RECONCILIATION_BLOCKED, PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS.
 - Current eligible headline results: none.
 - Historical measurements remain traceable in `docs/rp2_v3/SUPERSEDED_RESULTS.md`; they are not current claims.
 - Current academic report: `reports/final_report_draft_v2.md` with the Word submission rendering pinned under `current_report` in the machine state.

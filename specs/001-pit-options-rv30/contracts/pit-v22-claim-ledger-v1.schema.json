@@ -20,8 +20,8 @@
   ],
   "properties": {
     "schema_version": { "const": "pit-v22-claim-ledger-v1.0" },
-    "status": { "const": "PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION" },
-    "scope": { "const": "target_blind_pit_and_readiness_claims_only" },
+    "status": { "const": "PASS_TARGET_BLIND_CLAIMS_NO_RESULT" },
+    "scope": { "const": "target_blind_pit_readiness_and_failed_pre_oos_disposition" },
     "no_target_or_metric_payload_read": { "const": true },
     "model_fit_performed": { "const": false },
     "safe_to_reconcile_existing_results": { "const": "NO" },
@@ -36,7 +36,9 @@
         "availability_summary",
         "pit_contract_v21",
         "claim_matrix_v21",
-        "uw_latency_campaign_state"
+        "uw_latency_campaign_aggregate",
+        "uw_latency_campaign_state",
+        "successor_evaluation_log"
       ],
       "properties": {
         "panel_manifest": { "$ref": "#/$defs/sha256" },
@@ -45,7 +47,9 @@
         "availability_summary": { "$ref": "#/$defs/sha256" },
         "pit_contract_v21": { "$ref": "#/$defs/sha256" },
         "claim_matrix_v21": { "$ref": "#/$defs/sha256" },
-        "uw_latency_campaign_state": { "$ref": "#/$defs/sha256" }
+        "uw_latency_campaign_aggregate": { "$ref": "#/$defs/sha256" },
+        "uw_latency_campaign_state": { "$ref": "#/$defs/sha256" },
+        "successor_evaluation_log": { "$ref": "#/$defs/sha256" }
       }
     },
     "claims": {
@@ -110,7 +114,7 @@
       "items": { "$ref": "#/$defs/evaluationQuestion" }
     },
     "next_required_gate": {
-      "const": "SUCCESSOR_METHOD_FREEZE_AND_EXPLICIT_OOS_ACCESS_AUTHORIZATION"
+      "const": "NEW_CONTRACT_RUN_ID_OWNER_AUTHORIZATION_AND_READ_GATE"
     },
     "claim_ledger_sha256": { "$ref": "#/$defs/sha256" }
   },

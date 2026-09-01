@@ -1,5 +1,5 @@
 {
-  "claim_ledger_sha256": "d51ed0544137828e2e46afc763aa8ce9cd1f12b5816c7aec8933b1409f69915c",
+  "claim_ledger_sha256": "c20877a0a790c1878a561c4daf729856b391bfcb342d7fdb4573eda241dd6a7a",
   "claims": [
     {
       "allowed_presentation_context": "data_engineering_and_pit_readiness",
@@ -21,7 +21,7 @@
     {
       "allowed_presentation_context": "timing_assumption",
       "claim_id": "PITV22-C002",
-      "claim_text": "The measured live receipt latency campaign is RECONCILED_PARTIAL; Unusual Whales created_at remains only an operational availability proxy at the registered cutoff.",
+      "claim_text": "The measured live receipt latency campaign is RECONCILED_PARTIAL; Unusual Whales created_at remains only an operational availability proxy at the registered cutoff. The five clean sessions have 6/406 opening receipts beyond 60 seconds and 0/406 beyond 120 seconds.",
       "evidence": [
         {
           "path": "docs/provider_timing_pit_contract_v21.md",
@@ -32,11 +32,15 @@
           "sha256": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8"
         },
         {
-          "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json",
-          "sha256": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
+          "path": "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json",
+          "sha256": "82f3ee29e8b3623d56bb85f8783bbed69378680c7af2c6bae3b60fa5ebf52915"
+        },
+        {
+          "path": "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json",
+          "sha256": "68a3cd98d5a3bcda2d003a379a3f8f7fdbb28fb19504f59cf12f18ca400068ca"
         }
       ],
-      "limitation": "The cross-channel design cannot identify backfill or revision and does not prove provider publication time or client receipt time.",
+      "limitation": "The registered 60-second buffer is not a strict opening availability bound in this sample; two hour-14 receipts also exceed 120 seconds. The cross-channel design cannot identify backfill or revision and does not prove provider publication time or client receipt time.",
       "status": "PROXY_ONLY"
     },
     {
@@ -130,9 +134,13 @@
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
           "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
+        },
+        {
+          "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
+          "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
         }
       ],
-      "limitation": "A successor method freeze and authorized evaluation are required.",
+      "limitation": "The consumed attempt produced no result; any future evaluation requires a new contract, run id, owner authorization and read gate.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     },
     {
@@ -159,9 +167,13 @@
         {
           "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
           "sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd"
+        },
+        {
+          "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
+          "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
         }
       ],
-      "limitation": "The target-blind ledger contains no loss or model output.",
+      "limitation": "The consumed attempt produced no loss or model output.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     },
     {
@@ -184,36 +196,40 @@
         {
           "path": "docs/provider_timing_claim_matrix_v21.md",
           "sha256": "bbdb94fe82e7dc1a0568a3a01f616ff0fbb44655babafc2e03c820fb02f4ded8"
+        },
+        {
+          "path": "artifacts/target_blind_v22/successor_evaluation_run_v1.json",
+          "sha256": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169"
         }
       ],
-      "limitation": "No corrected forecasts, contrasts or stability payloads were read.",
+      "limitation": "No corrected forecasts, contrasts or stability payloads were produced.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     }
   ],
   "evaluation_questions": [
     {
       "question_id": "Q1_B1_VERSUS_B0",
-      "reason": "A corrected successor evaluation has not been authorised or run.",
+      "reason": "The only authorized successor attempt failed before OOS access and produced no scientific result.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     },
     {
       "question_id": "Q2_B2_INCREMENTAL_OVER_B1",
-      "reason": "Pre-v2.2 sealed results are not eligible for reconciliation.",
+      "reason": "The consumed successor attempt produced no result; pre-v2.2 sealed results remain ineligible for reconciliation.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     },
     {
       "question_id": "Q3_STABILITY_BY_ASSET_TIME_REGIME_AND_LATENCY",
-      "reason": "No corrected model/evaluation payload has been read.",
+      "reason": "The consumed successor attempt failed before corrected forecasts, contrasts or stability outputs were produced.",
       "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     }
   ],
   "model_fit_performed": false,
-  "next_required_gate": "SUCCESSOR_METHOD_FREEZE_AND_EXPLICIT_OOS_ACCESS_AUTHORIZATION",
+  "next_required_gate": "NEW_CONTRACT_RUN_ID_OWNER_AUTHORIZATION_AND_READ_GATE",
   "no_target_or_metric_payload_read": true,
   "safe_to_open_or_evaluate_oos": "NO",
   "safe_to_reconcile_existing_results": "NO",
   "schema_version": "pit-v22-claim-ledger-v1.0",
-  "scope": "target_blind_pit_and_readiness_claims_only",
+  "scope": "target_blind_pit_readiness_and_failed_pre_oos_disposition",
   "source_hashes": {
     "availability_manifest": "9e1717bb059e938b32280a0b11a26247fe19e5c3f934359fe04e79733f9ec585",
     "availability_summary": "49970fd1309e72d18393a69ed518d95affd65c4efce365f499a3c0bbab09a98b",
@@ -221,7 +237,9 @@
     "confirmation_readiness": "3ece2d1f75129218a0baffc0f8fdf5127a8be1a91617d71bf153bdb5b1579cfa",
     "panel_manifest": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
     "pit_contract_v21": "60f026243085eb781491ef19de6fdcdbe1d04e80ef2342e9140b1522ad9c2fbd",
-    "uw_latency_campaign_state": "e9e43305c541604bee085b6281332b55a03d65c2837aa34b0f77e31532194ca0"
+    "successor_evaluation_log": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
+    "uw_latency_campaign_aggregate": "68a3cd98d5a3bcda2d003a379a3f8f7fdbb28fb19504f59cf12f18ca400068ca",
+    "uw_latency_campaign_state": "82f3ee29e8b3623d56bb85f8783bbed69378680c7af2c6bae3b60fa5ebf52915"
   },
-  "status": "PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION"
+  "status": "PASS_TARGET_BLIND_CLAIMS_NO_RESULT"
 }

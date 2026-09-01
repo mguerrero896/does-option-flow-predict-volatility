@@ -160,8 +160,8 @@ is `rp2-v3-20260831-b1-spot-cutoff-remediation`, scientific hash
 `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`, status
 `REBUILD_COMPLETE_PIT_V22_BLOCKED`. Partition roles, the shared 120-second market cutoff
 for both B0 and B1 spot, and the XNYS expiry calendar are repaired and the 13-step rebuild
-passes, but
-`PIT_V22_RECONCILIATION_BLOCKED` remains.
+passes, but `PIT_V22_RECONCILIATION_BLOCKED` remains and the consumed successor attempt adds
+`PIT_V22_SUCCESSOR_FAIL_CLOSED_PRE_OOS`.
 
 The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run
 manifest, one hash, one eligibility state and its blocking reasons. If any document
@@ -174,7 +174,7 @@ Superseded measurements stay available for audit, never as current findings:
 - [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) — the narrative for the
   corrected-protocol bundle, marked `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
 - [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) — the
-  point-in-time evidence boundary and the gate it still needs.
+  point-in-time evidence boundary, consumed pre-OOS failure and future-authority boundary.
 
 No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
 claimed. Residual risks are in the

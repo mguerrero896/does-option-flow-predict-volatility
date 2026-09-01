@@ -1,8 +1,8 @@
 """Evidence-bound, target-blind claims and limitations for MDS650 PIT v2.2.
 
 This module is intentionally unable to accept predictions, RV30, QLIKE or any
-out-of-sample payload. It records only the claims that current provider-timing,
-availability and target-blind input artefacts support after the v2.2 correction.
+out-of-sample payload. It accepts only the sanitized public one-shot log needed
+to record the failed pre-OOS disposition alongside target-blind input evidence.
 """
 
 from __future__ import annotations
@@ -21,7 +21,9 @@ _SOURCE_KEYS = (
     "availability_summary",
     "pit_contract_v21",
     "claim_matrix_v21",
+    "uw_latency_campaign_aggregate",
     "uw_latency_campaign_state",
+    "successor_evaluation_log",
 )
 
 
@@ -53,6 +55,8 @@ def build_claim_ledger(
     availability_manifest: Mapping[str, Any],
     availability_summary: Mapping[str, Any],
     uw_latency_state: Mapping[str, Any],
+    uw_latency_aggregate: Mapping[str, Any],
+    successor_log: Mapping[str, Any],
     source_hashes: Mapping[str, str],
 ) -> dict[str, Any]:
     """Build a self-hashing PIT v2.2 claim ledger without evaluation data.
@@ -67,6 +71,11 @@ def build_claim_ledger(
         Target-blind B2 availability-sidecar evidence.
     uw_latency_state:
         Target-blind UW campaign lifecycle and cross-channel boundary.
+    uw_latency_aggregate:
+        Immutable target-blind latency snapshot referenced by the state authority.
+    successor_log:
+        Sanitized public log of the consumed attempt; it contains no OOS payload
+        or scientific result.
     source_hashes:
         SHA-256 values keyed by the fixed logical evidence identifiers.
 
@@ -86,13 +95,15 @@ def build_claim_ledger(
     Notes
     -----
     The resulting ledger marks the three scientific questions as not evaluated
-    after the PIT correction. It must be replaced by a separately authorised
-    evaluation ledger only after a successor method freeze and OOS-access gate.
+    after the PIT correction because the only authorized attempt failed before
+    OOS access. A future attempt requires an entirely new contract and read gate.
     """
     _validate_panel_manifest(panel_manifest)
     _validate_readiness(readiness)
     _validate_availability_manifest(availability_manifest)
-    _validate_uw_latency_state(uw_latency_state)
+    _validate_uw_latency_state(uw_latency_state, uw_latency_aggregate)
+    opening_receipts = _opening_receipt_counts(uw_latency_aggregate)
+    _validate_successor_log(successor_log)
     _validate_source_hashes(source_hashes)
     primary = _primary_availability_totals(availability_summary)
 
@@ -110,12 +121,13 @@ def build_claim_ledger(
         common_count=common_count,
         asset_count=asset_count,
         primary=primary,
+        opening_receipts=opening_receipts,
         source_hashes=source_hashes,
     )
     ledger: dict[str, Any] = {
         "schema_version": "pit-v22-claim-ledger-v1.0",
-        "status": "PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION",
-        "scope": "target_blind_pit_and_readiness_claims_only",
+        "status": "PASS_TARGET_BLIND_CLAIMS_NO_RESULT",
+        "scope": "target_blind_pit_readiness_and_failed_pre_oos_disposition",
         "no_target_or_metric_payload_read": True,
         "model_fit_performed": False,
         "safe_to_reconcile_existing_results": "NO",
@@ -126,20 +138,29 @@ def build_claim_ledger(
             {
                 "question_id": "Q1_B1_VERSUS_B0",
                 "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION",
-                "reason": "A corrected successor evaluation has not been authorised or run.",
+                "reason": (
+                    "The only authorized successor attempt failed before OOS access and "
+                    "produced no scientific result."
+                ),
             },
             {
                 "question_id": "Q2_B2_INCREMENTAL_OVER_B1",
                 "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION",
-                "reason": "Pre-v2.2 sealed results are not eligible for reconciliation.",
+                "reason": (
+                    "The consumed successor attempt produced no result; pre-v2.2 sealed "
+                    "results remain ineligible for reconciliation."
+                ),
             },
             {
                 "question_id": "Q3_STABILITY_BY_ASSET_TIME_REGIME_AND_LATENCY",
                 "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION",
-                "reason": "No corrected model/evaluation payload has been read.",
+                "reason": (
+                    "The consumed successor attempt failed before corrected forecasts, "
+                    "contrasts or stability outputs were produced."
+                ),
             },
         ],
-        "next_required_gate": "SUCCESSOR_METHOD_FREEZE_AND_EXPLICIT_OOS_ACCESS_AUTHORIZATION",
+        "next_required_gate": "NEW_CONTRACT_RUN_ID_OWNER_AUTHORIZATION_AND_READ_GATE",
     }
     ledger["claim_ledger_sha256"] = canonical_sha256(ledger)
     return ledger
@@ -165,7 +186,7 @@ def render_claims_markdown(ledger: Mapping[str, Any]) -> str:
         If the supplied ledger is not the expected target-blind, no-evaluation
         format.
     """
-    if ledger.get("status") != "PASS_TARGET_BLIND_CLAIMS_NO_EVALUATION":
+    if ledger.get("status") != "PASS_TARGET_BLIND_CLAIMS_NO_RESULT":
         raise ValueError("PIT_V22_CLAIM_LEDGER_RENDER_INPUT_INVALID")
     claims = ledger.get("claims")
     questions = ledger.get("evaluation_questions")
@@ -177,13 +198,15 @@ def render_claims_markdown(ledger: Mapping[str, Any]) -> str:
         "## Scope",
         "",
         "This ledger is target-blind. It contains no RV30, forecast, loss, QLIKE,",
-        "model-fit or sealed out-of-sample payload. It records what the corrected",
-        "PIT input evidence supports and what remains untested.",
+        "model-fit or sealed out-of-sample payload. It binds the corrected PIT input",
+        "evidence to the sanitized public log of the consumed pre-OOS failure.",
         "",
         "```text",
         "SAFE_TO_RECONCILE_EXISTING_RESULTS=NO",
         "SAFE_TO_OPEN_OR_EVALUATE_OOS=NO",
         "MODEL_FIT_PERFORMED=NO",
+        "SUCCESSOR_ATTEMPT_STATUS=FAIL_CLOSED_PRE_OOS",
+        "SUCCESSOR_RERUN_ALLOWED=NO",
         "```",
         "",
         "## Claims",
@@ -231,11 +254,11 @@ def render_claims_markdown(ledger: Mapping[str, Any]) -> str:
     lines.extend(
         [
             "",
-            "## Required next gate",
+            "## Future evaluation authority",
             "",
-            "A successor method freeze must bind the corrected panel, temporal splits,",
-            "estimand, bootstrap, multiplicity policy, development-only MDE and a zero-OOS",
-            "access ledger before a separate explicit authorization can permit evaluation.",
+            "The consumed attempt cannot be rerun. Any future evaluation requires a new",
+            "method contract, run id, owner authorization and separately justified read gate;",
+            "this ledger grants none of them.",
             "",
         ]
     )
@@ -248,13 +271,16 @@ def _claims(
     common_count: int,
     asset_count: int,
     primary: Mapping[str, int],
+    opening_receipts: Mapping[str, int],
     source_hashes: Mapping[str, str],
 ) -> list[dict[str, Any]]:
     """Create fixed claims whose status cannot depend on an evaluation result."""
     panel_evidence = _evidence(source_hashes, "panel_manifest", "confirmation_readiness")
     timing_evidence = _evidence(source_hashes, "pit_contract_v21", "claim_matrix_v21")
     measured_timing_evidence = timing_evidence + _evidence(
-        source_hashes, "uw_latency_campaign_state"
+        source_hashes,
+        "uw_latency_campaign_state",
+        "uw_latency_campaign_aggregate",
     )
     availability_evidence = _evidence(
         source_hashes,
@@ -281,11 +307,17 @@ def _claims(
             "claim_text": (
                 "The measured live receipt latency campaign is RECONCILED_PARTIAL; "
                 "Unusual Whales created_at remains only an operational availability proxy "
-                "at the registered cutoff."
+                "at the registered cutoff. The five clean sessions have "
+                f"{opening_receipts['over_60_count']}/{opening_receipts['count']} opening "
+                "receipts beyond 60 seconds and "
+                f"{opening_receipts['over_120_count']}/{opening_receipts['count']} beyond "
+                "120 seconds."
             ),
             "limitation": (
-                "The cross-channel design cannot identify backfill or revision and does not "
-                "prove provider publication time or client receipt time."
+                "The registered 60-second buffer is not a strict opening availability bound "
+                "in this sample; two hour-14 receipts also exceed 120 seconds. The "
+                "cross-channel design cannot identify backfill or revision and does not prove "
+                "provider publication time or client receipt time."
             ),
             "allowed_presentation_context": "timing_assumption",
             "evidence": measured_timing_evidence,
@@ -327,9 +359,14 @@ def _claims(
             "claim_id": "PITV22-C006",
             "status": "NOT_EVALUATED_AFTER_PIT_CORRECTION",
             "claim_text": "Whether B1 improves B0 for RV30 is not yet evaluated after PIT v2.2.",
-            "limitation": "A successor method freeze and authorized evaluation are required.",
+            "limitation": (
+                "The consumed attempt produced no result; any future evaluation requires a "
+                "new contract, run id, owner authorization and read gate."
+            ),
             "allowed_presentation_context": "research_question_status",
-            "evidence": panel_evidence + availability_evidence,
+            "evidence": panel_evidence
+            + availability_evidence
+            + _evidence(source_hashes, "successor_evaluation_log"),
         },
         {
             "claim_id": "PITV22-C007",
@@ -337,9 +374,11 @@ def _claims(
             "claim_text": (
                 "Whether B2 adds incremental value over B1 is not yet evaluated after PIT v2.2."
             ),
-            "limitation": "The target-blind ledger contains no loss or model output.",
+            "limitation": "The consumed attempt produced no loss or model output.",
             "allowed_presentation_context": "research_question_status",
-            "evidence": panel_evidence + availability_evidence,
+            "evidence": panel_evidence
+            + availability_evidence
+            + _evidence(source_hashes, "successor_evaluation_log"),
         },
         {
             "claim_id": "PITV22-C008",
@@ -348,9 +387,11 @@ def _claims(
                 "Stability by asset, session segment, volatility regime and latency assumption "
                 "is not yet evaluated after PIT v2.2."
             ),
-            "limitation": "No corrected forecasts, contrasts or stability payloads were read.",
+            "limitation": "No corrected forecasts, contrasts or stability payloads were produced.",
             "allowed_presentation_context": "research_question_status",
-            "evidence": panel_evidence + timing_evidence,
+            "evidence": panel_evidence
+            + timing_evidence
+            + _evidence(source_hashes, "successor_evaluation_log"),
         },
     ]
 
@@ -401,10 +442,12 @@ def _validate_availability_manifest(availability_manifest: Mapping[str, Any]) ->
         raise ValueError("PIT_V22_CLAIM_LEDGER_AVAILABILITY_MANIFEST_INVALID")
 
 
-def _validate_uw_latency_state(state: Mapping[str, Any]) -> None:
+def _validate_uw_latency_state(
+    state: Mapping[str, Any], aggregate: Mapping[str, Any]
+) -> None:
     """Keep measured latency evidence inside its target-blind proxy boundary."""
     required = {
-        "schema_version": "uw-latency-campaign-state-v1.0",
+        "schema_version": "uw-latency-campaign-state-v2.0",
         "state": "RECONCILED_PARTIAL",
         "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
         "target_blind": True,
@@ -414,6 +457,8 @@ def _validate_uw_latency_state(state: Mapping[str, Any]) -> None:
     counts = state.get("counts")
     backfill = state.get("backfill")
     revision = state.get("revision")
+    aggregate_ref = state.get("aggregate")
+    lifecycle = state.get("artifact_lifecycle")
     if (
         any(state.get(key) != value for key, value in required.items())
         or not isinstance(counts, Mapping)
@@ -426,8 +471,83 @@ def _validate_uw_latency_state(state: Mapping[str, Any]) -> None:
             "value": None,
             "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
         }
+        or aggregate_ref
+        != {
+            "path": "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json",
+            "self_sha256": aggregate.get("self_sha256"),
+        }
+        or lifecycle
+        != {
+            "policy": "IMMUTABLE_DATED_SNAPSHOT",
+            "freshness_check": "REGENERATE_AND_COMPARE_WITH_LIVE_SESSION_INVENTORY",
+            "on_drift": "PUBLISH_NEW_DATED_SNAPSHOT_NEVER_OVERWRITE",
+        }
+        or state.get("self_sha256")
+        != canonical_sha256({key: value for key, value in state.items() if key != "self_sha256"})
     ):
         raise ValueError("PIT_V22_CLAIM_LEDGER_UW_LATENCY_STATE_INVALID")
+
+
+def _opening_receipt_counts(aggregate: Mapping[str, Any]) -> Mapping[str, int]:
+    """Validate the immutable v2 aggregate and return its opening-hour counts."""
+    expected_boundary = {
+        "value": None,
+        "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE",
+    }
+    expected_revision = {
+        "value": None,
+        "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+    }
+    operational = aggregate.get("operational_latency")
+    if not isinstance(operational, Mapping):
+        raise ValueError("PIT_V22_CLAIM_LEDGER_UW_LATENCY_AGGREGATE_INVALID")
+    by_hour = operational.get("by_ny_hour")
+    values = by_hour.get("values") if isinstance(by_hour, Mapping) else None
+    opening = values.get("9") if isinstance(values, Mapping) else None
+    hour_14 = values.get("14") if isinstance(values, Mapping) else None
+    if (
+        aggregate.get("schema_version") != "uw-latency-campaign-v2.0"
+        or aggregate.get("scope") != "TARGET_BLIND_OPERATIONAL_PROVIDER_TIMING"
+        or aggregate.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
+        or aggregate.get("target_blind") is not True
+        or aggregate.get("model_fit_performed") is not False
+        or aggregate.get("sealed_cohort_read") is not False
+        or aggregate.get("backfill") != expected_boundary
+        or aggregate.get("revision") != expected_revision
+        or aggregate.get("self_sha256")
+        != canonical_sha256(
+            {key: value for key, value in aggregate.items() if key != "self_sha256"}
+        )
+        or not isinstance(opening, Mapping)
+        or not isinstance(hour_14, Mapping)
+        or opening.get("session_count") != 5
+        or opening.get("count") != 406
+        or not isinstance(opening.get("over_60_seconds"), Mapping)
+        or opening["over_60_seconds"].get("count") != 6
+        or not isinstance(opening.get("over_120_seconds"), Mapping)
+        or opening["over_120_seconds"].get("count") != 0
+        or not isinstance(hour_14.get("over_120_seconds"), Mapping)
+        or hour_14["over_120_seconds"].get("count") != 2
+    ):
+        raise ValueError("PIT_V22_CLAIM_LEDGER_UW_LATENCY_AGGREGATE_INVALID")
+    return {"count": 406, "over_60_count": 6, "over_120_count": 0}
+
+
+def _validate_successor_log(log: Mapping[str, Any]) -> None:
+    """Accept only the public fail-closed log emitted before OOS authorization."""
+    events = log.get("events")
+    if not isinstance(events, list) or not all(isinstance(event, Mapping) for event in events):
+        raise ValueError("PIT_V22_CLAIM_LEDGER_SUCCESSOR_LOG_INVALID")
+    names = [event.get("event") for event in events]
+    failure = events[-1] if events else {}
+    if (
+        log.get("schema_version") != "pit-v22-successor-evaluation-log-1.0"
+        or log.get("run_id") != "pit-v22-successor-evaluation-v1-20260901"
+        or names != ["ONE_SHOT_CLAIMED", "RUNTIME_PREREGISTRATION_FROZEN", "FAIL_CLOSED"]
+        or failure.get("error") != "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID"
+        or failure.get("rerun_allowed") is not False
+    ):
+        raise ValueError("PIT_V22_CLAIM_LEDGER_SUCCESSOR_LOG_INVALID")
 
 
 def _validate_source_hashes(source_hashes: Mapping[str, str]) -> None:
@@ -494,7 +614,13 @@ def _evidence(source_hashes: Mapping[str, str], *keys: str) -> list[dict[str, st
         "pit_contract_v21": "docs/provider_timing_pit_contract_v21.md",
         "claim_matrix_v21": "docs/provider_timing_claim_matrix_v21.md",
         "uw_latency_campaign_state": (
-            "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json"
+            "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json"
+        ),
+        "uw_latency_campaign_aggregate": (
+            "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json"
+        ),
+        "successor_evaluation_log": (
+            "artifacts/target_blind_v22/successor_evaluation_run_v1.json"
         ),
     }
     return [{"path": logical_paths[key], "sha256": source_hashes[key]} for key in keys]

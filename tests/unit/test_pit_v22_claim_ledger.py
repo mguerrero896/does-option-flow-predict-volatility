@@ -82,10 +82,43 @@ def _availability_summary() -> dict[str, object]:
     }
 
 
+def _uw_latency_aggregate() -> dict[str, object]:
+    """Return the immutable target-blind v2 latency snapshot."""
+    payload: dict[str, object] = {
+        "schema_version": "uw-latency-campaign-v2.0",
+        "scope": "TARGET_BLIND_OPERATIONAL_PROVIDER_TIMING",
+        "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
+        "target_blind": True,
+        "model_fit_performed": False,
+        "sealed_cohort_read": False,
+        "backfill": {"value": None, "reason": "CROSS_CHANNEL_NOT_IDENTIFIABLE"},
+        "revision": {
+            "value": None,
+            "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
+        },
+        "operational_latency": {
+            "by_ny_hour": {
+                "values": {
+                    "9": {
+                        "session_count": 5,
+                        "count": 406,
+                        "over_60_seconds": {"count": 6},
+                        "over_120_seconds": {"count": 0},
+                    },
+                    "14": {"over_120_seconds": {"count": 2}},
+                }
+            }
+        },
+    }
+    payload["self_sha256"] = canonical_sha256(payload)
+    return payload
+
+
 def _uw_latency_state() -> dict[str, object]:
-    """Return the target-blind reconciled-partial campaign authority."""
-    return {
-        "schema_version": "uw-latency-campaign-state-v1.0",
+    """Return the target-blind reconciled-partial v2 campaign authority."""
+    aggregate = _uw_latency_aggregate()
+    payload: dict[str, object] = {
+        "schema_version": "uw-latency-campaign-state-v2.0",
         "state": "RECONCILED_PARTIAL",
         "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
         "counts": {"collected": 11, "reconciled": 6, "unreconciled": 5},
@@ -97,6 +130,34 @@ def _uw_latency_state() -> dict[str, object]:
         "target_blind": True,
         "safe_to_reconcile_existing_results": "NO",
         "safe_to_open_or_evaluate_oos": "NO",
+        "aggregate": {
+            "path": "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json",
+            "self_sha256": aggregate["self_sha256"],
+        },
+        "artifact_lifecycle": {
+            "policy": "IMMUTABLE_DATED_SNAPSHOT",
+            "freshness_check": "REGENERATE_AND_COMPARE_WITH_LIVE_SESSION_INVENTORY",
+            "on_drift": "PUBLISH_NEW_DATED_SNAPSHOT_NEVER_OVERWRITE",
+        },
+    }
+    payload["self_sha256"] = canonical_sha256(payload)
+    return payload
+
+
+def _successor_log() -> dict[str, object]:
+    """Return the sanitized public log of the consumed pre-OOS failure."""
+    return {
+        "schema_version": "pit-v22-successor-evaluation-log-1.0",
+        "run_id": "pit-v22-successor-evaluation-v1-20260901",
+        "events": [
+            {"event": "ONE_SHOT_CLAIMED"},
+            {"event": "RUNTIME_PREREGISTRATION_FROZEN"},
+            {
+                "event": "FAIL_CLOSED",
+                "error": "RuntimeError:PIT_V22_TARGET_LINKAGE_INVALID",
+                "rerun_allowed": False,
+            },
+        ],
     }
 
 
@@ -109,7 +170,9 @@ def _source_hashes() -> dict[str, str]:
         "availability_summary": "4" * 64,
         "pit_contract_v21": "5" * 64,
         "claim_matrix_v21": "6" * 64,
-        "uw_latency_campaign_state": "7" * 64,
+        "uw_latency_campaign_aggregate": "7" * 64,
+        "uw_latency_campaign_state": "8" * 64,
+        "successor_evaluation_log": "9" * 64,
     }
 
 
@@ -121,6 +184,8 @@ def test_claim_ledger_preserves_proxy_and_not_evaluated_boundaries() -> None:
         _availability_manifest(),
         _availability_summary(),
         _uw_latency_state(),
+        _uw_latency_aggregate(),
+        _successor_log(),
         _source_hashes(),
     )
 
@@ -129,6 +194,10 @@ def test_claim_ledger_preserves_proxy_and_not_evaluated_boundaries() -> None:
     assert statuses["PITV22-C002"] == "PROXY_ONLY"
     assert statuses["PITV22-C006"] == "NOT_EVALUATED_AFTER_PIT_CORRECTION"
     assert statuses["PITV22-C007"] == "NOT_EVALUATED_AFTER_PIT_CORRECTION"
+    assert ledger["status"] == "PASS_TARGET_BLIND_CLAIMS_NO_RESULT"
+    assert ledger["next_required_gate"] == (
+        "NEW_CONTRACT_RUN_ID_OWNER_AUTHORIZATION_AND_READ_GATE"
+    )
     assert ledger["safe_to_open_or_evaluate_oos"] == "NO"
     assert ledger["model_fit_performed"] is False
     assert all(claim["evidence"] for claim in ledger["claims"])
@@ -137,8 +206,19 @@ def test_claim_ledger_preserves_proxy_and_not_evaluated_boundaries() -> None:
     assert "cross-channel" in c002["limitation"]
     assert any(
         item["path"]
-        == "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json"
+        == "artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json"
         for item in c002["evidence"]
+    )
+    assert any(
+        item["path"] == "artifacts/gate5_pit/uw_latency_campaign_20260901_v2.json"
+        for item in c002["evidence"]
+    )
+    assert "6/406 opening receipts beyond 60 seconds" in c002["claim_text"]
+    assert "0/406 beyond 120 seconds" in c002["claim_text"]
+    c006 = next(claim for claim in ledger["claims"] if claim["claim_id"] == "PITV22-C006")
+    assert any(
+        item["path"] == "artifacts/target_blind_v22/successor_evaluation_run_v1.json"
+        for item in c006["evidence"]
     )
     assert (
         canonical_sha256(
@@ -160,6 +240,8 @@ def test_claim_ledger_rejects_any_input_that_opens_reconciliation_or_oos() -> No
             _availability_manifest(),
             _availability_summary(),
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             _source_hashes(),
         )
 
@@ -172,6 +254,8 @@ def test_claim_ledger_markdown_is_evidence_bound_and_forbids_universal_edge() ->
         _availability_manifest(),
         _availability_summary(),
         _uw_latency_state(),
+        _uw_latency_aggregate(),
+        _successor_log(),
         _source_hashes(),
     )
     markdown = render_claims_markdown(ledger)
@@ -179,6 +263,9 @@ def test_claim_ledger_markdown_is_evidence_bound_and_forbids_universal_edge() ->
     assert "NOT_EVALUATED_AFTER_PIT_CORRECTION" in markdown
     assert "universal positive edge" not in markdown.casefold()
     assert "trading profit" not in markdown.casefold()
+    assert "has not been authorised or run" not in markdown
+    assert "## Future evaluation authority" in markdown
+    assert "The consumed attempt cannot be rerun." in markdown
     assert "C:\\Users\\" not in markdown
     assert json.dumps(_source_hashes()["panel_manifest"]) in json.dumps(ledger)
 
@@ -191,6 +278,8 @@ def test_claim_ledger_conforms_to_committed_json_schema() -> None:
         _availability_manifest(),
         _availability_summary(),
         _uw_latency_state(),
+        _uw_latency_aggregate(),
+        _successor_log(),
         _source_hashes(),
     )
     schema_path = (
@@ -213,6 +302,8 @@ def test_claim_ledger_schema_rejects_extra_or_duplicate_claims() -> None:
         _availability_manifest(),
         _availability_summary(),
         _uw_latency_state(),
+        _uw_latency_aggregate(),
+        _successor_log(),
         _source_hashes(),
     )
     schema_path = (
@@ -245,6 +336,8 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             _availability_manifest(),
             _availability_summary(),
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             _source_hashes(),
         )
 
@@ -257,6 +350,8 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             _availability_manifest(),
             _availability_summary(),
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             _source_hashes(),
         )
 
@@ -269,6 +364,8 @@ def test_claim_ledger_fails_closed_when_evidence_identity_is_invalid() -> None:
             _availability_manifest(),
             _availability_summary(),
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             invalid_hashes,
         )
 
@@ -284,6 +381,8 @@ def test_claim_ledger_rejects_malformed_target_blind_availability_totals() -> No
             invalid_manifest,
             _availability_summary(),
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             _source_hashes(),
         )
 
@@ -299,6 +398,8 @@ def test_claim_ledger_rejects_malformed_target_blind_availability_totals() -> No
             _availability_manifest(),
             invalid_summary,
             _uw_latency_state(),
+            _uw_latency_aggregate(),
+            _successor_log(),
             _source_hashes(),
         )
 
@@ -311,6 +412,8 @@ def test_claim_ledger_markdown_rejects_unsafe_or_malformed_structures() -> None:
         _availability_manifest(),
         _availability_summary(),
         _uw_latency_state(),
+        _uw_latency_aggregate(),
+        _successor_log(),
         _source_hashes(),
     )
 
@@ -349,5 +452,43 @@ def test_claim_ledger_rejects_campaign_state_promotion_or_boundary_drift() -> No
             _availability_manifest(),
             _availability_summary(),
             invalid_state,
+            _uw_latency_aggregate(),
+            _successor_log(),
+            _source_hashes(),
+        )
+
+    invalid_aggregate = _uw_latency_aggregate()
+    operational = invalid_aggregate["operational_latency"]
+    assert isinstance(operational, dict)
+    operational["by_ny_hour"]["values"]["9"]["over_60_seconds"]["count"] = 5
+    with pytest.raises(ValueError, match="PIT_V22_CLAIM_LEDGER_UW_LATENCY_AGGREGATE_INVALID"):
+        build_claim_ledger(
+            _panel_manifest(),
+            _readiness(),
+            _availability_manifest(),
+            _availability_summary(),
+            _uw_latency_state(),
+            invalid_aggregate,
+            _successor_log(),
+            _source_hashes(),
+        )
+
+
+def test_claim_ledger_rejects_successor_log_that_reaches_oos() -> None:
+    """The target-blind ledger cannot accept a log that crossed the OOS read gate."""
+    invalid_log = _successor_log()
+    events = invalid_log["events"]
+    assert isinstance(events, list)
+    events.insert(2, {"event": "OOS_AUTHORIZATION_CONSUMED"})
+
+    with pytest.raises(ValueError, match="PIT_V22_CLAIM_LEDGER_SUCCESSOR_LOG_INVALID"):
+        build_claim_ledger(
+            _panel_manifest(),
+            _readiness(),
+            _availability_manifest(),
+            _availability_summary(),
+            _uw_latency_state(),
+            _uw_latency_aggregate(),
+            invalid_log,
             _source_hashes(),
         )

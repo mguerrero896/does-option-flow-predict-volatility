@@ -135,7 +135,9 @@ _PROVENANCE_HASH_KEYS = (
 )
 
 
-def assert_safe_target_blind_paths_v24(paths: Mapping[str, Path]) -> None:
+def assert_safe_target_blind_paths_v24(
+    paths: Mapping[str, Path], *, trusted_root: Path | None = None
+) -> None:
     """Reject result-like paths before any local input reader is invoked.
 
     ``target_blind`` and ``target-blind`` directory names are intentionally
@@ -143,8 +145,14 @@ def assert_safe_target_blind_paths_v24(paths: Mapping[str, Path]) -> None:
     payload.  All other standalone outcome/target/metric/model-like tokens are
     rejected without echoing the supplied path.
     """
+    resolved_trusted_root = trusted_root.resolve() if trusted_root is not None else None
     for role, path in paths.items():
-        for component in path.parts:
+        guarded_path = path
+        if resolved_trusted_root is not None:
+            resolved_path = path.resolve()
+            if resolved_path.is_relative_to(resolved_trusted_root):
+                guarded_path = resolved_path.relative_to(resolved_trusted_root)
+        for component in guarded_path.parts:
             normalised = component.casefold()
             if normalised.replace("-", "_").startswith("target_blind"):
                 continue
