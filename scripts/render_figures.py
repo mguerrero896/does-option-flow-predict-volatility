@@ -512,14 +512,14 @@ def eligibility() -> Canvas:
         (
             "Is the one-shot scientific result reportable?",
             successor["scientific_result"]["eligible"],
-            "Yes. The frozen result, log, ledger and content-addressed payloads passed "
-            "independent custody validation.",
+            "Yes. Frozen result, log, ledger, and content-addressed payloads passed "
+            "custody validation.",
         ),
         (
             "Does it establish a global option-information edge?",
             successor["edge_claim_eligible"],
-            "No. No registered estimate met its development-frozen MDE, and the contract "
-            "contained no binary edge-promotion rule.",
+            "No. No registered estimate met its frozen MDE; no binary edge-promotion "
+            "rule was registered.",
         ),
         (
             "May it authorize capital or live trading?",
@@ -558,7 +558,7 @@ def eligibility() -> Canvas:
             f'<text x="70" y="{y + 34}" fill="{INK}" font-family="{SANS}" font-size="16" '
             f'font-weight="600">{esc(question)}</text>'
             f'<text x="70" y="{y + 62}" fill="{MUTED}" font-family="{SANS}" '
-            f'font-size="12.5">{esc(why[:96])}</text>'
+            f'font-size="12.5">{esc(why)}</text>'
             f'<rect x="{WIDTH - 122}" y="{y + 30}" width="52" height="26" rx="13" '
             f'fill="{PAPER_2}" stroke="{INK}" stroke-width="1.4"/>'
             f'<text x="{WIDTH - 96}" y="{y + 48}" fill="{INK}" font-family="{MONO}" '
@@ -578,11 +578,12 @@ def eligibility() -> Canvas:
     )
     footnote(
         canvas,
-        height - 26,
-        f"Every number stays auditable; scientific eligibility does not imply an edge or "
-        f"capital claim. Machine status: {headline}.",
+        height - 34,
+        "Every number stays auditable; scientific eligibility does not imply an edge or "
+        "capital claim.",
         x=40,
     )
+    footnote(canvas, height - 16, f"Machine status: {headline}.", x=40)
     return canvas
 
 
