@@ -99,6 +99,7 @@
   "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json": "e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c",
   "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json": "6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json": "fdb96ec95738868a41a1c3296a88c5af7999573668cfbcd5f17b7d65b510aa60",
+  "artifacts/local_evidence_gates/pr55_remediation_20260902_v10.json": "fefdd1f5586d1d13484fdadab415037633041a16017a7f3fd2a22ea006be3dbb",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json": "cfc71d0dc41e75d1ab32bbf939a48ecd21d83faef172251698c3f98ef3d4d490",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v3.json": "109f8c863fd2b3246dfa1b7b94861a16941483e0b697c6208a0b0eccbd35ed6e",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v6.json": "c85cadd69ef8c6406d3d5d53582cae7a222d255ba4d5d4a30e392d9ae7c21754",
@@ -133,13 +134,13 @@
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
   "artifacts/target_blind_v22/successor_owner_authorization_v2.json": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1",
-  "data/FROZEN_ARTIFACTS.json": "a6c9d6be387a9a47c72930e8a1f2c1ded425441ce30d611be68df45f3516c041",
+  "data/FROZEN_ARTIFACTS.json": "f98635901ffdda89964c6c702d7cd9297cef9f72dc15fe4bc9d8056ded786ff5",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "08efe029770d8de0d2882641c62d87a5b1a47970773c45ff796398419630f998",
+  "docs/methodology_decisions.md": "14b0b520e1180c853fce86d7997af903af5a217d0b3cadad4c9f94ac1ca6eeb4",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
@@ -262,16 +263,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 152,
+  "artifact_count": 153,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 150,
+  "physical_artifact_count": 151,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "a6c9d6be387a9a47c72930e8a1f2c1ded425441ce30d611be68df45f3516c041"
+  "registry_sha256": "f98635901ffdda89964c6c702d7cd9297cef9f72dc15fe4bc9d8056ded786ff5"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
