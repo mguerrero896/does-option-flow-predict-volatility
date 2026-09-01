@@ -128,8 +128,8 @@
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "5bcd5ff40edf5678ce2153e0a70c046e4299989fd4f7f636da9177b3c8b44c0c",
-  "reports/final_report_draft_v2.docx": "b34f21d7d87e7e74bb52f98a96d8cfe09e44c9696845e7b74fec22092cd8f28d",
-  "reports/final_report_draft_v2.md": "c69e33b461ad6e6d9672c1d41dfabd735cabc5ba0e762c6f50b9f52a683598c5",
+  "reports/final_report_draft_v2.docx": "cb9e3d76a738a6aee79a9371b802480f4a586efc419af75c4b1629bce0fbf6c7",
+  "reports/final_report_draft_v2.md": "c9bf1c219cb05e3f59ec599ca261926832d315b3e7765e08ab127183a650a3df",
   "reports/phase8a_exploratory_bridge_addendum_v13.md": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
@@ -156,11 +156,11 @@
   },
   "source": {
    "path": "reports/final_report_draft_v2.md",
-   "sha256": "c69e33b461ad6e6d9672c1d41dfabd735cabc5ba0e762c6f50b9f52a683598c5"
+   "sha256": "c9bf1c219cb05e3f59ec599ca261926832d315b3e7765e08ab127183a650a3df"
   },
   "submission_rendering": {
    "path": "reports/final_report_draft_v2.docx",
-   "sha256": "b34f21d7d87e7e74bb52f98a96d8cfe09e44c9696845e7b74fec22092cd8f28d"
+   "sha256": "cb9e3d76a738a6aee79a9371b802480f4a586efc419af75c4b1629bce0fbf6c7"
   }
  },
  "external_publication": {
