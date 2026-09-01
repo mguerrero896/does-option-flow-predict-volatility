@@ -89,6 +89,11 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
     assert act_four.index("show_gate_result") < act_four.index("arm 0"), (
         "the background gate must finish before any adversarial file mutation"
     )
+    assert (
+        act_four.index("arm 0")
+        < act_four.index('set_attrs "$FROZEN" "$((ATTRS[0] | 1))"')
+        < act_four.index('expect_fail "PermissionError"')
+    ), "the read-only demo must be armed and made read-only before its write probe"
 
 
 def test_chapter_validator_rejects_incomplete_or_impossible_ledgers() -> None:
