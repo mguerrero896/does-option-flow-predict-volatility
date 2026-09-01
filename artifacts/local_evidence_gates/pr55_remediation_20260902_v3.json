@@ -1,0 +1,49 @@
+{
+  "environment_contract": {
+    "ci_sim_declared_opt_outs": {
+      "MDS650_PANEL_GUARD_MAY_SKIP": "1",
+      "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP": "1"
+    },
+    "licensed_gate_opt_outs": {
+      "MDS650_PANEL_GUARD_MAY_SKIP": "absent",
+      "MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP": "absent"
+    }
+  },
+  "executed_at_utc": "2026-09-01T20:12:33.122338+00:00",
+  "gates": [
+    {
+      "exit_code": 0,
+      "name": "versioned-hook"
+    },
+    {
+      "exit_code": 0,
+      "name": "ruff"
+    },
+    {
+      "exit_code": 0,
+      "name": "mypy"
+    },
+    {
+      "exit_code": 0,
+      "name": "full-pytest"
+    },
+    {
+      "exit_code": 0,
+      "name": "ci-sim"
+    },
+    {
+      "exit_code": 0,
+      "name": "gated-hashes"
+    },
+    {
+      "exit_code": 0,
+      "name": "access-posture"
+    }
+  ],
+  "overall_exit_code": 0,
+  "required_ancestor": "c1e331e247d411eb21141b1cd271130ae16bfd89",
+  "runner": "scripts/run_local_evidence_gates.py",
+  "schema_version": "mds650-tier2-evidence-v1.0",
+  "tested_commit": "577fb5a9ba4bde494b5ac3a4270ad389f182df88",
+  "tested_tree": "216c2a2eb5f9d19ba4cfa54f29d4147955d41267"
+}

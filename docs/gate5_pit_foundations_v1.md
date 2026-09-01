@@ -32,11 +32,11 @@ re-acquisition breaks this agreement.
 **Lifecycle authority refreshed 2026-09-02; hourly-latency correction dated 2026-09-01.** This section supersedes the 2026-08-18
 `RUNNING (unattended)` label and its promise that five reconciled sessions would by
 themselves permit a claim upgrade. The machine authority is
-`artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json`; the aggregate and
+`artifacts/gate5_pit/uw_latency_campaign_state_20260902_v2.json`; the aggregate and
 anomaly disposition are in the two sibling versioned artifacts. The current inventory
 contains 12 collected sessions, six reconciled sessions and six collected but not yet
-reconciled sessions. All 2026-09-01 campaign/state artifacts remain immutable historical
-snapshots; the 2026-09-02 authority is a new dated overlay, not an edit to frozen evidence.
+reconciled sessions. All 2026-09-01 artifacts and the 2026-09-02 v1 pair remain immutable
+historical snapshots; v2 records the later collector-summary arrival without editing them.
 
 The latency half produced a measured result. Across all six reconciliations, 2,418 of
 2,418 live flow alerts had contract-window tape support (100%). After excluding only the

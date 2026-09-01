@@ -43,10 +43,10 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
 UW_LATENCY_AGGREGATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v2.json"
 )
 UW_LATENCY_STATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v2.json"
 )
 UW_LATENCY_ANOMALY = (
     Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
@@ -86,6 +86,7 @@ AUTHORIZED_SOURCES = (
     "artifacts/rp2_v3/cumulative_loss_session_series_v1.json",
     "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json",
     "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v3.json",
     PIT_V22_PREREGISTRATION.as_posix(),
     PIT_V22_FREEZE.as_posix(),
     PIT_V22_AUTHORIZATION.as_posix(),

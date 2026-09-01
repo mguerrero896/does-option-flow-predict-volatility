@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-EVIDENCE = REPO / "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json"
+EVIDENCE = REPO / "artifacts/local_evidence_gates/pr55_remediation_20260902_v3.json"
 EXPECTED_GATES = (
     "versioned-hook",
     "ruff",
