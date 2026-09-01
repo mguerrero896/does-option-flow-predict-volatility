@@ -338,7 +338,7 @@ start_recorder() {
   exec {rec_out_fd}<&-
   REC_RUNNING=1
 
-  local deadline=$((SECONDS + 20)) out_us wall_ms
+  local deadline=$((SECONDS + 20)) out_us wall_ms tick=0
   until awk -F= '$1=="out_time_us" && $2+0>0 {ok=1} END {exit !ok}' \
       "$FF_PROGRESS" 2>/dev/null; do
     ps -p "$REC_PID" >/dev/null 2>&1 || {
@@ -346,8 +346,11 @@ start_recorder() {
       die "FFMPEG_START_FAILED"
     }
     ((SECONDS < deadline)) || die "FFMPEG_NO_FRAME_TIMEOUT"
+    printf '\r\033[2KRECORDER_PREFLIGHT %03d' "$tick"
+    tick=$((tick + 1))
     sleep 0.1
   done
+  printf '\r\033[2K'
 
   out_us=$(awk -F= '$1=="out_time_us"{value=$2} END{print value+0}' "$FF_PROGRESS")
   wall_ms=$(now_ms)

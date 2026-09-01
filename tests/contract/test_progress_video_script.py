@@ -24,6 +24,7 @@ def test_record_progress_video_script_keeps_the_recording_contract() -> None:
         "successful-state cleanup": 'rm -r -- "$STATE_DIR"',
         "clean-worktree gate": "git status --porcelain",
         "native monitor recorder": "gfxcapture=monitor_idx=1",
+        "active recorder pre-roll": "RECORDER_PREFLIGHT",
         "graceful recorder stop": "printf 'q'",
         "video probe": "ffprobe",
         "second terminal": "wt.exe",
