@@ -9,16 +9,60 @@ from pathlib import Path
 from mds650.uw_latency_campaign import (
     build_campaign_artifact,
     build_campaign_state,
+    build_hourly_latency_distribution,
     latency_outlier_alerts,
     read_artifact,
     write_new_json,
 )
 
 
+def build_snapshot(
+    *,
+    external_root: Path,
+    anomaly_artifact: Path,
+    aggregate_path: str,
+    as_of_date: str,
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Regenerate one safe snapshot from the authorized UW session directory."""
+
+    sessions_root = external_root / "uw_latency" / "sessions"
+    if not sessions_root.is_dir():
+        raise ValueError("UW_LATENCY_SESSION_STORE_MISSING")
+    session_dirs = sorted(path for path in sessions_root.iterdir() if path.is_dir())
+    reconciliations = [
+        path / "reconciliation.json"
+        for path in session_dirs
+        if (path / "reconciliation.json").is_file()
+    ]
+    anomaly = read_artifact(anomaly_artifact, "UW_LATENCY_ANOMALY_ARTIFACT_INVALID")
+    clean_sessions = [
+        path
+        for path in session_dirs
+        if (path / "reconciliation.json").is_file()
+        and path.name != anomaly.get("session")
+    ]
+    hourly = build_hourly_latency_distribution(clean_sessions)
+    aggregate = build_campaign_artifact(
+        reconciliations,
+        anomaly=anomaly,
+        as_of_date=as_of_date,
+        hourly_latency=hourly,
+    )
+    state = build_campaign_state(
+        session_dirs,
+        aggregate_path=aggregate_path,
+        aggregate=aggregate,
+        as_of_date=as_of_date,
+        immutable_snapshot=True,
+    )
+    return aggregate, state
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--reconciliation", type=Path, action="append", required=True)
-    parser.add_argument("--session-dir", type=Path, action="append", required=True)
+    parser.add_argument("--external-root", type=Path)
+    parser.add_argument("--reconciliation", type=Path, action="append")
+    parser.add_argument("--session-dir", type=Path, action="append")
     parser.add_argument("--anomaly-artifact", type=Path, required=True)
     parser.add_argument("--aggregate-output", type=Path, required=True)
     parser.add_argument("--state-output", type=Path, required=True)
@@ -26,18 +70,32 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--emit-alert", action="store_true")
     args = parser.parse_args(argv)
 
-    anomaly = read_artifact(args.anomaly_artifact, "UW_LATENCY_ANOMALY_ARTIFACT_INVALID")
-    aggregate = build_campaign_artifact(
-        args.reconciliation,
-        anomaly=anomaly,
-        as_of_date=args.as_of_date,
-    )
-    state = build_campaign_state(
-        args.session_dir,
-        aggregate_path=args.aggregate_output.as_posix(),
-        aggregate=aggregate,
-        as_of_date=args.as_of_date,
-    )
+    if args.external_root is not None:
+        if args.reconciliation or args.session_dir:
+            parser.error("--external-root cannot be combined with explicit inputs")
+        aggregate, state = build_snapshot(
+            external_root=args.external_root,
+            anomaly_artifact=args.anomaly_artifact,
+            aggregate_path=args.aggregate_output.as_posix(),
+            as_of_date=args.as_of_date,
+        )
+    else:
+        if not args.reconciliation or not args.session_dir:
+            parser.error("provide --external-root or both explicit input lists")
+        anomaly = read_artifact(
+            args.anomaly_artifact, "UW_LATENCY_ANOMALY_ARTIFACT_INVALID"
+        )
+        aggregate = build_campaign_artifact(
+            args.reconciliation,
+            anomaly=anomaly,
+            as_of_date=args.as_of_date,
+        )
+        state = build_campaign_state(
+            args.session_dir,
+            aggregate_path=args.aggregate_output.as_posix(),
+            aggregate=aggregate,
+            as_of_date=args.as_of_date,
+        )
     write_new_json(args.aggregate_output, aggregate)
     write_new_json(args.state_output, state)
     if args.emit_alert:

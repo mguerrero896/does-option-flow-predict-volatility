@@ -22,7 +22,7 @@ from rp2_block12_prospective_design import measure_dispersion
 from mds650.executable_closure import build_executable_closure
 from mds650.metrics import qlike_losses
 from mds650.rp2.inference import aggregate_by_session
-from mds650.rp2.panel import load_merged_panel, session_rank
+from mds650.rp2.panel import DEFAULT_TRAIN_SHARE, load_merged_panel, session_rank
 from mds650.storage import assert_outside_frozen
 
 ROOT: Final = Path(__file__).resolve().parents[1]
@@ -251,7 +251,9 @@ def _current_dv_reference(
     role_sessions: dict[str, int] = {}
     for role in ("D", "V"):
         role_sessions[role] = int(panel.filter(pl.col("role") == role)["session_date"].n_unique())
-        measured, _ = measure_dispersion(panel, role=role, train_share=0.6)
+        measured, _ = measure_dispersion(
+            panel, role=role, train_share=DEFAULT_TRAIN_SHARE
+        )
         reference[role] = measured
     return reference, {
         "panels": identities,

@@ -57,6 +57,7 @@ def _ci_sim_env() -> dict[str, str]:
     env = {name: value for name, value in os.environ.items() if name.upper() in keep}
     env["MDS650_EXTERNAL_ROOT"] = str(REPO / ".ci-sim-nonexistent")
     env["MDS650_PANEL_GUARD_MAY_SKIP"] = "1"
+    env["MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP"] = "1"
     return env
 
 

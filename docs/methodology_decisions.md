@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–120](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
+| [97–121](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit and hardening closeout. |
 
 <a id="decision-1"></a>
 
@@ -2124,3 +2124,22 @@ Requirements-consistency and preregistration gates pass.
      authorize a Phase 8 reread, a Phase 9 read, a method-freeze promotion, a same-channel
      collector, or publication of licensed provider rows. No sealed external cohort was
      opened and no previously frozen artifact was modified for this closeout.
+
+<a id="decision-121"></a>
+
+121. **The three residual publication-hardening gaps are closed additively without
+     reopening decisions 119–120 or changing scientific results (2026-09-01).** The v1
+     UW campaign/state artifacts remain frozen historical snapshots. Current authority
+     moves to new v2 paths, and `PIT_V22_RECONCILIATION_BLOCKED` remains in force. The
+     dispositions are:
+
+     | Residual | Recorded disposition and evidence |
+     | --- | --- |
+     | Hourly NY latency | **CLOSED — THE 60-SECOND OPENING BOUND IS FALSIFIED IN-SAMPLE.** A target-blind harvester reads only the authorized live observation logs for the five clean reconciled sessions, retains session-date records, takes first receipt per record, and emits counts/quantiles only. The v2 aggregate contains 1,768 first receipts. At receipt hour 9, 6/406 (1.48%) exceed 60 seconds, p99 is 60.216898 seconds and 0/406 exceed 120 seconds. Thus the 60-second UW buffer does not hold as a strict opening bound in this sample; the 120-second sensitivity holds at opening but not all day because two hour-14 receipts exceed it. Hour-by-asset quantiles require at least 30 observations from at least three sessions; unsupported cells retain counts only. No provider row or external path is versioned. |
+     | Artifact freshness | **CLOSED — REGENERATE-AND-COMPARE, IMMUTABLE SNAPSHOTS.** The live contract discovers the authorized `uw_latency/sessions` inventory, regenerates both campaign and lifecycle payloads, and byte-compares their decoded JSON with the current v2 artifacts. A new session, a new `reconciliation.json`, or changed bound source evidence makes the contract red. A missing licensed disk fails closed except where hosted CI explicitly declares `MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP=1`. Drift requires a new dated artifact path; no frozen snapshot is overwritten or converted into a mutable generated file. |
+     | `train_share` call sites | **CLOSED — ONE AUTHORITY REACHES EVERY SCRIPT CALL.** The two remaining literal calls now consume `mds650.rp2.panel.DEFAULT_TRAIN_SHARE`; an AST contract scans every Python script recursively and rejects any literal `train_share=` call argument. The effective value remains `0.6`, and the canonical run-manifest SHA-256 remains `95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a`. |
+
+     This decision changes no panel, mask, estimate, interval, model, verdict, cohort-read
+     count or provider collection schedule. The 2026-08-21 exclusion and cross-channel
+     non-identifiability reasons remain exactly those recorded by decision 120. No sealed
+     cohort was opened and no previously frozen artifact was modified.

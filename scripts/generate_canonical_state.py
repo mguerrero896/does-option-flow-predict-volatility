@@ -43,10 +43,10 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
 UW_LATENCY_AGGREGATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260901_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260901_v2.json"
 )
 UW_LATENCY_STATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260901_v1.json"
+    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260901_v2.json"
 )
 UW_LATENCY_ANOMALY = (
     Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
@@ -437,6 +437,8 @@ def build_state() -> dict[str, Any]:
         or uw_latency_state.get("counts")
         != {"collected": 11, "reconciled": 6, "unreconciled": 5}
         or uw_latency_state.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
+        or uw_latency_state.get("artifact_lifecycle", {}).get("policy")
+        != "IMMUTABLE_DATED_SNAPSHOT"
         or uw_latency_state.get("safe_to_reconcile_existing_results") != "NO"
         or uw_latency_state.get("safe_to_open_or_evaluate_oos") != "NO"
         or uw_latency_state.get("aggregate", {}).get("path")
@@ -447,6 +449,12 @@ def build_state() -> dict[str, Any]:
         != "COLLECTOR_RESTART_REPLAY_DUPLICATION"
         or uw_latency_anomaly.get("campaign_disposition")
         != "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT"
+        or uw_latency_aggregate.get("operational_latency", {})
+        .get("by_ny_hour", {})
+        .get("values", {})
+        .get("9", {})
+        .get("over_60_seconds", {})
+        != {"count": 6, "rate": 6 / 406}
     ):
         raise ValueError("UW_LATENCY_CAMPAIGN_AUTHORITY_DRIFT")
     return {
@@ -491,6 +499,10 @@ def build_state() -> dict[str, Any]:
             "state_self_sha256": uw_latency_state["self_sha256"],
             "aggregate_artifact": UW_LATENCY_AGGREGATE.as_posix(),
             "aggregate_self_sha256": uw_latency_aggregate["self_sha256"],
+            "opening_receipt_hour": uw_latency_aggregate["operational_latency"][
+                "by_ny_hour"
+            ]["values"]["9"],
+            "artifact_lifecycle": uw_latency_state["artifact_lifecycle"],
             "anomaly_artifact": UW_LATENCY_ANOMALY.as_posix(),
             "anomaly_classification": uw_latency_anomaly["classification"],
             "backfill": uw_latency_state["backfill"],

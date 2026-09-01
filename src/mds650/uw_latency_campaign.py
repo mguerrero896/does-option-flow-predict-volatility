@@ -50,8 +50,9 @@ def build_campaign_artifact(
     *,
     anomaly: Mapping[str, Any],
     as_of_date: str,
+    hourly_latency: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Consolidate explicit ``reconciliation.json`` inputs without raw-data reads."""
+    """Consolidate explicit reconciliations and optional safe hourly aggregates."""
 
     _iso_date(as_of_date, "UW_LATENCY_AS_OF_DATE_INVALID")
     _validate_anomaly(anomaly)
@@ -156,8 +157,135 @@ def build_campaign_artifact(
             "new_channel_created": False,
         },
     }
+    if hourly_latency is not None:
+        expected_sessions = [str(session["session"]) for session in included]
+        if hourly_latency.get("included_sessions") != expected_sessions:
+            raise ValueError("UW_LATENCY_HOURLY_SESSION_SET_INVALID")
+        artifact["schema_version"] = "uw-latency-campaign-v2.0"
+        latency = artifact["operational_latency"]
+        latency["by_ny_hour"] = {
+            "status": "MEASURED_FROM_LICENSED_OBSERVATION_AGGREGATES",
+            "hour_basis": hourly_latency["hour_basis"],
+            "receipt_selection": hourly_latency["receipt_selection"],
+            "included_first_receipts": hourly_latency["included_first_receipts"],
+            "values": hourly_latency["by_ny_hour"],
+        }
+        latency["by_ny_hour_asset"] = {
+            "status": "MEASURED_WHERE_SAMPLE_SUPPORTS",
+            "support_rule": hourly_latency["cross_tab_support_rule"],
+            "values": hourly_latency["by_ny_hour_asset"],
+            "insufficient": hourly_latency["insufficient_by_ny_hour_asset"],
+        }
+        latency["source_observation_sha256"] = hourly_latency[
+            "source_observation_sha256"
+        ]
     artifact["self_sha256"] = canonical_sha256(artifact)
     return artifact
+
+
+def build_hourly_latency_distribution(session_dirs: Sequence[Path]) -> dict[str, Any]:
+    """Aggregate first-receipt latency by receipt hour without emitting licensed rows."""
+
+    if not session_dirs:
+        raise ValueError("UW_LATENCY_HOURLY_SESSIONS_EMPTY")
+    hourly: dict[int, list[tuple[float, str]]] = collections.defaultdict(list)
+    hourly_asset: dict[tuple[int, str], list[tuple[float, str]]] = collections.defaultdict(
+        list
+    )
+    included_sessions: list[str] = []
+    source_hashes: list[dict[str, str]] = []
+    seen_sessions: set[str] = set()
+    duplicate_valid_receipts = 0
+    for session_dir in sorted(session_dirs, key=lambda path: path.name):
+        session = session_dir.name
+        session_date = _iso_date(session, "UW_LATENCY_HOURLY_SESSION_INVALID")
+        if session in seen_sessions or not session_dir.is_dir():
+            raise ValueError("UW_LATENCY_HOURLY_SESSION_INVALID")
+        seen_sessions.add(session)
+        observations_path = session_dir / "observations.jsonl"
+        if not observations_path.is_file():
+            raise ValueError("UW_LATENCY_OBSERVATION_LOG_MISSING")
+        calendar_start = dt.datetime.combine(
+            session_date, dt.time.min, tzinfo=NY
+        ).astimezone(dt.UTC)
+        calendar_end = dt.datetime.combine(
+            session_date + dt.timedelta(days=1), dt.time.min, tzinfo=NY
+        ).astimezone(dt.UTC)
+        first_receipts: dict[str, tuple[dt.datetime, dt.datetime, str]] = {}
+        with observations_path.open(encoding="utf-8") as handle:
+            for raw in handle:
+                try:
+                    row = _loads_strict(raw)
+                except (json.JSONDecodeError, ValueError):
+                    continue
+                if not isinstance(row, Mapping) or row.get("kind") != "observation":
+                    continue
+                record = row.get("record")
+                if not isinstance(record, Mapping):
+                    continue
+                start = _epoch_datetime(record.get("start_time"))
+                receipt = _timestamp(row.get("receipt_utc"))
+                created = _timestamp(record.get("created_at"))
+                if (
+                    start is None
+                    or not calendar_start <= start < calendar_end
+                    or receipt is None
+                    or created is None
+                ):
+                    continue
+                latency = (receipt - created).total_seconds()
+                if not math.isfinite(latency) or latency < 0:
+                    continue
+                identity = _private_record_identity(row, record)
+                asset = str(record.get("ticker") or row.get("asset") or "").upper()
+                previous = first_receipts.get(identity)
+                if previous is not None:
+                    duplicate_valid_receipts += 1
+                if previous is None or receipt < previous[0]:
+                    first_receipts[identity] = (receipt, created, asset)
+        if not first_receipts:
+            raise ValueError("UW_LATENCY_HOURLY_SESSION_EMPTY")
+        included_sessions.append(session)
+        source_hashes.append(
+            {"session": session, "sha256": _file_sha256(observations_path)}
+        )
+        for receipt, created, asset in first_receipts.values():
+            value = (receipt - created).total_seconds()
+            hour = receipt.astimezone(NY).hour
+            hourly[hour].append((value, session))
+            if asset in ASSETS:
+                hourly_asset[(hour, asset)].append((value, session))
+
+    by_hour = {
+        str(hour): _distribution_summary(values)
+        for hour, values in sorted(hourly.items())
+    }
+    by_hour_asset: dict[str, dict[str, Any]] = {}
+    insufficient: dict[str, dict[str, Any]] = {}
+    for (hour, asset), values in sorted(hourly_asset.items()):
+        count = len(values)
+        session_count = len({session for _, session in values})
+        if count >= 30 and session_count >= 3:
+            by_hour_asset.setdefault(str(hour), {})[asset] = _distribution_summary(values)
+            continue
+        reason = "COUNT_BELOW_30" if count < 30 else "SESSION_COUNT_BELOW_3"
+        insufficient.setdefault(str(hour), {})[asset] = {
+            "count": count,
+            "session_count": session_count,
+            "reason": reason,
+        }
+    return {
+        "hour_basis": "RECEIPT_UTC_CONVERTED_TO_AMERICA_NEW_YORK",
+        "receipt_selection": "FIRST_VALID_RECEIPT_PER_RECORD",
+        "included_sessions": included_sessions,
+        "included_first_receipts": sum(len(values) for values in hourly.values()),
+        "duplicate_valid_receipts": duplicate_valid_receipts,
+        "cross_tab_support_rule": {"minimum_count": 30, "minimum_sessions": 3},
+        "by_ny_hour": by_hour,
+        "by_ny_hour_asset": by_hour_asset,
+        "insufficient_by_ny_hour_asset": insufficient,
+        "source_observation_sha256": source_hashes,
+    }
 
 
 def build_campaign_state(
@@ -166,6 +294,7 @@ def build_campaign_state(
     aggregate_path: str,
     aggregate: Mapping[str, Any],
     as_of_date: str,
+    immutable_snapshot: bool = False,
 ) -> dict[str, Any]:
     """Derive the four-state campaign lifecycle from named session files."""
 
@@ -236,6 +365,13 @@ def build_campaign_state(
         "safe_to_reconcile_existing_results": "NO",
         "safe_to_open_or_evaluate_oos": "NO",
     }
+    if immutable_snapshot:
+        state["schema_version"] = "uw-latency-campaign-state-v2.0"
+        state["artifact_lifecycle"] = {
+            "policy": "IMMUTABLE_DATED_SNAPSHOT",
+            "freshness_check": "REGENERATE_AND_COMPARE_WITH_LIVE_SESSION_INVENTORY",
+            "on_drift": "PUBLISH_NEW_DATED_SNAPSHOT_NEVER_OVERWRITE",
+        }
     state["self_sha256"] = canonical_sha256(state)
     return state
 
@@ -588,6 +724,20 @@ def _quantiles(values: Sequence[float]) -> dict[str, float]:
         "p50": float(np.quantile(array, 0.5)),
         "p90": float(np.quantile(array, 0.9)),
         "p99": float(np.quantile(array, 0.99)),
+    }
+
+
+def _distribution_summary(values: Sequence[tuple[float, str]]) -> dict[str, Any]:
+    latencies = [value for value, _ in values]
+    count = len(latencies)
+    over_60 = sum(value > 60.0 for value in latencies)
+    over_120 = sum(value > 120.0 for value in latencies)
+    return {
+        "count": count,
+        "session_count": len({session for _, session in values}),
+        "quantiles_seconds": _quantiles(latencies),
+        "over_60_seconds": {"count": over_60, "rate": over_60 / count},
+        "over_120_seconds": {"count": over_120, "rate": over_120 / count},
     }
 
 

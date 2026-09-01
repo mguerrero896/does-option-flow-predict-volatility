@@ -45,10 +45,11 @@ The hermetic Tier 1 suite runs from a clean clone with no credentials:
 
 ```bash
 uv sync --locked
-MDS650_PANEL_GUARD_MAY_SKIP=1 uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
+MDS650_PANEL_GUARD_MAY_SKIP=1 MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP=1 uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
 ```
 
-The flag allows only explicitly guarded licensed-panel checks to skip. Provider calls,
+The flags allow only the licensed-panel checks and live UW snapshot regeneration to skip
+when those stores are absent. Provider calls,
 Supabase end-to-end checks and Tier 2 panel verification remain separate; a Tier 1 pass is
 not evidence that those external planes passed. See the README evidence and data-access
 section. The exact skip count is not a stable interface.

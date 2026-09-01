@@ -117,6 +117,7 @@ jobs:
       # file and reported a pass; now the tier boundary is declared here, so a panel
       # missing anywhere else -- a developer's machine, the tier-2 gate runner -- fails.
       MDS650_PANEL_GUARD_MAY_SKIP: "1"
+      MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP: "1"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -173,6 +174,7 @@ jobs:
       # file and reported a pass; now the tier boundary is declared here, so a panel
       # missing anywhere else -- a developer's machine, the tier-2 gate runner -- fails.
       MDS650_PANEL_GUARD_MAY_SKIP: "1"
+      MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP: "1"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
