@@ -1,0 +1,63 @@
+{
+  "B0_B1a_and_B2_nested_contrasts": [
+    "B1a_over_B0",
+    "B2_over_B0_plus_B1a"
+  ],
+  "B1a_primary_and_B1b_B1c_robustness_role": {
+    "feature_counts": {
+      "B0": 12,
+      "B1a_addition": 3,
+      "B1b_addition": 2,
+      "B1c_addition": 4,
+      "B2_addition": 9
+    },
+    "primary": "B1a",
+    "robustness": [
+      "B1b",
+      "B1c"
+    ]
+  },
+  "MDE_estimated_from_development_only": true,
+  "QLIKE_primary_MAE_RMSE_secondary": {
+    "primary": "QLIKE",
+    "secondary": [
+      "MAE",
+      "RMSE"
+    ]
+  },
+  "bound_panel_common_complete_rows": 62266,
+  "bound_panel_rows": 77328,
+  "bound_panel_sha256": "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236",
+  "model_fit_performed_at_freeze": false,
+  "no_recalibration_no_feature_search_after_holdout_access": true,
+  "paired_day_cluster_bootstrap_and_Holm_policy": {
+    "multiplicity": "Holm across the registered contrast family",
+    "uncertainty": "paired bootstrap over whole trading sessions"
+  },
+  "provenance": {
+    "note": "Every field is transcribed from the sealed preregistration or the registered RP2 design. The temporal split was accepted by the owner in session.",
+    "preregistration_sha256": "8de28f3dbbb355751cad599d639346c6f773f6b76bdc141258481756a5930500",
+    "source_commit": "9f9446b5e44db86c06aebf42e30dace9b06dd446"
+  },
+  "purpose": "successor_method_freeze_over_corrected_pit_v22_inputs",
+  "schema_version": "pit-v22-successor-method-freeze-v1.0",
+  "temporal_train_validation_holdout_definition": {
+    "authority": "mds650.rp2.panel.DEFAULT_TRAIN_SHARE",
+    "chosen_without_outcomes": true,
+    "method": "chronological_by_session",
+    "remainder": "split chronologically into validation and a never-touched holdout",
+    "train_share": 0.6
+  },
+  "timing_rules": {
+    "b1q_primary_state": "SIP_ASOF_ORIGIN_MAX_AGE_60S",
+    "b2_created_at_rule": "OPERATIONAL_AVAILABILITY_PROXY_ORIGIN_MINUS_60_SECONDS",
+    "b2_primary_variant": "primary_5m_60s",
+    "fmp_primary_delay_minutes": 1,
+    "fmp_sensitivity_delay_minutes": 2,
+    "massive_reselection_sensitivity_cutoff_seconds": [
+      60,
+      300
+    ]
+  },
+  "zero_oos_reads_at_freeze": true
+}
