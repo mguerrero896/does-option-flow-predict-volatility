@@ -570,6 +570,78 @@ def test_a_reused_panel_does_not_change_what_the_run_says_it_did() -> None:
     assert manifest(True).as_record()["steps"][0]["reused"] is True  # type: ignore[index]
 
 
+def test_registered_panel_reuse_is_bound_to_its_source_manifest(tmp_path: Path) -> None:
+    runner = _load("run_rp2_v3_pipeline")
+    from mds650.rp2.run_manifest import (
+        PIPELINE_STEPS,
+        RunManifest,
+        StepRecord,
+        artifact_digest,
+        stable_content_digest,
+        write_manifest,
+    )
+
+    source = tmp_path / "source"
+    records: list[StepRecord] = []
+    for step in PIPELINE_STEPS:
+        artifacts: dict[str, str] = {}
+        content: dict[str, str] = {}
+        if step.name in runner.PANEL_STEP_NAMES:
+            for output in step.outputs:
+                path = source / output
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(f"{step.name}:{output}\n", encoding="utf-8")
+                artifacts[output] = artifact_digest(path)
+                content[output] = stable_content_digest(path)
+        records.append(
+            StepRecord(
+                name=step.name,
+                command=("internal", step.name),
+                exit_code=0,
+                runtime_seconds=0.0,
+                peak_memory_bytes=0,
+                artifacts=artifacts,
+                content=content,
+            )
+        )
+    write_manifest(
+        source,
+        RunManifest(
+            run_id="registered-source",
+            code_commit="0" * 40,
+            data_root="D:/MDS650",
+            roles=("D", "V"),
+            feature_registry_sha256="a" * 64,
+            input_manifest_sha256="b" * 64,
+            model_config_sha256="c" * 64,
+            seeds={"bootstrap": 650},
+            steps=tuple(records),
+            started_at_utc="t",
+            finished_at_utc="t",
+        ),
+    )
+
+    input_record, digest, integrity = runner.validate_registered_panel_source(source)
+    assert len(digest) == 64
+    destination = tmp_path / "destination"
+    destination.mkdir()
+    input_path = runner.write_input_manifest(destination, input_record)
+    assert stable_content_digest(input_path) == digest
+    copied = runner.reuse_registered_panel_step(
+        source,
+        destination,
+        "build-b0",
+        integrity["artifacts"],  # type: ignore[arg-type]
+    )
+    assert copied.reused is True
+    runner.assert_registered_panel_source_unchanged(source, integrity)
+
+    first = next(iter(integrity["artifacts"]))  # type: ignore[arg-type]
+    (source / first).write_text("tampered\n", encoding="utf-8")
+    with pytest.raises(SystemExit, match="RP2_RUN_PANEL_SOURCE_CHANGED"):
+        runner.assert_registered_panel_source_unchanged(source, integrity)
+
+
 def test_a_swapped_interior_session_is_caught(tmp_path: Path) -> None:
     """One session lost and another gained leaves the count and the endpoints unchanged."""
 

@@ -148,6 +148,7 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/run_gate2_calibration.py` | Gate 2: calibration-vs-information recalibration analysis on the binding frozen samples. |
 | `scripts/run_gate3_har.py` | Gate 3: HAR/HARQ intraday ladder on development data selecting the prospective base model. |
 | `scripts/figure_style.py` | The figure system: palette extracted from this project's archived predecessor, type scale, and the drawing primitives every figure shares. Imported, not run. |
+| `scripts/render_cumulative_loss_figure.py` | Validates a registered RP2 session-loss series against its manifest and aggregate estimates, then writes the descriptive SVG outside the repository. |
 | `scripts/render_figures.py` | Generates the five README figures. The evidence figure reads its numbers from the inference artifact named by the canonical state, so it cannot drift from the run it describes. |
 | `scripts/run_gate4_decay_power.py` | Gate 4: effect-decay regression and decay-aware power. **Superseded**: the decay line it fits is withdrawn and Phase 8 was read on 2026-08-30 as `MIXED_EXPLORATORY`, not under a decay-aware design. Retained for audit. |
 | `scripts/run_gate5_bar_reconciliation.py` | Gate 5.1: cross-provider FMP-vs-Massive 1-minute bar reconciliation measuring assumption A001. |

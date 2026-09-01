@@ -145,7 +145,7 @@ def test_boosted_producers_use_sessions_and_publish_matching_fit_provenance(
     monkeypatch.setattr(
         block10,
         "session_contrast",
-        lambda *_args, **_kwargs: SimpleNamespace(as_record=lambda: {}),
+        lambda *_args, **_kwargs: SimpleNamespace(as_record=lambda: {"estimate": 0.0}),
     )
     monkeypatch.setattr(
         block10,
@@ -186,6 +186,59 @@ def test_boosted_producers_use_sessions_and_publish_matching_fit_provenance(
     assert nested["equivalence_interpretation"] == (
         "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST"
     )
+
+
+def test_session_loss_series_is_the_registered_session_mean() -> None:
+    block10 = _load("rp2_block10_inference")
+    sessions = np.array([0, 0, 1, 1, 1], dtype=np.int64)
+    dates = np.array(["2026-01-05", "2026-01-05", "2026-01-06", "2026-01-06", "2026-01-06"])
+    without = np.array([3.0, 5.0, 2.0, 4.0, 6.0])
+    with_flow = np.array([2.0, 4.0, 1.0, 2.0, 3.0])
+
+    series = block10.session_loss_series(
+        without,
+        with_flow,
+        sessions,
+        dates,
+        expected_estimate=1.5,
+    )
+
+    assert [row["session_date"] for row in series] == ["2026-01-05", "2026-01-06"]
+    assert [row["origins"] for row in series] == [2, 3]
+    assert [row["delta_loss"] for row in series] == [1.0, 2.0]
+
+
+def test_cumulative_figure_analysis_preserves_endpoint_and_concentration() -> None:
+    renderer = _load("render_cumulative_loss_figure")
+    from mds650.rp2.ladder import PRIMARY_MODELS
+
+    rows = [
+        {
+            "session_date": f"2026-01-0{index + 5}",
+            "origins": 2,
+            "loss_without_flow": without,
+            "loss_with_flow": with_flow,
+            "delta_loss": without - with_flow,
+        }
+        for index, (without, with_flow) in enumerate(((3.0, 2.0), (1.0, 2.0), (4.0, 2.0)))
+    ]
+    mean = sum(float(row["delta_loss"]) for row in rows) / len(rows)
+    role = {
+        "clusters": 3,
+        "evaluation_mask_sha256": "a" * 64,
+        "nested_tests": {family: {"b2_over_b1": {"estimate": mean}} for family in PRIMARY_MODELS},
+        "flow_loss_series": {
+            "schema_version": 1,
+            "evaluation_mask_sha256": "a" * 64,
+            "models": {family: rows for family in PRIMARY_MODELS},
+        },
+    }
+    analysis, curves = renderer.analyse_role(role, {"evaluation_mask_sha256": "a" * 64})
+
+    assert analysis[PRIMARY_MODELS[0]]["endpoint"] == pytest.approx(2.0)
+    assert analysis[PRIMARY_MODELS[0]]["rising_sessions"] == 2
+    assert analysis[PRIMARY_MODELS[0]]["top_three_rise_share"] == pytest.approx(1.0)
+    assert curves[PRIMARY_MODELS[0]][1] == [1.0, 0.0, 2.0]
 
 
 def test_an_early_exit_records_the_pre_split_mask() -> None:
