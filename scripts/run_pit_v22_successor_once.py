@@ -8,7 +8,9 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 from collections.abc import Mapping, Sequence
+from contextlib import suppress
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -41,6 +43,7 @@ from mds650.phase6_evaluation import (
     validate_phase6_evaluation_panel,
 )
 from mds650.rp2.panel import DEFAULT_TRAIN_SHARE, chronological_split, session_rank
+from mds650.storage import assert_outside_frozen, write_content_addressed
 from mds650.study_design import canonical_sha256
 from mds650.temporal_validation import split_expanding_fold
 
@@ -57,6 +60,12 @@ GATED_ROOT: Path
 TRACKED_RESULT = ARTIFACTS / "successor_evaluation_result_v1.json"
 TRACKED_LOG = ARTIFACTS / "successor_evaluation_run_v1.json"
 BASE_COMMIT = "b8657bfa7e280b75fddd7ee818cbaa5987c495d2"
+EXPECTED_SIGNED_FREEZE_SHA256 = "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
+EXPECTED_OWNER_AUTHORIZATION_SHA256 = (
+    "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
+)
+EXPECTED_SOURCE_PANEL_SHA256 = "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236"
+EXPECTED_GATED_ROOT_PATH_SHA256 = "0348aa63962b19714303dccd0a8f8d273f1dc0152e9e2dc15353fad1956fea94"
 MODEL_ROLES = ("gamma_glm_confirmatory", "lightgbm_robustness")
 KEYS = ("origin_id", "asset", "session_date", "forecast_origin_utc")
 
@@ -69,24 +78,39 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _read_json(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+def _read_json_with_sha256(path: Path) -> tuple[dict[str, Any], str]:
+    raw = path.read_bytes()
+    payload = json.loads(raw.decode("utf-8"))
     if not isinstance(payload, dict):
         raise RuntimeError(f"PIT_V22_JSON_OBJECT_REQUIRED:{path.name}")
-    return payload
+    return payload, hashlib.sha256(raw).hexdigest()
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    return _read_json_with_sha256(path)[0]
+
+
+def _json_bytes(payload: Mapping[str, Any]) -> bytes:
+    return (json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
 
 
 def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    assert_outside_frozen(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".part")
-    with temporary.open("w", encoding="utf-8", newline="\n") as target:
-        target.write(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    with temporary.open("wb") as target:
+        target.write(_json_bytes(payload))
+        target.flush()
+        os.fsync(target.fileno())
     os.replace(temporary, path)
 
 
 def _write_parquet(path: Path, frame: pl.DataFrame) -> None:
+    assert_outside_frozen(path)
     temporary = path.with_suffix(path.suffix + ".part")
     frame.write_parquet(temporary, compression="zstd")
+    with temporary.open("r+b") as persisted:
+        os.fsync(persisted.fileno())
     os.replace(temporary, path)
 
 
@@ -102,15 +126,25 @@ def _write_log(path: Path, events: Sequence[Mapping[str, Any]]) -> None:
     _write_json(path, _log_payload(events))
 
 
-def _write_new_json(path: Path, payload: Mapping[str, Any]) -> None:
+def _write_new_json(path: Path, payload: Mapping[str, Any]) -> str:
+    assert_outside_frozen(path)
     path.parent.mkdir(parents=True, exist_ok=True)
+    payload_bytes = _json_bytes(payload)
+    with tempfile.NamedTemporaryFile(
+        mode="wb", dir=path.parent, prefix=f".{path.name}.", suffix=".part", delete=False
+    ) as target:
+        temporary = Path(target.name)
+        target.write(payload_bytes)
+        target.flush()
+        os.fsync(target.fileno())
     try:
-        with path.open("x", encoding="utf-8", newline="\n") as target:
-            target.write(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
-            target.flush()
-            os.fsync(target.fileno())
+        os.link(temporary, path)
     except FileExistsError as error:
         raise FileExistsError("PIT_V22_SUCCESSOR_TRACKED_OUTPUT_ALREADY_EXISTS") from error
+    finally:
+        with suppress(OSError):
+            temporary.unlink(missing_ok=True)
+    return hashlib.sha256(payload_bytes).hexdigest()
 
 
 def _assert_public_payload(payload: Mapping[str, Any]) -> None:
@@ -133,11 +167,7 @@ def _event(events: list[dict[str, Any]], gated_log: Path, name: str, **details: 
 def claim_one_shot(path: Path, payload: Mapping[str, Any]) -> None:
     """Create the irreversible process claim; an existing claim forbids a rerun."""
     try:
-        with path.open("x", encoding="utf-8") as target:
-            json.dump(payload, target, indent=2, sort_keys=True)
-            target.write("\n")
-            target.flush()
-            os.fsync(target.fileno())
+        _write_new_json(path, payload)
     except FileExistsError as error:
         raise FileExistsError("PIT_V22_SUCCESSOR_ALREADY_CLAIMED") from error
 
@@ -178,6 +208,9 @@ def _runtime_preregistration(
         "oos_read_count": 0,
         "bound_panel_sha256": source_preregistration["bound_panel"]["panel_sha256"],
         "source_preregistration_sha256": source_preregistration["preregistration_sha256"],
+        "source_bars_sha256": source_preregistration["bound_panel"]["source_hashes"][
+            "fmp_bars_sha256"
+        ],
         "outcome_assets": list(OUTCOME_ASSETS),
         "train_share": DEFAULT_TRAIN_SHARE,
         "session_universe": "COMMON_PREDICTOR_COMPLETE_SESSIONS",
@@ -216,12 +249,17 @@ def _git(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
-    if GATED_ROOT.name != RUN_ID:
+    gated_root_path_sha256 = hashlib.sha256(
+        GATED_ROOT.resolve().as_posix().casefold().encode()
+    ).hexdigest()
+    if GATED_ROOT.name != RUN_ID or gated_root_path_sha256 != EXPECTED_GATED_ROOT_PATH_SHA256:
         raise RuntimeError("PIT_V22_SUCCESSOR_GATED_ROOT_INVALID")
-    source_preregistration = _read_json(SOURCE_PREREGISTRATION)
-    freeze = _read_json(SIGNED_FREEZE)
-    authorization = _read_json(OWNER_AUTHORIZATION)
-    method_template = _read_json(METHOD_TEMPLATE)
+    source_preregistration, source_preregistration_raw_sha256 = _read_json_with_sha256(
+        SOURCE_PREREGISTRATION
+    )
+    freeze, freeze_sha256 = _read_json_with_sha256(SIGNED_FREEZE)
+    authorization, authorization_sha256 = _read_json_with_sha256(OWNER_AUTHORIZATION)
+    method_template, method_template_sha256 = _read_json_with_sha256(METHOD_TEMPLATE)
     prereg_unsigned = {
         key: value
         for key, value in source_preregistration.items()
@@ -234,8 +272,13 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
     bars_sha256 = _sha256(SOURCE_BARS)
     if (
         source_preregistration["preregistration_sha256"] != canonical_sha256(prereg_unsigned)
+        or source_preregistration["preregistration_sha256"]
+        != freeze["provenance"]["preregistration_sha256"]
         or method_template.get("manifest_sha256") != canonical_sha256(method_unsigned)
-        or _sha256(SIGNED_FREEZE) != authorization.get("contract_sha256")
+        or freeze_sha256 != EXPECTED_SIGNED_FREEZE_SHA256
+        or authorization_sha256 != EXPECTED_OWNER_AUTHORIZATION_SHA256
+        or panel_sha256 != EXPECTED_SOURCE_PANEL_SHA256
+        or freeze_sha256 != authorization.get("contract_sha256")
         or authorization.get("authorize_read_and_evaluation") is not True
         or authorization.get("sealed_cohorts_read_before") != 0
         or freeze.get("zero_oos_reads_at_freeze") is not True
@@ -288,6 +331,10 @@ def _preflight(*, require_clean: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         "status": "PASS_TARGET_FREE_PREFLIGHT",
         "source_panel_sha256": panel_sha256,
         "source_bars_sha256": bars_sha256,
+        "signed_freeze_sha256": freeze_sha256,
+        "owner_authorization_sha256": authorization_sha256,
+        "source_preregistration_raw_sha256": source_preregistration_raw_sha256,
+        "method_template_sha256": method_template_sha256,
         "source_rows": source_keys.height,
         "source_common_complete_rows": common.height,
         "split_session_counts": expected_counts,
@@ -498,21 +545,21 @@ def _runtime_method(
     method_template: Mapping[str, Any],
     *,
     development_panel_sha256: str,
+    method_template_sha256: str,
     training_mde: Mapping[str, float],
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "schema_version": "pit-v22-successor-runtime-method-freeze-1.0",
         "status": "FROZEN_AFTER_DEVELOPMENT_BEFORE_OOS",
         "oos_read_count": 0,
-        "signed_freeze_sha256": _sha256(SIGNED_FREEZE),
-        "source_preregistration_sha256": _read_json(SOURCE_PREREGISTRATION)[
-            "preregistration_sha256"
-        ],
+        "signed_freeze_sha256": EXPECTED_SIGNED_FREEZE_SHA256,
+        "owner_authorization_sha256": EXPECTED_OWNER_AUTHORIZATION_SHA256,
+        "source_preregistration_sha256": preregistration["source_preregistration_sha256"],
         "runtime_preregistration_sha256": preregistration["manifest_sha256"],
-        "bound_target_free_panel_sha256": _sha256(SOURCE_PANEL),
+        "bound_target_free_panel_sha256": preregistration["bound_panel_sha256"],
         "development_linked_common_panel_sha256": development_panel_sha256,
-        "source_bars_sha256": _sha256(SOURCE_BARS),
-        "method_template_sha256": _sha256(METHOD_TEMPLATE),
+        "source_bars_sha256": preregistration["source_bars_sha256"],
+        "method_template_sha256": method_template_sha256,
         "uv_lock_sha256": _sha256(ROOT / "uv.lock"),
         "execution_commit": _git("rev-parse", "HEAD").stdout.strip(),
         "execution_tree": _git("rev-parse", "HEAD^{tree}").stdout.strip(),
@@ -644,7 +691,12 @@ def _execute() -> dict[str, Any]:
 
         mde_forecasts, mde_variants = training_only_oof_forecasts(development, preregistration)
         _write_parquet(paths["mde_forecasts"], mde_forecasts)
-        method_template = _read_json(METHOD_TEMPLATE)
+        method_template, method_template_sha256 = _read_json_with_sha256(METHOD_TEMPLATE)
+        if (
+            method_template_sha256 != preflight["method_template_sha256"]
+            or _git("status", "--porcelain").stdout.strip()
+        ):
+            raise RuntimeError("PIT_V22_METHOD_OR_CODE_CHANGED_BEFORE_FREEZE")
         training_mde = training_mde_from_forecasts(
             mde_forecasts,
             draws=int(preregistration["inference"]["bootstrap_repetitions"]),
@@ -654,6 +706,7 @@ def _execute() -> dict[str, Any]:
             preregistration,
             method_template,
             development_panel_sha256=_sha256(paths["development_panel"]),
+            method_template_sha256=preflight["method_template_sha256"],
             training_mde=training_mde,
         )
         _write_json(paths["method"], method)
@@ -673,12 +726,21 @@ def _execute() -> dict[str, Any]:
             paths["variants"],
             paths["result"],
         )
+        authorization_document, authorization_sha256 = _read_json_with_sha256(OWNER_AUTHORIZATION)
+        if (
+            _sha256(SIGNED_FREEZE) != preflight["signed_freeze_sha256"]
+            or authorization_sha256 != preflight["owner_authorization_sha256"]
+            or _sha256(SOURCE_PANEL) != preflight["source_panel_sha256"]
+            or _sha256(SOURCE_BARS) != preflight["source_bars_sha256"]
+            or _git("status", "--porcelain").stdout.strip()
+        ):
+            raise RuntimeError("PIT_V22_SIGNED_INPUT_CHANGED_BEFORE_AUTHORIZATION")
         authorization = authorize_phase6_oos(
-            _read_json(OWNER_AUTHORIZATION),
+            authorization_document,
             common_panel_sha256=panel_sha256,
             preregistration_manifest_sha256=preregistration["manifest_sha256"],
             results_exist=any(path.exists() for path in result_paths),
-            contract_sha256=_sha256(SIGNED_FREEZE),
+            contract_sha256=preflight["signed_freeze_sha256"],
         )
         _write_json(paths["ledger"], authorization)
         _event(
@@ -703,6 +765,11 @@ def _execute() -> dict[str, Any]:
             .filter(pl.col("session_date").is_in(remaining_dates))
             .collect()
         )
+        if (
+            _sha256(SOURCE_PANEL) != preflight["source_panel_sha256"]
+            or _sha256(SOURCE_BARS) != preflight["source_bars_sha256"]
+        ):
+            raise RuntimeError("PIT_V22_SOURCE_CHANGED_DURING_OOS_MATERIALIZATION")
         remaining_all, remaining_common = _linked_panel(remaining_source, remaining_bars)
         all_rows = pl.concat([development_all, remaining_all]).sort(
             ["session_date", "forecast_origin_utc", "asset"]
@@ -760,13 +827,38 @@ def _execute() -> dict[str, Any]:
             decision=evaluation["decision"],
             edge_claim_eligible=edge_claim_eligible,
         )
-        public_log = _log_payload(events)
-        _assert_public_payload(public_log)
-        _write_new_json(TRACKED_LOG, public_log)
-        log_sha256 = _sha256(TRACKED_LOG)
+        content_addressed_payloads: dict[str, str] = {}
+        for protocol_id, path in {
+            "runtime-preregistration": paths["preregistration"],
+            "development-linked-panel": paths["development_panel"],
+            "linked-common-panel": paths["panel"],
+            "development-mde-forecasts": paths["mde_forecasts"],
+            "runtime-method-freeze": paths["method"],
+            "primary-predictions": paths["predictions"],
+            "b1-robustness-predictions": paths["robustness_predictions"],
+            "variant-ledger": paths["variants"],
+        }.items():
+            payload = path.read_bytes()
+            digest = hashlib.sha256(payload).hexdigest()
+            addressed = write_content_addressed(
+                payload,
+                root=GATED_ROOT / "content_addressed",
+                protocol_id=protocol_id,
+            )
+            if addressed.stem != digest:
+                raise RuntimeError("PIT_V22_CONTENT_ADDRESS_MISMATCH")
+            content_addressed_payloads[protocol_id] = digest
+        if content_addressed_payloads["linked-common-panel"] != linked_panel_sha256:
+            raise RuntimeError("PIT_V22_LINKED_PANEL_SNAPSHOT_MISMATCH")
+        _event(
+            events,
+            paths["log"],
+            "PRIMARY_PAYLOADS_CONTENT_ADDRESSED",
+            payload_count=len(content_addressed_payloads),
+        )
         result: dict[str, Any] = {
             "schema_version": "pit-v22-successor-evaluation-result-1.0",
-            "status": "COMPLETE_REPORTED",
+            "status": "SCIENTIFIC_EVALUATION_COMPLETE_PENDING_CUSTODY_VALIDATION",
             "run_id": RUN_ID,
             "evaluation_attempt_count": 1,
             "oos_read_count": 1,
@@ -781,14 +873,16 @@ def _execute() -> dict[str, Any]:
             "mde_annotations": annotations,
             "b1_information_set_robustness": robustness,
             "eligibility": {
-                "scientific_result_eligible": True,
+                "scientific_result_eligible": False,
                 "edge_claim_eligible": edge_claim_eligible,
                 "capital_eligible": False,
                 "capital_go": False,
                 "research_only": True,
-                "reason": "NO_BINARY_EDGE_PROMOTION_RULE_IN_SIGNED_SUCCESSOR_FREEZE",
+                "scientific_result_reason": "PENDING_CANONICAL_CUSTODY_VALIDATION",
+                "edge_claim_reason": "NO_BINARY_EDGE_PROMOTION_RULE_IN_SIGNED_SUCCESSOR_FREEZE",
                 "evaluator_diagnostic_decision": evaluation["decision"],
             },
+            "content_addressed_primary_payloads": content_addressed_payloads,
             "limitations": [
                 "UNUSUAL_WHALES_CREATED_AT_IS_AN_OPERATIONAL_AVAILABILITY_PROXY",
                 "TIMING_SENSITIVITY_FORECASTS_NOT_EVALUATED_IN_THIS_SUCCESSOR_RUN",
@@ -796,30 +890,47 @@ def _execute() -> dict[str, Any]:
                 "RESEARCH_ONLY_NOT_INVESTMENT_ADVICE",
             ],
             "hashes": {
-                "signed_freeze_sha256": _sha256(SIGNED_FREEZE),
-                "source_preregistration_sha256": _read_json(SOURCE_PREREGISTRATION)[
-                    "preregistration_sha256"
-                ],
+                "signed_freeze_sha256": preflight["signed_freeze_sha256"],
+                "owner_authorization_sha256": preflight["owner_authorization_sha256"],
+                "source_preregistration_sha256": preregistration["source_preregistration_sha256"],
                 "runtime_preregistration_sha256": preregistration["manifest_sha256"],
                 "source_target_free_panel_sha256": preflight["source_panel_sha256"],
                 "source_bars_sha256": bars_sha256,
-                "development_linked_common_panel_sha256": _sha256(paths["development_panel"]),
-                "linked_common_panel_sha256": linked_panel_sha256,
-                "development_mde_forecasts_sha256": _sha256(paths["mde_forecasts"]),
-                "runtime_method_freeze_sha256": _sha256(paths["method"]),
-                "primary_predictions_sha256": _sha256(paths["predictions"]),
-                "b1_robustness_predictions_sha256": _sha256(paths["robustness_predictions"]),
-                "variant_ledger_sha256": _sha256(paths["variants"]),
-                "full_log_sha256": log_sha256,
+                "development_linked_common_panel_sha256": content_addressed_payloads[
+                    "development-linked-panel"
+                ],
+                "linked_common_panel_sha256": content_addressed_payloads["linked-common-panel"],
+                "development_mde_forecasts_sha256": content_addressed_payloads[
+                    "development-mde-forecasts"
+                ],
+                "runtime_method_freeze_sha256": content_addressed_payloads["runtime-method-freeze"],
+                "primary_predictions_sha256": content_addressed_payloads["primary-predictions"],
+                "b1_robustness_predictions_sha256": content_addressed_payloads[
+                    "b1-robustness-predictions"
+                ],
+                "variant_ledger_sha256": content_addressed_payloads["variant-ledger"],
             },
             "personal_paths_emitted": False,
             "secret_values_emitted": False,
         }
         result["manifest_sha256"] = canonical_sha256(result)
         _assert_public_payload(result)
+        result_payload = _json_bytes(result)
+        result_address = write_content_addressed(
+            result_payload,
+            root=GATED_ROOT / "content_addressed",
+            protocol_id="successor-result",
+        )
+        if result_address.stem != hashlib.sha256(result_payload).hexdigest():
+            raise RuntimeError("PIT_V22_RESULT_CONTENT_ADDRESS_MISMATCH")
         _write_json(paths["result"], result)
-        _write_new_json(TRACKED_RESULT, result)
-        result_sha256 = _sha256(TRACKED_RESULT)
+        result_sha256 = _write_new_json(TRACKED_RESULT, result)
+        _event(
+            events,
+            paths["log"],
+            "RESULT_WRITTEN",
+            result_sha256=result_sha256,
+        )
         completed_ledger = {
             **{key: value for key, value in authorization.items() if key != "manifest_sha256"},
             "status": "OOS_CONSUMED_RESULTS_REPORTED",
@@ -829,6 +940,12 @@ def _execute() -> dict[str, Any]:
         }
         completed_ledger["manifest_sha256"] = canonical_sha256(completed_ledger)
         _write_json(paths["ledger"], completed_ledger)
+        _event(
+            events,
+            paths["log"],
+            "LEDGER_CLOSED",
+            status=completed_ledger["status"],
+        )
         _write_json(
             paths["claim"],
             {
@@ -838,6 +955,23 @@ def _execute() -> dict[str, Any]:
                 "completed_at_utc": datetime.now(UTC).isoformat(),
             },
         )
+        _event(
+            events,
+            paths["log"],
+            "CLAIM_CLOSED",
+            status="COMPLETE_REPORTED",
+        )
+        public_log = _log_payload(events)
+        _assert_public_payload(public_log)
+        log_payload = _json_bytes(public_log)
+        log_address = write_content_addressed(
+            log_payload,
+            root=GATED_ROOT / "content_addressed",
+            protocol_id="successor-log",
+        )
+        if log_address.stem != hashlib.sha256(log_payload).hexdigest():
+            raise RuntimeError("PIT_V22_LOG_CONTENT_ADDRESS_MISMATCH")
+        log_sha256 = _write_new_json(TRACKED_LOG, public_log)
         return {
             "status": "PASS_ONE_SHOT_EVALUATION_COMPLETE",
             "decision": evaluation["decision"],

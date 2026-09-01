@@ -66,6 +66,16 @@ def test_signed_successor_authorization_is_accepted_by_oos_gate() -> None:
     assert consumed["owner_authorization"]["authorized_by"] == authorization["authorized_by"]
 
 
+def test_runner_pins_the_physical_signed_input_hashes() -> None:
+    runner = _runner_module()
+
+    assert hashlib.sha256(FREEZE.read_bytes()).hexdigest() == runner.EXPECTED_SIGNED_FREEZE_SHA256
+    assert (
+        hashlib.sha256(AUTHORIZATION.read_bytes()).hexdigest()
+        == runner.EXPECTED_OWNER_AUTHORIZATION_SHA256
+    )
+
+
 def test_successor_information_sets_include_registered_b1_robustness() -> None:
     sets = phase6_information_sets(include_b1_robustness=True)
 
@@ -131,7 +141,9 @@ def test_one_shot_claim_rejects_a_second_process(tmp_path: Path) -> None:
 def test_public_outputs_are_exclusive_and_reject_absolute_paths(tmp_path: Path) -> None:
     runner = _runner_module()
     output = tmp_path / "result.json"
-    runner._write_new_json(output, {"status": "PASS"})
+    digest = runner._write_new_json(output, {"status": "PASS"})
+
+    assert digest == hashlib.sha256(output.read_bytes()).hexdigest()
 
     with pytest.raises(FileExistsError, match="TRACKED_OUTPUT_ALREADY_EXISTS"):
         runner._write_new_json(output, {"status": "OVERWRITE"})
@@ -167,6 +179,25 @@ def test_one_shot_runner_wires_only_the_frozen_producers() -> None:
         "forecast_phase6_fold",
         "evaluate_phase6",
         "DEFAULT_TRAIN_SHARE",
+        "assert_outside_frozen",
+        "write_content_addressed",
     }
     assert not (missing := {name for name in required if name not in source}), sorted(missing)
     assert "D:\\MDS650" not in source
+    assert 'freeze["provenance"]["preregistration_sha256"]' in source
+    assert '"scientific_result_eligible": True' not in source
+    assert '"scientific_result_eligible": False' in source
+
+
+def test_public_log_is_sealed_after_result_and_custody_closeout() -> None:
+    source = RUNNER.read_text(encoding="utf-8")
+    result_write = source.index("_write_new_json(TRACKED_RESULT, result)")
+    ledger_close = source.index('_write_json(paths["ledger"], completed_ledger)', result_write)
+    claim_close = source.index('paths["claim"]', ledger_close)
+    result_event = source.index('"RESULT_WRITTEN"', result_write)
+    ledger_event = source.index('"LEDGER_CLOSED"', result_event)
+    claim_event = source.index('"CLAIM_CLOSED"', ledger_event)
+    log_write = source.index("_write_new_json(TRACKED_LOG, public_log)", claim_event)
+
+    assert result_write < result_event < ledger_close < ledger_event
+    assert ledger_event < claim_close < claim_event < log_write
