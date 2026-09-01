@@ -4,7 +4,7 @@
 > `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.
 > This file supersedes any narrative document that disagrees with it.
 
-- Governance: decision 119 is the latest (119 recorded).
+- Governance: decision 120 is the latest (120 recorded).
 - Frozen evidence: 123 artifacts registered; 121 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
 - Public metadata redactions: 14 frozen artifacts retain original and redacted SHA-256 custody in `data/PUBLIC_METADATA_REDACTIONS.json`.
 - Gated data: 15 files in private storage (`data/GATED_DATA_POINTERS.json`).
