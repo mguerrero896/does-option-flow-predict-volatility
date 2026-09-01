@@ -461,6 +461,11 @@
    "sha256": "c412c8ec5b2d0a39c91c99fda06da8db58548d38e38260bd2594010e1cf94e7f"
   },
   {
+   "bytes": 26382,
+   "path": "artifacts/rp2_v3/cumulative_loss_session_series_v1.json",
+   "sha256": "d40608c8a55c2e42408c7a08db4ddcd4a32fc69ad9d3e56077eb186ade32de0c"
+  },
+  {
    "bytes": 2749,
    "path": "artifacts/rp2_v3/rp2-v3-20260827-remediation3/run_identity.json",
    "sha256": "019508b6daefa3f555dabba4855b068f45e9fe56b825fe55d8e827b651e788ba"

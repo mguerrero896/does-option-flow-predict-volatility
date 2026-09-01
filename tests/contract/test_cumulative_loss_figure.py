@@ -49,6 +49,15 @@ def _payload() -> dict[str, object]:
 
 def test_public_series_closes_the_figure_governance_and_scientific_contract() -> None:
     payload = _payload()
+    relative = SERIES.relative_to(REPO).as_posix()
+    registry = json.loads(
+        (REPO / "data/FROZEN_ARTIFACTS.json").read_text(encoding="utf-8")
+    )
+    canonical = json.loads(
+        (REPO / "data/CANONICAL_STATE.json").read_text(encoding="utf-8")
+    )
+    assert relative in {entry["path"] for entry in registry["entries"]}
+    assert relative in canonical["authorized_sources"]
     assert payload["schema_version"] == "rp2-cumulative-loss-session-series-v1.0"
     assert payload["source"]["published_nested_estimates_compared"] == 12
     assert payload["source"]["maximum_absolute_estimate_difference"] == 0.0
