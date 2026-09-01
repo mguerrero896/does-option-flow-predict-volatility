@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+from decimal import Decimal
 from pathlib import Path
 
 from tests.withdrawn_claims import carries_supersession_notice, normalize
@@ -12,14 +13,23 @@ from tests.withdrawn_claims import carries_supersession_notice, normalize
 from mds650.uw_latency_campaign import canonical_sha256
 
 REPO = Path(__file__).resolve().parents[2]
-AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v1.json"
-STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v1.json"
+AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v2.json"
+STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v2.json"
+LEGACY_AGGREGATE = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260901_v1.json"
+)
+LEGACY_STATE = (
+    REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260901_v1.json"
+)
 ANOMALY = REPO / "artifacts" / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
 GATE5 = REPO / "docs" / "gate5_pit_foundations_v1.md"
 REGISTERS = {"docs/methodology_decisions.md"}
 CAMPAIGN = re.compile(r"(?:UW|Unusual Whales).{0,80}(?:latency|created_at)", re.I | re.S)
 OUTDATED = re.compile(
     r"RUNNING\s*\(unattended\)|\b(?:COLLECTING|COLLECTED_UNRECONCILED|ABANDONED)\b"
+)
+OUTDATED_HOURLY = re.compile(
+    r"NOT_AVAILABLE_IN_RECONCILIATION_JSON|CAMPAIGN_HARVEST_MAY_NOT_READ_LICENSED_ROW_DATA"
 )
 LIFECYCLE_ESCAPE = re.compile(r"supersed|historical|not a current|no longer|retired", re.I)
 
@@ -49,7 +59,7 @@ def _asserts_outdated_campaign_state(text: str) -> bool:
 
 
 def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
-    for path in (AGGREGATE, STATE, ANOMALY):
+    for path in (AGGREGATE, STATE, LEGACY_AGGREGATE, LEGACY_STATE, ANOMALY):
         payload = _load(path)
         assert payload["self_sha256"] == canonical_sha256(payload)
         serialized = json.dumps(payload).lower()
@@ -90,6 +100,19 @@ def test_published_campaign_state_is_current_or_explicitly_historical() -> None:
     )
 
 
+def test_declined_hourly_claim_is_current_only_with_supersession_notice() -> None:
+    failures = []
+    for relative in _tracked_markdown():
+        if relative in REGISTERS:
+            continue
+        text = (REPO / relative).read_text(encoding="utf-8", errors="replace")
+        if OUTDATED_HOURLY.search(text) and not carries_supersession_notice(text):
+            failures.append(relative)
+    assert not failures, "published hourly claim contradicts v2 artifact: " + ", ".join(
+        failures
+    )
+
+
 def test_gate5_publishes_partial_state_and_cross_channel_boundary() -> None:
     text = GATE5.read_text(encoding="utf-8")
     required = (
@@ -101,8 +124,77 @@ def test_gate5_publishes_partial_state_and_cross_channel_boundary() -> None:
         "100%",
         "2026-08-21",
         "COLLECTOR_RESTART_REPLAY_DUPLICATION",
+        "406 first receipts across all five clean sessions",
+        "6/406 (1.48%)",
+        "0/406",
+        "does not hold as a strict conservative bound at the NY opening",
     )
-    assert not [token for token in required if token not in text]
+    folded = normalize(text)
+    assert not [token for token in required if normalize(token) not in folded]
+
+
+def test_hourly_distribution_answers_the_registered_opening_cutoff() -> None:
+    aggregate = _load(AGGREGATE)
+    latency = aggregate["operational_latency"]
+    assert aggregate["schema_version"] == "uw-latency-campaign-v2.0"
+    assert latency["by_ny_hour"]["status"] == (
+        "MEASURED_FROM_LICENSED_OBSERVATION_AGGREGATES"
+    )
+    assert latency["by_ny_hour"]["included_first_receipts"] == 1768
+    opening = latency["by_ny_hour"]["values"]["9"]
+    assert opening["count"] == 406
+    assert opening["session_count"] == 5
+    assert opening["over_60_seconds"] == {"count": 6, "rate": 6 / 406}
+    assert opening["over_120_seconds"] == {"count": 0, "rate": 0.0}
+    assert opening["quantiles_seconds"]["p99"] == 60.2168978
+    assert latency["by_ny_hour"]["values"]["14"]["over_120_seconds"]["count"] == 2
+    assert set(latency["by_ny_hour_asset"]["values"]["9"]) == {
+        "AAPL",
+        "META",
+        "NVDA",
+        "TSLA",
+    }
+    assert latency["by_ny_hour_asset"]["insufficient"]["9"] == {
+        "AMZN": {"count": 25, "reason": "COUNT_BELOW_30", "session_count": 5},
+        "MSFT": {"count": 24, "reason": "COUNT_BELOW_30", "session_count": 4},
+    }
+
+
+def test_gate5_hourly_table_is_rendered_exactly_from_the_artifact() -> None:
+    values = _load(AGGREGATE)["operational_latency"]["by_ny_hour"]["values"]
+    rows = re.findall(
+        r"^\| (\d{1,2}) \| (\d+) \| (\d+) \| ([0-9.]+) \| ([0-9.]+) \| "
+        r"([0-9.]+) \| ([0-9.]+) \| (\d+) \| (\d+) \|$",
+        GATE5.read_text(encoding="utf-8"),
+        re.M,
+    )
+    expected = []
+    six_places = Decimal("0.000001")
+    for hour, payload in sorted(values.items(), key=lambda item: int(item[0])):
+        quantiles = payload["quantiles_seconds"]
+        expected.append(
+            (
+                hour,
+                str(payload["count"]),
+                str(payload["session_count"]),
+                str(Decimal(str(quantiles["p10"])).quantize(six_places)),
+                str(Decimal(str(quantiles["p50"])).quantize(six_places)),
+                str(Decimal(str(quantiles["p90"])).quantize(six_places)),
+                str(Decimal(str(quantiles["p99"])).quantize(six_places)),
+                str(payload["over_60_seconds"]["count"]),
+                str(payload["over_120_seconds"]["count"]),
+            )
+        )
+    assert rows == expected
+
+
+def test_snapshot_policy_never_mutates_a_frozen_campaign_artifact() -> None:
+    state = _load(STATE)
+    assert state["artifact_lifecycle"] == {
+        "policy": "IMMUTABLE_DATED_SNAPSHOT",
+        "freshness_check": "REGENERATE_AND_COMPARE_WITH_LIVE_SESSION_INVENTORY",
+        "on_drift": "PUBLISH_NEW_DATED_SNAPSHOT_NEVER_OVERWRITE",
+    }
 
 
 def test_campaign_uses_only_the_existing_alert_channel() -> None:

@@ -51,6 +51,7 @@ from mds650.rp2.panel import (
     B0_FEATURES,
     B1_FEATURES,
     B2_FEATURES,
+    DEFAULT_TRAIN_SHARE,
     chronological_split,
     common_evaluation_mask,
     load_merged_panel,
@@ -174,7 +175,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     target = target[keep]
 
     rank = session_rank(frame["session_date"].to_numpy())
-    train, test = chronological_split(rank, train_share=0.6)
+    train, test = chronological_split(rank, train_share=DEFAULT_TRAIN_SHARE)
     clusters = rank[test]
     digest = mask_sha256(test)
     print(

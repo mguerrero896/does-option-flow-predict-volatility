@@ -37,7 +37,8 @@ files between directories.
 | [`docs/target_horizon_decision.md`](target_horizon_decision.md) | Recorded RV30 primary-target decision. |
 | [`docs/rp2/block3_target_validation_v1.md`](rp2/block3_target_validation_v1.md) | Current target-horizon diagnostic: RV60 leads in D, RV30 leads in V. |
 | [`docs/pit_v22_claims_and_limitations.md`](pit_v22_claims_and_limitations.md) | Source-time PIT and availability limitations. |
-| [`docs/gate5_uw_latency_closeout_v1.md`](gate5_uw_latency_closeout_v1.md) | Target-blind UW latency harvest, anomaly disposition and cross-channel boundary. |
+| [`docs/gate5_pit_foundations_v1.md`](gate5_pit_foundations_v1.md) | Current Gate 5 authority, including UW receipt-hour latency and opening-cutoff disposition. |
+| [`docs/gate5_uw_latency_closeout_v1.md`](gate5_uw_latency_closeout_v1.md) | Superseded historical UW latency closeout retained for v1 snapshot provenance. |
 | [`docs/gate5_uw_same_channel_reconciliation_proposal_v1.md`](gate5_uw_same_channel_reconciliation_proposal_v1.md) | Resource-gated proposal for identifiable same-channel backfill and revision. |
 | [`docs/provider_timing_pit_contract_v22.md`](provider_timing_pit_contract_v22.md) | Governing provider-timing contract and proxy semantics. |
 | [`docs/rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md`](rp2_v3/B1_CONTEMPORANEOUS_SPEC_V2.md) | Current B1 option-state contract: option rows and underlying spot share the `t-120 s` cutoff; v1 remains historical. |

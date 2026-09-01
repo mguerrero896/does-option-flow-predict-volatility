@@ -62,6 +62,25 @@ def _cli_defaults(path: Path) -> list[str]:
     return defaults
 
 
+def _literal_call_arguments() -> list[str]:
+    offenders: list[str] = []
+    for path in sorted((REPO / "scripts").rglob("*.py")):
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            if not isinstance(node, ast.Call):
+                continue
+            for keyword in node.keywords:
+                if keyword.arg != "train_share":
+                    continue
+                try:
+                    ast.literal_eval(keyword.value)
+                except (ValueError, TypeError):
+                    continue
+                offenders.append(
+                    f"{path.relative_to(REPO).as_posix()}:{keyword.value.lineno}"
+                )
+    return offenders
+
+
 def test_rp2_train_share_has_one_definition_and_every_cli_uses_it() -> None:
     """A future producer cannot drift from the split hashed by the pipeline manifest."""
     definitions = [
@@ -75,3 +94,10 @@ def test_rp2_train_share_has_one_definition_and_every_cli_uses_it() -> None:
     assert {path.name for path in cli_paths} == set(CLI_PRODUCERS)
     for path in cli_paths:
         assert _cli_defaults(path) == ["DEFAULT_TRAIN_SHARE"], path.name
+
+
+def test_no_script_call_hard_codes_train_share() -> None:
+    assert _literal_call_arguments() == [], (
+        "train_share call literals bypass DEFAULT_TRAIN_SHARE: "
+        + ", ".join(_literal_call_arguments())
+    )

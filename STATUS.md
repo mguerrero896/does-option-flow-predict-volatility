@@ -4,8 +4,8 @@
 > `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.
 > This file supersedes any narrative document that disagrees with it.
 
-- Governance: decision 120 is the latest (120 recorded).
-- Frozen evidence: 123 artifacts registered; 121 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
+- Governance: decision 121 is the latest (121 recorded).
+- Frozen evidence: 125 artifacts registered; 123 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
 - Public metadata redactions: 14 frozen artifacts retain original and redacted SHA-256 custody in `data/PUBLIC_METADATA_REDACTIONS.json`.
 - Gated data: 15 files in private storage (`data/GATED_DATA_POINTERS.json`).
 - Supabase publication: **NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT** (19 schema migrations, 1 catalog reconciliation, and 6 dataset manifests committed; sealed reads: Phase 8 = 1, Phase 9 = 0).
@@ -19,7 +19,7 @@
 
 - Lifecycle: **RECONCILED_PARTIAL** (6/11 sessions reconciled).
 - Claim boundary: **PROXY_ONLY_CROSS_CHANNEL**; backfill and revision remain non-identifiable under the cross-channel design.
-- State authority: `artifacts/gate5_pit/uw_latency_campaign_state_20260901_v1.json`.
+- State authority: `artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json`.
 
 ## Current scientific bundle
 

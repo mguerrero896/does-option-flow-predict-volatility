@@ -16,6 +16,7 @@ from mds650.uw_latency_campaign import (
     build_anomaly_evidence,
     build_campaign_artifact,
     build_campaign_state,
+    build_hourly_latency_distribution,
     canonical_sha256,
     latency_outlier_alerts,
     read_artifact,
@@ -168,6 +169,127 @@ def _write_anomalous_session(
         encoding="utf-8",
     )
     return session_dir
+
+
+def _write_clean_hourly_session(root: Path, session: str) -> Path:
+    session_dir = root / "uw_latency" / "sessions" / session
+    session_dir.mkdir(parents=True)
+    ny = ZoneInfo("America/New_York")
+    opened = dt.datetime.combine(
+        dt.date.fromisoformat(session), dt.time(9, 30), tzinfo=ny
+    )
+    rows: list[str] = []
+    for sequence in range(10):
+        created = opened + dt.timedelta(minutes=sequence)
+        record = {
+            "sequence": sequence,
+            "start_time": int(created.timestamp() * 1000),
+            "created_at": created.isoformat(),
+            "ticker": "AAPL",
+        }
+        delay = 30 if sequence % 2 == 0 else 90
+        rows.append(
+            json.dumps(
+                {
+                    "kind": "observation",
+                    "receipt_utc": (created + dt.timedelta(seconds=delay)).isoformat(),
+                    "record": record,
+                }
+            )
+        )
+        if sequence == 0:
+            rows.append(
+                json.dumps(
+                    {
+                        "kind": "observation",
+                        "receipt_utc": (created + dt.timedelta(seconds=300)).isoformat(),
+                        "record": record,
+                    }
+                )
+            )
+    created = opened + dt.timedelta(minutes=15)
+    rows.append(
+        json.dumps(
+            {
+                "kind": "observation",
+                "receipt_utc": (created + dt.timedelta(seconds=45)).isoformat(),
+                "record": {
+                    "sequence": 99,
+                    "start_time": int(created.timestamp() * 1000),
+                    "created_at": created.isoformat(),
+                    "ticker": "AMZN",
+                },
+            }
+        )
+    )
+    crossing = opened.replace(hour=9, minute=59, second=50)
+    rows.append(
+        json.dumps(
+            {
+                "kind": "observation",
+                "receipt_utc": (crossing + dt.timedelta(seconds=30)).isoformat(),
+                "record": {
+                    "sequence": 101,
+                    "start_time": int(crossing.timestamp() * 1000),
+                    "created_at": crossing.isoformat(),
+                    "ticker": "AAPL",
+                },
+            }
+        )
+    )
+    historical = opened - dt.timedelta(days=1)
+    rows.append(
+        json.dumps(
+            {
+                "kind": "observation",
+                "receipt_utc": opened.isoformat(),
+                "record": {
+                    "sequence": 100,
+                    "start_time": int(historical.timestamp() * 1000),
+                    "created_at": historical.isoformat(),
+                    "ticker": "AAPL",
+                },
+            }
+        )
+    )
+    (session_dir / "observations.jsonl").write_text(
+        "\n".join(rows) + "\n", encoding="utf-8"
+    )
+    return session_dir
+
+
+def test_hourly_latency_uses_receipt_hour_first_receipt_and_session_rows(
+    tmp_path: Path,
+) -> None:
+    sessions = [
+        _write_clean_hourly_session(tmp_path, session)
+        for session in ("2026-08-17", "2026-08-18", "2026-08-19")
+    ]
+
+    hourly = build_hourly_latency_distribution(sessions)
+
+    assert hourly["included_sessions"] == [path.name for path in sessions]
+    assert hourly["included_first_receipts"] == 36
+    opening = hourly["by_ny_hour"]["9"]
+    assert opening["count"] == 33
+    assert opening["session_count"] == 3
+    assert opening["quantiles_seconds"]["p50"] == 45.0
+    assert opening["over_60_seconds"] == {"count": 15, "rate": 15 / 33}
+    assert opening["over_120_seconds"] == {"count": 0, "rate": 0.0}
+    assert hourly["by_ny_hour"]["10"]["count"] == 3
+    assert hourly["by_ny_hour_asset"]["9"]["AAPL"]["count"] == 30
+    assert hourly["by_ny_hour_asset"]["9"]["AAPL"]["quantiles_seconds"]["p50"] == 60.0
+    assert hourly["insufficient_by_ny_hour_asset"]["9"]["AMZN"] == {
+        "count": 3,
+        "session_count": 3,
+        "reason": "COUNT_BELOW_30",
+    }
+    serialized = json.dumps(hourly).lower()
+    assert str(tmp_path).lower() not in serialized
+    assert not any(
+        token in serialized
+        for token in ("record" + "_id", "pri" + "ce", "prem" + "ium")
+    )
 
 
 def test_campaign_harvest_excludes_only_contaminated_latency(tmp_path: Path) -> None:
