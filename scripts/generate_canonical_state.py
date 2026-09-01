@@ -84,6 +84,7 @@ AUTHORIZED_SOURCES = (
     UW_LATENCY_STATE.as_posix(),
     UW_LATENCY_ANOMALY.as_posix(),
     "artifacts/rp2_v3/cumulative_loss_session_series_v1.json",
+    "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json",
     PIT_V22_PREREGISTRATION.as_posix(),
     PIT_V22_FREEZE.as_posix(),
     PIT_V22_AUTHORIZATION.as_posix(),
