@@ -41,9 +41,10 @@ def _write_reconciliation(root: Path, index: int) -> Path:
     session_dir = root / "uw_latency" / "sessions" / DATES[index]
     session_dir.mkdir(parents=True, exist_ok=True)
     live = LIVE[index]
+    reconciled_date = dt.date.fromisoformat(DATES[index]) + dt.timedelta(days=7)
     payload = {
         "session": DATES[index],
-        "reconciled_utc": f"{DATES[index]}T21:00:00+00:00",
+        "reconciled_utc": f"{reconciled_date.isoformat()}T21:00:00+00:00",
         "status": "PROXY_ONLY_CROSS_CHANNEL",
         "tape_rows_outcome_assets": 100_000 + index,
         "live_observations_total": live,
@@ -109,7 +110,16 @@ def _collected_sessions(root: Path, *, reconciled: int = 6) -> list[Path]:
         (directory / "collector_summary.json").write_text("{}", encoding="utf-8")
         (directory / "capture_report.json").write_text("{}", encoding="utf-8")
         if index < reconciled:
-            (directory / "reconciliation.json").write_text("{}", encoding="utf-8")
+            reconciled_date = dt.date.fromisoformat(session) + dt.timedelta(days=7)
+            (directory / "reconciliation.json").write_text(
+                json.dumps(
+                    {
+                        "session": session,
+                        "reconciled_utc": f"{reconciled_date.isoformat()}T21:00:00+00:00",
+                    }
+                ),
+                encoding="utf-8",
+            )
         directories.append(directory)
     return directories
 
@@ -504,6 +514,34 @@ def test_campaign_rejects_anomaly_identity_or_disposition_drift(tmp_path: Path) 
         build_campaign_artifact(paths, anomaly=bad_disposition, as_of_date="2026-09-01")
 
 
+def test_early_reconciliation_cannot_enter_aggregate_or_lifecycle(tmp_path: Path) -> None:
+    """A provider backfill cannot bypass the registered seven-day maturity gate."""
+    early = _write_reconciliation(tmp_path, 0)
+    early_payload = json.loads(early.read_text(encoding="utf-8"))
+    early_payload["reconciled_utc"] = f"{DATES[0]}T21:00:00+00:00"
+    early.write_text(json.dumps(early_payload), encoding="utf-8")
+    with pytest.raises(
+        ValueError, match="UW_LATENCY_RECONCILIATION_BEFORE_MINIMUM_AGE"
+    ):
+        build_campaign_artifact(
+            [early], anomaly=_anomaly_payload(), as_of_date="2026-09-01"
+        )
+
+    session = early.parent
+    (session / "observations.jsonl").write_text("synthetic\n", encoding="utf-8")
+    (session / "collector_summary.json").write_text("{}", encoding="utf-8")
+    (session / "capture_report.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(
+        ValueError, match="UW_LATENCY_RECONCILIATION_BEFORE_MINIMUM_AGE"
+    ):
+        build_campaign_state(
+            [session],
+            aggregate_path="artifacts/gate5_pit/uw_latency_campaign_20260901_v1.json",
+            aggregate={"self_sha256": "a" * 64},
+            as_of_date="2026-09-01",
+        )
+
+
 @pytest.mark.parametrize(
     ("shape", "expected"),
     (
@@ -523,7 +561,15 @@ def test_lifecycle_is_derived_from_session_files(
         (session / "collector_summary.json").write_text("{}", encoding="utf-8")
         (session / "capture_report.json").write_text("{}", encoding="utf-8")
     if shape == "reconciled":
-        (session / "reconciliation.json").write_text("{}", encoding="utf-8")
+        (session / "reconciliation.json").write_text(
+            json.dumps(
+                {
+                    "session": session.name,
+                    "reconciled_utc": "2026-08-24T21:00:00+00:00",
+                }
+            ),
+            encoding="utf-8",
+        )
     if shape == "abandoned":
         (session.parents[1] / "campaign_abandoned.json").write_text("{}", encoding="utf-8")
     aggregate = {"self_sha256": "a" * 64}

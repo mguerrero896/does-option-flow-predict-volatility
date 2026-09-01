@@ -27,10 +27,10 @@ import numpy as np
 import polars as pl
 
 from mds650.config import effective_data_root
+from mds650.uw_latency_campaign import RECONCILE_AFTER_DAYS
 
 ASSETS = ("AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA")
 NY = ZoneInfo("America/New_York")
-RECONCILE_AFTER_DAYS = 7
 TAPE_URL = "https://api.unusualwhales.com/api/option-trades/full-tape/{date}"
 
 
