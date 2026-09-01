@@ -22,6 +22,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -51,6 +52,7 @@ from mds650.rp2.run_manifest import (  # noqa: E402
     artifact_digest,
     assert_artifact_stable,
     assert_inventory_is_frozen,
+    assert_manifest_identity_intact,
     assert_no_sealed_paths,
     assert_no_sealed_roles,
     assert_run_identity_unchanged,
@@ -81,6 +83,12 @@ SEEDS = {"bootstrap": DEFAULT_SEED, "lightgbm": 20260818, "dml_folds": 5}
 #: The roles every producer fits. Blocks 8 and 10 iterate these internally rather than
 #: taking a flag, so the runner refuses any other selection instead of recording one.
 PRODUCER_ROLES: Final[tuple[str, ...]] = ("D", "V")
+PANEL_STEP_NAMES: Final[tuple[str, ...]] = (
+    "build-targets",
+    "build-b0",
+    "build-b1",
+    "build-b2",
+)
 
 
 def gated_data_root() -> Path:
@@ -459,6 +467,164 @@ def write_input_manifest(run_dir: Path, record: Mapping[str, object]) -> Path:
     return path
 
 
+def assert_panel_source_is_disjoint(source_run: Path, run_dir: Path) -> None:
+    """Reject either directory being nested inside the other before the first write."""
+
+    source = source_run.resolve()
+    destination = run_dir.resolve()
+    if destination.is_relative_to(source) or source.is_relative_to(destination):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_IS_DESTINATION")
+
+
+def _source_artifact(source_run: Path, relative: str) -> Path:
+    """Resolve one source artifact without allowing a child link to escape the run."""
+
+    root = source_run.resolve()
+    try:
+        path = (root / relative).resolve(strict=True)
+    except OSError:
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ARTIFACT_MISSING:{relative}") from None
+    if not path.is_relative_to(root):
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ESCAPE:{relative}")
+    assert_no_sealed_paths([path])
+    if not path.is_file():
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ARTIFACT_MISSING:{relative}")
+    return path
+
+
+def validate_registered_panel_source(
+    source_run: Path,
+) -> tuple[dict[str, object], str, dict[str, object]]:
+    """Bind a new run to verified panel artifacts from one completed registered run."""
+
+    source_run = source_run.resolve()
+    assert_no_sealed_paths([source_run])
+    if not source_run.is_dir():
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_UNREGISTERED:{source_run.name}")
+    manifest_path = _source_artifact(source_run, "run_manifest.json")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert_manifest_identity_intact(manifest)
+    steps = manifest.get("steps")
+    if (
+        not isinstance(steps, list)
+        or [step.get("name") for step in steps] != list(STEP_NAMES)
+        or any(step.get("exit_code") != 0 for step in steps)
+    ):
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_INCOMPLETE:{source_run.name}")
+    if tuple(manifest.get("roles", ())) != PRODUCER_ROLES:
+        raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ROLES_INVALID:{source_run.name}")
+
+    by_name = {str(step["name"]): step for step in steps}
+    artifacts: dict[str, str] = {}
+    contents: dict[str, str] = {}
+    for name in PANEL_STEP_NAMES:
+        declared = next(step for step in PIPELINE_STEPS if step.name == name)
+        recorded = by_name[name].get("artifacts", {})
+        content = by_name[name].get("content", {})
+        if not isinstance(recorded, dict) or not isinstance(content, dict):
+            raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ARTIFACTS_INVALID:{name}")
+        for output in declared.outputs:
+            expected = str(recorded.get(output, ""))
+            expected_content = str(content.get(output, ""))
+            if len(expected) != 64 or len(expected_content) != 64:
+                raise SystemExit(f"RP2_RUN_PANEL_SOURCE_ARTIFACT_UNRECORDED:{name}:{output}")
+            path = _source_artifact(source_run, output)
+            assert_artifact_stable(path, expected)
+            if stable_content_digest(path) != expected_content:
+                raise SystemExit(f"RP2_RUN_PANEL_SOURCE_CONTENT_CHANGED:{name}:{output}")
+            artifacts[output] = expected
+            contents[output] = expected_content
+
+    partition = json.loads(PARTITION.read_text(encoding="utf-8"))
+    record: dict[str, object] = {
+        "study_window_enforced": {
+            role: {
+                "sessions": value["sessions"],
+                "first_session": value["first_session"],
+                "last_session": value["last_session"],
+            }
+            for role, value in partition["roles"].items()
+            if value["sessions"]
+        },
+        "study_window_source": "artifacts/rp2_block1_partition/partition.json",
+        "source_lineage_mode": "registered_panel_reuse",
+        "source_registered_run": {
+            "run_id": manifest["run_id"],
+            "code_commit": manifest["code_commit"],
+            "scientific_sha256": manifest["scientific_sha256"],
+            "input_manifest_sha256": manifest["input_manifest_sha256"],
+            "content": dict(sorted(contents.items())),
+        },
+    }
+    source_record = record["source_registered_run"]
+    assert isinstance(source_record, dict)
+    identifying = {
+        **record,
+        "source_registered_run": {
+            key: value for key, value in source_record.items() if key != "run_id"
+        },
+    }
+    digest = hashlib.sha256(canonical_json(identifying).encode("utf-8")).hexdigest()
+    integrity: dict[str, object] = {
+        "manifest_sha256": artifact_digest(manifest_path),
+        "artifacts": dict(sorted(artifacts.items())),
+    }
+    return record, digest, integrity
+
+
+def reuse_registered_panel_step(
+    source_run: Path,
+    run_dir: Path,
+    name: str,
+    source_artifacts: Mapping[str, object],
+) -> StepRecord:
+    """Copy one verified panel step while preserving explicit source lineage."""
+
+    step = next(candidate for candidate in PIPELINE_STEPS if candidate.name == name)
+    started = time.perf_counter()
+    artifacts: dict[str, str] = {}
+    root = run_dir.resolve()
+    for output in step.outputs:
+        source = _source_artifact(source_run, output)
+        target = run_dir / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not target.parent.resolve().is_relative_to(root):
+            raise SystemExit(f"RP2_RUN_PANEL_DESTINATION_ESCAPE:{name}:{output}")
+        target.unlink(missing_ok=True)
+        shutil.copy2(source, target)
+        actual = artifact_digest(target)
+        if actual != source_artifacts.get(output):
+            raise SystemExit(f"RP2_RUN_PANEL_COPY_CHANGED:{name}:{output}")
+        artifacts[output] = actual
+    return StepRecord(
+        name=name,
+        command=("internal", "reuse-registered-panels", name),
+        exit_code=0,
+        runtime_seconds=round(time.perf_counter() - started, 3),
+        peak_memory_bytes=_own_peak_memory_bytes(),
+        artifacts=artifacts,
+        content={output: stable_content_digest(run_dir / output) for output in step.outputs},
+        reused=True,
+    )
+
+
+def assert_registered_panel_source_unchanged(
+    source_run: Path, source_integrity: Mapping[str, object]
+) -> None:
+    """Recheck the registered source after every consumer has finished."""
+
+    manifest_path = _source_artifact(source_run, "run_manifest.json")
+    if artifact_digest(manifest_path) != source_integrity.get("manifest_sha256"):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_CHANGED:run_manifest.json")
+    artifacts = source_integrity.get("artifacts")
+    if not isinstance(artifacts, Mapping):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_RECORD_INVALID")
+    for output, expected in artifacts.items():
+        path = _source_artifact(source_run, str(output))
+        if artifact_digest(path) != expected:
+            raise SystemExit(f"RP2_RUN_PANEL_SOURCE_CHANGED:{output}")
+
+
 #: An inventory entry for a whole session rather than one asset. Blocks 5 and 6 fall back
 #: to it for every asset on that day.
 SESSION_WILDCARD: Final = "__ALL__"
@@ -795,6 +961,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="reuse the panels already in the run directory instead of rebuilding them",
     )
+    parser.add_argument(
+        "--reuse-panels-from",
+        type=Path,
+        help="copy verified panels from a completed registered run and record its lineage",
+    )
     # Reading the tape is the default. A name-and-size fingerprint cannot tell a
     # re-acquisition with the same file length from the tape the run was built on, which is
     # exactly the case a resumed run has to detect. Eighty-five gigabytes costs a couple of
@@ -806,6 +977,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
+
+    if args.skip_panels and args.reuse_panels_from is not None:
+        parser.error("--skip-panels and --reuse-panels-from are mutually exclusive")
 
     if args.dry_run:
         print(f"RP2-v3 pipeline, run id {args.run_id}, roles {' '.join(args.roles)}")
@@ -831,6 +1005,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
     run_dir = Path(args.output_root) / str(args.run_id)
+    source_run = args.reuse_panels_from.resolve() if args.reuse_panels_from else None
+    if source_run is not None:
+        assert_panel_source_is_disjoint(source_run, run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     started = datetime.now(UTC).isoformat()
     wall = time.perf_counter()
@@ -877,12 +1054,18 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     steps: list[StepRecord] = []
     validation_started = time.perf_counter()
-    input_record, manifest_digest = validate_inputs(
-        run_dir,
-        data_root=Path(args.data_root),
-        forbid_sealed=True,
-        hash_tape_contents=not args.fast_tape_fingerprint,
-    )
+    source_integrity: Mapping[str, object] | None = None
+    if source_run is None:
+        input_record, manifest_digest = validate_inputs(
+            run_dir,
+            data_root=Path(args.data_root),
+            forbid_sealed=True,
+            hash_tape_contents=not args.fast_tape_fingerprint,
+        )
+    else:
+        input_record, manifest_digest, source_integrity = validate_registered_panel_source(
+            source_run
+        )
     assert_run_identity_unchanged(
         run_dir,
         RunManifest(
@@ -949,6 +1132,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     )
 
+    source_artifacts = (
+        source_integrity.get("artifacts") if isinstance(source_integrity, Mapping) else None
+    )
+    if source_run is not None and not isinstance(source_artifacts, Mapping):
+        raise SystemExit("RP2_RUN_PANEL_SOURCE_RECORD_INVALID")
     panel_steps = (
         (
             "build-targets",
@@ -984,6 +1172,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         ),
     )
     for name, command in panel_steps:
+        if source_run is not None:
+            assert isinstance(source_artifacts, Mapping)
+            record = reuse_registered_panel_step(source_run, run_dir, name, source_artifacts)
+            record_step_progress(run_dir, record)
+            steps.append(record)
+            continue
         if args.skip_panels:
             step = next(candidate for candidate in PIPELINE_STEPS if candidate.name == name)
             missing = [output for output in step.outputs if not (run_dir / output).is_file()]
@@ -1145,7 +1339,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     # The producers have read the store since step 1 hashed it. A tape replaced in between
     # would leave the outputs derived from bytes the recorded input digest does not
     # identify, and verifying only the artifacts would not notice.
-    assert_inputs_unchanged(run_dir, data_root=Path(args.data_root))
+    if source_run is None:
+        assert_inputs_unchanged(run_dir, data_root=Path(args.data_root))
+    else:
+        assert source_integrity is not None
+        assert_registered_panel_source_unchanged(source_run, source_integrity)
     verification_started = time.perf_counter()
     verify_artifacts(run_dir, steps)
     verification_seconds = round(time.perf_counter() - verification_started, 3)

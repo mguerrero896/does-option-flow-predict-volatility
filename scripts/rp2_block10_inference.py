@@ -29,6 +29,7 @@ from mds650.rp2.inference import (
     DEFAULT_POWER,
     DEFAULT_SEED,
     SPA_REPETITIONS,
+    aggregate_by_session,
     clark_west_terms,
     clustered_mean_test,
     hansen_spa,
@@ -94,6 +95,56 @@ def alpha_budget(step: int) -> float:
     return 0.05 / (step * (step + 1))
 
 
+def session_loss_series(
+    base_losses: FloatArray,
+    expanded_losses: FloatArray,
+    sessions: npt.NDArray[np.int64],
+    session_dates: npt.NDArray[np.str_],
+    *,
+    expected_estimate: float,
+) -> list[dict[str, object]]:
+    """Persist the exact session means behind one registered flow estimate."""
+
+    if base_losses.shape != expanded_losses.shape or base_losses.shape != sessions.shape:
+        raise ValueError("RP2_SESSION_LOSS_SHAPE_MISMATCH")
+    if session_dates.shape != sessions.shape:
+        raise ValueError("RP2_SESSION_LOSS_DATE_SHAPE_MISMATCH")
+    if not np.isfinite(base_losses).all() or not np.isfinite(expanded_losses).all():
+        raise ValueError("RP2_SESSION_LOSS_NONFINITE")
+    base, labels = aggregate_by_session(base_losses, sessions)
+    expanded, expanded_labels = aggregate_by_session(expanded_losses, sessions)
+    difference, difference_labels = aggregate_by_session(base_losses - expanded_losses, sessions)
+    if not np.array_equal(labels, expanded_labels) or not np.array_equal(
+        labels, difference_labels
+    ):
+        raise ValueError("RP2_SESSION_LOSS_LABEL_MISMATCH")
+    dates: list[str] = []
+    origins: list[int] = []
+    for label in labels:
+        selected = session_dates[sessions == label]
+        unique = np.unique(selected)
+        if unique.size != 1:
+            raise ValueError("RP2_SESSION_LOSS_DATE_LABEL_MISMATCH")
+        dates.append(str(unique[0]))
+        origins.append(int(selected.size))
+    if dates != sorted(set(dates)):
+        raise ValueError("RP2_SESSION_LOSS_DATES_NOT_STRICTLY_ORDERED")
+    if not np.isclose(float(difference.mean()), expected_estimate, rtol=0.0, atol=1e-15):
+        raise ValueError("RP2_SESSION_LOSS_ESTIMATE_MISMATCH")
+    return [
+        {
+            "session_date": date,
+            "origins": count,
+            "loss_without_flow": float(without),
+            "loss_with_flow": float(with_flow),
+            "delta_loss": float(delta),
+        }
+        for date, count, without, with_flow, delta in zip(
+            dates, origins, base, expanded, difference, strict=True
+        )
+    ]
+
+
 def run_role(
     panel: pl.DataFrame, *, role: str, train_share: float, models: Sequence[str]
 ) -> dict[str, object]:
@@ -144,6 +195,7 @@ def run_role(
         for name in INFORMATION_SETS
     }
     clusters = sessions_rank[test]
+    session_dates = np.asarray(frame["session_date"].to_numpy()[test], dtype=np.str_)
     # The rows every contrast below is scored on, and the digest that identifies them.
     evaluated_mask_sha256 = mask_sha256(lift_mask(keep, test))
     log_target = np.log(np.maximum(target, 1e-12))
@@ -177,6 +229,7 @@ def run_role(
     all_losses: dict[str, FloatArray] = {}
     per_model: dict[str, object] = {}
     model_provenance: dict[str, object] = {}
+    flow_loss_models: dict[str, object] = {}
     for model_name in models:
         forecasts: dict[str, FloatArray] = {}
         losses: dict[str, FloatArray] = {}
@@ -250,6 +303,15 @@ def run_role(
             )
             block[label] = record
         per_model[model_name] = block
+        flow_record = block["b2_over_b1"]
+        assert isinstance(flow_record, dict)
+        flow_loss_models[model_name] = session_loss_series(
+            losses["B0+B1"],
+            losses["B0+B1+B2"],
+            clusters,
+            session_dates,
+            expected_estimate=float(flow_record["estimate"]),
+        )
         model_provenance[model_name] = {
             "forecast_sha256": forecast_hashes,
             "loss_sha256": loss_hashes,
@@ -257,6 +319,14 @@ def run_role(
         }
     results["nested_tests"] = per_model
     results["model_provenance"] = model_provenance
+    results["flow_loss_series"] = {
+        "schema_version": 1,
+        "unit": "session_mean_qlike",
+        "base_information_set": "B0+B1",
+        "expanded_information_set": "B0+B1+B2",
+        "evaluation_mask_sha256": evaluated_mask_sha256,
+        "models": flow_loss_models,
+    }
 
     # SPA / Reality Check, one per family: each family's own B0 is the benchmark and its
     # own expansions are the candidates. Racing `log_ols|B0` against `lightgbm|B0+B1+B2`

@@ -98,7 +98,25 @@ them, and fails if any of them is missing.
 It is for **same-commit** retries only: re-running the modelling steps after an
 interruption, or with a producer that failed for an environmental reason. It is not a way
 to carry panels across a code change. `code_commit` is part of the run identity, so a run
-directory built at one commit and resumed at another is refused before anything runs — and
-a new run id has no panels to reuse. A change that can affect the panels needs a new run
-id and a full rebuild; a change that cannot still needs one, because the manifest would
-otherwise name a commit that did not build what is in the directory.
+directory built at one commit and resumed at another is refused before anything runs.
+
+## Registered reuse of frozen panels
+
+When a change affects only a downstream producer, a new run can reuse panels from a
+completed registered run without reading the raw stores again:
+
+```powershell
+uv run python scripts/run_rp2_v3_pipeline.py `
+    --data-root <DATA_ROOT> `
+    --output-root <OUTPUT_ROOT> `
+    --run-id <NEW_RUN_ID> `
+    --roles D V `
+    --reuse-panels-from <COMPLETED_RUN_DIRECTORY>
+```
+
+This is distinct from `--skip-panels`. The runner verifies the source manifest's own
+scientific hash and every declared panel artifact, copies the four panel steps, records the
+source run and hashes in the new input manifest, and checks the source again before closing
+the run. The copied steps are marked `reused`; the downstream registry, masks, model ladder,
+diagnostics, inference, scorecard and provenance are regenerated at the new commit. Use a
+full rebuild whenever a code or configuration change can affect any panel.
