@@ -486,6 +486,16 @@
    "sha256": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560"
   },
   {
+   "bytes": 2173,
+   "path": "artifacts/target_blind_v22/successor_method_freeze_v1.json",
+   "sha256": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf"
+  },
+  {
+   "bytes": 515,
+   "path": "artifacts/target_blind_v22/successor_owner_authorization_v1.json",
+   "sha256": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2"
+  },
+  {
    "bytes": 5890,
    "path": "artifacts/target_blind_v23_sourcebound_20260812/next_confirmation_preregistration_v3.json",
    "sha256": "59d0ef1fd2cd438a925e3c0114eb31711e05dc6178c9e37e198f6c219610f89d"

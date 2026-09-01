@@ -114,7 +114,7 @@
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a",
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
-  "data/FROZEN_ARTIFACTS.json": "1aa5ededd5ab493342ef918ad4c791e0eb29f7426f8ec9fb4fcca9924fd1f40a",
+  "data/FROZEN_ARTIFACTS.json": "77fb869181068ef4aaedd3f6813b4f355bc556a1ca12703575b0cd4e6e5d59c4",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
@@ -176,16 +176,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 125,
+  "artifact_count": 127,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 123,
+  "physical_artifact_count": 125,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "1aa5ededd5ab493342ef918ad4c791e0eb29f7426f8ec9fb4fcca9924fd1f40a"
+  "registry_sha256": "77fb869181068ef4aaedd3f6813b4f355bc556a1ca12703575b0cd4e6e5d59c4"
  },
  "future_campaigns": [
   "Phase 9 requires 60 complete (36 scored), previously unseen sessions and a separate read gate; academic submission does not wait for its outcome"
