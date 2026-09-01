@@ -1,0 +1,648 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016 # PowerShell, jq, and awk programs are intentionally literal.
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+die() {
+  printf 'VIDEO_SCRIPT_FAILED: %s\n' "$*" >&2
+  exit 1
+}
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+[[ -n ${WT_SESSION:-} ]] || die "RUN_INSIDE_WINDOWS_TERMINAL"
+[[ -z $(git status --porcelain=v1 --untracked-files=all) ]] || die "WORKTREE_NOT_CLEAN"
+git merge-base --is-ancestor 506f61b9dc85b3fc2cc721986bbbd2fc4db4f27a HEAD ||
+  die "README_FIX_PR57_NOT_IN_HEAD"
+[[ $(git config --get core.hooksPath) == scripts/hooks ]] ||
+  die "VERSIONED_HOOK_NOT_ACTIVE"
+
+for command in ffmpeg ffprobe wt.exe bat jq uv git gh rg awk sha256sum pwsh.exe cygpath; do
+  command -v "$command" >/dev/null || die "COMMAND_MISSING:$command"
+done
+pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
+  'if (Get-Process LogonUI -ErrorAction SilentlyContinue) { exit 1 }' ||
+  die "WINDOWS_SESSION_LOCKED"
+
+EDGE_EXE='/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
+[[ -x $EDGE_EXE ]] || die "MICROSOFT_EDGE_NOT_FOUND"
+
+OUTPUT_DIR=${VIDEO_OUTPUT_DIR:-"$(cd "$ROOT/.." && pwd)/MDS650-progress-video"}
+mkdir -p "$OUTPUT_DIR"
+VIDEO="$OUTPUT_DIR/VIDEO.mp4"
+CH="$OUTPUT_DIR/VIDEO.chapters"
+GATE_LOG="$OUTPUT_DIR/local-evidence-gates.log"
+STATE_DIR=$(mktemp -d "${TMPDIR:-/tmp}/mds650-video.XXXXXX")
+: >"$CH"
+: >"$GATE_LOG"
+
+T0_MS=0
+now_ms() { date +%s%3N; }
+
+mark() {
+  local kind=$1 label=$2 elapsed
+  elapsed=$(( $(now_ms) - T0_MS ))
+  label=${label//$'\t'/ }
+  label=${label//$'\n'/ }
+  printf '%d\t%s\t%s\n' "$elapsed" "$kind" "$label" >>"$CH"
+}
+
+type_command() {
+  local value=$1 i
+  printf '\033[1;32m$ \033[0m'
+  for ((i = 0; i < ${#value}; i++)); do
+    printf '%s' "${value:i:1}"
+    sleep 0.01
+  done
+  printf '\n'
+}
+
+run() {
+  local shown=$1
+  shift
+  mark CMD "$shown"
+  type_command "$shown"
+  "$@"
+  sleep 4
+}
+
+run_shell() {
+  local command=$1
+  run "$command" bash -o pipefail -c "$command"
+}
+
+FAIL_NO=0
+expect_fail() {
+  local needle=$1 shown=$2 rc log
+  shift 2
+  log="$STATE_DIR/expected-$((++FAIL_NO)).log"
+  mark CMD "$shown"
+  type_command "$shown"
+  set +e
+  "$@" 2>&1 | tee "$log"
+  rc=${PIPESTATUS[0]}
+  set -e
+  ((rc != 0)) || die "EXPECTED_FAILURE_DID_NOT_FAIL:$shown"
+  grep -Fq -- "$needle" "$log" || die "EXPECTED_FAILURE_WRONG_REASON:$needle"
+  printf '\033[1;33mEXPECTED_FAILURE_VERIFIED (exit %d)\033[0m\n' "$rc"
+  sleep 4
+}
+
+act() {
+  local number=$1 title=$2
+  printf '\033[2J\033[H'
+  mark ACT "$number | $title"
+  printf '\n\033[1;33m════════════════════════════════════════════════════════════\n'
+  printf '  ACT %s · %s\n' "$number" "$title"
+  printf '════════════════════════════════════════════════════════════\033[0m\n\n'
+  sleep 3
+}
+
+say() {
+  mark SAY "$1"
+  printf '\n\033[1;36m# %s\033[0m\n' "$1"
+  sleep 2
+}
+
+show_def() {
+  local file=$1 symbol=$2 span=${3:-24} line end
+  line=$(rg -n -m1 "^def ${symbol}\\b" "$file" | cut -d: -f1)
+  [[ $line =~ ^[0-9]+$ ]] || die "FUNCTION_NOT_FOUND:$symbol"
+  end=$((line + span))
+  run "bat --style=numbers --paging=never --line-range ${line}:${end} $file" \
+    bat --color=always --style=numbers --paging=never \
+    --line-range "${line}:${end}" "$file"
+}
+
+VISUAL_NO=0
+show_svg() {
+  local file=$1 title=$2 profile
+  [[ -f $file ]] || die "FIGURE_NOT_FOUND:$file"
+  VISUAL_NO=$((VISUAL_NO + 1))
+  profile=$(cygpath -aw "$STATE_DIR/edge-$VISUAL_NO")
+  mark VISUAL "$file"
+  printf '\n\033[1;35m# FIGURE · %s\033[0m\n' "$title"
+  VIDEO_EDGE_EXE=$(cygpath -aw "$EDGE_EXE") \
+  VIDEO_SVG=$(cygpath -aw "$file") \
+  VIDEO_EDGE_PROFILE="$profile" \
+    pwsh.exe -NoLogo -NoProfile -NonInteractive -Command '
+      $url = "file:///" + ($env:VIDEO_SVG -replace "\\", "/")
+      $args = @(
+        "--user-data-dir=$($env:VIDEO_EDGE_PROFILE)",
+        "--app=$url",
+        "--window-position=3840,0",
+        "--window-size=2560,1440",
+        "--no-first-run",
+        "--disable-features=msEdgeFirstRunExperience"
+      )
+      $p = Start-Process -FilePath $env:VIDEO_EDGE_EXE -ArgumentList $args -PassThru
+      Start-Sleep -Seconds 9
+      if (-not $p.HasExited) {
+        [void] $p.CloseMainWindow()
+        [void] $p.WaitForExit(5000)
+      }
+      Start-Sleep -Seconds 1
+      if (Test-Path -LiteralPath $env:VIDEO_EDGE_PROFILE) {
+        try { Remove-Item -LiteralPath $env:VIDEO_EDGE_PROFILE -Recurse -Force } catch {}
+      }
+    '
+  sleep 2
+}
+
+FROZEN='artifacts/gate1_inference/results.json'
+README='README.md'
+FREEZE='artifacts/target_blind_v22/successor_method_freeze_v1.json'
+DEMO_FILES=("$FROZEN" "$README" "$FREEZE")
+BACKUPS=()
+ATTRS=()
+HASHES=()
+DIRTY=(0 0 0)
+
+get_attrs() {
+  VIDEO_FILE_PATH=$(cygpath -aw "$1") pwsh.exe -NoLogo -NoProfile -NonInteractive \
+    -Command '[int][IO.File]::GetAttributes($env:VIDEO_FILE_PATH)'
+}
+
+set_attrs() {
+  VIDEO_FILE_PATH=$(cygpath -aw "$1") VIDEO_FILE_ATTRS=$2 \
+    pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
+    '[IO.File]::SetAttributes($env:VIDEO_FILE_PATH, [IO.FileAttributes][int]$env:VIDEO_FILE_ATTRS)'
+}
+
+clear_attrs() {
+  VIDEO_FILE_PATH=$(cygpath -aw "$1") pwsh.exe -NoLogo -NoProfile -NonInteractive \
+    -Command '[IO.File]::SetAttributes($env:VIDEO_FILE_PATH, [IO.FileAttributes]::Normal)'
+}
+
+for i in "${!DEMO_FILES[@]}"; do
+  BACKUPS[i]="$STATE_DIR/demo-$i.original"
+  cp -- "${DEMO_FILES[i]}" "${BACKUPS[i]}"
+  ATTRS[i]=$(get_attrs "${DEMO_FILES[i]}")
+  HASHES[i]=$(sha256sum "${DEMO_FILES[i]}" | awk '{print $1}')
+done
+
+arm() { DIRTY[$1]=1; }
+
+restore_idx() {
+  local i=$1 path=${DEMO_FILES[$1]}
+  ((DIRTY[i])) || return 0
+  clear_attrs "$path" || return 1
+  cp -f -- "${BACKUPS[$i]}" "$path" || return 1
+  set_attrs "$path" "${ATTRS[$i]}" || return 1
+  [[ $(sha256sum "$path" | awk '{print $1}') == "${HASHES[$i]}" ]] || return 1
+  [[ $(get_attrs "$path") == "${ATTRS[$i]}" ]] || return 1
+  DIRTY[i]=0
+}
+
+REC_RUNNING=0
+REC_PID=''
+REC_IN_FD=''
+FF_LOG="$STATE_DIR/ffmpeg.log"
+FF_PROGRESS="$STATE_DIR/ffmpeg.progress"
+
+start_recorder() {
+  coproc RECORDER {
+    ffmpeg -hide_banner -loglevel warning -stats_period 0.5 \
+      -progress "$FF_PROGRESS" \
+      -f lavfi -i 'gfxcapture=monitor_idx=1:max_framerate=15:capture_cursor=0' \
+      -vf 'hwdownload,format=bgra,format=yuv420p' -r 15 \
+      -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p \
+      -y "$VIDEO" >"$FF_LOG" 2>&1
+  }
+  REC_PID=$RECORDER_PID
+  REC_IN_FD=${RECORDER[1]}
+  local rec_out_fd=${RECORDER[0]}
+  exec {rec_out_fd}<&-
+  REC_RUNNING=1
+
+  local deadline=$((SECONDS + 20)) out_us wall_ms
+  until awk -F= '$1=="out_time_us" && $2+0>0 {ok=1} END {exit !ok}' \
+      "$FF_PROGRESS" 2>/dev/null; do
+    ps -p "$REC_PID" >/dev/null 2>&1 || {
+      sed -n '1,120p' "$FF_LOG" >&2
+      die "FFMPEG_START_FAILED"
+    }
+    ((SECONDS < deadline)) || die "FFMPEG_NO_FRAME_TIMEOUT"
+    sleep 0.1
+  done
+
+  out_us=$(awk -F= '$1=="out_time_us"{value=$2} END{print value+0}' "$FF_PROGRESS")
+  wall_ms=$(now_ms)
+  T0_MS=$((wall_ms - out_us / 1000))
+}
+
+stop_recorder() {
+  ((REC_RUNNING)) || return 0
+  local rc=0
+  printf 'q' 1>&"$REC_IN_FD" 2>/dev/null || true
+  exec {REC_IN_FD}>&- 2>/dev/null || true
+  wait "$REC_PID" || rc=$?
+  REC_RUNNING=0
+  return "$rc"
+}
+
+GATE_HELPER="$STATE_DIR/gate-tab.sh"
+GATE_STARTED="$STATE_DIR/gate.started"
+GATE_DONE="$STATE_DIR/gate.done"
+GATE_SHOW="$STATE_DIR/gate.show"
+GATE_READY="$STATE_DIR/gate.ready"
+GATE_RELEASE="$STATE_DIR/gate.release"
+GATE_EXITED="$STATE_DIR/gate.exited"
+GATE_TAB_STARTED=0
+NORMAL_EXIT=0
+
+cleanup() {
+  local rc=$? cleanup_rc i
+  trap - EXIT INT TERM
+  set +e
+  cleanup_rc=$rc
+  ((NORMAL_EXIT)) || ((cleanup_rc != 0)) || cleanup_rc=130
+  for ((i = ${#DEMO_FILES[@]} - 1; i >= 0; i--)); do
+    restore_idx "$i" || cleanup_rc=90
+  done
+  ((GATE_TAB_STARTED)) && : >"$GATE_RELEASE"
+  stop_recorder || { ((cleanup_rc != 0)) || cleanup_rc=91; }
+  if ((cleanup_rc != 0)); then
+    printf 'VIDEO_RECOVERY_STATE_RETAINED: %s\n' "$STATE_DIR" >&2
+  fi
+  exit "$cleanup_rc"
+}
+trap cleanup EXIT INT TERM
+
+start_gate_tab() {
+  local expected_head root_win bash_win helper_win deadline
+  expected_head=$(git rev-parse HEAD)
+  cat >"$GATE_HELPER" <<'GATE'
+#!/usr/bin/env bash
+set -uo pipefail
+: "${VIDEO_GATE_ROOT:?}" "${VIDEO_GATE_HEAD:?}" "${VIDEO_GATE_STARTED:?}"
+: "${VIDEO_GATE_DONE:?}" "${VIDEO_GATE_SHOW:?}" "${VIDEO_GATE_READY:?}"
+: "${VIDEO_GATE_RELEASE:?}" "${VIDEO_GATE_EXITED:?}" "${VIDEO_GATE_LOG:?}"
+
+atomic() {
+  printf '%s\n' "$2" >"$1.tmp"
+  mv -f -- "$1.tmp" "$1"
+}
+
+cd "$VIDEO_GATE_ROOT" || { atomic "$VIDEO_GATE_DONE" 96; exit 96; }
+actual=$(git rev-parse HEAD 2>/dev/null) || { atomic "$VIDEO_GATE_DONE" 97; exit 97; }
+[[ $actual == "$VIDEO_GATE_HEAD" ]] || {
+  printf 'LOCAL_GATE_HEAD_MISMATCH\n' >&2
+  atomic "$VIDEO_GATE_DONE" 98
+  exit 98
+}
+
+printf '\nLOCAL_EVIDENCE_GATE_STARTED %s\n' "$actual"
+atomic "$VIDEO_GATE_STARTED" "$actual"
+set +e
+uv run python scripts/run_local_evidence_gates.py 2>&1 | tee "$VIDEO_GATE_LOG"
+rc=${PIPESTATUS[0]}
+set -e
+printf '\nLOCAL_EVIDENCE_GATE_FINISHED rc=%d\n' "$rc"
+atomic "$VIDEO_GATE_DONE" "$rc"
+while [[ ! -e $VIDEO_GATE_SHOW ]]; do sleep 0.1; done
+printf '\nLOCAL_EVIDENCE_GATE_READY rc=%d\n' "$rc"
+atomic "$VIDEO_GATE_READY" "$rc"
+while [[ ! -e $VIDEO_GATE_RELEASE ]]; do sleep 0.1; done
+atomic "$VIDEO_GATE_EXITED" "$rc"
+exit "$rc"
+GATE
+  chmod 700 "$GATE_HELPER"
+
+  export VIDEO_GATE_ROOT="$ROOT"
+  export VIDEO_GATE_HEAD="$expected_head"
+  export VIDEO_GATE_STARTED="$GATE_STARTED"
+  export VIDEO_GATE_DONE="$GATE_DONE"
+  export VIDEO_GATE_SHOW="$GATE_SHOW"
+  export VIDEO_GATE_READY="$GATE_READY"
+  export VIDEO_GATE_RELEASE="$GATE_RELEASE"
+  export VIDEO_GATE_EXITED="$GATE_EXITED"
+  export VIDEO_GATE_LOG="$GATE_LOG"
+  root_win=$(cygpath -aw "$ROOT")
+  bash_win=$(cygpath -aw "$(command -v bash)")
+  helper_win=$(cygpath -aw "$GATE_HELPER")
+
+  wt.exe -w "${VIDEO_WT_WINDOW:-0}" new-tab \
+    --title "MDS650 local evidence gate" \
+    --startingDirectory "$root_win" \
+    --inheritEnvironment \
+    "$bash_win" --noprofile --norc "$helper_win"
+
+  deadline=$((SECONDS + 20))
+  until [[ -s $GATE_STARTED ]]; do
+    ((SECONDS < deadline)) || die "WT_GATE_TAB_NOT_STARTED"
+    sleep 0.1
+  done
+  GATE_TAB_STARTED=1
+  wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 0
+}
+
+show_gate_result() {
+  local deadline gate_rc
+  mark VISUAL "live progress and seven-gate summary in the evidence terminal"
+  wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 1
+  deadline=$((SECONDS + 900))
+  until [[ -s $GATE_DONE ]]; do
+    ((SECONDS < deadline)) || die "LOCAL_GATE_TIMEOUT"
+    sleep 0.25
+  done
+  gate_rc=$(<"$GATE_DONE")
+  [[ $gate_rc =~ ^[0-9]+$ ]] || die "LOCAL_GATE_RESULT_INVALID"
+  : >"$GATE_SHOW"
+  deadline=$((SECONDS + 10))
+  until [[ -s $GATE_READY ]]; do
+    ((SECONDS < deadline)) || die "LOCAL_GATE_READY_TIMEOUT"
+    sleep 0.1
+  done
+
+  sleep 12
+  wt.exe -w "${VIDEO_WT_WINDOW:-0}" focus-tab --target 0
+  sleep 1
+  : >"$GATE_RELEASE"
+  deadline=$((SECONDS + 10))
+  until [[ -e $GATE_EXITED ]]; do
+    ((SECONDS < deadline)) || die "LOCAL_GATE_EXIT_TIMEOUT"
+    sleep 0.1
+  done
+  ((gate_rc == 0)) || die "LOCAL_EVIDENCE_GATE_FAILED:$gate_rc"
+}
+
+show_clean() {
+  run_shell 'git status --short; test -z "$(git status --porcelain=v1 --untracked-files=all)" && printf "WORKTREE_CLEAN\n"'
+}
+
+contrast_table() {
+  local role=$1 contrast=$2
+  jq -r --arg role "$role" --arg contrast "$contrast" '
+    .models[] as $model |
+    (if $contrast == "both" then ["b1_over_b0", "b2_over_b1"]
+     else [$contrast] end)[] as $layer |
+    .[$role].nested_tests[$model][$layer] as $x |
+    [$model, $layer, $x.estimate, $x.ci_low, $x.ci_high,
+     $x.p_value, $x.mde,
+     (if ($x.estimate|abs) >= $x.mde then "CLEARS" else "BELOW" end)] | @tsv
+  ' "$INFERENCE" |
+    awk -F'\t' '
+      BEGIN { printf "%-17s %-11s %-10s %-24s %-10s %-11s %s\n",
+                     "MODEL", "LAYER", "ESTIMATE", "95% INTERVAL", "P", "MDE", "RESULT" }
+      { printf "%-17s %-11s %+0.5f    [%+0.5f,%+0.5f]    %.4f     %.5f     %s\n",
+               $1, $2, $3, $4, $5, $6, $7, $8 }
+    '
+}
+
+threshold_counts() {
+  jq '
+    [.D, .V] as $roles |
+    [$roles[] | .nested_tests | to_entries[] |
+      .value.b1_over_b0, .value.b2_over_b1] as $cells |
+    [$roles[] | .nested_tests | to_entries[] | .value.b2_over_b1] as $flow |
+    {comparisons: ($cells|length),
+     clear_own_mde: ([$cells[] | select((.estimate|abs) >= .mde)]|length),
+     flow_clear_own_mde: ([$flow[] | select((.estimate|abs) >= .mde)]|length)}
+  ' "$INFERENCE"
+}
+
+MANIFEST=$(jq -er '.scientific_bundle.manifest.path' data/CANONICAL_STATE.json)
+INFERENCE="${MANIFEST%/*}/rp2_block10_inference/inference.json"
+[[ -f $MANIFEST && -f $INFERENCE ]] || die "CANONICAL_BUNDLE_MISSING"
+
+printf '\033[2J\033[H\033]0;MDS650 progress evidence\007'
+start_recorder
+
+act 1 "THE QUESTION"
+say "A forecast question, stated before any result"
+run "bat --style=numbers --paging=never --line-range 1:37 README.md" \
+  bat --color=always --style=numbers --paging=never --line-range 1:37 README.md
+show_svg docs/figures/evidence.svg "Twelve contrasts against their registered thresholds"
+
+act 2 "THE MACHINE"
+say "The full local evidence gate starts now in a second terminal"
+start_gate_tab
+say "Three provider clients, not a hand-curated CSV"
+run "wc -l src/mds650/providers/*.py" wc -l src/mds650/providers/*.py
+
+say "The information clock is an engineered object"
+run "wc -l src/mds650/provider_timing_v21.py" wc -l src/mds650/provider_timing_v21.py
+run "rg -c '^def ' src/mds650/provider_timing_v21.py" \
+  rg -c '^def ' src/mds650/provider_timing_v21.py
+show_def src/mds650/provider_timing_v21.py audit_forecast_origin_session_bounds 22
+show_def src/mds650/provider_timing_v21.py reselect_last_quote_asof 26
+show_def src/mds650/provider_timing_v21.py audit_massive_reselection 24
+show_def src/mds650/provider_timing_v21.py audit_b2_canonical_traceability 22
+
+say "One canonical thirteen-step pipeline"
+run "bat --style=numbers --paging=never --line-range 54:121 src/mds650/rp2/run_manifest.py" \
+  bat --color=always --style=numbers --paging=never --line-range 54:121 \
+  src/mds650/rp2/run_manifest.py
+run "bat --style=numbers --paging=never --line-range 297:339 scripts/run_rp2_v3_pipeline.py" \
+  bat --color=always --style=numbers --paging=never --line-range 297:339 \
+  scripts/run_rp2_v3_pipeline.py
+run "bat --style=numbers --paging=never --line-range 935:950 scripts/run_rp2_v3_pipeline.py" \
+  bat --color=always --style=numbers --paging=never --line-range 935:950 \
+  scripts/run_rp2_v3_pipeline.py
+run "bat --style=numbers --paging=never --line-range 1344:1358 scripts/run_rp2_v3_pipeline.py" \
+  bat --color=always --style=numbers --paging=never --line-range 1344:1358 \
+  scripts/run_rp2_v3_pipeline.py
+
+say "Econometrics, power, and dependent-data inference"
+run "wc -l src/mds650/rp2/inference.py src/mds650/phase6_evaluation.py" \
+  wc -l src/mds650/rp2/inference.py src/mds650/phase6_evaluation.py
+run "rg -n '^def (session_block_bootstrap|wild_cluster_bootstrap|stationary_bootstrap_indices|newey_west_variance|newey_west_p_value|giacomini_white|session_giacomini_white|hansen_spa|minimum_detectable_effect|minimum_detectable_effect_from_long_run_variance|clark_west_terms|clustered_mean_test|session_contrast)' src/mds650/rp2/inference.py" \
+  rg -n '^def (session_block_bootstrap|wild_cluster_bootstrap|stationary_bootstrap_indices|newey_west_variance|newey_west_p_value|giacomini_white|session_giacomini_white|hansen_spa|minimum_detectable_effect|minimum_detectable_effect_from_long_run_variance|clark_west_terms|clustered_mean_test|session_contrast)' \
+  src/mds650/rp2/inference.py
+show_def src/mds650/rp2/inference.py minimum_detectable_effect_from_long_run_variance 54
+
+say "A published number traced through a closed hash chain"
+run "jq '{run_id:.scientific_bundle.run_id, manifest:.scientific_bundle.manifest}' data/CANONICAL_STATE.json" \
+  jq '{run_id:.scientific_bundle.run_id, manifest:.scientific_bundle.manifest}' \
+  data/CANONICAL_STATE.json
+run "sha256sum $MANIFEST" sha256sum "$MANIFEST"
+run "jq '.steps[] | select(.name == \"run-incremental-inference\") | {name, artifacts, content}' $MANIFEST" \
+  jq '.steps[] | select(.name == "run-incremental-inference") | {name, artifacts, content}' \
+  "$MANIFEST"
+run "sha256sum $INFERENCE" sha256sum "$INFERENCE"
+run "jq '.D.nested_tests.gamma_glm.b1_over_b0 | {estimate, ci_low, ci_high, p_value, mde}' $INFERENCE" \
+  jq '.D.nested_tests.gamma_glm.b1_over_b0 | {estimate, ci_low, ci_high, p_value, mde}' \
+  "$INFERENCE"
+
+act 3 "WHAT IT MEASURED"
+say "Model development: option state over the price-only baseline"
+run "contrast_table D b1_over_b0 $INFERENCE" contrast_table D b1_over_b0
+
+say "Model development: recent flow over option state"
+run "contrast_table D b2_over_b1 $INFERENCE" contrast_table D b2_over_b1
+
+say "Held-out check: all six state and flow contrasts"
+run "contrast_table V both $INFERENCE" contrast_table V both
+run "threshold_counts $INFERENCE" threshold_counts
+show_svg docs/figures/cumulative-loss-difference.svg "Cumulative loss differences by information layer"
+
+act 4 "BREAK IT LIVE"
+say "D: one frozen result, three independent defenses"
+run "pwsh: (Get-Item $FROZEN).IsReadOnly" \
+  pwsh.exe -NoLogo -NoProfile -NonInteractive -Command \
+  "(Get-Item -LiteralPath '$(cygpath -aw "$FROZEN")').IsReadOnly"
+expect_fail "PermissionError" \
+  "uv run python -c '<append to read-only frozen result>'" \
+  uv run python -c \
+  'from pathlib import Path; import sys; p=Path(sys.argv[1]); assert not (p.stat().st_mode & 0o200), "READ_ONLY_ATTRIBUTE_MISSING"; p.open("ab").write(b"x")' \
+  "$FROZEN"
+arm 0
+clear_attrs "$FROZEN"
+run "bat --style=numbers --paging=never --line-range 180:199 src/mds650/storage.py" \
+  bat --color=always --style=numbers --paging=never --line-range 180:199 \
+  src/mds650/storage.py
+expect_fail "FROZEN_ARTIFACT_WRITE_REJECTED" \
+  "uv run python -c '<writer guard against frozen result>'" \
+  uv run python -c \
+  'from pathlib import Path; from mds650.storage import assert_outside_frozen; assert_outside_frozen(Path("artifacts/gate1_inference/results.json"))'
+run "jq '.entries | length' data/FROZEN_ARTIFACTS.json" \
+  jq '.entries | length' data/FROZEN_ARTIFACTS.json
+printf '\n' >>"$FROZEN"
+expect_fail "MUTATED artifacts/gate1_inference/results.json" \
+  "uv run pytest tests/contract/test_frozen_artifacts_registry.py::test_every_frozen_artifact_is_physically_intact -q" \
+  uv run pytest \
+  tests/contract/test_frozen_artifacts_registry.py::test_every_frozen_artifact_is_physically_intact -q
+restore_idx 0
+run "uv run pytest tests/contract/test_frozen_artifacts_registry.py -q" \
+  uv run pytest tests/contract/test_frozen_artifacts_registry.py -q
+show_clean
+
+say "A: the versioned push hook rejects every licensed path"
+HOOK_COMMIT=6d11962e804009cdc798dac8a3b0bdd141135d89
+hook_probe() {
+  printf 'refs/heads/video-demo %s refs/heads/video-demo %040d\n' \
+    "$HOOK_COMMIT" 0 | scripts/hooks/pre-push origin unused
+}
+expect_fail "PRE_PUSH_GATED_PATH_REJECTED: refs/heads/video-demo" \
+  "feed archive/local-main-20260822 to scripts/hooks/pre-push" \
+  hook_probe
+run "uv run python scripts/scan_public_secrets.py --check-hook" \
+  uv run python scripts/scan_public_secrets.py --check-hook
+show_clean
+
+say "C: one false public sentence breaks the publication contract"
+PHASE8_RESULT='artifacts/phase8_bridge/result_20260830_v1.json'
+sessions=$(jq -er '.store_preflight.sessions' "$PHASE8_RESULT")
+run "jq '{sessions:.store_preflight.sessions, reads:.sealed_cohorts_read}' $PHASE8_RESULT" \
+  jq '{sessions:.store_preflight.sessions, reads:.sealed_cohorts_read}' "$PHASE8_RESULT"
+((sessions > 0)) || die "PHASE8_SESSION_COUNT_INVALID"
+arm 1
+printf '\nPhase 8 acquired %d of %d sessions.\n' "$((sessions - 1))" "$sessions" >>"$README"
+expect_fail "sessions=29 of 30" \
+  "uv run pytest tests/contract/test_sealed_cohort_publication_claims.py -q" \
+  uv run pytest tests/contract/test_sealed_cohort_publication_claims.py -q
+restore_idx 1
+run "uv run pytest tests/contract/test_sealed_cohort_publication_claims.py -q" \
+  uv run pytest tests/contract/test_sealed_cohort_publication_claims.py -q
+show_clean
+
+say "B: changing one signed method field invalidates authorization"
+share=$(jq -er '.temporal_train_validation_holdout_definition.train_share' "$FREEZE")
+altered=0.7
+[[ $share == 0.7 ]] && altered=0.6
+run "jq '<train_share and contract_sha256>' successor freeze + authorization" \
+  jq -n --argjson train_share "$share" \
+  --arg contract_sha256 "$(jq -er '.contract_sha256' artifacts/target_blind_v22/successor_owner_authorization_v1.json)" \
+  '{train_share:$train_share, contract_sha256:$contract_sha256}'
+arm 2
+clear_attrs "$FREEZE"
+jq --argjson value "$altered" \
+  '.temporal_train_validation_holdout_definition.train_share = $value' \
+  "$FREEZE" >"$STATE_DIR/freeze-mutated.json"
+cp -f -- "$STATE_DIR/freeze-mutated.json" "$FREEZE"
+expect_fail "the authorization points at a different freeze" \
+  "uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q" \
+  uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q
+restore_idx 2
+run "uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q" \
+  uv run pytest tests/contract/test_pit_v22_successor_freeze.py -q
+show_clean
+
+say "E: the complete local evidence gate"
+show_gate_result
+show_clean
+
+act 5 "SCALE AND THE FINAL POSITION"
+say "Every scale figure is computed at the recorded commit"
+run "git rev-list --count HEAD" git rev-list --count HEAD
+run_shell 'gh pr list --state merged --limit 1000 --json number | jq length'
+run_shell 'git ls-files ":(glob)**/*.py" | wc -l'
+run_shell 'rg -o -g "*.py" "def test_[A-Za-z0-9_]+" tests | wc -l'
+run_shell 'uv run pytest --collect-only -q | tr -d "\r" | awk -F": " "NF==2 && \$2 ~ /^[0-9]+$/ {n+=\$2} END {print n+0}"'
+run_shell 'git ls-files ":(glob)tests/contract/test_*.py" | wc -l'
+run_shell 'uv run pytest tests/contract --collect-only -q | tr -d "\r" | awk -F": " "NF==2 && \$2 ~ /^[0-9]+$/ {n+=\$2} END {print n+0}"'
+run_shell 'git ls-files ":(glob)docs/**/*.md" | wc -l'
+run_shell 'git ls-files ":(glob)reports/**/*.md" | wc -l'
+run "jq '{entry_count:(.entries|length), note}' data/FROZEN_ARTIFACTS.json" \
+  jq '{entry_count:(.entries|length), note}' data/FROZEN_ARTIFACTS.json
+run "rg -c '^[0-9]+\\. \\*\\*' docs/methodology_decisions.md" \
+  rg -c '^[0-9]+\. \*\*' docs/methodology_decisions.md
+run "rg -c '\\S' scripts/_gated_exclude_list.txt" \
+  rg -c '\S' scripts/_gated_exclude_list.txt
+run "git log --oneline -20" git log --oneline -20
+
+say "Phase Eight A: one read spent, exploratory only"
+run "jq '<Phase 8A custody and post-hoc fields>' data/CANONICAL_STATE.json" \
+  jq '
+    .active_protocols[] | select(.id == "phase8-prospective-bridge") |
+    {state, sealed_cohorts_read,
+     result:(.result|{overall_classification, claim_classification,
+                      confirmatory_promotion_allowed}),
+     posthoc:(.posthoc_materialized_remediation|
+       {new_sessions_collected, sealed_cohorts_read, sealed_store_reopened,
+        overall_classification:.result.overall_classification,
+        claim_classification:.result.claim_classification})}
+  ' data/CANONICAL_STATE.json
+
+say "Validation A and B are permanently closed unread"
+run "rg -n -C 2 'Validation A .*CLOSED_UNREAD_20260817' docs/methodology_decisions.md" \
+  rg -n -C 2 'Validation A .*CLOSED_UNREAD_20260817' docs/methodology_decisions.md
+
+say "RP Three remains sealed for one future read"
+run "rg -n 'Preregistration status|Primary read size|Estimated read date|Confirmatory reads so far' docs/rp3/PREREGISTRATION.md" \
+  rg -n 'Preregistration status|Primary read size|Estimated read date|Confirmatory reads so far' \
+  docs/rp3/PREREGISTRATION.md
+run_shell 'git show HEAD:docs/rp3/PREREGISTRATION.md | sha256sum'
+run "jq '{confirmatory_reads}' artifacts/rp3/look_counter.json" \
+  jq '{confirmatory_reads}' artifacts/rp3/look_counter.json
+run "jq '{n_primary, primary_target, window_opens:.session_bank.window_opens, estimated_read_date:.session_bank.read_date}' artifacts/rp3/sizing.json" \
+  jq '{n_primary, primary_target, window_opens:.session_bank.window_opens, estimated_read_date:.session_bank.read_date}' \
+  artifacts/rp3/sizing.json
+
+say "Phase Nine is collecting toward an endpoint, not reporting progress"
+run "jq '{status, endpoint, read_gate, academic_submission_waits_for_phase9:.decision.academic_submission_waits_for_phase9, recommended_academic_use:.decision.recommended_academic_use}' artifacts/phase9/power_deadline_audit_v1.json" \
+  jq '{status, endpoint, read_gate, academic_submission_waits_for_phase9:.decision.academic_submission_waits_for_phase9, recommended_academic_use:.decision.recommended_academic_use}' \
+  artifacts/phase9/power_deadline_audit_v1.json
+
+say "The PIT v2.2 successor attempt was consumed and failed closed before any OOS read"
+run "sha256sum artifacts/target_blind_v22/successor_method_freeze_v1.json artifacts/target_blind_v22/successor_owner_authorization_v1.json" \
+  sha256sum artifacts/target_blind_v22/successor_method_freeze_v1.json \
+  artifacts/target_blind_v22/successor_owner_authorization_v1.json
+run "jq '.pit_v22_successor_evaluation | {status, evaluation_attempt_count, oos_read_count, results_inspected, rerun_allowed, failure_code, development_mde_estimated, confirmatory_contrasts_evaluated, scientific_result, edge_claim_eligible, capital_eligible, capital_go, research_only}' data/CANONICAL_STATE.json" \
+  jq '.pit_v22_successor_evaluation | {status, evaluation_attempt_count, oos_read_count, results_inspected, rerun_allowed, failure_code, development_mde_estimated, confirmatory_contrasts_evaluated, scientific_result, edge_claim_eligible, capital_eligible, capital_go, research_only}' \
+  data/CANONICAL_STATE.json
+
+say "The canonical position: no eligible headline result"
+run "jq '{canonical_results, eligibility:.scientific_bundle.eligibility}' data/CANONICAL_STATE.json" \
+  jq '{canonical_results, eligibility:.scientific_bundle.eligibility}' \
+  data/CANONICAL_STATE.json
+show_svg docs/figures/eligibility-gates.svg "Eligibility is a state machine, not an editorial choice"
+show_clean
+
+mark END "Recording complete"
+sleep 5
+stop_recorder || die "FFMPEG_EXIT_FAILED"
+
+[[ -s $VIDEO ]] || die "VIDEO_EMPTY"
+ffprobe -v error -show_streams -show_format -of json "$VIDEO" >"$STATE_DIR/video-probe.json"
+jq -e '
+  ([.streams[] | select(.codec_type == "video" and .codec_name == "h264" and
+    .width == 2560 and .height == 1440)] | length) == 1 and
+  ((.format.duration | tonumber) > 0)
+' "$STATE_DIR/video-probe.json" >/dev/null || die "VIDEO_PROBE_FAILED"
+[[ -z $(git status --porcelain=v1 --untracked-files=all) ]] || die "FINAL_WORKTREE_NOT_CLEAN"
+
+NORMAL_EXIT=1
+printf 'VIDEO_CAPTURE_VERIFIED\nVIDEO=%s\nCHAPTERS=%s\n' "$VIDEO" "$CH"

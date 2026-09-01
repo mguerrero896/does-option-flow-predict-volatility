@@ -23,6 +23,7 @@ Lifecycle labels used below:
 | `scripts/run_rp2_v3_pipeline.py` | CONTROLLED | Execute the ordered RP2-v3 rebuild under one run identity and fail closed on sealed or drifting inputs. |
 | `scripts/run_public_repro_demo.py` | CURRENT | Run the redistributable methodological smoke demo on synthetic structured inputs. |
 | `scripts/run_local_evidence_gates.py` | CONTROLLED | Run Tier 2 validation against explicitly configured licensed evidence and live access posture. |
+| `scripts/record_progress_video.sh` | CONTROLLED | Record the evidence-traceable project-progress demonstration in a dedicated Windows Terminal session. |
 | `scripts/scan_public_secrets.py` | CURRENT | Scan public checkout/origin history for secrets; CI adds clean-clone tags. |
 | `scripts/freeze_registry.py` | CONTROLLED | Maintain the append-only registry of frozen evidence. |
 | `scripts/verify_scheduled_tasks.py` | CURRENT | Validate active Windows task targets/liveness and enforce retired Phase 8 shutdown. |
