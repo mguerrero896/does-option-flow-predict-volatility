@@ -2334,7 +2334,7 @@ Requirements-consistency and preregistration gates pass.
      claimed cross-platform; the SVG renderer itself is byte-deterministic:
 
      ```powershell
-     $sourceRun = "D:\MDS650\registered_runs\rp2_v3\rp2-v3-20260901-flow-session-loss-registration"
+     $sourceRun = Join-Path $env:MDS650_EXTERNAL_ROOT "registered_runs\rp2_v3\rp2-v3-20260901-flow-session-loss-registration"
      $stagedSeries = Join-Path $env:TEMP "cumulative-loss-session-series.json"
      $stagedSvg = Join-Path $env:TEMP "cumulative-loss-difference.svg"
      uv run python scripts/render_cumulative_loss_figure.py `
