@@ -55,12 +55,12 @@ def test_uw_latency_snapshot_matches_live_regeneration() -> None:
     assert committed_aggregate == fresh_aggregate, (
         "UW latency aggregate is stale; run scripts/harvest_uw_latency_campaign.py "
         "with --external-root and new dated --aggregate-output/--state-output paths, "
-        "then advance the current v2 authority"
+        "then advance the current authority"
     )
     assert committed_state == fresh_state, (
         "UW latency lifecycle state is stale; run scripts/harvest_uw_latency_campaign.py "
         "with --external-root and new dated --aggregate-output/--state-output paths, "
-        "then advance the current v2 authority"
+        "then advance the current authority"
     )
 
 
