@@ -115,8 +115,11 @@ uv run python scripts/run_rp2_v3_pipeline.py `
 ```
 
 This is distinct from `--skip-panels`. The runner verifies the source manifest's own
-scientific hash and every declared panel artifact, copies the four panel steps, records the
-source run and hashes in the new input manifest, and checks the source again before closing
-the run. The copied steps are marked `reused`; the downstream registry, masks, model ladder,
-diagnostics, inference, scorecard and provenance are regenerated at the new commit. Use a
-full rebuild whenever a code or configuration change can affect any panel.
+scientific hash, requires the source input manifest's recorded tape-inventory hash to match
+the inventory frozen by the current partition, and requires its content-mode tape
+fingerprint to match the versioned canonical fingerprint. It then verifies every declared
+panel artifact, copies the four panel steps, records the source run and hashes in the new
+input manifest, and checks the source again before closing the run. The copied steps are
+marked `reused`; the downstream registry, masks, model ladder, diagnostics, inference,
+scorecard and provenance are regenerated at the new commit. Use a full rebuild whenever a
+code or configuration change can affect any panel.
