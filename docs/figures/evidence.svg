@@ -6,7 +6,7 @@
 <line x1="420" y1="120" x2="420" y2="544" stroke="#c9d2da" stroke-width="1.1" stroke-dasharray="5,4"/>
 <line x1="564" y1="120" x2="564" y2="544" stroke="#c9d2da" stroke-width="1.1" stroke-dasharray="5,4"/>
 <line x1="492" y1="120" x2="492" y2="544" stroke="#c9d2da" stroke-width="1.1"/>
-<text x="564" y="112" fill="#7a8593" font-family="'Cascadia Mono','SF Mono',Consolas,monospace" font-size="10" text-anchor="middle" letter-spacing="0.08em">THE BAR IT SET BEFORE RUNNING</text><text x="492" y="112" fill="#7a8593" font-family="'Cascadia Mono','SF Mono',Consolas,monospace" font-size="10" text-anchor="middle" letter-spacing="0.08em">NO EFFECT</text>
+<text x="564" y="100" fill="#7a8593" font-family="'Cascadia Mono','SF Mono',Consolas,monospace" font-size="10" text-anchor="middle" letter-spacing="0.08em">THE BAR IT SET BEFORE RUNNING</text><text x="492" y="116" fill="#7a8593" font-family="'Cascadia Mono','SF Mono',Consolas,monospace" font-size="10" text-anchor="middle" letter-spacing="0.08em">NO EFFECT</text>
 <rect x="522.7" y="161" width="97.5" height="8" rx="4" fill="#1a2332" opacity="0.28"/>
 <rect x="455.2" y="192" width="101.1" height="8" rx="4" fill="#c9d2da" opacity="0.55"/>
 <rect x="513.0" y="223" width="96.1" height="8" rx="4" fill="#c9d2da" opacity="0.55"/>

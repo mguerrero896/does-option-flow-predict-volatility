@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 from scripts import render_figures
@@ -31,6 +32,15 @@ def test_evidence_figure_uses_canonical_lifecycle_and_measured_flow_count() -> N
     )
 
     rendered = render_figures.evidence().render()
+    def label_y(label: str) -> float:
+        match = re.search(
+            rf'<text[^>]*\sy="([^"]+)"[^>]*>{re.escape(label)}</text>',
+            rendered,
+        )
+        assert match is not None
+        return float(match.group(1))
+
+    assert label_y("NO EFFECT") - label_y("THE BAR IT SET BEFORE RUNNING") >= 12
     status = state["scientific_bundle"]["eligibility"]["status"]
     assert status in rendered
     assert f"{flow_clears} option-flow tests cleared their own bar." in rendered

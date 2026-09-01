@@ -131,10 +131,10 @@ def evidence() -> Canvas:
             f'y2="{bottom - 4}" stroke="{RULE_STRONG}" stroke-width="1.1"{dash}/>'
         )
     canvas.back(
-        f'<text x="{x_of(1.0):.0f}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'<text x="{x_of(1.0):.0f}" y="{top - 50}" fill="{SOFT}" font-family="{MONO}" '
         f'font-size="10" text-anchor="middle" letter-spacing="0.08em">'
         f"THE BAR IT SET BEFORE RUNNING</text>"
-        f'<text x="{x_of(0.0):.0f}" y="{top - 38}" fill="{SOFT}" font-family="{MONO}" '
+        f'<text x="{x_of(0.0):.0f}" y="{top - 34}" fill="{SOFT}" font-family="{MONO}" '
         f'font-size="10" text-anchor="middle" letter-spacing="0.08em">NO EFFECT</text>'
     )
 
