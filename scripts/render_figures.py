@@ -91,7 +91,7 @@ def _contrasts() -> list[dict[str, Any]]:
 def evidence() -> Canvas:
     rows = _contrasts()
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
-    lifecycle = state["canonical_results"]["status"]
+    lifecycle = state["scientific_bundle"]["eligibility"]["status"]
     state_clears = sum(not r["flow"] and r["clears"] for r in rows)
     flow_clears = sum(r["flow"] and r["clears"] for r in rows)
 
@@ -505,27 +505,27 @@ def pipeline() -> Canvas:
 def eligibility() -> Canvas:
     """The three permissions the canonical state actually records, and their real values."""
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
-    flags = state["scientific_bundle"]["eligibility"]
+    successor = state["pit_v22_successor_evaluation"]
     headline = state["canonical_results"]["status"]
-    reasons = ", ".join(flags["reasons"])
 
     checks = [
         (
-            "Can earlier results be carried into a corrected claim?",
-            "safe_to_reconcile_existing_results",
-            "The timing correction changed the inputs, so no earlier sign, metric or "
-            "ranking may be reused.",
+            "Is the one-shot scientific result reportable?",
+            successor["scientific_result"]["eligible"],
+            "Yes. The frozen result, log, ledger and content-addressed payloads passed "
+            "independent custody validation.",
         ),
         (
-            "Can a sealed test be opened and scored?",
-            "safe_to_open_or_evaluate_oos",
-            "A sealed test opens once, and only under a separate written authorisation.",
+            "Does it establish a global option-information edge?",
+            successor["edge_claim_eligible"],
+            "No. No registered estimate met its development-frozen MDE, and the contract "
+            "contained no binary edge-promotion rule.",
         ),
         (
-            "Has any model been fitted since the correction?",
-            "model_fit_after_pit_v22",
-            "Nothing has been measured on the corrected inputs, so there is no new number "
-            "to promote.",
+            "May it authorize capital or live trading?",
+            successor["capital_eligible"],
+            "No. The result is research-only, observational and not evidence of live "
+            "trading profitability.",
         ),
     ]
 
@@ -535,20 +535,19 @@ def eligibility() -> Canvas:
         WIDTH,
         height,
         "The three permissions this project checks before a number becomes a claim",
-        "All three are currently withheld, for one recorded reason, so every number the "
-        "run produced stays historical.",
+        "The scientific result is reportable after custody validation; edge and capital "
+        "promotion remain withheld.",
         "eligibility-gates",
     )
     header(
         canvas,
         "why you can trust it",
-        "Three permissions, and all three are currently withheld",
-        "The project stops itself here. Nothing below is hidden; it is simply not promoted.",
+        "One reportable result; no edge or capital promotion",
+        "The one-shot result stays visible without being promoted beyond its frozen rules.",
     )
 
-    for index, (question, key, why) in enumerate(checks):
+    for index, (question, granted, why) in enumerate(checks):
         y = top + index * (card_h + gap)
-        granted = bool(flags[key])
         mark = "YES" if granted else "NO"
         canvas.back(
             f'<rect x="40" y="{y}" width="{WIDTH - 80}" height="{card_h}" rx="8" fill="{PAPER}" '
@@ -573,16 +572,15 @@ def eligibility() -> Canvas:
     )
     canvas.front(
         f'<text x="70" y="{band + 26}" fill="{INK}" font-family="{SANS}" font-size="15" '
-        f'font-weight="600">No result is currently eligible as a headline.</text>'
+        f'font-weight="600">Scientific result eligible; global edge not confirmed.</text>'
         f'<text x="70" y="{band + 47}" fill="{MUTED}" font-family="{SANS}" font-size="12.5">'
-        f'Recorded reason: {esc(reasons)}. Lifting it needs a successor method freeze and '
-        f'one authorised evaluation.</text>'
+        f'One authorized OOS read, zero retuning, and no second execution permitted.</text>'
     )
     footnote(
         canvas,
         height - 26,
-        f"Every number stays on record and stays auditable; none is stated as current. "
-        f"Machine status: {headline}.",
+        f"Every number stays auditable; scientific eligibility does not imply an edge or "
+        f"capital claim. Machine status: {headline}.",
         x=40,
     )
     return canvas

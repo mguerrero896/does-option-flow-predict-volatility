@@ -2,7 +2,9 @@
 
 This is a researcher-facing map, not a second source of scientific truth. The single
 machine-readable authority is `data/CANONICAL_STATE.json`; `STATUS.md` is generated from it.
-The current state is `REBUILD_COMPLETE_PIT_V22_BLOCKED`, so no RP2-v3 headline is eligible.
+The current state is `CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED`: the
+successor-v2 result is reportable, while the RP2-v3 bundle remains historical and no global
+edge or capital claim is eligible.
 
 ## Start here
 
@@ -37,6 +39,7 @@ files between directories.
 | [`docs/target_horizon_decision.md`](target_horizon_decision.md) | Recorded RV30 primary-target decision. |
 | [`docs/rp2/block3_target_validation_v1.md`](rp2/block3_target_validation_v1.md) | Current target-horizon diagnostic: RV60 leads in D, RV30 leads in V. |
 | [`docs/pit_v22_claims_and_limitations.md`](pit_v22_claims_and_limitations.md) | Source-time PIT and availability limitations. |
+| [`docs/pit_v22_claims_and_limitations_v2.md`](pit_v22_claims_and_limitations_v2.md) | Current successor-v2 contrasts, custody validation and claim limits. |
 | [`docs/gate5_pit_foundations_v1.md`](gate5_pit_foundations_v1.md) | Current Gate 5 authority, including UW receipt-hour latency and opening-cutoff disposition. |
 | [`docs/gate5_uw_latency_closeout_v1.md`](gate5_uw_latency_closeout_v1.md) | Superseded historical UW latency closeout retained for v1 snapshot provenance. |
 | [`docs/gate5_uw_same_channel_reconciliation_proposal_v1.md`](gate5_uw_same_channel_reconciliation_proposal_v1.md) | Resource-gated proposal for identifiable same-channel backfill and revision. |

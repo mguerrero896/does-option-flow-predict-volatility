@@ -1,9 +1,9 @@
 # RP2-v3 implementation status
 
 > **Current eligibility:** the B1 spot-cutoff rebuild is an historical audit
-> record, not a current scientific claim. `data/CANONICAL_STATE.json` records
-> `REBUILD_COMPLETE_PIT_V22_BLOCKED`: bar roles and B0/B1 market clocks now fail closed,
-> while PIT v2.2 still forbids reconciliation into a current claim.
+> record, not a current scientific claim. `data/CANONICAL_STATE.json` now points to the
+> separately frozen PIT v2.2 successor-v2 result. That result is scientifically reportable,
+> while the RP2-v3 bundle remains `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
 
 One row per gate of the registered twelve-gate sequence, in its binding order. A gate is `merged`
 only when its own PR carried failing-first tests, the minimal fix, measured before/after

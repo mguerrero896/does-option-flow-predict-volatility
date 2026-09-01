@@ -1,0 +1,84 @@
+{
+  "affected_development_origins": {
+    "asset": "TSLA",
+    "count": 6,
+    "forecast_origin_utc_first": "2025-10-28T17:20:00Z",
+    "forecast_origin_utc_last": "2025-10-28T17:45:00Z",
+    "target_drop_reason": "RV30_CONSECUTIVE_CLOSE_MISSING"
+  },
+  "decision": "PROSPECTIVE_COMPLETE_CASE_EXCLUSION_NO_IMPUTATION",
+  "decision_basis": [
+    "The registered FMP source contains 389 unique one-minute timestamps for TSLA on 2025-10-28 and omits 2025-10-28T17:45:00Z.",
+    "The FMP source manifest reports 16 incomplete asset-sessions and 23 missing calendar rows, so repairing one minute would not establish global source completeness.",
+    "Massive independently reports an actively traded 17:45Z minute, but adjacent Massive and FMP bars are not numerically interchangeable.",
+    "Substituting one Massive bar into an FMP series would create a mixed-provider target not present in the frozen design.",
+    "Complete-case target eligibility is deterministic, auditable, and fixed before any validation or holdout outcome is read."
+  ],
+  "eligibility_policy": {
+    "cross_provider_bar_substitution": "FORBIDDEN",
+    "eligible_origin_set": "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE",
+    "imputation": "FORBIDDEN",
+    "missing_target_action": "EXCLUDE_ORIGIN",
+    "require_finite_rv30": true,
+    "require_positive_rv30": true,
+    "required_target_price_count": 31,
+    "required_target_return_count": 30
+  },
+  "frozen_at_utc": "2026-09-01T18:19:14.1223791Z",
+  "manifest_sha256": "ff3faf62241c6ac0658cc4e38056a18c372777d27b190468d27fe021cca9e2f7",
+  "oos_read_count": 0,
+  "primary_source": {
+    "asset": "TSLA",
+    "bar_timestamp_missing_utc": "2025-10-28T17:45:00Z",
+    "file_sha256": "07d1dcf4c87d206bb1ede55b82802467eb6af2d289d11c46ff12a2f9bb886a02",
+    "incomplete_asset_sessions_in_manifest": 16,
+    "logical_path": "phase6/data/fmp/underlying_1min_180d.parquet",
+    "manifest_reused_existing": true,
+    "manifest_sha256": "c217f3e25bb3f1e376edf82572533a6b6d489c29e85e0d16c7881f0c36d52baa",
+    "manifest_status": "PASS",
+    "missing_calendar_rows_in_manifest": 23,
+    "provider": "FMP",
+    "raw_response_row_count": 779,
+    "raw_response_sha256": "5afb36c07a513d0ad5a907bcf017628a52ac77b580e93fcff882739c641a197c",
+    "session_date": "2025-10-28",
+    "session_rows": 389,
+    "unique_session_timestamps": 389
+  },
+  "provider_checks": {
+    "fmp_plugin": {
+      "endpoint": "intraday-1-min",
+      "requested_date": "2025-10-28",
+      "status": "BLOCKED_REAUTHENTICATION_REQUIRED",
+      "usable_as_bar_evidence": false
+    },
+    "massive": {
+      "adjusted": false,
+      "endpoint": "/v2/aggs/ticker/TSLA/range/1/minute/1761673500000/1761673500000",
+      "role": "INDEPENDENT_EXISTENCE_AND_DISCREPANCY_EVIDENCE_NOT_TARGET_INPUT",
+      "row": {
+        "close": 460.91,
+        "high": 464.3899,
+        "low": 460.7,
+        "open": 464.0927,
+        "timestamp_unix_ms": 1761673500000,
+        "timestamp_utc": "2025-10-28T17:45:00Z",
+        "trade_count": 16357,
+        "volume": 731810,
+        "vwap": 462.3639
+      },
+      "status": "PASS_EXACT_MINUTE_RETURNED"
+    },
+    "unusual_whales": {
+      "daily_close": 460.55,
+      "interval": "1Y",
+      "limitation": "DAILY_CHART_DOES_NOT_VALIDATE_ONE_MINUTE_OHLCV",
+      "role": "DAILY_LEVEL_CORROBORATION_ONLY_NOT_TARGET_INPUT",
+      "session_date": "2025-10-28",
+      "status": "PASS_DAILY_ROW_RETURNED",
+      "ticker": "TSLA"
+    }
+  },
+  "schema_version": "pit-v22-target-source-discrepancy-resolution-1.0",
+  "status": "FROZEN_BEFORE_OOS",
+  "user_authorization_basis": "Owner authorized a new contract, new run ID, zero-read ledger, development-only MDE, and one OOS read in session on 2026-09-02 Australia/Sydney."
+}

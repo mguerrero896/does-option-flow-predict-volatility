@@ -1,8 +1,9 @@
 # RP2-v3 B1 spot-cutoff remediation
 
 > **HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM.** The partition-role and market-clock
-> defects are repaired and the complete rebuild finished. The only remaining eligibility
-> blocker is `PIT_V22_RECONCILIATION_BLOCKED`; no number below is a current headline.
+> defects are repaired and the complete rebuild finished. Decision 124 now makes the
+> separately frozen PIT v2.2 successor-v2 result current; no number below is promoted into
+> that result or a current headline.
 
 Measured on `rp2-v3-20260831-b1-spot-cutoff-remediation`, scientific hash
 `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4` at commit
@@ -120,9 +121,9 @@ mechanism, and provider source timestamps do not establish historical client rec
 
 ## Eligibility boundary
 
-- `PIT_V22_RECONCILIATION_BLOCKED` remains active.
-- `SAFE_TO_RECONCILE_EXISTING_RESULTS=NO` and
-  `SAFE_TO_OPEN_OR_EVALUATE_OOS=NO` remain binding.
+- The successor-v2 result does not retroactively reconcile or promote this historical
+  bundle; `SAFE_TO_RECONCILE_EXISTING_RESULTS=NO` remains binding for these rows.
+- The successor's sole OOS read is consumed and cannot be repeated.
 - This rebuild itself read no sealed cohort. At this run's execution snapshot, C,
   Phase 8 and Phase 9 were closed and `sealed_cohorts_read=0`. Phase 8 later consumed
   its separately authorized exploratory read; current counters live in

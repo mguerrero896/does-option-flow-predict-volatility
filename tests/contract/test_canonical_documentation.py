@@ -126,15 +126,15 @@ def test_historical_claim_ledgers_cannot_authorize_current_results() -> None:
 
 def test_current_threats_and_reports_match_corrected_evidence() -> None:
     matrix = _read("docs/threats_to_validity_matrix_v1.md")
-    assert "NO_CURRENT_ELIGIBLE_RESULT" in matrix
-    assert "PIT_V22_RECONCILIATION_BLOCKED" in matrix
-    assert "NOT_EVALUATED_AFTER_PIT_CORRECTION" in matrix
+    assert "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED" in matrix
+    assert "PIT_V22_RECONCILIATION_BLOCKED" not in matrix
+    assert "timing-sensitivity forecasts were not evaluated" in matrix
     assert "Phase 8 consumed its sole exploratory" in matrix
     assert "MIXED_EXPLORATORY" in matrix
     assert "Phase 9 remains sealed and unread" in matrix
     assert "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM" in matrix
-    assert "has no eligible post-PIT replication" in matrix
-    assert "The historical D/V diagnostic" in matrix
+    assert "paired whole-session bootstrap over 32 holdout sessions" in matrix
+    assert "62,266 predictor-complete origins became 62,254 eligible" in matrix
     assert "Current diagnostic" not in matrix
     assert "exact replay recovered 20 contrast rows and 140 fields" in matrix
     assert "supports no aggregation change" in matrix

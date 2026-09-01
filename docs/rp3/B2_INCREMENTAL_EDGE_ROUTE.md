@@ -13,8 +13,10 @@ features improve RV30 forecasts beyond contemporaneous option state across model
   p-value below 0.05 for that contrast.
 - The preregistered directional extension is `DO_NOT_PURSUE`; its positive estimates do not
   clear their familywise MDE.
-- The canonical result state remains `NO_CURRENT_ELIGIBLE_RESULT` while PIT-v2.2
-  reconciliation is blocked.
+- The custody-valid PIT v2.2 successor reports Gamma B2-over-B1a at -0.00313
+  [-0.01392, +0.00861] and LightGBM robustness at +0.00137
+  [-0.00062, +0.00368]. Neither reaches the development-frozen MDE, so the canonical
+  decision is `GLOBAL_EDGE_NOT_CONFIRMED`.
 
 A route can test an edge; it cannot create one or reinterpret these results as favorable.
 

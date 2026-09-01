@@ -268,11 +268,12 @@ every producer receives the same run identity, configuration and invariant check
 | `scripts/audit_confirmation_readiness_v1.py` | Offline readiness v1 audit for a future confirmation acquisition. |
 | `scripts/audit_phase6_source_recovery.py` | Recover and verify the exact frozen Phase 6 git source blobs via local refs. |
 | `scripts/build_pit_v22_claim_ledger.py` | Build the target-blind PIT v2.2 claims-and-limitations ledger. |
+| `scripts/build_pit_v22_successor_v2_closeout.py` | Reproduce the private successor-v2 custody hashes and emit the sanitized immutable audit/claim closeout. |
 | `scripts/pit_verify_term_structure.py` | One-off check that retained UW option-state payloads are PIT-usable. |
 | `scripts/prepare_phase5_storage.py` | Copies retained Phase 5 evidence to the external SSD with SHA-256 verification, without deleting sources. |
 | `scripts/provider_audit_v1.py` | Bounded authenticated provider audit emitting sanitized hash/schema evidence only. |
 | `scripts/run_phase4b.py` | Builds the local-only Phase 4B repair package from retained calibration and pilot parquets. |
-| `scripts/run_pit_v22_successor_once.py` | Consumed the signed PIT v2.2 attempt once; its pre-OOS failure is frozen and rerun is prohibited. |
+| `scripts/run_pit_v22_successor_once.py` | Historical one-shot runner: v1 failed before OOS and v2 completed one authorized read; neither run may be repeated. |
 | `scripts/window_probe_v1.py` | Bounded ~25-request probe measuring each provider's usable historical window. |
 
 ## Archived candidates (see scripts/archive/)

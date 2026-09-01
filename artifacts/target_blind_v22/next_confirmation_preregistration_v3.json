@@ -1,0 +1,39 @@
+{
+  "bound_panel": {
+    "common_predictor_complete_row_count": 62266,
+    "panel_sha256": "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236",
+    "row_count": 77328,
+    "source_hashes": {
+      "b1q_source_sha256": "cb23c96203c410193219b73b5ac9985e0d5df18621ac5099551d415eab725856",
+      "b2_availability_sidecar_sha256": "de3951a0dca73632c8fcbe0b92899c045d7096bf3eed81cf55f958f1009892de",
+      "b2_primary_inputs_sha256": "a3466e656ce6bc0397c2bed1f24472a5523f3ae8ffc986312f340d4b9f6c782b",
+      "fmp_bars_sha256": "07d1dcf4c87d206bb1ede55b82802467eb6af2d289d11c46ff12a2f9bb886a02",
+      "massive_reselection_sensitivity_v21_sha256": "11b1e592c08e67ea8f4b0df218ac1ba02edfd42c78f8fc2feb12355e68181aea",
+      "origins_sha256": "636cc90d287aa634f7533d643d52dbbb2bea4c7295111163f9552944c7c1a880"
+    }
+  },
+  "data_defect_resolution": {
+    "artifact": "artifacts/target_blind_v22/target_source_discrepancy_resolution_v1.json",
+    "artifact_sha256": "794a2ef5594cdb77c4ad72b63639eaac8cccaf3a8b7447338e5e7c097d93a5c1",
+    "decision": "PROSPECTIVE_COMPLETE_CASE_EXCLUSION_NO_IMPUTATION"
+  },
+  "model_fit_performed": false,
+  "no_target_or_metric_payload_read": true,
+  "preregistration_sha256": "4b98bb7c77c5535686b74682177d48e0a487ea58502e87bdcd56d82ea2c143af",
+  "purpose": "bind_complete_case_target_linkage_before_replacement_successor_evaluation",
+  "safe_to_open_or_evaluate_oos": "ONLY_AFTER_METHOD_FREEZE_AND_OWNER_AUTHORIZATION",
+  "schema_version": "target-blind-confirmation-preregistration-v3.0",
+  "source_commit": "b9ec78d6b368aa7ecc5d1e8dcc0c2a0c62a2cbcf",
+  "status": "FROZEN_PRE_METHOD_FREEZE_ZERO_OOS_READS",
+  "target_linkage_eligibility_policy": {
+    "cross_provider_bar_substitution": "FORBIDDEN",
+    "eligible_origin_set": "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE",
+    "imputation": "FORBIDDEN",
+    "missing_target_action": "EXCLUDE_ORIGIN",
+    "require_finite_rv30": true,
+    "require_positive_rv30": true,
+    "required_target_price_count": 31,
+    "required_target_return_count": 30
+  },
+  "zero_oos_reads_at_preregistration": true
+}

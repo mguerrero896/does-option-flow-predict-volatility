@@ -1,0 +1,192 @@
+{
+  "claim_boundaries": [
+    "NO_UNIVERSAL_EDGE_CONFIRMED",
+    "NO_CAUSAL_CLAIM",
+    "NO_TRADING_PROFITABILITY_CLAIM",
+    "TIMING_SENSITIVITY_NOT_EVALUATED",
+    "RESEARCH_ONLY",
+    "NOT_INVESTMENT_ADVICE"
+  ],
+  "contrasts": {
+    "gamma_glm_confirmatory": {
+      "delta_b1v2": {
+        "ci_high": 0.014024232307083271,
+        "ci_low": 0.0026577746715989023,
+        "clusters": 32,
+        "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+        "estimate": 0.008171247318411104,
+        "estimate_at_least_mde": false,
+        "mde_role": "CONFIRMATORY_THRESHOLD",
+        "observations": 12640,
+        "p_value_holm": 0.008399160083991601,
+        "p_value_raw": 0.004199580041995801,
+        "result_sign": "POSITIVE",
+        "training_mde": 0.008416143460160036
+      },
+      "delta_b2v2": {
+        "ci_high": 0.008608549835794906,
+        "ci_low": -0.013923357122674115,
+        "clusters": 32,
+        "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+        "estimate": -0.0031266210509440827,
+        "estimate_at_least_mde": false,
+        "mde_role": "CONFIRMATORY_THRESHOLD",
+        "observations": 12640,
+        "p_value_holm": 0.5595440455954405,
+        "p_value_raw": 0.5595440455954405,
+        "result_sign": "NEGATIVE",
+        "training_mde": 0.0066762275830901255
+      }
+    },
+    "lightgbm_robustness": {
+      "delta_b1v2": {
+        "ci_high": 0.0071251569526431845,
+        "ci_low": 0.001381712462904281,
+        "clusters": 32,
+        "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+        "estimate": 0.004175806123377246,
+        "estimate_at_least_mde": false,
+        "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+        "observations": 12640,
+        "p_value_holm": null,
+        "p_value_raw": 0.0023997600239976003,
+        "result_sign": "POSITIVE",
+        "training_mde": 0.008416143460160036
+      },
+      "delta_b2v2": {
+        "ci_high": 0.0036821862450517493,
+        "ci_low": -0.0006242036721119073,
+        "clusters": 32,
+        "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+        "estimate": 0.001368014097550589,
+        "estimate_at_least_mde": false,
+        "mde_role": "DESCRIPTIVE_REFERENCE_ONLY",
+        "observations": 12640,
+        "p_value_holm": null,
+        "p_value_raw": 0.20177982201779823,
+        "result_sign": "POSITIVE",
+        "training_mde": 0.0066762275830901255
+      }
+    }
+  },
+  "custody_audit_sha256": "652aba6ca5d358b5368ea63e46ecd8e9a97268b5d23ea1377875b3b8ec1bc957",
+  "data_defect_disposition": {
+    "decision": "PROSPECTIVE_COMPLETE_CASE_EXCLUSION_NO_IMPUTATION",
+    "eligibility_policy": {
+      "cross_provider_bar_substitution": "FORBIDDEN",
+      "eligible_origin_set": "PREDICTOR_COMPLETE_INTERSECT_TARGET_COMPLETE",
+      "imputation": "FORBIDDEN",
+      "missing_target_action": "EXCLUDE_ORIGIN",
+      "require_finite_rv30": true,
+      "require_positive_rv30": true,
+      "required_target_price_count": 31,
+      "required_target_return_count": 30
+    },
+    "missing_bar_timestamp_utc": "2025-10-28T17:45:00Z",
+    "provider_checks": {
+      "fmp_plugin": {
+        "endpoint": "intraday-1-min",
+        "requested_date": "2025-10-28",
+        "status": "BLOCKED_REAUTHENTICATION_REQUIRED",
+        "usable_as_bar_evidence": false
+      },
+      "massive": {
+        "adjusted": false,
+        "endpoint": "/v2/aggs/ticker/TSLA/range/1/minute/1761673500000/1761673500000",
+        "role": "INDEPENDENT_EXISTENCE_AND_DISCREPANCY_EVIDENCE_NOT_TARGET_INPUT",
+        "row": {
+          "close": 460.91,
+          "high": 464.3899,
+          "low": 460.7,
+          "open": 464.0927,
+          "timestamp_unix_ms": 1761673500000,
+          "timestamp_utc": "2025-10-28T17:45:00Z",
+          "trade_count": 16357,
+          "volume": 731810,
+          "vwap": 462.3639
+        },
+        "status": "PASS_EXACT_MINUTE_RETURNED"
+      },
+      "unusual_whales": {
+        "daily_close": 460.55,
+        "interval": "1Y",
+        "limitation": "DAILY_CHART_DOES_NOT_VALIDATE_ONE_MINUTE_OHLCV",
+        "role": "DAILY_LEVEL_CORROBORATION_ONLY_NOT_TARGET_INPUT",
+        "session_date": "2025-10-28",
+        "status": "PASS_DAILY_ROW_RETURNED",
+        "ticker": "TSLA"
+      }
+    }
+  },
+  "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
+  "eligibility": {
+    "capital_eligible": false,
+    "capital_go": false,
+    "edge_claim_eligible": false,
+    "edge_claim_reason": "NO_BINARY_EDGE_PROMOTION_RULE_IN_SIGNED_SUCCESSOR_FREEZE",
+    "research_only": true,
+    "scientific_result_eligible": true,
+    "scientific_result_reason": "PASS_POST_OOS_CUSTODY_VALIDATION"
+  },
+  "full_log_file_sha256": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
+  "historical_bundle_comparison": {
+    "comparable_model_contrasts": [
+      {
+        "historical_development_estimate": 0.0025639982914761753,
+        "historical_model": "gamma_glm",
+        "historical_validation_estimate": -0.0014957704208387985,
+        "new_contrast": "delta_b1v2",
+        "new_estimate": 0.008171247318411104,
+        "new_model_role": "gamma_glm_confirmatory",
+        "sign_vs_historical_development": "SAME",
+        "sign_vs_historical_validation": "DIFFERENT"
+      },
+      {
+        "historical_development_estimate": 0.00012249251000936656,
+        "historical_model": "gamma_glm",
+        "historical_validation_estimate": -0.002635234963296121,
+        "new_contrast": "delta_b2v2",
+        "new_estimate": -0.0031266210509440827,
+        "new_model_role": "gamma_glm_confirmatory",
+        "sign_vs_historical_development": "DIFFERENT",
+        "sign_vs_historical_validation": "SAME"
+      },
+      {
+        "historical_development_estimate": 0.0032003429488117506,
+        "historical_model": "lightgbm_qlike",
+        "historical_validation_estimate": 0.0028022776274997324,
+        "new_contrast": "delta_b1v2",
+        "new_estimate": 0.004175806123377246,
+        "new_model_role": "lightgbm_robustness",
+        "sign_vs_historical_development": "SAME",
+        "sign_vs_historical_validation": "SAME"
+      },
+      {
+        "historical_development_estimate": 0.0005205742246090278,
+        "historical_model": "lightgbm_qlike",
+        "historical_validation_estimate": 0.0019790672702443076,
+        "new_contrast": "delta_b2v2",
+        "new_estimate": 0.001368014097550589,
+        "new_model_role": "lightgbm_robustness",
+        "sign_vs_historical_development": "SAME",
+        "sign_vs_historical_validation": "SAME"
+      }
+    ],
+    "comparison_scope": "DESCRIPTIVE_SIGN_CHECK_NOT_ONE_TO_ONE_REPLICATION",
+    "direct_contradiction_disposition": "NOT_IDENTIFIABLE_DIFFERENT_PARTITION_INFORMATION_SETS_AND_ESTIMANDS",
+    "historical_aggregate_count": 12,
+    "historical_bundle_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation"
+  },
+  "ledger_sha256": "7aa8765a8b4610d54ec4b38145588029e0c8c6940ab43075bf816ff366fcc69a",
+  "personal_paths_emitted": false,
+  "result_file_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+  "run_id": "pit-v22-successor-evaluation-v2-20260902",
+  "schema_version": "pit-v22-claims-and-limitations-ledger-v2.0",
+  "secret_values_emitted": false,
+  "split_session_counts": {
+    "development": 95,
+    "holdout": 32,
+    "validation": 32
+  },
+  "status": "SCIENTIFIC_RESULT_ELIGIBLE_EDGE_NOT_CONFIRMED"
+}

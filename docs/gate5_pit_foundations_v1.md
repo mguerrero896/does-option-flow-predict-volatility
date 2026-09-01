@@ -29,14 +29,14 @@ re-acquisition breaks this agreement.
 
 ## 5.2/5.3 — UW `created_at` latency campaign: RECONCILED_PARTIAL
 
-**Lifecycle and hourly-latency correction dated 2026-09-01.** This section supersedes the 2026-08-18
+**Lifecycle authority refreshed 2026-09-02; hourly-latency correction dated 2026-09-01.** This section supersedes the 2026-08-18
 `RUNNING (unattended)` label and its promise that five reconciled sessions would by
 themselves permit a claim upgrade. The machine authority is
-`artifacts/gate5_pit/uw_latency_campaign_state_20260901_v2.json`; the aggregate and
+`artifacts/gate5_pit/uw_latency_campaign_state_20260902_v1.json`; the aggregate and
 anomaly disposition are in the two sibling versioned artifacts. The current inventory
-contains 11 collected sessions, six reconciled sessions and five collected but not yet
-reconciled sessions. The v1 campaign and state artifacts remain immutable historical
-snapshots; this correction is a new v2 overlay, not an edit to frozen evidence.
+contains 12 collected sessions, six reconciled sessions and six collected but not yet
+reconciled sessions. All 2026-09-01 campaign/state artifacts remain immutable historical
+snapshots; the 2026-09-02 authority is a new dated overlay, not an edit to frozen evidence.
 
 The latency half produced a measured result. Across all six reconciliations, 2,418 of
 2,418 live flow alerts had contract-window tape support (100%). After excluding only the
