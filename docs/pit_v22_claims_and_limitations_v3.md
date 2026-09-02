@@ -9,8 +9,8 @@ loss, metric, Phase 8/9 payload or C cohort.
 ## Verified exposure
 
 `artifacts/target_blind_v22/successor_holdout_exposure_v1.json` has semantic audit SHA-256
-`576c7427f81308b1fb95d011785af28bd2574982b42159e9583bd1384dc71422` and file SHA-256
-`d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d`.
+`2df4b74a0c663944d5428aac12afcf131017799261d0d24d1fa18857f71189c7` and file SHA-256
+`42d9f3c86e2a767b9b3baa8e59a8be0a6ad51c042c252f180602d887f2017340`.
 
 The signed runner's chronological 60% split of the 159-session target-free calendar is:
 
@@ -40,6 +40,6 @@ edge, causal, profitability or capital claim. `capital_go=false`, `RESEARCH_ONLY
 ## Reproduction
 
 ```powershell
-uv run python scripts/audit_successor_holdout_exposure_v1.py --source-panel <target-free-panel.parquet>
+uv run python scripts/audit_successor_holdout_exposure_v1.py
 uv run pytest tests/contract/test_outcome_exposure_labels.py -q
 ```

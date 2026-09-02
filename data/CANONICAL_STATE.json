@@ -130,7 +130,7 @@
   "artifacts/target_blind_v22/successor_evaluation_result_v2.json": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
   "artifacts/target_blind_v22/successor_evaluation_run_v1.json": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
   "artifacts/target_blind_v22/successor_evaluation_run_v2.json": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
-  "artifacts/target_blind_v22/successor_holdout_exposure_v1.json": "d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d",
+  "artifacts/target_blind_v22/successor_holdout_exposure_v1.json": "42d9f3c86e2a767b9b3baa8e59a8be0a6ad51c042c252f180602d887f2017340",
   "artifacts/target_blind_v22/successor_method_freeze_v1.json": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf",
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
@@ -147,7 +147,7 @@
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
-  "docs/pit_v22_claims_and_limitations_v3.md": "b67f3ea281914283cfb98de22f1ce6d9dd9abe0e1e5dbb473cd7fea54f9a151c",
+  "docs/pit_v22_claims_and_limitations_v3.md": "8b5eb5decba68027d501b05dece7d04970f3432313cc5ad854456af969f7eb3d",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
@@ -302,7 +302,7 @@
   "claims_and_limitations": {
    "exposure_addendum": {
     "path": "docs/pit_v22_claims_and_limitations_v3.md",
-    "sha256": "b67f3ea281914283cfb98de22f1ce6d9dd9abe0e1e5dbb473cd7fea54f9a151c"
+    "sha256": "8b5eb5decba68027d501b05dece7d04970f3432313cc5ad854456af969f7eb3d"
    },
    "ledger_sha256": "7aa8765a8b4610d54ec4b38145588029e0c8c6940ab43075bf816ff366fcc69a",
    "markdown": "docs/pit_v22_claims_and_limitations_v2.md",
@@ -398,7 +398,7 @@
    "historical_bundle_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation"
   },
   "holdout_exposure_audit": {
-   "audit_sha256": "576c7427f81308b1fb95d011785af28bd2574982b42159e9583bd1384dc71422",
+   "audit_sha256": "2df4b74a0c663944d5428aac12afcf131017799261d0d24d1fa18857f71189c7",
    "classification": {
     "evidential_status": "EXPLORATORY_DESCRIPTIVE",
     "holdout_outcomes_previously_read": true,
@@ -452,7 +452,7 @@
     "phase6_c3": 32,
     "rp2_development": 32
    },
-   "sha256": "d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d",
+   "sha256": "42d9f3c86e2a767b9b3baa8e59a8be0a6ad51c042c252f180602d887f2017340",
    "status": "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
   },
   "oos_read_count": 1,

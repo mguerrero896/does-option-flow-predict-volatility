@@ -29,7 +29,7 @@ def _self_sha(payload: dict[str, object]) -> str:
     ).hexdigest()
 
 
-def test_public_metadata_audit_is_reproducible_and_reads_no_outcomes() -> None:
+def test_frozen_metadata_audit_is_reproducible_and_reads_no_outcomes() -> None:
     audit = _load()
     _module.verify_recorded(audit)
     assert audit["audit_sha256"] == _self_sha(audit)
@@ -40,13 +40,29 @@ def test_public_metadata_audit_is_reproducible_and_reads_no_outcomes() -> None:
         "phase9_reads": 0,
         "c_cohort_reads": 0,
         "target_or_metric_columns_read": 0,
-        "target_free_metadata_panel_reads": 1,
-        "columns_read": ["common_predictor_complete", "session_date"],
+        "external_panel_reads": 0,
+        "frozen_target_free_metadata_artifact_reads": 1,
+        "columns_read": [],
     }
     assert audit["source_contract"]["registered_session_universe_count"] == 159
     assert audit["source_contract"]["splits"]["holdout"]["session_count"] == 32
     assert audit["source_contract"]["splits"]["holdout"]["start"] == "2026-02-05"
     assert audit["source_contract"]["splits"]["holdout"]["end"] == "2026-03-23"
+    assert audit["source_contract"]["calendar_derivation"] == {
+        "source": "artifacts/provider_timing_v22/b2_availability_by_incident_v22.csv",
+        "primary_b2_variant": "primary_5m_60s",
+        "full_session_b2_blackouts": [
+            {
+                "session_date": "2025-10-20",
+                "assets": ["AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA"],
+                "excluded_rows_per_asset": 72,
+                "row_status": "PIT_EXCLUDED_DELAYED_RAW_WINDOW_TRADES",
+            }
+        ],
+    }
+    source = SCRIPT.read_text(encoding="utf-8")
+    assert "--source-panel" not in source
+    assert "D:\\MDS650" not in source
     assert audit["classification"] == {
         "holdout_outcomes_previously_read": True,
         "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",

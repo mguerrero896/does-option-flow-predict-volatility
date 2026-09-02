@@ -1,5 +1,5 @@
 {
-  "audit_sha256": "576c7427f81308b1fb95d011785af28bd2574982b42159e9583bd1384dc71422",
+  "audit_sha256": "2df4b74a0c663944d5428aac12afcf131017799261d0d24d1fa18857f71189c7",
   "classification": {
     "evidential_status": "EXPLORATORY_DESCRIPTIVE",
     "holdout_outcomes_previously_read": true,
@@ -11,6 +11,7 @@
   },
   "inputs": {
     "artifacts/phase6/method_freeze.json": "384a4b6f5a5a760c6c001205ae2b1a50445543c9cf8ad94053e94bedcccb33d1",
+    "artifacts/provider_timing_v22/b2_availability_by_incident_v22.csv": "5c01bf68c3e162cdc517666266047137b807807c2a1f84a14dd1da6c7de0379e",
     "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
     "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
     "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
@@ -215,26 +216,43 @@
     }
   },
   "producer": {
-    "command": "uv run python scripts/audit_successor_holdout_exposure_v1.py --source-panel <target-free-panel.parquet>",
+    "command": "uv run python scripts/audit_successor_holdout_exposure_v1.py",
     "exit_code": 0,
     "path": "scripts/audit_successor_holdout_exposure_v1.py",
-    "sha256": "d6afe6951617b18db53b166bb81743ca05b5c7e4a874c7a6a8206ef0d45c8679"
+    "sha256": "b70d2462eb12625d7b19dd4f4049cdf1b7c86d9846ed3253996f3312e9b49546"
   },
   "read_guard": {
     "c_cohort_reads": 0,
-    "columns_read": [
-      "common_predictor_complete",
-      "session_date"
-    ],
+    "columns_read": [],
+    "external_panel_reads": 0,
     "fresh_outcome_reads": 0,
+    "frozen_target_free_metadata_artifact_reads": 1,
     "phase9_reads": 0,
     "sealed_cohort_outcome_reads": 0,
-    "target_free_metadata_panel_reads": 1,
     "target_or_metric_columns_read": 0
   },
   "schema_version": "successor-holdout-exposure-v1.0",
-  "scope": "target_free_session_calendar_only",
+  "scope": "frozen_target_free_metadata_only",
   "source_contract": {
+    "calendar_derivation": {
+      "full_session_b2_blackouts": [
+        {
+          "assets": [
+            "AAPL",
+            "AMZN",
+            "META",
+            "MSFT",
+            "NVDA",
+            "TSLA"
+          ],
+          "excluded_rows_per_asset": 72,
+          "row_status": "PIT_EXCLUDED_DELAYED_RAW_WINDOW_TRADES",
+          "session_date": "2025-10-20"
+        }
+      ],
+      "primary_b2_variant": "primary_5m_60s",
+      "source": "artifacts/provider_timing_v22/b2_availability_by_incident_v22.csv"
+    },
     "predictor_manifest_session_count": 180,
     "registered_session_universe_count": 159,
     "registered_session_universe_sha256": "9aaf852441996306a0773e17739fc23b309ac606a97773e30ed1816ba213cf61",
@@ -421,7 +439,7 @@
         "start": "2025-12-18"
       }
     },
-    "target_free_panel_sha256": "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236",
+    "target_free_panel_sha256_recorded": "d9f6c7690c5952a1c0e69087f9c8643c9b0496927fe863456d23648f268cd236",
     "train_share": 0.6
   },
   "status": "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
