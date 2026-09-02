@@ -55,7 +55,10 @@ def test_eligibility_figure_keeps_complete_claims_and_machine_status() -> None:
     assert "passed custody validation." in rendered
     assert "no binary edge-promotion rule was registered." in rendered
     assert "Every number stays auditable" in rendered
-    assert "Machine status: CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED." in rendered
+    assert (
+        "Machine status: CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE."
+        in rendered
+    )
     assert (REPO / "docs" / "figures" / "eligibility-gates.svg").read_text(
         encoding="utf-8"
     ) == rendered + "\n"
