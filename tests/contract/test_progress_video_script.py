@@ -144,6 +144,25 @@ def _bash_function(text: str, name: str) -> str:
     return text[start : text.index("\n}\n", start) + 3]
 
 
+def test_normal_stop_waits_for_the_encoded_end_tail_before_q() -> None:
+    text = SCRIPT.read_text(encoding="utf-8")
+    mark = _bash_function(text, "mark")
+    stop = _bash_function(text, "stop_recorder")
+    ending = text[text.index('mark END "Recording complete"') : text.index("\n[[ -s $VIDEO")]
+
+    assert "LAST_MARK_MS=$elapsed" in mark
+    assert 'stop_recorder "$LAST_MARK_MS"' in ending
+    assert 'target_us=$(( (target_ms + 1000) * 1000 ))' in stop
+    assert '$1=="out_time_us" && $2+0>=target_us' in stop
+    assert stop.index('out_time_us') < stop.index("printf 'q'")
+    assert stop.index('"$FF_PROGRESS"') < stop.index("printf 'q'")
+    assert 'ps -p "$REC_PID"' in stop
+    assert "FFMPEG_END_TAIL_TIMEOUT" in stop
+    assert "FFMPEG_GRACEFUL_STOP_TIMEOUT" in stop
+    assert "kill " not in stop
+    assert 'die "$failure"' not in stop
+
+
 def test_code_presenter_uses_complete_ast_bounds_and_bounded_pages() -> None:
     text = SCRIPT.read_text(encoding="utf-8")
     assert "end_lineno" in _bash_function(text, "symbol_bounds")
