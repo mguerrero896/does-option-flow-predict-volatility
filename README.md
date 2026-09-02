@@ -12,10 +12,18 @@ options market is doing makes that prediction better.
 
 ## The answer
 
-**The one-shot PIT v2.2 result is scientifically reportable, but it does not confirm a
-global option-information edge.**
+**The PIT v2.2 successor is a custody-valid retrospective remeasurement, not
+confirmatory evidence; it does not confirm a global option-information edge.**
 
-On the 32-session holdout, the confirmatory Gamma B1a-over-B0 QLIKE contrast is
+The target-free calendar audit is `PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`: all 32 holdout
+sessions (2026-02-05 to 2026-03-23) were already in C3 and RP2-v3 development. The result is
+therefore `RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` and `EXPLORATORY_DESCRIPTIVE`; “one-shot”
+describes only its access-custody contract. The audit reads no target, forecast, loss, metric or
+external panel; it derives the calendar from frozen target-free availability metadata.
+[`artifacts/target_blind_v22/successor_holdout_exposure_v1.json`](artifacts/target_blind_v22/successor_holdout_exposure_v1.json)
+records the date splits, intersections and access guard.
+
+On the 32-session holdout, the frozen Gamma B1a-over-B0 QLIKE contrast is
 +0.00817125 [0.00265777, 0.01402423], Holm p=0.00839916. That estimate is still below
 the development-frozen MDE of 0.00841614. Gamma B2-over-B0+B1a is -0.00312662
 [-0.01392336, 0.00860855], Holm p=0.55954405, versus MDE 0.00667623. Neither registered

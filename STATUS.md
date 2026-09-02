@@ -4,7 +4,7 @@
 > `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.
 > This file supersedes any narrative document that disagrees with it.
 
-- Governance: decision 126 is the latest (126 recorded).
+- Governance: decision 127 is the latest (127 recorded).
 - Frozen evidence: 153 artifacts registered; 151 are present in this release and 2 remain gated or withdrawn with their digests preserved in `data/FROZEN_ARTIFACTS.json`.
 - Public metadata redactions: 14 frozen artifacts retain original and redacted SHA-256 custody in `data/PUBLIC_METADATA_REDACTIONS.json`.
 - Gated data: 15 files in private storage (`data/GATED_DATA_POINTERS.json`).
@@ -23,15 +23,17 @@
 
 ## PIT v2.2 successor evaluation
 
-- Status: **SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED**; decision: **GLOBAL_EDGE_NOT_CONFIRMED**.
+- Status: **RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED**; decision: **GLOBAL_EDGE_NOT_CONFIRMED**.
+- Evidential classification: **RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22** / **EXPLORATORY_DESCRIPTIVE**; one-shot is contract-access custody only.
+- Exposure: 32/32 holdout sessions were previously read by C3 and RP2-v3 D; audit **PASS_RETROSPECTIVE_EXPOSURE_VERIFIED** at `artifacts/target_blind_v22/successor_holdout_exposure_v1.json`.
 - One-shot custody: 1 attempt, 1 OOS read, rerun allowed = false.
 - Target linkage: development 37,312 -> 37,306 (6 excluded); all 62,266 -> 62,254 (12 excluded).
-- Gamma confirmatory `delta_b1v2`: 0.00817124731841 [0.0026577746716, 0.0140242323071], Holm p=0.00839916008399, MDE=0.00841614346016, >=MDE=false.
-- Gamma confirmatory `delta_b2v2`: -0.00312662105094 [-0.0139233571227, 0.00860854983579], Holm p=0.559544045595, MDE=0.00667622758309, >=MDE=false.
+- Frozen Gamma registered `delta_b1v2`: 0.00817124731841 [0.0026577746716, 0.0140242323071], Holm p=0.00839916008399, MDE=0.00841614346016, >=MDE=false.
+- Frozen Gamma registered `delta_b2v2`: -0.00312662105094 [-0.0139233571227, 0.00860854983579], Holm p=0.559544045595, MDE=0.00667622758309, >=MDE=false.
 - LightGBM robustness `delta_b1v2` / `delta_b2v2`: 0.00417580612338 / 0.00136801409755; both are descriptive MDE references, not confirmatory promotion tests.
 - Frozen result: `artifacts/target_blind_v22/successor_evaluation_result_v2.json` (SHA-256 `ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775`).
 - Frozen public log: `artifacts/target_blind_v22/successor_evaluation_run_v2.json` (SHA-256 `0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3`).
-- Eligibility: scientific result = true after independent custody validation; edge claim = false, capital = false; `capital_go=false`, `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`.
+- Eligibility: custody-valid descriptive result = true; confirmatory evidence, edge claim and capital = false; `capital_go=false`, `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`.
 
 ## Current scientific bundle
 
@@ -40,7 +42,7 @@
 - Code provenance: recorded run commit `b70c54ba14fd` is reachable from this root release.
 - Eligibility: **HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM**.
 - Disposition: SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2.
-- Current canonical scientific result: the PIT v2.2 successor-v2 result above; no edge headline is eligible because no registered estimate met its frozen MDE and the signed contract contained no binary edge-promotion rule.
+- Current canonical result: the PIT v2.2 successor-v2 retrospective remeasurement above; no edge headline or confirmatory interpretation is eligible.
 - Historical measurements remain traceable in `docs/rp2_v3/SUPERSEDED_RESULTS.md`; they are not current claims.
 - Current academic report: `reports/final_report_draft_v2.md` with the Word submission rendering pinned under `current_report` in the machine state.
 - Post-cutoff Phase 8A result: `reports/phase8a_exploratory_bridge_addendum_v13.md`.
