@@ -38,12 +38,14 @@ STATE_DIR=$(mktemp -d "${TMPDIR:-/tmp}/mds650-video.XXXXXX")
 : >"$GATE_LOG"
 
 T0_MS=0
+LAST_MARK_MS=0
 CODE_ZOOM_ACTIVE=0
 now_ms() { date +%s%3N; }
 
 mark() {
   local kind=$1 label=$2 elapsed
   elapsed=$(( $(now_ms) - T0_MS ))
+  LAST_MARK_MS=$elapsed
   label=${label//$'\t'/ }
   label=${label//$'\n'/ }
   printf '%d\t%s\t%s\n' "$elapsed" "$kind" "$label" >>"$CH"
@@ -454,7 +456,21 @@ start_recorder() {
 
 stop_recorder() {
   ((REC_RUNNING)) || return 0
-  local rc=0
+  local target_ms=${1:-} rc=0 target_us deadline
+  if [[ -n $target_ms ]]; then
+    target_us=$(( (target_ms + 1000) * 1000 ))
+    deadline=$((SECONDS + 30))
+    until awk -F= -v target_us="$target_us" \
+        '$1=="out_time_us" && $2+0>=target_us {ok=1} END {exit !ok}' \
+        "$FF_PROGRESS" 2>/dev/null; do
+      ps -p "$REC_PID" >/dev/null 2>&1 || {
+        sed -n '1,120p' "$FF_LOG" >&2
+        die "FFMPEG_ENDED_BEFORE_END_TAIL"
+      }
+      ((SECONDS < deadline)) || die "FFMPEG_END_TAIL_TIMEOUT"
+      sleep 0.1
+    done
+  fi
   printf 'q' 1>&"$REC_IN_FD" 2>/dev/null || true
   exec {REC_IN_FD}>&- 2>/dev/null || true
   wait "$REC_PID" || rc=$?
@@ -933,8 +949,7 @@ show_svg docs/figures/eligibility-gates.svg "Eligibility is a state machine, not
 show_clean
 
 mark END "Recording complete"
-sleep 5
-stop_recorder || die "FFMPEG_EXIT_FAILED"
+stop_recorder "$LAST_MARK_MS" || die "FFMPEG_EXIT_FAILED"
 
 [[ -s $VIDEO ]] || die "VIDEO_EMPTY"
 ffprobe -v error -show_streams -show_format -of json "$VIDEO" >"$STATE_DIR/video-probe.json"
