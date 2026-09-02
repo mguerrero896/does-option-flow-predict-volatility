@@ -456,7 +456,7 @@ start_recorder() {
 
 stop_recorder() {
   ((REC_RUNNING)) || return 0
-  local target_ms=${1:-} rc=0 target_us deadline
+  local target_ms=${1:-} rc=0 target_us deadline stop_deadline failure=''
   if [[ -n $target_ms ]]; then
     target_us=$(( (target_ms + 1000) * 1000 ))
     deadline=$((SECONDS + 30))
@@ -465,16 +465,34 @@ stop_recorder() {
         "$FF_PROGRESS" 2>/dev/null; do
       ps -p "$REC_PID" >/dev/null 2>&1 || {
         sed -n '1,120p' "$FF_LOG" >&2
-        die "FFMPEG_ENDED_BEFORE_END_TAIL"
+        failure=FFMPEG_ENDED_BEFORE_END_TAIL
+        break
       }
-      ((SECONDS < deadline)) || die "FFMPEG_END_TAIL_TIMEOUT"
+      ((SECONDS < deadline)) || {
+        failure=FFMPEG_END_TAIL_TIMEOUT
+        break
+      }
       sleep 0.1
     done
   fi
   printf 'q' 1>&"$REC_IN_FD" 2>/dev/null || true
   exec {REC_IN_FD}>&- 2>/dev/null || true
+  stop_deadline=$((SECONDS + 10))
+  while ps -p "$REC_PID" >/dev/null 2>&1; do
+    ((SECONDS < stop_deadline)) || break
+    sleep 0.1
+  done
+  if ps -p "$REC_PID" >/dev/null 2>&1; then
+    [[ -z $failure ]] || printf 'VIDEO_SCRIPT_FAILED: %s\n' "$failure" >&2
+    printf 'VIDEO_SCRIPT_FAILED: FFMPEG_GRACEFUL_STOP_TIMEOUT:%s\n' "$REC_PID" >&2
+    return 1
+  fi
   wait "$REC_PID" || rc=$?
   REC_RUNNING=0
+  [[ -z $failure ]] || {
+    printf 'VIDEO_SCRIPT_FAILED: %s\n' "$failure" >&2
+    return 1
+  }
   return "$rc"
 }
 
