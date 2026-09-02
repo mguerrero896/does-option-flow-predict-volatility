@@ -13,7 +13,7 @@ Requirements-consistency and preregistration gates pass.
 | [50–67](#decision-50) | Governance, reporting authority, CI and evidence immutability. |
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
-| [97–126](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout and PR #55 remediation. |
+| [97–127](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout, PR #55 remediation and exposure reclassification. |
 
 <a id="decision-1"></a>
 
@@ -2357,4 +2357,29 @@ Requirements-consistency and preregistration gates pass.
      sealed cohort, changes no frozen artifact bytes, and modifies nothing under
      `artifacts/target_blind_v22/`. It creates no new eligibility, causal, decay or
      investment claim; `capital_go=false`, `RESEARCH_ONLY`, and
+     `NOT INVESTMENT ADVICE` remain binding.
+
+<a id="decision-127"></a>
+
+127. **The PIT v2.2 successor-v2 is a retrospective remeasurement under the corrected
+     PIT contract, not confirmatory evidence (2026-09-03).** Decision 125 was already an
+     append-only UW inventory decision and decision 126 was already the PR #55 remediation,
+     so this correction uses the next free decision number. The frozen target-free calendar
+     audit `artifacts/target_blind_v22/successor_holdout_exposure_v1.json` has semantic
+     SHA-256 `2df4b74a0c663944d5428aac12afcf131017799261d0d24d1fa18857f71189c7` and file
+     SHA-256 `42d9f3c86e2a767b9b3baa8e59a8be0a6ad51c042c252f180602d887f2017340`.
+     Its chronological split is 95 development sessions (2025-08-04 to 2025-12-17),
+     32 validation sessions (2025-12-18 to 2026-02-04), and 32 holdout sessions
+     (2026-02-05 to 2026-03-23). All 32 holdout sessions were previously read in both the
+     160-session C3 calendar and RP2-v3 development; none intersects Phase 8.
+
+     The audit derives its calendar from the frozen C3 session list and the primary-60-second
+     B2 availability incident record: all six assets have 72 excluded rows on 2025-10-20, so
+     that session is excluded. It opens no external panel and reads no target, forecast, loss,
+     metric, Phase 8/9 payload or C cohort. Immutable estimates, intervals, p-values, result,
+     access ledger and one-shot custody remain unchanged. `one-shot` describes contract-access
+     custody only. Under decision 64 rule 4, the evidential label is
+     `RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` / `EXPLORATORY_DESCRIPTIVE`; its MDE role is
+     descriptive and it is outside the confirmatory alpha sequence. It authorizes no global
+     edge, causal, profitability or capital claim; `capital_go=false`, `RESEARCH_ONLY`, and
      `NOT INVESTMENT ADVICE` remain binding.

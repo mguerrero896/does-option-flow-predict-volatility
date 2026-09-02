@@ -2,15 +2,16 @@
 
 This matrix follows `data/CANONICAL_STATE.json`. Historical gate documents cannot
 override it. The PIT v2.2 successor-v2 result is
-`CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED`: it is reportable after independent
-custody validation, but it authorizes no global edge or capital claim. The RP2 D/V bundle
-remains `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`. Phase 8 consumed its sole exploratory
-read (`sealed_cohorts_read=1`); Phase 9 remains sealed and unread
+`CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE`: its immutable outputs are
+custody-valid, but the exposed 32-session holdout cannot serve as confirmatory evidence or
+authorize a global edge or capital claim. The RP2 D/V bundle remains
+`HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`. Phase 8 consumed its sole exploratory read
+(`sealed_cohorts_read=1`); Phase 9 remains sealed and unread
 (`sealed_cohorts_read=0`).
 
 | # | Threat | Evidence record | Mitigation | Residual risk |
 |---|---|---|---|---|
-| 1 | Adaptive campaigns, multiplicity and holdout exposure | D/V were reused for selection and recalibration; retrospective ordering was not preregistered. `successor_holdout_exposure_v1.json` establishes prior-read windows but reports `NO_VERIFICABLE_DATE_VECTOR_UNAVAILABLE` for the successor holdout. | D/V and the consumed Phase 8 bridge are labelled exploratory; α=0.00417 is only a non-binding post-hoc sensitivity and a future-campaign budget. The exposure audit fails closed rather than assuming freshness. | No retrospective correction or Phase 8 outcome can become confirmation. The successor's exposure intersection remains unclassified until a date vector can be audited without reopening outcomes; Phase 9 retains its separate read gate. |
+| 1 | Adaptive campaigns, multiplicity and holdout exposure | D/V were reused for selection and recalibration; retrospective ordering was not preregistered. `successor_holdout_exposure_v1.json` is `PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`: all 32 successor-holdout sessions intersect both C3 and RP2-v3 D. | The successor is `RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` and `EXPLORATORY_DESCRIPTIVE`; `one-shot` is limited to access custody. D/V and the consumed Phase 8 bridge are exploratory; α=0.00417 is only a non-binding post-hoc sensitivity and a future-campaign budget. | No retrospective correction or Phase 8 outcome can become confirmation. The successor is outside the confirmatory alpha sequence; Phase 9 retains its separate read gate. |
 | 2 | Model-family dependence | Gamma, Ridge and LightGBM differ in sign and precision across D/V | Same information-set masks and session-aware model selection; family-specific reporting | No universal B1/B2 claim is supported |
 | 3 | Calibration versus information | QLIKE rewards calibration; historical effects changed after recalibration and producer repairs | The current successor uses frozen QLIKE contrasts and reports MAE/RMSE only secondarily; Gamma B1a survives Holm but remains below its MDE | QLIKE improvement may reflect calibration rather than an economic mechanism |
 | 4 | Multiple model/target search | Historical extensions searched many cells | Family-matched SPA/Reality Check and explicit exploratory labels | Data-dependent search remains a limit; no confirmatory discovery is claimed |

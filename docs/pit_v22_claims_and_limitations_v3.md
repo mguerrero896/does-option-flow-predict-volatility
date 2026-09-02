@@ -1,45 +1,45 @@
-# PIT v2.2 successor — holdout-exposure audit addendum v3
+# PIT v2.2 successor — holdout-exposure addendum v3
 
-**Status:** `NO_VERIFICABLE_DATE_VECTOR_UNAVAILABLE`
+**Status:** `PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`
 
-**Scope:** metadata-only audit; no new outcome read, model fit, scoring, rerun or sealed-store access.
-**Authority:** this additive note does not alter any frozen successor artifact or replace
-the canonical result while the successor date vector is unavailable.
+**Scope:** a target-free session-calendar audit. It read only `session_date` and
+`common_predictor_complete` from the signed predictor panel; it read no target, forecast,
+loss, metric, Phase 8/9 payload or C cohort.
 
-## What was verified
+## Verified exposure
 
 `artifacts/target_blind_v22/successor_holdout_exposure_v1.json` has semantic audit SHA-256
-`a4a83452ec36684956aed9bdf3c40d5bcafb56b15897c85da8fc9d3af75eba0a` and file SHA-256
-`e44602d9b1ea7949dc9bd32cff9ed0da820585b6d09c45ff2f61533e2da4f41c`.
+`576c7427f81308b1fb95d011785af28bd2574982b42159e9583bd1384dc71422` and file SHA-256
+`d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d`.
 
-The audit verified three prior read windows from their public metadata:
+The signed runner's chronological 60% split of the 159-session target-free calendar is:
 
-| Earlier read | Sessions | Window |
+| Role | Sessions | Window |
 | --- | ---: | --- |
-| Phase 6 C3 test folds | 100 | 2025-10-28 to 2026-03-23 |
-| RP2 development | 389 | 2024-08-02 to 2026-03-23 |
-| Phase 8 primary / sensitivity | 20 / 30 | 2026-08-03 to 2026-08-28 / 2026-07-20 to 2026-08-28 |
+| Development | 95 | 2025-08-04 to 2025-12-17 |
+| Validation | 32 | 2025-12-18 to 2026-02-04 |
+| Holdout | 32 | 2026-02-05 to 2026-03-23 |
 
-It also verified the target-blind predictor manifest's 180-session input universe and the
-successor freeze's chronological 60% training split. Neither permitted file carries the
-materialized validation or holdout session-date vector. Exact overlap counts and a
-retrospective classification are therefore **not verifiable** from this audit.
+All 32 holdout sessions intersect the 160-session Phase 6 C3 calendar and the 389-session
+RP2-v3 development window. Neither intersects the Phase 8 primary or sensitivity windows.
+This conclusion comes from dates and the frozen split only, not from any newly read outcome.
 
-## Claim boundary
+## Reclassification and claim boundary
 
-No reclassification is applied. The existing `GLOBAL_EDGE_NOT_CONFIRMED` disposition,
-one-shot custody, `capital_go=false`, `RESEARCH_ONLY`, and `NOT INVESTMENT ADVICE` remain
-unchanged; this addendum does not promote them.
+The successor is `RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` and
+`EXPLORATORY_DESCRIPTIVE`. Its `one-shot` label describes only the executed contract's
+access custody; it is not a claim that the outcomes were prospectively unobserved. Its MDE
+role is `EXPLORATORY_DESCRIPTIVE`, so it cannot retain
+`CONFIRMATORY_THRESHOLD` without an explicit overriding methodology decision.
 
-If a separately auditable, non-outcome date vector later proves any holdout intersection
-with a prior read window, its role must be
-`RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` and `EXPLORATORY_DESCRIPTIVE`; its MDE role may
-not remain `CONFIRMATORY_THRESHOLD` without an explicit overriding methodology decision.
-The contract test is `tests/contract/test_outcome_exposure_labels.py`.
+The immutable estimates, intervals, p-values and custody records are preserved. The
+reclassification neither reruns nor recalibrates the result, and it authorizes no global
+edge, causal, profitability or capital claim. `capital_go=false`, `RESEARCH_ONLY`, and
+`NOT INVESTMENT ADVICE` remain binding.
 
 ## Reproduction
 
 ```powershell
-uv run python scripts/audit_successor_holdout_exposure_v1.py
+uv run python scripts/audit_successor_holdout_exposure_v1.py --source-panel <target-free-panel.parquet>
 uv run pytest tests/contract/test_outcome_exposure_labels.py -q
 ```

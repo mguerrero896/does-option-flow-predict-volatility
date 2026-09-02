@@ -31,18 +31,35 @@ def _self_sha(payload: dict[str, object]) -> str:
 
 def test_public_metadata_audit_is_reproducible_and_reads_no_outcomes() -> None:
     audit = _load()
-    assert audit == _module.build_audit()
+    _module.verify_recorded(audit)
     assert audit["audit_sha256"] == _self_sha(audit)
-    assert audit["status"] == "NO_VERIFICABLE_DATE_VECTOR_UNAVAILABLE"
+    assert audit["status"] == "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
     assert audit["read_guard"] == {
         "fresh_outcome_reads": 0,
-        "sealed_cohort_reads": 0,
+        "sealed_cohort_outcome_reads": 0,
         "phase9_reads": 0,
         "c_cohort_reads": 0,
-        "sealed_root_reads": 0,
+        "target_or_metric_columns_read": 0,
+        "target_free_metadata_panel_reads": 1,
+        "columns_read": ["common_predictor_complete", "session_date"],
     }
-    assert audit["source_contract"]["holdout_session_dates"] is None
-    assert audit["classification"]["reclassification_applied"] is False
+    assert audit["source_contract"]["registered_session_universe_count"] == 159
+    assert audit["source_contract"]["splits"]["holdout"]["session_count"] == 32
+    assert audit["source_contract"]["splits"]["holdout"]["start"] == "2026-02-05"
+    assert audit["source_contract"]["splits"]["holdout"]["end"] == "2026-03-23"
+    assert audit["classification"] == {
+        "holdout_outcomes_previously_read": True,
+        "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+        "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22",
+        "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+        "mde_role": "EXPLORATORY_DESCRIPTIVE",
+        "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+        "reclassification_applied": True,
+    }
+    windows = audit["prior_outcome_read_windows"]
+    assert windows["phase6_c3"]["holdout_intersection_count"] == 32
+    assert windows["rp2_development"]["holdout_intersection_count"] == 32
+    assert [item["holdout_intersection_count"] for item in windows["phase8"]] == [0, 0]
 
 
 def test_intersected_holdout_loses_confirmatory_mde_role_without_override() -> None:
@@ -58,11 +75,12 @@ def test_current_docs_disclose_the_failed_closed_exposure_audit() -> None:
     audit = _load()
     for path in (
         REPO / "README.md",
+        REPO / "STATUS.md",
         REPO / "docs" / "threats_to_validity_matrix_v1.md",
         ADDENDUM,
     ):
         text = path.read_text(encoding="utf-8")
-        assert "NO_VERIFICABLE_DATE_VECTOR_UNAVAILABLE" in text
+        assert "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED" in text
     addendum = ADDENDUM.read_text(encoding="utf-8")
     assert audit["audit_sha256"] in addendum
     assert hashlib.sha256(ARTIFACT.read_bytes()).hexdigest() in addendum

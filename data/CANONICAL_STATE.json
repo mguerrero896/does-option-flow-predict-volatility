@@ -130,6 +130,7 @@
   "artifacts/target_blind_v22/successor_evaluation_result_v2.json": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
   "artifacts/target_blind_v22/successor_evaluation_run_v1.json": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
   "artifacts/target_blind_v22/successor_evaluation_run_v2.json": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
+  "artifacts/target_blind_v22/successor_holdout_exposure_v1.json": "d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d",
   "artifacts/target_blind_v22/successor_method_freeze_v1.json": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf",
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
@@ -146,6 +147,7 @@
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
+  "docs/pit_v22_claims_and_limitations_v3.md": "b67f3ea281914283cfb98de22f1ce6d9dd9abe0e1e5dbb473cd7fea54f9a151c",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
@@ -186,8 +188,10 @@
     "training_mde": 0.0066762275830901255
    }
   },
+  "confirmatory_evidence_eligible": false,
   "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
   "edge_claim_eligible": false,
+  "evidential_status": "EXPLORATORY_DESCRIPTIVE",
   "headline_claims": [],
   "result_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
   "robustness_contrasts": {
@@ -222,7 +226,7 @@
   },
   "run_id": "pit-v22-successor-evaluation-v2-20260902",
   "scientific_result_eligible": true,
-  "status": "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
+  "status": "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE"
  },
  "ci": {
   "contract": "docs/ci_contract_v1.md",
@@ -296,12 +300,17 @@
   "capital_eligible": false,
   "capital_go": false,
   "claims_and_limitations": {
+   "exposure_addendum": {
+    "path": "docs/pit_v22_claims_and_limitations_v3.md",
+    "sha256": "b67f3ea281914283cfb98de22f1ce6d9dd9abe0e1e5dbb473cd7fea54f9a151c"
+   },
    "ledger_sha256": "7aa8765a8b4610d54ec4b38145588029e0c8c6940ab43075bf816ff366fcc69a",
    "markdown": "docs/pit_v22_claims_and_limitations_v2.md",
    "path": "artifacts/target_blind_v22/pit_v22_claim_ledger_v2.json",
    "sha256": "292751bec10f347cf5b3abcb29be840e3b7b7c95e63f9f9b60ab39eb83962a88"
   },
   "confirmatory_contrasts_evaluated": true,
+  "confirmatory_interpretation_eligible": false,
   "custody_audit": {
    "audit_sha256": "652aba6ca5d358b5368ea63e46ecd8e9a97268b5d23ea1377875b3b8ec1bc957",
    "path": "artifacts/target_blind_v22/successor_custody_audit_v2.json",
@@ -312,6 +321,15 @@
   "development_mde_estimated": true,
   "edge_claim_eligible": false,
   "evaluation_attempt_count": 1,
+  "evidential_classification": {
+   "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+   "holdout_outcomes_previously_read": true,
+   "mde_role": "EXPLORATORY_DESCRIPTIVE",
+   "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+   "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+   "reclassification_applied": true,
+   "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22"
+  },
   "full_log": {
    "events": [
     "ONE_SHOT_CLAIMED",
@@ -378,6 +396,64 @@
    "direct_contradiction_disposition": "NOT_IDENTIFIABLE_DIFFERENT_PARTITION_INFORMATION_SETS_AND_ESTIMANDS",
    "historical_aggregate_count": 12,
    "historical_bundle_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation"
+  },
+  "holdout_exposure_audit": {
+   "audit_sha256": "576c7427f81308b1fb95d011785af28bd2574982b42159e9583bd1384dc71422",
+   "classification": {
+    "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+    "holdout_outcomes_previously_read": true,
+    "mde_role": "EXPLORATORY_DESCRIPTIVE",
+    "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+    "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+    "reclassification_applied": true,
+    "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22"
+   },
+   "holdout_window": {
+    "end": "2026-03-23",
+    "session_count": 32,
+    "session_dates": [
+     "2026-02-05",
+     "2026-02-06",
+     "2026-02-09",
+     "2026-02-10",
+     "2026-02-11",
+     "2026-02-12",
+     "2026-02-13",
+     "2026-02-17",
+     "2026-02-18",
+     "2026-02-19",
+     "2026-02-20",
+     "2026-02-23",
+     "2026-02-24",
+     "2026-02-25",
+     "2026-02-26",
+     "2026-02-27",
+     "2026-03-02",
+     "2026-03-03",
+     "2026-03-04",
+     "2026-03-05",
+     "2026-03-06",
+     "2026-03-09",
+     "2026-03-10",
+     "2026-03-11",
+     "2026-03-12",
+     "2026-03-13",
+     "2026-03-16",
+     "2026-03-17",
+     "2026-03-18",
+     "2026-03-19",
+     "2026-03-20",
+     "2026-03-23"
+    ],
+    "start": "2026-02-05"
+   },
+   "path": "artifacts/target_blind_v22/successor_holdout_exposure_v1.json",
+   "prior_read_intersections": {
+    "phase6_c3": 32,
+    "rp2_development": 32
+   },
+   "sha256": "d692ee4ff6ade113801089578909cfc98f8b16b8ea28b3afde6861f39b2a631d",
+   "status": "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
   },
   "oos_read_count": 1,
   "previous_attempt": {
@@ -482,7 +558,7 @@
     "semantic_sha256": "4b98bb7c77c5535686b74682177d48e0a487ea58502e87bdcd56d82ea2c143af"
    }
   },
-  "status": "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED",
+  "status": "RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED",
   "target_linkage": {
    "all_eligible_origins": 62254,
    "all_excluded_origins": 12,

@@ -58,22 +58,36 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     assert bundle["eligibility"]["status"] == "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
     assert bundle["eligibility"]["reasons"] == ["SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2"]
     canonical = state["canonical_results"]
-    assert canonical["status"] == "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
+    assert canonical["status"] == "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE"
     assert canonical["run_id"] == "pit-v22-successor-evaluation-v2-20260902"
     assert canonical["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
     assert canonical["scientific_result_eligible"] is True
+    assert canonical["confirmatory_evidence_eligible"] is False
+    assert canonical["evidential_status"] == "EXPLORATORY_DESCRIPTIVE"
     assert canonical["edge_claim_eligible"] is False
     assert canonical["capital_go"] is False
     assert canonical["headline_claims"] == []
     successor = state["pit_v22_successor_evaluation"]
-    assert successor["status"] == "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED"
+    assert successor["status"] == (
+        "RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED"
+    )
     assert successor["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
+    assert successor["evidential_classification"] == {
+        "holdout_outcomes_previously_read": True,
+        "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+        "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22",
+        "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+        "mde_role": "EXPLORATORY_DESCRIPTIVE",
+        "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+        "reclassification_applied": True,
+    }
     assert successor["evaluation_attempt_count"] == 1
     assert successor["oos_read_count"] == 1
     assert successor["results_inspected"] is True
     assert successor["rerun_allowed"] is False
     assert successor["development_mde_estimated"] is True
     assert successor["confirmatory_contrasts_evaluated"] is True
+    assert successor["confirmatory_interpretation_eligible"] is False
     assert successor["historical_bundle_aggregate_comparison_performed"] is True
     assert successor["previous_attempt"]["status"] == "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
     assert successor["previous_attempt"]["failure_code"] == (
@@ -92,6 +106,13 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     assert successor["full_log"]["sha256"] == (
         "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3"
     )
+    exposure = successor["holdout_exposure_audit"]
+    assert exposure["status"] == "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
+    assert exposure["classification"] == successor["evidential_classification"]
+    assert exposure["holdout_window"]["session_count"] == 32
+    assert exposure["holdout_window"]["start"] == "2026-02-05"
+    assert exposure["holdout_window"]["end"] == "2026-03-23"
+    assert exposure["prior_read_intersections"] == {"phase6_c3": 32, "rp2_development": 32}
     assert successor["target_linkage"] == {
         "all_eligible_origins": 62_254,
         "all_excluded_origins": 12,

@@ -153,4 +153,4 @@ def test_default_paths_bind_only_to_local_source_evidence() -> None:
     assert len(args.fmp_paths) == 3
     assert all(path.as_posix().startswith("D:/MDS650/") for path in args.fmp_paths)
     assert args.output_path.parent == ROOT / "artifacts" / "corrected_development_v1"
-    assert "holdout" not in args.output_path.as_posix().casefold()
+    assert "holdout" not in args.output_path.relative_to(ROOT).as_posix().casefold()
