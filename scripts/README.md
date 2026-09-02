@@ -20,6 +20,7 @@ Lifecycle labels used below:
 | Script | Lifecycle | Purpose |
 | --- | --- | --- |
 | `scripts/generate_canonical_state.py` | CURRENT | Generate `data/CANONICAL_STATE.json` and `STATUS.md` from the explicit authority allowlist. |
+| `scripts/audit_successor_holdout_exposure_v1.py` | CURRENT | Audit successor-holdout exposure from metadata only; fail closed if the materialized session-date vector is unavailable. |
 | `scripts/run_rp2_v3_pipeline.py` | CONTROLLED | Execute the ordered RP2-v3 rebuild under one run identity and fail closed on sealed or drifting inputs. |
 | `scripts/run_public_repro_demo.py` | CURRENT | Run the redistributable methodological smoke demo on synthetic structured inputs. |
 | `scripts/run_local_evidence_gates.py` | CONTROLLED | Run Tier 2 validation against explicitly configured licensed evidence and live access posture. |

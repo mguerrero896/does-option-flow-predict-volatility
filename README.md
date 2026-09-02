@@ -15,6 +15,13 @@ options market is doing makes that prediction better.
 **The one-shot PIT v2.2 result is scientifically reportable, but it does not confirm a
 global option-information edge.**
 
+The metadata-only holdout-exposure audit is
+`NO_VERIFICABLE_DATE_VECTOR_UNAVAILABLE`: the permitted inputs do not contain the
+materialized successor holdout dates needed to prove or refute overlap with earlier reads.
+It therefore applies no reclassification and does not reopen any outcome.
+[`artifacts/target_blind_v22/successor_holdout_exposure_v1.json`](artifacts/target_blind_v22/successor_holdout_exposure_v1.json)
+records the inputs, zero-read guard and conditional non-promotion rule.
+
 On the 32-session holdout, the confirmatory Gamma B1a-over-B0 QLIKE contrast is
 +0.00817125 [0.00265777, 0.01402423], Holm p=0.00839916. That estimate is still below
 the development-frozen MDE of 0.00841614. Gamma B2-over-B0+B1a is -0.00312662
