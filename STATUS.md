@@ -32,6 +32,9 @@ su lectura prevista para 2029-01-30 y contador cero; no se ha ejecutado aquí.
 Fase 9 dejó de ser cohorte sellada para RP4 por decisión 128; sus originales
 no se alteran. C10 permanece inactivo: no se presenta una fecha de lectura inexistente.
 Las decisiones y cifras previas están completas en `history` del JSON.
+El sucesor PIT v2.2 quedó reclasificado como `RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22` (auditoría de exposición
+`PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`: 32/32 sesiones del holdout ya leídas por C3 y RP2-v3).
+Sensibilidad de reparación B2: `COMPLETED_RETROSPECTIVE_REPAIR_SENSITIVITY`, análisis separado; 451 orígenes excluidos, alfa gastado 0.
 Frozen evidence: 155 artifacts registered.
 
 ## Operación

@@ -93,6 +93,13 @@ en las figuras son contexto temporal, no atribución causal.
   cifras favorables y adversas y disposición histórica
   `GLOBAL_EDGE_NOT_CONFIRMED`.
   [Resultado y límites originales](docs/pit_v22_claims_and_limitations_v2.md).
+  La auditoría de exposición (`PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`) mostró que las
+  32 sesiones del holdout ya se habían leído en C3 y RP2-v3, por lo que se reclasificó
+  como remedición retrospectiva descriptiva; la sensibilidad de reparación del
+  historial B2 es un análisis separado con alfa gastado cero.
+  [Addendum de exposición](docs/pit_v22_claims_and_limitations_v3.md) ·
+  [Auditoría de exposición](artifacts/target_blind_v22/successor_holdout_exposure_v1.json) ·
+  [Cierre de la reparación B2](docs/b2_repair_and_evidence_closeout_20260905.md).
 - El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones
   descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).
 - RP3 conserva su protocolo, contador de lectura cero y fecha **prevista**

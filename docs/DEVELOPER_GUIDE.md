@@ -146,7 +146,7 @@ particular failure must be fail-closed.
 
 Do not hand-edit a generated result. Locate its producer, rebuild deterministically, update
 the appropriate registry through its supported workflow, and verify every downstream hash.
-If an authorized source listed by `generate_canonical_state.py` changes, regenerate both
+If an authorized source listed by `scripts/generate_canonical_state.py` changes, regenerate both
 canonical outputs and run their drift tests.
 
 ### Supabase

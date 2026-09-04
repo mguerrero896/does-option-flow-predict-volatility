@@ -73,6 +73,9 @@ B2V2_FEATURES: tuple[str, ...] = (
     "b2v2_z_strike_concentration",
     "b2v2_z_expiry_concentration",
 )
+B2_HISTORY_MAX_SESSIONS = 60
+B2_MIN_ELIGIBLE_HISTORY_SESSIONS = 20
+B2_MIN_ELIGIBLE_ORIGIN_COVERAGE = 0.80
 
 
 def build_phase6_common_panel(
@@ -506,56 +509,137 @@ def build_b2v2_features(
     trades: pl.DataFrame,
     origins: pl.DataFrame,
     window_minutes: int = 5,
+    *,
+    delay_seconds: int = 60,
+    history_eligibility: pl.DataFrame | None = None,
 ) -> pl.DataFrame:
     """Construct normalized B2v2 features from individual Full Tape rows."""
-    return build_b2v2_from_activity(aggregate_b2_activity(trades, origins, window_minutes), origins)
+    return build_b2v2_from_activity(
+        aggregate_b2_activity(trades, origins, window_minutes, delay_seconds),
+        origins,
+        history_eligibility=history_eligibility,
+    )
+
+
+def build_source_time_proxy_b2v2_features(
+    trades: pl.DataFrame,
+    origins: pl.DataFrame,
+    *,
+    history_eligibility: pl.DataFrame,
+) -> pl.DataFrame:
+    """Bind the source-time replication to t-120 and current eligibility."""
+    return build_b2v2_features(
+        trades,
+        origins,
+        delay_seconds=120,
+        history_eligibility=history_eligibility,
+    )
 
 
 def build_b2v2_from_activity(
     activity: pl.DataFrame,
     origins: pl.DataFrame,
+    *,
+    history_eligibility: pl.DataFrame | None = None,
+    normalization_band: str | None = None,
 ) -> pl.DataFrame:
     """Build the nine target-blind B2v2 features from per-origin activity.
 
-    Only the most recent sixty strictly prior sessions are eligible. At least
-    twenty prior sessions are required; warm-up rows remain explicitly
-    incomplete and may only contribute to later history.
+    Only the most recent sixty strictly prior sessions are eligible. A row
+    requires valid current data, at least twenty distinct prior eligible
+    sessions and at least eighty-percent eligible-origin coverage in its
+    asset/time band. Incomplete rows remain null; missing values are not
+    imputed.
     """
+    source_frames = (activity, origins, history_eligibility)
     forbidden = {
         column
-        for column in (*activity.columns, *origins.columns)
+        for frame in source_frames
+        if frame is not None
+        for column in frame.columns
         if column.lower() in {"rv30", "qlike", "target"} or column.lower().startswith("rv30_")
     }
     if forbidden:
         raise ValueError("B2V2_TARGET_COLUMN_FORBIDDEN")
-    required_origins = {
+    origin_keys = (
         "origin_id",
         "asset",
         "session_date",
         "forecast_origin_utc",
-    }
-    if not required_origins <= set(origins.columns):
+    )
+    if not set(origin_keys) <= set(origins.columns):
         raise ValueError("B2V2_ORIGIN_COLUMNS_MISSING")
-    if origins["origin_id"].n_unique() != origins.height:
+    if any(origins[column].null_count() for column in origin_keys):
+        raise ValueError("B2V2_ORIGIN_KEY_NULL")
+    if origins["origin_id"].null_count() or origins["origin_id"].n_unique() != origins.height:
         raise ValueError("B2V2_ORIGIN_ID_DUPLICATE")
     missing_raw = RAW_B2_COLUMNS - set(activity.columns)
     if missing_raw:
         raise ValueError(f"B2_RAW_FEATURES_MISSING:{','.join(sorted(missing_raw))}")
-    if activity["origin_id"].n_unique() != activity.height:
+    if "origin_id" not in activity.columns:
+        raise ValueError("B2V2_ACTIVITY_ORIGIN_KEY_MISMATCH")
+    if not set(origin_keys) <= set(activity.columns):
+        raise ValueError("B2V2_ACTIVITY_ORIGIN_KEY_MISMATCH")
+    if any(activity[column].null_count() for column in origin_keys):
+        raise ValueError("B2V2_ACTIVITY_ORIGIN_KEY_NULL")
+    if activity["origin_id"].null_count() or activity["origin_id"].n_unique() != activity.height:
         raise ValueError("B2V2_ACTIVITY_ORIGIN_DUPLICATE")
+    if not activity.select(*origin_keys).sort("origin_id").equals(
+        origins.select(*origin_keys).sort("origin_id")
+    ):
+        raise ValueError("B2V2_ACTIVITY_ORIGIN_KEY_MISMATCH")
+
+    eligibility_column = "eligible_for_corrected_pit_panel"
+    if history_eligibility is None:
+        eligibility = origins.select(*origin_keys).with_columns(
+            pl.lit(True).alias("_b2v2_history_eligible")
+        )
+    else:
+        if not {*origin_keys, eligibility_column} <= set(history_eligibility.columns):
+            raise ValueError("B2V2_HISTORY_ELIGIBILITY_KEY_MISMATCH")
+        if any(history_eligibility[column].null_count() for column in origin_keys):
+            raise ValueError("B2V2_HISTORY_ELIGIBILITY_KEY_NULL")
+        if (
+            history_eligibility["origin_id"].null_count()
+            or history_eligibility["origin_id"].n_unique() != history_eligibility.height
+        ):
+            raise ValueError("B2V2_HISTORY_ELIGIBILITY_ORIGIN_DUPLICATE")
+        if (
+            not history_eligibility.select(*origin_keys)
+            .sort("origin_id")
+            .equals(origins.select(*origin_keys).sort("origin_id"))
+        ):
+            raise ValueError("B2V2_HISTORY_ELIGIBILITY_KEY_MISMATCH")
+        if (
+            history_eligibility.schema[eligibility_column] != pl.Boolean
+            or history_eligibility[eligibility_column].null_count()
+        ):
+            raise ValueError("B2V2_HISTORY_ELIGIBILITY_INVALID")
+        eligibility = history_eligibility.select(
+            *origin_keys,
+            pl.col(eligibility_column).alias("_b2v2_history_eligible"),
+        )
 
     evidence_columns = [
         column
         for column in ("b2v2_cutoff_utc", "b2v2_max_created_at_utc")
         if column in activity.columns
     ]
-    raw = origins.select(sorted(required_origins)).join(
-        activity.select("origin_id", *sorted(RAW_B2_COLUMNS), *evidence_columns),
-        on="origin_id",
-        how="left",
-        validate="1:1",
+    raw = (
+        origins.select(*origin_keys)
+        .join(
+            activity.select(*origin_keys, *sorted(RAW_B2_COLUMNS), *evidence_columns),
+            on=list(origin_keys),
+            how="left",
+            validate="1:1",
+        )
+        .join(
+            eligibility,
+            on=list(origin_keys),
+            how="left",
+            validate="1:1",
+        )
     )
-    raw = raw.with_columns(pl.col(column).fill_null(0.0) for column in sorted(RAW_B2_COLUMNS))
     compact = add_compact_b2_features(raw)
     source_to_output = dict(zip(B2_FEATURE_NAMES, B2V2_FEATURES, strict=True))
     records = (
@@ -566,12 +650,13 @@ def build_b2v2_from_activity(
             "forecast_origin_utc",
             *B2_FEATURE_NAMES,
             *evidence_columns,
+            "_b2v2_history_eligible",
         )
         .sort(["asset", "session_date", "forecast_origin_utc"])
         .to_dicts()
     )
     for row in records:
-        row["_band"] = _phase6_band(row["forecast_origin_utc"])
+        row["_band"] = normalization_band or _phase6_band(row["forecast_origin_utc"])
 
     dates_by_asset: dict[str, list[str]] = {}
     rows_by_asset_date: dict[tuple[str, str], list[dict[str, Any]]] = {}
@@ -590,21 +675,36 @@ def build_b2v2_from_activity(
     output: list[dict[str, Any]] = []
     for (asset, band, day), current_rows in sorted(current_groups.items()):
         date_index = dates_by_asset[asset].index(day)
-        prior_dates = dates_by_asset[asset][max(0, date_index - 60) : date_index]
-        complete = len(prior_dates) >= 20
+        prior_dates = dates_by_asset[asset][
+            max(0, date_index - B2_HISTORY_MAX_SESSIONS) : date_index
+        ]
+        prior_band_rows = [
+            row
+            for prior_day in prior_dates
+            for row in rows_by_asset_band_date.get((asset, band, prior_day), [])
+        ]
+        eligible_band_rows = [row for row in prior_band_rows if row["_b2v2_history_eligible"]]
+        eligible_sessions = {row["session_date"] for row in eligible_band_rows}
+        origin_coverage = (
+            len(eligible_band_rows) / len(prior_band_rows) if prior_band_rows else 0.0
+        )
+        history_complete = (
+            len(eligible_sessions) >= B2_MIN_ELIGIBLE_HISTORY_SESSIONS
+            and origin_coverage >= B2_MIN_ELIGIBLE_ORIGIN_COVERAGE
+        )
         parameters: dict[str, tuple[float, float, str]] = {}
         for source, destination in source_to_output.items():
-            if not complete:
+            if not history_complete:
                 continue
             band_values = [
                 float(row[source])
-                for prior_day in prior_dates
-                for row in rows_by_asset_band_date.get((asset, band, prior_day), [])
+                for row in eligible_band_rows
             ]
             asset_values = [
                 float(row[source])
                 for prior_day in prior_dates
                 for row in rows_by_asset_date.get((asset, prior_day), [])
+                if row["_b2v2_history_eligible"]
             ]
             parameters[destination] = _robust_parameters(band_values, asset_values)
         for current in current_rows:
@@ -620,15 +720,25 @@ def build_b2v2_from_activity(
             }
             labels: list[str] = []
             for source, destination in source_to_output.items():
-                if not complete:
-                    result[destination] = 0.0
-                    labels.append("INSUFFICIENT_PRIOR_SESSIONS")
+                if not current["_b2v2_history_eligible"]:
+                    result[destination] = None
+                    labels.append("INELIGIBLE_FOR_CORRECTED_PIT_PANEL")
+                    continue
+                if len(eligible_sessions) < B2_MIN_ELIGIBLE_HISTORY_SESSIONS:
+                    result[destination] = None
+                    labels.append("INSUFFICIENT_ELIGIBLE_HISTORY_SESSIONS")
+                    continue
+                if origin_coverage < B2_MIN_ELIGIBLE_ORIGIN_COVERAGE:
+                    result[destination] = None
+                    labels.append("INSUFFICIENT_ELIGIBLE_ORIGIN_COVERAGE")
                     continue
                 center, scale, label = parameters[destination]
                 result[destination] = (float(current[source]) - center) / scale if scale else 0.0
                 labels.append(label)
-            result["b2v2_complete"] = complete
+            result["b2v2_complete"] = history_complete and current["_b2v2_history_eligible"]
             result["b2v2_history_sessions"] = len(prior_dates)
+            result["b2v2_history_eligible_sessions"] = len(eligible_sessions)
+            result["b2v2_history_origin_coverage"] = origin_coverage
             result["b2v2_normalization_labels"] = ";".join(sorted(set(labels)))
             output.append(result)
     return pl.DataFrame(output, infer_schema_length=None).sort(

@@ -44,13 +44,13 @@ def test_evidence_figure_uses_canonical_lifecycle_and_measured_flow_count() -> N
     ) == rendered + "\n"
 
 
-def test_eligibility_figure_keeps_complete_claims_and_machine_status() -> None:
+def test_eligibility_figure_discloses_exposure_and_matches_current_state() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     status = state["canonical_results"]["status"]
     assert isinstance(status, str) and status
     rendered = render_figures.eligibility().render()
-    assert "passed custody validation." in rendered
-    assert "no binary edge-promotion rule was registered." in rendered
+    assert "all 32 holdout sessions were exposed" in rendered
+    assert "Reusing exposed outcomes supports descriptive evidence" in rendered
     assert "Every number stays auditable" in rendered
     assert f"Machine status: {status}." in rendered
     assert (REPO / "docs" / "figures" / "eligibility-gates.svg").read_text(

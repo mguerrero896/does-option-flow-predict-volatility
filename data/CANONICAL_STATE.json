@@ -10,6 +10,9 @@
  ],
  "authorized_sources": {
   ".github/workflows/ci.yml": "d5fab918f066795a244700d21cdc2c653e04fc80e12c0f284a9cec58295a76bf",
+  "artifacts/b2_history_repair_v1/evaluation_protocol.json": "487b9dd133664bce34d4900582f6302a0a52746f87d5ac36e9beefff02ecda6d",
+  "artifacts/b2_history_repair_v1/evaluation_result.json": "bd9debe7f1396e52296b8eca61961c3370ff88530c39bae6d0e0cc0f74964fea",
+  "artifacts/b2_history_repair_v1/feature_impact.json": "a64cff195cec85ca2f08d6a82606161b9e9a0e41549ea95d1f8483afd102f35a",
   "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63",
   "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json": "e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c",
   "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json": "6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721",
@@ -46,6 +49,7 @@
   "artifacts/target_blind_v22/successor_evaluation_result_v2.json": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
   "artifacts/target_blind_v22/successor_evaluation_run_v1.json": "33b04913e579fb4e429f0f1bf59e48c1b8c8a48dc39c22530a70acb5a1151169",
   "artifacts/target_blind_v22/successor_evaluation_run_v2.json": "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3",
+  "artifacts/target_blind_v22/successor_holdout_exposure_v1.json": "c2822db384d6f64557dc6be4ebade971eefd0725fb7d19d72d671d865be6d9d1",
   "artifacts/target_blind_v22/successor_method_freeze_v1.json": "0b3d26ac08e06ff9e862dbc40ce17f42102067f126bfe3f1ba1e55e880639faf",
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
@@ -56,12 +60,13 @@
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "ad1c0c9ced6eb0beedd3a92558d5db5b595a29c922de297c363764bc7d32e1c7",
+  "docs/methodology_decisions.md": "9984df6fead3a840e0930d823d0f76d90b6bce34b091087af5a085110db37079",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
   "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
   "docs/pit_v22_claims_and_limitations.md": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
+  "docs/pit_v22_claims_and_limitations_v3.md": "4ed703a4fd142528ea6e69c6efa501fa2535b4c39bd87ef2344c6d8ba9ee8807",
   "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
@@ -1465,38 +1470,73 @@
   ],
   "canonical_results": {
    "capital_go": false,
-   "confirmatory_contrasts": {
-    "delta_b1v2": {
-     "ci_high": 0.014024232307083271,
-     "ci_low": 0.0026577746715989023,
-     "clusters": 32,
-     "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
-     "estimate": 0.008171247318411104,
-     "estimate_at_least_mde": false,
-     "mde_role": "CONFIRMATORY_THRESHOLD",
-     "observations": 12640,
-     "p_value_holm": 0.008399160083991601,
-     "p_value_raw": 0.004199580041995801,
-     "result_sign": "POSITIVE",
-     "training_mde": 0.008416143460160036
+   "confirmatory_contrasts": {},
+   "confirmatory_evidence_eligible": false,
+   "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
+   "descriptive_contrasts": {
+    "gamma_glm_confirmatory": {
+     "delta_b1v2": {
+      "ci_high": 0.014024232307083271,
+      "ci_low": 0.0026577746715989023,
+      "clusters": 32,
+      "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+      "estimate": 0.008171247318411104,
+      "estimate_at_least_mde": false,
+      "mde_role": "EXPLORATORY_DESCRIPTIVE",
+      "observations": 12640,
+      "p_value_holm": 0.008399160083991601,
+      "p_value_raw": 0.004199580041995801,
+      "result_sign": "POSITIVE",
+      "training_mde": 0.008416143460160036
+     },
+     "delta_b2v2": {
+      "ci_high": 0.008608549835794906,
+      "ci_low": -0.013923357122674115,
+      "clusters": 32,
+      "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+      "estimate": -0.0031266210509440827,
+      "estimate_at_least_mde": false,
+      "mde_role": "EXPLORATORY_DESCRIPTIVE",
+      "observations": 12640,
+      "p_value_holm": 0.5595440455954405,
+      "p_value_raw": 0.5595440455954405,
+      "result_sign": "NEGATIVE",
+      "training_mde": 0.0066762275830901255
+     }
     },
-    "delta_b2v2": {
-     "ci_high": 0.008608549835794906,
-     "ci_low": -0.013923357122674115,
-     "clusters": 32,
-     "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
-     "estimate": -0.0031266210509440827,
-     "estimate_at_least_mde": false,
-     "mde_role": "CONFIRMATORY_THRESHOLD",
-     "observations": 12640,
-     "p_value_holm": 0.5595440455954405,
-     "p_value_raw": 0.5595440455954405,
-     "result_sign": "NEGATIVE",
-     "training_mde": 0.0066762275830901255
+    "lightgbm_robustness": {
+     "delta_b1v2": {
+      "ci_high": 0.0071251569526431845,
+      "ci_low": 0.001381712462904281,
+      "clusters": 32,
+      "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+      "estimate": 0.004175806123377246,
+      "estimate_at_least_mde": false,
+      "mde_role": "EXPLORATORY_DESCRIPTIVE",
+      "observations": 12640,
+      "p_value_holm": null,
+      "p_value_raw": 0.0023997600239976003,
+      "result_sign": "POSITIVE",
+      "training_mde": 0.008416143460160036
+     },
+     "delta_b2v2": {
+      "ci_high": 0.0036821862450517493,
+      "ci_low": -0.0006242036721119073,
+      "clusters": 32,
+      "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+      "estimate": 0.001368014097550589,
+      "estimate_at_least_mde": false,
+      "mde_role": "EXPLORATORY_DESCRIPTIVE",
+      "observations": 12640,
+      "p_value_holm": null,
+      "p_value_raw": 0.20177982201779823,
+      "result_sign": "POSITIVE",
+      "training_mde": 0.0066762275830901255
+     }
     }
    },
-   "decision": "GLOBAL_EDGE_NOT_CONFIRMED",
    "edge_claim_eligible": false,
+   "evidential_status": "EXPLORATORY_DESCRIPTIVE",
    "headline_claims": [],
    "result_sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
    "robustness_contrasts": {
@@ -1531,9 +1571,53 @@
    },
    "run_id": "pit-v22-successor-evaluation-v2-20260902",
    "scientific_result_eligible": true,
-   "status": "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
+   "status": "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE"
   },
   "current_report": {
+   "b2_history_repair_sensitivity": {
+    "alpha_spent": 0,
+    "b0_b1_control_forecast_max_abs_error": 0.0,
+    "capital_go": false,
+    "changed_common_predictor_origins": 24604,
+    "common_predictor_origins": 62266,
+    "confirmatory_evidence_eligible": false,
+    "excluded_activity_origins": 451,
+    "gained_complete": 0,
+    "historical_forecast_reproduction_max_abs_error": 0.0,
+    "historical_metric_reproduction_max_abs_error": {
+     "absolute_error": 0.0,
+     "qlike_loss": 0.0,
+     "squared_error": 0.0
+    },
+    "lost_complete": 0,
+    "original_panel_rows": 62254,
+    "published_comparison_scope": "FOLD_2_HOLDOUT_ONLY_2026_02_05_TO_2026_03_23",
+    "replaces_canonical_result": false,
+    "rows_lost_to_corrected_history": 0,
+    "same_mask_rows": 62254,
+    "scope": "RETROSPECTIVE_REPAIR_SENSITIVITY_NOT_INDEPENDENT_CONFIRMATION",
+    "sources": {
+     "evaluation_protocol": {
+      "file_sha256": "c2af5b8048dc2ca1013047a496fa9d5e2d3c3ecddd5fbd1b966475cabe0d7857",
+      "manifest_sha256": "b692883d7cfdee9f761c040af376a1605e83494d714afbda07132f2c18174223",
+      "path": "artifacts/b2_history_repair_v1/evaluation_protocol.json",
+      "sha256": "487b9dd133664bce34d4900582f6302a0a52746f87d5ac36e9beefff02ecda6d"
+     },
+     "evaluation_result": {
+      "file_sha256": "b2413e14151d73caf213a5e8313fe269c9097169a9eccbb576e73ea5721ef1b7",
+      "manifest_sha256": "24609e41fabb522c9dd3493ff870107c049e10d688817e1be9ccbbf9911e1e85",
+      "path": "artifacts/b2_history_repair_v1/evaluation_result.json",
+      "sha256": "bd9debe7f1396e52296b8eca61961c3370ff88530c39bae6d0e0cc0f74964fea"
+     },
+     "feature_impact": {
+      "file_sha256": "fa624a04f9967ead1aeb3002e5b5a65f77c38063128ba6e363875c07d3c14e67",
+      "manifest_sha256": "0c8a062c29a024972948ceaa62153e76a6e96d8291f43d1e63e04f83db47bee8",
+      "path": "artifacts/b2_history_repair_v1/feature_impact.json",
+      "sha256": "a64cff195cec85ca2f08d6a82606161b9e9a0e41549ea95d1f8483afd102f35a"
+     }
+    },
+    "status": "COMPLETED_RETROSPECTIVE_REPAIR_SENSITIVITY"
+   },
    "evidence_cutoff": "2026-08-31",
    "phase8_addendum": {
     "path": "reports/phase8a_exploratory_bridge_addendum_v13.md",
@@ -1562,12 +1646,17 @@
   "capital_eligible": false,
   "capital_go": false,
   "claims_and_limitations": {
+   "exposure_addendum": {
+    "path": "docs/pit_v22_claims_and_limitations_v3.md",
+    "sha256": "4ed703a4fd142528ea6e69c6efa501fa2535b4c39bd87ef2344c6d8ba9ee8807"
+   },
    "ledger_sha256": "7aa8765a8b4610d54ec4b38145588029e0c8c6940ab43075bf816ff366fcc69a",
    "markdown": "docs/pit_v22_claims_and_limitations_v2.md",
    "path": "artifacts/target_blind_v22/pit_v22_claim_ledger_v2.json",
    "sha256": "292751bec10f347cf5b3abcb29be840e3b7b7c95e63f9f9b60ab39eb83962a88"
   },
   "confirmatory_contrasts_evaluated": true,
+  "confirmatory_interpretation_eligible": false,
   "custody_audit": {
    "audit_sha256": "652aba6ca5d358b5368ea63e46ecd8e9a97268b5d23ea1377875b3b8ec1bc957",
    "path": "artifacts/target_blind_v22/successor_custody_audit_v2.json",
@@ -1578,6 +1667,15 @@
   "development_mde_estimated": true,
   "edge_claim_eligible": false,
   "evaluation_attempt_count": 1,
+  "evidential_classification": {
+   "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+   "holdout_outcomes_previously_read": true,
+   "mde_role": "EXPLORATORY_DESCRIPTIVE",
+   "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+   "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+   "reclassification_applied": true,
+   "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22"
+  },
   "full_log": {
    "events": [
     "ONE_SHOT_CLAIMED",
@@ -1644,6 +1742,64 @@
    "direct_contradiction_disposition": "NOT_IDENTIFIABLE_DIFFERENT_PARTITION_INFORMATION_SETS_AND_ESTIMANDS",
    "historical_aggregate_count": 12,
    "historical_bundle_run_id": "rp2-v3-20260831-b1-spot-cutoff-remediation"
+  },
+  "holdout_exposure_audit": {
+   "audit_sha256": "5e520eef642c98596efa856a004c64c93e667f8f4d8822e165897f9e2bac282d",
+   "classification": {
+    "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+    "holdout_outcomes_previously_read": true,
+    "mde_role": "EXPLORATORY_DESCRIPTIVE",
+    "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+    "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+    "reclassification_applied": true,
+    "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22"
+   },
+   "holdout_window": {
+    "end": "2026-03-23",
+    "session_count": 32,
+    "session_dates": [
+     "2026-02-05",
+     "2026-02-06",
+     "2026-02-09",
+     "2026-02-10",
+     "2026-02-11",
+     "2026-02-12",
+     "2026-02-13",
+     "2026-02-17",
+     "2026-02-18",
+     "2026-02-19",
+     "2026-02-20",
+     "2026-02-23",
+     "2026-02-24",
+     "2026-02-25",
+     "2026-02-26",
+     "2026-02-27",
+     "2026-03-02",
+     "2026-03-03",
+     "2026-03-04",
+     "2026-03-05",
+     "2026-03-06",
+     "2026-03-09",
+     "2026-03-10",
+     "2026-03-11",
+     "2026-03-12",
+     "2026-03-13",
+     "2026-03-16",
+     "2026-03-17",
+     "2026-03-18",
+     "2026-03-19",
+     "2026-03-20",
+     "2026-03-23"
+    ],
+    "start": "2026-02-05"
+   },
+   "path": "artifacts/target_blind_v22/successor_holdout_exposure_v1.json",
+   "prior_read_intersections": {
+    "phase6_c3": 32,
+    "rp2_development": 32
+   },
+   "sha256": "c2822db384d6f64557dc6be4ebade971eefd0725fb7d19d72d671d865be6d9d1",
+   "status": "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
   },
   "oos_read_count": 1,
   "previous_attempt": {
@@ -1720,6 +1876,7 @@
     }
    }
   },
+  "registered_contrasts_scope": "HISTORICAL_FROZEN_DEFINITION_NOT_CURRENT_AUTHORITY",
   "rerun_allowed": false,
   "research_only": true,
   "results_inspected": true,
@@ -1748,7 +1905,7 @@
     "semantic_sha256": "4b98bb7c77c5535686b74682177d48e0a487ea58502e87bdcd56d82ea2c143af"
    }
   },
-  "status": "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED",
+  "status": "RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED",
   "target_linkage": {
    "all_eligible_origins": 62254,
    "all_excluded_origins": 12,

@@ -6,6 +6,8 @@ import importlib.util
 import json
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[2]
 
 _spec = importlib.util.spec_from_file_location(
@@ -32,6 +34,31 @@ def test_status_md_matches_rendering() -> None:
     )
 
 
+def test_b2_repair_is_a_separate_hash_bound_sensitivity() -> None:
+    state = _module.build_state()
+    repair = state["history"]["current_report"]["b2_history_repair_sensitivity"]
+    assert repair["status"] == "COMPLETED_RETROSPECTIVE_REPAIR_SENSITIVITY"
+    assert repair["replaces_canonical_result"] is False
+    assert repair["confirmatory_evidence_eligible"] is False
+    assert repair["excluded_activity_origins"] == 451
+    assert repair["changed_common_predictor_origins"] == 24_604
+    assert repair["common_predictor_origins"] == 62_266
+    assert repair["lost_complete"] == repair["gained_complete"] == 0
+    assert repair["same_mask_rows"] == repair["original_panel_rows"] == 62_254
+    assert repair["rows_lost_to_corrected_history"] == 0
+    assert repair["historical_forecast_reproduction_max_abs_error"] == 0
+    assert set(repair["historical_metric_reproduction_max_abs_error"].values()) == {0}
+    assert repair["b0_b1_control_forecast_max_abs_error"] == 0
+    assert repair["alpha_spent"] == 0
+    assert state["history"]["canonical_results"]["result_sha256"] == (
+        "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775"
+    )
+    attributes = (REPO / ".gitattributes").read_text(encoding="utf-8")
+    for source in repair["sources"].values():
+        assert f"/{source['path']} -text" in attributes
+        assert state["authorized_sources"][source["path"]] == source["sha256"]
+
+
 def test_public_commit_provenance_does_not_claim_reachability() -> None:
     ledger = json.loads(
         (REPO / "data" / "PUBLIC_COMMIT_TRANSLATIONS.json").read_text(encoding="utf-8")
@@ -40,6 +67,26 @@ def test_public_commit_provenance_does_not_claim_reachability() -> None:
     assert translation["status"] == "HISTORICAL_REFERENCES_NOT_REACHABLE_FROM_ROOT_RELEASE"
     assert "published_equivalent_commit" not in translation
     assert len(translation["historical_sanitized_commit_reference"]) == 40
+
+
+@pytest.mark.parametrize(
+    ("source", "error"),
+    [
+        ("docs/rp2_v3/STUDY_WINDOW.md", "EXPOSURE_INPUT_DRIFT"),
+        ("scripts/audit_successor_holdout_exposure_v1.py", "EXPOSURE_PRODUCER_DRIFT"),
+    ],
+)
+def test_exposure_source_drift_blocks_current_state(
+    monkeypatch: pytest.MonkeyPatch, source: str, error: str
+) -> None:
+    original_sha = _module._sha
+
+    def changed_sha(path: Path) -> str:
+        return "0" * 64 if path == REPO / source else original_sha(path)
+
+    monkeypatch.setattr(_module, "_sha", changed_sha)
+    with pytest.raises(ValueError, match=error):
+        _module.build_state()
 
 
 def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
@@ -65,22 +112,37 @@ def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     assert state["current_report"]["source"]["path"] == "docs/rp4/RESULTADO_FINAL.md"
     assert state["current_report"]["evidence_cutoff"] == "2026-09-04"
     canonical = state["history"]["canonical_results"]
-    assert canonical["status"] == "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
+    assert canonical["status"] == "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE"
     assert canonical["run_id"] == "pit-v22-successor-evaluation-v2-20260902"
     assert canonical["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
     assert canonical["scientific_result_eligible"] is True
+    assert canonical["confirmatory_evidence_eligible"] is False
+    assert canonical["evidential_status"] == "EXPLORATORY_DESCRIPTIVE"
     assert canonical["edge_claim_eligible"] is False
     assert canonical["capital_go"] is False
     assert canonical["headline_claims"] == []
+    assert canonical["confirmatory_contrasts"] == {}
     successor = state["pit_v22_successor_evaluation"]
-    assert successor["status"] == "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED"
+    assert successor["status"] == (
+        "RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED"
+    )
     assert successor["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
+    assert successor["evidential_classification"] == {
+        "holdout_outcomes_previously_read": True,
+        "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+        "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22",
+        "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+        "mde_role": "EXPLORATORY_DESCRIPTIVE",
+        "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+        "reclassification_applied": True,
+    }
     assert successor["evaluation_attempt_count"] == 1
     assert successor["oos_read_count"] == 1
     assert successor["results_inspected"] is True
     assert successor["rerun_allowed"] is False
     assert successor["development_mde_estimated"] is True
     assert successor["confirmatory_contrasts_evaluated"] is True
+    assert successor["confirmatory_interpretation_eligible"] is False
     assert successor["historical_bundle_aggregate_comparison_performed"] is True
     assert successor["previous_attempt"]["status"] == "FAIL_CLOSED_BEFORE_OOS_AUTHORIZATION"
     assert successor["previous_attempt"]["failure_code"] == (
@@ -99,6 +161,13 @@ def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     assert successor["full_log"]["sha256"] == (
         "0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3"
     )
+    exposure = successor["holdout_exposure_audit"]
+    assert exposure["status"] == "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
+    assert exposure["classification"] == successor["evidential_classification"]
+    assert exposure["holdout_window"]["session_count"] == 32
+    assert exposure["holdout_window"]["start"] == "2026-02-05"
+    assert exposure["holdout_window"]["end"] == "2026-03-23"
+    assert exposure["prior_read_intersections"] == {"phase6_c3": 32, "rp2_development": 32}
     assert successor["target_linkage"] == {
         "all_eligible_origins": 62_254,
         "all_excluded_origins": 12,
@@ -109,6 +178,13 @@ def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     }
     assert successor["custody_audit"]["status"] == ("PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT")
     gamma = successor["registered_contrasts"]["gamma_glm_confirmatory"]
+    assert successor["registered_contrasts_scope"] == (
+        "HISTORICAL_FROZEN_DEFINITION_NOT_CURRENT_AUTHORITY"
+    )
+    effective = canonical["descriptive_contrasts"]["gamma_glm_confirmatory"]
+    assert gamma["delta_b1v2"]["mde_role"] == "CONFIRMATORY_THRESHOLD"
+    assert effective["delta_b1v2"]["mde_role"] == "EXPLORATORY_DESCRIPTIVE"
+    assert effective["delta_b1v2"]["estimate"] == gamma["delta_b1v2"]["estimate"]
     assert gamma["delta_b1v2"]["estimate"] == 0.008171247318411104
     assert gamma["delta_b1v2"]["p_value_holm"] == 0.008399160083991601
     assert gamma["delta_b1v2"]["estimate_at_least_mde"] is False

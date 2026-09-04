@@ -58,6 +58,9 @@ PIT_V22_RESULT_V2 = PIT_V22_DIR / "successor_evaluation_result_v2.json"
 PIT_V22_CUSTODY_AUDIT_V2 = PIT_V22_DIR / "successor_custody_audit_v2.json"
 PIT_V22_CLAIM_LEDGER_V2 = PIT_V22_DIR / "pit_v22_claim_ledger_v2.json"
 PIT_V22_CLAIMS_DOC_V2 = Path("docs") / "pit_v22_claims_and_limitations_v2.md"
+PIT_V22_HOLDOUT_EXPOSURE_V1 = PIT_V22_DIR / "successor_holdout_exposure_v1.json"
+PIT_V22_CLAIMS_DOC_V3 = Path("docs") / "pit_v22_claims_and_limitations_v3.md"
+B2_REPAIR_DIR = Path("artifacts") / "b2_history_repair_v1"
 TEXT_SUFFIXES = {".csv", ".json", ".jsonl", ".md", ".py", ".sql", ".txt", ".yaml", ".yml"}
 
 AUTHORIZED_SOURCES = (
@@ -96,6 +99,8 @@ AUTHORIZED_SOURCES = (
     PIT_V22_CUSTODY_AUDIT_V2.as_posix(),
     PIT_V22_CLAIM_LEDGER_V2.as_posix(),
     PIT_V22_CLAIMS_DOC_V2.as_posix(),
+    PIT_V22_HOLDOUT_EXPOSURE_V1.as_posix(),
+    PIT_V22_CLAIMS_DOC_V3.as_posix(),
     (CURRENT_RUN / "run_manifest.json").as_posix(),
     (CURRENT_RUN / "scorecard.json").as_posix(),
     "artifacts/target_blind_v22/pit_v22_claim_ledger_v1.json",
@@ -213,10 +218,21 @@ def build_historical_state() -> dict[str, Any]:
         (REPO / PIT_V22_AUTHORIZATION_V2).read_text(encoding="utf-8")
     )
     successor_v2_log = json.loads((REPO / PIT_V22_LOG_V2).read_text(encoding="utf-8"))
-    successor_v2_result = json.loads((REPO / PIT_V22_RESULT_V2).read_text(encoding="utf-8"))
-    successor_v2_audit = json.loads((REPO / PIT_V22_CUSTODY_AUDIT_V2).read_text(encoding="utf-8"))
-    successor_v2_claims = json.loads((REPO / PIT_V22_CLAIM_LEDGER_V2).read_text(encoding="utf-8"))
-    successor_v2_events = [event.get("event") for event in successor_v2_log.get("events", [])]
+    successor_v2_result = json.loads(
+        (REPO / PIT_V22_RESULT_V2).read_text(encoding="utf-8")
+    )
+    successor_v2_audit = json.loads(
+        (REPO / PIT_V22_CUSTODY_AUDIT_V2).read_text(encoding="utf-8")
+    )
+    successor_v2_claims = json.loads(
+        (REPO / PIT_V22_CLAIM_LEDGER_V2).read_text(encoding="utf-8")
+    )
+    successor_v2_exposure = json.loads(
+        (REPO / PIT_V22_HOLDOUT_EXPOSURE_V1).read_text(encoding="utf-8")
+    )
+    successor_v2_events = [
+        event.get("event") for event in successor_v2_log.get("events", [])
+    ]
     expected_v2_events = [
         "ONE_SHOT_CLAIMED",
         "RUNTIME_PREREGISTRATION_FROZEN",
@@ -278,6 +294,123 @@ def build_historical_state() -> dict[str, Any]:
         != 12
     ):
         raise ValueError("PIT_V22_SUCCESSOR_V2_CUSTODY_DRIFT")
+    exposure_classification = successor_v2_exposure.get("classification", {})
+    exposure_splits = successor_v2_exposure.get("source_contract", {}).get("splits", {})
+    exposure_windows = successor_v2_exposure.get("prior_outcome_read_windows", {})
+    if (
+        successor_v2_exposure.get("audit_sha256")
+        != _canonical_sha(successor_v2_exposure, omit="audit_sha256")
+        or successor_v2_exposure.get("status") != "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED"
+        or exposure_splits.get("holdout", {}).get("session_count") != 32
+        or exposure_splits.get("holdout", {}).get("start") != "2026-02-05"
+        or exposure_splits.get("holdout", {}).get("end") != "2026-03-23"
+        or exposure_windows.get("phase6_c3", {}).get("holdout_intersection_count") != 32
+        or exposure_windows.get("rp2_development", {}).get("holdout_intersection_count") != 32
+        or [item.get("holdout_intersection_count") for item in exposure_windows.get("phase8", [])]
+        != [0, 0]
+        or exposure_classification
+        != {
+            "holdout_outcomes_previously_read": True,
+            "reason": "HOLDOUT_OUTCOMES_PREVIOUSLY_READ_BY_C3_AND_RP2V3_D",
+            "result_role": "RETROSPECTIVE_REMEASUREMENT_UNDER_PIT_V22",
+            "evidential_status": "EXPLORATORY_DESCRIPTIVE",
+            "mde_role": "EXPLORATORY_DESCRIPTIVE",
+            "one_shot_label_scope": "CONTRACT_ACCESS_CUSTODY_ONLY",
+            "reclassification_applied": True,
+        }
+    ):
+        raise ValueError("PIT_V22_SUCCESSOR_HOLDOUT_EXPOSURE_DRIFT")
+    for source, expected_sha in successor_v2_exposure["inputs"].items():
+        if _sha(REPO / source) != expected_sha:
+            raise ValueError(f"PIT_V22_SUCCESSOR_HOLDOUT_EXPOSURE_INPUT_DRIFT:{source}")
+    exposure_producer = successor_v2_exposure["producer"]
+    if _sha(REPO / exposure_producer["path"]) != exposure_producer["sha256"]:
+        raise ValueError("PIT_V22_SUCCESSOR_HOLDOUT_EXPOSURE_PRODUCER_DRIFT")
+    repair_sources: dict[str, dict[str, Any]] = {}
+    repair_payloads: dict[str, dict[str, Any]] = {}
+    for label in ("feature_impact", "evaluation_protocol", "evaluation_result"):
+        path = B2_REPAIR_DIR / f"{label}.json"
+        if not (REPO / path).is_file():
+            continue
+        payload = json.loads((REPO / path).read_text(encoding="utf-8"))
+        if payload.get("manifest_sha256") != _canonical_sha(payload, omit="manifest_sha256"):
+            raise ValueError(f"B2_REPAIR_SENSITIVITY_MANIFEST_DRIFT:{label}")
+        repair_payloads[label] = payload
+        repair_sources[label] = {
+            "path": path.as_posix(),
+            "sha256": _sha(REPO / path),
+            "file_sha256": hashlib.sha256((REPO / path).read_bytes()).hexdigest(),
+            "manifest_sha256": payload["manifest_sha256"],
+        }
+    repair: dict[str, Any] | None = None
+    if repair_payloads:
+        features = repair_payloads["feature_impact"]
+        impact = features["impact_on_published_common_predictor_rows"]
+        if (
+            features["status"] != "FEATURE_IMPACT_MEASURED"
+            or features["target_reads"] != 0
+            or features["provider_requests"] != 0
+            or features["alpha_spent"] != 0
+            or features["excluded_activity_origins"] != 451
+            or impact["rows"] != 62_266
+            or impact["changed_common_rows"] != 24_604
+            or impact["before_complete"] != impact["after_complete"]
+            or impact["lost_complete"] != 0
+            or impact["gained_complete"] != 0
+        ):
+            raise ValueError("B2_REPAIR_SENSITIVITY_FEATURE_CONTRACT_DRIFT")
+        repair = {
+            "status": "FEATURE_IMPACT_MEASURED_EVALUATION_NOT_RECORDED",
+            "scope": "RETROSPECTIVE_REPAIR_SENSITIVITY_NOT_INDEPENDENT_CONFIRMATION",
+            "replaces_canonical_result": False,
+            "confirmatory_evidence_eligible": False,
+            "alpha_spent": 0,
+            "capital_go": False,
+            "excluded_activity_origins": features["excluded_activity_origins"],
+            "changed_common_predictor_origins": impact["changed_common_rows"],
+            "common_predictor_origins": impact["rows"],
+            "lost_complete": impact["lost_complete"],
+            "gained_complete": impact["gained_complete"],
+            "sources": repair_sources,
+        }
+        for label in ("evaluation_protocol", "evaluation_result"):
+            if label not in repair_payloads:
+                continue
+            payload = repair_payloads[label]
+            if (
+                payload["scope"] != repair["scope"]
+                or payload["alpha_spent"] != 0
+                or payload["capital_go"] is not False
+                or payload["feature_audit_sha256"]
+                != repair_sources["feature_impact"]["file_sha256"]
+            ):
+                raise ValueError(f"B2_REPAIR_SENSITIVITY_EVALUATION_CONTRACT_DRIFT:{label}")
+        if "evaluation_result" in repair_payloads:
+            result = repair_payloads["evaluation_result"]
+            protocol = repair_payloads.get("evaluation_protocol", {})
+            if (
+                result["status"] != "COMPLETED_RETROSPECTIVE_REPAIR_SENSITIVITY"
+                or any(result.get(key) != value for key, value in protocol.items()
+                       if key != "manifest_sha256")
+                or not protocol
+            ):
+                raise ValueError("B2_REPAIR_SENSITIVITY_RESULT_PROTOCOL_DRIFT")
+            repair.update({
+                "status": result["status"],
+                "original_panel_rows": result["original_panel_rows"],
+                "same_mask_rows": result["same_mask_rows"],
+                "rows_lost_to_corrected_history": result["rows_lost_to_corrected_history"],
+                "historical_forecast_reproduction_max_abs_error": result[
+                    "historical_forecast_reproduction_max_abs_error"
+                ],
+                "historical_metric_reproduction_max_abs_error": result[
+                    "historical_metric_reproduction_max_abs_error"
+                ],
+                "b0_b1_control_forecast_max_abs_error": result[
+                    "b0_b1_control_forecast_max_abs_error"
+                ],
+                "published_comparison_scope": "FOLD_2_HOLDOUT_ONLY_2026_02_05_TO_2026_03_23",
+            })
     redactions = json.loads(
         (REPO / "data" / "PUBLIC_METADATA_REDACTIONS.json").read_text(encoding="utf-8")
     )
@@ -728,14 +861,16 @@ def build_historical_state() -> dict[str, Any]:
         ],
         "pit_v22_successor_evaluation": {
             "run_id": successor_v2_log["run_id"],
-            "status": "SCIENTIFIC_EVALUATION_COMPLETE_CUSTODY_VALIDATED",
+            "status": "RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE_CUSTODY_VALIDATED",
             "decision": successor_v2_result["evaluation"]["decision"],
+            "evidential_classification": exposure_classification,
             "evaluation_attempt_count": 1,
             "oos_read_count": 1,
             "results_inspected": True,
             "rerun_allowed": False,
             "development_mde_estimated": True,
             "confirmatory_contrasts_evaluated": True,
+            "confirmatory_interpretation_eligible": False,
             "historical_bundle_aggregate_comparison_performed": True,
             "previous_attempt": {
                 "run_id": successor_log["run_id"],
@@ -794,10 +929,31 @@ def build_historical_state() -> dict[str, Any]:
                 "sha256": _sha(REPO / PIT_V22_CLAIM_LEDGER_V2),
                 "ledger_sha256": successor_v2_claims["ledger_sha256"],
                 "markdown": PIT_V22_CLAIMS_DOC_V2.as_posix(),
+                "exposure_addendum": {
+                    "path": PIT_V22_CLAIMS_DOC_V3.as_posix(),
+                    "sha256": _sha(REPO / PIT_V22_CLAIMS_DOC_V3),
+                },
+            },
+            "holdout_exposure_audit": {
+                "path": PIT_V22_HOLDOUT_EXPOSURE_V1.as_posix(),
+                "sha256": _sha(REPO / PIT_V22_HOLDOUT_EXPOSURE_V1),
+                "audit_sha256": successor_v2_exposure["audit_sha256"],
+                "status": successor_v2_exposure["status"],
+                "classification": exposure_classification,
+                "holdout_window": exposure_splits["holdout"],
+                "prior_read_intersections": {
+                    "phase6_c3": exposure_windows["phase6_c3"]["holdout_intersection_count"],
+                    "rp2_development": exposure_windows["rp2_development"][
+                        "holdout_intersection_count"
+                    ],
+                },
             },
             "target_linkage": successor_v2_audit["target_linkage"],
             "registered_contrasts": successor_v2_claims["contrasts"],
-            "historical_bundle_comparison": successor_v2_claims["historical_bundle_comparison"],
+            "registered_contrasts_scope": "HISTORICAL_FROZEN_DEFINITION_NOT_CURRENT_AUTHORITY",
+            "historical_bundle_comparison": successor_v2_claims[
+                "historical_bundle_comparison"
+            ],
             "edge_claim_eligible": False,
             "capital_eligible": False,
             "capital_go": False,
@@ -833,18 +989,30 @@ def build_historical_state() -> dict[str, Any]:
             },
         },
         "canonical_results": {
-            "status": "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED",
+            "status": "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE",
             "run_id": successor_v2_log["run_id"],
             "decision": successor_v2_result["evaluation"]["decision"],
             "result_sha256": _sha(REPO / PIT_V22_RESULT_V2),
             "scientific_result_eligible": True,
+            "confirmatory_evidence_eligible": False,
+            "evidential_status": exposure_classification["evidential_status"],
             "edge_claim_eligible": False,
             "capital_go": False,
             "headline_claims": [],
-            "confirmatory_contrasts": successor_v2_claims["contrasts"]["gamma_glm_confirmatory"],
-            "robustness_contrasts": successor_v2_claims["contrasts"]["lightgbm_robustness"],
+            "confirmatory_contrasts": {},
+            "descriptive_contrasts": {
+                role: {
+                    name: {**contrast, "mde_role": exposure_classification["mde_role"]}
+                    for name, contrast in contrasts.items()
+                }
+                for role, contrasts in successor_v2_claims["contrasts"].items()
+            },
+            "robustness_contrasts": successor_v2_claims["contrasts"][
+                "lightgbm_robustness"
+            ],
         },
         "current_report": {
+            "b2_history_repair_sensitivity": repair,
             "source": {
                 "path": "reports/final_report_draft_v2.md",
                 "sha256": _sha(REPO / "reports" / "final_report_draft_v2.md"),
@@ -872,7 +1040,10 @@ def build_historical_state() -> dict[str, Any]:
             "tier2_runner": "scripts/run_local_evidence_gates.py",
             "publish_gate": "scripts/publish_mirror.sh refuses to push unless tier-2 passes",
         },
-        "authorized_sources": {source: _sha(REPO / source) for source in AUTHORIZED_SOURCES},
+        "authorized_sources": {
+            **{source: _sha(REPO / source) for source in AUTHORIZED_SOURCES},
+            **{item["path"]: item["sha256"] for item in repair_sources.values()},
+        },
     }
 
 
@@ -964,6 +1135,24 @@ def build_state() -> dict[str, Any]:
     return state
 
 
+def _history_corrections(state: dict[str, Any]) -> list[str]:
+    """Historical corrections that must stay visible even though RP4 is current."""
+    successor = state["pit_v22_successor_evaluation"]
+    role = successor["evidential_classification"]["result_role"]
+    audit = successor["holdout_exposure_audit"]
+    lines = [
+        f"El sucesor PIT v2.2 quedó reclasificado como `{role}` (auditoría de exposición",
+        f"`{audit['status']}`: 32/32 sesiones del holdout ya leídas por C3 y RP2-v3).",
+    ]
+    repair = state["history"]["current_report"]["b2_history_repair_sensitivity"]
+    if repair is not None:
+        lines.append(
+            f"Sensibilidad de reparación B2: `{repair['status']}`, análisis separado; "
+            f"{repair['excluded_activity_origins']:,} orígenes excluidos, alfa gastado 0."
+        )
+    return lines
+
+
 def render_status(state: dict[str, Any]) -> str:
     """Render the same final table and keep old dispositions explicitly historical."""
     result = state["canonical_results"]
@@ -999,6 +1188,7 @@ def render_status(state: dict[str, Any]) -> str:
         "Fase 9 dejó de ser cohorte sellada para RP4 por decisión 128; sus originales",
         "no se alteran. C10 permanece inactivo: no se presenta una fecha de lectura inexistente.",
         "Las decisiones y cifras previas están completas en `history` del JSON.",
+        *_history_corrections(state),
         f"Frozen evidence: {state['frozen_evidence']['artifact_count']} artifacts registered.",
         "",
         "## Operación",

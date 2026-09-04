@@ -54,6 +54,30 @@ def _frames(days: int = 22) -> tuple[pl.DataFrame, pl.DataFrame]:
     return pl.DataFrame(activity), pl.DataFrame(origins)
 
 
+def _band_frames(days: int = 21) -> tuple[pl.DataFrame, pl.DataFrame]:
+    activity_parts: list[pl.DataFrame] = []
+    origin_parts: list[pl.DataFrame] = []
+    for offset in range(5):
+        activity, origins = _frames(days)
+        shift = timedelta(minutes=5 * offset)
+        origins = origins.with_columns(
+            (pl.col("forecast_origin_utc") + shift).alias("forecast_origin_utc")
+        ).with_columns(
+            pl.concat_str([pl.col("asset"), pl.lit(":"), pl.col("forecast_origin_utc")]).alias(
+                "origin_id"
+            )
+        )
+        activity = activity.drop("origin_id", "forecast_origin_utc").join(
+            origins.select("session_date", "origin_id", "forecast_origin_utc"),
+            on="session_date",
+            how="inner",
+            validate="1:1",
+        )
+        activity_parts.append(activity)
+        origin_parts.append(origins)
+    return pl.concat(activity_parts), pl.concat(origin_parts)
+
+
 def test_b2v2_has_exactly_nine_registered_features() -> None:
     activity, origins = _frames()
 
@@ -83,6 +107,89 @@ def test_b2v2_never_uses_current_or_future_session_history() -> None:
     )
 
 
+def test_b2v2_excludes_ineligible_history_before_normalization() -> None:
+    activity, origins = _frames()
+    excluded_origin = origins.item(-2, "origin_id")
+    eligibility = origins.with_columns(
+        (pl.col("origin_id") != excluded_origin).alias("eligible_for_corrected_pit_panel")
+    )
+    baseline = build_b2v2_from_activity(
+        activity,
+        origins,
+        history_eligibility=eligibility,
+    )
+    perturbed_activity = activity.with_columns(
+        pl.when(pl.col("origin_id") == excluded_origin)
+        .then(1_000_000_000.0)
+        .otherwise(pl.col("option_trade_count_5m"))
+        .alias("option_trade_count_5m")
+    )
+
+    changed = build_b2v2_from_activity(
+        perturbed_activity,
+        origins,
+        history_eligibility=eligibility,
+    )
+
+    excluded = baseline.filter(pl.col("origin_id") == excluded_origin)
+    assert not excluded.item(0, "b2v2_complete")
+    assert excluded.select(B2V2_FEATURES).null_count().row(0) == (1,) * len(B2V2_FEATURES)
+    future = baseline.filter(pl.col("session_date") > excluded.item(0, "session_date"))
+    changed_future = changed.filter(
+        pl.col("session_date") > excluded.item(0, "session_date")
+    )
+    assert future["b2v2_complete"].all()
+    assert future.select(B2V2_FEATURES).equals(changed_future.select(B2V2_FEATURES))
+
+
+def test_b2v2_excluded_history_cannot_contaminate_asset_scale_fallback() -> None:
+    activity, origins = _frames()
+    primary_activity = activity.with_columns(pl.lit(1.0).alias("option_trade_count_5m"))
+    second_origins = origins.with_columns(
+        (pl.col("forecast_origin_utc") + pl.duration(minutes=35)).alias("forecast_origin_utc")
+    ).with_columns(
+        pl.concat_str([pl.col("asset"), pl.lit(":"), pl.col("forecast_origin_utc")]).alias(
+            "origin_id"
+        )
+    )
+    second_activity = activity.drop("origin_id", "forecast_origin_utc").join(
+        second_origins.select("session_date", "origin_id", "forecast_origin_utc"),
+        on="session_date",
+        how="inner",
+        validate="1:1",
+    ).select(primary_activity.columns)
+    combined_activity = pl.concat([primary_activity, second_activity])
+    combined_origins = pl.concat([origins, second_origins])
+    excluded_origin = second_origins.item(-2, "origin_id")
+    eligibility = combined_origins.with_columns(
+        (pl.col("origin_id") != excluded_origin).alias("eligible_for_corrected_pit_panel")
+    )
+    baseline = build_b2v2_from_activity(
+        combined_activity,
+        combined_origins,
+        history_eligibility=eligibility,
+    )
+    changed = build_b2v2_from_activity(
+        combined_activity.with_columns(
+            pl.when(pl.col("origin_id") == excluded_origin)
+            .then(1_000_000_000.0)
+            .otherwise(pl.col("option_trade_count_5m"))
+            .alias("option_trade_count_5m")
+        ),
+        combined_origins,
+        history_eligibility=eligibility,
+    )
+
+    final_day = origins.item(-1, "session_date")
+    future = baseline.filter(pl.col("session_date") == final_day)
+    changed_future = changed.filter(pl.col("session_date") == final_day)
+    primary_future = future.filter(pl.col("origin_id") == origins.item(-1, "origin_id"))
+    assert future.height == 2
+    assert future["b2v2_complete"].all()
+    assert "PRIOR_ASSET" in primary_future.item(0, "b2v2_normalization_labels")
+    assert future.select(B2V2_FEATURES).equals(changed_future.select(B2V2_FEATURES))
+
+
 def test_b2v2_builder_rejects_target_columns() -> None:
     activity, origins = _frames()
 
@@ -96,7 +203,63 @@ def test_b2v2_requires_twenty_prior_sessions() -> None:
     result = build_b2v2_from_activity(activity, origins).sort("session_date")
 
     assert result.head(20)["b2v2_complete"].sum() == 0
+    assert result.head(20).select(B2V2_FEATURES).null_count().row(0) == (20,) * len(
+        B2V2_FEATURES
+    )
     assert result.tail(2)["b2v2_complete"].all()
+
+
+def test_b2v2_enforces_eighty_percent_history_coverage() -> None:
+    activity, origins = _band_frames()
+    final_day = origins["session_date"].max()
+    exact = origins.with_columns(
+        (
+            (pl.col("session_date") == final_day)
+            | (pl.col("forecast_origin_utc").dt.minute() != 20)
+        ).alias("eligible_for_corrected_pit_panel")
+    )
+    below = exact.with_columns(
+        (
+            pl.col("eligible_for_corrected_pit_panel")
+            & (pl.col("origin_id") != origins.item(0, "origin_id"))
+        ).alias("eligible_for_corrected_pit_panel")
+    )
+
+    accepted = build_b2v2_from_activity(
+        activity, origins, history_eligibility=exact
+    ).filter(pl.col("session_date") == final_day)
+    rejected = build_b2v2_from_activity(
+        activity, origins, history_eligibility=below
+    ).filter(pl.col("session_date") == final_day)
+
+    assert accepted["b2v2_complete"].all()
+    assert accepted["b2v2_history_origin_coverage"].unique().to_list() == pytest.approx([0.8])
+    assert not rejected["b2v2_complete"].any()
+    assert rejected.select(B2V2_FEATURES).null_count().row(0) == (5,) * len(B2V2_FEATURES)
+
+
+def test_daily_midpoint_band_treats_early_close_as_same_registered_slot() -> None:
+    activity, origins = _frames(days=21)
+    origins = origins.with_columns(
+        pl.when(pl.col("session_date") == origins.item(-1, "session_date"))
+        .then(pl.col("forecast_origin_utc") - pl.duration(hours=1))
+        .otherwise(pl.col("forecast_origin_utc"))
+        .alias("forecast_origin_utc")
+    )
+    activity = activity.drop("forecast_origin_utc").join(
+        origins.select("origin_id", "forecast_origin_utc"),
+        on="origin_id",
+        how="inner",
+        validate="1:1",
+    )
+
+    intraday = build_b2v2_from_activity(activity, origins)
+    daily = build_b2v2_from_activity(
+        activity, origins, normalization_band="DAILY_MIDPOINT"
+    )
+
+    assert not intraday.tail(1).item(0, "b2v2_complete")
+    assert daily.tail(1).item(0, "b2v2_complete")
 
 
 def test_robust_prior_deviation_uses_mad_before_fallbacks() -> None:

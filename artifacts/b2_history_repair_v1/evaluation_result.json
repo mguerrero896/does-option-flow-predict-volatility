@@ -1,0 +1,1196 @@
+{
+  "after": {
+    "gains": [
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0002775572647971484
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.049538426803965765
+          },
+          {
+            "asset": "META",
+            "gain": -0.017711102331318535
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.010134958035940096
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.01379786594253478
+          },
+          {
+            "asset": "TSLA",
+            "gain": -0.0021481402597023237
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.011603735550930942,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.0018042646904605556,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.008410913912239686,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.008684031742924708,
+          -0.007500929926267373,
+          0.019832658844500237,
+          0.003077238104273934
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.005402666865826147,
+        "mean_by_session": 0.0060232496913578785,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.011767447782100343
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.008612859247909084
+          },
+          {
+            "asset": "META",
+            "gain": 0.004312178713439832
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.013913593531186052
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.014182168943978885
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.008587237106273132
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.005693295057980341,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.015326469723556215,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.008199171794577569,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.020171020742356514,
+          0.00635650965850643,
+          0.003439140369879946,
+          0.011182224507150772
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.010221316797641412,
+        "mean_by_session": 0.010287223819473414,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.00521022618033405
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.01488187897580052
+          },
+          {
+            "asset": "META",
+            "gain": -0.0026541123782160515
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.0022353798993641843
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0026911213575177353
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.01185947291144046
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0058432387430524925,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.006079234060925316,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.005077653747379105,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.010539961059552436,
+          0.0004207058124503345,
+          0.011725841037266226,
+          0.0017387933838639198
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.005670222157728829,
+        "mean_by_session": 0.006106325323283229,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.0020813151866149854
+          },
+          {
+            "asset": "AMZN",
+            "gain": 3.5531172893214125e-05
+          },
+          {
+            "asset": "META",
+            "gain": 0.00023945936553670965
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.0009292290755397662
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0013357889902907286
+          },
+          {
+            "asset": "TSLA",
+            "gain": -0.0003138016758541862
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0010350416433108048,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.0006605818221613169,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0010799259962432784,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 1,
+        "four_chronological_block_means": [
+          -0.00020900877018214338,
+          0.0002435747339664122,
+          0.000588518905998156,
+          0.0011457895412084608
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.00040488156176142823,
+        "mean_by_session": 0.00044221860274772134,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0075849861754351934
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.019096119060912985
+          },
+          {
+            "asset": "META",
+            "gain": 0.022470488129629033
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.010623369421622621
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0007348936013552103
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.0035830065727547305
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.01136520241637704,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.0008359468826177014,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.006717216325321254,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.007625562335216687,
+          0.00038356375737822314,
+          0.016986243828663698,
+          0.007902404710538581
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.008171247318411104,
+        "mean_by_session": 0.008224443657949297,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.007209213035326611
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.01074804849396881
+          },
+          {
+            "asset": "META",
+            "gain": -0.004905338902885923
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.039905330777907345
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.012203316014542923
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.0014792740713725503
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0021014986523159728,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.016360098211076115,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": -0.002838818375514761,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.02470440674737218,
+          0.005186325727936572,
+          -0.03445163006738662,
+          -0.004558792077362687
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": -0.0022055525540196057,
+        "mean_by_session": -0.002279922417360137,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0015185413130234175
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.00287830355980373
+          },
+          {
+            "asset": "META",
+            "gain": 0.007066048218642362
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.006994755466388516
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0006818292564193695
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.008914641237139777
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.002735643517569838,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.012937207604377308,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0031330467564720543,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.001380290873741856,
+          -0.0005045191672375522,
+          0.00712673687259891,
+          0.008830490156895797
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.004175806123377246,
+        "mean_by_session": 0.0042082496839997525,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.00258193124212855
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.011344530461163665
+          },
+          {
+            "asset": "META",
+            "gain": -0.0007868295241803991
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.005890462256462026
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0034387189166136213
+          },
+          {
+            "asset": "TSLA",
+            "gain": -0.004346727229069622
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0034709909796179442,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.008092682897529681,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.001076336274197609,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.003954422815902997,
+          0.002376768506797832,
+          -0.002150699474793988,
+          -5.1239439474342675e-05
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.00105517110747697,
+        "mean_by_session": 0.0010323131021081245,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      }
+    ],
+    "metrics": [
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B0v2",
+        "mae": 5.488514128215534e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.2078012950479698,
+        "rmse": 2.9092008513604252e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B1v2a",
+        "mae": 5.137898777610343e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.20239862818214366,
+        "rmse": 1.411106491250957e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B2v2",
+        "mae": 4.902095287103881e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.19217731138450225,
+        "rmse": 1.2423268792019222e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B0v2",
+        "mae": 4.463568770598551e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15650926675307753,
+        "rmse": 8.26243551771907e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B1v2a",
+        "mae": 4.309932931199686e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.1508390445953487,
+        "rmse": 8.146126490247463e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B2v2",
+        "mae": 4.29147652358792e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15043416303358728,
+        "rmse": 8.114594193678629e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B0v2",
+        "mae": 1.3069104462755603e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.21291611253740725,
+        "rmse": 0.00013221623955806828,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B1v2a",
+        "mae": 1.082997054375233e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.20474486521899615,
+        "rmse": 7.161200348192569e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B2v2",
+        "mae": 1.0433602937703486e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.20695041777301576,
+        "rmse": 6.36220370456803e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B0v2",
+        "mae": 6.115381264465221e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15569428970751786,
+        "rmse": 1.3054750567095933e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B1v2a",
+        "mae": 6.001998557083669e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.1515184835841406,
+        "rmse": 1.3021733572053121e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B2v2",
+        "mae": 5.85999258210029e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15046331247666364,
+        "rmse": 1.2840356791835472e-05,
+        "start": "2026-02-05"
+      }
+    ]
+  },
+  "alpha_spent": 0,
+  "b0_b1_control_forecast_max_abs_error": 0.0,
+  "before": {
+    "gains": [
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0002775572647971484
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.04953842680396576
+          },
+          {
+            "asset": "META",
+            "gain": -0.01771110233131853
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.010134958035940094
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.01379786594253478
+          },
+          {
+            "asset": "TSLA",
+            "gain": -0.0021481402597023237
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.011603735550930945,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.0018042646904605573,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.008410913912239677,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.00868403174292471,
+          -0.0075009299262673735,
+          0.019832658844500237,
+          0.0030772381042739275
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.005402666865826147,
+        "mean_by_session": 0.006023249691357875,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.011707045616302252
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.008932514323496754
+          },
+          {
+            "asset": "META",
+            "gain": 0.003913116299819815
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.013941704654298242
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.014336839335283302
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.008456865610068831
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0056931779018385,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.015225719246253624,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.00826559697232858,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.02029760039133248,
+          0.006438322907067507,
+          0.0035052706753250385,
+          0.010820324480290215
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.010205733291164169,
+        "mean_by_session": 0.01026537961350381,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.005210226180334049
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.01488187897580052
+          },
+          {
+            "asset": "META",
+            "gain": -0.002654112378216051
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.0022353798993641843
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0026911213575177353
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.01185947291144046
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.005843238743052493,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.006079234060925312,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0050776537473791045,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 1,
+        "four_chronological_block_means": [
+          0.010539961059552438,
+          0.0004207058124503345,
+          0.011725841037266226,
+          0.0017387933838639196
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.005670222157728829,
+        "mean_by_session": 0.006106325323283229,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.0023525524478355242
+          },
+          {
+            "asset": "AMZN",
+            "gain": -8.719901882793989e-05
+          },
+          {
+            "asset": "META",
+            "gain": 0.00020953591267062997
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.0008494057715193291
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0012896981816333444
+          },
+          {
+            "asset": "TSLA",
+            "gain": 2.935077521975997e-05
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0013211230022928558,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.0006721209513741387,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0011024933025723458,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 1,
+        "four_chronological_block_means": [
+          6.898282136641172e-06,
+          0.0005395506828511865,
+          0.000601257647241738,
+          0.0009422428590331259
+        ],
+        "historical_role": "VALIDATION",
+        "mean_by_origin": 0.0004871718909910673,
+        "mean_by_session": 0.0005224873678156729,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0075849861754351934
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.019096119060912985
+          },
+          {
+            "asset": "META",
+            "gain": 0.022470488129629033
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.010623369421622621
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0007348936013552102
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.0035830065727547314
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.011365202416377037,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.0008359468826177001,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.006717216325321258,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.0076255623352166875,
+          0.00038356375737822173,
+          0.016986243828663698,
+          0.007902404710538576
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.008171247318411104,
+        "mean_by_session": 0.008224443657949295,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.005995413252845706
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.009897337781492557
+          },
+          {
+            "asset": "META",
+            "gain": -0.006962800643872555
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.040745164186085904
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.01199552804584872
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.0011205134887978378
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0016394229228925,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.01763391474384315,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": -0.004187257283243684,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.024080917752577716,
+          0.004927082793812564,
+          -0.03633419353725341,
+          -0.005491261857520843
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": -0.003126621050944083,
+        "mean_by_session": -0.0032043637120959933,
+        "model_role": "gamma_glm_confirmatory",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": -0.0015185413130234175
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.0028783035598037294
+          },
+          {
+            "asset": "META",
+            "gain": 0.00706604821864236
+          },
+          {
+            "asset": "MSFT",
+            "gain": 0.006994755466388517
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0006818292564193688
+          },
+          {
+            "asset": "TSLA",
+            "gain": 0.008914641237139781
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0027356435175698362,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": 0.0129372076043773,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0031330467564720534,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B1v2a_over_B0v2",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.0013802908737418562,
+          -0.0005045191672375501,
+          0.00712673687259891,
+          0.008830490156895797
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.004175806123377246,
+        "mean_by_session": 0.004208249683999753,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      },
+      {
+        "by_asset": [
+          {
+            "asset": "AAPL",
+            "gain": 0.0026024010344141138
+          },
+          {
+            "asset": "AMZN",
+            "gain": 0.011582952271072164
+          },
+          {
+            "asset": "META",
+            "gain": 7.855696593823815e-05
+          },
+          {
+            "asset": "MSFT",
+            "gain": -0.005464316410787999
+          },
+          {
+            "asset": "NVDA",
+            "gain": 0.0036382201959814404
+          },
+          {
+            "asset": "TSLA",
+            "gain": -0.004221535342762458
+          }
+        ],
+        "by_training_defined_regime": [
+          {
+            "gain": 0.0036346802925981358,
+            "volatility_regime": "high"
+          },
+          {
+            "gain": -0.007280800236695569,
+            "volatility_regime": "low"
+          },
+          {
+            "gain": 0.0014083483495505851,
+            "volatility_regime": "normal"
+          }
+        ],
+        "contrast": "B2v2_over_B1v2a",
+        "fold": 2,
+        "four_chronological_block_means": [
+          0.004090564435811409,
+          0.0023628917328293534,
+          -0.001509399625215231,
+          0.0004511444859149527
+        ],
+        "historical_role": "HOLDOUT",
+        "mean_by_origin": 0.0013680140975505892,
+        "mean_by_session": 0.0013488002573351214,
+        "model_role": "lightgbm_robustness",
+        "sessions": 32
+      }
+    ],
+    "metrics": [
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B0v2",
+        "mae": 5.488514128215534e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.2078012950479698,
+        "rmse": 2.9092008513604252e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B1v2a",
+        "mae": 5.137898777610343e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.20239862818214366,
+        "rmse": 1.411106491250957e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B2v2",
+        "mae": 4.899730721152069e-06,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.19219289489097952,
+        "rmse": 1.240980649752238e-05,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B0v2",
+        "mae": 4.463568770598551e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15650926675307753,
+        "rmse": 8.26243551771907e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B1v2a",
+        "mae": 4.309932931199686e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.1508390445953487,
+        "rmse": 8.146126490247463e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-02-04",
+        "fold": 1,
+        "historical_role": "VALIDATION",
+        "information_set": "B2v2",
+        "mae": 4.281128242509509e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15035187270435765,
+        "rmse": 8.107521678235812e-06,
+        "start": "2025-12-18"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B0v2",
+        "mae": 1.3069104462755603e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.21291611253740725,
+        "rmse": 0.00013221623955806828,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B1v2a",
+        "mae": 1.082997054375233e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.20474486521899615,
+        "rmse": 7.161200348192569e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B2v2",
+        "mae": 1.0409060189839022e-05,
+        "model_role": "gamma_glm_confirmatory",
+        "qlike": 0.2078714862699402,
+        "rmse": 6.332221645473353e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B0v2",
+        "mae": 6.115381264465221e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15569428970751786,
+        "rmse": 1.3054750567095933e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B1v2a",
+        "mae": 6.001998557083669e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.1515184835841406,
+        "rmse": 1.3021733572053121e-05,
+        "start": "2026-02-05"
+      },
+      {
+        "end": "2026-03-23",
+        "fold": 2,
+        "historical_role": "HOLDOUT",
+        "information_set": "B2v2",
+        "mae": 5.854300696663048e-06,
+        "model_role": "lightgbm_robustness",
+        "qlike": 0.15015046948659003,
+        "rmse": 1.2836225821840096e-05,
+        "start": "2026-02-05"
+      }
+    ]
+  },
+  "capital_go": false,
+  "custody_audit_sha256": "c293257271cafe05d99f5102e78d7dc07d46c5d1f5203213e245957955003eca",
+  "feature_audit_sha256": "fa624a04f9967ead1aeb3002e5b5a65f77c38063128ba6e363875c07d3c14e67",
+  "forecast_hashes": {
+    "after": "29ca2d80decfaf1d1818589acfe4b81e8239d1221d20cd59cc3e8dbadd4d101d",
+    "before": "f24afa0dc7ba9305a8cc693753d9b948bd95a382afe0f3620250e948dc670185"
+  },
+  "forecast_rows_per_arm": 149688,
+  "historical_forecast_reproduction_max_abs_error": 0.0,
+  "historical_metric_reproduction_max_abs_error": {
+    "absolute_error": 0.0,
+    "qlike_loss": 0.0,
+    "squared_error": 0.0
+  },
+  "manifest_sha256": "24609e41fabb522c9dd3493ff870107c049e10d688817e1be9ccbbf9911e1e85",
+  "original_panel_rows": 62254,
+  "rows_lost_to_corrected_history": 0,
+  "runtime_sha256": {
+    "scripts/audit_b2_history_repair_v1.py": "4ac03243cfa4dd0ecfbc7dc7c1cd4b48bb28ed4d1a4181dc942cedafad7bfa75",
+    "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+    "src/mds650/modeling.py": "2742825e8a23ae2e5dbed5d1fc1d263e9844889ff20973cceacded1c88fc66d1",
+    "src/mds650/phase6.py": "40666a1f25b04c70891fc2924c3f75c62b89e308a3a375ca43efa1bacfb1dce8",
+    "src/mds650/phase6_evaluation.py": "a6626338de820df5b239682af96e54208f47b590422b2c4977810517bbbc6385",
+    "src/mds650/temporal_validation.py": "82d2d327cb2726b08c0b997962d4c848f3b0383d0ac6f7f18e45e5460e085cd9",
+    "uv.lock": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0"
+  },
+  "same_mask_rows": 62254,
+  "scope": "RETROSPECTIVE_REPAIR_SENSITIVITY_NOT_INDEPENDENT_CONFIRMATION",
+  "selection": "ARCHIVED_HYPERPARAMETERS_NO_RETUNING_SAME_ROWS_BOTH_ARMS",
+  "source_hashes": {
+    "linked_common_panel.parquet": "10c023ed01ec16b8de95ef4bcfac0d24e8acd84152b7459d298ef169af78f27a",
+    "oos_primary_predictions.parquet": "f24afa0dc7ba9305a8cc693753d9b948bd95a382afe0f3620250e948dc670185",
+    "runtime_preregistration.json": "42ab589e3601188696b0e5041312d9fea8487536980f4bc651fa567c5475c4f7",
+    "variant_ledger.json": "3e4fb6c640310e4fbd33ce18585ab90261307dbf67ed3f842b0d88b09ce2311d"
+  },
+  "status": "COMPLETED_RETROSPECTIVE_REPAIR_SENSITIVITY"
+}
