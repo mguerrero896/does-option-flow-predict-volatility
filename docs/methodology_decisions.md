@@ -14,6 +14,7 @@ Requirements-consistency and preregistration gates pass.
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
 | [97–126](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout and PR #55 remediation. |
+| [128–128](#decision-128) | RP4 owner-directed fixed-split walk-forward design and metadata-only inventory stop. |
 
 <a id="decision-1"></a>
 
@@ -2358,3 +2359,44 @@ Requirements-consistency and preregistration gates pass.
      `artifacts/target_blind_v22/`. It creates no new eligibility, causal, decay or
      investment claim; `capital_go=false`, `RESEARCH_ONLY`, and
      `NOT INVESTMENT ADVICE` remain binding.
+
+<a id="decision-128"></a>
+
+128. **RP4: decisiones del propietario antes de especificar o evaluar
+     (2026-09-07, Australia/Sydney).** Autorizado por **Miguel, propietario**, mediante
+     instrucción explícita en esta conversación. Esta es la constancia de su autorización,
+     no una firma criptográfica ni una firma manuscrita creada por el asistente.
+
+     - Partición de calendario: **2026-08-01**. Desarrollo: 2024-08-02 a 2026-07-31;
+       evaluación posterior: desde 2026-08-03. Esta fecha reemplaza la propuesta
+       2026-07-20 del inventario entregado por el propietario.
+     - Fase 9 se retira como cohorte sellada para RP4 y sus sesiones quedan autorizadas
+       como entradas de esa evaluación. Se conservan intactos sus protocolos, artefactos,
+       contadores y raíz; este registro no los reescribe ni ejecuta accesos. **C10 no se
+       activa.** RP4 no exige campaña prospectiva, cohorte sellada ni espera de sesiones.
+     - Etiqueta solicitada: **"fuera de muestra walk-forward, partición fijada
+       2026-09-07"**. La evaluación primaria será walk-forward por sesión dentro del
+       desarrollo; la posterior aplicará la misma especificación sin ajustes sobre sus
+       resultados. Una única especificación precederá a cualquier evaluación RP4.
+     - Divulgación solicitada por el propietario, que se cotejará con sus fuentes antes
+       de presentarla como hecho verificado: "La ventana 20 de julio a 28 de agosto fue
+       leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de
+       tiempo fuente a 120 s, como en la literatura."
+     - Se utilizarán los conjuntos enriquecidos B0 más HARQ, B1 de superficie más rejilla
+       IV y B2 de flujo más medidas derivadas de OI/gamma. Familias: log-OLS HARQ y
+       LightGBM con objetivo QLIKE; Gamma sobre niveles crudos queda fuera de RP4.
+       Partición, purga/embargo de 60 minutos, hiperparámetros e inferencia deben quedar
+       especificados y hash-vinculados antes de calcular resultados. Se reportará
+       cualquier signo, con sus limitaciones, sin modificar artefactos congelados.
+     - Entregables y orden solicitados: A1 especificación; A2 variables de desarrollo
+       sin objetivos; B1 adquisición acotada y panel; B2 evaluación primaria; B3
+       evaluación posterior sin cambios; B4 informe y colector con nombre/raíz nuevos,
+       sin tocar `phase9`. No se autoriza publicación.
+     - **Punto de parada de este turno:** la última instrucción del propietario pide
+       primero los archivos registrados, hashes y columnas exactas B0/B1/B2, y
+       "Detente ahí". Se entregará ese inventario sin ejecutar A1, A2, descargas,
+       entrenamiento, evaluación, activación ni cambios de automatización.
+
+     Límite de interpretación: una partición fijada hoy no elimina la exposición ni
+     las decisiones metodológicas previas sobre datos históricos, y ningún proxy de
+     timestamp demuestra por sí solo recepción histórica por el cliente.
