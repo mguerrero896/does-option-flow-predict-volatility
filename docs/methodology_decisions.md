@@ -15,6 +15,7 @@ Requirements-consistency and preregistration gates pass.
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
 | [97–126](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout and PR #55 remediation. |
 | [128–128](#decision-128) | RP4 owner-directed fixed-split walk-forward design and metadata-only inventory stop. |
+| [129–129](#decision-129) | RP4 v1 specification; owner authorizes full execution and a draft PR. |
 
 <a id="decision-1"></a>
 
@@ -2400,3 +2401,37 @@ Requirements-consistency and preregistration gates pass.
      Límite de interpretación: una partición fijada hoy no elimina la exposición ni
      las decisiones metodológicas previas sobre datos históricos, y ningún proxy de
      timestamp demuestra por sí solo recepción histórica por el cliente.
+
+<a id="decision-129"></a>
+
+129. **RP4 ejecución completa, autorización del propietario (2026-09-07).**
+     Miguel autoriza en esta conversación A1, A2, B1, B2, B3 y B4 de corrido,
+     descargas acotadas, copia por hash de Fase 9 sin modificarla, colector diario
+     nuevo RP4 y un PR en borrador. Esta autorización sustituye el punto de parada
+     del turno anterior en la decisión 128, no su partición 2026-08-01.
+     No se inventa una firma criptográfica del propietario. Las verificaciones
+     que aporta se atribuyen a su instrucción; se distinguen de mediciones ejecutadas.
+
+     La especificación inmutable está en `docs/rp4/specification_v1.md`, SHA256
+     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, y su contrato ejecutable en
+     `artifacts/rp4_a1/specification.json`, SHA256
+     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; ambos se fijan en
+     `artifacts/rp4_a1/freeze.json` antes de reconstruir objetivos o evaluar RP4.
+     Las listas nominales 22/28/68 se conservan y se excluyen explícitamente
+     diagnósticos de calidad, edad y latencia según la regla del propietario,
+     dando conjuntos anidados de 29/71/136 entradas más efectos de activo.
+     Solo las 25 celdas IV nuevas admiten NaN con el tratamiento fijado.
+     La convención call-largo/put-corto es un proxy, no inventario observado.
+     Las nuevas griegas usan tasa/dividendo exógenos reales; no se reescriben
+     griegas antiguas. El hueco UW 2025-01-25–2025-02-24 no se rellena.
+     Tasas oficiales 2024 y reparación UW 2026-08-26 son insumos auxiliares
+     acotados detectados antes de evaluar; no modifican phase9.
+
+     Se reconstruye RV30 por clave con horizonte30 y se compara con lo existente;
+     todas las diferencias y exclusiones se informan. Walk-forward expansivo,
+     primeras60 sesiones entrenamiento, validación interna últimas10, purga y
+     embargo60min; log-OLS HARQ y LightGBM QLIKE sin Gamma crudo. Una sola regla
+     y reporte de cualquier signo; bootstrap sesiones y Holm4 por ventana.
+     GW-HAC se presenta como diagnóstico asintótico, no como garantía de la
+     teoría original de ventana fija. No se declara independencia nueva por
+     reutilización de datos. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.

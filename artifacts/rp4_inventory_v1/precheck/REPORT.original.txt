@@ -1,6 +1,6 @@
 > Copia pública saneada; no es un nuevo congelamiento ni una nueva ejecución.
-> SHA-256 del original conservado: `72b01276f465423164d94ad6ec71854c023f2f832a7657acd611952a246fcd09`.
-> Los hashes y comandos históricos describen el original; [correspondencia de bytes](../rp4_publication_v1/manifest.json).
+> SHA-256 del original conservado: `0561ec8603e80d634ab1a7c1a0b264dbef54d34e66512d61409d9ff7dee87dab`.
+> Los hashes y comandos históricos describen el original; [correspondencia de bytes](../../rp4_publication_v1/manifest.json).
 
 # RP4 — archivos y columnas antes de A1
 
@@ -12,7 +12,7 @@ RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
 
 ## Decisión del propietario
 
-La [decisión 128](../../docs/methodology_decisions.md)
+La [decisión 128](../../../docs/methodology_decisions.md#L2401)
 registra la autorización explícita de Miguel en la conversación, sin atribuirle
 una firma criptográfica o manuscrita inexistente. Conserva la partición 2026-08-01,
 desarrollo 2024-08-02–2026-07-31 y evaluación posterior desde 2026-08-03; el retiro
@@ -58,7 +58,7 @@ La jerarquía solicitada es acumulativa: **B0; B0 + superficie; B0 + superficie 
 Las siguientes listas documentan las entradas disponibles para A1, no una selección
 hecha mirando resultados ni una lista RP4 ya congelada. Los esquemas completos,
 tipos, registro CORE/RICH y exclusiones están en
-[COLUMNS.md](../../artifacts/rp4_inventory_v1/COLUMNS.md).
+[COLUMNS.md](../COLUMNS.md).
 
 ### B0: 22 columnas registradas, un campo temporal adicional y HARQ
 
@@ -168,7 +168,7 @@ b2_zero_dte_trades, b2_counting_trades
 ```
 
 Total: 34 × 2 + 6 = **74**. La lista expandida, una columna por línea, está en
-[COLUMNS.md:466](../../artifacts/rp4_inventory_v1/COLUMNS.md).
+[COLUMNS.md:466](../COLUMNS.md#L466).
 Es también una **reconstrucción de conteo**, distinta de las 68 CORE/RICH del registro:
 incluye antigüedad, latencia y otros diagnósticos, no exclusivamente flujo económico.
 
@@ -196,18 +196,18 @@ El inventario del propietario se leyó completo. SHA-256 del archivo original:
 
 - Las griegas existentes se calculan con Black-Scholes e IV suministrada al
   productor; el código actual fija **r = q = 0**, no extrae tasa/dividendo de B1.
-  Fuente: [flow.py:56](../../src/mds650/rp2/flow.py)
-  y [productor:434](../../scripts/rp2_block6_flow_panel.py).
+  Fuente: [flow.py:56](../../../src/mds650/rp2/flow.py#L56)
+  y [productor:434](../../../scripts/rp2_block6_flow_panel.py#L434).
 - `gamma_flow` usa `gamma × size × 100 × direction × spot²`.
   No equivale al posicionamiento gamma por OI solicitado.
-  Fuente: [productor:447](../../scripts/rp2_block6_flow_panel.py).
+  Fuente: [productor:447](../../../scripts/rp2_block6_flow_panel.py#L447).
 - La intensidad existente es actividad con decaimiento y parámetros suministrados,
   no un proceso Hawkes estimado; así lo dice el productor.
-  Fuente: [flow.py:96](../../src/mds650/rp2/flow.py).
+  Fuente: [flow.py:96](../../../src/mds650/rp2/flow.py#L96).
 - Los diagnósticos se distinguen explícitamente en el contrato actual;
   este inventario no convierte su presencia en autorización automática para
   entrenar con ellos. Fuente:
-  [contrato:50](../../tests/contract/test_feature_registry_reaches_the_panel.py).
+  [contrato:50](../../../tests/contract/test_feature_registry_reaches_the_panel.py#L50).
 
 **NO VERIFICABLE en este alcance:** cobertura por activo/celda, disponibilidad
 histórica efectiva del OI, continuidad completa del tape, alineación de objetivos,
