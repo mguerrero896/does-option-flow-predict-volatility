@@ -1,0 +1,212 @@
+{
+  "stage": "A2",
+  "status": "PASS",
+  "combined": {
+    "artifacts": {
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_combined_v2\\coverage.csv": "9102df2ec39272c42b75924b96e978b3dc68b4f14c5d5402a2f517fc0078fae8",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_combined_v2\\panel.parquet": "51f04c5937a7922757f929ef0ca53941b7766719cf2799673669f8545f97a949"
+    },
+    "assets": [
+      "AAPL",
+      "AMZN",
+      "META",
+      "MSFT",
+      "NVDA",
+      "TSLA"
+    ],
+    "capital_go": false,
+    "code_sha256": "6d9889c6c9191c9f407f422a35e83dd716f074b2b07d2a0bfe979ec999940d8a",
+    "first_session": "2024-08-02",
+    "last_session": "2026-07-31",
+    "model_fits": 0,
+    "parts": {
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_aapl\\manifest.json": "9e9144d7d441ff7b727116f9664eacf853228fb45d66e9204b2b9f3c13ae95ac",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_amzn\\manifest.json": "09c46200a24eb08b69a45964e247745d09b37a77100fe5c08c54eb2a94fd3d5c",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_meta\\manifest.json": "3dc6b6c210e266e2f22da3e89dae1a7639afa662adf9e82da36444a202cf430c",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_msft\\manifest.json": "0a06c08b79f34c59e0c9b8ab90498a6bc0f34f977cbce7753b9df1d03d4c1955",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_nvda\\manifest.json": "136532e1f1ddd76abd799ccf3523dbca8bf8c34dab47fb61f2ff9654975fc7c2",
+      "D:\\MDS650\\artifacts\\rp4_20260907\\a2_v2_tsla\\manifest.json": "ad4ca39a88dc6d6b663bfcf8a163d307b0a5269954ed532719752127f7924eec"
+    },
+    "research_only": true,
+    "rows": 185729,
+    "sessions": 479,
+    "spec_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+    "stage": "A2_combined_v2",
+    "target_rows_finite": 185715
+  },
+  "combined_manifest_sha256": "323d404eb6c5d3327722fe318d3b81247a50813d76cfbae135ff877edef01579",
+  "per_asset_target_comparison": [
+    {
+      "asset": "AAPL",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 7
+        },
+        "finite_pairs": 13919,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13919,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13919,
+        "rebuilt_rows": 30948,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    },
+    {
+      "asset": "AMZN",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 0
+        },
+        "finite_pairs": 13917,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13917,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13917,
+        "rebuilt_rows": 30955,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    },
+    {
+      "asset": "META",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 0
+        },
+        "finite_pairs": 13917,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13917,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13917,
+        "rebuilt_rows": 30954,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    },
+    {
+      "asset": "MSFT",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 0
+        },
+        "finite_pairs": 13919,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13919,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13919,
+        "rebuilt_rows": 30955,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    },
+    {
+      "asset": "NVDA",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 0
+        },
+        "finite_pairs": 13920,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13920,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13920,
+        "rebuilt_rows": 30955,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    },
+    {
+      "asset": "TSLA",
+      "comparison": {
+        "counters": {
+          "missing_bar_keys": 0,
+          "quality_excluded_keys": 0,
+          "unobserved_target_bar_keys": 7
+        },
+        "finite_pairs": 13910,
+        "join": "asset,session_date,origin_minute;1:1",
+        "maximum_absolute_difference": 0,
+        "mean_absolute_difference": 0,
+        "overlapping_keys": 13910,
+        "pairs_above_1e_minus_12": 0,
+        "pairs_within_registered_tolerance": 13910,
+        "rebuilt_rows": 30948,
+        "registered_rows": 111348,
+        "share_within_registered_tolerance": 1,
+        "target_used": "rebuilt_rv30"
+      }
+    }
+  ],
+  "coverage_summary": [
+    {
+      "asset": "AAPL",
+      "minimum_coverage": 0.07162009368438055,
+      "atm_8_30": 0.9978355677596511,
+      "minimum_wing_ge8": 0.9254078501049912
+    },
+    {
+      "asset": "AMZN",
+      "minimum_coverage": 0.12104668066548215,
+      "atm_8_30": 0.99780326280084,
+      "minimum_wing_ge8": 0.973445323857212
+    },
+    {
+      "asset": "META",
+      "minimum_coverage": 0.19913419913419914,
+      "atm_8_30": 0.9978031918330426,
+      "minimum_wing_ge8": 0.9756735801511921
+    },
+    {
+      "asset": "MSFT",
+      "minimum_coverage": 0.08573736068486512,
+      "atm_8_30": 0.99780326280084,
+      "minimum_wing_ge8": 0.8286868034243257
+    },
+    {
+      "asset": "NVDA",
+      "minimum_coverage": 0.2821838152156356,
+      "atm_8_30": 0.9975771280891617,
+      "minimum_wing_ge8": 0.9974156032951058
+    },
+    {
+      "asset": "TSLA",
+      "minimum_coverage": 0.4345016960103376,
+      "atm_8_30": 0.9977386528832176,
+      "minimum_wing_ge8": 0.997641738006784
+    }
+  ],
+  "registered_origin_keys": 181829,
+  "new_july20_to31_keys": 3900,
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/materialize.py --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --output-root D:/MDS650/artifacts/rp4_20260907 --stage A2_combined_v2 --combine-parts A2_v2_AAPL A2_v2_AMZN A2_v2_META A2_v2_MSFT A2_v2_NVDA A2_v2_TSLA",
+  "exit_code": 0,
+  "unverifiable": [
+    "Transport lost for NVDA/TSLA worker exit codes after agent usage limit; complete manifests/hashes validated and final combination exit code 0 observed directly."
+  ],
+  "model_fits_by_materializer": 0
+}
