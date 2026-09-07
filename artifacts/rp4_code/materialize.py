@@ -15,6 +15,8 @@ from zoneinfo import ZoneInfo
 
 import numpy as np
 import polars as pl
+from evaluate import write_json_once
+from polars.testing import assert_frame_equal
 from rp2_block4_b0_panel import build_b0_panel, build_market_controls
 from rp2_block5_surface_panel import build_session_surface, load_inventory
 from rp2_block6_flow_panel import build_session_flow
@@ -71,14 +73,7 @@ def sha256(path: Path) -> str:
 
 
 def write_json(path: Path, value: object) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists():
-        if json.loads(path.read_text(encoding="utf-8")) != value:
-            raise ValueError(f"RP4_EXISTING_JSON_DIFFERS:{path.name}")
-        return
-    with path.open("x", encoding="utf-8") as handle:
-        json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
-        handle.write("\n")
+    write_json_once(path, value)
 
 
 def assert_unique(frame: pl.DataFrame, keys: Sequence[str] = KEYS) -> None:
@@ -97,7 +92,7 @@ def weighted_median(values: np.ndarray, weights: np.ndarray) -> float:
     selected = values[valid]
     selected_weights = weights[valid]
     order = np.argsort(selected, kind="stable")
-    cumulative = np.cumsum(selected_weights[order])
+    cumulative: np.ndarray = np.cumsum(selected_weights[order])
     position = np.searchsorted(cumulative, cumulative[-1] / 2.0, side="left")
     return float(selected[order[position]])
 
@@ -106,7 +101,8 @@ def cell_indices(dte: np.ndarray, moneyness: np.ndarray) -> np.ndarray:
     tenor = np.searchsorted([1, 7, 30, 90], dte, side="left")
     money = np.searchsorted([0.90, 0.97, 1.03, 1.10], moneyness, side="right")
     money = np.where(moneyness == 1.10, 3, money)
-    return np.asarray(tenor * 5 + money, dtype=np.int64)
+    result: np.ndarray = np.asarray(tenor * 5 + money, dtype=np.int64)
+    return result
 
 
 def gamma_with_carry(
@@ -120,7 +116,8 @@ def gamma_with_carry(
     if not (
         math.isfinite(spot) and spot > 0 and math.isfinite(rate) and math.isfinite(dividend_yield)
     ):
-        return np.full(strike.shape, math.nan)
+        missing: np.ndarray = np.full(strike.shape, math.nan)
+        return missing
     valid = (
         np.isfinite(strike)
         & (strike > 0)
@@ -129,7 +126,7 @@ def gamma_with_carry(
         & np.isfinite(iv)
         & (iv > 0)
     )
-    result = np.full(strike.shape, math.nan)
+    result: np.ndarray = np.full(strike.shape, math.nan)
     sigma_sqrt_t = iv[valid] * np.sqrt(tenor[valid])
     d1 = (
         np.log(spot / strike[valid]) + (rate - dividend_yield + 0.5 * iv[valid] ** 2) * tenor[valid]
@@ -343,7 +340,9 @@ def har_features_for_session(bars: pl.DataFrame, keys: pl.DataFrame) -> pl.DataF
     )
 
 
-def exogenous_sources(output_root: Path) -> tuple[dict[str, float], dict[str, list], list[Path]]:
+def exogenous_sources(
+    output_root: Path, *, updated_dividends: bool = False
+) -> tuple[dict[str, float], dict[str, list[dict[str, Any]]], list[Path]]:
     old = DATA_ROOT / "phase6/raw/fmp_exogenous_v1"
     paths = sorted(old.glob("treasury_*.xml"))
     paths += sorted((output_root / "raw/exogenous").glob("treasury_*.xml"))
@@ -353,10 +352,22 @@ def exogenous_sources(output_root: Path) -> tuple[dict[str, float], dict[str, li
             if day in rates and rates[day] != value:
                 raise ValueError(f"RP4_TREASURY_SOURCE_DISAGREES:{day}")
             rates[day] = value
-    dividends: dict[str, list] = {}
+    dividends: dict[str, list[dict[str, Any]]] = {}
     for path in sorted(old.glob("dividends_*.json")):
         dividends[path.stem.removeprefix("dividends_")] = json.loads(path.read_text())
         paths.append(path)
+    if updated_dividends:
+        # A missing refresh remains missing for the extension, never a silent stale fallback.
+        dividends = {}
+        for path in sorted((output_root / "raw/exogenous").glob("dividends_*.json")):
+            receipt_path = (
+                output_root / "manifests/dividends" / f"{path.stem.removeprefix('dividends_')}.json"
+            )
+            receipt = json.loads(receipt_path.read_text())
+            if receipt.get("status") != "PASS" or receipt["files"][0]["sha256"] != sha256(path):
+                raise ValueError("RP4_UPDATED_DIVIDEND_CUSTODY_INVALID")
+            dividends[path.stem.removeprefix("dividends_")] = json.loads(path.read_text())
+            paths.extend([path, receipt_path])
     return rates, dividends, paths
 
 
@@ -364,7 +375,7 @@ def carry_for_session(
     session: str,
     asset: str,
     rates: dict[str, float],
-    dividends: dict[str, list],
+    dividends: dict[str, list[dict[str, Any]]],
 ) -> tuple[float, float]:
     days = [day for day in rates if day < session]
     day = max(days) if days else None
@@ -406,7 +417,9 @@ def load_rp4_bars(output_root: Path, end: str) -> tuple[pl.DataFrame, list[Path]
 
 
 def tape_index(output_root: Path) -> dict[tuple[str, str], list[str]]:
-    index = load_inventory(ROOT / "artifacts/rp2_block1_partition/inventory.jsonl")
+    index: dict[tuple[str, str], list[str]] = load_inventory(
+        ROOT / "artifacts/rp2_block1_partition/inventory.jsonl"
+    )
     extension = DATA_ROOT / "data/phase5_holdout/data/option_events"
     for path in sorted(extension.glob("date=*/asset=*/events.parquet")):
         day = path.parent.parent.name.removeprefix("date=")
@@ -575,6 +588,80 @@ def combine_parts(
     return 0
 
 
+def append_extension(
+    development_path: Path,
+    extension_path: Path,
+    output: Path,
+    spec: dict[str, Any],
+    spec_hash: str,
+    code_hash: str,
+) -> int:
+    """Append only later keys and prove that every development value remains identical."""
+    hashes = {}
+    frames = []
+    for name, path in (("development", development_path), ("extension", extension_path)):
+        manifest_path = path.parent / "manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        digest = sha256(path)
+        if manifest["spec_sha256"] != spec_hash or manifest["artifacts"][str(path)] != digest:
+            raise ValueError("RP4_APPEND_INPUT_HASH_OR_SPEC_MISMATCH")
+        frame = pl.read_parquet(path)
+        assert_unique(frame)
+        hashes[f"{name}_panel_sha256"] = digest
+        hashes[f"{name}_manifest_sha256"] = sha256(manifest_path)
+        frames.append(frame)
+    development, extension = frames
+    if (
+        development["session_date"].max() > spec["windows"]["primary"]["end"]
+        or extension["session_date"].min() < spec["windows"]["confirmation"]["start"]
+        or extension["session_date"].max() > spec["windows"]["confirmation"]["end"]
+        or set(development.columns) != set(extension.columns)
+    ):
+        raise ValueError("RP4_APPEND_WINDOW_OR_COLUMNS_INVALID")
+    combined = pl.concat([development, extension.select(development.columns)], how="vertical").sort(
+        KEYS
+    )
+    assert_unique(combined)
+    prefix = combined.filter(pl.col("session_date") <= spec["windows"]["primary"]["end"])
+    assert_frame_equal(prefix.sort(KEYS), development.sort(KEYS), check_exact=True)
+    if (output / "panel.parquet").exists():
+        raise ValueError("RP4_APPEND_OUTPUT_ALREADY_EXISTS")
+    output.mkdir(parents=True, exist_ok=True)
+    panel_path = output / "panel.parquet"
+    combined.write_parquet(panel_path)
+    reread = pl.read_parquet(panel_path).filter(
+        pl.col("session_date") <= spec["windows"]["primary"]["end"]
+    )
+    assert_frame_equal(reread.sort(KEYS), development.sort(KEYS), check_exact=True)
+    lineage = {
+        **hashes,
+        "spec_sha256": spec_hash,
+        "code_sha256": code_hash,
+        "combined_panel_sha256": sha256(panel_path),
+        "development_rows": development.height,
+        "extension_rows": extension.height,
+        "combined_rows": combined.height,
+        "development_prefix_equal_by_keys": True,
+        "join_keys": KEYS,
+        "artifacts": {str(panel_path): sha256(panel_path)},
+        "model_fits": 0,
+        "phase9_modified": False,
+        "capital_go": False,
+    }
+    write_json(output / "manifest.json", lineage)
+    print(
+        json.dumps(
+            {
+                "status": "PASS_APPEND",
+                "manifest": str(output / "manifest.json"),
+                "sha256": sha256(output / "manifest.json"),
+            }
+        ),
+        flush=True,
+    )
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--spec", type=Path, required=True)
@@ -585,6 +672,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--stage", default="A2")
     parser.add_argument("--assets", nargs="+")
     parser.add_argument("--combine-parts", nargs="+")
+    parser.add_argument("--development-panel", type=Path)
+    parser.add_argument("--extension-panel", type=Path)
     args = parser.parse_args(argv)
     if sha256(args.spec) != args.spec_sha256:
         raise ValueError("RP4_SPECIFICATION_HASH_MISMATCH")
@@ -597,6 +686,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     output_root = args.output_root.resolve()
     if output_root != (DATA_ROOT / "artifacts/rp4_20260907").resolve():
         raise ValueError("RP4_OUTPUT_ROOT_NOT_AUTHORIZED")
+    if args.extension_panel is not None:
+        if args.development_panel is None:
+            raise ValueError("RP4_APPEND_DEVELOPMENT_REQUIRED")
+        return append_extension(
+            args.development_panel,
+            args.extension_panel,
+            output_root / args.stage.lower(),
+            spec,
+            args.spec_sha256,
+            code_hash,
+        )
     if args.combine_parts:
         return combine_parts(
             output_root, args.stage, args.combine_parts, args.spec_sha256, code_hash
@@ -640,7 +740,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             raise ValueError("RP4_ASSET_NOT_REGISTERED")
         b0 = b0.filter(pl.col("asset").is_in(args.assets))
     index = tape_index(output_root)
-    rates, dividends, exogenous_paths = exogenous_sources(output_root)
+    rates, dividends, exogenous_paths = exogenous_sources(
+        output_root, updated_dividends=args.development_panel is not None
+    )
     events = event_sources(output_root)
     event_paths = [output_root / "manifests/events" / f"{name}.json" for name in events]
     input_paths = [
@@ -653,6 +755,49 @@ def main(argv: Sequence[str] | None = None) -> int:
         *exogenous_paths,
         *event_paths,
     ]
+    historical_flow = b2.select("asset", "session_date", "b2_30m_premium")
+    if args.development_panel is not None:
+        development_hash = sha256(args.development_panel)
+        accepted = json.loads((ROOT / "artifacts/rp4_a2/summary.json").read_text())
+        if development_hash not in accepted["combined"]["artifacts"].values():
+            raise ValueError("RP4_DEVELOPMENT_HISTORY_NOT_A2_PANEL")
+        input_paths.append(args.development_panel)
+        development_flow = pl.read_parquet(
+            args.development_panel, columns=["asset", "session_date", "b2_30m_premium"]
+        )
+        historical_flow = pl.concat(
+            [
+                historical_flow,
+                development_flow.join(
+                    historical_flow.select("asset", "session_date").unique(),
+                    on=["asset", "session_date"],
+                    how="anti",
+                ),
+            ]
+        )
+        old_rates, old_dividends, _ = exogenous_sources(output_root)
+        changes = []
+        for asset, session in development_flow.select("asset", "session_date").unique().iter_rows():
+            old_carry = carry_for_session(session, asset, old_rates, old_dividends)
+            new_carry = carry_for_session(session, asset, rates, dividends)
+            if old_carry != new_carry and all(map(math.isfinite, old_carry + new_carry)):
+                changes.append(
+                    {
+                        "asset": asset,
+                        "session_date": session,
+                        "old_rate_cash": old_carry,
+                        "new_rate_cash": new_carry,
+                    }
+                )
+        write_json(
+            output / "exogenous_refresh_comparison.json",
+            {
+                "development_panel_sha256": development_hash,
+                "development_unchanged": True,
+                "changed_prior_rate_or_cash": changes,
+                "new_inputs_used_only_in_extension": True,
+            },
+        )
     input_pins = {str(path): sha256(path) for path in input_paths}
     input_identity = hashlib.sha256(json.dumps(input_pins, sort_keys=True).encode()).hexdigest()
     rebuilt_target, target_counters = reconstruct_rv30(bars, b0.select(KEYS))
@@ -798,7 +943,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         KEYS
     )
     assert_unique(panel)
-    panel = attach_secondaries(panel, b2, events)
+    panel = attach_secondaries(panel, historical_flow, events)
     panel_path = output / "panel.parquet"
     panel.write_parquet(panel_path)
     coverage_path = output / "coverage.csv"
@@ -829,6 +974,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 coverage_path,
                 output / "target_comparison.json",
                 output / "exclusions.json",
+                *(
+                    [output / "exogenous_refresh_comparison.json"]
+                    if args.development_panel is not None
+                    else []
+                ),
             ]
         },
         "licensed_tape_sha256_in_session_receipts": True,

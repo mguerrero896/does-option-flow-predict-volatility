@@ -1,0 +1,124 @@
+{
+  "stage": "B1",
+  "status": "PASS",
+  "specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "artifacts": [
+    {
+      "path": "artifacts/rp4_b1/acquire_before_atomic_source.zip",
+      "sha256": "890c0bc4eb38d296a2afefdf6c9dee216aa79ff8030c4ec26fe581329545188e"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_before_clock_cache_source.zip",
+      "sha256": "c37ca78a3f1d82ad96cf6ce7ee0a706a905b9d948538c62a89e52509930da3ac"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_clock_cache_source.zip",
+      "sha256": "71b0ac314d0dc068350dbb5419778e04720efd25fbed4a55feae415aa5310b66"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_dividend_refresh_source.zip",
+      "sha256": "202fbb3172098edc3e0bdc314c12acba00020a21e773df9f69e2f0ad62e88ffa"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_fomc_fix_source.zip",
+      "sha256": "3539be3814b7f1ca80ec0a15aa7d55e63fa992ab775b69092e582f6b60a5eb7a"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_initial_source.zip",
+      "sha256": "c80da09af308159ede9c70ff2e990528fac753a8c6a403b09fd81b5af2fb75b9"
+    },
+    {
+      "path": "artifacts/rp4_b1/acquire_local_reuse_source.zip",
+      "sha256": "2dd0d8e90f71f2662aea69188b8f9b7011800c24b51af420c8084954ec4fd209"
+    },
+    {
+      "path": "artifacts/rp4_b1/coverage.csv",
+      "sha256": "a4527885199b2b23f0305e2a96db80bbe6e2c705fb23240c2cc7e3d743a99159"
+    },
+    {
+      "path": "artifacts/rp4_b1/implementation_pins.json",
+      "sha256": "8d1ffaea555fec40a5a756aa6f6aeb766ce2d3ee685d101236c96a2d21b3254a"
+    },
+    {
+      "path": "artifacts/rp4_b1/INCIDENTS.md",
+      "sha256": "a7dd4e6148ab0ba780f935e7737bf871b1faca6345b8b7efd9c6b74ef0e9741d"
+    },
+    {
+      "path": "artifacts/rp4_b1/REPORT.md",
+      "sha256": "db7347ead3666429e211d1b49d914b6f50a30bbc5aeff11ade6f52ef278a8572"
+    },
+    {
+      "path": "artifacts/rp4_b1/summary.json",
+      "sha256": "2d99aa8f38afcf6247c1c18ad2d665b63f1c8765c14d453b4abb9c10e45b841e"
+    },
+    {
+      "path": "artifacts/rp4_code/acquire.py",
+      "sha256": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8"
+    },
+    {
+      "path": "artifacts/rp4_code/test_acquire.py",
+      "sha256": "81be2f44353606e9405fd0e7c1c99215000a6d395f3336b697d43819b649cbc0"
+    },
+    {
+      "path": "artifacts/rp4_code/materialize.py",
+      "sha256": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0"
+    },
+    {
+      "path": "artifacts/rp4_code/test_materialize.py",
+      "sha256": "7339e1db795797bcffc96e68c83e3bcba08de41f6baf09320cc8c348a9e159f1"
+    },
+    {
+      "path": "artifacts/rp4_code/evaluate.py",
+      "sha256": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14"
+    },
+    {
+      "path": "artifacts/rp4_code/test_evaluate.py",
+      "sha256": "1cd0aea456eccf50d86e7bd07bfa9876210c371646a9f3c84862b62be6a86095"
+    },
+    {
+      "path": "artifacts/rp4_code/close_b1.py",
+      "sha256": "4ed7f2c190ad0843718fb93d4d452034e4f3e0206e0320a98834502ce5278e79"
+    }
+  ],
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/acquire.py --spec-hash 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --mode batch --leg all",
+      "exit_code": 0,
+      "final_manifest_sha256": "19e9de749ddad8d81b76bda11b67f80cd099b734839aaba71f87dbb4d5585477"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/materialize.py --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --output-root D:/MDS650/artifacts/rp4_20260907 --start 2026-08-03 --end 2026-09-04 --stage B1_extension_v1 --development-panel D:/MDS650/artifacts/rp4_20260907/a2_combined_v2/panel.parquet",
+      "exit_code": 0,
+      "manifest_sha256": "d440f1420c0ba9b40fdf99d8c4315100675493004b550647ba5d67350d357531"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/materialize.py --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --output-root D:/MDS650/artifacts/rp4_20260907 --stage B1_complete_v1 --development-panel D:/MDS650/artifacts/rp4_20260907/a2_combined_v2/panel.parquet --extension-panel D:/MDS650/artifacts/rp4_20260907/b1_extension_v1/panel.parquet",
+      "exit_code": 0,
+      "manifest_sha256": "abe40d6990fbc59bcee6f3912bda1d2dc5c85f488a38ef95dd835cff537577e1"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/close_b1.py --acquisition-summary D:/MDS650/artifacts/rp4_20260907/manifests/acquisition_batch_all_20260907T001147950705Z.json",
+      "exit_code": 0,
+      "original_phase9_files_rehashed": 54
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q -p no:cacheprovider artifacts/rp4_code/test_acquire.py",
+      "exit_code": 0,
+      "passed": 16
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_code",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --follow-imports=skip artifacts/rp4_code/materialize.py artifacts/rp4_code/acquire.py artifacts/rp4_code/evaluate.py artifacts/rp4_code/report.py artifacts/rp4_code/close_b1.py artifacts/rp4_code/tail_diagnostic.py scripts/figure_style.py",
+      "exit_code": 0,
+      "scope": "Seven explicit sources; not all legacy producers"
+    }
+  ],
+  "notes": [
+    "Sources used by original acquisition workers are preserved in code-only ZIPs; all seven receipt code digests have a matching archived source.",
+    "Intermediate lock contention receipt and lost worker transport codes remain documented in INCIDENTS.md.",
+    "No licensed rows or credentials committed. A2 preserved exactly by keys. No evaluation specification or evaluator change."
+  ]
+}

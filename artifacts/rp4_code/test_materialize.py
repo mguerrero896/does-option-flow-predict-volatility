@@ -1,5 +1,6 @@
 """Small synthetic RP4 checks: cutoff, OI uniqueness, carry and keyed target identity."""
 
+import json
 from datetime import UTC, date, datetime, timedelta
 
 import numpy as np
@@ -11,6 +12,7 @@ from materialize import (
     GRID_COUNT,
     KEYS,
     TAPE_COLUMNS,
+    append_extension,
     attach_secondaries,
     build_new_option_features,
     carry_for_session,
@@ -21,6 +23,7 @@ from materialize import (
     read_new_tape,
     reconstruct_rv30,
     session_window,
+    sha256,
     weighted_median,
 )
 
@@ -191,3 +194,41 @@ def test_rv30_keys_and_har_cutoff():
     original_early = har_features_for_session(bars, keys.tail(1))
     changed_early = har_features_for_session(changed, keys.tail(1))
     assert original_early.equals(changed_early)
+
+
+def test_append_preserves_each_keyed_development_value(tmp_path):
+    spec = {
+        "windows": {
+            "primary": {"end": "2026-07-31"},
+            "confirmation": {"start": "2026-08-03", "end": "2026-09-04"},
+        }
+    }
+    paths = []
+    for name, session, values in (
+        ("development", "2026-07-31", [float("nan"), 0.2]),
+        ("extension", "2026-08-03", [0.3, float("nan")]),
+    ):
+        folder = tmp_path / name
+        folder.mkdir()
+        path = folder / "panel.parquet"
+        pl.DataFrame(
+            {
+                "asset": ["AAPL"] * 2,
+                "session_date": [session] * 2,
+                "origin_minute": [40, 35],
+                "rv30": [0.001, 0.002],
+                "grid": values,
+            }
+        ).write_parquet(path)
+        (folder / "manifest.json").write_text(
+            json.dumps({"spec_sha256": "spec", "artifacts": {str(path): sha256(path)}})
+        )
+        paths.append(path)
+    before = sha256(paths[0])
+    output = tmp_path / "combined"
+    assert append_extension(*paths, output, spec, "spec", "code") == 0
+    receipt = json.loads((output / "manifest.json").read_text())
+    assert receipt["development_prefix_equal_by_keys"] is True
+    assert receipt["combined_rows"] == 4 and sha256(paths[0]) == before
+    with pytest.raises(ValueError, match="ALREADY_EXISTS"):
+        append_extension(*paths, output, spec, "spec", "code")
