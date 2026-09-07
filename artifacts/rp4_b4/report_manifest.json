@@ -1,0 +1,26 @@
+{
+  "inputs_sha256": {
+    "artifacts\\rp4_code\\report.py": "9aae55e8488ebe8b69504dc104a0cf3b077e510b279384d5e5e1988c3bb7e668",
+    "docs\\rp4\\specification_v1.md": "24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d",
+    "scripts\\figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
+    "D:\\MDS650\\artifacts\\rp4_20260907\\b1_complete_v1\\manifest.json": "abe40d6990fbc59bcee6f3912bda1d2dc5c85f488a38ef95dd835cff537577e1",
+    "artifacts\\rp4_a1\\specification.json": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+    "artifacts\\rp4_b2\\session_losses.csv": "345889fb42e9681ba3e530edcd712f41c22cd9976a4f7c3fbcb1ef52030fc4bc",
+    "artifacts\\rp4_b2\\summary.json": "d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2",
+    "artifacts\\rp4_b3\\session_losses.csv": "468a00fdaa6666b4cb5b2585bae8b7601a9326e8b4d95cd176febd58cf698ae2",
+    "artifacts\\rp4_b3\\summary.json": "76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7",
+    "docs\\rp4\\data_and_execution_v1.md": "33f1ecc18aedc6ef0831bf237da4db4be0edf531a6421329b507bff82ef7f6dd"
+  },
+  "models_fitted": 0,
+  "outputs_sha256": {
+    "artifacts\\rp4_b4\\B1_over_B0.svg": "2e7f529782749dd7ef0ac69c8a00291e25dcc843e78d358a47c93455bbbf650d",
+    "artifacts\\rp4_b4\\B2_over_B1.svg": "38fc76aa476a831fc7b7df89ad2ad17eecbced7a58820310d224a0873ae3a442",
+    "docs\\rp4\\results_v1.md": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26"
+  },
+  "raw_or_origin_data_read": false,
+  "specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "_public_projection": {
+    "original_sha256": "2251a84b11320af55df2a74ab1cdd941f1edacdc774cfd7db88794bd91cacb37",
+    "meaning": "Paths sanitized; hashes and exit codes describe the preserved original execution, not a rerun."
+  }
+}

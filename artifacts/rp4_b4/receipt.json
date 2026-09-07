@@ -1,0 +1,120 @@
+{
+  "stage": "B4",
+  "execution_status": "COMPLETE",
+  "report": "docs/rp4/results_v1.md",
+  "scientific_outcome": "Full robust B2>B1>B0 hierarchy not established; every sign retained",
+  "artifacts": [
+    {
+      "path": "artifacts/rp4_b4/B1_over_B0.svg",
+      "sha256": "2e7f529782749dd7ef0ac69c8a00291e25dcc843e78d358a47c93455bbbf650d"
+    },
+    {
+      "path": "artifacts/rp4_b4/B2_over_B1.svg",
+      "sha256": "38fc76aa476a831fc7b7df89ad2ad17eecbced7a58820310d224a0873ae3a442"
+    },
+    {
+      "path": "artifacts/rp4_b4/collector_receipt.json",
+      "sha256": "6c50416b2f666d756e0b1cbcd8a7801bf1b131d54afd59633e51be772cc01076"
+    },
+    {
+      "path": "artifacts/rp4_b4/report_manifest.json",
+      "sha256": "2251a84b11320af55df2a74ab1cdd941f1edacdc774cfd7db88794bd91cacb37"
+    },
+    {
+      "path": "docs/rp4/results_v1.md",
+      "sha256": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26"
+    },
+    {
+      "path": "docs/rp4/data_and_execution_v1.md",
+      "sha256": "33f1ecc18aedc6ef0831bf237da4db4be0edf531a6421329b507bff82ef7f6dd"
+    },
+    {
+      "path": "docs/rp4/operations_v1.md",
+      "sha256": "5771362d809e90fc2362c120c302eb149f796e294de199b8db5eccb30e893a60"
+    },
+    {
+      "path": "artifacts/rp4_code/report.py",
+      "sha256": "9aae55e8488ebe8b69504dc104a0cf3b077e510b279384d5e5e1988c3bb7e668"
+    },
+    {
+      "path": "artifacts/rp4_code/test_report.py",
+      "sha256": "1c02db9da0fc89c7cddfb084fd2f59c3e16f1b7297bb11aeb38c7ce3cfc8a44e"
+    },
+    {
+      "path": "artifacts/rp4_code/verify_delivery.py",
+      "sha256": "e7e775011dbb1ad8d7c07cb70fbaacd25c2571231efb07ed56c05a9934986532"
+    },
+    {
+      "path": "artifacts/rp4_b2/.gitattributes",
+      "sha256": "ec9221932cac3ba3fa109e8b3c444d8e982e06b8bdbe6f643556f13dc2a7ef76"
+    }
+  ],
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/report.py --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --primary artifacts/rp4_b2 --confirmation artifacts/rp4_b3 --panel-lineage D:/MDS650/artifacts/rp4_20260907/b1_complete_v1/manifest.json --audit docs/rp4/data_and_execution_v1.md",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q -p no:cacheprovider artifacts/rp4_code tests/unit/test_rp2_qlike_objective.py tests/contract/test_documentation_references.py tests/contract/test_canonical_state_current.py",
+      "exit_code": 0,
+      "passed": 65
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_code",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --follow-imports=skip artifacts/rp4_code/materialize.py artifacts/rp4_code/acquire.py artifacts/rp4_code/evaluate.py artifacts/rp4_code/report.py artifacts/rp4_code/close_b1.py artifacts/rp4_code/tail_diagnostic.py artifacts/rp4_code/verify_delivery.py scripts/figure_style.py",
+      "exit_code": 0,
+      "explicit_sources": 8
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/verify_delivery.py",
+      "exit_code": 0,
+      "figure_endpoints_verified": 8,
+      "git_byte_exact_files_before_this_receipt": 64,
+      "publication_payloads_scanned_before_this_receipt": 78,
+      "secret_findings": 0,
+      "models_fitted": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B scripts/scan_public_secrets.py --check-hook",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B scripts/scan_public_secrets.py",
+      "exit_code": 0,
+      "findings": 0,
+      "scope": "Committed public history through B3; staged B4 payloads independently scanned by verify_delivery"
+    },
+    {
+      "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check origin/main",
+      "exit_code": 1,
+      "reason": "One blank final line in hash-frozen docs/rp4/specification_v1.md; preserved, not edited"
+    },
+    {
+      "command": "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --check origin/main -- . ':!docs/rp4/specification_v1.md'",
+      "exit_code": 0
+    }
+  ],
+  "visual_verification": {
+    "both_svgs_rendered_with": "Bundled Node sharp, no dependency installed",
+    "render_exit_code": 0,
+    "previews": "Private report_previews directory on D",
+    "inspection": "Both figures inspected; four panels each, independent scales labeled, adverse values retained"
+  },
+  "collector": {
+    "receipt": "artifacts/rp4_b4/collector_receipt.json",
+    "active": true,
+    "daily_command_exit_code": 0,
+    "newly_processed_future_session": "NO VERIFICABLE; present session reused and hash-checked",
+    "separate_k3_collector_modified": false
+  },
+  "notes": [
+    "Report uses existing figure system and completed aggregates only; no new forecast fitting in B4.",
+    "No new capital allocation, broker connection, licensed data publication or purchase.",
+    "A1 hash and frozen original artifacts preserved. CRLF CSV bytes are preserved in Git, not normalized.",
+    "Prior archive whitelist assertion was narrowed to permit the already-accepted three metadata members of decision_state_before.zip; all expanded archives scanned without secret findings.",
+    "Draft PR is the separately authorized final publication step; no merge is authorized or performed."
+  ]
+}
