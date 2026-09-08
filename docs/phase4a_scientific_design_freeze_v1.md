@@ -1,41 +1,46 @@
 # Phase 4A — Scientific design freeze
 
-Estado de esta revisión: **PARTIAL / local-only**. El diseño está congelado como
-convención de investigación, pero no se autoriza backfill, entrenamiento ni
-evaluación fuera de muestra.
+> **Historical Phase 4A freeze, English translation.** This record describes its
+> original authority. The current models, inference rules and horizons are resolved
+> in [RP4 v4](rp4/specification_v4.md) and the [current decisions](research_decisions_current.md).
+> The [original](archive/public_refresh_baseline/docs__phase4a_scientific_design_freeze_v1.md.original)
+> is preserved for provenance; this translation changes no frozen method.
 
-## Pregunta y estimando
+Status at this review: **PARTIAL / local-only**. The design was frozen as a research
+convention; backfill, training and out-of-sample evaluation were not authorized by it.
+
+## Question and estimand
 
 > “Do continuous unusual options-activity features improve out-of-sample RV30
 > forecasting beyond information contained in the underlying market and
 > conventional options-state variables?”
 
-La afirmación es incremental y predictiva; no es una afirmación causal ni una
-afirmación sobre intención del operador.
+The claim is incremental and predictive; it is neither causal nor a claim about
+trader intent.
 
-El estimando futuro será la diferencia de pérdida esperada entre B1Q y B2 sobre
-los mismos orígenes, activos y fechas que sobrevivan a los filtros PIT. La
-evaluación aún no existe y queda fuera de este objetivo.
+The planned estimand is the expected loss difference between B1Q and B2 on the
+same origins, assets and dates surviving the PIT filters. At this freeze the
+evaluation did not yet exist and lay outside the authorized scope.
 
-## Unidad y target
+## Unit and target
 
-Una fila es un activo `i`, una sesión regular XNYS y un origen `t` de cinco
-minutos. El target es RV30 no anualizada:
+A row is an asset `i`, a regular XNYS session and a five-minute origin `t`.
+The target is unannualized RV30:
 
 ```text
 r(i,t+j) = ln(C(i,t+j) / C(i,t+j-1)), j=1,...,30
 RV30(i,t:t+30) = sum_j r(i,t+j)^2
 ```
 
-Se requieren exactamente 31 precios: el cierre ancla disponible en `t` y los
-30 cierres futuros. El repositorio contiene RV30, no RV10.
+Exactly 31 prices are required: the anchor close available at `t` and the
+30 future closes. This historical implementation contains RV30, not RV10.
 
-## Diseño congelado
+## Frozen design
 
-| Decisión | Status | Source | Evidence | Assumption class | Consequence |
+| Decision | Status | Source | Evidence | Assumption class | Consequence |
 |---|---|---|---|---|---|
-| Horizonte | PASS | owner decision and contract | `src/mds650/targets.py`; `artifacts/common_sample/common_matrix_profile_v1.json` | HUMAN_APPROVED_RESEARCH_ASSUMPTION | No se implementa RV10. |
-| Origen | PASS | project contract | `specs/001-pit-options-rv30/` | PROVIDER_CONFIRMED_FACT for session calendar; design convention for five-minute grid | `asset|session_date|forecast_origin_utc` is the key. |
+| Horizon | PASS | recorded decision and contract | `src/mds650/targets.py`; `artifacts/common_sample/common_matrix_profile_v1.json` | HUMAN_APPROVED_RESEARCH_ASSUMPTION | RV10 is not implemented. |
+| Origin | PASS | project contract | `specs/001-pit-options-rv30/` | PROVIDER_CONFIRMED_FACT for session calendar; design convention for five-minute grid | `asset|session_date|forecast_origin_utc` is the key. |
 | FMP availability | PARTIAL | authenticated probe + owner approval | `artifacts/pit/fmp_bar_semantics_v3.json` | HUMAN_APPROVED_RESEARCH_ASSUMPTION | raw+1m primary; raw+2m sensitivity; no provider claim. |
 | UW availability | PARTIAL | retained Full Tape and documentation | `artifacts/pit/uw_created_at_semantics_v1.json` | HUMAN_APPROVED_RESEARCH_ASSUMPTION + UNRESOLVED_LIMITATION | `max(executed_at,created_at)`; 60s primary; 120/300 sensitivity. |
 | Massive quotes | PASS for selected rows | authenticated local evidence | `artifacts/b1_full_origin/b1_origin_matrix.parquet` | AUTHENTICATED_EMPIRICAL_EVIDENCE | `sip_timestamp <= origin`, positive bid, ask>bid, age/spread filters. |

@@ -1,5 +1,11 @@
 # Provider license review (v1, 2026-08-18)
 
+> **Dated review.** The counts below describe the August review, not a new inventory.
+> The licensed bucket remains private; the maintainer manages individual access
+> requests within the applicable entitlements. The current public results inventory
+> and measured schema/policy receipt are in [Data access](../data/DATA_ACCESS.md).
+> This publication refresh creates no new redistribution right or legal interpretation.
+
 Scope: what the **public mirror** (github.com — filtered history) and the **gated
 Supabase bucket** actually expose, read against the exact public Terms of Service of
 the three data providers, retrieved 2026-08-18. This review covers the public

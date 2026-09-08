@@ -1,8 +1,10 @@
 # Methodology decisions (recovery baseline)
 
-Status: Phase 5 design approved, 2026-07-29. Earlier bounded phase restrictions remain
-historical controls; current acquisition, modeling and QLIKE authority begins only after
-Requirements-consistency and preregistration gates pass.
+This is a dated decision ledger. A decision describes authority and evidence at its
+recorded date; later numbered decisions can supersede it. The
+[current decisions](research_decisions_current.md) and generated
+[state](../data/CANONICAL_STATE.json) resolve present scope. Historical approval,
+pending and seal statements below must not be mistaken for today's status.
 
 ## Decision index
 
@@ -341,15 +343,16 @@ Requirements-consistency and preregistration gates pass.
    and the Phase 6 session allowlist ending 2026-03-23, and no numbered decision authorized
    their dates before evaluation. They are therefore classified `EXPLORATORY_RETROSPECTIVE`
    and may not be cited as confirmatory evidence in any deliverable. Presenting them as part
-   of a window amendment requires an explicit owner decision (D005,
-   `OWNER_APPROVAL_PENDING`). Their per-protocol freezes remain valid as internal audit
+   of a window amendment required an explicit owner decision (D005, subsequently
+   **closed by decision 54 with no amendment**). Their per-protocol freezes remain valid as internal audit
    records; the classification governs only the evidentiary weight of the results.
 52. **Sealed-cohort disposition and campaign moratorium (2026-08-17)** — Validation A
    (14/30 acquired), Validation B (0/30) and Phase 8 (10/30) remain sealed with zero
    scientific reads. Their disposition — complete under the existing frozen gates, or close
-   formally without reading — is an owner decision (D006) recorded in
-   `docs/sealed_cohorts_disposition_v1.md`. Until D006 is decided, NO new retrospective
-   evaluation campaign, protocol freeze, or historical block selection may be created. This
+   formally without reading — was decision D006, recorded in
+   `docs/sealed_cohorts_disposition_v1.md` and **closed by decision 55**. The original
+   restriction barred new retrospective evaluation campaigns, protocol freezes or historical
+   block selection while that decision was unresolved. This
    moratorium exists because five post-null evaluation campaigns were designed between
    2026-08-01 and 2026-08-14, and campaign-level multiplicity is not controlled by
    per-campaign Holm families (R-019).
@@ -464,7 +467,7 @@ Requirements-consistency and preregistration gates pass.
    CI previously ran only static gates. Now tier 1 (GitHub Actions, required) runs
    Ruff, strict mypy, and the hermetic pytest suite — 189/193 test files including
    property-based (hypothesis), synthetic end-to-end and schema/contract tests — with
-   a coverage gate >= 80% of src/mds650 (81.03% at introduction). Tier 2 (local,
+   a coverage gate >= 80% of `src/mds650` (81.03% at introduction). Tier 2 (local,
    scripts/run_local_evidence_gates.py) runs the full suite against the licensed
    evidence store plus SHA-256 verification of every gated file. The four
    tier-2-only test files and the reason each cannot run hosted are enumerated in
@@ -486,7 +489,7 @@ Requirements-consistency and preregistration gates pass.
    pinning 61 frozen artifacts to their SHA-256 (LF-normalized text, raw parquet)
    managed exclusively by scripts/freeze_registry.py; (2) a hermetic tripwire test
    re-hashing every registered file on every CI and tier-2 run; (3) a writer guard
-   mds650.storage.assert_outside_frozen raising FROZEN_ARTIFACT_WRITE_REJECTED,
+   `mds650.storage.assert_outside_frozen` raising FROZEN_ARTIFACT_WRITE_REJECTED,
    wired into the B2-confirmation builder/evaluator; (4) content-addressed writes
    (root/protocol_id/<sha256>.bin) as the required path for new frozen evidence —
    no update operation exists, only new versions; (5) OS read-only flags via
@@ -519,13 +522,13 @@ Requirements-consistency and preregistration gates pass.
    one-shot = k=1 at 0.025; Phase 9 evaluation = k=2 at 0.00833; binding
    threshold is the smaller of the spending budget and any frozen protocol
    alpha), e-values + test martingale + always-valid p-value reported alongside
-   registered tests (mds650/sequential.py, unit-tested), and a pre-registered
+   registered tests (`mds650/sequential.py`, unit-tested), and a pre-registered
    maximum of 3 further confirmatory campaigns this thesis cycle. Frozen
    protocol documents are not edited (decision 62); the policy composes with
    them. (b) ProviderHTTPClient now retries httpx transport errors (timeouts,
    resets, disconnects) inside the retry loop with the same exponential backoff
    as 429/5xx, preserving the last exception as the cause — previously a single
-   transport error bypassed max_retries entirely (src/mds650/providers/base.py;
+   transport error bypassed max_retries entirely (`src/mds650/providers/base.py`;
    regression tests in tests/unit/test_provider_client.py).
 65. **Four-contrast hypothesis structure replaces the B1-first precondition
    (2026-08-18)** — Research Program v2 §0 corrects a premise that has governed
@@ -1462,7 +1465,7 @@ Requirements-consistency and preregistration gates pass.
 
 100. **Phase 9 remains a 60-session one-read follow-up and no longer gates the academic
      delivery (2026-08-28).** The owner requested a design reassessment because waiting
-     until November is incompatible with the study calendar. The existing frozen
+     until November is incompatible with the reporting calendar. The existing frozen
      protocol already targets 60 complete sessions; reducing it "to 60" therefore changes
      nothing. `docs/phase9_academic_reporting_policy_v1.md` records the resolution before
      any outcome read: submit and defend from the evidence available at the manuscript
@@ -1484,7 +1487,7 @@ Requirements-consistency and preregistration gates pass.
      most 19 complete sessions and therefore zero scored sessions, so no valid Phase 9
      result can exist for the academic deadline. The 60-session endpoint is retained,
      RP2, RP3 sizing and this audit now share the same long-run-variance MDE producer,
-     no interim is activated, the study proceeds from current evidence plus any
+     no interim is activated, the report proceeds from current evidence plus any
      separately authorized exploratory Phase 8 bridge, and `sealed_cohorts_read=0`.
 
 102. **The sole Phase 8A exploratory read is consumed and reconciled
@@ -1818,8 +1821,8 @@ Requirements-consistency and preregistration gates pass.
      `figure_path` and `model_card_path` pointers already written into the delay-120 and
      delay-300 confirmation artifacts, which name the delay-0 run's files - the producer
      is fixed for future runs and the existing artifacts stay untouched under decision
-     62; and `reports/final_report_draft_v2.md`, which names its course on the title
-     page because that document is submitted for course credit.
+     62; and `reports/final_report_draft_v2.md`, whose title page was retained in that
+     historical publication. Its original wording is preserved in the archive.
 
      One defect is knowingly left standing.
      `docs/DISCOVERY_VALIDATION_CONFIRMATION_PROTOCOL.md` cites
