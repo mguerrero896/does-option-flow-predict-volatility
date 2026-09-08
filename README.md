@@ -106,7 +106,8 @@ From a clean clone, install Python 3.12 and `uv`, then install the locked enviro
 
 ```sh
 uv sync --frozen
-uv run --frozen pytest tests/contract tests/test_gated_history_contract.py -q
+git config --local core.hooksPath scripts/hooks
+uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 uv run --frozen python scripts/sync_supabase_catalog.py --rp4-v4 --dry-run
 ```
 
