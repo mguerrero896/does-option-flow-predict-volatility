@@ -1,0 +1,24 @@
+{
+  "N_family_records": 2095,
+  "artifacts_sha256": {
+    "candidate_frequencies.csv": "48defbc07c7f4cb7ef0f2474199524d1125e78e5cc39c4ad69a0477ea3451e82",
+    "comparison.csv": "66c7786bfb5ae1ce5b8936584e7cc049d1fd73962c7892ffe0c270bfcdf897e5",
+    "exclusions.csv": "060946bc394e83a6fe79bf51a9bcff83bae12beec7c5ca6d81fa3f2be6fa2fe0",
+    "frequencies.csv": "39d44bb115b124a0ddf7d8dba9478b96e69489b895164451e113df0dac2e6e30",
+    "losses.csv": "e0238c86cecc3769668b626b77545d7eb06e26f618ec5e4f09537785d4aa4402",
+    "progress.csv": "ca14e6e44cc276d2f75f9b440c735687780b02910c65b7821d3b890aef3f7c57",
+    "results_v5.md": "9384c1a333acc2ad122e915fdd7ef1ab35fa0dcbc48ec9fda2fb118f522632b3",
+    "summary.json": "a5073c1dc82bdad9a3a28124298a3441011f22bbe0b666625d52141ae5babbac",
+    "table.csv": "d4b60406fad82772021f9c6b8edcd3a4cc66554d9377abc5d82a6171d06844dd"
+  },
+  "binding": {
+    "execution_sha256": "5cd6b4a92f3319d12f20044f32e9b87d8cc3ae731ce5cde66780d9fd2a9befb4",
+    "release_sha256": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855",
+    "specification_sha256": "a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e"
+  },
+  "created_at_utc": "2026-09-08T15:31:33.840073+00:00",
+  "input_records_sha256": "0e846be59bdfecc48d5cb793fbe816d953ed35404172967adb85257c360006b3",
+  "schema_version": "rp4-v5-a3-report-receipt-v1",
+  "status": "COMPLETE",
+  "update_id": "5_control"
+}

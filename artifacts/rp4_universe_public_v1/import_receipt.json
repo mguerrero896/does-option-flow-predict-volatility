@@ -1,0 +1,248 @@
+{
+  "schema_version": "rp4-eight-asset-public-import-v1",
+  "source_commit": "a11a5c93446cb3fccafc1d1663d9d334d522f01a",
+  "source_report_original_sha256": "1a0418e2d6f74c39bd1bfb63ec24133d885b008aa0afeb67260588a8811851b2",
+  "source_specification_original_sha256": "aafde61fa8a5373c88cd4a21199fff86cfb69f7448d70197729bed0c17686d9a",
+  "source_result_summary_original_sha256": "74bd1bdcbd9fb1a0e4018af19fdc74d221751e039f25c373c6cb34d337d446a3",
+  "original_source_entries": [
+    {
+      "source_path": "docs/rp4/results_universe_v1.md",
+      "source_sha256": "1a0418e2d6f74c39bd1bfb63ec24133d885b008aa0afeb67260588a8811851b2",
+      "git_blob_oid": "cfa9e1afc2e47c3963573a9de06146cde7827402",
+      "copied_path": "docs/archive/rp4/presentation_originals/results_universe_v1.md.original",
+      "bytes": 15246,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "docs/rp4/specification_universe_v1.md",
+      "source_sha256": "aafde61fa8a5373c88cd4a21199fff86cfb69f7448d70197729bed0c17686d9a",
+      "git_blob_oid": "7d706dc0e68abfd22906f2cdbe7dcc79d62ba34c",
+      "copied_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.md.original",
+      "bytes": 10122,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "docs/rp4/specification_universe_v1.json",
+      "source_sha256": "b59e0cfbc7ee9d78766743709c358f9264b5ee317cc2f8ec588fc5ca0de1dcc1",
+      "git_blob_oid": "a7e88c4891f7a7f9e49e7b6e1125ac7510d45214",
+      "copied_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.json.original",
+      "bytes": 22210,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "docs/rp4/specification_universe_v1.sha256",
+      "source_sha256": "3bc9bf2dd52859ada4d70211e06cea0d73b92459317aca2ec316294e23859fb1",
+      "git_blob_oid": "cc1e2d99752c4d518292bb776db6e9b864efbfa6",
+      "copied_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.sha256.original",
+      "bytes": 192,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/final_report_receipt.json",
+      "source_sha256": "6608f2ce63953554097a03c8e1e82c08b37ace5c18a14da59856c313ecaadefd",
+      "git_blob_oid": "cd245fd5f3c7a5148b0d6a5317b6d92bdbd8f5d1",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_final_report_receipt.json.original",
+      "bytes": 4694,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/independent_final_audit.json",
+      "source_sha256": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4",
+      "git_blob_oid": "63db6836e01aa91bde3babe5687a099294b2dd8f",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_independent_final_audit.json.original",
+      "bytes": 7931,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/receipt.json",
+      "source_sha256": "9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988",
+      "git_blob_oid": "d84977213f4d55bd9d7383e960d0e1518d6ddbec",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_evaluation_receipt.json.original",
+      "bytes": 47358,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/control_six/receipt.json",
+      "source_sha256": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+      "git_blob_oid": "b47c462788d8ee692900fbb9c8fc9fa7faeae4de",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_control_six_receipt.json.original",
+      "bytes": 7665,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/control_six/rv15/receipt.json",
+      "source_sha256": "d0dcc77753a2a67b0471a185c21218880474574a6c444d753d7c6cd9d6f47c3f",
+      "git_blob_oid": "040a1e1925d57c1b7d9baac065eed1ef2ce30a39",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_control_six_rv15_receipt.json.original",
+      "bytes": 1330,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/closure_verification.json",
+      "source_sha256": "0223bab9e601eb185b691129c9313af9360d62b3e647c696abe8c970c97ad8a1",
+      "git_blob_oid": "08ed2e8b5fffdfb66a14f528830ea62cdd660b89",
+      "copied_path": "docs/archive/rp4/presentation_originals/universe_closure_verification.json.original",
+      "bytes": 1081,
+      "classification": "preserved original document or closed custody metadata"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/by_asset.csv",
+      "source_sha256": "31de38a31c38a245544c96aa2ff7a336cacf3349f7eb77804f6df498ad2dead2",
+      "git_blob_oid": "c2f75a6f0a7f9655825ad339bd9937840bdb8bcb",
+      "copied_path": "artifacts/rp4_universe_public_v1/by_asset.csv",
+      "bytes": 12517,
+      "classification": "closed aggregate statistics, counts, weights or session losses",
+      "columns": [
+        "estimate",
+        "statistic",
+        "N_sessions",
+        "bootstrap_block_length",
+        "bootstrap_repetitions",
+        "bootstrap_seed",
+        "removed_each_tail",
+        "ci_low",
+        "ci_high",
+        "p_raw",
+        "alternative",
+        "interval",
+        "null",
+        "null_calibration",
+        "status",
+        "null_exceedances",
+        "N_origins",
+        "N_asset_sessions",
+        "family",
+        "contrast",
+        "endpoint",
+        "inference_role",
+        "baseline_loss",
+        "expanded_loss",
+        "percent_reduction_mean",
+        "asset",
+        "horizon_minutes",
+        "cannot_rescue_primary"
+      ]
+    }
+  ],
+  "derived_summary": {
+    "path": "artifacts/rp4_universe_public_v1/primary_summary.json",
+    "sha256": "ac80484f8e104fb97126d2c1303c626b8bedbcb6f88551f64e4974aebbb514be",
+    "selected_top_level_fields": [
+      "N_asset_sessions",
+      "N_origins",
+      "N_sessions",
+      "RESEARCH_ONLY",
+      "capital_go",
+      "confirmation_executed",
+      "contrasts",
+      "executed_origins_by_asset",
+      "extension_after_v4",
+      "first_session",
+      "global_joint_reject",
+      "global_joint_role",
+      "horizon_minutes",
+      "last_session",
+      "predeclared_closure",
+      "primary_sequence",
+      "secondary_can_rescue_primary",
+      "six_control_receipt_sha256",
+      "status",
+      "tail_secondary",
+      "target_horizon_role",
+      "target_key",
+      "v5_selector_executed",
+      "window"
+    ]
+  },
+  "scope": {
+    "new_empirical_model_fits": 0,
+    "new_bootstrap_runs": 0,
+    "prospective_data_reads": 0,
+    "per_origin_forecasts_or_panels_copied": false,
+    "licensed_raw_data_copied": false,
+    "v4_headline_replaced": false,
+    "full_private_execution_custody_repeated": false,
+    "capital_go": false,
+    "forecast_columns_distributed": false
+  },
+  "custody_note": "Original sources were read only from the fixed commit. Source and distributed derivative hashes remain distinct. The main summary is an explicit field projection, not a reproduction of omitted diagnostics or private execution custody. Original documents and closed receipts are archived; publication sanitization requires its separate original/public provenance record.",
+  "derived_csv": [
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/control_six/rv15/session_losses_reproduced.csv",
+      "original_sha256": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+      "source_git_blob_oid": "b61ecf4551bfa649f7baaefe80578f67580c3d80",
+      "path": "artifacts/rp4_universe_public_v1/control_six_rv15_losses.csv",
+      "sha256": "e2bbc69a355c755f06aad9e671a8c3273c151f348c5614ab9a63cf5dafaa601b",
+      "selected_columns": [
+        "session_date",
+        "loss__log_ridge_harq__B0",
+        "loss__log_ridge_harq__B1",
+        "loss__log_ridge_harq__B2",
+        "loss__lightgbm_qlike__B0",
+        "loss__lightgbm_qlike__B1",
+        "loss__lightgbm_qlike__B2"
+      ],
+      "omitted_columns": [
+        "forecast__log_ridge_harq__B0",
+        "forecast__log_ridge_harq__B1",
+        "forecast__log_ridge_harq__B2",
+        "forecast__lightgbm_qlike__B0",
+        "forecast__lightgbm_qlike__B1",
+        "forecast__lightgbm_qlike__B2",
+        "actual"
+      ],
+      "method": "Exact CSV cell selection; session-mean forecast and actual columns are not distributed.",
+      "original_distributed": false
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/effective_weights.csv",
+      "original_sha256": "1ab56b461aee1e73d4479155c1d5a01acb1dbfa1bcf0a0c20576adc2fc2cb069",
+      "source_git_blob_oid": "74010ccb5c4298cd3619ecbad7b5cfa74ca14da4",
+      "path": "artifacts/rp4_universe_public_v1/coverage.csv",
+      "sha256": "27f48e03b6720148392e147217f7975329bae9ba6742af9dae85249ef37a6d7d",
+      "method": "Eight asset-level count rows from 3352 closed weight rows; each weight exactly 0.125 and all eight assets present on each of 419 dates verified before projection. No inference or model fit.",
+      "original_distributed": false,
+      "source_rows": 3352,
+      "source_sessions": 419,
+      "all_eight_assets_present_every_session": true
+    }
+  ],
+  "checked_not_distributed": [
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/effective_weights.csv",
+      "source_sha256": "1ab56b461aee1e73d4479155c1d5a01acb1dbfa1bcf0a0c20576adc2fc2cb069",
+      "git_blob_oid": "74010ccb5c4298cd3619ecbad7b5cfa74ca14da4"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/asset_session_losses.csv",
+      "source_sha256": "e352316f3c729a5450d7a898f8712eec15d89422980580e92b55289254ee78ee",
+      "git_blob_oid": "286b6ee2bb6f324325c30ce96f89fb2f4072f42f"
+    },
+    {
+      "source_path": "artifacts/rp4_universe_v1/phase2/control_six/rv15/session_delta_comparison.csv",
+      "source_sha256": "c722b970989f280a58b26155d6f05ffa2815e54375717cf4e83a904ef9ee9c76",
+      "git_blob_oid": "b2645405c2fa62e0e40a78b15293cf890d764f39"
+    }
+  ],
+  "verification": {
+    "verified_at_utc": "2026-09-08T18:01:26Z",
+    "focused_contract": "tests/contract/test_rp4_universe_english.py",
+    "focused_contract_result": "4 passed",
+    "presentation_check": "PASS",
+    "ruff_check": "PASS",
+    "mypy_presentation": "PASS: no issues found in 1 source file",
+    "eight_asset_contrasts_verified": 32,
+    "asset_count_rows_verified": 8,
+    "original_six_public_loss_cells_compared": 2514,
+    "maximum_absolute_loss_difference": 0.0,
+    "pooled_mean_reconciled_to_equal_weight_asset_aggregates": true,
+    "historical_original_sources_verified": 11,
+    "new_model_or_inference_execution": false,
+    "candidate_and_clean_clone_gates": "PENDING; verified separately by publication workflow"
+  },
+  "presentation_files_sha256_lf": {
+    "docs/rp4/results_universe_v1.md": "818ca576e343b672490cba43a112f4350263a235516bd439239488ef5cef4305",
+    "scripts/build_rp4_universe_english.py": "6743e9161ca506b72e16cf8f9676d138dea9da0943270f00f27ae22fc8fda2e0",
+    "tests/contract/test_rp4_universe_english.py": "b216445b2c0b66aa5fd9cacaea4e819cf2ea4443e48450a9a9ac2250f2da5bec"
+  }
+}

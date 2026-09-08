@@ -1,0 +1,49 @@
+# Pre-declaración condicional v4 — proyección pública del texto
+
+Esta proyección conserva el contenido científico del original local, cuyo SHA-256 es `6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee`. Sólo se redactan los fragmentos de operador y los identificadores privados enumerados abajo. El hash del original corresponde a sus bytes íntegros; esta copia tiene hash propio en el [sidecar](../../../../rp4/predeclaration_v4_text.sha256) y [recibo de proyección](../../../../rp4/predeclaration_v4_text_receipt.json).
+
+La hora **2026-09-07 20:20 Australia/Sydney**, equivalente a **2026-09-07 10:20 UTC**, es una declaración contenida en el texto. La frase sobre conocer los resultados también pertenece al original. El registro fue pre-declarado y sellado localmente, sin marca de tiempo de un tercero; el hash y la proyección no certifican por sí solos cuándo se escribió ni qué información conocía cada persona. Esta copia se prepara después de los resultados y no constituye una nueva predeclaración ni cambia el registro científico.
+
+| Marca | Línea del original | Fragmento redactado y conservación |
+|---|---:|---|
+| R1 | 3 | Nombre de herramienta, estado operativo y tareas pendientes; se conserva el propósito condicional. |
+| R2 | 3 | Ubicación operativa del registro del hash en la conversación y carpeta; el recibo de esta copia fija la procedencia disponible. |
+| R3 | 19 | Identificador privado de la versión del productor de objetivos; se conserva la referencia a su fórmula heredada. |
+| R4 | 19 | Ruta interna del panel de referencia; se conservan las columnas, el tramo de comparación, la comprobación y su límite. |
+
+La identidad del panel de R4 queda fijada por el SHA-256 `fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831` en la [especificación ejecutable](../../../../../artifacts/rp4_v4_a1/specification.json). No se ha abierto ese panel para preparar esta copia. Las líneas sin marcas se conservan literalmente, normalizando únicamente los saltos de línea a LF.
+
+La motivación sobre la cobertura de intermediarios es una hipótesis del texto, no una demostración causal. Para interpretar el cierre, la [especificación v4](../../../../rp4/specification_v4.md) aclara que no rechazo no prueba equivalencia a cero ni absorción causal.
+
+## Texto proyectado
+
+# RP4 v4 — pre-declaración condicional del último intento
+
+Escrito el 2026-09-07 a las 20:20 (Australia/Sydney), ANTES de conocer results_v3.md. [R1: estado operativo redactado.] Esta pre-declaración fija qué se hará si v3 no confirma B2 > B1, para que el último intento sea secuencial y declarado, no una búsqueda posterior al resultado. [R2: referencia operativa de custodia redactada.]
+
+## Disparador
+
+v4 se ejecuta únicamente si en v3 la hipótesis H2 (reducción media de QLIKE de B2 sobre B1 > 0, prueba unilateral al 5 % tras rechazar H1) NO se rechaza en NINGUNA de las dos familias. Si una familia rechaza H2 y la otra no, el resultado se reporta como dependiente de la familia y v4 no se ejecuta. Si ambas rechazan, v4 no se ejecuta.
+
+## Hipótesis de v4
+
+La información del flujo de opciones es de vida corta: la cobertura de los dealers actúa en minutos. Si B2 no mejora el pronóstico a 30 minutos, puede mejorarlo a horizontes más cortos. v4 cambia UNA cosa: el horizonte del objetivo.
+
+- Horizonte primario: 15 minutos (rv_15).
+- Horizonte secundario registrado: 5 minutos (rv_5).
+- Nada más cambia: mismos conjuntos B0/B1/B2 de v3 (con la regla de ventana vacía y las medidas de desbalance gamma), mismas familias (log-ridge HARQ y LightGBM QLIKE), misma partición 2024-08-02 a 2026-07-31 y confirmación 2026-08-03 a 2026-09-04, mismo walk-forward por sesión con purga y embargo, misma inferencia secuencial unilateral H1 → H2 por familia, mismos secundarios robustos (mediana, media recortada, posterior).
+
+## Objetivos
+
+rv_15 y rv_5 se construyen desde las mismas barras de 1 minuto de RP4 con el mismo estimador que rv30 (fórmula del bloque 3 de la versión heredada [R3]) y se validan byte a byte contra el panel de referencia registrado [R4] (columnas rv_15 y rv_5) en el tramo donde se solapan, hasta 2026-07-17. Una discrepancia se investiga antes de evaluar. La ventana de confirmación no tiene referencia previa y se reporta como tal.
+
+## Regla de cierre
+
+- Éxito: H2 rechazada al horizonte primario (15 min) en al menos una familia, con el resultado a 5 min reportado como secundario.
+- Si no: el proyecto se cierra con B1 > B0 como resultado principal y B2 como nulo informativo a 30, 15 y 5 minutos. No hay v5. Se pasa a la fase de organización y publicación.
+
+## Multiplicidad y divulgación
+
+v4 es la cuarta evaluación de las mismas ventanas y se declara como tal. En el informe se listan v1, v2, v3 y v4 en orden, con la razón registrada de cada cambio: v2 corrigió defectos del instrumento (cobertura, capacidad, regularización), v3 añadió el mecanismo y la regla de ventana vacía, v4 cambió el horizonte bajo esta pre-declaración. La etiqueta se mantiene: fuera de muestra walk-forward, partición fijada 2026-09-07.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

@@ -1,0 +1,123 @@
+{
+  "schema": "rp4-defense-package-receipt-v1",
+  "sealed_at_utc": "2026-09-08T05:15:20.931753+00:00",
+  "status": "COMPLETE_LOCAL",
+  "research_only": true,
+  "capital_go": false,
+  "deliverable_sha256": {
+    "executive_summary.md": "225a81a5d5239461972bd9ab94d26db6ffcaeb095d40662f5a8fae4995567de9",
+    "examiner_qa.md": "08c8bb37d66c90fa51a6e7ddf1461b3cf6354d1f3de85499e927ea00985f0999",
+    "defense_slides.md": "2e5ae7238bf458d0983ba2c4bdb39b6b8109300f66afd3c27c4497e3a06c06a0",
+    "claims_matrix.csv": "8f51f56b6292c9c8df79742f4ccb227be322c0fff836766fe7dc5b6a82a2213e"
+  },
+  "evidence_manifest_sha256": "4621ef8c2a3bbdffcdf20346413d5464519147adec11c26e9b1546c5b9fb77ed",
+  "contract": {
+    "path": "tests/contract/test_rp4_defense_package.py",
+    "sha256": "d8b97a79349908dc3c8aaad2f3c2711951c286d9a117c963d8e4df48116ee455",
+    "new_tests": 6,
+    "negative_mutations_rejected": 3,
+    "coverage": "Every source passage, every displayed digit-based quantity, reviewed artifact fields, v3/v4 decisions, percentage interval scaling and unchanged plotted curves."
+  },
+  "coverage": {
+    "source_passages": 126,
+    "number_occurrences": 337,
+    "source_files": 58,
+    "examiner_questions": 25,
+    "slides": 12,
+    "executive_languages": [
+      "es",
+      "en"
+    ],
+    "executive_page_break": true,
+    "executive_word_counts": {
+      "es": 379,
+      "en": 359
+    },
+    "number_policy": "Dates and numeric literals included; editorial numbering excluded. Written-out quantities remain protected by document hashes and editorial review.",
+    "curve_polylines_identical": {
+      "B1_over_B0": 8,
+      "B2_over_B1": 8
+    }
+  },
+  "verification_commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check src scripts tests",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_prospective_registration.py",
+      "exit_code": 0,
+      "stdout": "2 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py",
+      "exit_code": 0,
+      "stdout": "{\"final_report_sha256\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_prospective_registration.py tests/contract/test_readme_headline_matches_the_inference_artifact.py tests/contract/test_canonical_state_current.py::test_rp4_front_page_and_status_repeat_the_exact_final_table artifacts/rp4_cleanup_review/test_inventory_review.py artifacts/rp4_closeout_figures_code -o addopts= -q -p no:cacheprovider",
+      "exit_code": 0,
+      "stdout": "................................................                         [100%]\n48 passed in 3.03s\n",
+      "stderr": ""
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "validation_correction": "An initial lint check required an explicit strict argument for zip; corrected before final validation.",
+  "checkout_format_baseline": {
+    "command": "uv run --offline --frozen --no-sync ruff format --check src scripts tests",
+    "exit_code": 1,
+    "preexisting_files_needing_format": 244,
+    "unrelated_files_reformatted": 0,
+    "interpretation": "Repository-wide format was already failing; scoped format checks passed. This receipt does not declare the repository-wide formatting gate green."
+  },
+  "frozen_artifacts": {
+    "checked": 359,
+    "changed": 0,
+    "baseline_inventory_sha256": "6827cf5f41887d14c0601347ebd03560ae6b5271847a7115d607a165bb140c70"
+  },
+  "registration_continuity": {
+    "original_sha256": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "amendment_sha256": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "original_preserved": true,
+    "primary_unchanged": true,
+    "prospective_results_available": false
+  },
+  "collection_observation": {
+    "observed_at_utc": "2026-09-08T05:12:35.8336476Z",
+    "state": "Ready",
+    "enabled": true,
+    "next_run": "2026-09-09T10:00:00.0000000+10:00",
+    "last_run": "1999-11-30T00:00:00.0000000+11:00",
+    "last_task_result": 267011,
+    "wake_to_run": false,
+    "start_when_available": true,
+    "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+    "data_root_exists": false
+  },
+  "collection_interpretation": "Ready is registration status. The never-run status is not evidence of a successful real collection. The first acquisition remains scheduled; no manual launch was performed.",
+  "operation_counts": {
+    "licensed_or_new_provider_data_reads": 0,
+    "stored_aggregate_losses_read": true,
+    "new_fits": 0,
+    "new_inference_runs": 0,
+    "network_provider_requests": 0,
+    "remote_mutations": 0
+  },
+  "evidence_limits": [
+    "Historical and reserved-cohort statements are source declarations explicitly classified as not reaudited; reserved cohorts were not opened.",
+    "Provider-outage labels are reported instrument findings; the empty-window census alone does not establish external causation.",
+    "The January 29 cell jump remains a reported audit statement, not a separately reproduced daily cell-count result.",
+    "Forecast accuracy is not profitability, dealer causality, historical client availability or independent confirmation.",
+    "Numeric equality is not semantic proof. Field selections and interpretations received a separate contextual review.",
+    "Summary sections are each sized for one page and separated by a page-break directive; pagination depends on the Markdown renderer."
+  ]
+}

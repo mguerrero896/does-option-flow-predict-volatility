@@ -1,0 +1,149 @@
+{
+  "capital_go": false,
+  "commands": [
+    "uv run --frozen --no-sync python docs/figures/rp4/reproduce_english.py --verify",
+    "uv run --frozen --no-sync python docs/figures/rp4/reproduce_english.py --render",
+    "uv run --frozen --no-sync python docs/figures/rp4/reproduce_english.py --render --png"
+  ],
+  "input_sha256": {
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "artifacts/rp4_v4_b2_rv15/session_losses.csv": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+    "artifacts/rp4_v4_b2_rv5/session_losses.csv": "f342a2fa7815a27d83a2fb31347683f51e8428278881407474432e22667bf8ba",
+    "artifacts/rp4_v4_b3_rv15/session_losses.csv": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+    "artifacts/rp4_v4_b3_rv5/session_losses.csv": "972249af8d31d26126650589de7e5e9b95216d29e8a2add494de7be7b7cf75ee"
+  },
+  "method": "The existing pure renderers reproduce all six Spanish SVGs byte for byte from five saved public CSVs. The adapter changes SVG text nodes only and checks every XML attribute and every numeric token in text-node order. PNGs use the existing Sharp rasterizer.",
+  "new_bootstrap_repetitions": 0,
+  "new_model_fits": 0,
+  "original_paths_map": "docs/archive/rp4/figure_originals/original_paths.json",
+  "original_paths_map_sha256": "c050bbd4d958731facb98cb6b3375fed336abd687c10118578bc24ce5be2d897",
+  "output_sha256": {
+    "docs/figures/rp4/comparison_v1_v4.png": "25b838588b1f8f77cb8457a97dd4ed411ab833c1b7fd1454040ff76776f89257",
+    "docs/figures/rp4/comparison_v1_v4.svg": "5bcce078866a18dd0073e227eb4429653d390208815bbd80bd1d32362c316c83",
+    "docs/figures/rp4/thesis_summary.png": "147d0590786d250a0659c27431b89aabb0350f81aa814692c3086f0cf94cf408",
+    "docs/figures/rp4/thesis_summary.svg": "5b70a1fe340ce4dcfc18750c4a55526a146d7a5b3bab6800be1b6233b95bb6f6",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative.png": "9d8440a103b10473a7eda9f0187c1e289005b624ec98f36defb460c4abdae9ce",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative.svg": "7135a5564d8e5e792e364c39cff1a799f66ac407a77bfd10256c65286c19b072",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.png": "714a67dabe012e3701a245b49190a4e7d2c1339d671d6ec574f5b70c09646d57",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg": "736a5e30ea8616300ebe1bbb64d9b64354868802432944937a3defbb6165cd5e",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative.png": "da4fa61fa3a055858364759f5ebab25d2c6a58149806becf89c9c2b659718ce5",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative.svg": "881e533d070aa7b9b5de90ae222dd18a60e3dbf291fd2a7137701df89abac49b",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "7e2ae7ebb01570cc92ed207ae7a1818c7598c5d398d98fbbe41e9156d5f1803c",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "b7359b9217e8d261563dd07c6f440ed0d2d6501c0c23dc5bc1fcd9b2fcdf6c00"
+  },
+  "png_environment": "RP4_FIGURE_NODE is a Node executable; RP4_FIGURE_NODE_MODULES is its existing package directory containing sharp. Exact PNG bytes also depend on the font environment.",
+  "png_renderers": {
+    "comparison_v1_v4.png": {
+      "density": 96,
+      "format": "png",
+      "height": 2267,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2800
+    },
+    "thesis_summary.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1373,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    "v4_B1_over_B0_cumulative.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1813,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    "v4_B1_over_B0_cumulative_v2.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1973,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    "v4_B2_over_B1_cumulative.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1813,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    "v4_B2_over_B1_cumulative_v2.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1973,
+      "metadata_copied": false,
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    }
+  },
+  "producer_sha256": {
+    "artifacts/rp4_closeout_figures_code/additions.py": "0e85e3c908d50c5cb7afdd08766d6ad54226b8a46da616e522a48d6ffcd4260f",
+    "artifacts/rp4_closeout_figures_code/build.py": "47500aae9b906ab3b0f1e6aa8806853ba8ed02650bf8379e7ba51a97e5cbe03b",
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
+    "artifacts/rp4_v3_code/report_v3.py": "c3408f6db6255bea64d6c9100b5d8bdc9ece5781b679d1bb97455c93fd1ab080",
+    "docs/figures/rp4/labels_en.json": "4375c98e465aea7b42eb0e6d515e1222e6147d8233e6f2e0752d58e0175da288",
+    "docs/figures/rp4/reproduce_english.py": "75d8dbacba4dc25a50da3707cb56857da5330ce074467e5e1000a173d3cfa8de",
+    "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6"
+  },
+  "raw_or_licensed_data_reads": 0,
+  "research_status": "RESEARCH_ONLY",
+  "schema_version": "rp4-figure-english-presentation-v1",
+  "scope": "English labels on existing public presentation figures; scientific records are unchanged.",
+  "svg_invariants": {
+    "comparison_v1_v4.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 318,
+      "translated_text_nodes": 113,
+      "xml_elements_with_identical_attributes": 579
+    },
+    "thesis_summary.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 81,
+      "translated_text_nodes": 18,
+      "xml_elements_with_identical_attributes": 166
+    },
+    "v4_B1_over_B0_cumulative.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 153,
+      "translated_text_nodes": 18,
+      "xml_elements_with_identical_attributes": 159
+    },
+    "v4_B1_over_B0_cumulative_v2.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 165,
+      "translated_text_nodes": 21,
+      "xml_elements_with_identical_attributes": 166
+    },
+    "v4_B2_over_B1_cumulative.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 152,
+      "translated_text_nodes": 18,
+      "xml_elements_with_identical_attributes": 159
+    },
+    "v4_B2_over_B1_cumulative_v2.svg": {
+      "numeric_tokens_preserved_in_order_per_text_node": 164,
+      "translated_text_nodes": 21,
+      "xml_elements_with_identical_attributes": 166
+    }
+  },
+  "visual_review": {
+    "figures_reviewed": 6,
+    "geometry_changes": 0,
+    "method": "Inspected each current PNG as a full figure after rendering; checked titles, legends, numeric intervals, axes, date ticks, annotation markers and footnotes. No clipping or text overlap was observed.",
+    "numeric_label_changes": 0,
+    "status": "PASS"
+  }
+}

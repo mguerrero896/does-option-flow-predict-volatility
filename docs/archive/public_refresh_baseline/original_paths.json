@@ -1,0 +1,109 @@
+{
+  "docs/threats_to_validity_matrix_v1.md": {
+    "sha256": "7574bf56f181214b44132ce4a54a446fdf16492a6d3c336aead1a6b27b597337",
+    "public_path": "docs/threats_to_validity_matrix_v1.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__threats_to_validity_matrix_v1.md.original"
+  },
+  "docs/provider_license_review_v1.md": {
+    "sha256": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
+    "public_path": "docs/provider_license_review_v1.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__provider_license_review_v1.md.original"
+  },
+  "docs/rp2/FINAL_REPORT.md": {
+    "sha256": "3b086bfcc65a767e601588432c15182825d24665ae0bda105f2f6746491b9cc2",
+    "public_path": "docs/rp2/FINAL_REPORT.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__rp2__FINAL_REPORT.md.original"
+  },
+  "docs/target_horizon_decision.md": {
+    "sha256": "fcc5710860eb2242d0f8f66af83e800054d3e465c8148fc628276772525e6e66",
+    "public_path": "docs/target_horizon_decision.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__target_horizon_decision.md.original"
+  },
+  "docs/phase4a_scientific_design_freeze_v1.md": {
+    "sha256": "50736ca11eaa9ca72efcc913dfe1f745068942c4d783977cf5410a4b3b81b281",
+    "public_path": "docs/phase4a_scientific_design_freeze_v1.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__phase4a_scientific_design_freeze_v1.md.original"
+  },
+  "docs/methodology_decisions.md": {
+    "sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+    "public_path": "docs/methodology_decisions.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__methodology_decisions.md.original",
+    "public_baseline_path": "docs/archive/public_refresh_baseline/part44_inputs/docs__methodology_decisions.md.original",
+    "public_baseline_sha256": "92c301e596223deb24c0139cb8e371a479d1f8fec34cece96890c797d0c9d2a4"
+  },
+  "docs/AI_ASSISTANCE_STATEMENT.md": {
+    "sha256": "56fcfea60df952b36347bcb7662a7d6a1b41dce0c33e46f6a5d92a163cddcc15",
+    "public_path": "docs/AI_ASSISTANCE_STATEMENT.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__AI_ASSISTANCE_STATEMENT.md.original"
+  },
+  "artifacts/provider_audit/2026-07-20/provider_audit_summary.md": {
+    "sha256": "970a48571457531b659d7f3c12f34089133337b0f2ed81a4e58eec70e82a2296",
+    "public_path": "artifacts/provider_audit/2026-07-20/provider_audit_summary.md",
+    "archive_path": "docs/archive/public_refresh_baseline/artifacts__provider_audit__2026-07-20__provider_audit_summary.md.original"
+  },
+  "docs/architecture.md": {
+    "sha256": "5e4be1fce2974b0f52a7dc53193be9c0112d6582918cdd7a882cbfa967591d0a",
+    "public_path": "docs/architecture.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__architecture.md.original"
+  },
+  "docs/canonical_claims_and_limitations.md": {
+    "sha256": "5150970893fe818dd2569d51c52d2a1359bd9e615c05372840a360d2aecb56fd",
+    "public_path": "docs/canonical_claims_and_limitations.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__canonical_claims_and_limitations.md.original"
+  },
+  "docs/confirmation_protocol_v2_sourcebound.md": {
+    "sha256": "af10efeac4537622281a695f5008b62030596fb1d708191cf4a850e3a9205ca7",
+    "public_path": "docs/confirmation_protocol_v2_sourcebound.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__confirmation_protocol_v2_sourcebound.md.original"
+  },
+  "docs/data_dictionary.md": {
+    "sha256": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+    "public_path": "docs/data_dictionary.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__data_dictionary.md.original"
+  },
+  "docs/literature_sources/README.md": {
+    "sha256": "a8d99a296d08678d197bab8b3d33aabef3374abe2496c3a45162a7339e605bd1",
+    "public_path": "docs/literature_sources/README.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__literature_sources__README.md.original"
+  },
+  "docs/literature_synthesis.md": {
+    "sha256": "a42fbb5ceb5c233cad31e3891dccd6e413ee3e808d08f9e5d6644f199fa631ee",
+    "public_path": "docs/literature_synthesis.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__literature_synthesis.md.original"
+  },
+  "docs/phase9_academic_reporting_policy_v1.md": {
+    "sha256": "3c7d03f555b958046006d34d4a47e719ed364cbd8b0f7d7b11ffb5d63622c567",
+    "public_path": "docs/phase9_academic_reporting_policy_v1.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v1.md.original"
+  },
+  "docs/phase9_academic_reporting_policy_v2.md": {
+    "sha256": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
+    "public_path": "docs/phase9_academic_reporting_policy_v2.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v2.md.original"
+  },
+  "docs/pit_v22_claims_and_limitations.md": {
+    "sha256": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
+    "public_path": "docs/pit_v22_claims_and_limitations.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__pit_v22_claims_and_limitations.md.original"
+  },
+  "docs/reference/provider_http_reference.md": {
+    "sha256": "ec73b008169a3e12d5a7fbacc3e694c59e4086366f0376acc22bef0cca6b408c",
+    "public_path": "docs/reference/provider_http_reference.md",
+    "archive_path": "docs/archive/public_refresh_baseline/docs__reference__provider_http_reference.md.original"
+  },
+  "reports/final_report_draft_v2.md": {
+    "sha256": "37605d07d45c9f77fcc99426deeb6a18dc5a3079a21a2dcafc7d8a69b7952bb1",
+    "public_path": "reports/final_report_draft_v2.md",
+    "archive_path": "docs/archive/public_refresh_baseline/reports__final_report_draft_v2.md.original"
+  },
+  "specs/001-pit-options-rv30/checklists/research-quality.md": {
+    "sha256": "bf91ebdfeedf3b973a331ed1fca144b9f63a01c4dbb9306c62b0d45cbc0f1bec",
+    "public_path": "specs/001-pit-options-rv30/checklists/research-quality.md",
+    "archive_path": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__checklists__research-quality.md.original"
+  },
+  "specs/001-pit-options-rv30/spec.md": {
+    "sha256": "d260b75c6ed3846804c51e96b3ef7e542319e63749249e8893dff51c6c48c9ef",
+    "public_path": "specs/001-pit-options-rv30/spec.md",
+    "archive_path": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__spec.md.original"
+  }
+}

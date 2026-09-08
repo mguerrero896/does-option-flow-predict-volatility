@@ -1,0 +1,14 @@
+{
+  "active_D05_D07_processes": [],
+  "capital_go": false,
+  "native_verification": "D01_COMPLETED_RUN_VERIFIED_NO_FITS",
+  "report_idempotence": "PASS_FINAL_REPORT_CUSTODY_NO_REWRITE",
+  "source_sha256": {
+    "private-input/5b3e0a69bffb55d0de50": "6608f2ce63953554097a03c8e1e82c08b37ace5c18a14da59856c313ecaadefd",
+    "private-input/52a42b8e8cbcf5889654": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4",
+    "private-input/6b051c4960c33909a357": "0b7ba0f5f99ee90808304e8b1cce6c0497ea5bd3d1b47a0677f0f74186952e35",
+    "private-input/3685cc20c4dd250112e9": "4d0bff27830c138f967c26b4f44c1466cfb0e884384f0bb017c1aa3caba18153"
+  },
+  "status": "PASS_RV15_CLOSED_AND_PROCESSES_EXITED",
+  "verified_utc": "2026-09-08T17:34:38.049094+00:00"
+}

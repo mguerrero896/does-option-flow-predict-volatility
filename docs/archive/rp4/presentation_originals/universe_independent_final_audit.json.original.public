@@ -1,0 +1,100 @@
+{
+  "RESEARCH_ONLY": true,
+  "audit_scope": "Independent completed-family and original-six control audit; not final aggregation acceptance.",
+  "capital_go": false,
+  "control": {
+    "all_three_reproduced_loss_csvs_byte_identical_to_verified_sources": true,
+    "artifacts_verified": 19,
+    "horizons": [
+      15,
+      30,
+      5
+    ],
+    "max_abs_session_delta_difference": 0.0,
+    "max_abs_session_qlike_difference": 0.0,
+    "native_mask_audit_records_verified": 1257,
+    "origins_per_horizon": 160832,
+    "receipt_sha256": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+    "sessions_per_horizon": 419,
+    "source_pins_verified": 2581,
+    "total_session_deltas_exact_zero": 5028,
+    "v5_feasibility_hash_only_paths": [
+      "private-input/8960ad9af7db683aecdb",
+      "private-input/05d6e637c92bfbc03f76",
+      "private-input/79b2149cae0e18ca154e"
+    ]
+  },
+  "created_utc": "2026-09-08T17:29:22.971270+00:00",
+  "families": {
+    "lightgbm_qlike": {
+      "all_eight_assets_present_every_session": true,
+      "components": 1257,
+      "family_forecasts_and_fits_equal_components": true,
+      "forecasts_finite_positive": true,
+      "native_checkpoint_hash_binding_keys_targets_verified": true,
+      "origins": 214209,
+      "paired_session_receipts": 419,
+      "sessions": 419
+    },
+    "log_ridge_harq": {
+      "all_eight_assets_present_every_session": true,
+      "components": 1257,
+      "family_forecasts_and_fits_equal_components": true,
+      "forecasts_finite_positive": true,
+      "native_checkpoint_hash_binding_keys_targets_verified": true,
+      "origins": 214209,
+      "paired_session_receipts": 419,
+      "sessions": 419
+    }
+  },
+  "inventories": {
+    "component_files": 5028,
+    "component_sha256": "0dcbc564b9dc1e669cb667b8ba569c00aa7ec4d8c3ff70629e8e6861d4218b54",
+    "family_files": 1676,
+    "family_sha256": "ebf31b04576c277091d356590917e11251a51b3adf3e00506ccdd0ebc6463eb1",
+    "method": "SHA256 of UTF-8 JSON mapping checkout-relative Windows paths to SHA256; sort_keys=True,separators=(comma,colon). Inventory captures immutable files after native verification."
+  },
+  "limits": [
+    "Final aggregated result receipt and campaign closeout are outside this audit; 419/419 and ETA zero alone do not establish final closure.",
+    "RV30 original v3 stored no historical mask hash vector; the control documents native reconstruction, not historical hash parity.",
+    "Original-six invariance replays frozen primary predictions; it does not imply unchanged six-asset forecasts inside newly fitted eight-asset models.",
+    "Three historically pinned wt_v5/rp4_v5_feasibility inventory/receipt files were checked by SHA256 only under explicit clarification; no v5 outcomes, selector or future cohorts were inspected."
+  ],
+  "real_verification": "Native e.load validates sealed source/runtime/cache hashes; e.binding and v4.read_checkpoint checked each family and component against causal masks, cache keys and target vectors. Positive finite forecasts and exact component/family forecast and fit parity asserted. Original control artifact/source hashes and delta CSV equality checked; source loss CSV hashes equal reproduced CSV hashes.",
+  "resources": {
+    "bootstrap_reruns": 0,
+    "campaign_processes_started_stopped_or_modified": 0,
+    "cpu_affinity": [
+      31
+    ],
+    "model_fits": 0,
+    "numeric_threads": 1,
+    "only_write": "private-input/52a42b8e8cbcf5889654"
+  },
+  "schema": "rp4-universe-independent-final-audit-v1",
+  "source_sha256": {
+    "private-input/9d7cddac857738f169be": "7487edc096fb595edaba8e70f8450b6c493c059e8c06f4751d5a2541da9338e0",
+    "private-input/c407a5bd480767b3acc7": "178b75b09ddf855aa6736aa2e04592df856dd9d6a54dbe14e91122e79ca83cef",
+    "private-input/bcc42fe2720849bb7592": "e6c777629825eab8176b30d0774b7b84ecf8ba9d039e46101f143e657e678326",
+    "private-input/a3a5dad0862531764de3": "32a5f273cd9ab0cbe5259d846330e0725cd7778057e51011cb7188e98b8f41dc",
+    "private-input/d1b081972fbaf9b0362f": "773408958b25d7217ba41acebadc7c14a3d8e3cd9d9deb4c0264c6f259be5195",
+    "private-input/8ee60ae943451d6985b0": "058b440e93f9e69e511686c79d2c4f56fbff70a2ad41d11b6b607639ce4d6575",
+    "private-input/fc2682649d2171deefc6": "3ac535b71f0df17f41e852ec844496f57b7272721136c7e2064011d68624bd20",
+    "private-input/0c867276e3adad899299": "c3044c09f20ea133af9b643664adabb6d5011d808f08c3364de9ff8d31d31dbd",
+    "private-input/dad2aea1b3eb784099be": "cf89cedc3b87db71992e9cf74e1e5c2770e4866893da66a9f64d728600be07de",
+    "private-input/0654988c4a73a2a9c5e9": "88e334836dfd460f60936f502aa6cc6e1f6518b22ab52b8350ab15eeecafb02c",
+    "private-input/55206adf1756ff6fee03": "3834de64bda2b4114410066753164815aecf909d75d92be24475d66a2f15afe5",
+    "private-input/6ccad5f71abb2295a27e": "ece511adff480dd4a823ee45856f01ad2045a75de93f271ad4c5173418c49ddb",
+    "private-input/d3c82edd38a025e87b33": "c9baefde514a905cc095a983f79715831273e2afb69f0ab62a4dbb6d7cd37400",
+    "private-input/71f881c5fdfac3708711": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+    "private-input/2674f42b0409f3324cb9": "f3094094e69b68939599d8e1cc18ea0f73c7866c9265e5ecec411906a7cd6548",
+    "private-input/4afa6efb418a5b3d1e75": "9a18be0a0acbf6fbf5f3854bc381f66713d299dce77cecc3750e5b739a4f23d8",
+    "private-input/93db729633bea529d717": "5386cb53d387770233460aced49b8a7bd6354c67009835dc490f9e8b63c90455",
+    "private-input/291d7dd683af9d734a23": "29c5df837c7795bbd95d88a41f4010686bfda1578b8575b0865c8d9ebc8aaf76",
+    "private-input/a499cee925463e980fd8": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "private-input/ab7751e535e6f0b5ed35": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450",
+    "private-input/ff3ba3580c7f15795348": "b59e0cfbc7ee9d78766743709c358f9264b5ee317cc2f8ec588fc5ca0de1dcc1",
+    "private-input/d70ae72896abdbf85e08": "aafde61fa8a5373c88cd4a21199fff86cfb69f7448d70197729bed0c17686d9a"
+  },
+  "status": "PASS_FAMILY_COMPONENT_AND_ORIGINAL_SIX_CUSTODY"
+}

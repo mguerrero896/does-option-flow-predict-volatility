@@ -1,0 +1,17 @@
+# Proyección verificable de secundarios RP4 v3
+
+Esta carpeta conserva el código y los recibos anteriores. La nueva [evidencia](evidence.json) reúne únicamente agregados finales de AUC, estados y procedencia de los dos pases, diagnósticos de calibración y auditorías aritméticas Mincer–Zarnowitz. Cada hecho conserva un selector exacto y el hash de su fuente pública; el recibo vincula también las fuentes restringidas mediante alias.
+
+La AUC final es calculable en ambas familias y ventanas: 419 sesiones primarias y 25 finales. Ningún H1 rechaza; sus H2 conservan `NOT_TESTED` y un p de decisión nulo. La reparación numérica permite informar los contrastes, sin demostrar mejora incremental ni ausencia de información.
+
+La calibración de pronósticos originales cubre ambas familias. La recalibración afín aplicada corresponde sólo a LightGBM: su fórmula es reproducible, pero los valores negativos llevados al piso registrado generan inestabilidad. **NO VERIFICABLE** conserva el límite de utilidad, sin declarar irreproducible la cuenta.
+
+Los éxitos originales se preservan bajo su regla de aceptación. La revisión coteja resultados guardados y referencias de hashes; no constituye una ejecución nueva de los modelos ni una reproducción independiente con datos distintos. Los intervalos de ejecución guardados describen esos pases, sin certificar la ausencia global de otros procesos.
+
+- [Revisión aditiva de resultados](../../docs/rp4/results_v3_revision3.md).
+- [Cierre combinado anterior](../../docs/rp4/results_v3_revision2.md).
+- [Resultado final conservado](../../docs/rp4/RESULTADO_FINAL_revision_2.md).
+- [Recibo de proyección](projection_receipt_v1.json).
+- [Hashes de las nuevas entregas](projection_SHA256SUMS_v1.txt).
+
+La proyección omite rutas privadas y predicciones individuales. Los originales permanecen preservados. RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

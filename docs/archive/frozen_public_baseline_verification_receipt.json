@@ -1,0 +1,104 @@
+{
+  "archive_map": {
+    "entries": 99,
+    "path": "docs/archive/rp4/DEFENSE_PACKAGE/original_paths.json",
+    "sha256": "2302b240d10700316227dafcc48511c513b07b49b3ee3205b4037fc69229174a"
+  },
+  "baseline": {
+    "logical_path": "artifacts/rp4_v4_prereg/protocol.md",
+    "public_baseline_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.public_baseline.original",
+    "public_baseline_sha256": "4ef4a84f14179312635e01afdbe5df6cc2f50c1f81b4d53f534c1fabb362bd08",
+    "registered_original_sha256": "6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee"
+  },
+  "capital_go": false,
+  "checks": {
+    "archive_contract_after_final_edits": {
+      "command": "python -m pytest -o addopts= -q tests/contract/test_rp4_public_archive.py",
+      "passed": 10
+    },
+    "complete_source_frozen_contract": {
+      "failed": 1,
+      "failing_test": "test_gate_sidecars_agree_with_registry",
+      "failure_scope": "Two local checksums refer to sources not registered in the source checkout: one is registered only in the public candidate and the other belongs to a separate private workflow. No sidecar, registry entry or exclusion was modified.",
+      "passed": 18
+    },
+    "focused_frozen_tests": {
+      "command": "python -m pytest -o addopts= -q tests/contract/test_frozen_artifacts_registry.py -k \"public_baseline_relocation or checksum\"",
+      "deselected": 9,
+      "passed": 10
+    },
+    "mypy": "PASS for scripts/freeze_registry.py and scripts/rp4_archive_sources.py",
+    "negative_cases": [
+      "Changed archived bytes fail the CLI and physical/sidecar contracts",
+      "A false map pin does not redirect the frozen path and the altered physical stub fails",
+      "A baseline outside docs/archive fails",
+      "Unrelated identities remain physical",
+      "The registry bytes remain identical before and after all mutation fixtures"
+    ],
+    "preliminary_candidate_read_only": {
+      "all_gate_sidecars": "PASS",
+      "archived_public_baselines": 1,
+      "intact": 156,
+      "limitation": "Final candidate validation is performed separately by the repository integrator.",
+      "metadata_redactions": 14,
+      "method": "Load the updated source verifier and physical/sidecar contract functions against the public candidate paths, with no candidate writes.",
+      "physical_contract": "PASS",
+      "registered": 156,
+      "withdrawn": 2
+    },
+    "ruff": "PASS for the helper, verifier and both modified contract files",
+    "source_cli": {
+      "archived_public_baselines": 0,
+      "command": "python scripts/freeze_registry.py --verify",
+      "intact": 153,
+      "metadata_redactions": 14,
+      "registered": 153,
+      "withdrawn": 2
+    }
+  },
+  "contract": "Resolve an explicitly mapped public_baseline_path only when the expected frozen pin equals public_baseline_sha256. The target must be inside docs/archive and its raw bytes must match that exact public pin. All other frozen paths remain physical. Private-source pins, redaction receipts and non-distribution records cannot satisfy this route.",
+  "created_at_utc": "2026-09-08T17:24:23.469826+00:00",
+  "current_sources": {
+    "scripts/freeze_registry.py": "b9a669e45035aa601e6dd0eeb43e40736cb185b5e325d41b0a99863742311682",
+    "scripts/rp4_archive_sources.py": "605551ef1838fff972274cbc5202c55f88f85504dba8bd81ffffb7144d0a97f7",
+    "tests/contract/test_frozen_artifacts_registry.py": "7bf196ece3b4aebb78b20e1cb4419b2fe6d1f19e6c1f25b02e402b2e45c72f8c",
+    "tests/contract/test_rp4_public_archive.py": "36bf58fe9643d98881ac6ef471a92b60ac098bc991b283f061a7cbde912f7082"
+  },
+  "forbidden_mutations_not_performed": [
+    "freeze --add",
+    "freeze --lock",
+    "registry edits",
+    "withdrawal-list edits",
+    "storage or model/evaluation changes"
+  ],
+  "preserved_original_sources": {
+    "scripts/freeze_registry.py": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/scripts/freeze_registry.py.original",
+      "public_path": "scripts/freeze_registry.py",
+      "sha256": "3057025b1f81f3e06c3268b4a6a0207dd3df50b5daa0669eec5071259005882d"
+    },
+    "tests/contract/test_frozen_artifacts_registry.py": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/tests/contract/test_frozen_artifacts_registry.py.original",
+      "public_path": "tests/contract/test_frozen_artifacts_registry.py",
+      "sha256": "a72897483db3ed7c57617e66a61db8a90629ac6492ee19a8be426ff8852e334a"
+    }
+  },
+  "previous_documentation_validation": {
+    "path": "docs/archive/archive_relocation_receipt.json",
+    "sha256": "8775536cd3e7f34a0ad8b7487d21b9873cb3ddff65baf5a2cdcc6aada205d998"
+  },
+  "research_status": "RESEARCH_ONLY",
+  "schema_version": "public-frozen-baseline-relocation-verification-v1",
+  "scientific_actions": {
+    "new_evaluations": 0,
+    "new_model_fits": 0,
+    "reserved_cohorts_read": 0
+  },
+  "scope": "Verification-only documentary archive relocation. The frozen registry and writer/storage protections remain unchanged. This is source and preliminary candidate evidence, not final publication acceptance.",
+  "unchanged_existing_files": {
+    "data/FROZEN_ARTIFACTS.json": "f98635901ffdda89964c6c702d7cd9297cef9f72dc15fe4bc9d8056ded786ff5",
+    "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9",
+    "scripts/_mirror_internal_exclude_list.txt": "f93560e15cb68922d501534333042140559bc89a07091fffafa3e323e4e32f86",
+    "src/mds650/storage.py": "ec9d1de55eaef4647cfa4bd97fe28885fee37edb08949adc4a0e8bc268d89438"
+  }
+}

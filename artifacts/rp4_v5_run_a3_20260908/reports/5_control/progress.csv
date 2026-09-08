@@ -1,0 +1,6 @@
+horizon_minutes,family,N_sessions,N_calendar,N_remaining,N_origins,cpu_seconds,status
+15,seasonal_persistence,419,419,0,160832,186.84375,COMPLETE
+15,log_har,419,419,0,160832,13088.140625,COMPLETE
+15,log_ridge_harq,419,419,0,160832,9645.5,COMPLETE
+15,log_elastic_net,419,419,0,160832,13735.03125,COMPLETE
+15,lightgbm_qlike,419,419,0,160832,101485.890625,COMPLETE

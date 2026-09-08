@@ -31,7 +31,7 @@ historical is not sufficient.
 dividend semantics for historical research
 
 ```text
-We are documenting a non-trading academic point-in-time study. We do not need
+The author is documenting a non-trading academic point-in-time study. This request does not need
 account information or data delivery. Please provide a written answer, with an
 official documentation reference or case identifier, for the following.
 
@@ -53,7 +53,7 @@ official documentation reference or case identifier, for the following.
    revised or backfilled, and how can that revision be identified?
 
 Please answer each item separately. A generic statement that historical data
-are available is not sufficient for our timing audit.
+are available is not sufficient for this timing audit.
 ```
 
 Claims required by the intake: `FMP_RESPONSE_TIMESTAMP_TIMEZONE`,
@@ -70,7 +70,7 @@ Claims required by the intake: `FMP_RESPONSE_TIMESTAMP_TIMEZONE`,
 semantics
 
 ```text
-We are documenting a non-trading academic point-in-time study. We do not need
+The author is documenting a non-trading academic point-in-time study. This request does not need
 account information or data delivery. Please provide a written answer, with an
 official documentation reference or case identifier, for the historical Full
 Tape download endpoint /api/option-trades/full-tape/{date}.
@@ -89,7 +89,7 @@ Tape download endpoint /api/option-trades/full-tape/{date}.
    and re-downloads? If yes, name the field and its invariants.
 
 Please distinguish execution, provider ingestion, record creation, alert
-generation, file generation, and customer-visible availability. We will not
+generation, file generation, and customer-visible availability. The study will not
 interpret created_at as publication time without an explicit confirmation.
 ```
 
@@ -102,7 +102,7 @@ Claims required by the intake: `UW_EXECUTED_AT_SEMANTICS`,
 **Subject:** Request for historical options contract and quote as-of semantics
 
 ```text
-We are documenting a non-trading academic point-in-time study. We do not need
+The author is documenting a non-trading academic point-in-time study. This request does not need
 account information or data delivery. Please provide a written answer, with an
 official documentation reference or case identifier, for:
 

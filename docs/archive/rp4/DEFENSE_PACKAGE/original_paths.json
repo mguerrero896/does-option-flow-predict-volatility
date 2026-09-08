@@ -1,0 +1,489 @@
+{
+  "data/DATA_ACCESS.md": {
+    "archive_path": "docs/archive/public_refresh_baseline/DATA_ACCESS.md.original",
+    "public_path": "data/DATA_ACCESS.md",
+    "sha256": "aaa68a4b94af5bfa7059b11c18f400b680ec322edb641c382e56b6e3d034e66a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/README.md",
+    "sha256": "2a637b2ccf35c42b0b1f29b74b8f624ad04fb461dc46d8762e1efa6be9ba76c2"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/SHA256SUMS",
+    "sha256": "f26110704bb9e4ef39ebf7f532c249630412fac7ae02c78b1c3003371da145a5"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/claims_matrix.csv",
+    "sha256": "8f51f56b6292c9c8df79742f4ccb227be322c0fff836766fe7dc5b6a82a2213e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/defense_slides.md",
+    "sha256": "2e5ae7238bf458d0983ba2c4bdb39b6b8109300f66afd3c27c4497e3a06c06a0"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/evidence_manifest.json",
+    "sha256": "4621ef8c2a3bbdffcdf20346413d5464519147adec11c26e9b1546c5b9fb77ed"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/examiner_qa.md",
+    "sha256": "08c8bb37d66c90fa51a6e7ddf1461b3cf6354d1f3de85499e927ea00985f0999"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/executive_summary.md",
+    "sha256": "225a81a5d5239461972bd9ab94d26db6ffcaeb095d40662f5a8fae4995567de9"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/receipt.json",
+    "sha256": "d88a075767bad2b661d90e77b675b7896e1a04f77fcfd70018f96287646ef79f"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/SHA256SUMS",
+    "sha256": "cc2e07a67cdfa46a7afc35514ffa4e18e3e9641bff9b399c825d49550017d800"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/additions_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/additions_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/additions_evidence.json",
+    "sha256": "10085a652cf82144a3ba0a7f9fe632bd95fe910862c5780f2a5c687b43d61389"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/claims_matrix.csv",
+    "sha256": "211e8cc6e180d0b42deea207090f321a31754ec192ded213603a240a8b26d28e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/SHA256SUMS",
+    "sha256": "f2f85b613bbf61644796edad9b3c49f4ca563a0833d2d8c163a55b96c83080fd"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json",
+    "sha256": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/claims_matrix.csv",
+    "sha256": "ce143ae77aeff89507843f5b1b2ff431ac8ca88decd1bec54e7ca9d0dc1b419a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/defense_slides.md",
+    "sha256": "90a26e920e1341882432da501538d1ff9e3df35ca297dcd6fa3fbc47f0e2ac6a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/evidence_manifest.json",
+    "sha256": "649642529797363832c3249d44d7b02c863e5147d5764a10e8ac5a6e38140ee6"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/examiner_qa.md",
+    "sha256": "bbf084f0b937178b1a268a6f72fbee7a44dd453e0e024103b1af164c26f09630"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/executive_summary.md",
+    "sha256": "82b4cea48209b0342983674b2b340a84662d42fc9c5bd4a19860f1280a73c5b5"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_1/receipt.json",
+    "sha256": "9a0b4d16917fefef43c89a12bf2c1f2cfa06190d744460849db5a4f49153a201"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/README.md",
+    "sha256": "534ea517ac31be93218d69708461b51ff32cc0b73b82684560c40cc16a676077"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/SHA256SUMS",
+    "sha256": "385b5b9666b0bdf0313982d75a2ee53259be6792a4620f7dceb811f554dea0e9"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/claims_matrix.csv",
+    "sha256": "e03fbbc154b592dd0391b6ce5f0647f7809137fc8be568da5706aae1d89daf30"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/defense_slides.md",
+    "sha256": "7398634d16229ccc33cafb7f8b9a7b6e0420b573d0cb7d6e17a0ec9d0277fcb3"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/evidence_manifest.json",
+    "sha256": "4105751dc504625baa8c837fa7f99b7d7bae2fb8cfd2fbc1994785c3293648cf"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_evidence.json",
+    "sha256": "5bd7d7a6e85899d0542a4797671b14c534099e8806506b4fff06dd3da46143a4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_qa.md",
+    "sha256": "2b8501feaf449eb4a2d7ddf2d1d345c7dfd05ed80d8d37712777798872e62e25"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/executive_summary.md",
+    "sha256": "0a11f256d60f73847b8add438aad28ae12bff2c95b72d91e3be131dce1c4c35d"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.json",
+    "sha256": "3267849c050360432917076bee57853ae6db6b647d7ae605d67486712d3a30bc"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/index_custody_addendum.sha256",
+    "sha256": "1e1cd6beff340e3cff3a88e7a213ad048671ae4a91675ccb3368bdf3f9fd0c98"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/receipt.json",
+    "sha256": "1c7eab523b72499ec8d40bd4eeae1d563d907f1dbf59072eb21a7a373121c56c"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.json",
+    "sha256": "5eb1c501d5befa3503ea0568bce5f36bcfe49c515eaf203c941dad514e39d5d6"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_complete.sha256",
+    "sha256": "a61f751005ecec7dcea5193cca581c1102ebbfb5833917f0de864e6aea6cbacc"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.json",
+    "sha256": "f7307b198143d85ea09bece183e96f1cad31e3663fbb46b4f43cf1504950f1ce"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_2/verification_receipt.sha256",
+    "sha256": "4969a5ec49800044a8508cb55dffe17ff642dff4bcb1ce4665b2dd31d6879b12"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/README.md",
+    "sha256": "03d875ab776351fefb7c72939ede869c5508e0f30ccf092cc7f07a19061c7471"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/SHA256SUMS",
+    "sha256": "03866c55247d423f79ab5b38b33e31aaf1ba226bf031a74003b85068536abecf"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/claims_matrix.csv",
+    "sha256": "bda56c9f87d9acfa044970f921ac02fc35174d6e5241bd4b8987a79f3e648ade"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/convergence_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/convergence_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/convergence_evidence.json",
+    "sha256": "58131b9e2c3098669baa44471e6638739e6a2d05a5408fd5423620dd3817f238"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md",
+    "sha256": "7a6633f3c38d80c9a8cc0213736871fe5e35b2e43b5f6a6cf518eeb918d02889"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/evidence_manifest.json",
+    "sha256": "aa96f90a4944ed8dda788343d3ec7a90236bd66e362168f0e5f4b781d49a614e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md",
+    "sha256": "e6d25be0da3fefac2165339f571ab03506eb7f82ec4e7b742f75e848d85f7d41"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/executive_summary.md",
+    "sha256": "02ba564228cfe7722deffe3aa329b14bdeb5b7115f223cd54e1898c25bf1b31f"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/receipt.json",
+    "sha256": "6a1ba97d337efc0761a452e8ae8167e1124dcc6b700c862c638371b47099e273"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.json",
+    "sha256": "90bb8bf33d5c136e3d64cf4eff5f87f773e55ffb50cd272c94305bbf64ad4dce"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_3/verification_receipt.sha256",
+    "sha256": "3019472d87d409da41b532af1153ec42d0ea97f54e2e66805245074967a06416"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/README.md",
+    "sha256": "e736b3a7e5161d15ffd577e10eb630cb7a10c4064b8a89711a1c41322922579c"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/SHA256SUMS",
+    "sha256": "956943e34bd51c7b3332fa6e656377c2af69c617146c68f675dc6d41a9010f40"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/claims_matrix.csv",
+    "sha256": "acf22bf0583adc175ceda9c5ec03d81e345d14ef5ddeedc9f17166d768085efe"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/defense_slides.md",
+    "sha256": "529b6b5f6de424caf05594042f353fe094b0f3b48f3a4dbfafe78bf07da790f5"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/evidence_manifest.json",
+    "sha256": "60e77f87a921ff45cc3f8586eba63fd11978720f2410d2ea092dd548cb46d4ba"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/examiner_qa.md",
+    "sha256": "40a19a3f5975ab560de72f9a56868dacd8e407160a1e6c3b695d5940829c5fc4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/executive_summary.md",
+    "sha256": "76a99a84e5e9c16a36db63bbdd084fae511d9c9fc0923cecb8a27e88a57be3db"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_alignment_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_alignment_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_alignment_evidence.json",
+    "sha256": "6dd1d8599ba42e8861af06f6f7acaf9d72d923a590940159bb1834390ad1e965"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+    "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/receipt.json",
+    "sha256": "1a59bd10c69f25d085dc7cec18be2cc78f157bff0d92bbd2937268a3e5f97f0a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.json",
+    "sha256": "ff7ab3338d6c4e509dea7d8f6ab9bb1597cfaf5ca63dfeb59c609050027f92b4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/verification_receipt.sha256",
+    "sha256": "0a56f1ec09c635b61321e057dcee6f2b9338489801de39e65f7b831a8088b6a4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/README.md",
+    "sha256": "6a5bc09f5684b64b0f02ebc27270efb86b7f3ebb4594bd5ac60af45cdb8956dc"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/SHA256SUMS",
+    "sha256": "226b3d428fec88f41a91ddb898d02fd19f2caf6339df315a9226ec8e9a98022e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/claims_matrix.csv",
+    "sha256": "0804cd7e5a4e5cb04ef5413aac8838caee9329c8f49f96a95c6fe2a7d00cad5e"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/defense_slides.md",
+    "sha256": "582e6c6557a402064bd6072b96f99265b486d14eafdec077b827b538e4246105"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/evidence_manifest.json",
+    "sha256": "34a1954d4ea2ef9eddb96a3f487613bd485d300b1e65099c486c91d1e3b64098"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/examiner_qa.md",
+    "sha256": "70575ba5f914b71fa1433de9fad95753219fb097be3eb9083d0da0158e6d3280"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/executive_summary.md",
+    "sha256": "a8cd36ea70094125c233f049a004cb35918616d52ed661617ffd8e89b037b0c4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/holm_evidence.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/holm_evidence.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/holm_evidence.json",
+    "sha256": "c8d14169f8231e4015671f18da90432d648a8e012a68f7a74d5b832a5134ca22"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/receipt.json",
+    "sha256": "3cc5130aa8e6ce1b5dcafe35f2bfa7aa4505b09df1dec1c34a9251f659f0441a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.json",
+    "sha256": "d302fae1a07abaee87e56261953b81ccbcda7322c78b1edbc0e36e18f61725c5"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_5/verification_receipt.sha256",
+    "sha256": "9e12d208c635ea386c3b05c19260d0f8f86034b15fe2432561f639117c1cda75"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/README.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/README.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/README.md",
+    "sha256": "997d984abb84e6e6d7a29b78afe214bf97852c0f2bb4b8e0cfdc60fbbc736bd7"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/SHA256SUMS": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/SHA256SUMS",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/SHA256SUMS",
+    "sha256": "075008bf7f060736fe075ba8f38e27ecc080a50d4bf852055b2d3e9153bc0dd4"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/claims_matrix.csv": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/claims_matrix.csv",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/claims_matrix.csv",
+    "sha256": "40573f2a0d7188c464e30344bffb156eac68b54da7909b709a952069e64a1c2a"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/defense_slides.md",
+    "sha256": "345a74abbc73d5340caf10a65b6530e60ef3bd5c5429c30b3beb159180fa51aa"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/evidence_manifest.json",
+    "sha256": "fef298641a344e222c3924d9d0cca0eb8832243b575c7138c88fa266ec836c58"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/examiner_qa.md",
+    "sha256": "66ed9130c51315f89a3b224117114fb43be55676a6d4a1d639978d90db70ca41"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/executive_summary.md",
+    "sha256": "9aa8bfbf471e4c62a5afa721a1eb2ccd9f1cbc15555bd5794aba122575aee97f"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/receipt.json",
+    "sha256": "600a477b68c0582b6425fc03c67970aea88dddf043ee685de8210f9ebb4b2672"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.json",
+    "sha256": "477bd86e236ec5aa5a0229e5976b208b37ed0ea74bbfe40190b035560569e122"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.sha256": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.sha256",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_6/verification_receipt.sha256",
+    "sha256": "2333fd9723d4cbf33c427afb447cc31ddb18a3aec429443a475463208e5ca927"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/defense_slides.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/defense_slides.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/defense_slides.md",
+    "sha256": "a92cc571ad34abe4bf9dbfd262a0b9be2ae0f55164ec7882b40c35507b459acf"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/evidence_manifest.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/evidence_manifest.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/evidence_manifest.json",
+    "sha256": "9fc9a262dfa0b0036bd58224b45f3a94430e109f3ac8d120f95dbf20aea62b58"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/examiner_qa.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/examiner_qa.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/examiner_qa.md",
+    "sha256": "a8b61f607f53bf1ebd36e67298d125435162f33ccb3f4e3d738ad965306de16c"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/executive_summary.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/executive_summary.md.original",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/executive_summary.md",
+    "sha256": "93ed23a06ed3824cf058106f3934d1bc2e41efc86d3330943991a05405801106"
+  },
+  "docs/rp4/DEFENSE_PACKAGE/revision_2/receipt.json": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/receipt.json",
+    "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/receipt.json.public",
+    "sha256": "595e2a9873c13096e802a8d137949f1293544dbf2ef7e8168dff794e7f7d1383"
+  },
+  "docs/rp4/RUNBOOK.md": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/docs/rp4/RUNBOOK.md.original",
+    "public_path": "docs/rp4/OPERATING_GUIDE.md",
+    "sha256": "5890e0f3d68d34be9cb40575d6c1905da90dfd0574e00e1eeb7b9295d16ece31"
+  },
+  "notebooks/canonical_rv30_defense.ipynb": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/notebooks/canonical_rv30_defense.ipynb.original",
+    "public_path": "notebooks/canonical_rv30_defense.ipynb",
+    "sha256": "5c93fe9cd4f503df74324b8d31a419ec9d5a138355611bb715ce414b96be33d5"
+  },
+  "notebooks/research_pipeline.ipynb": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/notebooks/research_pipeline.ipynb.original",
+    "public_path": "notebooks/research_pipeline.ipynb",
+    "sha256": "01180e8a2af11be57645f180bef1b84919e22aa1327149f5fb677e9d16502045"
+  },
+  "scripts/_mirror_internal_exclude_list.txt": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/scripts/_mirror_internal_exclude_list.txt.original",
+    "public_path": "scripts/_mirror_internal_exclude_list.txt",
+    "sha256": "1f4b085ab6eaf401810cf7cbb06c16147ed58e27bf54607072fb8b4cff69e403"
+  },
+  "scripts/freeze_registry.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/scripts/freeze_registry.py.original",
+    "public_path": "scripts/freeze_registry.py",
+    "sha256": "3057025b1f81f3e06c3268b4a6a0207dd3df50b5daa0669eec5071259005882d"
+  },
+  "tests/contract/test_frozen_artifacts_registry.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/tests/contract/test_frozen_artifacts_registry.py.original",
+    "public_path": "tests/contract/test_frozen_artifacts_registry.py",
+    "sha256": "a72897483db3ed7c57617e66a61db8a90629ac6492ee19a8be426ff8852e334a"
+  },
+  "tests/contract/test_rp4_defense_additions.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_defense_additions.py.original",
+    "sha256": "aa08f78e376f93868452dcfc6c2ea6d268c04a0234e58dc6dcc65bf46aaefeb2"
+  },
+  "tests/contract/test_rp4_defense_audit_corrections.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_defense_audit_corrections.py.original",
+    "sha256": "97dce8c002794267db15cd3fe7c8112cfe045410b8419ac254e54e03e4da9a35"
+  },
+  "tests/contract/test_rp4_defense_examiner_revision.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_defense_examiner_revision.py.original",
+    "sha256": "de043dcbaf269a8ca28ff506464ed7edfa7e318e2a5261c8d8814b08b67a4d40"
+  },
+  "tests/contract/test_rp4_defense_package.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_defense_package.py.original",
+    "sha256": "d8b97a79349908dc3c8aaad2f3c2711951c286d9a117c963d8e4df48116ee455"
+  },
+  "tests/contract/test_rp4_program_convergence.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_program_convergence.py.original",
+    "sha256": "73abba1bc473660c8fc0c0735fe280339d9412a399b51a4da0ac0c68221f921c"
+  },
+  "tests/contract/test_rp4_proposal_alignment.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_proposal_alignment.py.original",
+    "sha256": "b22b2fa1a10b0b1291a81b15c24b934f1f6433a7a21a5dcfe6e08ded0440ed81"
+  },
+  "tests/contract/test_rp4_saved_holm_closeout.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_saved_holm_closeout.py.original",
+    "sha256": "5aa9c6b61d292d177b75d44ddefad279f1857419e5549d0730e99a5bbe65ab41"
+  },
+  "tests/contract/test_rp4_v3_secondary_projection.py": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/contract_originals/test_rp4_v3_secondary_projection.py.original",
+    "sha256": "5cb8f46d8ddddeae4f881332b89dcd9d71393d61a833c654f66d0d320a9935cb"
+  },
+  "uv.lock": {
+    "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/uv.lock.original",
+    "public_path": "uv.lock",
+    "sha256": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0"
+  }
+}

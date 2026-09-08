@@ -240,7 +240,7 @@ As the research evaluator, I need a common out-of-sample comparison of B0, B1a a
 an auditable notebook and manifest so that incremental information from trade-derived activity is
 tested without leakage, silent sample changes or live-trading claims.
 
-**Why this priority**: This is the scientific decision the capstone is meant to answer, but
+**Why this priority**: This is the scientific decision the study is meant to answer, but
 it depends on the feasibility and pilot gates from Stories 1 and 2.
 
 **Independent Test**: Re-run the local pipeline and the Colab orchestration on the frozen
@@ -687,8 +687,8 @@ final testing preserve the natural event prevalence:
 - Provider credentials will be rotated after their exposure in the chat and then loaded from
   an approved runtime secret store. User-scope environment presence is not treated as proof
   that a credential is safe to use.
-- The requested Downloads source folder is currently unavailable. Existing MDS650 proposal
-  documents and the course ZIP are usable as provisional design sources, but no claim will
+- The requested Downloads source folder is currently unavailable. Existing research proposal
+  documents and the proposal ZIP are usable as provisional design sources, but no claim will
   cite the missing folder as read until its path is supplied and its contents are inspected.
 - A forecast origin is the end of a five-minute interval during regular market hours. Exact
   calendar handling, early closes and daylight-saving rules will be frozen in the plan.

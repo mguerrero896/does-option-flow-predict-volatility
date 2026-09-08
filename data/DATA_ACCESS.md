@@ -31,8 +31,9 @@ fully checkable from public material alone.
 
 1. Open a GitHub issue on this repository titled `Data access request`, stating your
    affiliation and purpose, or contact the author directly.
-2. The author verifies the purpose is research/review (not redistribution) and issues
-   **time-limited signed URLs** for the requested files from private storage.
+2. The author reviews the purpose and applicable provider entitlements. The bucket
+   remains private; access is individually managed and is not guaranteed by a request.
+   If permitted, access uses **time-limited signed URLs** for the approved files.
 3. Verify each downloaded file against its SHA-256 in `GATED_DATA_POINTERS.json`, then
    run `scripts/fetch_gated_data.py --manifest <file-with-signed-urls>` (or download
    manually) and place files at their recorded `path`.
@@ -42,7 +43,35 @@ fully checkable from public material alone.
 Raw provider payloads (hundreds of GB) are never shared; full reproduction from
 scratch requires live provider entitlements, as documented in the README.
 
-## Research catalog database (Supabase Postgres, 2026-08-18)
+## Public v4 aggregate results (verified 2026-09-09 Sydney)
+
+There are now **nine public aggregate/registry tables**: the six historical tables
+listed below and three v4 tables. The four curated `api` views are unchanged, and the
+`research-data` bucket remains private. The new tables are:
+
+| Table | Rows | Public source |
+| --- | ---: | --- |
+| `rp4_v4_primary_statistics` | 24 | [Saved primary statistics](../artifacts/rp4_v4_b4/primary_statistics.csv) |
+| `rp4_v4_coverage` | 36 | [Saved coverage](../artifacts/rp4_v4_b4/coverage.csv) |
+| `rp4_v4_horizons` | 3 | [Horizon reference](../artifacts/rp4_public_refresh/horizon_reference.csv) |
+
+Each row carries its source path, SHA-256 and CSV row number. Its `result` JSON
+preserves exact CSV cell strings, including decimal precision and empty fields.
+The 30-minute entries are the historical v3 reference; 15 minutes is v4 primary and
+5 minutes secondary. These are saved aggregate results, not provider observations.
+
+Anonymous and authenticated roles receive SELECT only, with RLS and a `public_read`
+policy. Service-role writes are scoped to these tables. The existing catalog loader's
+`--rp4-v4` mode checks pinned source hashes and reads back every cell; `--dry-run`
+validates inputs without connecting to the database. No licensed loader runs in this mode.
+
+The [before/after receipt](../artifacts/rp4_public_refresh/supabase_receipt.json) records
+schema exports, exact added objects, hashes and full anonymous round-trip equality.
+All pre-existing table definitions, grants, policies, views and buckets were unchanged.
+The older endpoint measurements below retain their recorded dates; this refresh does
+not claim to have reread private tables.
+
+## Historical research catalog (Supabase Postgres, 2026-08-18)
 
 Beyond Storage, the project's Pro Supabase instance (project `eqpyjikcewqaegnbaemf`)
 now hosts a queryable research catalog — **aggregates and registry only, never
@@ -64,7 +93,7 @@ the anonymous key:
   `access_grants` and the ingestion logs, return no rows. They carry zero policies, so
   RLS denies every row, and `anon` and `authenticated` hold no grant of any kind on the
   six licensed tables — a read is refused at the privilege level, before RLS is reached.
-- **Open by design.** Six aggregate and registry tables (`campaigns`,
+- **Historical public surface, retained.** Six aggregate and registry tables (`campaigns`,
   `contrast_results`, `mcs_cells`, `rp2_blocks`, `rp2_extensions`, `rp2_power`) carry a
   permissive `*_public_read` policy, and four curated `api.*` views are readable through
   the `Accept-Profile: api` header. These publish the same aggregates the repository

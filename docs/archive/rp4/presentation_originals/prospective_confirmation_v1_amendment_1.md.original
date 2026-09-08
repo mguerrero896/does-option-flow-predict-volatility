@@ -1,0 +1,69 @@
+# Réplica prospectiva v4 — enmienda 1 del registro v1
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+**Sellado de esta enmienda: 2026-09-08T04:31:58.752153+00:00.** Se añade antes de la primera ejecución del colector, prevista para **2026-09-09 a las 10:00 Australia/Sydney**. En la comprobación local, la tarea no registra ejecución y su directorio de adquisición aún no existe; no se ha leído ni producido una cohorte prospectiva en esta tarea.
+
+## Cadena de sellados y alcance
+
+El [registro v1](prospective_confirmation_v1.md) permanece íntegro: SHA-256 `317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d`, sellado el **2026-09-08T04:24:01.918499+00:00**, según su [recibo original](prospective_confirmation_v1_receipt.json). Esta enmienda tiene hash y [sidecar propios](prospective_confirmation_v1_amendment_1.sha256); su [recibo](prospective_confirmation_v1_amendment_1_receipt.json) enlaza ambos sellados. Son constancias locales de bytes y secuencia, no sellos temporales independientes de un tercero.
+
+**El primario y su regla de decisión no cambian:** la réplica confirma sólo si H1 y H2 rechazan en la familia lineal a 15 minutos en la lectura principal de 20 sesiones completas, con la secuencia y el umbral del v1. La lectura acumulada de 40 prevista en v1 conserva exclusivamente su función de estabilidad y no rescata un resultado primario negativo. Los dos secundarios nuevos se leen **una sola vez, junto con el primario, al completar las primeras 20 sesiones**; no se vuelven a contrastar a 40 sesiones ni modifican el veredicto primario.
+
+La especificación científica heredada es [v4](../../artifacts/rp4_v4_a1/specification.json), SHA-256 `0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04`. Ni v3 ni v4 se editan o se vuelven a evaluar. Se incorpora una ablación prospectiva como secundario nuevo; no se presenta como resultado histórico ni como una v5.
+
+## Secundario A — contribución predictiva del bloque de desbalance
+
+**Pregunta:** ¿añadir el bloque registrado de desbalance gamma mejora el pronóstico de la familia lineal a 15 minutos frente al mismo B2 sin ese bloque?
+
+La base es B2 sin las cuatro columnas de `gamma_imbalance.columns`, más la eliminación de sus correspondientes indicadores de presencia; la ampliación es B2 completo. Las cuatro columnas, fijadas por nombre antes de observar datos, son:
+
+- `rp4_gamma_imb_total`;
+- `rp4_gamma_imb_near_spot`;
+- `rp4_gamma_imb_near_short`;
+- `rp4_gamma_imb_signed_trades`.
+
+Quedan 134 predictores base frente a los 138 de B2 completo, antes de efectos fijos, indicadores y filtrado de rango. La última variable cuenta operaciones con dirección identificable: no es un saldo firmado de exposición. Permanecen las tres columnas históricas de exposición gamma incluidas en `dealer_columns`; retirarlas también respondería otra pregunta y no está registrado aquí.
+
+Se mantiene la misma muestra y máscara v4 que el primario, la misma pérdida QLIKE, agregación por activo/sesión, entrenamiento expansivo, transformación, selección temporal, rejilla, semilla, purga, embargo y límites. El modelo reducido se ajusta con su propio entrenamiento y selección bajo esas mismas reglas; no hereda a posteriori el mejor hiperparámetro del modelo completo. Se mantienen las máscaras comunes aun cuando el modelo reducido pudiera admitir más filas. No se eliminan observaciones por su pérdida ni se calcula una nueva selección de variables.
+
+Para cada sesión se forma delta = QLIKE de B2 reducido − QLIKE de B2 completo, después de las mismas medias por activo. H0 es contribución media no positiva y la alternativa es positiva. Se usa la inferencia de media v4: bootstrap circular por sesión, bloques de cinco sesiones, 9.999 réplicas, semilla 20260907, nula centrada y corrección +1, p unilateral e IC percentil bilateral del 95 %. Se publican el delta, el efecto relativo al QLIKE del modelo reducido, el intervalo y los p nominal y ajustado.
+
+**Regla:** este secundario respalda contribución predictiva del bloque sólo si la media de delta es positiva y su p ajustado por Holm entre estos dos secundarios es ≤ 0,05. No rechazo se informa como «contribución no detectada», nunca como equivalencia ni como prueba de que todo sea composición del flujo. Un rechazo identifica el aporte conjunto de estas columnas y sus indicadores en esta familia: no demuestra inventario real de dealers, cobertura causal ni contribución aislada de gamma frente al conteo de operaciones.
+
+## Secundario B — mediana pareada de los árboles
+
+**Pregunta:** ¿la mejora de B2 sobre B1 en LightGBM a 15 minutos se presenta en la sesión típica, aunque la media histórica no la confirme?
+
+Se usa exactamente el B1 y B2 de los árboles v4 y las mismas primeras 20 sesiones completas. Para cada sesión se forma delta = QLIKE de B1 − QLIKE de B2, con la misma agregación por activo/sesión. El estimando es la **mediana de los deltas pareados**, no la diferencia entre las medianas de dos series ni la mediana por origen.
+
+Se conserva el bootstrap de mediana de v4: bloques circulares de cinco sesiones, 9.999 réplicas, semilla 20260907, intervalo percentil bilateral del 95 % y p bilateral con la receta del [productor de inferencia](../../artifacts/rp4_v3_code/inference.py). Se reporta también el signo. La prueba bilateral conserva la posibilidad de revelar un deterioro de la sesión típica.
+
+**Regla:** este secundario respalda mejora de la mediana sólo si la mediana de delta es positiva y su p ajustado por Holm entre estos dos secundarios es ≤ 0,05. Un resultado adverso se publica con su signo; un resultado positivo no sustituye la media ni cambia el primario. No rechazo no demuestra B2 igual a B1.
+
+## Multiplicidad, lectura y fallos
+
+Los p nominales se calculan con las recetas v4 anteriores. Para las dos nuevas decisiones secundarias se fija una familia de multiplicidad propia: Holm al 5 % sobre el p unilateral de A y el p bilateral de B. Ordenados de menor a mayor, se comparan primero con 0,025 y después con 0,05, y la secuencia se detiene si falla el primer escalón; se exige además signo positivo para declarar mejora. El ajuste sólo afecta estas nuevas decisiones secundarias y no altera la secuencia primaria H1→H2 del v1. No se reclama control global al 5 % sobre la unión del primario y ambos secundarios.
+
+La lectura de ambos secundarios ocurre incluso si el primario no confirma. No se añaden búsquedas por activo, horizonte o variante como sustitutos de estas decisiones. Si una prueba es no computable, se publica ese estado y no se reduce la familia de multiplicidad: para ajustar la otra se usa p = 1 en el lugar no disponible, sin presentar ese valor administrativo como p estimado. No se consume otra lectura para obtener un resultado favorable.
+
+Antes del primer ajuste se fijarán por hash, en archivos nuevos, el productor de ablación, el manifiesto de datos, las claves/máscaras comunes y el entorno, comprobando que el reducido difiere sólo en las cuatro columnas e indicadores especificados. Este registro no ejecuta ajustes, no abre pérdidas y no implementa un lanzador automático de evaluación.
+
+## Corrección operativa del colector
+
+Se conserva la identidad de tarea, el script, sus argumentos y la configuración con SHA-256 `5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6`. La acción ahora usa PowerShell instalado en la ubicación estable del sistema; la versión observada es **7.6.3**. El disparador diario queda a las **10:00 civiles de Australia/Sydney**, sin un offset UTC fijo en `StartBoundary`. Esto sustituye sólo la hora operativa de 08:00 documentada en v1; la cohorte inicial sigue siendo la sesión XNYS de 2026-09-08, recogida el día siguiente en Sídney.
+
+Para cierre ordinario de Nueva York a las 16:00:
+
+| Régimen Nueva York / Sídney | UTC Nueva York | UTC Sídney | Hora de Nueva York cuando Sídney marca 10:00 | Margen desde el cierre |
+| --- | --- | --- | --- | --- |
+| EDT / AEST | −4 | +10 | 20:00 del día anterior | 4 horas |
+| EDT / AEDT | −4 | +11 | 19:00 del día anterior | 3 horas |
+| EST / AEDT | −5 | +11 | 18:00 del día anterior | 2 horas |
+| EST / AEST | −5 | +10 | 19:00 del día anterior | 3 horas |
+
+Cálculo: hora de Nueva York = 10 − offset de Sídney + offset de Nueva York, reducida módulo 24; margen = esa hora − 16. La tabla cubre las cuatro combinaciones de offsets solicitadas, sin afirmar que todas ocurran en cada año. El menor margen es de dos horas y supera la gracia registrada de 30 minutos; los cierres anticipados tienen más margen.
+
+`WakeToRun=false` y `StartWhenAvailable=true`: la tarea no despierta el equipo y podrá ejecutarse al volver a estar disponible. El colector obtiene sólo la última sesión cerrada; una suspensión o apagado prolongado puede dejar sesiones sin recoger y no equivale a un backfill automático. Esas ausencias se censan según v1.
+
+El recibo privado de registro conserva las acciones y el estado antes/después, ambas salidas de `launch.ps1 -DryRun` con exit 0, el ejecutable y el nuevo disparador; el recibo público de esta enmienda fija su hash sin exponer ubicaciones privadas. La tarea está habilitada, pero su primera descarga real aún no ha ocurrido. Ningún resultado de esta enmienda está disponible.

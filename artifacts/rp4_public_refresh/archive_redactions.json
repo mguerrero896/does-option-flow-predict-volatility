@@ -1,0 +1,1230 @@
+{
+  "schema_version": "public-archive-redactions-v1",
+  "entries": [
+    {
+      "logical_path": "artifacts/rp4_a2/INCIDENTS.md",
+      "original_sha256": "8b1f903f196e6767f1c1b023c9b51fc70fa88bb5c17953d05e44e8e201d8dc7b",
+      "public_path": "docs/archive/public_history/artifacts/rp4_a2/INCIDENTS.md.original.public",
+      "public_sha256": "b5c70e8f99a593cf4eaeed28f5fa69d05291bc92cec06da6f42cb9b5bf996da5",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_a2/REPORT.md",
+      "original_sha256": "74763c8c6ccf683dba5877997c806654e35738baaeff76684d0f0c0e7ac71191",
+      "public_path": "docs/archive/public_history/artifacts/rp4_a2/REPORT.md.original.public",
+      "public_sha256": "8cf889489878a81893e26043233bf9d42ae29b8793001b3e5dde3e535205afff",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_b1/INCIDENTS.md",
+      "original_sha256": "a7dd4e6148ab0ba780f935e7737bf871b1faca6345b8b7efd9c6b74ef0e9741d",
+      "public_path": "docs/archive/public_history/artifacts/rp4_b1/INCIDENTS.md.original.public",
+      "public_sha256": "037c63e2f9d86356b5790100a9bae3de0ec03456f9f8b2be196a7e08be436b61",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_b1/REPORT.md",
+      "original_sha256": "db7347ead3666429e211d1b49d914b6f50a30bbc5aeff11ade6f52ef278a8572",
+      "public_path": "docs/archive/public_history/artifacts/rp4_b1/REPORT.md.original.public",
+      "public_sha256": "021b63724d8079647f38ea6239306d9a82319b68d8789bd5230188d1630c8a68",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_b2/REPORT.md",
+      "original_sha256": "334d2acc5993da29f4c7a2b23fea901168bdcf63c5527f79a6252d06791e9425",
+      "public_path": "docs/archive/public_history/artifacts/rp4_b2/REPORT.md.original.public",
+      "public_sha256": "dfd6c5008c67f9f0ba579d50da76f95ad79327fdce5d79fea3a387bc5e5ed680",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_b3/REPORT.md",
+      "original_sha256": "381a5f3784f5478deb20e012a6ec677dd900eae555c50fdb618adc95bbcb0b21",
+      "public_path": "docs/archive/public_history/artifacts/rp4_b3/REPORT.md.original.public",
+      "public_sha256": "37da14252054d555ebb19196bd701bd28147e22e23a513076d826077a07283d5",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/COLUMNS.md",
+      "original_sha256": "bc65296d403eeb976a722fa42862f5884a0b08137734120215b20c3bf2e3974f",
+      "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/COLUMNS.md.original.public",
+      "public_sha256": "591e8c90078a8f457de27f538dfa8f9f368da8128da11b847c6951f500e14644",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/REPORT.md",
+      "original_sha256": "e7c79b917f564cfddba1a062cf7d189332b88d4bdbd7a3e3bfcd837d7a16d082",
+      "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/REPORT.md.original.public",
+      "public_sha256": "542622a62022aa7033793c8664be82f07234b45dee65208f89e5e061ebeb6ba7",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/precheck/COLUMNS.md",
+      "original_sha256": "bc65296d403eeb976a722fa42862f5884a0b08137734120215b20c3bf2e3974f",
+      "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/precheck/COLUMNS.md.original.public",
+      "public_sha256": "591e8c90078a8f457de27f538dfa8f9f368da8128da11b847c6951f500e14644",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/REPORT.md",
+      "original_sha256": "f07ecfe3202e4aaba7d7d2e23f308d86af9f12f012e741f5b2cbd63a4c3ff513",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v3_a2/REPORT.md.original.public",
+      "public_sha256": "7c33242349fe04f30f9d27de468d182aecb4a52c2c570a09916452591ab30579",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/logistic_numerical_audit/README.md",
+      "original_sha256": "28e7b5af6662669e3120f421f00030b4b2073ab11786a85e83ffbad1ad6d064d",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v3_b4/logistic_numerical_audit/README.md.original.public",
+      "public_sha256": "9bebac6d5e689759dc54efd4b0ae10eefad3df299d5eb56db71ac036106be7e7",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md",
+      "original_sha256": "88493b7eb1a3ceff3cdef1c0bd4ecbe467fc64d443552e0b8b2b8888568a1d54",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md.original.public",
+      "public_sha256": "490d573571c59a4f51d49e6f7ad266884d5e3dd846630ca74a79267269122ae6",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/README.md",
+      "original_sha256": "7be179e9d79160b9f3906a1e8df6260a01e3b2d2efb9aed283bd1e7c2ff2d3b4",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/README.md.original.public",
+      "public_sha256": "0c3884962b992a6f8e493830268f3806a0c237889514a2569dcb1cf164cee24e",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_a2/REPORT.md",
+      "original_sha256": "0fb6acfc3f16dff2ae73fe39a868726bfbf6065eac2def9051673db91b17709d",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v4_a2/REPORT.md.original.public",
+      "public_sha256": "d8c92beccc9ba118d4d9b95339b8d9a69c28218f19b89f8ef8d41cc7214c4083",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_prereg/protocol.md",
+      "original_sha256": "6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee",
+      "public_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.original.public",
+      "public_sha256": "4ef4a84f14179312635e01afdbe5df6cc2f50c1f81b4d53f534c1fabb362bd08",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/specification_v2.md",
+      "original_sha256": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+      "public_path": "docs/archive/public_history/docs/rp4/specification_v2.md.original.public",
+      "public_sha256": "2b8dcb1426b572441950d9e063fd8f2a45b0953a5d913f65238ce3aa9bfe0709",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/specification_v3.md",
+      "original_sha256": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+      "public_path": "docs/archive/public_history/docs/rp4/specification_v3.md.original.public",
+      "public_sha256": "f8c8bc4f7c85cb29c0820da0ef4fbaa91d26470c872d859c4d016f2e5015a8c7",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/v3_secondary_implementation_addendum_v1.md",
+      "original_sha256": "c89b63598f9d9a2aff2a76e0f09ed303653ffac83f8c4e5d50f128dcc04dafd7",
+      "public_path": "docs/archive/public_history/docs/rp4/v3_secondary_implementation_addendum_v1.md.original.public",
+      "public_sha256": "1e52ed2efb1088c91c1f7103d6d9f0d0a0c5c0dfe2cc4ad2e3788b4b19ee4f9a",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/provider_audit/2026-07-20/provider_audit_summary.md",
+      "original_sha256": "970a48571457531b659d7f3c12f34089133337b0f2ed81a4e58eec70e82a2296",
+      "public_path": "docs/archive/public_refresh_baseline/artifacts__provider_audit__2026-07-20__provider_audit_summary.md.original.public",
+      "public_sha256": "f7b49633ee662776fa313784eee69ca69571ecc0ee47e71473eaf961e6259a7c",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/architecture.md",
+      "original_sha256": "5e4be1fce2974b0f52a7dc53193be9c0112d6582918cdd7a882cbfa967591d0a",
+      "public_path": "docs/archive/public_refresh_baseline/docs__architecture.md.original.public",
+      "public_sha256": "67816ce3cf32b162196a2b504d1e1ebfe1c7363c9591927bf2c479a1af973e7f",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/canonical_claims_and_limitations.md",
+      "original_sha256": "5150970893fe818dd2569d51c52d2a1359bd9e615c05372840a360d2aecb56fd",
+      "public_path": "docs/archive/public_refresh_baseline/docs__canonical_claims_and_limitations.md.original.public",
+      "public_sha256": "bb513bd29eb3ce2b437ef10799024cc8bab1d62e925b0071d9b0134dc95fcb77",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/confirmation_protocol_v2_sourcebound.md",
+      "original_sha256": "af10efeac4537622281a695f5008b62030596fb1d708191cf4a850e3a9205ca7",
+      "public_path": "docs/archive/public_refresh_baseline/docs__confirmation_protocol_v2_sourcebound.md.original.public",
+      "public_sha256": "6dec87b45f617033acdec85029c99234948348b988fcb95cf30e5cd340b64cd6",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/data_dictionary.md",
+      "original_sha256": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+      "public_path": "docs/archive/public_refresh_baseline/docs__data_dictionary.md.original.public",
+      "public_sha256": "0f8e93864e5374d9b14e73d240cd5f7bb237086dec20316488331a6be293c0d7",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/literature_sources/README.md",
+      "original_sha256": "a8d99a296d08678d197bab8b3d33aabef3374abe2496c3a45162a7339e605bd1",
+      "public_path": "docs/archive/public_refresh_baseline/docs__literature_sources__README.md.original.public",
+      "public_sha256": "e2205598a618e6f8c6b5b7929ee5cc27ad0a5b031d96c1486c7b9d1610ab4e56",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/literature_synthesis.md",
+      "original_sha256": "a42fbb5ceb5c233cad31e3891dccd6e413ee3e808d08f9e5d6644f199fa631ee",
+      "public_path": "docs/archive/public_refresh_baseline/docs__literature_synthesis.md.original.public",
+      "public_sha256": "a781ad3be431819cb4058dd19d64e83460adcd28b53b70812538ea1501b7385d",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/methodology_decisions.md",
+      "original_sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+      "public_path": "docs/archive/public_refresh_baseline/docs__methodology_decisions.md.original.public",
+      "public_sha256": "ad1c0c9ced6eb0beedd3a92558d5db5b595a29c922de297c363764bc7d32e1c7",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/phase9_academic_reporting_policy_v1.md",
+      "original_sha256": "3c7d03f555b958046006d34d4a47e719ed364cbd8b0f7d7b11ffb5d63622c567",
+      "public_path": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v1.md.original.public",
+      "public_sha256": "cdd8e091c7b47d7676a027bc000c4eb60ce8341075e40879a49c955b04f6ba20",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/phase9_academic_reporting_policy_v2.md",
+      "original_sha256": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
+      "public_path": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v2.md.original.public",
+      "public_sha256": "00f5987dbb63206b7f1dcceedb6bcf23a6f3f06cfd149ce7e71a18fccb55992e",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/pit_v22_claims_and_limitations.md",
+      "original_sha256": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
+      "public_path": "docs/archive/public_refresh_baseline/docs__pit_v22_claims_and_limitations.md.original.public",
+      "public_sha256": "5cd6114ce6089a52807b7bdcc816551bdf3bc265e84a0e12d3f70a3d946ff0b8",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/reference/provider_http_reference.md",
+      "original_sha256": "ec73b008169a3e12d5a7fbacc3e694c59e4086366f0376acc22bef0cca6b408c",
+      "public_path": "docs/archive/public_refresh_baseline/docs__reference__provider_http_reference.md.original.public",
+      "public_sha256": "6990433fa6f599d2a0b9a9864a402e186d9f3319718272bcfd9712ee941c06b3",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "reports/final_report_draft_v2.md",
+      "original_sha256": "37605d07d45c9f77fcc99426deeb6a18dc5a3079a21a2dcafc7d8a69b7952bb1",
+      "public_path": "docs/archive/public_refresh_baseline/reports__final_report_draft_v2.md.original.public",
+      "public_sha256": "17d0962435a494a7009b9617cf9c89554b2798b4bf2e1ac039f423f9a2ef403a",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "specs/001-pit-options-rv30/checklists/research-quality.md",
+      "original_sha256": "bf91ebdfeedf3b973a331ed1fca144b9f63a01c4dbb9306c62b0d45cbc0f1bec",
+      "public_path": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__checklists__research-quality.md.original.public",
+      "public_sha256": "a94b6d64ae3eebbaa4fccf1e20fc7246a748917e47e9f117d951bcac18d2a34c",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "specs/001-pit-options-rv30/spec.md",
+      "original_sha256": "d260b75c6ed3846804c51e96b3ef7e542319e63749249e8893dff51c6c48c9ef",
+      "public_path": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__spec.md.original.public",
+      "public_sha256": "ce8a5d8d059d8423b1cff59efa45d8418fe5da1031b6b24e64cfc747fcd51494",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "notebooks/research_pipeline.ipynb",
+      "original_sha256": "01180e8a2af11be57645f180bef1b84919e22aa1327149f5fb677e9d16502045",
+      "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/notebooks/research_pipeline.ipynb.original.public",
+      "public_sha256": "e759f885d322a308b9e74ec176608904c73496ca0da8c8089e1dded6e250e59e",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "scripts/_mirror_internal_exclude_list.txt",
+      "original_sha256": "1f4b085ab6eaf401810cf7cbb06c16147ed58e27bf54607072fb8b4cff69e403",
+      "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/historical_sources/scripts/_mirror_internal_exclude_list.txt.original.public",
+      "public_sha256": "a06fe6ec4e1f580922212cb42b87f5e8862619330937b7276bad50c241baae9d",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/receipt.json",
+      "original_sha256": "595e2a9873c13096e802a8d137949f1293544dbf2ef7e8168dff794e7f7d1383",
+      "public_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/receipt.json.public",
+      "public_sha256": "53525b579d73e1e5062bd349013c41e159e3530c014bc066eae6d4de9707f476",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/prospective_combination_decision_136_receipt.json",
+      "original_sha256": "4003ccdfd6d203798d44308fa3fffa695c519e1a78fcb585023619b604d75af4",
+      "public_path": "docs/archive/rp4/presentation_originals/prospective_combination_decision_136_receipt.json.original.public",
+      "public_sha256": "03ce375e4fb8c29b33feafca0862ac1e6345cc24860fe29bbd8655367db33976",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b4/receipt.json",
+      "original_sha256": "b77c640645c4ef467d56c73b0ce762b679cbc3d3475647684d1941a72921e00d",
+      "public_path": "docs/archive/rp4/presentation_originals/receipt.json.original.public",
+      "public_sha256": "cd1eb1f23ab0da8bd7623b7f627ccc57dd38f6d7f1aec0ba7227301e09bd401d",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b4/report_manifest.json",
+      "original_sha256": "a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f",
+      "public_path": "docs/archive/rp4/presentation_originals/report_manifest.json.original.public",
+      "public_sha256": "231a7d7bb7d467cf1f934a9dbae2b757e99087f6ba71d1f9702c9c00a464ed3c",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/results_v5.md",
+      "original_sha256": "0561551a2938796baf4e7e705b082fc24ee09be0a069596802285cf018b1973c",
+      "public_path": "docs/archive/rp4/presentation_originals/results_v5.md.original.public",
+      "public_sha256": "8852bae0296ecf7462b04bce72facff38c874afff4b4ec966945c60dadc6dcf5",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/specification_universe_v1.json",
+      "original_sha256": "b59e0cfbc7ee9d78766743709c358f9264b5ee317cc2f8ec588fc5ca0de1dcc1",
+      "public_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.json.original.public",
+      "public_sha256": "16c420889026aa72ec018b8200a7bdeb3c3aadf7409a51699517ee751924d741",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/specification_v4.md",
+      "original_sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+      "public_path": "docs/archive/rp4/presentation_originals/specification_v4.md.original.public",
+      "public_sha256": "1a7495ccf515d83fc8ec3600e2cfed88bad18f97642e4297c7d345c7524cb120",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "docs/rp4/specification_v5.md",
+      "original_sha256": "6ffdfe97de0660515b2f3d79b15b985e398060cf59d74b7c1adf33e379aa63da",
+      "public_path": "docs/archive/rp4/presentation_originals/specification_v5.md.original.public",
+      "public_sha256": "5cf4149f7077ef35af3dfae5afcdeeb9c25cc5df3c304cd5a1dfddaf5e5d6cf9",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/closure_verification.json",
+      "original_sha256": "0223bab9e601eb185b691129c9313af9360d62b3e647c696abe8c970c97ad8a1",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_closure_verification.json.original.public",
+      "public_sha256": "d606e11d869fd1cc68afe4d166c2847405168e692d307b2c6a54de08565d5fc6",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/control_six/receipt.json",
+      "original_sha256": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_control_six_receipt.json.original.public",
+      "public_sha256": "8a6dfe8fa0b76bff0af751d7f65490e728b3ec1bbd5d979b9af5525d26e88093",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/control_six/rv15/receipt.json",
+      "original_sha256": "d0dcc77753a2a67b0471a185c21218880474574a6c444d753d7c6cd9d6f47c3f",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_control_six_rv15_receipt.json.original.public",
+      "public_sha256": "03f64ea8c0eb64e97a20183ffda07cfb1003092df40cf61ff584b5f82c953c36",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/receipt.json",
+      "original_sha256": "9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_evaluation_receipt.json.original.public",
+      "public_sha256": "8cd1b82040b7914eba2f388f35db5eb9f2cfc395951610bdf2276fe073976161",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/final_report_receipt.json",
+      "original_sha256": "6608f2ce63953554097a03c8e1e82c08b37ace5c18a14da59856c313ecaadefd",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_final_report_receipt.json.original.public",
+      "public_sha256": "7279a593bf32c4a5b73d684ead24b00cf9e8d613993965212af27e35c3f1d39d",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/independent_final_audit.json",
+      "original_sha256": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_independent_final_audit.json.original.public",
+      "public_sha256": "74c3c1b8e777d7bd29c9226302420c6e7ab17bf7e190e96e0ffdc4374df77801",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/results_v5.md",
+      "original_sha256": "9384c1a333acc2ad122e915fdd7ef1ab35fa0dcbc48ec9fda2fb118f522632b3",
+      "public_path": "docs/archive/rp4/presentation_originals/v5_5_control_results_v5.md.original.public",
+      "public_sha256": "f101cf7531ab4d170e9d20bb18448bbcf1234b44e5ef6a02d2fefb0375076879",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_v5_part34/results_v5_before_part34.md",
+      "original_sha256": "76209f47ee8cbf84ddf9c3f6b9d77a0f1037de809a425526f16c8c1125a6cd01",
+      "public_path": "docs/archive/rp4/presentation_originals/v5_before_part34_results_v5.md.original.public",
+      "public_sha256": "e70646f9826ceb8edd78b0c852dcc34344ac3dd4e5c0705ff4e42894f412e5b3",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_a1/specification.json",
+      "original_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+      "public_path": "artifacts/rp4_a1/specification.json",
+      "public_sha256": "983bbfb8fead38e3917621abbf70f84025388f62806f73eb9dc3df25f55de271",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_a2/receipt.json",
+      "original_sha256": "d223e3195d2a213b952b5d0c66bb20e936e77a52e32491b3bc55c807b8d2ed4a",
+      "public_path": "artifacts/rp4_a2/receipt.json",
+      "public_sha256": "dae17622e2c5961963261a483d60c955369f8ef7ddb77c306ed459da6ca2c140",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_a2/summary.json",
+      "original_sha256": "7afc473247bfa22008c96b1994f30410d300f2ae021d4a990a1da31cc4f80966",
+      "public_path": "artifacts/rp4_a2/summary.json",
+      "public_sha256": "535ef1a6f1f68d1ffd6d497bd82ff0e31f3853940845f655d7284ce07506c288",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b1/receipt.json",
+      "original_sha256": "1053ae61246154c86fe212b82cd36d2e5e1b692a547dab4c684a7a36807c6921",
+      "public_path": "artifacts/rp4_b1/receipt.json",
+      "public_sha256": "5c002ddd332365b3f39ec8f359c2092c9d8ada6634c8e2d0d7114a3e7ccd21b8",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b2/receipt.json",
+      "original_sha256": "8c499aba0c1ba5411b384a6b0639338ac53e77f46a16d90e432b6ca1097588b0",
+      "public_path": "artifacts/rp4_b2/receipt.json",
+      "public_sha256": "229271a4c09d151481b89be28b803799af27a3ba9ab67440bac6bacc45caffd5",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b3/receipt.json",
+      "original_sha256": "f80a669750ac0b78d781adb7a03b2af153dfba8689268e4ba14c519a1b7c10cf",
+      "public_path": "artifacts/rp4_b3/receipt.json",
+      "public_sha256": "98371b8be210e2b0963fb39d94417d72a8c161d835962a668c983658bd64f235",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b4/collector_receipt.json",
+      "original_sha256": "6c50416b2f666d756e0b1cbcd8a7801bf1b131d54afd59633e51be772cc01076",
+      "public_path": "artifacts/rp4_b4/collector_receipt.json",
+      "public_sha256": "dad7d7b342a1049311914314cc13527de3d354aad5978541fe0b9e9bd157065a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b4/receipt.json",
+      "original_sha256": "069816d2d13e12e736aef2257f11b42bc75834c36a14c83c196ce6ebf1314c9d",
+      "public_path": "artifacts/rp4_b4/receipt.json",
+      "public_sha256": "d2f0fe9de33148bc36f95dd74ccbf44265b427fabfe67c0347c78980e97a708c",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_b4/report_manifest.json",
+      "original_sha256": "ed8a1c76f2078fe5d3ad4741b6c6f57e7e0a560f5ad297f067d40e53fe6ff5ba",
+      "public_path": "artifacts/rp4_b4/report_manifest.json",
+      "public_sha256": "0345f03d326c0f1b7c9881bf904757374d240f0ac4b09eb78df3e82d9ba2cfb1",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_audit_code/audit_closed.py",
+      "original_sha256": "6957164cb688be290cdd4797ef9f6966c071c3934fd8ba93c66f09ca9c9d6fee",
+      "public_path": "artifacts/rp4_closeout_audit_code/audit_closed.py",
+      "public_sha256": "bd5c21035160c1da1ad5eb6157847618635d9299efd64d27e826f1aaf90e27fe",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_audit_code/public_projection.py",
+      "original_sha256": "847bea25bc2b3cd5adce64ce8e9f9a01ef12f822ef3dfa1fae2e34867e0f99c4",
+      "public_path": "artifacts/rp4_closeout_audit_code/public_projection.py",
+      "public_sha256": "e26158bcf94c1e19322ce7339c8eabd49e0a9920ffeccf35e91c25460a3a80af",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_audit_code/public_projection_v2.py",
+      "original_sha256": "dac662eb91c154113b3c11f3a67aa7b75d81d935b262d2a0b5b9dd3ae57ed596",
+      "public_path": "artifacts/rp4_closeout_audit_code/public_projection_v2.py",
+      "public_sha256": "9367ad5b2204815ade10b10a4827b35d3378169b2a01f1720000e95b95c9d090",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_audit_code/test_audit_closed.py",
+      "original_sha256": "f2ec4730ee8624284f63741c30942fc50361a9449f59cef152059af90987e450",
+      "public_path": "artifacts/rp4_closeout_audit_code/test_audit_closed.py",
+      "public_sha256": "171bfe5400a46803bd972057551b3621c7b305cd1a847848d320c82b0cb38861",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage1/receipt.json",
+      "original_sha256": "7d6082c4aedae6fe0ee50a513367850efec2bf5e08285630c8e2e971fbc7a8d9",
+      "public_path": "artifacts/rp4_closeout_stage1/receipt.json",
+      "public_sha256": "a43203c981a5f7d6212f90007d6f306e6982f78cb8d03005044d533f67e6c190",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage1_audit_supplement/receipt.json",
+      "original_sha256": "e8422a7b5a1813c813cd491b757f3d638f24db36e92eef537414b0a36e9bac6e",
+      "public_path": "artifacts/rp4_closeout_stage1_audit_supplement/receipt.json",
+      "public_sha256": "06ccb295dbc8bc734cffb436d3d9877246431337dedcc1c9b7704718bbb6f42e",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage2/receipt.json",
+      "original_sha256": "8c70301e5222e141dd187d45333e0b7276de2e51f294bcf3eb4ab857698f1dd5",
+      "public_path": "artifacts/rp4_closeout_stage2/receipt.json",
+      "public_sha256": "c25b84aea49d70900d578877abd5bff5d6161451f43df3d04f4497896d4affa9",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage2_revision2/receipt.json",
+      "original_sha256": "9ee68076d04ef780cf81adfdce21692f979c6a6f23f11032fb144ee6c82d0603",
+      "public_path": "artifacts/rp4_closeout_stage2_revision2/receipt.json",
+      "public_sha256": "6360437e568f892fff83897924d5864fa8ebb6ea29ee0fbee8c42d96d9c23e95",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage4/receipt.json",
+      "original_sha256": "33acf0c59f06d44a6ee59756a2aeebaf8a22ade70bd7d7d83460717794f3cac6",
+      "public_path": "artifacts/rp4_closeout_stage4/receipt.json",
+      "public_sha256": "19a4a1d0e712c2ab4ac275af6bd20a327744d11c6ce984353ef862c0ab459970",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_closeout_stage5_collector/receipt.json",
+      "original_sha256": "fbcf4f43942f871f6b1fbe0cea4c77fd1025a2c6889a37eccb81577ee1911c7d",
+      "public_path": "artifacts/rp4_closeout_stage5_collector/receipt.json",
+      "public_sha256": "d8b018c84f4b5edd9eb0d3980d83975201d04796bda7b3e277f519b305ef7c93",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/acquire.py",
+      "original_sha256": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8",
+      "public_path": "artifacts/rp4_code/acquire.py",
+      "public_sha256": "020c2ddff5e0f804b169cae30a4f391b10c1e39292e68615754f2aa72044e680",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/close_b1.py",
+      "original_sha256": "4ed7f2c190ad0843718fb93d4d452034e4f3e0206e0320a98834502ce5278e79",
+      "public_path": "artifacts/rp4_code/close_b1.py",
+      "public_sha256": "0ba9e3d3fe2823147a6462d7172d257fed4ec61c0f161b4f8bf2a1c492b63c96",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/materialize.py",
+      "original_sha256": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0",
+      "public_path": "artifacts/rp4_code/materialize.py",
+      "public_sha256": "8a7402076c0e62e8f84c7fa23c87e4c21c6d7b53945cf02f25254bf53f7127dd",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/tail_diagnostic.py",
+      "original_sha256": "6c64bdf9c9a29a66e23c10f695a4ddf3303b15d0ad5c3bac7237290b6781b488",
+      "public_path": "artifacts/rp4_code/tail_diagnostic.py",
+      "public_sha256": "cc7ec3e6bf47702047291104c2b130b57b0f42b0fe3f87108b750245373e6beb",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/test_acquire.py",
+      "original_sha256": "81be2f44353606e9405fd0e7c1c99215000a6d395f3336b697d43819b649cbc0",
+      "public_path": "artifacts/rp4_code/test_acquire.py",
+      "public_sha256": "50d4373e9466f641a20b96a16b64d62285c9b0991a49932614cfaab62fb9c5ee",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/test_evaluate.py",
+      "original_sha256": "1cd0aea456eccf50d86e7bd07bfa9876210c371646a9f3c84862b62be6a86095",
+      "public_path": "artifacts/rp4_code/test_evaluate.py",
+      "public_sha256": "d54dbc53805eb91ecfb00429a23235e3d9b7d7c7d1aefc0d8cf9d4521adedcd3",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_code/test_public_projection.py",
+      "original_sha256": "ea960eeb0635cabaab55178ddcafb7e74fcd6d58e4562a78e0d5056abb8acea3",
+      "public_path": "artifacts/rp4_code/test_public_projection.py",
+      "public_sha256": "bb84c1f812874fa8cb0a65f952c6cb06e5e456fe2274e44b9f48e8d84eeea80d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/inspect_panels.py",
+      "original_sha256": "dbdfc56ae75c9c14e9ac257770981091085aaa7e4e1901c60bf80916733a91b7",
+      "public_path": "artifacts/rp4_inventory_v1/inspect_panels.py",
+      "public_sha256": "8f645bcf095def50dd32e69f313850314220a0f1366a265c797aff95ed057641",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/inventory.json",
+      "original_sha256": "71cec7160292ea3f873d2268006a0fe853e3258a0b7ae145c3ee948614fb7ce3",
+      "public_path": "artifacts/rp4_inventory_v1/inventory.json",
+      "public_sha256": "10c79bfcaabc097c3c1a48e2400b3b35974c635f701f1a124ea94252c04e5595",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/precheck/inspect_panels.py",
+      "original_sha256": "ad5ae0d76536aa4575acd9e2e7cb4b20b68539bb1121dda6136993edd3845c88",
+      "public_path": "artifacts/rp4_inventory_v1/precheck/inspect_panels.py",
+      "public_sha256": "9531f7a43cbc0d184efcfe90ee7f1a1f037f8d457ba28e05a716a97d15a3ade8",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_inventory_v1/precheck/inventory.json",
+      "original_sha256": "fa6de31e3c1028f0ced58eba729d7ceb3a570b8ddffd5b6e319068db97aa5b60",
+      "public_path": "artifacts/rp4_inventory_v1/precheck/inventory.json",
+      "public_sha256": "61929b83efdbdeba925d6155c8758dc4d8e1484c5276e676cac3e7ed666be7d0",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_a1/specification.json",
+      "original_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+      "public_path": "artifacts/rp4_v2_a1/specification.json",
+      "public_sha256": "337e16c5797a52e38c8462c10f847c502eb023e4bcf285a5e3b7f34cb8c893d4",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_a2/manifest.json",
+      "original_sha256": "ba409cf18bb38c4025e602a68177d01a1197229881d0de442bbc6355d220d807",
+      "public_path": "artifacts/rp4_v2_a2/manifest.json",
+      "public_sha256": "ca5d836946ea75a3c675cc838af5562d045cf11eaf5e50286d2a0bbea46df681",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_a2/receipt.json",
+      "original_sha256": "23d4cccd2c153dacc6a14870e903ce3d2d9fa6720f95e8859628a1e6eebbd0e4",
+      "public_path": "artifacts/rp4_v2_a2/receipt.json",
+      "public_sha256": "8958f2b090a0f95d8e64f926be9450f444ca3633e926b627f9df959add9bb30f",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_a2/verification_before_fit.json",
+      "original_sha256": "6b41d7bff8819f33db5aa148b00bfb3337e2bf0e2c77e6148a7dce88621e2c4b",
+      "public_path": "artifacts/rp4_v2_a2/verification_before_fit.json",
+      "public_sha256": "1bae66cfff214774a0e3f26d4fcb0e82e7a5c348f80d8bad920a0020b0448bb4",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_b2/receipt.json",
+      "original_sha256": "d6c24541807f3a9088f3e6e203fbbd4e430815baeccbcca1d4a3aef973c006aa",
+      "public_path": "artifacts/rp4_v2_b2/receipt.json",
+      "public_sha256": "cc79609f611e377898717ea7d0ce6a8cff19a2be7eac491d5f622f50d023b14d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_b3/receipt.json",
+      "original_sha256": "6f1305e8b57b6c4744996c88dec045554aee9c2034fa6b9ca492b680a40dde73",
+      "public_path": "artifacts/rp4_v2_b3/receipt.json",
+      "public_sha256": "77d9e5e4ced62ccc9c831448b3c392be63a3742df5dd1095b6546863f9c41ad4",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_b4/confirmation_audit.json",
+      "original_sha256": "2615dda07cc35e35fa6f94c8ff32fc25b0f2af34b7e9b59825dec45e9d9e2de5",
+      "public_path": "artifacts/rp4_v2_b4/confirmation_audit.json",
+      "public_sha256": "29c6fd9c2b9af573cdd95d5e6ad0552407c9e1f15ba0a2396f47b996f4f0194a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_b4/primary_audit.json",
+      "original_sha256": "8b4da5a9c75073ac7b72c88e39c1d74066008a60747a7f7e486c08972520d290",
+      "public_path": "artifacts/rp4_v2_b4/primary_audit.json",
+      "public_sha256": "a2f9fe16d88a78e34460b28bc7c47b3c8f4b99a006c7dae56ae15373d57a5b42",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_b4/receipt.json",
+      "original_sha256": "54745c58378ef0c9ff578b0ebad5e92c7c2fe2685d259141fc38ca44364ee293",
+      "public_path": "artifacts/rp4_v2_b4/receipt.json",
+      "public_sha256": "c2ef50179e0a59ab79b7b18924b47b17a73e1da8429e45adb1253f86b3bf47a3",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_code/freeze.py",
+      "original_sha256": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+      "public_path": "artifacts/rp4_v2_code/freeze.py",
+      "public_sha256": "aa847424b6f42450cc1623452ac4f8662403dbec56687b67442185f2e06c232a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_code/materialize_iv.py",
+      "original_sha256": "3741c28773d50e89d6c65bb3307536ba8defcc085edcd92a358d6dc735d43972",
+      "public_path": "artifacts/rp4_v2_code/materialize_iv.py",
+      "public_sha256": "f29938b92a4237904c27af84726bfc878833963f57b1b5cffaedb4f5b3036f8b",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_code/test_evaluate_v2.py",
+      "original_sha256": "589ed5f34d588ba0161f25c30b9a616e5e39038168abe13e7b47a3d219d52ebc",
+      "public_path": "artifacts/rp4_v2_code/test_evaluate_v2.py",
+      "public_sha256": "2f0e3fd34979ee51d8d5a139436b384b660f3110ab458c208bbb4607d70f2210",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v2_code/test_runtime_v2.py",
+      "original_sha256": "709b28373c64b815d953931b5a8066910b334d81c63ae4cf41082dbb55940df2",
+      "public_path": "artifacts/rp4_v2_code/test_runtime_v2.py",
+      "public_sha256": "2b2d43355955bd5fb1899ce8bf869109fa8e7cb256278b3ab86354295784d823",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a1/receipt.json",
+      "original_sha256": "1495aeb61fe0b3c32a8cd9e80a286b27b20e463116c92f46af72798368fe948d",
+      "public_path": "artifacts/rp4_v3_a1/receipt.json",
+      "public_sha256": "7f0459440d009d1097be3fe6070eb699aafa4c3150e1de4dcd79ab83037e5739",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a1/specification.json",
+      "original_sha256": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+      "public_path": "artifacts/rp4_v3_a1/specification.json",
+      "public_sha256": "0e924f905ce24072760246e76eaf5d2faac0810e8c261b2ad55924b0284675a3",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "original_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "public_path": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "public_sha256": "a5a125e9e88a8530361765372448c1cc88479ffd2e7498371d87dfde9c7bebc8",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/candidate_carry_audit.json",
+      "original_sha256": "be4fadcd9388f105b4ef96585b265644f05fc6af39c3e757127f637143659d44",
+      "public_path": "artifacts/rp4_v3_a2/candidate_carry_audit.json",
+      "public_sha256": "6c40305f57e40984fff2fedd50246f726c10df703a8ebc4eafd43f6b8908071f",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/empty_window_manifest.json",
+      "original_sha256": "e3a76fecf274d6233c1059221b9755297f5854a6c4519b2b806344008bec59e3",
+      "public_path": "artifacts/rp4_v3_a2/empty_window_manifest.json",
+      "public_sha256": "8fafee86de9a35d85c137b81aa589147d5d6ca81c609ca89a6c61f238dfe9b7f",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/gamma_manifest.json",
+      "original_sha256": "1e6b5aeade5624bd12ced17d7a55e18b3102a7597ea0af559f5e0a8793b90eb0",
+      "public_path": "artifacts/rp4_v3_a2/gamma_manifest.json",
+      "public_sha256": "727c15003aa556a8611c49d8637b64996b95910376191a09d0f952ef8743cc48",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/receipt.json",
+      "original_sha256": "3fb36211b27538b86b45e3a68c853d1478d9329df49b6bd48efa0693ea79865e",
+      "public_path": "artifacts/rp4_v3_a2/receipt.json",
+      "public_sha256": "c1bd9cad10b5c2c54e1883361ae51df58890382b1f1d87371734e211d07dd677",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_a2/verification_before_fit.json",
+      "original_sha256": "0a75fd79c57088d48f496835a0bb1010d19f764b1b0cefbddb700653f6f2657b",
+      "public_path": "artifacts/rp4_v3_a2/verification_before_fit.json",
+      "public_sha256": "9b4896e18e2e44190a3969274975ccf54589393ede08a329f38203711750b0bb",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_addendum_v1/receipt.json",
+      "original_sha256": "31239b9273f2f15e76d4f91fc37142f117cdabd8854db912b64f154786e3aa9f",
+      "public_path": "artifacts/rp4_v3_addendum_v1/receipt.json",
+      "public_sha256": "bf201bcbaf50b62931f0bc5292f4c0aabf8fcd7906958442c87c3c4697c321fe",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b2/receipt.json",
+      "original_sha256": "60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af",
+      "public_path": "artifacts/rp4_v3_b2/receipt.json",
+      "public_sha256": "a9efb068689c5f1c152b1672c72e98b0a9d530d3354d671708d2181d9a3c9490",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b3/receipt.json",
+      "original_sha256": "698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635",
+      "public_path": "artifacts/rp4_v3_b3/receipt.json",
+      "public_sha256": "4629a267229b6d447137ba2d9c1cdba8baa83c7db695720a09e59fb1ef0d539d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "original_sha256": "0875b9d7d59ddc638c8ea368a8f200029f14ed3a07b798345488793053d3ddf4",
+      "public_path": "artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "public_sha256": "4ef83f9ae02bcff460753c91ddb6fff55da8f2b3b70419419741219d097e1c7b",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/logistic_numerical_audit/audit.py",
+      "original_sha256": "70dce8b3d5cfcf7c282606aa6cfed4beef98ddd677fa7f6e3b95833c448569a4",
+      "public_path": "artifacts/rp4_v3_b4/logistic_numerical_audit/audit.py",
+      "public_sha256": "89b4e0a98be8127008fe396040d9f34534ee9f0296a604aa3ca1b8af66ea9ddf",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/logistic_numerical_audit/receipt.json",
+      "original_sha256": "be9f0efd24c27dda6d66a453c9e67b14ae7f021ae7fdb5aae1a8b73834fcd5f7",
+      "public_path": "artifacts/rp4_v3_b4/logistic_numerical_audit/receipt.json",
+      "public_sha256": "cfdb7167a6a68099c8f72df489d9293251c47b6c967fb3c0c26936ea252f96d5",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/mz_identity_receipt.json",
+      "original_sha256": "cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4",
+      "public_path": "artifacts/rp4_v3_b4/mz_identity_receipt.json",
+      "public_sha256": "b2bc52c99d9918767dadcfa2f3c4aae347ac995d303b510f64d2b1786c7bc43e",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_b4/receipt.json",
+      "original_sha256": "799b97749e1c15e5e2fd1b18ac4ad4a680192fa6521b168d52fa830205b9f1b5",
+      "public_path": "artifacts/rp4_v3_b4/receipt.json",
+      "public_sha256": "4843b7b2a426aaed08dc60e6bed6cea3636dd79e0cf4f262504b3bf5abd5335e",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_code/freeze.py",
+      "original_sha256": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "public_path": "artifacts/rp4_v3_code/freeze.py",
+      "public_sha256": "d00a5394502993d098481eaee6a0c646d506ed39083ce8d5ac78214a5c26fa6a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_code/materialize_gamma.py",
+      "original_sha256": "2f59184b5a36b301252bb11eaf779c8128cef0f45266368f44b1a7d35f3644a3",
+      "public_path": "artifacts/rp4_v3_code/materialize_gamma.py",
+      "public_sha256": "9bf5daaaae83f60921546a18535628b267bc3f4ef3c83ac59fced5faa9cfa4da",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/evidence.json",
+      "original_sha256": "e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/evidence.json",
+      "public_sha256": "58175e316f1e2daad7d3997ee71f9a85fdeae9e038f4360194cd5292118bd626",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/peer_audit_receipt.json",
+      "original_sha256": "0d4ee7b9d0427cbc68c04169d1dc2c6ddf0cc2d88e7933121f214dd5328a0f47",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/peer_audit_receipt.json",
+      "public_sha256": "021fff08528fa1451547d667fa11610466ebf5d55ae75c7b798ecb5d3bbb8e08",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/qa_receipt.json",
+      "original_sha256": "321d9a507796818161e8f6a3817ba3db01569359e5e207ddae9525688b10a5b4",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/qa_receipt.json",
+      "public_sha256": "976556592f587f1a1e3293be2659893d962206c5e469aed88d76260cad592e83",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/receipt.json",
+      "original_sha256": "551ebd5dab1ee5d7e4aa781eae9da9c48b1a2b642c52d6b51165aee7ccaaf1dd",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/receipt.json",
+      "public_sha256": "d4ec08a40c930b82bdc5c84b178e5377bc3c7aa02adf7a64ce931a3e6537aeb9",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/report_revision2.py",
+      "original_sha256": "e4d4d9ed795334f3c4128539fb6fd9ce614efac98e210729f945600c9f5889f2",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/report_revision2.py",
+      "public_sha256": "be78f47a3833869e55391c2883a03cd612c6e2cd1761406076faffaf6b62f82d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_closeout/root_verification_receipt.json",
+      "original_sha256": "733b3dafc2670d4a6554cbeac95cc97b3d9484c21317af4bd8b8defe2f96f901",
+      "public_path": "artifacts/rp4_v3_secondary_closeout/root_verification_receipt.json",
+      "public_sha256": "942f571e3633efce3d638f5986416325af0715336892cfe935f733db535f8c94",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_mz_audit/audit_mz_identity.py",
+      "original_sha256": "23c717e3e7da9e97b30f22cf4b4fa7805046ae29b72f5385f0f72c68f38ad1bc",
+      "public_path": "artifacts/rp4_v3_secondary_mz_audit/audit_mz_identity.py",
+      "public_sha256": "de378e8c402797d87d3e82d32de81d363e1a090e75019152317450f5fcb6fd4d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_mz_audit/manifest.json",
+      "original_sha256": "9b7b88bfead2ba3018d8ce8bd4b4739679a4418bde752818fa6f76f1ebf2a42a",
+      "public_path": "artifacts/rp4_v3_secondary_mz_audit/manifest.json",
+      "public_sha256": "16eef63a80e25d14fa0c72b0ad714ee9ce78c22298d604a759095963e82e53fb",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_mz_audit/receipt.json",
+      "original_sha256": "ebe38763e180d6676e57d13fd65b22df2f9ec537985d8768466ffb7434ee6b4b",
+      "public_path": "artifacts/rp4_v3_secondary_mz_audit/receipt.json",
+      "public_sha256": "1d98686f96417104b7dc52152d2d74c4adc6df7a2c28974070942c40ab4b6787",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_newton_a1/addendum.json",
+      "original_sha256": "529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa",
+      "public_path": "artifacts/rp4_v3_secondary_newton_a1/addendum.json",
+      "public_sha256": "4a607fa7ea4cf5aa63942120f2e4783403b718ae8753ec0cbc637da983f00dd8",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_newton_a1/confirmation_closeout_receipt.json",
+      "original_sha256": "f500abb3e1235277240e6868d4814b75fce8d3b5ac181a67edebf84b848342b9",
+      "public_path": "artifacts/rp4_v3_secondary_newton_a1/confirmation_closeout_receipt.json",
+      "public_sha256": "67e541e6d4b06c0bb4cdd6df1eb1e58f60b52a74dcac112a8cc91bb81a660444",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_newton_a1/primary_closeout_receipt.json",
+      "original_sha256": "f0185a31d9381eef87435b0dfb3916092d0b0b688b19f762c0a27ce562b304e8",
+      "public_path": "artifacts/rp4_v3_secondary_newton_a1/primary_closeout_receipt.json",
+      "public_sha256": "aaa9b3a2de9b7a40c98fb9bc10b7fd38a7518732a8404d8b369c1dd30439101a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_newton_a1/release_receipt.json",
+      "original_sha256": "fd2c0fe4434a1672978e64f4e6e38904fbc96c3b104cf675ca50ffce1a29f7d6",
+      "public_path": "artifacts/rp4_v3_secondary_newton_a1/release_receipt.json",
+      "public_sha256": "1df92f1e0ea4147f2db7474132f8ce7e173fa1d280cd8844347615c4b35efc3a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/addendum.json",
+      "original_sha256": "606a8c8d5dbe51628e7507b504cf7c5f8483a9aa5e7c80f62be33b2cb12e55de",
+      "public_path": "artifacts/rp4_v3_secondary_repair/addendum.json",
+      "public_sha256": "49ba25f1ec31c3593a5ffe801ba2b840338d5168c8f794ac8cdff07e6a00c8a3",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/addendum_receipt.json",
+      "original_sha256": "aaa008d20f8eff27facc32eb6281d986a3da6e6ecbbf5999dd3559a31cef7942",
+      "public_path": "artifacts/rp4_v3_secondary_repair/addendum_receipt.json",
+      "public_sha256": "b0958e7f460c3f37ce32c36b234843ca200845242f0f0263e20779da8e2ab909",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/confirmation_closeout_receipt.json",
+      "original_sha256": "8639b17bb19edfd6197283159a914c31d81958c04663f424fb9109a8a22fc604",
+      "public_path": "artifacts/rp4_v3_secondary_repair/confirmation_closeout_receipt.json",
+      "public_sha256": "3efd5e044ece69b0d670622fdd50fe3a451c549241bf9577f7aebc43b20e8896",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/jump_inventory.py",
+      "original_sha256": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+      "public_path": "artifacts/rp4_v3_secondary_repair/jump_inventory.py",
+      "public_sha256": "7f61c3bb9fbf597ebfa9efb004626b2a50682c5445d41e980b01a0b0d39c37ec",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/primary_closeout_receipt.json",
+      "original_sha256": "1e22bc64329c7ac2f255ee9518030a3b0db7930667e786803078f2575ce65208",
+      "public_path": "artifacts/rp4_v3_secondary_repair/primary_closeout_receipt.json",
+      "public_sha256": "1bd0f0d257039b446b4ecbd2aaa1707ddb702520120946e0b7d0f8a20ff078fc",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v3_secondary_repair/release_receipt.json",
+      "original_sha256": "e6c8660e7b40690c0163c7f88865074bac59dbbc6e69a723661c4cfbce05dea7",
+      "public_path": "artifacts/rp4_v3_secondary_repair/release_receipt.json",
+      "public_sha256": "4700e5ffe341c47a50586f2de8908190095d753212d19cd30604d8b66f607307",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "original_sha256": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+      "public_path": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "public_sha256": "c5e27881a4fd26117d55754d763b1408cf14dd1bfaf951a7e69e199a9791c982",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_a1/receipt.json",
+      "original_sha256": "41299adc4335188a0974bb8c28a2d6690231c4103f51e7be582b047d70029cd9",
+      "public_path": "artifacts/rp4_v4_a1/receipt.json",
+      "public_sha256": "ca96ce6097e2bf65d622bfbe6d6472237bf9179fcde11c137974d5d43bc98680",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_a1/specification.json",
+      "original_sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "public_path": "artifacts/rp4_v4_a1/specification.json",
+      "public_sha256": "bc952677569591f588f47aac30d052a57621fc7f09faa53057c8e541130aefaf",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged",
+      "logical_references": {
+        "parent_specification": {
+          "path": "artifacts/rp4_v3_a1_empty_window/specification.json",
+          "original_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5"
+        }
+      }
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_a2/receipt.json",
+      "original_sha256": "d0483ef642b6440602467454457ed9b31356744911b50b7597fdc8f2f5a3f3b8",
+      "public_path": "artifacts/rp4_v4_a2/receipt.json",
+      "public_sha256": "20ba4810500b0cff91728516fb263f8c23122aff1d8fd214ce8244d2cf2ea88e",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "original_sha256": "d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93",
+      "public_path": "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "public_sha256": "d79c6747328781abf923bd7a5d89ea19a86969aa5f8d7219e9eaac8f802ac6cf",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b2_rv15/verification_receipt.json",
+      "original_sha256": "0d4bbb326eb96a78aefaa1075f6a3f9cbcc9fe6472e850fc8f66dc0cbdc69767",
+      "public_path": "artifacts/rp4_v4_b2_rv15/verification_receipt.json",
+      "public_sha256": "1a4d53ee218785a60287b51fc6a84f271b7b320e1992cd4b44ad0f01180555fd",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "original_sha256": "737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365",
+      "public_path": "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "public_sha256": "6aa99637d2761ba5dee8f4aaf431f755c5f96192df36539dd3fb6c39c31e6744",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b2_rv5/verification_receipt.json",
+      "original_sha256": "1fe46441356c6fac256ab0414eaf3e59ff6046eae4bf590447d5d86a69b681e0",
+      "public_path": "artifacts/rp4_v4_b2_rv5/verification_receipt.json",
+      "public_sha256": "f0fa8efebde94143d50e48818da9225a0a75fa1a7f3d45427760d8bc5c5bd02a",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "original_sha256": "b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb",
+      "public_path": "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "public_sha256": "da490732ef8d1ac775817102358753221a98b8191b19b1981c2162a6bf1955ac",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b3_rv15/verification_receipt.json",
+      "original_sha256": "5092bdf35d0a26a82d1da9baaedc8b07d5c181e1f4fd744af0c87ec0ee95d64f",
+      "public_path": "artifacts/rp4_v4_b3_rv15/verification_receipt.json",
+      "public_sha256": "e16049aab6c05168ea9c45d7f0b60127e520d7e63b1fb2eebd9efc78669afd3d",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "original_sha256": "556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769",
+      "public_path": "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "public_sha256": "851169202c5333fcbc7d918f08a1129115b93ca10e2b79ba41724c9126fadfc5",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b3_rv5/verification_receipt.json",
+      "original_sha256": "1776256256cda6ebad532c7f3527ce056fb309572fa05e5ff2afa723700ba3ad",
+      "public_path": "artifacts/rp4_v4_b3_rv5/verification_receipt.json",
+      "public_sha256": "6c14b5014afc6b33bae5f21de14579d62573e3fc8dedff004b636e0ccb4f43a1",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_b4/peer_audit_receipt.json",
+      "original_sha256": "80bcfb98d56a2daa5f618c4466ddc70c7ff29c56421eff5de358d70d5d5ae7fe",
+      "public_path": "artifacts/rp4_v4_b4/peer_audit_receipt.json",
+      "public_sha256": "ae2d562e66b637732f8b93006a550402357b9d9113371ab9905515d3305f58ac",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_code/freeze.py",
+      "original_sha256": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+      "public_path": "artifacts/rp4_v4_code/freeze.py",
+      "public_sha256": "df2813a308fac3a8e1f10d23fff489e264e39949036cc9d1787756da08d315ab",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v4_code/materialize_targets.py",
+      "original_sha256": "8c6f9acc1dd3d995bea1ca75456c8fda6d4b6da1dc0b734dfbc23917b1265ce6",
+      "public_path": "artifacts/rp4_v4_code/materialize_targets.py",
+      "public_sha256": "b482e9da634f35af99b9c52a4a94f454afe07ed2dec2b227677545d5f4d13fb1",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v5_a3/freeze.json",
+      "original_sha256": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855",
+      "public_path": "artifacts/rp4_v5_a3/freeze.json",
+      "public_sha256": "ee44516298449816f99b922c0a957abfb526b069c01adfa139f07ae610634eba",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v5_a3/specification.json",
+      "original_sha256": "a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e",
+      "public_path": "artifacts/rp4_v5_a3/specification.json",
+      "public_sha256": "a5d9d729cbd374c15f8467f71f8ee04bf9da7739618fc84b89cae6ac40d7c2cf",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    },
+    {
+      "logical_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/summary.json",
+      "original_sha256": "a5073c1dc82bdad9a3a28124298a3441011f22bbe0b666625d52141ae5babbac",
+      "public_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/summary.json",
+      "public_sha256": "c1c096f8b9456b89ab810c6c046ceff9d564eb0f4b06f527df1b6358fd2a94bf",
+      "numeric_invariant": true,
+      "rule": "Verified deterministic metadata projection; original pins retained; retained aggregate fields unchanged"
+    }
+  ],
+  "withheld_sources": [
+    {
+      "logical_path_sha256": "fbdb2fde1976456142cd78bdb814a422187cad0c9ce4b7d0d27cc103845f6e14",
+      "original_sha256": "e91213bd03e1170e3f0ea543604412973162d1b5d27b4701b2d37b9c8059f5a7",
+      "reason": "Private publication implementation; no scientific values selected from this source; byte verification unavailable publicly"
+    },
+    {
+      "logical_path_sha256": "61e19b74cd139bb95829fc779bf98e5c9a6fb1753901b4f4e7896ad6a10ee044",
+      "original_sha256": "98116b9af994a4c1d7d1e3cea2ece0886541efc9f9e9d992406b2f9f612a555d",
+      "reason": "Private publication implementation; no scientific values selected from this source; byte verification unavailable publicly"
+    },
+    {
+      "logical_path_sha256": "21d377a3971f5fa69b6c216063d76faed99f0ec9dfd9d359d9fdeced2d8ebc8a",
+      "original_sha256": "95bc6d6eac43d923f4e9fdb33646e2acddf28a201dad33cdb92a4bff2c1e0045",
+      "reason": "Private administrative source and custody sidecar; no scientific values selected; bytes not distributed"
+    },
+    {
+      "logical_path_sha256": "da0c72f93e9fe5cdf420150726aedfdb2cc5c5c28d1a863649b634bed596988c",
+      "original_sha256": "286c32d3c29eaf17e135ad755b022db95e7c7569e06dec9cc8e60e422e438c1b",
+      "reason": "Private administrative source and custody sidecar; no scientific values selected; bytes not distributed"
+    },
+    {
+      "logical_path_sha256": "743ba2572de05ace379dfbc34a01ea3f99d5f2748e35d96648bb59b810d4f1d7",
+      "original_sha256": "7ef7ef7db43df2e4c78b63fd6b1c7b8b89ad293f196ddd6b15e0283699a5e3dd",
+      "reason": "Private administrative source and custody sidecar; no scientific values selected; bytes not distributed"
+    }
+  ]
+}

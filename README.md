@@ -1,146 +1,176 @@
-fuera de muestra walk-forward, partición fijada 2026-09-07.
+# Options Order Flow and Intraday Volatility
 
-# ¿Las opciones mejoran el pronóstico de volatilidad intradía?
+**Can options trading activity improve forecasts of how much a stock's price will move?**
 
-[![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
+Author: Miguel Guerrero · Master of Data Science research project, Sydney Polytechnic Institute, September 2026
 
-El estado y la superficie de opciones mejoran el pronóstico medio de RV30 y RV15
-en ambas familias bajo las pruebas de v3/v4. El flujo añade una mejora pequeña
-en la familia lineal a **15 minutos (+0,623 % de reducción de QLIKE)**, con
-**IC95 % positivo** de la diferencia QLIKE [0,000335; 0,001932], y a
-**5 minutos (+0,256 %, secundario)**; en árboles no supera la prueba de la media.
-No es una ventaja universal ni evidencia de rentabilidad.
+## In one minute
 
-![Síntesis de tesis: ambas familias y cinco versiones u horizontes, con intervalos](docs/figures/rp4/thesis_summary.svg)
+- **What was studied:** six stocks, roughly two years of historical data and **160,832 matched forecast origins**, with three nested information sets and two model families. Evaluation follows time order, with rules written before each calculation; the historical sample was already known when the final design was fixed.
+- **What was found:** option state improves both model families. Adding order flow gives a small improvement in the linear model at 15 minutes: **+0.62%** lower forecast loss, **p = 0.003**, with positive signs in **six of six assets**. The tree model does not improve, and no economic value is demonstrated. Exact estimates and uncertainty appear below.
+- **What remains:** prospective replication under locally sealed rules, with **20 new sessions**, a **40-session** stability check and a **335-session** final extension. These are registered future checks, not completed confirmation.
 
-## Pregunta, diseño y respuesta
+![Four forecast-loss comparisons: option state improves both families; option flow improves the linear family only](docs/figures/public_refresh/result_matrix.svg)
 
-Seis activos: AAPL, AMZN, META, MSFT, NVDA y TSLA. B0 contiene historia de precios
-y volatilidad; B1 añade superficie de opciones; B2 añade composición y actividad
-del flujo. Los conjuntos son anidados: 29/69/138 predictores en v3/v4.
-La familia lineal es winsorizada con filtro de rango (ridge nominal); la otra
-es LightGBM. QLIKE mide error de pronóstico, no beneficios de una estrategia.
+*Primary 15-minute results: percentage reduction in forecast loss, with the declared one-sided p-values.*
+[PNG alternative](docs/figures/public_refresh/result_matrix.png) · [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv).
 
-Partición de calendario: 2026-08-01, fijada el 2026-09-07. Entrenamiento expansivo
-sólo con el pasado; 60 sesiones de calentamiento; selección sobre las últimas
-diez sesiones de entrenamiento; purga/embargo de 60 minutos. Primaria v2–v4:
-419 sesiones, 160.832 orígenes. Ventana final: 25 sesiones, 9.750 orígenes.
+<a id="history-and-prospective-replication"></a>
 
-Cada celda muestra **reducción porcentual de QLIKE (p)**. En v1/v2 se usa p
-bilateral con Holm; en v3/v4, H1→H2 unilateral al 5 % por familia. H2 sólo se
-abre cuando H1 rechaza. No se corrige la búsqueda entre versiones.
+## How this project was carried out
 
-| Versión / objetivo | Lineal B1/B0 | Lineal B2/B1 | Árboles B1/B0 | Árboles B2/B1 | Sesiones |
+**July 2026 — define three questions.** The proposal dated **2026-07-26** asked whether option state improves on price history, whether trade-derived flow adds information beyond option state, and whether any improvement survives changes in assets, time segments, volatility regimes and timing assumptions. Its original target was 30-minute realized variance. The date is declared in the proposal, without an independent timestamp authenticating submission. [Proposal and delivery comparison](docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md) · [Source extracts and original hashes](docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json).
+
+**18 August 2026 — test what the data could establish.** Construction of point-in-time inputs required distinguishing exchange execution, provider creation and actual client receipt. The availability audit measured the observable clocks and their limits; an event timestamp alone could not establish that a forecaster had received the record. This discipline shaped the later conservative information cutoff. [Availability audit](docs/rp2/block2_pit_ledger_v1.md) · [Dated measurement record](artifacts/rp2_block2_pit/ledger.json).
+
+**18–24 August 2026 — retain the validation nulls.** The earlier research program (RP2) ran on **2026-08-18–2026-08-19**. Favorable development results did not carry through validation across the tested families, and the economic checks found no usable value. A subsequent remeasurement corrected measurement defects rather than treating a favorable development result as confirmation. This established the need for a clearer separation of information sets, timing and evaluation. [Historical report and corrections](docs/rp2/FINAL_REPORT.md) · [Execution provenance](artifacts/rp2_block8_ladder/provenance.json) · [Remeasurement manifest](artifacts/rp2_v3/rp2-v3-20260824-remeasure/run_manifest.json).
+
+**30–31 August 2026 — examine a limited prospective bridge.** The exploratory 20-session bridge (Phase 8) was read once on 30 August and produced mixed findings. The next day's documented sensitivity corrected the information clock; its audit found **no aggregation change**, and only **one of eight B1-inclusive primary cells** improved in forecast loss. These outcomes remain distinct from the later historical result and are not confirmatory. [Bridge report](reports/phase8a_exploratory_bridge_addendum_v13.md) · [Consumed-read record](artifacts/phase8_bridge/result_20260830_v1.json) · [Correction record](artifacts/phase8_bridge/materialized_remediation_20260831_v1.json).
+
+**1–2 September 2026 — evaluate the corrected point-in-time design.** A first attempt stopped before evaluation; a separately authorized point-in-time successor completed on 2 September, Australia/Sydney. It did not confirm a global forecasting advantage. The stopped attempt and the completed successor retain separate records, so a technical recovery cannot erase either the failure or the limits of the eventual result. [Successor report](docs/pit_v22_claims_and_limitations_v2.md) · [First-attempt record](artifacts/target_blind_v22/successor_evaluation_run_v1.json) · [Successor execution](artifacts/target_blind_v22/successor_evaluation_run_v2.json) · [Saved result](artifacts/target_blind_v22/successor_evaluation_result_v2.json).
+
+**7 September 2026 — register and repair the historical walk-forward study.** The intraday forecasting study presented here (RP4) went through four specifications, versions 1–4 (v1–v4). The first exposed extreme numerical failures in linear flow forecasts. The second changed coverage, model capacity and numerical stability while retaining the known provider gap. Both results remain visible; their precise execution times were not recorded. [First-version report](docs/rp4/results_v1.md) · [First-version receipt](artifacts/rp4_b4/receipt.json) · [Second-version report](docs/rp4/results_v2.md) · [Second-version receipt](artifacts/rp4_v2_b4/receipt.json).
+
+**7–8 September 2026 — distinguish empty activity from unknown data.** The third specification added signed gamma imbalance and explicit empty-window handling: no qualifying trades is different from unavailable provider data. At the original 30-minute horizon, option state improved both families, but incremental flow did not pass the primary decision. Its registration followed already observed first- and second-version results. [Third-version report](docs/rp4/results_v3.md) · [Empty-window registration](artifacts/rp4_v3_a1_empty_window/receipt.json) · [Closeout receipt](artifacts/rp4_v3_b4/receipt.json).
+
+**8 September 2026 — complete the shorter-horizon comparison.** A conditional declaration dated the previous evening proposed that flow information might be short-lived. The executable fourth specification was frozen at **02:37 Australia/Sydney**, before its new fits, and the report was complete by **05:26**. It made 15 minutes primary and 5 minutes secondary, retaining the predictors and training rules. The linear flow result was favorable; the tree mean result and the final historical window did not confirm the full sequence. The local seal establishes the recorded sequence, not independent proof that the design preceded knowledge of the historical sample. [Fourth-version report](docs/rp4/results_v4.md) · [Conditional declaration](docs/rp4/predeclaration_v4_text.md) · [Freeze manifest](artifacts/rp4_v4_a1/freeze_manifest.json) · [Report receipt](artifacts/rp4_v4_b4/receipt.json).
+
+**8–9 September 2026 — close extensions and prepare new evidence.** Two registered exploratory extensions were complete by 9 September, Australia/Sydney: one compared five model families and combinations; the other added SPY and QQQ as forecast targets. Neither supplied an independent sample or replaced the fourth specification's headline. In parallel, the prospective rules were sealed on 8 September for future sessions. The next evidence must come from those registered reads, rather than another interpretation of the same history. [Five-family report](docs/rp4/results_v5.md) · [Completion receipt](artifacts/rp4_v5_run_a3_20260908/reports/5_control/receipt.json) · [Eight-asset report](docs/rp4/results_universe_v1.md) · [Aggregate provenance](artifacts/rp4_universe_public_v1/import_receipt.json) · [Prospective protocol](docs/rp4/prospective_confirmation_v1.md) · [Registration receipt](docs/rp4/prospective_confirmation_v1_receipt.json).
+
+The timeline also includes a separately registered long-run study (RP3), whose estimated read date remains **2029-01-30**, not a completed read. [Long-run protocol](docs/rp3/PREREGISTRATION.md) · [Seal manifest](artifacts/rp3/frozen/freeze_manifest.json). The [scientific findings ledger](docs/scientific_findings_ledger.md) connects these different studies without counting them as independent replications of the same effect.
+
+![Research programme timeline from the earlier validation program through the point-in-time successor and the four walk-forward specifications](docs/figures/public_refresh/programme_timeline.architecture.svg)
+
+*The sequence preserves nulls, technical corrections, changed specifications and prospective gates as distinct events.*
+[PNG alternative](docs/figures/public_refresh/programme_timeline.architecture.png).
+
+## Data and point-in-time discipline
+
+The six stocks are **AAPL, AMZN, META, MSFT, NVDA and TSLA**. Licensed one-minute bars and options records come from FMP, Unusual Whales and Massive. The primary source window spans **2024-08-02–2026-07-31**; after warm-up and eligibility checks, it supplies **419 evaluated sessions** and **160,832 forecast origins per specification**, not that many independent experiments. The separate **25-session** final historical window ends on **2026-09-04**. [Coverage](artifacts/rp4_v4_b4/coverage.csv) · [Registered windows](artifacts/rp4_v4_a1/specification.json).
+
+Availability uses a **120-second source-time proxy**. Records must satisfy the relevant clocks and quality rules before a forecast origin; later records are not treated as earlier information. This does not establish historical receipt by a trading client. The Unusual Whales gap **2025-01-25–2025-02-24** remains unfilled, and absence of a provider record is distinguished from a valid empty activity window. Licensed inputs remain in private storage; public aggregates and source hashes support inspection within that boundary. [Data access](data/DATA_ACCESS.md) · [Availability limits](docs/pit_v22_claims_and_limitations.md) · [Provider audit](artifacts/provider_audit/2026-07-20/provider_audit_summary.md) · [Audit manifest](artifacts/provider_audit/2026-07-20/provider_audit_manifest.json).
+
+![Data workflow from licensed provider records through point-in-time panels and evaluation to public aggregates and hashes](docs/figures/data-pipeline.svg)
+
+*Licensed observations and analytical panels remain private; the public record exposes aggregate evidence and its provenance.*
+[PNG alternative](docs/figures/data-pipeline.png).
+
+## Method
+
+The comparison adds information in three nested steps:
+
+- **B0 — 29 predictors:** price and volatility history.
+- **B1 — 69 predictors:** B0 plus the implied volatility surface and option state.
+- **B2 — 138 predictors:** B1 plus options order flow, composition and signed imbalance.
+
+These counts precede family-specific indicators and asset effects. The baseline includes multiscale volatility and market context, so option information must improve on more than a simple last-value forecast. [Proposal alignment and deviations](docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
+
+![Three nested information sets with 29, 69 and 138 predictors](docs/figures/public_refresh/information_sets.svg)
+
+*Each comparison isolates the increment from one additional information layer.*
+[PNG alternative](docs/figures/public_refresh/information_sets.png).
+
+The two families are a winsorized ridge regression on log variance with rank filtering (the linear model) and a LightGBM tree model. Expanding chronological training uses **60 warm-up sessions**, the last **10 training sessions** for selection, **60-minute purge/embargo**, and a calendar partition at **2026-08-01**. Model selection and transformations use the permitted training data. The primary target is **15-minute realized variance**, with **5 minutes** secondary; the change from 30 minutes is disclosed and does not establish an optimal horizon.
+
+**QLIKE** measures forecast loss. The **first test (H1)** asks whether option state improves B1 over B0; only a successful first test opens the **second test (H2)**, option flow improving B2 over B1. The rule uses a one-sided **5%** sequence within each family. Uncertainty comes from **9,999** circular bootstrap resamples of **five-session blocks**, retaining the dependence within sessions and the joint asset composition. This is a test of forecasting accuracy, not trading profit.
+
+![From the research question through data, chronological evaluation and prospective replication](docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg)
+
+*Training and evaluation follow time order; only the future registered sample can provide prospective replication.*
+[PNG alternative](docs/figures/public_refresh/proposal_to_replication_readme.workflow.png) · [Full report](docs/rp4/results_v4.md) · [Registered design](docs/rp4/specification_v4.md) · [Decisions and deviations](docs/research_decisions_current.md).
+
+## Results
+
+The table retains all four historical specifications. Realized variance is measured over **30, 15 and 5 minutes** (RV30, RV15 and RV5, respectively). Cells show **percentage QLIKE reduction (p)**; negative values mean worse forecasts. The first two specifications use bilateral Holm-adjusted p-values. The third and fourth use the one-sided sequence at **5% per family**, with the **second test opened only if the first rejects**. Cross-version search is not adjusted; **the fourth specification supplies the headline**.
+
+| Version / target | Linear B1/B0 | Linear B2/B1 | Trees B1/B0 | Trees B2/B1 | Sessions |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| v1 · RV30 | +0,290 % (1,000) | −167.448,32 % (1,000) | +1,204 % (0,4724) | −0,073 % (1,000) | 418 |
-| v2 · RV30 | +1,715 % (0,1842) | −8,714 % (0,3752) | +2,091 % (0,0264) | −0,063 % (0,8858) | 419 |
-| v3 · RV30 | +1,729 % (0,0439) | +0,554 % (0,0525) | +2,091 % (0,0053) | −0,159 % (0,6631) | 419 |
-| v4 · RV15, primario | +0,880 % (0,0390) | +0,623 % (0,0032) | +1,170 % (0,0135) | −0,115 % (0,6280) | 419 |
-| v4 · RV5, secundario | +0,377 % (0,0092) | +0,256 % (0,0172) | +0,536 % (0,0608) | +0,160 % (no abierta; nominal 0,1927) | 419 |
+| v1 · RV30 | +0.290 % (1.0000) | numerical failure (retained in the CSV) | +1.204 % (0.4724) | −0.073 % (1.0000) | 418 |
+| v2 · RV30 | +1.715 % (0.1842) | −8.714 % (0.3752) | +2.091 % (0.0264) | −0.063 % (0.8858) | 419 |
+| v3 · RV30 | +1.729 % (0.0439) | +0.554 % (0.0525) | +2.091 % (0.0053) | −0.159 % (0.6631) | 419 |
+| v4 · RV15, primary | +0.880 % (0.0390) | +0.623 % (0.0032) | +1.170 % (0.0135) | −0.115 % (0.6280) | 419 |
+| v4 · RV5, secondary | +0.377 % (0.0092) | +0.256 % (0.0172) | +0.536 % (0.0608) | +0.160 % (not opened; nominal 0.1927) | 419 |
 
-El flujo lineal es positivo en los tres bloques de ambos horizontes; por activo,
-en seis de seis a 15 minutos y **tres de seis a 5 minutos**. En árboles, la
-mediana pareada de B2 es positiva a 15/5 minutos: p bilateral 0,0435/0,0038 y
-Holm 0,0870/0,0096; no sustituye la media primaria. La ventana final de 25
-sesiones no confirma la secuencia completa. El programa termina en v4, sin v5.
+[All 40 comparison cells and source hashes](artifacts/rp4_closeout_figures/comparison_v1_v4.csv). The first version's numerical failure is retained. Coverage and specification changed between versions; their differences do not isolate one repair's causal effect.
 
-[Resultado final y límites](docs/rp4/RESULTADO_FINAL.md) ·
-[Informe completo con ambas ventanas](docs/rp4/results_v4.md) ·
-[Anexo de 40 paneles sin recorte](docs/figures/rp4/comparison_v1_v4.svg) ·
-[Datos agregados de las figuras](artifacts/rp4_closeout_figures/comparison_v1_v4.csv)
+For the current **15-minute primary target**, the four comparisons are:
 
-## Cómo verificar y reproducir
+| Model family | First test: option state, B1/B0 | Second test: option flow, B2/B1 |
+| --- | ---: | ---: |
+| Linear | +0.880% (p = 0.0390) | +0.623% (p = 0.0032) |
+| Trees | +1.170% (p = 0.0135) | −0.115% (p = 0.6280) |
 
-Verificación del informe contra los resultados guardados, sin datos licenciados,
-entrenamiento ni inferencia nueva:
+These p-values belong to the declared one-sided sequence. The linear flow difference has a positive **95% interval [0.000335; 0.001932]** in QLIKE units. Its **bilateral Holm-adjusted p = 0.0248** comes from a separate comparability analysis; it is not another adjustment to the one-sided sequence. [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv) · [Loss comparisons and uncertainty figure](docs/figures/rp4/thesis_summary.svg).
 
-```powershell
-uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py
-uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_closeout_figures_code -q -p no:cacheprovider
+![Accumulated daily forecast-loss difference after adding option flow](docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg)
+
+*Accumulated paired loss differences show when the linear and tree results gain or reverse; they are not trading returns.*
+[PNG alternative](docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png).
+
+Linear flow ends with a positive improvement in **six of six assets** at 15 minutes. That consistency does not make six correlated stocks six independent replications. At the secondary five-minute horizon, linear flow improves **0.256%**, with positive signs in **three of six assets**. Positive tree medians are also secondary and do not replace the primary mean test.
+
+![Cumulative option-flow forecast-loss differences for each of the six stocks](docs/figures/public_refresh/cumulative_by_asset_rv15.svg)
+
+*The six asset paths retain local reversals and show the cross-sectional scope of the aggregate result.*
+[PNG alternative](docs/figures/public_refresh/cumulative_by_asset_rv15.png) · [Aggregate figure data and import receipt](artifacts/rp4_readme_figures_v1/import_receipt.json) · [Stability checks](artifacts/rp4_v4_b4/robustness.csv). The [canonical defense](docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md) provides the detailed numerical argument.
+
+**HAR and persistence references.** The price-history set includes heterogeneous autoregressive volatility features, but that is not a standalone benchmark comparison. Separate HAR and seasonal-persistence model rows were absent from the four-version comparison; they are present in the closed five-family extension, alongside ridge, Elastic Net and LightGBM. The distinction prevents treating a feature choice as proof of superiority over those reference models. [Benchmark rows and scope](docs/rp4/results_v5.md).
+
+**Five-family extension.** The closed registered model-combination extension, version 5 (v5), compares five families at 15 minutes on the same historical sessions. Its primary selector fails the first test (**p = 0.3594**), leaving the second unopened. After Holm adjustment across the two selector chains, the secondary ensemble passes the two-test chain (**p = 0.0498**) but not the stricter Bonferroni **×5** correction for the five historical versions (**p = 0.249**), so it remains a candidate for prospective testing, not a confirmed result. This correction does not cover all adaptive search. Its disclosed post hoc averaging analysis also reuses these sessions. [Exploratory extension](docs/rp4/results_v5.md) · [Saved selector inference](artifacts/rp4_v5_run_a3_20260908/reports/5_control/summary.json).
+
+**Eight-asset extension.** Adding SPY/QQQ as targets gives linear state/flow improvements of **1.40% / 0.56%** (p = **0.0208 / 0.0093**). Trees fail the first test, so the joint claim across both families fails. It reuses the historical period and preserves the six-asset headline. Both extensions motivate further tests and supply no independent confirmation. [Closed eight-asset report](docs/rp4/results_universe_v1.md) · [Saved aggregate results](artifacts/rp4_universe_public_v1/primary_summary.json).
+
+## Limits
+
+This is the **fourth evaluation of reused historical windows**: the design was fixed on **2026-09-07**, after the historical sample had been observed, so chronology within each fit does not make the design an unseen-data preregistration.<br>
+The **final 25-session window does not confirm the full test sequence**, and prospective replication remains pending.<br>
+The **120-second availability proxy** does not establish actual historical client receipt, while the gap in the source data remains unfilled.<br>
+A small forecasting improvement establishes neither the dealer-hedging mechanism, economic alpha, profitability nor broader generalization.
+
+[Findings](docs/scientific_findings_ledger.md) · [Validity](docs/threats_to_validity_matrix_v1.md).
+
+## What would change the conclusion
+
+A successful **registered prospective sequence on new sessions**, using the fixed primary linear model at 15 minutes, would support replication of the historical finding. An adverse or inconclusive result would remain part of the record rather than trigger a change of family, horizon or read rule. The plan distinguishes **20 new sessions**, a **40-session** stability check and the final **335-session** extension. [Prospective protocol](docs/rp4/prospective_confirmation_v1.md) · [Final-look amendment](docs/rp4/prospective_confirmation_v1_amendment_3.md) · [Calculations and seal](docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json).
+
+The **335-session** target is a normal-approximation power plan for the option-flow test, not guaranteed success or **80% joint power for the first and second tests**. The earlier **537-session** validation-study plan concerned a different effect and does not contradict it. A secondary **45-session combination of 25 historical + 20 new** reuses known data and is not an independent replication. The separately registered long-run study retains its own gate and estimated **2029-01-30** read date. [Reconciliation and sources](docs/scientific_findings_ledger.md) · [Secondary pooling rules and receipt](docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json) · [Long-run registration](docs/rp3/PREREGISTRATION.md).
+
+Evidence of practical value would additionally require observed client availability and an evaluation of a defined decision after costs. Neither follows from a positive forecast-loss difference.
+
+## Reproduce
+
+[![Tier 1 CI](https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml/badge.svg)](https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml)
+
+From a clean clone, use Python **3.12** and `uv`. These three commands install the locked environment, configure the repository hook and run the public verification:
+
+```sh
+uv sync --frozen
+git config --local core.hooksPath scripts/hooks
+uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 ```
 
-Requiere el entorno Python 3.12 instalado con las dependencias fijadas en
-`uv.lock`. El [runbook](docs/rp4/OPERATING_GUIDE.md) separa verificación pública,
-ejecuciones históricas y reproducción con licencia y originales. No se declara
-una nueva ejecución completa ni CI remota aprobada. La proyección de publicación
-puede tener bytes distintos: sus hashes no se presentan como los del freeze.
+Public aggregate CSVs support numerical cross-checks, figure regeneration and artifact-hash verification. Rebuilding feature panels or refitting the study requires licensed inputs and their recorded hashes. The [reproduction guide](docs/reproduce.md) contains the checked figure commands and database catalog dry run; the [reproducibility contract](docs/reproducibility_contract_v1.md) defines the boundaries. A public check is not a new scientific evaluation. Original and public-derivative hashes remain distinct where provenance redactions were necessary.
 
-Las fuentes de proveedores y los derivados por origen no se redistribuyen.
-La licencia del código no concede derechos sobre esos datos.
-[Acceso a datos](data/DATA_ACCESS.md) · [Estado generado](STATUS.md) ·
-[Estado legible por máquina](data/CANONICAL_STATE.json).
+## Defects and corrections
 
-## Divulgaciones
+Every documented defect has a recorded status, evidence and resolution or remaining scope in the [defects and resolutions register](docs/known_defects_and_resolutions.md), with the historical record retained for inspection.
 
-Cuarta evaluación de las mismas ventanas: v1 inicial; v2 corrige cobertura y
-estabilidad; v3 añade desbalance y ventanas vacías; v4 cambia el horizonte bajo
-un antecedente condicional. RV5 es secundario, no una réplica independiente.
+## Cite this work
 
-La ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8
-con otra especificación. El PIT es proxy de tiempo fuente a 120 s, como en la
-literatura; no demuestra recepción histórica por el cliente.
+Miguel Guerrero (2026). *Options Order Flow and Intraday Volatility*.
+Master of Data Science research project, Sydney Polytechnic Institute.
+Use [CITATION.cff](CITATION.cff) and include the commit used when citing results.
 
-El hueco UW 2025-01-25–2025-02-24 se acepta sin relleno. Las marcas de sucesos
-en las figuras son contexto temporal, no atribución causal.
+Companion final report: *Can option trading improve short-term volatility forecasts? Comparing 15-minute forecasts for six U.S. stocks* — Miguel Antonio Guerrero Quijano, Sydney Polytechnic Institute, September 2026.
 
-## Historial: resultados y correcciones conservados
-
-- El programa de 2024 y RP2 distinguió superficie y flujo con resultados
-  dependientes de modelo y muestra; su señal se estudió como absorbida por
-  información de estado, no se presenta como réplica de RP4.
-  [Registro de resultados anteriores](docs/rp2_v3/SUPERSEDED_RESULTS.md).
-- El sucesor PIT v2.2 tiene una lectura de evaluación fechada 2026-09-02,
-  cifras favorables y adversas y disposición histórica
-  `GLOBAL_EDGE_NOT_CONFIRMED`.
-  [Resultado y límites originales](docs/pit_v22_claims_and_limitations_v2.md).
-- El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones
-  descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).
-- RP3 conserva su protocolo, contador de lectura cero y fecha **prevista**
-  2029-01-30; esa fecha no es una lectura realizada. [Prerregistro](docs/rp3/PREREGISTRATION.md).
-  C10 permanece inactivo por decisión 128: no se inventa fecha de lectura.
-  Fase 9 dejó de ser cohorte sellada para RP4; sus originales no se modifican.
-- v1 conserva su fallo numérico; v2 conserva sus resultados; la regla de ventana
-  vacía de v3 acotó los apagones del proveedor sin eliminar todo el daño.
-  [Auditoría de instrumento y modelos](artifacts/rp4_closeout_audit/REPORT.md).
-  El cambio de vencimientos del 26 de enero de 2026 y los extremos AMZN/TSLA
-  se documentan con límites de verificación.
-  [Censo y barras](artifacts/rp4_market_audit/REPORT.md).
-
-## Referencia de trabajo
+The [numbered reading route](docs/INDEX.md) holds the detailed documentation.
+[Contributing](CONTRIBUTING.md) · [Development guide](docs/DEVELOPER_GUIDE.md) · [Computational assistance](docs/AI_ASSISTANCE_STATEMENT.md) · [Scripts](scripts/README.md) · [Reports](reports/INDEX.md) · [Database](supabase/README.md) · [Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues) · [License](LICENSE) · [Security](SECURITY.md).
 
 <details>
-<summary>Trazabilidad técnica anterior, no resultado vigente de RP4</summary>
+<summary>Historical bundle identity retained for audit</summary>
 
-El registro histórico `rp2-v3-20260831-b1-spot-cutoff-remediation` conserva el
-hash científico `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`.
-Su disposición es `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`, por
-`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`; no se presenta como una réplica de RP4.
-El puente Fase 8 conserva `MIXED_EXPLORATORY`: su auditoría concluyó
-«no aggregation change» y «not confirmatory»; la sensibilidad materializada
-mejoró sólo «one of eight B1-inclusive primary cells». Son diagnósticos
-históricos, no la conclusión del programa cerrado en v4.
-
-[Estado canónico e historial](data/CANONICAL_STATE.json) ·
-[Límites PIT anteriores](docs/pit_v22_claims_and_limitations.md) ·
-[Acceso a datos](data/DATA_ACCESS.md) ·
-[Contrato de reproducción histórico](docs/reproducibility_contract_v1.md).
+The bundle from the earlier validation study `rp2-v3-20260831-b1-spot-cutoff-remediation` retains scientific hash `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`. Its measurements are superseded and are not current claims. [Superseded measurements](docs/rp2_v3/SUPERSEDED_RESULTS.md) · [Machine-readable state](data/CANONICAL_STATE.json) · [Generated state](STATUS.md).
 
 </details>
 
-La ruta vigente de lectura es este README → [RESULTADO_FINAL](docs/rp4/RESULTADO_FINAL.md)
-→ [RUNBOOK](docs/rp4/OPERATING_GUIDE.md). Los protocolos y recibos anteriores se conservan
-como historia; no autorizan volver a ejecutar campañas cerradas.
-La preparación es local: no se ha publicado esta entrega ni abierto su PR.
-
-[Guía de desarrollo](docs/DEVELOPER_GUIDE.md) · [Licencia](LICENSE) ·
-[Citación](CITATION.cff) · [Seguridad](SECURITY.md).
-
-RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
-
-## Navegación
-
-[Contribuir](CONTRIBUTING.md) · [Índice de documentación](docs/INDEX.md) ·
-[Declaración de asistencia](docs/AI_ASSISTANCE_STATEMENT.md) ·
-[Amenazas a la validez](docs/threats_to_validity_matrix_v1.md) ·
-[Scripts](scripts/README.md) · [Índice de informes](reports/INDEX.md) ·
-[Base de datos](supabase/README.md) · [Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues).
+Research only. Not investment advice. Capital deployment is not authorized.

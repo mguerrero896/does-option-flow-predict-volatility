@@ -1,0 +1,2 @@
+# Hash sidecars are byte-exact provenance records, including their line endings.
+*.sha256 -text

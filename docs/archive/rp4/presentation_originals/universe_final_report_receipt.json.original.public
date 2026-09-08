@@ -1,0 +1,46 @@
+{
+  "artifacts_sha256": {
+    "private-input/5c7f9897fe6be23eebef": "ca25f6cbb7a8fa52e9cf2b45bb02afc142d22576bd9b754bff1c552ad5185501",
+    "private-input/1c6e53fbc248861ecc77": "35fa7d301903f3375fb2b51069ea7fa5702178b4c64ca0d690d2cd941ef03cb4",
+    "private-input/2a67656563cf8de00b02": "870b83aa6ce4c80e7e2692b34e7a4211d018786d187f6c874437c3fc1da01f71",
+    "private-input/71f881c5fdfac3708711": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+    "private-input/061ec9b23b46ed71a110": "01f85395c225d6c730f3824fce1ee53b5c4d29f09b0da7927a0c675409475126",
+    "private-input/c20e42632af02cf01904": "d4cbefaf6ce56e1eeab8b416903a8fe3b5027d7d925cceee9e4219387c7fc137",
+    "private-input/51c69c1372b910786df2": "00be9756933b5ed4893461f9eb5dfdf8a0cb9706a776aa59c68e37e32b8bc851",
+    "private-input/4445b865aa63aa7a79a2": "d934431f5a860723e87ad714f0543f18d57448b53cdebf09af186b386d20cd18",
+    "private-input/b4e02afe521ce6f6a980": "77af88564a475a2b2bc742bf06511fc4d05a46b396c28eda9a7350b42b496064",
+    "private-input/cf7f690609e9ba9801fe": "abf9c4a3065b55150b3190aea7109d5bee586c26180abe160f96a3115972f234",
+    "private-input/f7a5c2213b2d35f7c692": "2234c6acddecf442e6aab4c771fb466324543a2d2e09bc0f3c653dc834e27944",
+    "private-input/1d077d1e66da16cd1d7a": "00b04a7b6b120c88419d254d2b7e7cb9415a6c47b41793ffec2b8535da516134",
+    "private-input/2171d05bd00d34351150": "9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988",
+    "private-input/dc3a9a7252bea53f7473": "ef9066a23ef30f20472b5dca168281a3847a5fd678add74a6c7c85be90346da2",
+    "private-input/52a42b8e8cbcf5889654": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4",
+    "private-input/84b109302d2f809ad794": "36c0f212c8af0f2466b6b704f4d53e096cb1ec4cf5e549968ff1f4394b2f3387",
+    "private-input/3685cc20c4dd250112e9": "4d0bff27830c138f967c26b4f44c1466cfb0e884384f0bb017c1aa3caba18153",
+    "private-input/d066971acd8056245673": "9d709b2c907da5d68eb59d6bb73ad4d71e92e13fa89ba001546d27ab92dbbeae",
+    "private-input/b4d17ff4c197ef0ba4cc": "1d60981aa5e3236e537fba82b173d721152f15839fd35615dc465b7f8180a7c4",
+    "private-input/568459e98ff4fe063069": "ee39f51049f5f78d8531cc7c0f5a4c80caf39ee4ca45e9bc299471c02f18658c",
+    "private-input/d2803f16fdb4a6b59b85": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "private-input/c2c4d7f6a2543c45eb63": "1a0418e2d6f74c39bd1bfb63ec24133d885b008aa0afeb67260588a8811851b2"
+  },
+  "bootstrap_reruns": 0,
+  "capital_go": false,
+  "checks": [
+    "native e.verify",
+    "D04-D07 source hashes",
+    "both partials equal aggregate exactly",
+    "32 per-asset contrasts",
+    "3352 equal weights and 214209 origins",
+    "six control and holdings artifacts"
+  ],
+  "global_joint_reject": false,
+  "horizons_completed": [
+    15
+  ],
+  "horizons_deferred": [
+    30,
+    5
+  ],
+  "model_fits": 0,
+  "status": "PASS_FINAL_RV15_REPORT_AND_NATIVE_CUSTODY"
+}

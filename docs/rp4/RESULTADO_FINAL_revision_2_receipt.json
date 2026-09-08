@@ -1,0 +1,37 @@
+{
+  "schema": "rp4-final-result-document-revision-2",
+  "sealed_at_utc": "2026-09-08T07:48:10.731250+00:00",
+  "document_sha256": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5",
+  "previous_document_sha256": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05",
+  "source_sha256": {
+    "docs/rp4/RESULTADO_FINAL.md": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19",
+    "docs/rp4/RESULTADO_FINAL_revision_1.md": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05",
+    "docs/rp4/RESULTADO_FINAL_revision_1_receipt.json": "9ac1d6005b431e750572ce0190705704907535c74b65b8e84048515f1db355c2",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_evidence.json": "5bd7d7a6e85899d0542a4797671b14c534099e8806506b4fff06dd3da46143a4",
+    "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2",
+    "docs/rp4/specification_v3.md": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+    "docs/rp4/specification_v4.md": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "docs/rp4/v3_window_empty_addendum.md": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803"
+  },
+  "corrections": [
+    "Development-sample scope and walk-forward training distinguished from observed-sample design.",
+    "Expanded four disclosures and declared local chronology; prior bridge status remains historical and not freshly verified.",
+    "Stored bilateral Holm sensitivity separated from unilateral Bonferroni arithmetic.",
+    "Marginal prospective power separated from complete-sequence power; three-positive-asset RV5 scope retained.",
+    "Empty-window census distinguished from an independently verified provider interruption.",
+    "At-least-one-family closure rule explicitly attributed to v4."
+  ],
+  "validation": {
+    "all_result_table_lines_equal_prior": true,
+    "content_cross_review": "No remaining content error detected in the twelve requested corrections.",
+    "contract_and_gate_receipt": "DEFENSE_PACKAGE/revision_2/correction_2/receipt.json"
+  },
+  "original_documents_modified": false,
+  "scientific_results_modified": false,
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "research_only": true,
+  "capital_go": false
+}

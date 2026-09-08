@@ -1,0 +1,3181 @@
+{
+  "schema": "rp4-proposal-alignment-evidence-v1",
+  "scope": {
+    "new_statistical_calculations": 0,
+    "pending_analyses_executed": false,
+    "model_fits": 0,
+    "bootstrap_replications": 0,
+    "raw_or_sealed_payloads_read": false,
+    "source": "Proyección de revisiones ya realizadas y extractos públicos; verificación de campos, citas e identidades únicamente.",
+    "absence_claim_limit": "Los estados pendientes y la razón no localizada son conclusiones de revisión acotada, no demostraciones de ausencia global.",
+    "source_metadata_limit": "Identidades guardadas no prueban recepción histórica al cliente ni reproducibilidad completa desde cero."
+  },
+  "proposal_source": {
+    "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+    "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+    "fact_ids": {
+      "en": {
+        "rq1": "proposal_en_rq1",
+        "rq2": "proposal_en_rq2",
+        "rq3": "proposal_en_rq3",
+        "scope": "proposal_en_scope",
+        "peer_review": "proposal_en_peer_review",
+        "sources": "proposal_en_sources",
+        "models": "proposal_en_models",
+        "equation_prices": "proposal_en_equation_prices",
+        "evaluation": "proposal_en_evaluation",
+        "deliverables": "proposal_en_deliverables",
+        "commitment": "proposal_en_commitment",
+        "null_clause": "proposal_en_null_clause"
+      },
+      "es": {
+        "rq1": "proposal_es_rq1",
+        "rq2": "proposal_es_rq2",
+        "rq3": "proposal_es_rq3",
+        "scope": "proposal_es_scope",
+        "peer_review": "proposal_es_peer_review",
+        "sources": "proposal_es_sources",
+        "models": "proposal_es_models",
+        "equation_prices": "proposal_es_equation_prices",
+        "evaluation": "proposal_es_evaluation",
+        "deliverables": "proposal_es_deliverables",
+        "commitment": "proposal_es_commitment",
+        "null_clause": "proposal_es_null_clause"
+      }
+    },
+    "equation_fact": "proposal_equation_1_visual_check",
+    "declared_date_fact": "proposal_declared_date"
+  },
+  "source_sha256": {
+    "artifacts/rp4_a1/specification.json": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+    "artifacts/rp4_closeout_audit/REPORT.md": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+    "artifacts/rp4_closeout_audit/descriptive_profiles.csv": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd",
+    "artifacts/rp4_closeout_figures/README.md": "51f46c4a6f1d00c320e7b01922cf9cf0ebb84b99c05d5540729d3a86bf1b8b4b",
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "artifacts/rp4_closeout_figures_revision2/manifest.json": "a7c6c8533f32acbae30bc34567e1306699255f6b84a3c2a898746c25613796c0",
+    "artifacts/rp4_code/acquire.py": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8",
+    "artifacts/rp4_code/close_b1.py": "4ed7f2c190ad0843718fb93d4d452034e4f3e0206e0320a98834502ce5278e79",
+    "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+    "artifacts/rp4_code/materialize.py": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0",
+    "artifacts/rp4_code/report.py": "9aae55e8488ebe8b69504dc104a0cf3b077e510b279384d5e5e1988c3bb7e668",
+    "artifacts/rp4_code/tail_diagnostic.py": "6c64bdf9c9a29a66e23c10f695a4ddf3303b15d0ad5c3bac7237290b6781b488",
+    "artifacts/rp4_code/test_acquire.py": "81be2f44353606e9405fd0e7c1c99215000a6d395f3336b697d43819b649cbc0",
+    "artifacts/rp4_code/test_evaluate.py": "1cd0aea456eccf50d86e7bd07bfa9876210c371646a9f3c84862b62be6a86095",
+    "artifacts/rp4_code/test_materialize.py": "7339e1db795797bcffc96e68c83e3bcba08de41f6baf09320cc8c348a9e159f1",
+    "artifacts/rp4_code/test_public_projection.py": "ea960eeb0635cabaab55178ddcafb7e74fcd6d58e4562a78e0d5056abb8acea3",
+    "artifacts/rp4_code/test_report.py": "1c02db9da0fc89c7cddfb084fd2f59c3e16f1b7297bb11aeb38c7ce3cfc8a44e",
+    "artifacts/rp4_code/verify_delivery.py": "15145fa8ec16fe23e1031a335c9d3885a508375941e40db305af533780d1d22f",
+    "artifacts/rp4_market_audit/REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "artifacts/rp4_market_audit/summary.json": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+    "artifacts/rp4_v2_code/materialize_iv.py": "3741c28773d50e89d6c65bb3307536ba8defcc085edcd92a358d6dc735d43972",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "artifacts/rp4_v2_code/report_v2.py": "8ad2131dee31a3f424fd4e3bf581bdfc32d00f04f5223cc552761b045021d5f1",
+    "artifacts/rp4_v2_code/test_evaluate_v2.py": "589ed5f34d588ba0161f25c30b9a616e5e39038168abe13e7b47a3d219d52ebc",
+    "artifacts/rp4_v2_code/test_materialize_iv.py": "2cb9a2d5b10149943cbd98466be7219ad30a8ce6b1a755dbd81d46612820de2c",
+    "artifacts/rp4_v2_code/test_models.py": "c84301445b4685def13d0f2deb41dbbd3612f91c746d171b4122874597f53ce1",
+    "artifacts/rp4_v2_code/test_report_v2.py": "e942443ea69a65e3e550de6b1ea9d92fb20ba1a11192fae0d577b98f851174c5",
+    "artifacts/rp4_v2_code/test_runtime_v2.py": "709b28373c64b815d953931b5a8066910b334d81c63ae4cf41082dbb55940df2",
+    "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+    "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+    "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+    "artifacts/rp4_v3_code/execute.py": "fb6b01b42f62c24ec2a87f83e0338e1b36f0e609b3938cf92c76365a08505ff9",
+    "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+    "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "artifacts/rp4_v3_code/materialize_gamma.py": "2f59184b5a36b301252bb11eaf779c8128cef0f45266368f44b1a7d35f3644a3",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+    "artifacts/rp4_v3_code/report_v3.py": "bb5b7d574207e8307a1b31800e689166583851161365fd94b689f94fce7be356",
+    "artifacts/rp4_v3_code/test_aggregate_v3.py": "a985c7d6b7383d76ca3169fbb6c8785415354fdf001bbb39455264afe52d2a9c",
+    "artifacts/rp4_v3_code/test_empty_windows.py": "9b7e7a5d892c7dbbe97782ab2c329d523ed3ca33d18da6f792584a1ee2fdd843",
+    "artifacts/rp4_v3_code/test_evaluate_v3.py": "a26343dcbd264b8e3e9139805dde1e485cf7fa26b4db59a12bb8de66299ddd5a",
+    "artifacts/rp4_v3_code/test_inference.py": "d7a2caee560c7aa36218f3bccbeaa7f24993e5c77dc2189a00af2a87433990b1",
+    "artifacts/rp4_v3_code/test_materialize_gamma.py": "3fa8bef153ea8a7b5c84b9c4cd14d0d1ae3c471c6794c8181878cc3244460f6e",
+    "artifacts/rp4_v3_code/test_models.py": "56fb47cc9d73aafed1842ad6633dd0454f44e1a7341b00a5d50d0910a22fe4cc",
+    "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+    "artifacts/rp4_v4_a2/evaluation_release_rv15.json": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+    "artifacts/rp4_v4_a2/receipt.json": "d0483ef642b6440602467454457ed9b31356744911b50b7597fdc8f2f5a3f3b8",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+    "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+    "artifacts/rp4_v4_b3_rv5/summary.json": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_v4_b4/regime_secondary.csv": "eb1fd165dd03f5c24efb717afdae7a30e04898dcd6fc53cb3172c1a2d81b03c7",
+    "artifacts/rp4_v4_b4/robustness.csv": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb",
+    "artifacts/rp4_v4_code/aggregate_v4.py": "53ced372a3e12b7dc3525130b118d62ff045b60853f9cfad86f7dfd8f7f811f0",
+    "artifacts/rp4_v4_code/evaluate_v4.py": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450",
+    "artifacts/rp4_v4_code/execute.py": "222ba0f4c28aafe96e42986b3e6e4424128b4488fda616a1e624337422034093",
+    "artifacts/rp4_v4_code/freeze.py": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+    "artifacts/rp4_v4_code/materialize_targets.py": "8c6f9acc1dd3d995bea1ca75456c8fda6d4b6da1dc0b734dfbc23917b1265ce6",
+    "artifacts/rp4_v4_code/report_v4.py": "accf65711f7d09e0851df25501c40e30166a9f25d92a85d0a95773bc7080969b",
+    "artifacts/rp4_v4_code/report_v4_checked.py": "17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c",
+    "artifacts/rp4_v4_code/test_aggregate.py": "67c484e2642643f2bce798aaa949a7936965e99f9dae3df91add6ee1748b9ebd",
+    "artifacts/rp4_v4_code/test_evaluate_v4.py": "c4c7d9cc1d09edceb0f5e1eea770ba0a9398b1ce6f399de26c2179a48c9fd43f",
+    "artifacts/rp4_v4_code/test_report.py": "8e531a7a96b7e941c7b67810abcdd6fd68af5a4a9772b3b5a54a1e0a5bf3a2bc",
+    "artifacts/rp4_v4_code/test_report_checked.py": "ca2f50495e3125f258ab7b437e98b040b25df536edd8bee5d637cb13261d3c58",
+    "artifacts/rp4_v4_code/test_targets.py": "79fa4f7d7f9df3b2306ed8018bcddd6529da0d8cb2099bdd807f7feadbeea999",
+    "docs/data_dictionary.md": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+    "docs/literature_evidence_ledger_v2.csv": "c52652090316aa23bdf3dbf10360986ce5a844377e8d721afe3ee1e96aa96de9",
+    "docs/literature_matrix.csv": "6023c1b094b5fbb7461b8f00a6b038699d0c94d9dd4c405fdc3f7117f5de6e26",
+    "docs/methodology_decisions.md": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md": "7a6633f3c38d80c9a8cc0213736871fe5e35b2e43b5f6a6cf518eeb918d02889",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md": "e6d25be0da3fefac2165339f571ab03506eb7f82ec4e7b742f75e848d85f7d41",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/executive_summary.md": "02ba564228cfe7722deffe3aa329b14bdeb5b7115f223cd54e1898c25bf1b31f",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+    "docs/rp4/RESULTADO_FINAL_revision_2.md": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5",
+    "docs/rp4/RUNBOOK.md": "5890e0f3d68d34be9cb40575d6c1905da90dfd0574e00e1eeb7b9295d16ece31",
+    "docs/rp4/predeclaration_v4_text.md": "b7e13877a3090b0724d9a90792afefef3f009124d2766197da637a42eb24d4a9",
+    "docs/rp4/results_v3_revision2.md": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e",
+    "docs/rp4/results_v4.md": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7",
+    "docs/rp4/specification_v1.md": "2012ce9a62fb1b0da205cd0b4d4d5f635353c35b60f6548257883db84211e510",
+    "docs/rp4/specification_v2.md": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+    "docs/rp4/specification_v3.md": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+    "docs/rp4/specification_v4.md": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+    "scripts/rp2_block4_b0_panel.py": "cc25547b84fdb305a87e7bf3cbf1dbaad66349c89b8903f9794454a194399eb2",
+    "src/mds650/manifests.py": "a1e10ced8336f735b411170ac2ba3021135b746a2454ed9534e6fbd057b09023",
+    "src/mds650/providers/fmp.py": "aefaf2f638facc4199c7d769c1e60a78c7c1a63450b482001749872aa9bec054",
+    "src/mds650/providers/massive.py": "9914799055cb58dab7fe92ba2243271635370f809b7c8abc8ff6266d65c67621",
+    "src/mds650/providers/unusual_whales.py": "b50433c5b3d1880a29f0c31e7351926239f154e25f10d32770b6fa52a2713abe",
+    "src/mds650/quality.py": "50780697c08340f80f6d18e64ab1892479763e93493fa2a25f6abf8934f13e97",
+    "tests/contract/test_literature_matrix.py": "2e146f0cdeed97a186d333515e20941e48242f4701bf0fb980d9d3f5e927a55a",
+    "tests/contract/test_public_data_dictionary.py": "f5c4f39b4e29632753b4cbdf059915a8db3ee0d2590d9529a1f60321ce6fb0bd",
+    "uv.lock": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+    "notebooks/canonical_rv30_defense.ipynb": "5c93fe9cd4f503df74324b8d31a419ec9d5a138355611bb715ce414b96be33d5",
+    "notebooks/research_pipeline.ipynb": "01180e8a2af11be57645f180bef1b84919e22aa1327149f5fb677e9d16502045"
+  },
+  "facts": {
+    "proposal_en_rq1": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "41",
+        "text"
+      ],
+      "value": "Does conventional option-state information improve RV30 forecasts relative to an underlying-market benchmark?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_rq2": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "42",
+        "text"
+      ],
+      "value": "Does trade-derived options activity add incremental predictive value beyond that conventional option-state benchmark?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_rq3": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "43",
+        "text"
+      ],
+      "value": "Are any improvements stable across assets, time-of-day segments, volatility regimes, and conservative timing assumptions?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_scope": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "45",
+        "text"
+      ],
+      "value": "The initial universe comprises SPY, QQQ, AAPL, MSFT, NVDA, TSLA, AMZN, and META during regular United States market hours. Retention will depend only on historical coverage, timestamp integrity, liquidity, and completeness—not predictive performance. Five-minute origins will be used to forecast unannualised RV30. A bounded pilot across five sessions has already produced 2,840 valid origins and confirmed that the three licensed sources can be aligned; this evidence demonstrates feasibility only and will not support final predictive claims. The project excludes directional-price prediction, execution or profit optimisation, causal or insider-trading inference, unrestricted full-market OPRA reconstruction, and redistribution of licensed raw data. Limitations include commercial API changes, imperfect historical availability timestamps, missing observations, storage requirements, and the ten-week delivery period.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_peer_review": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "49",
+        "text"
+      ],
+      "value": "First, I will conduct a structured review of at least ten peer-reviewed studies, prioritising 2024–2026 publications. A literature matrix will compare research questions, datasets, forecast horizons, feature groups, model families, validation designs, metrics, findings, and limitations. Foundational methods will be retained only where recent applications demonstrate continuing relevance.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_sources": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "51",
+        "text"
+      ],
+      "value": "Second, the three licensed datasets will be audited for entitlement, history, timestamps, pagination, schema stability, missingness, and licensing constraints. One-minute underlying data will come from Financial Modeling Prep; historical option contracts and quotes from Massive; and transaction-level options activity from Unusual Whales. Raw files will be cached, hashed, and transformed into a traceable panel without future-data leakage.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_models": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "69",
+        "text"
+      ],
+      "value": "Third, the analysis will construct nested benchmarks on the same rows: B0 will contain underlying-market controls; B1 will add conventional option-state measures such as at-the-money implied volatility, skew, quote age, and spread; B2 will add continuous trade-activity surprises, concentration, premium, size, and contract-composition measures. Seasonal persistence, HAR-RV (Corsi, 2009), a regularised linear model, and gradient-boosted trees will be compared under the same protocol.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_equation_prices": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "72",
+        "text"
+      ],
+      "value": "C denotes the one-minute close. Equation 1 uses 31 prices to form 30 squared log returns; the target measures movement intensity, not direction.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_evaluation": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "74",
+        "text"
+      ],
+      "value": "Finally, expanding walk-forward validation will preserve chronology and keep all preprocessing within training histories. QLIKE (Patton, 2011) will be the primary loss because the target is variance; MAE and RMSE will provide secondary interpretation. Day-block bootstrap intervals, timing sensitivities, placebo tests, and asset/regime analyses will distinguish stable incremental information from noise. Model choice will follow benchmark performance and simplicity, not whether B2 produces a favourable sign.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_deliverables": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "paragraphs",
+        "79",
+        "text"
+      ],
+      "value": "The project will deliver a final research report, presentation, literature matrix, data dictionary, reproducible extraction and quality-control code, versioned analytical panel, model-comparison tables, uncertainty intervals, robustness analyses, and an examiner-facing notebook. Its principal contribution will be a defensible answer to whether options activity contains incremental short-horizon risk information. A positive result would justify further investigation of B2 as one input to risk monitoring; a null or negative result would be equally informative because it would show that commercial flow signals do not outperform stronger controls under realistic validation. The wider value is a reusable, leakage-resistant protocol for evaluating heterogeneous market data across other liquid assets.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_commitment": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "exact_english_commitment"
+      ],
+      "value": "Model choice will follow benchmark performance and simplicity, not whether B2 produces a favourable sign.",
+      "context": "Cita literal de la propuesta; no se sustituye por una traducción retrospectiva.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_en_null_clause": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "exact_english_null_clause"
+      ],
+      "value": "a null or negative result would be equally informative",
+      "context": "Cita literal de la propuesta; no se sustituye por una traducción retrospectiva.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_rq1": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "42",
+        "text"
+      ],
+      "value": "¿La información convencional del estado de opciones mejora RV30 frente a un benchmark del mercado subyacente?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_rq2": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "43",
+        "text"
+      ],
+      "value": "¿La actividad derivada de operaciones agrega valor predictivo incremental sobre ese benchmark convencional de opciones?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_rq3": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "44",
+        "text"
+      ],
+      "value": "¿Las mejoras son estables entre activos, segmentos horarios, regímenes de volatilidad y supuestos temporales conservadores?",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_scope": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "46",
+        "text"
+      ],
+      "value": "El universo inicial incluye SPY, QQQ, AAPL, MSFT, NVDA, TSLA, AMZN y META durante el horario regular del mercado estadounidense. La permanencia de cada activo dependerá únicamente de cobertura histórica, integridad temporal, liquidez y completitud, nunca de su rendimiento predictivo. Se utilizarán orígenes de cinco minutos para pronosticar RV30 no anualizada. Un piloto acotado de cinco sesiones ya produjo 2.840 orígenes válidos y confirmó que las tres fuentes licenciadas pueden alinearse; esta evidencia demuestra factibilidad, pero no respaldará afirmaciones predictivas finales. Se excluyen la predicción direccional, la ejecución o optimización de beneficios, inferencias causales o de insider trading, la reconstrucción irrestricta de OPRA y la redistribución de datos licenciados. Las limitaciones incluyen cambios de API, timestamps históricos imperfectos, observaciones faltantes, almacenamiento y el plazo de diez semanas.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_peer_review": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "50",
+        "text"
+      ],
+      "value": "Primero, el investigador realizará una revisión estructurada de al menos diez estudios revisados por pares, priorizando publicaciones de 2024–2026. Una matriz comparará preguntas, datasets, horizontes, grupos de variables, familias de modelos, validación, métricas, hallazgos y limitaciones. Los métodos fundacionales se conservarán únicamente cuando aplicaciones recientes demuestren su vigencia.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_sources": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "52",
+        "text"
+      ],
+      "value": "Segundo, las tres fuentes licenciadas serán auditadas en cuanto a permisos, historia, timestamps, paginación, estabilidad de esquemas, datos faltantes y restricciones de licencia. Financial Modeling Prep aportará datos del subyacente a un minuto; Massive, contratos y cotizaciones históricas; y Unusual Whales, actividad transaccional en opciones. Los archivos crudos serán cacheados, hasheados y transformados en un panel trazable sin información futura.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_models": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "70",
+        "text"
+      ],
+      "value": "Tercero, se construirán benchmarks anidados sobre las mismas filas: B0 incluirá controles del mercado subyacente; B1 añadirá medidas convencionales de opciones, como volatilidad implícita at-the-money, skew, edad de la cotización y spread; B2 agregará sorpresas continuas de actividad, concentración, prima, tamaño y composición contractual. Se compararán persistencia estacional, HAR-RV (Corsi, 2009), un modelo lineal regularizado y árboles con gradient boosting bajo el mismo protocolo.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_equation_prices": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "72",
+        "text"
+      ],
+      "value": "C representa el cierre de un minuto. La Ecuación 1 usa 31 precios para formar 30 retornos logarítmicos al cuadrado; mide intensidad, no dirección.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_evaluation": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "74",
+        "text"
+      ],
+      "value": "Finalmente, la validación walk-forward expansiva respetará el orden temporal y ajustará todo el preprocesamiento solo dentro de la historia de entrenamiento. QLIKE (Patton, 2011) será la pérdida principal por tratarse de un objetivo de varianza; MAE y RMSE facilitarán la interpretación secundaria. Intervalos bootstrap por día, sensibilidades temporales, placebos y análisis por activo y régimen distinguirán información incremental estable de ruido. La elección del modelo dependerá del benchmark y de la simplicidad, no de que B2 produzca un signo favorable.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_deliverables": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "es",
+        "paragraphs",
+        "79",
+        "text"
+      ],
+      "value": "El proyecto entregará un informe final, presentación, matriz de literatura, diccionario de datos, código reproducible de extracción y control de calidad, panel analítico versionado, tablas comparativas de modelos, intervalos de incertidumbre, análisis de robustez y un notebook para el evaluador. Su contribución principal será responder de forma defendible si la actividad de opciones contiene información incremental de riesgo a corto plazo. Un resultado positivo justificaría investigar B2 como insumo de monitoreo; un resultado nulo o negativo sería igualmente valioso porque mostraría que las señales comerciales no superan controles más fuertes bajo una validación realista. El valor adicional será un protocolo reutilizable y resistente a fuga de información para evaluar datos financieros heterogéneos.",
+      "context": "Cláusula exacta de la copia local de la propuesta; la proyección no acredita presentación o sello temporal independiente.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_commitment": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "exact_spanish_commitment"
+      ],
+      "value": "La elección del modelo dependerá del benchmark y de la simplicidad, no de que B2 produzca un signo favorable.",
+      "context": "Cita literal de la propuesta; no se sustituye por una traducción retrospectiva.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_es_null_clause": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "exact_spanish_null_clause"
+      ],
+      "value": "un resultado nulo o negativo sería igualmente valioso",
+      "context": "Cita literal de la propuesta; no se sustituye por una traducción retrospectiva.",
+      "evidence_status": "EXACT_PROJECTED_PROPOSAL_TEXT"
+    },
+    "proposal_equation_1_visual_check": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "equation_1_visual_check"
+      ],
+      "value": "The embedded equation is an unannualised sum of thirty squared future one-minute log returns; the companion paragraph explicitly specifies thirty-one prices.",
+      "context": "Inspección visual ya documentada de la ecuación y su párrafo compañero.",
+      "evidence_status": "DOCUMENTED_VISUAL_CHECK"
+    },
+    "proposal_declared_date": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json",
+      "sha256": "808275831ca2c7ee253634eb8ad79510e0690cb54cc9447c8613608958ecaf6e",
+      "selector": [
+        "sources",
+        "en",
+        "declared_date_iso"
+      ],
+      "value": "2026-07-26",
+      "context": "Fecha declarada por la copia local, sin certificación temporal externa.",
+      "evidence_status": "DECLARED_DOCUMENT_DATE"
+    },
+    "v3_assets": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "assets"
+      ],
+      "value": [
+        "AAPL",
+        "AMZN",
+        "META",
+        "MSFT",
+        "NVDA",
+        "TSLA"
+      ],
+      "context": "Configuración efectiva vinculada al resultado primario v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_market_assets": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "market_assets"
+      ],
+      "value": [
+        "SPY",
+        "QQQ"
+      ],
+      "context": "Configuración efectiva vinculada al resultado primario v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_target_horizon_minutes": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "target_horizon_minutes"
+      ],
+      "value": 30,
+      "context": "Configuración efectiva vinculada al resultado primario v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_source_cutoff_seconds": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "source_cutoff_seconds"
+      ],
+      "value": 120,
+      "context": "Configuración efectiva vinculada al resultado primario v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_asset_count": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "assets",
+        "@length"
+      ],
+      "value": 6,
+      "context": "Número de objetivos individuales registrados; no suma SPY/QQQ como objetivos.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B0_features": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B0"
+      ],
+      "value": [
+        "QQQ_ret_30",
+        "QQQ_rv_30",
+        "SPY_ret_30",
+        "SPY_rv_30",
+        "day_of_week",
+        "dollar_volume_30",
+        "jump_back_30",
+        "minutes_since_open",
+        "minutes_to_close",
+        "parkinson_30",
+        "ret_30",
+        "ret_5",
+        "rq_back_30",
+        "rs_down_back_30",
+        "rs_up_back_30",
+        "rv_back_15",
+        "rv_back_30",
+        "rv_back_5",
+        "rv_prev_day",
+        "rv_session_to_date",
+        "rv_week",
+        "volume_30",
+        "log_rv_30m",
+        "log_rv_session",
+        "log_rv_day",
+        "log_rv_week",
+        "minute_fraction",
+        "minute_fraction_sq",
+        "rq_attenuation"
+      ],
+      "context": "Conjunto efectivo anidado de predictores; es una capa informativa, no un proveedor independiente.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B0_feature_count": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B0",
+        "@length"
+      ],
+      "value": 29,
+      "context": "Conteo de la especificación efectiva con la regla de ventanas vacías.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B1_features": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B1"
+      ],
+      "value": [
+        "QQQ_ret_30",
+        "QQQ_rv_30",
+        "SPY_ret_30",
+        "SPY_rv_30",
+        "day_of_week",
+        "dollar_volume_30",
+        "jump_back_30",
+        "minutes_since_open",
+        "minutes_to_close",
+        "parkinson_30",
+        "ret_30",
+        "ret_5",
+        "rq_back_30",
+        "rs_down_back_30",
+        "rs_up_back_30",
+        "rv_back_15",
+        "rv_back_30",
+        "rv_back_5",
+        "rv_prev_day",
+        "rv_session_to_date",
+        "rv_week",
+        "volume_30",
+        "log_rv_30m",
+        "log_rv_session",
+        "log_rv_day",
+        "log_rv_week",
+        "minute_fraction",
+        "minute_fraction_sq",
+        "rq_attenuation",
+        "b1_iv_30d",
+        "b1_iv_60d",
+        "b1_iv_7d",
+        "b1_iv_minus_trailing_rv_30d",
+        "b1_risk_reversal_25",
+        "b1_smile_level",
+        "b1_term_slope",
+        "b1_butterfly_25",
+        "b1_iv_14d",
+        "b1_iv_90d",
+        "b1_mfiv",
+        "b1_smile_curvature",
+        "b1_smile_slope",
+        "b1_term_convexity",
+        "rp4_iv_dte_0_1_m_lt090",
+        "rp4_iv_dte_0_1_m_090_097",
+        "rp4_iv_dte_0_1_m_097_103",
+        "rp4_iv_dte_0_1_m_103_110",
+        "rp4_iv_dte_0_1_m_gt110",
+        "rp4_iv_dte_2_7_m_lt090",
+        "rp4_iv_dte_2_7_m_090_097",
+        "rp4_iv_dte_2_7_m_097_103",
+        "rp4_iv_dte_2_7_m_103_110",
+        "rp4_iv_dte_2_7_m_gt110",
+        "rp4_iv_dte_8_30_m_lt090",
+        "rp4_iv_dte_8_30_m_090_097",
+        "rp4_iv_dte_8_30_m_097_103",
+        "rp4_iv_dte_8_30_m_103_110",
+        "rp4_iv_dte_8_30_m_gt110",
+        "rp4_iv_dte_31_90_m_lt090",
+        "rp4_iv_dte_31_90_m_090_097",
+        "rp4_iv_dte_31_90_m_097_103",
+        "rp4_iv_dte_31_90_m_103_110",
+        "rp4_iv_dte_31_90_m_gt110",
+        "rp4_iv_dte_gt90_m_lt090",
+        "rp4_iv_dte_gt90_m_090_097",
+        "rp4_iv_dte_gt90_m_097_103",
+        "rp4_iv_dte_gt90_m_103_110",
+        "rp4_iv_dte_gt90_m_gt110",
+        "rp4_surface_populated_cells"
+      ],
+      "context": "Conjunto efectivo anidado de predictores; es una capa informativa, no un proveedor independiente.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B1_feature_count": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B1",
+        "@length"
+      ],
+      "value": 69,
+      "context": "Conteo de la especificación efectiva con la regla de ventanas vacías.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B2_features": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B2"
+      ],
+      "value": [
+        "QQQ_ret_30",
+        "QQQ_rv_30",
+        "SPY_ret_30",
+        "SPY_rv_30",
+        "day_of_week",
+        "dollar_volume_30",
+        "jump_back_30",
+        "minutes_since_open",
+        "minutes_to_close",
+        "parkinson_30",
+        "ret_30",
+        "ret_5",
+        "rq_back_30",
+        "rs_down_back_30",
+        "rs_up_back_30",
+        "rv_back_15",
+        "rv_back_30",
+        "rv_back_5",
+        "rv_prev_day",
+        "rv_session_to_date",
+        "rv_week",
+        "volume_30",
+        "log_rv_30m",
+        "log_rv_session",
+        "log_rv_day",
+        "log_rv_week",
+        "minute_fraction",
+        "minute_fraction_sq",
+        "rq_attenuation",
+        "b1_iv_30d",
+        "b1_iv_60d",
+        "b1_iv_7d",
+        "b1_iv_minus_trailing_rv_30d",
+        "b1_risk_reversal_25",
+        "b1_smile_level",
+        "b1_term_slope",
+        "b1_butterfly_25",
+        "b1_iv_14d",
+        "b1_iv_90d",
+        "b1_mfiv",
+        "b1_smile_curvature",
+        "b1_smile_slope",
+        "b1_term_convexity",
+        "rp4_iv_dte_0_1_m_lt090",
+        "rp4_iv_dte_0_1_m_090_097",
+        "rp4_iv_dte_0_1_m_097_103",
+        "rp4_iv_dte_0_1_m_103_110",
+        "rp4_iv_dte_0_1_m_gt110",
+        "rp4_iv_dte_2_7_m_lt090",
+        "rp4_iv_dte_2_7_m_090_097",
+        "rp4_iv_dte_2_7_m_097_103",
+        "rp4_iv_dte_2_7_m_103_110",
+        "rp4_iv_dte_2_7_m_gt110",
+        "rp4_iv_dte_8_30_m_lt090",
+        "rp4_iv_dte_8_30_m_090_097",
+        "rp4_iv_dte_8_30_m_097_103",
+        "rp4_iv_dte_8_30_m_103_110",
+        "rp4_iv_dte_8_30_m_gt110",
+        "rp4_iv_dte_31_90_m_lt090",
+        "rp4_iv_dte_31_90_m_090_097",
+        "rp4_iv_dte_31_90_m_097_103",
+        "rp4_iv_dte_31_90_m_103_110",
+        "rp4_iv_dte_31_90_m_gt110",
+        "rp4_iv_dte_gt90_m_lt090",
+        "rp4_iv_dte_gt90_m_090_097",
+        "rp4_iv_dte_gt90_m_097_103",
+        "rp4_iv_dte_gt90_m_103_110",
+        "rp4_iv_dte_gt90_m_gt110",
+        "rp4_surface_populated_cells",
+        "b2_5m_buy_premium_share",
+        "b2_5m_d_iv",
+        "b2_5m_decay_intensity_innovation",
+        "b2_5m_delta_flow",
+        "b2_5m_multileg_size_share",
+        "b2_5m_premium",
+        "b2_5m_strike_hhi",
+        "b2_5m_trades",
+        "b2_5m_vega_flow",
+        "b2_5m_vega_flow_short_dte",
+        "b2_5m_zero_dte_premium_share",
+        "b2_30m_buy_premium_share",
+        "b2_30m_contracts",
+        "b2_30m_d_iv",
+        "b2_30m_d_mid_rel",
+        "b2_30m_d_spread",
+        "b2_30m_decay_intensity_innovation",
+        "b2_30m_decay_intensity_last",
+        "b2_30m_delta_flow",
+        "b2_30m_gamma_flow",
+        "b2_30m_multileg_premium_share",
+        "b2_30m_multileg_size_share",
+        "b2_30m_otm_premium_share",
+        "b2_30m_passive_premium_share",
+        "b2_30m_premium",
+        "b2_30m_rate_per_second",
+        "b2_30m_sell_premium_share",
+        "b2_30m_size",
+        "b2_30m_sweep_premium_share",
+        "b2_30m_trades",
+        "b2_30m_vega_flow",
+        "b2_30m_vega_flow_abs",
+        "b2_30m_vega_flow_call",
+        "b2_30m_vega_flow_long_dte",
+        "b2_30m_vega_flow_put",
+        "b2_30m_vega_flow_short_dte",
+        "b2_30m_zero_dte_premium_share",
+        "b2_30m_zero_dte_signed_premium",
+        "b2_30m_zero_dte_trade_share",
+        "b2_5m_contract_entropy",
+        "b2_5m_contracts",
+        "b2_5m_d_mid_rel",
+        "b2_5m_d_spread",
+        "b2_5m_decay_intensity_last",
+        "b2_5m_expiry_hhi",
+        "b2_5m_gamma_flow",
+        "b2_5m_interarrival_cv",
+        "b2_5m_multileg_premium_share",
+        "b2_5m_otm_premium_share",
+        "b2_5m_passive_premium_share",
+        "b2_5m_rate_per_second",
+        "b2_5m_sell_premium_share",
+        "b2_5m_size",
+        "b2_5m_sweep_premium_share",
+        "b2_5m_vega_flow_abs",
+        "b2_5m_vega_flow_call",
+        "b2_5m_vega_flow_long_dte",
+        "b2_5m_vega_flow_put",
+        "b2_5m_zero_dte_signed_premium",
+        "b2_5m_zero_dte_trade_share",
+        "rp4_dealer_gamma_net",
+        "rp4_dealer_gamma_near_spot",
+        "rp4_dealer_max_gamma_distance",
+        "rp4_gamma_imb_total",
+        "rp4_gamma_imb_near_spot",
+        "rp4_gamma_imb_near_short",
+        "rp4_gamma_imb_signed_trades",
+        "b2_5m_window_empty",
+        "b2_30m_window_empty"
+      ],
+      "context": "Conjunto efectivo anidado de predictores; es una capa informativa, no un proveedor independiente.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_B2_feature_count": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "feature_sets",
+        "B2",
+        "@length"
+      ],
+      "value": 138,
+      "context": "Conteo de la especificación efectiva con la regla de ventanas vacías.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_model_families": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "model",
+        "families"
+      ],
+      "value": [
+        "log_ridge_harq",
+        "lightgbm_qlike"
+      ],
+      "context": "Familias realmente registradas, sin una fila separada de persistencia estacional o HAR-RV.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v4_model_families": {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "selector": [
+        "model",
+        "families"
+      ],
+      "value": [
+        "log_ridge_harq",
+        "lightgbm_qlike"
+      ],
+      "context": "Familias registradas para la extensión de horizonte.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v4_har_predictors": {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "selector": [
+        "har_columns"
+      ],
+      "value": [
+        "log_rv_30m",
+        "log_rv_session",
+        "log_rv_day",
+        "log_rv_week",
+        "minute_fraction",
+        "minute_fraction_sq",
+        "rq_attenuation"
+      ],
+      "context": "HAR/HARQ y estacionalidad figuran como predictores; no son por sí solos benchmarks independientes.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_bootstrap_block_sessions": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "bootstrap",
+        "block_length"
+      ],
+      "value": 5,
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_bootstrap_repetitions": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "bootstrap",
+        "replications"
+      ],
+      "value": 9999,
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_bootstrap_definition": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "bootstrap"
+      ],
+      "value": {
+        "block_length": 5,
+        "ci": "percentile_95",
+        "kind": "circular_session_blocks",
+        "p_value": "greater_centered_null_plus_one",
+        "replications": 9999,
+        "seed": 20260907
+      },
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_aggregation": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "aggregation"
+      ],
+      "value": "origin_mean_within_asset_session_then_equal_asset_then_equal_session",
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_loss": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "loss"
+      ],
+      "value": "ratio_minus_log_ratio_minus_one",
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_fixed_sequence": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "fixed_sequence"
+      ],
+      "value": {
+        "H2_if_H1_fails": "nominal_p_only_not_formally_tested",
+        "alpha": 0.05,
+        "joint_primary": "both_contrasts_reject_in_both_families",
+        "order": [
+          "B1_over_B0",
+          "B2_over_B1"
+        ],
+        "require_positive_estimate": true,
+        "scope": "each_family_endpoint_window"
+      },
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_warmup_sessions": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "windows",
+        "primary",
+        "warmup_sessions"
+      ],
+      "value": 60,
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_secondary_definition": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "secondary"
+      ],
+      "value": {
+        "all_secondary_nonpromotable": true,
+        "events": [
+          "earnings",
+          "FOMC",
+          "monthly_expiration"
+        ],
+        "first_hour": "origin_NY_minute<60",
+        "high_flow": "previous_session_asset_mean_b2_30m_premium_above_training_only_2of3_quantile",
+        "high_gamma": "abs_current_start_near_spot_above_training_only_asset_linear_2of3_quantile",
+        "high_gamma_hypothesis": "B2_increment_larger_in_high_than_remaining",
+        "last_hour": "origin_minute_ge_300",
+        "mean_median_trimmed_bootstrap": true,
+        "not_predictors": true,
+        "tails": {
+          "contrast_median": true,
+          "symmetric_trim_each_tail": 0.05,
+          "tie_break": "date_ascending",
+          "top_loss_scope": "per_family_and_information_set",
+          "top_loss_sessions": 10,
+          "trim_rounding": "floor"
+        },
+        "third_friday": "calendar_friday_day_15_to_21",
+        "unavailable_calendar": "NO_VERIFICABLE_no_false_zero",
+        "weekly_expiration_proxy": "calendar_friday"
+      },
+      "context": "Parámetro o definición registrada de v3; no implica validación global entre versiones.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v4_source_cutoff_seconds": {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "selector": [
+        "source_cutoff_seconds"
+      ],
+      "value": 120,
+      "context": "Corte fuente fijo en v4; no acredita comparación de cortes alternativos ni recepción del cliente.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v4_joint_rule": {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "selector": [
+        "inference",
+        "fixed_sequence",
+        "joint_primary"
+      ],
+      "value": "both_contrasts_reject_in_at_least_one_family_at_15min_primary",
+      "context": "Regla conjunta de v4 distinta de la conjunción de ambas familias de v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_joint_rule": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "inference",
+        "fixed_sequence",
+        "joint_primary"
+      ],
+      "value": "both_contrasts_reject_in_both_families",
+      "context": "La conjunción de v3 requiere los dos contrastes en ambas familias.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_model_ridge": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "model",
+        "ridge"
+      ],
+      "value": {
+        "all_missing": "drop_without_inventing_median",
+        "clip_log_before_exp": true,
+        "collinearity": "pivoted_qr",
+        "forecast_bounds": [
+          0.5,
+          2.0
+        ],
+        "forecast_bounds_reference": "positive_training_rv30_linear_quantiles",
+        "forecast_quantiles": [
+          0.01,
+          0.99
+        ],
+        "imputation": "training_median_after_v1_pointwise_transforms",
+        "indicators": "presence_all_optional_predictors",
+        "lambda_grid": [
+          0.0001,
+          0.01,
+          1.0,
+          100.0,
+          10000.0
+        ],
+        "objective": "sum_squared_log_residuals_plus_lambda_l2_slopes",
+        "qr_after_winsorization_intercept_aware": true,
+        "qr_relative_tolerance": 1e-10,
+        "quantile_method": "linear",
+        "smearing": "duan_arithmetic_training",
+        "standardization": "training_mean_population_sd",
+        "tie_break": "larger_lambda",
+        "winsorized_standardized_slopes": [
+          -5.0,
+          5.0
+        ]
+      },
+      "context": "Configuración lineal registrada; la denominación ridge no acredita una penalización efectiva fuerte.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "origin_step_code": {
+      "artifact": "scripts/rp2_block4_b0_panel.py",
+      "sha256": "cc25547b84fdb305a87e7bf3cbf1dbaad66349c89b8903f9794454a194399eb2",
+      "selector": [],
+      "quote": "ORIGIN_STEP = 5",
+      "context": "Paso de la rejilla de orígenes; transcripción entera de una constante de código, no cálculo estadístico.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE"
+    },
+    "option_input_schema": {
+      "artifact": "artifacts/rp4_code/materialize.py",
+      "sha256": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0",
+      "selector": [],
+      "quote": "TAPE_COLUMNS = [\n    \"id\",\n    \"underlying_symbol\",\n    \"created_at\",\n    \"implied_volatility\",\n    \"size\",\n    \"open_interest\",\n    \"expiry\",\n    \"strike\",\n    \"option_type\",\n    \"nbbo_bid\",\n    \"nbbo_ask\",\n]",
+      "context": "Columnas de actividad, contrato, IV, OI y NBBO usadas por el productor; superficie y flujo pueden compartir operaciones.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 55,
+      "line_end": 67
+    },
+    "source_layers_construction": {
+      "artifact": "docs/rp4/specification_v1.md",
+      "sha256": "2012ce9a62fb1b0da205cd0b4d4d5f635353c35b60f6548257883db84211e510",
+      "selector": [],
+      "quote": "HARQ reutiliza mds650.har con barras start-labelled completadas: effective_time\n=bar_start+1min, disponible<=origen-120s; para el operador estricto del productor,\nse usa origen desplazado-120s+1microsegundo. La estacionalidad se restaura al\norigen de pronóstico original. Los rezagos diarios solo usan sesiones anteriores.\n\n## Superficie nueva\n\n25 celdas rp4_iv_<tenor>_<moneyness>; tenores dte_0_1,dte_2_7,dte_8_30,\ndte_31_90,dte_gt90 por días calendario hasta vencimiento NY, con contratos\nno vencidos a la hora exacta del corte.\nMoneyness K/S: [0,.90),[.90,.97),[.97,1.03),[1.03,1.10],(1.10,infinito).\nNombres de bins m_lt090,m_090_097,m_097_103,m_103_110,m_gt110.\nPor cada origen de cinco minutos, operaciones válidas con created_at en\n(corte-5min,corte], corte=origen-120s. IV del proveedor, peso tamaño positivo;\nmediana ponderada = primer valor ordenado cuya suma acumulada alcanza la mitad.\nSe agrupan calls y puts en cada celda. Spot FMP usa última barra completada\ndisponible al corte. Celda sin operaciones válidas=NaN, no una IV fabricada.",
+      "context": "La rejilla de superficie se construye desde operaciones válidas e IV; no se afirma independencia de tres datasets originales.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 81,
+      "line_end": 97
+    },
+    "rv30_linear_h1": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        0
+      ],
+      "value": {
+        "N_asset_sessions": 2514,
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "alpha": 0.05,
+        "alternative": "greater",
+        "baseline_loss": 0.1473067406637844,
+        "baseline_qlike": 0.1473067406637844,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.005540719606568932,
+        "ci_low": 0.0005570052727676305,
+        "contrast": "B1_over_B0",
+        "dm_hac_lags": 5,
+        "dm_hac_p_two_sided": 0.05849635102521796,
+        "dm_hac_statistic": 1.891959695863125,
+        "endpoint": "qlike_mean",
+        "estimate": 0.002546895917702083,
+        "expanded_loss": 0.14475984474608233,
+        "expanded_qlike": 0.14475984474608233,
+        "family": "log_ridge_harq",
+        "gw_hac_diagnostic_df": 2,
+        "gw_hac_diagnostic_p": 0.005337710691246614,
+        "gw_hac_diagnostic_statistic": 10.46591685487321,
+        "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+        "hypothesis_status": "REJECTED",
+        "inference_role": "PRIMARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "nominal_p_role": "USED_FOR_FIXED_SEQUENCE",
+        "null": "delta <= 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 438,
+        "p_for_decision": 0.0439,
+        "p_raw": 0.0439,
+        "percent_reduction_mean": 1.7289744557685687,
+        "qlike_reduction_percent": 1.7289744557685687,
+        "rejected": true,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED"
+      },
+      "context": "RV30 v3, ventana primaria, media QLIKE: conservar familia y contraste junto con intervalo y decisión.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_linear_h1_p": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        0,
+        "p_for_decision"
+      ],
+      "value": 0.0439,
+      "context": "P unilateral de decisión de la secuencia RV30 v3, no p bilateral ni Holm.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_linear_h2": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        1
+      ],
+      "value": {
+        "N_asset_sessions": 2514,
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "alpha": 0.05,
+        "alternative": "greater",
+        "baseline_loss": 0.14475984474608233,
+        "baseline_qlike": 0.14475984474608233,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0017735436831533618,
+        "ci_low": -0.00015343469579501222,
+        "contrast": "B2_over_B1",
+        "dm_hac_lags": 5,
+        "dm_hac_p_two_sided": 0.10126656912850938,
+        "dm_hac_statistic": 1.6387440824141652,
+        "endpoint": "qlike_mean",
+        "estimate": 0.000802389659514178,
+        "expanded_loss": 0.14395745508656813,
+        "expanded_qlike": 0.14395745508656813,
+        "family": "log_ridge_harq",
+        "gw_hac_diagnostic_df": 2,
+        "gw_hac_diagnostic_p": 0.22242924821111104,
+        "gw_hac_diagnostic_statistic": 3.006292427024026,
+        "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+        "hypothesis_status": "NOT_REJECTED",
+        "inference_role": "PRIMARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "nominal_p_role": "USED_FOR_FIXED_SEQUENCE",
+        "null": "delta <= 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 524,
+        "p_for_decision": 0.0525,
+        "p_raw": 0.0525,
+        "percent_reduction_mean": 0.5542902183417086,
+        "qlike_reduction_percent": 0.5542902183417086,
+        "rejected": false,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED"
+      },
+      "context": "RV30 v3, ventana primaria, media QLIKE: conservar familia y contraste junto con intervalo y decisión.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_linear_h2_p": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        1,
+        "p_for_decision"
+      ],
+      "value": 0.0525,
+      "context": "P unilateral de decisión de la secuencia RV30 v3, no p bilateral ni Holm.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_trees_h1": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        2
+      ],
+      "value": {
+        "N_asset_sessions": 2514,
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "alpha": 0.05,
+        "alternative": "greater",
+        "baseline_loss": 0.14931695344824814,
+        "baseline_qlike": 0.14931695344824814,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.005486016539622717,
+        "ci_low": 0.0010149406976682313,
+        "contrast": "B1_over_B0",
+        "dm_hac_lags": 5,
+        "dm_hac_p_two_sided": 0.006081058790034832,
+        "dm_hac_statistic": 2.7433782812238205,
+        "endpoint": "qlike_mean",
+        "estimate": 0.003122485902953738,
+        "expanded_loss": 0.14619446754529442,
+        "expanded_qlike": 0.14619446754529442,
+        "family": "lightgbm_qlike",
+        "gw_hac_diagnostic_df": 2,
+        "gw_hac_diagnostic_p": 0.010583715262407875,
+        "gw_hac_diagnostic_statistic": 9.096877510352247,
+        "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+        "hypothesis_status": "REJECTED",
+        "inference_role": "PRIMARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "nominal_p_role": "USED_FOR_FIXED_SEQUENCE",
+        "null": "delta <= 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 52,
+        "p_for_decision": 0.0053,
+        "p_raw": 0.0053,
+        "percent_reduction_mean": 2.091179756112532,
+        "qlike_reduction_percent": 2.091179756112532,
+        "rejected": true,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED"
+      },
+      "context": "RV30 v3, ventana primaria, media QLIKE: conservar familia y contraste junto con intervalo y decisión.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_trees_h1_p": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        2,
+        "p_for_decision"
+      ],
+      "value": 0.0053,
+      "context": "P unilateral de decisión de la secuencia RV30 v3, no p bilateral ni Holm.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_trees_h2": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        3
+      ],
+      "value": {
+        "N_asset_sessions": 2514,
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "alpha": 0.05,
+        "alternative": "greater",
+        "baseline_loss": 0.14619446754529442,
+        "baseline_qlike": 0.14619446754529442,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0008319667722548281,
+        "ci_low": -0.0016475987079428186,
+        "contrast": "B2_over_B1",
+        "dm_hac_lags": 5,
+        "dm_hac_p_two_sided": 0.7166138183882287,
+        "dm_hac_statistic": -0.3629880402770945,
+        "endpoint": "qlike_mean",
+        "estimate": -0.00023264695478901929,
+        "expanded_loss": 0.14642711450008342,
+        "expanded_qlike": 0.14642711450008342,
+        "family": "lightgbm_qlike",
+        "gw_hac_diagnostic_df": 2,
+        "gw_hac_diagnostic_p": 0.42107326306473036,
+        "gw_hac_diagnostic_statistic": 1.7298968778166401,
+        "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+        "hypothesis_status": "NOT_REJECTED",
+        "inference_role": "PRIMARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "nominal_p_role": "USED_FOR_FIXED_SEQUENCE",
+        "null": "delta <= 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 6630,
+        "p_for_decision": 0.6631,
+        "p_raw": 0.6631,
+        "percent_reduction_mean": -0.1591352659887351,
+        "qlike_reduction_percent": -0.1591352659887351,
+        "rejected": false,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED"
+      },
+      "context": "RV30 v3, ventana primaria, media QLIKE: conservar familia y contraste junto con intervalo y decisión.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_trees_h2_p": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "contrasts",
+        3,
+        "p_for_decision"
+      ],
+      "value": 0.6631,
+      "context": "P unilateral de decisión de la secuencia RV30 v3, no p bilateral ni Holm.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "v3_global_joint_reject": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "global_joint_reject"
+      ],
+      "value": false,
+      "context": "No se cumple la conjunción primaria histórica de v3.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_aapl": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        132
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26898,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133934,
+        "alternative": "two-sided",
+        "baseline_loss": 0.16137650049028113,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.008282063523094577,
+        "ci_low": 0.0009657446925900275,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0038942040842736107,
+        "expanded_loss": 0.15748229640600753,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 379,
+        "p_holm": 0.152,
+        "p_raw": 0.038,
+        "percent_reduction_mean": 2.4131171963963483,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_AAPL"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_aapl": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        134
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26898,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133934,
+        "alternative": "two-sided",
+        "baseline_loss": 0.16128229643430964,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0058338555657309115,
+        "ci_low": -0.0011126359087512325,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0022956156880685795,
+        "expanded_loss": 0.15898668074624106,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 1945,
+        "p_holm": 0.3892,
+        "p_raw": 0.1946,
+        "percent_reduction_mean": 1.42335255562509,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_AAPL"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_amzn": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        144
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26743,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134089,
+        "alternative": "two-sided",
+        "baseline_loss": 0.1406160824946158,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.00758265312187804,
+        "ci_low": 0.00044007120870529756,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0032546239785998803,
+        "expanded_loss": 0.13736145851601592,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 643,
+        "p_holm": 0.2432,
+        "p_raw": 0.0644,
+        "percent_reduction_mean": 2.314546046839628,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_AMZN"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_amzn": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        146
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26743,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134089,
+        "alternative": "two-sided",
+        "baseline_loss": 0.14339781609042634,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.00602767570430331,
+        "ci_low": 7.34751904992604e-05,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0028413229073772023,
+        "expanded_loss": 0.14055649318304914,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 607,
+        "p_holm": 0.2432,
+        "p_raw": 0.0608,
+        "percent_reduction_mean": 1.9814269037301588,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_AMZN"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_meta": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        156
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26853,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133979,
+        "alternative": "two-sided",
+        "baseline_loss": 0.15310934703568344,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.007499879379896602,
+        "ci_low": 0.0014203458434073697,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.003975023732127006,
+        "expanded_loss": 0.14913432330355644,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 155,
+        "p_holm": 0.0624,
+        "p_raw": 0.0156,
+        "percent_reduction_mean": 2.5961992582990985,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_META"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_meta": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        158
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26853,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133979,
+        "alternative": "two-sided",
+        "baseline_loss": 0.15706676136179576,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.006324492746321944,
+        "ci_low": 0.0004922668324781942,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.003308892887618448,
+        "expanded_loss": 0.1537578684741773,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 268,
+        "p_holm": 0.0807,
+        "p_raw": 0.0269,
+        "percent_reduction_mean": 2.1066792610542033,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_META"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_msft": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        168
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26729,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134103,
+        "alternative": "two-sided",
+        "baseline_loss": 0.14455647363373295,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.005082339052500918,
+        "ci_low": -0.0015341503804070953,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0015582213762661602,
+        "expanded_loss": 0.14299825225746676,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 3388,
+        "p_holm": 0.9867000000000001,
+        "p_raw": 0.3389,
+        "percent_reduction_mean": 1.0779326149130284,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_MSFT"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_msft": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        170
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26729,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134103,
+        "alternative": "two-sided",
+        "baseline_loss": 0.14304737693185848,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.005435200659722137,
+        "ci_low": 9.520039939881438e-05,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0027085582588842884,
+        "expanded_loss": 0.14033881867297415,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 461,
+        "p_holm": 0.1848,
+        "p_raw": 0.0462,
+        "percent_reduction_mean": 1.893469364471134,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_MSFT"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_nvda": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        180
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26764,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134068,
+        "alternative": "two-sided",
+        "baseline_loss": 0.14943764203057114,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0028090858379850973,
+        "ci_low": -0.0011799395226864621,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0008170120040384674,
+        "expanded_loss": 0.1486206300265327,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 4136,
+        "p_holm": 0.5798,
+        "p_raw": 0.4137,
+        "percent_reduction_mean": 0.5467243680620493,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_NVDA"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_nvda": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        182
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26764,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 134068,
+        "alternative": "two-sided",
+        "baseline_loss": 0.15071342317972217,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.006820422356168033,
+        "ci_low": -0.00034151806545902705,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.002976641955675786,
+        "expanded_loss": 0.14773678122404638,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 1001,
+        "p_holm": 0.3006,
+        "p_raw": 0.1002,
+        "percent_reduction_mean": 1.9750344016313737,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_NVDA"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_tsla": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        192
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26845,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133987,
+        "alternative": "two-sided",
+        "baseline_loss": 0.13474439829782192,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.004532706756128591,
+        "ci_low": -0.0005003040204100397,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.001782290330907371,
+        "expanded_loss": 0.13296210796691454,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 1575,
+        "p_holm": 0.4728,
+        "p_raw": 0.1576,
+        "percent_reduction_mean": 1.3227194253879277,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_TSLA"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_tsla": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        194
+      ],
+      "value": {
+        "N_asset_sessions": 419,
+        "N_available_origins": 160832,
+        "N_origins": 26845,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 133987,
+        "alternative": "two-sided",
+        "baseline_loss": 0.14039404669137645,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.009691280483647173,
+        "ci_low": 0.00046640609517462707,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.00460388372009813,
+        "expanded_loss": 0.13579016297127833,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 480,
+        "p_holm": 0.1924,
+        "p_raw": 0.0481,
+        "percent_reduction_mean": 3.2792585074627087,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "asset_TSLA"
+      },
+      "context": "Media QLIKE B1 sobre B0 por activo, RV30 primaria; p Holm secundario no equivale al p principal.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_first_hour": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        0
+      ],
+      "value": {
+        "N_asset_sessions": 2509,
+        "N_available_origins": 160832,
+        "N_origins": 12451,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 148381,
+        "alternative": "two-sided",
+        "baseline_loss": 0.10289189595097199,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0027790665824870314,
+        "ci_low": -0.0026043297185407736,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": -0.000339895660980627,
+        "expanded_loss": 0.10323179161195267,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 8119,
+        "p_holm": 1.0,
+        "p_raw": 0.812,
+        "percent_reduction_mean": -0.3303424996100639,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "first_hour"
+      },
+      "context": "Secundario horario RV30 registrado; last_hour significa origin_minute>=300.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_first_hour": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        2
+      ],
+      "value": {
+        "N_asset_sessions": 2509,
+        "N_available_origins": 160832,
+        "N_origins": 12451,
+        "N_sessions": 419,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 148381,
+        "alternative": "two-sided",
+        "baseline_loss": 0.11721949094247523,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.006418445567865622,
+        "ci_low": -0.0011335938934006775,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.002221289874084466,
+        "expanded_loss": 0.11499820106839076,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 2281,
+        "p_holm": 0.9128,
+        "p_raw": 0.2282,
+        "percent_reduction_mean": 1.894983382221435,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "first_hour"
+      },
+      "context": "Secundario horario RV30 registrado; last_hour significa origin_minute>=300.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_linear_last_hour": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        36
+      ],
+      "value": {
+        "N_asset_sessions": 2482,
+        "N_available_origins": 160832,
+        "N_origins": 29562,
+        "N_sessions": 414,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 131270,
+        "alternative": "two-sided",
+        "baseline_loss": 0.17554950468696306,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.0027491376623661576,
+        "ci_low": -0.0015711757566097533,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.0005220338846825108,
+        "expanded_loss": 0.17502747080228057,
+        "family": "log_ridge_harq",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 6298,
+        "p_holm": 0.6872,
+        "p_raw": 0.6299,
+        "percent_reduction_mean": 0.2973713230426898,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "last_hour"
+      },
+      "context": "Secundario horario RV30 registrado; last_hour significa origin_minute>=300.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_b1_trees_last_hour": {
+      "artifact": "artifacts/rp4_v3_b2/summary.json",
+      "sha256": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "selector": [
+        "regime_secondary",
+        38
+      ],
+      "value": {
+        "N_asset_sessions": 2482,
+        "N_available_origins": 160832,
+        "N_origins": 29562,
+        "N_sessions": 414,
+        "N_unknown_membership_origins": 0,
+        "N_verified_membership_origins": 160832,
+        "N_verified_nonmember_origins": 131270,
+        "alternative": "two-sided",
+        "baseline_loss": 0.16714259519266533,
+        "bootstrap_block_length": 5,
+        "bootstrap_repetitions": 9999,
+        "bootstrap_seed": 20260907,
+        "ci_high": 0.00895316014320056,
+        "ci_low": 0.0007935823566928307,
+        "contrast": "B1_over_B0",
+        "coverage_status": "COMPLETE_COVERAGE",
+        "endpoint": "qlike_regime_secondary",
+        "estimate": 0.00468677429164104,
+        "expanded_loss": 0.16245582090102428,
+        "family": "lightgbm_qlike",
+        "holm_family_size": 4,
+        "holm_unavailable_treated_as_one": false,
+        "inference_role": "SECONDARY",
+        "interval": "two-sided percentile 95%; not inversion of centered-null p",
+        "null": "delta = 0",
+        "null_calibration": "resampled statistic minus observed statistic; +1 correction",
+        "null_exceedances": 252,
+        "p_holm": 0.0759,
+        "p_raw": 0.0253,
+        "percent_reduction_mean": 2.804057389583184,
+        "removed_each_tail": 0,
+        "statistic": "mean",
+        "status": "COMPUTED",
+        "subset": "last_hour"
+      },
+      "context": "Secundario horario RV30 registrado; last_hour significa origin_minute>=300.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_early_linear": {
+      "artifact": "artifacts/rp4_closeout_audit/descriptive_profiles.csv",
+      "sha256": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd",
+      "selector": [
+        124
+      ],
+      "value": {
+        "horizon_minutes": "30",
+        "window": "primary",
+        "profile": "calendar_early",
+        "stratum": "2024-10-28_to_2025-02-28",
+        "family": "log_ridge_harq",
+        "contrast": "B1_over_B0",
+        "N_origins": "24528",
+        "N_sessions": "64",
+        "N_asset_sessions": "384",
+        "first_session": "2024-10-28",
+        "last_session": "2025-02-28",
+        "base_qlike_pooled": "0.12076561832658748",
+        "rich_qlike_pooled": "0.12234900652928542",
+        "delta_pooled": "-0.0015833882026979054",
+        "percent_reduction_pooled": "-1.3111249912337926",
+        "base_qlike_equal_session_asset": "0.12067667211291115",
+        "rich_qlike_equal_session_asset": "0.12215304677361284",
+        "delta_equal_session_asset": "-0.0014763746607016903",
+        "percent_reduction_equal_session_asset": "-1.2234134691088598",
+        "N_positive_session_deltas": "23.0",
+        "N_negative_session_deltas": "41.0",
+        "N_zero_session_deltas": "0.0",
+        "minimum_session_delta": "-0.052624542884727954",
+        "median_session_delta": "-0.0012808507596092575",
+        "new_p_value": "",
+        "inference_role": "POSTHOC_DESCRIPTIVE_ONLY"
+      },
+      "context": "Perfil RV30 temprano post hoc ya guardado; sin p nuevo y sin identificación causal de aprendizaje.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "rv30_early_trees": {
+      "artifact": "artifacts/rp4_closeout_audit/descriptive_profiles.csv",
+      "sha256": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd",
+      "selector": [
+        126
+      ],
+      "value": {
+        "horizon_minutes": "30",
+        "window": "primary",
+        "profile": "calendar_early",
+        "stratum": "2024-10-28_to_2025-02-28",
+        "family": "lightgbm_qlike",
+        "contrast": "B1_over_B0",
+        "N_origins": "24528",
+        "N_sessions": "64",
+        "N_asset_sessions": "384",
+        "first_session": "2024-10-28",
+        "last_session": "2025-02-28",
+        "base_qlike_pooled": "0.12483695877883033",
+        "rich_qlike_pooled": "0.12572704213754518",
+        "delta_pooled": "-0.0008900833587148718",
+        "percent_reduction_pooled": "-0.7129966697537099",
+        "base_qlike_equal_session_asset": "0.12428170687545315",
+        "rich_qlike_equal_session_asset": "0.12519888243517635",
+        "delta_equal_session_asset": "-0.0009171755597232045",
+        "percent_reduction_equal_session_asset": "-0.7379811420214375",
+        "N_positive_session_deltas": "29.0",
+        "N_negative_session_deltas": "35.0",
+        "N_zero_session_deltas": "0.0",
+        "minimum_session_delta": "-0.047689988896059896",
+        "median_session_delta": "-0.00023353671719533037",
+        "new_p_value": "",
+        "inference_role": "POSTHOC_DESCRIPTIVE_ONLY"
+      },
+      "context": "Perfil RV30 temprano post hoc ya guardado; sin p nuevo y sin identificación causal de aprendizaje.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "accepted_provider_gap": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "selector": [
+        "accepted_tape_gap"
+      ],
+      "value": {
+        "end": "2025-02-24",
+        "fill": false,
+        "start": "2025-01-25"
+      },
+      "context": "Hueco documentado conservado sin relleno.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "reported_empty_window_incidents": {
+      "artifact": "docs/rp4/RESULTADO_FINAL_revision_2.md",
+      "sha256": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5",
+      "selector": [],
+      "quote": "Las fechas 2025-05-15 y 2025-09-18 están señaladas como incidencias del instrumento;\nel censo acredita ventanas vacías, sin verificar de forma independiente una interrupción de publicación. La regla v3 conserva actividad cero, vuelve\nindefinidas las formas/ratios sin operaciones y añade indicadores; acota el daño\nsin eliminarlo. Quedan 412 ventanas vacías de cinco minutos en la primaria y\nninguna en confirmación. No se excluyen para mejorar el resultado.",
+      "context": "Las ventanas vacías no demuestran de forma independiente una interrupción de publicación.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 78,
+      "line_end": 82
+    },
+    "expiry_first_observed": {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "sha256": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+      "selector": [
+        "first_observed_mon_or_wed_expiry_by_asset"
+      ],
+      "value": {
+        "AAPL": "2026-01-26",
+        "AMZN": "2026-01-26",
+        "META": "2026-01-26",
+        "MSFT": "2026-01-26",
+        "NVDA": "2026-01-26",
+        "TSLA": "2026-01-26"
+      },
+      "context": "Auditoría descriptiva guardada de vencimientos; no identifica su efecto causal sobre QLIKE.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "expiry_audit_method": {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "sha256": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+      "selector": [
+        "method"
+      ],
+      "value": "descriptive_no_fits_no_bootstrap",
+      "context": "Auditoría descriptiva guardada de vencimientos; no identifica su efecto causal sobre QLIKE.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "expiry_audit_limits": {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "sha256": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+      "selector": [
+        "limitations"
+      ],
+      "value": [
+        "First occurrence in local tape is not the official listing date or proof of market causality.",
+        "Daily expiry union is not the per-origin snapshot count of zero-day contracts.",
+        "Coverage uses every panel origin, not an outcome-dependent or complete-case model mask.",
+        "OHLCV continuity is an internal check of one provider, not independent validation of a traded price or a news explanation.",
+        "Source timestamps remain availability proxies; no client receipt times are inferred."
+      ],
+      "context": "Auditoría descriptiva guardada de vencimientos; no identifica su efecto causal sobre QLIKE.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "expiry_causality_limit": {
+      "artifact": "artifacts/rp4_market_audit/REPORT.md",
+      "sha256": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+      "selector": [],
+      "quote": "El corte alternativo del 29 de enero y los desgloses por activo, junto con una ventana local de ±28 días, permanecen en [la tabla de cobertura completa](coverage_weekday.csv). Son comparaciones descriptivas; no identifican por sí mismas una causa del rendimiento predictivo.",
+      "context": "Alcance descriptivo de los cambios de cobertura.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 38,
+      "line_end": 38
+    },
+    "final_report_question": {
+      "artifact": "docs/rp4/RESULTADO_FINAL_revision_2.md",
+      "sha256": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5",
+      "selector": [],
+      "quote": "# ¿Las opciones mejoran el pronóstico de volatilidad intradía?\n\nSí en la muestra de desarrollo para el estado de opciones; para el flujo, la respuesta depende del horizonte,\nla familia y el estadístico. La regla de cierre de RP4 se cumplió en RV15 con la\nfamilia lineal. El programa científico termina en v4, sin una v5.\n\n## Pregunta y prueba\n",
+      "context": "Informe científico de cierre existente; su función no acredita aceptación institucional.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 3,
+      "line_end": 10
+    },
+    "current_markdown_guide": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md",
+      "sha256": "e6d25be0da3fefac2165339f571ab03506eb7f82ec4e7b742f75e848d85f7d41",
+      "selector": [],
+      "quote": "## 25. ¿Qué puede verificar un examinador sin disponer de datos licenciados?\n\nPuede contrastar cada afirmación con las estadísticas agregadas, comparar los signos y denominadores entre versiones, revisar las fórmulas y seguir los hashes de los artefactos. La verificación documental comprueba concordancia de cifras y bytes; no demuestra por sí sola procedencia íntegra de todos los datos, recepción histórica al cliente o ejecución correcta de una estrategia.\n\nRecalcular desde originales licenciados exige esos insumos, el entorno y sus recibos, y es una operación distinta de verificar el paquete. No se declara una reproducción completa desde cero durante esta preparación. Las correcciones documentales se añaden sin sustituir los resultados congelados y las cohortes reservadas quedan fuera del alcance. La evidencia prospectiva permanece pendiente hasta su lectura registrada.",
+      "context": "Guía actual en Markdown; se distingue de un notebook y de una reproducción desde cero.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 318,
+      "line_end": 322
+    },
+    "figure_manifest_files": {
+      "artifact": "artifacts/rp4_closeout_figures_revision2/manifest.json",
+      "sha256": "a7c6c8533f32acbae30bc34567e1306699255f6b84a3c2a898746c25613796c0",
+      "selector": [
+        "artifacts_sha256"
+      ],
+      "value": {
+        "artifacts/rp4_closeout_figures_revision2/annotation_sources.json": "234499333d79ae4c5461aa1b6072e015af76a9baba3844eefef7cd4f6bd90d52",
+        "artifacts/rp4_closeout_figures_revision2/clipping_census.csv": "40cfeb38aa2cacfb6a93dc5baeba9db1861c04a1980cb93df0aaafb23937d461",
+        "artifacts/rp4_closeout_figures_revision2/panel_metadata.json": "db3614f32c99159b1d9475d322106fa5d831acb5b4718e436c499dc62d5100f2",
+        "docs/figures/rp4/thesis_summary.png": "5de17e799480022ab48b3b0db2ebef6f3cc7e9cda73b2a4f7b5dde5c4f94b83f",
+        "docs/figures/rp4/thesis_summary.svg": "5eb8d21dcce001821cea1bed1ec7c73ba7ca098479c21e76489931b346353c9b",
+        "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.png": "f8c2e491ddd9bd014a7e93ad7d1e56057a2b78510c32ef7847d03dc9a4b6836a",
+        "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg": "705371d5e7cf8b859585527b82d1a444aeff58451610bda4c47f00f0000a842e",
+        "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "baa2191fc5a2a51d7ec1fd3ee1f06d3d1f9d532aae8aa6fac9cede193854e4b0",
+        "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "f16c4aca2380b78ebb4a354a8c4c76226c09b94f0f3f7b822b5d1c53c637c830"
+      },
+      "context": "Figuras ya producidas y sus identidades guardadas; no se renderizan en esta proyección.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "presentation_script_heading": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md",
+      "sha256": "7a6633f3c38d80c9a8cc0213736871fe5e35b2e43b5f6a6cf518eeb918d02889",
+      "selector": [],
+      "quote": "# Defensa — información de opciones y volatilidad intradía\n\nGuion de presentación con cifras congeladas y notas para responder al examen.",
+      "context": "Guion de diapositivas ya entregado en Markdown.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 1,
+      "line_end": 3
+    },
+    "literature_matrix_row_count": {
+      "artifact": "docs/literature_matrix.csv",
+      "sha256": "6023c1b094b5fbb7461b8f00a6b038699d0c94d9dd4c405fdc3f7117f5de6e26",
+      "selector": [
+        "@length"
+      ],
+      "value": 10,
+      "context": "Filas de la matriz existente; el conteo no certifica revisión por pares.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "literature_working_paper_status": {
+      "artifact": "docs/literature_matrix.csv",
+      "sha256": "6023c1b094b5fbb7461b8f00a6b038699d0c94d9dd4c405fdc3f7117f5de6e26",
+      "selector": [
+        5,
+        "venue_or_status"
+      ],
+      "value": "FEDS working paper (preprint/working paper)",
+      "context": "Una fila se identifica expresamente como working paper; no acredita diez artículos revisados por pares.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "literature_working_paper_id": {
+      "artifact": "docs/literature_matrix.csv",
+      "sha256": "6023c1b094b5fbb7461b8f00a6b038699d0c94d9dd4c405fdc3f7117f5de6e26",
+      "selector": [
+        5,
+        "study_id"
+      ],
+      "value": "LIT-006",
+      "context": "Identidad de la fila de literatura con estatus de working paper.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "data_dictionary_historical_status": {
+      "artifact": "docs/data_dictionary.md",
+      "sha256": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+      "selector": [],
+      "quote": "| Underlying 1-minute OHLCV | `date`, `open`, `high`, `low`, `close`, `volume` | `date` is a raw naive string such as `2026-07-17 09:30:00`; timezone and start/close meaning are not accepted yet | FMP partial; bar semantics blocked |\n| Structured earnings | `symbol`, `date`, `epsActual`, `epsEstimated`, `revenueActual`, `revenueEstimated`, `lastUpdated` | `date` is date-only in the observed response; `lastUpdated` is retained as raw provider metadata, not release availability | FMP parsed; PIT release time unresolved |\n| Unusual option events | `id`, `ticker`, `option_chain`, `start_time`, `end_time`, `created_at`, `total_premium`, `total_size`, `volume`, `open_interest`, `volume_oi_ratio`, `type`, `strike`, `expiry`, `price`, `bid`, `ask`, `has_sweep`, `has_floor`, `has_multileg`, `iv_start`, `iv_end` | Event times are epoch milliseconds; `iv_start`/`iv_end` are alert-window IV fields. No `executed_at` was present in the retained REST payload | Event fields present; PIT availability absent |\n| Ordinary option state | `date`, `expiry`, `dte`, `ticker`, `volatility`, `implied_move`, `implied_move_perc`; skew `date`, `ticker`, `delta`, `risk_reversal` | `date` is trading date only; no independent publication timestamp was observed | Field coverage only; B1 blocked |\n| Contract trades | `id`, `exchange`, `price`, `size`, `decimal_size`, `conditions`, `sip_timestamp`, `sequence_number` | `sip_timestamp` preserves nanosecond precision; condition codes remain uninterpreted source values | Massive directed probe passed |\n| Consolidated contract quotes | `bid_price`, `ask_price`, `bid_size`, `ask_size`, `bid_exchange`, `ask_exchange`, `sip_timestamp`, `sequence_number` | Bid/ask nullability and provider pagination are preserved; empty windows are valid observations | Massive directed probe passed; broad history unverified |",
+      "context": "El diccionario existente conserva estados históricos y requiere actualización al cierre.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 11,
+      "line_end": 16
+    },
+    "data_dictionary_target": {
+      "artifact": "docs/data_dictionary.md",
+      "sha256": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+      "selector": [],
+      "quote": "All normalized timestamps retain the raw value, UTC instant and `America/New_York` rendering.\n`available_at_utc` is separate from event/market time and is mandatory for B1/B2 eligibility.\nThe target stores one origin close plus exactly thirty future closes, thirty log returns and\nthe formula version. Missing or ambiguous prices produce an invalid row; interpolation and\nsilent forward-fill are forbidden.",
+      "context": "Definición histórica del diccionario; no cubre por sí sola los objetivos y campos actuales.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 20,
+      "line_end": 24
+    },
+    "reproduction_not_executed": {
+      "artifact": "docs/rp4/RUNBOOK.md",
+      "sha256": "5890e0f3d68d34be9cb40575d6c1905da90dfd0574e00e1eeb7b9295d16ece31",
+      "selector": [],
+      "quote": "La repetición completa desde cero **no se ejecutó en esta revisión: NO\nVERIFICABLE**. Una copia con rutas o nombres saneados no sustituye por sí sola los\noriginales fijados por hash. Los supervisores de evaluación no tienen una opción\n`--output-root`: sus raíces proceden de la especificación. No se deben editar\nesas raíces, hashes ni recibos para forzar una repetición.",
+      "context": "Entrega de código y procedimiento no equivale a reproducción completa desde cero.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 16,
+      "line_end": 20
+    },
+    "licensed_inputs_required": {
+      "artifact": "docs/rp4/RUNBOOK.md",
+      "sha256": "5890e0f3d68d34be9cb40575d6c1905da90dfd0574e00e1eeb7b9295d16ece31",
+      "selector": [],
+      "quote": "Ejecutar desde la raíz del checkout original. `RP4_PYTHON_ENV` debe estar\nconfigurada localmente con la ruta del entorno existente; este documento no\ninstala paquetes, descarga datos ni muestra su valor. Los originales de UW/FMP,\ntasas, dividendos, eventos, paneles y recibos requieren acceso local bajo las\nlicencias correspondientes. No copiar claves ni archivos licenciados al repositorio.",
+      "context": "Los originales y sus recibos requieren acceso bajo licencia; el panel no se redistribuye.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 24,
+      "line_end": 28
+    },
+    "extraction_code": {
+      "artifact": "src/mds650/providers/fmp.py",
+      "sha256": "aefaf2f638facc4199c7d769c1e60a78c7c1a63450b482001749872aa9bec054",
+      "selector": [],
+      "quote": "class FMPProvider:\n    \"\"\"Bounded FMP Ultimate client for minute bars and earnings probes.\"\"\"\n\n    def __init__(\n        self,\n        api_key: str,\n        *,\n        transport: Any = None,\n        max_retries: int = 3,",
+      "context": "Fuente de código entregada y previamente inspeccionada; no se ejecuta.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 27,
+      "line_end": 35
+    },
+    "quality_code": {
+      "artifact": "src/mds650/quality.py",
+      "sha256": "50780697c08340f80f6d18e64ab1892479763e93493fa2a25f6abf8934f13e97",
+      "selector": [],
+      "quote": "\"\"\"Explicit, non-destructive data-quality accounting.\"\"\"\n\nfrom __future__ import annotations\n\nfrom collections import Counter\nfrom collections.abc import Mapping, Sequence\nfrom dataclasses import dataclass\nfrom math import isfinite",
+      "context": "Fuente de código entregada y previamente inspeccionada; no se ejecuta.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 1,
+      "line_end": 8
+    },
+    "manifest_validation_code": {
+      "artifact": "src/mds650/manifests.py",
+      "sha256": "a1e10ced8336f735b411170ac2ba3021135b746a2454ed9534e6fbd057b09023",
+      "selector": [],
+      "quote": "\"\"\"Sanitized provider-audit manifest validation and fail-closed gates.\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport re\nfrom collections.abc import Mapping\nfrom dataclasses import dataclass",
+      "context": "Fuente de código entregada y previamente inspeccionada; no se ejecuta.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 1,
+      "line_end": 8
+    },
+    "versioned_base_panel_hash": {
+      "artifact": "artifacts/rp4_v4_a2/evaluation_release_rv15.json",
+      "sha256": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+      "selector": [
+        "base_panel_sha256"
+      ],
+      "value": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+      "context": "Identidad del panel según la release; sin acceder a su payload.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "versioned_target_panel_hash": {
+      "artifact": "artifacts/rp4_v4_a2/evaluation_release_rv15.json",
+      "sha256": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+      "selector": [
+        "target_panel_sha256"
+      ],
+      "value": "b2357a10a8a4955499e94b576b7853129e957ad70702da09bebbc9b6befd35db",
+      "context": "Identidad del sidecar de objetivos según la release; sin acceder a su payload.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "materialization_target_hash": {
+      "artifact": "artifacts/rp4_v4_a2/receipt.json",
+      "sha256": "d0483ef642b6440602467454457ed9b31356744911b50b7597fdc8f2f5a3f3b8",
+      "selector": [
+        "target_panel_sha256"
+      ],
+      "value": "b2357a10a8a4955499e94b576b7853129e957ad70702da09bebbc9b6befd35db",
+      "context": "Recibo de materialización guardado; sólo el campo de identidad.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "comparison_table_rows": {
+      "artifact": "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+      "sha256": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+      "selector": [
+        "@length"
+      ],
+      "value": 40,
+      "context": "Tabla guardada de versiones y contrastes; no son réplicas independientes.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "comparison_sample_row": {
+      "artifact": "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+      "sha256": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+      "selector": [
+        25
+      ],
+      "value": {
+        "version": "v4",
+        "target": "RV15",
+        "horizon_minutes": "15",
+        "window": "primary",
+        "family": "log_ridge_harq",
+        "family_group": "linear",
+        "contrast": "B2_over_B1",
+        "N_sessions": "419",
+        "N_origins": "160832",
+        "N_asset_sessions": "2514",
+        "delta_qlike": "0.0011337596590923558",
+        "ci_low_qlike": "0.00033503697025205506",
+        "ci_high_qlike": "0.0019321615865300122",
+        "baseline_qlike_observed": "0.1820440600908625",
+        "percent_reduction": "0.6227940963997779",
+        "ci_low_rescaled_percent": "0.18404169303015444",
+        "ci_high_rescaled_percent": "1.0613702998964234",
+        "interval_definition": "saved_difference_CI95_scaled_by_100_over_observed_baseline;not_bootstrap_ratio_CI",
+        "p_raw": "0.0032",
+        "p_raw_sidedness": "one_sided",
+        "p_for_decision": "0.0032",
+        "hypothesis_status": "REJECTED",
+        "p_bilateral": "0.0062",
+        "p_holm_bilateral": "0.0248",
+        "source_summary": "artifacts/rp4_v4_b2_rv15/summary.json",
+        "source_summary_sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+        "source_session_losses": "artifacts/rp4_v4_b2_rv15/session_losses.csv",
+        "source_session_losses_sha256": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1"
+      },
+      "context": "Ejemplo de fila con estimando, intervalo, denominador y fuentes.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "uncertainty_interval": {
+      "artifact": "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+      "selector": [
+        9,
+        "interval"
+      ],
+      "value": "two-sided percentile 95%; not inversion of centered-null p",
+      "context": "Definición del intervalo primario guardado.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "uncertainty_ci_low": {
+      "artifact": "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+      "selector": [
+        9,
+        "ci_low"
+      ],
+      "value": "0.00033503697025205506",
+      "context": "Límite inferior guardado RV15 lineal B2 sobre B1.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "uncertainty_ci_high": {
+      "artifact": "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+      "selector": [
+        9,
+        "ci_high"
+      ],
+      "value": "0.0019321615865300122",
+      "context": "Límite superior guardado RV15 lineal B2 sobre B1.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "robustness_table_rows": {
+      "artifact": "artifacts/rp4_v4_b4/robustness.csv",
+      "sha256": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb",
+      "selector": [
+        "@length"
+      ],
+      "value": 208,
+      "context": "Resultados de robustez presentes; no cumplimiento de cada sensibilidad originalmente prometida.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "regime_table_rows": {
+      "artifact": "artifacts/rp4_v4_b4/regime_secondary.csv",
+      "sha256": "eb1fd165dd03f5c24efb717afdae7a30e04898dcd6fc53cb3172c1a2d81b03c7",
+      "selector": [
+        "@length"
+      ],
+      "value": 1152,
+      "context": "Regímenes guardados con cobertura y estado; no pruebas nuevas.",
+      "evidence_status": "VERIFIED_SAVED_FIELD"
+    },
+    "descriptive_audit_scope": {
+      "artifact": "artifacts/rp4_closeout_audit/REPORT.md",
+      "sha256": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+      "selector": [],
+      "quote": "# Auditoría descriptiva de cierre RP4 — RV30, RV15 y RV5\n\nSe extrajeron pronósticos y diagnósticos ya cerrados: 419 sesiones/160.832 orígenes primarios y 25/9.750 de confirmación por horizonte. No se ajustó ningún modelo, no se consultó tape bruto ni se calculó ningún nuevo p, AUC o bootstrap. Las 7.992 medias QLIKE de sesión reconstruidas desde pronósticos coinciden con los CSV fijados hasta 6,67e-16. No cambia ninguna decisión primaria.",
+      "context": "La auditoría guardada diferencia extracción de resultados de nuevos ajustes o bootstrap.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 1,
+      "line_end": 3
+    },
+    "v4_closure_original": {
+      "artifact": "docs/rp4/predeclaration_v4_text.md",
+      "sha256": "b7e13877a3090b0724d9a90792afefef3f009124d2766197da637a42eb24d4a9",
+      "selector": [],
+      "quote": "## Regla de cierre\n\n- Éxito: H2 rechazada al horizonte primario (15 min) en al menos una familia, con el resultado a 5 min reportado como secundario.\n- Si no: el proyecto se cierra con B1 > B0 como resultado principal y B2 como nulo informativo a 30, 15 y 5 minutos. No hay v5. Se pasa a la fase de organización y publicación.",
+      "context": "Compromiso registrado y sus límites; compatible en intención con la propuesta, sin identidad de reglas formales.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 40,
+      "line_end": 43
+    },
+    "v4_closure_caution": {
+      "artifact": "docs/rp4/specification_v4.md",
+      "sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+      "selector": [],
+      "quote": "## Cierre y límites\n\nSi RV15 primaria rechaza H2 en al menos una familia tras H1, se reporta como resultado de esa familia y RV5 sólo como secundario. Se informa además si ambas familias rechazan; «al menos una» no tiene por sí solo control global 5% entre familias, ni entre versiones. Si ninguna rechaza, se cierra la investigación de este mecanismo con B1>B0 como resultado principal observado a 30 minutos y B2 no detectado a 30/15/5 según cada estimación e intervalo. No rechazo no establece equivalencia a cero ni absorción causal; «nulo informativo» describe el cierre, no una prueba de ausencia.\n\nEl informe compara v3 y v4 y declara la cuarta evaluación de las mismas ventanas: v1 diseño inicial; v2 cobertura/capacidad/regularización; v3 mecanismo y ventanas vacías; v4 horizonte condicional predeclarado. Las comparaciones de horizontes son descripciones de estimandos distintos, no replicaciones independientes.\n\nLa ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de tiempo fuente a 120 s, como en la literatura.\n\nHueco UW aceptado: 2025-01-25 a 2025-02-24, sin relleno. La fijación local de v4 no elimina la búsqueda adaptativa previa ni demuestra disponibilidad histórica al cliente o inventarios reales de dealers.",
+      "context": "Compromiso registrado y sus límites; compatible en intención con la propuesta, sin identidad de reglas formales.",
+      "evidence_status": "VERIFIED_DOCUMENTARY_QUOTE",
+      "line_start": 47,
+      "line_end": 55
+    }
+  },
+  "nested_sources": {
+    "status": "ALINEADO",
+    "fact_ids": [
+      "v3_B0_features",
+      "v3_B1_features",
+      "v3_B2_features",
+      "option_input_schema",
+      "source_layers_construction"
+    ],
+    "finding": "Se alinean los tipos de información: barras de un minuto, estado de contratos/cotizaciones y actividad por operación.",
+    "provenance_limit": "No se afirma reutilización exacta de los tres datasets originalmente propuestos ni tres proveedores independientes. Superficie y flujo comparten operaciones en su construcción."
+  },
+  "configuration": {
+    "origin_step_minutes": 5,
+    "origin_step_fact": "origin_step_code",
+    "bootstrap_block_sessions": 5,
+    "bootstrap_block_fact": "v3_bootstrap_block_sessions",
+    "bootstrap_repetitions": 9999,
+    "bootstrap_repetitions_fact": "v3_bootstrap_repetitions",
+    "source_cutoff_seconds": 120,
+    "source_cutoff_fact": "v3_source_cutoff_seconds",
+    "primary_horizon_minutes": 30,
+    "primary_horizon_fact": "v3_target_horizon_minutes",
+    "predictor_counts": {
+      "B0": 29,
+      "B1": 69,
+      "B2": 138
+    },
+    "predictor_count_facts": {
+      "B0": "v3_B0_feature_count",
+      "B1": "v3_B1_feature_count",
+      "B2": "v3_B2_feature_count"
+    }
+  },
+  "rq30": {
+    "horizon_minutes": 30,
+    "window": "primary",
+    "version": "v3",
+    "rq1": {
+      "status": "SÍ BAJO LA REGLA REGISTRADA",
+      "linear_fact": "rv30_linear_h1",
+      "trees_fact": "rv30_trees_h1",
+      "linear_p_fact": "rv30_linear_h1_p",
+      "trees_p_fact": "rv30_trees_h1_p"
+    },
+    "rq2": {
+      "status": "NO RECHAZA AL 5 %",
+      "linear_fact": "rv30_linear_h2",
+      "trees_fact": "rv30_trees_h2",
+      "linear_p_fact": "rv30_linear_h2_p",
+      "trees_p_fact": "rv30_trees_h2_p"
+    },
+    "scope": "Medias QLIKE históricas con secuencia por familia; no rechazo no demuestra equivalencia ni absorción causal, y la adaptación entre versiones no queda corregida por esos p."
+  },
+  "rq3_scope": {
+    "status": "PARCIAL",
+    "asset_fact_ids": [
+      "rv30_b1_linear_aapl",
+      "rv30_b1_trees_aapl",
+      "rv30_b1_linear_amzn",
+      "rv30_b1_trees_amzn",
+      "rv30_b1_linear_meta",
+      "rv30_b1_trees_meta",
+      "rv30_b1_linear_msft",
+      "rv30_b1_trees_msft",
+      "rv30_b1_linear_nvda",
+      "rv30_b1_trees_nvda",
+      "rv30_b1_linear_tsla",
+      "rv30_b1_trees_tsla"
+    ],
+    "asset_count": 6,
+    "family_count": 2,
+    "positive_B1_point_estimates": 12,
+    "individual_B1_Holm_rejections": 0,
+    "asset_statement": "Consistencia de signo B1 en seis activos por dos familias, sin rechazo de las doce comparaciones individuales después de Holm.",
+    "time_of_day_fact_ids": [
+      "rv30_b1_linear_first_hour",
+      "rv30_b1_trees_first_hour",
+      "rv30_b1_linear_last_hour",
+      "rv30_b1_trees_last_hour"
+    ],
+    "time_limit": "Los signos horarios no son uniformes; last_hour usa el umbral registrado de minuto 300, distinto del último tramo regular de minuto 330.",
+    "early_fact_ids": [
+      "rv30_early_linear",
+      "rv30_early_trees"
+    ],
+    "circumstances": {
+      "learning": "Perfil temporal post hoc; entrenamiento y mercado varían conjuntamente.",
+      "provider": "Hueco e incidencias de instrumento documentados; ventanas vacías no verifican por sí solas una interrupción del proveedor.",
+      "expiry": "Cambio documentado de vencimientos y cobertura; sin identificación causal del rendimiento."
+    },
+    "context_fact_ids": [
+      "accepted_provider_gap",
+      "reported_empty_window_incidents",
+      "expiry_first_observed",
+      "expiry_audit_method",
+      "expiry_audit_limits",
+      "expiry_causality_limit"
+    ],
+    "volatility_regime_limit": "Las tres circunstancias no son tres estratos predefinidos de volatilidad. No se localizó un desglose explícito por volatilidad alta/baja en el inventario de regímenes revisado.",
+    "timing_sensitivity_status": "PENDIENTE"
+  },
+  "universe": {
+    "status": "DESVIACION DECLARADA",
+    "assets_fact": "v3_assets",
+    "asset_count_fact": "v3_asset_count",
+    "market_assets_fact": "v3_market_assets",
+    "B0_fact": "v3_B0_features",
+    "proposed_scope_facts": [
+      "proposal_en_scope",
+      "proposal_es_scope"
+    ],
+    "written_rationale": null,
+    "rationale_status": "NO LOCALIZADA EN BUSQUEDA ACOTADA",
+    "review_scope": [
+      "docs/rp4/specification_v1.md",
+      "docs/rp4/specification_v2.md",
+      "docs/rp4/specification_v3.md",
+      "docs/rp4/specification_v4.md",
+      "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "artifacts/rp4_v4_a1/specification.json",
+      "docs/methodology_decisions.md"
+    ],
+    "limit": "La asignación de seis objetivos y dos controles está registrada; no se inventa una explicación retrospectiva de la reducción del universo."
+  },
+  "model_choice_and_closure": {
+    "proposal_facts": [
+      "proposal_en_commitment",
+      "proposal_es_commitment"
+    ],
+    "null_clause_facts": [
+      "proposal_en_null_clause",
+      "proposal_es_null_clause"
+    ],
+    "closure_facts": [
+      "v4_closure_original",
+      "v4_closure_caution"
+    ],
+    "joint_rule_facts": [
+      "v3_joint_rule",
+      "v4_joint_rule"
+    ],
+    "limit": "El compromiso de sencillez y de informar resultados adversos es compatible en intención; no constituye identidad literal de reglas ni ausencia de adaptación histórica."
+  },
+  "deliverables": [
+    {
+      "id": "final_research_report",
+      "proposal_item": "final research report",
+      "status": "ALINEADO",
+      "paths": [
+        "docs/rp4/RESULTADO_FINAL_revision_2.md",
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/executive_summary.md"
+      ],
+      "finding": "Existe un informe científico de cierre que formula pregunta y diseño, compara todas las versiones, da resultados e incertidumbre, distingue familias/horizontes, e incluye cuatro divulgaciones y límites; el resumen bilingüe proporciona acceso ejecutivo.",
+      "fact_ids": [
+        "final_report_question",
+        "proposal_en_deliverables"
+      ],
+      "limits": [
+        "ALINEADO identifica una entrega de investigación en Markdown; no acredita aceptación institucional de formato, extensión o maquetación de una tesis final.",
+        "La alineación explícita RQ1/RQ2/RQ3 a RV30 se prepara en la revisión nueva; esta inspección no modifica el informe sellado."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "presentation",
+      "proposal_item": "presentation",
+      "status": "ALINEADO",
+      "paths": [
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/defense_slides.md",
+        "artifacts/rp4_closeout_figures_revision2/manifest.json"
+      ],
+      "finding": "El guion tiene una secuencia de diapositivas con contenido proyectable, notas de defensa, síntesis, acumuladas, tabla de versiones, incertidumbre, regímenes y próximos datos. Enlaza figuras concretas y evidencia, no es un archivo vacío.",
+      "fact_ids": [
+        "presentation_script_heading",
+        "figure_manifest_files"
+      ],
+      "limits": [
+        "Formato entregado: guion Markdown y figuras SVG/PNG. No se ha comprobado una presentación nativa PPTX ni un PDF de diapositivas.",
+        "Esta inspección comprueba contenido y presencia de figuras; no ejecuta renderizado ni valida duración de una exposición."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "literature_matrix",
+      "proposal_item": "literature matrix",
+      "status": "ALINEADO",
+      "paths": [
+        "docs/literature_matrix.csv",
+        "docs/literature_evidence_ledger_v2.csv",
+        "docs/literature_synthesis_v2.md"
+      ],
+      "finding": "La matriz estructura estudios concretos con pregunta, muestra, horizonte, predictores, modelos y benchmark exactos, validación, controles temporales, métricas, hallazgos, limitaciones e implicación para el proyecto. Cumple la función del entregable; no debe marcarse inexistente.",
+      "fact_ids": [
+        "literature_matrix_row_count",
+        "literature_working_paper_status",
+        "proposal_en_peer_review"
+      ],
+      "limits": [
+        "El párrafo 49 de la propuesta pide al menos diez estudios revisados por pares. La matriz contiene una fila explícitamente FEDS working paper; su existencia no acredita por sí sola que las diez filas satisfagan ese requisito editorial.",
+        "El acceso a metadatos de un artículo publicado es distinto de leer su texto completo; no invalida por sí solo su estado editorial, pero limita afirmaciones metodológicas y numéricas.",
+        "La síntesis y reconciliación son documentos históricos. La reconciliación declara una contribución parcialmente sustituida; no debe importarse como resultado vigente.",
+        "No se verificaron fuentes externas ni se amplió la revisión bibliográfica en esta tarea."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "data_dictionary",
+      "proposal_item": "data dictionary",
+      "status": "PENDIENTE",
+      "paths": [
+        "docs/data_dictionary.md",
+        "artifacts/rp4_v4_a1/specification.json"
+      ],
+      "finding": "Existe un diccionario observado de seis componentes y normas de tiempo/procedencia, pero sus estados de aceptación y su objetivo pertenecen al contrato antiguo: barras bloqueadas, B1 bloqueado y treinta cierres futuros. No es un diccionario actualizado de los conjuntos/objetivos v3/v4.",
+      "fact_ids": [
+        "data_dictionary_historical_status",
+        "data_dictionary_target",
+        "v3_B2_features"
+      ],
+      "limits": [
+        "Pendiente significa actualización del entregable final, no inexistencia del archivo.",
+        "Falta una correspondencia de diccionario actual para conjuntos B0/B1/B2, unidades/transformaciones, indicadores de presencia y ventanas vacías, bloque de desbalance gamma y objetivos RV15/RV5.",
+        "No se modifica ni completa el diccionario en esta auditoría de inventario."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "reproducible_extraction_qc_code",
+      "proposal_item": "reproducible extraction and quality-control code",
+      "status": "ALINEADO",
+      "paths": [
+        "src/mds650/providers/fmp.py",
+        "src/mds650/providers/massive.py",
+        "src/mds650/providers/unusual_whales.py",
+        "src/mds650/quality.py",
+        "src/mds650/manifests.py",
+        "artifacts/rp4_v3_code/",
+        "artifacts/rp4_v4_code/",
+        "docs/rp4/RUNBOOK.md",
+        "uv.lock"
+      ],
+      "finding": "Hay clientes/parsers de extracción, funciones de calidad y validación de manifiestos, materializadores RP4, evaluadores y productores de informes con verificación de identidad/hash; el entorno y los comandos están documentados. Es código operativo sustantivo disponible para inspección, no pseudocódigo.",
+      "fact_ids": [
+        "extraction_code",
+        "quality_code",
+        "manifest_validation_code",
+        "reproduction_not_executed",
+        "licensed_inputs_required"
+      ],
+      "limits": [
+        "No se ejecutó extracción, QC, materialización, ajuste ni reproducción desde cero.",
+        "ALINEADO se refiere a entrega de código y procedimiento. RUNBOOK declara la reproducción completa desde cero no ejecutada/no verificable en esta revisión.",
+        "Los productores históricos dependen de insumos, raíces y recibos licenciados preservados; no se afirma ejecución pública autónoma con sólo este checkout."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "versioned_analytical_panel",
+      "proposal_item": "versioned analytical panel",
+      "status": "DESVIACION DECLARADA",
+      "paths": [
+        "artifacts/rp4_v4_a1/specification.json",
+        "artifacts/rp4_v4_a1/freeze_manifest.json",
+        "artifacts/rp4_v4_a2/receipt.json",
+        "artifacts/rp4_v4_a2/evaluation_release_rv15.json"
+      ],
+      "finding": "Se entrega identificación versionada del panel base y del panel de objetivos mediante especificación, hashes, freeze y release. Los payloads licenciados quedan en custodia privada; el checkout público contiene registros y agregados, no una copia redistribuible del panel analítico.",
+      "fact_ids": [
+        "versioned_base_panel_hash",
+        "versioned_target_panel_hash",
+        "materialization_target_hash",
+        "licensed_inputs_required"
+      ],
+      "limits": [
+        "La desviación es de acceso/distribución: panel privado versionado frente a entregable públicamente inspeccionable.",
+        "Se verificaron relaciones entre metadatos; no se abrió, contó ni volvió a hashear ningún payload de panel.",
+        "No se asegura aquí su reconstitución íntegra desde el checkout ni se publican sus rutas privadas."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "model_comparison_tables",
+      "proposal_item": "model-comparison tables",
+      "status": "ALINEADO",
+      "paths": [
+        "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+        "artifacts/rp4_v4_b4/primary_statistics.csv",
+        "docs/rp4/RESULTADO_FINAL_revision_2.md"
+      ],
+      "finding": "Las tablas comparan versiones, horizontes, ventanas, familias y contrastes; retienen tamaños, denominadores, signos, IC, p originales/ajustados y estado de inferencia. Se conservan filas adversas y p formales no abiertos.",
+      "fact_ids": [
+        "comparison_table_rows",
+        "comparison_sample_row"
+      ],
+      "limits": [
+        "No son comparaciones entre réplicas independientes.",
+        "Las tablas disponibles no incluyen por sí solas todas las familias de referencia sugeridas originalmente; la auditoría de modelos se trata en otra fila de la alineación general."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "uncertainty_intervals",
+      "proposal_item": "uncertainty intervals",
+      "status": "ALINEADO",
+      "paths": [
+        "artifacts/rp4_v4_b4/primary_statistics.csv",
+        "artifacts/rp4_closeout_figures/comparison_v1_v4.csv"
+      ],
+      "finding": "Los intervalos están materializados en columnas y ligados a contraste/familia/ventana, con especificación del bootstrap y reescalado porcentual. No son sólo una promesa de calcularlos.",
+      "fact_ids": [
+        "uncertainty_interval",
+        "uncertainty_ci_low",
+        "uncertainty_ci_high",
+        "comparison_sample_row"
+      ],
+      "limits": [
+        "No se regeneraron intervalos ni bootstrap.",
+        "El intervalo reescalado no añade incertidumbre del denominador; el contrato de inferencia de cada versión permanece distinto."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "robustness_analyses",
+      "proposal_item": "robustness analyses",
+      "status": "ALINEADO",
+      "paths": [
+        "artifacts/rp4_v4_b4/robustness.csv",
+        "artifacts/rp4_v4_b4/regime_secondary.csv",
+        "artifacts/rp4_closeout_audit/REPORT.md",
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md"
+      ],
+      "finding": "Hay resultados por activo, bloques cronológicos, exclusión de bloques y sesiones recientes, además de secundarios por evento, hora, actividad, exposición y ventanas vacías. La auditoría de cierre aporta diagnósticos de coeficientes, podas, extremos, tiempos y máscaras.",
+      "fact_ids": [
+        "robustness_table_rows",
+        "regime_table_rows",
+        "descriptive_audit_scope"
+      ],
+      "limits": [
+        "ALINEADO cubre los análisis presentes, no cumplimiento íntegro de cada sensibilidad prometida en la sección de evaluación.",
+        "MAE/RMSE, variantes del corte PIT y placebos permanecen pendientes según la instrucción de alineación; esta subtarea no los ejecuta ni pretende demostrar ausencia global fuera de los artefactos inspeccionados.",
+        "Los regímenes son diagnósticos condicionados y algunos secundarios tienen límites de cobertura; no se presentan como nueva confirmación del mecanismo."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    },
+    {
+      "id": "examiner_facing_notebook",
+      "proposal_item": "examiner-facing notebook",
+      "status": "PENDIENTE",
+      "paths": [
+        "notebooks/canonical_rv30_defense.ipynb",
+        "notebooks/research_pipeline.ipynb",
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3/examiner_qa.md"
+      ],
+      "finding": "Los notebooks históricos inspeccionados en la revisión funcional no presentan el cierre actual v3/v4. La guía vigente es Markdown; la actualización o entrega del notebook comprometido queda pendiente.",
+      "fact_ids": [
+        "current_markdown_guide",
+        "proposal_en_deliverables"
+      ],
+      "limits": [
+        "Pendiente de un cuaderno dirigido al examinador del cierre RP4, o adaptación autorizada posterior; no basta enlazar el antecedente como vigente.",
+        "No se ejecutaron celdas ni se usaron sus outputs como evidencia.",
+        "No se abrió ningún artefacto referenciado por los notebooks; sus referencias sólo se inspeccionaron como texto de código."
+      ],
+      "evidence_status": "BOUNDED_FUNCTIONAL_REVIEW"
+    }
+  ],
+  "pending_items": [
+    {
+      "id": "mae_rmse",
+      "item": "MAE y RMSE secundarios",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_evaluation",
+        "v3_loss"
+      ],
+      "limit": "No se identificaron resultados RP4 en los archivos inspeccionados; el módulo compartido contiene implementación.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "pit_variants",
+      "item": "Sensibilidad empírica a cortes PIT alternativos",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_evaluation",
+        "v3_source_cutoff_seconds",
+        "v4_source_cutoff_seconds"
+      ],
+      "limit": "Las especificaciones fijan el corte fuente; tests sintéticos y auditorías de construcción no sustituyen variantes predictivas.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "placebo",
+      "item": "Placebo empírico",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_evaluation"
+      ],
+      "limit": "No identificado en la búsqueda acotada; no se afirma ausencia global del repositorio.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "separate_har_benchmark",
+      "item": "HAR-RV como benchmark independiente",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_models",
+        "v3_model_families",
+        "v4_har_predictors"
+      ],
+      "limit": "La presencia de HAR/HARQ en B0 no constituye una fila de modelo independiente.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "separate_seasonal_persistence",
+      "item": "Persistencia estacional como benchmark independiente",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_models",
+        "v3_model_families",
+        "v4_har_predictors"
+      ],
+      "limit": "Los predictores de estacionalidad no sustituyen una comparación con persistencia estacional.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "data_dictionary_update",
+      "item": "Diccionario actualizado del cierre",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "data_dictionary_historical_status",
+        "data_dictionary_target"
+      ],
+      "limit": "El archivo existe; su actualización de campos, unidades y horizontes está pendiente.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "examiner_notebook_update",
+      "item": "Notebook del cierre dirigido al examinador",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "current_markdown_guide",
+        "proposal_en_deliverables"
+      ],
+      "limit": "Una guía Markdown y notebooks históricos no acreditan el notebook comprometido del cierre.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    },
+    {
+      "id": "peer_review_requirement",
+      "item": "Al menos diez estudios revisados por pares",
+      "status": "PENDIENTE",
+      "fact_ids": [
+        "proposal_en_peer_review",
+        "literature_matrix_row_count",
+        "literature_working_paper_status"
+      ],
+      "limit": "La matriz existe, pero por sí sola no acredita que sus filas satisfagan el requisito editorial: una fila está declarada working paper. Esta revisión no amplía el censo editorial del proyecto.",
+      "analyses_executed": false,
+      "evidence_status": "BOUNDED_REVIEW_NOT_GLOBAL_ABSENCE"
+    }
+  ],
+  "bounded_review": {
+    "source_files": [
+      "artifacts/rp4_code/acquire.py",
+      "artifacts/rp4_code/close_b1.py",
+      "artifacts/rp4_code/evaluate.py",
+      "artifacts/rp4_code/materialize.py",
+      "artifacts/rp4_code/report.py",
+      "artifacts/rp4_code/tail_diagnostic.py",
+      "artifacts/rp4_code/test_acquire.py",
+      "artifacts/rp4_code/test_evaluate.py",
+      "artifacts/rp4_code/test_materialize.py",
+      "artifacts/rp4_code/test_public_projection.py",
+      "artifacts/rp4_code/test_report.py",
+      "artifacts/rp4_code/verify_delivery.py",
+      "artifacts/rp4_v2_code/evaluate_v2.py",
+      "artifacts/rp4_v2_code/execute.py",
+      "artifacts/rp4_v2_code/freeze.py",
+      "artifacts/rp4_v2_code/materialize_iv.py",
+      "artifacts/rp4_v2_code/models.py",
+      "artifacts/rp4_v2_code/report_v2.py",
+      "artifacts/rp4_v2_code/test_evaluate_v2.py",
+      "artifacts/rp4_v2_code/test_materialize_iv.py",
+      "artifacts/rp4_v2_code/test_models.py",
+      "artifacts/rp4_v2_code/test_report_v2.py",
+      "artifacts/rp4_v2_code/test_runtime_v2.py",
+      "artifacts/rp4_v3_code/aggregate_v3.py",
+      "artifacts/rp4_v3_code/empty_windows.py",
+      "artifacts/rp4_v3_code/evaluate_v3.py",
+      "artifacts/rp4_v3_code/execute.py",
+      "artifacts/rp4_v3_code/freeze.py",
+      "artifacts/rp4_v3_code/inference.py",
+      "artifacts/rp4_v3_code/materialize_gamma.py",
+      "artifacts/rp4_v3_code/models.py",
+      "artifacts/rp4_v3_code/report_v3.py",
+      "artifacts/rp4_v3_code/test_aggregate_v3.py",
+      "artifacts/rp4_v3_code/test_empty_windows.py",
+      "artifacts/rp4_v3_code/test_evaluate_v3.py",
+      "artifacts/rp4_v3_code/test_inference.py",
+      "artifacts/rp4_v3_code/test_materialize_gamma.py",
+      "artifacts/rp4_v3_code/test_models.py",
+      "artifacts/rp4_v4_code/aggregate_v4.py",
+      "artifacts/rp4_v4_code/evaluate_v4.py",
+      "artifacts/rp4_v4_code/execute.py",
+      "artifacts/rp4_v4_code/freeze.py",
+      "artifacts/rp4_v4_code/materialize_targets.py",
+      "artifacts/rp4_v4_code/report_v4.py",
+      "artifacts/rp4_v4_code/report_v4_checked.py",
+      "artifacts/rp4_v4_code/test_aggregate.py",
+      "artifacts/rp4_v4_code/test_evaluate_v4.py",
+      "artifacts/rp4_v4_code/test_report.py",
+      "artifacts/rp4_v4_code/test_report_checked.py",
+      "artifacts/rp4_v4_code/test_targets.py",
+      "artifacts/rp4_a1/specification.json",
+      "artifacts/rp4_v2_a1/specification.json",
+      "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "artifacts/rp4_v4_a1/specification.json",
+      "docs/rp4/specification_v1.md",
+      "docs/rp4/specification_v2.md",
+      "docs/rp4/specification_v3.md",
+      "docs/rp4/specification_v4.md",
+      "docs/rp4/results_v3_revision2.md",
+      "docs/rp4/results_v4.md",
+      "artifacts/rp4_v3_b2/summary.json",
+      "artifacts/rp4_v3_b3/summary.json",
+      "artifacts/rp4_v4_b2_rv15/summary.json",
+      "artifacts/rp4_v4_b3_rv15/summary.json",
+      "artifacts/rp4_v4_b2_rv5/summary.json",
+      "artifacts/rp4_v4_b3_rv5/summary.json"
+    ],
+    "search_results": [
+      {
+        "name": "mae_rmse",
+        "pattern": "\\b(mae|rmse|mean_absolute_error|root_mean_squared_error|regression_metrics)\\b",
+        "exit_code": 1,
+        "scope": "Only the explicitly listed RP4 code directories, four configurations, six specification/result documents and six saved v3/v4 summaries. Not a repository-wide or historical-global absence proof."
+      },
+      {
+        "name": "empirical_placebo",
+        "pattern": "\\bplacebo(s)?\\b|permutation_test",
+        "exit_code": 1,
+        "scope": "Only the explicitly listed RP4 code directories, four configurations, six specification/result documents and six saved v3/v4 summaries. Not a repository-wide or historical-global absence proof."
+      },
+      {
+        "name": "standalone_seasonal_har",
+        "pattern": "seasonal[_ -](naive|persistence)|persistencia[_ -]estacional|fit_har|\\bhar[_-]rv\\b",
+        "exit_code": 1,
+        "scope": "Only the explicitly listed RP4 code directories, four configurations, six specification/result documents and six saved v3/v4 summaries. Not a repository-wide or historical-global absence proof."
+      },
+      {
+        "name": "named_pit_variants",
+        "pattern": "cutoff[_ -]sensitiv|pit[_ -]variant|pit[_ -]sensitiv|latency[_ -]sensitiv|alternate[_ -]cutoff",
+        "exit_code": 1,
+        "scope": "Only the explicitly listed RP4 code directories, four configurations, six specification/result documents and six saved v3/v4 summaries. Not a repository-wide or historical-global absence proof."
+      }
+    ],
+    "repeated_in_this_projection": false,
+    "notebook_scope": "La revisión anterior inspeccionó únicamente fuentes de celdas; esta proyección no carga notebooks ni outputs y no incorpora sus payloads a facts/source_sha256."
+  }
+}

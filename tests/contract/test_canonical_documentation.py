@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from scripts.rp4_archive_sources import original_path
+
 ROOT = Path(__file__).resolve().parents[2]
 CLAIMS_PATH = ROOT / "docs" / "canonical_claims_and_limitations.md"
 CONCLUSION_PATH = ROOT / "docs" / "canonical_validation_conclusion.md"
@@ -125,7 +127,16 @@ def test_historical_claim_ledgers_cannot_authorize_current_results() -> None:
 
 
 def test_current_threats_and_reports_match_corrected_evidence() -> None:
-    matrix = _read("docs/threats_to_validity_matrix_v1.md")
+    current = _read("docs/threats_to_validity_matrix_v1.md")
+    assert "current presentation: RP4 v4" in current
+    assert "15-minute primary and 5-minute secondary horizons" in current
+    assert "Cross-version search is not adjusted" in current
+    assert "No full-sequence confirmation in the final window" in current
+    assert "Phase 8 was already consumed" in current
+    assert "Phase 9 remains sealed and unread" not in current
+    # The previous matrix remains an immutable historical statement. Its old
+    # cohort dispositions must not be promoted back into the current narrative.
+    matrix = original_path(ROOT / "docs/threats_to_validity_matrix_v1.md").read_text("utf-8")
     assert "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED" in matrix
     assert "PIT_V22_RECONCILIATION_BLOCKED" not in matrix
     assert "timing-sensitivity forecasts were not evaluated" in matrix

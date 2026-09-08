@@ -1,0 +1,44 @@
+{
+  "aggregate": "cumulative_by_asset_rv15.csv",
+  "assets": [
+    "AAPL",
+    "AMZN",
+    "META",
+    "MSFT",
+    "NVDA",
+    "TSLA"
+  ],
+  "bytes": 52163,
+  "capital_go": false,
+  "checks": {
+    "absolute_tolerance": 5.001e-07,
+    "all_values_finite": true,
+    "dates_identical_to_public_control": true,
+    "maximum_absolute_endpoint_difference": 4.548023851969063e-07,
+    "maximum_absolute_global_curve_difference": 3.4686042485465585e-07,
+    "public_asset_endpoints_compared": 12,
+    "public_global_curve_points_compared": 838,
+    "tolerance_reason": "Each existing cumulative value was rounded to six decimal places: at most 0.5e-6 per point or endpoint; 1e-10 extra permits floating-point summation. Averaging six rounded curves cannot increase this bound."
+  },
+  "comparison_inputs_sha256": {
+    "artifacts/rp4_universe_public_v1/control_six_rv15_losses.csv": "e2bbc69a355c755f06aad9e671a8c3273c151f348c5614ab9a63cf5dafaa601b",
+    "artifacts/rp4_v4_b4/robustness.csv": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb"
+  },
+  "copied_sha256": "764e4fdaefdd2e4ba0d81f83da7a6fa243601116d796671c47481266a722aa52",
+  "custody_scope": "Authenticates the existing aggregate bytes and agreement with public controls. It does not reconstruct or independently authenticate private checkpoints or original per-origin calculations.",
+  "families": [
+    "log_ridge_harq",
+    "lightgbm_qlike"
+  ],
+  "first_session": "2024-10-28",
+  "last_session": "2026-07-31",
+  "new_bootstrap_runs": 0,
+  "new_model_fits": 0,
+  "prior_aggregation_producer_sha256": "0688d5d160e850a5b6e306573902f9065d15c59fc57ea59d654571589f671c5d",
+  "private_forecast_or_target_inputs_read": 0,
+  "raw_licensed_inputs_read": 0,
+  "rows": 419,
+  "schema_version": "existing-cumulative-aggregate-import-v1",
+  "source_kind": "Previously generated aggregate of cumulative daily mean QLIKE(option state) minus QLIKE(option state plus flow), stored with six decimal places. Original aggregation producer inspected but never executed in this publication refresh.",
+  "source_sha256": "764e4fdaefdd2e4ba0d81f83da7a6fa243601116d796671c47481266a722aa52"
+}

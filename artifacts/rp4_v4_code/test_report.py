@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from itertools import accumulate
 
 import pytest
+
 from artifacts.rp4_v4_code import report_v4 as report
 from artifacts.rp4_v4_code.aggregate_v4 import aggregate_records
 from artifacts.rp4_v4_code.test_aggregate import OPTIONS, synthetic_records
@@ -66,9 +67,9 @@ def test_tables_separate_secondary_and_diagnostic_p(result_set: report.Results) 
         summary["contrasts"][1]["p_for_decision"] = None
         summary["contrasts"][1]["hypothesis_status"] = "NOT_TESTED"
         text = report.main_table(result_set, "confirmation")
-        assert "NO ABIERTA" in text
-        assert "v4 RV5 secundario" in text
-        assert "v4 RV15 primario" in text
+        assert "NOT OPENED" in text
+        assert "v4 RV5 secondary" in text
+        assert "v4 RV15 primary" in text
         assert "v3 RV30" in text
     finally:
         summary.clear()

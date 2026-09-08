@@ -14,7 +14,7 @@ Massive. Its oldest partition on disk is `2024-08-02`, which coincides with the
 oldest *non-empty* day UW served when entitlement was probed
 (`artifacts/api_audit/window_probe_20260720/probe_summary.md`: entitled back to
 2023-08-18, oldest non-empty events ~2024-08-02). The floor is the provider's
-own data start, not merely our subscription — there is nothing earlier to
+own data start, not merely the subscription used — there is nothing earlier to
 acquire from UW, and nothing earlier exists on disk.
 
 Probe date: 2026-08-24. Method: read-only. Parquet footers only (row-group
@@ -64,7 +64,7 @@ reaches earlier.
 
 - **The tape cannot go back.** B1 (surface) and B2 (flow — the RP3 primary
   contrast) are derived from the UW full tape, whose oldest non-empty day is
-  ~2024-08-02 by the provider's own data, not by our window choice. There is
+  ~2024-08-02 by the provider's own data, not by the selected window. There is
   no earlier UW tape to buy or download. This is measured for entitlement as
   of the 2026-07-20 probe; that the provider has since backfilled 2023-2024
   history is possible in principle but **not probed**.

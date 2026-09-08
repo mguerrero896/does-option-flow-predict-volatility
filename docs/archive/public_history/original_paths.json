@@ -1,0 +1,304 @@
+{
+  "artifacts/rp4_a2/INCIDENTS.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_a2/INCIDENTS.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_a2/INCIDENTS.md",
+    "sha256": "8b1f903f196e6767f1c1b023c9b51fc70fa88bb5c17953d05e44e8e201d8dc7b",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_a2/INCIDENTS.md.summary.md"
+  },
+  "artifacts/rp4_a2/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_a2/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_a2/REPORT.md",
+    "sha256": "74763c8c6ccf683dba5877997c806654e35738baaeff76684d0f0c0e7ac71191",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_a2/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_b1/INCIDENTS.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_b1/INCIDENTS.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_b1/INCIDENTS.md",
+    "sha256": "a7dd4e6148ab0ba780f935e7737bf871b1faca6345b8b7efd9c6b74ef0e9741d",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_b1/INCIDENTS.md.summary.md"
+  },
+  "artifacts/rp4_b1/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_b1/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_b1/REPORT.md",
+    "sha256": "db7347ead3666429e211d1b49d914b6f50a30bbc5aeff11ade6f52ef278a8572",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_b1/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_b2/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_b2/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_b2/REPORT.md",
+    "sha256": "334d2acc5993da29f4c7a2b23fea901168bdcf63c5527f79a6252d06791e9425",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_b2/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_b3/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_b3/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_b3/REPORT.md",
+    "sha256": "381a5f3784f5478deb20e012a6ec677dd900eae555c50fdb618adc95bbcb0b21",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_b3/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_closeout_audit/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_closeout_audit/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_closeout_audit/REPORT.md",
+    "sha256": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_closeout_audit/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_closeout_figures/README.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_closeout_figures/README.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_closeout_figures/README.md",
+    "sha256": "51f46c4a6f1d00c320e7b01922cf9cf0ebb84b99c05d5540729d3a86bf1b8b4b",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_closeout_figures/README.md.summary.md"
+  },
+  "artifacts/rp4_inventory_v1/COLUMNS.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/COLUMNS.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/COLUMNS.md",
+    "sha256": "bc65296d403eeb976a722fa42862f5884a0b08137734120215b20c3bf2e3974f",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/COLUMNS.md.summary.md"
+  },
+  "artifacts/rp4_inventory_v1/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/REPORT.md",
+    "sha256": "e7c79b917f564cfddba1a062cf7d189332b88d4bdbd7a3e3bfcd837d7a16d082",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_inventory_v1/precheck/COLUMNS.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/precheck/COLUMNS.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/precheck/COLUMNS.md",
+    "sha256": "bc65296d403eeb976a722fa42862f5884a0b08137734120215b20c3bf2e3974f",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_inventory_v1/precheck/COLUMNS.md.summary.md"
+  },
+  "artifacts/rp4_market_audit/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_market_audit/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_market_audit/REPORT.md",
+    "sha256": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_market_audit/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_publication_projection_release/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_publication_projection_release/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_publication_projection_release/REPORT.md",
+    "sha256": "6eedbe34c4721798695c8c8b4ec354dfe1f9aed977f14cb58a1546f5ee60af46",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_publication_projection_release/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_v2_audit/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v2_audit/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v2_audit/REPORT.md",
+    "sha256": "c278fda73f5b71dacc44d2389d8971af17ab2359c7ef250dbec5c94035e0a567",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v2_audit/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_v3_a2/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_a2/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_a2/REPORT.md",
+    "sha256": "f07ecfe3202e4aaba7d7d2e23f308d86af9f12f012e741f5b2cbd63a4c3ff513",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_a2/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_v3_b4/READING_NOTES.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_b4/READING_NOTES.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_b4/READING_NOTES.md",
+    "sha256": "116e672b1852a256b2e7b164cdd8504d403191fb83fa4c3817ce7039de1c5488",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_b4/READING_NOTES.md.summary.md"
+  },
+  "artifacts/rp4_v3_b4/README.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_b4/README.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_b4/README.md",
+    "sha256": "c721843669087d152ac9cfe4e57462a9fb1f3ed808795aed5828a3c10014e87f",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_b4/README.md.summary.md"
+  },
+  "artifacts/rp4_v3_b4/logistic_numerical_audit/README.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_b4/logistic_numerical_audit/README.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_b4/logistic_numerical_audit/README.md",
+    "sha256": "28e7b5af6662669e3120f421f00030b4b2073ab11786a85e83ffbad1ad6d064d",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_b4/logistic_numerical_audit/README.md.summary.md"
+  },
+  "artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md",
+    "sha256": "88493b7eb1a3ceff3cdef1c0bd4ecbe467fc64d443552e0b8b2b8888568a1d54",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/NEWTON_CLOSEOUT.md.summary.md"
+  },
+  "artifacts/rp4_v3_secondary_closeout/README.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/README.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/README.md",
+    "sha256": "7be179e9d79160b9f3906a1e8df6260a01e3b2d2efb9aed283bd1e7c2ff2d3b4",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_closeout/README.md.summary.md"
+  },
+  "artifacts/rp4_v3_secondary_mz_audit/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_mz_audit/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_mz_audit/REPORT.md",
+    "sha256": "06aaa5ca529f3d3f9ce4fc1716e54ffcede848d91062b8e3c168649480bffa30",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_mz_audit/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_v3_secondary_repair/README.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_repair/README.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_repair/README.md",
+    "sha256": "083a63f38cc5dddf43cc7d26d4771af9e34c3ac14b7279cbd40809001fa507fe",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v3_secondary_repair/README.md.summary.md"
+  },
+  "artifacts/rp4_v4_a2/REPORT.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v4_a2/REPORT.md.original",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v4_a2/REPORT.md",
+    "sha256": "0fb6acfc3f16dff2ae73fe39a868726bfbf6065eac2def9051673db91b17709d",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v4_a2/REPORT.md.summary.md"
+  },
+  "artifacts/rp4_v4_prereg/protocol.md": {
+    "archive_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.original",
+    "public_baseline_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.public_baseline.original",
+    "public_baseline_sha256": "4ef4a84f14179312635e01afdbe5df6cc2f50c1f81b4d53f534c1fabb362bd08",
+    "public_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md",
+    "sha256": "6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee",
+    "summary_path": "docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.summary.md"
+  },
+  "docs/20_session_calibration_request.md": {
+    "archive_path": "docs/archive/public_history/docs/20_session_calibration_request.md.original",
+    "public_path": "docs/archive/public_history/docs/20_session_calibration_request.md",
+    "sha256": "9a5691f4b30a2b3dde9e79725bc2190f785cfc8b1e519ce6750e0fc49f7c6096",
+    "summary_path": "docs/archive/public_history/docs/20_session_calibration_request.md.summary.md"
+  },
+  "docs/date_level_pit_preflight_plan_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/date_level_pit_preflight_plan_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/date_level_pit_preflight_plan_v1.md",
+    "sha256": "6f298a27ea008ba8e6f00d26dbc873b2b0774e33ee8e7ad2191f01cfd4c7afe9",
+    "summary_path": "docs/archive/public_history/docs/date_level_pit_preflight_plan_v1.md.summary.md"
+  },
+  "docs/date_level_pit_preflight_request_budget_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/date_level_pit_preflight_request_budget_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/date_level_pit_preflight_request_budget_v1.md",
+    "sha256": "ff60ef0c4c339fe6c4a8c794a7b5e488edf0b16480b9878126672eec65b1026e",
+    "summary_path": "docs/archive/public_history/docs/date_level_pit_preflight_request_budget_v1.md.summary.md"
+  },
+  "docs/date_level_pit_preflight_runner_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/date_level_pit_preflight_runner_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/date_level_pit_preflight_runner_v1.md",
+    "sha256": "8c1dcd82c5e30d2491794370e1dcb9922a4ea77e5adbb80e6839c0fa7be09ed2",
+    "summary_path": "docs/archive/public_history/docs/date_level_pit_preflight_runner_v1.md.summary.md"
+  },
+  "docs/rp4/CLEANUP_REVIEW.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/CLEANUP_REVIEW.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/CLEANUP_REVIEW.md",
+    "sha256": "30d62c7faaef2c03538a0eb40b162c11c7953bbfbe8a282f8387e08fe7fb5a88",
+    "summary_path": "docs/archive/public_history/docs/rp4/CLEANUP_REVIEW.md.summary.md"
+  },
+  "docs/rp4/decision_130_v2.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/decision_130_v2.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/decision_130_v2.md",
+    "sha256": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98",
+    "summary_path": "docs/archive/public_history/docs/rp4/decision_130_v2.md.summary.md"
+  },
+  "docs/rp4/decision_131_v3.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/decision_131_v3.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/decision_131_v3.md",
+    "sha256": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697",
+    "summary_path": "docs/archive/public_history/docs/rp4/decision_131_v3.md.summary.md"
+  },
+  "docs/rp4/decision_132_v3_empty_windows.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/decision_132_v3_empty_windows.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/decision_132_v3_empty_windows.md",
+    "sha256": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189",
+    "summary_path": "docs/archive/public_history/docs/rp4/decision_132_v3_empty_windows.md.summary.md"
+  },
+  "docs/rp4/operations_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/operations_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/operations_v1.md",
+    "sha256": "976200f1acda389f5eae451bfd2dd8522125fefb2c1523829918cfe12b9e7c5d",
+    "summary_path": "docs/archive/public_history/docs/rp4/operations_v1.md.summary.md"
+  },
+  "docs/rp4/predeclaration_v4_text.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/predeclaration_v4_text.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/predeclaration_v4_text.md",
+    "sha256": "b7e13877a3090b0724d9a90792afefef3f009124d2766197da637a42eb24d4a9",
+    "summary_path": "docs/archive/public_history/docs/rp4/predeclaration_v4_text.md.summary.md"
+  },
+  "docs/rp4/publication_contract_v2.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/publication_contract_v2.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/publication_contract_v2.md",
+    "sha256": "e485afd87d22b595e2b9a97c3cc13917e24be9dd61ab7b3382977d13bc5285a2",
+    "summary_path": "docs/archive/public_history/docs/rp4/publication_contract_v2.md.summary.md"
+  },
+  "docs/rp4/publication_contract_v2_addendum_1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/publication_contract_v2_addendum_1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/publication_contract_v2_addendum_1.md",
+    "sha256": "c1ea61a0ea7a81e6ed92cc98a00836f5671382217ed91ad3b14c5083735925e2",
+    "summary_path": "docs/archive/public_history/docs/rp4/publication_contract_v2_addendum_1.md.summary.md"
+  },
+  "docs/rp4/publication_projection_release_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/publication_projection_release_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/publication_projection_release_v1.md",
+    "sha256": "becd82726459e451f8284e7a0d533f0a203d13ab913c81f6542dcce68035bc26",
+    "summary_path": "docs/archive/public_history/docs/rp4/publication_projection_release_v1.md.summary.md"
+  },
+  "docs/rp4/publication_projection_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/publication_projection_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/publication_projection_v1.md",
+    "sha256": "98bd85355f3fe6ce8cbf155f232c78405e542ba2ad11eeb6f954f1bdf6114976",
+    "summary_path": "docs/archive/public_history/docs/rp4/publication_projection_v1.md.summary.md"
+  },
+  "docs/rp4/results_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/results_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/results_v1.md",
+    "sha256": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26",
+    "summary_path": "docs/archive/public_history/docs/rp4/results_v1.md.summary.md"
+  },
+  "docs/rp4/results_v2.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/results_v2.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/results_v2.md",
+    "sha256": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf",
+    "summary_path": "docs/archive/public_history/docs/rp4/results_v2.md.summary.md"
+  },
+  "docs/rp4/results_v3_revision1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/results_v3_revision1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/results_v3_revision1.md",
+    "sha256": "f209a54519298d8ee7308a8dc20b5c293d0da4fbad807709aed8aca2feb1db03",
+    "summary_path": "docs/archive/public_history/docs/rp4/results_v3_revision1.md.summary.md"
+  },
+  "docs/rp4/results_v3_revision2.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/results_v3_revision2.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/results_v3_revision2.md",
+    "sha256": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e",
+    "summary_path": "docs/archive/public_history/docs/rp4/results_v3_revision2.md.summary.md"
+  },
+  "docs/rp4/results_v3_revision3.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/results_v3_revision3.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/results_v3_revision3.md",
+    "sha256": "c06e3fbbcc750c74bc417cb4643f2c169fa2bf894ce76ad3875bd432ae8344dc",
+    "summary_path": "docs/archive/public_history/docs/rp4/results_v3_revision3.md.summary.md"
+  },
+  "docs/rp4/specification_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/specification_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/specification_v1.md",
+    "sha256": "2012ce9a62fb1b0da205cd0b4d4d5f635353c35b60f6548257883db84211e510",
+    "summary_path": "docs/archive/public_history/docs/rp4/specification_v1.md.summary.md"
+  },
+  "docs/rp4/specification_v2.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/specification_v2.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/specification_v2.md",
+    "sha256": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+    "summary_path": "docs/archive/public_history/docs/rp4/specification_v2.md.summary.md"
+  },
+  "docs/rp4/specification_v3.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/specification_v3.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/specification_v3.md",
+    "sha256": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+    "summary_path": "docs/archive/public_history/docs/rp4/specification_v3.md.summary.md"
+  },
+  "docs/rp4/v3_addendum_stability_calibration.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/v3_addendum_stability_calibration.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/v3_addendum_stability_calibration.md",
+    "sha256": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5",
+    "summary_path": "docs/archive/public_history/docs/rp4/v3_addendum_stability_calibration.md.summary.md"
+  },
+  "docs/rp4/v3_secondary_implementation_addendum_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/v3_secondary_implementation_addendum_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/v3_secondary_implementation_addendum_v1.md",
+    "sha256": "c89b63598f9d9a2aff2a76e0f09ed303653ffac83f8c4e5d50f128dcc04dafd7",
+    "summary_path": "docs/archive/public_history/docs/rp4/v3_secondary_implementation_addendum_v1.md.summary.md"
+  },
+  "docs/rp4/v3_secondary_newton_addendum_v1.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/v3_secondary_newton_addendum_v1.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/v3_secondary_newton_addendum_v1.md",
+    "sha256": "7353209882a75316faf9f60da8d895739a5fb26e6f84bfb3cc01128c21d9f888",
+    "summary_path": "docs/archive/public_history/docs/rp4/v3_secondary_newton_addendum_v1.md.summary.md"
+  },
+  "docs/rp4/v3_window_empty_addendum.md": {
+    "archive_path": "docs/archive/public_history/docs/rp4/v3_window_empty_addendum.md.original",
+    "public_path": "docs/archive/public_history/docs/rp4/v3_window_empty_addendum.md",
+    "sha256": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803",
+    "summary_path": "docs/archive/public_history/docs/rp4/v3_window_empty_addendum.md.summary.md"
+  }
+}

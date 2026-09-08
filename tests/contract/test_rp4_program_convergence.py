@@ -1,0 +1,196 @@
+"""Check the additive historical context against saved outputs, without evaluation."""
+
+import copy
+import csv
+import importlib.util
+import json
+import re
+from pathlib import Path
+
+import pytest
+from scripts.rp4_archive_sources import assert_historical_sha256, original_path, public_path
+
+ROOT = Path(__file__).resolve().parents[2]
+PACKAGE = ROOT / "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_3"
+CONTEXT = "docs/rp4/prospective_confirmation_v1_amendment_3_context_1.md"
+TEST = "tests/contract/test_rp4_program_convergence.py"
+SPEC = importlib.util.spec_from_file_location(
+    "convergence_readers", Path(__file__).with_name("test_rp4_defense_package.py")
+)
+assert SPEC and SPEC.loader
+readers = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(readers)
+PRIVATE = r"(?i)\b(codex|claude|chatgpt|mds650|capstone)\b|[A-Za-z]:[\\/]"
+RP3_PUBLIC_DOCS = {"docs/rp3/EXECUTION_GUIDE.md", "docs/rp3/PREREGISTRATION.md"}
+
+
+def assert_programs(evidence: dict) -> None:
+    programs = evidence["programs"]
+    assert [p["id"] for p in programs] == ["RP2", "PIT_v2.2", "Phase8A", "RP4"]
+    assert len({p["result_identity"] for p in programs}) == len(programs)
+    assert programs[1]["result_identity"] == "pit-v22-successor-evaluation-v2-20260902"
+    assert programs[1]["disposition"] == "GLOBAL_EDGE_NOT_CONFIRMED"
+    assert programs[2]["disposition"] == "MIXED_EXPLORATORY"
+    assert evidence["independent_replication_count"] is None
+    assert evidence["new_statistical_calculations"] == 0
+    assert evidence["sealed_payloads_read"] == 0
+
+
+def test_all_figures_and_claims_have_exact_saved_sources() -> None:
+    manifest = json.loads((original_path(PACKAGE / "evidence_manifest.json")).read_text("utf-8"))
+    for name, expected in manifest["source_sha256"].items():
+        path = (ROOT / name).resolve()
+        assert path.is_relative_to(ROOT)
+        if re.search(r"(?:^|/)(?:rp3|c10)(?:/|$)", name, re.I):
+            assert name in RP3_PUBLIC_DOCS, name
+        assert_historical_sha256(original_path(path), expected)
+    for name, expected in manifest["document_sha256"].items():
+        assert_historical_sha256(original_path(PACKAGE / name), expected)
+    with (original_path(PACKAGE / "claims_matrix.csv")).open(
+        encoding="utf-8", newline=""
+    ) as stream:
+        rows = list(csv.DictReader(stream))
+    facts = json.loads((original_path(PACKAGE / "convergence_evidence.json")).read_text("utf-8"))[
+        "facts"
+    ]
+    assert len(rows) == len({r["claim_id"] for r in rows})
+    for row in rows:
+        assert row["current_test"] == TEST
+        assert row["artifact_sha256"] == manifest["source_sha256"][row["artifact"]]
+        assert not re.search(PRIVATE, row["claim"] + " " + row["context"])
+        for name, expected in json.loads(row["supporting_artifacts"]).items():
+            assert manifest["source_sha256"][name] == expected
+        if row["kind"] == "package_number":
+            assert (
+                readers.rendered(
+                    readers.selected(row["artifact"], row["selector"]), row["rendering"]
+                )
+                == row["claim"]
+            ), row["claim_id"]
+        elif row["kind"] == "program_evidence":
+            fact = facts[row["claim"]]
+            assert row["artifact"] == fact["artifact"]
+            assert json.loads(row["selector"]) == fact["selector"]
+    for name in manifest["source_documents"]:
+        passages = readers.passages((original_path(ROOT / name)).read_text("utf-8"))
+        source_rows = [
+            r for r in rows if r["kind"] == "source_claim" and r["source_document"] == name
+        ]
+        assert [r["claim"] for r in source_rows] == [readers.public_claim(p) for p in passages]
+        assert [r["source_passage_sha256"] for r in source_rows] == [
+            readers.digest(p.encode()) for p in passages
+        ]
+    for name in (*readers.DOCUMENTS, CONTEXT):
+        path = ROOT / name if name == CONTEXT else PACKAGE / name
+        text = original_path(path).read_text("utf-8")
+        assert [
+            r["claim"]
+            for r in rows
+            if r["kind"] == "package_number" and r["source_document"] == name
+        ] == readers.tokens(text), name
+        assert not re.search(PRIVATE, readers.prose(text)), name
+        for target in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", text):
+            if not target.startswith(("http://", "https://", "#")):
+                linked = (path.parent / target.split("#")[0]).resolve()
+                assert linked.is_relative_to(ROOT) and public_path(linked).is_file(), target
+    assert sum(r["kind"] == "program_evidence" for r in rows) == len(facts)
+    assert sum(r["kind"] == "source_claim" for r in rows) == manifest["source_claims"]
+    assert (
+        sum(r["kind"] == "package_number" for r in rows) == manifest["package_number_occurrences"]
+    )
+
+
+def test_program_identity_dispositions_and_documentary_limits() -> None:
+    evidence = json.loads((original_path(PACKAGE / "convergence_evidence.json")).read_text("utf-8"))
+    assert_programs(evidence)
+    assert evidence["documented_phase8_holm_threshold"] == float(
+        readers.tokens(readers.source(evidence["threshold_transcription_source"]))[2]
+    )
+    for fact in evidence["facts"].values():
+        value = readers.selected(fact["artifact"], json.dumps(fact["selector"]))
+        if "quote" in fact:
+            assert fact["quote"] and fact["quote"] in value
+        else:
+            assert fact["value"] == value
+    qa = (original_path(PACKAGE / "examiner_qa.md")).read_text("utf-8")
+    for phrase in (
+        "convergencia, no réplica idéntica",
+        "no son cuatro réplicas independientes",
+        "misma evaluación",
+        "537,3386",
+        "no es el único contraste con tamaño finito",
+        "no verifica un contador vivo",
+        "ventana completa del puente",
+    ):
+        assert phrase in qa, phrase
+    assert "README.md#historial-resultados-y-correcciones-conservados" in qa
+    slides = (original_path(PACKAGE / "defense_slides.md")).read_text("utf-8")
+    assert len(re.findall(r"(?m)^## \d+\.", slides)) == 12
+    assert len(re.findall(r"(?m)^## \d+\.", qa)) == 27
+    prior = (original_path(PACKAGE.parent / "correction_2/defense_slides.md")).read_text("utf-8")
+    for line in prior.splitlines():
+        if line.startswith("| v") or line.startswith("!["):
+            assert line in slides
+    summary = (original_path(PACKAGE / "executive_summary.md")).read_text("utf-8")
+    assert "page-break-after: always" in summary
+    assert len(re.findall(r"(?m)^[1-4]\. ", summary)) == 8
+    assert "convergence" in summary.lower() and "convergencia" in summary.lower()
+
+
+def test_historical_context_preserves_all_existing_preregistration_seals() -> None:
+    note = (original_path(ROOT / CONTEXT)).read_text("utf-8")
+    assert "No modifica hipótesis, umbrales, muestras ni lecturas" in note
+    assert "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6" in note
+    receipt = json.loads((original_path(PACKAGE / "receipt.json")).read_text("utf-8"))
+    for name, expected in receipt["prior_seals_sha256"].items():
+        assert_historical_sha256(original_path(ROOT / name), expected)
+    sidecar = ROOT / CONTEXT.replace(".md", ".sha256")
+    for line in original_path(sidecar).read_text("utf-8").splitlines():
+        expected, name = line.split("  ", 1)
+        assert Path(name).name == name
+        assert_historical_sha256(original_path(sidecar.parent / name), expected)
+
+
+def test_saved_signs_windows_and_power_keep_their_original_scope() -> None:
+    facts = json.loads((original_path(PACKAGE / "convergence_evidence.json")).read_text("utf-8"))[
+        "facts"
+    ]
+    for family in ("ridge_log", "gamma_glm", "lightgbm_qlike"):
+        assert facts[f"rp2_D_{family}_b1_over_b0"]["value"]["ci_low"] > 0
+        validation = facts[f"rp2_V_{family}_b1_over_b0"]["value"]
+        assert validation["ci_low"] < 0 < validation["ci_high"]
+        assert (validation["estimate"] > 0) == (family == "lightgbm_qlike")
+        for role in ("D", "V"):
+            flow = facts[f"rp2_{role}_{family}_b2_over_b1"]["value"]
+            assert flow["ci_low"] < 0 < flow["ci_high"]
+    holm = []
+    for role in ("D", "V"):
+        for family in ("gamma_glm", "lightgbm"):
+            state = facts[f"phase8_{role}_{family}_delta_b1"]["value"]
+            flow = facts[f"phase8_{role}_{family}_delta_b2_given_b1"]["value"]
+            assert state["sessions"] == flow["sessions"] == 20
+            assert state["estimate"] > 0 and flow["ci_low"] < 0 < flow["ci_high"]
+            holm.append(state["p_value_holm_descriptive"] < 0.05)
+    assert sorted(holm) == [False, True, True, True]
+    assert facts["phase8_sensitivity_D_gamma_state"]["value"]["estimate"] < 0
+    assert facts["phase8_comparison_0"]["value"]["paired_common_origins"] == 7800
+    assert facts["phase8_comparison_16"]["value"]["paired_common_origins"] == 11700
+    overlap = facts["saved_overlap"]["value"]
+    assert (overlap["overlap_count"], overlap["final_count"]) == (20, 25)
+    assert overlap["overlap_sessions"][0] == "2026-08-03"
+    assert overlap["overlap_sessions"][-1] == "2026-08-28"
+    assert "2026-08-03..2026-08-28" in facts["phase8_window"]["quote"]
+    assert facts["block12_alpha_one_sided"]["value"] == 0.0025
+    assert facts["block12_power"]["value"] == 0.8
+    joint = facts["current_joint_power_limit"]["value"]
+    assert not joint["actual_joint_power_estimated"]
+    assert joint["bounds"][-1]["n"] == 335
+    assert joint["bounds"][-1]["upper_percent"] < 80
+
+
+def test_duplicate_successor_cannot_be_counted_as_another_program() -> None:
+    evidence = json.loads((original_path(PACKAGE / "convergence_evidence.json")).read_text("utf-8"))
+    wrong = copy.deepcopy(evidence)
+    wrong["programs"][0]["result_identity"] = wrong["programs"][1]["result_identity"]
+    with pytest.raises(AssertionError):
+        assert_programs(wrong)

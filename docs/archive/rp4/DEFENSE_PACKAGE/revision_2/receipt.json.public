@@ -1,0 +1,151 @@
+{
+  "schema": "rp4-defense-package-revision-2-receipt",
+  "sealed_at_utc": "2026-09-08T05:58:54.568147+00:00",
+  "status": "COMPLETE_LOCAL",
+  "research_only": true,
+  "capital_go": false,
+  "request": {
+    "name": "20260908_1504_bloque3_adiciones.md",
+    "sha256": "dd4832e260e8095ad5d5636d160be85e13c7de24eb136414f426446388a691a7",
+    "read_completely_before_actions": true
+  },
+  "prior_receipt_sha256": "d88a075767bad2b661d90e77b675b7896e1a04f77fcfd70018f96287646ef79f",
+  "prior_manifest_sha256": "4621ef8c2a3bbdffcdf20346413d5464519147adec11c26e9b1546c5b9fb77ed",
+  "prior_packet_preserved": true,
+  "deliverable_sha256": {
+    "executive_summary.md": "93ed23a06ed3824cf058106f3934d1bc2e41efc86d3330943991a05405801106",
+    "examiner_qa.md": "a8b61f607f53bf1ebd36e67298d125435162f33ccb3f4e3d738ad965306de16c",
+    "claims_matrix.csv": "211e8cc6e180d0b42deea207090f321a31754ec192ded213603a240a8b26d28e",
+    "defense_slides.md": "a92cc571ad34abe4bf9dbfd262a0b9be2ae0f55164ec7882b40c35507b459acf"
+  },
+  "evidence_manifest_sha256": "9fc9a262dfa0b0036bd58224b45f3a94430e109f3ac8d120f95dbf20aea62b58",
+  "additions_evidence_sha256": "10085a652cf82144a3ba0a7f9fe632bd95fe910862c5780f2a5c687b43d61389",
+  "contract_sha256": {
+    "tests/contract/test_rp4_defense_package.py": "d8b97a79349908dc3c8aaad2f3c2711951c286d9a117c963d8e4df48116ee455",
+    "tests/contract/test_rp4_defense_additions.py": "aa08f78e376f93868452dcfc6c2ea6d268c04a0234e58dc6dcc65bf46aaefeb2",
+    "tests/contract/test_rp4_prospective_registration.py": "eece949430ba4668aaa20dea8846a165db8b2db59aa4cb42a63cf0778caf5610"
+  },
+  "registration_document_sha256": {
+    "prospective_confirmation_v1": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "prospective_confirmation_v1_amendment_1": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "prospective_confirmation_v1_amendment_2": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9"
+  },
+  "amendment_2_receipt_sha256": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+  "administrative_verification": {
+    "document_sha256": "286c32d3c29eaf17e135ad755b022db95e7c7569e06dec9cc8e60e422e438c1b",
+    "receipt_sha256": "7ef7ef7db43df2e4c78b63fd6b1c7b8b89ad293f196ddd6b15e0283699a5e3dd",
+    "unsupported_prior_receipt_not_certified": true
+  },
+  "coverage": {
+    "source_passages": 126,
+    "number_occurrences": 452,
+    "source_files": 61,
+    "examiner_questions": 26,
+    "slides": 12,
+    "executive_languages": [
+      "es",
+      "en"
+    ],
+    "executive_page_break": true,
+    "executive_whitespace_word_counts": {
+      "es": 395,
+      "en": 373
+    },
+    "independently_corrected_context_bindings": 52,
+    "semantic_review_record_sha256": "81455c527bcb828a4277869cadc0c66401bc63c21d7f743ade75823357499737",
+    "number_policy": "Every digit-based prose quantity, including dates and cited section identifiers; editorial ordinals excluded; word-based quantities protected by document hashes and review."
+  },
+  "additions": {
+    "A": "Bonferroni times two and four are descriptive sensitivity. Linear RV15 H1 becomes 0.078; H2 alone at 0.0064 cannot establish the adjusted sequence or borrow H1 from trees.",
+    "B": "Two session examples preserve their distinct windows. August surface range is 20.4 to 24.0 across six asset means; internal provider consistency is not independent price validation or causal identification.",
+    "C": "RV15 linear B2/B1 is favorable in 249 of 419 sessions, 59.43 percent rounded, and positive in six asset means and three chronological block means. HARQ literature comparison is qualitative; no equivalent percentage benchmark verified.",
+    "D": "Administrative note verified against the preserved local commit and code, with an immediate native exit-code guard demonstrated on a synthetic failure; the unlocated prior receipt remains uncertified.",
+    "E": "Amendment 2 sealed before the scheduled first acquisition: trimmed tree secondary C enters A/B/C Holm; observed historical 25 plus prospective 20 form pooled secondary D of 45. Primary unchanged, secondaries read once at twenty, no rescue at forty."
+  },
+  "verification_commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check src scripts tests",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_defense_additions.py tests/contract/test_rp4_prospective_registration.py",
+      "exit_code": 0,
+      "stdout": "3 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check src scripts tests",
+      "exit_code": 1,
+      "stdout": "Would reformat: scripts\\acquire_b1_independent_replication_b1q.py\nWould reformat: scripts\\acquire_b1_independent_replication_full_tape.py\nWould reformat: scripts\\acquire_b1v3_confirmation_full_tape.py\nWould reformat: scripts\\acquire_gate3_dev_bars.py\nWould reformat: scripts\\build_b1_independent_replication_b1v3.py\nWould reformat: scripts\\build_b1_independent_replication_b2.py\nWould reformat: scripts\\build_b1_independent_replication_base.py\nWould reformat: scripts\\build_b1_replication_fmp_delay2.py\nWould reformat: scripts\\build_b1v3_confirmation_b1.py\nWould reformat: scripts\\build_b1v3_confirmation_b2.py\nWould reformat: scripts\\build_b1v3_confirmation_base.py\nWould reformat: scripts\\build_b1v3_confirmation_common.py\nWould reformat: scripts\\build_b1v3_target_blind.py\nWould reformat: scripts\\build_b2_confirmation_inputs.py\nWould reformat: scripts\\build_canonical_defense_package.py\nWould reformat: scripts\\build_confirmation_readiness_v2.py\nWould reformat: scripts\\build_phase8_bridge_dispersion_audit_v1.py\nWould reformat: scripts\\build_phase9_power_deadline_audit.py\nWould reformat: scripts\\build_pit_v22_claim_ledger.py\nWould reformat: scripts\\download_calibration_20d.py\nWould reformat: scripts\\evaluate_b2_confirmation_blocks.py\nWould reformat: scripts\\evaluate_phase8_bridge_v2.py\nWould reformat: scripts\\fetch_gated_data.py\nWould reformat: scripts\\finalize_calibration_20d.py\nWould reformat: scripts\\freeze_b1_independent_replication_method.py\nWould reformat: scripts\\freeze_b1v3_method.py\nWould reformat: scripts\\freeze_phase8_bridge_evaluator_v3.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v1.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v2.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v3.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v4.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v5.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v6.py\nWould reformat: scripts\\harvest_uw_latency_campaign.py\nWould reformat: scripts\\load_supabase_datasets.py\nWould reformat: scripts\\phase9_collect.py\nWould reformat: scripts\\plan_b1_independent_replication.py\nWould reformat: scripts\\prepare_b1_independent_replication_access.py\nWould reformat: scripts\\prepare_b1v3_confirmation_acquisition.py\nWould reformat: scripts\\publish_ancestry_guard.py\nWould reformat: scripts\\publish_rp2_v3_supabase.py\nWould reformat: scripts\\render_cumulative_loss_figure.py\nWould reformat: scripts\\render_figures.py\nWould reformat: scripts\\replay_phase8_materialized_remediation_v1.py\nWould reformat: scripts\\rp2_b2_autopsy_extension.py\nWould reformat: scripts\\rp2_b2_exploratory_campaign.py\nWould reformat: scripts\\rp2_b2_exploratory_v2.py\nWould reformat: scripts\\rp2_block10_inference.py\nWould reformat: scripts\\rp2_block11_economics.py\nWould reformat: scripts\\rp2_block11b_forward_economics.py\nWould reformat: scripts\\rp2_block12_prospective_design.py\nWould reformat: scripts\\rp2_block2_pit_ledger.py\nWould reformat: scripts\\rp2_block5_surface_panel.py\nWould reformat: scripts\\rp2_block5b_independent_surface.py\nWould reformat: scripts\\rp2_block6_flow_panel.py\nWould reformat: scripts\\rp2_block7_dml.py\nWould reformat: scripts\\rp2_block8_ladder.py\nWould reformat: scripts\\rp2_block9_generalization.py\nWould reformat: scripts\\rp2_ext12_level4_and_tensor.py\nWould reformat: scripts\\rp2_ext1_directional_v2.py\nWould reformat: scripts\\rp2_ext2_tape_tensors.py\nWould reformat: scripts\\rp2_ext3_acquire_missing_bars.py\nWould reformat: scripts\\rp2_ext4_power_both_contrasts.py\nWould reformat: scripts\\rp2_repair_contradicted_volume.py\nWould reformat: scripts\\rp2_verdict_tables.py\nWould reformat: scripts\\rp3_acquire_batch.py\nWould reformat: scripts\\rp3_build_eval_panels.py\nWould reformat: scripts\\rp3_freeze_b2_index.py\nWould reformat: scripts\\rp3_score_batch.py\nWould reformat: scripts\\rp3_sizing.py\nWould reformat: scripts\\run_b1_diagnostics.py\nWould reformat: scripts\\run_b1_independent_replication_once.py\nWould reformat: scripts\\run_b1_independent_replication_provider_preflight.py\nWould reformat: scripts\\run_b1_replication_market_control_preflight.py\nWould reformat: scripts\\run_b1v3_confirmation_once.py\nWould reformat: scripts\\run_corrected_independent_replication.py\nWould reformat: scripts\\run_economic_significance.py\nWould reformat: scripts\\run_gate11_era_map.py\nWould reformat: scripts\\run_gate12_harq_hardening.py\nWould reformat: scripts\\run_gate2_calibration.py\nWould reformat: scripts\\run_gate3_har.py\nWould reformat: scripts\\run_gate4_decay_power.py\nWould reformat: scripts\\run_gate5_bar_reconciliation.py\nWould reformat: scripts\\run_gate6_regimes.py\nWould reformat: scripts\\run_gate8_selection.py\nWould reformat: scripts\\run_gate9_localization.py\nWould reformat: scripts\\run_global_multiplicity.py\nWould reformat: scripts\\run_local_evidence_gates.py\nWould reformat: scripts\\run_rp2_v3_pipeline.py\nWould reformat: scripts\\scan_public_secrets.py\nWould reformat: scripts\\seal_b1_independent_replication_b1q_source.py\nWould reformat: scripts\\seal_b1v3_confirmation_b1q_source.py\nWould reformat: scripts\\seal_b1v3_preregistration.py\nWould reformat: scripts\\seal_corrected_independent_preregistration_v1.py\nWould reformat: scripts\\sync_supabase_catalog.py\nWould reformat: scripts\\sync_supabase_rp2_blocks.py\nWould reformat: scripts\\uw_latency_reconcile.py\nWould reformat: scripts\\uw_latency_verify.py\nWould reformat: scripts\\verify_access_posture.py\nWould reformat: scripts\\verify_scheduled_tasks.py\nWould reformat: src\\mds650\\b1_diagnostics.py\nWould reformat: src\\mds650\\b1_independent_replication.py\nWould reformat: src\\mds650\\b1_replication_access.py\nWould reformat: src\\mds650\\b1_replication_b1q_source.py\nWould reformat: src\\mds650\\b1_replication_b2.py\nWould reformat: src\\mds650\\b1_replication_build.py\nWould reformat: src\\mds650\\b1_replication_common.py\nWould reformat: src\\mds650\\b1_replication_evaluation.py\nWould reformat: src\\mds650\\b1v3_b1q_source.py\nWould reformat: src\\mds650\\b1v3_b2_confirmation.py\nWould reformat: src\\mds650\\b1v3_confirmation.py\nWould reformat: src\\mds650\\b1v3_confirmation_acquisition.py\nWould reformat: src\\mds650\\b1v3_confirmation_build.py\nWould reformat: src\\mds650\\b1v3_confirmation_common.py\nWould reformat: src\\mds650\\b1v3_confirmation_evaluation.py\nWould reformat: src\\mds650\\b1v3_confirmation_panel.py\nWould reformat: src\\mds650\\b1v3_confirmation_run.py\nWould reformat: src\\mds650\\b1v3_evaluation.py\nWould reformat: src\\mds650\\b1v3_massive_sensitivity.py\nWould reformat: src\\mds650\\b1v3_method_freeze.py\nWould reformat: src\\mds650\\b1v3_timing_panel.py\nWould reformat: src\\mds650\\har.py\nWould reformat: src\\mds650\\independent_corrected_reevaluation_v1.py\nWould reformat: src\\mds650\\inference.py\nWould reformat: src\\mds650\\pit_v22_claim_ledger.py\nWould reformat: src\\mds650\\rp2\\feature_registry.py\nWould reformat: src\\mds650\\rp2\\ladder.py\nWould reformat: src\\mds650\\rp2\\option_clock.py\nWould reformat: src\\mds650\\rp2\\provenance.py\nWould reformat: src\\mds650\\rp2\\run_manifest.py\nWould reformat: src\\mds650\\rp2\\scorecard.py\nWould reformat: src\\mds650\\rp3\\frozen_forecasters.py\nWould reformat: src\\mds650\\sealed.py\nWould reformat: src\\mds650\\sequential.py\nWould reformat: src\\mds650\\storage.py\nWould reformat: src\\mds650\\target_blind_panel_b1q_eligibility_v1.py\nWould reformat: src\\mds650\\uw_latency_campaign.py\nWould reformat: tests\\contract\\test_access_posture_matches_documentation.py\nWould reformat: tests\\contract\\test_alert_popup_isolation.py\nWould reformat: tests\\contract\\test_b1v3_confirmation_base_artifact.py\nWould reformat: tests\\contract\\test_b2_autopsy_doc_matches_artifact.py\nWould reformat: tests\\contract\\test_b2_exploratory_doc_matches_artifact.py\nWould reformat: tests\\contract\\test_block7_narrative_matches_artifact.py\nWould reformat: tests\\contract\\test_calibration_20d.py\nWould reformat: tests\\contract\\test_canonical_defense_package.py\nWould reformat: tests\\contract\\test_cumulative_loss_figure.py\nWould reformat: tests\\contract\\test_current_report_docx.py\nWould reformat: tests\\contract\\test_documentation_references.py\nWould reformat: tests\\contract\\test_exchange_clock_contract.py\nWould reformat: tests\\contract\\test_feature_registry_reaches_the_panel.py\nWould reformat: tests\\contract\\test_frozen_artifacts_registry.py\nWould reformat: tests\\contract\\test_phase4a_artifacts.py\nWould reformat: tests\\contract\\test_phase5_development_evaluation.py\nWould reformat: tests\\contract\\test_phase5_storage.py\nWould reformat: tests\\contract\\test_phase6_acquisition_manifest.py\nWould reformat: tests\\contract\\test_phase6_b0_artifacts.py\nWould reformat: tests\\contract\\test_phase6_preregistration.py\nWould reformat: tests\\contract\\test_phase6_results.py\nWould reformat: tests\\contract\\test_phase8_bridge_contract_v2.py\nWould reformat: tests\\contract\\test_phase8_bridge_dispersion_audit.py\nWould reformat: tests\\contract\\test_phase8_bridge_evaluator_v2.py\nWould reformat: tests\\contract\\test_pilot_v2_artifacts.py\nWould reformat: tests\\contract\\test_pit_gate_artifacts.py\nWould reformat: tests\\contract\\test_progress_video_script.py\nWould reformat: tests\\contract\\test_publish_ancestry_guard.py\nWould reformat: tests\\contract\\test_rp2_train_share_authority.py\nWould reformat: tests\\contract\\test_rp2_v3_feature_registry.py\nWould reformat: tests\\contract\\test_rp2_v3_research_contract.py\nWould reformat: tests\\contract\\test_scheduled_task_liveness.py\nWould reformat: tests\\contract\\test_supabase_migrations_present.py\nWould reformat: tests\\contract\\test_supabase_schema_preflight.py\nWould reformat: tests\\contract\\test_uw_collector_resume.py\nWould reformat: tests\\contract\\test_uw_latency_campaign_current.py\nWould reformat: tests\\contract\\test_uw_latency_campaign_publication.py\nWould reformat: tests\\contract\\test_verdict_matches_artifact.py\nWould reformat: tests\\e2e\\test_rp2_b1_contemporaneous.py\nWould reformat: tests\\e2e\\test_rp2_b2_point_in_time.py\nWould reformat: tests\\test_gated_history_contract.py\nWould reformat: tests\\test_gated_publish_contract.py\nWould reformat: tests\\test_har.py\nWould reformat: tests\\test_inference.py\nWould reformat: tests\\test_mirror_internal_docs_contract.py\nWould reformat: tests\\unit\\test_acquire_b1v3_confirmation_b1q.py\nWould reformat: tests\\unit\\test_acquire_b1v3_confirmation_full_tape.py\nWould reformat: tests\\unit\\test_b1_replication_access.py\nWould reformat: tests\\unit\\test_b1_replication_b1q_source.py\nWould reformat: tests\\unit\\test_b1_replication_b2.py\nWould reformat: tests\\unit\\test_b1_replication_build.py\nWould reformat: tests\\unit\\test_b1_replication_common.py\nWould reformat: tests\\unit\\test_b1_replication_evaluation.py\nWould reformat: tests\\unit\\test_b1v3.py\nWould reformat: tests\\unit\\test_b1v3_b2_confirmation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_acquisition.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_build.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_common.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_evaluation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_panel.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_run.py\nWould reformat: tests\\unit\\test_b1v3_evaluation.py\nWould reformat: tests\\unit\\test_b1v3_method_freeze.py\nWould reformat: tests\\unit\\test_b1v3_timing_panel.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_b1.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_common.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_timing.py\nWould reformat: tests\\unit\\test_build_b1v3_target_blind.py\nWould reformat: tests\\unit\\test_data_root_config.py\nWould reformat: tests\\unit\\test_evidence_gates_env.py\nWould reformat: tests\\unit\\test_evidence_line_ending_contract.py\nWould reformat: tests\\unit\\test_freeze_b1_independent_replication_method.py\nWould reformat: tests\\unit\\test_freeze_b1v3_confirmation_plan.py\nWould reformat: tests\\unit\\test_phase5_study_design.py\nWould reformat: tests\\unit\\test_phase9_power_deadline_audit.py\nWould reformat: tests\\unit\\test_pit_v22_claim_ledger.py\nWould reformat: tests\\unit\\test_plan_b1_independent_replication.py\nWould reformat: tests\\unit\\test_property_core.py\nWould reformat: tests\\unit\\test_publish_rp2_v3_supabase.py\nWould reformat: tests\\unit\\test_rp2_baseline.py\nWould reformat: tests\\unit\\test_rp2_block4_causal_ewma.py\nWould reformat: tests\\unit\\test_rp2_block_evaluation_mask.py\nWould reformat: tests\\unit\\test_rp2_ext1_directional_v2.py\nWould reformat: tests\\unit\\test_rp2_flow.py\nWould reformat: tests\\unit\\test_rp2_ladder.py\nWould reformat: tests\\unit\\test_rp2_ladder_level_weighting.py\nWould reformat: tests\\unit\\test_rp2_level4_pooling.py\nWould reformat: tests\\unit\\test_rp2_option_clock.py\nWould reformat: tests\\unit\\test_rp2_panel.py\nWould reformat: tests\\unit\\test_rp2_preprocessing.py\nWould reformat: tests\\unit\\test_rp2_provenance.py\nWould reformat: tests\\unit\\test_rp2_run_invariants.py\nWould reformat: tests\\unit\\test_rp2_scorecard_full.py\nWould reformat: tests\\unit\\test_rp3_acquire_batch.py\nWould reformat: tests\\unit\\test_rp3_eval_inventory.py\nWould reformat: tests\\unit\\test_rp3_frozen_forecasters.py\nWould reformat: tests\\unit\\test_rp3_score_batch.py\nWould reformat: tests\\unit\\test_scan_public_secrets.py\nWould reformat: tests\\unit\\test_seal_b1v3_access_ledger.py\nWould reformat: tests\\unit\\test_seal_b1v3_preregistration.py\nWould reformat: tests\\unit\\test_sealed_gate.py\nWould reformat: tests\\unit\\test_supabase_auth.py\nWould reformat: tests\\unit\\test_supabase_producers.py\nWould reformat: tests\\unit\\test_target_blind_panel_b1q_eligibility_v1.py\nWould reformat: tests\\unit\\test_target_blind_provenance_v23.py\nWould reformat: tests\\unit\\test_uw_latency_campaign.py\n244 files would be reformatted, 431 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py",
+      "exit_code": 0,
+      "stdout": "{\"final_report_sha256\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\n",
+      "stderr": ""
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_defense_additions.py tests/contract/test_rp4_prospective_registration.py tests/contract/test_readme_headline_matches_the_inference_artifact.py tests/contract/test_canonical_state_current.py::test_rp4_front_page_and_status_repeat_the_exact_final_table artifacts/rp4_cleanup_review/test_inventory_review.py artifacts/rp4_closeout_figures_code -o addopts= -q -p no:cacheprovider",
+      "exit_code": 0,
+      "stdout": "......................................................                   [100%]\n54 passed in 3.49s\n",
+      "stderr": ""
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "validation_corrections": [
+    "Registration contract now anchors document bytes directly to the pinned seal; the previous coordinated document/sidecar mutation is rejected in memory.",
+    "Frozen packet contract remains byte-identical. The additive contract handles HTTPS links without mistaking the URL scheme for a private drive path.",
+    "Equal numeric values with different meanings were rebound to the reviewed scientific field before sealing."
+  ],
+  "checkout_format_baseline": {
+    "preexisting_files_needing_format": 244,
+    "global_gate_passed": false,
+    "unrelated_files_reformatted": 0,
+    "scoped_gate_passed": true
+  },
+  "frozen_artifacts": {
+    "checked": 359,
+    "changed": [],
+    "baseline_inventory_sha256": "6827cf5f41887d14c0601347ebd03560ae6b5271847a7115d607a165bb140c70"
+  },
+  "collection_observation": {
+    "observed_at_utc": "2026-09-08T05:58:53.7494692Z",
+    "state": "Ready",
+    "enabled": true,
+    "execute": "private-input/0b3f7a6d90420218a1d3",
+    "start_boundary": "2026-09-09T10:00:00",
+    "next_run": "2026-09-09T10:00:00.0000000+10:00",
+    "last_run": "1999-11-30T00:00:00.0000000+11:00",
+    "last_task_result": 267011,
+    "wake_to_run": false,
+    "start_when_available": true,
+    "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+    "data_root_exists": false
+  },
+  "operation_counts": {
+    "stored_session_and_feature_bar_aggregates_read": true,
+    "sealed_cohort_reads": 0,
+    "prospective_data_reads": 0,
+    "new_fits": 0,
+    "new_bootstraps": 0,
+    "provider_network_requests": 0,
+    "remote_mutations": 0,
+    "manual_collector_runs": 0
+  },
+  "evidence_limits": [
+    "The historical scientific outputs and their decisions are unchanged. Sensitivity multiplication is arithmetic, not a fresh bootstrap or independent replication.",
+    "The input bar and daily-feature aggregate files remain excluded from the publication projection. Only the requested aggregate transcription is in this revision.",
+    "Local event-audit tests may skip when the licensed local aggregate inputs are absent; they executed against available inputs in this checkout.",
+    "The seals are local custody records, not independent timestamp attestations.",
+    "Ready and never-run status establish schedule registration; real collection has not yet occurred.",
+    "Executive sections are sized for one page each with an explicit break; final pagination depends on the Markdown renderer."
+  ]
+}

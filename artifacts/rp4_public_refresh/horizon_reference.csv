@@ -1,0 +1,4 @@
+horizon_minutes,version,role,source
+30,v3,historical_reference,docs/rp4/specification_v3.md
+15,v4,primary,docs/rp4/specification_v4.md
+5,v4,secondary,docs/rp4/specification_v4.md

@@ -1,0 +1,190 @@
+# RP4 v5 — torneo de familias con selección dentro del entrenamiento
+
+Propietario: Miguel. Autorización: 2026-09-08, 17:00 Australia/Sydney; decisión 134
+en `docs/methodology_decisions.md`. Instrucción íntegra:
+`private-input/f4c11f7075b2c34b0cc8`,
+SHA-256 `6fe35ddedcbafc871306a09a10756533bea7f6a37c199fd191a51167f71ef8d0`.
+RESEARCH_ONLY; NOT INVESTMENT ADVICE; capital_go=false.
+
+## Registro, estimando y cierre anterior
+
+v5 es una etapa nueva de desarrollo; no modifica el cierre «no hay v5» del programa
+v4, sus artefactos ni su condición de prueba predeclarada. Se reporta como quinta
+lectura de las mismas ventanas históricas, con Bonferroni ×5 como cota declarada.
+El entrenamiento causal por sesión no vuelve virgen el desarrollo adaptativo.
+La inferencia es retrospectiva sobre el procedimiento selector fijado aquí; no es
+una réplica independiente ni controla toda decisión de búsqueda previa.
+
+El estimando primario es el delta pareado de QLIKE B1/B0 y B2/B1 del selector
+primario a RV15 sobre desarrollo. v4 conserva el titular hasta que una réplica
+prospectiva respalde v5. La propuesta original, sección 4.4, se cita conforme a la
+autorización del propietario: «la elección del modelo seguirá el rendimiento del
+benchmark y la simplicidad»; no se afirma un cotejo documental independiente de esa cita.
+
+## Datos, predictores y tiempo
+
+Se hereda el contrato ejecutable v4, SHA-256
+`0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04`, y el efectivo v3,
+SHA-256 `930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5`.
+El JSON v5 enumera literalmente los mismos predictores, transformaciones, variables
+obligatorias, opcionales y activos: AAPL, AMZN, META, MSFT, NVDA y TSLA.
+B0 ⊂ B1 ⊂ B2 tienen **29/69/138** predictores más cinco efectos fijos de activo.
+SPY/QQQ permanecen como controles ya registrados; no se amplía el universo.
+El torneo elige familias y sus parámetros, nunca una lista de variables usando resultados.
+
+Panel: `private-input/1e60e265a1b78b1b0a71`,
+SHA-256 `a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637`.
+Objetivos RV15/RV5: `private-input/d6960c1f5596730d9006`,
+SHA-256 `b2357a10a8a4955499e94b576b7853129e957ad70702da09bebbc9b6befd35db`.
+RV30 es `rv30` del panel base. Unión uno a uno por activo, sesión y minuto de origen;
+no por posición. Se conserva exactamente la elegibilidad v3, incluido RV30 válido,
+NaN autorizados, indicadores de presencia/ventana vacía y controles de calidad.
+Un objetivo seleccionado inválido en una fila elegible detiene la ejecución.
+No se imputan objetivos ni precios, ni se excluyen filas por el rendimiento de una familia.
+
+Partición: **2026-08-01**. Se leen mediante filtro Parquet únicamente sesiones
+2024-08-02–2026-07-31. Primeras 60 sesiones: calentamiento. Programación heredada:
+419 sesiones, 2024-10-28–2026-07-31. Las sesiones sin orígenes elegibles se censan
+con la misma regla heredada y no cuentan como pérdidas de cero. Se informa tanto
+el calendario programado como el número efectivamente evaluado.
+No se evalúa aquí la ventana posterior ni se leen datos prospectivos.
+
+Walk-forward expansivo, activos agrupados y pesos iguales por origen al ajustar.
+Se reutiliza `causal_masks`: train requiere fecha anterior y fin del objetivo
+original RV30 ≤ primer origen evaluado −60 minutos. Validación: últimas diez
+sesiones elegibles de train; inner_fit excluye esas diez y exige fin RV30 ≤ primer
+origen de validación −60 minutos. Purga/embargo: 60 minutos. PIT: proxy de tiempo
+fuente **120 segundos**; no prueba recepción histórica por el cliente.
+Se mantiene el hueco UW 2025-01-25–2025-02-24 sin relleno.
+
+## Horizontes y familias fijadas
+
+RV15 es primario; RV5 es secundario registrado; RV30 se informa para las preguntas
+de la propuesta. RV3/RV1 quedan excluidos, sin buscar sus resultados. Los tres
+horizontes usan la misma máscara conservadora de RV30 y los mismos conjuntos.
+
+Cada familia produce validación desde inner_fit, elige parámetros sólo con esas
+diez sesiones y se reajusta en train completo para pronosticar la sesión siguiente.
+El QLIKE de selección es media por activo/sesión y después media igual de sesiones.
+Ni las cotas, el preprocesamiento ni el reajuste consultan el objetivo de la sesión evaluada.
+
+| Familia / clave | Rejilla y regla fijadas |
+| --- | --- |
+| Persistencia estacional / `seasonal_persistence` | K ∈ [1,5,20]. Media aritmética de los objetivos de las últimas K sesiones disponibles del mismo activo y minuto de origen dentro de la máscara de ajuste. Si falta el grupo, media de ajuste del activo; si también falta, media global de ajuste. Piso 1e-12. Empate: menor K. Esta referencia ignora por definición los regresores adicionales y es idéntica en B0/B1/B2; no modifica las listas de los demás modelos. |
+| HAR-RV log-lineal aumentado / `log_har` | HAR-X/HARQ log-OLS sobre todo el conjunto registrado, incluidos rezagos HAR, rq_attenuation y controles; no se presenta como HAR clásico de tres regresores. Sin penalización, mínimos cuadrados con tolerancia 1e-10, intercepto libre, Duan y cotas de entrenamiento. Modelo sin hiperparámetros: rejilla singleton. |
+| Ridge logarítmica actual / `log_ridge_harq` | Reutilizar `rp4_v3_code.models.fit_ridge` intacto; lambda [0.0001,0.01,1,100,10000], empate a mayor lambda. |
+| Elastic net logarítmica / `log_elastic_net` | scikit-learn ElasticNet; alpha [0.0001,0.01,1] × l1_ratio [0.1,0.5,0.9]; selección cíclica, max_iter 10000, tol 1e-6, intercepto. Empate: orden de rejilla. No convergencia numérica no autoriza descartar un candidato silenciosamente. |
+| LightGBM QLIKE / `lightgbm_qlike` | Reutilizar `rp4_v2_code.models.fit_lightgbm` intacto: hojas **[7,15,31,63,127]**, ampliación de [15,31,63]; tasa 0.05, mínimo 100/hoja, max_bin 63, máximo 2000 rondas, paciencia 50, semilla 20260908, CPU 4 hilos, determinista, force_col_wise, feature_fraction=bagging_fraction=1. Empate: menos hojas y rondas. Init score log(media del objetivo de ajuste), aplicado una sola vez. |
+| Red densa pequeña / `mlp_log` | scikit-learn MLPRegressor; capas [(32),(64,32)] × alpha [0.0001,0.01], ReLU, Adam, batch_size 1024, learning_rate_init 0.001, max_iter 100, shuffle=False, random_state 20260908, early_stopping=False, n_iter_no_change 20, tol 1e-4. No partición aleatoria interna. El criterio de pérdida de entrenamiento puede parar antes del máximo; llegar al límite se informa como presupuesto alcanzado, sin excluir candidato. Empate: orden de rejilla. CPU en toda corrida final. |
+| Conjunto / `ensemble_top2` | Media aritmética de los pronósticos en niveles de las dos mejores familias individuales por QLIKE de validación. Se eligen dos familias distintas; no dos hiperparámetros de una familia. Pesos 1/2 fijos, sin metaajuste. Es el selector secundario; no compite otra vez contra las seis familias en el primario. |
+
+Las familias lineales y MLP utilizan las transformaciones puntuales heredadas y
+`_ridge_design` v3: medianas sólo del ajuste para opcionales, presencia explícita,
+media/desviación poblacional del ajuste, winsorización ±5, eliminación de varianza
+cero y QR pivoteado con tolerancia 1e-10. Una columna opcional nunca observada se
+elimina sin fabricar mediana. La selección de rango es sólo identificabilidad,
+no búsqueda supervisada de variables. Elastic net y MLP usan las pendientes sin
+duplicar el intercepto propio. El objetivo log de MLP se centra/escala con media y
+desviación de su ajuste; si la desviación es cero, divisor uno. Se deshace antes de
+Duan. HAR, ridge, elastic net y MLP usan Duan con residuos del ajuste y cotas
+[0.5×P1,2×P99] del objetivo seleccionado de ese ajuste (cuantiles lineales).
+Las cotas y el preprocesamiento se recalculan separadamente en inner_fit y train.
+LightGBM conserva NaN nativo, clip log [-30,30] y piso 1e-12 heredados.
+Si QR deja cero pendientes, ElasticNet/MLP reciben una columna técnica de ceros
+para conservar el estimador con intercepto, sin inventar una variable observada.
+Los hilos BLAS también se limitan a cuatro mediante threadpoolctl.
+ElasticNet precalcula la matriz de Gram (`precompute=True`) para reducir el coste
+de las iteraciones sobre entrenamiento grande, conservando el objetivo registrado.
+
+## Selector e inferencia
+
+Para cada sesión, conjunto y horizonte, `selector_primary` escoge la familia de
+menor `selected.validation_qlike`. Empates exactos siguen el orden de las seis
+familias de la tabla. Se conserva el candidato elegido y el orden de los dos
+primeros; la sesión de evaluación no decide ninguno. El selector secundario es
+`ensemble_top2`. Cada selector es un procedimiento, no seis pruebas elegidas a posteriori.
+
+QLIKE = y/f − log(y/f) −1. MAE en niveles; RMSE = raíz de la media ponderada de
+errores cuadrados. Se promedia primero por origen dentro de activo/sesión, luego
+igual entre activos presentes de la sesión y después igual entre sesiones.
+Delta = pérdida base − ampliada; reducción % = 100×media(delta)/media(pérdida base).
+
+Bootstrap circular de bloques de cinco sesiones, 9999 réplicas, semilla **20260908**,
+nula centrada, corrección +1, p unilateral y IC percentil bilateral 95%; mínimo
+diez sesiones, degeneración declarada, sin eliminar colas. Reusar `session_contrast`
+v3 con los parámetros explícitos. No bootstrap IID de orígenes.
+
+Dentro de cada selector: H1 B1/B0 y luego H2 B2/B1, unilateral al 5%, efecto
+positivo; H2 sólo promovible tras H1. Ambos p nominales e intervalos se muestran,
+con H2 cerrado si H1 no pasa. Para **Holm entre los dos selectores**, registrar la
+afirmación conjunta de cada cadena mediante q_s=max(p_H1,p_H2); aplicar Holm a
+los dos q_s y exigir ambos signos positivos. Esto controla las afirmaciones
+conjuntas de jerarquía entre selectores; no promete control global de cada H1
+aislado. Se informa p_Holm_cadena y min(1,5×p_Holm_cadena), además de min(1,5×p)
+para cada contraste como cota descriptiva entre versiones. RV5/RV30 y las tablas
+de familias son secundarios/descriptivos; no se promueven según su resultado.
+
+**Regla de decisión fijada ahora:** v5 «mejora a v4» sólo si el delta B2/B1 del
+selector primario a RV15 es positivo, p unilateral <0.05 e IC95% excluye cero.
+Se informa por separado si esa condición nominal también supera H1 y Holm de
+cadena; cumplir sólo el criterio nominal no permite afirmar jerarquía global.
+Este rótulo significa cumplir la regla del propietario sobre el incremento B2/B1,
+no una prueba directa de diferencia de rendimientos entre versiones. Incluso
+cumpliéndola, v4 conserva el titular hasta respaldo prospectivo. Si no se cumple,
+se reporta el torneo sin reemplazar nada. Nada se reajusta después de leer.
+
+## Cribado, coste y ejecución
+
+El mensaje directo del propietario permite cribado GPU y exige primero decisión
+y especificación sellada. Se adopta la ruta sin cribado adaptativo previo: todas
+las configuraciones anteriores se fijan por diseño. **Cajón de archivo cerrado:
+configuraciones probadas para decidir esta rejilla antes del sello = ninguna;
+cribado GPU = no ejecutado.** No se instalará otro motor para sustituir los
+estimadores CPU. La RTX 5090 Laptop está presente; PyTorch no está instalado en
+el entorno heredado. No se atribuye rendimiento GPU a una ejecución CPU.
+
+Estimación inicial comunicada antes de ajustar: **6–18 horas**, provisional.
+Base medida: v4 RV15/desarrollo, 2940.2563865 segundos =49.0043 minutos para ocho
+fragmentos. Extrapolación aproximada de árboles: 49.0043×3 horizontes×5/3
+=245.0215 minutos (4.0837 horas). El coste añadido de redes/elastic net y la carga
+de los otros hilos todavía no están medidos; explican el rango, que no es garantía.
+Una medición de tiempo posterior al sello puede refinarlo, nunca cambiar la rejilla.
+La estimación se vuelve a comunicar con el hash antes de lanzar la corrida completa.
+
+CPU determinista, ocho fragmentos disjuntos por sesión (índice i de calendario
+con i%8), cuatro hilos por estimador como máximo, semillas fijas; cada fragmento
+conserva todo el pasado permitido. Orden de horizontes: RV15, RV5, RV30. Las librerías
+numéricas y sus versiones, código y hashes de entradas se fijan en el release antes
+de la corrida. Sin modelos o datos prospectivos, descargas para entrenamiento,
+automatizaciones nuevas, push ni escrituras fuera del worktree autorizado.
+
+Componentes/sesiones se escriben una vez con claves, selección, máscaras, entrada,
+objetivo, código, especificación y recibo hash. Reanudar sólo artefactos íntegros
+del mismo release; no sobrescribir resultados ni repetir una lectura completa.
+Un fallo detiene su fragmento, se conserva y se informa. Los tests sintéticos
+verifican causalidad, envenenamiento del objetivo de evaluación, selección sólo
+por validación, determinismo, igualdad de máscaras, contratos/hashes y agregación.
+Pruebas sintéticas no equivalen a evaluación completa.
+
+## Universo y prospectiva
+
+`docs/rp4/v5_universe_feasibility.md` es el anexo de disponibilidad, tiempo y cuota
+de los dos proveedores RP4. Su recibo y hash se vinculan al sello antes de correr.
+SPY/QQQ no se incorporan sin una decisión escrita adicional de Miguel. Soporte de
+un endpoint o un muestreo no acredita cobertura exhaustiva de la ventana.
+
+Se prepara `docs/rp4/prospective_confirmation_v1_amendment_4_draft.md` **sin sellar**,
+con el selector primario v5 como prueba prospectiva adicional secundaria, v4
+primario. Se vincula al hash de esta especificación; su eventual sello debe preceder
+cualquier lectura prospectiva. Este trabajo no abre datos prospectivos ni consume
+una lectura o autorización de los registros existentes.
+
+## Entregables obligatorios
+
+`docs/rp4/results_v5.md`: tabla completa familia × conjunto × horizonte con QLIKE,
+MAE, RMSE, recuentos y comparación v4 en la misma tabla (RV30: v3 como referencia,
+v4 no ejecutó RV30); frecuencias de selección, deltas e intervalos de ambos
+selectores, p nominal/Holm/Bonferroni y cronología de cualquier incidencia.
+Artefactos `artifacts/rp4_v5_*/`: especificación ejecutable, recibos, costes,
+contratos, hashes por archivo, pronósticos privados y agregados reproducibles.
+Nota de integración para defensa revisión 3. No se altera el paquete de otros hilos.

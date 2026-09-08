@@ -1,10 +1,16 @@
 # Target horizon decision
 
+> **Historical RV30 decision, closed.** This record governs its original run.
+> The current RP4 v4 presentation uses **15 minutes primary and 5 minutes secondary**;
+> RP4 v3 used 30 minutes. RP2's RV60 comparison remains a historical diagnostic.
+> See the [current decisions](research_decisions_current.md) and
+> [v4 registration](rp4/specification_v4.md). No target decision is pending here.
+
 Status: `PASS_RV30_APPROVED_BY_OWNER`
 
 ## Decision
 
-The supervisor-approved repository specification is unambiguous: the primary target is
+The supervisor-approved specification for this historical run is unambiguous: the primary target is
 RV30. The frozen contract is the origin close `C(i,t)` plus the next thirty consecutive
 one-minute closes, requiring 31 prices and producing exactly 30 one-minute log returns.
 The target implementation remains unchanged and RV10 is not introduced.

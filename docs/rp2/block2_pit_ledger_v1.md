@@ -62,7 +62,7 @@ window when the collector started and would otherwise masquerade as latency).
 | min | **−0.79 s** |
 
 The shape — near-uniform on `[0, 60]` with a hard ceiling at ~61 s — shows this leg is
-**our own 60-second polling cadence**, not a provider delay. It is an operational property
+**the study's own 60-second polling cadence**, not a provider delay. It is an operational property
 of this pipeline and is reducible by polling faster or subscribing to a stream. The seven
 negative values bound the **clock skew** between the provider's clock and the local machine
 at **under 0.8 s**, which is the closest thing to a clock-synchronisation check the
@@ -145,8 +145,8 @@ block of this program by list, not by re-derivation.
 - `provider_received_at`, `ingested_at`, `reconciled_at` and an explicit `revision_version`
   do not exist in the historical tape. Zero duplicate ids is evidence that the provider does
   not *re-emit* revised rows under the same id; it is **not** evidence that no row was ever
-  silently corrected before we fetched it.
-- The local-receipt leg rests on two sessions and 486 steady-state records. It measures our
+  silently corrected before collection.
+- The local-receipt leg rests on two sessions and 486 steady-state records. It measures the study's
   polling cadence well and the provider's push behaviour barely at all. It is a floor on
   what a faster collector could achieve, not a characterisation of the provider.
 - "Rows appearing only in the historical tape" cannot be computed: there is no live stream

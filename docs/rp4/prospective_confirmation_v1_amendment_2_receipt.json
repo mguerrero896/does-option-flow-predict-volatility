@@ -1,0 +1,106 @@
+{
+  "schema": "rp4-prospective-amendment-2",
+  "sealed_at_utc": "2026-09-08T05:27:15.316335+00:00",
+  "document_sha256": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+  "original_sha256": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+  "original_sealed_at_utc": "2026-09-08T04:24:01.918499+00:00",
+  "amendment_1_sha256": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+  "amendment_1_sealed_at_utc": "2026-09-08T04:31:58.752153+00:00",
+  "primary_unchanged": true,
+  "primary_look_sessions": 20,
+  "primary_family": "log_ridge_harq",
+  "primary_horizon_minutes": 15,
+  "stability_sessions": 40,
+  "stability_cannot_rescue_primary": true,
+  "secondary_single_look_at_prospective_sessions": 20,
+  "secondary_at_40": false,
+  "source_sha256": {
+    "artifacts/rp4_v4_b3_rv15/session_losses.csv": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+    "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+    "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+    "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "docs/rp4/prospective_confirmation_v1.md": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "docs/rp4/prospective_confirmation_v1_receipt.json": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+    "docs/rp4/prospective_confirmation_v1_amendment_1.md": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "docs/rp4/prospective_confirmation_v1_amendment_1_receipt.json": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837"
+  },
+  "bootstrap": {
+    "block_length": 5,
+    "ci": "percentile_95",
+    "kind": "circular_session_blocks",
+    "p_value": "greater_centered_null_plus_one",
+    "replications": 9999,
+    "seed": 20260907
+  },
+  "secondary_C": {
+    "family": "lightgbm_qlike",
+    "horizon_minutes": 15,
+    "contrast": "B2_over_B1",
+    "statistic": "trimmed_mean_5pct",
+    "trim_each_tail": 0.05,
+    "sessions": 20,
+    "removed_each_tail": 1,
+    "retained": 18,
+    "alternative": "two-sided",
+    "require_positive_estimate": true
+  },
+  "secondary_D": {
+    "family": "log_ridge_harq",
+    "horizon_minutes": 15,
+    "historical_start": "2026-08-03",
+    "historical_end": "2026-09-04",
+    "historical_sessions": 25,
+    "historical_already_observed": true,
+    "prospective_sessions": 20,
+    "pooled_sessions": 45,
+    "weight_per_session": 0.022222222222222223,
+    "same_window_means_not_equally_weighted": true,
+    "historical_fits_recomputed": false,
+    "historical_losses_source": "artifacts/rp4_v4_b3_rv15/session_losses.csv",
+    "sequence": [
+      "B1_over_B0",
+      "B2_over_B1"
+    ],
+    "alpha": 0.05,
+    "require_positive_estimate": true,
+    "alternative": "greater",
+    "in_ABC_Holm": false,
+    "independent_replication": false,
+    "can_rescue_primary": false
+  },
+  "secondary_multiplicity": {
+    "method": "Holm",
+    "members": [
+      "A",
+      "B",
+      "C"
+    ],
+    "family_size": 3,
+    "alpha": 0.05,
+    "thresholds": [
+      0.016666666666666666,
+      0.025,
+      0.05
+    ],
+    "unavailable_p_for_adjustment_only": 1,
+    "supersedes_amendment_1_family_size_only": true,
+    "global_control_claimed": false
+  },
+  "collector_observation": {
+    "observed_at_utc": "2026-09-08T05:24:21.0514963Z",
+    "state": "Ready",
+    "enabled": true,
+    "next_run": "2026-09-09T10:00:00.0000000+10:00",
+    "last_run": "1999-11-30T00:00:00.0000000+11:00",
+    "last_task_result": 267011,
+    "data_root_exists": false,
+    "start_scheduled_task_called": false
+  },
+  "private_collector_observation_sha256": "b1161a99927a3f5a1d74cd865b0fe5fdb47a33eb853f51458f7d280b756972b3",
+  "independent_timestamp": false,
+  "research_only": true,
+  "capital_go": false,
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "prospective_data_read": false
+}

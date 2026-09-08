@@ -1,0 +1,107 @@
+{
+  "schema_version": "rp4-v3-secondary-projection-receipt-v1",
+  "created_at_utc": "2026-09-08T10:10:47.316586+00:00",
+  "status": "COMPLETE_SAVED_AGGREGATE_PROJECTION",
+  "scope": {
+    "RESEARCH_ONLY": true,
+    "capital_go": false,
+    "new_model_fits": 0,
+    "new_auc_calculations": 0,
+    "new_bootstrap_runs": 0,
+    "new_statistical_calculations": 0,
+    "new_scientific_evaluations": 0,
+    "source_granular_payloads_read": false,
+    "sealed_cohorts_read": false,
+    "frozen_sources_changed": false
+  },
+  "evidence_artifact": "artifacts/rp4_v3_secondary_repair/evidence.json",
+  "byte_identical_to_verified_draft": true,
+  "verified_draft_sha256": "6280bb4cc8044aeeec7d694a5db224e0a90ba2d2182b742cc2a13c933661a36a",
+  "private_review_sha256": "3af0cd1dbde7f4f7d4b4c27a40b5f806e9f63231d455b8692fb1452a5359ced9",
+  "restricted_source_sha256": {
+    "repair_run/evaluation/primary/summary.json": "8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79",
+    "repair_run/evaluation/primary/receipt.json": "61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b",
+    "repair_run/evaluation/primary/summary_receipt.json": "5dda11e17932017b799dd3b27f24b17ea9385fb4e3dcc1c74b17f789e5733128",
+    "repair_run/evaluation/primary/component_manifest.json": "4861a04ca0f9c3207a6fdea3c8679512ff5c659f4bdc7e56e3d89cc8434baa50",
+    "repair_run/evaluation/confirmation/summary.json": "2c902790a9055dd6ec3dde6877636b15c2bf8cc62025722ddf5fe28386e974ad",
+    "repair_run/evaluation/confirmation/receipt.json": "d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed",
+    "repair_run/evaluation/confirmation/summary_receipt.json": "140b09740dd4d39624973882b5a32b387724dc8d135df798143a5590872eea5e",
+    "repair_run/evaluation/confirmation/component_manifest.json": "ca9036d6f6b232852e623f0979769b6d64026738448e9ae9741defede90c695a",
+    "repair_run/newton_failed_only_v1/evaluation/primary/summary.json": "0381df3c2104538686ba25c540704c12f7c088ecc3c86fdab070a30dadaf4e61",
+    "repair_run/newton_failed_only_v1/evaluation/primary/receipt.json": "5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26",
+    "repair_run/newton_failed_only_v1/evaluation/primary/summary_receipt.json": "fac11a444689fc072ed69dcee50313d94376f13a5c886925c9ec9547075ea02f",
+    "repair_run/newton_failed_only_v1/evaluation/primary/component_manifest.json": "2ef2e788291d056197aa5c63a395f05dddbd2a1c77a06505c9ad3c49acf7beef",
+    "repair_run/newton_failed_only_v1/evaluation/confirmation/summary.json": "6fbd55318dcfb9486947b97fa734ca6016ff876151249431ba8badb338245dd3",
+    "repair_run/newton_failed_only_v1/evaluation/confirmation/receipt.json": "0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542",
+    "repair_run/newton_failed_only_v1/evaluation/confirmation/summary_receipt.json": "59ec9b7f421f30baa4944c89766102b997a9dbc9d51e16b9d6e825aaeb1f5e0e",
+    "repair_run/newton_failed_only_v1/evaluation/confirmation/component_manifest.json": "ff3f8109737b243e99984606db65c79a0e62d156cdcefedbe546be51da346836",
+    "mz_audit/confirmation_audit.json": "835c404a24e7513270f25172286dc50cbf8fe5753dd576b179456e0fcca5edce",
+    "repair_run/jump_release.json": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+    "repair_run/newton_failed_only_v1/release.json": "721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74",
+    "repair_run/newton_failed_only_v1/qa_receipt.json": "48a6104c490b1ab10ac33b5779ec90b813a28abe2c4724324dd20b9df5a9f126",
+    "repair_run/newton_failed_only_v1/qa_newton_execution_receipt.json": "42aa8288691c9c5f38651ad2c4f0be411af1ae4a5d6af99b177a29023565114c"
+  },
+  "restricted_alias_policy": "Aliases identify saved source files without disclosing machine paths; private equality mapping is retained separately.",
+  "source_sha256": {
+    "artifacts/rp4_v3_secondary_closeout/evidence.json": "e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1",
+    "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+    "artifacts/rp4_v3_b4/mz_identity_receipt.json": "cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4",
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "artifacts/rp4_v3_secondary_mz_audit/confirmation_summary.json": "c185a396d59c35b5be81cc09406541c67c33dc60de80e713657b7283b66f9b71",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+    "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+    "artifacts/rp4_v3_secondary_mz_audit/REPORT.md": "06aaa5ca529f3d3f9ce4fc1716e54ffcede848d91062b8e3c168649480bffa30",
+    "artifacts/rp4_v3_secondary_mz_audit/receipt.json": "ebe38763e180d6676e57d13fd65b22df2f9ec537985d8768466ffb7434ee6b4b",
+    "docs/rp4/results_v3_revision2.md": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e",
+    "docs/rp4/RESULTADO_FINAL_revision_2.md": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5",
+    "tests/contract/test_rp4_defense_package.py": "d8b97a79349908dc3c8aaad2f3c2711951c286d9a117c963d8e4df48116ee455"
+  },
+  "artifacts_sha256": {
+    "artifacts/rp4_v3_secondary_repair/evidence.json": "6280bb4cc8044aeeec7d694a5db224e0a90ba2d2182b742cc2a13c933661a36a",
+    "docs/rp4/results_v3_revision3.md": "c06e3fbbcc750c74bc417cb4643f2c169fa2bf894ce76ad3875bd432ae8344dc",
+    "artifacts/rp4_v3_secondary_repair/README.md": "083a63f38cc5dddf43cc7d26d4771af9e34c3ac14b7279cbd40809001fa507fe"
+  },
+  "preexisting_files_sha256": {
+    "artifacts/rp4_v3_secondary_repair/addendum.json": "606a8c8d5dbe51628e7507b504cf7c5f8483a9aa5e7c80f62be33b2cb12e55de",
+    "artifacts/rp4_v3_secondary_repair/addendum_receipt.json": "aaa008d20f8eff27facc32eb6281d986a3da6e6ecbbf5999dd3559a31cef7942",
+    "artifacts/rp4_v3_secondary_repair/confirmation_closeout_receipt.json": "8639b17bb19edfd6197283159a914c31d81958c04663f424fb9109a8a22fc604",
+    "artifacts/rp4_v3_secondary_repair/jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+    "artifacts/rp4_v3_secondary_repair/jump_newton.py": "65c62a7ef6b23bb8aac78e87a8f1d087017418430a16d0af6aa241721f80b675",
+    "artifacts/rp4_v3_secondary_repair/jump_newton_runner.py": "2c8e928da522567a928d8b9b1832c739dc43c2dfa5000c1349b6e22a5b5c6201",
+    "artifacts/rp4_v3_secondary_repair/jump_repair.py": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+    "artifacts/rp4_v3_secondary_repair/jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+    "artifacts/rp4_v3_secondary_repair/primary_closeout_receipt.json": "1e22bc64329c7ac2f255ee9518030a3b0db7930667e786803078f2575ce65208",
+    "artifacts/rp4_v3_secondary_repair/release_receipt.json": "e6c8660e7b40690c0163c7f88865074bac59dbbc6e69a723661c4cfbce05dea7",
+    "artifacts/rp4_v3_secondary_repair/test_jump_newton.py": "37109eb83ca33fbf7edd02ea8635aa9b46de6df9d7870bde6607912ab8d76775",
+    "artifacts/rp4_v3_secondary_repair/test_jump_newton_runner.py": "a2873e51b9a66ed65a76c677e420f3dc0bfc31f484f39913414c8e68ddc97cd6",
+    "artifacts/rp4_v3_secondary_repair/test_jump_repair.py": "2fb30317265699947e0a6ce703aaf982725f652272045c074fc40e797241f727",
+    "artifacts/rp4_v3_secondary_repair/test_jump_runner.py": "b9115928e38fd635d344b2415ec8de892a021572cf3f7702169ff201722b5fe0"
+  },
+  "validation": {
+    "facts": 293,
+    "facts_selected_and_hashed_passed": 293,
+    "private_to_public_mapping": 183,
+    "private_to_public_mapping_passed": 183,
+    "prior_review_checks": {
+      "checks": 291,
+      "passed": 291,
+      "failed": 0,
+      "named_source_pin_checks": 71
+    },
+    "numeric_bindings_by_document": {
+      "docs/rp4/results_v3_revision3.md": 106,
+      "artifacts/rp4_v3_secondary_repair/README.md": 2
+    },
+    "numeric_renderings_match": true,
+    "preexisting_files_unchanged": true
+  },
+  "limits": [
+    "This operation copies and documents saved aggregate results; it does not execute scientific code or validate constituent prediction bytes.",
+    "Jump H1 hypotheses were tested and not rejected. H2 NOT_TESTED and null p_for_decision indicate an unopened within-family gate, not a numerical defect.",
+    "Raw forecast calibration diagnostics cover both families; applied affine MZ recalibration covers LightGBM only.",
+    "Formula identity is exact in stored audits; aggregate MZ equality is within floating-point precision. Unstable recalibration remains unsuitable for an improvement claim.",
+    "Original successful components retain their prior acceptance rule; no retrospective stricter gradient certification is claimed.",
+    "Recorded execution intervals establish the order of those saved runs only.",
+    "No endpoint outside the examined jump AUC and MZ aggregates is newly certified."
+  ]
+}

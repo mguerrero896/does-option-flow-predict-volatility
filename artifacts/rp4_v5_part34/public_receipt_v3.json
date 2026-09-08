@@ -1,0 +1,262 @@
+{
+  "schema_version": "rp4-v5-part34-public-receipt-v3",
+  "supersedes_public_presentation": "artifacts/rp4_v5_part34/public_receipt_v2.json",
+  "status": "PUBLIC_PRESENTATION_OF_CLOSED_HISTORICAL_RECEIPT",
+  "source_status": "PASS_PART34_HISTORICAL_AUDIT_AND_NEW_REGISTRATION",
+  "source_created_at_utc": "2026-09-08T16:13:31.990091+00:00",
+  "original_receipt": {
+    "logical_path": "artifacts/rp4_v5_part34/receipt.json",
+    "original_sha256": "cdbf75390600b8ae72d7303d535de9dc6c4d3dd915fb06c61b64f5e16a550b6c",
+    "archive_path": "docs/archive/rp4/presentation_originals/v5_part34_receipt.json.original",
+    "distributed_archive_sha256": "cdbf75390600b8ae72d7303d535de9dc6c4d3dd915fb06c61b64f5e16a550b6c",
+    "sidecar_original_sha256": "6e46fa9c24e28dce380f5ad72b60331abd9214e679819c29ee66360f0ad1e56d",
+    "sidecar_archive_path": "docs/archive/rp4/presentation_originals/v5_part34_receipt.sha256.original",
+    "sidecar_distributed_archive_sha256": "6e46fa9c24e28dce380f5ad72b60331abd9214e679819c29ee66360f0ad1e56d"
+  },
+  "source_reference_count": 25,
+  "references": [
+    {
+      "source_identity_sha256": "9effb90d21c61b5f2016a59294e4d6fbc221e341ecaef2c646d6b8321bc9d118",
+      "source_path": "artifacts/rp4_v3_code/inference.py",
+      "original_sha256": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "public_path": "artifacts/rp4_v3_code/inference.py",
+      "public_sha256": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "ae5b2c566be95c4b5c425d76e436bdf17a29916b98cca405b1b1c14e64958e5d",
+      "source_path": "artifacts/rp4_v5_a2_code/reporting.py",
+      "original_sha256": "d95386adbded47bdeaae19d584eb2108151a3a604283001e134875659f72bb51",
+      "public_path": "artifacts/rp4_v5_a2_code/reporting.py",
+      "public_sha256": "d95386adbded47bdeaae19d584eb2108151a3a604283001e134875659f72bb51",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "8fc828e67c0fb51f6afbc8681b47d92ea4f8b5528b6871458a86640408b83637",
+      "source_path": "artifacts/rp4_v5_a3/freeze.json",
+      "original_sha256": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855",
+      "public_path": "artifacts/rp4_v5_a3/freeze.json",
+      "public_sha256": "ee44516298449816f99b922c0a957abfb526b069c01adfa139f07ae610634eba",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "8c096987398170f74b0d8b0bbc5ac99596d2ab0bb9368445c846bfe477bc6446",
+      "source_path": "artifacts/rp4_v5_a3_code/reporting.py",
+      "original_sha256": "abc269e4db7e8ff7ca379129663c1764cf85264d1e742bc860d3119388712f82",
+      "public_path": "artifacts/rp4_v5_a3_code/reporting.py",
+      "public_sha256": "abc269e4db7e8ff7ca379129663c1764cf85264d1e742bc860d3119388712f82",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "7dc56e2a41c9d1913c9af1ecb2c902deb260358ea9e8f079bbf6ab0eca73923d",
+      "source_path": null,
+      "original_sha256": "b6c05d1f5e054d7a2e48e874668bba6c36f61b4ea190c691101fe1e3a334c9ef",
+      "public_path": null,
+      "public_sha256": null,
+      "relation": "private_source_not_distributed",
+      "evidence": "Historical provenance pin only; private operational ledger omitted."
+    },
+    {
+      "source_identity_sha256": "ce7bc6a01cff30ed40bc803601897c63158cf76446bee6e10480b3326d224473",
+      "source_path": "artifacts/rp4_v5_part34/antecedent_prospective_amendment_3.md",
+      "original_sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+      "public_path": "docs/archive/rp4/presentation_originals/v5_part34_antecedent_prospective_amendment_3.md.original",
+      "public_sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "9d21d044a3b1238d120e6212dfdd9eb567d979843bcaca0b0e486ae7374d342e",
+      "source_path": "artifacts/rp4_v5_part34/audit.py",
+      "original_sha256": "2d47813b704e08ef91b63ee0588992e42a5ed34d3e75326a995bdb8b805c8b24",
+      "public_path": "artifacts/rp4_v5_part34/audit.py",
+      "public_sha256": "2d47813b704e08ef91b63ee0588992e42a5ed34d3e75326a995bdb8b805c8b24",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "b7aca3aea1ffee8d0e8bdbfcd03f49f4ec40b3d079ece65419a4ee054b6ea2af",
+      "source_path": "artifacts/rp4_v5_part34/diagnostics.csv",
+      "original_sha256": "f8d25bfbaca89439efe622d19acac512653fdc0424302eb39df94d8bc1d45810",
+      "public_path": "artifacts/rp4_v5_part34/diagnostics.csv",
+      "public_sha256": "f8d25bfbaca89439efe622d19acac512653fdc0424302eb39df94d8bc1d45810",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "73f335f1cf89e1556eb7132c4a00ca36b8f9ed4a651fa7e6a180fdd62097f9f0",
+      "source_path": "artifacts/rp4_v5_part34/input_hashes.json",
+      "original_sha256": "7a407cafd024519a0632301247a41fa8c1864eb0f9717dd01a28b607eed7a1cd",
+      "public_path": "artifacts/rp4_v5_part34/input_hashes.json",
+      "public_sha256": "7a407cafd024519a0632301247a41fa8c1864eb0f9717dd01a28b607eed7a1cd",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "ab4be1ba74ea6785f47d97e0e84bdb399e3826b472b6f17560ee586253b55e6c",
+      "source_path": "artifacts/rp4_v5_part34/methodology_decisions_before_part34.md",
+      "original_sha256": "6e5ffa22ec2ce4bfd2d5989b24b447e02a7fbc6affe2fb16944c7790fffdfda3",
+      "public_path": null,
+      "public_sha256": null,
+      "relation": "source_not_distributed",
+      "evidence": "Historical provenance pin only; the earlier file is not distributed."
+    },
+    {
+      "source_identity_sha256": "1b248921a4fde157ec555e686b81f93c1c587e22f3fc1449d610c329aa5bf6e1",
+      "source_path": "artifacts/rp4_v5_part34/publish.py",
+      "original_sha256": "ebae072eed98c7db9dfc8da1a3c97b6e345127f1f6e9fd3ec8c1c1372193cf83",
+      "public_path": "artifacts/rp4_v5_part34/publish.py",
+      "public_sha256": "ebae072eed98c7db9dfc8da1a3c97b6e345127f1f6e9fd3ec8c1c1372193cf83",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "592688f2e90e29dc0d7b6a6ee5c40b9ced1997b59feea3ba0f24a86182248de4",
+      "source_path": "artifacts/rp4_v5_part34/results_v5_before_part34.md",
+      "original_sha256": "76209f47ee8cbf84ddf9c3f6b9d77a0f1037de809a425526f16c8c1125a6cd01",
+      "public_path": "docs/archive/rp4/presentation_originals/v5_before_part34_results_v5.md.original.public",
+      "public_sha256": "e70646f9826ceb8edd78b0c852dcc34344ac3dd4e5c0705ff4e42894f412e5b3",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "608d44995e6b17d662e37dfff7440421ea637dea3685b3d30aa55ca1859e64e0",
+      "source_path": "artifacts/rp4_v5_part34/sensitivity_section.md",
+      "original_sha256": "c7e05a9a8a7ea9acbbf22d1be49fdc18b58a22e028185bd74cc33f30f7cfebda",
+      "public_path": "docs/archive/rp4/presentation_originals/v5_part34_sensitivity_section.md.original",
+      "public_sha256": "c7e05a9a8a7ea9acbbf22d1be49fdc18b58a22e028185bd74cc33f30f7cfebda",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "de84fc7d099ad540fdc41bbf8999b9c0c72d19d5c9ac59e9c5c4c584ac55c528",
+      "source_path": "artifacts/rp4_v5_part34/session_losses.csv",
+      "original_sha256": "8118182b98da3c636a498d43b474fcb98fb09f37463408d24869afa4bc99564b",
+      "public_path": "artifacts/rp4_v5_part34/session_losses.csv",
+      "public_sha256": "8118182b98da3c636a498d43b474fcb98fb09f37463408d24869afa4bc99564b",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "1f84dd36327020625a35433ec2e39227669ebcad2e4fdce0ef6ded79d0ff73ed",
+      "source_path": "artifacts/rp4_v5_part34/summary.json",
+      "original_sha256": "e84c852ed8bed5fb2e7c561f913193ee692a23f68c1148f15d74e206887b6404",
+      "public_path": "artifacts/rp4_v5_part34/summary.json",
+      "public_sha256": "e84c852ed8bed5fb2e7c561f913193ee692a23f68c1148f15d74e206887b6404",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "1b613b925b99f1288b7a8758843d16496438642c2bb6a84d8701cf417d4cee70",
+      "source_path": "artifacts/rp4_v5_part34/table.csv",
+      "original_sha256": "48e9b6e604dec88cc5a9b2dddc5e43c3b4bea9b46a1d1c76c7b0cd5142880d88",
+      "public_path": "artifacts/rp4_v5_part34/table.csv",
+      "public_sha256": "48e9b6e604dec88cc5a9b2dddc5e43c3b4bea9b46a1d1c76c7b0cd5142880d88",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "0904aea7a59992df68c25b5e78a3a203700a188a7565a3a52458e16f1e0d2855",
+      "source_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/receipt.json",
+      "original_sha256": "2cc2d34f702229a3ddfa5666d4bd0431dc70aaa592712a849ce98356cfdc2d7c",
+      "public_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/receipt.json",
+      "public_sha256": "2cc2d34f702229a3ddfa5666d4bd0431dc70aaa592712a849ce98356cfdc2d7c",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "e19815d4efd906b9c5dacb900baa0994dfbd5e5e13b5c0e80455d78115d4d3dd",
+      "source_path": "docs/methodology_decisions.md",
+      "original_sha256": "ab7c51ecca9f8796b61faf7ab1461e67259d13c9593ef265447376ef36885f16",
+      "public_path": "docs/methodology_decisions.md",
+      "public_sha256": "92c301e596223deb24c0139cb8e371a479d1f8fec34cece96890c797d0c9d2a4",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "a4675b2a799884c5fcb4dcbff351e1dbd325875c7e51d78db8004824870afefc",
+      "source_path": "docs/rp4/prospective_combination_decision_136.md",
+      "original_sha256": "e500c487b015b7662c52a7f381180996d740c88d1d317debf594330c3ddf15b0",
+      "public_path": "docs/rp4/prospective_combination_decision_136.md",
+      "public_sha256": "4b749c97490d3970d9ed2e27380a7ac139ef2fdd94df76110edd0e702cb8fdca",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "b50288b0004410f1a07b2928e3f4c42dbf50c38088342f3193ee4f21493dad08",
+      "source_path": "docs/rp4/prospective_combination_decision_136.sha256",
+      "original_sha256": "9bff3ecb33c449239b72b5a1c9945f096f9ab6f716a04a06c8ec043616bcca81",
+      "public_path": "docs/rp4/prospective_combination_decision_136.sha256",
+      "public_sha256": "9bff3ecb33c449239b72b5a1c9945f096f9ab6f716a04a06c8ec043616bcca81",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    },
+    {
+      "source_identity_sha256": "163e19a3ea1a16542ec18bc527317aaea8c0590e020cea508ea9852611c19e7a",
+      "source_path": "docs/rp4/prospective_combination_decision_136_clarification_1.md",
+      "original_sha256": "02e3a336ee9d0b2b8dc7074b5baaf3976761754550e679e86730a7aad869f140",
+      "public_path": null,
+      "public_sha256": null,
+      "relation": "source_not_distributed",
+      "evidence": "Historical provenance pin only; the earlier file is not distributed."
+    },
+    {
+      "source_identity_sha256": "ab2d6a44e96a179df05ffce2c0a7195a08214c32a10d522c9c1da19bf18b2546",
+      "source_path": "docs/rp4/prospective_combination_decision_136_clarification_1.sha256",
+      "original_sha256": "75c8b05deb6a6ae0447fd83dedb51f646595192d6976a2df17563b36862f0a18",
+      "public_path": null,
+      "public_sha256": null,
+      "relation": "source_not_distributed",
+      "evidence": "Historical provenance pin only; the earlier file is not distributed."
+    },
+    {
+      "source_identity_sha256": "089445f59aee193e39cfe11884e9118f55485c398d4c063412866a7456ed5c25",
+      "source_path": "docs/rp4/prospective_combination_decision_136_receipt.json",
+      "original_sha256": "4003ccdfd6d203798d44308fa3fffa695c519e1a78fcb585023619b604d75af4",
+      "public_path": "docs/rp4/prospective_combination_decision_136_receipt.json",
+      "public_sha256": "03ce375e4fb8c29b33feafca0862ac1e6345cc24860fe29bbd8655367db33976",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "d56e449f1b1975ac72b3b12fc6029e84ee6e8ae55496145f043699b2e6594699",
+      "source_path": "docs/rp4/results_v5.md",
+      "original_sha256": "0561551a2938796baf4e7e705b082fc24ee09be0a069596802285cf018b1973c",
+      "public_path": "docs/rp4/results_v5.md",
+      "public_sha256": "0b416763caa841f4b3312dc4cece4fa88a56a1bacb0b129c1a2aa9dc18eb142e",
+      "relation": "public_derivative",
+      "evidence": "Public bytes have their own hash; the historical pin authenticates the earlier source, not this derivative."
+    },
+    {
+      "source_identity_sha256": "aeb1f523f9274077649c395a7f4144cda3a4f3ff1dc2c549a1d9b051430f94a3",
+      "source_path": "src/mds650/rp2/inference.py",
+      "original_sha256": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "public_path": "src/mds650/rp2/inference.py",
+      "public_sha256": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "relation": "original_bytes",
+      "evidence": "Public bytes reproduce the original hash."
+    }
+  ],
+  "historical_audit_scope": {
+    "prospective_data_reads": 0,
+    "refits": 0,
+    "canonical_roundtrip_max_abs_error": 4.440892098500626e-16,
+    "auditor_p_values_exactly_reproduced": false,
+    "ridge_drift_cause_proven": false
+  },
+  "publication_scope": {
+    "v4_headline_replaced": false,
+    "part34_is_post_hoc": true,
+    "prospective_registration_executed": false,
+    "scientific_execution_performed": false,
+    "private_inputs_read": false,
+    "private_operational_files_read": false,
+    "source_registry_modified": false,
+    "capital_go": false
+  },
+  "hash_scope": "Original hashes retain the closed source identities. Public derivatives carry separate raw-byte hashes and never inherit original hashes. Missing and private sources provide historical provenance pins only, not publicly reproduced evidence. This new receipt and sidecar use LF so raw and registry-normalized hashes agree. Register only this new public receipt after final projection; preserve every earlier frozen-artifact entry unchanged."
+}

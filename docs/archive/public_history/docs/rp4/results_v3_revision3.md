@@ -1,0 +1,60 @@
+# RP4 v3 — revisión aditiva de secundarios
+
+## Secundarios reparados de v3
+
+Esta revisión reúne resultados secundarios ya guardados. La [revisión anterior](results_v3_revision2.md) ya presenta el cierre combinado de saltos y el diagnóstico Mincer–Zarnowitz; el [resultado final conservado](../../../../rp4/RESULTADO_FINAL_revision_2.md) también los resume. La contribución de esta edición es una [proyección pública acotada y verificable](../../../../../artifacts/rp4_v3_secondary_repair/evidence.json), con procedencia y límites explícitos. No se han ejecutado ajustes, cálculos de AUC ni remuestreos nuevos.
+
+### AUC final de saltos
+
+El endpoint estima la etiqueta `jump30 > 0`; no es una prueba de salto estadísticamente significativo. La familia lineal usa regresión logística y la otra familia usa clasificación binaria por árboles. La muestra final completa contiene 419 sesiones y 160.832 orígenes en la ventana primaria; la ventana final conserva 25 sesiones y 9.750 orígenes. «Final» corresponde a la ventana de confirmación histórica de v3, sin convertirla en una réplica prospectiva nueva.
+
+| Ventana | Clasificador | Conjunto | AUC | IC 95 % |
+| --- | --- | --- | ---: | --- |
+| Primaria | Logística | B0 | 0,52176107 | [0,51485246; 0,52832978] |
+| Primaria | Logística | B1 | 0,52040811 | [0,51364844; 0,52686781] |
+| Primaria | Logística | B2 | 0,51921636 | [0,51284587; 0,52542900] |
+| Primaria | Árboles binarios | B0 | 0,51706132 | [0,51101359; 0,52277029] |
+| Primaria | Árboles binarios | B1 | 0,51567879 | [0,50961469; 0,52142034] |
+| Primaria | Árboles binarios | B2 | 0,51614095 | [0,51006249; 0,52219362] |
+| Final | Logística | B0 | 0,53985035 | [0,50804318; 0,56962653] |
+| Final | Logística | B1 | 0,53856780 | [0,50917050; 0,56664405] |
+| Final | Logística | B2 | 0,53614532 | [0,50970308; 0,56130055] |
+| Final | Árboles binarios | B0 | 0,52979871 | [0,50813913; 0,55064039] |
+| Final | Árboles binarios | B1 | 0,52948957 | [0,50429081; 0,55462348] |
+| Final | Árboles binarios | B2 | 0,53549843 | [0,51900352; 0,54857203] |
+
+La AUC agrupa orígenes y el remuestreo conserva bloques de 5 sesiones con 9.999 repeticiones. Los contrastes usan AUC del conjunto ampliado menos AUC del conjunto base. La inferencia secundaria mantiene H1→H2 dentro de cada familia: ningún H1 rechaza y, por ello, ningún H2 abre una decisión. El guion de la columna de decisión representa el nulo guardado; `NOT_TESTED` no significa un fallo numérico. El p nominal de H2 queda visible sin promoverlo a decisión.
+
+| Ventana | Clasificador | Contraste | Delta AUC | IC 95 % | p nominal unilateral | p de decisión | Estado |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| Primaria | Logística | H1: B1/B0 | −0,00135296 | [−0,00373244; +0,00093854] | 0,8742 | 0,8742 | `NOT_REJECTED` |
+| Primaria | Logística | H2: B2/B1 | −0,00119175 | [−0,00335960; +0,00104547] | 0,8595 | — | `NOT_TESTED` |
+| Primaria | Árboles binarios | H1: B1/B0 | −0,00138253 | [−0,00584941; +0,00303053] | 0,7237 | 0,7237 | `NOT_REJECTED` |
+| Primaria | Árboles binarios | H2: B2/B1 | +0,00046216 | [−0,00343805; +0,00446366] | 0,4195 | — | `NOT_TESTED` |
+| Final | Logística | H1: B1/B0 | −0,00128256 | [−0,00745875; +0,00606928] | 0,7055 | 0,7055 | `NOT_REJECTED` |
+| Final | Logística | H2: B2/B1 | −0,00242248 | [−0,00872678; +0,00422617] | 0,7302 | — | `NOT_TESTED` |
+| Final | Árboles binarios | H1: B1/B0 | −0,00030914 | [−0,01526464; +0,01434979] | 0,4587 | 0,4587 | `NOT_REJECTED` |
+| Final | Árboles binarios | H2: B2/B1 | +0,00600886 | [−0,00887440; +0,02069706] | 0,1897 | — | `NOT_TESTED` |
+
+El primer pase dejó un componente lineal sin certificado y la máscara común de AUC primaria en 418 sesiones. El intento Newton resolvió después únicamente ese componente fallido y recuperó la muestra completa registrada; reutilizó los componentes ya satisfactorios. Objetivo, selección temporal y umbral permanecen fijados. El intento inicial conserva su fallo; los éxitos originales mantienen su regla de aceptación, sin atribuirles retroactivamente el certificado más estricto de las reparaciones.
+
+### Mincer–Zarnowitz: reproducción y utilidad
+
+El diagnóstico de calibración de los pronósticos originales está disponible para ambas familias y todos los conjuntos. La recalibración afín aplicada es otro endpoint y corresponde exclusivamente a LightGBM. Las cifras siguientes son el diagnóstico guardado de esa recalibración, cuya utilidad conserva el estado **NO VERIFICABLE**.
+
+| Ventana | Conjunto | QLIKE original | QLIKE recalibrada guardada | Afines negativos / pisos | Pérdida MZ debida al piso (%) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Primaria | B0 | 0,14931695 | 635736,36167198 | 18631 | 99,999798 |
+| Primaria | B1 | 0,14619447 | 711247,77708514 | 20834 | 99,999476 |
+| Primaria | B2 | 0,14642711 | 730463,85533075 | 21100 | 99,999802 |
+| Final | B0 | 0,17494027 | 0,18623062 | 0 | 0,000000 |
+| Final | B1 | 0,17202611 | 1988,17728269 | 9 | 99,989633 |
+| Final | B2 | 0,17617863 | 2400,21883048 | 11 | 99,990301 |
+
+Los recibos reproducen exactamente la fórmula por origen. La agregación coincide dentro de precisión numérica; no se afirma igualdad bit a bit de todas las sumas. La recta ajustada a medias de calibración puede producir varianzas negativas al aplicarse a orígenes individuales; el piso positivo registrado transforma esos casos en pérdidas QLIKE extremas. Modificar el enlace, imponer positividad o cambiar ese piso sería una metodología distinta. La identidad aritmética no hace útil la recalibración.
+
+Entre AUC y MZ aquí examinados, ningún agregado final permanece sin reproducción acreditada en los recibos guardados. AUC no aporta un rechazo incremental; MZ mantiene su limitación de utilidad. Esta revisión no vuelve a abrir pronósticos individuales ni amplía el alcance al secundario cuantílico. La media primaria, el cuantil y v4 permanecen sin modificación.
+
+Las tablas redondean únicamente la presentación; la proyección conserva los valores originales, los nulos y los estados. [Recibo de esta proyección](../../../../../artifacts/rp4_v3_secondary_repair/projection_receipt_v1.json) · [Hashes](../../../../../artifacts/rp4_v3_secondary_repair/projection_SHA256SUMS_v1.txt) · [Guía de lectura](../../artifacts/rp4_v3_secondary_repair/README.md).
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

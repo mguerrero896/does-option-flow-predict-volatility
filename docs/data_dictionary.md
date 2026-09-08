@@ -1,4 +1,4 @@
-# MDS650 observed data dictionary
+# Observed research data dictionary
 
 This dictionary is derived from the sanitized v1r manifest and provider fixtures, not only
 from provider documentation. Raw licensed values remain in restricted storage; this file

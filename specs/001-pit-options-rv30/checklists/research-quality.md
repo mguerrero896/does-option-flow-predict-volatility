@@ -1,4 +1,4 @@
-# Research requirements quality checklist: MDS650 PIT options / RV30
+# Research requirements quality checklist: PIT options / RV30
 
 **Purpose**: review the written requirements before implementation. This is a
 requirements-quality gate, not the executable test suite.

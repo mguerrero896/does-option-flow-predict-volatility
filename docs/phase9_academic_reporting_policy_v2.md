@@ -7,7 +7,7 @@ test blocks, one-read rule and recorded protocol SHA-256 remain binding.
 ## Decision
 
 Phase 9 remains a prospective follow-up and is not a gate for submitting or defending
-the capstone. The academic report uses the eligible evidence available at its editorial
+the research report. The academic report uses the eligible evidence available at its editorial
 cutoff and describes Phase 9 as ongoing. It reports no Phase 9 estimate, interval,
 p-value, power calculated from outcomes or verdict.
 

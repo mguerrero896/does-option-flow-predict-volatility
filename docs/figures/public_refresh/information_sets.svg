@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="712" viewBox="0 0 1200 712" role="img" aria-labelledby="information-sets-current-title information-sets-current-desc">
+<title id="information-sets-current-title">Three nested information sets</title>
+<desc id="information-sets-current-desc">B0 has 29 price-history predictors. B1 contains B0 and adds option state for 69 total. B2 contains B1 and adds option flow for 138 total, before family-specific indicators and asset effects.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="54" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="32" fill="#1a2332" font-weight="600" text-anchor="start">Three nested information sets</text>
+<text x="40" y="87" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">Each step retains the previous predictors and adds one kind of information.</text>
+<rect x="40" y="130" width="1120" height="468" rx="10" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.4"/>
+<text x="68" y="174" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">B2 · Price history + option state + option flow</text>
+<text x="1130" y="174" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="end">138 total</text>
+<text x="68" y="207" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#5a6570" font-weight="400" text-anchor="start">Adds trading activity, composition and signed imbalance</text>
+<rect x="76" y="240" width="1048" height="320" rx="10" fill="#eef5fb" stroke="#123c69" stroke-width="1.4"/>
+<text x="104" y="284" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">B1 · Price history + option state</text>
+<text x="1094" y="284" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="end">69 total</text>
+<text x="104" y="317" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#5a6570" font-weight="400" text-anchor="start">Adds the implied-volatility surface and option-state measures</text>
+<rect x="112" y="350" width="976" height="172" rx="10" fill="#ffffff" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="140" y="400" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">B0 · Price and volatility history</text>
+<text x="1058" y="400" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="end">29 total</text>
+<text x="140" y="440" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">The same price-history baseline is present in all three sets.</text>
+<text x="140" y="475" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#5a6570" font-weight="400" text-anchor="start">Chronological training and the same eligible forecast origins</text>
+<text x="40" y="639" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#5a6570" font-weight="400" text-anchor="start">Counts are total predictors, before family-specific indicators and asset effects.</text>
+<text x="40" y="674" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" font-weight="400" text-anchor="start">Boxes show inclusion, not a scale of predictor counts. The information cutoff is 120 seconds.</text>
+</svg>

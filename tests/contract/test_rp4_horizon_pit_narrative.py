@@ -1,0 +1,360 @@
+"""Bind horizon and visibility wording to saved facts without evaluating models."""
+
+import importlib.util
+import json
+import re
+import unicodedata
+from datetime import datetime
+from decimal import Decimal
+from pathlib import Path
+
+from scripts.rp4_archive_sources import assert_historical_sha256, original_path
+
+ROOT = Path(__file__).resolve().parents[2]
+PACKAGE = ROOT / "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7"
+TEST = "tests/contract/test_rp4_horizon_pit_narrative.py"
+SPEC = importlib.util.spec_from_file_location(
+    "horizon_shared_contract", Path(__file__).with_name("test_rp4_saved_holm_closeout.py")
+)
+assert SPEC and SPEC.loader
+shared = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(shared)
+readers = shared.readers
+EVIDENCE_SHA256 = "9449f0564efa738adf9ca51beebc83b983747a2b905f77c0939584b838b10ad8"
+STATISTICS = "artifacts/rp4_v4_b4/primary_statistics.csv"
+ASSETS = ("AAPL", "AMZN", "META", "MSFT", "NVDA", "TSLA")
+
+
+def _evidence() -> dict:
+    return json.loads(original_path(PACKAGE / "horizon_pit_evidence.json").read_text("utf-8"))
+
+
+def test_historical_horizon_pit_package_is_sealed_and_fully_bound() -> None:
+    shared.assert_sealed_package(PACKAGE, TEST)
+
+
+def test_horizon_sources_and_local_chronology_preserve_saved_evidence() -> None:
+    path = PACKAGE / "horizon_pit_evidence.json"
+    assert readers.digest(path.read_bytes()) == EVIDENCE_SHA256
+    evidence = _evidence()
+    assert evidence["schema"] == "rp4-horizon-pit-documentary-evidence-v1"
+    facts = evidence["facts"]
+    assert len(facts) == 84 and sum("quote" in fact for fact in facts.values()) == 15
+    assert len(evidence["source_hashes"]) == 21
+    pins = {record["artifact"]: record["sha256"] for record in evidence["source_hashes"]}
+    assert len(pins) == len(evidence["source_hashes"])
+    for name, expected in pins.items():
+        assert_historical_sha256(shared._safe_source(name), expected)
+    for name, fact in facts.items():
+        assert fact["sha256"] == pins[fact["artifact"]]
+        shared._safe_file(fact["artifact"])
+        value = readers.selected(fact["artifact"], json.dumps(fact["selector"]))
+        if "quote" in fact:
+            assert isinstance(value, str) and fact["quote"] and fact["quote"] in value, name
+            lines = value.splitlines()[fact["line_start"] - 1 : fact["line_end"]]
+            assert "\n".join(lines) == fact["quote"], name
+        else:
+            assert fact["value"] == value, name
+    scope = evidence["scope"]
+    assert scope["research_only"] is True
+    for key in (
+        "capital_go",
+        "scientific_runs_performed",
+        "original_results_changed",
+        "new_licensed_or_sealed_payloads_read",
+        "new_metrics_estimated",
+    ):
+        assert scope[key] is False
+    events = (
+        "conditional_text_time",
+        "v3_close_verification_time",
+        "v4_executable_freeze",
+        "rv15_primary_started",
+        "rv15_primary_completed",
+        "rv5_primary_started",
+        "rv5_primary_completed",
+    )
+    instants = []
+    for name in events:
+        record = facts[name]["value"]
+        direct = facts[name + "_direct"]
+        assert (record["artifact"], record["selector"], record["literal"]) == (
+            direct["artifact"],
+            direct["selector"],
+            direct["value"],
+        )
+        assert record["independent_timestamp"] is False
+        instant = datetime.fromisoformat(record["utc"])
+        assert instant == datetime.fromisoformat(record["sydney"])
+        instants.append(instant)
+    assert all(first < second for first, second in zip(instants, instants[1:], strict=False))
+    assert "no hora autenticada" in facts["conditional_text_time"]["value"]["evidence_role"]
+
+
+def test_observed_horizon_maximum_keeps_primary_scope_and_rv30_answer() -> None:
+    evidence = _evidence()
+    facts = evidence["facts"]
+    assert "varianza realizada a 30 minutos" in facts["proposal_rv30"]["value"]
+    assert facts["rv30_horizon_minutes"]["value"] == 30
+    assert facts["rv15_primary_horizon_minutes"]["value"] == 15
+    assert facts["rv5_secondary_horizon_minutes"]["value"] == 5
+    assert facts["primary_alpha"]["value"] == 0.05
+    for row_index, family, hypothesis, probability in (
+        (0, "linear", "h1", "0.0439"),
+        (1, "linear", "h2", "0.0525"),
+        (2, "trees", "h1", "0.0053"),
+        (3, "trees", "h2", "0.6631"),
+    ):
+        row = readers.selected(STATISTICS, json.dumps([row_index]))
+        assert (row["horizon_minutes"], row["window"]) == ("30", "primary")
+        assert row["family"] == ("log_ridge_harq" if family == "linear" else "lightgbm_qlike")
+        assert row["contrast"] == ("B1_over_B0" if hypothesis == "h1" else "B2_over_B1")
+        prefix = f"rv30_{family}_{hypothesis}_"
+        assert facts[prefix + "p"]["selector"] == [row_index, "p_raw"]
+        assert facts[prefix + "p"]["value"] == row["p_raw"] == probability
+        assert facts[prefix + "decision"]["value"] == row["hypothesis_status"]
+        assert row["hypothesis_status"] == ("REJECTED" if hypothesis == "h1" else "NOT_REJECTED")
+    assert facts["percentage_formula"]["value"] == (
+        "100*mean_session_delta/mean_session_baseline_loss"
+    )
+    assert facts["aggregation"]["value"] == (
+        "origin_mean_within_asset_session_then_equal_asset_then_equal_session"
+    )
+    for horizon, index, formatted in ((30, 1, "0.554"), (15, 9, "0.623"), (5, 17, "0.256")):
+        fact = facts[f"rv{horizon}_linear_flow_percent"]
+        assert fact["artifact"] == STATISTICS
+        assert fact["selector"] == [index, "percent_reduction_mean"]
+        row = readers.selected(STATISTICS, json.dumps([index]))
+        assert (row["horizon_minutes"], row["window"], row["family"], row["contrast"]) == (
+            str(horizon),
+            "primary",
+            "log_ridge_harq",
+            "B2_over_B1",
+        )
+        assert readers.rendered(fact["value"], ".3f|en") == formatted
+        if horizon != 30:
+            for suffix, field in (("delta", "estimate"), ("baseline", "baseline_loss")):
+                assert facts[f"rv{horizon}_linear_flow_{suffix}"]["selector"] == [index, field]
+                assert facts[f"rv{horizon}_linear_flow_{suffix}"]["value"] == row[field]
+    maximum = evidence["observed_maximum"]
+    assert maximum["ordered_fact_ids"] == [
+        "rv15_linear_flow_percent",
+        "rv30_linear_flow_percent",
+        "rv5_linear_flow_percent",
+    ]
+    ordered = [Decimal(facts[name]["value"]) for name in maximum["ordered_fact_ids"]]
+    assert ordered[0] > ordered[1] > ordered[2]
+    assert maximum["maximum_horizon_fact_id"] == "rv15_primary_horizon_minutes"
+    assert "among examined horizons" in maximum["interpretation"]
+    assert "not a population optimum" in maximum["interpretation"]
+    for horizon, role, positive in ((15, "PRIMARY", 6), (5, "SECONDARY", 3)):
+        prefix = f"rv{horizon}_"
+        assert facts[prefix + "window"]["value"] == "primary"
+        assert facts[prefix + "target_horizon_role"]["value"] == role
+        assert facts[prefix + "N_sessions"]["value"] == 419
+        assert facts[prefix + "N_origins"]["value"] == 160832
+        assert facts[prefix + "inherited_eligibility_unchanged"]["value"] is True
+        rows = [facts[prefix + "asset_" + asset]["value"] for asset in ASSETS]
+        for asset, row in zip(ASSETS, rows, strict=True):
+            assert (row["subset"], row["family"], row["contrast"], row["N_sessions"]) == (
+                "asset_" + asset,
+                "log_ridge_harq",
+                "B2_over_B1",
+                419,
+            )
+        assert len(rows) == facts[prefix + "asset_count"]["value"] == 6
+        assert sum(row["N_origins"] for row in rows) == facts[prefix + "N_origins"]["value"]
+        assert (
+            sum(row["estimate"] > 0 for row in rows)
+            == (facts[prefix + "positive_estimate_count"]["value"])
+            == positive
+        )
+    assert "vida corta" in facts["horizon_rationale"]["quote"]
+    assert "Horizonte primario: 15 minutos" in facts["horizon_rationale"]["quote"]
+    assert "Horizonte secundario registrado: 5 minutos" in facts["horizon_rationale"]["quote"]
+    assert (
+        "estimandos distintos, no replicaciones independientes"
+        in (facts["cross_horizon_limit"]["quote"])
+    )
+    summary = original_path(PACKAGE / "executive_summary.md").read_text("utf-8")
+    for phrase in (
+        "La propuesta fijó RV30",
+        "The proposal specified RV30",
+        "como exploración declarada",
+        "as declared exploration",
+        "máximo observado entre los horizontes examinados",
+        "observed maximum among the examined horizons",
+        "no identifica un horizonte óptimo ni demuestra diferencias significativas",
+        "neither identifies an optimal horizon nor establishes significant differences",
+        "+0,623 %, 6/6",
+        "+0,256 %, 3/6",
+        "+0.623%, 6/6",
+        "+0.256%, 3/6",
+    ):
+        assert phrase in summary, phrase
+    qa = (
+        original_path(PACKAGE / "examiner_qa.md")
+        .read_text("utf-8")
+        .split("## 2.", 1)[1]
+        .split("## 3.", 1)[0]
+    )
+    assert "no aumenta monótonamente al acortar" in qa
+    assert "no pruebas de un óptimo temporal" in qa
+    assert "ni de seis réplicas independientes" in qa
+    assert "no está autenticada por un tercero" in qa
+    slides = original_path(PACKAGE / "defense_slides.md").read_text("utf-8")
+    assert "familia lineal y la ventana primaria" in slides
+    assert "mayor efecto relativo observado entre los horizontes examinados" in slides
+    assert (
+        "no una prueba de un óptimo ni de una diferencia significativa entre horizontes" in slides
+    )
+
+
+def test_pit_clock_intersection_is_separate_from_targets_and_assigned_sensitivities() -> None:
+    evidence = _evidence()
+    facts = evidence["facts"]
+    assert facts["source_visibility_delay_seconds"]["value"] == 120
+    semantics = evidence["pit_semantics"]
+    assert semantics["predicate"] == "created_at <= forecast_origin - source_cutoff_seconds"
+    assert semantics["extra_gamma_predicate"] == (
+        "executed_at <= forecast_origin - source_cutoff_seconds"
+    )
+    assert semantics["gamma_equivalent"] == (
+        "max(created_at, executed_at) <= forecast_origin - source_cutoff_seconds"
+    )
+    for name, fragments in {
+        "source_clock_definition": ("operational record-creation stamp", "*proxy*"),
+        "source_and_exchange_clocks": ('tape["created_at"]', 'tape["executed_at"]'),
+        "source_predicate_implementation": (
+            "- timedelta(seconds=CUTOFF_SECONDS)",
+            'np.searchsorted(created, cutoffs_us, side="right")',
+        ),
+        "gamma_visibility_definition": ("BOTH created_at and executed_at <=",),
+        "gamma_max_clock": ("np.maximum(created, executed) if causal else created",),
+        "gamma_cutoff_implementation": (
+            "origins * 60_000_000 - 120_000_000",
+            'np.searchsorted(visible_clock, cutoffs, side="right")',
+        ),
+        "bar_label_completion": ("labelled by their start", "CUTOFF_SECONDS // 60 + 1"),
+        "har_completion_predicate": (
+            "- pl.duration(seconds=120) + pl.duration(microseconds=1)",
+            "label_shift_minutes=1",
+        ),
+        "no_double_source_delay": ("no se aplica un\nsegundo retraso",),
+        "target_not_shifted_by_predictor_delay": ("or shift by predictor latency",),
+        "target_index_convention": ("== horizon + 1", "origins[valid] - first, horizon"),
+        "target_end_convention": ('pl.col("forecast_origin_utc") + pl.duration(minutes=horizon)',),
+        "client_receipt_limit": ("not a provider-proven", "client-receipt timestamp"),
+    }.items():
+        for fragment in fragments:
+            assert fragment in facts[name]["quote"], (name, fragment)
+    assignment = evidence["owner_assignment"]
+    assert assignment["alternative_visibility_cutoff_seconds"] == [60, 300]
+    assert assignment["literal_public_excerpt"] == "60 y 300 s son sensibilidades de ese corte"
+    assert (
+        readers.digest(assignment["literal_public_excerpt"].encode("utf-8"))
+        == (assignment["literal_excerpt_sha256"])
+    )
+    assert assignment["projection_kind"] == "SANITIZED_OWNER_ASSIGNMENT_NOT_EXECUTION_RECEIPT"
+    assert assignment["execution_state_observed"] is assignment["results_observed"] is False
+    assert assignment["execution_state"] is assignment["results"] is None
+    qa = (
+        original_path(PACKAGE / "examiner_qa.md")
+        .read_text("utf-8")
+        .split("## 2.", 1)[1]
+        .split("## 3.", 1)[0]
+    )
+    for phrase in (
+        "created_at <= t − 120 segundos",
+        "executed_at <= t − 120 segundos",
+        "máximo de ambos relojes",
+        "no se suman a RV15/RV5",
+        "no se reaplican a columnas que ya incorporan el corte",
+        "no prueba cuándo se publicó el registro ni cuándo lo recibió un cliente",
+        "aquí no se afirma su ejecución, preparación ni resultados",
+    ):
+        assert phrase in qa, phrase
+    summary = original_path(PACKAGE / "executive_summary.md").read_text("utf-8")
+    for phrase in (
+        "marca de creación del registro",
+        "no demuestra cuándo lo recibió un cliente histórico",
+        "record-creation timestamp",
+        "does not establish when a historical client received the record",
+    ):
+        assert phrase in summary, phrase
+    slides = original_path(PACKAGE / "defense_slides.md").read_text("utf-8")
+    for phrase in (
+        "creación del registro y la ejecución bursátil",
+        "created_at <= t − 120 segundos",
+        "executed_at <= t − 120 segundos",
+        "etiquetadas por su inicio y deben haber cerrado al llegar al corte",
+        "no añade el retraso de visibilidad al horizonte ni lo aplica dos veces",
+        "no se inspecciona ni se afirma su preparación, ejecución o resultado",
+        "Son sensibilidades del corte de información, no horizontes del objetivo",
+    ):
+        assert phrase in slides, phrase
+
+
+def test_historical_summary_pdf_keeps_full_text_and_numbers_on_one_page_per_language() -> None:
+    receipt = json.loads(original_path(PACKAGE / "summary_layout_receipt.json").read_text("utf-8"))
+    assert receipt["schema"] == "rp4-executive-summary-layout-receipt-v1"
+    assert receipt["source_markdown"] == "executive_summary.md"
+    assert receipt["pdf"] == "executive_summary.pdf"
+    markdown_bytes = original_path(PACKAGE / receipt["source_markdown"]).read_bytes()
+    pdf = original_path(PACKAGE / receipt["pdf"]).read_bytes()
+    assert readers.digest(markdown_bytes) == receipt["source_markdown_sha256"]
+    assert receipt["source_md_sha256"] == receipt["source_markdown_sha256"]
+    assert readers.digest(pdf) == receipt["pdf_sha256"]
+    assert receipt["reader_source"] == "tests/contract/test_rp4_defense_package.py"
+    assert (
+        readers.digest(original_path(shared._safe_file(receipt["reader_source"])).read_bytes())
+        == (receipt["reader_source_sha256"])
+    )
+    page_count = len(re.findall(rb"/Type\s*/Page(?!s)\b", pdf))
+    assert page_count == receipt["page_count"] == receipt["uncompressed_page_object_count"] == 2
+    assert receipt["page_compression"] is False and receipt["page_size"] == "A4"
+    boxes = re.findall(rb"/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)\s*\]", pdf)
+    assert len(boxes) == 2
+    for width, height in boxes:
+        assert abs(float(width) - 595.2755905511812) < 0.01
+        assert abs(float(height) - 841.8897637795277) < 0.01
+    font_sizes = [float(value) for value in re.findall(rb"/[\w+]+\s+([\d.]+)\s+Tf\b", pdf)]
+    assert font_sizes and min(font_sizes) >= 9.5
+    assert min(font_sizes) == receipt["minimum_rendered_font_pt"]
+    pages = receipt["pages"]
+    assert len(pages) == 2
+    assert [page["language"] for page in pages] == ["es", "en"]
+    assert [page["page_index_zero_based"] for page in pages] == [0, 1]
+    assert (
+        min(page["layout"]["body_font_pt"] for page in pages)
+        == (receipt["minimum_body_font_pt"])
+        >= 9.5
+    )
+    source = markdown_bytes.decode("utf-8")
+    marker = "## Executive summary — English"
+    assert source.count(marker) == 1
+    first, second = source.split(marker)
+    for section, page in zip((first, marker + second), pages, strict=True):
+        extracted = page["extracted_text"]
+        expected_numbers = readers.tokens(section)
+        assert expected_numbers == readers.tokens(extracted)
+        assert expected_numbers == page["source_numeric_sequence"]
+        assert expected_numbers == page["extracted_numeric_sequence"]
+        assert page["numeric_sequence_equal"] is True
+        visible = re.sub(r"<div\b[^>]*>\s*</div>", "", section)
+        visible = re.sub(r"(?m)^#{1,6}\s+", "", visible)
+        visible = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", visible)
+        visible = re.sub(r"`([^`]*)`", r"\1", visible.replace("**", ""))
+        visible = "".join(unicodedata.normalize("NFC", visible).split())
+        actual = "".join(unicodedata.normalize("NFC", extracted).split())
+        assert visible == actual
+        assert len(visible) == page["visible_character_count"]
+        assert readers.digest(visible.encode("utf-8")) == page["source_visible_text_sha256"]
+        assert readers.digest(actual.encode("utf-8")) == page["extracted_visible_text_sha256"]
+        assert page["text_complete"] is True
+    joined = "\f".join(page["extracted_text"] for page in pages)
+    assert readers.digest(joined.encode("utf-8")) == receipt["extracted_text_sha256"]
+    assert readers.tokens(source) == readers.tokens(joined) == receipt["source_numeric_sequence"]
+    assert receipt["source_numeric_sequence"] == receipt["extracted_numeric_sequence"]
+    assert receipt["numeric_sequence_equal"] is True
+    assert all(value is False for value in receipt["scope"].values())

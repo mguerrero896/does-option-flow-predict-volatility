@@ -5,7 +5,7 @@
 > current eligibility and [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](rp2_v3/SUPERSEDED_RESULTS.md)
 > for withdrawn numerical claims.
 
-At its 2026-08-17 freeze, this ledger controlled numerical claims in the capstone
+At its 2026-08-17 freeze, this ledger controlled numerical claims in the research report
 report, presentation and oral defense. It remains a scoped historical audit record and
 does not authorize a current claim. `SUPPORTED` means the stated artifact
 directly supports the bounded statement; it does not imply a universal effect.

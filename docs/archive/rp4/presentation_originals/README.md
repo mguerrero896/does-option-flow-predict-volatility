@@ -1,0 +1,11 @@
+# Original final reports and presentation sources
+
+The [original-path map](original_paths.json) records the former repository path, archive location and original SHA-256 of each document, renderer and custody record. Locally preserved originals are byte-exact. Where a public distribution requires redaction, its separate receipt records the original identity and the actual public file hash. The `.original` suffix identifies historical sources and does not itself assert byte equality after a declared redaction.
+
+The full English publications are the [v4 results](../../../rp4/results_v4.md), [final report](../../../rp4/RESULTADO_FINAL.md), [first documentary revision](../../../rp4/RESULTADO_FINAL_revision_1.md) and [second documentary revision](../../../rp4/RESULTADO_FINAL_revision_2.md). All numerical assertions, adverse findings, qualifications and referenced source artifacts are retained. Decimal and grouping notation follows English conventions.
+
+The [translation receipt](../../../rp4/presentation_translation_receipt.json) records the comparison and checks. Historical hashes authenticate the original bytes retained here; they do not authenticate the later English presentation. No model fitting, evaluation rerun or reading of sealed/prospective data forms part of the translation.
+
+The full English [runbook](../../../rp4/OPERATING_GUIDE.md), [data and execution history](../../../rp4/data_and_execution_v1.md), [v4 specification](../../../rp4/specification_v4.md) and [prospective registration chain](../../../rp4/prospective_confirmation_v1_amendment_3.md) retain their scientific rules and historical qualifications. Their [protocol translation receipt](../../../rp4/protocol_translation_receipt.json) verifies quantities, references, identifiers, code and seals.
+
+The [v5 report](../../../rp4/results_v5.md) is a registered exploratory extension with a separately labelled post hoc sensitivity. Its [translation receipt](../../../rp4/v5_translation_receipt.json) covers the complete report, original specification, effective cost amendment and later prospective secondary registration. The [public import allowlist](../../../../artifacts/rp4_v5_public_import/allowlist_receipt.json) contains only saved aggregates, source code and scientific custody records.

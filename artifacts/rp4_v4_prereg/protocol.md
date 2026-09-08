@@ -1,28 +1,7 @@
-# RP4 v4 — pre-declaración condicional del último intento
+# V4 conditional predeclaration and its historical scope
 
-Escrito el 2026-09-07 a las 20:20 (Australia/Sydney), ANTES de conocer results_v3.md. research está en la etapa A2 de v3 (materialización de la variable gamma, 153 tareas pendientes). Esta pre-declaración fija qué se hará si v3 no confirma B2 > B1, para que el último intento sea secuencial y declarado, no una búsqueda posterior al resultado. Su SHA-256 se registra en el chat de la sesión y en el manifiesto de esta carpeta.
+This document is archived as historical evidence. Read its [English summary](../../docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md.summary.md) and [preserved reading copy](../../docs/archive/public_history/artifacts/rp4_v4_prereg/protocol.md). The [current English defense](../../docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md) explains the present interpretation and limits.
 
-## Disparador
+The exact original and its SHA-256 remain in the [archive path map](../../docs/archive/public_history/original_paths.json). This relocation performs no scientific evaluation.
 
-v4 se ejecuta únicamente si en v3 la hipótesis H2 (reducción media de QLIKE de B2 sobre B1 > 0, prueba unilateral al 5 % tras rechazar H1) NO se rechaza en NINGUNA de las dos familias. Si una familia rechaza H2 y la otra no, el resultado se reporta como dependiente de la familia y v4 no se ejecuta. Si ambas rechazan, v4 no se ejecuta.
-
-## Hipótesis de v4
-
-La información del flujo de opciones es de vida corta: la cobertura de los dealers actúa en minutos. Si B2 no mejora el pronóstico a 30 minutos, puede mejorarlo a horizontes más cortos. v4 cambia UNA cosa: el horizonte del objetivo.
-
-- Horizonte primario: 15 minutos (rv_15).
-- Horizonte secundario registrado: 5 minutos (rv_5).
-- Nada más cambia: mismos conjuntos B0/B1/B2 de v3 (con la regla de ventana vacía y las medidas de desbalance gamma), mismas familias (log-ridge HARQ y LightGBM QLIKE), misma partición 2024-08-02 a 2026-07-31 y confirmación 2026-08-03 a 2026-09-04, mismo walk-forward por sesión con purga y embargo, misma inferencia secuencial unilateral H1 → H2 por familia, mismos secundarios robustos (mediana, media recortada, posterior).
-
-## Objetivos
-
-rv_15 y rv_5 se construyen desde las mismas barras de 1 minuto de RP4 con el mismo estimador que rv30 (fórmula del bloque 3 de RP2-v3) y se validan byte a byte contra `rp2_block3_target/target_panel.parquet` (columnas rv_15 y rv_5) en el tramo donde se solapan, hasta 2026-07-17. Una discrepancia se investiga antes de evaluar. La ventana de confirmación no tiene referencia previa y se reporta como tal.
-
-## Regla de cierre
-
-- Éxito: H2 rechazada al horizonte primario (15 min) en al menos una familia, con el resultado a 5 min reportado como secundario.
-- Si no: el proyecto se cierra con B1 > B0 como resultado principal y B2 como nulo informativo a 30, 15 y 5 minutos. No hay v5. Se pasa a la fase de organización y publicación.
-
-## Multiplicidad y divulgación
-
-v4 es la cuarta evaluación de las mismas ventanas y se declara como tal. En el informe se listan v1, v2, v3 y v4 en orden, con la razón registrada de cada cambio: v2 corrigió defectos del instrumento (cobertura, capacidad, regularización), v3 añadió el mecanismo y la regla de ventana vacía, v4 cambió el horizonte bajo esta pre-declaración. La etiqueta se mantiene: fuera de muestra walk-forward, partición fijada 2026-09-07.
+RESEARCH_ONLY. NOT INVESTMENT ADVICE. `capital_go=false`.

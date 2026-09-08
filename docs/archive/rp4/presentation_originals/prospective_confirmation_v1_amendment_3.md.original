@@ -1,0 +1,56 @@
+# Réplica prospectiva v4 — enmienda 3 del registro v1
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+**Sellado local: 2026-09-08T06:56:21.897094+00:00.** Esta enmienda queda pre-declarada y sellada localmente, sin marca de tiempo de un tercero, antes de la primera adquisición programada: **2026-09-09 a las 10:00 Australia/Sydney**. La observación del colector anterior al sello muestra tarea habilitada, sin ejecución registrada y directorio de adquisición inexistente. No se adquirieron ni leyeron datos prospectivos para preparar esta enmienda. Es evidencia del estado local, no una afirmación sobre el conocimiento de todas las personas. Véanse el [recibo](prospective_confirmation_v1_amendment_3_receipt.json) y el [sidecar](prospective_confirmation_v1_amendment_3.sha256).
+
+## Cadena íntegra de sellados
+
+| Documento | Sello UTC | SHA-256 del documento |
+|---|---|---|
+| [v1](prospective_confirmation_v1.md) | 2026-09-08T04:24:01.918499+00:00 | `317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d` |
+| [Enmienda 1](prospective_confirmation_v1_amendment_1.md) | 2026-09-08T04:31:58.752153+00:00 | `036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3` |
+| [Enmienda 2](prospective_confirmation_v1_amendment_2.md) | 2026-09-08T05:27:15.316335+00:00 | `b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9` |
+
+No se edita ninguno de esos documentos, sus recibos o sus hashes. El horario inicial del v1 es un antecedente histórico; la enmienda 1 registra el horario vigente de las 10:00. Esta enmienda modifica las etiquetas de alcance y añade una lectura acumulada; no cambia ninguna regla ya escrita ni crea una especificación científica nueva.
+
+## Potencia de planificación, calculada antes de la adquisición
+
+Se utilizan exclusivamente los estimandos e intervalos del [resumen histórico RV15, ventana primaria](../../artifacts/rp4_v4_b2_rv15/summary.json), SHA-256 `451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4`. No se vuelve a ejecutar el bootstrap ni se ajusta ningún modelo. Se aproxima un error típico a partir de la anchura del intervalo percentil guardado; no se dispone aquí de una distribución de potencia bootstrap guardada.
+
+Para H2 lineal B2/B1, con 419 sesiones, delta = 0,0011337596590923558 e IC del 95 % [0,00033503697025205506; 0,0019321615865300122]. Con Φ normal estándar, SE419 = (IC superior − IC inferior)/(2 × Φ⁻¹(0,975)) = 0,000407437235805319; delta/SE419 = 2,7826608848143843. Se supone SE(n) = SE419 × √(419/n) y potencia marginal = Φ(delta/SE(n) − Φ⁻¹(0,95)). Se aplica la misma aproximación al IC guardado de H1, por separado.
+
+| Sesiones supuestas | Potencia H2 marginal | Potencia H1 marginal | Papel |
+|---|---:|---:|---|
+| 20 | 14,99 % | 11,27 % | Consistencia primaria temprana |
+| 40 | 21,62 % | 15,08 % | Estabilidad acumulada |
+| 45 | 23,18 % | 15,96 % | Escenario hipotético; D no es independiente |
+| 120 | 43,81 % | 27,91 % | Sólo planificación, sin lectura |
+| 146 | 49,91 % | 31,69 % | Sólo planificación, sin lectura |
+| 335 | 80,05 % | 54,98 % | Lectura final acumulada; 80 % sólo para H2 |
+
+Los valores de 120 y 146 son escenarios de planificación: **no autorizan lecturas**. La fila de 45 supone hipotéticamente 45 sesiones nuevas de una distribución estable; **no estima la potencia condicional de D**, que contiene 25 sesiones ya observadas y sólo 20 nuevas. No hay estimaciones justificadas de potencia para la ablación A ni para los secundarios B/C ajustados por Holm; se declaran no disponibles, no se les asigna la potencia de H2.
+
+Como sensibilidad de un estimando distinto, una prueba binomial unilateral de signos al 5 %, bajo signos independientes con probabilidad positiva 0,59, tiene potencia exacta 10,79 % con 20 sesiones y 27,95 % con 45. Usando la frecuencia histórica exacta 249/419, esos valores son 11,52 % y 29,95 %. Este cálculo no registra una prueba adicional, no es la potencia de la mediana bootstrap pareada y no sustituye ninguna decisión. La independencia de signos es un supuesto de la sensibilidad, no una propiedad demostrada de estas sesiones.
+
+**Las lecturas de 20, 40 y 45 son comprobaciones de consistencia con potencia limitada, no pruebas diseñadas para alta potencia.** En 335 sesiones, el 80,05 % corresponde exclusivamente a H2 aislado; H1 alcanza aproximadamente 54,98 %. La potencia conjunta de H1→H2 no puede superar la menor potencia marginal, aproximadamente 54,98 % bajo estas aproximaciones. No se ha demostrado una potencia del 80 % para confirmar toda la jerarquía.
+
+La anchura de un IC percentil no es un error típico normal exacto y ese IC no invierte el p centrado registrado. El escalado supone efecto, varianza de largo plazo, dependencia y composición comparables a la historia. El efecto se estimó tras adaptaciones sobre una muestra observada y puede resultar optimista; cambios de régimen o del aprendizaje invalidarían la extrapolación. En 20 sesiones caben sólo cuatro longitudes de bloque de cinco: este cálculo no valida el tamaño ni la potencia finita del bootstrap. Estas cifras son sensibilidades de planificación, no probabilidades verificadas de éxito futuro.
+
+## Lecturas anteriores: reglas y veredictos conservados
+
+- **20 prospectivas:** lectura temprana de consistencia, con el primario original intacto: familia lineal RV15, H1 B1/B0 y después H2 B2/B1, ambos con estimando positivo y p unilateral ≤ 0,05; H2 sólo se abre si H1 rechaza. Se conserva literalmente su veredicto, favorable o desfavorable. A, B, C y D se leen una sola vez al completar estas 20, incluso si el primario falla, según la enmienda 2.
+- **40 prospectivas:** lectura acumulada de estabilidad una sola vez si el calendario original lo permite; no rescata el primario ni repite A/B/C/D.
+- **45 agrupadas:** secundario D de consistencia, formado por las 25 históricas y las primeras 20 prospectivas; conserva peso igual por sesión, la secuencia nominal propia y su condición de análisis observado en parte. No es una réplica independiente ni rescata el primario.
+
+A/B/C conservan la familia Holm de tres y D su secuencia separada. Ni los p, ni los umbrales, ni el estimando, ni la muestra de una lectura se cambian según el resultado de otra.
+
+## Nueva lectura final, una sola vez al completar 335 prospectivas
+
+Se fija ahora la lectura de **las primeras 335 sesiones prospectivas elegibles**, en orden cronológico y según la elegibilidad completa del v1. Es acumulada e incluye las sesiones de las lecturas tempranas; no incorpora las 25 históricas de D. Se ejecuta una sola vez al alcanzarse el número fijado, independientemente de lo que hayan mostrado las lecturas anteriores. El calendario orientativo es aproximadamente enero de 2028, condicionado a sesiones elegibles y adquisición continua; la fecha no decide la muestra y un retraso no permite sustituir ni seleccionar sesiones.
+
+Se conserva la misma especificación v4: B0 ⊂ B1 ⊂ B2, familias, transformaciones, máscara común, selección temporal causal y entrenamiento expansivo; RV15 primario y RV5 secundario. La decisión registrada para esta lectura corresponde exclusivamente a la familia lineal RV15: **H1→H2 al 5 % unilateral, ambos con estimando positivo y p ≤ 0,05; H2 se abre sólo tras rechazo de H1 en la misma muestra**. Se usa la receta ya registrada: bootstrap circular de sesiones, bloques de cinco, 9.999 réplicas, semilla 20260907, nula centrada, corrección +1 e IC percentil bilateral del 95 %. Esta enmienda no amplía a 335 las lecturas de A/B/C/D.
+
+Se publicará apoyo nominal a la secuencia en la lectura final sólo si ambos escalones rechazan. Si H1 falla, H2 queda nominal no abierto; si falta cobertura o la inferencia no es computable, se registra esa limitación sin sustituciones ni repetición. Un éxito final no reescribe ni rescata el veredicto de 20. **No existe una regla de éxito por rechazar en cualquiera de las dos lecturas.** Los umbrales del 5 % son por lectura; no se reclama control global al 5 % entre lecturas acumuladas, secundarios o búsqueda histórica. Las lecturas comparten datos y no son réplicas independientes.
+
+**No se permite ninguna lectura intermedia adicional**: 120 y 146 no son puntos de inspección; 45 es D al llegar a 20 prospectivas, no una lectura de 45 prospectivas. El monitoreo de adquisición se limita a disponibilidad, integridad y elegibilidad sin mirar pérdidas, efectos o p fuera de las lecturas registradas. No hay rescate, parada opcional por resultados ni nueva especificación tras un resultado desfavorable. Las limitaciones de disponibilidad temporal como proxy, causalidad y rentabilidad permanecen intactas.

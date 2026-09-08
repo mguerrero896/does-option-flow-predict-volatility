@@ -26,14 +26,14 @@ from artifacts.rp4_v3_code.report_v3 import (
 
 ROOT = Path(__file__).resolve().parents[2]
 WINDOWS = ("primary", "confirmation")
-LABELS = {30: "v3 RV30", 15: "v4 RV15 primario", 5: "v4 RV5 secundario"}
+LABELS = {30: "v3 RV30", 15: "v4 RV15 primary", 5: "v4 RV5 secondary"}
 SPEC_SHA = "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04"
 V3_PINS = {
     "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
     "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
     "artifacts/rp4_v3_b2/session_losses.csv": "8eb70bfe30c60a9cc1dd6802dd711e506cb4582ae172fdfbe9fee9f9ddc5064f",
     "artifacts/rp4_v3_b3/session_losses.csv": "1798a86cde522b2e7e44bbd69dc758da40ff15ba62c951eea2032100d2782725",
-    "docs/rp4/results_v3.md": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f",
+    "docs/archive/rp4/results_v3_original/results_v3.md.original": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f",
 }
 type Rows = list[dict[str, Any]]
 type Results = dict[tuple[int, str], tuple[dict[str, Any], Rows]]
@@ -74,13 +74,13 @@ def verify_results(summary: dict[str, Any], rows: Rows, horizon: int, window: st
 
 
 def main_table(results: Results, window: str) -> str:
-    headers = ["Familia / contraste"]
+    headers = ["Family / contrast"]
     for h in LABELS:
         headers += [
-            f"{LABELS[h]} Δ [IC95%]",
-            "p unilateral / formal",
+            f"{LABELS[h]} Δ [95% CI]",
+            "one-sided / formal p",
             "% QLIKE",
-            "N sesiones/orígenes",
+            "N sessions/origins",
         ]
     output = []
     for family in inf.FAMILIES:
@@ -96,9 +96,9 @@ def main_table(results: Results, window: str) -> str:
                 formal = (
                     number(item["p_for_decision"])
                     if item["p_for_decision"] is not None
-                    else "NO ABIERTA"
+                    else "NOT OPENED"
                     if item["hypothesis_status"] == "NOT_TESTED"
-                    else "NO VERIFICABLE"
+                    else "UNVERIFIABLE"
                 )
                 row += [
                     f"{number(item['estimate'], signed=True)} [{number(item['ci_low'])}, {number(item['ci_high'])}]",
@@ -113,11 +113,11 @@ def main_table(results: Results, window: str) -> str:
 def figure(results: Results, contrast: str, base: str, richer: str) -> str:
     out = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1320" viewBox="0 0 1680 1320" role="img">',
-        f"<title>RP4 v3 y v4: {html.escape(contrast)}</title>",
-        "<desc>Doce paneles con fechas reales y escalas independientes; todas las sesiones, sin recortes.</desc>",
+        f"<title>RP4 v3 and v4: {html.escape(contrast)}</title>",
+        "<desc>Twelve panels with actual dates and independent scales; all sessions, without trimming.</desc>",
         '<rect width="100%" height="100%" fill="white"/><g font-family="Segoe UI,Arial,sans-serif" fill="#182333">',
-        f'<text x="65" y="38" font-size="23">{html.escape(contrast)} · QLIKE acumulado base − ampliado</text>',
-        '<text x="65" y="65" font-size="13">Horizontes distintos; escalas independientes. Valores positivos favorecen al conjunto rico.</text>',
+        f'<text x="65" y="38" font-size="23">{html.escape(contrast)} · Cumulative baseline − expanded-model QLIKE</text>',
+        '<text x="65" y="65" font-size="13">Different horizons; independent scales. Positive values favour the richer set.</text>',
     ]
     for col, horizon in enumerate(LABELS):
         for wi, window in enumerate(WINDOWS):
@@ -401,33 +401,37 @@ def run() -> dict[str, Any]:
         if all(r["rejected"] for r in results[15, "primary"][0]["contrasts"] if r["family"] == f)
     ]
     text = [
-        "# RP4 v4 — cierre final del horizonte del flujo",
+        "# RP4 v4 — final flow-horizon closeout",
         "",
-        spec["label"] + ".",
+        spec["label"].replace(
+            "fuera de muestra walk-forward, partición fijada ",
+            "out-of-sample walk-forward, split fixed ",
+        )
+        + ".",
         "RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.",
-        "## Resultado y regla de cierre",
+        "## Result and closeout rule",
         "",
         (
-            "RV15 satisface H1 → H2 en: "
+            "RV15 satisfies H1 → H2 in: "
             + ", ".join(winning)
-            + ". Se reporta el alcance por familia; RV5 no decide el resultado."
+            + ". Scope is reported by family; RV5 does not determine the result."
             if winning
-            else "RV15 no satisface H1 → H2 en ninguna familia. Se cierra este intento: B1>B0 observado en la primaria de 30 minutos sigue siendo el resultado principal; la evidencia de B2 se informa por horizonte sin afirmar equivalencia a cero."
+            else "RV15 does not satisfy H1 → H2 in either family. This attempt closes: B1>B0 observed in the 30-minute primary window remains the main result; B2 evidence is reported by horizon without claiming equivalence to zero."
         ),
-        "No hay v5. La regla de al menos una familia es operativa; no implica control global 5% entre familias ni versiones.",
-        "## Comparación primaria",
+        "There is no v5. The at-least-one-family rule is operational; it does not imply global 5% control across families or versions.",
+        "## Primary comparison",
         "",
         main_table(results, "primary"),
-        "## Comparación de confirmación",
+        "## Confirmation comparison",
         "",
         main_table(results, "confirmation"),
-        "Delta positivo favorece al conjunto rico. IC95% percentil bilateral; p unilateral de nula centrada. H2 NO ABIERTA significa que H1 no rechazó; su p nominal no es una prueba formal. Las dos ventanas se informan separadas, no se suman como replicaciones independientes.",
-        "En las decisiones, rechazo significa rechazo de la nula delta≤0, es decir evidencia a favor del incremento; no rechazo de la ventaja como hipótesis sustantiva.",
-        "[Estadísticas completas, p bilateral y Holm, DM/GW y decisiones](../../artifacts/rp4_v4_b4/primary_statistics.csv). Reducción % = 100 × media de diferencias por sesión / media de QLIKE base. Los horizontes tienen objetivos distintos.",
-        "## Cobertura de la muestra",
+        "Positive delta favours the richer set. The 95% CI is a two-sided percentile interval; the one-sided p-value uses a centred null. H2 NOT OPENED means H1 did not reject; its nominal p-value is not a formal test. The two windows are reported separately and are not added together as independent replications.",
+        "In the decisions, rejection means rejection of the null delta≤0, that is, evidence favouring the increment; it does not mean rejection of the advantage as a substantive hypothesis.",
+        "[Full statistics, two-sided p-values and Holm, DM/GW and decisions](../../artifacts/rp4_v4_b4/primary_statistics.csv). Reduction % = 100 × mean of session differences / mean baseline QLIKE. The horizons have different targets.",
+        "## Sample coverage",
         "",
         table(
-            ["Horizonte", "Ventana", "Activo", "Programados", "Elegibles", "%"],
+            ["Horizon", "Window", "Asset", "Scheduled", "Eligible", "%"],
             [
                 [
                     str(r["horizon_minutes"]),
@@ -440,8 +444,8 @@ def run() -> dict[str, Any]:
                 for r in coverage
             ],
         ),
-        "[Conteos y causas](../../artifacts/rp4_v4_b4/coverage.csv). Máscara y entrenamiento de v3 conservados; RV15/RV5 no incorporan nuevos orígenes por ser más cortos.",
-        "## Secundarios registrados, no promovibles",
+        "[Counts and reasons](../../artifacts/rp4_v4_b4/coverage.csv). The v3 mask and training are retained; RV15/RV5 do not gain new origins because they are shorter.",
+        "## Registered secondaries that cannot be promoted to primary evidence",
         "",
     ]
     for horizon in (15, 5):
@@ -452,12 +456,12 @@ def run() -> dict[str, Any]:
                 "",
                 table(
                     [
-                        "Familia",
-                        "Contraste",
-                        "Estadístico",
+                        "Family",
+                        "Contrast",
+                        "Statistic",
                         "Delta",
-                        "IC95%",
-                        "p bilateral",
+                        "95% CI",
+                        "two-sided p",
                         "Holm",
                         "N",
                     ],
@@ -476,7 +480,7 @@ def run() -> dict[str, Any]:
                     ],
                 ),
                 table(
-                    ["Familia", "Contraste", "P(delta>0) condicional", "HAC SE", "N"],
+                    ["Family", "Contrast", "Conditional P(delta>0)", "HAC SE", "N"],
                     [
                         [
                             r["family"],
@@ -490,20 +494,20 @@ def run() -> dict[str, Any]:
                 ),
             ]
     text += [
-        "La posterior es una aproximación gaussiana con varianza HAC plug-in: no integra la incertidumbre de esa varianza. Mediana pareada no equivale a diferencia de medianas; recorte 5% por cada cola sólo en el secundario.",
-        "[Todos los regímenes con N, desconocidos, intervalos y p](../../artifacts/rp4_v4_b4/regime_secondary.csv) · [Activos, bloques, retiradas y últimas 30 sesiones](../../artifacts/rp4_v4_b4/robustness.csv) · [Interacción alto gamma frente al resto](../../artifacts/rp4_v4_b4/high_gamma_vs_rest.csv). Se conservan primera/última hora, viernes calendario, tercer viernes, alto flujo, eventos y ventanas vacías/no vacías; no se promueve un estrato favorable.",
-        "## Ventanas vacías y cotas",
+        "The posterior is a Gaussian approximation with plug-in HAC variance: it does not integrate uncertainty in that variance. The paired median is not the difference of medians; 5% trimming from each tail applies only to the secondary analysis.",
+        "[All regimes with N, unknowns, intervals and p-values](../../artifacts/rp4_v4_b4/regime_secondary.csv) · [Assets, blocks, exclusions and last 30 sessions](../../artifacts/rp4_v4_b4/robustness.csv) · [High-gamma interaction against the rest](../../artifacts/rp4_v4_b4/high_gamma_vs_rest.csv). First/last hour, calendar Friday, third Friday, high flow, events and empty/nonempty windows are retained; a favourable stratum is not promoted.",
+        "## Empty windows and bounds",
         "",
         table(
             [
                 "RV",
-                "Ventana",
-                "Ventana flujo",
-                "Activo",
+                "Window",
+                "Flow window",
+                "Asset",
                 "N",
-                "Vacías",
-                "No vacías",
-                "Desconocidas",
+                "Empty",
+                "Nonempty",
+                "Unknown",
             ],
             [
                 [
@@ -519,10 +523,10 @@ def run() -> dict[str, Any]:
                 for r in census
             ],
         ),
-        "El contraste B2/B1 dentro y fuera de los vacíos está en el CSV de regímenes, con intervalos y N; ningún origen sale por estar vacío.",
-        "[Rondas/hojas/lambda, cotas y contactos de cada sesión](../../artifacts/rp4_v4_b4/fit_selection_bounds.csv). Cotas calculadas únicamente con P1/P99 del objetivo de entrenamiento del horizonte correspondiente.",
+        "The B2/B1 contrast inside and outside empty windows is in the regime CSV, with intervals and N; no origin is excluded for being empty.",
+        "[Rounds/leaves/lambda, bounds and bound hits for each session](../../artifacts/rp4_v4_b4/fit_selection_bounds.csv). Bounds are calculated only from P1/P99 of the training target for the corresponding horizon.",
         table(
-            ["RV", "Ventana", "Ridge", "Fase", "N pronósticos", "Cota inferior", "Cota superior"],
+            ["RV", "Window", "Ridge", "Phase", "N forecasts", "Lower bound", "Upper bound"],
             [
                 [
                     str(r["horizon_minutes"]),
@@ -536,8 +540,8 @@ def run() -> dict[str, Any]:
                 for r in bounds
             ],
         ),
-        "Los denominadores de validación suman aplicaciones en ajustes sucesivos, no orígenes únicos. [Conteos de cotas](../../artifacts/rp4_v4_b4/bound_counts.csv).",
-        "## Días extremos",
+        "Validation denominators sum applications across successive fits, not unique origins. [Bound counts](../../artifacts/rp4_v4_b4/bound_counts.csv).",
+        "## Extreme days",
         "",
     ]
     for horizon in (15, 5):
@@ -550,13 +554,13 @@ def run() -> dict[str, Any]:
                 and r["ranked_information_set"] == "B2"
             ]
             text += [
-                f"### RV{horizon} · {window}: diez mayores pérdidas B2 por familia",
+                f"### RV{horizon} · {window}: ten largest B2 losses by family",
                 "",
                 table(
                     [
-                        "Familia",
-                        "Día",
-                        "Rango",
+                        "Family",
+                        "Day",
+                        "Rank",
                         "QLIKE B0",
                         "QLIKE B1",
                         "QLIKE B2",
@@ -579,21 +583,21 @@ def run() -> dict[str, Any]:
                 ),
             ]
     text += [
-        "[Diez extremos por cada familia y cada conjunto, incluidos B0 y B1](../../artifacts/rp4_v4_b4/top_loss_sessions.csv). Todos los signos se conservan.",
-        "## Evolución acumulada",
+        "[Ten extremes for each family and set, including B0 and B1](../../artifacts/rp4_v4_b4/top_loss_sessions.csv). All signs are retained.",
+        "## Cumulative evolution",
         "",
-        "![B1 sobre B0](../../artifacts/rp4_v4_b4/B1_over_B0.svg)",
-        "![B2 sobre B1](../../artifacts/rp4_v4_b4/B2_over_B1.svg)",
-        "## Datos, ejecución y trazabilidad",
+        "![B1 over B0](../../artifacts/rp4_v4_b4/B1_over_B0.svg)",
+        "![B2 over B1](../../artifacts/rp4_v4_b4/B2_over_B1.svg)",
+        "## Data, execution and traceability",
         "",
-        "[Validación de RV15/RV5](../../artifacts/rp4_v4_a2/REPORT.md) · [Especificación congelada](specification_v4.md) · [Decisión 133](decision_133_v4.md). La confirmación no tiene referencia previa de RV15/RV5; no se afirma paridad con un archivo inexistente.",
-        "Ocho shards disjuntos × cuatro hilos, entrenamiento completo pasado por shard. Sin ensayo adicional sobre evaluación, descargas o publicación. [Tiempos reales](../../artifacts/rp4_v4_b4/timing.csv). Los releases y recibos de las cuatro ejecuciones están vinculados en el manifiesto del informe.",
-        "## Divulgación y cierre",
+        "[RV15/RV5 validation](../../artifacts/rp4_v4_a2/REPORT.md) · [Frozen specification](specification_v4.md) · [Decision 133](decision_133_v4.md). The confirmation window has no earlier RV15/RV5 reference; parity with a nonexistent file is not claimed.",
+        "Eight disjoint shards × four threads, with complete past training per shard. No additional evaluation trial, downloads or publication. [Actual timings](../../artifacts/rp4_v4_b4/timing.csv). The releases and receipts for the four executions are linked in the report manifest.",
+        "## Disclosure and closeout",
         "",
-        "Esta es la cuarta evaluación de las mismas ventanas: v1 diseño inicial; v2 cobertura/capacidad/regularización; v3 mecanismo y ventanas vacías; v4 horizonte condicional predeclarado. RV5 es un endpoint secundario de v4, no una quinta versión ni réplica independiente. Los p dentro de una versión no corrigen toda la búsqueda anterior.",
-        "La ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de tiempo fuente a 120 s, como en la literatura.",
-        "Hueco UW aceptado: 2025-01-25 a 2025-02-24, sin relleno. El inventario de dealers y la disponibilidad histórica al cliente no están observados directamente. Un resultado no rechazado no demuestra ausencia o absorción; los intervalos delimitan lo medido.",
-        "[v3 intacto](results_v3.md) · [Cierre de secundarios v3](results_v3_revision1.md) · [Manifiesto y hashes](../../artifacts/rp4_v4_b4/report_manifest.json). La primaria v3 no depende de reparar sus secundarios.",
+        "This is the fourth evaluation of the same windows: v1 initial design; v2 coverage/capacity/regularisation; v3 mechanism and empty windows; v4 a predeclared conditional horizon. RV5 is a secondary endpoint of v4, not a fifth version or an independent replication. Within-version p-values do not correct the entire preceding search.",
+        "The window from 20 July to 28 August was read once by the Phase 8 bridge under another specification. PIT uses a source-time proxy at 120 s, as in the literature.",
+        "Accepted UW gap: 2025-01-25 to 2025-02-24, without filling. Dealer inventory and historical client availability are not directly observed. A non-rejected result does not demonstrate absence or absorption; the intervals bound what was measured.",
+        "[Unchanged v3 results](results_v3.md) · [v3 secondary closeout](results_v3_revision1.md) · [Manifest and hashes](../../artifacts/rp4_v4_b4/report_manifest.json). The v3 primary analysis does not depend on repairing its secondaries.",
     ]
     report = "\n\n".join(text) + "\n"
     for name, content in artifacts.items():

@@ -31,6 +31,17 @@ glob:docs/**/*SUPPORT*TICKET*DRAFT*.md
 glob:docs/**/*MIRROR*HAZARD*.md
 glob:docs/phase8_one_shot_protocol_v*.md
 
+# RP4 administrative follow-up and its custody sidecars remain private.
+glob:docs/rp4/administrative_verification_20260908*
+glob:docs/rp4/INCIDENT_20260908_fit_selection*
+glob:docs/rp4/GITHUB_SUPPORT_REQUEST*
+glob:docs/rp4/LICENSE_EXPOSURE_ANALYSIS_20260908*
+glob:docs/**/PR_BODY.md
+glob:docs/**/PUBLISH_COMMANDS.md
+glob:artifacts/*publication_projection_code/**
+glob:artifacts/*publication_precheck/**
+glob:tests/**/*followup_projection*.py
+
 # Working correspondence and internal drafts, by directory and by prefix
 glob:reports/handoffs/**
 glob:docs/handoffs/**

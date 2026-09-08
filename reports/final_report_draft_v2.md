@@ -1,6 +1,6 @@
 # Point-in-time options information for forecasting next-30-minute realised variance
 
-**Capstone report — scientific-result cutoff 2026-08-31; timing amendment 2026-09-01**
+**Research report — scientific-result cutoff 2026-08-31; timing amendment 2026-09-01**
 
 > Status: `EVIDENCE_CUTOFF_COMPLETE`. Supersedes the v1 skeleton. Phase 8 and Phase 9 are
 > reported at their actual evidence-cutoff status rather than left as result placeholders.
@@ -28,9 +28,9 @@
 
 **Author:** Miguel Guerrero Quijano
 
-**Course:** MDS650 Capstone Research Project
+**Project:** Options information and intraday variance research
 
-**Document:** Capstone report, evidence-cutoff version
+**Document:** Research report, evidence-cutoff version
 
 **Evidence cutoff:** 31 August 2026 (Australia/Sydney)
 
@@ -388,7 +388,7 @@ option state or flow carries information of that size, nor separate a change in 
 from a change in representation. Deciding either requires a fresh prospective cohort sized
 in advance. The separate Block-12 design estimates at least 180 sessions and approximately
 537 for its best observed favorable ΔB2|B1 case, with two independent families and one
-read. That is future-design evidence, not a reason to hold the capstone open.
+read. That is future-design evidence, not a reason to hold the report open.
 
 ## 5. Results
 
@@ -711,7 +711,7 @@ than provider-certified. The remaining PIT v2.2 blocker is part of the result, n
 something concealed by a headline. Phase 8 is complete and exploratory; its corrected same-session sensitivity
 does not improve paired QLIKE generally and does not create a confirmatory result. Phase 9
 continues to 60 as prospective
-future evidence while the capstone is written and submitted from the evidence available at
+future evidence while the report is written and submitted from the evidence available at
 its editorial cutoff.
 
 ### Future work: the sealed RP3 program (preregistered 2026-08-24)

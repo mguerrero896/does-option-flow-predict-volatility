@@ -1,132 +1,58 @@
-## Lectura del resultado completo
+## Reading the complete result
 
-La ejecución RP4 está terminada; la jerarquía global robusta no queda
-demostrada. En la primaria B1 mejora en promedio en ambas familias, pero B2
-empeora en ambas. En confirmación log-OLS muestra B2 > B1 > B0 en promedio
-(+2,6647 % y +4,1837 % de reducción incremental de QLIKE); LightGBM mejora
-con B1 (+4,4713 %) y empeora al añadir B2 (-1,8127 %). Ninguno de los ocho
-contrastes de las dos tablas tiene p Holm inferior a 0,05.
+**English translation. Historical seals refer to the preserved original bytes.**
 
-La estabilidad tampoco es uniforme: en confirmación el segundo bloque
-temporal es negativo para ambos incrementos log-OLS, y B1 log-OLS pasa a
--0,00076519781 al retirar el tercer bloque. B2 LightGBM es negativo al
-retirar cualquiera de los tres bloques. Tener más información disponible
-no garantiza que el estimador extraiga una mejora estable de ella.
+The RP4 execution is complete; the robust global hierarchy is not demonstrated. In the primary window B1 improves the average in both families, but B2 worsens it in both. In confirmation, log-OLS shows B2 > B1 > B0 on average (+2.6647% and +4.1837% incremental QLIKE reductions); LightGBM improves with B1 (+4.4713%) and worsens when B2 is added (-1.8127%). None of the eight contrasts in the two tables has a Holm p-value below 0.05.
 
-En la primaria, el 2025-05-15 aporta el 99,94095565 % de la suma de pérdidas
-QLIKE por sesión de B2 log-OLS. Dos pronósticos, en MSFT y TSLA, alcanzan el
-suelo fijado de 1e-12. El diagnóstico reproduce por activo la pérdida
-agregada a partir de los pronósticos guardados. La sesión permanece en todas
-las cifras primarias; no hubo reajuste ni cambio de suelo. Los metadatos de
-rango del ajuste no bastan para atribuir causalmente el extremo a una
-variable concreta. Evidencia: [diagnóstico](../../artifacts/rp4_b2/tail_diagnostic.json).
+Stability is also uneven: in confirmation, the second time block is negative for both log-OLS increments, and log-OLS B1 becomes -0.00076519781 when the third block is removed. LightGBM B2 is negative after removing any of the three blocks. Having more available information does not guarantee that the estimator extracts a stable improvement from it.
 
-Los intervalos percentiles y los p bilaterales centrados no son inversiones
-del mismo test. Su asimetría explica que en dos contrastes de confirmación
-el IC percentil excluya cero mientras el p crudo supere 0,05. Ambos se
-reportan tal como fueron especificados; los p Holm de esa ventana son
-0,2312 o 0,6470. El secundario de eventos de confirmación tiene solo dos
-sesiones: se informa su media, no una confirmación inferencial adicional.
+In the primary window, 2025-05-15 contributes 99.94095565% of the sum of session QLIKE losses for log-OLS B2. Two forecasts, in MSFT and TSLA, reach the fixed floor of 1e-12. The diagnostic reproduces aggregate loss by asset from saved forecasts. The session remains in every primary figure; there was no refit or floor change. Fit-rank metadata are insufficient to causally attribute the extreme to a particular variable. Evidence: [diagnostic](../../artifacts/rp4_b2/tail_diagnostic.json).
 
-## Datos y cobertura realmente ejecutados
+Percentile intervals and centred two-sided p-values are not inversions of the same test. Their asymmetry explains why, for two confirmation contrasts, the percentile CI excludes zero while the raw p-value exceeds 0.05. Both are reported as specified; the Holm p-values in that window are 0.2312 or 0.6470. The confirmation event secondary has only two sessions: its mean is reported, not an additional inferential confirmation.
 
-Los archivos registrados y sus columnas exactas permanecen en el
-[inventario aceptado](../../artifacts/rp4_inventory_v1/REPORT.md).
-La [especificación](specification_v1.md) fija conjuntos anidados de 29,
-71 y 136 predictores, más intercepto y contrastes de activo comunes.
-Las 25 celdas admiten NaN; las demás variables son obligatorias. Los
-diagnósticos de calidad, antigüedad y latencia no se usan como predictores.
+## Data and coverage actually executed
 
-A2 contiene 185.729 orígenes y 479 sesiones: 181.829 orígenes registrados
-más 3.900 reconstruidos del 20 al 31 de julio. Hay 185.715 RV30 finitos;
-14 ventanas se excluyen por falta de barras observadas (siete AAPL y siete
-TSLA). De los 83.509 cruces con objetivos registrados, 83.502 conservan
-pares finitos tras ese control y coinciden exactamente, diferencia máxima
-y media cero. No se rellenaron ventanas del objetivo ni el hueco UW.
+Registered files and their exact columns remain in the [accepted inventory](../../artifacts/rp4_inventory_v1/REPORT.md). The [specification](specification_v1.md) fixes nested sets of 29, 71 and 136 predictors, plus a common intercept and asset contrasts. The 25 cells allow NaN; other variables are mandatory. Quality, age and latency diagnostics are not used as predictors.
 
-El RV30 reutiliza la indexación de barras de rp2_block3. Con barras rotuladas
-al comienzo, la última barra usada termina un minuto después de la etiqueta
-nominal de target_end; las particiones por sesión y el embargo de 60 minutos
-separan holgadamente ese minuto. No se cambió el objetivo para mejorar
-resultados. Las comparaciones son por asset, session_date y origin_minute.
+A2 contains 185,729 origins and 479 sessions: 181,829 registered origins plus 3,900 reconstructed from 20 to 31 July. There are 185,715 finite RV30 values; 14 windows are excluded for missing observed bars (seven AAPL and seven TSLA). Of 83,509 matches to registered targets, 83,502 retain finite pairs after that check and agree exactly, with zero maximum and mean difference. Neither target windows nor the UW gap were filled.
 
-La cobertura ATM 8–30 días de A2 es 99,7577–99,7836 %, no el 100 % declarado
-inicialmente. La mínima ala extrema con vencimiento ≥8 días es 82,86868 %.
-En la extensión de 25 sesiones, esas cifras son 100 % y 93,84615 %,
-respectivamente. Todas las celdas se conservan, incluidas las poco pobladas:
-[cobertura A2](../../artifacts/rp4_a2/coverage.csv) y
-[cobertura de extensión](../../artifacts/rp4_b1/coverage.csv).
+RV30 reuses the rp2_block3 bar indexing. With bars labelled at their start, the last bar used ends one minute after the nominal target_end label; session splits and the 60-minute embargo comfortably separate that minute. The target was not changed to improve results. Comparisons use asset, session_date and origin_minute.
 
-B1 cerró 331 trabajos: 280 activo-sesiones FMP, 25 sesiones UW, 11 copias
-phase9, seis dividendos, seis earnings, dos años Treasury y un calendario
-FOMC. Faltantes finales: cero. Se revalidaron los 54 archivos originales de
-phase9 por hash sin modificarlos. La extensión añade 9.750 RV30 finitos,
-sin bloques activo-sesión excluidos en materialización. Tras aplicar la
-misma máscara de predictores a las seis celdas de evaluación, quedan 5.360
-orígenes en confirmación, 54,9744 % de esos 9.750. Las exclusiones no se
-confunden con descargas faltantes ni se resuelven con imputación no registrada.
+ATM coverage at 8–30 days in A2 is 99.7577–99.7836%, not the initially stated 100%. Minimum extreme-wing coverage with maturity ≥8 days is 82.86868%. In the 25-session extension, those figures are 100% and 93.84615%, respectively. All cells are retained, including sparsely populated ones: [A2 coverage](../../artifacts/rp4_a2/coverage.csv) and [extension coverage](../../artifacts/rp4_b1/coverage.csv).
 
-El panel completo tiene 195.479 filas. Se comprobó igualdad exacta, por
-claves y también tras releer el parquet, de las 185.729 filas de desarrollo
-antes y después de la unión. Las nuevas respuestas de dividendos produjeron
-cero diferencias de tasa/caja histórica en el desarrollo comparado. Las
-griegas nuevas usan tasas y dividendos reales; las columnas griegas antiguas
-del B2 registrado conservan su convención histórica r=q=0, divulgada en A1.
+B1 completed 331 jobs: 280 FMP asset-sessions, 25 UW sessions, 11 phase9 copies, six dividend jobs, six earnings jobs, two Treasury years and one FOMC calendar. Final missing items: zero. The 54 original phase9 files were revalidated by hash without modification. The extension adds 9,750 finite RV30 values, without excluded asset-session blocks in materialisation. After applying the same predictor mask to all six evaluation cells, 5,360 confirmation origins remain, 54.9744% of those 9,750. Exclusions are not confused with missing downloads or resolved through unregistered imputation.
 
-## Trazabilidad y etapas
+The complete panel has 195,479 rows. Exact equality of the 185,729 development rows before and after the join was checked by keys and after rereading the parquet. New dividend responses produced zero historical rate/cash differences in the compared development data. New Greeks use actual rates and dividends; the old Greek columns in registered B2 retain their historical r=q=0 convention, disclosed in A1.
 
-| Etapa | Cierre verificado | Commit |
+## Traceability and stages
+
+| Stage | Verified closeout | Commit |
 | --- | --- | --- |
-| INIT | Rama desde origin/main; decisión 128, inventario y estado generado | 0d98e79a |
-| A1 | Especificación y decisión 129 antes de evaluar | 9748d246 |
-| A2 | Materialización de desarrollo y comparación RV30 | 643b5226 |
-| B1 | Entradas completas y prueba de unión inmutable | fdd12c5e |
-| B2 | 418 sesiones primarias, salida 0 | 71a491b3 |
-| B3 | 25 sesiones de confirmación, salida 0 | 852d6133 |
+| INIT | Branch from origin/main; decision 128, inventory and generated state | 0d98e79a |
+| A1 | Specification and decision 129 before evaluation | 9748d246 |
+| A2 | Development materialisation and RV30 comparison | 643b5226 |
+| B1 | Complete inputs and immutable-join check | fdd12c5e |
+| B2 | 418 primary sessions, exit 0 | 71a491b3 |
+| B3 | 25 confirmation sessions, exit 0 | 852d6133 |
 
-Los comandos exactos, códigos observados y hashes por etapa están en
-[A1](../../artifacts/rp4_a1), [A2](../../artifacts/rp4_a2/receipt.json),
-[B1](../../artifacts/rp4_b1/receipt.json),
-[B2](../../artifacts/rp4_b2/receipt.json) y
-[B3](../../artifacts/rp4_b3/receipt.json). Los códigos de salida originales
-perdidos por transporte de algunos trabajadores A2 siguen como NO VERIFICABLE;
-los manifiestos, hashes y comando de unión posteriores sí fueron comprobados.
-El PASS de software no equivale a significación estadística.
+Exact commands, observed codes and stage hashes are in [A1](../../artifacts/rp4_a1), [A2](../../artifacts/rp4_a2/receipt.json), [B1](../../artifacts/rp4_b1/receipt.json), [B2](../../artifacts/rp4_b2/receipt.json) and [B3](../../artifacts/rp4_b3/receipt.json). Original exit codes lost in transport from some A2 workers remain UNVERIFIABLE; subsequent manifests, hashes and the join command were verified. Software PASS is not statistical significance.
 
-| Artefacto | SHA-256 |
+| Artifact | SHA-256 |
 | --- | --- |
-| Especificación Markdown | 24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d |
-| Especificación JSON | 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 |
-| Panel de desarrollo A2 | 51f04c5937a7922757f929ef0ca53941b7766719cf2799673669f8545f97a949 |
-| Panel completo B1 | ecb1c6cce76cb6464d3cdf3d4ef409c60e204adf2df22fba6851e32199819d93 |
-| Evaluador, ambas ventanas | 0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14 |
-| Resultado primario | d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2 |
-| Resultado de confirmación | 76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7 |
+| Markdown specification | 24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d |
+| JSON specification | 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 |
+| A2 development panel | 51f04c5937a7922757f929ef0ca53941b7766719cf2799673669f8545f97a949 |
+| B1 complete panel | ecb1c6cce76cb6464d3cdf3d4ef409c60e204adf2df22fba6851e32199819d93 |
+| Evaluator, both windows | 0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14 |
+| Primary result | d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2 |
+| Confirmation result | 76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7 |
 
-Los CSV del evaluador contienen finales CRLF; se preservan byte a byte con
-atributos Git `-text`, en lugar de cambiar un artefacto ya calculado. El
-control de espacios de Git usa `cr-at-eol` para reconocer esos finales como
-terminadores. Los ZIP de historial B1 contienen únicamente versiones de
-código; los datos licenciados y pronósticos por origen permanecen privados.
-El cierre B4 registra la verificación final del informe, figuras y bytes Git.
+Evaluator CSVs contain CRLF endings; they are preserved byte for byte with Git `-text` attributes rather than changing an already calculated artifact. Git whitespace checking uses `cr-at-eol` to recognise those endings as terminators. B1 history ZIPs contain code versions only; licensed data and origin-level forecasts remain private. The B4 closeout records final verification of the report, figures and Git bytes.
 
-## Operación diaria activada
+## Activated daily operation
 
-Nombre: **RP4 colección diaria**. Activa martes a sábado a las 09:10,
-Australia/Sydney, con raíz nueva RP4. La aplicación admite un solo seguimiento
-por tarea: se actualizó el seguimiento de esta tarea, conservando su ID
-interno y una copia de la configuración anterior. El recolector K3 separado
-no fue modificado, y phase9 permanece intacto.
+Name: **RP4 daily collection**. Active Tuesday through Saturday at 09:10, Australia/Sydney, with a new RP4 root. The application allows one follow-up per task: this task's follow-up was updated, retaining its internal ID and a copy of the earlier configuration. The separate K3 collector was not modified, and phase9 remains intact.
 
-El modo diario se ejecutó ahora sobre la última sesión cerrada, 2026-09-04:
-24 trabajos PASS, faltantes cero, salida 0. Reutilizó los archivos recibidos
-por hash. Manifiesto SHA-256:
-`270d3b92cb2bad3914f942efe2c66c7afbe1da91f1bcdc0c26f4ae76e081eaa2`.
-Esto verifica el comando de colección; no acredita de antemano una futura
-activación del planificador con el equipo apagado o sin acceso al proveedor.
+Daily mode was executed on the last closed session, 2026-09-04: 24 PASS jobs, zero missing items, exit 0. It reused received files by hash. Manifest SHA-256: `270d3b92cb2bad3914f942efe2c66c7afbe1da91f1bcdc0c26f4ae76e081eaa2`. This verifies the collection command; it does not establish in advance that the scheduler will activate in future while the computer is off or the provider is inaccessible.
 
-La colección añade barras y tape; no reajusta modelos ni reescribe este
-informe. Los snapshots exógenos v1 quedan preservados y una extensión
-analítica posterior deberá vincular los exógenos correspondientes a sus
-fechas. No hay publicación automática, operación con capital ni compra
-adicional. El [runbook](operations_v1.md) contiene entorno y recuperación.
+Collection adds bars and tape; it does not refit models or rewrite this report. Exogenous v1 snapshots remain preserved, and a later analytical extension must bind the exogenous inputs corresponding to its dates. There is no automatic publication, capital operation or additional purchase. The [runbook](operations_v1.md) contains the environment and recovery procedure.

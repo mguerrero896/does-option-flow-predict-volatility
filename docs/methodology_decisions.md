@@ -1,8 +1,10 @@
 # Methodology decisions (recovery baseline)
 
-Status: Phase 5 design approved, 2026-07-29. Earlier bounded phase restrictions remain
-historical controls; current acquisition, modeling and QLIKE authority begins only after
-Requirements-consistency and preregistration gates pass.
+This is a dated decision ledger. A decision describes authority and evidence at its
+recorded date; later numbered decisions can supersede it. The
+[current decisions](research_decisions_current.md) and generated
+[state](../data/CANONICAL_STATE.json) resolve present scope. Historical approval,
+pending and seal statements below must not be mistaken for today's status.
 
 ## Decision index
 
@@ -341,15 +343,16 @@ Requirements-consistency and preregistration gates pass.
    and the Phase 6 session allowlist ending 2026-03-23, and no numbered decision authorized
    their dates before evaluation. They are therefore classified `EXPLORATORY_RETROSPECTIVE`
    and may not be cited as confirmatory evidence in any deliverable. Presenting them as part
-   of a window amendment requires an explicit owner decision (D005,
-   `OWNER_APPROVAL_PENDING`). Their per-protocol freezes remain valid as internal audit
+   of a window amendment required an explicit owner decision (D005, subsequently
+   **closed by decision 54 with no amendment**). Their per-protocol freezes remain valid as internal audit
    records; the classification governs only the evidentiary weight of the results.
 52. **Sealed-cohort disposition and campaign moratorium (2026-08-17)** — Validation A
    (14/30 acquired), Validation B (0/30) and Phase 8 (10/30) remain sealed with zero
    scientific reads. Their disposition — complete under the existing frozen gates, or close
-   formally without reading — is an owner decision (D006) recorded in
-   `docs/sealed_cohorts_disposition_v1.md`. Until D006 is decided, NO new retrospective
-   evaluation campaign, protocol freeze, or historical block selection may be created. This
+   formally without reading — was decision D006, recorded in
+   `docs/sealed_cohorts_disposition_v1.md` and **closed by decision 55**. The original
+   restriction barred new retrospective evaluation campaigns, protocol freezes or historical
+   block selection while that decision was unresolved. This
    moratorium exists because five post-null evaluation campaigns were designed between
    2026-08-01 and 2026-08-14, and campaign-level multiplicity is not controlled by
    per-campaign Holm families (R-019).
@@ -464,7 +467,7 @@ Requirements-consistency and preregistration gates pass.
    CI previously ran only static gates. Now tier 1 (GitHub Actions, required) runs
    Ruff, strict mypy, and the hermetic pytest suite — 189/193 test files including
    property-based (hypothesis), synthetic end-to-end and schema/contract tests — with
-   a coverage gate >= 80% of src/mds650 (81.03% at introduction). Tier 2 (local,
+   a coverage gate >= 80% of `src/mds650` (81.03% at introduction). Tier 2 (local,
    scripts/run_local_evidence_gates.py) runs the full suite against the licensed
    evidence store plus SHA-256 verification of every gated file. The four
    tier-2-only test files and the reason each cannot run hosted are enumerated in
@@ -486,7 +489,7 @@ Requirements-consistency and preregistration gates pass.
    pinning 61 frozen artifacts to their SHA-256 (LF-normalized text, raw parquet)
    managed exclusively by scripts/freeze_registry.py; (2) a hermetic tripwire test
    re-hashing every registered file on every CI and tier-2 run; (3) a writer guard
-   mds650.storage.assert_outside_frozen raising FROZEN_ARTIFACT_WRITE_REJECTED,
+   `mds650.storage.assert_outside_frozen` raising FROZEN_ARTIFACT_WRITE_REJECTED,
    wired into the B2-confirmation builder/evaluator; (4) content-addressed writes
    (root/protocol_id/<sha256>.bin) as the required path for new frozen evidence —
    no update operation exists, only new versions; (5) OS read-only flags via
@@ -519,13 +522,13 @@ Requirements-consistency and preregistration gates pass.
    one-shot = k=1 at 0.025; Phase 9 evaluation = k=2 at 0.00833; binding
    threshold is the smaller of the spending budget and any frozen protocol
    alpha), e-values + test martingale + always-valid p-value reported alongside
-   registered tests (mds650/sequential.py, unit-tested), and a pre-registered
+   registered tests (`mds650/sequential.py`, unit-tested), and a pre-registered
    maximum of 3 further confirmatory campaigns this thesis cycle. Frozen
    protocol documents are not edited (decision 62); the policy composes with
    them. (b) ProviderHTTPClient now retries httpx transport errors (timeouts,
    resets, disconnects) inside the retry loop with the same exponential backoff
    as 429/5xx, preserving the last exception as the cause — previously a single
-   transport error bypassed max_retries entirely (src/mds650/providers/base.py;
+   transport error bypassed max_retries entirely (`src/mds650/providers/base.py`;
    regression tests in tests/unit/test_provider_client.py).
 65. **Four-contrast hypothesis structure replaces the B1-first precondition
    (2026-08-18)** — Research Program v2 §0 corrects a premise that has governed
@@ -1462,7 +1465,7 @@ Requirements-consistency and preregistration gates pass.
 
 100. **Phase 9 remains a 60-session one-read follow-up and no longer gates the academic
      delivery (2026-08-28).** The owner requested a design reassessment because waiting
-     until November is incompatible with the study calendar. The existing frozen
+     until November is incompatible with the reporting calendar. The existing frozen
      protocol already targets 60 complete sessions; reducing it "to 60" therefore changes
      nothing. `docs/phase9_academic_reporting_policy_v1.md` records the resolution before
      any outcome read: submit and defend from the evidence available at the manuscript
@@ -1484,7 +1487,7 @@ Requirements-consistency and preregistration gates pass.
      most 19 complete sessions and therefore zero scored sessions, so no valid Phase 9
      result can exist for the academic deadline. The 60-session endpoint is retained,
      RP2, RP3 sizing and this audit now share the same long-run-variance MDE producer,
-     no interim is activated, the study proceeds from current evidence plus any
+     no interim is activated, the report proceeds from current evidence plus any
      separately authorized exploratory Phase 8 bridge, and `sealed_cohorts_read=0`.
 
 102. **The sole Phase 8A exploratory read is consumed and reconciled
@@ -1818,8 +1821,8 @@ Requirements-consistency and preregistration gates pass.
      `figure_path` and `model_card_path` pointers already written into the delay-120 and
      delay-300 confirmation artifacts, which name the delay-0 run's files - the producer
      is fixed for future runs and the existing artifacts stay untouched under decision
-     62; and `reports/final_report_draft_v2.md`, which names its course on the title
-     page because that document is submitted for course credit.
+     62; and `reports/final_report_draft_v2.md`, whose title page was retained in that
+     historical publication. Its original wording is preserved in the archive.
 
      One defect is knowingly left standing.
      `docs/DISCOVERY_VALIDATION_CONFIRMATION_PROTOCOL.md` cites
@@ -2363,75 +2366,75 @@ Requirements-consistency and preregistration gates pass.
 
 <a id="decision-128"></a>
 
-128. **RP4: decisiones del propietario antes de especificar o evaluar
-     (2026-09-07, Australia/Sydney).** Autorizado por **Miguel, propietario**, mediante
-     instrucción explícita en esta conversación. Esta es la constancia de su autorización,
-     no una firma criptográfica ni una firma manuscrita creada por el asistente.
+128. **RP4: decisions before specification or evaluation
+     (2026-09-07, Australia/Sydney).** Explicit authorisation by **Miguel, the research author**,
+     recorded in the instruction. This records that authorisation;
+     it does not create a cryptographic or handwritten signature.
 
-     - Partición de calendario: **2026-08-01**. Desarrollo: 2024-08-02 a 2026-07-31;
-       evaluación posterior: desde 2026-08-03. Esta fecha reemplaza la propuesta
-       2026-07-20 del inventario entregado por el propietario.
-     - Fase 9 se retira como cohorte sellada para RP4 y sus sesiones quedan autorizadas
-       como entradas de esa evaluación. Se conservan intactos sus protocolos, artefactos,
-       contadores y raíz; este registro no los reescribe ni ejecuta accesos. **C10 no se
-       activa.** RP4 no exige campaña prospectiva, cohorte sellada ni espera de sesiones.
-     - Etiqueta solicitada: **"fuera de muestra walk-forward, partición fijada
-       2026-09-07"**. La evaluación primaria será walk-forward por sesión dentro del
-       desarrollo; la posterior aplicará la misma especificación sin ajustes sobre sus
-       resultados. Una única especificación precederá a cualquier evaluación RP4.
-     - Divulgación solicitada por el propietario, que se cotejará con sus fuentes antes
-       de presentarla como hecho verificado: "La ventana 20 de julio a 28 de agosto fue
-       leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de
-       tiempo fuente a 120 s, como en la literatura."
-     - Se utilizarán los conjuntos enriquecidos B0 más HARQ, B1 de superficie más rejilla
-       IV y B2 de flujo más medidas derivadas de OI/gamma. Familias: log-OLS HARQ y
-       LightGBM con objetivo QLIKE; Gamma sobre niveles crudos queda fuera de RP4.
-       Partición, purga/embargo de 60 minutos, hiperparámetros e inferencia deben quedar
-       especificados y hash-vinculados antes de calcular resultados. Se reportará
-       cualquier signo, con sus limitaciones, sin modificar artefactos congelados.
-     - Entregables y orden solicitados: A1 especificación; A2 variables de desarrollo
-       sin objetivos; B1 adquisición acotada y panel; B2 evaluación primaria; B3
-       evaluación posterior sin cambios; B4 informe y colector con nombre/raíz nuevos,
-       sin tocar `phase9`. No se autoriza publicación.
-     - **Punto de parada de este turno:** la última instrucción del propietario pide
-       primero los archivos registrados, hashes y columnas exactas B0/B1/B2, y
-       "Detente ahí". Se entregará ese inventario sin ejecutar A1, A2, descargas,
-       entrenamiento, evaluación, activación ni cambios de automatización.
+     - Calendar split: **2026-08-01**. Development: 2024-08-02 to 2026-07-31;
+       subsequent evaluation: from 2026-08-03. This date replaces the proposed
+       2026-07-20 date in the supplied inventory.
+     - Phase 9 is withdrawn as a sealed cohort for RP4, and its sessions are authorised
+       as inputs to that evaluation. Its protocols, artifacts,
+       counters and root remain intact; this record neither rewrites them nor accesses them. **C10 is not
+       activated.** RP4 does not require a prospective campaign, a sealed cohort or a wait for sessions.
+     - Requested label: **"out-of-sample walk-forward, split fixed
+       2026-09-07"**. The primary evaluation will use walk-forward by session within
+       development; the subsequent evaluation will apply the same specification without adjustments based on its
+       results. A single specification will precede any RP4 evaluation.
+     - Requested disclosure, to be checked against its sources before
+       being presented as a verified fact: "The July 20 to August 28 window was
+       read once by the Phase 8 bridge under another specification. PIT is a
+       source-time proxy at 120 s, as in the literature."
+     - The enriched sets will be B0 plus HARQ, B1 surface plus IV
+       grid, and B2 flow plus OI/gamma-derived measures. Families: log-OLS HARQ and
+       LightGBM with the QLIKE objective; Gamma on raw levels is excluded from RP4.
+       The split, 60-minute purge/embargo, hyperparameters and inference must be
+       specified and bound by hashes before results are calculated. Every
+       sign will be reported, with its limitations, without changing frozen artifacts.
+     - Requested deliverables and sequence: A1 specification; A2 development features
+       without targets; B1 bounded acquisition and panel; B2 primary evaluation; B3
+       unchanged subsequent evaluation; B4 report and collector with a new name/root,
+       leaving `phase9` untouched. Publication is not authorised.
+     - **Initial authorisation boundary:** the instruction first requests
+       the registered files, hashes and exact B0/B1/B2 columns, and
+       "Stop there". That inventory will be delivered without executing A1, A2, downloads,
+       training, evaluation, activation or automation changes.
 
-     Límite de interpretación: una partición fijada hoy no elimina la exposición ni
-     las decisiones metodológicas previas sobre datos históricos, y ningún proxy de
-     timestamp demuestra por sí solo recepción histórica por el cliente.
+     Interpretation limit: fixing a split today does not remove prior exposure or
+     methodological decisions concerning historical data, and no timestamp
+     proxy alone demonstrates historical receipt by the client.
 
 <a id="decision-129"></a>
 
-129. **RP4 ejecución completa, autorización del propietario (2026-09-07).**
-     Miguel autoriza en esta conversación A1, A2, B1, B2, B3 y B4 de corrido,
-     descargas acotadas, copia por hash de Fase 9 sin modificarla, colector diario
-     nuevo RP4 y un PR en borrador. Esta autorización sustituye el punto de parada
-     del turno anterior en la decisión 128, no su partición 2026-08-01.
-     No se inventa una firma criptográfica del propietario. Las verificaciones
-     que aporta se atribuyen a su instrucción; se distinguen de mediciones ejecutadas.
+129. **RP4 complete execution, research authorisation (2026-09-07).**
+     Miguel authorises A1, A2, B1, B2, B3 and B4 in sequence,
+     bounded downloads, a copy of Phase 9 verified by hash without modifying it, a new RP4 daily
+     collector and a draft PR. This authorisation supersedes the initial execution
+     boundary in decision 128, while retaining its 2026-08-01 split.
+     No cryptographic signature is invented. The supplied
+     checks are attributed to the instruction and distinguished from executed measurements.
 
-     La especificación inmutable está en `docs/rp4/specification_v1.md`, SHA256
-     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, y su contrato ejecutable en
+     The immutable specification is in `docs/rp4/specification_v1.md`, SHA256
+     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, and its executable contract is in
      `artifacts/rp4_a1/specification.json`, SHA256
-     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; ambos se fijan en
-     `artifacts/rp4_a1/freeze.json` antes de reconstruir objetivos o evaluar RP4.
-     Las listas nominales 22/28/68 se conservan y se excluyen explícitamente
-     diagnósticos de calidad, edad y latencia según la regla del propietario,
-     dando conjuntos anidados de 29/71/136 entradas más efectos de activo.
-     Solo las 25 celdas IV nuevas admiten NaN con el tratamiento fijado.
-     La convención call-largo/put-corto es un proxy, no inventario observado.
-     Las nuevas griegas usan tasa/dividendo exógenos reales; no se reescriben
-     griegas antiguas. El hueco UW 2025-01-25–2025-02-24 no se rellena.
-     Tasas oficiales 2024 y reparación UW 2026-08-26 son insumos auxiliares
-     acotados detectados antes de evaluar; no modifican phase9.
+     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; both are fixed in
+     `artifacts/rp4_a1/freeze.json` before rebuilding targets or evaluating RP4.
+     The nominal 22/28/68 lists are preserved, and quality, age and latency
+     diagnostics are explicitly excluded under the authorised rule,
+     yielding nested sets of 29/71/136 inputs plus asset effects.
+     Only the 25 new IV cells permit NaN under the fixed treatment.
+     The long-call/short-put convention is a proxy, not observed inventory.
+     The new Greeks use real exogenous rates/dividends; existing Greeks
+     are not rewritten. The UW gap 2025-01-25–2025-02-24 is not filled.
+     Official 2024 rates and the UW repair for 2026-08-26 are bounded auxiliary
+     inputs identified before evaluation; they do not modify phase9.
 
-     Se reconstruye RV30 por clave con horizonte30 y se compara con lo existente;
-     todas las diferencias y exclusiones se informan. Walk-forward expansivo,
-     primeras60 sesiones entrenamiento, validación interna últimas10, purga y
-     embargo60min; log-OLS HARQ y LightGBM QLIKE sin Gamma crudo. Una sola regla
-     y reporte de cualquier signo; bootstrap sesiones y Holm4 por ventana.
-     GW-HAC se presenta como diagnóstico asintótico, no como garantía de la
-     teoría original de ventana fija. No se declara independencia nueva por
-     reutilización de datos. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.
+     RV30 is rebuilt by key with horizon 30 and compared with the existing values;
+     every difference and exclusion is reported. Expanding walk-forward,
+     first 60 sessions for training, last 10 for internal validation, purge and
+     embargo of 60 min; log-OLS HARQ and LightGBM QLIKE without raw Gamma. A single rule
+     and reporting of every sign; session bootstrap and Holm over 4 contrasts per window.
+     GW-HAC is presented as an asymptotic diagnostic, not a guarantee of the
+     original fixed-window theory. Data reuse does not establish new
+     independence. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.

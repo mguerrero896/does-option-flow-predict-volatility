@@ -1,0 +1,404 @@
+{
+  "schema_version": "public-defect-register-verification-v1",
+  "date_local": "2026-09-09",
+  "timezone": "Australia/Sydney",
+  "working_tree": "English public refresh; uncommitted presentation changes",
+  "runtime": "Python 3.12.12, frozen project environment",
+  "command_prefix": [
+    "uv",
+    "run",
+    "--frozen",
+    "--no-sync",
+    "python",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest"
+  ],
+  "command_suffix": [
+    "-o",
+    "addopts=",
+    "-q",
+    "-rs",
+    "--confcutdir=.",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "pytest_timeout"
+  ],
+  "environment": {
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "RP4_GAMMA_CANDIDATE_SOURCE": "absent"
+  },
+  "new_scientific_evaluations": 0,
+  "provider_calls": 0,
+  "licensed_or_private_payload_reads": 0,
+  "limits": [
+    "Synthetic model fits are not scientific evaluations.",
+    "No full repository gate is claimed.",
+    "Per-test duplication across groups is not a count of independent checks."
+  ],
+  "runs": [
+    {
+      "id": "rp2_provider_mechanisms",
+      "paths": [
+        "tests/unit/test_rp2_bars.py",
+        "tests/unit/test_rp2_bars_missing_columns.py",
+        "tests/unit/test_rp2_block3_targets.py",
+        "tests/unit/test_rp2_block4_sessions.py",
+        "tests/unit/test_rp2_block4_cutoff.py",
+        "tests/unit/test_rp2_block4_causal_ewma.py",
+        "tests/unit/test_rp2_block4_window_sum.py",
+        "tests/unit/test_rp2_tensor_trade_mark.py",
+        "tests/unit/test_rp2_b1_snapshot.py",
+        "tests/unit/test_rp2_option_clock.py",
+        "tests/unit/test_rp2_block_windows.py",
+        "tests/unit/test_rp2_surface_forward.py",
+        "tests/unit/test_rp2_flow.py",
+        "tests/unit/test_rp2_partial_pooling_variance.py",
+        "tests/unit/test_rp2_pit_sum_quantile.py",
+        "tests/unit/test_rp2_scorecard_pooling.py",
+        "tests/unit/test_rp2_ladder_level_weighting.py",
+        "tests/unit/test_rp2_ladder_recalibration_smearing.py",
+        "tests/unit/test_rp2_ladder_boosting_rounds.py",
+        "tests/unit/test_rp2_preprocessing.py",
+        "tests/unit/test_rp2_level4_pooling.py",
+        "tests/unit/test_rp2_qlike_objective.py",
+        "tests/unit/test_rp2_panel.py",
+        "tests/unit/test_rp2_provenance.py",
+        "tests/unit/test_rp2_inference.py",
+        "tests/unit/test_rp2_power.py",
+        "tests/unit/test_rp2_economics.py",
+        "tests/unit/test_rp2_scorecard_counters.py",
+        "tests/unit/test_provider_client.py",
+        "tests/contract/test_provider_contract_validation.py",
+        "tests/contract/test_polars_datetime_arithmetic.py",
+        "tests/contract/test_rp2_train_share_authority.py"
+      ],
+      "exit_code": 0,
+      "passed": 300,
+      "skipped_modules": 1,
+      "seconds": 60.22,
+      "skip": "Torch unavailable; eight functions in test_rp2_level4_pooling.py did not execute."
+    },
+    {
+      "id": "rp4_initial_import_context",
+      "paths": [
+        "artifacts/rp4_v2_code/test_materialize_iv.py",
+        "artifacts/rp4_v3_code/test_materialize_gamma.py",
+        "artifacts/rp4_v3_code/test_empty_windows.py",
+        "artifacts/rp4_v3_code/test_models.py",
+        "artifacts/rp4_v4_code/test_targets.py",
+        "artifacts/rp4_v4_code/test_evaluate_v4.py",
+        "artifacts/rp4_v4_a2/test_resolve_target_mask.py",
+        "tests/unit/test_phase8_materialized_remediation.py",
+        "tests/unit/test_rp2_ext1_directional_v2.py::test_directional_dml_rejects_fold_placeholder_width_drift",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_source_guards_before_probes_and_binds_inventory",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_rejects_a_reused_source",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_rejects_a_different_source_inventory",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_requires_the_canonical_content_fingerprint",
+        "tests/contract/test_pit_v22_successor_evaluator.py::test_target_linkage_excludes_predictor_complete_rows_with_missing_rv30",
+        "tests/contract/test_pit_v22_successor_v2_evaluator.py::test_v2_runner_does_not_equate_predictor_complete_with_target_complete_count",
+        "tests/unit/test_b2_availability_v22.py"
+      ],
+      "exit_code": 1,
+      "collection_errors": 3,
+      "seconds": 3.93,
+      "reason": "Missing rp2_block5_surface_panel/materialize import context; no tests or scientific reads occurred."
+    },
+    {
+      "id": "rp4_explicit_import_context",
+      "paths": [
+        "artifacts/rp4_v2_code/test_materialize_iv.py",
+        "artifacts/rp4_v3_code/test_materialize_gamma.py",
+        "artifacts/rp4_v3_code/test_empty_windows.py",
+        "artifacts/rp4_v3_code/test_models.py",
+        "artifacts/rp4_v4_code/test_targets.py",
+        "artifacts/rp4_v4_code/test_evaluate_v4.py",
+        "artifacts/rp4_v4_a2/test_resolve_target_mask.py",
+        "tests/unit/test_phase8_materialized_remediation.py",
+        "tests/unit/test_rp2_ext1_directional_v2.py::test_directional_dml_rejects_fold_placeholder_width_drift",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_source_guards_before_probes_and_binds_inventory",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_rejects_a_reused_source",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_rejects_a_different_source_inventory",
+        "tests/unit/test_rp2_run_invariants.py::test_registered_panel_reuse_requires_the_canonical_content_fingerprint",
+        "tests/contract/test_pit_v22_successor_evaluator.py::test_target_linkage_excludes_predictor_complete_rows_with_missing_rv30",
+        "tests/contract/test_pit_v22_successor_v2_evaluator.py::test_v2_runner_does_not_equate_predictor_complete_with_target_complete_count",
+        "tests/unit/test_b2_availability_v22.py"
+      ],
+      "pythonpath_repo_relative": [
+        ".",
+        "src",
+        "scripts",
+        "artifacts/rp4_code",
+        "artifacts/rp4_v2_code"
+      ],
+      "exit_code": 1,
+      "passed": 150,
+      "failed": 1,
+      "skipped": 1,
+      "seconds": 5.09,
+      "failed_node": "artifacts/rp4_v4_code/test_evaluate_v4.py::test_real_spec_metadata_load_without_data_access",
+      "failure": "RP4_V3_FROZEN_DOCUMENT_DRIFT after English presentation replaced current document paths; failure precedes data access.",
+      "skip": "Private candidate-source oracle intentionally not available."
+    },
+    {
+      "id": "additional_callers_and_provenance",
+      "paths": [
+        "tests/test_har.py::test_session_minute_expression_survives_the_int8_trap",
+        "tests/unit/test_rp2_run_provenance.py",
+        "tests/unit/test_rp2_block_evaluation_mask.py",
+        "tests/contract/test_rp2_block7_treatment_batteries.py",
+        "tests/unit/test_rp2_baseline.py",
+        "tests/e2e/test_rp2_b2_point_in_time.py",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_every_required_set_is_registered_and_nothing_else_is",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_the_registry_is_loaded_from_the_configuration_not_restated",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_the_panel_information_sets_come_from_the_registry",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_a_feature_may_not_change_transform_between_sets",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_the_floor_is_enforced_within_each_role_not_across_them",
+        "tests/contract/test_rp2_v3_feature_registry.py::test_every_splitting_block_checks_its_own_segments"
+      ],
+      "exit_code": 0,
+      "passed": 74,
+      "skipped": 1,
+      "seconds": 3.59,
+      "skip": "Windows WinError 1314 prevented symlink construction for the temporary containment fixture."
+    },
+    {
+      "id": "canonical_english_defense",
+      "paths": [
+        "tests/contract/test_rp4_english_defense.py",
+        "tests/contract/test_rp4_horizon_pit_narrative.py"
+      ],
+      "exit_code": 0,
+      "passed": 8,
+      "seconds": 2.33,
+      "separate_producer_check": {
+        "command": [
+          "uv",
+          "run",
+          "--frozen",
+          "--no-sync",
+          "python",
+          "-X",
+          "utf8",
+          "scripts/build_rp4_english_defense.py",
+          "--check"
+        ],
+        "result": {
+          "status": "PASS",
+          "changed": []
+        }
+      }
+    },
+    {
+      "id": "final_english_defense_and_public_metadata",
+      "paths": [
+        "tests/contract/test_rp4_english_defense.py",
+        "tests/contract/test_rp4_horizon_pit_narrative.py",
+        "tests/contract/test_rp4_public_metadata.py"
+      ],
+      "exit_code": 0,
+      "passed": 9,
+      "seconds": 2.36,
+      "scope": "Eight historical/presentation defense checks and one separate public metadata contract; no frozen executor acceptance claimed.",
+      "frozen_metadata_test_status": "FAILED_PRESERVED_ORIGINAL_TEST_EXECUTOR_PORTABILITY_OPEN"
+    }
+  ],
+  "public_metadata_verification": {
+    "schema_version": "rp4-public-metadata-verification-v1",
+    "status": "PASS_PUBLIC_METADATA",
+    "files": {
+      "artifacts/rp4_a1/specification.json": {
+        "original_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5"
+      },
+      "artifacts/rp4_v2_a1/specification.json": {
+        "original_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5"
+      },
+      "artifacts/rp4_v2_a1/freeze.json": {
+        "original_sha256": "248abbedd5267552272da1a9f7c1d4d3cefd99ef4d3fdd7b4c1b8a2f10ef41d2",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "248abbedd5267552272da1a9f7c1d4d3cefd99ef4d3fdd7b4c1b8a2f10ef41d2"
+      },
+      "artifacts/rp4_v3_a1/specification.json": {
+        "original_sha256": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b"
+      },
+      "artifacts/rp4_v3_a1/freeze.json": {
+        "original_sha256": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d"
+      },
+      "artifacts/rp4_v3_a1_empty_window/specification.json": {
+        "original_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5"
+      },
+      "artifacts/rp4_v3_a1_empty_window/freeze.json": {
+        "original_sha256": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6"
+      },
+      "artifacts/rp4_v4_a1/specification.json": {
+        "original_sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04"
+      },
+      "artifacts/rp4_v4_a1/freeze_manifest.json": {
+        "original_sha256": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a"
+      },
+      "artifacts/rp4_v2_code/evaluate_v2.py": {
+        "original_sha256": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37"
+      },
+      "artifacts/rp4_v3_code/evaluate_v3.py": {
+        "original_sha256": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025"
+      },
+      "artifacts/rp4_v4_code/evaluate_v4.py": {
+        "original_sha256": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450"
+      },
+      "artifacts/rp4_v3_code/freeze.py": {
+        "original_sha256": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea"
+      },
+      "artifacts/rp4_v3_code/empty_windows.py": {
+        "original_sha256": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5"
+      },
+      "artifacts/rp4_v4_code/freeze.py": {
+        "original_sha256": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b"
+      },
+      "docs/rp4/specification_v2.md": {
+        "original_sha256": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c"
+      },
+      "docs/rp4/decision_130_v2.md": {
+        "original_sha256": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98"
+      },
+      "docs/rp4/specification_v3.md": {
+        "original_sha256": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566"
+      },
+      "docs/rp4/decision_131_v3.md": {
+        "original_sha256": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697"
+      },
+      "docs/rp4/v3_addendum_stability_calibration.md": {
+        "original_sha256": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5"
+      },
+      "docs/rp4/v3_window_empty_addendum.md": {
+        "original_sha256": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803"
+      },
+      "docs/rp4/decision_132_v3_empty_windows.md": {
+        "original_sha256": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189"
+      },
+      "docs/rp4/specification_v4.md": {
+        "original_sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9"
+      },
+      "docs/rp4/decision_133_v4.md": {
+        "original_sha256": "1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804",
+        "verification": "original_bytes",
+        "verified_bytes_sha256": "1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804"
+      }
+    },
+    "parent_logical_path": "artifacts/rp4_v3_a1_empty_window/specification.json",
+    "parent_identity_verification": "registered_logical_suffix",
+    "feature_widths": {
+      "B0": 29,
+      "B1": 69,
+      "B2": 138
+    },
+    "frozen_executor_portability": "OPEN_REQUIRES_ORIGINAL_REGISTERED_CONTEXT",
+    "scientific_evaluation_executed": false,
+    "licensed_or_sealed_payloads_read": 0,
+    "external_panel_custody_verified": false,
+    "capital_go": false,
+    "command": [
+      "uv",
+      "run",
+      "--frozen",
+      "--no-sync",
+      "python",
+      "-X",
+      "utf8",
+      "scripts/verify_rp4_public_metadata.py"
+    ]
+  },
+  "static_checks": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-m",
+        "mypy",
+        "scripts/verify_rp4_public_metadata.py",
+        "scripts/build_rp4_english_defense.py"
+      ],
+      "exit_code": 0,
+      "result": "Success: no issues found in 2 source files"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/verify_rp4_public_metadata.py",
+        "scripts/build_rp4_english_defense.py",
+        "tests/contract/test_rp4_public_metadata.py",
+        "tests/contract/test_rp4_english_defense.py",
+        "--output-format",
+        "concise"
+      ],
+      "exit_code": 0,
+      "result": "All checks passed!"
+    }
+  ],
+  "documentation_audit": {
+    "entries": 83,
+    "unique_ids": 83,
+    "markdown_links_checked": 212,
+    "missing_local_links": 0,
+    "referenced_public_commits_resolved": 33,
+    "unknown_commits": 0,
+    "git_diff_check_exit_code": 0
+  },
+  "source_checkout_commit": "c560b73",
+  "public_base_commit": "2a6da3297f3104a092a9630a9b3b78d907fb8502"
+}

@@ -1,0 +1,529 @@
+{
+  "schema": "rp4-prospective-amendment-3",
+  "sealed_at_utc": "2026-09-08T06:56:21.897094+00:00",
+  "document_sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+  "request_sha256": "510ab5abacf073e82807fb6136c7f51bc42728e12de30af9705337f9239080a0",
+  "chain": [
+    {
+      "document": "docs/rp4/prospective_confirmation_v1.md",
+      "sha256": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+      "sealed_at_utc": "2026-09-08T04:24:01.918499+00:00"
+    },
+    {
+      "document": "docs/rp4/prospective_confirmation_v1_amendment_1.md",
+      "sha256": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+      "sealed_at_utc": "2026-09-08T04:31:58.752153+00:00"
+    },
+    {
+      "document": "docs/rp4/prospective_confirmation_v1_amendment_2.md",
+      "sha256": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+      "sealed_at_utc": "2026-09-08T05:27:15.316335+00:00"
+    }
+  ],
+  "source_sha256": {
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv15/session_losses.csv": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+    "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+    "docs/rp4/prospective_confirmation_v1.md": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "docs/rp4/prospective_confirmation_v1_receipt.json": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+    "docs/rp4/prospective_confirmation_v1.sha256": "39943794e7f3908acd0c1f668d1fdcfcc9ab687b97b5a7eee3185d93d8e609d1",
+    "docs/rp4/prospective_confirmation_v1_amendment_1.md": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "docs/rp4/prospective_confirmation_v1_amendment_1_receipt.json": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837",
+    "docs/rp4/prospective_confirmation_v1_amendment_1.sha256": "056a22ac8edbb72571ede41c0853beab7082f81e05036f3133853afb1183887f",
+    "docs/rp4/prospective_confirmation_v1_amendment_2.md": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+    "docs/rp4/prospective_confirmation_v1_amendment_2.sha256": "d035233b835bdec0fa7942b316468552f1fd472e96bcaea9c1220eead03c1ab5"
+  },
+  "primary_unchanged": true,
+  "primary_look_sessions": 20,
+  "stability_sessions": 40,
+  "pooled_sessions": 45,
+  "registered_reading_roles": {
+    "prospective_20": {
+      "sessions": 20,
+      "previous_primary_decision_preserved": true,
+      "alpha": 0.05,
+      "H2_only_if_H1_rejects": true,
+      "reading_once": true,
+      "new_description": "Lectura temprana de consistencia con potencia limitada; se conserva literalmente su regla primaria y su veredicto."
+    },
+    "prospective_40": {
+      "sessions": 40,
+      "cumulative": true,
+      "stability_only": true,
+      "cannot_rescue_20": true,
+      "ABC_retest": false,
+      "D_retest": false,
+      "reading_once_if_original_calendar_condition_met": true
+    },
+    "pooled_D_45": {
+      "historical_observed_sessions": 25,
+      "new_prospective_sessions": 20,
+      "pooled_sessions": 45,
+      "read_at_prospective_sessions": 20,
+      "alpha": 0.05,
+      "sequence_preserved": true,
+      "independent_replication": false,
+      "normal_n45_row_is_power_of_actual_pooled_D": false,
+      "reason": "The analytic n=45 row imagines forty-five fresh sessions drawn from the assumed stationary distribution. D contains twenty-five historical sessions already observed; its conditional prospective power is not estimated by that row."
+    },
+    "ABC": {
+      "members": [
+        "A",
+        "B",
+        "C"
+      ],
+      "Holm_family_size": 3,
+      "alpha": 0.05,
+      "read_once_at_prospective_sessions": 20,
+      "new_power_estimates_available": false
+    },
+    "proposed_prospective_335": {
+      "sessions": 335,
+      "first_335_eligible_in_chronological_order": true,
+      "cumulative_including_early_prospective_sessions": true,
+      "independent_of_20_or_40": false,
+      "no_historical_25_pooled": true,
+      "family": "log_ridge_harq",
+      "horizon_minutes": 15,
+      "sequence": [
+        "B1_over_B0",
+        "B2_over_B1"
+      ],
+      "per_read_nominal_alpha": 0.05,
+      "require_positive_estimates": true,
+      "read_once_regardless_of_early_results": true,
+      "cannot_relabel_or_rescue_20": true,
+      "no_additional_intermediate_reads": true,
+      "not_a_new_scientific_version": true
+    }
+  },
+  "additional_reading": {
+    "sessions": 335,
+    "first_335_eligible_in_chronological_order": true,
+    "cumulative_including_early_prospective_sessions": true,
+    "independent_of_20_or_40": false,
+    "no_historical_25_pooled": true,
+    "family": "log_ridge_harq",
+    "horizon_minutes": 15,
+    "sequence": [
+      "B1_over_B0",
+      "B2_over_B1"
+    ],
+    "per_read_nominal_alpha": 0.05,
+    "require_positive_estimates": true,
+    "read_once_regardless_of_early_results": true,
+    "cannot_relabel_or_rescue_20": true,
+    "no_additional_intermediate_reads": true,
+    "not_a_new_scientific_version": true
+  },
+  "authorized_prospective_read_counts": [
+    20,
+    40,
+    335
+  ],
+  "pooled_D_at_prospective_sessions": 20,
+  "additional_intermediate_reads": false,
+  "global_between_look_alpha_control_claimed": false,
+  "success_at_either_look_rule": false,
+  "same_scientific_specification": true,
+  "power_inputs": [
+    {
+      "hypothesis": "H1",
+      "source": "artifacts/rp4_v4_b2_rv15/summary.json",
+      "selector": [
+        "contrasts",
+        0
+      ],
+      "family": "log_ridge_harq",
+      "contrast": "B1_over_B0",
+      "N_sessions": 419,
+      "estimate": 0.0016163117029221244,
+      "ci_low": 0.0002529862671932415,
+      "ci_high": 0.003453534376546728,
+      "exact_decimal_source": {
+        "estimate": "0.0016163117029221244",
+        "ci_low": "0.0002529862671932415",
+        "ci_high": "0.003453534376546728"
+      },
+      "p_saved_one_sided": 0.039,
+      "normal_se_419_from_ci_width": 0.0008164813574634539,
+      "normal_z_effect_over_se_419": 1.979606378207443,
+      "normal_n_for_80pct_continuous": 661.035037514167,
+      "normal_n_for_80pct_ceiling": 662,
+      "bootstrap_interval_type": "two-sided percentile 95%; not inversion of centered-null p",
+      "new_bootstrap": false
+    },
+    {
+      "hypothesis": "H2",
+      "source": "artifacts/rp4_v4_b2_rv15/summary.json",
+      "selector": [
+        "contrasts",
+        1
+      ],
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "N_sessions": 419,
+      "estimate": 0.0011337596590923558,
+      "ci_low": 0.00033503697025205506,
+      "ci_high": 0.0019321615865300122,
+      "exact_decimal_source": {
+        "estimate": "0.0011337596590923558",
+        "ci_low": "0.00033503697025205506",
+        "ci_high": "0.0019321615865300122"
+      },
+      "p_saved_one_sided": 0.0032,
+      "normal_se_419_from_ci_width": 0.000407437235805319,
+      "normal_z_effect_over_se_419": 2.7826608848143843,
+      "normal_n_for_80pct_continuous": 334.5504371548037,
+      "normal_n_for_80pct_ceiling": 335,
+      "bootstrap_interval_type": "two-sided percentile 95%; not inversion of centered-null p",
+      "new_bootstrap": false
+    }
+  ],
+  "normal_approximation": {
+    "alpha": 0.05,
+    "one_sided": true,
+    "historical_sessions": 419,
+    "ci_nominal_coverage": 0.95,
+    "z_ci_two_sided": 1.959963984540054,
+    "z_test_one_sided": 1.6448536269514722,
+    "z_power_80": 0.8416212335729143,
+    "se_formula": "SE419 = (CI_high - CI_low) / (2 * Phi_inverse(0.975))",
+    "se_scaling": "SE(n) = SE419 * sqrt(419 / n)",
+    "power_formula": "Power(n) = Phi(delta / SE(n) - Phi_inverse(0.95))",
+    "n80_formula": "n80 = 419 * ((Phi_inverse(0.95) + Phi_inverse(0.80)) / (delta / SE419))**2; round upward for an integer sample size.",
+    "rows": [
+      {
+        "hypothesis": "H1",
+        "n": 20,
+        "se_n": 0.003737130698602657,
+        "normal_noncentrality": 0.4325007159975637,
+        "power": 0.11268865900599329,
+        "power_percent": 11.268865900599328,
+        "power_percent_rounded_integer": 11,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H1",
+        "n": 40,
+        "se_n": 0.0026425504591623583,
+        "normal_noncentrality": 0.6116483782998288,
+        "power": 0.15075392858286019,
+        "power_percent": 15.075392858286019,
+        "power_percent_rounded_integer": 15,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H1",
+        "n": 45,
+        "se_n": 0.002491420465735105,
+        "normal_noncentrality": 0.6487510739963455,
+        "power": 0.15960015979098474,
+        "power_percent": 15.960015979098474,
+        "power_percent_rounded_integer": 16,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H1",
+        "n": 120,
+        "se_n": 0.0015256772189445567,
+        "normal_noncentrality": 1.0594060675824126,
+        "power": 0.2791234089207011,
+        "power_percent": 27.91234089207011,
+        "power_percent_rounded_integer": 28,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H1",
+        "n": 146,
+        "se_n": 0.0013831741269773321,
+        "normal_noncentrality": 1.1685525859670833,
+        "power": 0.3169299619366851,
+        "power_percent": 31.69299619366851,
+        "power_percent_rounded_integer": 32,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H1",
+        "n": 335,
+        "se_n": 0.0009131263618703546,
+        "normal_noncentrality": 1.7700854672637387,
+        "power": 0.5498299946324863,
+        "power_percent": 54.982999463248625,
+        "power_percent_rounded_integer": 55,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 20,
+        "se_n": 0.0018648878970271181,
+        "normal_noncentrality": 0.6079505695220184,
+        "power": 0.14989051945197684,
+        "power_percent": 14.989051945197684,
+        "power_percent_rounded_integer": 15,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 40,
+        "se_n": 0.0013186748781405951,
+        "normal_noncentrality": 0.8597719406704858,
+        "power": 0.2162028382574162,
+        "power_percent": 21.62028382574162,
+        "power_percent_rounded_integer": 22,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 45,
+        "se_n": 0.001243258598018079,
+        "normal_noncentrality": 0.9119258542830275,
+        "power": 0.23180124154302711,
+        "power_percent": 23.18012415430271,
+        "power_percent_rounded_integer": 23,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 120,
+        "se_n": 0.0007613372958680696,
+        "normal_noncentrality": 1.4891686841633758,
+        "power": 0.4381406831782344,
+        "power_percent": 43.81406831782344,
+        "power_percent_rounded_integer": 44,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 146,
+        "se_n": 0.0006902259773375224,
+        "normal_noncentrality": 1.6425919862734235,
+        "power": 0.499097736679633,
+        "power_percent": 49.9097736679633,
+        "power_percent_rounded_integer": 50,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      },
+      {
+        "hypothesis": "H2",
+        "n": 335,
+        "se_n": 0.00045566463633320314,
+        "normal_noncentrality": 2.4881449396992443,
+        "power": 0.8004672299156971,
+        "power_percent": 80.04672299156971,
+        "power_percent_rounded_integer": 80,
+        "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+      }
+    ]
+  },
+  "binomial_sign_sensitivity": {
+    "new_registered_test": false,
+    "estimand": "Probability of a positive linear RV15 B2/B1 session delta, not magnitude of the mean improvement and not the tree-median secondary.",
+    "method": "k = minimum integer with P[Binomial(n,0.5) >= k] <= 0.05; power = P[Binomial(n,p_true) >= k].",
+    "requires_independent_bernoulli_signs": true,
+    "registered_inference_remains_block_bootstrap": true,
+    "rows": [
+      {
+        "n": 20,
+        "rejection_threshold_positive_sessions": 15,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.020694732666015625,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.10793260770976443,
+        "power_percent_rounded_059": 10.793260770976442,
+        "power_empirical_249_over_419": 0.11523846678745825,
+        "power_percent_empirical_249_over_419": 11.523846678745825
+      },
+      {
+        "n": 40,
+        "rejection_threshold_positive_sessions": 26,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.0403452338759962,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.27299236149516226,
+        "power_percent_rounded_059": 27.299236149516226,
+        "power_empirical_249_over_419": 0.29156832276838474,
+        "power_percent_empirical_249_over_419": 29.156832276838472
+      },
+      {
+        "n": 45,
+        "rejection_threshold_positive_sessions": 29,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.03622713008127221,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.2795246024795267,
+        "power_percent_rounded_059": 27.952460247952672,
+        "power_empirical_249_over_419": 0.2994634895784022,
+        "power_percent_empirical_249_over_419": 29.946348957840218
+      },
+      {
+        "n": 120,
+        "rejection_threshold_positive_sessions": 70,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.04120373966376326,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.5973087332400453,
+        "power_percent_rounded_059": 59.73087332400453,
+        "power_empirical_249_over_419": 0.6338134199525463,
+        "power_percent_empirical_249_over_419": 63.38134199525462
+      },
+      {
+        "n": 146,
+        "rejection_threshold_positive_sessions": 84,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.04093087218836523,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.6729554104562175,
+        "power_percent_rounded_059": 67.29554104562176,
+        "power_empirical_249_over_419": 0.710062294606042,
+        "power_percent_empirical_249_over_419": 71.0062294606042
+      },
+      {
+        "n": 335,
+        "rejection_threshold_positive_sessions": 184,
+        "null_positive_probability": 0.5,
+        "target_alpha": 0.05,
+        "actual_null_rejection_probability": 0.04012452686936871,
+        "alternative_rounded_probability": 0.59,
+        "alternative_empirical_numerator": 249,
+        "alternative_empirical_denominator": 419,
+        "alternative_empirical_probability": 0.594272076372315,
+        "power_rounded_059": 0.9415140292100248,
+        "power_percent_rounded_059": 94.15140292100249,
+        "power_empirical_249_over_419": 0.9579723779229203,
+        "power_percent_empirical_249_over_419": 95.79723779229204
+      }
+    ]
+  },
+  "sequence_power": {
+    "actual_joint_power_estimated": false,
+    "dependence_assumed_independent": false,
+    "logical_bounds_formula": "max(0,power_H1+power_H2-1) <= power(H1 AND H2) <= min(power_H1,power_H2), conditional on the marginal approximations.",
+    "bounds": [
+      {
+        "n": 20,
+        "lower_under_approximated_marginals": 0,
+        "upper_under_approximated_marginals": 0.11268865900599329,
+        "lower_percent": 0,
+        "upper_percent": 11.268865900599328,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      },
+      {
+        "n": 40,
+        "lower_under_approximated_marginals": 0,
+        "upper_under_approximated_marginals": 0.15075392858286019,
+        "lower_percent": 0,
+        "upper_percent": 15.075392858286019,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      },
+      {
+        "n": 45,
+        "lower_under_approximated_marginals": 0,
+        "upper_under_approximated_marginals": 0.15960015979098474,
+        "lower_percent": 0,
+        "upper_percent": 15.960015979098474,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      },
+      {
+        "n": 120,
+        "lower_under_approximated_marginals": 0,
+        "upper_under_approximated_marginals": 0.2791234089207011,
+        "lower_percent": 0,
+        "upper_percent": 27.91234089207011,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      },
+      {
+        "n": 146,
+        "lower_under_approximated_marginals": 0,
+        "upper_under_approximated_marginals": 0.3169299619366851,
+        "lower_percent": 0,
+        "upper_percent": 31.69299619366851,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      },
+      {
+        "n": 335,
+        "lower_under_approximated_marginals": 0.35029722454818346,
+        "upper_under_approximated_marginals": 0.5498299946324863,
+        "lower_percent": 35.02972245481835,
+        "upper_percent": 54.982999463248625,
+        "not_a_confidence_interval": true,
+        "not_an_estimate_of_actual_joint_power": true
+      }
+    ],
+    "at_335_conclusion": "Approximately 80.0467 percent is the marginal H2 approximation. H1 is approximately 54.9830 percent; consequently the registered H1-to-H2 sequence does not have demonstrated 80 percent power at 335.",
+    "n80_H1_is_not_joint_n80": true
+  },
+  "power_for_actual_pooled_D_estimated": false,
+  "ABC_power_available": false,
+  "collector_observation": {
+    "observed_at_utc": "2026-09-08T06:50:11.8490216+00:00",
+    "commands": [
+      "Get-ScheduledTask -TaskName OptionsVolatility-Daily-Collection",
+      "Get-ScheduledTaskInfo -TaskName OptionsVolatility-Daily-Collection",
+      "Get-FileHash -Algorithm SHA256 <registered machine config>",
+      "Test-Path -LiteralPath <registered data root>"
+    ],
+    "state": "Ready",
+    "enabled": true,
+    "start_boundary": "2026-09-09T10:00:00",
+    "next_run": "2026-09-09T10:00:00.0000000+10:00",
+    "last_run": "1999-11-30T00:00:00.0000000+11:00",
+    "last_task_result": 267011,
+    "wake_to_run": false,
+    "start_when_available": true,
+    "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+    "data_root_exists": false,
+    "start_scheduled_task_called": false
+  },
+  "private_collector_observation_sha256": "23500862b0dd75fe03680ac34f456501cc2b7db27e8b88584dac6f991ee2cec9",
+  "independent_numeric_review_sha256": "bbbcd1bcfe14c0e38a6c721f118c5f558706fee61232d3aa5531510b70d2ba88",
+  "bootstrap": {
+    "block_length": 5,
+    "ci": "percentile_95",
+    "kind": "circular_session_blocks",
+    "p_value": "greater_centered_null_plus_one",
+    "replications": 9999,
+    "seed": 20260907
+  },
+  "independent_timestamp": false,
+  "research_only": true,
+  "capital_go": false,
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "prospective_data_read": false,
+  "limitations": [
+    "Recovering an SE from a percentile-bootstrap CI assumes a normal approximation; the stored interval is not the inversion of the centered-null p value. H1 CI asymmetry makes this especially approximate.",
+    "Root-n scaling assumes that the historical mean effect, long-run variance, session dependence and eligible-session composition remain representative prospectively. Regime changes or changing training sample sizes can invalidate it.",
+    "Historical effects follow adaptive reuse of the observed sample. Treating them as true future effects can be optimistic; these calculations are planning sensitivities, not validated or predictive probabilities of success.",
+    "At twenty sessions, only four five-session block lengths fit into the sample. The asymptotic approximation does not validate the finite-sample size or power of the registered block bootstrap.",
+    "The exact sign calculation is exact only under independent Bernoulli signs and tests a different feature of the distribution. It is not substituted for any registered bootstrap contrast or secondary.",
+    "No independence between H1 and H2 or between cumulative looks is assumed. The displayed logical joint bounds are not confidence intervals.",
+    "The pooled forty-five-session analysis includes twenty-five known outcomes and is secondary; the n=45 normal row does not compute its actual conditional power.",
+    "January 2028 remains an approximate calendar expectation requiring complete eligible sessions and uninterrupted acquisition; no future calendar date was independently verified in this numerical review."
+  ]
+}

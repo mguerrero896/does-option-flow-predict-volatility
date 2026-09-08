@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Research programme timeline",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "viewBox": [
+      320,
+      440
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "rp2",
+      "type": "backend",
+      "label": "RP2",
+      "sublabel": "Aug 2026 · nulls",
+      "pos": [
+        12,
+        28
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "rp3",
+      "type": "security",
+      "label": "RP3 registered",
+      "sublabel": "Before 29 Aug · sealed",
+      "pos": [
+        172,
+        28
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "phase8",
+      "type": "backend",
+      "label": "Phase 8 bridge",
+      "sublabel": "30 Aug · mixed; 1 read",
+      "pos": [
+        172,
+        134
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "pit",
+      "type": "backend",
+      "label": "PIT successor",
+      "sublabel": "02 Sep · unconfirmed",
+      "pos": [
+        12,
+        134
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "rp4v1",
+      "type": "backend",
+      "label": "RP4 v1 · RV30",
+      "sublabel": "Sep · unstable",
+      "pos": [
+        12,
+        240
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "rp4v2",
+      "type": "backend",
+      "label": "RP4 v2 · RV30",
+      "sublabel": "Sep · repairs",
+      "pos": [
+        172,
+        240
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "rp4v3",
+      "type": "backend",
+      "label": "RP4 v3 · RV30",
+      "sublabel": "Sep · unconfirmed flow",
+      "pos": [
+        172,
+        346
+      ],
+      "size": [
+        136,
+        72
+      ]
+    },
+    {
+      "id": "rp4v4",
+      "type": "frontend",
+      "label": "Current v4 · RV15",
+      "sublabel": "Sep · RV15 flow",
+      "pos": [
+        12,
+        346
+      ],
+      "size": [
+        136,
+        72
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "rp2-to-rp3",
+      "from": "rp2",
+      "to": "rp3"
+    },
+    {
+      "id": "rp3-to-phase8",
+      "from": "rp3",
+      "to": "phase8"
+    },
+    {
+      "id": "phase8-to-pit",
+      "from": "phase8",
+      "to": "pit"
+    },
+    {
+      "id": "pit-to-rp4v1",
+      "from": "pit",
+      "to": "rp4v1"
+    },
+    {
+      "id": "rp4v1-to-rp4v2",
+      "from": "rp4v1",
+      "to": "rp4v2"
+    },
+    {
+      "id": "rp4v2-to-rp4v3",
+      "from": "rp4v2",
+      "to": "rp4v3"
+    },
+    {
+      "id": "rp4v3-to-rp4v4",
+      "from": "rp4v3",
+      "to": "rp4v4"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Interpretation",
+      "items": [
+        "Reused windows are not independent replication. V5 is exploratory; v4 stays the headline.",
+        "No direct v5/v4 test. RP3 is sealed: 662 sessions; estimated read 2029-01-30.",
+        "Future replication is registered separately. Planned reads are not results."
+      ]
+    }
+  ]
+}

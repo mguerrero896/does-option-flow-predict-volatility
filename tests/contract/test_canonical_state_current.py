@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import importlib.util
 import json
 from pathlib import Path
@@ -117,7 +118,7 @@ def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
     assert redactions["artifact_count"] == 14
-    assert state["external_publication"]["supabase"] == {
+    assert state["history"]["external_publication"]["supabase"] == {
         "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
         "status": ("NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT"),
         "writes": {
@@ -183,19 +184,32 @@ def test_generated_paths_are_platform_independent() -> None:
     assert all("\\" not in path for path in state["authorized_sources"])
 
 
-def test_publication_contract_preserves_base_and_does_not_authorize_remote_execution() -> None:
+def test_publication_contract_preserves_base_and_requires_ci_and_external_review() -> None:
     closeout = _module.build_state()["publication_closeout"]
     assert closeout["contract"] == "NEW_MATERIAL_ONLY_EXISTING_HISTORY_PRESERVED"
-    assert closeout["publication_branch"] == "rp4/walkforward-v1-v4"
     assert closeout["publication_base"] == "origin/main"
     assert closeout["technical_package_identifier_allowed"] is True
     assert closeout["remote_history_migration_authorized"] is False
-    assert closeout["remote_commands_executor"] == "Miguel"
-    assert closeout["remote_writes_executed"] is False
+    assert closeout["required_passing_ci_checks"] == 5
+    assert closeout["written_external_review_required"] is True
     assert closeout["cleanup_deletions_authorized"] is False
 
 
-def test_rp4_front_page_and_status_repeat_the_exact_final_table() -> None:
+def test_current_database_state_is_bound_to_verified_public_results() -> None:
+    current = _module.build_state()["external_publication"]["supabase"]
+    receipt = json.loads((REPO / current["receipt"]).read_text(encoding="utf-8"))
+    assert current["tables"] == receipt["new_results"]
+    assert {name: data["rows"] for name, data in current["tables"].items()} == {
+        "rp4_v4_primary_statistics": 24,
+        "rp4_v4_coverage": 36,
+        "rp4_v4_horizons": 3,
+    }
+    assert all(row["all_cells_equal"] for row in receipt["anonymous_round_trip"].values())
+    assert all(row["removed_or_changed"] == 0 for row in receipt["schema_diff"].values())
+    assert current["licensed_bucket"] == "PRIVATE" and receipt["bucket_public"] is False
+
+
+def test_front_page_explains_failure_and_preserves_other_table_cells() -> None:
     def table(name: str) -> list[str]:
         return [
             line
@@ -205,7 +219,28 @@ def test_rp4_front_page_and_status_repeat_the_exact_final_table() -> None:
 
     expected = table("docs/rp4/RESULTADO_FINAL.md")
     assert len(expected) == 7
-    assert table("README.md") == expected
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    csv_path = REPO / "artifacts/rp4_closeout_figures/comparison_v1_v4.csv"
+    with csv_path.open(encoding="utf-8", newline="") as handle:
+        failed_cells = [
+            row
+            for row in csv.DictReader(handle)
+            if row["version"] == "v1"
+            and row["window"] == "primary"
+            and row["family_group"] == "linear"
+            and row["contrast"] == "B2_over_B1"
+        ]
+    assert len(failed_cells) == 1
+    failed_cell = failed_cells[0]
+    assert float(failed_cell["percent_reduction"]) < -100_000
+    numeric_label = (
+        f"{float(failed_cell['percent_reduction']):+,.2f} % "
+        f"({float(failed_cell['p_holm_bilateral']):.4f})"
+    ).replace("-", "−")
+    expected_text = "\n".join(expected)
+    assert expected_text.count(numeric_label) == 1
+    assert expected_text.replace(numeric_label, "numerical failure (retained in the CSV)") in readme
+    assert "artifacts/rp4_closeout_figures/comparison_v1_v4.csv" in readme
     assert table("STATUS.md") == expected
 
 
@@ -223,12 +258,23 @@ def test_generated_public_state_does_not_catalog_internal_working_material() -> 
         assert forbidden not in status_text
 
 
-def test_citation_does_not_claim_an_unpublished_release() -> None:
+def test_citation_names_the_author_and_publication_date_without_inventing_a_version() -> None:
     citation = (REPO / "CITATION.cff").read_text(encoding="utf-8")
     attributes = (REPO / ".gitattributes").read_text(encoding="utf-8")
 
     assert "\nversion:" not in citation
-    assert "\ndate-released:" not in citation
+    assert "\ndate-released: 2026-09-09\n" in citation
+    assert 'family-names: "Guerrero"' in citation
+    assert 'given-names: "Miguel"' in citation
+    assert 'title: "Options Order Flow and Intraday Volatility"' in citation
+    companion_title = (
+        "Can option trading improve short-term volatility forecasts? "
+        "Comparing 15-minute forecasts for six U.S. stocks"
+    )
+    assert "notes: >-" in citation
+    for text in (citation, (REPO / "README.md").read_text(encoding="utf-8")):
+        assert companion_title in text
+        assert "Miguel Antonio Guerrero Quijano" in text
     assert "evidence-freeze-2026-08-18" not in citation
     assert "*.cff text eol=lf" in attributes
 

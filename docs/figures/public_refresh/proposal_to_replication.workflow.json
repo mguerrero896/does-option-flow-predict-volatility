@@ -1,0 +1,212 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "From the original question to a prospective replication",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "frontend": {
+          "label": "Published record"
+        },
+        "backend": {
+          "label": "Computation"
+        },
+        "security": {
+          "label": "Gate"
+        },
+        "database": {
+          "label": "Data"
+        },
+        "external": {
+          "label": "Study question"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "design",
+      "label": "Question and data"
+    },
+    {
+      "id": "evaluation",
+      "label": "Measured evidence"
+    },
+    {
+      "id": "replication",
+      "label": "Future evidence"
+    },
+    {
+      "id": "future_read",
+      "label": "Authorized future reads"
+    }
+  ],
+  "mainPath": [
+    "proposal",
+    "pit",
+    "sets",
+    "earlier",
+    "v4",
+    "report",
+    "register",
+    "future"
+  ],
+  "nodes": [
+    {
+      "id": "proposal",
+      "lane": "design",
+      "col": 0,
+      "type": "external",
+      "label": "Original question",
+      "sublabel": "Do options help?",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "pit",
+      "lane": "design",
+      "col": 1,
+      "type": "database",
+      "label": "Point-in-time inputs",
+      "sublabel": "Licensed prices, state and flow",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "sets",
+      "lane": "design",
+      "col": 2,
+      "type": "backend",
+      "label": "Nested B0 / B1 / B2",
+      "sublabel": "History → surface → flow",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "earlier",
+      "lane": "evaluation",
+      "col": 2,
+      "type": "backend",
+      "label": "Earlier programmes",
+      "sublabel": "Nulls, mixed, not confirmed",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "v4",
+      "lane": "evaluation",
+      "col": 3,
+      "type": "backend",
+      "label": "RP4 v4 · RV15",
+      "sublabel": "419 sessions · walk-forward",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "report",
+      "lane": "evaluation",
+      "col": 4,
+      "type": "frontend",
+      "label": "Conditional finding",
+      "sublabel": "+0.623% linear flow QLIKE",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "register",
+      "lane": "replication",
+      "col": 4,
+      "type": "security",
+      "label": "Register replication",
+      "sublabel": "Frozen rules and future sessions",
+      "tag": "SEALED",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "future",
+      "lane": "future_read",
+      "col": 4,
+      "type": "security",
+      "label": "Authorized looks only",
+      "sublabel": "20 / 40 / 335 new sessions",
+      "tag": "PENDING",
+      "width": 178,
+      "height": 78
+    }
+  ],
+  "edges": [
+    {
+      "id": "proposal-to-pit",
+      "from": "proposal",
+      "to": "pit",
+      "role": "main"
+    },
+    {
+      "id": "pit-to-sets",
+      "from": "pit",
+      "to": "sets",
+      "role": "main"
+    },
+    {
+      "id": "sets-to-earlier",
+      "from": "sets",
+      "to": "earlier",
+      "role": "main"
+    },
+    {
+      "id": "earlier-to-v4",
+      "from": "earlier",
+      "to": "v4",
+      "role": "main"
+    },
+    {
+      "id": "v4-to-report",
+      "from": "v4",
+      "to": "report",
+      "role": "main"
+    },
+    {
+      "id": "report-to-register",
+      "from": "report",
+      "to": "register",
+      "role": "main"
+    },
+    {
+      "id": "register-to-future",
+      "from": "register",
+      "to": "future",
+      "role": "main"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "The nulls come first",
+      "items": [
+        "RP2 validation: null or negative; PIT: global edge not confirmed; Phase 8: mixed.",
+        "V5 is a closed exploratory extension. Reused windows are not independent replications."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "A small, conditional result",
+      "items": [
+        "Linear B2/B1: +0.623%, p = 0.0032; two-sided Holm sensitivity = 0.0248.",
+        "Fourth evaluation; final 25 sessions do not confirm. Forecast loss is not trading alpha."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Replication remains separate",
+      "items": [
+        "20 new sessions: consistency; 40: stability; 335: a single final look.",
+        "D = 25 observed + 20 new sessions. These 45 pooled sessions are not another look."
+      ]
+    }
+  ]
+}

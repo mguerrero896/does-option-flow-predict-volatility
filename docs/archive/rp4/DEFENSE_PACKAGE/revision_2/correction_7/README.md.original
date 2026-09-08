@@ -1,0 +1,11 @@
+# Defensa — horizonte del pronóstico y visibilidad de la información
+
+Esta edición conserva íntegros los [secundarios reparados y sus límites](../correction_6/README.md) y aclara la secuencia entre el objetivo de la propuesta y su extensión de horizonte. La comparación entre horizontes es descriptiva y se limita a la familia y la ventana indicadas; no establece un horizonte óptimo.
+
+El corte PIT determina la información admisible en los predictores y no cambia el horizonte del objetivo. Las sensibilidades de visibilidad asignadas a otra evaluación se documentan como asignación del propietario; aquí no se inspeccionan ni se afirman preparación, ejecución o resultados de ese trabajo.
+
+Documentos de lectura: [resumen bilingüe](executive_summary.md), [edición del resumen para impresión](executive_summary.pdf), [preguntas del examinador](examiner_qa.md), [matriz de afirmaciones](claims_matrix.csv) y [diapositivas](defense_slides.md). La [evidencia de horizonte y relojes](horizon_pit_evidence.json) contiene campos guardados, selectores, citas de código y la proyección acotada de la instrucción. La [revisión aditiva de los secundarios](../../../results_v3_revision3.md) y la [sensibilidad bilateral/Holm](../correction_5/README.md) mantienen sus resultados.
+
+El [recibo](receipt.json), el [manifiesto](evidence_manifest.json) y [SHA256SUMS](SHA256SUMS) fijan el contenido; la verificación tiene un recibo separado con comandos y salidas. El [recibo de maquetación](summary_layout_receipt.json) verifica la edición para impresión contra el texto fuente. Esta aclaración documental no añade pérdidas, ajustes ni resultados científicos.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

@@ -9,7 +9,7 @@ frozen v1 protocol, whose 60-session, one-read design and recorded SHA-256 remai
 
 ## Decision
 
-Phase 9 is a prospective follow-up, not a gate for submitting or defending the capstone.
+Phase 9 is a prospective follow-up, not a gate for submitting or defending the research report.
 An academic version completed before the Phase 9 read reports the campaign as **ongoing**
 and reports no Phase 9 estimate, interval, p-value or verdict. Operational metadata may be
 reported: the frozen target, complete-session count, recorded misses, projected completion

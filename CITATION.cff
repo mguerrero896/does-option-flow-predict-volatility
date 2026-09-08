@@ -1,21 +1,33 @@
 cff-version: 1.2.0
 message: "If you use this repository or its methodology, please cite it as below."
-title: "MDS650 volatility-forecasting research pipeline"
+title: "Options Order Flow and Intraday Volatility"
 type: software
 authors:
   - family-names: "Guerrero"
     given-names: "Miguel"
-# Version and release date remain absent until this exact sanitized tree has a public release.
+    affiliation: "Sydney Polytechnic Institute"
+# Date of this public research snapshot; no tagged software version is claimed.
+date-released: 2026-09-09
 repository-code: "https://github.com/mguerrero896/does-option-flow-predict-volatility"
 keywords:
-  - realized-variance
-  - volatility-forecasting
-  - options
-  - point-in-time
-  - preregistration
-  - reproducible-research
+  - options order flow
+  - implied volatility surface
+  - intraday realized variance
+  - volatility forecasting
+  - walk-forward evaluation
+  - QLIKE
+  - point-in-time data
+  - pre-registration
+  - prospective replication
+  - reproducible research
 abstract: >-
-  Software and public aggregate artifacts for a point-in-time study of whether
-  options-market information improves forecasts of 30-minute realized variance.
-  The corrected-protocol RP2-v3 rebuild is complete, but no current scientific
-  headline is eligible while the PIT v2.2 reconciliation gate remains closed.
+  Software, registered methods and public aggregate evidence on whether options
+  order flow improves intraday realized-variance forecasts beyond price history
+  and the implied volatility surface. Earlier studies found null or negative
+  validation results. RP4 v4 reports a small conditional linear-flow improvement
+  at 15 minutes over 419 historical sessions, with 5 minutes secondary, no
+  full-sequence confirmation in the final window, and prospective replication
+  pending. Forecast-loss reduction is not evidence of trading profitability.
+notes: >-
+  Companion final report: Can option trading improve short-term volatility forecasts? Comparing 15-minute forecasts for six U.S. stocks
+  (Miguel Antonio Guerrero Quijano, Sydney Polytechnic Institute, September 2026).

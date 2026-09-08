@@ -1,0 +1,41 @@
+# Réplica prospectiva v4 — enmienda 2 del registro v1
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+**Sellado local: 2026-09-08T05:27:15.316335+00:00.** Esta enmienda se añade antes de la primera ejecución programada del colector, **2026-09-09 a las 10:00 Australia/Sydney**. La observación local anterior al sellado muestra la tarea habilitada, sin ejecución registrada y sin directorio de adquisición; no hay datos prospectivos adquiridos o leídos por esta tarea. El [recibo](prospective_confirmation_v1_amendment_2_receipt.json) y el [sidecar](prospective_confirmation_v1_amendment_2.sha256) fijan esta evidencia. El sello es local, no una certificación temporal independiente.
+
+## Cadena de sellados y regla primaria
+
+El [v1](prospective_confirmation_v1.md), sellado el **2026-09-08T04:24:01.918499+00:00**, conserva SHA-256 `317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d`. La [enmienda 1](prospective_confirmation_v1_amendment_1.md), sellada el **2026-09-08T04:31:58.752153+00:00**, conserva SHA-256 `036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3`. Ambos documentos y sus recibos permanecen íntegros.
+
+**El primario no cambia:** primeras 20 sesiones prospectivas completas, familia lineal, RV15, secuencia H1→H2 unilateral al 5 %, estimaciones positivas y apertura de H2 sólo tras rechazo de H1 en esa misma familia y muestra. RV5 continúa como secundario. La lectura acumulada de 40 conserva únicamente su papel de estabilidad; no rescata el primario ni repite las decisiones secundarias aquí registradas.
+
+Esta enmienda añade dos análisis secundarios. Para mantener los nombres anteriores, A es la ablación y B la mediana de la enmienda 1; C es la media recortada nueva y D la agrupación nueva. **A, B, C y D se leen una sola vez al completar las primeras 20 sesiones prospectivas**, incluso si el primario no confirma. No son resultados disponibles ni una v5.
+
+## Secundario D — lectura agrupada posterior a la partición
+
+La muestra concatena las **25 sesiones históricas de confirmación, 2026-08-03–2026-09-04**, y las **primeras 20 sesiones prospectivas completas** del v1: **45 sesiones**. Las 25 históricas ya se observaron y motivan parte de este análisis; por eso la agrupación es secundaria y no una réplica independiente. Un resultado favorable no convierte en desconocida esa información previa ni rescata la confirmación prospectiva primaria.
+
+Se reutilizan literalmente las pérdidas por sesión B0/B1/B2 de la familia lineal RV15 guardadas en [el agregado histórico](../../artifacts/rp4_v4_b3_rv15/session_losses.csv), SHA-256 `d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231`. No se reajustan modelos históricos, no se cambian predicciones, no se reabre v3/v4 y no se recalculan sus p. Las pérdidas prospectivas procederán del procedimiento v4 ya registrado, con los mismos conjuntos, transformaciones, selección temporal, semillas y máscaras; este registro no ejecuta ese procedimiento.
+
+Se concatenan las filas históricas y prospectivas por sesión de mercado, con claves únicas, orden temporal y sin solapamiento. Se exige la misma agregación v4: media de orígenes dentro de activo/sesión, media igual entre activos y después peso igual para cada sesión. Por tanto cada una de las 45 sesiones pesa 1/45; no se asigna la mitad del peso a cada ventana. Se conserva el calendario observado, incluidos huecos declarados, sin inventar sesiones intermedias. Antes de abrir la lectura se sellarán las nuevas pérdidas, sus claves, la unión y el entorno; una cobertura incompleta no se sustituye por una muestra elegida según pérdidas.
+
+Se aplica una sola secuencia H1: B1/B0 → H2: B2/B1 en la **familia lineal a 15 minutos** sobre esas 45 filas. Delta es pérdida base menos ampliada. Se conserva el bootstrap circular de sesiones v4: bloques de cinco, 9.999 réplicas, semilla 20260907, p unilateral con nula centrada y corrección +1 e IC percentil bilateral del 95 %. H1 debe tener media positiva y p ≤ 0,05; sólo entonces H2 se decide con esas mismas condiciones. Si H1 no rechaza, el p de H2 se conserva exclusivamente como nominal no abierto.
+
+**Decisión secundaria agrupada:** se informa apoyo a la jerarquía en la muestra agrupada sólo si ambos escalones rechazan dentro de esta misma familia, horizonte y muestra. D mantiene su propia secuencia al 5 %; no pertenece al Holm A/B/C. No se reclama control global al 5 % sobre D, A/B/C, el primario o la búsqueda histórica. Si la unión o la inferencia no es computable, se registra como no verificable, sin excluir días, repetir la lectura ni cambiar el criterio.
+
+## Secundario C — media pareada recortada de los árboles
+
+Se usan B1 y B2 de LightGBM RV15 sobre las mismas **20 sesiones prospectivas completas**. El delta de cada sesión es QLIKE de B1 menos QLIKE de B2, tras la misma agregación por activo/sesión. El estimando es la **media del vector de deltas pareados recortada al 5 % por cada cola**, no una diferencia entre medias recortadas por separado ni una selección de fechas de choque.
+
+Se conserva la receta `trimmed_mean_5pct` del [productor v4 heredado](../../artifacts/rp4_v3_code/inference.py): ordenar los deltas y retirar `floor(0.05 × N)` de cada extremo. Con N = 20 se retira una observación por cola y se promedian las 18 restantes. En cada remuestra se aplica exactamente la misma regla, con bloques circulares de cinco sesiones, 9.999 réplicas y semilla 20260907. El p es bilateral con remuestra centrada respecto al estadístico observado y corrección +1; el IC es percentil bilateral del 95 %. El recorte se fijó antes de observar estas sesiones; no se usan diagnósticos retrospectivos para decidir qué días retirar.
+
+**Decisión C:** apoya una mejora recortada sólo si el estimando es positivo y su p ajustado por Holm junto con A y B es ≤ 0,05. Una mediana o una media recortada favorables no sustituyen la media primaria ni demuestran ausencia de riesgo en las colas. Se publican el efecto, el IC, los p nominal y ajustado y el recuento recortado; un fallo computacional se informa sin repetir el análisis.
+
+## Actualización explícita de multiplicidad secundaria
+
+Las recetas nominales de A (media unilateral) y B (mediana bilateral) se conservan. **Se sustituye únicamente su familia Holm de dos por la familia de tres A/B/C**, antes de la primera adquisición prospectiva. La enmienda 1 sigue sellada como antecedente; no se edita su texto.
+
+Se ordenan los tres p, incluidos los lugares no disponibles, y se aplican los umbrales exactos 0,05/3, 0,05/2 y 0,05, deteniéndose en el primer no rechazo. Los p ajustados son el máximo acumulado de los p ordenados multiplicados por 3, 2 y 1, limitado a 1. Se exige además signo positivo para declarar mejora en cualquiera de A/B/C. Un p no computable conserva su lugar con valor administrativo 1 para el ajuste, sin publicarlo como una estimación científica. No se reduce la familia por el resultado, no se añade a ella otro contraste después de mirar y no hay segunda lectura de A/B/C a 40 sesiones.
+
+El productor, la unión de datos y sus hashes se fijarán en archivos nuevos antes de cualquier ajuste o lectura autorizada. Esta enmienda registra reglas; no ejecuta ajustes, remuestreos ni evaluaciones. Conserva las restricciones de cobertura, datos ausentes, disponibilidad temporal como proxy y ausencia de inferencia causal o de rentabilidad del v1 y v4.

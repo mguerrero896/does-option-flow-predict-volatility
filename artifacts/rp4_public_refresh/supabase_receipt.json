@@ -1,0 +1,83 @@
+{
+  "schema_version": "public-aggregate-publication-v1",
+  "status": "VERIFIED",
+  "measured_at_utc": "2026-09-08T15:37:34.477265+00:00",
+  "migration": "supabase/migrations/20260908153626_rp4_v4_public_aggregate_results.sql",
+  "reads": "Schema and policies plus saved public aggregates only; no prospective rows or licensed tables read.",
+  "tables_before": 6,
+  "tables_after": 9,
+  "new_results": {
+    "rp4_v4_primary_statistics": {
+      "rows": 24,
+      "source_path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "source_sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+      "all_cells_equal": true
+    },
+    "rp4_v4_coverage": {
+      "rows": 36,
+      "source_path": "artifacts/rp4_v4_b4/coverage.csv",
+      "source_sha256": "67941d02647ae329fcc704a0b109949ab4312cb6915006302186b21770e853ef",
+      "all_cells_equal": true
+    },
+    "rp4_v4_horizons": {
+      "rows": 3,
+      "source_path": "artifacts/rp4_public_refresh/horizon_reference.csv",
+      "source_sha256": "a5fc2b258c89110a125dec46252379a8cb44c5e399b4c401333d727b832c7eb6",
+      "all_cells_equal": true
+    }
+  },
+  "anonymous_round_trip": {
+    "rp4_v4_primary_statistics": {
+      "http_status": 200,
+      "rows": 24,
+      "all_cells_equal": true
+    },
+    "rp4_v4_coverage": {
+      "http_status": 200,
+      "rows": 36,
+      "all_cells_equal": true
+    },
+    "rp4_v4_horizons": {
+      "http_status": 200,
+      "rows": 3,
+      "all_cells_equal": true
+    }
+  },
+  "schema_diff": {
+    "tables": {
+      "removed_or_changed": 0,
+      "added": 3
+    },
+    "columns": {
+      "removed_or_changed": 0,
+      "added": 15
+    },
+    "policies": {
+      "removed_or_changed": 0,
+      "added": 3
+    },
+    "grants": {
+      "removed_or_changed": 0,
+      "added": 15
+    },
+    "views": {
+      "removed_or_changed": 0,
+      "added": 0
+    },
+    "buckets": {
+      "removed_or_changed": 0,
+      "added": 0
+    }
+  },
+  "snapshots": {
+    "supabase_schema_before.json": {
+      "sha256": "e51f8ee98c7b6b66add1ef6ab68297883bee8570ace27d6268019fed1cc4994b",
+      "bytes": 333714
+    },
+    "supabase_schema_after.json": {
+      "sha256": "5c1cb909d1935640a84417f925aacc34a6e546a1aa8befd0df97adab13a7fae6",
+      "bytes": 345138
+    }
+  },
+  "bucket_public": false
+}

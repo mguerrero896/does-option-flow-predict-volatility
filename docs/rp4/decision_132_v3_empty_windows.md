@@ -1,7 +1,7 @@
-# Decisión 132 — RP4 v3, ratios indefinidos en ventanas vacías
+# Decision for empty-window measurement
 
-2026-09-07. Por la instrucción explícita de Miguel recibida después de A1 y antes de cualquier evaluación v3, se adopta `v3_window_empty_addendum.md` como suplemento nuevo, sin modificar documentos o resultados congelados.
+This document is archived. Read the [English summary](../archive/public_history/docs/rp4/decision_132_v3_empty_windows.md.summary.md) and the [historical record](../archive/public_history/docs/rp4/decision_132_v3_empty_windows.md). The archive preserves its scientific content and source identity.
 
-Se autoriza convertir únicamente formas/ratios/innovaciones enumerados a NaN cuando su contador de operaciones disponible es cero, mantener las magnitudes de actividad, añadir dos indicadores B2 de ventana vacía y reportar censo y contraste dentro/fuera. No se excluyen filas ni sesiones y no se modifica ningún otro procedimiento v3. Las dos nuevas columnas constituyen la excepción explícita a la prohibición previa de predictores de ventana vacía.
+For the current interpretation, use the [English defense](DEFENSE_PACKAGE/revision_2/correction_7/README.md) and [scientific findings ledger](../scientific_findings_ledger.md).
 
-La especificación efectiva A1B y su hash se registran antes de ajustar modelos, vinculando el A1 original inmutable y ambos addenda. Gamma/jump se derivan según A1; la recodificación posterior produce otro archivo sin sustituirlo. Toda publicación y cambio de colector siguen fuera de alcance. RESEARCH_ONLY; capital_go=false.
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

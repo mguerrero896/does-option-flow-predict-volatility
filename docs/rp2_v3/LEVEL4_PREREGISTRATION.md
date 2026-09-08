@@ -47,7 +47,7 @@ The control was five times worse than the tabular LightGBM fitted on the same fe
 beating it measured the control's weakness. The sequence model lost to the model already in
 the ladder, and the reported improvement was significant at p = 0.004 regardless.
 
-A single reference cannot distinguish "the sequence helps" from "our control is bad". Two
+A single reference cannot distinguish "the sequence helps" from "the control is poor". Two
 can:
 
 | Reference | What it isolates |

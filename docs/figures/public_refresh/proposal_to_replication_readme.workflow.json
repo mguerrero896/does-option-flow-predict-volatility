@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "From the research question to a future replication",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "legend": {
+      "mode": "hidden"
+    },
+    "viewBox": [
+      320,
+      340
+    ]
+  },
+  "components": [
+    {
+      "id": "question",
+      "type": "external",
+      "label": "Licensed inputs",
+      "sublabel": "Do options help?",
+      "pos": [
+        12,
+        20
+      ],
+      "size": [
+        136,
+        78
+      ]
+    },
+    {
+      "id": "design",
+      "type": "database",
+      "label": "Point-in-time",
+      "sublabel": "History → state → flow",
+      "pos": [
+        172,
+        20
+      ],
+      "size": [
+        136,
+        78
+      ]
+    },
+    {
+      "id": "history",
+      "type": "backend",
+      "label": "Mixed past evidence",
+      "sublabel": "419 reused sessions",
+      "pos": [
+        172,
+        130
+      ],
+      "size": [
+        136,
+        78
+      ]
+    },
+    {
+      "id": "finding",
+      "type": "frontend",
+      "label": "Linear flow gain",
+      "sublabel": "+0.623%; conditional",
+      "pos": [
+        12,
+        130
+      ],
+      "size": [
+        136,
+        78
+      ]
+    },
+    {
+      "id": "registration",
+      "type": "security",
+      "label": "Register rules",
+      "sublabel": "Fixed before new data",
+      "pos": [
+        12,
+        240
+      ],
+      "size": [
+        136,
+        78
+      ]
+    },
+    {
+      "id": "reads",
+      "type": "security",
+      "label": "Authorized reads",
+      "sublabel": "20 / 40 / 335 sessions",
+      "pos": [
+        172,
+        240
+      ],
+      "size": [
+        136,
+        78
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "question-to-design",
+      "from": "question",
+      "to": "design"
+    },
+    {
+      "id": "design-to-history",
+      "from": "design",
+      "to": "history"
+    },
+    {
+      "id": "history-to-finding",
+      "from": "history",
+      "to": "finding"
+    },
+    {
+      "id": "finding-to-registration",
+      "from": "finding",
+      "to": "registration"
+    },
+    {
+      "id": "registration-to-reads",
+      "from": "registration",
+      "to": "reads"
+    }
+  ],
+  "cards": []
+}

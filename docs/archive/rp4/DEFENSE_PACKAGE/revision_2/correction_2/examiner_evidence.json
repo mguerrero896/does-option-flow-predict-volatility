@@ -1,0 +1,1847 @@
+{
+  "schema": "rp4-defense-examiner-revision-2-evidence",
+  "research_only": true,
+  "capital_go": false,
+  "source_sha256": {
+    "README.md": "f5f4ca20883d44cbece6e3293aa17868881812a0b6d976c7f51c42f53422ac6e",
+    "artifacts/rp4_a1/freeze.json": "eb9f51a36638940b1fe8e04bb2e0112879ddf979f82208670c9c54e40e2ce65a",
+    "artifacts/rp4_a1/specification.json": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+    "artifacts/rp4_b2/summary.json": "d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2",
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "artifacts/rp4_code/materialize.py": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0",
+    "artifacts/rp4_v2_a1/freeze.json": "248abbedd5267552272da1a9f7c1d4d3cefd99ef4d3fdd7b4c1b8a2f10ef41d2",
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_b2/summary.json": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693",
+    "artifacts/rp4_v3_a1/freeze.json": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d",
+    "artifacts/rp4_v3_a1_empty_window/freeze.json": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6",
+    "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "artifacts/rp4_v3_b4/receipt.json": "799b97749e1c15e5e2fd1b18ac4ad4a680192fa6521b168d52fa830205b9f1b5",
+    "artifacts/rp4_v4_a1/freeze_manifest.json": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+    "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+    "artifacts/rp4_v4_b2_rv15/receipt.json": "d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv5/receipt.json": "737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365",
+    "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+    "artifacts/rp4_v4_b3_rv15/receipt.json": "b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb",
+    "artifacts/rp4_v4_b3_rv15/session_losses.csv": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+    "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+    "artifacts/rp4_v4_b3_rv5/receipt.json": "556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769",
+    "artifacts/rp4_v4_b3_rv5/summary.json": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_v4_b4/receipt.json": "b77c640645c4ef467d56c73b0ce762b679cbc3d3475647684d1941a72921e00d",
+    "docs/literature_evidence_ledger_v2.csv": "c52652090316aa23bdf3dbf10360986ce5a844377e8d721afe3ee1e96aa96de9",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/additions_evidence.json": "10085a652cf82144a3ba0a7f9fe632bd95fe910862c5780f2a5c687b43d61389",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735",
+    "docs/rp4/RESULTADO_FINAL.md": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19",
+    "docs/rp4/predeclaration_v4_text.md": "b7e13877a3090b0724d9a90792afefef3f009124d2766197da637a42eb24d4a9",
+    "docs/rp4/predeclaration_v4_text.sha256": "6c50ccc82f86f5f03fb4cd981cb087bcd168790e8e605f4471d1b56b9185c3ff",
+    "docs/rp4/predeclaration_v4_text_receipt.json": "ca211a41908579a33c2d84ef3c8e60a256010f5453bb9cede7339bd9a06ab708",
+    "docs/rp4/prospective_confirmation_v1.md": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "docs/rp4/prospective_confirmation_v1_amendment_1.md": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "docs/rp4/prospective_confirmation_v1_amendment_1_receipt.json": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837",
+    "docs/rp4/prospective_confirmation_v1_amendment_2.md": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+    "docs/rp4/prospective_confirmation_v1_amendment_3.md": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+    "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2",
+    "docs/rp4/prospective_confirmation_v1_receipt.json": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+    "docs/rp4/specification_v4.md": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+    "scripts/rp2_block4_b0_panel.py": "cc25547b84fdb305a87e7bf3cbf1dbaad66349c89b8903f9794454a194399eb2",
+    "src/mds650/har.py": "a24f5ff325946f8063d3a06ee9887a01911ee3b44ea8b984d817f50e107b7763"
+  },
+  "chronology": [
+    {
+      "event": "Última sesión incluida en la muestra histórica",
+      "artifact": "artifacts/rp4_v4_b3_rv15/summary.json",
+      "selector": [
+        "last_session"
+      ],
+      "market_date": "2026-09-04",
+      "time_of_day": null,
+      "evidence_role": "Fecha de mercado guardada, no hora de descarga ni de conocimiento humano."
+    },
+    {
+      "event": "Partición de calendario y fecha de diseño declaradas",
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selectors": [
+        [
+          "calendar_split"
+        ],
+        [
+          "asof_date"
+        ],
+        [
+          "label"
+        ]
+      ],
+      "calendar_split": "2026-08-01",
+      "declared_design_date": "2026-09-07",
+      "time_of_day": null,
+      "evidence_role": "Campos del registro; la muestra histórica concluye antes de esta fecha. No prueba desconocimiento del resultado durante el diseño.",
+      "selector": [
+        "asof_date"
+      ],
+      "declared_date": "2026-09-07"
+    },
+    {
+      "event": "Congelación v1",
+      "artifact": "artifacts/rp4_a1/freeze.json",
+      "selector": [
+        "created_date"
+      ],
+      "declared_date": "2026-09-07",
+      "utc": null,
+      "sydney": null,
+      "time_of_day": null,
+      "evidence_role": "El recibo sólo da fecha; no se inventa hora ni zona horaria."
+    },
+    {
+      "event": "Registro v3; v1/v2 ya conocidos",
+      "artifact": "artifacts/rp4_v3_a1/freeze.json",
+      "selector": [
+        "registered_at_utc"
+      ],
+      "literal": "2026-09-07T08:18:58.166170+00:00",
+      "utc": "2026-09-07T08:18:58.166170+00:00",
+      "sydney": "2026-09-07T18:18:58.166170+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local v3; prior_v1_v2_results_known=true da una cota temporal local para el conocimiento de sus resultados.",
+      "independent_timestamp": false,
+      "additional_assertion": {
+        "selector": [
+          "prior_v1_v2_results_known"
+        ],
+        "value": true
+      },
+      "v1_v2_execution_clock_not_available_in_reviewed_receipts": true
+    },
+    {
+      "event": "Regla de ventana vacía v3",
+      "artifact": "artifacts/rp4_v3_a1_empty_window/freeze.json",
+      "selector": [
+        "registered_at_utc"
+      ],
+      "literal": "2026-09-07T08:30:43.053218+00:00",
+      "utc": "2026-09-07T08:30:43.053218+00:00",
+      "sydney": "2026-09-07T18:30:43.053218+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local del addendum; no sello de tercero.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Predeclaración condicional v4: hora escrita en el texto",
+      "artifact": "docs/rp4/predeclaration_v4_text_receipt.json",
+      "selector": [
+        "claimed_writing_time",
+        "literal_in_original"
+      ],
+      "original_line": 3,
+      "literal": "2026-09-07 20:20 Australia/Sydney",
+      "utc": "2026-09-07T10:20:00+00:00",
+      "sydney": "2026-09-07T20:20:00+10:00",
+      "evidence_role": "Declaración del texto original; no hora autenticada, no mtime y no sello temporal independiente.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Cierre v3: verificación registrada",
+      "artifact": "artifacts/rp4_v3_b4/receipt.json",
+      "selector": [
+        "verified_at_utc"
+      ],
+      "literal": "2026-09-07 16:18:46 UTC",
+      "utc": "2026-09-07T16:18:46+00:00",
+      "sydney": "2026-09-08T02:18:46+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Marca del recibo de verificación del cierre; no se presenta como hora exacta de creación de results_v3.md.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Registro ejecutable v4 congelado",
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "frozen_at_utc"
+      ],
+      "literal": "2026-09-07T16:37:21.501511+00:00",
+      "utc": "2026-09-07T16:37:21.501511+00:00",
+      "sydney": "2026-09-08T02:37:21.501511+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local del contrato ejecutable que enlaza el hash de la predeclaración; posterior a la verificación v3 en esta cadena inspeccionada.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Inicio RV15 primaria",
+      "artifact": "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "selector": [
+        "started_at_utc"
+      ],
+      "literal": "2026-09-07T17:24:29.535011+00:00",
+      "utc": "2026-09-07T17:24:29.535011+00:00",
+      "sydney": "2026-09-08T03:24:29.535011+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de inicio capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Finalización RV15 primaria",
+      "artifact": "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "selector": [
+        "completed_at_utc"
+      ],
+      "literal": "2026-09-07T18:13:29.790569+00:00",
+      "utc": "2026-09-07T18:13:29.790569+00:00",
+      "sydney": "2026-09-08T04:13:29.790569+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de terminación capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Inicio RV15 ventana final",
+      "artifact": "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "selector": [
+        "started_at_utc"
+      ],
+      "literal": "2026-09-07T18:14:50.222385+00:00",
+      "utc": "2026-09-07T18:14:50.222385+00:00",
+      "sydney": "2026-09-08T04:14:50.222385+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de inicio capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Finalización RV15 ventana final",
+      "artifact": "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "selector": [
+        "completed_at_utc"
+      ],
+      "literal": "2026-09-07T18:23:27.273395+00:00",
+      "utc": "2026-09-07T18:23:27.273395+00:00",
+      "sydney": "2026-09-08T04:23:27.273395+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de terminación capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Inicio RV5 primaria",
+      "artifact": "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "selector": [
+        "started_at_utc"
+      ],
+      "literal": "2026-09-07T18:24:38.947836+00:00",
+      "utc": "2026-09-07T18:24:38.947836+00:00",
+      "sydney": "2026-09-08T04:24:38.947836+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de inicio capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Finalización RV5 primaria",
+      "artifact": "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "selector": [
+        "completed_at_utc"
+      ],
+      "literal": "2026-09-07T19:16:40.533194+00:00",
+      "utc": "2026-09-07T19:16:40.533194+00:00",
+      "sydney": "2026-09-08T05:16:40.533194+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de terminación capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Inicio RV5 ventana final",
+      "artifact": "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "selector": [
+        "started_at_utc"
+      ],
+      "literal": "2026-09-07T19:17:15.307438+00:00",
+      "utc": "2026-09-07T19:17:15.307438+00:00",
+      "sydney": "2026-09-08T05:17:15.307438+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de inicio capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Finalización RV5 ventana final",
+      "artifact": "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "selector": [
+        "completed_at_utc"
+      ],
+      "literal": "2026-09-07T19:25:22.707101+00:00",
+      "utc": "2026-09-07T19:25:22.707101+00:00",
+      "sydney": "2026-09-08T05:25:22.707101+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Hora de terminación capturada por el recibo de ejecución.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Informe v4 generado a más tardar",
+      "artifact": "artifacts/rp4_v4_b4/receipt.json",
+      "selector": [
+        "report_generated_by_utc"
+      ],
+      "literal": "2026-09-07T19:26:27Z",
+      "utc": "2026-09-07T19:26:27+00:00",
+      "sydney": "2026-09-08T05:26:27+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Cota superior declarada de generación del informe, no un timestamp exacto de escritura.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Registro prospectivo v1",
+      "artifact": "docs/rp4/prospective_confirmation_v1_receipt.json",
+      "selector": [
+        "registered_at_utc"
+      ],
+      "literal": "2026-09-08T04:24:01.918499+00:00",
+      "utc": "2026-09-08T04:24:01.918499+00:00",
+      "sydney": "2026-09-08T14:24:01.918499+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local prospectivo anterior a la adquisición programada; no certificación de tercero.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Enmienda 1",
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_1_receipt.json",
+      "selector": [
+        "sealed_at_utc"
+      ],
+      "literal": "2026-09-08T04:31:58.752153+00:00",
+      "utc": "2026-09-08T04:31:58.752153+00:00",
+      "sydney": "2026-09-08T14:31:58.752153+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local prospectivo anterior a la adquisición programada; no certificación de tercero.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Enmienda 2",
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json",
+      "selector": [
+        "sealed_at_utc"
+      ],
+      "literal": "2026-09-08T05:27:15.316335+00:00",
+      "utc": "2026-09-08T05:27:15.316335+00:00",
+      "sydney": "2026-09-08T15:27:15.316335+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local prospectivo anterior a la adquisición programada; no certificación de tercero.",
+      "independent_timestamp": false
+    },
+    {
+      "event": "Enmienda 3",
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json",
+      "selector": [
+        "sealed_at_utc"
+      ],
+      "literal": "2026-09-08T06:56:21.897094+00:00",
+      "utc": "2026-09-08T06:56:21.897094+00:00",
+      "sydney": "2026-09-08T16:56:21.897094+10:00",
+      "timezone": "Australia/Sydney",
+      "evidence_role": "Sello local prospectivo anterior a la adquisición programada; no certificación de tercero.",
+      "independent_timestamp": false
+    }
+  ],
+  "chronology_cautions": [
+    "20:20 Sydney in the original is an author-text declaration, converted to 10:20 UTC; no filesystem mtime is used as a seal.",
+    "The inspected v3 closeout receipt records verification at 16:18:46 UTC on September 7, which is 02:18:46 Sydney on September 8. The inbox 02:21 is not established by this receipt.",
+    "The RV15 and RV5 primary completion receipts are 04:13:29.790569 and 05:16:40.533194 Sydney on September 8. Do not present inbox 04:14/05:17 as exact UTC or exact captured completion times.",
+    "v1 freeze supplies a date only and v2 freeze supplies no clock. Their prior results are recorded as known by the v3 local freeze at 08:18:58.166170 UTC. No precise v1/v2 execution times were found in the inspected receipts.",
+    "The inspected executable v4 freeze at 16:37:21.501511 UTC is later than the v3 closeout verification and links the conditional-text hash. This does not independently prove when the original conditional text was written or what anyone knew before the result.",
+    "Walk-forward means training and tuning consume only permitted past targets. It is causal training, not proof that target values or the historical design sample were unknown to researchers."
+  ],
+  "horizon_rationale": {
+    "source": "docs/rp4/predeclaration_v4_text.md",
+    "original_line": 11,
+    "quote_exact": "La información del flujo de opciones es de vida corta: la cobertura de los dealers actúa en minutos. Si B2 no mejora el pronóstico a 30 minutos, puede mejorarlo a horizontes más cortos. v4 cambia UNA cosa: el horizonte del objetivo.",
+    "role": "Prior mechanistic hypothesis and horizon motivation; not evidence of actual dealer hedging.",
+    "primary_horizon_original_line": 13,
+    "primary_horizon_quote": "- Horizonte primario: 15 minutos (rv_15).",
+    "secondary_horizon_original_line": 14,
+    "secondary_horizon_quote": "- Horizonte secundario registrado: 5 minutos (rv_5)."
+  },
+  "closure": {
+    "source": "docs/rp4/specification_v4.md",
+    "quote_exact": "Si RV15 primaria rechaza H2 en al menos una familia tras H1, se reporta como resultado de esa familia y RV5 sólo como secundario. Se informa además si ambas familias rechazan; «al menos una» no tiene por sí solo control global 5% entre familias, ni entre versiones. Si ninguna rechaza, se cierra la investigación de este mecanismo con B1>B0 como resultado principal observado a 30 minutos y B2 no detectado a 30/15/5 según cada estimación e intervalo. No rechazo no establece equivalencia a cero ni absorción causal; «nulo informativo» describe el cierre, no una prueba de ausencia.",
+    "original_predeclaration_success_quote": "- Éxito: H2 rechazada al horizonte primario (15 min) en al menos una familia, con el resultado a 5 min reportado como secundario.",
+    "original_predeclaration_failure_quote": "- Si no: el proyecto se cierra con B1 > B0 como resultado principal y B2 como nulo informativo a 30, 15 y 5 minutos. No hay v5. Se pasa a la fase de organización y publicación.",
+    "no_v5_literal": "No hay v5.",
+    "no_v5_source": "docs/rp4/predeclaration_v4_text.md",
+    "do_not_call_nonrejection_equivalence": true
+  },
+  "bounded_horizon_search": {
+    "cwd": ".",
+    "inventory_command_args": [
+      "rg",
+      "--files",
+      "-g",
+      "*.py",
+      "artifacts/rp4_v3_code",
+      "artifacts/rp4_v4_code"
+    ],
+    "inventory_stdout": "artifacts/rp4_v4_code\\test_targets.py\nartifacts/rp4_v4_code\\test_report_checked.py\nartifacts/rp4_v4_code\\test_report.py\nartifacts/rp4_v4_code\\test_evaluate_v4.py\nartifacts/rp4_v4_code\\test_aggregate.py\nartifacts/rp4_v4_code\\report_v4_checked.py\nartifacts/rp4_v4_code\\report_v4.py\nartifacts/rp4_v4_code\\materialize_targets.py\nartifacts/rp4_v4_code\\freeze.py\nartifacts/rp4_v4_code\\execute.py\nartifacts/rp4_v4_code\\evaluate_v4.py\nartifacts/rp4_v4_code\\aggregate_v4.py\nartifacts/rp4_v3_code\\models.py\nartifacts/rp4_v3_code\\materialize_gamma.py\nartifacts/rp4_v3_code\\inference.py\nartifacts/rp4_v3_code\\freeze.py\nartifacts/rp4_v3_code\\execute.py\nartifacts/rp4_v3_code\\evaluate_v3.py\nartifacts/rp4_v3_code\\empty_windows.py\nartifacts/rp4_v3_code\\aggregate_v3.py\nartifacts/rp4_v3_code\\test_evaluate_v3.py\nartifacts/rp4_v3_code\\test_empty_windows.py\nartifacts/rp4_v3_code\\test_aggregate_v3.py\nartifacts/rp4_v3_code\\report_v3.py\nartifacts/rp4_v3_code\\test_materialize_gamma.py\nartifacts/rp4_v3_code\\test_inference.py\nartifacts/rp4_v3_code\\test_models.py\n",
+    "search_command_args": [
+      "rg",
+      "--line-number",
+      "--no-heading",
+      "--color",
+      "never",
+      "-e",
+      "rv_10|rv_20|rv_60|rv_45",
+      "--",
+      "artifacts/rp4_v3_a1/freeze.json",
+      "artifacts/rp4_v3_a1/receipt.json",
+      "artifacts/rp4_v3_a1/specification.json",
+      "artifacts/rp4_v3_a1_empty_window/freeze.json",
+      "artifacts/rp4_v3_a1_empty_window/receipt.json",
+      "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "artifacts/rp4_v3_a2/evaluation_release.json",
+      "artifacts/rp4_v3_a2/receipt.json",
+      "artifacts/rp4_v3_b2/receipt.json",
+      "artifacts/rp4_v3_b2/summary.json",
+      "artifacts/rp4_v3_b3/receipt.json",
+      "artifacts/rp4_v3_b3/summary.json",
+      "artifacts/rp4_v3_b4/receipt.json",
+      "artifacts/rp4_v3_b4/report_manifest.json",
+      "artifacts/rp4_v3_code/aggregate_v3.py",
+      "artifacts/rp4_v3_code/empty_windows.py",
+      "artifacts/rp4_v3_code/evaluate_v3.py",
+      "artifacts/rp4_v3_code/execute.py",
+      "artifacts/rp4_v3_code/freeze.py",
+      "artifacts/rp4_v3_code/inference.py",
+      "artifacts/rp4_v3_code/materialize_gamma.py",
+      "artifacts/rp4_v3_code/models.py",
+      "artifacts/rp4_v3_code/report_v3.py",
+      "artifacts/rp4_v3_code/test_aggregate_v3.py",
+      "artifacts/rp4_v3_code/test_empty_windows.py",
+      "artifacts/rp4_v3_code/test_evaluate_v3.py",
+      "artifacts/rp4_v3_code/test_inference.py",
+      "artifacts/rp4_v3_code/test_materialize_gamma.py",
+      "artifacts/rp4_v3_code/test_models.py",
+      "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "artifacts/rp4_v4_a1/receipt.json",
+      "artifacts/rp4_v4_a1/specification.json",
+      "artifacts/rp4_v4_a2/evaluation_release_rv15.json",
+      "artifacts/rp4_v4_a2/evaluation_release_rv5.json",
+      "artifacts/rp4_v4_a2/receipt.json",
+      "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "artifacts/rp4_v4_b2_rv15/summary.json",
+      "artifacts/rp4_v4_b2_rv15/verification_receipt.json",
+      "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "artifacts/rp4_v4_b2_rv5/summary.json",
+      "artifacts/rp4_v4_b2_rv5/verification_receipt.json",
+      "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "artifacts/rp4_v4_b3_rv15/summary.json",
+      "artifacts/rp4_v4_b3_rv15/verification_receipt.json",
+      "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "artifacts/rp4_v4_b3_rv5/summary.json",
+      "artifacts/rp4_v4_b3_rv5/verification_receipt.json",
+      "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "artifacts/rp4_v4_b4/receipt.json",
+      "artifacts/rp4_v4_b4/report_manifest.json",
+      "artifacts/rp4_v4_code/aggregate_v4.py",
+      "artifacts/rp4_v4_code/evaluate_v4.py",
+      "artifacts/rp4_v4_code/execute.py",
+      "artifacts/rp4_v4_code/freeze.py",
+      "artifacts/rp4_v4_code/materialize_targets.py",
+      "artifacts/rp4_v4_code/report_v4.py",
+      "artifacts/rp4_v4_code/report_v4_checked.py",
+      "artifacts/rp4_v4_code/test_aggregate.py",
+      "artifacts/rp4_v4_code/test_evaluate_v4.py",
+      "artifacts/rp4_v4_code/test_report.py",
+      "artifacts/rp4_v4_code/test_report_checked.py",
+      "artifacts/rp4_v4_code/test_targets.py"
+    ],
+    "search_command_powershell": "rg -n -i -e rv_10 -e rv_20 -e rv_60 -e rv_45 -- <exact scope_files listed in this receipt>",
+    "scope_file_count": 62,
+    "scope_code_file_count": 27,
+    "scope_metadata_and_aggregate_file_count": 35,
+    "scope_files": [
+      "artifacts/rp4_v3_a1/freeze.json",
+      "artifacts/rp4_v3_a1/receipt.json",
+      "artifacts/rp4_v3_a1/specification.json",
+      "artifacts/rp4_v3_a1_empty_window/freeze.json",
+      "artifacts/rp4_v3_a1_empty_window/receipt.json",
+      "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "artifacts/rp4_v3_a2/evaluation_release.json",
+      "artifacts/rp4_v3_a2/receipt.json",
+      "artifacts/rp4_v3_b2/receipt.json",
+      "artifacts/rp4_v3_b2/summary.json",
+      "artifacts/rp4_v3_b3/receipt.json",
+      "artifacts/rp4_v3_b3/summary.json",
+      "artifacts/rp4_v3_b4/receipt.json",
+      "artifacts/rp4_v3_b4/report_manifest.json",
+      "artifacts/rp4_v3_code/aggregate_v3.py",
+      "artifacts/rp4_v3_code/empty_windows.py",
+      "artifacts/rp4_v3_code/evaluate_v3.py",
+      "artifacts/rp4_v3_code/execute.py",
+      "artifacts/rp4_v3_code/freeze.py",
+      "artifacts/rp4_v3_code/inference.py",
+      "artifacts/rp4_v3_code/materialize_gamma.py",
+      "artifacts/rp4_v3_code/models.py",
+      "artifacts/rp4_v3_code/report_v3.py",
+      "artifacts/rp4_v3_code/test_aggregate_v3.py",
+      "artifacts/rp4_v3_code/test_empty_windows.py",
+      "artifacts/rp4_v3_code/test_evaluate_v3.py",
+      "artifacts/rp4_v3_code/test_inference.py",
+      "artifacts/rp4_v3_code/test_materialize_gamma.py",
+      "artifacts/rp4_v3_code/test_models.py",
+      "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "artifacts/rp4_v4_a1/receipt.json",
+      "artifacts/rp4_v4_a1/specification.json",
+      "artifacts/rp4_v4_a2/evaluation_release_rv15.json",
+      "artifacts/rp4_v4_a2/evaluation_release_rv5.json",
+      "artifacts/rp4_v4_a2/receipt.json",
+      "artifacts/rp4_v4_b2_rv15/receipt.json",
+      "artifacts/rp4_v4_b2_rv15/summary.json",
+      "artifacts/rp4_v4_b2_rv15/verification_receipt.json",
+      "artifacts/rp4_v4_b2_rv5/receipt.json",
+      "artifacts/rp4_v4_b2_rv5/summary.json",
+      "artifacts/rp4_v4_b2_rv5/verification_receipt.json",
+      "artifacts/rp4_v4_b3_rv15/receipt.json",
+      "artifacts/rp4_v4_b3_rv15/summary.json",
+      "artifacts/rp4_v4_b3_rv15/verification_receipt.json",
+      "artifacts/rp4_v4_b3_rv5/receipt.json",
+      "artifacts/rp4_v4_b3_rv5/summary.json",
+      "artifacts/rp4_v4_b3_rv5/verification_receipt.json",
+      "artifacts/rp4_v4_b4/primary_statistics.csv",
+      "artifacts/rp4_v4_b4/receipt.json",
+      "artifacts/rp4_v4_b4/report_manifest.json",
+      "artifacts/rp4_v4_code/aggregate_v4.py",
+      "artifacts/rp4_v4_code/evaluate_v4.py",
+      "artifacts/rp4_v4_code/execute.py",
+      "artifacts/rp4_v4_code/freeze.py",
+      "artifacts/rp4_v4_code/materialize_targets.py",
+      "artifacts/rp4_v4_code/report_v4.py",
+      "artifacts/rp4_v4_code/report_v4_checked.py",
+      "artifacts/rp4_v4_code/test_aggregate.py",
+      "artifacts/rp4_v4_code/test_evaluate_v4.py",
+      "artifacts/rp4_v4_code/test_report.py",
+      "artifacts/rp4_v4_code/test_report_checked.py",
+      "artifacts/rp4_v4_code/test_targets.py"
+    ],
+    "scope_file_sha256": {
+      "artifacts/rp4_v3_a1/freeze.json": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d",
+      "artifacts/rp4_v3_a1/receipt.json": "1495aeb61fe0b3c32a8cd9e80a286b27b20e463116c92f46af72798368fe948d",
+      "artifacts/rp4_v3_a1/specification.json": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+      "artifacts/rp4_v3_a1_empty_window/freeze.json": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6",
+      "artifacts/rp4_v3_a1_empty_window/receipt.json": "abc1737e9b2aa439c03cc0ea74f3993fa51771d8855b4ea3a8fd54757afb4866",
+      "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "artifacts/rp4_v3_a2/evaluation_release.json": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+      "artifacts/rp4_v3_a2/receipt.json": "3fb36211b27538b86b45e3a68c853d1478d9329df49b6bd48efa0693ea79865e",
+      "artifacts/rp4_v3_b2/receipt.json": "60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af",
+      "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "artifacts/rp4_v3_b3/receipt.json": "698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635",
+      "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+      "artifacts/rp4_v3_b4/receipt.json": "799b97749e1c15e5e2fd1b18ac4ad4a680192fa6521b168d52fa830205b9f1b5",
+      "artifacts/rp4_v3_b4/report_manifest.json": "a9346a7fc0e40bf23c3431f22756d69a82151b0ea184d4fd5929a4ea1166b6bd",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/execute.py": "fb6b01b42f62c24ec2a87f83e0338e1b36f0e609b3938cf92c76365a08505ff9",
+      "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "artifacts/rp4_v3_code/materialize_gamma.py": "2f59184b5a36b301252bb11eaf779c8128cef0f45266368f44b1a7d35f3644a3",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_code/report_v3.py": "bb5b7d574207e8307a1b31800e689166583851161365fd94b689f94fce7be356",
+      "artifacts/rp4_v3_code/test_aggregate_v3.py": "a985c7d6b7383d76ca3169fbb6c8785415354fdf001bbb39455264afe52d2a9c",
+      "artifacts/rp4_v3_code/test_empty_windows.py": "9b7e7a5d892c7dbbe97782ab2c329d523ed3ca33d18da6f792584a1ee2fdd843",
+      "artifacts/rp4_v3_code/test_evaluate_v3.py": "a26343dcbd264b8e3e9139805dde1e485cf7fa26b4db59a12bb8de66299ddd5a",
+      "artifacts/rp4_v3_code/test_inference.py": "d7a2caee560c7aa36218f3bccbeaa7f24993e5c77dc2189a00af2a87433990b1",
+      "artifacts/rp4_v3_code/test_materialize_gamma.py": "3fa8bef153ea8a7b5c84b9c4cd14d0d1ae3c471c6794c8181878cc3244460f6e",
+      "artifacts/rp4_v3_code/test_models.py": "56fb47cc9d73aafed1842ad6633dd0454f44e1a7341b00a5d50d0910a22fe4cc",
+      "artifacts/rp4_v4_a1/freeze_manifest.json": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+      "artifacts/rp4_v4_a1/receipt.json": "41299adc4335188a0974bb8c28a2d6690231c4103f51e7be582b047d70029cd9",
+      "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "artifacts/rp4_v4_a2/evaluation_release_rv15.json": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+      "artifacts/rp4_v4_a2/evaluation_release_rv5.json": "efeb22b33d992d453a4d766c93b5434e4f3f73271f350b50268a8289c365b08d",
+      "artifacts/rp4_v4_a2/receipt.json": "d0483ef642b6440602467454457ed9b31356744911b50b7597fdc8f2f5a3f3b8",
+      "artifacts/rp4_v4_b2_rv15/receipt.json": "d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93",
+      "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+      "artifacts/rp4_v4_b2_rv15/verification_receipt.json": "0d4bbb326eb96a78aefaa1075f6a3f9cbcc9fe6472e850fc8f66dc0cbdc69767",
+      "artifacts/rp4_v4_b2_rv5/receipt.json": "737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365",
+      "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+      "artifacts/rp4_v4_b2_rv5/verification_receipt.json": "1fe46441356c6fac256ab0414eaf3e59ff6046eae4bf590447d5d86a69b681e0",
+      "artifacts/rp4_v4_b3_rv15/receipt.json": "b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb",
+      "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+      "artifacts/rp4_v4_b3_rv15/verification_receipt.json": "5092bdf35d0a26a82d1da9baaedc8b07d5c181e1f4fd744af0c87ec0ee95d64f",
+      "artifacts/rp4_v4_b3_rv5/receipt.json": "556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769",
+      "artifacts/rp4_v4_b3_rv5/summary.json": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+      "artifacts/rp4_v4_b3_rv5/verification_receipt.json": "1776256256cda6ebad532c7f3527ce056fb309572fa05e5ff2afa723700ba3ad",
+      "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+      "artifacts/rp4_v4_b4/receipt.json": "b77c640645c4ef467d56c73b0ce762b679cbc3d3475647684d1941a72921e00d",
+      "artifacts/rp4_v4_b4/report_manifest.json": "a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f",
+      "artifacts/rp4_v4_code/aggregate_v4.py": "53ced372a3e12b7dc3525130b118d62ff045b60853f9cfad86f7dfd8f7f811f0",
+      "artifacts/rp4_v4_code/evaluate_v4.py": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450",
+      "artifacts/rp4_v4_code/execute.py": "222ba0f4c28aafe96e42986b3e6e4424128b4488fda616a1e624337422034093",
+      "artifacts/rp4_v4_code/freeze.py": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+      "artifacts/rp4_v4_code/materialize_targets.py": "8c6f9acc1dd3d995bea1ca75456c8fda6d4b6da1dc0b734dfbc23917b1265ce6",
+      "artifacts/rp4_v4_code/report_v4.py": "accf65711f7d09e0851df25501c40e30166a9f25d92a85d0a95773bc7080969b",
+      "artifacts/rp4_v4_code/report_v4_checked.py": "17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c",
+      "artifacts/rp4_v4_code/test_aggregate.py": "67c484e2642643f2bce798aaa949a7936965e99f9dae3df91add6ee1748b9ebd",
+      "artifacts/rp4_v4_code/test_evaluate_v4.py": "c4c7d9cc1d09edceb0f5e1eea770ba0a9398b1ce6f399de26c2179a48c9fd43f",
+      "artifacts/rp4_v4_code/test_report.py": "8e531a7a96b7e941c7b67810abcdd6fd68af5a4a9772b3b5a54a1e0a5bf3a2bc",
+      "artifacts/rp4_v4_code/test_report_checked.py": "ca2f50495e3125f258ab7b437e98b040b25df536edd8bee5d637cb13261d3c58",
+      "artifacts/rp4_v4_code/test_targets.py": "79fa4f7d7f9df3b2306ed8018bcddd6529da0d8cb2099bdd807f7feadbeea999"
+    },
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "",
+    "matching_lines": 0,
+    "meaning": "Zero literal-pattern matches in these explicitly listed inspected files only; not proof of global absence of experiments.",
+    "raw_or_origin_panels_in_scope": false,
+    "protected_cohorts_in_scope": false,
+    "primary_family_crosscheck": [
+      {
+        "artifact": "artifacts/rp4_v3_b2/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": null,
+        "recorded_horizon_minutes": null
+      },
+      {
+        "artifact": "artifacts/rp4_v3_b3/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": null,
+        "recorded_horizon_minutes": null
+      },
+      {
+        "artifact": "artifacts/rp4_v4_b2_rv15/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": "rv_15",
+        "recorded_horizon_minutes": 15
+      },
+      {
+        "artifact": "artifacts/rp4_v4_b3_rv15/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": "rv_15",
+        "recorded_horizon_minutes": 15
+      },
+      {
+        "artifact": "artifacts/rp4_v4_b2_rv5/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": "rv_5",
+        "recorded_horizon_minutes": 5
+      },
+      {
+        "artifact": "artifacts/rp4_v4_b3_rv5/summary.json",
+        "selector": [
+          "contrasts"
+        ],
+        "families": [
+          "lightgbm_qlike",
+          "log_ridge_harq"
+        ],
+        "recorded_target_key": "rv_5",
+        "recorded_horizon_minutes": 5
+      }
+    ],
+    "v3_target_horizon": {
+      "artifact": "artifacts/rp4_v3_a1_empty_window/specification.json",
+      "selector": [
+        "target_horizon_minutes"
+      ],
+      "value": 30
+    },
+    "v4_horizons": {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "primary_selector": [
+        "primary_horizon_minutes"
+      ],
+      "primary_value": 15,
+      "secondary_selector": [
+        "secondary_horizon_minutes"
+      ],
+      "secondary_value": 5
+    },
+    "families_claim_scope": "The saved primary-mean contrasts and registered primary families in inspected v3/v4 records; does not claim no other model or secondary was ever studied."
+  },
+  "prior_bridge": {
+    "window_start": "2026-07-20",
+    "window_end": "2026-08-28",
+    "window_source": "artifacts/rp4_v4_a1/specification.json",
+    "window_selector": [
+      "owner_attestations",
+      "bridge_prior_read"
+    ],
+    "owner_source_status": "OWNER_PROVIDED_NOT_AGENT_MEASURED",
+    "prior_read_independently_verified": false,
+    "final_window_session_source": "artifacts/rp4_v4_b3_rv15/session_losses.csv",
+    "final_window_sessions": [
+      "2026-08-03",
+      "2026-08-04",
+      "2026-08-05",
+      "2026-08-06",
+      "2026-08-07",
+      "2026-08-10",
+      "2026-08-11",
+      "2026-08-12",
+      "2026-08-13",
+      "2026-08-14",
+      "2026-08-17",
+      "2026-08-18",
+      "2026-08-19",
+      "2026-08-20",
+      "2026-08-21",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27",
+      "2026-08-28",
+      "2026-08-31",
+      "2026-09-01",
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04"
+    ],
+    "overlap_sessions": [
+      "2026-08-03",
+      "2026-08-04",
+      "2026-08-05",
+      "2026-08-06",
+      "2026-08-07",
+      "2026-08-10",
+      "2026-08-11",
+      "2026-08-12",
+      "2026-08-13",
+      "2026-08-14",
+      "2026-08-17",
+      "2026-08-18",
+      "2026-08-19",
+      "2026-08-20",
+      "2026-08-21",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27",
+      "2026-08-28"
+    ],
+    "nonoverlap_sessions": [
+      "2026-08-31",
+      "2026-09-01",
+      "2026-09-02",
+      "2026-09-03",
+      "2026-09-04"
+    ],
+    "overlap_count": 20,
+    "final_count": 25,
+    "overlap_percent": 80.0,
+    "calculation": "Count only saved final-window session_date values satisfying 2026-07-20 <= date <= 2026-08-28; 20/25*100=80.",
+    "public_readme_passages": [
+      {
+        "start_line": 96,
+        "end_line": 97,
+        "text": "- El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones\n  descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md)."
+      },
+      {
+        "start_line": 118,
+        "end_line": 121,
+        "text": "El puente Fase 8 conserva `MIXED_EXPLORATORY`: su auditoría concluyó\n«no aggregation change» y «not confirmatory»; la sensibilidad materializada\nmejoró sólo «one of eight B1-inclusive primary cells». Son diagnósticos\nhistóricos, no la conclusión del programa cerrado en v4."
+      }
+    ],
+    "reported_opened_date": "2026-08-30",
+    "reported_result": "MIXED_EXPLORATORY; no aggregation change; not confirmatory; sensitivity improved only one of eight B1-inclusive primary cells.",
+    "public_wording_es": "La ventana puente declarada se solapa con 20 de las 25 sesiones finales, el 80 %. El README histórico describe su resultado como mixto y exploratorio, no confirmatorio, sin cambio de agregación; una sensibilidad sólo mejoró una de ocho celdas primarias que incluyen B1. Es una declaración histórica pública, no una nueva auditoría de ese puente.",
+    "protected_bridge_artifacts_opened": false,
+    "previous_threads_read": false,
+    "linked_addendum_not_opened": true,
+    "no_fresh_validation_of_prior_result": true
+  },
+  "statistics": {
+    "holm": {
+      "horizon_minutes": 15,
+      "window": "primary",
+      "alpha": 0.05,
+      "family_size": 4,
+      "family_definition": "Two contrasts times two model families within the RV15 primary window; comparability with the old bilateral Holm rule.",
+      "formula": "Sort the four stored bilateral p values ascending; at rank j=1..4 calculate min(1,max_{k<=j}((4-k+1)*p_sorted[k])). Return to original order.",
+      "arithmetic": "Decimal over the saved CSV decimal p strings; no resampling.",
+      "steps": [
+        {
+          "rank_one_based": 1,
+          "original_row_position_zero_based": 1,
+          "raw_p": 0.0062,
+          "multiplier": 4,
+          "raw_product": 0.0248,
+          "adjusted_p": 0.0248
+        },
+        {
+          "rank_one_based": 2,
+          "original_row_position_zero_based": 2,
+          "raw_p": 0.0149,
+          "multiplier": 3,
+          "raw_product": 0.0447,
+          "adjusted_p": 0.0447
+        },
+        {
+          "rank_one_based": 3,
+          "original_row_position_zero_based": 0,
+          "raw_p": 0.0459,
+          "multiplier": 2,
+          "raw_product": 0.0918,
+          "adjusted_p": 0.0918
+        },
+        {
+          "rank_one_based": 4,
+          "original_row_position_zero_based": 3,
+          "raw_p": 0.8048,
+          "multiplier": 1,
+          "raw_product": 0.8048,
+          "adjusted_p": 0.8048
+        }
+      ],
+      "rows": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "N_sessions": 419,
+          "stored_p_bilateral": 0.0459,
+          "stored_p_bilateral_decimal": "0.0459",
+          "stored_p_holm_bilateral": 0.0918,
+          "calculated_holm_p": 0.0918,
+          "calculated_holm_p_decimal": "0.0918",
+          "reject_at_alpha_0_05": false,
+          "original_unilateral_p_for_distinction_only": 0.039,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 8,
+            "file_line_one_based": 10,
+            "columns": [
+              "family",
+              "contrast",
+              "N_sessions",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "p_raw"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[0]"
+          }
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "N_sessions": 419,
+          "stored_p_bilateral": 0.0062,
+          "stored_p_bilateral_decimal": "0.0062",
+          "stored_p_holm_bilateral": 0.0248,
+          "calculated_holm_p": 0.0248,
+          "calculated_holm_p_decimal": "0.0248",
+          "reject_at_alpha_0_05": true,
+          "original_unilateral_p_for_distinction_only": 0.0032,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 9,
+            "file_line_one_based": 11,
+            "columns": [
+              "family",
+              "contrast",
+              "N_sessions",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "p_raw"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[1]"
+          }
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "N_sessions": 419,
+          "stored_p_bilateral": 0.0149,
+          "stored_p_bilateral_decimal": "0.0149",
+          "stored_p_holm_bilateral": 0.044700000000000004,
+          "calculated_holm_p": 0.0447,
+          "calculated_holm_p_decimal": "0.0447",
+          "reject_at_alpha_0_05": true,
+          "original_unilateral_p_for_distinction_only": 0.0135,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 10,
+            "file_line_one_based": 12,
+            "columns": [
+              "family",
+              "contrast",
+              "N_sessions",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "p_raw"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[2]"
+          }
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "N_sessions": 419,
+          "stored_p_bilateral": 0.8048,
+          "stored_p_bilateral_decimal": "0.8048",
+          "stored_p_holm_bilateral": 0.8048,
+          "calculated_holm_p": 0.8048,
+          "calculated_holm_p_decimal": "0.8048",
+          "reject_at_alpha_0_05": false,
+          "original_unilateral_p_for_distinction_only": 0.628,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 11,
+            "file_line_one_based": 13,
+            "columns": [
+              "family",
+              "contrast",
+              "N_sessions",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "p_raw"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[3]"
+          }
+        }
+      ],
+      "rejected_contrasts": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1"
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0"
+        }
+      ],
+      "linear_complete_hierarchy_supported": false,
+      "corrections_to_auditor": [
+        {
+          "claimed": "The bilateral p equals twice the one-sided p.",
+          "finding": "Not supported by the saved bilateral output. Use p_bilateral, not an arithmetic doubling of p_raw."
+        },
+        {
+          "claimed_tree_B2_bilateral_p": 0.744,
+          "saved_tree_B2_bilateral_p": 0.8048,
+          "saved_tree_B2_holm_p": 0.8048
+        },
+        {
+          "claimed": "Only linear B2/B1 survives Holm.",
+          "finding": "Linear B2/B1 and tree B1/B0 survive; linear B1/B0 does not."
+        }
+      ],
+      "interpretation": "This sensitivity does not support the complete hierarchy in either family. Do not replace the predeclared fixed-sequence result, and do not describe the old Holm rule itself as sequential.",
+      "bilateral_relation": "P(abs(T_star-T)>=abs(T)) need not equal 2*P(T_star-T>=T)."
+    },
+    "diagnostics": {
+      "horizon_minutes": 15,
+      "window": "primary",
+      "rows": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "dm_hac_lags": 5,
+          "dm_hac_statistic": 1.9119523160304173,
+          "dm_hac_p_two_sided": 0.05588231047643638,
+          "gw_hac_lags": 5,
+          "gw_df": 2,
+          "gw_statistic": 7.029704469723793,
+          "gw_p": 0.029752198967090065,
+          "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 8,
+            "file_line_one_based": 10,
+            "columns": [
+              "family",
+              "contrast",
+              "dm_hac_lags",
+              "dm_hac_statistic",
+              "dm_hac_p_two_sided",
+              "gw_hac_diagnostic_df",
+              "gw_hac_diagnostic_statistic",
+              "gw_hac_diagnostic_p",
+              "gw_status"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[0]"
+          }
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "dm_hac_lags": 5,
+          "dm_hac_statistic": 2.734852937149572,
+          "dm_hac_p_two_sided": 0.006240815139993914,
+          "gw_hac_lags": 5,
+          "gw_df": 2,
+          "gw_statistic": 7.61894628921525,
+          "gw_p": 0.022159850919000176,
+          "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 9,
+            "file_line_one_based": 11,
+            "columns": [
+              "family",
+              "contrast",
+              "dm_hac_lags",
+              "dm_hac_statistic",
+              "dm_hac_p_two_sided",
+              "gw_hac_diagnostic_df",
+              "gw_hac_diagnostic_statistic",
+              "gw_hac_diagnostic_p",
+              "gw_status"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[1]"
+          }
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "dm_hac_lags": 5,
+          "dm_hac_statistic": 2.4253147268730464,
+          "dm_hac_p_two_sided": 0.015295120550837447,
+          "gw_hac_lags": 5,
+          "gw_df": 2,
+          "gw_statistic": 7.12830845224446,
+          "gw_p": 0.028320928459073105,
+          "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 10,
+            "file_line_one_based": 12,
+            "columns": [
+              "family",
+              "contrast",
+              "dm_hac_lags",
+              "dm_hac_statistic",
+              "dm_hac_p_two_sided",
+              "gw_hac_diagnostic_df",
+              "gw_hac_diagnostic_statistic",
+              "gw_hac_diagnostic_p",
+              "gw_status"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[2]"
+          }
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "dm_hac_lags": 5,
+          "dm_hac_statistic": -0.257627774581645,
+          "dm_hac_p_two_sided": 0.7966941920871033,
+          "gw_hac_lags": 5,
+          "gw_df": 2,
+          "gw_statistic": 0.05796428920903146,
+          "gw_p": 0.9714338096466099,
+          "gw_status": "ASYMPTOTIC_DIAGNOSTIC",
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 11,
+            "file_line_one_based": 13,
+            "columns": [
+              "family",
+              "contrast",
+              "dm_hac_lags",
+              "dm_hac_statistic",
+              "dm_hac_p_two_sided",
+              "gw_hac_diagnostic_df",
+              "gw_hac_diagnostic_statistic",
+              "gw_hac_diagnostic_p",
+              "gw_status"
+            ]
+          },
+          "corroborating_source": {
+            "source_id": "primary_rv15",
+            "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+            "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+            "bytes": 1680171,
+            "selector": "$.comparability_bilateral[3]"
+          }
+        }
+      ],
+      "dm_distribution": "normal_two_sided",
+      "gw_instruments": [
+        "constant",
+        "previous_session_loss_difference"
+      ],
+      "gw_registered_status": "ASYMPTOTIC_DIAGNOSTIC_NOT_ORIGINAL_FIXED_WINDOW_GW_GUARANTEE",
+      "specification_sources": [
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.inference.dm"
+        },
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.inference.gw"
+        }
+      ],
+      "interpretation": "HAC normal two-sided DM and asymptotic GW diagnostics accompany, and do not replace, the registered session-block bootstrap decision. GW is not the original fixed-window conditional-predictive-ability guarantee."
+    },
+    "concentration": {
+      "window": "confirmation",
+      "horizon_minutes": 15,
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "session_count": 25,
+      "first_session": "2026-08-03",
+      "last_session": "2026-09-04",
+      "event_session": "2026-08-31",
+      "delta_definition": "loss__log_ridge_harq__B1 - loss__log_ridge_harq__B2; positive is improvement.",
+      "event_baseline_loss": 1.7285112456710487,
+      "event_expanded_loss": 1.612263341412884,
+      "event_delta": 0.1162479042581647,
+      "event_delta_decimal_from_saved_csv": "0.1162479042581647",
+      "cumulative_delta": 0.11918283137061718,
+      "cumulative_delta_decimal_from_saved_csv": "0.11918283137061718",
+      "mean_delta": 0.004767313254824687,
+      "mean_delta_decimal_from_saved_csv": "0.0047673132548246872",
+      "stored_summary_mean_delta": 0.004767313254824691,
+      "event_fraction_of_net_cumulative_delta": 0.9753745813998504,
+      "event_fraction_decimal": "0.97537458139985048012416287237493717849092609849598",
+      "event_percent_of_net_cumulative_delta": 97.53745813998505,
+      "event_percent_decimal": "97.537458139985048012416287237493717849092609849598",
+      "other_24_cumulative_delta": 0.00293492711245248,
+      "other_24_cumulative_delta_decimal": "0.00293492711245248",
+      "formula": "d_s=Decimal(saved_loss_B1_s)-Decimal(saved_loss_B2_s); total=sum(d_s for all 25 sessions); fraction=d_2026_08_31/total; percent=100*fraction.",
+      "event_source": {
+        "source_id": "final_losses",
+        "path": "artifacts/rp4_v4_b3_rv15/session_losses.csv",
+        "sha256": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+        "bytes": 7420,
+        "row_index_zero_based": 20,
+        "file_line_one_based": 22,
+        "columns": [
+          "session_date",
+          "loss__log_ridge_harq__B1",
+          "loss__log_ridge_harq__B2"
+        ]
+      },
+      "total_source": {
+        "source_id": "final_losses",
+        "path": "artifacts/rp4_v4_b3_rv15/session_losses.csv",
+        "sha256": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+        "bytes": 7420,
+        "selector": "CSV data rows 0 through 24",
+        "columns": [
+          "session_date",
+          "loss__log_ridge_harq__B1",
+          "loss__log_ridge_harq__B2"
+        ]
+      },
+      "summary_source": {
+        "source_id": "final_rv15",
+        "path": "artifacts/rp4_v4_b3_rv15/summary.json",
+        "sha256": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+        "bytes": 556866,
+        "selector": "$.contrasts[1].estimate"
+      },
+      "decimal_precision": 50,
+      "summary_reconstruction_absolute_tolerance": 1e-15,
+      "rounding_note": "Exact decimal subtraction of displayed CSV values differs at about 1e-16 from binary values used by the frozen producer. Display 0.116248 of 0.119183, or 97.54%; do not claim byte-identical unrounded binary reconstruction.",
+      "interpretation": "This percentage is the share of the net cumulative increment, not the share of all positive increments or total loss. The final window already has been observed; this is descriptive concentration.",
+      "other_session_count": 24
+    },
+    "sample": {
+      "assets": [
+        "AAPL",
+        "AMZN",
+        "META",
+        "MSFT",
+        "NVDA",
+        "TSLA"
+      ],
+      "asset_count": 6,
+      "market_assets": [
+        "SPY",
+        "QQQ"
+      ],
+      "aggregation": "origin_mean_within_asset_session_then_equal_asset_then_equal_session",
+      "bootstrap": {
+        "block_length": 5,
+        "ci": "percentile_95",
+        "kind": "circular_session_blocks",
+        "p_value": "greater_centered_null_plus_one",
+        "replications": 9999,
+        "seed": 20260907
+      },
+      "resampling_unit": "Contiguous circular blocks of session-level paired losses after within-asset-session origin means and equal-asset aggregation; not asset-level independent resamples.",
+      "measured_cross_asset_correlation": null,
+      "correlation_evidence_status": "No measured cross-asset correlation was supplied by the inspected aggregates; no correlation coefficient was calculated.",
+      "interpretation": "Six selected assets are the cross-sectional scope, not six independent replications. Session aggregation and session blocks preserve their joint session contribution; the saved evidence does not establish generalization to other sectors.",
+      "sources": [
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.assets"
+        },
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.market_assets"
+        },
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.inference.aggregation"
+        },
+        {
+          "source_id": "specification",
+          "path": "artifacts/rp4_v4_a1/specification.json",
+          "sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+          "bytes": 35711,
+          "selector": "$.inference.bootstrap"
+        }
+      ]
+    },
+    "versions": {
+      "v1_v2_linear_H1": [
+        {
+          "version": "v1",
+          "horizon_minutes": 30,
+          "window": "primary",
+          "family": "log_ols_harq",
+          "contrast": "B1_over_B0",
+          "N_sessions": 418,
+          "estimate": 0.0004237455094975266,
+          "ci_low": -0.001680244728113881,
+          "ci_high": 0.002375051383694389,
+          "p_bilateral": 0.6746,
+          "p_holm_bilateral": 1.0,
+          "reject_under_original_bilateral_holm_alpha_0_05": false,
+          "source": {
+            "source_id": "v1",
+            "path": "artifacts/rp4_b2/summary.json",
+            "sha256": "d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2",
+            "bytes": 67817,
+            "selector": "$.contrasts[0]"
+          },
+          "corroborating_source": {
+            "source_id": "versions",
+            "path": "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+            "sha256": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+            "bytes": 21957,
+            "row_index_zero_based": 0,
+            "file_line_one_based": 2,
+            "columns": [
+              "version",
+              "family",
+              "contrast",
+              "N_sessions",
+              "delta_qlike",
+              "ci_low_qlike",
+              "ci_high_qlike",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "source_summary",
+              "source_summary_sha256"
+            ]
+          }
+        },
+        {
+          "version": "v2",
+          "horizon_minutes": 30,
+          "window": "primary",
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "N_sessions": 419,
+          "estimate": 0.002527830536511916,
+          "ci_low": 0.00037254832356218225,
+          "ci_high": 0.005758785024503867,
+          "p_bilateral": 0.0614,
+          "p_holm_bilateral": 0.1842,
+          "reject_under_original_bilateral_holm_alpha_0_05": false,
+          "source": {
+            "source_id": "v2",
+            "path": "artifacts/rp4_v2_b2/summary.json",
+            "sha256": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693",
+            "bytes": 93268,
+            "selector": "$.contrasts[0]"
+          },
+          "corroborating_source": {
+            "source_id": "versions",
+            "path": "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+            "sha256": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+            "bytes": 21957,
+            "row_index_zero_based": 8,
+            "file_line_one_based": 10,
+            "columns": [
+              "version",
+              "family",
+              "contrast",
+              "N_sessions",
+              "delta_qlike",
+              "ci_low_qlike",
+              "ci_high_qlike",
+              "p_bilateral",
+              "p_holm_bilateral",
+              "source_summary",
+              "source_summary_sha256"
+            ]
+          }
+        }
+      ],
+      "wording": "The linear H1 was not detected under the original formal bilateral Holm rule in v1 or v2. Positive estimates alone do not imply rejection; v2 has a positive stored percentile interval but a non-rejecting stored adjusted p.",
+      "v3_v4_linear_H1_nominal_and_posthoc_multiplication": [
+        {
+          "horizon_minutes": 30,
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "p_unilateral_original": 0.0439,
+          "posthoc_times_two": 0.0878,
+          "posthoc_times_four": 0.1756,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 0,
+            "file_line_one_based": 2,
+            "columns": [
+              "horizon_minutes",
+              "family",
+              "contrast",
+              "p_raw",
+              "p_for_decision"
+            ]
+          }
+        },
+        {
+          "horizon_minutes": 15,
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "p_unilateral_original": 0.039,
+          "posthoc_times_two": 0.078,
+          "posthoc_times_four": 0.156,
+          "source": {
+            "source_id": "statistics",
+            "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+            "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+            "bytes": 15131,
+            "row_index_zero_based": 8,
+            "file_line_one_based": 10,
+            "columns": [
+              "horizon_minutes",
+              "family",
+              "contrast",
+              "p_raw",
+              "p_for_decision"
+            ]
+          }
+        }
+      ],
+      "multiplication_limit": "These are transparent post hoc sensitivity multiplications of saved nominal one-sided p values. They do not certify global control of the entire model or version search.",
+      "per_asset_linear_B2": [
+        {
+          "horizon_minutes": 15,
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "asset_count": 6,
+          "positive_estimate_count": 6,
+          "rows": [
+            {
+              "asset": "AAPL",
+              "estimate": 0.0015291325661040927,
+              "qlike_reduction_percent": 0.7959362796640411,
+              "N_sessions": 419,
+              "N_origins": 26898,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[1]"
+              }
+            },
+            {
+              "asset": "AMZN",
+              "estimate": 0.000513946955014077,
+              "qlike_reduction_percent": 0.2902716922510049,
+              "N_sessions": 419,
+              "N_origins": 26743,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[5]"
+              }
+            },
+            {
+              "asset": "META",
+              "estimate": 4.531936915142427e-05,
+              "qlike_reduction_percent": 0.023692803605807004,
+              "N_sessions": 419,
+              "N_origins": 26853,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[9]"
+              }
+            },
+            {
+              "asset": "MSFT",
+              "estimate": 0.0007797463824454374,
+              "qlike_reduction_percent": 0.43924247912437203,
+              "N_sessions": 419,
+              "N_origins": 26729,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[13]"
+              }
+            },
+            {
+              "asset": "NVDA",
+              "estimate": 0.002278727558413713,
+              "qlike_reduction_percent": 1.2636055505540502,
+              "N_sessions": 419,
+              "N_origins": 26764,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[17]"
+              }
+            },
+            {
+              "asset": "TSLA",
+              "estimate": 0.001655685123425383,
+              "qlike_reduction_percent": 0.951791650173417,
+              "N_sessions": 419,
+              "N_origins": 26845,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv15",
+                "path": "artifacts/rp4_v4_b2_rv15/summary.json",
+                "sha256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+                "bytes": 1680171,
+                "selector": "$.robustness[21]"
+              }
+            }
+          ],
+          "interpretation": "Descriptive signs, not six independent confirmatory tests."
+        },
+        {
+          "horizon_minutes": 5,
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "asset_count": 6,
+          "positive_estimate_count": 3,
+          "rows": [
+            {
+              "asset": "AAPL",
+              "estimate": 0.0019128816970803587,
+              "qlike_reduction_percent": 0.5246943238908117,
+              "N_sessions": 419,
+              "N_origins": 26898,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[1]"
+              }
+            },
+            {
+              "asset": "AMZN",
+              "estimate": -0.0005167221111539288,
+              "qlike_reduction_percent": -0.14913242135216054,
+              "N_sessions": 419,
+              "N_origins": 26743,
+              "positive_estimate": false,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[5]"
+              }
+            },
+            {
+              "asset": "META",
+              "estimate": -0.00015705920513874275,
+              "qlike_reduction_percent": -0.04365712598549003,
+              "N_sessions": 419,
+              "N_origins": 26853,
+              "positive_estimate": false,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[9]"
+              }
+            },
+            {
+              "asset": "MSFT",
+              "estimate": -1.7963241809380777e-05,
+              "qlike_reduction_percent": -0.005173488564122403,
+              "N_sessions": 419,
+              "N_origins": 26729,
+              "positive_estimate": false,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[13]"
+              }
+            },
+            {
+              "asset": "NVDA",
+              "estimate": 0.002648147285710646,
+              "qlike_reduction_percent": 0.7943499018702125,
+              "N_sessions": 419,
+              "N_origins": 26764,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[17]"
+              }
+            },
+            {
+              "asset": "TSLA",
+              "estimate": 0.001476809494039077,
+              "qlike_reduction_percent": 0.44173532343916155,
+              "N_sessions": 419,
+              "N_origins": 26845,
+              "positive_estimate": true,
+              "source": {
+                "source_id": "primary_rv5",
+                "path": "artifacts/rp4_v4_b2_rv5/summary.json",
+                "sha256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+                "bytes": 1679996,
+                "selector": "$.robustness[21]"
+              }
+            }
+          ],
+          "interpretation": "Descriptive signs, not six independent confirmatory tests."
+        }
+      ]
+    }
+  },
+  "b0": {
+    "source": "artifacts/rp4_v4_a1/specification.json",
+    "field": "feature_sets.B0",
+    "count": 29,
+    "columns": [
+      "QQQ_ret_30",
+      "QQQ_rv_30",
+      "SPY_ret_30",
+      "SPY_rv_30",
+      "day_of_week",
+      "dollar_volume_30",
+      "jump_back_30",
+      "minutes_since_open",
+      "minutes_to_close",
+      "parkinson_30",
+      "ret_30",
+      "ret_5",
+      "rq_back_30",
+      "rs_down_back_30",
+      "rs_up_back_30",
+      "rv_back_15",
+      "rv_back_30",
+      "rv_back_5",
+      "rv_prev_day",
+      "rv_session_to_date",
+      "rv_week",
+      "volume_30",
+      "log_rv_30m",
+      "log_rv_session",
+      "log_rv_day",
+      "log_rv_week",
+      "minute_fraction",
+      "minute_fraction_sq",
+      "rq_attenuation"
+    ],
+    "groups": {
+      "past_realized_variance": [
+        "rv_back_5",
+        "rv_back_15",
+        "rv_back_30",
+        "rv_session_to_date",
+        "rv_prev_day",
+        "rv_week"
+      ],
+      "past_returns": [
+        "ret_5",
+        "ret_30"
+      ],
+      "quarticity_semivariance_jump_range": [
+        "rq_back_30",
+        "rs_up_back_30",
+        "rs_down_back_30",
+        "jump_back_30",
+        "parkinson_30"
+      ],
+      "volume": [
+        "volume_30",
+        "dollar_volume_30"
+      ],
+      "market_controls": [
+        "SPY_ret_30",
+        "SPY_rv_30",
+        "QQQ_ret_30",
+        "QQQ_rv_30"
+      ],
+      "calendar": [
+        "day_of_week",
+        "minutes_since_open",
+        "minutes_to_close"
+      ],
+      "har_log_components": [
+        "log_rv_30m",
+        "log_rv_session",
+        "log_rv_day",
+        "log_rv_week"
+      ],
+      "intraday_basis": [
+        "minute_fraction",
+        "minute_fraction_sq"
+      ],
+      "quarticity_attenuation": [
+        "rq_attenuation"
+      ]
+    },
+    "code_bindings": {
+      "scripts/rp2_block4_b0_panel.py": [
+        "MARKET_ASSETS",
+        "build_market_controls",
+        "build_b0_panel"
+      ],
+      "src/mds650/har.py": [
+        "HAR_COLUMNS",
+        "HARQ_COLUMN",
+        "build_har_features"
+      ],
+      "artifacts/rp4_code/materialize.py": [
+        "build_har_features integration lines 318-339",
+        "build_b0_panel and build_market_controls integration lines 732-734"
+      ]
+    },
+    "scope": "Registered B0 contains these 29 predictors, including SPY/QQQ. Static code and registration review only, no panel or licensed data read, no coefficient survival claimed. This is an intraday adaptation inspired by HAR/HARQ and signed-semivariance research, not an exact replication of those published models.",
+    "backward_rv_minutes": [
+      5,
+      15,
+      30
+    ]
+  },
+  "literature": [
+    {
+      "authors": [
+        "Fulvio Corsi"
+      ],
+      "year": 2009,
+      "title": "A Simple Approximate Long-Memory Model of Realized Volatility",
+      "journal": "Journal of Financial Econometrics",
+      "volume": 7,
+      "issue": 2,
+      "pages": [
+        174,
+        196
+      ],
+      "doi": "10.1093/jjfinec/nbp001",
+      "metadata_url": "https://people.unipi.it/fulvio_corsi/pubblicazioni/",
+      "metadata_status": "Author university publication list inspected on public institutional pages, HTTP200. Final article DOI and institutional repository returned HTTP403; no bypass attempted.",
+      "method_reading": {
+        "title": "A Simple Long Memory Model of Realized Volatility",
+        "version_date": "2004-11-13",
+        "first_version_year": 2002,
+        "url": "https://www.greta.it/old/jae/poster/06_1_Corsi.pdf",
+        "sha256": "feea29f65d30fefe0df47948665ac1e76c52928035274e51834ef8210878bdd9",
+        "pdf_pages_read": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "status": "PARTIAL_FULL_TEXT_WORKING_PAPER_PREDECESSOR",
+        "finding": "An additive cascade of realized-volatility components over different time horizons motivates the HAR family; the final 2009 version was not read in full during this audit."
+      },
+      "claim_scope": "Methodological lineage only; no transferred forecasting percentage."
+    },
+    {
+      "authors": [
+        "Tim Bollerslev",
+        "Andrew J. Patton",
+        "Rogier Quaedvlieg"
+      ],
+      "year": 2016,
+      "title": "Exploiting the errors: A simple approach for improved volatility forecasting",
+      "journal": "Journal of Econometrics",
+      "volume": 192,
+      "issue": 1,
+      "pages": [
+        1,
+        18
+      ],
+      "doi": "10.1016/j.jeconom.2015.10.007",
+      "metadata_url": "https://scholars.duke.edu/publication/1072550",
+      "url": "https://public.econ.duke.edu/~ap172/BPQ_Exploiting_Errors_JoE_2016.pdf",
+      "this_audit_verification": "Institutional author metadata and abstract inspected on public institutional pages, HTTP200. Existing additions_evidence.json retains prior full-article inspection sections 2.3,3.1,3.3,3.5.",
+      "finding": "Persistence parameters respond to estimated measurement error; quarticity motivates the registered attenuation term.",
+      "claim_scope": "Methodological context; daily and longer forecast horizons are not the intraday B2/B1 estimand; no directly comparable paper percentage."
+    },
+    {
+      "authors": [
+        "Andrew J. Patton",
+        "Kevin Sheppard"
+      ],
+      "year": 2015,
+      "title": "Good volatility, bad volatility: Signed jumps and the persistence of volatility",
+      "journal": "Review of Economics and Statistics",
+      "volume": 97,
+      "issue": 3,
+      "pages": [
+        683,
+        697
+      ],
+      "doi": "10.1162/REST_a_00503",
+      "metadata_url": "https://scholars.duke.edu/publication/1082826",
+      "url": "https://public.econ.duke.edu/~ap172/Patton_Sheppard_REStat_2015.pdf",
+      "this_audit_verification": "Institutional author metadata and abstract inspected on public institutional pages, HTTP200; published PDF link identified on author CV through search; full PDF not inspected in this audit.",
+      "finding": "Past positive and negative return variation and signed jumps have different predictive relationships with future volatility.",
+      "claim_scope": "Motivates signed semivariance predictors, not a transferred empirical result or a signed-jump causal claim for B0."
+    }
+  ],
+  "prospective_amendment_3": {
+    "receipt": "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json",
+    "receipt_sha256": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2",
+    "document_sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+    "normal_quantiles": {
+      "ci_upper_probability": 0.975,
+      "test_upper_probability": 0.95
+    }
+  },
+  "review_source_sha256": {
+    "chronology_review.json": "a9001eedcb9d0f1312219237eb5529395596156715846b8cc0e5884bfb527bf6",
+    "statistical_review.json": "cd4e5146ae34f0b0ea11c8e76ffa0d3577382b6e2d8a29d160166be10d268605",
+    "narrative_review.json": "b39d86e22a205b77597f99178d5f02bdb1ec03aaa2dc3bb7e9660d910ba85d72"
+  },
+  "new_model_fits": 0,
+  "new_bootstraps": 0,
+  "scientific_results_modified": false,
+  "limits": [
+    "Local record and declared writing times are not independently authenticated timestamps.",
+    "The stored historical bridge statement was not revalidated by reopening its evidence; only the overlap of allowed RP4 session dates was counted.",
+    "Horizon absence is restricted to the listed inspected files and the listed primary summaries.",
+    "Analytic planning power is in the sealed amendment receipt and does not estimate actual joint or pooled-secondary power.",
+    "Published citations establish methodological lineage; no external performance percentage is transferred."
+  ],
+  "documentation": {
+    "bonferroni_examiner_question": 26
+  }
+}

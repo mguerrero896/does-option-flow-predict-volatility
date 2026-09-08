@@ -25,6 +25,7 @@ MARKER = "-- ---- verbatim applied SQL follows ----\n"
 
 #: version_name -> md5 reported by supabase_migrations.schema_migrations (2026-08-28).
 APPLIED = {
+    "20260908153626_rp4_v4_public_aggregate_results": "a1a8f4d801f40785e0cc3276a963c63c",
     "20260818095451_research_catalog_v1": "0cbd13c385c331cebb9fa4b830ff69f2",
     "20260818100555_research_datasets_v1": "49dae2ea54d1163d93bd887781f4d348",
     "20260818182133_rp2_block14_evidence_hygiene": "bc31689dbc591531c1d22afdc5a00afb",

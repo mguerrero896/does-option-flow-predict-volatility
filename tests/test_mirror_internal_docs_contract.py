@@ -9,6 +9,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from scripts import rp4_archive_sources as archive
 
 REPO = Path(__file__).resolve().parents[1]
 EXCLUDE_LIST = REPO / "scripts" / "_mirror_internal_exclude_list.txt"
@@ -147,6 +148,26 @@ def _tracked_paths() -> list[str]:
     return listed.stdout.splitlines()
 
 
+def _verified_archived_guard(path: Path) -> bool:
+    """Archived tests/exclusion patterns are code, including their detection literals.
+
+    Their historical hash contract remains mandatory. Secret scanning still reads
+    every byte; this exception concerns only the human-facing prose classifier.
+    """
+    if not path.is_relative_to(REPO / "docs/archive"):
+        return False
+    logical = archive.logical_path(path).relative_to(REPO).as_posix()
+    technical = (logical.startswith("tests/") and logical.endswith(".py")) or (
+        logical == "scripts/_mirror_internal_exclude_list.txt"
+    )
+    if not technical:
+        return False
+    record = archive._paths().get(logical)
+    assert record and record.get("sha256"), "Unbound archived technical source"
+    archive.assert_historical_sha256(path, record["sha256"])
+    return True
+
+
 def test_public_research_prose_has_no_internal_tooling_or_personal_paths() -> None:
     """Research-facing prose must describe evidence, not the private workflow."""
     violations: list[str] = []
@@ -156,6 +177,8 @@ def test_public_research_prose_has_no_internal_tooling_or_personal_paths() -> No
         ):
             continue
         path = REPO / logical_path
+        if _verified_archived_guard(path):
+            continue
         try:
             content = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
@@ -188,6 +211,11 @@ def test_public_check_suite_provenance_exception_is_literal_and_narrow() -> None
 
     assert INTERNAL_PROSE.search(allowed) is None
     assert INTERNAL_PROSE.search(unrelated) is not None
+
+
+def test_archived_code_exception_does_not_hide_unregistered_text() -> None:
+    assert not _verified_archived_guard(REPO / "docs/archive/unregistered.py.original")
+    assert not _verified_archived_guard(REPO / "README.md")
 
 
 def test_public_tree_uses_research_facing_document_names() -> None:

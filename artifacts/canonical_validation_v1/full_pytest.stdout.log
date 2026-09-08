@@ -25,7 +25,7 @@ scripts\run_b1_calibration_20d.py:24: in <module>
 .venv\Lib\site-packages\polars\lazyframe\frame.py:2630: in collect
     return wrap_df(ldf.collect(engine, callback))
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): ...uer/Dev/MDS650-Capstone-defense/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
+E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): historical-workspace/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
 _____ ERROR collecting tests/contract/test_phase5_holdout_acquisition.py ______
 tests\contract\test_phase5_holdout_acquisition.py:22: in <module>
     import acquire_phase5_holdout as acquisition  # noqa: E402
@@ -53,7 +53,7 @@ scripts\run_b1_calibration_20d.py:24: in <module>
 .venv\Lib\site-packages\polars\lazyframe\frame.py:2630: in collect
     return wrap_df(ldf.collect(engine, callback))
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): ...uer/Dev/MDS650-Capstone-defense/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
+E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): historical-workspace/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
 ___________ ERROR collecting tests/contract/test_phase5_storage.py ____________
 tests\contract\test_phase5_storage.py:21: in <module>
     import run_b1_calibration_20d as b1_builder  # noqa: E402
@@ -79,7 +79,7 @@ scripts\run_b1_calibration_20d.py:24: in <module>
 .venv\Lib\site-packages\polars\lazyframe\frame.py:2630: in collect
     return wrap_df(ldf.collect(engine, callback))
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): ...uer/Dev/MDS650-Capstone-defense/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
+E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): historical-workspace/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
 ___________ ERROR collecting tests/unit/test_phase6_acquisition.py ____________
 ImportError while importing test module 'REPOSITORY_ROOT\tests\unit\test_phase6_acquisition.py'.
 Hint: make sure your test modules/packages have valid Python names.
@@ -119,7 +119,7 @@ scripts\run_b1_calibration_20d.py:24: in <module>
 .venv\Lib\site-packages\polars\lazyframe\frame.py:2630: in collect
     return wrap_df(ldf.collect(engine, callback))
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): ...uer/Dev/MDS650-Capstone-defense/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
+E   FileNotFoundError: El sistema no puede encontrar la ruta especificada. (os error 3): historical-workspace/artifacts/calibration_20d/b2_calibration_origins.parquet (set POLARS_VERBOSE=1 to see full path)
 __________ ERROR collecting tests/unit/test_phase6_method_freeze.py ___________
 ImportError while importing test module 'REPOSITORY_ROOT\tests\unit\test_phase6_method_freeze.py'.
 Hint: make sure your test modules/packages have valid Python names.
