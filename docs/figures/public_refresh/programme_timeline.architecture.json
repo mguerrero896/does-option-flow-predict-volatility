@@ -51,7 +51,7 @@
       "id": "rp3",
       "type": "security",
       "label": "RP3 registered",
-      "sublabel": "24 Aug · sealed",
+      "sublabel": "Before 29 Aug",
       "pos": [
         196,
         390
@@ -123,7 +123,7 @@
       "id": "rp4v3",
       "type": "backend",
       "label": "RP4 v3 · RV30",
-      "sublabel": "Sep · no flow signal",
+      "sublabel": "Sep · unconfirmed flow",
       "pos": [
         1026,
         120

@@ -1,0 +1,66 @@
+{
+  "frozen_registry_modified": false,
+  "geometry_check": {
+    "all_numeric_tokens_identical": true,
+    "all_xml_attributes_identical": true,
+    "elements": 50,
+    "only_pipeline_function_changed": true,
+    "other_figure_builders_called": false,
+    "status": "PASS"
+  },
+  "new_scientific_evaluations": 0,
+  "original_svg_sha256": "93270259a3700312f911a86c8a3b4a41ee5ecf2400a2b4f009e59c1019dd11ee",
+  "output_sha256": {
+    "docs/figures/data-pipeline.png": "5e25800a2e685b3782d09917918911ad765283fcd96939f71d7548b5fc6813d2",
+    "docs/figures/data-pipeline.svg": "dd6fa069ab7ee8079afe1a5657e4b1f8b1175433b03e66872be38f32b30ca622"
+  },
+  "png_method": "Pass the SVG bytes to the existing rasterize.cjs on stdin; write its stdout bytes as PNG. Supply the path to the installed sharp package as the sole argument.",
+  "reason": "Align the data-publication boundary with DATA_ACCESS: licensed data may use controlled private storage and individually permitted signed-URL access; it is not limited to one machine.",
+  "renderer": {
+    "density": 96,
+    "height": 816,
+    "metadata_copied": false,
+    "node_version": "v24.11.1",
+    "path": "artifacts/rp4_closeout_figures_code/rasterize.cjs",
+    "renderer_threads": 1,
+    "sharp": "0.35.4",
+    "vips": "8.18.6",
+    "width": 1173
+  },
+  "schema_version": "data-flow-presentation-receipt-v1",
+  "source_sha256": {
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": {
+      "hash_mode": "utf8_crlf_to_lf",
+      "sha256": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69"
+    },
+    "data/DATA_ACCESS.md": {
+      "hash_mode": "raw_bytes",
+      "sha256": "e09b5540149b77fb99ffd1b12e72d5ee889bbafd61e886a5be18f4b812d68cc9"
+    },
+    "scripts/figure_style.py": {
+      "hash_mode": "utf8_crlf_to_lf",
+      "sha256": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6"
+    },
+    "scripts/render_figures.py": {
+      "hash_mode": "utf8_crlf_to_lf",
+      "sha256": "e8e768b2d4bc266353797a67591f142d8a4c6102e2f4f9b63c61cf627bcd66d1"
+    }
+  },
+  "svg_command": "python -c \"from scripts.render_figures import pipeline; from pathlib import Path; Path('docs/figures/data-pipeline.svg').write_bytes((pipeline().render() + '\\n').encode('utf-8'))\"",
+  "visual_review": {
+    "artifact": "docs/figures/data-pipeline.png",
+    "checks": [
+      "all labels readable",
+      "no clipping or overlap",
+      "four nodes and three arrows preserved",
+      "private storage and public aggregates distinguished",
+      "no one-machine-only claim"
+    ],
+    "dimensions": [
+      1173,
+      816
+    ],
+    "method": "Direct image inspection after the policy correction",
+    "status": "PASS"
+  }
+}

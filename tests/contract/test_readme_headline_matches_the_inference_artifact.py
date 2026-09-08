@@ -96,8 +96,8 @@ def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject(
         assert cell["hypothesis_status"] == "NOT_REJECTED"
         assert artifact["global_joint_reject"] is False
         assert f"{_percent(cell)} %" in _table_row(readme, label)[4]
-    headline = _prose(_section(readme, "Overview"))
-    assert "the tree model does not improve" in headline
+    headline = _prose(_section(readme, "In one minute"))
+    assert "the tree model does not improve" in headline.lower()
     limits = _prose(_section(readme, "Limits"))
     assert "neither the dealer-hedging mechanism, economic alpha, profitability" in limits
     assert "nor broader generalization" in limits
@@ -109,9 +109,11 @@ def test_the_readme_names_the_registered_linear_flow_estimate_and_interval() -> 
     assert 0 < cell["ci_low"] < cell["estimate"] < cell["ci_high"]
     assert cell["rejected"] is True
     readme = README.read_text(encoding="utf-8")
-    headline = _prose(_section(readme, "Overview"))
-    percent = f"{cell['qlike_reduction_percent']:.3f}"
-    assert re.search(rf"15-minute forecast loss by {re.escape(percent)}%", headline)
+    headline = _prose(_section(readme, "In one minute"))
+    percent = f"{cell['qlike_reduction_percent']:+.2f}"
+    assert f"{percent}% lower forecast loss" in headline
+    assert "in the linear model at 15 minutes" in headline
+    assert f"p = {cell['p_for_decision']:.3f}" in headline
     results = _prose(_section(readme, "Results"))
     assert "positive 95% interval" in results
     interval = f"[{cell['ci_low']:.6f}; {cell['ci_high']:.6f}]"
@@ -134,7 +136,7 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
             p_value = f"{cell['p_for_decision']:.4f}"
             assert row[column] == f"{_percent(cell)} % ({p_value})"
     text = _prose(readme)
-    history = _prose(_section(readme, "History and prospective replication"))
+    history = _prose(_section(readme, "Results"))
     assert "one-sided sequence at 5% per family" in history
     assert "H2 opened only if H1 rejects" in history
     assert "Cross-version search is not adjusted" in text

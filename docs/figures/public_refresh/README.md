@@ -130,3 +130,12 @@ existing light palette explicitly for compatibility with Sharp's SVG engine.
 This changes neither the original SVG bytes nor the diagram geometry. PNG checks
 reject blank images; visual review separately checks text, units, clipping,
 colours and routes. A fresh render resets the visual-review field to pending.
+
+The README also uses the existing data-flow illustration ([SVG](../data-pipeline.svg),
+[PNG](../data-pipeline.png)). Its wording now reflects the private licensed-storage
+policy; its 50 elements, geometry and numerical content are unchanged. The
+[separate render receipt](data_pipeline_render_receipt.json) records four source
+hashes, both output hashes, the prior SVG hash and the inspected renderer versions.
+It includes the command that calls only `pipeline()` in the existing figure
+producer, followed by the existing stdin/stdout SVG-to-PNG rasterizer. The other
+four legacy figure builders are not invoked for this illustration.

@@ -472,8 +472,8 @@ def pipeline() -> Canvas:
         WIDTH,
         612,
         "From licensed provider data to a published, hash-pinned record",
-        "Licensed panels are built and evaluated on one machine and never redistributed; "
-        "what the repository publishes is aggregates, schemas and SHA-256 pointers, "
+        "Licensed panels are stored and evaluated in private environments; "
+        "public redistribution is restricted to aggregates, schemas and SHA-256 pointers, "
         "governed by a canonical state that refuses to promote what it cannot support.",
         "pipeline",
     )
@@ -481,11 +481,11 @@ def pipeline() -> Canvas:
         canvas,
         "where the data comes from",
         "Two planes, and the line between them",
-        "Licensed panels never leave the machine. What is published is aggregates and hashes.",
+        "Licensed data stays private. The public record contains aggregates and hashes.",
     )
 
-    plane(canvas, 56, 216, 768, 216, "licensed plane · local machine only")
-    plane(canvas, 56, 468, 768, 96, "public plane · what the repository publishes", amber=True)
+    plane(canvas, 56, 216, 768, 216, "private licensed-data storage plane")
+    plane(canvas, 56, 468, 768, 96, "public aggregates and hashes · public record", amber=True)
 
     node(canvas, 264, 120, 352, 60, "Market data providers", "FMP · Massive · Unusual Whales")
     node(canvas, 264, 244, 352, 60, "Point-in-time panel", "what was knowable at the time")
@@ -497,7 +497,7 @@ def pipeline() -> Canvas:
     arrow_down(canvas, 440, 304, 348, "one model per step")
     arrow_down(canvas, 440, 412, 484, "freeze and hash", accent=True)
 
-    legend(canvas, 582, [(RULE_STRONG, "stays local"), (ACCENT, "leaves the machine")])
+    legend(canvas, 582, [(RULE_STRONG, "private use"), (ACCENT, "public record")])
     return canvas
 
 

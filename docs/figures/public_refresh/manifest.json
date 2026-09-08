@@ -266,18 +266,18 @@
       "diagram_type": "architecture",
       "source": {
         "path": "programme_timeline.architecture.json",
-        "sha256": "d379813be6bcede0bae6ef23b4e1339cd0de8f7a3caee25bd6af2175988e7bd3",
-        "bytes": 3872
+        "sha256": "15e88e63831147a35b9722bc7d892e58b542a519d390cb0df58ebcd00a3e8c09",
+        "bytes": 3871
       },
       "html": {
         "path": "programme_timeline.architecture.html",
-        "sha256": "ac2a78140a7cbeee40e84f3ca0fe4be11fc2ac052021fe3cddea8f4c9da6da44",
-        "bytes": 722553
+        "sha256": "0f5e08b9a0e3aac7600384218f96a8aa12db7cfc3d82a3fe9ec4d2e44c24e06a",
+        "bytes": 722549
       },
       "svg": {
         "path": "programme_timeline.architecture.svg",
-        "sha256": "a5ebd2974c0d4eb0db28d027c674bd26cc129b5992b6713c5cdd158a40e0da1e",
-        "bytes": 51249
+        "sha256": "eb907759575e707372da175b2c7d70f5d15fc466ca20dd2dab50a7007252703a",
+        "bytes": 51245
       },
       "validation": {
         "checks": [
@@ -326,7 +326,7 @@
         "automated_status": "pass",
         "automated_visual_review": "pending",
         "visual_review": "passed",
-        "reviewed": "Light and dark contact sheets inspected for labels, routes, node and card fit, containment and balance.",
+        "reviewed": "Corrected RP3 date bound and unconfirmed-flow wording; light/dark contact sheet and PNG inspected for complete labels, unchanged routes and no clipping.",
         "viewports": [
           {
             "width": 1440,
@@ -362,27 +362,42 @@
             "width": 1440,
             "height": 900,
             "theme": "light",
-            "sha256": "26078e456e0657ae68b92e108c658a829fa6cf9e58f24fc5246f7e2102164a55"
+            "sha256": "afaf01788ac5141e4ebcb6a5223a59789678563dd17bc2902c1eaf144d2bd966"
           },
           {
             "width": 1440,
             "height": 900,
             "theme": "dark",
-            "sha256": "fae9ded1c1a4332d2e064ff0f3b7c067d225a03fca1f1c5d7943f2d6f7b846a0"
+            "sha256": "f4a761c3ed444984fd4132e3da1c54ab9f63195008f84038a961ab12b5d62b85"
           },
           {
             "width": 2048,
             "height": 1320,
             "theme": "light",
-            "sha256": "1825132a19a0ea3aee7b18debf9b9a1d200bd3794af411331f73990f6d5a3a05"
+            "sha256": "c559adfbc8a5fbf74dac2cdcc49e5c0088ce2807f73227d585e190ffbbb9688e"
           },
           {
             "width": 2048,
             "height": 1320,
             "theme": "dark",
-            "sha256": "d4915d0006c347fd679826d2523fce3c03cd4b1df7da238f436f6aad0ef43ade"
+            "sha256": "b8438335d7a32bc41849e0574838b86b861801437b73552a69dfc925b6c5a38a"
           }
         ]
+      },
+      "label_correction": {
+        "rp3": {
+          "text": "Before 29 Aug",
+          "source": "docs/rp3/PREREGISTRATION.md",
+          "source_sha256": "66906a88b0d8ff76d9bbc6556e0aa64e32de494254d2ebdccc49140fce7f77e7",
+          "scope": "The protocol declares sealing before 2026-08-29; this is not an independently authenticated exact sealing date."
+        },
+        "rp4_v3": {
+          "text": "Sep · unconfirmed flow",
+          "source": "docs/rp4/results_v3.md",
+          "source_sha256": "ebacdde7cca5c3ebdf18bedf40dc4c433ec1a578681dff2d7c8379e120f5cbe1",
+          "scope": "The saved linear B2/B1 primary p-value is 0.0525 with NOT_REJECTED. Non-rejection does not establish absence of a signal."
+        },
+        "geometry_elements_unchanged": 107
       }
     },
     {
