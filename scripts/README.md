@@ -21,7 +21,6 @@ Lifecycle labels used below:
 | --- | --- | --- |
 | `scripts/generate_canonical_state.py` | CURRENT | Generate `data/CANONICAL_STATE.json` and `STATUS.md` from the explicit authority allowlist. |
 | `scripts/audit_successor_holdout_exposure_v1.py` | CONTROLLED | Audit successor-holdout exposure from frozen target-free metadata; it never opens an external panel or outcome payload. |
-| `scripts/audit_b2_history_repair_v1.py` | CONTROLLED | Quantify the B2 history repair on local, already-exposed data (feature impact and paired evaluation); it never retunes a model or reads a new target. |
 | `scripts/run_rp2_v3_pipeline.py` | CONTROLLED | Execute the ordered RP2-v3 rebuild under one run identity and fail closed on sealed or drifting inputs. |
 | `scripts/run_public_repro_demo.py` | CURRENT | Run the redistributable methodological smoke demo on synthetic structured inputs. |
 | `scripts/run_local_evidence_gates.py` | CONTROLLED | Run Tier 2 validation against explicitly configured licensed evidence and live access posture. |
@@ -267,6 +266,7 @@ every producer receives the same run identity, configuration and invariant check
 | Script | Purpose |
 |---|---|
 | `scripts/audit_b1q_put_call_parity_feasibility.py` | Target-free B1Q put-call-parity feasibility report from local cache data. |
+| `scripts/audit_b2_history_repair_v1.py` | Quantify the sealed B2 history repair on local, already-exposed data (feature impact and paired evaluation); never retunes or reads a new target. |
 | `scripts/audit_confirmation_readiness_v1.py` | Offline readiness v1 audit for a future confirmation acquisition. |
 | `scripts/audit_phase6_source_recovery.py` | Recover and verify the exact frozen Phase 6 git source blobs via local refs. |
 | `scripts/build_pit_v22_claim_ledger.py` | Build the target-blind PIT v2.2 claims-and-limitations ledger. |

@@ -4,19 +4,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import polars as pl
-from scripts.build_target_blind_common_panel_v22 import (
-    B1_ORIGINS,
-    B2_AVAILABILITY,
-    B2_PRIMARY_ROOT,
-    ROOT,
-    combined_input_digest,
-    sha256_file,
-)
 
 from mds650.metrics import regression_metrics
 from mds650.phase6 import B2V2_FEATURES, build_b2v2_from_activity
@@ -34,6 +27,21 @@ from mds650.target_blind_panel_v22 import (
 )
 from mds650.target_blind_sourcebound_v24 import write_if_new_or_identical_v24
 from mds650.temporal_validation import split_expanding_fold
+
+# Sibling scripts are imported by bare name, like build_target_blind_common_panel_v23.py
+# does; a `scripts.` prefix makes mypy see the module twice under CI's `mypy src scripts`.
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from build_target_blind_common_panel_v22 import (  # noqa: E402
+    B1_ORIGINS,
+    B2_AVAILABILITY,
+    B2_PRIMARY_ROOT,
+    ROOT,
+    combined_input_digest,
+    sha256_file,
+)
 
 SOURCE = Path("D:/MDS650/evidence_root/pit_v22_successor") / (
     "pit-v22-successor-evaluation-v2-20260902"
