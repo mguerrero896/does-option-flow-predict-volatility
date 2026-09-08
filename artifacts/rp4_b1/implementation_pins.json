@@ -1,0 +1,21 @@
+{
+  "description": "B1 extension implementation complete before root reads primary summary values; specification remains frozen.",
+  "artifacts": [
+    {
+      "path": "artifacts/rp4_code/materialize.py",
+      "sha256": "f1de9af7f07480650ff17ab5dc6d785c823193e2e400f32dc532c2a05d31ded0"
+    },
+    {
+      "path": "artifacts/rp4_code/evaluate.py",
+      "sha256": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14"
+    },
+    {
+      "path": "artifacts/rp4_code/acquire.py",
+      "sha256": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8"
+    },
+    {
+      "path": "artifacts/rp4_a1/specification.json",
+      "sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5"
+    }
+  ]
+}

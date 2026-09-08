@@ -1,0 +1,21 @@
+{
+  "allowed_artifacts_sha256": {
+    "REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "coverage_public.csv": "e665b8653989e865d2736b685b1c7fbdba8d1d6db228a671e50e9ab81afce2b0",
+    "coverage_weekday.csv": "e347f76f648da1511eb54a56e853d2ab656b28388de5d0acff70090e95f314a6",
+    "expiry_daily.csv": "06809853d3e7b62d1342ee6d6779d86447b09c800f59397dd04f88ca160c235d",
+    "expiry_daily_public.csv": "f770d2e9532d10deb7e23591d5a2994108f42f318a0239ffb6e4aa8649686b5a",
+    "expiry_first_observed.csv": "8604ccb92868703f614dee3255099594c356b44eed193acdfda3a440974a007e",
+    "sources.json": "629d89256015b5743614e7cf10e8b8bf9c29d2fc56b857b3ee073d1ce996b5f9",
+    "summary.json": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb"
+  },
+  "excluded_local_artifacts": [
+    "bar_event_windows.csv",
+    "feature_daily.csv"
+  ],
+  "exclusion_reason": "No minute-level provider-derived rows in the public projection.",
+  "input_manifest_sha256": "f52c37e95f9ebe9961d2d42e1e6719ffbf823a0a7a0128fb5d029407d507219f",
+  "producer_sha256": "5d6c50f1aaad2f22f3eb7cac7968674f5b1bbe6cafd9eb7811ac378a55c34079",
+  "receipt_created_after_cli_exit": "receipt.json",
+  "status": "AGGREGATE_ONLY"
+}

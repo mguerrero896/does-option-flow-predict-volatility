@@ -1,0 +1,34 @@
+{
+  "schema": "rp4-closeout-history-navigation-receipt-v1",
+  "status": "PASS_HISTORICAL_GUARDS_RETAINED",
+  "cause": "The new front page omitted historical provenance links, dispositions and the existing CI badge required by four retained checks.",
+  "change": "Restored a collapsed historical-provenance section and the existing hosted-tier badge; current RP4 headline and table unchanged.",
+  "before": {
+    "command": "uv run --offline --frozen --no-sync python -B -m pytest -q -p no:cacheprovider tests/contract/test_readme_matches_artifacts.py",
+    "result": {
+      "chunk_id": "db4c2d",
+      "wall_time_seconds": 0.9985955,
+      "exit_code": 1,
+      "original_token_count": 940,
+      "output": "F.FF.F                                                                   [100%]\r\n================================== FAILURES ===================================\r\n______________ test_readme_resolves_the_single_scientific_bundle ______________\r\n\r\n    def test_readme_resolves_the_single_scientific_bundle() -> None:\r\n        state = json.loads(STATE.read_text(encoding=\"utf-8\"))\r\n        bundle = state[\"scientific_bundle\"]\r\n        readme = README.read_text(encoding=\"utf-8\")\r\n    \r\n>       assert bundle[\"run_id\"] in readme\r\nE       AssertionError: assert 'rp2-v3-20260831-b1-spot-cutoff-remediation' in 'fuera de muestra walk-forward, partición fijada 2026-09-07.\\n\\n# ¿Las opciones mejoran el pronóstico de volatilidad i...·\\n[Citación](CITATION.cff) · [Seguridad](SECURITY.md).\\n\\nRESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.\\n'\r\n\r\ntests\\contract\\test_readme_matches_artifacts.py:18: AssertionError\r\n_____ test_readme_routes_the_completed_phase8_bridge_without_promoting_it _____\r\n\r\n    def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> None:\r\n        readme = README.read_text(encoding=\"utf-8\")\r\n>       assert \"MIXED_EXPLORATORY\" in readme\r\nE       AssertionError: assert 'MIXED_EXPLORATORY' in 'fuera de muestra walk-forward, partición fijada 2026-09-07.\\n\\n# ¿Las opciones mejoran el pronóstico de volatilidad i...·\\n[Citación](CITATION.cff) · [Seguridad](SECURITY.md).\\n\\nRESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.\\n'\r\n\r\ntests\\contract\\test_readme_matches_artifacts.py:42: AssertionError\r\n_______ test_readme_routes_history_and_evidence_to_researcher_documents _______\r\n\r\n    def test_readme_routes_history_and_evidence_to_researcher_documents() -> None:\r\n        readme = README.read_text(encoding=\"utf-8\")\r\n        required = (\r\n            \"data/CANONICAL_STATE.json\",\r\n            \"docs/pit_v22_claims_and_limitations.md\",\r\n            \"docs/rp2_v3/SUPERSEDED_RESULTS.md\",\r\n            \"data/DATA_ACCESS.md\",\r\n            \"docs/reproducibility_contract_v1.md\",\r\n        )\r\n        for relative in required:\r\n>           assert relative in readme\r\nE           AssertionError: assert 'docs/pit_v22_claims_and_limitations.md' in 'fuera de muestra walk-forward, partición fijada 2026-09-07.\\n\\n# ¿Las opciones mejoran el pronóstico de volatilidad i...·\\n[Citación](CITATION.cff) · [Seguridad](SECURITY.md).\\n\\nRESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.\\n'\r\n\r\ntests\\contract\\test_readme_matches_artifacts.py:60: AssertionError\r\n_____________________ test_ci_badge_names_the_hosted_tier _____________________\r\n\r\n    def test_ci_badge_names_the_hosted_tier() -> None:\r\n        readme = README.read_text(encoding=\"utf-8\")\r\n        workflow = (REPO / \".github\" / \"workflows\" / \"ci.yml\").read_text(encoding=\"utf-8\")\r\n    \r\n>       assert \"[![Tier 1 CI]\" in readme\r\nE       AssertionError: assert '[![Tier 1 CI]' in 'fuera de muestra walk-forward, partición fijada 2026-09-07.\\n\\n# ¿Las opciones mejoran el pronóstico de volatilidad i...·\\n[Citación](CITATION.cff) · [Seguridad](SECURITY.md).\\n\\nRESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.\\n'\r\n\r\ntests\\contract\\test_readme_matches_artifacts.py:74: AssertionError\r\n=========================== short test summary info ===========================\r\nFAILED tests/contract/test_readme_matches_artifacts.py::test_readme_resolves_the_single_scientific_bundle\r\nFAILED tests/contract/test_readme_matches_artifacts.py::test_readme_routes_the_completed_phase8_bridge_without_promoting_it\r\nFAILED tests/contract/test_readme_matches_artifacts.py::test_readme_routes_history_and_evidence_to_researcher_documents\r\nFAILED tests/contract/test_readme_matches_artifacts.py::test_ci_badge_names_the_hosted_tier\r\n"
+    }
+  },
+  "after": {
+    "command": "uv run --offline --frozen --no-sync python -B -m pytest -q -p no:cacheprovider tests/contract/test_readme_matches_artifacts.py tests/contract/test_canonical_state_current.py tests/contract/test_coverage_floor_is_stated_once.py",
+    "result": {
+      "chunk_id": "98621b",
+      "wall_time_seconds": 1.1522014999999999,
+      "exit_code": 0,
+      "original_token_count": 21,
+      "output": "...................                                                      [100%]\r\n"
+    }
+  },
+  "focused_tests_after": 19,
+  "retained_guard_modified": false,
+  "artifacts_sha256": {
+    "README.md": "b126ec92b0f285c2cc98851c5077096fb8de217594b5f7e9f705672f65526520"
+  },
+  "new_model_fits": 0,
+  "new_inference": 0,
+  "remote_writes": 0
+}

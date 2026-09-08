@@ -1,0 +1,64 @@
+{
+  "schema_version": "rp4-v3-addendum-registration-v1",
+  "stage": "RP4_V3_ADDITIONS_REGISTRATION",
+  "registration_date": "2026-09-07",
+  "status": "ADDITIONS_REGISTERED_FULL_V3_SPECIFICATION_NOT_VERIFIABLE",
+  "branch": "research/rp4-v3-20260907",
+  "parent_commit": "89499f8a06d5e4c3f2abbea917a3cfb738ea6775",
+  "authority": "Explicit owner message: ridge standardized predictor winsorization and percentile forecast bounds; training-only Mincer-Zarnowitz LightGBM secondary.",
+  "artifact_sha256": {
+    "docs/rp4/v3_addendum_stability_calibration.md": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5"
+  },
+  "reference_sha256": {
+    "docs/rp4/specification_v1.md": "2012ce9a62fb1b0da205cd0b4d4d5f635353c35b60f6548257883db84211e510",
+    "docs/rp4/specification_v2.md": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+    "docs/rp4/results_v1.md": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26",
+    "docs/rp4/results_v2.md": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf",
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "artifacts/rp4_v2_b2/session_losses.csv": "c01bee110fe1a46d2e67b1261b1c865d3634c5ca8deda8af8ef5b69a70cc50c4",
+    "artifacts/rp4_v2_b2/summary.json": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693"
+  },
+  "commands": [
+    {
+      "command": "git diff --exit-code 89499f8 -- .",
+      "exit_code": 0,
+      "scope": "All previously tracked files unchanged before adding this receipt."
+    },
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\nuv run --offline --frozen --no-sync python -B -c \"import csv, hashlib, json, pathlib; r=pathlib.Path.cwd(); p=r/'docs/rp4/v3_addendum_stability_calibration.md'; t=p.read_text(encoding='utf-8'); s=json.loads((r/'artifacts/rp4_v2_b2/summary.json').read_text()); rows=list(csv.DictReader((r/'artifacts/rp4_v2_b2/session_losses.csv').open(newline=''))); row=next(x for x in rows if x['session_date']=='2025-09-18'); assert row['loss__log_ridge_harq__B2'] in t; assert all(str(s['mincer_zarnowitz']['lightgbm_qlike__'+k]['slope']) in t for k in ('B0','B1','B2')); assert all(x in t for x in ('min(5, max(-5, z))', '0.5 * P1', '2 * P99', 'inner_fit', '1e-12', 'ESPECIFICACIÓN COMPLETA V3 NO VERIFICABLE', 'No se han implementado ni evaluado', 'usar identidad solo para ese origen', 'sin modificar pronósticos anteriores')); assert hashlib.sha256(p.read_bytes()).hexdigest()=='81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5'; print(json.dumps({'status':'PASS_DOCUMENT_REGISTRATION_CHECK','facts_verified':4,'clauses_checked':9,'source':'closed_v2_aggregates_only','models_fitted':0,'v3_evaluations':0,'document_sha256':hashlib.sha256(p.read_bytes()).hexdigest()}))\"\nexit $LASTEXITCODE",
+      "exit_code": 0,
+      "result": {
+        "status": "PASS_DOCUMENT_REGISTRATION_CHECK",
+        "facts_verified": 4,
+        "clauses_checked": 9,
+        "source": "closed_v2_aggregates_only",
+        "models_fitted": 0,
+        "v3_evaluations": 0,
+        "document_sha256": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5"
+      }
+    }
+  ],
+  "verification_scope": "Document requirements and four previously closed aggregate facts; not estimator tests or a new scientific evaluation.",
+  "missing_context": {
+    "status": "NO VERIFICABLE",
+    "item": "Full preceding RP4 v3 request/specification referred to by the owner",
+    "reason": "Recovered current-task user history proceeds from v2 directly to this addendum. RP4 repository/document searches found candidate feature materialization and a draft mention, but no complete v3 specification. Neither candidate features nor sequential tests were adopted."
+  },
+  "implementation_completed": false,
+  "real_models_fitted": 0,
+  "real_evaluations_run": 0,
+  "new_provider_calls": 0,
+  "v1_v2_preserved": true,
+  "phase9_modified": false,
+  "collector_modified": false,
+  "published": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false,
+  "self_hash_policy": "This receipt omits its own recursive hash; its exact bytes are pinned by the local Git commit. No cryptographic signature is claimed.",
+  "pre_finalization_review": {
+    "scope": "Independent document-only audit",
+    "correction": "A nonfinite calibrated forecast triggers identity for that origin only; training degeneracy may trigger identity for the session. No later origin may revise earlier forecasts.",
+    "real_evaluations_before_correction": 0
+  }
+}

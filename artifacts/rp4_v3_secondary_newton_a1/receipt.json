@@ -1,0 +1,13 @@
+{
+  "stage": "V3_SECONDARY_NEWTON_METHOD_A1",
+  "status": "REGISTERED_BEFORE_EMPIRICAL_REFINEMENT",
+  "command": "Get-FileHash -Algorithm SHA256 -LiteralPath artifacts/rp4_v3_secondary_newton_a1/addendum.json; Get-FileHash -Algorithm SHA256 -LiteralPath docs/rp4/v3_secondary_newton_addendum_v1.md",
+  "exit_code": 0,
+  "artifacts_sha256": {
+    "artifacts/rp4_v3_secondary_newton_a1/addendum.json": "529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa",
+    "docs/rp4/v3_secondary_newton_addendum_v1.md": "7353209882a75316faf9f60da8d895739a5fb26e6f84bfb3cc01128c21d9f888"
+  },
+  "numeric_tests": "NOT_YET_EXECUTED_FIRST_PASS_USING_TWO_SECONDARY_THREADS",
+  "new_empirical_refinement_fits": 0,
+  "primary_changed": false
+}

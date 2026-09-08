@@ -1,0 +1,14 @@
+{
+  "addendum_sha256": "81a20523b205e014bd2e910272e280e6c412af120037a6fb1c565e263dd7fce5",
+  "capital_go": false,
+  "decision_sha256": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697",
+  "freeze_producer_sha256": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+  "parent_specification_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+  "prior_v1_v2_results_known": true,
+  "registered_at_utc": "2026-09-07T08:18:58.166170+00:00",
+  "schema_version": "rp4-v3-freeze-v1",
+  "specification_md_sha256": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+  "specification_sha256": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+  "v3_materialization_executed": false,
+  "v3_models_fitted": 0
+}

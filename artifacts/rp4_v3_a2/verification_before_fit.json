@@ -1,0 +1,87 @@
+{
+  "stage": "RP4_V3_A2_VERIFICATION_BEFORE_REAL_FIT",
+  "status": "SYNTHETIC_AND_STATIC_GATES_PASS_REAL_EVALUATION_NOT_STARTED",
+  "verified_at_sydney": "2026-09-07T19:06:43.4852982+10:00",
+  "branch": "research/rp4-v3-20260907",
+  "head_before_A2": "b4e4cbf",
+  "specification_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "environment": {
+    "UV_PROJECT_ENVIRONMENT": "private-input/4b06809c9ca2d51ba83b",
+    "cwd": "private-input/0ec5f26c567f416b9513",
+    "PYTHONPATH": "private-input/b8a9e73041c6eefd90b4",
+    "MYPYPATH_joint": "private-input/0d2012363c94bcf4a831",
+    "MYPYPATH_materialization": "src;scripts;artifacts/rp4_code;artifacts/rp4_v2_code;artifacts/rp4_v3_code",
+    "RP4_GAMMA_CANDIDATE_SOURCE": "artifacts/rp4_v3_candidate/build_gamma_imbalance.py",
+    "OPENBLAS_NUM_THREADS": 4,
+    "OMP_NUM_THREADS": 4,
+    "POLARS_MAX_THREADS": 4
+  },
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync pytest --import-mode=importlib artifacts/rp4_v3_code/test_models.py artifacts/rp4_v3_code/test_evaluate_v3.py artifacts/rp4_v3_code/test_inference.py artifacts/rp4_v3_code/test_materialize_gamma.py artifacts/rp4_v3_code/test_empty_windows.py artifacts/rp4_v3_code/test_aggregate_v3.py artifacts/rp4_v2_code/test_models.py -q -o addopts='' --junitxml=artifacts/rp4_v3_a2/pytest_before_fit.xml",
+      "exit_code": 0,
+      "passed": 142,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 7.25
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_code",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v3_code",
+      "exit_code": 0,
+      "files_already_formatted": 15
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v3_code/models.py artifacts/rp4_v3_code/evaluate_v3.py artifacts/rp4_v3_code/execute.py artifacts/rp4_v3_code/inference.py artifacts/rp4_v3_code/aggregate_v3.py artifacts/rp4_v3_code/report_v3.py artifacts/rp4_v3_code/empty_windows.py",
+      "exit_code": 0,
+      "checked_source_files": 7
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --follow-imports=skip artifacts/rp4_v3_code/materialize_gamma.py artifacts/rp4_v3_code/test_materialize_gamma.py",
+      "exit_code": 0,
+      "checked_source_files": 2,
+      "scope": "New materialization modules only; frozen flat-import helpers are not retyped."
+    }
+  ],
+  "artifacts_sha256": {
+    "artifacts/rp4_v3_code/test_models.py": "56fb47cc9d73aafed1842ad6633dd0454f44e1a7341b00a5d50d0910a22fe4cc",
+    "artifacts/rp4_v3_code/test_materialize_gamma.py": "3fa8bef153ea8a7b5c84b9c4cd14d0d1ae3c471c6794c8181878cc3244460f6e",
+    "artifacts/rp4_v3_code/test_inference.py": "d7a2caee560c7aa36218f3bccbeaa7f24993e5c77dc2189a00af2a87433990b1",
+    "artifacts/rp4_v3_code/test_evaluate_v3.py": "a26343dcbd264b8e3e9139805dde1e485cf7fa26b4db59a12bb8de66299ddd5a",
+    "artifacts/rp4_v3_code/test_empty_windows.py": "9b7e7a5d892c7dbbe97782ab2c329d523ed3ca33d18da6f792584a1ee2fdd843",
+    "artifacts/rp4_v3_code/test_aggregate_v3.py": "a985c7d6b7383d76ca3169fbb6c8785415354fdf001bbb39455264afe52d2a9c",
+    "artifacts/rp4_v3_code/report_v3.py": "c59302a234d77371077a90078f5821e092445574fc6ecbaf87ffba53c6dd3970",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+    "artifacts/rp4_v3_code/materialize_gamma.py": "2f59184b5a36b301252bb11eaf779c8128cef0f45266368f44b1a7d35f3644a3",
+    "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+    "artifacts/rp4_v3_code/execute.py": "fb6b01b42f62c24ec2a87f83e0338e1b36f0e609b3938cf92c76365a08505ff9",
+    "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+    "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+    "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+    "artifacts/rp4_v3_a2/pytest_before_fit.xml": "73030145e9013a960f2a55dbb11fa077ff322c51df042fc5dfc30d73027bee12"
+  },
+  "preflight_issues_resolved": [
+    "Synthetic integration exposed RV-level versus log-RV quantile units; session assembly now logs the positive level exactly once, covered by real-estimator synthetic integration.",
+    "Static combined typing exposed four Literal/keyword argument annotation errors in aggregation; annotation-only repair passed the joint seven-module check.",
+    "Flat frozen helper imports require a separate focused materialization type-check namespace; no frozen helper or running materializer was changed."
+  ],
+  "verification_scope": [
+    "Causal cutoffs, duplicate prefixes, IV validity, independent gamma oracle, key alignment and strict jump-target mask on synthetic fixtures.",
+    "Empty-window shape-only NaN recoding, preserved activity zeros, unknown membership and no origin/session exclusion.",
+    "Training-only preprocessing, winsorization, bounds, primary v2 LightGBM parity on synthetic data, exact quantile/logit objectives and secondary MZ.",
+    "Session bootstrap, directional gate order, old bilateral arithmetic, paired AUC, common endpoint masks and immutable checkpoint behavior.",
+    "Report receipts, hash chains, raw versus evaluated census and all 24 SVG endpoints; report rendering exercised on synthetic fixtures."
+  ],
+  "legacy_reports_and_session_aggregates_checked": 10,
+  "legacy_hashes_match_closed_v2_report_manifest": true,
+  "legacy_report_manifest_sha256": "2ba6b2611be4a4dd1e0cfd031a5f50680c96d665f603386522a9af0c21610083",
+  "real_model_fits": 0,
+  "scientific_evaluation_complete": false,
+  "synthetic_tests_are_not_empirical_evidence": true,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

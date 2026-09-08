@@ -1,0 +1,43 @@
+{
+  "schema": "disabled_windows_daily_collection_public_manifest_v1",
+  "status": "AGGREGATE_AND_SOURCE_ONLY_NO_PRIVATE_CONFIGURATION",
+  "path_base": "repository root",
+  "outputs_sha256": {
+    "artifacts/rp4_daily_collector_code/collector.py": "60f248cfed43051f5041838634bbe6b32feed16f17e9cd06fa35a032ca8b1228",
+    "artifacts/rp4_daily_collector_code/launch.ps1": "337a9dfc485390f7447ed0910920b0b094f5b616167658087ea9c4c045d04db5",
+    "artifacts/rp4_daily_collector_code/register_disabled.ps1": "cf861c56e9e2db66a4a0872faedfa7c75dff823980130991c6d38b8b5b6c6cf5",
+    "artifacts/rp4_daily_collector_code/test_collector.py": "10c470e53b6f12dd60d45920057da181f1f29d2a507100402dfb8864314b5fde",
+    "artifacts/rp4_daily_collector_setup/.gitignore": "1d6b7fffeefc7336408a7f6d6f6557cf03528e3572c3b4c55a08c5fa3817736c",
+    "artifacts/rp4_daily_collector_setup/README.md": "44131db5146bb1fb1c23197ebe91935fb89f582e19b5ddeb25478df6275ae24e",
+    "artifacts/rp4_daily_collector_setup/public_receipt.json": "eb385a82a8c4f3c4a6aa06e5bdd5cbd0c42a5c7108258646dd925ac172bb9fc5"
+  },
+  "registered_configuration_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+  "source_pins_sha256": {
+    "src/mds650/b1q_exogenous_provenance_v1.py": "ed70ff124c1651e61c01f7d96de39b538e5e76abe17259f1e448c69901f7fc87",
+    "src/mds650/phase5_storage.py": "bc1e1eee18c15b05a4ca0b1b7340a74f86d760255edc37a2c0adc01907a5f9af",
+    "src/mds650/normalize.py": "7cfc7e993fd9f3d4fdb0b8ea728b015c5adad1aab3476701c08fbb59115a1798",
+    "src/mds650/study_design.py": "990c7e2a3d4012ccfe718c740c2e5eaf6eecc0f377222c650a11720fd517fcc7",
+    "src/mds650/providers/fmp.py": "aefaf2f638facc4199c7d769c1e60a78c7c1a63450b482001749872aa9bec054",
+    "artifacts/rp4_daily_collector_code/launch.ps1": "337a9dfc485390f7447ed0910920b0b094f5b616167658087ea9c4c045d04db5",
+    "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+    "uv.lock": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+    "src/mds650/providers/base.py": "7021bd4d139ddabc5270c666c5fc126f596ba80d85df7828ce3ee67584f748e4",
+    "src/mds650/contracts.py": "ee9c832a4c5e9cc3e62ae1701907325ed2b3668fa6a78d7b60b2fc6f419f7a53",
+    "scripts/download_calibration_20d.py": "4a07bb46e0aaaadcc561131e75ac54f942dcce4e34774097ea25d5cfb8d48a64",
+    "artifacts/rp4_code/acquire.py": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8",
+    "src/mds650/time.py": "dc8005663f877910028b8da5cdc80c5d0c374cee176ea251945237c4c4ddff24",
+    "src/mds650/errors.py": "63b2cf00df37072fa387f12eefa8926ac2d1eaa110bc966761622e880fbe63cb",
+    "artifacts/rp4_daily_collector_code/collector.py": "60f248cfed43051f5041838634bbe6b32feed16f17e9cd06fa35a032ca8b1228",
+    "pyproject.toml": "f7a62af5dcb1a35ce4c4f52df305ed0f574a0fff7806aba4a07f957fd6fb4b56"
+  },
+  "private_receipt_sha256": "757185ee83d19084864e3493deba43518a32713de216241bdfb93716c689480f",
+  "excluded": [
+    "private/",
+    "test_tmp/",
+    "raw provider payloads",
+    "machine-specific XML and configuration",
+    "task-name inventories of unrelated jobs"
+  ],
+  "creation_does_not_enable_collection": true,
+  "network_collection_executed": false
+}

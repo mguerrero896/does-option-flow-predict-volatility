@@ -1,0 +1,25 @@
+{
+  "stage": "B3_RV15",
+  "validation": {
+    "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B -c \"import json; from pathlib import Path; from artifacts.rp4_v4_code.report_v4_checked import read_json,read_csv,verify_receipt_identity,verify_results; from artifacts.rp4_code.evaluate import sha256; p=Path('artifacts/rp4_v4_b3_rv15'); r=read_json(p/'receipt.json'); verify_receipt_identity(r,15,'confirmation'); assert r['exit_code']==0 and all(c['exit_code']==0 and sha256(Path(c['log']))==c['log_sha256'] for c in r['commands']); assert all(sha256(Path(k))==v for k,v in r['artifacts_sha256'].items()); s=read_json(p/'summary.json'); verify_results(s,read_csv(p/'session_losses.csv'),15,'confirmation'); old=read_json(Path('artifacts/rp4_v3_b3/summary.json')); assert (s['N_sessions'],s['N_origins'])==(old['N_sessions'],old['N_origins'])==(25,9750); assert s['executed_origins_by_asset']==old['executed_origins_by_asset']; print(json.dumps({'status':'PASS_RV15_CONFIRMATION_CLOSED_RECEIPTS_MEANS_SEQUENCE_N_ASSET_PARITY','summary_sha256':sha256(p/'summary.json'),'csv_sha256':sha256(p/'session_losses.csv'),'contrasts':[{k:c[k] for k in ['family','contrast','estimate','ci_low','ci_high','p_raw','p_for_decision','hypothesis_status','qlike_reduction_percent']} for c in s['contrasts']]}))\"\nexit $LASTEXITCODE",
+    "chunk_id": "73519c",
+    "wall_time_seconds": 1.9078756000000001,
+    "exit_code": 0,
+    "original_token_count": 350,
+    "output": "{\"status\": \"PASS_RV15_CONFIRMATION_CLOSED_RECEIPTS_MEANS_SEQUENCE_N_ASSET_PARITY\", \"summary_sha256\": \"1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c\", \"csv_sha256\": \"d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231\", \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"estimate\": 0.00041622522194090185, \"ci_low\": -0.0022086272919664665, \"ci_high\": 0.0028780554487611836, \"p_raw\": 0.3908, \"p_for_decision\": 0.3908, \"hypothesis_status\": \"NOT_REJECTED\", \"qlike_reduction_percent\": 0.17408259647110502}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"estimate\": 0.004767313254824691, \"ci_low\": -0.0011087291167046942, \"ci_high\": 0.014742152610369255, \"p_raw\": 0.1758, \"p_for_decision\": null, \"hypothesis_status\": \"NOT_TESTED\", \"qlike_reduction_percent\": 1.9973645698181244}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"estimate\": 0.007482146159045653, \"ci_low\": 0.001644364167826952, \"ci_high\": 0.01680713671969026, \"p_raw\": 0.0568, \"p_for_decision\": 0.0568, \"hypothesis_status\": \"NOT_REJECTED\", \"qlike_reduction_percent\": 3.162627461057245}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"estimate\": -0.0022724768497439274, \"ci_low\": -0.00907196547290959, \"ci_high\": 0.0021952091469455196, \"p_raw\": 0.7554, \"p_for_decision\": null, \"hypothesis_status\": \"NOT_TESTED\", \"qlike_reduction_percent\": -0.9919238217819006}]}\r\n"
+  },
+  "launch": {
+    "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.execute --spec-sha256 0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04 --horizon 15 --window confirmation\nexit $LASTEXITCODE",
+    "chunk_id": "c412a2",
+    "wall_time_seconds": 10.0149137,
+    "session_id": 16216,
+    "original_token_count": 15,
+    "output": "RP4_V4_PROGRESS:rv15:confirmation:completed_checkpoints=0\r\n"
+  },
+  "completion_exit_code": 0,
+  "N_sessions": 25,
+  "N_origins": 9750,
+  "same_counts_by_asset_as_v3": true,
+  "summary_sha256": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+  "session_losses_sha256": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231"
+}

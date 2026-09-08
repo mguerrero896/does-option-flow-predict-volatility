@@ -1,0 +1,7 @@
+horizon_minutes,window,constant_B0,constant_B1,constant_B2,B0_B1_identical,B1_B2_identical,B0_B2_identical,N_asset_session_family_units
+5,confirmation,0,0,0,0,0,0,300
+5,primary,0,0,0,0,0,0,5028
+15,confirmation,0,0,0,0,0,0,300
+15,primary,0,0,0,0,0,0,5028
+30,confirmation,0,0,0,0,0,0,300
+30,primary,0,0,0,0,0,0,5028

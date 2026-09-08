@@ -1,0 +1,168 @@
+{
+  "schema_version": "rp4-v2-closed-confirmation-read-only-audit-v1",
+  "status": "PASS_CLOSED_CONFIRMATION_CUSTODY_CAUSALITY_AGGREGATION_AUDIT",
+  "recorded_at_utc": "2026-09-07T05:48:08Z",
+  "record_purpose": "Receipt of verification of already-fixed confirmation forecasts. This is aggregation and custody verification, not another predictive evaluation.",
+  "stage": "B4",
+  "audited_stage": "B3",
+  "window": "confirmation",
+  "checkout_commit_at_audit": "44144d99474ce216c96212d95a31e0fae8b00935",
+  "execution": {
+    "shell": "pwsh",
+    "working_directory": "private-input/0ec5f26c567f416b9513",
+    "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'; $env:PYTHONPATH=\"$PWD;$PWD/src;$PWD/scripts;$PWD/artifacts/rp4_code;$PWD/artifacts/rp4_v2_code\"; $rp4ConfirmationAudit = @'\nimport hashlib\nimport json\nimport subprocess\nimport sys\nfrom pathlib import Path\n\nimport numpy as np\nimport pandas as pd\nimport pyarrow.parquet as pq\nfrom artifacts.rp4_v2_code import evaluate_v2 as evaluator\n\nrepo = Path.cwd().resolve()\npublic = repo / 'artifacts/rp4_v2_b3'\nrelease_path = repo / 'artifacts/rp4_v2_a2/evaluation_release.json'\nspec_path = repo / 'artifacts/rp4_v2_a1/specification.json'\nrelease_sha = '9397453da7673cabff5eabb641ddb73542817755126b4c91dfc1ce444efa83db'\nspec_sha = '08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5'\ndef digest(path):\n    with Path(path).open('rb') as stream:\n        return hashlib.file_digest(stream, 'sha256').hexdigest()\ndef load(path):\n    return json.loads(Path(path).read_bytes())\nassert digest(release_path) == release_sha, 'release hash drift'\nspec = evaluator.load_spec(spec_path, spec_sha)\nrelease = load(release_path)\nassert release['specification_sha256'] == spec_sha\nassert release['execution'] == {'session_shards':4, 'threads_per_model':4}\nassert release['evaluation_code_sha256'] == evaluator.evaluation_code_hashes(), 'frozen source drift'\nassert release['launcher_sha256'] == digest(repo / 'artifacts/rp4_v2_code/execute.py')\nroot = Path(spec['data_root']).resolve()\noutput = root / 'evaluation/confirmation'\npanel_path, manifest_path = root/'materialized/panel.parquet', root/'materialized/manifest.json'\nassert digest(panel_path) == release['panel_sha256']\nassert digest(manifest_path) == release['materialization_manifest_sha256']\nexpected_binding = {'panel_sha256':release['panel_sha256'], 'specification_sha256':spec_sha, 'release_sha256':release_sha, 'window':'confirmation', 'code_sha256':release['evaluation_code_sha256'], 'execution':release['execution']}\nassert load(output/'binding.json') == expected_binding\nreceipt_path = public/'receipt.json'\nreceipt = load(receipt_path)\nsummary = load(public/'summary.json')\nassert receipt['status'] == 'COMPLETE' and receipt['exit_code'] == 0 and receipt['execution_failure'] is None\nassert receipt['stage'] == 'B3' and receipt['window'] == 'confirmation'\nassert receipt['release_sha256'] == release_sha and receipt['evaluation_code_sha256'] == release['evaluation_code_sha256']\nrequired_outputs = {str(public/'summary.json'), str(public/'session_losses.csv'), str(output/'fit_diagnostics.json')}\nassert set(receipt['artifacts_sha256']) == required_outputs\nassert all(digest(path) == expected for path, expected in receipt['artifacts_sha256'].items())\ncommon = [sys.executable,'-B','-m','artifacts.rp4_v2_code.evaluate_v2','--spec',str(spec_path),'--spec-sha256',spec_sha,'--panel',str(panel_path),'--release',str(release_path),'--window','confirmation','--output',str(output),'--public-output',str(public),'--threads','4','--shard-count','4']\nexpected_commands = [subprocess.list2cmdline(common+['--shard-index',str(i)]) for i in range(4)] + [subprocess.list2cmdline(common+['--aggregate-only'])]\nassert [item['command'] for item in receipt['commands']] == expected_commands\nassert all(item['exit_code'] == 0 and digest(item['log']) == item['log_sha256'] for item in receipt['commands'])\nassert len({Path(item['log']).parent for item in receipt['commands']}) == 1\nattempt = Path(receipt['commands'][0]['log']).parent\nassert (attempt/'receipt.json').read_bytes() == receipt_path.read_bytes()\nassert summary['binding'] == expected_binding and summary['scheduled_sessions'] == summary['N_sessions'] == 25\nassert summary['skipped_sessions'] == [] and summary['N_origins'] == 9750\nkeys = ['asset','session_date','origin_minute']\ncolumns = keys + ['rv30','forecast_origin_utc','target_end_utc'] + spec['mandatory_predictors']\noptional_metadata = [name for name in ['rp4_eligible','is_event'] if name in pq.read_schema(panel_path).names]\ncolumns += optional_metadata\nwindow = spec['windows']['confirmation']\npanel = pd.read_parquet(panel_path, columns=columns, filters=[('session_date','>=',spec['windows']['primary']['start']),('session_date','<=',window['end'])])\npanel['session_date'] = panel['session_date'].astype(str)\npanel = panel.sort_values(['session_date','asset','origin_minute']).reset_index(drop=True)\nassert not panel.duplicated(keys).any()\ndates = panel['session_date'].to_numpy()\nscheduled = sorted(set(dates[(dates >= window['start']) & (dates <= window['end'])]))[window['warmup_sessions']:]\nassert len(scheduled) == 25\npaths = sorted((output/'sessions').glob('*.json'))\nassert [p.stem for p in paths] == scheduled\nassert sorted(p.stem for p in (output/'session_receipts').glob('*.json')) == scheduled\nquality = panel['rp4_eligible'].fillna(False).to_numpy(dtype=bool) if 'rp4_eligible' in panel else np.ones(len(panel), dtype=bool)\ntarget = panel['rv30'].to_numpy(dtype=float)\nvalid_target = np.isfinite(target) & (target > 0)\ncomplete = np.isfinite(panel[spec['mandatory_predictors']].to_numpy(dtype=float)).all(axis=1)\neligible = valid_target & complete & quality\norigins = pd.to_datetime(panel['forecast_origin_utc'], utc=True)\nends = pd.to_datetime(panel['target_end_utc'], utc=True)\nassert ((ends-origins) == pd.Timedelta(minutes=30)).all()\norigins_ns, ends_ns = [series.dt.as_unit('ns').astype('int64').to_numpy() for series in [origins,ends]]\nlocal = origins.dt.tz_convert('America/New_York')\nfirst_hour = ((local.dt.hour*60+local.dt.minute >= 570) & (local.dt.hour*60+local.dt.minute < 630)).to_numpy()\nrecords, hashes, gaps, train_counts, audit_loss_rows = [], {}, [], [], []\nactual_origins = 0\nfor index, path in enumerate(paths):\n    encoded = path.read_bytes()\n    sha = hashlib.sha256(encoded).hexdigest()\n    record = json.loads(encoded)\n    session = path.stem\n    assert load(output/'session_receipts'/path.name) == {'session':session,'binding':expected_binding,'sha256':sha}, session+' receipt drift'\n    assert record['session'] == session and record['binding'] == expected_binding\n    test = eligible & (dates == session)\n    assert record['keys'] == panel.loc[test, keys].to_dict('records'), session+' key/mask drift'\n    assert np.array_equal(np.asarray(record['target']),target[test]), session+' target drift'\n    assert int(test.sum()) > 0\n    anchor_ns = origins_ns[test].min()\n    train = eligible & (dates < session) & (ends_ns <= anchor_ns - 60*60*10**9)\n    train_days = sorted(set(dates[train]))\n    inner_valid = train & np.isin(dates,train_days[-10:])\n    inner_fit = train & ~inner_valid & (ends_ns <= origins_ns[inner_valid].min()-60*60*10**9)\n    assert inner_fit.any() and len(set(dates[inner_valid])) == 10\n    assert not (train & test).any() and not (inner_valid & inner_fit).any()\n    assert record['train_sessions'] == len(train_days)\n    assert record['train_last_session'] == train_days[-1] < session\n    assert pd.Timestamp(record['first_evaluation_origin_utc']) == origins[test].min()\n    assert pd.Timestamp(record['max_training_target_end_utc']) == ends[train].max()\n    gap = (anchor_ns - ends_ns[train].max())/(60*10**9)\n    assert gap >= 60\n    assert record['secondary']['first_hour'] == first_hour[test].tolist()\n    if 'is_event' in panel:\n        expected_event = [None if pd.isna(value) else bool(value) for value in panel.loc[test,'is_event']]\n        assert record['secondary']['event'] == expected_event\n    assert set(record['forecasts']) == {'log_ridge_harq','lightgbm_qlike'}\n    row_frame = pd.DataFrame(record['keys'])\n    row_frame['actual'] = record['target']\n    for family in ['log_ridge_harq','lightgbm_qlike']:\n        assert set(record['forecasts'][family]) == {'B0','B1','B2'}\n        for information_set in ['B0','B1','B2']:\n            prediction = np.asarray(record['forecasts'][family][information_set], dtype=float)\n            assert prediction.shape == (int(test.sum()),) and np.isfinite(prediction).all() and (prediction > 0).all()\n            # Independent direct definition, not evaluator.qlike_losses.\n            ratio = target[test]/np.maximum(prediction,1e-12)\n            row_frame[f'loss__{family}__{information_set}'] = ratio-np.log(ratio)-1\n            row_frame[f'forecast__{family}__{information_set}'] = prediction\n    numeric = [column for column in row_frame if column.startswith(('loss__','forecast__'))] + ['actual']\n    row = row_frame.groupby('asset')[numeric].mean().mean().to_dict()\n    audit_loss_rows.append({'session_date':session, **row})\n    actual_origins += int(test.sum())\n    records.append(record)\n    hashes[path.name] = sha\n    gaps.append(float(gap))\n    train_counts.append(len(train_days))\n    if (index+1) % 100 == 0:\n        print(json.dumps({'audit_progress_checkpoints':index+1}), flush=True)\nassert hashes == summary['completed_session_sha256']\nassert actual_origins == summary['N_origins'] == 9750\nassert int((eligible & np.isin(dates,scheduled)).sum()) == actual_origins\nfor index in range(4):\n    shard = load(output/'shards'/f'{index}.json')\n    assert shard['binding'] == expected_binding and shard['shard_index'] == index and shard['shard_count'] == 4\n    assert shard['assigned_sessions'] == shard['completed_sessions'] == len(scheduled[index::4])\n    assert shard['skipped_sessions'] == [] and shard['status'] == 'RP4_V2_SESSION_SHARD_COMPLETE'\nfor item in summary['evaluation_quality_by_asset']:\n    mask = (panel['asset'].to_numpy() == item['asset']) & np.isin(dates,scheduled)\n    expected = {'asset':item['asset'],'scheduled_rows':int(mask.sum()),'eligible_rows':int((mask&eligible).sum()),'invalid_target':int((mask&~valid_target).sum()),'incomplete_mandatory_predictors':int((mask&~complete).sum()),'failed_quality_gate':int((mask&~quality).sum())}\n    assert item == expected\nsaved_csv = pd.read_csv(public/'session_losses.csv')\nindependent = pd.DataFrame(audit_loss_rows)[saved_csv.columns]\nassert list(saved_csv['session_date']) == list(independent['session_date']) == scheduled\nnumeric = [column for column in saved_csv if column != 'session_date']\nindependent_values = independent[numeric].to_numpy()\nsaved_values = saved_csv[numeric].to_numpy()\nnp.testing.assert_allclose(independent_values,saved_values,rtol=2e-13,atol=2e-13)\nmax_abs = float(np.abs(independent_values-saved_values).max())\nprint(json.dumps({'custody_temporal_checks':'PASS','independent_qlike_max_absolute_difference':max_abs,'aggregation_reconstruction':'starting'}), flush=True)\nrecomputed, losses = evaluator.aggregate_records(records, spec['inference'])\nfor key, value in recomputed.items():\n    assert summary[key] == value, 'summary differs from reconstructed aggregation: '+key\ncsv_bytes = losses.to_csv(index=False).encode()\nassert hashlib.sha256(csv_bytes).hexdigest() == receipt['artifacts_sha256'][str(public/'session_losses.csv')], 'CSV byte reconstruction differs'\nfit_rows = []\nfor record in records:\n    for name, fit in sorted(record['fits'].items()):\n        fit_rows.append({'session':record['session'],'model':name,**fit})\nassert load(output/'fit_diagnostics.json') == fit_rows\nmetrics = [{key:row[key] for key in ['family','contrast','estimate','ci_low','ci_high','p_raw','p_holm','qlike_reduction_percent','N_sessions','N_origins']} for row in summary['contrasts']]\nprint(json.dumps({'status':'PASS_CLOSED_CONFIRMATION_CUSTODY_CAUSALITY_AGGREGATION_AUDIT','release_sha256':release_sha,'receipt_sha256':digest(receipt_path),'summary_sha256':digest(public/'summary.json'),'session_losses_sha256':digest(public/'session_losses.csv'),'fit_diagnostics_sha256':digest(output/'fit_diagnostics.json'),'panel_sha256':release['panel_sha256'],'materialization_manifest_sha256':release['materialization_manifest_sha256'],'checkpoint_count':len(records),'origins_verified':actual_origins,'checkpoint_receipts_verified':len(hashes),'shard_counts':[len(scheduled[i::4]) for i in range(4)],'training_sessions_min_max':[min(train_counts),max(train_counts)],'minimum_temporal_gap_minutes':min(gaps),'chronology_and_inner_masks':'PASS_ALL_25','independent_qlike_max_absolute_difference':max_abs,'all_reconstructed_summary_fields_exact':True,'reconstructed_csv_bytes_exact':True,'fit_diagnostic_rows_verified':len(fit_rows),'metrics_confirmation_closed':metrics,'model_fits':0,'file_writes':0},indent=2), flush=True)\n'@; uv run --offline --frozen --no-sync python -B -c $rp4ConfirmationAudit",
+    "exit_code": 0,
+    "exit_code_observed": true,
+    "unified_exec_session_id": null,
+    "execution_output_chunk_ids": [
+      "842188"
+    ],
+    "wall_time_seconds": 2.8382666,
+    "rerun_to_create_receipt": false,
+    "model_fits": 0,
+    "refits": 0,
+    "evaluation_launcher_invocations": 0,
+    "audit_file_writes": 0,
+    "note": "The command read closed confirmation artifacts and the bound historical panel, then recomputed aggregation only. This documentation step creates one new JSON receipt."
+  },
+  "scope": {
+    "completed_confirmation_only": true,
+    "confirmation_window": {
+      "start": "2026-08-03",
+      "end": "2026-09-04",
+      "warmup_calendar_sessions": 0
+    },
+    "historical_training_panel_start": "2024-08-02",
+    "training_scope": "Every step retains all eligible historical rows from the primary start through strictly earlier sessions, including earlier confirmation sessions, subject to the frozen 60-minute embargo.",
+    "checkpoint_integrity": "All 25 completed checkpoints, separate receipts, binding objects and the summary's exact checkpoint SHA-256 map.",
+    "release_integrity": "Specification, frozen document checks, release, panel, materialization manifest, bound evaluator source files and launcher.",
+    "process_evidence": "Four exact shard commands plus aggregate-only; all five exit codes and log hashes; identical attempt and completed-stage receipt bytes.",
+    "panel_parity": "Exact key list and target values for every eligible confirmation origin, joined by asset, session_date and origin_minute; no positional replacement.",
+    "temporal_masks": "Independent reconstruction of eligible past training rows, last ten training sessions for validation, 60-minute embargo and target horizon; parity with stored session metadata.",
+    "aggregation": "Independent QLIKE definition and equal-asset session means, followed by exact reconstruction of all frozen aggregator output fields and serialized session-loss CSV bytes.",
+    "exclusions": [
+      "No model fitting, hyperparameter selection or model changes.",
+      "No source-data or historical-availability provenance re-audit.",
+      "No alteration of primary, confirmation, release or specification artifacts.",
+      "No claim that numerical reproducibility establishes the full B2 > B1 > B0 hypothesis or independently validates previously exposed observations."
+    ]
+  },
+  "artifact_sha256": {
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_a2/evaluation_release.json": "9397453da7673cabff5eabb641ddb73542817755126b4c91dfc1ce444efa83db",
+    "artifacts/rp4_v2_b3/receipt.json": "6f1305e8b57b6c4744996c88dec045554aee9c2034fa6b9ca492b680a40dde73",
+    "artifacts/rp4_v2_b3/summary.json": "7ac5591b18c12e86165e80d9c6adf906ba19a2d1e502eb163b154c9eb74e83af",
+    "artifacts/rp4_v2_b3/session_losses.csv": "ac2f39206de4f5b9025bed10f0f87a5980536d0e913015fe8d5beb54e178ad76",
+    "private-input/52abad6fed9842f1a1ba": "5b7dd5cc4b2b1e64446d305a5ee0de92f6d18e790f94b5840664947da00fd19d",
+    "private-input/ae7b8dad4f99b3c23bc9": "ba409cf18bb38c4025e602a68177d01a1197229881d0de442bbc6355d220d807",
+    "private-input/f64893478a6be4090552": "5ac7335884bbbf8cd292726bff5115c36573a0ec9d494be0b189d79301145efb"
+  },
+  "checks": {
+    "status": "PASS",
+    "scheduled_sessions": 25,
+    "completed_checkpoints_verified": 25,
+    "checkpoint_receipts_verified": 25,
+    "origins_verified": 9750,
+    "skipped_sessions": 0,
+    "shard_session_counts": [
+      7,
+      6,
+      6,
+      6
+    ],
+    "diagnostic_fit_rows_verified": 150,
+    "completed_commands_with_exit_zero_and_matching_logs": 5,
+    "training_eligible_sessions_min_max": [
+      474,
+      498
+    ],
+    "inner_validation_sessions_each_step": 10,
+    "required_embargo_minutes": 60,
+    "minimum_observed_temporal_gap_minutes": 1090,
+    "target_horizon_minutes": 30,
+    "checkpoint_target_and_key_parity": "EXACT",
+    "quality_gate_counts_by_asset": "EXACT",
+    "chronology_and_inner_masks": "PASS_ALL_25",
+    "first_hour_membership_parity": "EXACT",
+    "event_membership_parity_when_present": "EXACT",
+    "independent_qlike_formula": "ratio = actual / max(forecast, 1e-12); loss = ratio - log(ratio) - 1",
+    "independent_aggregation_weighting": "Mean over origins within each asset-session; then equal mean over assets within the session.",
+    "independent_qlike_max_absolute_difference": 2.220446049250313e-16,
+    "independent_numeric_comparison_rtol": 2e-13,
+    "independent_numeric_comparison_atol": 2e-13,
+    "all_reconstructed_summary_fields_exact": true,
+    "exact_summary_scope": [
+      "primary contrasts",
+      "bootstrap intervals and p-values",
+      "Holm",
+      "DM",
+      "GW",
+      "Mincer-Zarnowitz",
+      "secondary aggregates",
+      "robustness aggregates",
+      "tail diagnostics",
+      "top loss sessions"
+    ],
+    "reconstructed_session_losses_csv_bytes_exact": true,
+    "serialized_fit_diagnostics_exact": true
+  },
+  "observed_closed_metrics": [
+    {
+      "family": "log_ridge_harq",
+      "contrast": "B1_over_B0",
+      "estimate": 0.0006767067713942454,
+      "ci_low": -0.0029467222381568204,
+      "ci_high": 0.0037440417602838164,
+      "p_raw": 0.7081,
+      "p_holm": 1,
+      "qlike_reduction_percent": 0.3764411607778625,
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    {
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "estimate": 0.0033372277299636454,
+      "ci_low": -0.0006159970147455965,
+      "ci_high": 0.010201394066756063,
+      "p_raw": 0.341,
+      "p_holm": 1,
+      "qlike_reduction_percent": 1.8634612808457223,
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    {
+      "family": "lightgbm_qlike",
+      "contrast": "B1_over_B0",
+      "estimate": 0.002914158133017256,
+      "ci_low": -0.0016852924088726668,
+      "ci_high": 0.007422188097779921,
+      "p_raw": 0.2193,
+      "p_holm": 0.8772,
+      "qlike_reduction_percent": 1.665801773159701,
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    {
+      "family": "lightgbm_qlike",
+      "contrast": "B2_over_B1",
+      "estimate": -0.002001506974756125,
+      "ci_low": -0.007992845574946568,
+      "ci_high": 0.001642535859302046,
+      "p_raw": 0.5665,
+      "p_holm": 1,
+      "qlike_reduction_percent": -1.163490207203909,
+      "N_sessions": 25,
+      "N_origins": 9750
+    }
+  ],
+  "inference_note": {
+    "subject": "The frozen percentile bootstrap interval and centered-bootstrap two-sided p-value are not dual procedures.",
+    "explanation": "The interval uses resampled-mean quantiles; the p-value counts centered two-sided exceedances. This audit reconstructs both as registered and makes no change to either procedure or Holm adjustment.",
+    "action": "Report the closed estimates, intervals and adjusted p-values together; this audit's PASS denotes custody and arithmetic reproducibility, not hypothesis acceptance.",
+    "source": "artifacts/rp4_code/evaluate.py::mean_inference"
+  },
+  "RESEARCH_ONLY": true,
+  "capital_go": false,
+  "disclaimer": "NOT INVESTMENT ADVICE"
+}

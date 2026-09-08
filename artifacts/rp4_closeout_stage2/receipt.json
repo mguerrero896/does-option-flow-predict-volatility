@@ -1,0 +1,27 @@
+{
+  "stage": "PUBLICATION_CLOSEOUT_2",
+  "status": "PASS",
+  "qa": {
+    "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync pytest -o addopts='' -q -p no:cacheprovider artifacts/rp4_closeout_figures_code/test_build.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_figures_code\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync python -B -c \"import json,hashlib;from pathlib import Path;r=Path('.');m=json.loads((r/'artifacts/rp4_closeout_figures/manifest.json').read_text());[(_ for _ in ()).throw(AssertionError(p)) for field in ('artifacts_sha256','code_sha256') for p,h in m[field].items() if hashlib.sha256((r/p).read_bytes()).hexdigest()!=h];print('PASS figures and code digests')\"\nexit $LASTEXITCODE",
+    "chunk_id": "6c749a",
+    "wall_time_seconds": 1.9414861,
+    "exit_code": 0,
+    "original_token_count": 38,
+    "output": ".....................                                                    [100%]\r\n21 passed in 0.96s\r\nAll checks passed!\nPASS figures and code digests\r\n"
+  },
+  "manifest": {
+    "path": "artifacts/rp4_closeout_figures/manifest.json",
+    "sha256": "15bae2d6eeda608cecc6d24cbc34a9c0174eb2ae6a3a319d9e22519930b88c04"
+  },
+  "visual_review": {
+    "pngs": 3,
+    "axes": "Explicit independent panel scales",
+    "adverse_v1": "Preserved without -100 percent truncation",
+    "event_labels": "Temporal context, not causal attribution",
+    "intervals": "Stored difference intervals divided by observed base QLIKE; not bootstrap ratio intervals"
+  },
+  "model_fits": 0,
+  "new_bootstraps": 0,
+  "frozen_figures_modified": 0,
+  "publication": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "rp4-closeout-stage5-runbook-receipt-v1",
+  "status": "PASS_SCOPED_CUSTODY_AND_RETENTION_REVIEW",
+  "source_receipt_sha256": "14562af374c5e294b525d4bef910d76d7098996ad9b089e734b369221daf54eb",
+  "main_review": {
+    "command_context": "Existing Python environment configured; no evaluation producer invoked.",
+    "command": "$ErrorActionPreference='Stop'\nforeach ($mode in @('--verify-public','--verify-licensed')) {\n $verificationText = uv run --offline --frozen --no-sync python -B artifacts/rp4_cleanup_review/inventory_review.py $mode\n if ($LASTEXITCODE -ne 0) { throw \"VERIFICATION_FAILED:$mode\" }\n $verified = $verificationText | ConvertFrom-Json\n $verified | Select-Object status,mode,checked_files,private_hash_checks_skipped,failures,model_fits,inference_runs | ConvertTo-Json -Compress\n}\nuv run --offline --frozen --no-sync python -B -m pytest -q -p no:cacheprovider artifacts/rp4_cleanup_review/test_inventory_review.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+    "result": {
+      "chunk_id": "8b4e01",
+      "wall_time_seconds": 4.027573,
+      "exit_code": 0,
+      "original_token_count": 118,
+      "output": "{\"status\":\"PASS\",\"mode\":\"public_byte_custody\",\"checked_files\":140,\"private_hash_checks_skipped\":52,\"failures\":[],\"model_fits\":0,\"inference_runs\":0}\r\n{\"status\":\"PASS\",\"mode\":\"licensed_byte_custody\",\"checked_files\":192,\"private_hash_checks_skipped\":0,\"failures\":[],\"model_fits\":0,\"inference_runs\":0}\r\n.....                                                                    [100%]\r\nAll checks passed!\n2 files already formatted\nSuccess: no issues found in 2 source files\r\n"
+    }
+  },
+  "final_hash_verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$receipt=Get-Content -Raw artifacts/rp4_cleanup_review/receipt.json | ConvertFrom-Json -AsHashtable\nforeach ($entry in $receipt.artifact_sha256.GetEnumerator()) { $actual=(Get-FileHash -LiteralPath $entry.Key -Algorithm SHA256).Hash.ToLowerInvariant(); if ($actual -ne $entry.Value) { throw \"RUNBOOK_HASH_MISMATCH:$($entry.Key)\" } }\n[pscustomobject]@{Status='PASS';ArtifactHashes=$receipt.artifact_sha256.Count;RunbookSHA256=(Get-FileHash -LiteralPath docs/rp4/RUNBOOK.md -Algorithm SHA256).Hash.ToLowerInvariant();ReceiptSHA256=(Get-FileHash -LiteralPath artifacts/rp4_cleanup_review/receipt.json -Algorithm SHA256).Hash.ToLowerInvariant()} | ConvertTo-Json\nrg -n -C 2 'LASTEXITCODE -ne 2' docs/rp4/RUNBOOK.md\ngit status --short --untracked-files=all -- artifacts/rp4_cleanup_review docs/rp4/RUNBOOK.md docs/rp4/CLEANUP_REVIEW.md",
+    "result": {
+      "chunk_id": "3b13cf",
+      "wall_time_seconds": 0.40618,
+      "exit_code": 0,
+      "original_token_count": 343,
+      "output": "{\r\n  \"Status\": \"PASS\",\r\n  \"ArtifactHashes\": 7,\r\n  \"RunbookSHA256\": \"d030e7301defaedda3f1e723f564460f32ab0b4fa166d7beb4b09be74d09dbbb\",\r\n  \"ReceiptSHA256\": \"14562af374c5e294b525d4bef910d76d7098996ad9b089e734b369221daf54eb\"\r\n}\r\n183-uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.materialize_targets --spec artifacts/rp4_v4_a1/specification.json --spec-sha256 0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04 --producer-sha256 8c6f9acc1dd3d995bea1ca75456c8fda6d4b6da1dc0b734dfbc23917b1265ce6 --output-root $v4Root --workers 4\n184-# Registro histórico: exit 2. No autoriza continuar ante cualquier error nuevo.\n185:if ($LASTEXITCODE -ne 2) { throw 'Estado distinto de la materialización histórica investigada' }\n186-$targetManifest = Join-Path $v4Root 'targets/manifest.json'\n187-if ((Get-FileHash $targetManifest -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'ae4c1e7b104c5f2cee2402ded5d0515e04e5264759bf70f0e1098432806c8316') { throw 'Manifiesto distinto del investigado' }\n?? artifacts/rp4_cleanup_review/.gitignore\n?? artifacts/rp4_cleanup_review/inventory.json\n?? artifacts/rp4_cleanup_review/inventory_review.py\n?? artifacts/rp4_cleanup_review/receipt.json\n?? artifacts/rp4_cleanup_review/test_inventory_review.py\n?? artifacts/rp4_cleanup_review/verification_results.json\n?? docs/rp4/CLEANUP_REVIEW.md\n?? docs/rp4/RUNBOOK.md\n"
+    }
+  },
+  "artifacts_sha256": {
+    "docs/rp4/RUNBOOK.md": "d030e7301defaedda3f1e723f564460f32ab0b4fa166d7beb4b09be74d09dbbb",
+    "docs/rp4/CLEANUP_REVIEW.md": "30d62c7faaef2c03538a0eb40b162c11c7953bbfbe8a282f8387e08fe7fb5a88",
+    "artifacts/rp4_cleanup_review/inventory.json": "16632ca4388e075f17e0a88f8efb7a30fbf207ec06baf7a7c7202551644ff531",
+    "artifacts/rp4_cleanup_review/receipt.json": "14562af374c5e294b525d4bef910d76d7098996ad9b089e734b369221daf54eb"
+  },
+  "scope": {
+    "known_worktrees": 46,
+    "shared_git_directories": 2,
+    "physical_rp4_directories": 8,
+    "confirmed_orphans": 0,
+    "authorized_local_deletions": 0,
+    "files_deleted": 0,
+    "new_model_fits": 0,
+    "new_inference": 0,
+    "new_downloads": 0,
+    "remote_writes": 0
+  },
+  "limitations": [
+    "Reference graph is bounded; zero literal references does not establish safe deletion.",
+    "Cold end-to-end replay was not executed and is NO VERIFICABLE.",
+    "Public hash gate describes the original checkout, not an independently sanitized copy."
+  ]
+}

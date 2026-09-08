@@ -1,0 +1,54 @@
+{
+  "artifacts_sha256": {
+    "private-input/ccdc994fba272306a519": "c01bee110fe1a46d2e67b1261b1c865d3634c5ca8deda8af8ef5b69a70cc50c4",
+    "private-input/663953c8b90ad4b54b93": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693",
+    "private-input/93f314bd77bf55f8feee": "56804f0d6ca1407ab3c2a6085ebe035a973a3695e6197fbe183a488371156dd5"
+  },
+  "commands": [
+    {
+      "command": "private-input/0253b30388cef652b733",
+      "exit_code": 0,
+      "log": "private-input/98470d8abec2b7cc404b",
+      "log_sha256": "bbd9d9b197529506564d1142bde6cb5e339a7eaf40be8c2ce0bd27e944bad745"
+    },
+    {
+      "command": "private-input/75d4906cac5ace28119e",
+      "exit_code": 0,
+      "log": "private-input/a96a06b60a870f598b6e",
+      "log_sha256": "2b365f2ef7672f3671e8efb69b30f2942561948b8426cb011c8b76d85e3f5091"
+    },
+    {
+      "command": "private-input/be3b36f7120e8f24ca1c",
+      "exit_code": 0,
+      "log": "private-input/b362b5f8c9c087a1ff3a",
+      "log_sha256": "d4c8a1b8bab29dbefc8d7308612e0382c66e8f5b91767f1e32cf560deb939e84"
+    },
+    {
+      "command": "private-input/8a50f0c34e74a8e15664",
+      "exit_code": 0,
+      "log": "private-input/8eaf7c8039ff81126f3d",
+      "log_sha256": "5b1bed6ee03c43c69c78683189c909d2ea4dd37cb65793674c9bec3cead06c8a"
+    },
+    {
+      "command": "private-input/a6e720aef59896be08ef",
+      "exit_code": 0,
+      "log": "private-input/a88e25c49794344e6c3a",
+      "log_sha256": "7bf7d0c631a9a1d01e81a6e6a2db9a3c962c360488ba2ddb249633af6a16783b"
+    }
+  ],
+  "evaluation_code_sha256": {
+    "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+    "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+    "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+    "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+  },
+  "execution_failure": null,
+  "exit_code": 0,
+  "release_sha256": "9397453da7673cabff5eabb641ddb73542817755126b4c91dfc1ce444efa83db",
+  "stage": "B2",
+  "status": "COMPLETE",
+  "window": "primary"
+}

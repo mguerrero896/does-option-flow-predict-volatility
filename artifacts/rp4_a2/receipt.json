@@ -1,0 +1,59 @@
+{
+  "stage": "A2",
+  "status": "PASS",
+  "specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "artifacts": [
+    {
+      "path": "artifacts\\rp4_a2\\coverage.csv",
+      "sha256": "9102df2ec39272c42b75924b96e978b3dc68b4f14c5d5402a2f517fc0078fae8"
+    },
+    {
+      "path": "artifacts\\rp4_a2\\INCIDENTS.md",
+      "sha256": "8b1f903f196e6767f1c1b023c9b51fc70fa88bb5c17953d05e44e8e201d8dc7b"
+    },
+    {
+      "path": "artifacts\\rp4_a2\\REPORT.md",
+      "sha256": "74763c8c6ccf683dba5877997c806654e35738baaeff76684d0f0c0e7ac71191"
+    },
+    {
+      "path": "artifacts\\rp4_a2\\summary.json",
+      "sha256": "7afc473247bfa22008c96b1994f30410d300f2ae021d4a990a1da31cc4f80966"
+    },
+    {
+      "path": "artifacts\\rp4_code\\materialize.py",
+      "sha256": "6d9889c6c9191c9f407f422a35e83dd716f074b2b07d2a0bfe979ec999940d8a"
+    },
+    {
+      "path": "artifacts\\rp4_code\\test_materialize.py",
+      "sha256": "d2179f7270941bb8beb10559b975a42a4e89737742e2b18f765cc2386fad5656"
+    }
+  ],
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/materialize.py --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --output-root private-input/66c0e77362caa29dd928 --stage A2_combined_v2 --combine-parts A2_v2_AAPL A2_v2_AMZN A2_v2_META A2_v2_MSFT A2_v2_NVDA A2_v2_TSLA",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_a1/verify_specification.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q -p no:cacheprovider artifacts/rp4_code/test_materialize.py",
+      "exit_code": 0,
+      "passed": 9
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_code/materialize.py artifacts/rp4_code/test_materialize.py",
+      "exit_code": 0
+    }
+  ],
+  "notes": [
+    "Initial worker transport failures preserved in REPORT.md and INCIDENTS.md.",
+    "Private row-level artifacts remain only on D; summary.json pins each component manifest and the combined panel.",
+    "Primary computation may run concurrently with B1 acquisition; no confirmation-period rows enter primary."
+  ],
+  "_public_projection": {
+    "original_sha256": "4c1684ba591af6fd34666e0b88fb84c68cf854b3e2084eaa0f59f849f91c1506",
+    "meaning": "Paths sanitized; hashes and exit codes describe the preserved original execution, not a rerun."
+  }
+}

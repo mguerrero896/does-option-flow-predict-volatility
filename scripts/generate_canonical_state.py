@@ -11,6 +11,7 @@ document claiming to be current cannot silently contradict the repository
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import re
@@ -31,9 +32,7 @@ PHASE8_LAYOUT_RECOVERY = PHASE8_DIR / "layout_recovery_manifest_20260830_v1.json
 PHASE8_RECOVERY = PHASE8_DIR / "execution_recovery_20260830_v1.json"
 PHASE8_RESULT = PHASE8_DIR / "result_20260830_v1.json"
 PHASE8_DISPERSION_AUDIT = PHASE8_DIR / "dispersion_audit_20260831_v11.json"
-PHASE8_REMEDIATION_CONTRACT = (
-    PHASE8_DIR / "materialized_remediation_contract_20260831_v1.json"
-)
+PHASE8_REMEDIATION_CONTRACT = PHASE8_DIR / "materialized_remediation_contract_20260831_v1.json"
 PHASE8_REMEDIATION_WARMUP_AMENDMENT = (
     PHASE8_DIR / "materialized_remediation_contract_amendment_20260831_v1.json"
 )
@@ -42,15 +41,9 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 )
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
-UW_LATENCY_AGGREGATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
-)
-UW_LATENCY_STATE = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
-)
-UW_LATENCY_ANOMALY = (
-    Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
-)
+UW_LATENCY_AGGREGATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
+UW_LATENCY_STATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
+UW_LATENCY_ANOMALY = Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
 PIT_V22_DIR = Path("artifacts") / "target_blind_v22"
 PIT_V22_PREREGISTRATION = PIT_V22_DIR / "next_confirmation_preregistration_v2.json"
 PIT_V22_FREEZE = PIT_V22_DIR / "successor_method_freeze_v1.json"
@@ -130,7 +123,6 @@ AUTHORIZED_SOURCES = (
 )
 
 
-
 def _enforced_coverage_floor() -> int:
     """Read the floor CI actually enforces instead of restating a remembered number.
 
@@ -157,12 +149,10 @@ def _canonical_sha(payload: dict[str, Any], *, omit: str) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def build_state() -> dict[str, Any]:
-    """Assemble the canonical state from the authorized sources only."""
+def build_historical_state() -> dict[str, Any]:
+    """Validate the unchanged pre-RP4 evidence and retain its historical disposition."""
     frozen = json.loads((REPO / "data" / "FROZEN_ARTIFACTS.json").read_text(encoding="utf-8"))
-    frozen_present = sum(
-        1 for entry in frozen["entries"] if (REPO / str(entry["path"])).is_file()
-    )
+    frozen_present = sum(1 for entry in frozen["entries"] if (REPO / str(entry["path"])).is_file())
     frozen_by_path = {str(entry["path"]): entry for entry in frozen["entries"]}
     for relative in (
         PIT_V22_PREREGISTRATION,
@@ -177,9 +167,7 @@ def build_state() -> dict[str, Any]:
         (REPO / PIT_V22_PREREGISTRATION).read_text(encoding="utf-8")
     )
     successor_freeze = json.loads((REPO / PIT_V22_FREEZE).read_text(encoding="utf-8"))
-    successor_authorization = json.loads(
-        (REPO / PIT_V22_AUTHORIZATION).read_text(encoding="utf-8")
-    )
+    successor_authorization = json.loads((REPO / PIT_V22_AUTHORIZATION).read_text(encoding="utf-8"))
     successor_log = json.loads((REPO / PIT_V22_LOG).read_text(encoding="utf-8"))
     successor_events = successor_log.get("events", [])
     successor_event_names = [event.get("event") for event in successor_events]
@@ -216,31 +204,19 @@ def build_state() -> dict[str, Any]:
     ):
         entry = frozen_by_path.get(relative.as_posix())
         if entry is None or entry.get("sha256") != _sha(REPO / relative):
-            raise ValueError(
-                f"PIT_V22_SUCCESSOR_V2_FROZEN_ARTIFACT_DRIFT:{relative.as_posix()}"
-            )
+            raise ValueError(f"PIT_V22_SUCCESSOR_V2_FROZEN_ARTIFACT_DRIFT:{relative.as_posix()}")
     successor_v2_preregistration = json.loads(
         (REPO / PIT_V22_PREREGISTRATION_V2).read_text(encoding="utf-8")
     )
-    successor_v2_freeze = json.loads(
-        (REPO / PIT_V22_FREEZE_V2).read_text(encoding="utf-8")
-    )
+    successor_v2_freeze = json.loads((REPO / PIT_V22_FREEZE_V2).read_text(encoding="utf-8"))
     successor_v2_authorization = json.loads(
         (REPO / PIT_V22_AUTHORIZATION_V2).read_text(encoding="utf-8")
     )
     successor_v2_log = json.loads((REPO / PIT_V22_LOG_V2).read_text(encoding="utf-8"))
-    successor_v2_result = json.loads(
-        (REPO / PIT_V22_RESULT_V2).read_text(encoding="utf-8")
-    )
-    successor_v2_audit = json.loads(
-        (REPO / PIT_V22_CUSTODY_AUDIT_V2).read_text(encoding="utf-8")
-    )
-    successor_v2_claims = json.loads(
-        (REPO / PIT_V22_CLAIM_LEDGER_V2).read_text(encoding="utf-8")
-    )
-    successor_v2_events = [
-        event.get("event") for event in successor_v2_log.get("events", [])
-    ]
+    successor_v2_result = json.loads((REPO / PIT_V22_RESULT_V2).read_text(encoding="utf-8"))
+    successor_v2_audit = json.loads((REPO / PIT_V22_CUSTODY_AUDIT_V2).read_text(encoding="utf-8"))
+    successor_v2_claims = json.loads((REPO / PIT_V22_CLAIM_LEDGER_V2).read_text(encoding="utf-8"))
+    successor_v2_events = [event.get("event") for event in successor_v2_log.get("events", [])]
     expected_v2_events = [
         "ONE_SHOT_CLAIMED",
         "RUNTIME_PREREGISTRATION_FROZEN",
@@ -260,12 +236,10 @@ def build_state() -> dict[str, Any]:
         != _canonical_sha(successor_v2_preregistration, omit="preregistration_sha256")
         or successor_v2_freeze.get("provenance", {}).get("preregistration_sha256")
         != successor_v2_preregistration.get("preregistration_sha256")
-        or successor_v2_authorization.get("contract_sha256")
-        != _sha(REPO / PIT_V22_FREEZE_V2)
+        or successor_v2_authorization.get("contract_sha256") != _sha(REPO / PIT_V22_FREEZE_V2)
         or successor_v2_authorization.get("authorize_read_and_evaluation") is not True
         or successor_v2_authorization.get("sealed_cohorts_read_before") != 0
-        or successor_v2_authorization.get("run_id")
-        != "pit-v22-successor-evaluation-v2-20260902"
+        or successor_v2_authorization.get("run_id") != "pit-v22-successor-evaluation-v2-20260902"
         or successor_v2_log.get("run_id") != successor_v2_authorization.get("run_id")
         or successor_v2_events != expected_v2_events
         or successor_v2_result.get("manifest_sha256")
@@ -274,16 +248,14 @@ def build_state() -> dict[str, Any]:
         != "SCIENTIFIC_EVALUATION_COMPLETE_PENDING_CUSTODY_VALIDATION"
         or successor_v2_result.get("evaluation_attempt_count") != 1
         or successor_v2_result.get("oos_read_count") != 1
-        or successor_v2_result.get("evaluation", {}).get("decision")
-        != "GLOBAL_EDGE_NOT_CONFIRMED"
+        or successor_v2_result.get("evaluation", {}).get("decision") != "GLOBAL_EDGE_NOT_CONFIRMED"
         or successor_v2_result.get("target_linkage_excluded_origins") != 12
         or successor_v2_result.get("linked_common_complete_rows") != 62_254
         or successor_v2_result.get("personal_paths_emitted") is not False
         or successor_v2_result.get("secret_values_emitted") is not False
         or successor_v2_audit.get("audit_sha256")
         != _canonical_sha(successor_v2_audit, omit="audit_sha256")
-        or successor_v2_audit.get("status")
-        != "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT"
+        or successor_v2_audit.get("status") != "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT"
         or successor_v2_audit.get("evaluation_attempt_count") != 1
         or successor_v2_audit.get("oos_read_count") != 1
         or successor_v2_audit.get("result_file_sha256") != _sha(REPO / PIT_V22_RESULT_V2)
@@ -291,16 +263,13 @@ def build_state() -> dict[str, Any]:
         or len(successor_v2_audit.get("verified_content_addressed_payloads", {})) != 10
         or successor_v2_claims.get("ledger_sha256")
         != _canonical_sha(successor_v2_claims, omit="ledger_sha256")
-        or successor_v2_claims.get("status")
-        != "SCIENTIFIC_RESULT_ELIGIBLE_EDGE_NOT_CONFIRMED"
-        or successor_v2_claims.get("custody_audit_sha256")
-        != successor_v2_audit.get("audit_sha256")
+        or successor_v2_claims.get("status") != "SCIENTIFIC_RESULT_ELIGIBLE_EDGE_NOT_CONFIRMED"
+        or successor_v2_claims.get("custody_audit_sha256") != successor_v2_audit.get("audit_sha256")
         or successor_v2_claims.get("result_file_sha256")
         != successor_v2_audit.get("result_file_sha256")
         or successor_v2_claims.get("full_log_file_sha256")
         != successor_v2_audit.get("full_log_file_sha256")
-        or successor_v2_claims.get("eligibility", {}).get("scientific_result_eligible")
-        is not True
+        or successor_v2_claims.get("eligibility", {}).get("scientific_result_eligible") is not True
         or successor_v2_claims.get("eligibility", {}).get("edge_claim_eligible") is not False
         or successor_v2_claims.get("eligibility", {}).get("capital_go") is not False
         or successor_v2_claims.get("historical_bundle_comparison", {}).get(
@@ -313,9 +282,7 @@ def build_state() -> dict[str, Any]:
         (REPO / "data" / "PUBLIC_METADATA_REDACTIONS.json").read_text(encoding="utf-8")
     )
     supabase_state = json.loads(
-        (REPO / "artifacts" / "supabase_schema_audit_20260828.json").read_text(
-            encoding="utf-8"
-        )
+        (REPO / "artifacts" / "supabase_schema_audit_20260828.json").read_text(encoding="utf-8")
     )
     gated = json.loads((REPO / "data" / "GATED_DATA_POINTERS.json").read_text(encoding="utf-8"))
     manifest_path = REPO / CURRENT_RUN / "run_manifest.json"
@@ -349,14 +316,10 @@ def build_state() -> dict[str, Any]:
     decision_numbers = [int(match) for match in re.findall(r"^(\d+)\.\s", decisions_text, re.M)]
     bridge_path = REPO / "artifacts" / "phase8_bridge" / "bridge_contract_v2.json"
     bridge = json.loads(bridge_path.read_text(encoding="utf-8"))
-    bridge_evaluator_path = (
-        REPO / "artifacts" / "phase8_bridge" / "evaluator_freeze_v4.json"
-    )
+    bridge_evaluator_path = REPO / "artifacts" / "phase8_bridge" / "evaluator_freeze_v4.json"
     bridge_evaluator = json.loads(bridge_evaluator_path.read_text(encoding="utf-8"))
     bridge_authorization_path = REPO / PHASE8_AUTHORIZATION
-    bridge_authorization = json.loads(
-        bridge_authorization_path.read_text(encoding="utf-8")
-    )
+    bridge_authorization = json.loads(bridge_authorization_path.read_text(encoding="utf-8"))
     bridge_custody_path = REPO / PHASE8_CUSTODY
     bridge_custody = json.loads(bridge_custody_path.read_text(encoding="utf-8"))
     bridge_layout_path = REPO / PHASE8_LAYOUT_RECOVERY
@@ -368,9 +331,7 @@ def build_state() -> dict[str, Any]:
     bridge_dispersion_path = REPO / PHASE8_DISPERSION_AUDIT
     bridge_dispersion = json.loads(bridge_dispersion_path.read_text(encoding="utf-8"))
     remediation_contract_path = REPO / PHASE8_REMEDIATION_CONTRACT
-    remediation_contract = json.loads(
-        remediation_contract_path.read_text(encoding="utf-8")
-    )
+    remediation_contract = json.loads(remediation_contract_path.read_text(encoding="utf-8"))
     remediation_warmup_path = REPO / PHASE8_REMEDIATION_WARMUP_AMENDMENT
     remediation_warmup = json.loads(remediation_warmup_path.read_text(encoding="utf-8"))
     remediation_grid_path = REPO / PHASE8_REMEDIATION_GRID_AMENDMENT
@@ -408,8 +369,7 @@ def build_state() -> dict[str, Any]:
     if (
         bridge_custody["authorization"]["authorization_id"]
         != bridge_authorization["authorization_id"]
-        or bridge_custody["authorization"]["file_sha256"]
-        != _sha(bridge_authorization_path)
+        or bridge_custody["authorization"]["file_sha256"] != _sha(bridge_authorization_path)
         or bridge_custody["authorization"]["canonical_sha256"]
         != _canonical_sha(bridge_authorization, omit="__never__")
         or bridge_custody["access_ledger"]["read_count"] != 1
@@ -419,14 +379,10 @@ def build_state() -> dict[str, Any]:
         != "POST_READ_RECONCILIATION_NO_SECOND_EXECUTION"
         or bridge_custody["owner_instruction_after_consumption"]["effect"]
         != "RECORDS_OWNER_INTENT_AND_CLASSIFICATION_NO_SECOND_EXECUTION"
-        or bridge_custody["owner_instruction_after_consumption"][
-            "received_after_claim"
-        ]
-        is not True
+        or bridge_custody["owner_instruction_after_consumption"]["received_after_claim"] is not True
         or "statement" in bridge_custody["owner_instruction_after_consumption"]
         or bridge_custody["execution"]["closure_deviation"] is not True
-        or bridge_custody["execution"]["recovery_script_in_frozen_closure"]
-        is not False
+        or bridge_custody["execution"]["recovery_script_in_frozen_closure"] is not False
         or bridge_custody["execution"]["second_execution_permitted"] is not False
     ):
         raise ValueError("PHASE8_BRIDGE_ONE_SHOT_CUSTODY_DRIFT")
@@ -435,12 +391,10 @@ def build_state() -> dict[str, Any]:
         or bridge_layout["session_count"] != 30
         or bridge_layout["sealed_cohorts_read"] != 1
         or bridge_layout["sealed_store_reopened"] is not False
-        or bridge_custody["execution"]["layout_manifest_file_sha256"]
-        != _sha(bridge_layout_path)
+        or bridge_custody["execution"]["layout_manifest_file_sha256"] != _sha(bridge_layout_path)
         or bridge_custody["execution"]["layout_manifest_canonical_sha256"]
         != bridge_layout["manifest_sha256"]
-        or bridge_layout["manifest_sha256"]
-        != _canonical_sha(bridge_layout, omit="manifest_sha256")
+        or bridge_layout["manifest_sha256"] != _canonical_sha(bridge_layout, omit="manifest_sha256")
     ):
         raise ValueError("PHASE8_BRIDGE_LAYOUT_RECOVERY_DRIFT")
     if (
@@ -450,31 +404,25 @@ def build_state() -> dict[str, Any]:
         or bridge_recovery["sealed_store_reopened"] is not False
         or bridge_recovery["recovery_sha256"]
         != _canonical_sha(bridge_recovery, omit="recovery_sha256")
-        or bridge_custody["execution"]["recovery_file_sha256"]
-        != _sha(bridge_recovery_path)
+        or bridge_custody["execution"]["recovery_file_sha256"] != _sha(bridge_recovery_path)
     ):
         raise ValueError("PHASE8_BRIDGE_EXECUTION_RECOVERY_DRIFT")
     if (
         bridge_result["status"] != "EXPLORATORY_BRIDGE_EVALUATION_COMPLETE"
-        or bridge_result["claim_classification"]
-        != "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY"
+        or bridge_result["claim_classification"] != "EXPLORATORY_DESCRIPTIVE_NOT_CONFIRMATORY"
         or bridge_result["contract_sha256"] != bridge["contract_sha256"]
         or bridge_result["sealed_cohorts_read"] != 1
         or bridge_result["confirmatory_promotion_allowed"] is not False
         or bridge_result["personal_paths_emitted"] is not False
         or bridge_result["secret_values_emitted"] is not False
-        or bridge_result["evaluation"]["overall_classification"]
-        != "MIXED_EXPLORATORY"
+        or bridge_result["evaluation"]["overall_classification"] != "MIXED_EXPLORATORY"
         or bridge_result["store_preflight"]
         != {"completed_count": 30, "records": 750, "sealed_cohorts_read": 0, "sessions": 30}
-        or bridge_result["result_sha256"]
-        != _canonical_sha(bridge_result, omit="result_sha256")
+        or bridge_result["result_sha256"] != _canonical_sha(bridge_result, omit="result_sha256")
         or bridge_custody["output"]["result_file_sha256"] != _sha(bridge_result_path)
-        or bridge_custody["output"]["forecast_cube_sha256"]
-        != bridge_result["forecast_cube_sha256"]
+        or bridge_custody["output"]["forecast_cube_sha256"] != bridge_result["forecast_cube_sha256"]
         or bridge_recovery["result_sha256"] != bridge_result["result_sha256"]
-        or bridge_recovery["forecast_cube_sha256"]
-        != bridge_result["forecast_cube_sha256"]
+        or bridge_recovery["forecast_cube_sha256"] != bridge_result["forecast_cube_sha256"]
     ):
         raise ValueError("PHASE8_BRIDGE_RESULT_DRIFT")
     if (
@@ -488,29 +436,21 @@ def build_state() -> dict[str, Any]:
         or bridge_dispersion["checks"]["second_evaluator_execution"] is not False
         or bridge_dispersion["checks"]["published_statistics_replayed_exactly"] is not True
         or bridge_dispersion["conclusion"]["delta_b1_holm_below_0_05_cells"] != 3
-        or bridge_dispersion["conclusion"][
-            "delta_b2_given_b1_holm_below_0_05_cells"
-        ]
-        != 0
-        or bridge_dispersion["conclusion"][
-            "delta_b2_given_b1_intervals_crossing_zero"
-        ]
-        != 4
+        or bridge_dispersion["conclusion"]["delta_b2_given_b1_holm_below_0_05_cells"] != 0
+        or bridge_dispersion["conclusion"]["delta_b2_given_b1_intervals_crossing_zero"] != 4
         or bridge_dispersion["conclusion"]["aggregation_change_supported"] is not False
         or bridge_dispersion["audit_sha256"]
         != _canonical_sha(bridge_dispersion, omit="audit_sha256")
     ):
         raise ValueError("PHASE8_BRIDGE_DISPERSION_AUDIT_DRIFT")
     if (
-        remediation_contract["status"]
-        != "PRECOMMITTED_BEFORE_REMEDIATION_MEASUREMENT"
+        remediation_contract["status"] != "PRECOMMITTED_BEFORE_REMEDIATION_MEASUREMENT"
         or remediation_contract["claim_classification"]
         != "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY"
         or remediation_contract["execution"]["new_sessions_collected"] != 0
         or remediation_contract["execution"]["sealed_cohorts_read"] != 0
         or remediation_contract["execution"]["sealed_store_reopened"] is not False
-        or remediation_contract["decision_rules"]["confirmatory_promotion_allowed"]
-        is not False
+        or remediation_contract["decision_rules"]["confirmatory_promotion_allowed"] is not False
         or remediation_contract["decision_rules"]["historical_one_shot_result_preserved"]
         is not True
         or remediation_contract["contract_sha256"]
@@ -518,26 +458,19 @@ def build_state() -> dict[str, Any]:
     ):
         raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_CONTRACT_DRIFT")
     if (
-        remediation_warmup["status"]
-        != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
-        or remediation_warmup["amends_contract_sha256"]
-        != remediation_contract["contract_sha256"]
+        remediation_warmup["status"] != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
+        or remediation_warmup["amends_contract_sha256"] != remediation_contract["contract_sha256"]
         or remediation_warmup["invariants"]["new_phase8_sessions_collected"] != 0
-        or remediation_warmup["invariants"]["phase8_scoring_started_before_amendment"]
-        is not False
-        or remediation_warmup["invariants"]["target_or_forecast_read_from_warmup"]
-        is not False
+        or remediation_warmup["invariants"]["phase8_scoring_started_before_amendment"] is not False
+        or remediation_warmup["invariants"]["target_or_forecast_read_from_warmup"] is not False
         or remediation_warmup["amendment_sha256"]
         != _canonical_sha(remediation_warmup, omit="amendment_sha256")
     ):
         raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_WARMUP_DRIFT")
     if (
-        remediation_grid["status"]
-        != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
-        or remediation_grid["amends_contract_sha256"]
-        != remediation_contract["contract_sha256"]
-        or remediation_grid["supersedes_amendment_sha256"]
-        != remediation_warmup["amendment_sha256"]
+        remediation_grid["status"] != "PRECOMMITTED_BEFORE_FIRST_REMEDIATION_MODEL_FIT"
+        or remediation_grid["amends_contract_sha256"] != remediation_contract["contract_sha256"]
+        or remediation_grid["supersedes_amendment_sha256"] != remediation_warmup["amendment_sha256"]
         or remediation_grid["comparison_grid"]
         != {
             "historical_only_origins": 175,
@@ -555,8 +488,7 @@ def build_state() -> dict[str, Any]:
     ):
         raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_GRID_DRIFT")
     if (
-        remediation_result["status"]
-        != "POST_HOC_REMEDIATION_SENSITIVITY_COMPLETE"
+        remediation_result["status"] != "POST_HOC_REMEDIATION_SENSITIVITY_COMPLETE"
         or remediation_result["claim_classification"]
         != "POST_HOC_REMEDIATION_SENSITIVITY_NOT_CONFIRMATORY"
         or remediation_result["confirmatory_promotion_allowed"] is not False
@@ -568,14 +500,10 @@ def build_state() -> dict[str, Any]:
         or remediation_result["personal_paths_emitted"] is not False
         or remediation_result["secret_values_emitted"] is not False
         or remediation_result["bridge_contract_sha256"] != bridge["contract_sha256"]
-        or remediation_result["contract_sha256"]
-        != remediation_contract["contract_sha256"]
-        or remediation_result["warmup_amendment_sha256"]
-        != remediation_warmup["amendment_sha256"]
-        or remediation_result["grid_amendment_sha256"]
-        != remediation_grid["amendment_sha256"]
-        or remediation_result["evaluation"]["overall_classification"]
-        != "MIXED_EXPLORATORY"
+        or remediation_result["contract_sha256"] != remediation_contract["contract_sha256"]
+        or remediation_result["warmup_amendment_sha256"] != remediation_warmup["amendment_sha256"]
+        or remediation_result["grid_amendment_sha256"] != remediation_grid["amendment_sha256"]
+        or remediation_result["evaluation"]["overall_classification"] != "MIXED_EXPLORATORY"
         or remediation_result["forecast_comparison"]["global_label"] != "MIXED"
         or remediation_result["forecast_comparison"]["grid"]
         != {
@@ -587,25 +515,19 @@ def build_state() -> dict[str, Any]:
         }
         or remediation_result["forecast_comparison"]["rv30_exactly_equal_on_paired_grid"]
         is not True
-        or remediation_result["b2_panel_negative_control"][
-            "all_features_exact_on_paired_grid"
-        ]
+        or remediation_result["b2_panel_negative_control"]["all_features_exact_on_paired_grid"]
         is not True
         or remediation_result["forecast_comparison"]["primary_b1_inclusive_cells"] != 8
-        or remediation_result["forecast_comparison"][
-            "primary_b1_inclusive_cells_improved"
-        ]
-        != 1
+        or remediation_result["forecast_comparison"]["primary_b1_inclusive_cells_improved"] != 1
         or remediation_result["result_sha256"]
         != _canonical_sha(remediation_result, omit="result_sha256")
     ):
         raise ValueError("PHASE8_MATERIALIZED_REMEDIATION_RESULT_DRIFT")
-    if (
-        phase9_audit["endpoint"]
-        != {"complete_sessions": 60, "scored_sessions": 36, "test_blocks": 3}
-        or phase9_audit["read_gate"]
-        != {"outcome_paths_read": [], "sealed_cohorts_read": 0}
-    ):
+    if phase9_audit["endpoint"] != {
+        "complete_sessions": 60,
+        "scored_sessions": 36,
+        "test_blocks": 3,
+    } or phase9_audit["read_gate"] != {"outcome_paths_read": [], "sealed_cohorts_read": 0}:
         raise ValueError("PHASE9_POWER_DEADLINE_AUDIT_DRIFT")
     if (
         uw_latency_aggregate.get("self_sha256")
@@ -615,21 +537,17 @@ def build_state() -> dict[str, Any]:
         or uw_latency_anomaly.get("self_sha256")
         != _canonical_sha(uw_latency_anomaly, omit="self_sha256")
         or uw_latency_state.get("state") != "RECONCILED_PARTIAL"
-        or uw_latency_state.get("counts")
-        != {"collected": 12, "reconciled": 7, "unreconciled": 5}
+        or uw_latency_state.get("counts") != {"collected": 12, "reconciled": 7, "unreconciled": 5}
         or uw_latency_state.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
         or uw_latency_state.get("artifact_lifecycle", {}).get("policy")
         != "IMMUTABLE_DATED_SNAPSHOT"
         or uw_latency_state.get("safe_to_reconcile_existing_results") != "NO"
         or uw_latency_state.get("safe_to_open_or_evaluate_oos") != "NO"
-        or uw_latency_state.get("aggregate", {}).get("path")
-        != UW_LATENCY_AGGREGATE.as_posix()
+        or uw_latency_state.get("aggregate", {}).get("path") != UW_LATENCY_AGGREGATE.as_posix()
         or uw_latency_state.get("aggregate", {}).get("self_sha256")
         != uw_latency_aggregate.get("self_sha256")
-        or uw_latency_anomaly.get("classification")
-        != "COLLECTOR_RESTART_REPLAY_DUPLICATION"
-        or uw_latency_anomaly.get("campaign_disposition")
-        != "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT"
+        or uw_latency_anomaly.get("classification") != "COLLECTOR_RESTART_REPLAY_DUPLICATION"
+        or uw_latency_anomaly.get("campaign_disposition") != "EXCLUDE_LATENCY_KEEP_CONTRACT_SUPPORT"
         or uw_latency_aggregate.get("operational_latency", {})
         .get("by_ny_hour", {})
         .get("values", {})
@@ -680,9 +598,9 @@ def build_state() -> dict[str, Any]:
             "state_self_sha256": uw_latency_state["self_sha256"],
             "aggregate_artifact": UW_LATENCY_AGGREGATE.as_posix(),
             "aggregate_self_sha256": uw_latency_aggregate["self_sha256"],
-            "opening_receipt_hour": uw_latency_aggregate["operational_latency"][
-                "by_ny_hour"
-            ]["values"]["9"],
+            "opening_receipt_hour": uw_latency_aggregate["operational_latency"]["by_ny_hour"][
+                "values"
+            ]["9"],
             "artifact_lifecycle": uw_latency_state["artifact_lifecycle"],
             "anomaly_artifact": UW_LATENCY_ANOMALY.as_posix(),
             "anomaly_classification": uw_latency_anomaly["classification"],
@@ -691,9 +609,7 @@ def build_state() -> dict[str, Any]:
             "safe_to_reconcile_existing_results": uw_latency_state[
                 "safe_to_reconcile_existing_results"
             ],
-            "safe_to_open_or_evaluate_oos": uw_latency_state[
-                "safe_to_open_or_evaluate_oos"
-            ],
+            "safe_to_open_or_evaluate_oos": uw_latency_state["safe_to_open_or_evaluate_oos"],
         },
         "active_protocols": [
             {
@@ -725,9 +641,7 @@ def build_state() -> dict[str, Any]:
                     "confirmatory_promotion_allowed": bridge_result[
                         "confirmatory_promotion_allowed"
                     ],
-                    "overall_classification": bridge_result["evaluation"][
-                        "overall_classification"
-                    ],
+                    "overall_classification": bridge_result["evaluation"]["overall_classification"],
                     "result_sha256": bridge_result["result_sha256"],
                     "sha256": _sha(bridge_result_path),
                 },
@@ -739,9 +653,9 @@ def build_state() -> dict[str, Any]:
                     "delta_b1_holm_below_0_05_cells": bridge_dispersion["conclusion"][
                         "delta_b1_holm_below_0_05_cells"
                     ],
-                    "delta_b2_given_b1_holm_below_0_05_cells": bridge_dispersion[
-                        "conclusion"
-                    ]["delta_b2_given_b1_holm_below_0_05_cells"],
+                    "delta_b2_given_b1_holm_below_0_05_cells": bridge_dispersion["conclusion"][
+                        "delta_b2_given_b1_holm_below_0_05_cells"
+                    ],
                     "sha256": _sha(bridge_dispersion_path),
                     "audit_sha256": bridge_dispersion["audit_sha256"],
                 },
@@ -765,15 +679,13 @@ def build_state() -> dict[str, Any]:
                     ],
                     "result": {
                         "artifact": PHASE8_REMEDIATION_RESULT.as_posix(),
-                        "claim_classification": remediation_result[
-                            "claim_classification"
-                        ],
+                        "claim_classification": remediation_result["claim_classification"],
                         "overall_classification": remediation_result["evaluation"][
                             "overall_classification"
                         ],
-                        "primary_b1_inclusive_cells": remediation_result[
-                            "forecast_comparison"
-                        ]["primary_b1_inclusive_cells"],
+                        "primary_b1_inclusive_cells": remediation_result["forecast_comparison"][
+                            "primary_b1_inclusive_cells"
+                        ],
                         "primary_b1_inclusive_cells_improved": remediation_result[
                             "forecast_comparison"
                         ]["primary_b1_inclusive_cells_improved"],
@@ -840,17 +752,13 @@ def build_state() -> dict[str, Any]:
             "bound_target_free_panel": {
                 "sha256": successor_v2_freeze["bound_panel_sha256"],
                 "rows": successor_v2_freeze["bound_panel_rows"],
-                "predictor_common_rows": successor_v2_freeze[
-                    "bound_panel_common_complete_rows"
-                ],
+                "predictor_common_rows": successor_v2_freeze["bound_panel_common_complete_rows"],
             },
             "signed_inputs": {
                 "preregistration": {
                     "path": PIT_V22_PREREGISTRATION_V2.as_posix(),
                     "file_sha256": _sha(REPO / PIT_V22_PREREGISTRATION_V2),
-                    "semantic_sha256": successor_v2_preregistration[
-                        "preregistration_sha256"
-                    ],
+                    "semantic_sha256": successor_v2_preregistration["preregistration_sha256"],
                 },
                 "method_freeze": {
                     "path": PIT_V22_FREEZE_V2.as_posix(),
@@ -889,9 +797,7 @@ def build_state() -> dict[str, Any]:
             },
             "target_linkage": successor_v2_audit["target_linkage"],
             "registered_contrasts": successor_v2_claims["contrasts"],
-            "historical_bundle_comparison": successor_v2_claims[
-                "historical_bundle_comparison"
-            ],
+            "historical_bundle_comparison": successor_v2_claims["historical_bundle_comparison"],
             "edge_claim_eligible": False,
             "capital_eligible": False,
             "capital_go": False,
@@ -935,12 +841,8 @@ def build_state() -> dict[str, Any]:
             "edge_claim_eligible": False,
             "capital_go": False,
             "headline_claims": [],
-            "confirmatory_contrasts": successor_v2_claims["contrasts"][
-                "gamma_glm_confirmatory"
-            ],
-            "robustness_contrasts": successor_v2_claims["contrasts"][
-                "lightgbm_robustness"
-            ],
+            "confirmatory_contrasts": successor_v2_claims["contrasts"]["gamma_glm_confirmatory"],
+            "robustness_contrasts": successor_v2_claims["contrasts"]["lightgbm_robustness"],
         },
         "current_report": {
             "source": {
@@ -974,141 +876,144 @@ def build_state() -> dict[str, Any]:
     }
 
 
+def build_state() -> dict[str, Any]:
+    """Add the closed RP4 result without rewriting historical scientific records."""
+    state = build_historical_state()
+    names = ("canonical_results", "current_report", "active_protocols", "future_campaigns")
+    state["history"] = {name: state[name] for name in names}
+    comparison = "artifacts/rp4_closeout_figures/comparison_v1_v4.csv"
+    expected = "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba"
+    if hashlib.sha256((REPO / comparison).read_bytes()).hexdigest() != expected:
+        raise ValueError("RP4_CLOSED_COMPARISON_DRIFT")
+    with (REPO / comparison).open(encoding="utf-8", newline="") as stream:
+        table = list(csv.DictReader(stream))
+    if len(table) != 40:
+        raise ValueError("RP4_CLOSED_COMPARISON_CARDINALITY")
+    final = "docs/rp4/RESULTADO_FINAL.md"
+    report = (REPO / final).read_text(encoding="utf-8")
+    label = "fuera de muestra walk-forward, partición fijada 2026-09-07."
+    if report.splitlines()[0] != label:
+        raise ValueError("RP4_FINAL_LABEL_DRIFT")
+    state["schema_version"] = "canonical-state-v2.0-rp4-closeout"
+    state["canonical_results"] = {
+        "status": "RP4_V4_SCIENTIFIC_PROGRAM_CLOSED",
+        "run_id": "rp4-v1-v4-walkforward-20260907",
+        "label": label,
+        "calendar_partition": "2026-08-01",
+        "specification_fixed_on": "2026-09-07",
+        "primary_window": ["2024-10-28", "2026-07-31"],
+        "confirmation_window": ["2026-08-03", "2026-09-04"],
+        "decision": "RV15_LINEAR_FIXED_SEQUENCE_REJECTED_BOTH",
+        "scientific_result_eligible": True,
+        "independent_global_confirmation": False,
+        "edge_claim_eligible": False,
+        "capital_go": False,
+        "research_only": True,
+        "v5_authorized": False,
+        "headline_claims": [
+            "Option state improves mean RV30/RV15 in both families in registered v3/v4 tests.",
+            "Linear flow increment: RV15 +0.623%; RV5 secondary +0.256%.",
+            "RV15 flow is positive in six assets; RV5 in three, not all six.",
+            "Tree flow does not pass the primary mean test; medians are secondary.",
+        ],
+        "table": table,
+        "table_source": {"path": comparison, "sha256": expected},
+        "limitations": [
+            "Fourth evaluation of reused windows; cross-version search not adjusted.",
+            "Phase 8 previously read July 20 to August 28 with another specification.",
+            "Source-time proxy at 120 seconds is not demonstrated client availability.",
+            "UW gap January 25 to February 24, 2025 is accepted without filling.",
+            "Confirmation has 25 sessions and does not reject the full hierarchy.",
+        ],
+    }
+    state["current_report"] = {
+        "source": {"path": final, "sha256": _sha(REPO / final)},
+        "full_result": "docs/rp4/results_v4.md",
+        "secondary_correction": "docs/rp4/results_v3_revision2.md",
+        "evidence_cutoff": "2026-09-04",
+    }
+    state["active_protocols"] = [
+        {
+            "id": "rp4-closed-v1-v4",
+            "document": "docs/rp4/specification_v4.md",
+            "state": "SCIENTIFIC_PROGRAM_CLOSED_NO_V5_NO_NEW_EVALUATION",
+            "phase9_for_rp4": "RETIRED_AS_SEALED_COHORT_DECISION_128",
+            "c10": "INACTIVE_DECISION_128",
+        }
+    ]
+    state["future_campaigns"] = []
+    state["publication_closeout"] = {
+        "status": "LOCAL_PREPARATION_NOT_PUBLISHED",
+        "contract": "NEW_MATERIAL_ONLY_EXISTING_HISTORY_PRESERVED",
+        "contract_source": "docs/rp4/publication_contract_v2.md",
+        "publication_branch": "rp4/walkforward-v1-v4",
+        "publication_base": "origin/main",
+        "technical_package_identifier_allowed": True,
+        "remote_history_migration_authorized": False,
+        "remote_commands_executor": "Miguel",
+        "remote_writes_executed": False,
+        "cleanup_deletions_authorized": False,
+    }
+    for name in (
+        final,
+        comparison,
+        "docs/rp4/results_v4.md",
+        "docs/rp4/publication_contract_v2.md",
+    ):
+        state["authorized_sources"][name] = _sha(REPO / name)
+    return state
+
+
 def render_status(state: dict[str, Any]) -> str:
-    """Human-readable rendering of the same state."""
+    """Render the same final table and keep old dispositions explicitly historical."""
+    result = state["canonical_results"]
+    final = (REPO / state["current_report"]["source"]["path"]).read_text(encoding="utf-8")
+    table = [line for line in final.splitlines() if line.startswith("|")]
     lines = [
-        "# STATUS — canonical project state",
+        result["label"],
         "",
-        "> AUTO-GENERATED from `data/CANONICAL_STATE.json` by",
-        "> `scripts/generate_canonical_state.py`. Never edit by hand; CI fails on drift.",
-        "> This file supersedes any narrative document that disagrees with it.",
+        "# STATUS — cierre RP4 v1–v4",
         "",
-        f"- Governance: decision {state['governance']['latest_decision']} is the latest "
-        f"({state['governance']['decision_count']} recorded).",
-        f"- Frozen evidence: {state['frozen_evidence']['artifact_count']} artifacts registered; "
-        f"{state['frozen_evidence']['physical_artifact_count']} are present in this release and "
-        f"{state['frozen_evidence']['external_custody_artifact_count']} remain gated or withdrawn "
-        "with their digests preserved in `data/FROZEN_ARTIFACTS.json`.",
-        f"- Public metadata redactions: "
-        f"{state['frozen_evidence']['public_metadata_redactions']['artifact_count']} frozen "
-        "artifacts retain original and redacted SHA-256 custody in "
-        "`data/PUBLIC_METADATA_REDACTIONS.json`.",
-        f"- Gated data: {state['gated_data']['file_count']} files in private storage "
-        "(`data/GATED_DATA_POINTERS.json`).",
-        f"- Supabase publication: **{state['external_publication']['supabase']['status']}** "
-        f"({state['external_publication']['supabase']['writes']['schema_migrations_committed']} "
-        "schema migrations, "
-        f"{state['external_publication']['supabase']['writes']['catalog_syncs_committed']} "
-        "catalog reconciliation, and "
-        f"{state['external_publication']['supabase']['writes']['dataset_loads_committed']} "
-        "dataset manifests committed; sealed reads: Phase 8 = 1, Phase 9 = 0).",
+        "> AUTO-GENERATED by `scripts/generate_canonical_state.py`; never edit by hand.",
         "",
-        "## Active protocols",
+        "## Resultado vigente",
+        "",
+        "Superficie: mejora media en RV30/RV15, ambas familias. Flujo: incremento pequeño",
+        "en la familia lineal a 15 minutos y a 5 minutos como secundario. Árboles no",
+        "superan la prueba primaria de flujo. No hay confirmación independiente global.",
+        "",
+        *table,
+        "",
+        "p: Holm bilateral en v1/v2; secuencia unilateral H1→H2 en v3/v4.",
+        "RV5 es secundario. Cuarta evaluación de ventanas reutilizadas, sin corrección",
+        "entre versiones; cuatro divulgaciones y limitaciones en el informe final.",
+        "",
+        "[Resultado final](docs/rp4/RESULTADO_FINAL.md) · "
+        "[Informe completo](docs/rp4/results_v4.md) · [Reproducción](docs/rp4/OPERATING_GUIDE.md)",
+        "",
+        "## Historial conservado",
+        "",
+        "RP2 y el sucesor PIT permanecen como resultados históricos, no réplicas de RP4.",
+        "El puente Fase 8 tiene una lectura registrada el 2026-08-30. RP3 conserva",
+        "su lectura prevista para 2029-01-30 y contador cero; no se ha ejecutado aquí.",
+        "Fase 9 dejó de ser cohorte sellada para RP4 por decisión 128; sus originales",
+        "no se alteran. C10 permanece inactivo: no se presenta una fecha de lectura inexistente.",
+        "Las decisiones y cifras previas están completas en `history` del JSON.",
+        f"Frozen evidence: {state['frozen_evidence']['artifact_count']} artifacts registered.",
+        "",
+        "## Operación",
+        "",
+        "Programa científico cerrado en v4; ninguna v5 ni nueva evaluación autorizada.",
+        "Preparación local de publicación; no se ha hecho push ni abierto PR.",
+        "Contrato reducido al material nuevo; historia pública anterior preservada.",
+        "Rama `rp4/walkforward-v1-v4` desde `origin/main`; operaciones remotas sólo por Miguel.",
+        "Ningún borrado de limpieza ejecutado. La colección futura no altera estas tablas.",
+        f"Contrato de CI: coverage >= {state['ci']['coverage_min_percent']}%; "
+        "este cierre no declara una ejecución nueva de toda la CI ni cobertura total medida.",
+        "",
+        "RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.",
         "",
     ]
-    for protocol in state["active_protocols"]:
-        document = f" — `{protocol['document']}`" if protocol.get("document") else ""
-        lines.append(f"- **{protocol['id']}**{document}: {protocol['state']}")
-    uw_latency = state["uw_latency_campaign"]
-    lines += [
-        "",
-        "## UW latency campaign",
-        "",
-        f"- Lifecycle: **{uw_latency['state']}** "
-        f"({uw_latency['counts']['reconciled']}/{uw_latency['counts']['collected']} "
-        "sessions reconciled).",
-        f"- Claim boundary: **{uw_latency['claim_classification']}**; backfill and "
-        "revision remain non-identifiable under the cross-channel design.",
-        f"- State authority: `{uw_latency['state_artifact']}`.",
-    ]
-    successor = state["pit_v22_successor_evaluation"]
-    gamma = successor["registered_contrasts"]["gamma_glm_confirmatory"]
-    lightgbm = successor["registered_contrasts"]["lightgbm_robustness"]
-    lines += [
-        "",
-        "## PIT v2.2 successor evaluation",
-        "",
-        f"- Status: **{successor['status']}**; decision: **{successor['decision']}**.",
-        f"- One-shot custody: {successor['evaluation_attempt_count']} attempt, "
-        f"{successor['oos_read_count']} OOS read, rerun allowed = "
-        f"{str(successor['rerun_allowed']).lower()}.",
-        "- Target linkage: development "
-        f"{successor['target_linkage']['development_predictor_complete_origins']:,} -> "
-        f"{successor['target_linkage']['development_eligible_origins']:,} "
-        f"({successor['target_linkage']['development_excluded_origins']} excluded); all "
-        f"{successor['target_linkage']['all_predictor_complete_origins']:,} -> "
-        f"{successor['target_linkage']['all_eligible_origins']:,} "
-        f"({successor['target_linkage']['all_excluded_origins']} excluded).",
-        "- Gamma confirmatory `delta_b1v2`: "
-        f"{gamma['delta_b1v2']['estimate']:.12g} "
-        f"[{gamma['delta_b1v2']['ci_low']:.12g}, {gamma['delta_b1v2']['ci_high']:.12g}], "
-        f"Holm p={gamma['delta_b1v2']['p_value_holm']:.12g}, "
-        f"MDE={gamma['delta_b1v2']['training_mde']:.12g}, >=MDE=false.",
-        "- Gamma confirmatory `delta_b2v2`: "
-        f"{gamma['delta_b2v2']['estimate']:.12g} "
-        f"[{gamma['delta_b2v2']['ci_low']:.12g}, {gamma['delta_b2v2']['ci_high']:.12g}], "
-        f"Holm p={gamma['delta_b2v2']['p_value_holm']:.12g}, "
-        f"MDE={gamma['delta_b2v2']['training_mde']:.12g}, >=MDE=false.",
-        "- LightGBM robustness `delta_b1v2` / `delta_b2v2`: "
-        f"{lightgbm['delta_b1v2']['estimate']:.12g} / "
-        f"{lightgbm['delta_b2v2']['estimate']:.12g}; both are descriptive MDE references, "
-        "not confirmatory promotion tests.",
-        f"- Frozen result: `{successor['scientific_result']['path']}` "
-        f"(SHA-256 `{successor['scientific_result']['sha256']}`).",
-        f"- Frozen public log: `{successor['full_log']['path']}` "
-        f"(SHA-256 `{successor['full_log']['sha256']}`).",
-        "- Eligibility: scientific result = true after independent custody validation; "
-        "edge claim = false, capital = false; "
-        "`capital_go=false`, `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`.",
-    ]
-    bundle = state["scientific_bundle"]
-    eligibility = bundle["eligibility"]
-    provenance = bundle["historical_code_provenance"]
-    if provenance["status"] == "RECORDED_COMMIT_REACHABLE_FROM_ROOT_RELEASE":
-        provenance_line = (
-            "- Code provenance: recorded run commit "
-            f"`{provenance['recorded_code_commit'][:12]}` is reachable from this root "
-            "release."
-        )
-    else:
-        provenance_line = (
-            "- Historical code provenance: recorded run commit "
-            f"`{provenance['recorded_code_commit'][:12]}` and the pre-root sanitization "
-            "audit are external references; neither is claimed reachable from this "
-            "root-only public release."
-        )
-    lines += [
-        "",
-        "## Current scientific bundle",
-        "",
-        f"- Run: `{bundle['run_id']}`.",
-        f"- Scientific hash: `{bundle['manifest']['scientific_sha256']}`.",
-        provenance_line,
-        f"- Eligibility: **{eligibility['status']}**.",
-        f"- Disposition: {', '.join(eligibility['reasons'])}.",
-        "- Current canonical scientific result: the PIT v2.2 successor-v2 result above; "
-        "no edge headline is eligible because no registered estimate met its frozen MDE "
-        "and the signed contract contained no binary edge-promotion rule.",
-        "- Historical measurements remain traceable in "
-        "`docs/rp2_v3/SUPERSEDED_RESULTS.md`; they are not current claims.",
-        "- Current academic report: `reports/final_report_draft_v2.md` with the Word "
-        "submission rendering pinned under `current_report` in the machine state.",
-        "- Post-cutoff Phase 8A result: "
-        f"`{PHASE8_ADDENDUM.as_posix()}`.",
-    ]
-    lines += ["", "## Future campaigns", ""]
-    for campaign in state["future_campaigns"]:
-        lines.append(f"- {campaign}")
-    lines += [
-        "",
-        "## CI",
-        "",
-        f"- Required checks: {', '.join(state['ci']['required_checks'])} "
-        f"(coverage >= {state['ci']['coverage_min_percent']}%).",
-        f"- Tier 2 (licensed evidence): `{state['ci']['tier2_runner']}`; "
-        f"{state['ci']['publish_gate']}.",
-    ]
-    lines.append("")
     return "\n".join(lines)
 
 

@@ -1,0 +1,57 @@
+{
+  "stage": "A2",
+  "status": "COMPLETE_WITH_PRESERVED_EXIT2_AND_PINNED_RESOLUTION",
+  "model_fits": 0,
+  "original_target_stage_receipt": {
+    "path": "private-input/736ad0a950ac226f3c3e",
+    "sha256": "055d9b432a1765acf22ca78a5dc3ad476fd9118c6afb98c07cdf09edb5ade4b2"
+  },
+  "target_panel_sha256": "b2357a10a8a4955499e94b576b7853129e957ad70702da09bebbc9b6befd35db",
+  "resolution_sha256": "05ff5f4b8127238dc9fb8371e530c12a1d2bbf23c30ef1363edf0f829b87722f",
+  "verification": [
+    {
+      "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\nuv run --offline --frozen --no-sync pytest -o addopts='' -q artifacts/rp4_v4_code/test_targets.py artifacts/rp4_v4_a2/test_resolve_target_mask.py artifacts/rp4_v4_code/test_evaluate_v4.py artifacts/rp4_v4_code/test_aggregate.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v3_code/test_models.py artifacts/rp4_v3_code/test_inference.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v4_code artifacts/rp4_v4_a2/resolve_target_mask.py artifacts/rp4_v4_a2/test_resolve_target_mask.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v4_code artifacts/rp4_v4_a2/resolve_target_mask.py artifacts/rp4_v4_a2/test_resolve_target_mask.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v4_code/materialize_targets.py artifacts/rp4_v4_code/evaluate_v4.py artifacts/rp4_v4_code/execute.py artifacts/rp4_v4_code/aggregate_v4.py artifacts/rp4_v4_code/report_v4.py artifacts/rp4_v4_a2/resolve_target_mask.py\nexit $LASTEXITCODE",
+      "chunk_id": "95756e",
+      "wall_time_seconds": 2.6050704,
+      "exit_code": 2,
+      "original_token_count": 332,
+      "output": "\r\n=================================== ERRORS ====================================\r\n______ ERROR collecting artifacts/rp4_v4_a2/test_resolve_target_mask.py _______\r\nImportError while importing test module 'private-input/f6ae98246472d8663bfa'.\r\nHint: make sure your test modules/packages have valid Python names.\r\nTraceback:\r\nprivate-input/d2617a689980a8bd8c85:90: in import_module\r\n    return _bootstrap._gcd_import(name[level:], package, level)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nartifacts\\rp4_v4_a2\\test_resolve_target_mask.py:11: in <module>\r\n    from artifacts.rp4_v4_a2.resolve_target_mask import audit_pair\r\nartifacts\\rp4_v4_a2\\resolve_target_mask.py:20: in <module>\r\n    from artifacts.rp4_v3_code.materialize_gamma import paired_price_grids\r\nartifacts\\rp4_v3_code\\materialize_gamma.py:37: in <module>\r\n    import materialize_iv as rp4_v2\r\nE   ModuleNotFoundError: No module named 'materialize_iv'\r\n=========================== short test summary info ===========================\r\nERROR artifacts/rp4_v4_a2/test_resolve_target_mask.py\r\n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\r\n1 error in 1.63s\r\n"
+    },
+    {
+      "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync pytest -o addopts='' -q artifacts/rp4_v4_code/test_targets.py artifacts/rp4_v4_a2/test_resolve_target_mask.py artifacts/rp4_v4_code/test_evaluate_v4.py artifacts/rp4_v4_code/test_aggregate.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v3_code/test_models.py artifacts/rp4_v3_code/test_inference.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v4_code artifacts/rp4_v4_a2/resolve_target_mask.py artifacts/rp4_v4_a2/test_resolve_target_mask.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v4_code artifacts/rp4_v4_a2/resolve_target_mask.py artifacts/rp4_v4_a2/test_resolve_target_mask.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v4_code/materialize_targets.py artifacts/rp4_v4_code/evaluate_v4.py artifacts/rp4_v4_code/execute.py artifacts/rp4_v4_code/aggregate_v4.py artifacts/rp4_v4_code/report_v4.py artifacts/rp4_v4_a2/resolve_target_mask.py\nexit $LASTEXITCODE",
+      "chunk_id": "fe783c",
+      "wall_time_seconds": 8.947899,
+      "exit_code": 0,
+      "original_token_count": 89,
+      "output": "........................................................................ [ 48%]\r\n........................................................................ [ 96%]\r\n......                                                                   [100%]\r\n150 passed in 6.65s\r\nAll checks passed!\n12 files already formatted\nSuccess: no issues found in 6 source files\r\n"
+    },
+    {
+      "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.execute --spec-sha256 0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04 --horizon 15 --prepare-only\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.execute --spec-sha256 0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04 --horizon 5 --prepare-only\nexit $LASTEXITCODE",
+      "chunk_id": "bce8ff",
+      "wall_time_seconds": 4.9090782,
+      "exit_code": 0,
+      "original_token_count": 44,
+      "output": "RP4_V4_RELEASE_PINNED:7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a\r\nRP4_V4_RELEASE_PINNED:efeb22b33d992d453a4d766c93b5434e4f3f73271f350b50268a8289c365b08d\r\n"
+    }
+  ],
+  "verification_note": "Initial combined collection lacked inherited materialize_iv module search path; added existing v2/v3 directories to PYTHONPATH, no frozen source change. Final: 150 tests, Ruff check/format, mypy six production modules exit zero. No evaluation fits.",
+  "artifact_sha256": {
+    "private-input/c0513b3da6f2ad794120": "53ced372a3e12b7dc3525130b118d62ff045b60853f9cfad86f7dfd8f7f811f0",
+    "private-input/8d96e3a8c7a8cc323778": "42bab85ef140dc85357d1672838261475c84af797e582782a0c552625e987450",
+    "private-input/429800035aba7571c0a8": "222ba0f4c28aafe96e42986b3e6e4424128b4488fda616a1e624337422034093",
+    "private-input/fceb0ce2ab1ab57d934f": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+    "private-input/d2581fc7af6501e1c5ed": "8c6f9acc1dd3d995bea1ca75456c8fda6d4b6da1dc0b734dfbc23917b1265ce6",
+    "private-input/1379137c4c39502890ac": "accf65711f7d09e0851df25501c40e30166a9f25d92a85d0a95773bc7080969b",
+    "private-input/e45b21153098be928818": "67c484e2642643f2bce798aaa949a7936965e99f9dae3df91add6ee1748b9ebd",
+    "private-input/73f458f34c9f5f628b68": "c4c7d9cc1d09edceb0f5e1eea770ba0a9398b1ce6f399de26c2179a48c9fd43f",
+    "private-input/bc998fd3f05c3b4cb765": "8e531a7a96b7e941c7b67810abcdd6fd68af5a4a9772b3b5a54a1e0a5bf3a2bc",
+    "private-input/6b1378cdf229bb4fc84b": "79fa4f7d7f9df3b2306ed8018bcddd6529da0d8cb2099bdd807f7feadbeea999",
+    "private-input/35c5a117bd52c657dfbe": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+    "private-input/d24482a6b05bd8e854d5": "efeb22b33d992d453a4d766c93b5434e4f3f73271f350b50268a8289c365b08d",
+    "private-input/52861c88fecd85008a6c": "0fb6acfc3f16dff2ae73fe39a868726bfbf6065eac2def9051673db91b17709d",
+    "private-input/95af02ff5ec71278559d": "093e1906df0b3e098c3c6981c7762b39b7b84e03d916e108cd11e23ded1c898f",
+    "private-input/f6ae98246472d8663bfa": "70cd10c3a7354e619eba8919045230d1f83a30da510e4511f5ba960eeb87452a"
+  },
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

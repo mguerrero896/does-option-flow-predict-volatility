@@ -1,0 +1,39 @@
+{
+  "stage": "B3",
+  "execution_status": "COMPLETE",
+  "scientific_outcome": "Positive log-OLS averages; no Holm-significant full hierarchy; LightGBM B2 increment negative",
+  "specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "evaluator_sha256": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+  "panel_sha256": "ecb1c6cce76cb6464d3cdf3d4ef409c60e204adf2df22fba6851e32199819d93",
+  "artifacts": [
+    {
+      "path": "artifacts/rp4_b3/.gitattributes",
+      "sha256": "ec9221932cac3ba3fa109e8b3c444d8e982e06b8bdbe6f643556f13dc2a7ef76"
+    },
+    {
+      "path": "artifacts/rp4_b3/REPORT.md",
+      "sha256": "381a5f3784f5478deb20e012a6ec677dd900eae555c50fdb618adc95bbcb0b21"
+    },
+    {
+      "path": "artifacts/rp4_b3/session_losses.csv",
+      "sha256": "468a00fdaa6666b4cb5b2585bae8b7601a9326e8b4d95cd176febd58cf698ae2"
+    },
+    {
+      "path": "artifacts/rp4_b3/summary.json",
+      "sha256": "76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7"
+    }
+  ],
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/evaluate.py --panel private-input/16baf18760d99542f617 --spec artifacts/rp4_a1/specification.json --spec-sha256 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --window confirmation --output private-input/af79705b17c26b893225 --public-output artifacts/rp4_b3 --threads 4",
+      "exit_code": 0,
+      "completed_sessions": 25,
+      "origin_forecasts": 5360
+    }
+  ],
+  "notes": [
+    "Same specification, evaluator and imported computational source hashes as primary.",
+    "No session omitted or adverse observation removed. Percentile CI and centered bilateral bootstrap p are not test inversions.",
+    "Session checkpoints are immutable private outputs; only public aggregates committed."
+  ]
+}

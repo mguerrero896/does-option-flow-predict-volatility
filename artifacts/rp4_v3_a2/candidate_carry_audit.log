@@ -1,0 +1,45 @@
+**********************
+PowerShell transcript start
+Start time: 20260907202210
+Configuration Name: 
+$ErrorActionPreference='Stop'
+$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'
+$env:PYTHONPATH="$($PWD.Path)/src;$($PWD.Path)/scripts;$($PWD.Path)/artifacts/rp4_code;$($PWD.Path)/artifacts/rp4_v2_code;$($PWD.Path)/artifacts/rp4_v3_code"
+$env:OMP_NUM_THREADS='1'
+$env:OPENBLAS_NUM_THREADS='1'
+$env:POLARS_MAX_THREADS='4'
+$env:PYTHONIOENCODING='utf-8'
+Start-Transcript -LiteralPath private-input/0b0553bd15ae0106a739 -NoClobber
+Get-Date -Format o
+Write-Output 'COMMAND: uv run --offline --frozen --no-sync python -B private-input/ed37db58efee0861709b'
+Get-FileHash -Algorithm SHA256 private-input/ed37db58efee0861709b | Select-Object Path, Hash | Format-List
+uv run --offline --frozen --no-sync python -B private-input/ed37db58efee0861709b
+$gammaCarryAuditExit=$LASTEXITCODE
+Write-Output "CARRY_AUDIT_EXIT_CODE=$gammaCarryAuditExit"
+Get-Date -Format o
+Stop-Transcript
+exit $gammaCarryAuditExit
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is private-input/0b0553bd15ae0106a739
+2026-09-07T20:22:10.9277739+10:00
+COMMAND: uv run --offline --frozen --no-sync python -B private-input/ed37db58efee0861709b
+
+Path : private-input/4821f38de0e32be7c50e
+Hash : DCCF6D542EF261E982124F22223148D4A8975899927F35C9E95BF5DB2B399ACE
+
+
+CARRY_AUDIT_EXIT_CODE=0
+2026-09-07T20:22:31.5715662+10:00
+**********************
+PowerShell transcript end
+End time: 20260907202231
+**********************

@@ -1,0 +1,27 @@
+{
+  "stage": "RP4_V2_A1",
+  "status": "SPECIFICATION_FROZEN",
+  "decision": 130,
+  "artifacts": {
+    "docs/rp4/specification_v2.md": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+    "docs/rp4/decision_130_v2.md": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98",
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_a1/freeze.json": "248abbedd5267552272da1a9f7c1d4d3cefd99ef4d3fdd7b4c1b8a2f10ef41d2",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3"
+  },
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_v2_code/freeze.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v2_code/freeze.py",
+      "exit_code": 0
+    }
+  ],
+  "models_fitted_by_registration": 0,
+  "target_values_read_by_registration": 0,
+  "v1_preserved": true,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

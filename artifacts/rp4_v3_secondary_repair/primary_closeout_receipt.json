@@ -1,0 +1,104 @@
+{
+  "stage": "V3_SECONDARY_FIRST_REPAIR_PRIMARY_CLOSEOUT",
+  "status": "COMPLETE_WITH_ONE_UNCERTIFIED_COMPONENT_PRESERVED",
+  "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='2'\n$env:OMP_NUM_THREADS='2'\n$env:POLARS_MAX_THREADS='2'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_secondary_repair.jump_runner --window primary\nexit $LASTEXITCODE",
+  "exit_code": 0,
+  "verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$rp4Root='private-input/0ec5f26c567f416b9513'\n$rp4Stage='private-input/f460d0f688cd1053812e'\n$rp4Receipt=Get-Content -LiteralPath \"$rp4Stage/receipt.json\" -Raw | ConvertFrom-Json -AsHashtable\n$rp4Checked=0\nforeach($rp4Pair in $rp4Receipt.artifacts_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath $rp4Pair.Key -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'ARTIFACT_HASH_MISMATCH'}; $rp4Checked++ }\nforeach($rp4Pair in $rp4Receipt.code_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath \"$rp4Root/$($rp4Pair.Key)\" -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'SOURCE_HASH_MISMATCH'}; $rp4Checked++ }\nif ((Get-FileHash -LiteralPath $rp4Receipt.log -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Receipt.log_sha256) {throw 'LOG_HASH_MISMATCH'}\nif($rp4Receipt.status -ne 'COMPLETE' -or $rp4Receipt.exit_code -ne 0) {throw 'INCOMPLETE_RECEIPT'}\n[pscustomobject]@{status='PASS';artifact_and_code_hashes_checked=$rp4Checked;log_hash_verified=$true;worker_exit_code=$rp4Receipt.exit_code;endpoint_scores_consulted=$false} | ConvertTo-Json -Compress",
+    "chunk_id": "4d17da",
+    "wall_time_seconds": 0.5552675,
+    "exit_code": 0,
+    "original_token_count": 35,
+    "output": "{\"status\":\"PASS\",\"artifact_and_code_hashes_checked\":21,\"log_hash_verified\":true,\"worker_exit_code\":0,\"endpoint_scores_consulted\":false}\r\n"
+  },
+  "scheduled_sessions": 419,
+  "component_counts": [
+    {
+      "N": 1601,
+      "provenance": "NEW_MISSING_COMPONENT",
+      "status": "COMPUTED"
+    },
+    {
+      "N": 1,
+      "provenance": "NEW_MISSING_COMPONENT",
+      "status": "NO VERIFICABLE"
+    },
+    {
+      "N": 912,
+      "provenance": "REUSED_FROZEN_V3",
+      "status": "COMPUTED"
+    }
+  ],
+  "resources": {
+    "arrow_cpu_threads": 2,
+    "arrow_io_threads": 1,
+    "parquet_use_threads": false,
+    "priority": "16384",
+    "process_id": 59448,
+    "threadpools": [
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      },
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      }
+    ],
+    "threads_total_max": 2
+  },
+  "private_stage_root": "private-input/f460d0f688cd1053812e",
+  "artifacts_sha256": {
+    "component_manifest.json": "4861a04ca0f9c3207a6fdea3c8679512ff5c659f4bdc7e56e3d89cc8434baa50",
+    "fit_diagnostics.json": "1cae2289eb025557453100240f958f753f859317ff7af4a60012cfafe6dfa41f",
+    "summary.json": "8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79",
+    "summary_receipt.json": "5dda11e17932017b799dd3b27f24b17ea9385fb4e3dcc1c74b17f789e5733128",
+    "receipt.json": "61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b"
+  },
+  "closed_worker_receipt": {
+    "artifacts_sha256": {
+      "private-input/f589da98468373f8984b": "4861a04ca0f9c3207a6fdea3c8679512ff5c659f4bdc7e56e3d89cc8434baa50",
+      "private-input/baf37d32b3529b09ed74": "1cae2289eb025557453100240f958f753f859317ff7af4a60012cfafe6dfa41f",
+      "private-input/154210d1638ddc7dc42d": "8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79",
+      "private-input/5d782cdf08d573ffddec": "5dda11e17932017b799dd3b27f24b17ea9385fb4e3dcc1c74b17f789e5733128"
+    },
+    "code_sha256": {
+      "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+      "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+      "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+      "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+      "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_secondary_repair/jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+      "artifacts/rp4_v3_secondary_repair/jump_repair.py": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+      "artifacts/rp4_v3_secondary_repair/jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+      "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+      "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+    },
+    "command": "private-input/4a35bef39fa2a40d516b",
+    "completed_at_utc": "2026-09-08T06:31:31.98138+10:00",
+    "elapsed_seconds": 8648.049853499993,
+    "exit_code": 0,
+    "log": "private-input/4317d72e0da540174dff",
+    "log_sha256": "18676f73275e6f4a8e02dd1a182fc7b99ac5d592dd23d82dd00ecb2ba5fd64a6",
+    "release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+    "started_at_utc": "2026-09-08T04:07:25.934654+10:00",
+    "status": "COMPLETE",
+    "summary_sha256": "8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79",
+    "window": "primary"
+  },
+  "interpretation": "Exit 0 closes all registered attempts, not a declaration that every component converged. The one failed new linear component remains NO VERIFICABLE; no AUC was consulted to choose the already-frozen Newton refinement.",
+  "primary_changed": false,
+  "quantile_changed": false,
+  "mz_changed": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

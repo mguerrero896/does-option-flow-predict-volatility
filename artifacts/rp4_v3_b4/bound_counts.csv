@@ -1,0 +1,49 @@
+window,endpoint,family,information_set,phase,kind,N_fit_records,N_predictions,count_low,count_high,percent_low,percent_high,status
+primary,mean,log_ridge_harq,B0,validation,percentile_bounds,419,1608320,0,2155,0.0,0.1339907481098289,COMPUTED
+primary,mean,log_ridge_harq,B0,evaluation,percentile_bounds,419,160832,0,219,0.0,0.13616693195384003,COMPUTED
+primary,mean,log_ridge_harq,B1,validation,percentile_bounds,419,1608320,0,3548,0.0,0.22060286510147234,COMPUTED
+primary,mean,log_ridge_harq,B1,evaluation,percentile_bounds,419,160832,0,315,0.0,0.1958565459610028,COMPUTED
+primary,mean,log_ridge_harq,B2,validation,percentile_bounds,419,1608320,0,3192,0.0,0.19846796657381616,COMPUTED
+primary,mean,log_ridge_harq,B2,evaluation,percentile_bounds,419,160832,0,287,0.0,0.17844707520891365,COMPUTED
+primary,mean,lightgbm_qlike,B0,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,mean,lightgbm_qlike,B1,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,mean,lightgbm_qlike,B2,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,quantile,log_ridge_harq,B0,validation,percentile_bounds,419,1608320,0,5368,0.0,0.3337644249900517,COMPUTED
+primary,quantile,log_ridge_harq,B0,evaluation,percentile_bounds,419,160832,0,491,0.0,0.3052875049741345,COMPUTED
+primary,quantile,log_ridge_harq,B1,validation,percentile_bounds,419,1608320,0,8493,0.0,0.528066553919618,COMPUTED
+primary,quantile,log_ridge_harq,B1,evaluation,percentile_bounds,419,160832,0,796,0.0,0.49492638280939116,COMPUTED
+primary,quantile,log_ridge_harq,B2,validation,percentile_bounds,419,1608320,0,7753,0.0,0.4820558097890967,COMPUTED
+primary,quantile,log_ridge_harq,B2,evaluation,percentile_bounds,419,160832,0,768,0.0,0.477516912057302,COMPUTED
+primary,quantile,lightgbm_qlike,B0,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,quantile,lightgbm_qlike,B1,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,quantile,lightgbm_qlike,B2,evaluation,log_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,jump,log_ridge_harq,B0,evaluation,probability_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,jump,log_ridge_harq,B1,evaluation,probability_clip,36,13608,0,0,0.0,0.0,COMPUTED
+primary,jump,log_ridge_harq,B2,evaluation,probability_clip,1,390,0,0,0.0,0.0,COMPUTED
+primary,jump,lightgbm_qlike,B0,evaluation,probability_clip,419,160832,0,0,0.0,0.0,COMPUTED
+primary,jump,lightgbm_qlike,B1,evaluation,probability_clip,36,13608,0,0,0.0,0.0,COMPUTED
+primary,jump,lightgbm_qlike,B2,evaluation,probability_clip,1,390,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B0,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B0,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B1,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B1,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B2,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,mean,log_ridge_harq,B2,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,mean,lightgbm_qlike,B0,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,mean,lightgbm_qlike,B1,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,mean,lightgbm_qlike,B2,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B0,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B0,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B1,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B1,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B2,validation,percentile_bounds,25,97500,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,log_ridge_harq,B2,evaluation,percentile_bounds,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,lightgbm_qlike,B0,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,lightgbm_qlike,B1,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,quantile,lightgbm_qlike,B2,evaluation,log_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,jump,log_ridge_harq,B0,evaluation,probability_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,jump,log_ridge_harq,B1,evaluation,probability_clip,0,,,,,,NO VERIFICABLE
+confirmation,jump,log_ridge_harq,B2,evaluation,probability_clip,0,,,,,,NO VERIFICABLE
+confirmation,jump,lightgbm_qlike,B0,evaluation,probability_clip,25,9750,0,0,0.0,0.0,COMPUTED
+confirmation,jump,lightgbm_qlike,B1,evaluation,probability_clip,0,,,,,,NO VERIFICABLE
+confirmation,jump,lightgbm_qlike,B2,evaluation,probability_clip,0,,,,,,NO VERIFICABLE

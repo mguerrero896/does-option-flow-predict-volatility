@@ -1,0 +1,899 @@
+{
+  "source_lineage_sha256": "ca610184b4ccffe2d5792e86d8babefc12ebee52b38e5b1d16f8c2f7465606db",
+  "sources": [
+    {
+      "alias": "frozen_feature_panel",
+      "binding": "matches_preexisting_pin",
+      "bytes": 175785596,
+      "sha256": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637"
+    },
+    {
+      "alias": "option_tape/2026-01-12/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6821832,
+      "sha256": "d5dd923617bd3d9da6166f0969f0ac2fd7e957ae73e5d71019d92a265a9850df"
+    },
+    {
+      "alias": "option_tape/2026-01-12/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4644884,
+      "sha256": "23d50549abb57fbe53aee5a73e1542f70812c3273ce55e3b2a1041ee37a3ebd2"
+    },
+    {
+      "alias": "option_tape/2026-01-12/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4576067,
+      "sha256": "ee7047c394bb534614a6c0e9ac1040b93263f28f1ec829765ef367780f273eb1"
+    },
+    {
+      "alias": "option_tape/2026-01-12/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 2565931,
+      "sha256": "ec480200a1550833ba3a5d18a61561df6a32095d5b2dabb119deb26a35c777c8"
+    },
+    {
+      "alias": "option_tape/2026-01-12/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11989261,
+      "sha256": "8ed7b353bc4e2247d107de07930d24db7072c6cff1737ea0bd8965615b9eb08f"
+    },
+    {
+      "alias": "option_tape/2026-01-12/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 20618426,
+      "sha256": "df78c96dbbd1734d84d713fdf092cab834f9bfff74797f0d47f21baff55f3a90"
+    },
+    {
+      "alias": "option_tape/2026-01-13/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5476472,
+      "sha256": "1a8a1a33cc981a19f8de027b858197ff0a15f23f11b00eb1f94cf0f1a0d9184b"
+    },
+    {
+      "alias": "option_tape/2026-01-13/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5127959,
+      "sha256": "952eacbb54ff682250b0ea64705f40b1ae756e10386a77123a6ab6f2907f21b2"
+    },
+    {
+      "alias": "option_tape/2026-01-13/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8488272,
+      "sha256": "fa446bd90798d1c37a67325d45b489b41abed9f28940664b20573253591ba327"
+    },
+    {
+      "alias": "option_tape/2026-01-13/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5632207,
+      "sha256": "823b1f541ab68d2d9f8ba9b2a6d8991526b968fd99891fc89df6b761babcaccd"
+    },
+    {
+      "alias": "option_tape/2026-01-13/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 12614895,
+      "sha256": "e6c18f973f6b37143cee02ff8122f3d5499a998297e4e48e2417d10c9717099e"
+    },
+    {
+      "alias": "option_tape/2026-01-13/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 17422397,
+      "sha256": "25cdf1ed02f477322f11adf018a37f86694b85bfe7e6f1727521cb5d8ee62c8a"
+    },
+    {
+      "alias": "option_tape/2026-01-14/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5687227,
+      "sha256": "2c637409e5cd8183caf307907757ad321492839a8be4f565df63b9dff7100ae0"
+    },
+    {
+      "alias": "option_tape/2026-01-14/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5126731,
+      "sha256": "48dd8eaa033d6202b9134116e5c3c9c249e944cc96362932f0b0dc66fef46448"
+    },
+    {
+      "alias": "option_tape/2026-01-14/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6898239,
+      "sha256": "75a6d893bf4b4abe5f7fe43ce078c413459f3e1c5e69c4c13d509eaadd346b2e"
+    },
+    {
+      "alias": "option_tape/2026-01-14/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5534080,
+      "sha256": "92afc3bee177ed29618a60151692d185438d41edd93da7e7db2213d3fb8d5805"
+    },
+    {
+      "alias": "option_tape/2026-01-14/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 13509752,
+      "sha256": "a8a912108fc7499eaf677f4c4cb1afdc01dcfddd01ea828768a376819356b39a"
+    },
+    {
+      "alias": "option_tape/2026-01-14/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 19943678,
+      "sha256": "0c3b801ef4c1e43704f345fae7cca5fbb43324b3bd4527bd5ee607ed74914fcc"
+    },
+    {
+      "alias": "option_tape/2026-01-15/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5502821,
+      "sha256": "08247a9623fd4289227d60257ada8ebaa9c8636be23386f12865a68cabe14ea7"
+    },
+    {
+      "alias": "option_tape/2026-01-15/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5140719,
+      "sha256": "00ee812e15d2363aa03d5e3fe0c605ac992a445d2ed0da42eaf154f0d0d2ec15"
+    },
+    {
+      "alias": "option_tape/2026-01-15/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7239944,
+      "sha256": "3552981ceba696979702e45b9f7b2bef4f7ecd1d201e357c144eb8252e57e2ba"
+    },
+    {
+      "alias": "option_tape/2026-01-15/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5054116,
+      "sha256": "dd8dc34f18054884464f0a4e79dd4f68584180a8a19fd2aba5b9efaee8e1013b"
+    },
+    {
+      "alias": "option_tape/2026-01-15/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 20077944,
+      "sha256": "927ea9755bc4053d3445b773ae3ed050bb56b161a7968b621ae3af1ceabfbaf1"
+    },
+    {
+      "alias": "option_tape/2026-01-15/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 18525108,
+      "sha256": "5002a2b76766a26e57194952c54ef4fa48f55acb8f892bf6feb7977df807f333"
+    },
+    {
+      "alias": "option_tape/2026-01-16/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7850164,
+      "sha256": "8d6490a7f689825feffd703f3d431e695cc684cb53e7b66a1dc1105d47854fde"
+    },
+    {
+      "alias": "option_tape/2026-01-16/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4831622,
+      "sha256": "c5e12f62caadbd10cd7a31c75f0a9817d4640d7f451808e0c9fc77f88b78fa9f"
+    },
+    {
+      "alias": "option_tape/2026-01-16/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6983003,
+      "sha256": "395e6b461c7f30e9550e9ec1ab124ea4d60e4c9d2f8d4677d3a720fa6684cd8f"
+    },
+    {
+      "alias": "option_tape/2026-01-16/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5051073,
+      "sha256": "6d0cd3ad27ddc8148600b812ae2cf67ab53c095d24929359a6df586a721b7a75"
+    },
+    {
+      "alias": "option_tape/2026-01-16/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 17452154,
+      "sha256": "a95cc0d1ad9bbafba34fdf2afe865dae1917de8621096717777d1e0848ae1546"
+    },
+    {
+      "alias": "option_tape/2026-01-16/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 27905027,
+      "sha256": "3959ec505b7d74565a9717bfd82905e7ed51bf276f33bd750f0d1fdde2a253d2"
+    },
+    {
+      "alias": "option_tape/2026-01-20/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9142342,
+      "sha256": "40411309f5624b78320158f838caa97665c9a919f645f5c3ee88c80837e5ad2a"
+    },
+    {
+      "alias": "option_tape/2026-01-20/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5579735,
+      "sha256": "8be26db56d92458dd1477c6efa683c9aed32e5ed4560832bf5f9c174a4aa03a8"
+    },
+    {
+      "alias": "option_tape/2026-01-20/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5225395,
+      "sha256": "d1b313734a6c177e5ef5b63e1cec665b839a245877c3124c47a68c965854f003"
+    },
+    {
+      "alias": "option_tape/2026-01-20/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 3670831,
+      "sha256": "78d644b4a1213cc59985f234868195c7d3f7035f5450a4f89719c6eae9ffe9ec"
+    },
+    {
+      "alias": "option_tape/2026-01-20/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16670885,
+      "sha256": "7cc889785622b5b906fed9d8493a9c643cf1c8312d46ba408b9b6f47ed33c5af"
+    },
+    {
+      "alias": "option_tape/2026-01-20/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 19718452,
+      "sha256": "534d175504005cba0d8ef5e389358e91e2590926383b77c9dd0066c4b9eab718"
+    },
+    {
+      "alias": "option_tape/2026-01-21/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7588914,
+      "sha256": "d3127ccc7b805b813c9a1ae4b20763156e4b6997645b72c96df881c4b26bba54"
+    },
+    {
+      "alias": "option_tape/2026-01-21/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5581301,
+      "sha256": "0b06373be0b4e533af263789ba2cff23af7586506340846895f57fba7d34af97"
+    },
+    {
+      "alias": "option_tape/2026-01-21/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5627557,
+      "sha256": "b3b7ac7ca353c204fe8c3558bc59586b5ffd030d2b3703fbca60cf3a13b4b41e"
+    },
+    {
+      "alias": "option_tape/2026-01-21/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6880968,
+      "sha256": "c1aefb7f9a7edc3164a44b1b24a07eef7bb54e704f188304619c90248475c1bc"
+    },
+    {
+      "alias": "option_tape/2026-01-21/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16498235,
+      "sha256": "40da74617d0f44505915309621b98c0809179aa525a23de790bdd96e3d3f8492"
+    },
+    {
+      "alias": "option_tape/2026-01-21/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 22268898,
+      "sha256": "2f93e935fafe7a67e3b53f5edb8ed64e2916b841f1b6f27d271f99dda6636b9a"
+    },
+    {
+      "alias": "option_tape/2026-01-22/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5972574,
+      "sha256": "f68c2618b9322c70063d9b99563b66b6a7c9bce0de0216ff21938ed0eed1d471"
+    },
+    {
+      "alias": "option_tape/2026-01-22/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5539453,
+      "sha256": "7c4d226ae60085678b71e4f580497d5b0926ba5e685d74b42aead25ad65a8a51"
+    },
+    {
+      "alias": "option_tape/2026-01-22/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11622972,
+      "sha256": "f65f965ceaac3f13660fa0de90c9dcb58cb5b33f985d543a0b89bdc1dd703229"
+    },
+    {
+      "alias": "option_tape/2026-01-22/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4788226,
+      "sha256": "07b4d180da28a352acd4561d168b10b0aaad9ae3aec6f2eec19eb02cb0f4f0b4"
+    },
+    {
+      "alias": "option_tape/2026-01-22/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11902654,
+      "sha256": "e12d47a23f489ccf1469aded5b21beb70f8bccb4a4a0b68a299a0cda72da8ae6"
+    },
+    {
+      "alias": "option_tape/2026-01-22/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 28829393,
+      "sha256": "90ed8397725f9dd8ad807916f8601d791585177975b47fb0d70b05cc9b465e0f"
+    },
+    {
+      "alias": "option_tape/2026-01-23/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7269911,
+      "sha256": "7c946aeaaf7a982ea169edcf8b55e24fe819a6f11b0352e12be67f59b613b014"
+    },
+    {
+      "alias": "option_tape/2026-01-23/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7461785,
+      "sha256": "346c4d53bfafb7d8e4945fd6c9fed37d3b07f3bc9059c7548df6b61526706662"
+    },
+    {
+      "alias": "option_tape/2026-01-23/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11970888,
+      "sha256": "fd2974cf79ee92261e8301f27c0036560c04ce7c4ad5be7ebaf0082c22ffea9c"
+    },
+    {
+      "alias": "option_tape/2026-01-23/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10643642,
+      "sha256": "a6e6201ef67101b56e75db0d78c9a424ddc55c24f0d7558d831e2beecb918894"
+    },
+    {
+      "alias": "option_tape/2026-01-23/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 15984240,
+      "sha256": "0e44d35ba312e852db1985f17b4ce6ac3b8d6546b8edfe15818719697928ba1c"
+    },
+    {
+      "alias": "option_tape/2026-01-23/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 29953730,
+      "sha256": "9ae013146c4f611e8dadeed4247f493139c8a12d8251f0d11eb2a5b68c59493f"
+    },
+    {
+      "alias": "option_tape/2026-01-26/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8735515,
+      "sha256": "34f6596c7e4bfdf0bd8ee8089fea8e66c781ea929bf2811e579a4ec6104de5b1"
+    },
+    {
+      "alias": "option_tape/2026-01-26/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4087421,
+      "sha256": "bd47bf184719d1e90fbc5da155445cf384c38a851ef80cc21bd81477bc02fcd6"
+    },
+    {
+      "alias": "option_tape/2026-01-26/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5866230,
+      "sha256": "3a237566c9ba00f3babaed0d387fb471ed7050134f171d631896a4923ac7764f"
+    },
+    {
+      "alias": "option_tape/2026-01-26/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4606281,
+      "sha256": "54a5ae1f230101d20b514a727431f59883b48db4ff0123c6b63cd0f1e12c7f79"
+    },
+    {
+      "alias": "option_tape/2026-01-26/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10825885,
+      "sha256": "362ca91e5fa8d3f74b4bc7bee639f09d1d0ca890ba64428050d76c7019265452"
+    },
+    {
+      "alias": "option_tape/2026-01-26/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 14316972,
+      "sha256": "6fd885dc9fe7160ee2b880b7b62bb9e3da18540395d588be04fd25dec7631e46"
+    },
+    {
+      "alias": "option_tape/2026-01-27/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8256779,
+      "sha256": "e916c85cbfce835d24a698ad4a2fd09a19f7e87fdb8ab093b6da4b22803b4c1f"
+    },
+    {
+      "alias": "option_tape/2026-01-27/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6879351,
+      "sha256": "1a234b2bc2e4bb627842e3e16e61e9be129325367ec5f927dc32adcc45fd9de8"
+    },
+    {
+      "alias": "option_tape/2026-01-27/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4825873,
+      "sha256": "53a4b5f772bcdb5357573b81f42dd634bbefd480de8120b5ac2b87af6ceea7df"
+    },
+    {
+      "alias": "option_tape/2026-01-27/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5259073,
+      "sha256": "718fc1f7e84934cba3120643aac2d1977f1a26db802e37b8020c2960526f95c2"
+    },
+    {
+      "alias": "option_tape/2026-01-27/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11868377,
+      "sha256": "716007703dd2741c10200fa6cd13e408dc799c74ed22cc642d93e3594b7d9858"
+    },
+    {
+      "alias": "option_tape/2026-01-27/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11261380,
+      "sha256": "b24feae40bc753df9e63105633a10f80cbbec07c9565c5146c60d3fdcbb0df3c"
+    },
+    {
+      "alias": "option_tape/2026-01-28/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5121351,
+      "sha256": "733c7828cc5803e01459fc95071a9ab08c3da5627cc2780e058a13da8d2cbc90"
+    },
+    {
+      "alias": "option_tape/2026-01-28/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6226453,
+      "sha256": "2653739a19987db76e214ca66312d986ea1b7015f6283e828d4456d5f4089eaf"
+    },
+    {
+      "alias": "option_tape/2026-01-28/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7909575,
+      "sha256": "4362ab0e68fb89ff9430396c11b44ce3327a5673bab0851d0ab44da7c1858d46"
+    },
+    {
+      "alias": "option_tape/2026-01-28/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6953484,
+      "sha256": "38c4f0dd30471600f3f7427c2ff58a0adf72e583cbb6ed1e1d31db74e464a80c"
+    },
+    {
+      "alias": "option_tape/2026-01-28/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 13627207,
+      "sha256": "bc36e0eb20e2426551cc5f8feeac985409142eac0cf11bee850c131d4815c13b"
+    },
+    {
+      "alias": "option_tape/2026-01-28/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16665695,
+      "sha256": "4876a4bd3e927a1062cfba2638ebca376e4e17c65a40a6840d5776150e3731fc"
+    },
+    {
+      "alias": "option_tape/2026-01-29/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10006706,
+      "sha256": "bc1fa3ce5ba5bb39145bb4ae6352a0f0720c711d7236c7dc20ca2a80965328c9"
+    },
+    {
+      "alias": "option_tape/2026-01-29/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5457021,
+      "sha256": "cf04bb2d3e07e73172cc74f09cce1b223a76237b14e5bba38da82193c1754afb"
+    },
+    {
+      "alias": "option_tape/2026-01-29/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 21055236,
+      "sha256": "ba502c1c0579fd97a5aee12e311b8cf7d01d7d44387dd08b38cca62a4867c9f8"
+    },
+    {
+      "alias": "option_tape/2026-01-29/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 22942450,
+      "sha256": "892fd9b92e3f9b879a6feef9fe8782ef1f740f115b762e20252bcd6a33b3223e"
+    },
+    {
+      "alias": "option_tape/2026-01-29/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 15962464,
+      "sha256": "b29df55c74f24bc29b6f1ba218545fc8dddb0b3533e88fd00df3592407b73932"
+    },
+    {
+      "alias": "option_tape/2026-01-29/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 30159969,
+      "sha256": "6677d59aab3108eda86b0c0533b482476cf13097ac43549d6a3c2e4e051bda30"
+    },
+    {
+      "alias": "option_tape/2026-01-30/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16004637,
+      "sha256": "db0ada60b74b61343b966e155ab64f477859dd9a7ab5a2a3e2e520c491dac98d"
+    },
+    {
+      "alias": "option_tape/2026-01-30/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6011447,
+      "sha256": "c5d5affa6c7bd57239b7062334b215711965eda2143f7a9a5302d30f7b98b244"
+    },
+    {
+      "alias": "option_tape/2026-01-30/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9366302,
+      "sha256": "e84cd05d68512cd47c00a2a47e573c16a9d698ff445eb01f1e5cec473df90290"
+    },
+    {
+      "alias": "option_tape/2026-01-30/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 12379152,
+      "sha256": "30cdfbd80b2f79d4e4ce12ad59ec9ca49e5b997ec243fc71e05e4e90e4406873"
+    },
+    {
+      "alias": "option_tape/2026-01-30/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 18587351,
+      "sha256": "e0f9074b1b324ffb1fa709953fae5c9dbb326d53b81ead0f0936afb61e0d744b"
+    },
+    {
+      "alias": "option_tape/2026-01-30/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 40277969,
+      "sha256": "4e3c7ac22c69dc1e0eb0acc25017539e70ea33b0e8c58a80bf38d1deac69aebb"
+    },
+    {
+      "alias": "option_tape/2026-02-02/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 14606529,
+      "sha256": "64d95e778a6bad9d50d4d596536591761414c6afb9e37c72aadcdceed1f95fd6"
+    },
+    {
+      "alias": "option_tape/2026-02-02/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6176613,
+      "sha256": "4883cf62a9920e8e1c88aaabbf4620060acdab3b79df116695eb8e643a5cad44"
+    },
+    {
+      "alias": "option_tape/2026-02-02/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7348306,
+      "sha256": "8709d5c06065c898ed454d909cca0eabf4bd60d27bfd65af1ab2f77e6c9c46e9"
+    },
+    {
+      "alias": "option_tape/2026-02-02/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8443919,
+      "sha256": "80a98080ed090fffb4298d8cde808dba8f0db0e077b4666185f231599e15c9df"
+    },
+    {
+      "alias": "option_tape/2026-02-02/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16729409,
+      "sha256": "1dd3d11da74baab0c4f496d1ff0e8437006d3e357dfc8be183d2a91c1f3d7bb4"
+    },
+    {
+      "alias": "option_tape/2026-02-02/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 25798412,
+      "sha256": "c9b81bf09154f8dfe33c710a0e179bfbfd0062580c989d9c63c7d6db436fd5f6"
+    },
+    {
+      "alias": "option_tape/2026-02-03/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9935927,
+      "sha256": "9e5bc395ab816591dfca9135c36ad45f77ef03590d7449ef5e3f94cf68753f61"
+    },
+    {
+      "alias": "option_tape/2026-02-03/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6455790,
+      "sha256": "399580def107839ed035e31485e6e2c37baf47dea9531855e3bcba45e2125cf0"
+    },
+    {
+      "alias": "option_tape/2026-02-03/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6586272,
+      "sha256": "b952483a4d4f73111c1cf10d4fd0c13b0c0ccf82e53f6730b5777d9eb375e600"
+    },
+    {
+      "alias": "option_tape/2026-02-03/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10672008,
+      "sha256": "df546f2f0cb6f49f13d5caaae03d25a82467a77975e9b7882dbfce23144d532a"
+    },
+    {
+      "alias": "option_tape/2026-02-03/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 22520921,
+      "sha256": "cd3ae0963ec445fb4dab0eba66c3bcbd6fc36fca3d38cced42e558d39b6cb801"
+    },
+    {
+      "alias": "option_tape/2026-02-03/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 24031112,
+      "sha256": "15b418aa67e99ce00dc01a70f8b5408bab4b17f33c5caf0df12b6be3fa72cfdf"
+    },
+    {
+      "alias": "option_tape/2026-02-04/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16785893,
+      "sha256": "bc1512b8797502245d17d0e705965001cb42f2ac624f3cbb45bb2a0be16fa0f7"
+    },
+    {
+      "alias": "option_tape/2026-02-04/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 5741735,
+      "sha256": "56ce4d31e314af5e96832a041a39e3552534ebf27cdd7a955e17c4d76f619a46"
+    },
+    {
+      "alias": "option_tape/2026-02-04/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7516126,
+      "sha256": "90a83260f5c8c7b483248f0f3bd734267c6d2c8b4187b12195dfd223cb71f6bf"
+    },
+    {
+      "alias": "option_tape/2026-02-04/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8835691,
+      "sha256": "ea7c88ef649f86aeeea33fce748a8c21548b40cebfb90059b190e53f5aeed9db"
+    },
+    {
+      "alias": "option_tape/2026-02-04/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 21547634,
+      "sha256": "54507585bc2d27643bcdad45fa621aff73137545a2600ef741633093a34dbbf0"
+    },
+    {
+      "alias": "option_tape/2026-02-04/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 33168448,
+      "sha256": "a8fcc95b271c01cbcc07c336e470ad8798fc8f78156edaa8143041c2f16cc7c4"
+    },
+    {
+      "alias": "option_tape/2026-02-05/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9425056,
+      "sha256": "11f52d15f94d313624e94c1a4eedceba290cce4beb1c3995c953800b0106c0b3"
+    },
+    {
+      "alias": "option_tape/2026-02-05/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 13049337,
+      "sha256": "92a5e6cc074f9b637a625722268a8a29f026035be14fd1fb9ea93b160c48499c"
+    },
+    {
+      "alias": "option_tape/2026-02-05/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6686254,
+      "sha256": "0d3cf630766d3eb0f5cf0955635af060f745c4ee5efedb96df0646b2d5faeb22"
+    },
+    {
+      "alias": "option_tape/2026-02-05/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11503667,
+      "sha256": "3a2bd583b3f8d7f8a96613089b112acb1a0cb734ec600176173fbd1c769a4220"
+    },
+    {
+      "alias": "option_tape/2026-02-05/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 20017076,
+      "sha256": "9a5162e0cd033a14d412897647a890bd76713162ea90c4b7a56923896c92db72"
+    },
+    {
+      "alias": "option_tape/2026-02-05/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 26119040,
+      "sha256": "35e4341371cb40bfa214b10f82b80041214ffa2e0d7adf5ec8c3fff7a54e44af"
+    },
+    {
+      "alias": "option_tape/2026-02-06/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11158255,
+      "sha256": "f119bea59c1713f4330beb3891a7714cefef5c7f4a5b45a76dae33f6ccfd91a7"
+    },
+    {
+      "alias": "option_tape/2026-02-06/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 26509121,
+      "sha256": "245fb4652358d634f8b060d968d13e31215c59be9bb1b76b55d7fde52be765a6"
+    },
+    {
+      "alias": "option_tape/2026-02-06/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9553952,
+      "sha256": "4790f44361c1c8881e65cf0a7d2c1b626008769f72dc17d5256ffaa8bad651bb"
+    },
+    {
+      "alias": "option_tape/2026-02-06/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9998393,
+      "sha256": "9f7640ab697a71cba249373946c6b0f3ae6477e3c836c3044d509e99808a97e4"
+    },
+    {
+      "alias": "option_tape/2026-02-06/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 29123348,
+      "sha256": "c0af47e8f3f5a6040b84a9e77ff6eb625d652bfe05dcc7359bbe95eeb2d509c3"
+    },
+    {
+      "alias": "option_tape/2026-02-06/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 29952581,
+      "sha256": "f906c50f3a7418a78a451d0825740a181f6ca06755a6a9cdd4e78925b79080a1"
+    },
+    {
+      "alias": "option_tape/2026-02-09/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9029827,
+      "sha256": "59a77eb6a88fb74b64ec7af36eac7bc234a913e6638d053375e88e9ad9c78434"
+    },
+    {
+      "alias": "option_tape/2026-02-09/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 14613587,
+      "sha256": "5e6078bb72f7fa967a3dc61e213e64369f70aef65962154edffe2ef77e5e984e"
+    },
+    {
+      "alias": "option_tape/2026-02-09/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8423108,
+      "sha256": "0404b0eb3441cd8a24393a722b4693d60939d4605dfb5019762f15d3ff80ad5b"
+    },
+    {
+      "alias": "option_tape/2026-02-09/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9447919,
+      "sha256": "813fb01f767d0d772368a7ec0eccd5a069894ec2fab6f68f734c60a0958eaa35"
+    },
+    {
+      "alias": "option_tape/2026-02-09/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 24152531,
+      "sha256": "34498aa0e0547b92686d94f7de4de672ab95879b65281d0e7cced811ce010e7c"
+    },
+    {
+      "alias": "option_tape/2026-02-09/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 24612436,
+      "sha256": "7360090153eab886074419cecdec2cbe1838fd9698bb566d0fb9ce7484eeb999"
+    },
+    {
+      "alias": "option_tape/2026-02-10/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4813786,
+      "sha256": "22bb2941d36ded9375dea26f27c3081d19a78e98e1fab6302404abc41067167f"
+    },
+    {
+      "alias": "option_tape/2026-02-10/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10590274,
+      "sha256": "53068b0ea108b8fac6e95f30aea2c2812aee48d4a12098eaad2251ec1a858db3"
+    },
+    {
+      "alias": "option_tape/2026-02-10/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 4431066,
+      "sha256": "1ddc74ec40388c5bbf70843d2bfa72e0f282256e284944d2c141f05d81201c83"
+    },
+    {
+      "alias": "option_tape/2026-02-10/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8609688,
+      "sha256": "1acaf7bfcc2943ae822849fbef662d48f96ffd9159935b892635eed462992787"
+    },
+    {
+      "alias": "option_tape/2026-02-10/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 12258226,
+      "sha256": "cdc766afd2ac3d9cdefb965120db544e7931288928c0ea8c6fc824925559b1d8"
+    },
+    {
+      "alias": "option_tape/2026-02-10/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 22971327,
+      "sha256": "c4b85506866c948d06bfe6c2f726942f35907a51df327f83e5f7c2c0b6a6e9de"
+    },
+    {
+      "alias": "option_tape/2026-02-11/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10729870,
+      "sha256": "7bdf0e3372638026fc095fb846447114d53334e5c9a9a43b38f07e7a80f3f306"
+    },
+    {
+      "alias": "option_tape/2026-02-11/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10045618,
+      "sha256": "39e8473f249e6ff15f12f55a94a8853d5d8c9ec3fce0266247d58ae20ac5eed9"
+    },
+    {
+      "alias": "option_tape/2026-02-11/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7348803,
+      "sha256": "6f7dc2eaf1773cd7cc6b670312f025e53ce608da483e63afceac8c7a1ac186db"
+    },
+    {
+      "alias": "option_tape/2026-02-11/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9193807,
+      "sha256": "946fdc77400741ce351e2200bf3380cec492244c0866f138780d10c51a8904ce"
+    },
+    {
+      "alias": "option_tape/2026-02-11/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16571111,
+      "sha256": "d6450b4c38296d91c15b3460eea455a50dc4c7b1995f32cb796d9e9c8cd1cfa4"
+    },
+    {
+      "alias": "option_tape/2026-02-11/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 29641933,
+      "sha256": "1059d9facd10bb8b2766ccedfc128c2ab520ed436e9467bdc184ec0d2d3380bd"
+    },
+    {
+      "alias": "option_tape/2026-02-12/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 11867928,
+      "sha256": "c66f46f55c4c3fba1029f2284bff6e6b057da5f9e9741dcd6c5d912979a4f264"
+    },
+    {
+      "alias": "option_tape/2026-02-12/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 10497117,
+      "sha256": "4516bf07c80691951ef2be57dfe6ffab9348ae1155002b7a1d1777ae3012d154"
+    },
+    {
+      "alias": "option_tape/2026-02-12/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6702787,
+      "sha256": "5ecfb456758eeb599f993f1b3b29178fe508a4c2e6b88c8f47cd2f02fedbb7a3"
+    },
+    {
+      "alias": "option_tape/2026-02-12/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7420818,
+      "sha256": "b96dd7f7ac1fa70648f0d200647c52509722cc562dc7df17b6e739d0837d4b2e"
+    },
+    {
+      "alias": "option_tape/2026-02-12/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 16338304,
+      "sha256": "9f8d45042c43800897458fb5cdf03265847d88428f20c0752eed6f135f58cfb4"
+    },
+    {
+      "alias": "option_tape/2026-02-12/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 26308954,
+      "sha256": "0ec82f4a2cc7339602a0742b93d3791327d5b16fca87480e5e64e7b799cc9a7d"
+    },
+    {
+      "alias": "option_tape/2026-02-13/AAPL/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 9777155,
+      "sha256": "e698510bb63b28040de1dd07ea763486912e2fd878c4a02a2eb63a9f642b1562"
+    },
+    {
+      "alias": "option_tape/2026-02-13/AMZN/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8781261,
+      "sha256": "faa156c6ad8c6bf550c87c4447b7731570d71c40c4dc6a91a822bf4c31ba36fd"
+    },
+    {
+      "alias": "option_tape/2026-02-13/META/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 6989715,
+      "sha256": "f775d231055ab80c9d5f88d577594532c7f233696df7d9aa2917500cbd52da9f"
+    },
+    {
+      "alias": "option_tape/2026-02-13/MSFT/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 7583073,
+      "sha256": "106c426dc8732cd61003ddf88cc9dabd64ec5f24a558dafd037a77a9eec2ea86"
+    },
+    {
+      "alias": "option_tape/2026-02-13/NVDA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 21811538,
+      "sha256": "42f59db7aa7aed9fa1bc682faf7053869fc27ca9ce9a598a0dbc4f76ab089990"
+    },
+    {
+      "alias": "option_tape/2026-02-13/TSLA/0",
+      "binding": "matches_preexisting_pin",
+      "bytes": 28543468,
+      "sha256": "bdf3a8e0d42e46c49bc2e94c3f7296d2f249d68ea153d040d486f606401a1de9"
+    },
+    {
+      "alias": "minute_bars_receipt/2026-08-31/AMZN",
+      "binding": "metadata_hash_recorded_at_read",
+      "bytes": 647,
+      "sha256": "9dd8251d96345444ed040d6479733eb877b985f20c1166435f45054dba9ec166"
+    },
+    {
+      "alias": "minute_bars/2026-08-31/AMZN",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8895,
+      "sha256": "9ebe2dfe55bd8ed9ad08d59658909f71ed189b9eaa6401888957e75b5b62b728"
+    },
+    {
+      "alias": "minute_bars_receipt/2026-08-17/TSLA",
+      "binding": "metadata_hash_recorded_at_read",
+      "bytes": 647,
+      "sha256": "7907ab44978380d2489d88d63d032a23f01fad64327bb8ba421ad10f4d36314b"
+    },
+    {
+      "alias": "minute_bars/2026-08-17/TSLA",
+      "binding": "matches_preexisting_pin",
+      "bytes": 8862,
+      "sha256": "b23f7ab63be1aa7704d070e4ab021b1a3cd5d1a262ac0fa8f5c41f117b3e50e2"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "stage": "RP4_V3_REVISION2_TWO_PASS_GENERATOR_STATIC_ONLY",
+  "status": "PASS_STATIC_CHECKS_RUNTIME_TESTS_NOT_EXECUTED",
+  "model_fits": 0,
+  "newton_empirical_calls": 0,
+  "auc_consulted": false,
+  "numeric_tests_executed": false,
+  "synthetic_tests_written": 11,
+  "synthetic_tests_passed": null,
+  "report_generated": false,
+  "prior_generator_changed": false,
+  "frozen_results_changed": false,
+  "v4_changed": false,
+  "git_commits_by_this_agent": 0,
+  "scope_note": "The first secondary pass retained its two-thread resource cap. Only source editing, formatting, lint and static typing were performed. Runtime report tests remain explicitly unverified.",
+  "source_sha256": {
+    "report_newton_revision2.py": "4345a4cc1fb7b3069f70c2ac619dd79cc815b19c93c364cff66857f4dbd6447e",
+    "test_report_newton_revision2.py": "a61e2dea0234f287583a06f6e83c009e3a2844f2239f81658459684de85568ff",
+    "report_revision2.py": "e4d4d9ed795334f3c4128539fb6fd9ce614efac98e210729f945600c9f5889f2"
+  },
+  "newton_method_sha256": "529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa",
+  "newton_document_sha256": "7353209882a75316faf9f60da8d895739a5fb26e6f84bfb3cc01128c21d9f888",
+  "first_release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_v3_secondary_closeout/report_newton_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_newton_revision2.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff format --check artifacts/rp4_v3_secondary_closeout/report_newton_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_newton_revision2.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --explicit-package-bases --follow-imports=silent --ignore-missing-imports artifacts/rp4_v3_secondary_closeout/report_newton_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_newton_revision2.py",
+      "exit_code": 0,
+      "modules": 2
+    }
+  ],
+  "draft_type_errors_resolved": "Explicit source helper imports and typed argument unpacking; no numerical methodology changed.",
+  "skill_influence": "Model Evaluator: fair same-window comparison, separate passes and unavailable outputs; no new empirical analysis.",
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

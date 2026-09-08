@@ -1,0 +1,36 @@
+{
+  "stage": "RP4_V2_B2_GIT_CUSTODY",
+  "status": "PASS_EXACT_EVALUATION_BYTES_IN_GIT_AND_CHECKOUT",
+  "reason": "The inherited *.csv text eol=lf rule normalized the newly generated CRLF CSV in Git only. The physical evaluation artifact, summary and signed hash receipt never changed. Scoped child .gitattributes preserve the original bytes for both new windows. No method, data value, model or inferential calculation changed.",
+  "previous_commit": "e8204b640c44944fc8baa673c4295090b26ca17f",
+  "previous_normalized_git_blob_sha256": "88e6f6f00b84f84d9bcea55eff6a09d872ee3b08c37c129e220bb6fde5e0e9a2",
+  "artifacts_sha256": {
+    "artifacts/rp4_v2_b2/session_losses.csv": "c01bee110fe1a46d2e67b1261b1c865d3634c5ca8deda8af8ef5b69a70cc50c4",
+    "artifacts/rp4_v2_b2/.gitattributes": "7b4a8cd23291a1b96a854689d15d56af2d2c95046c5a92f00086c10a4b6b1ed0",
+    "artifacts/rp4_v2_b3/.gitattributes": "7b4a8cd23291a1b96a854689d15d56af2d2c95046c5a92f00086c10a4b6b1ed0"
+  },
+  "commands": [
+    {
+      "command": "git add --renormalize -- artifacts/rp4_v2_b2/session_losses.csv",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -c \"import hashlib,json,subprocess; p='artifacts/rp4_v2_b2/session_losses.csv'; oid=subprocess.check_output(['git','rev-parse',':'+p],text=True).strip(); results={}; expected='c01bee110fe1a46d2e67b1261b1c865d3634c5ca8deda8af8ef5b69a70cc50c4'; old=subprocess.check_output(['git','show','e8204b640c44944fc8baa673c4295090b26ca17f:'+p]); results['previous_normalized_blob_sha256']=hashlib.sha256(old).hexdigest(); results['index_blob_sha256']=hashlib.sha256(subprocess.check_output(['git','cat-file','blob',oid])).hexdigest(); assert results['index_blob_sha256']==expected; results['checkout_filter_sha256']={mode:hashlib.sha256(subprocess.check_output(['git','-c','core.autocrlf='+mode,'cat-file','--filters','--path='+p,oid])).hexdigest() for mode in ['false','true','input']}; assert all(v==expected for v in results['checkout_filter_sha256'].values()); results['status']='PASS_EXACT_EVALUATION_BYTES_IN_GIT_AND_CHECKOUT'; print(json.dumps(results,indent=2))\"",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --cached --check",
+      "exit_code": 0
+    }
+  ],
+  "checkout_modes_verified": [
+    "false",
+    "true",
+    "input"
+  ],
+  "earlier_check": "git diff --cached --check initially returned 2 because CRLF was classified as trailing whitespace; the scoped rule now declares CR-at-EOL while retaining the other default whitespace checks.",
+  "physical_evaluation_bytes_modified": false,
+  "model_refits": 0,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

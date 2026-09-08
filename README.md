@@ -1,238 +1,146 @@
-# Does option-market information improve intraday volatility forecasts?
+fuera de muestra walk-forward, partición fijada 2026-09-07.
+
+# ¿Las opciones mejoran el pronóstico de volatilidad intradía?
 
 [![Tier 1 CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
-![Python 3.12](https://img.shields.io/badge/python-3.12-1a2332)
-![Headline claim](https://img.shields.io/badge/global_edge-not_confirmed-e8a33d)
 
-Six large US equities. Every five minutes of the New York session, predict how much the
-stock will actually move over the next thirty minutes. Then ask whether knowing what the
-options market is doing makes that prediction better.
+El estado y la superficie de opciones mejoran el pronóstico medio de RV30 y RV15
+en ambas familias bajo las pruebas de v3/v4. El flujo añade una mejora pequeña
+en la familia lineal a **15 minutos (+0,623 % de reducción de QLIKE)**, con
+**IC95 % positivo** de la diferencia QLIKE [0,000335; 0,001932], y a
+**5 minutos (+0,256 %, secundario)**; en árboles no supera la prueba de la media.
+No es una ventaja universal ni evidencia de rentabilidad.
 
----
+![Síntesis de tesis: ambas familias y cinco versiones u horizontes, con intervalos](docs/figures/rp4/thesis_summary.svg)
 
-## The answer
+## Pregunta, diseño y respuesta
 
-**The one-shot PIT v2.2 result is scientifically reportable, but it does not confirm a
-global option-information edge.**
+Seis activos: AAPL, AMZN, META, MSFT, NVDA y TSLA. B0 contiene historia de precios
+y volatilidad; B1 añade superficie de opciones; B2 añade composición y actividad
+del flujo. Los conjuntos son anidados: 29/69/138 predictores en v3/v4.
+La familia lineal es winsorizada con filtro de rango (ridge nominal); la otra
+es LightGBM. QLIKE mide error de pronóstico, no beneficios de una estrategia.
 
-On the 32-session holdout, the confirmatory Gamma B1a-over-B0 QLIKE contrast is
-+0.00817125 [0.00265777, 0.01402423], Holm p=0.00839916. That estimate is still below
-the development-frozen MDE of 0.00841614. Gamma B2-over-B0+B1a is -0.00312662
-[-0.01392336, 0.00860855], Holm p=0.55954405, versus MDE 0.00667623. Neither registered
-contrast reaches its MDE. LightGBM robustness is positive for B1a (+0.00417581) and B2
-(+0.00136801), but both remain below the same descriptive MDE references; B2's interval
-contains zero. The disposition is `GLOBAL_EDGE_NOT_CONFIRMED`, `capital_go=false`,
-`RESEARCH_ONLY`, and `NOT INVESTMENT ADVICE`.
+Partición de calendario: 2026-08-01, fijada el 2026-09-07. Entrenamiento expansivo
+sólo con el pasado; 60 sesiones de calentamiento; selección sobre las últimas
+diez sesiones de entrenamiento; purga/embargo de 60 minutos. Primaria v2–v4:
+419 sesiones, 160.832 orígenes. Ventana final: 25 sesiones, 9.750 orígenes.
 
-The twelve comparisons below are the historical RP2-v3 context, not the current
-confirmatory authority. They separate option *state* (B1 over B0) from recent option
-*flow* (B2 over B1), across three model families and two calendar roles.
+Cada celda muestra **reducción porcentual de QLIKE (p)**. En v1/v2 se usa p
+bilateral con Holm; en v3/v4, H1→H2 unilateral al 5 % por familia. H2 sólo se
+abre cuando H1 rechaza. No se corrige la búsqueda entre versiones.
 
-![Twelve historical contrasts against the threshold each one declared](docs/figures/evidence.svg)
+| Versión / objetivo | Lineal B1/B0 | Lineal B2/B1 | Árboles B1/B0 | Árboles B2/B1 | Sesiones |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| v1 · RV30 | +0,290 % (1,000) | −167.448,32 % (1,000) | +1,204 % (0,4724) | −0,073 % (1,000) | 418 |
+| v2 · RV30 | +1,715 % (0,1842) | −8,714 % (0,3752) | +2,091 % (0,0264) | −0,063 % (0,8858) | 419 |
+| v3 · RV30 | +1,729 % (0,0439) | +0,554 % (0,0525) | +2,091 % (0,0053) | −0,159 % (0,6631) | 419 |
+| v4 · RV15, primario | +0,880 % (0,0390) | +0,623 % (0,0032) | +1,170 % (0,0135) | −0,115 % (0,6280) | 419 |
+| v4 · RV5, secundario | +0,377 % (0,0092) | +0,256 % (0,0172) | +0,536 % (0,0608) | +0,160 % (no abierta; nominal 0,1927) | 419 |
 
-Every comparison registers a detection threshold before it is run, so it cannot be
-declared a success after the fact. Two of the twelve beat their own threshold (their
-registered minimum detectable effect), and both are discovery option-state contrasts. No flow contrast clears its own
-MDE. Discovery LightGBM flow is positive at +0.00052, but its 95% interval
-[-0.00013, +0.00111] contains zero and its estimate remains below its 0.00089 MDE.
-Validation flow estimates have mixed signs. **That historical bundle is mixed by family
-and role, not a universal flow finding.**
+El flujo lineal es positivo en los tres bloques de ambos horizontes; por activo,
+en seis de seis a 15 minutos y **tres de seis a 5 minutos**. En árboles, la
+mediana pareada de B2 es positiva a 15/5 minutos: p bilateral 0,0435/0,0038 y
+Holm 0,0870/0,0096; no sustituye la media primaria. La ventana final de 25
+sesiones no confirma la secuencia completa. El programa termina en v4, sin v5.
 
-The earlier flow exception motivated a sealed question before this timing remediation;
-that programme remains frozen rather than rewritten around the updated retrospective run.
-[`docs/rp3/PREREGISTRATION.md`](docs/rp3/PREREGISTRATION.md) fixes two hypotheses, on
-sessions that mostly did not exist when it was written, to be opened once at 662 sessions
-— estimated 2029-01-30.
+[Resultado final y límites](docs/rp4/RESULTADO_FINAL.md) ·
+[Informe completo con ambas ventanas](docs/rp4/results_v4.md) ·
+[Anexo de 40 paneles sin recorte](docs/figures/rp4/comparison_v1_v4.svg) ·
+[Datos agregados de las figuras](artifacts/rp4_closeout_figures/comparison_v1_v4.csv)
 
-Two further points a reader should have before going on:
+## Cómo verificar y reproducir
 
-- **Did the option-*state* layer help?** In discovery, yes. It did not hold up under
-  validation, so it is not stated as a finding.
-- **Did the signal weaken over time?** That cannot be claimed. The data do not show that
-  fall, and splitting by date cannot separate a change in the market from simply having
-  less data to train on.
-
----
-
-## When it was tested
-
-![Two retrospective samples, then three sealed tests: one opened, one collecting, one locked until 2029](docs/figures/programme-timeline.svg)
-
-*Bar length is time. The dark bars are measured and reported; the amber card is a test that has never been opened.*
-
-Retrospective work can always be re-run until it agrees with you. The defence against that
-is a cohort you are allowed to look at only once, under a protocol written and hashed
-before that data existed.
-
-One such read is spent. Phase 8A opened on 2026-08-30 and returned `MIXED_EXPLORATORY`:
-the state layer was positive in all four cells with descriptive Holm p below 0.05 in
-three, while the flow layer crossed zero in all four and cleared Holm in none. An audit
-reproduced the registered inference exactly and found **no aggregation change**. A separate
-post-hoc rebuild then corrected the information clock on the same 30 materialized sessions:
-only one of eight B1-inclusive primary cells lowered paired QLIKE, although the qualitative
-B1-positive/B2-conditional-null pattern survived. Both exercises are descriptive,
-**not confirmatory**, and cannot promote anything. Full result in the
-[Phase 8A addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).
-
-One cohort is still collecting, and one is sealed until 2029.
-
----
-
-## What was compared
-
-![Three nested information sets on one shared row mask](docs/figures/information-sets.svg)
-
-Three models see three progressively larger pictures of the same moment, and all three are
-scored on exactly the same moments. That is what lets the difference between two steps be
-attributed to the information added and to nothing else.
-
-The loss function is QLIKE. The model families are Gamma GLM, ridge-log and
-LightGBM-QLIKE. Results are aggregated by trading session before any interval is computed,
-because minutes within one session are not independent observations.
-
-One distinction does a lot of work here: knowing *when a fact was true* is not the same as
-knowing *when you could have seen it*. Unusual Whales `created_at` is `PROXY_ONLY`, and
-Massive SIP timestamps establish when something happened at the source, not when a
-subscriber received it. The rules used are in
-[`docs/provider_timing_pit_contract_v22.md`](docs/provider_timing_pit_contract_v22.md).
-
----
-
-## Why you can trust it
-
-![How a measurement becomes an eligible claim, or does not](docs/figures/eligibility-gates.svg)
-
-A number in this repository is not a claim until it passes three gates. Failing one does
-not delete the number — it keeps it auditable and marks it as history.
-
-The successor passed scientific-custody validation after one authorized OOS read. It did
-not pass the separate edge or capital gates, and the read cannot be repeated. That is the
-state this repository publishes, stated in full under
-[Governance and current state](#governance-and-current-state).
-
----
-
-## Where the data comes from
-
-![From licensed provider data to a published, hash-pinned record](docs/figures/data-pipeline.svg)
-
-Provider data is licensed and is not redistributed. Panels are built and evaluated on one
-machine; what reaches this repository is aggregate results, schemas and SHA-256 pointers.
-Custody and access boundaries are in [`data/DATA_ACCESS.md`](data/DATA_ACCESS.md) and
-[`data/GATED_DATA_POINTERS.json`](data/GATED_DATA_POINTERS.json).
-
-That boundary has a consequence worth stating plainly: hosted CI can prove this repository
-is internally consistent, but it can never verify a licensed panel, because it cannot see
-one. Only a local run can.
-
----
-
-## Reproducing it
-
-A methodological smoke demo, on synthetic inputs, exercising the primitives only:
+Verificación del informe contra los resultados guardados, sin datos licenciados,
+entrenamiento ni inferencia nueva:
 
 ```powershell
-uv sync --locked
-uv run python scripts/run_public_repro_demo.py
+uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py
+uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_closeout_figures_code -q -p no:cacheprovider
 ```
 
-It does not acquire provider data, build licensed panels, run the cascade or publish
-anything.
+Requiere el entorno Python 3.12 instalado con las dependencias fijadas en
+`uv.lock`. El [runbook](docs/rp4/OPERATING_GUIDE.md) separa verificación pública,
+ejecuciones históricas y reproducción con licencia y originales. No se declara
+una nueva ejecución completa ni CI remota aprobada. La proyección de publicación
+puede tener bytes distintos: sus hashes no se presentan como los del freeze.
 
-Hosted CI runs static quality, hermetic tests and scientific contracts against tracked
-public inputs; exact commands are in [`docs/ci_contract_v1.md`](docs/ci_contract_v1.md).
+Las fuentes de proveedores y los derivados por origen no se redistribuyen.
+La licencia del código no concede derechos sobre esos datos.
+[Acceso a datos](data/DATA_ACCESS.md) · [Estado generado](STATUS.md) ·
+[Estado legible por máquina](data/CANONICAL_STATE.json).
 
-Running `pytest` on a fresh clone reports failures from the panel guard, by design: it
-fails closed when the licensed panels are absent rather than skipping, because a silent
-skip would let an unverified run look green. Each failure names `RP2_PANEL_UNVERIFIED`. To
-reproduce what hosted CI reproduces, set the same opt-out CI sets:
+## Divulgaciones
 
-```powershell
-$env:MDS650_PANEL_GUARD_MAY_SKIP = "1"; uv run pytest tests -q --ignore=tests/unit/test_independent_replication_panel.py --cov=src/mds650 --cov-report=term --cov-fail-under=90
-```
+Cuarta evaluación de las mismas ventanas: v1 inicial; v2 corrige cobertura y
+estabilidad; v3 añade desbalance y ventanas vacías; v4 cambia el horizonte bajo
+un antecedente condicional. RV5 es secundario, no una réplica independiente.
 
-The local Tier 2 gate additionally requires licensed evidence and live credentials:
+La ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8
+con otra especificación. El PIT es proxy de tiempo fuente a 120 s, como en la
+literatura; no demuestra recepción histórica por el cliente.
 
-```powershell
-uv run python scripts/run_local_evidence_gates.py
-```
+El hueco UW 2025-01-25–2025-02-24 se acepta sin relleno. Las marcas de sucesos
+en las figuras son contexto temporal, no atribución causal.
 
-Boundaries between the two tiers are in
-[`docs/reproducibility_contract_v1.md`](docs/reproducibility_contract_v1.md).
+## Historial: resultados y correcciones conservados
 
----
+- El programa de 2024 y RP2 distinguió superficie y flujo con resultados
+  dependientes de modelo y muestra; su señal se estudió como absorbida por
+  información de estado, no se presenta como réplica de RP4.
+  [Registro de resultados anteriores](docs/rp2_v3/SUPERSEDED_RESULTS.md).
+- El sucesor PIT v2.2 tiene una lectura de evaluación fechada 2026-09-02,
+  cifras favorables y adversas y disposición histórica
+  `GLOBAL_EDGE_NOT_CONFIRMED`.
+  [Resultado y límites originales](docs/pit_v22_claims_and_limitations_v2.md).
+- El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones
+  descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).
+- RP3 conserva su protocolo, contador de lectura cero y fecha **prevista**
+  2029-01-30; esa fecha no es una lectura realizada. [Prerregistro](docs/rp3/PREREGISTRATION.md).
+  C10 permanece inactivo por decisión 128: no se inventa fecha de lectura.
+  Fase 9 dejó de ser cohorte sellada para RP4; sus originales no se modifican.
+- v1 conserva su fallo numérico; v2 conserva sus resultados; la regla de ventana
+  vacía de v3 acotó los apagones del proveedor sin eliminar todo el daño.
+  [Auditoría de instrumento y modelos](artifacts/rp4_closeout_audit/REPORT.md).
+  El cambio de vencimientos del 26 de enero de 2026 y los extremos AMZN/TSLA
+  se documentan con límites de verificación.
+  [Censo y barras](artifacts/rp4_market_audit/REPORT.md).
 
-## Governance and current state
+## Referencia de trabajo
 
-This section is the machine-checked position, kept separate from the finding above: the
-finding says what the evidence shows, this says what the project is permitted to claim.
+<details>
+<summary>Trazabilidad técnica anterior, no resultado vigente de RP4</summary>
 
-**The current scientific result is the custody-validated PIT v2.2 successor-v2 run.** Its
-result SHA-256 is
-`ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775`; its full-log
-SHA-256 is `0507ccf5903d46ccd7fee2dc7a535faa8455501e7a1061bafceadd1d8e5f96a3`.
-It consumed exactly one OOS read after development-only MDE freeze. Independent custody
-validation makes the result eligible to report scientifically, while edge and capital
-eligibility remain false.
+El registro histórico `rp2-v3-20260831-b1-spot-cutoff-remediation` conserva el
+hash científico `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`.
+Su disposición es `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`, por
+`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`; no se presenta como una réplica de RP4.
+El puente Fase 8 conserva `MIXED_EXPLORATORY`: su auditoría concluyó
+«no aggregation change» y «not confirmatory»; la sensibilidad materializada
+mejoró sólo «one of eight B1-inclusive primary cells». Son diagnósticos
+históricos, no la conclusión del programa cerrado en v4.
 
-The prior bundle `rp2-v3-20260831-b1-spot-cutoff-remediation` (scientific SHA-256
-`033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`) remains
-`HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM` for reason
-`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`.
+[Estado canónico e historial](data/CANONICAL_STATE.json) ·
+[Límites PIT anteriores](docs/pit_v22_claims_and_limitations.md) ·
+[Acceso a datos](data/DATA_ACCESS.md) ·
+[Contrato de reproducción histórico](docs/reproducibility_contract_v1.md).
 
-The authority is [`data/CANONICAL_STATE.json`](data/CANONICAL_STATE.json): one run
-manifest, one hash, one eligibility state and its blocking reasons. If any document
-disagrees with it, the canonical state wins.
+</details>
 
-Superseded measurements stay available for audit, never as current findings:
+La ruta vigente de lectura es este README → [RESULTADO_FINAL](docs/rp4/RESULTADO_FINAL.md)
+→ [RUNBOOK](docs/rp4/OPERATING_GUIDE.md). Los protocolos y recibos anteriores se conservan
+como historia; no autorizan volver a ejecutar campañas cerradas.
+La preparación es local: no se ha publicado esta entrega ni abierto su PR.
 
-- [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](docs/rp2_v3/SUPERSEDED_RESULTS.md) — what was
-  retired, and why.
-- [`docs/rp2_v3/VERDICT.md`](docs/rp2_v3/VERDICT.md) — the narrative for the
-  corrected-protocol bundle, marked `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`.
-- [`docs/pit_v22_claims_and_limitations.md`](docs/pit_v22_claims_and_limitations.md) — the
-  historical v1 point-in-time boundary and consumed pre-OOS failure.
-- [`docs/pit_v22_claims_and_limitations_v2.md`](docs/pit_v22_claims_and_limitations_v2.md)
-  — the current successor-v2 contrasts, data-defect disposition and claim limits.
+[Guía de desarrollo](docs/DEVELOPER_GUIDE.md) · [Licencia](LICENSE) ·
+[Citación](CITATION.cff) · [Seguridad](SECURITY.md).
 
-No causal mechanism, formal equivalence, confirmatory discovery or live trading result is
-claimed. Residual risks are in the
-[threats-to-validity matrix](docs/threats_to_validity_matrix_v1.md).
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
 
----
+## Navegación
 
-## Repository map
-
-| Path | What is there |
-| --- | --- |
-| `src/mds650/` | Research and validation code |
-| `scripts/` | Producers and verification entrypoints; see [`scripts/README.md`](scripts/README.md) |
-| `tests/` | Unit, behavioural, contract and synthetic end-to-end tests |
-| `configs/`, `schemas/`, `specs/` | Frozen configuration and machine-readable contracts |
-| `artifacts/` | Public aggregates and frozen evidence records |
-| `supabase/` | Database schema and access controls; see [`supabase/README.md`](supabase/README.md) |
-| `docs/` | Methodology, limitations and history; see [`docs/INDEX.md`](docs/INDEX.md) |
-| `reports/` | Deliverables; see [`reports/INDEX.md`](reports/INDEX.md) |
-
-The figures above are generated by `scripts/render_figures.py` from the evidence they
-describe, in the palette defined in `scripts/figure_style.py`.
-
-New readers of the code should start with the
-[developer guide](docs/DEVELOPER_GUIDE.md) and the
-[architecture map](docs/architecture.md).
-
----
-
-## Scope
-
-Research evidence. Not investment advice, not an order-routing system, not evidence of
-live profitability. `capital_go=false`.
-
-[Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues) and
-methodological discussion are welcome; boundaries are in
-[`CONTRIBUTING.md`](CONTRIBUTING.md), and computational assistance is disclosed in
-[`docs/AI_ASSISTANCE_STATEMENT.md`](docs/AI_ASSISTANCE_STATEMENT.md).
-
-See [`CITATION.cff`](CITATION.cff), [`LICENSE`](LICENSE) for the MIT licence covering
-project-authored material, and [`SECURITY.md`](SECURITY.md) for private vulnerability
-reporting.
+[Contribuir](CONTRIBUTING.md) · [Índice de documentación](docs/INDEX.md) ·
+[Declaración de asistencia](docs/AI_ASSISTANCE_STATEMENT.md) ·
+[Amenazas a la validez](docs/threats_to_validity_matrix_v1.md) ·
+[Scripts](scripts/README.md) · [Índice de informes](reports/INDEX.md) ·
+[Base de datos](supabase/README.md) · [Issues](https://github.com/mguerrero896/does-option-flow-predict-volatility/issues).

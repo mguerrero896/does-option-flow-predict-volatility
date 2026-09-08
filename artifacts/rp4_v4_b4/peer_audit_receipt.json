@@ -1,0 +1,508 @@
+{
+  "schema_version": "rp4-v4-independent-peer-audit-v1",
+  "status": "PASS_INDEPENDENT_CLOSED_ARTIFACT_AUDIT",
+  "created_at_utc": "2026-09-07 19:30:59 UTC",
+  "reviewer": "root/rp4_acquire",
+  "working_directory": "private-input/0ec5f26c567f416b9513",
+  "scope": {
+    "closed_windows": [
+      {
+        "horizon_minutes": 15,
+        "window": "primary",
+        "N_sessions": 419,
+        "N_origins": 160832,
+        "first_session": "2024-10-28",
+        "last_session": "2026-07-31"
+      },
+      {
+        "horizon_minutes": 15,
+        "window": "confirmation",
+        "N_sessions": 25,
+        "N_origins": 9750,
+        "first_session": "2026-08-03",
+        "last_session": "2026-09-04"
+      },
+      {
+        "horizon_minutes": 5,
+        "window": "primary",
+        "N_sessions": 419,
+        "N_origins": 160832,
+        "first_session": "2024-10-28",
+        "last_session": "2026-07-31"
+      },
+      {
+        "horizon_minutes": 5,
+        "window": "confirmation",
+        "N_sessions": 25,
+        "N_origins": 9750,
+        "first_session": "2026-08-03",
+        "last_session": "2026-09-04"
+      }
+    ],
+    "source_commit_pins": {
+      "15/primary": "dbb1502",
+      "15/confirmation": "f4b03e0",
+      "5/primary": "f10ec8a",
+      "5/confirmation": "a768f3b"
+    },
+    "commands_and_logs_verified": 36,
+    "checkpoint_receipts_verified": 888,
+    "keys_training_last_session_original_30min_end_and_fit_mask_counts_exact_to_v3": true,
+    "rv15_rv5_mask_hashes_equal_both_windows": true,
+    "mask_hash_output_note": "The preserved first-command outputs say mask_hashes_RV15_RV5_exact=false for RV15 because the comparison is performed on RV5 after loading its RV15 counterpart. The completed RV5 primary and confirmation comparisons are both true; no mask mismatch was observed.",
+    "zero_new_model_fits": true,
+    "zero_bootstrap_reruns": true,
+    "maximum_audit_threads": 1,
+    "no_unclosed_result_reads": true,
+    "protected_report_manifest_and_model_files_modified": false,
+    "model_rerun_authorized_or_executed": false,
+    "statistical_scope": "Independent arithmetic and custody audit of fixed forecasts and exported results. No model retraining, tuning, inferential resampling or new evaluation. Counts across horizons are repeated artifact occurrences, not independent samples.",
+    "primary_statistics_and_main_tables_checked": 24,
+    "cumulative_curves_checked": 24,
+    "cumulative_points_checked": 5352,
+    "input_hashes_verified_by_report_audit": 43,
+    "output_hashes_verified_by_report_audit": 15,
+    "all_report_local_links_exist": true,
+    "maximum_origin_qlike_to_csv_absolute_error": 4.440892098500626e-16,
+    "maximum_mean_delta_absolute_error": 2.168404344971009e-19,
+    "maximum_reduction_percentage_point_absolute_error": 2.220446049250313e-16,
+    "coverage_rows_verified": 36,
+    "empty_census_rows_verified": 48,
+    "fit_selection_rows_verified": 5328,
+    "bound_count_rows_verified": 24
+  },
+  "interpretation": {
+    "rp4_v4_primary_rv15_closure_satisfied_only_by": [
+      "log_ridge_harq"
+    ],
+    "global_joint_reject_all_families": false,
+    "rv5_secondary_cannot_rescue_primary": true,
+    "confirmation_rv5_ridge_H1": "NOT_REJECTED; p=0.5015",
+    "confirmation_rv5_ridge_H2": "NOT_TESTED; nominal diagnostic p=0.1086",
+    "confirmation_rv5_lightgbm_H1": "REJECTED; p=0.0224",
+    "confirmation_rv5_lightgbm_H2": "NOT_REJECTED; estimate negative; p=0.7716",
+    "confidence_interval_p_value_note": "The bilateral percentile 95% interval is not an inversion of the centered-null one-sided p-value; interval positivity alone does not override the fixed sequence.",
+    "neither_versions_nor_horizons_counted_as_independent_replications": true,
+    "audit_pass_is_not_global_scientific_confirmation": true
+  },
+  "execution_evidence": [
+    {
+      "name": "three_closed_windows_original_output_preserved",
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONIOENCODING='utf-8'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:MKL_NUM_THREADS='1'\n$env:NUMEXPR_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\n$auditSource=@'\nimport csv, hashlib, json, math, os, subprocess, sys, time\nfrom collections import Counter, defaultdict\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nif os.name == 'nt':\n    import ctypes\n    kernel=ctypes.WinDLL('kernel32',use_last_error=True)\n    kernel.GetCurrentProcess.restype=ctypes.c_void_p\n    kernel.SetPriorityClass.argtypes=[ctypes.c_void_p,ctypes.c_uint]\n    assert kernel.SetPriorityClass(kernel.GetCurrentProcess(),0x4000), ctypes.get_last_error()\nroot=Path.cwd(); private=Path('private-input/d983c44a81f6f3fe85fb')\nfamilies=('log_ridge_harq','lightgbm_qlike'); contrasts=(('B1_over_B0','B0','B1'),('B2_over_B1','B1','B2'))\nspec_sha='0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04'\nplan=((15,'primary','dbb1502'),(15,'confirmation','f4b03e0'),(5,'primary','f10ec8a'))\nread=lambda p:json.loads(Path(p).read_bytes())\ndef sha(p):\n    with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()\ndef stamped(p,d):\n    data=Path(p).read_bytes();assert hashlib.sha256(data).hexdigest()==d, str(p);return json.loads(data)\ndef average(x):return math.fsum(x)/len(x)\nv3summaries={};v3keys={};v4masks={};results=[];t0=time.perf_counter()\nfor h,window,commit in plan:\n    stage='b2' if window=='primary' else 'b3';folder=root/'artifacts'/f'rp4_v4_{stage}_rv{h}';output=private/'evaluation'/f'rv{h}'/window\n    receipt=read(folder/'receipt.json');assert receipt['status']=='COMPLETE' and receipt['exit_code']==0\n    committed=subprocess.check_output(['git','show',f'{commit}:artifacts/rp4_v4_{stage}_rv{h}/receipt.json'],cwd=root)\n    assert hashlib.sha256(committed).hexdigest()==sha(folder/'receipt.json')\n    assert (receipt['stage'],receipt['window'],receipt['horizon_minutes'],receipt['target_key'])==(stage.upper(),window,h,f'rv_{h}')\n    release_path=root/'artifacts/rp4_v4_a2'/f'evaluation_release_rv{h}.json';release=stamped(release_path,receipt['release_sha256'])\n    assert receipt['evaluation_code_sha256']==release['evaluation_code_sha256']\n    for p,d in receipt['evaluation_code_sha256'].items():assert sha(root/p)==d,p\n    for p,d in receipt['artifacts_sha256'].items():assert sha(p)==d,p\n    common=[sys.executable,'-B','-m','artifacts.rp4_v4_code.evaluate_v4','--spec',str(root/'artifacts/rp4_v4_a1/specification.json'),'--spec-sha256',spec_sha,'--release',str(release_path),'--horizon',str(h),'--window',window,'--threads','4','--shard-count','8']\n    expected=[subprocess.list2cmdline(common+['--shard-index',str(i)]) for i in range(8)]+[subprocess.list2cmdline(common+['--aggregate-only'])]\n    assert [r['command'] for r in receipt['commands']]==expected\n    assert len({r['log'] for r in receipt['commands']})==9\n    for command in receipt['commands']:assert command['exit_code']==0 and sha(command['log'])==command['log_sha256']\n    summary=read(folder/'summary.json');binding=summary['binding'];assert binding['release_sha256']==receipt['release_sha256']\n    assert binding['target_key']==f'rv_{h}' and binding['horizon_minutes']==h and binding['specification_sha256']==spec_sha\n    with (folder/'session_losses.csv').open(newline='',encoding='utf-8-sig') as stream:losses=list(csv.DictReader(stream))\n    dates=[r['session_date'] for r in losses];assert dates==sorted(set(dates))\n    assert (len(losses),summary['N_sessions'],summary['N_origins'])==((419,419,160832) if window=='primary' else (25,25,9750))\n    assert (dates[0],dates[-1])==(('2024-10-28','2026-07-31') if window=='primary' else ('2026-08-03','2026-09-04'))\n    assert set(summary['completed_session_sha256'])=={d+'.json' for d in dates}\n    assert {p.name for p in (output/'sessions').glob('*.json')}==set(summary['completed_session_sha256'])\n    assert {p.name for p in (output/'session_receipts').glob('*.json')}==set(summary['completed_session_sha256'])\n    oldsummary=v3summaries.setdefault(window,read(root/'artifacts'/f'rp4_v3_{stage}'/'summary.json'))\n    assert summary['executed_origins_by_asset']==oldsummary['executed_origins_by_asset']\n    assert summary['evaluation_quality_by_asset']==oldsummary['evaluation_quality_by_asset']\n    assert set(summary['completed_session_sha256'])==set(oldsummary['completed_session_sha256'])\n    assert summary['inherited_eligibility_unchanged'] is True and summary['secondary_can_rescue_primary'] is False\n    contrast_results=[];max_delta_error=max_percent_error=max_loss_error=0.0;successes=[]\n    for family in families:\n        opened=True\n        for contrast,b0,b1 in contrasts:\n            item=next(r for r in summary['contrasts'] if (r['family'],r['contrast'])==(family,contrast))\n            baseline=average([float(r[f'loss__{family}__{b0}']) for r in losses]);expanded=average([float(r[f'loss__{family}__{b1}']) for r in losses]);delta=average([float(r[f'loss__{family}__{b0}'])-float(r[f'loss__{family}__{b1}']) for r in losses]);percent=100*delta/baseline\n            max_delta_error=max(max_delta_error,abs(delta-item['estimate']));max_percent_error=max(max_percent_error,abs(percent-item['qlike_reduction_percent']))\n            max_loss_error=max(max_loss_error,abs(baseline-item['baseline_qlike']),abs(expanded-item['expanded_qlike']))\n            assert abs(delta-item['estimate'])<1e-14 and abs(percent-item['qlike_reduction_percent'])<1e-10\n            assert item['alternative']=='greater' and item['status']=='COMPUTED' and item['bootstrap_repetitions']==9999\n            assert item['p_raw']==(item['null_exceedances']+1)/(item['bootstrap_repetitions']+1)\n            reject=opened and delta>0 and item['p_raw']<=0.05;state='NOT_TESTED' if not opened else 'REJECTED' if reject else 'NOT_REJECTED'\n            assert item['rejected']==reject and item['hypothesis_status']==state\n            assert item['p_for_decision']==(item['p_raw'] if opened else None)\n            assert item['inference_role']==('PRIMARY' if h==15 else 'SECONDARY')\n            contrast_results.append({'family':family,'contrast':contrast,'delta':delta,'QLIKE_reduction_percent':percent,'p_raw':item['p_raw'],'p_formal':item['p_for_decision'],'decision':state,'CI95':[item['ci_low'],item['ci_high']]})\n            opened=reject\n        if opened:successes.append(family)\n    assert summary['global_joint_reject']==(len(successes)==2)\n    closure=summary['predeclared_closure'];assert closure['successful_families']==successes and closure['applies']==(h==15 and window=='primary') and closure['global_alpha_0_05_control_claimed'] is False\n    assert closure['satisfied']==(bool(successes) if closure['applies'] else None)\n    ordered=sorted(summary['comparability_bilateral'],key=lambda r:r['p_raw']);cumulative=0.0\n    for rank,item in enumerate(ordered):\n        cumulative=max(cumulative,min(1.0,(len(ordered)-rank)*item['p_raw']));assert abs(cumulative-item['p_holm'])<1e-14\n    keycount=0;assets=Counter();origin_loss_error=0.0\n    for index,(day,csvrow) in enumerate(zip(dates,losses,strict=True)):\n        name=day+'.json';record=stamped(output/'sessions'/name,summary['completed_session_sha256'][name]);session_receipt=read(output/'session_receipts'/name)\n        assert session_receipt['sha256']==summary['completed_session_sha256'][name] and session_receipt['session']==day and session_receipt['binding']==binding\n        assert record['binding']==binding and record['session']==day and record['target_key']==f'rv_{h}' and record['horizon_minutes']==h\n        assert set(record['fits'])=={f'mean__{family}__{b}' for family in families for b in ('B0','B1','B2')}\n        key=(window,day)\n        if key not in v3keys:\n            old=stamped(Path('private-input/c43ac6756d25b8e9ea94')/window/'sessions'/name,oldsummary['completed_session_sha256'][name])\n            v3keys[key]={k:old[k] for k in ('keys','train_last_session','train_sessions','first_evaluation_origin_utc','max_training_target_end_utc')}\n            v3keys[key]['fit_masks']={m:{k:old['fits'][m][k] for k in ('train_rows','inner_fit_rows','inner_valid_rows','inner_valid_sessions')} for m in record['fits']}\n        prior=v3keys[key]\n        for field in ('keys','train_last_session','train_sessions','first_evaluation_origin_utc','max_training_target_end_utc'):assert record[field]==prior[field],(h,window,day,field)\n        assert record['train_last_session']<day\n        first=datetime.fromisoformat(record['first_evaluation_origin_utc']);last=datetime.fromisoformat(record['max_training_target_end_utc']);selected=datetime.fromisoformat(record['max_training_selected_target_end_utc']);assert last<=first-timedelta(minutes=60) and selected==last-timedelta(minutes=30-h)\n        for model,fit in record['fits'].items():\n            assert {k:fit[k] for k in prior['fit_masks'][model]}==prior['fit_masks'][model]\n            assert len(fit['inner_valid_sessions'])==10 and max(fit['inner_valid_sessions'])<day\n        if h==15:v4masks[key]=(record['mask_counts'],record['mask_sha256'])\n        else:assert (record['mask_counts'],record['mask_sha256'])==v4masks[key]\n        n=len(record['keys']);assert record['mask_counts']['test']==n==len(record['target'])\n        keycount+=n;assets.update(k['asset'] for k in record['keys'])\n        assert len({(k['asset'],k['session_date'],k['origin_minute']) for k in record['keys']})==n\n        for family in families:\n            for b in ('B0','B1','B2'):\n                forecasts=record['forecasts'][family][b];assert len(forecasts)==n\n                grouped=defaultdict(list)\n                for keyrow,y,f in zip(record['keys'],record['target'],forecasts,strict=True):\n                    assert y>0 and f>0 and math.isfinite(y) and math.isfinite(f)\n                    ratio=y/f;grouped[keyrow['asset']].append(ratio-math.log(ratio)-1.0)\n                loss=average([average(v) for v in grouped.values()]);err=abs(loss-float(csvrow[f'loss__{family}__{b}']));origin_loss_error=max(origin_loss_error,err);assert err<1e-12,(h,window,day,family,b,err)\n        if index and index%140==0:print(json.dumps({'audit_progress':f'RV{h}/{window}','verified_sessions':index+1}),flush=True)\n    assert keycount==summary['N_origins'] and dict(assets)==summary['executed_origins_by_asset']\n    result={'horizon':h,'window':window,'receipt_SHA256':sha(folder/'receipt.json'),'summary_SHA256':sha(folder/'summary.json'),'CSV_SHA256':sha(folder/'session_losses.csv'),'commands_logs_verified':9,'sessions_verified':len(dates),'origins_verified':keycount,'first':dates[0],'last':dates[-1],'keys_timing_fit_mask_counts_v3_exact':True,'mask_hashes_RV15_RV5_exact':h==5,'max_delta_error':max_delta_error,'max_percent_error':max_percent_error,'max_baseline_loss_error':max_loss_error,'max_origin_QLIKE_to_CSV_error':origin_loss_error,'global_joint_reject':summary['global_joint_reject'],'closure':closure,'contrasts':contrast_results}\n    results.append(result);print(json.dumps(result),flush=True)\nprint(json.dumps({'status':'PASS_INDEPENDENT_V4_THREE_CLOSED_WINDOWS','elapsed_seconds':time.perf_counter()-t0,'new_model_fits':0,'bootstrap_reruns':0,'files_written':0,'unclosed_RV5_confirmation_read':False,'threads_max':1,'results':results}),flush=True)\n'@\n$auditSource | uv run --offline --frozen --no-sync python -B -\nexit $LASTEXITCODE",
+      "chunk_id": "4be70a",
+      "wall_time_seconds": 9.5866801,
+      "exit_code": 0,
+      "original_token_count": 3133,
+      "output": "{\"audit_progress\": \"RV15/primary\", \"verified_sessions\": 141}\r\n{\"audit_progress\": \"RV15/primary\", \"verified_sessions\": 281}\r\n{\"horizon\": 15, \"window\": \"primary\", \"receipt_SHA256\": \"d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93\", \"summary_SHA256\": \"451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4\", \"CSV_SHA256\": \"28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1\", \"commands_logs_verified\": 9, \"sessions_verified\": 419, \"origins_verified\": 160832, \"first\": \"2024-10-28\", \"last\": \"2026-07-31\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": false, \"max_delta_error\": 0.0, \"max_percent_error\": 1.1102230246251565e-16, \"max_baseline_loss_error\": 2.7755575615628914e-17, \"max_origin_QLIKE_to_CSV_error\": 2.220446049250313e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": true, \"at_least_one_family_rejects\": true, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": true, \"status\": \"SATISFIED\", \"successful_families\": [\"log_ridge_harq\"]}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0016163117029221244, \"QLIKE_reduction_percent\": 0.8800546830738928, \"p_raw\": 0.039, \"p_formal\": 0.039, \"decision\": \"REJECTED\", \"CI95\": [0.0002529862671932415, 0.003453534376546728]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0011337596590923558, \"QLIKE_reduction_percent\": 0.6227940963997779, \"p_raw\": 0.0032, \"p_formal\": 0.0032, \"decision\": \"REJECTED\", \"CI95\": [0.00033503697025205506, 0.0019321615865300122]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0021966192830256415, \"QLIKE_reduction_percent\": 1.169968713660752, \"p_raw\": 0.0135, \"p_formal\": 0.0135, \"decision\": \"REJECTED\", \"CI95\": [0.0006109899462962658, 0.004102668666212466]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.00021290307176726115, \"QLIKE_reduction_percent\": -0.1147393674343757, \"p_raw\": 0.628, \"p_formal\": 0.628, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.002044124778251595, 0.0011041694991075965]}]}\r\n{\"horizon\": 15, \"window\": \"confirmation\", \"receipt_SHA256\": \"b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb\", \"summary_SHA256\": \"1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c\", \"CSV_SHA256\": \"d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231\", \"commands_logs_verified\": 9, \"sessions_verified\": 25, \"origins_verified\": 9750, \"first\": \"2026-08-03\", \"last\": \"2026-09-04\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": false, \"max_delta_error\": 0.0, \"max_percent_error\": 2.220446049250313e-16, \"max_baseline_loss_error\": 2.7755575615628914e-17, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": false, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": []}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.00041622522194090185, \"QLIKE_reduction_percent\": 0.17408259647110502, \"p_raw\": 0.3908, \"p_formal\": 0.3908, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.0022086272919664665, 0.0028780554487611836]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.004767313254824691, \"QLIKE_reduction_percent\": 1.9973645698181242, \"p_raw\": 0.1758, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0011087291167046942, 0.014742152610369255]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.007482146159045653, \"QLIKE_reduction_percent\": 3.162627461057245, \"p_raw\": 0.0568, \"p_formal\": 0.0568, \"decision\": \"NOT_REJECTED\", \"CI95\": [0.001644364167826952, 0.01680713671969026]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.0022724768497439274, \"QLIKE_reduction_percent\": -0.9919238217819005, \"p_raw\": 0.7554, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.00907196547290959, 0.0021952091469455196]}]}\r\n{\"audit_progress\": \"RV5/primary\", \"verified_sessions\": 141}\r\n{\"audit_progress\": \"RV5/primary\", \"verified_sessions\": 281}\r\n{\"horizon\": 5, \"window\": \"primary\", \"receipt_SHA256\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\", \"summary_SHA256\": \"4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe\", \"CSV_SHA256\": \"f342a2fa7815a27d83a2fb31347683f51e8428278881407474432e22667bf8ba\", \"commands_logs_verified\": 9, \"sessions_verified\": 419, \"origins_verified\": 160832, \"first\": \"2024-10-28\", \"last\": \"2026-07-31\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": true, \"max_delta_error\": 2.168404344971009e-19, \"max_percent_error\": 5.551115123125783e-17, \"max_baseline_loss_error\": 5.551115123125783e-17, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": true, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": [\"log_ridge_harq\"]}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0013164097944550013, \"QLIKE_reduction_percent\": 0.3772630964049197, \"p_raw\": 0.0092, \"p_formal\": 0.0092, \"decision\": \"REJECTED\", \"CI95\": [0.00046645265124926964, 0.0023758315629989657]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0008910156531213365, \"QLIKE_reduction_percent\": 0.25631857791069307, \"p_raw\": 0.0172, \"p_formal\": 0.0172, \"decision\": \"REJECTED\", \"CI95\": [7.104694395886746e-05, 0.0016978277359952772]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0018929362037624596, \"QLIKE_reduction_percent\": 0.535775650710059, \"p_raw\": 0.0608, \"p_formal\": 0.0608, \"decision\": \"NOT_REJECTED\", \"CI95\": [0.00017647987108783484, 0.004373435691765242]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0005639718438127555, \"QLIKE_reduction_percent\": 0.16048613467492356, \"p_raw\": 0.1927, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0009254245591697613, 0.001956639388860833]}]}\r\n{\"status\": \"PASS_INDEPENDENT_V4_THREE_CLOSED_WINDOWS\", \"elapsed_seconds\": 8.932551999998395, \"new_model_fits\": 0, \"bootstrap_reruns\": 0, \"files_written\": 0, \"unclosed_RV5_confirmation_read\": false, \"threads_max\": 1, \"results\": [{\"horizon\": 15, \"window\": \"primary\", \"receipt_SHA256\": \"d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93\", \"summary_SHA256\": \"451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4\", \"CSV_SHA256\": \"28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1\", \"commands_logs_verified\": 9, \"sessions_verified\": 419, \"origins_verified\": 160832, \"first\": \"2024-10-28\", \"last\": \"2026-07-31\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": false, \"max_delta_error\": 0.0, \"max_percent_error\": 1.1102230246251565e-16, \"max_baseline_loss_error\": 2.7755575615628914e-17, \"max_origin_QLIKE_to_CSV_error\": 2.220446049250313e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": true, \"at_least_one_family_rejects\": true, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": true, \"status\": \"SATISFIED\", \"successful_families\": [\"log_ridge_harq\"]}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0016163117029221244, \"QLIKE_reduction_percent\": 0.8800546830738928, \"p_raw\": 0.039, \"p_formal\": 0.039, \"decision\": \"REJECTED\", \"CI95\": [0.0002529862671932415, 0.003453534376546728]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0011337596590923558, \"QLIKE_reduction_percent\": 0.6227940963997779, \"p_raw\": 0.0032, \"p_formal\": 0.0032, \"decision\": \"REJECTED\", \"CI95\": [0.00033503697025205506, 0.0019321615865300122]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0021966192830256415, \"QLIKE_reduction_percent\": 1.169968713660752, \"p_raw\": 0.0135, \"p_formal\": 0.0135, \"decision\": \"REJECTED\", \"CI95\": [0.0006109899462962658, 0.004102668666212466]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.00021290307176726115, \"QLIKE_reduction_percent\": -0.1147393674343757, \"p_raw\": 0.628, \"p_formal\": 0.628, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.002044124778251595, 0.0011041694991075965]}]}, {\"horizon\": 15, \"window\": \"confirmation\", \"receipt_SHA256\": \"b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb\", \"summary_SHA256\": \"1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c\", \"CSV_SHA256\": \"d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231\", \"commands_logs_verified\": 9, \"sessions_verified\": 25, \"origins_verified\": 9750, \"first\": \"2026-08-03\", \"last\": \"2026-09-04\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": false, \"max_delta_error\": 0.0, \"max_percent_error\": 2.220446049250313e-16, \"max_baseline_loss_error\": 2.7755575615628914e-17, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": false, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": []}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.00041622522194090185, \"QLIKE_reduction_percent\": 0.17408259647110502, \"p_raw\": 0.3908, \"p_formal\": 0.3908, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.0022086272919664665, 0.0028780554487611836]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.004767313254824691, \"QLIKE_reduction_percent\": 1.9973645698181242, \"p_raw\": 0.1758, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0011087291167046942, 0.014742152610369255]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.007482146159045653, \"QLIKE_reduction_percent\": 3.162627461057245, \"p_raw\": 0.0568, \"p_formal\": 0.0568, \"decision\": \"NOT_REJECTED\", \"CI95\": [0.001644364167826952, 0.01680713671969026]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.0022724768497439274, \"QLIKE_reduction_percent\": -0.9919238217819005, \"p_raw\": 0.7554, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.00907196547290959, 0.0021952091469455196]}]}, {\"horizon\": 5, \"window\": \"primary\", \"receipt_SHA256\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\", \"summary_SHA256\": \"4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe\", \"CSV_SHA256\": \"f342a2fa7815a27d83a2fb31347683f51e8428278881407474432e22667bf8ba\", \"commands_logs_verified\": 9, \"sessions_verified\": 419, \"origins_verified\": 160832, \"first\": \"2024-10-28\", \"last\": \"2026-07-31\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": true, \"max_delta_error\": 2.168404344971009e-19, \"max_percent_error\": 5.551115123125783e-17, \"max_baseline_loss_error\": 5.551115123125783e-17, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": true, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": [\"log_ridge_harq\"]}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0013164097944550013, \"QLIKE_reduction_percent\": 0.3772630964049197, \"p_raw\": 0.0092, \"p_formal\": 0.0092, \"decision\": \"REJECTED\", \"CI95\": [0.00046645265124926964, 0.0023758315629989657]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0008910156531213365, \"QLIKE_reduction_percent\": 0.25631857791069307, \"p_raw\": 0.0172, \"p_formal\": 0.0172, \"decision\": \"REJECTED\", \"CI95\": [7.104694395886746e-05, 0.0016978277359952772]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.0018929362037624596, \"QLIKE_reduction_percent\": 0.535775650710059, \"p_raw\": 0.0608, \"p_formal\": 0.0608, \"decision\": \"NOT_REJECTED\", \"CI95\": [0.00017647987108783484, 0.004373435691765242]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": 0.0005639718438127555, \"QLIKE_reduction_percent\": 0.16048613467492356, \"p_raw\": 0.1927, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0009254245591697613, 0.001956639388860833]}]}]}\r\n"
+    },
+    {
+      "name": "rv5_confirmation_only_no_three_window_rerun",
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONIOENCODING='utf-8'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:MKL_NUM_THREADS='1'\n$env:NUMEXPR_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\n$auditSource=@'\nimport csv, hashlib, json, math, os, subprocess, sys, time\nfrom collections import Counter, defaultdict\nfrom datetime import datetime, timedelta\nfrom pathlib import Path\nif os.name == 'nt':\n    import ctypes\n    kernel=ctypes.WinDLL('kernel32',use_last_error=True)\n    kernel.GetCurrentProcess.restype=ctypes.c_void_p\n    kernel.SetPriorityClass.argtypes=[ctypes.c_void_p,ctypes.c_uint]\n    assert kernel.SetPriorityClass(kernel.GetCurrentProcess(),0x4000), ctypes.get_last_error()\nroot=Path.cwd(); private=Path('private-input/d983c44a81f6f3fe85fb')\nfamilies=('log_ridge_harq','lightgbm_qlike'); contrasts=(('B1_over_B0','B0','B1'),('B2_over_B1','B1','B2'))\nspec_sha='0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04'\nplan=((5,'confirmation','a768f3b'),)\nread=lambda p:json.loads(Path(p).read_bytes())\ndef sha(p):\n    with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()\ndef stamped(p,d):\n    data=Path(p).read_bytes();assert hashlib.sha256(data).hexdigest()==d, str(p);return json.loads(data)\ndef average(x):return math.fsum(x)/len(x)\nv3summaries={};v3keys={};v4masks={};results=[];t0=time.perf_counter()\nfor h,window,commit in plan:\n    stage='b2' if window=='primary' else 'b3';folder=root/'artifacts'/f'rp4_v4_{stage}_rv{h}';output=private/'evaluation'/f'rv{h}'/window\n    receipt=read(folder/'receipt.json');assert receipt['status']=='COMPLETE' and receipt['exit_code']==0\n    committed=subprocess.check_output(['git','show',f'{commit}:artifacts/rp4_v4_{stage}_rv{h}/receipt.json'],cwd=root)\n    assert hashlib.sha256(committed).hexdigest()==sha(folder/'receipt.json')\n    assert (receipt['stage'],receipt['window'],receipt['horizon_minutes'],receipt['target_key'])==(stage.upper(),window,h,f'rv_{h}')\n    release_path=root/'artifacts/rp4_v4_a2'/f'evaluation_release_rv{h}.json';release=stamped(release_path,receipt['release_sha256'])\n    assert receipt['evaluation_code_sha256']==release['evaluation_code_sha256']\n    for p,d in receipt['evaluation_code_sha256'].items():assert sha(root/p)==d,p\n    for p,d in receipt['artifacts_sha256'].items():assert sha(p)==d,p\n    common=[sys.executable,'-B','-m','artifacts.rp4_v4_code.evaluate_v4','--spec',str(root/'artifacts/rp4_v4_a1/specification.json'),'--spec-sha256',spec_sha,'--release',str(release_path),'--horizon',str(h),'--window',window,'--threads','4','--shard-count','8']\n    expected=[subprocess.list2cmdline(common+['--shard-index',str(i)]) for i in range(8)]+[subprocess.list2cmdline(common+['--aggregate-only'])]\n    assert [r['command'] for r in receipt['commands']]==expected\n    assert len({r['log'] for r in receipt['commands']})==9\n    for command in receipt['commands']:assert command['exit_code']==0 and sha(command['log'])==command['log_sha256']\n    summary=read(folder/'summary.json');binding=summary['binding'];assert binding['release_sha256']==receipt['release_sha256']\n    assert binding['target_key']==f'rv_{h}' and binding['horizon_minutes']==h and binding['specification_sha256']==spec_sha\n    with (folder/'session_losses.csv').open(newline='',encoding='utf-8-sig') as stream:losses=list(csv.DictReader(stream))\n    dates=[r['session_date'] for r in losses];assert dates==sorted(set(dates))\n    assert (len(losses),summary['N_sessions'],summary['N_origins'])==((419,419,160832) if window=='primary' else (25,25,9750))\n    assert (dates[0],dates[-1])==(('2024-10-28','2026-07-31') if window=='primary' else ('2026-08-03','2026-09-04'))\n    assert set(summary['completed_session_sha256'])=={d+'.json' for d in dates}\n    assert {p.name for p in (output/'sessions').glob('*.json')}==set(summary['completed_session_sha256'])\n    assert {p.name for p in (output/'session_receipts').glob('*.json')}==set(summary['completed_session_sha256'])\n    oldsummary=v3summaries.setdefault(window,read(root/'artifacts'/f'rp4_v3_{stage}'/'summary.json'))\n    assert summary['executed_origins_by_asset']==oldsummary['executed_origins_by_asset']\n    assert summary['evaluation_quality_by_asset']==oldsummary['evaluation_quality_by_asset']\n    assert set(summary['completed_session_sha256'])==set(oldsummary['completed_session_sha256'])\n    assert summary['inherited_eligibility_unchanged'] is True and summary['secondary_can_rescue_primary'] is False\n    contrast_results=[];max_delta_error=max_percent_error=max_loss_error=0.0;successes=[]\n    for family in families:\n        opened=True\n        for contrast,b0,b1 in contrasts:\n            item=next(r for r in summary['contrasts'] if (r['family'],r['contrast'])==(family,contrast))\n            baseline=average([float(r[f'loss__{family}__{b0}']) for r in losses]);expanded=average([float(r[f'loss__{family}__{b1}']) for r in losses]);delta=average([float(r[f'loss__{family}__{b0}'])-float(r[f'loss__{family}__{b1}']) for r in losses]);percent=100*delta/baseline\n            max_delta_error=max(max_delta_error,abs(delta-item['estimate']));max_percent_error=max(max_percent_error,abs(percent-item['qlike_reduction_percent']))\n            max_loss_error=max(max_loss_error,abs(baseline-item['baseline_qlike']),abs(expanded-item['expanded_qlike']))\n            assert abs(delta-item['estimate'])<1e-14 and abs(percent-item['qlike_reduction_percent'])<1e-10\n            assert item['alternative']=='greater' and item['status']=='COMPUTED' and item['bootstrap_repetitions']==9999\n            assert item['p_raw']==(item['null_exceedances']+1)/(item['bootstrap_repetitions']+1)\n            reject=opened and delta>0 and item['p_raw']<=0.05;state='NOT_TESTED' if not opened else 'REJECTED' if reject else 'NOT_REJECTED'\n            assert item['rejected']==reject and item['hypothesis_status']==state\n            assert item['p_for_decision']==(item['p_raw'] if opened else None)\n            assert item['inference_role']==('PRIMARY' if h==15 else 'SECONDARY')\n            contrast_results.append({'family':family,'contrast':contrast,'delta':delta,'QLIKE_reduction_percent':percent,'p_raw':item['p_raw'],'p_formal':item['p_for_decision'],'decision':state,'CI95':[item['ci_low'],item['ci_high']]})\n            opened=reject\n        if opened:successes.append(family)\n    assert summary['global_joint_reject']==(len(successes)==2)\n    closure=summary['predeclared_closure'];assert closure['successful_families']==successes and closure['applies']==(h==15 and window=='primary') and closure['global_alpha_0_05_control_claimed'] is False\n    assert closure['satisfied']==(bool(successes) if closure['applies'] else None)\n    ordered=sorted(summary['comparability_bilateral'],key=lambda r:r['p_raw']);cumulative=0.0\n    for rank,item in enumerate(ordered):\n        cumulative=max(cumulative,min(1.0,(len(ordered)-rank)*item['p_raw']));assert abs(cumulative-item['p_holm'])<1e-14\n    keycount=0;assets=Counter();origin_loss_error=0.0\n    for index,(day,csvrow) in enumerate(zip(dates,losses,strict=True)):\n        name=day+'.json';record=stamped(output/'sessions'/name,summary['completed_session_sha256'][name]);session_receipt=read(output/'session_receipts'/name)\n        assert session_receipt['sha256']==summary['completed_session_sha256'][name] and session_receipt['session']==day and session_receipt['binding']==binding\n        assert record['binding']==binding and record['session']==day and record['target_key']==f'rv_{h}' and record['horizon_minutes']==h\n        assert set(record['fits'])=={f'mean__{family}__{b}' for family in families for b in ('B0','B1','B2')}\n        key=(window,day)\n        if key not in v3keys:\n            old=stamped(Path('private-input/c43ac6756d25b8e9ea94')/window/'sessions'/name,oldsummary['completed_session_sha256'][name])\n            v3keys[key]={k:old[k] for k in ('keys','train_last_session','train_sessions','first_evaluation_origin_utc','max_training_target_end_utc')}\n            v3keys[key]['fit_masks']={m:{k:old['fits'][m][k] for k in ('train_rows','inner_fit_rows','inner_valid_rows','inner_valid_sessions')} for m in record['fits']}\n        prior=v3keys[key]\n        for field in ('keys','train_last_session','train_sessions','first_evaluation_origin_utc','max_training_target_end_utc'):assert record[field]==prior[field],(h,window,day,field)\n        assert record['train_last_session']<day\n        first=datetime.fromisoformat(record['first_evaluation_origin_utc']);last=datetime.fromisoformat(record['max_training_target_end_utc']);selected=datetime.fromisoformat(record['max_training_selected_target_end_utc']);assert last<=first-timedelta(minutes=60) and selected==last-timedelta(minutes=30-h)\n        for model,fit in record['fits'].items():\n            assert {k:fit[k] for k in prior['fit_masks'][model]}==prior['fit_masks'][model]\n            assert len(fit['inner_valid_sessions'])==10 and max(fit['inner_valid_sessions'])<day\n        if h==15:v4masks[key]=(record['mask_counts'],record['mask_sha256'])\n        else:\n            if key not in v4masks:\n                h15summary=read(root/'artifacts'/f'rp4_v4_{stage}_rv15'/'summary.json')\n                h15record=stamped(private/'evaluation/rv15'/window/'sessions'/name,h15summary['completed_session_sha256'][name])\n                v4masks[key]=(h15record['mask_counts'],h15record['mask_sha256'])\n            assert (record['mask_counts'],record['mask_sha256'])==v4masks[key]\n        n=len(record['keys']);assert record['mask_counts']['test']==n==len(record['target'])\n        keycount+=n;assets.update(k['asset'] for k in record['keys'])\n        assert len({(k['asset'],k['session_date'],k['origin_minute']) for k in record['keys']})==n\n        for family in families:\n            for b in ('B0','B1','B2'):\n                forecasts=record['forecasts'][family][b];assert len(forecasts)==n\n                grouped=defaultdict(list)\n                for keyrow,y,f in zip(record['keys'],record['target'],forecasts,strict=True):\n                    assert y>0 and f>0 and math.isfinite(y) and math.isfinite(f)\n                    ratio=y/f;grouped[keyrow['asset']].append(ratio-math.log(ratio)-1.0)\n                loss=average([average(v) for v in grouped.values()]);err=abs(loss-float(csvrow[f'loss__{family}__{b}']));origin_loss_error=max(origin_loss_error,err);assert err<1e-12,(h,window,day,family,b,err)\n        if index and index%140==0:print(json.dumps({'audit_progress':f'RV{h}/{window}','verified_sessions':index+1}),flush=True)\n    assert keycount==summary['N_origins'] and dict(assets)==summary['executed_origins_by_asset']\n    result={'horizon':h,'window':window,'receipt_SHA256':sha(folder/'receipt.json'),'summary_SHA256':sha(folder/'summary.json'),'CSV_SHA256':sha(folder/'session_losses.csv'),'commands_logs_verified':9,'sessions_verified':len(dates),'origins_verified':keycount,'first':dates[0],'last':dates[-1],'keys_timing_fit_mask_counts_v3_exact':True,'mask_hashes_RV15_RV5_exact':h==5,'max_delta_error':max_delta_error,'max_percent_error':max_percent_error,'max_baseline_loss_error':max_loss_error,'max_origin_QLIKE_to_CSV_error':origin_loss_error,'global_joint_reject':summary['global_joint_reject'],'closure':closure,'contrasts':contrast_results}\n    results.append(result);print(json.dumps(result),flush=True)\nprint(json.dumps({'status':'PASS_INDEPENDENT_V4_FOURTH_CLOSED_WINDOW','elapsed_seconds':time.perf_counter()-t0,'new_model_fits':0,'bootstrap_reruns':0,'files_written':0,'unclosed_windows_read':False,'closed_RV5_confirmation_read':True,'threads_max':1,'results':results}),flush=True)\n'@\n$auditSource | uv run --offline --frozen --no-sync python -B -\nexit $LASTEXITCODE",
+      "chunk_id": "92be77",
+      "wall_time_seconds": 0.9411729,
+      "exit_code": 0,
+      "original_token_count": 1047,
+      "output": "{\"horizon\": 5, \"window\": \"confirmation\", \"receipt_SHA256\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\", \"summary_SHA256\": \"d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb\", \"CSV_SHA256\": \"972249af8d31d26126650589de7e5e9b95216d29e8a2add494de7be7b7cf75ee\", \"commands_logs_verified\": 9, \"sessions_verified\": 25, \"origins_verified\": 9750, \"first\": \"2026-08-03\", \"last\": \"2026-09-04\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": true, \"max_delta_error\": 0.0, \"max_percent_error\": 0.0, \"max_baseline_loss_error\": 0.0, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": false, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": []}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 3.600068890998731e-06, \"QLIKE_reduction_percent\": 0.0008658056653297615, \"p_raw\": 0.5015, \"p_formal\": 0.5015, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.002583890412819075, 0.0025449240579097795]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.005107753949557885, \"QLIKE_reduction_percent\": 1.2284099914708604, \"p_raw\": 0.1086, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0007692214554592633, 0.014481553505870493]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.005499485139160578, \"QLIKE_reduction_percent\": 1.3305247957775443, \"p_raw\": 0.0224, \"p_formal\": 0.0224, \"decision\": \"REJECTED\", \"CI95\": [0.0013003445470713632, 0.010864310014167666]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.004162569606580859, \"QLIKE_reduction_percent\": -1.0206565576597642, \"p_raw\": 0.7716, \"p_formal\": 0.7716, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.014423982126994944, 0.0021786846598025236]}]}\r\n{\"status\": \"PASS_INDEPENDENT_V4_FOURTH_CLOSED_WINDOW\", \"elapsed_seconds\": 0.44628700001339894, \"new_model_fits\": 0, \"bootstrap_reruns\": 0, \"files_written\": 0, \"unclosed_windows_read\": false, \"closed_RV5_confirmation_read\": true, \"threads_max\": 1, \"results\": [{\"horizon\": 5, \"window\": \"confirmation\", \"receipt_SHA256\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\", \"summary_SHA256\": \"d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb\", \"CSV_SHA256\": \"972249af8d31d26126650589de7e5e9b95216d29e8a2add494de7be7b7cf75ee\", \"commands_logs_verified\": 9, \"sessions_verified\": 25, \"origins_verified\": 9750, \"first\": \"2026-08-03\", \"last\": \"2026-09-04\", \"keys_timing_fit_mask_counts_v3_exact\": true, \"mask_hashes_RV15_RV5_exact\": true, \"max_delta_error\": 0.0, \"max_percent_error\": 0.0, \"max_baseline_loss_error\": 0.0, \"max_origin_QLIKE_to_CSV_error\": 4.440892098500626e-16, \"global_joint_reject\": false, \"closure\": {\"applies\": false, \"at_least_one_family_rejects\": false, \"global_alpha_0_05_control_claimed\": false, \"rule\": \"both_contrasts_reject_in_at_least_one_family_at_15min_primary\", \"satisfied\": null, \"status\": \"NOT_APPLICABLE\", \"successful_families\": []}, \"contrasts\": [{\"family\": \"log_ridge_harq\", \"contrast\": \"B1_over_B0\", \"delta\": 3.600068890998731e-06, \"QLIKE_reduction_percent\": 0.0008658056653297615, \"p_raw\": 0.5015, \"p_formal\": 0.5015, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.002583890412819075, 0.0025449240579097795]}, {\"family\": \"log_ridge_harq\", \"contrast\": \"B2_over_B1\", \"delta\": 0.005107753949557885, \"QLIKE_reduction_percent\": 1.2284099914708604, \"p_raw\": 0.1086, \"p_formal\": null, \"decision\": \"NOT_TESTED\", \"CI95\": [-0.0007692214554592633, 0.014481553505870493]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B1_over_B0\", \"delta\": 0.005499485139160578, \"QLIKE_reduction_percent\": 1.3305247957775443, \"p_raw\": 0.0224, \"p_formal\": 0.0224, \"decision\": \"REJECTED\", \"CI95\": [0.0013003445470713632, 0.010864310014167666]}, {\"family\": \"lightgbm_qlike\", \"contrast\": \"B2_over_B1\", \"delta\": -0.004162569606580859, \"QLIKE_reduction_percent\": -1.0206565576597642, \"p_raw\": 0.7716, \"p_formal\": 0.7716, \"decision\": \"NOT_REJECTED\", \"CI95\": [-0.014423982126994944, 0.0021786846598025236]}]}]}\r\n"
+    },
+    {
+      "name": "final_report_tables_figures_custody",
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONIOENCODING='utf-8'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:MKL_NUM_THREADS='1'\n$env:NUMEXPR_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\n$auditSource=@'\nimport csv, hashlib, json, math, re, time, xml.etree.ElementTree as ET\nfrom collections import Counter\nfrom datetime import date, datetime\nfrom itertools import accumulate\nfrom pathlib import Path\nroot=Path.cwd();out=root/'artifacts/rp4_v4_b4';report_path=root/'docs/rp4/results_v4.md'\ndef sha(p):\n    with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()\ndef jread(p):return json.loads(Path(p).read_bytes())\ndef cread(p):\n    with Path(p).open(newline='',encoding='utf-8-sig') as f:return list(csv.DictReader(f))\ndef number(x,signed=False):return 'NO VERIFICABLE' if x is None else format(float(x),'+.8g' if signed else '.8g')\ndef path_from_pin(p):\n    p=Path(p);return p if p.is_absolute() else root/p\nt0=time.perf_counter();manifest=jread(out/'report_manifest.json')\nassert sha(report_path)=='c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7'\nassert manifest['report_code_sha256']==sha(root/'artifacts/rp4_v4_code/report_v4_checked.py')=='17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c'\nfor group in ('input_sha256','output_sha256'):\n    for p,d in manifest[group].items():assert sha(path_from_pin(p))==d,p\nassert manifest['model_fits']==manifest['downloads']==0 and manifest['publication'] is False\nassert manifest['rv15_primary_winning_families']==['log_ridge_harq']\nreport=report_path.read_text(encoding='utf-8');families=('log_ridge_harq','lightgbm_qlike');windows=('primary','confirmation');horizons=(30,15,5);contrasts=(('B1_over_B0','B0','B1'),('B2_over_B1','B1','B2'))\nresults={};receipts={};stats=cread(out/'primary_statistics.csv');assert len(stats)==24\nfor h in horizons:\n    for window in windows:\n        stage='b2' if window=='primary' else 'b3';folder=root/'artifacts'/(f'rp4_v3_{stage}' if h==30 else f'rp4_v4_{stage}_rv{h}')\n        if h!=30:\n            receipts[h,window]=jread(folder/'receipt.json');assert receipts[h,window]['status']=='COMPLETE' and receipts[h,window]['exit_code']==0\n        summary=jread(folder/'summary.json');losses=cread(folder/'session_losses.csv');results[h,window]=(summary,losses)\n        bilateral={(r['family'],r['contrast']):r for r in summary['comparability_bilateral']}\n        for item in summary['contrasts']:\n            matches=[r for r in stats if (int(r['horizon_minutes']),r['window'],r['family'],r['contrast'])==(h,window,item['family'],item['contrast'])];assert len(matches)==1\n            actual=matches[0]\n            for key,value in item.items():\n                if value is None:assert actual[key]==''\n                elif isinstance(value,(float,int)) and not isinstance(value,bool):assert float(actual[key])==value,(h,window,key)\n                else:assert actual[key]==str(value),(h,window,key)\n            pair=bilateral[item['family'],item['contrast']]\n            assert float(actual['p_bilateral'])==pair['p_raw'] and float(actual['p_holm_bilateral'])==pair['p_holm']\nfor window,heading,endheading in [('primary','## Comparación primaria','## Comparación de confirmación'),('confirmation','## Comparación de confirmación','Delta positivo favorece')]:\n    section=report.split(heading,1)[1].split(endheading,1)[0]\n    actual_rows=[line for line in section.splitlines() if line.startswith(('| Ridge /','| LightGBM /'))];expected=[]\n    for family in families:\n        for contrast,_,_ in contrasts:\n            cells=[('Ridge' if family==families[0] else 'LightGBM')+' / '+contrast]\n            for h in horizons:\n                item=next(r for r in results[h,window][0]['contrasts'] if (r['family'],r['contrast'])==(family,contrast))\n                formal=number(item['p_for_decision']) if item['p_for_decision'] is not None else 'NO ABIERTA' if item['hypothesis_status']=='NOT_TESTED' else 'NO VERIFICABLE'\n                cells += [f\"{number(item['estimate'],True)} [{number(item['ci_low'])}, {number(item['ci_high'])}]\",number(item['p_raw'])+' / '+formal,number(item['qlike_reduction_percent'],True),f\"{item['N_sessions']}/{item['N_origins']}\"]\n            expected.append('| '+' | '.join(cells)+' |')\n    assert actual_rows==expected,window\ncurves_checked=points_checked=0\nfor contrast,b0,b1 in contrasts:\n    svg=ET.parse(out/(contrast+'.svg')).getroot();assert svg.attrib['viewBox']=='0 0 1680 1320'\n    curves=svg.findall('.//{http://www.w3.org/2000/svg}path');assert len(curves)==12;seen=set()\n    for curve in curves:\n        h=int(curve.attrib['data-horizon']);window=curve.attrib['data-window'];family=curve.attrib['data-family'];identity=(h,window,family);assert identity not in seen;seen.add(identity)\n        rows=results[h,window][1];values=[0.0,*accumulate(float(r[f'loss__{family}__{b0}'])-float(r[f'loss__{family}__{b1}']) for r in rows)]\n        assert float(curve.attrib['data-endpoint'])==values[-1] and int(curve.attrib['data-sessions'])==len(rows)\n        col=horizons.index(h);wi=windows.index(window);fi=families.index(family);left,right=85+col*550,500+col*550;top,bottom=137+(wi*2+fi)*294,342+(wi*2+fi)*294\n        low,high=min(values),max(values);pad=.08*(high-low) if high>low else 1.0;low-=pad;high+=pad\n        days=[date.fromisoformat(r['session_date']).toordinal() for r in rows];times=[days[0]-1,*days]\n        points=[(float(x),float(y)) for _,x,y in re.findall(r'([ML]) ([+-]?[0-9.]+) ([+-]?[0-9.]+)',curve.attrib['d'])]\n        assert len(points)==len(rows)+1\n        for (x,y),t,v in zip(points,times,values,strict=True):\n            ex=left+(right-left)*(t-times[0])/(times[-1]-times[0]);ey=bottom-(v-low)*(bottom-top)/(high-low)\n            assert x==float(f'{ex:.2f}') and y==float(f'{ey:.2f}') and left<=x<=right and top<=y<=bottom\n        curves_checked+=1;points_checked+=len(points)\n    assert seen=={(h,w,f) for h in horizons for w in windows for f in families}\ncoverage=cread(out/'coverage.csv');assert len(coverage)==36\nfor row in coverage:\n    summary=results[int(row['horizon_minutes']),row['window']][0];source=next(r for r in summary['evaluation_quality_by_asset'] if r['asset']==row['asset'])\n    for k,v in source.items():\n        if v is None:assert row[k]==''\n        elif isinstance(v,(int,float)):assert float(row[k])==v\n        else:assert row[k]==str(v)\ncensus=cread(out/'empty_census.csv');assert len(census)==48\nfor row in census:\n    assert int(row['N_origins'])==sum(int(row[k]) for k in ('N_empty_origins','N_nonempty_origins','N_unknown_origins'))\nfits=cread(out/'fit_selection_bounds.csv');assert len(fits)==(419+25)*2*6\nbounds=cread(out/'bound_counts.csv');assert len(bounds)==24\nfor row in bounds:\n    group=[r for r in fits if (r['horizon_minutes'],r['window'],r['information_set'],r['family'])==(row['horizon_minutes'],row['window'],row['information_set'],'log_ridge_harq')]\n    names=('prediction_rows','count_low','count_high') if row['phase']=='evaluation' else ('validation_rows','validation_count_low','validation_count_high')\n    totals=[sum(int(r[k]) for r in group) for k in names]\n    assert [int(row[k]) for k in ('N_predictions','count_low','count_high')]==totals and totals[1]+totals[2]<=totals[0]\nfor name in ('distribution_secondary','posterior_mean','regime_secondary','high_gamma_vs_rest','top_loss_sessions','robustness'):\n    data=cread(out/(name+'.csv'));assert len(data)==sum(len(results[h,w][0][name]) for h in (15,5) for w in windows)\ntimings=cread(out/'timing.csv');assert len(timings)==4\nfor row in timings:\n    receipt=receipts[int(row['horizon_minutes']),row['window']]\n    for k in ('started_at_utc','completed_at_utc'):assert row[k]==receipt[k]\n    assert float(row['elapsed_seconds'])==receipt['elapsed_seconds']\n    for k,v in receipt['resources'].items():\n        if isinstance(v,(int,float)):assert float(row[k])==v\n        else:assert row[k]==v\nmissing_links=[]\nfor link in re.findall(r'\\]\\(([^)]+)\\)',report):\n    if '://' in link or link.startswith('#'):continue\n    p=(report_path.parent/link.split('#')[0]).resolve()\n    if not p.exists():missing_links.append(link)\nassert not missing_links,missing_links\nrequired_phrases=['Se reporta el alcance por familia; RV5 no decide el resultado.','no implica control global 5% entre familias ni versiones.','H2 NO ABIERTA significa que H1 no rechazó','IC95% percentil bilateral; p unilateral de nula centrada.','Esta es la cuarta evaluación de las mismas ventanas','no una quinta versión ni réplica independiente','Los p dentro de una versión no corrigen toda la búsqueda anterior.','La ventana 20 de julio a 28 de agosto fue leída una vez','El PIT es proxy de tiempo fuente a 120 s','Hueco UW aceptado: 2025-01-25 a 2025-02-24','Un resultado no rechazado no demuestra ausencia o absorción','RESEARCH_ONLY','capital_go=false']\nassert all(p in report for p in required_phrases)\nassert results[5,'confirmation'][0]['predeclared_closure']['satisfied'] is None\nelapsed_total=math.fsum(float(r['elapsed_seconds']) for r in timings)\nelapsed_span=(datetime.fromisoformat(timings[-1]['completed_at_utc'])-datetime.fromisoformat(timings[0]['started_at_utc'])).total_seconds()\nprint(json.dumps({'status':'PASS_INDEPENDENT_FINAL_B4_REPORT','report_SHA256':sha(report_path),'report_manifest_SHA256':sha(out/'report_manifest.json'),'report_code_SHA256':sha(root/'artifacts/rp4_v4_code/report_v4_checked.py'),'test_report_checked_SHA256':sha(root/'artifacts/rp4_v4_code/test_report_checked.py'),'input_hashes_verified':len(manifest['input_sha256']),'output_hashes_verified':len(manifest['output_sha256']),'primary_statistics_rows_exact':len(stats),'main_table_contrast_horizon_cells_exact':24,'cumulative_curves_checked':curves_checked,'cumulative_points_checked':points_checked,'coverage_rows':len(coverage),'empty_census_rows':len(census),'fit_selection_rows':len(fits),'bound_count_rows':len(bounds),'all_links_exist':not missing_links,'adverse_signs_and_closed_H2_preserved':True,'family_specific_primary_RV15_success_not_global_claim':True,'elapsed_execution_sum_seconds':elapsed_total,'elapsed_execution_wall_span_seconds':elapsed_span,'audit_elapsed_seconds':time.perf_counter()-t0,'new_fits':0,'bootstrap_reruns':0,'files_written':0,'threads_max':1,'scope_note':'Checks copied inferential fields against immutable sources and arithmetic/plots only; no statistical resampling or model evaluation rerun.'}),flush=True)\n'@\n$auditSource | uv run --offline --frozen --no-sync python -B -\nexit $LASTEXITCODE",
+      "chunk_id": "98b20f",
+      "wall_time_seconds": 0.7585347,
+      "exit_code": 0,
+      "original_token_count": 310,
+      "output": "{\"status\": \"PASS_INDEPENDENT_FINAL_B4_REPORT\", \"report_SHA256\": \"c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7\", \"report_manifest_SHA256\": \"a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f\", \"report_code_SHA256\": \"17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c\", \"test_report_checked_SHA256\": \"ca2f50495e3125f258ab7b437e98b040b25df536edd8bee5d637cb13261d3c58\", \"input_hashes_verified\": 43, \"output_hashes_verified\": 15, \"primary_statistics_rows_exact\": 24, \"main_table_contrast_horizon_cells_exact\": 24, \"cumulative_curves_checked\": 24, \"cumulative_points_checked\": 5352, \"coverage_rows\": 36, \"empty_census_rows\": 48, \"fit_selection_rows\": 5328, \"bound_count_rows\": 24, \"all_links_exist\": true, \"adverse_signs_and_closed_H2_preserved\": true, \"family_specific_primary_RV15_success_not_global_claim\": true, \"elapsed_execution_sum_seconds\": 7066.292840299982, \"elapsed_execution_wall_span_seconds\": 7253.17209, \"audit_elapsed_seconds\": 0.2856317000114359, \"new_fits\": 0, \"bootstrap_reruns\": 0, \"files_written\": 0, \"threads_max\": 1, \"scope_note\": \"Checks copied inferential fields against immutable sources and arithmetic/plots only; no statistical resampling or model evaluation rerun.\"}\r\n"
+    }
+  ],
+  "preliminary_environment_failure": {
+    "chunk_id": "4da229",
+    "exit_code": 1,
+    "wall_time_seconds": 2.1990552,
+    "output": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 7, in <module>\r\nAssertionError\r\n",
+    "cause": "Initial audit process priority prelude lacked Windows ctypes HANDLE declarations. It failed before the audit opened any artifact.",
+    "correction": "The successful retained audit command sets GetCurrentProcess.restype=c_void_p and SetPriorityClass.argtypes=[c_void_p,c_uint]. Only the ephemeral audit command changed; no repository or model code changed."
+  },
+  "window_results": [
+    {
+      "horizon": 15,
+      "window": "primary",
+      "receipt_SHA256": "d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93",
+      "summary_SHA256": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+      "CSV_SHA256": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+      "commands_logs_verified": 9,
+      "sessions_verified": 419,
+      "origins_verified": 160832,
+      "first": "2024-10-28",
+      "last": "2026-07-31",
+      "keys_timing_fit_mask_counts_v3_exact": true,
+      "mask_hashes_RV15_RV5_exact": false,
+      "max_delta_error": 0,
+      "max_percent_error": 1.1102230246251565e-16,
+      "max_baseline_loss_error": 2.7755575615628914e-17,
+      "max_origin_QLIKE_to_CSV_error": 2.220446049250313e-16,
+      "global_joint_reject": false,
+      "closure": {
+        "applies": true,
+        "at_least_one_family_rejects": true,
+        "global_alpha_0_05_control_claimed": false,
+        "rule": "both_contrasts_reject_in_at_least_one_family_at_15min_primary",
+        "satisfied": true,
+        "status": "SATISFIED",
+        "successful_families": [
+          "log_ridge_harq"
+        ]
+      },
+      "contrasts": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "delta": 0.0016163117029221244,
+          "QLIKE_reduction_percent": 0.8800546830738928,
+          "p_raw": 0.039,
+          "p_formal": 0.039,
+          "decision": "REJECTED",
+          "CI95": [
+            0.0002529862671932415,
+            0.003453534376546728
+          ]
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "delta": 0.0011337596590923558,
+          "QLIKE_reduction_percent": 0.6227940963997779,
+          "p_raw": 0.0032,
+          "p_formal": 0.0032,
+          "decision": "REJECTED",
+          "CI95": [
+            0.00033503697025205506,
+            0.0019321615865300122
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "delta": 0.0021966192830256415,
+          "QLIKE_reduction_percent": 1.169968713660752,
+          "p_raw": 0.0135,
+          "p_formal": 0.0135,
+          "decision": "REJECTED",
+          "CI95": [
+            0.0006109899462962658,
+            0.004102668666212466
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "delta": -0.00021290307176726115,
+          "QLIKE_reduction_percent": -0.1147393674343757,
+          "p_raw": 0.628,
+          "p_formal": 0.628,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            -0.002044124778251595,
+            0.0011041694991075965
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 15,
+      "window": "confirmation",
+      "receipt_SHA256": "b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb",
+      "summary_SHA256": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+      "CSV_SHA256": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+      "commands_logs_verified": 9,
+      "sessions_verified": 25,
+      "origins_verified": 9750,
+      "first": "2026-08-03",
+      "last": "2026-09-04",
+      "keys_timing_fit_mask_counts_v3_exact": true,
+      "mask_hashes_RV15_RV5_exact": false,
+      "max_delta_error": 0,
+      "max_percent_error": 2.220446049250313e-16,
+      "max_baseline_loss_error": 2.7755575615628914e-17,
+      "max_origin_QLIKE_to_CSV_error": 4.440892098500626e-16,
+      "global_joint_reject": false,
+      "closure": {
+        "applies": false,
+        "at_least_one_family_rejects": false,
+        "global_alpha_0_05_control_claimed": false,
+        "rule": "both_contrasts_reject_in_at_least_one_family_at_15min_primary",
+        "satisfied": null,
+        "status": "NOT_APPLICABLE",
+        "successful_families": []
+      },
+      "contrasts": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "delta": 0.00041622522194090185,
+          "QLIKE_reduction_percent": 0.17408259647110502,
+          "p_raw": 0.3908,
+          "p_formal": 0.3908,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            -0.0022086272919664665,
+            0.0028780554487611836
+          ]
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "delta": 0.004767313254824691,
+          "QLIKE_reduction_percent": 1.9973645698181242,
+          "p_raw": 0.1758,
+          "p_formal": null,
+          "decision": "NOT_TESTED",
+          "CI95": [
+            -0.0011087291167046942,
+            0.014742152610369255
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "delta": 0.007482146159045653,
+          "QLIKE_reduction_percent": 3.162627461057245,
+          "p_raw": 0.0568,
+          "p_formal": 0.0568,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            0.001644364167826952,
+            0.01680713671969026
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "delta": -0.0022724768497439274,
+          "QLIKE_reduction_percent": -0.9919238217819005,
+          "p_raw": 0.7554,
+          "p_formal": null,
+          "decision": "NOT_TESTED",
+          "CI95": [
+            -0.00907196547290959,
+            0.0021952091469455196
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 5,
+      "window": "primary",
+      "receipt_SHA256": "737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365",
+      "summary_SHA256": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+      "CSV_SHA256": "f342a2fa7815a27d83a2fb31347683f51e8428278881407474432e22667bf8ba",
+      "commands_logs_verified": 9,
+      "sessions_verified": 419,
+      "origins_verified": 160832,
+      "first": "2024-10-28",
+      "last": "2026-07-31",
+      "keys_timing_fit_mask_counts_v3_exact": true,
+      "mask_hashes_RV15_RV5_exact": true,
+      "max_delta_error": 2.168404344971009e-19,
+      "max_percent_error": 5.551115123125783e-17,
+      "max_baseline_loss_error": 5.551115123125783e-17,
+      "max_origin_QLIKE_to_CSV_error": 4.440892098500626e-16,
+      "global_joint_reject": false,
+      "closure": {
+        "applies": false,
+        "at_least_one_family_rejects": true,
+        "global_alpha_0_05_control_claimed": false,
+        "rule": "both_contrasts_reject_in_at_least_one_family_at_15min_primary",
+        "satisfied": null,
+        "status": "NOT_APPLICABLE",
+        "successful_families": [
+          "log_ridge_harq"
+        ]
+      },
+      "contrasts": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "delta": 0.0013164097944550013,
+          "QLIKE_reduction_percent": 0.3772630964049197,
+          "p_raw": 0.0092,
+          "p_formal": 0.0092,
+          "decision": "REJECTED",
+          "CI95": [
+            0.00046645265124926964,
+            0.0023758315629989657
+          ]
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "delta": 0.0008910156531213365,
+          "QLIKE_reduction_percent": 0.25631857791069307,
+          "p_raw": 0.0172,
+          "p_formal": 0.0172,
+          "decision": "REJECTED",
+          "CI95": [
+            7.104694395886746e-05,
+            0.0016978277359952772
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "delta": 0.0018929362037624596,
+          "QLIKE_reduction_percent": 0.535775650710059,
+          "p_raw": 0.0608,
+          "p_formal": 0.0608,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            0.00017647987108783484,
+            0.004373435691765242
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "delta": 0.0005639718438127555,
+          "QLIKE_reduction_percent": 0.16048613467492356,
+          "p_raw": 0.1927,
+          "p_formal": null,
+          "decision": "NOT_TESTED",
+          "CI95": [
+            -0.0009254245591697613,
+            0.001956639388860833
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 5,
+      "window": "confirmation",
+      "receipt_SHA256": "556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769",
+      "summary_SHA256": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+      "CSV_SHA256": "972249af8d31d26126650589de7e5e9b95216d29e8a2add494de7be7b7cf75ee",
+      "commands_logs_verified": 9,
+      "sessions_verified": 25,
+      "origins_verified": 9750,
+      "first": "2026-08-03",
+      "last": "2026-09-04",
+      "keys_timing_fit_mask_counts_v3_exact": true,
+      "mask_hashes_RV15_RV5_exact": true,
+      "max_delta_error": 0,
+      "max_percent_error": 0,
+      "max_baseline_loss_error": 0,
+      "max_origin_QLIKE_to_CSV_error": 4.440892098500626e-16,
+      "global_joint_reject": false,
+      "closure": {
+        "applies": false,
+        "at_least_one_family_rejects": false,
+        "global_alpha_0_05_control_claimed": false,
+        "rule": "both_contrasts_reject_in_at_least_one_family_at_15min_primary",
+        "satisfied": null,
+        "status": "NOT_APPLICABLE",
+        "successful_families": []
+      },
+      "contrasts": [
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B1_over_B0",
+          "delta": 3.600068890998731e-06,
+          "QLIKE_reduction_percent": 0.0008658056653297615,
+          "p_raw": 0.5015,
+          "p_formal": 0.5015,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            -0.002583890412819075,
+            0.0025449240579097795
+          ]
+        },
+        {
+          "family": "log_ridge_harq",
+          "contrast": "B2_over_B1",
+          "delta": 0.005107753949557885,
+          "QLIKE_reduction_percent": 1.2284099914708604,
+          "p_raw": 0.1086,
+          "p_formal": null,
+          "decision": "NOT_TESTED",
+          "CI95": [
+            -0.0007692214554592633,
+            0.014481553505870493
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B1_over_B0",
+          "delta": 0.005499485139160578,
+          "QLIKE_reduction_percent": 1.3305247957775443,
+          "p_raw": 0.0224,
+          "p_formal": 0.0224,
+          "decision": "REJECTED",
+          "CI95": [
+            0.0013003445470713632,
+            0.010864310014167666
+          ]
+        },
+        {
+          "family": "lightgbm_qlike",
+          "contrast": "B2_over_B1",
+          "delta": -0.004162569606580859,
+          "QLIKE_reduction_percent": -1.0206565576597642,
+          "p_raw": 0.7716,
+          "p_formal": 0.7716,
+          "decision": "NOT_REJECTED",
+          "CI95": [
+            -0.014423982126994944,
+            0.0021786846598025236
+          ]
+        }
+      ]
+    }
+  ],
+  "final_report_result": {
+    "status": "PASS_INDEPENDENT_FINAL_B4_REPORT",
+    "report_SHA256": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7",
+    "report_manifest_SHA256": "a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f",
+    "report_code_SHA256": "17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c",
+    "test_report_checked_SHA256": "ca2f50495e3125f258ab7b437e98b040b25df536edd8bee5d637cb13261d3c58",
+    "input_hashes_verified": 43,
+    "output_hashes_verified": 15,
+    "primary_statistics_rows_exact": 24,
+    "main_table_contrast_horizon_cells_exact": 24,
+    "cumulative_curves_checked": 24,
+    "cumulative_points_checked": 5352,
+    "coverage_rows": 36,
+    "empty_census_rows": 48,
+    "fit_selection_rows": 5328,
+    "bound_count_rows": 24,
+    "all_links_exist": true,
+    "adverse_signs_and_closed_H2_preserved": true,
+    "family_specific_primary_RV15_success_not_global_claim": true,
+    "elapsed_execution_sum_seconds": 7066.292840299982,
+    "elapsed_execution_wall_span_seconds": 7253.17209,
+    "audit_elapsed_seconds": 0.2856317000114359,
+    "new_fits": 0,
+    "bootstrap_reruns": 0,
+    "files_written": 0,
+    "threads_max": 1,
+    "scope_note": "Checks copied inferential fields against immutable sources and arithmetic/plots only; no statistical resampling or model evaluation rerun."
+  },
+  "verified_sha256": {
+    "artifacts/rp4_v4_b2_rv15/receipt.json": "d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv15/session_losses.csv": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+    "artifacts/rp4_v4_b3_rv15/receipt.json": "b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb",
+    "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+    "artifacts/rp4_v4_b3_rv15/session_losses.csv": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+    "artifacts/rp4_v4_b2_rv5/receipt.json": "737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365",
+    "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+    "artifacts/rp4_v4_b2_rv5/session_losses.csv": "f342a2fa7815a27d83a2fb31347683f51e8428278881407474432e22667bf8ba",
+    "artifacts/rp4_v4_b3_rv5/receipt.json": "556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769",
+    "artifacts/rp4_v4_b3_rv5/summary.json": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+    "artifacts/rp4_v4_b3_rv5/session_losses.csv": "972249af8d31d26126650589de7e5e9b95216d29e8a2add494de7be7b7cf75ee",
+    "docs/rp4/results_v4.md": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7",
+    "artifacts/rp4_v4_b4/report_manifest.json": "a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f",
+    "artifacts/rp4_v4_code/report_v4_checked.py": "17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c",
+    "artifacts/rp4_v4_code/test_report_checked.py": "ca2f50495e3125f258ab7b437e98b040b25df536edd8bee5d637cb13261d3c58",
+    "artifacts/rp4_v4_a2/receipt.json": "d0483ef642b6440602467454457ed9b31356744911b50b7597fdc8f2f5a3f3b8"
+  },
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

@@ -1,0 +1,26 @@
+{
+  "stage": "V3_SECONDARY_JUMP_RELEASE",
+  "status": "RELEASE_PINNED_BEFORE_NEW_EMPIRICAL_FITS",
+  "release_path": "private-input/8d564851fe43198950ff",
+  "release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+  "inventory_path": "private-input/2c99ded3710b8b74fc71",
+  "inventory_sha256": "a7f0bd85aa2d817cfc7d1da7b463fc7c8751ee7e966b13fb662a63e403731c38",
+  "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_secondary_repair.jump_runner --prepare-only",
+  "exit_code": 0,
+  "root_verification": {
+    "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\nuv run --offline --frozen --no-sync pytest -o addopts='' -q artifacts/rp4_v3_secondary_repair/test_jump_repair.py artifacts/rp4_v3_secondary_repair/test_jump_runner.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_secondary_repair\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v3_secondary_repair/jump_repair.py artifacts/rp4_v3_secondary_repair/jump_inventory.py artifacts/rp4_v3_secondary_repair/jump_runner.py\nexit $LASTEXITCODE",
+    "chunk_id": "1f22a6",
+    "wall_time_seconds": 8.1984314,
+    "exit_code": 0,
+    "original_token_count": 41,
+    "output": "...................                                                      [100%]\r\n19 passed in 4.07s\r\nAll checks passed!\nSuccess: no issues found in 3 source files\r\n"
+  },
+  "independent_review": "PASS: masks/last10/target keys/reuse/inference; tampered session labels and forecasts rejected; Arrow CPU2/IO1 and BELOW_NORMAL verified on synthetic process; no empirical fits.",
+  "new_code_sha256": {
+    "jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+    "jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+    "test_jump_runner.py": "b9115928e38fd635d344b2415ec8de892a021572cf3f7702169ff201722b5fe0"
+  },
+  "new_empirical_fits": 0,
+  "existing_forecasts_changed": 0
+}

@@ -1,0 +1,1916 @@
+{
+  "a1_specification_frozen": false,
+  "data_rows_decoded": 0,
+  "harq_columns_in_existing_producer": [
+    "log_rv_30m",
+    "log_rv_session",
+    "log_rv_day",
+    "log_rv_week",
+    "minute_fraction",
+    "minute_fraction_sq",
+    "rq_attenuation"
+  ],
+  "input_manifest_sha256": "4259514d74ca32be9704f5e55174690892d8834a0d4043c788dbc4cb2e377f08",
+  "inspector_sha256": "ad5ae0d76536aa4575acd9e2e7cb4b20b68539bb1121dda6136993edd3845c88",
+  "model_evaluations": 0,
+  "model_fits": 0,
+  "new_grid_and_dealer_columns": "NOT_MATERIALIZED_OR_FROZEN_BY_THIS_INVENTORY",
+  "panels": {
+    "B0": {
+      "additional_non_target_candidate": [
+        "minute_bucket"
+      ],
+      "bytes": 20655471,
+      "columns": [
+        {
+          "name": "asset",
+          "type": "large_string"
+        },
+        {
+          "name": "session_date",
+          "type": "large_string"
+        },
+        {
+          "name": "role",
+          "type": "large_string"
+        },
+        {
+          "name": "source",
+          "type": "large_string"
+        },
+        {
+          "name": "origin_minute",
+          "type": "int64"
+        },
+        {
+          "name": "rv30",
+          "type": "double"
+        },
+        {
+          "name": "jump30",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_5",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_15",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_30",
+          "type": "double"
+        },
+        {
+          "name": "rq_back_30",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_back_30",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_back_30",
+          "type": "double"
+        },
+        {
+          "name": "jump_back_30",
+          "type": "double"
+        },
+        {
+          "name": "rv_session_to_date",
+          "type": "double"
+        },
+        {
+          "name": "rv_prev_day",
+          "type": "double"
+        },
+        {
+          "name": "rv_week",
+          "type": "double"
+        },
+        {
+          "name": "ret_5",
+          "type": "double"
+        },
+        {
+          "name": "ret_30",
+          "type": "double"
+        },
+        {
+          "name": "parkinson_30",
+          "type": "double"
+        },
+        {
+          "name": "volume_30",
+          "type": "double"
+        },
+        {
+          "name": "dollar_volume_30",
+          "type": "double"
+        },
+        {
+          "name": "minutes_since_open",
+          "type": "double"
+        },
+        {
+          "name": "minutes_to_close",
+          "type": "double"
+        },
+        {
+          "name": "minute_bucket",
+          "type": "int64"
+        },
+        {
+          "name": "day_of_week",
+          "type": "int8"
+        },
+        {
+          "name": "SPY_rv_30",
+          "type": "double"
+        },
+        {
+          "name": "SPY_ret_30",
+          "type": "double"
+        },
+        {
+          "name": "QQQ_rv_30",
+          "type": "double"
+        },
+        {
+          "name": "QQQ_ret_30",
+          "type": "double"
+        }
+      ],
+      "columns_count": 30,
+      "forbidden_predictor_columns": [
+        "rv30",
+        "jump30",
+        "role",
+        "source"
+      ],
+      "histogram_columns": [],
+      "matches_registered_hash": true,
+      "outside_registry_and_keys": [
+        "role",
+        "source",
+        "rv30",
+        "jump30",
+        "minute_bucket"
+      ],
+      "path": "private-input/154e9a45ff331c4b01f6",
+      "registered_core_and_rich": [
+        "QQQ_ret_30",
+        "QQQ_rv_30",
+        "SPY_ret_30",
+        "SPY_rv_30",
+        "day_of_week",
+        "dollar_volume_30",
+        "jump_back_30",
+        "minutes_since_open",
+        "minutes_to_close",
+        "parkinson_30",
+        "ret_30",
+        "ret_5",
+        "rq_back_30",
+        "rs_down_back_30",
+        "rs_up_back_30",
+        "rv_back_15",
+        "rv_back_30",
+        "rv_back_5",
+        "rv_prev_day",
+        "rv_session_to_date",
+        "rv_week",
+        "volume_30"
+      ],
+      "relative_path": "rp2_block4_b0/b0_panel.parquet",
+      "rows_from_footer": 181829,
+      "session_date_max_from_footer": "2026-07-17",
+      "session_date_min_from_footer": "2024-08-02",
+      "sha256": "52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20"
+    },
+    "B1": {
+      "bytes": 41142479,
+      "columns": [
+        {
+          "name": "b1_contracts",
+          "type": "double"
+        },
+        {
+          "name": "b1_expiries",
+          "type": "double"
+        },
+        {
+          "name": "b1_strikes",
+          "type": "double"
+        },
+        {
+          "name": "b1_median_quote_age_s",
+          "type": "double"
+        },
+        {
+          "name": "b1_p95_quote_age_s",
+          "type": "double"
+        },
+        {
+          "name": "b1_median_relative_spread",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_0",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_1",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_2",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_3",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_4",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_5",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_6",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_7",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_8",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_9",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_10",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_11",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_12",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_13",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_14",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_15",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_16",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_17",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_18",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_19",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_20",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_21",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_22",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_23",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_24",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_25",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_26",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_27",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_28",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_29",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_30",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_31",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_32",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_33",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_34",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_35",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_36",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_37",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_38",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_39",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_40",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_41",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_42",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_43",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_44",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_45",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_46",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_47",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_48",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_49",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_50",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_51",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_52",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_53",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_54",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_55",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_56",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_57",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_58",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_59",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_60",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_61",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_62",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_63",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_64",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_65",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_66",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_67",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_68",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_69",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_70",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_71",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_72",
+          "type": "double"
+        },
+        {
+          "name": "b1_quote_age_bin_73",
+          "type": "double"
+        },
+        {
+          "name": "b1_forward_expiries_fitted",
+          "type": "double"
+        },
+        {
+          "name": "b1_min_log_moneyness",
+          "type": "double"
+        },
+        {
+          "name": "b1_max_log_moneyness",
+          "type": "double"
+        },
+        {
+          "name": "b1_spans_call_wing",
+          "type": "double"
+        },
+        {
+          "name": "b1_spans_put_wing",
+          "type": "double"
+        },
+        {
+          "name": "b1_zero_dte_contracts",
+          "type": "double"
+        },
+        {
+          "name": "b1_surface_coverage",
+          "type": "double"
+        },
+        {
+          "name": "b1_smile_level",
+          "type": "double"
+        },
+        {
+          "name": "b1_pcp_residual",
+          "type": "double"
+        },
+        {
+          "name": "b1_calendar_violations",
+          "type": "double"
+        },
+        {
+          "name": "b1_butterfly_violations",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_7d",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_14d",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_30d",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_60d",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_90d",
+          "type": "double"
+        },
+        {
+          "name": "b1_term_slope",
+          "type": "double"
+        },
+        {
+          "name": "b1_term_convexity",
+          "type": "double"
+        },
+        {
+          "name": "b1_smile_slope",
+          "type": "double"
+        },
+        {
+          "name": "b1_smile_curvature",
+          "type": "double"
+        },
+        {
+          "name": "b1_smile_residual",
+          "type": "double"
+        },
+        {
+          "name": "b1_risk_reversal_25",
+          "type": "double"
+        },
+        {
+          "name": "b1_butterfly_25",
+          "type": "double"
+        },
+        {
+          "name": "b1_mfiv",
+          "type": "double"
+        },
+        {
+          "name": "b1_implied_rate",
+          "type": "double"
+        },
+        {
+          "name": "b1_implied_dividend_yield",
+          "type": "double"
+        },
+        {
+          "name": "origin_minute",
+          "type": "int64"
+        },
+        {
+          "name": "b1_quote_duplicates_dropped",
+          "type": "double"
+        },
+        {
+          "name": "b1_post_cutoff_selected",
+          "type": "double"
+        },
+        {
+          "name": "b1_duplicate_contracts_remaining",
+          "type": "double"
+        },
+        {
+          "name": "b1_rows_dropped_for_rate_or_dividend",
+          "type": "double"
+        },
+        {
+          "name": "b1_iv_minus_trailing_rv_30d",
+          "type": "double"
+        },
+        {
+          "name": "asset",
+          "type": "large_string"
+        },
+        {
+          "name": "session_date",
+          "type": "large_string"
+        }
+      ],
+      "columns_count": 114,
+      "excluded_custody_columns_for_reconstruction": [
+        "b1_duplicate_contracts_remaining",
+        "b1_post_cutoff_selected",
+        "b1_quote_duplicates_dropped"
+      ],
+      "histogram_columns": [
+        "b1_quote_age_bin_0",
+        "b1_quote_age_bin_1",
+        "b1_quote_age_bin_2",
+        "b1_quote_age_bin_3",
+        "b1_quote_age_bin_4",
+        "b1_quote_age_bin_5",
+        "b1_quote_age_bin_6",
+        "b1_quote_age_bin_7",
+        "b1_quote_age_bin_8",
+        "b1_quote_age_bin_9",
+        "b1_quote_age_bin_10",
+        "b1_quote_age_bin_11",
+        "b1_quote_age_bin_12",
+        "b1_quote_age_bin_13",
+        "b1_quote_age_bin_14",
+        "b1_quote_age_bin_15",
+        "b1_quote_age_bin_16",
+        "b1_quote_age_bin_17",
+        "b1_quote_age_bin_18",
+        "b1_quote_age_bin_19",
+        "b1_quote_age_bin_20",
+        "b1_quote_age_bin_21",
+        "b1_quote_age_bin_22",
+        "b1_quote_age_bin_23",
+        "b1_quote_age_bin_24",
+        "b1_quote_age_bin_25",
+        "b1_quote_age_bin_26",
+        "b1_quote_age_bin_27",
+        "b1_quote_age_bin_28",
+        "b1_quote_age_bin_29",
+        "b1_quote_age_bin_30",
+        "b1_quote_age_bin_31",
+        "b1_quote_age_bin_32",
+        "b1_quote_age_bin_33",
+        "b1_quote_age_bin_34",
+        "b1_quote_age_bin_35",
+        "b1_quote_age_bin_36",
+        "b1_quote_age_bin_37",
+        "b1_quote_age_bin_38",
+        "b1_quote_age_bin_39",
+        "b1_quote_age_bin_40",
+        "b1_quote_age_bin_41",
+        "b1_quote_age_bin_42",
+        "b1_quote_age_bin_43",
+        "b1_quote_age_bin_44",
+        "b1_quote_age_bin_45",
+        "b1_quote_age_bin_46",
+        "b1_quote_age_bin_47",
+        "b1_quote_age_bin_48",
+        "b1_quote_age_bin_49",
+        "b1_quote_age_bin_50",
+        "b1_quote_age_bin_51",
+        "b1_quote_age_bin_52",
+        "b1_quote_age_bin_53",
+        "b1_quote_age_bin_54",
+        "b1_quote_age_bin_55",
+        "b1_quote_age_bin_56",
+        "b1_quote_age_bin_57",
+        "b1_quote_age_bin_58",
+        "b1_quote_age_bin_59",
+        "b1_quote_age_bin_60",
+        "b1_quote_age_bin_61",
+        "b1_quote_age_bin_62",
+        "b1_quote_age_bin_63",
+        "b1_quote_age_bin_64",
+        "b1_quote_age_bin_65",
+        "b1_quote_age_bin_66",
+        "b1_quote_age_bin_67",
+        "b1_quote_age_bin_68",
+        "b1_quote_age_bin_69",
+        "b1_quote_age_bin_70",
+        "b1_quote_age_bin_71",
+        "b1_quote_age_bin_72",
+        "b1_quote_age_bin_73"
+      ],
+      "inventory_count_reconstruction": [
+        "b1_contracts",
+        "b1_expiries",
+        "b1_strikes",
+        "b1_median_quote_age_s",
+        "b1_p95_quote_age_s",
+        "b1_median_relative_spread",
+        "b1_forward_expiries_fitted",
+        "b1_min_log_moneyness",
+        "b1_max_log_moneyness",
+        "b1_spans_call_wing",
+        "b1_spans_put_wing",
+        "b1_zero_dte_contracts",
+        "b1_surface_coverage",
+        "b1_smile_level",
+        "b1_pcp_residual",
+        "b1_calendar_violations",
+        "b1_butterfly_violations",
+        "b1_iv_7d",
+        "b1_iv_14d",
+        "b1_iv_30d",
+        "b1_iv_60d",
+        "b1_iv_90d",
+        "b1_term_slope",
+        "b1_term_convexity",
+        "b1_smile_slope",
+        "b1_smile_curvature",
+        "b1_smile_residual",
+        "b1_risk_reversal_25",
+        "b1_butterfly_25",
+        "b1_mfiv",
+        "b1_implied_rate",
+        "b1_implied_dividend_yield",
+        "b1_rows_dropped_for_rate_or_dividend",
+        "b1_iv_minus_trailing_rv_30d"
+      ],
+      "matches_registered_hash": true,
+      "outside_registry_and_keys": [
+        "b1_contracts",
+        "b1_p95_quote_age_s",
+        "b1_spans_call_wing",
+        "b1_spans_put_wing",
+        "b1_calendar_violations",
+        "b1_quote_duplicates_dropped",
+        "b1_post_cutoff_selected",
+        "b1_duplicate_contracts_remaining",
+        "b1_rows_dropped_for_rate_or_dividend"
+      ],
+      "path": "private-input/290d4589aed2042c87a8",
+      "reconstruction_status": "INFERRED_COUNT_NOT_OFFICIAL_FEATURE_ALLOWLIST",
+      "registered_core_and_rich": [
+        "b1_iv_30d",
+        "b1_iv_60d",
+        "b1_iv_7d",
+        "b1_iv_minus_trailing_rv_30d",
+        "b1_median_quote_age_s",
+        "b1_median_relative_spread",
+        "b1_risk_reversal_25",
+        "b1_smile_level",
+        "b1_surface_coverage",
+        "b1_term_slope",
+        "b1_butterfly_25",
+        "b1_butterfly_violations",
+        "b1_expiries",
+        "b1_forward_expiries_fitted",
+        "b1_implied_dividend_yield",
+        "b1_implied_rate",
+        "b1_iv_14d",
+        "b1_iv_90d",
+        "b1_max_log_moneyness",
+        "b1_mfiv",
+        "b1_min_log_moneyness",
+        "b1_pcp_residual",
+        "b1_smile_curvature",
+        "b1_smile_residual",
+        "b1_smile_slope",
+        "b1_strikes",
+        "b1_term_convexity",
+        "b1_zero_dte_contracts"
+      ],
+      "relative_path": "rp2_block5_surface/b1_surface_panel.parquet",
+      "rows_from_footer": 181829,
+      "session_date_max_from_footer": "2026-07-17",
+      "session_date_min_from_footer": "2024-08-02",
+      "sha256": "7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33"
+    },
+    "B2": {
+      "bytes": 84072219,
+      "columns": [
+        {
+          "name": "origin_minute",
+          "type": "int64"
+        },
+        {
+          "name": "b2_pit_violations",
+          "type": "double"
+        },
+        {
+          "name": "b2_zero_dte_trades",
+          "type": "double"
+        },
+        {
+          "name": "b2_counting_trades",
+          "type": "double"
+        },
+        {
+          "name": "b2_counting_mean_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_counting_p95_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_0",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_1",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_2",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_3",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_4",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_5",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_6",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_7",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_8",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_9",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_10",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_11",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_12",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_13",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_14",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_15",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_16",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_17",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_18",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_19",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_20",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_21",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_22",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_23",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_24",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_25",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_26",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_27",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_28",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_29",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_30",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_31",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_32",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_33",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_34",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_35",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_36",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_37",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_38",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_39",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_40",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_41",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_42",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_43",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_44",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_45",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_46",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_47",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_48",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_49",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_50",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_51",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_52",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_53",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_54",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_55",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_56",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_57",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_58",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_59",
+          "type": "double"
+        },
+        {
+          "name": "b2_latency_bin_60",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_trades",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_contracts",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_size",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_premium",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_gamma_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_delta_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow_abs",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow_call",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow_put",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow_short_dte",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_vega_flow_long_dte",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_otm_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_buy_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_sell_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_passive_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_sweep_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_multileg_size_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_multileg_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_d_iv",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_d_mid_rel",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_d_spread",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_decay_intensity_last",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_decay_intensity_innovation",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_rate_per_second",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_observed_span_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_is_empty_window",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_mean_age_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_mean_provider_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_late_arrival_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_p95_provider_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_zero_dte_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_zero_dte_signed_premium",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_zero_dte_trade_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_strike_hhi",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_expiry_hhi",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_contract_entropy",
+          "type": "double"
+        },
+        {
+          "name": "b2_5m_interarrival_cv",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_trades",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_contracts",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_size",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_premium",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_gamma_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_delta_flow",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow_abs",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow_call",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow_put",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow_short_dte",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_vega_flow_long_dte",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_otm_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_buy_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_sell_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_passive_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_sweep_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_multileg_size_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_multileg_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_d_iv",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_d_mid_rel",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_d_spread",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_decay_intensity_last",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_decay_intensity_innovation",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_rate_per_second",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_observed_span_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_is_empty_window",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_mean_age_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_mean_provider_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_late_arrival_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_p95_provider_latency_s",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_zero_dte_premium_share",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_zero_dte_signed_premium",
+          "type": "double"
+        },
+        {
+          "name": "b2_30m_zero_dte_trade_share",
+          "type": "double"
+        },
+        {
+          "name": "asset",
+          "type": "large_string"
+        },
+        {
+          "name": "session_date",
+          "type": "large_string"
+        }
+      ],
+      "columns_count": 141,
+      "excluded_custody_columns_for_reconstruction": [
+        "b2_counting_mean_latency_s",
+        "b2_counting_p95_latency_s",
+        "b2_pit_violations"
+      ],
+      "histogram_columns": [
+        "b2_latency_bin_0",
+        "b2_latency_bin_1",
+        "b2_latency_bin_2",
+        "b2_latency_bin_3",
+        "b2_latency_bin_4",
+        "b2_latency_bin_5",
+        "b2_latency_bin_6",
+        "b2_latency_bin_7",
+        "b2_latency_bin_8",
+        "b2_latency_bin_9",
+        "b2_latency_bin_10",
+        "b2_latency_bin_11",
+        "b2_latency_bin_12",
+        "b2_latency_bin_13",
+        "b2_latency_bin_14",
+        "b2_latency_bin_15",
+        "b2_latency_bin_16",
+        "b2_latency_bin_17",
+        "b2_latency_bin_18",
+        "b2_latency_bin_19",
+        "b2_latency_bin_20",
+        "b2_latency_bin_21",
+        "b2_latency_bin_22",
+        "b2_latency_bin_23",
+        "b2_latency_bin_24",
+        "b2_latency_bin_25",
+        "b2_latency_bin_26",
+        "b2_latency_bin_27",
+        "b2_latency_bin_28",
+        "b2_latency_bin_29",
+        "b2_latency_bin_30",
+        "b2_latency_bin_31",
+        "b2_latency_bin_32",
+        "b2_latency_bin_33",
+        "b2_latency_bin_34",
+        "b2_latency_bin_35",
+        "b2_latency_bin_36",
+        "b2_latency_bin_37",
+        "b2_latency_bin_38",
+        "b2_latency_bin_39",
+        "b2_latency_bin_40",
+        "b2_latency_bin_41",
+        "b2_latency_bin_42",
+        "b2_latency_bin_43",
+        "b2_latency_bin_44",
+        "b2_latency_bin_45",
+        "b2_latency_bin_46",
+        "b2_latency_bin_47",
+        "b2_latency_bin_48",
+        "b2_latency_bin_49",
+        "b2_latency_bin_50",
+        "b2_latency_bin_51",
+        "b2_latency_bin_52",
+        "b2_latency_bin_53",
+        "b2_latency_bin_54",
+        "b2_latency_bin_55",
+        "b2_latency_bin_56",
+        "b2_latency_bin_57",
+        "b2_latency_bin_58",
+        "b2_latency_bin_59",
+        "b2_latency_bin_60"
+      ],
+      "inventory_count_reconstruction": [
+        "b2_zero_dte_trades",
+        "b2_counting_trades",
+        "b2_5m_trades",
+        "b2_5m_contracts",
+        "b2_5m_size",
+        "b2_5m_premium",
+        "b2_5m_vega_flow",
+        "b2_5m_gamma_flow",
+        "b2_5m_delta_flow",
+        "b2_5m_vega_flow_abs",
+        "b2_5m_vega_flow_call",
+        "b2_5m_vega_flow_put",
+        "b2_5m_vega_flow_short_dte",
+        "b2_5m_vega_flow_long_dte",
+        "b2_5m_otm_premium_share",
+        "b2_5m_buy_premium_share",
+        "b2_5m_sell_premium_share",
+        "b2_5m_passive_premium_share",
+        "b2_5m_sweep_premium_share",
+        "b2_5m_multileg_size_share",
+        "b2_5m_multileg_premium_share",
+        "b2_5m_d_iv",
+        "b2_5m_d_mid_rel",
+        "b2_5m_d_spread",
+        "b2_5m_decay_intensity_last",
+        "b2_5m_decay_intensity_innovation",
+        "b2_5m_rate_per_second",
+        "b2_5m_observed_span_s",
+        "b2_5m_is_empty_window",
+        "b2_5m_mean_age_s",
+        "b2_5m_mean_provider_latency_s",
+        "b2_5m_late_arrival_share",
+        "b2_5m_p95_provider_latency_s",
+        "b2_5m_zero_dte_premium_share",
+        "b2_5m_zero_dte_signed_premium",
+        "b2_5m_zero_dte_trade_share",
+        "b2_5m_strike_hhi",
+        "b2_5m_expiry_hhi",
+        "b2_5m_contract_entropy",
+        "b2_5m_interarrival_cv",
+        "b2_30m_trades",
+        "b2_30m_contracts",
+        "b2_30m_size",
+        "b2_30m_premium",
+        "b2_30m_vega_flow",
+        "b2_30m_gamma_flow",
+        "b2_30m_delta_flow",
+        "b2_30m_vega_flow_abs",
+        "b2_30m_vega_flow_call",
+        "b2_30m_vega_flow_put",
+        "b2_30m_vega_flow_short_dte",
+        "b2_30m_vega_flow_long_dte",
+        "b2_30m_otm_premium_share",
+        "b2_30m_buy_premium_share",
+        "b2_30m_sell_premium_share",
+        "b2_30m_passive_premium_share",
+        "b2_30m_sweep_premium_share",
+        "b2_30m_multileg_size_share",
+        "b2_30m_multileg_premium_share",
+        "b2_30m_d_iv",
+        "b2_30m_d_mid_rel",
+        "b2_30m_d_spread",
+        "b2_30m_decay_intensity_last",
+        "b2_30m_decay_intensity_innovation",
+        "b2_30m_rate_per_second",
+        "b2_30m_observed_span_s",
+        "b2_30m_is_empty_window",
+        "b2_30m_mean_age_s",
+        "b2_30m_mean_provider_latency_s",
+        "b2_30m_late_arrival_share",
+        "b2_30m_p95_provider_latency_s",
+        "b2_30m_zero_dte_premium_share",
+        "b2_30m_zero_dte_signed_premium",
+        "b2_30m_zero_dte_trade_share"
+      ],
+      "matches_registered_hash": true,
+      "outside_registry_and_keys": [
+        "b2_pit_violations",
+        "b2_zero_dte_trades",
+        "b2_counting_trades",
+        "b2_counting_mean_latency_s",
+        "b2_counting_p95_latency_s",
+        "b2_5m_mean_age_s",
+        "b2_5m_p95_provider_latency_s",
+        "b2_30m_mean_age_s",
+        "b2_30m_p95_provider_latency_s"
+      ],
+      "path": "private-input/8a4c5029ae2168842e57",
+      "reconstruction_status": "INFERRED_COUNT_NOT_OFFICIAL_FEATURE_ALLOWLIST",
+      "registered_core_and_rich": [
+        "b2_5m_buy_premium_share",
+        "b2_5m_d_iv",
+        "b2_5m_decay_intensity_innovation",
+        "b2_5m_delta_flow",
+        "b2_5m_mean_provider_latency_s",
+        "b2_5m_multileg_size_share",
+        "b2_5m_premium",
+        "b2_5m_strike_hhi",
+        "b2_5m_trades",
+        "b2_5m_vega_flow",
+        "b2_5m_vega_flow_short_dte",
+        "b2_5m_zero_dte_premium_share",
+        "b2_30m_buy_premium_share",
+        "b2_30m_contracts",
+        "b2_30m_d_iv",
+        "b2_30m_d_mid_rel",
+        "b2_30m_d_spread",
+        "b2_30m_decay_intensity_innovation",
+        "b2_30m_decay_intensity_last",
+        "b2_30m_delta_flow",
+        "b2_30m_gamma_flow",
+        "b2_30m_is_empty_window",
+        "b2_30m_late_arrival_share",
+        "b2_30m_mean_provider_latency_s",
+        "b2_30m_multileg_premium_share",
+        "b2_30m_multileg_size_share",
+        "b2_30m_observed_span_s",
+        "b2_30m_otm_premium_share",
+        "b2_30m_passive_premium_share",
+        "b2_30m_premium",
+        "b2_30m_rate_per_second",
+        "b2_30m_sell_premium_share",
+        "b2_30m_size",
+        "b2_30m_sweep_premium_share",
+        "b2_30m_trades",
+        "b2_30m_vega_flow",
+        "b2_30m_vega_flow_abs",
+        "b2_30m_vega_flow_call",
+        "b2_30m_vega_flow_long_dte",
+        "b2_30m_vega_flow_put",
+        "b2_30m_vega_flow_short_dte",
+        "b2_30m_zero_dte_premium_share",
+        "b2_30m_zero_dte_signed_premium",
+        "b2_30m_zero_dte_trade_share",
+        "b2_5m_contract_entropy",
+        "b2_5m_contracts",
+        "b2_5m_d_mid_rel",
+        "b2_5m_d_spread",
+        "b2_5m_decay_intensity_last",
+        "b2_5m_expiry_hhi",
+        "b2_5m_gamma_flow",
+        "b2_5m_interarrival_cv",
+        "b2_5m_is_empty_window",
+        "b2_5m_late_arrival_share",
+        "b2_5m_multileg_premium_share",
+        "b2_5m_observed_span_s",
+        "b2_5m_otm_premium_share",
+        "b2_5m_passive_premium_share",
+        "b2_5m_rate_per_second",
+        "b2_5m_sell_premium_share",
+        "b2_5m_size",
+        "b2_5m_sweep_premium_share",
+        "b2_5m_vega_flow_abs",
+        "b2_5m_vega_flow_call",
+        "b2_5m_vega_flow_long_dte",
+        "b2_5m_vega_flow_put",
+        "b2_5m_zero_dte_signed_premium",
+        "b2_5m_zero_dte_trade_share"
+      ],
+      "relative_path": "rp2_block6_flow/b2_flow_panel.parquet",
+      "rows_from_footer": 181829,
+      "session_date_max_from_footer": "2026-07-17",
+      "session_date_min_from_footer": "2024-08-02",
+      "sha256": "61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6"
+    },
+    "target": {
+      "bytes": 37068944,
+      "columns": [
+        {
+          "name": "asset",
+          "type": "large_string"
+        },
+        {
+          "name": "session_date",
+          "type": "large_string"
+        },
+        {
+          "name": "role",
+          "type": "large_string"
+        },
+        {
+          "name": "source",
+          "type": "large_string"
+        },
+        {
+          "name": "origin_minute",
+          "type": "int64"
+        },
+        {
+          "name": "rv_session_to_date",
+          "type": "double"
+        },
+        {
+          "name": "rv_prev_day",
+          "type": "double"
+        },
+        {
+          "name": "rv_5",
+          "type": "double"
+        },
+        {
+          "name": "bv_5",
+          "type": "double"
+        },
+        {
+          "name": "jump_5",
+          "type": "double"
+        },
+        {
+          "name": "continuous_5",
+          "type": "double"
+        },
+        {
+          "name": "rq_5",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_5",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_5",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_5",
+          "type": "double"
+        },
+        {
+          "name": "noise_5",
+          "type": "double"
+        },
+        {
+          "name": "rv_15",
+          "type": "double"
+        },
+        {
+          "name": "bv_15",
+          "type": "double"
+        },
+        {
+          "name": "jump_15",
+          "type": "double"
+        },
+        {
+          "name": "continuous_15",
+          "type": "double"
+        },
+        {
+          "name": "rq_15",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_15",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_15",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_15",
+          "type": "double"
+        },
+        {
+          "name": "noise_15",
+          "type": "double"
+        },
+        {
+          "name": "rv_30",
+          "type": "double"
+        },
+        {
+          "name": "bv_30",
+          "type": "double"
+        },
+        {
+          "name": "jump_30",
+          "type": "double"
+        },
+        {
+          "name": "continuous_30",
+          "type": "double"
+        },
+        {
+          "name": "rq_30",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_30",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_30",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_30",
+          "type": "double"
+        },
+        {
+          "name": "noise_30",
+          "type": "double"
+        },
+        {
+          "name": "rv_60",
+          "type": "double"
+        },
+        {
+          "name": "bv_60",
+          "type": "double"
+        },
+        {
+          "name": "jump_60",
+          "type": "double"
+        },
+        {
+          "name": "continuous_60",
+          "type": "double"
+        },
+        {
+          "name": "rq_60",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_60",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_60",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_60",
+          "type": "double"
+        },
+        {
+          "name": "noise_60",
+          "type": "double"
+        },
+        {
+          "name": "rv_120",
+          "type": "double"
+        },
+        {
+          "name": "bv_120",
+          "type": "double"
+        },
+        {
+          "name": "jump_120",
+          "type": "double"
+        },
+        {
+          "name": "continuous_120",
+          "type": "double"
+        },
+        {
+          "name": "rq_120",
+          "type": "double"
+        },
+        {
+          "name": "rs_up_120",
+          "type": "double"
+        },
+        {
+          "name": "rs_down_120",
+          "type": "double"
+        },
+        {
+          "name": "rv_back_120",
+          "type": "double"
+        },
+        {
+          "name": "noise_120",
+          "type": "double"
+        }
+      ],
+      "columns_count": 52,
+      "histogram_columns": [],
+      "matches_registered_hash": true,
+      "outside_registry_and_keys": [
+        "role",
+        "source",
+        "rv_session_to_date",
+        "rv_prev_day",
+        "rv_5",
+        "bv_5",
+        "jump_5",
+        "continuous_5",
+        "rq_5",
+        "rs_up_5",
+        "rs_down_5",
+        "rv_back_5",
+        "noise_5",
+        "rv_15",
+        "bv_15",
+        "jump_15",
+        "continuous_15",
+        "rq_15",
+        "rs_up_15",
+        "rs_down_15",
+        "rv_back_15",
+        "noise_15",
+        "rv_30",
+        "bv_30",
+        "jump_30",
+        "continuous_30",
+        "rq_30",
+        "rs_up_30",
+        "rs_down_30",
+        "rv_back_30",
+        "noise_30",
+        "rv_60",
+        "bv_60",
+        "jump_60",
+        "continuous_60",
+        "rq_60",
+        "rs_up_60",
+        "rs_down_60",
+        "rv_back_60",
+        "noise_60",
+        "rv_120",
+        "bv_120",
+        "jump_120",
+        "continuous_120",
+        "rq_120",
+        "rs_up_120",
+        "rs_down_120",
+        "rv_back_120",
+        "noise_120"
+      ],
+      "path": "private-input/ce6bf6f13a0b59fbd2a0",
+      "registered_core_and_rich": [],
+      "relative_path": "rp2_block3_target/target_panel.parquet",
+      "rows_from_footer": 111348,
+      "session_date_max_from_footer": "2026-07-17",
+      "session_date_min_from_footer": "2024-08-02",
+      "sha256": "fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831"
+    }
+  },
+  "provider_requests": 0,
+  "rp4_features_materialized": false,
+  "run_id": "rp2-v3-20260901-flow-session-loss-registration",
+  "run_identity_sha256": "5a21709cf7557cb54c244ada00df5de8798f502ebfcc7f1c4a1884a2c811d4eb",
+  "schema_version": "rp4-registered-panel-inventory-v1",
+  "scope": "HASHES_AND_PARQUET_FOOTERS_ONLY_NO_DATA_ROWS",
+  "source_sha256": {
+    "configs/rp2_v3_feature_sets.json": "9b74b2c53ce7633d363c0721016352c9828679cce9ff1fafba18537af6f5c07a",
+    "docs/methodology_decisions.md": "47817ae84ab6b8e037a2880d7ac9481c950c3015f3095a6bd07b8bbf34758b4d",
+    "scripts/rp2_block4_b0_panel.py": "cc25547b84fdb305a87e7bf3cbf1dbaad66349c89b8903f9794454a194399eb2",
+    "scripts/rp2_block5_surface_panel.py": "60a1c427c67a20da7a0ceb0433a85d1b57f9d6fc86a78f2fc97c24dfb010ee14",
+    "scripts/rp2_block6_flow_panel.py": "87db0062bc3f3a74dc55345152095aed5de3c39795d12c333dca2e127bf87ae8",
+    "src/mds650/har.py": "2644339f8fbcb91ba8d42e436f7c18047b65c48b7e8dd965b0d31f24be2c3e9a",
+    "src/mds650/rp2/flow.py": "cec7d0beec3595c9be06750e25e480f07ba61eac50f12ea84f6aca2f7b84b1ed",
+    "src/mds650/rp2/surface.py": "a6d5175c43124d563645b65dbc88b20e32b6f327f35c767b00d64fb370c27723"
+  },
+  "target_values_decoded": 0
+}

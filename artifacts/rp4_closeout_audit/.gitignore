@@ -1,0 +1,17 @@
+/*
+!/.gitignore
+!/REPORT.md
+!/b2_coefficient_summary.csv
+!/b2_presence_coefficient_summary.csv
+!/descriptive_profiles.csv
+!/ridge_lambda_counts.csv
+!/ridge_bounds_pruning_summary.csv
+!/forecast_equality_summary.csv
+!/loss_tails_and_rounds_summary.csv
+!/training_end_clock_census.csv
+!/selected_target_endpoint_clock_census.csv
+!/metadata_findings.json
+!/findings.json
+!/public_manifest.json
+!/public_manifest_v2.json
+!/public_checks_receipt.json

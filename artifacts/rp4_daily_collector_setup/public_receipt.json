@@ -1,0 +1,177 @@
+{
+  "schema": "disabled_windows_daily_collection_public_receipt_v1",
+  "status": "CREATED_DISABLED_VERIFIED_NO_COLLECTION",
+  "created_at_utc": "2026-09-07T22:07:00Z",
+  "task_name": "OptionsVolatility-Daily-Collection",
+  "actual_setup": {
+    "task_enabled": false,
+    "trigger_enabled": false,
+    "allow_start_on_demand": false,
+    "created_disabled_from_xml": true,
+    "action_count": 1,
+    "action_and_working_directory_verified": true,
+    "other_task_definitions_verified": 274,
+    "other_task_definitions_changed": 0,
+    "data_root_created": false,
+    "collection_runs": 0,
+    "network_requests": 0,
+    "provider_credential_reads": 0,
+    "target_reads": 0,
+    "model_fits": 0,
+    "heartbeat_automations_created": 0,
+    "private_setup_acl_protected": true,
+    "unexpected_acl_grants": 0
+  },
+  "final_registration_exit_code": 0,
+  "initial_registration": {
+    "exit_code": 1,
+    "native_error": "0x8004131a",
+    "resolution": "Removed the explicit UTF-8 declaration from the native Unicode XML string. A new disabled registration succeeded; the first rejected XML and receipt remain preserved privately. No transient enable or run occurred."
+  },
+  "exported_xml_note": "The original native BSTR export is preserved privately. An additional UTF-8-consistent XML export removes only its encoding declaration, without changing the registered task.",
+  "dry_run": {
+    "command_display": "launch.ps1 -DryRun (private configuration arguments omitted)",
+    "command_is_redacted": true,
+    "exit_code": 0,
+    "output": {
+      "calendar": "XNYS",
+      "close_grace_minutes": 30,
+      "close_utc": "2026-09-04T20:00:00+00:00",
+      "credential_reads": 0,
+      "fmp_one_minute_assets": [
+        "AAPL",
+        "AMZN",
+        "META",
+        "MSFT",
+        "NVDA",
+        "TSLA",
+        "SPY",
+        "QQQ"
+      ],
+      "model_fits": 0,
+      "network_requests": 0,
+      "numeric_thread_limit": 2,
+      "session_date": "2026-09-04",
+      "session_timezone": "America/New_York",
+      "status": "DRY_RUN_NO_NETWORK",
+      "target_reads": 0,
+      "uw_full_tape_sessions": 1
+    }
+  },
+  "quality_checks": [
+    {
+      "step": "tests",
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_daily_collector_code/test_collector.py -q -p no:cacheprovider --basetemp artifacts/rp4_daily_collector_setup/test_tmp",
+      "command_scope": "Exact invoked relative command; machine environment retained privately.",
+      "exit_code": 0,
+      "output": "..........                                                               [100%]\r\n"
+    },
+    {
+      "step": "ruff",
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_daily_collector_code",
+      "command_scope": "Exact invoked relative command; machine environment retained privately.",
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "step": "format",
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_daily_collector_code",
+      "command_scope": "Exact invoked relative command; machine environment retained privately.",
+      "exit_code": 0,
+      "output": "2 files already formatted\n"
+    },
+    {
+      "step": "mypy",
+      "command": "uv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent --ignore-missing-imports artifacts/rp4_daily_collector_code/collector.py",
+      "command_scope": "Exact invoked relative command; machine environment retained privately.",
+      "exit_code": 0,
+      "output": "Success: no issues found in 1 source file\r\n"
+    },
+    {
+      "step": "powershell_parse",
+      "command": "PowerShell AST parse of the two new scripts",
+      "command_scope": "Human-readable description; full invocation retained privately.",
+      "exit_code": 0,
+      "output": "POWERSHELL_PARSE_PASS:2_FILES\r\n"
+    }
+  ],
+  "post_export_only_change_verification": {
+    "powershell_ast_exit_code": 0,
+    "output": "POWERSHELL_POST_EXPORT_FIX_PARSE_PASS\r\n"
+  },
+  "final_native_verification": {
+    "exit_code": 0,
+    "output": {
+      "Status": "PASS_FINAL_NATIVE_TASK_CHECK",
+      "OtherTasksVerified": 274,
+      "ChangedOtherDefinitions": 0,
+      "TaskDisabled": true,
+      "TriggerDisabled": true,
+      "OnDemandDisabled": true,
+      "ActionAndWorkingDirectoryExact": true,
+      "NewRootAbsent": true
+    }
+  },
+  "source_pin_count": 16,
+  "source_pin_drift": 0,
+  "private_execution_receipt_sha256": "757185ee83d19084864e3493deba43518a32713de216241bdfb93716c689480f",
+  "registered_configuration_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+  "executed_installer_source_sha256": "8783287e09031fb9a3613e7c94be34b609dab4cb43caa45e8ed36b8e23f58252",
+  "future_behavior": {
+    "daily_nominal_utc": "22:00",
+    "calendar": "XNYS",
+    "session_timezone": "America/New_York",
+    "close_grace_minutes": 30,
+    "session_scope": "LATEST_CLOSED_ONLY",
+    "historical_backfill": false,
+    "provider_scope": "UW full-tape ZIP and bounded FMP 1-minute bars only",
+    "assets": [
+      "AAPL",
+      "AMZN",
+      "META",
+      "MSFT",
+      "NVDA",
+      "TSLA",
+      "SPY",
+      "QQQ"
+    ],
+    "max_attempts_per_missing_component": 5,
+    "backoff_seconds": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "numeric_thread_limit": 2,
+    "minimum_free_gib": 100,
+    "account_mode": "InteractiveToken, least privilege, no stored password",
+    "storage_mode": "New private root with immutable per-component and per-session hashes; no writes to existing scientific roots"
+  },
+  "limitations": {
+    "provider_credentials": "NO VERIFICABLE: no credentials were read or probed.",
+    "provider_entitlements_and_download_success": "NO VERIFICABLE: no network collection was executed.",
+    "unattended_operation": "NO VERIFICABLE: disabled task; InteractiveToken requires logged-in account.",
+    "data_quality": "Collection does not prove feature eligibility, complete bar coverage, historical client availability, prior-close open-interest vintage, or predictive advantage.",
+    "raw_zip_quality": "Existing CRC and field-set validation only; row-level feature filtering is intentionally outside this collector.",
+    "new_data_root_acl": "Future initialization implemented but not executed; only setup private-directory ACL protection was exercised and verified."
+  },
+  "source_pins_sha256": {
+    "src/mds650/b1q_exogenous_provenance_v1.py": "ed70ff124c1651e61c01f7d96de39b538e5e76abe17259f1e448c69901f7fc87",
+    "src/mds650/phase5_storage.py": "bc1e1eee18c15b05a4ca0b1b7340a74f86d760255edc37a2c0adc01907a5f9af",
+    "src/mds650/normalize.py": "7cfc7e993fd9f3d4fdb0b8ea728b015c5adad1aab3476701c08fbb59115a1798",
+    "src/mds650/study_design.py": "990c7e2a3d4012ccfe718c740c2e5eaf6eecc0f377222c650a11720fd517fcc7",
+    "src/mds650/providers/fmp.py": "aefaf2f638facc4199c7d769c1e60a78c7c1a63450b482001749872aa9bec054",
+    "artifacts/rp4_daily_collector_code/launch.ps1": "337a9dfc485390f7447ed0910920b0b094f5b616167658087ea9c4c045d04db5",
+    "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+    "uv.lock": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+    "src/mds650/providers/base.py": "7021bd4d139ddabc5270c666c5fc126f596ba80d85df7828ce3ee67584f748e4",
+    "src/mds650/contracts.py": "ee9c832a4c5e9cc3e62ae1701907325ed2b3668fa6a78d7b60b2fc6f419f7a53",
+    "scripts/download_calibration_20d.py": "4a07bb46e0aaaadcc561131e75ac54f942dcce4e34774097ea25d5cfb8d48a64",
+    "artifacts/rp4_code/acquire.py": "ff6cf87ee4c7b66fdb24c8914a89325e19642a2ddad4bc8fc62349682a2351f8",
+    "src/mds650/time.py": "dc8005663f877910028b8da5cdc80c5d0c374cee176ea251945237c4c4ddff24",
+    "src/mds650/errors.py": "63b2cf00df37072fa387f12eefa8926ac2d1eaa110bc966761622e880fbe63cb",
+    "artifacts/rp4_daily_collector_code/collector.py": "60f248cfed43051f5041838634bbe6b32feed16f17e9cd06fa35a032ca8b1228",
+    "pyproject.toml": "f7a62af5dcb1a35ce4c4f52df305ed0f574a0fff7806aba4a07f957fd6fb4b56"
+  },
+  "research_status": "RESEARCH_ONLY; NOT INVESTMENT ADVICE; capital_go=false"
+}

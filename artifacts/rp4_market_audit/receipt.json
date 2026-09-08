@@ -1,0 +1,151 @@
+{
+  "status": "COMPLETE_DESCRIPTIVE_AUDIT",
+  "recorded_at_utc": "2026-09-07 21:38:21 UTC",
+  "scope": {
+    "fits": 0,
+    "bootstrap_replications": 0,
+    "new_targets": 0,
+    "downloads": 0,
+    "original_files_modified": 0,
+    "tape_asset_sessions": 144,
+    "panel_origins": 195479,
+    "panel_sessions": 504,
+    "bar_sessions": 2
+  },
+  "environment": {
+    "workdir_alias": "repository_root",
+    "python_environment_alias": "existing_python_312_environment",
+    "source_root_alias": "local_input_store",
+    "panel_alias": "frozen_feature_panel",
+    "panel_sha256": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+    "lineage_alias": "frozen_input_lineage",
+    "lineage_sha256": "ca610184b4ccffe2d5792e86d8babefc12ebee52b38e5b1d16f8c2f7465606db",
+    "PYTHONPATH": [
+      "repository_root",
+      "repository_root/src",
+      "repository_root/scripts",
+      "repository_root/artifacts/rp4_code"
+    ],
+    "numeric_threads": 2,
+    "priority": "BELOW_NORMAL",
+    "uv_lock_sha256": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0"
+  },
+  "commands": [
+    {
+      "stage": "audit",
+      "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_market_audit_code.audit --source-root \"$env:AUDIT_SOURCE_ROOT\" --panel \"$env:AUDIT_PANEL\" --lineage \"$env:AUDIT_LINEAGE\"",
+      "exit_code": 0,
+      "stdout": "{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-12\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-13\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-14\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-15\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-16\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-20\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-21\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-22\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-23\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-26\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-27\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-28\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-29\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-01-30\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-02\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-03\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-04\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-05\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-06\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-09\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-10\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-11\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-12\", \"assets\": 6}\r\n{\"event\": \"EXPIRY_DAY_COMPLETE\", \"session\": \"2026-02-13\", \"assets\": 6}\r\n{\"status\": \"COMPLETE\", \"first_observed\": {\"AAPL\": \"2026-01-26\", \"AMZN\": \"2026-01-26\", \"META\": \"2026-01-26\", \"MSFT\": \"2026-01-26\", \"NVDA\": \"2026-01-26\", \"TSLA\": \"2026-01-26\"}, \"bar_events\": [{\"asset\": \"AMZN\", \"session_date\": \"2026-08-31\", \"event_bar_start_ny\": \"2026-08-31T14:00:00-04:00\", \"N_bars\": 390, \"unique_minutes\": 390, \"duplicate_minutes\": 0, \"missing_regular_minutes\": 0, \"outside_regular_minutes\": 0, \"nonfinite_ohlcv_rows\": 0, \"inconsistent_ohlc_rows\": 0, \"negative_volume_rows\": 0, \"zero_volume_rows\": 0, \"full_session_volume_median\": 55178.0, \"prior_30_minutes_volume_median\": 25450.5, \"event_close_to_close_log_return_bp\": -151.6788694132191, \"next_close_to_close_log_return_bp\": 71.30154984591269, \"event_simple_return_bp\": -150.53433944918982, \"next_simple_return_bp\": 71.55635062611853, \"event_volume\": 166560.0, \"next_volume\": 615022.0, \"event_volume_over_session_median\": 3.0185943673203086, \"next_volume_over_session_median\": 11.146145202798216, \"event_open_gap_log_bp\": -0.7661074086331772, \"next_open_gap_log_bp\": 36.29595443976096, \"two_minute_net_log_return_bp\": -80.37731956730642, \"max_abs_close_to_close_log_return_bp\": 151.6788694132191, \"event_abs_return_rank_within_session\": 1, \"internal_consistency_not_external_price_validation\": true}, {\"asset\": \"TSLA\", \"session_date\": \"2026-08-17\", \"event_bar_start_ny\": \"2026-08-17T15:25:00-04:00\", \"N_bars\": 390, \"unique_minutes\": 390, \"duplicate_minutes\": 0, \"missing_regular_minutes\": 0, \"outside_regular_minutes\": 0, \"nonfinite_ohlcv_rows\": 0, \"inconsistent_ohlc_rows\": 0, \"negative_volume_rows\": 0, \"zero_volume_rows\": 0, \"full_session_volume_median\": 42135.5, \"prior_30_minutes_volume_median\": 37011.0, \"event_close_to_close_log_return_bp\": 102.66072430598675, \"next_close_to_close_log_return_bp\": -83.18509562570216, \"event_simple_return_bp\": 103.18949343339546, \"next_simple_return_bp\": -82.84006499535646, \"event_volume\": 118179.0, \"next_volume\": 314047.0, \"event_volume_over_session_median\": 2.8047370981713757, \"next_volume_over_session_median\": 7.453263874879852, \"event_open_gap_log_bp\": 0.2931476731612418, \"next_open_gap_log_bp\": -21.78526093930083, \"two_minute_net_log_return_bp\": 19.475628680284586, \"max_abs_close_to_close_log_return_bp\": 102.66072430598675, \"event_abs_return_rank_within_session\": 1, \"internal_consistency_not_external_price_validation\": true}], \"manifest_sha256\": \"f52c37e95f9ebe9961d2d42e1e6719ffbf823a0a7a0128fb5d029407d507219f\"}\r\n"
+    },
+    {
+      "stage": "pytest",
+      "command": "uv run --offline --frozen --no-sync python -B -c \"import psutil; psutil.Process().nice(psutil.BELOW_NORMAL_PRIORITY_CLASS); import pytest; raise SystemExit(pytest.main(['artifacts/rp4_market_audit_code','-q']))\"",
+      "exit_code": 0,
+      "tests": 4,
+      "failures": 0,
+      "stdout": "....                                                                     [100%]"
+    },
+    {
+      "stage": "ruff",
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_market_audit_code",
+      "exit_code": 0,
+      "stdout": "All checks passed!"
+    },
+    {
+      "stage": "format",
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_market_audit_code",
+      "exit_code": 0,
+      "stdout": "4 files already formatted"
+    },
+    {
+      "stage": "mypy",
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_market_audit_code/audit.py artifacts/rp4_market_audit_code/report.py",
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 2 source files"
+    },
+    {
+      "stage": "report",
+      "command": "uv run --offline --frozen --no-sync python -B -c \"import psutil; psutil.Process().nice(psutil.BELOW_NORMAL_PRIORITY_CLASS); from artifacts.rp4_market_audit_code.report import main; raise SystemExit(main())\"",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"COMPLETE\", \"tables\": {\"coverage\": 5, \"first_observed\": 6, \"daily\": 24}, \"report_sha256\": \"74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab\", \"projection_sha256\": \"c73b688aeb521d978f3c4bcc934ce8f63c724731ad5fc612404e38a70b2dc1b8\"}\r\n"
+    }
+  ],
+  "prior_failures_preserved": [
+    {
+      "stage": "initial_synthetic_test",
+      "exit_code": 1,
+      "error": "polars.exceptions.ColumnNotFoundError: unable to find column 2026-01-01",
+      "resolution": "Use explicit literal expressions for date-range bounds; regression test passed."
+    },
+    {
+      "stage": "initial_typecheck",
+      "exit_code": 1,
+      "errors": 12,
+      "resolution": "Narrow scalar statistic and datetime types with runtime guards; no arithmetic change."
+    },
+    {
+      "stage": "initial_descriptive_audit",
+      "exit_code": 1,
+      "error": "SOURCE_HASH_NOT_BOUND:minute_bars_receipt/2026-08-31/AMZN",
+      "outputs_written_before_failure": 0,
+      "resolution": "The bar itself is pinned in historical lineage; the receipt is not. Record receipt metadata hash at read, require bar hash to agree with BOTH receipt and historical lineage. No input was altered."
+    },
+    {
+      "stage": "initial_report_ruff",
+      "exit_code": 1,
+      "errors": 11,
+      "resolution": "Wrap long strings; no rendered numerical content changed."
+    },
+    {
+      "stage": "initial_report_typecheck",
+      "exit_code": 1,
+      "errors": 1,
+      "resolution": "Explicit float conversion for the aggregate return type."
+    }
+  ],
+  "source_metadata": {
+    "count": 149,
+    "aliases_and_hashes": "sources.json",
+    "provider_bars_match_preexisting_hashes": true,
+    "receipt_metadata_binding_is_not_a_claim_of_prior_freeze": true
+  },
+  "code_sha256": {
+    "artifacts/rp4_market_audit_code/test_audit.py": "3675820e280b0d55405eca286aee30fda3e67bd6e3733bc215a923f79b574f41",
+    "artifacts/rp4_market_audit_code/audit.py": "e6a63a086d793dffc8ed98f4b5dce08b5c9e6240c82e64d4d15b40e875023c2b",
+    "artifacts/rp4_market_audit_code/test_report.py": "c3986f5cf3c24ef6aca932e2cd6ea4806aa0efe9b9a1ca7ac34d0e16c702d79d",
+    "artifacts/rp4_market_audit_code/report.py": "5d6c50f1aaad2f22f3eb7cac7968674f5b1bbe6cafd9eb7811ac378a55c34079"
+  },
+  "audit_manifest_sha256": "f52c37e95f9ebe9961d2d42e1e6719ffbf823a0a7a0128fb5d029407d507219f",
+  "publication_projection_sha256": "c73b688aeb521d978f3c4bcc934ce8f63c724731ad5fc612404e38a70b2dc1b8",
+  "public_artifacts_sha256": {
+    "REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "coverage_public.csv": "e665b8653989e865d2736b685b1c7fbdba8d1d6db228a671e50e9ab81afce2b0",
+    "coverage_weekday.csv": "e347f76f648da1511eb54a56e853d2ab656b28388de5d0acff70090e95f314a6",
+    "expiry_daily.csv": "06809853d3e7b62d1342ee6d6779d86447b09c800f59397dd04f88ca160c235d",
+    "expiry_daily_public.csv": "f770d2e9532d10deb7e23591d5a2994108f42f318a0239ffb6e4aa8649686b5a",
+    "expiry_first_observed.csv": "8604ccb92868703f614dee3255099594c356b44eed193acdfda3a440974a007e",
+    "sources.json": "629d89256015b5743614e7cf10e8b8bf9c29d2fc56b857b3ee073d1ce996b5f9",
+    "summary.json": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb"
+  },
+  "validation": {
+    "all_projection_hashes_valid": true,
+    "full_report_read": true,
+    "no_prohibited_public_text_matches": true,
+    "public_text_scan_exit_code": 1,
+    "local_only_outputs_ignored_by_git": true
+  },
+  "privacy": {
+    "absolute_private_paths_replaced_by_neutral_aliases": true,
+    "minute_level_outputs_excluded": [
+      "bar_event_windows.csv"
+    ],
+    "additional_local_output_excluded": [
+      "feature_daily.csv"
+    ],
+    "no_external_publication_performed": true
+  },
+  "limitations": [
+    "Descriptive composition shift is not a causal explanation of predictive performance.",
+    "Single-provider internal OHLCV consistency is not independent validation of execution prices."
+  ]
+}

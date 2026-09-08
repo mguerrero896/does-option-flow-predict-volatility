@@ -1,0 +1,52 @@
+{
+  "stage": "RP4_V2_PRE_FIT_VERIFICATION",
+  "verified_at_utc": "2026-09-07",
+  "scope": "Synthetic unit, integration and failure-injection checks plus unchanged v1 inference regressions; no real v2 model fits.",
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q artifacts/rp4_v2_code/test_models.py artifacts/rp4_v2_code/test_evaluate_v2.py artifacts/rp4_v2_code/test_materialize_iv.py artifacts/rp4_v2_code/test_report_v2.py artifacts/rp4_v2_code/test_runtime_v2.py artifacts/rp4_code/test_evaluate.py artifacts/rp4_code/test_report.py",
+      "exit_code": 0,
+      "passed": 91
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v2_code",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v2_code",
+      "exit_code": 0,
+      "files_already_formatted": 11
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync mypy --follow-imports=skip artifacts/rp4_v2_code/evaluate_v2.py artifacts/rp4_v2_code/models.py artifacts/rp4_v2_code/materialize_iv.py artifacts/rp4_v2_code/report_v2.py artifacts/rp4_v2_code/execute.py",
+      "exit_code": 0,
+      "sources_checked": 5
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/verify_delivery.py --original-root private-input/3a1de7fd2c89b7059465",
+      "exit_code": 0,
+      "status": "PASS_RP4_PUBLIC_PROJECTION",
+      "files_verified": 65,
+      "figure_endpoints_verified": 8,
+      "live_collector_verified": false
+    }
+  ],
+  "source_sha256": {
+    "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+    "artifacts/rp4_v2_code/materialize_iv.py": "3741c28773d50e89d6c65bb3307536ba8defcc085edcd92a358d6dc735d43972",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "artifacts/rp4_v2_code/report_v2.py": "8ad2131dee31a3f424fd4e3bf581bdfc32d00f04f5223cc552761b045021d5f1",
+    "artifacts/rp4_v2_code/test_evaluate_v2.py": "589ed5f34d588ba0161f25c30b9a616e5e39038168abe13e7b47a3d219d52ebc",
+    "artifacts/rp4_v2_code/test_materialize_iv.py": "2cb9a2d5b10149943cbd98466be7219ad30a8ce6b1a755dbd81d46612820de2c",
+    "artifacts/rp4_v2_code/test_models.py": "c84301445b4685def13d0f2deb41dbbd3612f91c746d171b4122874597f53ce1",
+    "artifacts/rp4_v2_code/test_report_v2.py": "e942443ea69a65e3e550de6b1ea9d92fb20ba1a11192fae0d577b98f851174c5",
+    "artifacts/rp4_v2_code/test_runtime_v2.py": "709b28373c64b815d953931b5a8066910b334d81c63ae4cf41082dbb55940df2"
+  },
+  "prior_synthetic_failures": "Runtime review reproduced four launcher custody/partial-failure defects before repair; all regression checks pass in the pinned code. No real v2 model fitting occurred in failed checks.",
+  "models_fitted_real_v2": 0,
+  "scientific_evaluation_complete": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

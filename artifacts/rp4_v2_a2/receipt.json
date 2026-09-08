@@ -1,0 +1,71 @@
+{
+  "stage": "RP4_V2_A2",
+  "status": "COMPLETE_PANEL_AND_EVALUATION_RELEASE_PINNED",
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v2_code/materialize_iv.py --spec artifacts/rp4_v2_a1/specification.json --spec-sha256 08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5 --output-root private-input/c153d5c8978c23bc439f --workers 4",
+      "exit_code": 0,
+      "log": "private-input/7c9ca59755ce09a7c92e",
+      "log_sha256": "2a6231d643eb644f484d3523f9e5cc71bf96d6872e75f1fb4e8aefb3a31032d2"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v2_code.execute --spec-sha256 08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5 --prepare-only",
+      "exit_code": 0
+    },
+    {
+      "command": "Copy-Item exact-byte copies of materialized/manifest.json, coverage.csv and iv_filter_counts.csv to artifacts/rp4_v2_a2; Get-FileHash SHA256 comparison for each copy",
+      "exit_code": 0
+    }
+  ],
+  "artifacts_sha256": {
+    "artifacts/rp4_v2_a2/coverage.csv": "dde3804774557a8d13553e12c49e0bd80019eee5a1d149bcfd5ff05759f27e1a",
+    "artifacts/rp4_v2_a2/evaluation_release.json": "9397453da7673cabff5eabb641ddb73542817755126b4c91dfc1ce444efa83db",
+    "artifacts/rp4_v2_a2/iv_filter_counts.csv": "387431b76da024ea09a8a5c953928af3d381d2ca34cee0a6dfa5197acd9198c2",
+    "artifacts/rp4_v2_a2/manifest.json": "ba409cf18bb38c4025e602a68177d01a1197229881d0de442bbc6355d220d807",
+    "artifacts/rp4_v2_a2/verification_before_fit.json": "6b41d7bff8819f33db5aa148b00bfb3337e2bf0e2c77e6148a7dce88621e2c4b",
+    "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+    "artifacts/rp4_v2_code/materialize_iv.py": "3741c28773d50e89d6c65bb3307536ba8defcc085edcd92a358d6dc735d43972",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "artifacts/rp4_v2_code/report_v2.py": "8ad2131dee31a3f424fd4e3bf581bdfc32d00f04f5223cc552761b045021d5f1",
+    "artifacts/rp4_v2_code/test_evaluate_v2.py": "589ed5f34d588ba0161f25c30b9a616e5e39038168abe13e7b47a3d219d52ebc",
+    "artifacts/rp4_v2_code/test_materialize_iv.py": "2cb9a2d5b10149943cbd98466be7219ad30a8ce6b1a755dbd81d46612820de2c",
+    "artifacts/rp4_v2_code/test_models.py": "c84301445b4685def13d0f2deb41dbbd3612f91c746d171b4122874597f53ce1",
+    "artifacts/rp4_v2_code/test_report_v2.py": "e942443ea69a65e3e550de6b1ea9d92fb20ba1a11192fae0d577b98f851174c5",
+    "artifacts/rp4_v2_code/test_runtime_v2.py": "709b28373c64b815d953931b5a8066910b334d81c63ae4cf41082dbb55940df2",
+    "artifacts/rp4_v2_audit/audit.json": "fe1023c142e72c080ef1a9afa3cac1193d544f6faec4b2fb0f9af64bf1fadee5",
+    "artifacts/rp4_v2_audit/REPORT.md": "c278fda73f5b71dacc44d2389d8971af17ab2359c7ef250dbec5c94035e0a567"
+  },
+  "private_artifacts_sha256": {
+    "private-input/52abad6fed9842f1a1ba": "5b7dd5cc4b2b1e64446d305a5ee0de92f6d18e790f94b5840664947da00fd19d",
+    "private-input/56adbf9de2ba256798da": "9403b1d8f6ec03f14dad0de43fc01567585ccb1c523f2c9507dcd708c52a034b"
+  },
+  "rows": 195479,
+  "sessions": 504,
+  "asset_sessions": 3024,
+  "preserved_columns": 69,
+  "preserved_values_exact_by_keys": true,
+  "replaced_option_columns": 103,
+  "unfiltered_parity_asset_sessions": 2775,
+  "identical_eligibility_reuse_asset_sessions": 249,
+  "iv_filter": {
+    "inclusive_bounds": [
+      0.03,
+      3
+    ],
+    "denominator": "Raw UW rows of the six assets before other quality, size, time or origin-window gates; not excluded forecast origins.",
+    "raw_asset_rows": 700049350,
+    "rejected_rows": 28962654,
+    "rejected_percent": 4.1372303252620695,
+    "old_iv_eligible_rows": 698077554,
+    "newly_rejected_within_old_iv_range": 26990858
+  },
+  "verification_receipt": "artifacts/rp4_v2_a2/verification_before_fit.json",
+  "model_fits": 0,
+  "provider_requests": 0,
+  "phase9_modified": false,
+  "v1_artifacts_modified": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

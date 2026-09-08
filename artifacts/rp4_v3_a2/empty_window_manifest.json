@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "private-input/d957fad184a68b3b6d47": "51a0b33ea8558685f2e98f0f168b3946e0abab131a13b1202d81f550b33725df",
+    "private-input/db7425b0533fe75e90f5": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+    "private-input/3c5f1a9e909b5916f05c": "c7a7027f7647c53cbc257f14214f1551cb2339a014c8b524bd00f31a89fbebde"
+  },
+  "base_panel_sha256": "5b7dd5cc4b2b1e64446d305a5ee0de92f6d18e790f94b5840664947da00fd19d",
+  "capital_go": false,
+  "changed_columns_only": {
+    "30": [
+      "b2_30m_buy_premium_share",
+      "b2_30m_d_iv",
+      "b2_30m_d_mid_rel",
+      "b2_30m_d_spread",
+      "b2_30m_decay_intensity_innovation",
+      "b2_30m_multileg_premium_share",
+      "b2_30m_multileg_size_share",
+      "b2_30m_otm_premium_share",
+      "b2_30m_passive_premium_share",
+      "b2_30m_sell_premium_share",
+      "b2_30m_sweep_premium_share",
+      "b2_30m_zero_dte_premium_share",
+      "b2_30m_zero_dte_trade_share"
+    ],
+    "5": [
+      "b2_5m_buy_premium_share",
+      "b2_5m_d_iv",
+      "b2_5m_decay_intensity_innovation",
+      "b2_5m_multileg_size_share",
+      "b2_5m_strike_hhi",
+      "b2_5m_zero_dte_premium_share",
+      "b2_5m_contract_entropy",
+      "b2_5m_d_mid_rel",
+      "b2_5m_d_spread",
+      "b2_5m_expiry_hhi",
+      "b2_5m_interarrival_cv",
+      "b2_5m_multileg_premium_share",
+      "b2_5m_otm_premium_share",
+      "b2_5m_passive_premium_share",
+      "b2_5m_sell_premium_share",
+      "b2_5m_sweep_premium_share",
+      "b2_5m_zero_dte_trade_share"
+    ]
+  },
+  "changed_origins_only": "finite_corresponding_trade_count_equal_zero",
+  "columns": 179,
+  "excluded_origins": 0,
+  "excluded_sessions": 0,
+  "model_fits": 0,
+  "preserved_unaffected_values_exact_by_keys": true,
+  "preserved_values_exact_by_keys": false,
+  "recode_producer_sha256": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+  "rows": 195479,
+  "source_gamma_manifest_sha256": "1e6b5aeade5624bd12ced17d7a55e18b3102a7597ea0af559f5e0a8793b90eb0",
+  "source_gamma_panel_sha256": "ab2977127fde0c65458e15a984924b136b9bf88ba0588240d80bd6a81545dc45",
+  "spec_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "status": "RP4_V3_EMPTY_WINDOW_PANEL_COMPLETE"
+}

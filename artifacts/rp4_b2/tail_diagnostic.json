@@ -1,0 +1,85 @@
+{
+  "N_sessions": 418,
+  "by_asset": [
+    {
+      "asset": "AAPL",
+      "forecast_max": 1.9675590077670835e-05,
+      "forecast_min": 4.041257105456788e-06,
+      "forecasts_at_frozen_floor": 0,
+      "origins": 36,
+      "qlike": 0.06787905218978511,
+      "target_max": 1.640210711119369e-05,
+      "target_min": 3.5479830295786217e-06
+    },
+    {
+      "asset": "AMZN",
+      "forecast_max": 3.573182035553837e-05,
+      "forecast_min": 8.259978641051301e-06,
+      "forecasts_at_frozen_floor": 0,
+      "origins": 22,
+      "qlike": 0.11447811405435981,
+      "target_max": 4.871834623441809e-05,
+      "target_min": 4.6549140017145235e-06
+    },
+    {
+      "asset": "META",
+      "forecast_max": 1.6862340501729906e-05,
+      "forecast_min": 5.8770754672461224e-06,
+      "forecasts_at_frozen_floor": 0,
+      "origins": 20,
+      "qlike": 0.028165222123476896,
+      "target_max": 1.6552377987856408e-05,
+      "target_min": 4.808338749202204e-06
+    },
+    {
+      "asset": "MSFT",
+      "forecast_max": 8.76896932396439e-06,
+      "forecast_min": 1e-12,
+      "forecasts_at_frozen_floor": 1,
+      "origins": 32,
+      "qlike": 93457.89655106586,
+      "target_max": 6.7313644657276926e-06,
+      "target_min": 2.379697573243132e-06
+    },
+    {
+      "asset": "NVDA",
+      "forecast_max": 3.6796371867690515e-05,
+      "forecast_min": 6.720924685721314e-06,
+      "forecasts_at_frozen_floor": 0,
+      "origins": 60,
+      "qlike": 0.06642481535588762,
+      "target_max": 3.504748669458443e-05,
+      "target_min": 7.777964232342778e-06
+    },
+    {
+      "asset": "TSLA",
+      "forecast_max": 8.766449871194311e-05,
+      "forecast_min": 1e-12,
+      "forecasts_at_frozen_floor": 1,
+      "origins": 52,
+      "qlike": 517766.5198742372,
+      "target_max": 9.370558907308675e-05,
+      "target_min": 1.4858563910608122e-05
+    }
+  ],
+  "code_sha256": "6c64bdf9c9a29a66e23c10f695a4ddf3303b15d0ad5c3bac7237290b6781b488",
+  "equal_asset_session_qlike": 101870.78222875112,
+  "fit": {
+    "design_columns": 166,
+    "hyperparameters": "none",
+    "log_smearing": 0.13051108948816825,
+    "method": "ordinary_least_squares_log_target_Duan_smearing",
+    "rank": 155,
+    "rcond": 1e-10,
+    "smallest_singular_value": 5.902796793844303e-14,
+    "train_rows": 36450
+  },
+  "inputs": {
+    "artifacts/rp4_b2/session_losses.csv": "345889fb42e9681ba3e530edcd712f41c22cd9976a4f7c3fbcb1ef52030fc4bc",
+    "private/evaluation/primary/sessions/2025-05-15.json": "7547d98bb919b89f696a8d9b5f5eb2bca3fd79bcb80561e817b76994251b38be"
+  },
+  "interpretation": "The frozen QLIKE ratio penalizes near-zero positive variance forecasts severely. This is retained adverse model behavior, not grounds to remove observations. Saved fit metadata alone cannot identify a causal feature attribution.",
+  "scope": "Completed forecasts only; no refit, exclusion, or changed result",
+  "session": "2025-05-15",
+  "share_of_summed_session_B2_qlike_pct": 99.94095564589026
+}

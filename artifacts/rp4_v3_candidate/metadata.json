@@ -1,0 +1,29 @@
+{
+  "description": "Supplied candidate, retained for comparison with the independent derivation",
+  "source_manifest_sha256": "8619bfd4191e80d14e7c025dc7f3358d9d0f881eb65f55a341fc16bddaae645d",
+  "source_code_sha256": "ddd4cc94c75f8df3b8a0e657d8aca93ff850b44019fa3d77eca79f20bca4b885",
+  "omitted_panel_sha256": "edc0263c8d8a76c897fc6d8e54462fd3ffb8f3aa475eb7ee4b55551b4a7fdfcc",
+  "panel_distributed": false,
+  "rows": 195479,
+  "columns": [
+    "asset",
+    "session_date",
+    "origin_minute",
+    "rp4_gamma_imb_total",
+    "rp4_gamma_imb_near_spot",
+    "rp4_gamma_imb_near_short",
+    "rp4_gamma_imb_signed_trades"
+  ],
+  "feature": "rp4_gamma_imbalance_v1",
+  "definition": "RP4 v3 candidate feature: signed intraday customer gamma imbalance, target-blind.\n\nWhy this exists: the v1 dealer measures use prior-close open interest with a sign\nconvention. That is a stock. The hedging-feedback mechanism in the literature is driven by\nthe *flow* of customer-initiated option trades during the session: every customer buy of\ngamma leaves a dealer short gamma who must hedge into moves. This feature is that flow,\nsigned by the tape's own aggressor tag, accumulated from the open to the origin cutoff.\n\nDefinition (this text is the contract for an independent re-derivation):\n\n  For asset a, session d and origin minute m, the origin is 09:30 New York + m minutes\n  and the cutoff is origin - 120 s applied to ``created_at`` (identical to the RP4 grid).\n  Universe: option trades of ``a`` on ``d`` read from the same tape files the RP4 panel\n  used (``materialize.tape_index``), keeping the same validity filter as\n  ``materialize.build_new_option_features`` (IV in [0.01, 5], nbbo_bid > 0,\n  nbbo_ask > nbbo_bid, strike > 0, size > 0, option_type in {call, put}) plus\n  execution inside the session minute grid and 0 <= DTE <= 90.\n  Direction: +1 when ``tags`` contains ``ask_side``, -1 when it contains ``bid_side``,\n  else 0; multi-leg prints (block 6 ``_multileg_size`` > 0) are 0. Identical to\n  ``rp2_block6_flow_panel``.\n  Spot at the trade: block 6 ``mark_price(minute_of_trade, closes, opens)`` on the\n  session grid built by ``mds650.rp2.bars.build_session_grid`` from the RP4 bars.\n  Tenor: ``option_clock.time_to_expiry_years(expiry_close_timestamps(expiry), executed)``.\n  Gamma: the ``materialize.gamma_with_carry`` formula evaluated at the trade's own spot,\n  with the session's Treasury rate and dividend cash from ``materialize.exogenous_sources``\n  and ``carry_for_session`` (dividend yield = cash / spot at the trade).\n  Exposure per trade: direction * size * 100 * gamma * spot_trade ** 2, the same units as\n  ``rp4_dealer_gamma_net``.\n  Features at the origin, cumulative over trades with created_at <= cutoff:\n    rp4_gamma_imb_total         sum of exposure over all valid trades\n    rp4_gamma_imb_near_spot     restricted to |strike / spot_trade - 1| <= 0.05\n    rp4_gamma_imb_near_short    near spot and DTE <= 7\n    rp4_gamma_imb_signed_trades count of trades with direction != 0 and finite exposure\n  A session-asset without a bar grid or without any valid trade yields NaN. Zero signed\n  trades before the cutoff yields 0.0 sums and a 0 count: that is information, not a gap.\n\nNo target, loss or metric is read. Outputs are keyed by (asset, session_date, origin_minute).\n",
+  "parameters": {
+    "near_spot": 0.05,
+    "max_dte": 90,
+    "short_dte": 7,
+    "cutoff_seconds": 120,
+    "start": "2024-08-02",
+    "end": "2026-09-04"
+  },
+  "source_session_records": 504,
+  "source_timestamps_independently_verified": false
+}

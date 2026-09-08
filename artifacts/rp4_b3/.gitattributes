@@ -1,0 +1,3 @@
+# Preserve the evaluator's exact hashed CSV bytes across Windows/Linux checkouts.
+.gitattributes text eol=lf
+session_losses.csv -text

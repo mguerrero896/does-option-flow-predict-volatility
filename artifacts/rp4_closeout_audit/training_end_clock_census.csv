@@ -1,0 +1,16 @@
+horizon_minutes,window,training_end_utc_clock,training_end_ny_clock,N_sessions
+5,confirmation,19:55,15:55,25
+5,primary,16:55,12:55,1
+5,primary,17:55,12:55,4
+5,primary,19:55,15:55,269
+5,primary,20:55,15:55,145
+15,confirmation,19:55,15:55,25
+15,primary,16:55,12:55,1
+15,primary,17:55,12:55,4
+15,primary,19:55,15:55,269
+15,primary,20:55,15:55,145
+30,confirmation,19:55,15:55,25
+30,primary,16:55,12:55,1
+30,primary,17:55,12:55,4
+30,primary,19:55,15:55,269
+30,primary,20:55,15:55,145
