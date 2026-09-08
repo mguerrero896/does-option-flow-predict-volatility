@@ -14,6 +14,13 @@
 > [`data/CANONICAL_STATE.json`](../../data/CANONICAL_STATE.json);
 > [`docs/rp2_v3/SUPERSEDED_RESULTS.md`](../rp2_v3/SUPERSEDED_RESULTS.md) preserves each
 > replacement and its reason.
+>
+> **Current reading, 2026-09-09:** RP4 v4 is the presented result. The historical
+> mechanism claims below were narrowed or withdrawn after producer repairs; they do
+> not establish informed trading or causal flow information. The Sharpe-probability
+> bound of 0.19 applies only to the buffer sweep, as clarified in decision 114.
+> See the [scientific findings ledger](../scientific_findings_ledger.md) for current
+> dispositions and the distinction between historical nulls and the conditional v4 result.
 
 ---
 
@@ -150,7 +157,7 @@ These are results, recorded as such.
 * **Splitting the target does not help.** The continuous component is no more predictable
   than total RV; semivariances are less predictable; upside ≈ downside.
 * **Hierarchical partial pooling adds nothing** (between-asset variance ≈ 1.4 × 10⁻⁴).
-* **No economic value at any selectivity.** Deflated Sharpe probability ≤ 0.19 everywhere and
+* **No economic value established by the buffer sweep.** Deflated Sharpe probability ≤ 0.19 in that sweep and
   0.000 when the strategy is made selective. The option-informed arm is *worse* in discovery
   at every trading threshold.
 * **Nothing clears the sequential budget.** α₃ = 0.00417; best SPA p = 0.0070 (D) and 0.0250
@@ -247,14 +254,16 @@ This section originally addressed unresolved choices to the repository owner. Th
 instructions are retired. Their current dispositions are now recorded in the public
 methodology rather than directed at a person:
 
-- RV30 remains the sole primary target; the current RV30/RV60 evidence and limitations are
-  documented in `docs/target_horizon_decision.md` and the superseded-results register.
+- RV30 was this historical program's primary target; RV60 was a diagnostic. RP4 v4
+  uses 15 minutes primary and 5 minutes secondary; the target decision is closed.
 - Phase 8 is an exploratory bridge with 20 strictly unobserved sessions in the primary
-  analysis and 30 sessions in sensitivity; its cohort remains sealed.
-- Phase 9 is ongoing prospective follow-up, not an academic-submission gate; its current
-  endpoint is 60 complete sessions and 36 scored sessions.
+  analysis and 30 sessions in sensitivity; its read was consumed on 2026-08-30 and
+  returned `MIXED_EXPLORATORY`.
+- Phase 9's historical endpoint was 60 complete sessions and 36 scored sessions.
+  Decision 128 retired its use as an RP4 sealed cohort; this report authorizes no read.
 - The unsafe Block 14 migration draft remains unapplied. The reconciled live Supabase state
-  is `artifacts/supabase_schema_audit_20260828.json`.
+  at that date is `artifacts/supabase_schema_audit_20260828.json`. Current public
+  aggregate publication is documented in [Data access](../../data/DATA_ACCESS.md).
 - No post-hoc direction finding is confirmatory. Any future confirmatory campaign requires a
   separately frozen estimand, multiplicity contract and read authorization.
 
@@ -279,6 +288,12 @@ Discovery also grew from 236 to 384 sessions (153 acquired bar sessions, 906 req
 empty), taking the panel from 125,136 to 183,744 origins.
 
 ## 6. What this program contributes
+
+> **Historical interpretation, superseded.** This section records the original
+> closeout interpretation. Its claim that flow information is established does not
+> survive the later measurement repairs as a general conclusion. The current
+> [findings ledger](../scientific_findings_ledger.md) retains nulls, withdrawals,
+> conditional positives and unproven mechanisms separately.
 
 Not a signal. A negative result with its mechanism identified and its magnitude measured:
 
