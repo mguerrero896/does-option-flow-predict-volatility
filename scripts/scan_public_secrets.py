@@ -30,6 +30,9 @@ GITHUB_SYNTHETIC_MERGE_MESSAGE = re.compile(
     rb"^Merge [0-9a-f]{40} into [0-9a-f]{40}\n?$"
 )
 GITHUB_SQUASH_SUBJECT = re.compile(rb"^[^\r\n]+ \(#[1-9][0-9]*\)$")
+GITHUB_PULL_REQUEST_SUBJECT = re.compile(
+    rb"^Merge pull request #[1-9][0-9]* from [A-Za-z0-9_.-]+/[^\s]+$"
+)
 GITHUB_WEB_FLOW_KEY = Path(__file__).with_name("github_web_flow_signing_key.asc")
 # Source: https://api.github.com/users/web-flow/gpg_keys, key B5690EEEBB952194.
 GITHUB_WEB_FLOW_FINGERPRINT = "968479A1AFF927E37D1A566BB5690EEEBB952194"
@@ -129,6 +132,19 @@ def _has_github_squash_shape(content: bytes) -> bool:
     )
 
 
+def _has_github_pull_request_shape(content: bytes) -> bool:
+    """Recognize a signed, two-parent GitHub pull-request merge envelope."""
+    headers, separator, message = content.partition(b"\n\n")
+    subject = message.splitlines()[0] if message else b""
+    return bool(
+        separator
+        and sum(line.startswith(b"parent ") for line in headers.splitlines()) == 2
+        and GITHUB_MERGE_COMMITTER.search(headers)
+        and b"\ngpgsig -----BEGIN PGP SIGNATURE-----\n" in headers
+        and GITHUB_PULL_REQUEST_SUBJECT.fullmatch(subject)
+    )
+
+
 def _gpg_program() -> str | None:
     configured = subprocess.run(
         ["git", "config", "--get", "gpg.program"],
@@ -174,11 +190,14 @@ def _is_published_main_commit(repo: Path, object_id: str) -> bool:
 
 
 def _is_verified_github_squash(repo: Path, object_id: str, content: bytes) -> bool:
-    """Accept a published-main squash only when GitHub's pinned key verifies it."""
+    """Accept a published-main PR merge only when GitHub's pinned key verifies it."""
 
     gpg = _gpg_program()
     if (
-        not _has_github_squash_shape(content)
+        not (
+            _has_github_squash_shape(content)
+            or _has_github_pull_request_shape(content)
+        )
         or not _is_published_main_commit(repo, object_id)
         or not gpg
         or not GITHUB_WEB_FLOW_KEY.is_file()

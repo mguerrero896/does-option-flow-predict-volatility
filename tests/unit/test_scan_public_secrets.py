@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 
 from scripts.scan_public_secrets import (
+    _has_github_pull_request_shape,
     _has_github_squash_shape,
     _is_published_main_commit,
     _is_verified_github_squash,
@@ -150,18 +151,44 @@ def test_github_squash_identity_requires_a_valid_platform_signature(
     assert not _has_github_squash_shape(
         content.replace(b"parent ", b"parent " + b"3" * 40 + b"\nparent ", 1)
     )
+    forged_merge = content.replace(
+        b"parent ", b"parent " + b"3" * 40 + b"\nparent ", 1
+    ).replace(b"research: result (#16)", b"Merge pull request #16 from user/branch")
+    forged_id = subprocess.run(
+        ["git", "-C", str(repo), "hash-object", "-t", "commit", "-w", "--stdin"],
+        input=forged_merge, capture_output=True, check=True,
+    ).stdout.decode().strip()
+    _git(repo, "update-ref", "refs/remotes/origin/main", forged_id)
+    assert _has_github_pull_request_shape(forged_merge)
+    assert not _is_verified_github_squash(repo, forged_id, forged_merge)
 
 
 def test_published_github_squashes_verify_with_the_pinned_web_flow_key() -> None:
     for object_id in (
         "c39cfb3394aedb020e8a1a3903da66fd603cfd4d",
         "8e19546eae817095f59fc4e15ebfb4c6df2d9e42",
+        "2a6da3297f3104a092a9630a9b3b78d907fb8502",
     ):
         content = subprocess.check_output(
             ["git", "-C", str(REPO), "cat-file", "commit", object_id]
         )
         assert _is_published_main_commit(REPO, object_id)
         assert _is_verified_github_squash(REPO, object_id, content)
+
+
+def test_signed_pull_request_merge_shape_does_not_accept_lookalikes() -> None:
+    content = subprocess.check_output(
+        ["git", "-C", str(REPO), "cat-file", "commit",
+         "2a6da3297f3104a092a9630a9b3b78d907fb8502"]
+    )
+    assert _has_github_pull_request_shape(content)
+    for old, new in (
+        (b"gpgsig ", b"unsigned "),
+        (b"committer GitHub", b"committer Test"),
+        (b"Merge pull request #81 from ", b"Merge arbitrary branch "),
+        (b"parent ", b"unrelated "),
+    ):
+        assert not _has_github_pull_request_shape(content.replace(old, new, 1))
 
 
 def test_scanner_accepts_github_service_identity(tmp_path: Path) -> None:
