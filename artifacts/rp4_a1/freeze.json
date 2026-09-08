@@ -1,0 +1,17 @@
+{
+  "schema_version": "rp4-freeze-v1",
+  "decision": 129,
+  "created_date": "2026-09-07",
+  "base_commit": "6f219d436018a5b0f239aadd801ec3e8e70877bf",
+  "specification": {
+    "path": "artifacts/rp4_a1/specification.json",
+    "sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5"
+  },
+  "document": {
+    "path": "docs/rp4/specification_v1.md",
+    "sha256": "24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d"
+  },
+  "scope": "FROZEN_BEFORE_RP4_TARGET_RECONSTRUCTION_OR_MODEL_EVALUATION",
+  "source_inventory_sha256": "71cec7160292ea3f873d2268006a0fe853e3258a0b7ae145c3ee948614fb7ce3",
+  "phase9_mutations_authorized": false
+}

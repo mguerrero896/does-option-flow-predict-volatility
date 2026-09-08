@@ -1,0 +1,23 @@
+{
+  "name": "RP4 colección diaria",
+  "automation_id": "mds650-k3-v3-seguimiento-prospectivo",
+  "kind": "heartbeat",
+  "status_verified": "ACTIVE",
+  "schedule": "Tuesday through Saturday, 09:10 Australia/Sydney",
+  "new_data_root": "private-input/66c0e77362caa29dd928",
+  "previous_thread_monitor_repurposed": true,
+  "separate_k3_collector_modified": false,
+  "phase9_modified": false,
+  "previous_configuration_sha256": "fc85015466edb2847cf6cd339d56676f136c18c3f44d539b2fa0705416ebb6eb",
+  "active_configuration_sha256": "b9f25cf59be6c66aa21b120b96395a9d19210d915fb7209d98c7a9b3bdc0236f",
+  "activation_method": "research automation update API, then configuration readback",
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/acquire.py --spec-hash 865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5 --mode daily --leg all",
+  "exit_code": 0,
+  "verified_session": "2026-09-04",
+  "jobs_passed": 24,
+  "missing": [],
+  "daily_manifest_sha256": "270d3b92cb2bad3914f942efe2c66c7afbe1da91f1bcdc0c26f4ae76e081eaa2",
+  "model_refits": 0,
+  "capital_go": false,
+  "future_scheduler_execution": "NO VERIFICABLE before a scheduled activation; current command tested"
+}

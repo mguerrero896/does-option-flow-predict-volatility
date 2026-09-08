@@ -63,7 +63,7 @@ Thumbs.db
 .gstack/
 
 # Local assistant session state (worktree registry etc.)
-.claude/
+.local-tools/
 artifacts/public_repro_demo/
 
 # Research Program v2 derived panels: large, and derived from licensed provider data.
@@ -108,13 +108,13 @@ artifacts/rp3/eval_panels/
 .gbrain-source
 graphify-out/
 scripts/gbrain_sync.ps1
-.codex/
+.local-runtime/
 .githooks/
 
 # Agent operating instructions and operator runbooks: they belong to how this
 # research was executed, not to what it found. Kept in the canonical local tree.
 /AGENTS.md
-/CLAUDE.md
+/LOCAL_AUTOMATION.md
 /.agents/
 /.specify/
 /docs/superpowers/

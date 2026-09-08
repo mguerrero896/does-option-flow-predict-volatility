@@ -1,0 +1,72 @@
+{
+  "stage": "A1",
+  "status": "PASS",
+  "specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "base_commit": "0d98e79a",
+  "artifacts": [
+    {
+      "path": "docs\\rp4\\specification_v1.md",
+      "sha256": "24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d"
+    },
+    {
+      "path": "artifacts\\rp4_a1\\specification.json",
+      "sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5"
+    },
+    {
+      "path": "artifacts\\rp4_a1\\freeze.json",
+      "sha256": "eb9f51a36638940b1fe8e04bb2e0112879ddf979f82208670c9c54e40e2ce65a"
+    },
+    {
+      "path": "artifacts\\rp4_a1\\verify_specification.py",
+      "sha256": "bc549683ca30bb21aab81c5e546c42527a0e6c6dc4470138f1b5eefcec7bdbc9"
+    },
+    {
+      "path": "docs\\methodology_decisions.md",
+      "sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf"
+    },
+    {
+      "path": "data\\CANONICAL_STATE.json",
+      "sha256": "5d71c85b9bd1f9487fa2144ead9504fd022a2f43c4e776009a434ebeb03250b5"
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "bfa3a74772bb208906e429ab9658cbdfd440c59b362cd6d35ec4f9110cc9dff9"
+    },
+    {
+      "path": "artifacts\\rp4_inventory_v1\\REPORT.md",
+      "sha256": "72b01276f465423164d94ad6ec71854c023f2f832a7657acd611952a246fcd09"
+    }
+  ],
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_a1/verify_specification.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_a1/verify_specification.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B scripts/generate_canonical_state.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q -p no:cacheprovider tests/contract/test_documentation_references.py tests/contract/test_canonical_state_current.py",
+      "exit_code": 0,
+      "passed": 17
+    }
+  ],
+  "incidents": [
+    {
+      "issue": "Copied inventory report retained eight machine-local links rejected by public-clone link contract",
+      "resolution": "Portable relative links in copied report only; original bytes retained as precheck/REPORT.original.txt; no frozen specification or input hashes changed."
+    }
+  ],
+  "style_note": "git diff --cached --check returned 2 solely for a trailing blank line in the already hash-frozen specification. Its bytes were preserved; the per-command whitespace check disables only blank-at-eof.",
+  "real_targets_read": 0,
+  "model_fits": 0,
+  "_public_projection": {
+    "original_sha256": "29fc5d29c31a871dd8c81ae3184bed23e8e879a6e6efffb8f2fcfdad5937a5c8",
+    "meaning": "Paths sanitized; hashes and exit codes describe the preserved original execution, not a rerun."
+  }
+}

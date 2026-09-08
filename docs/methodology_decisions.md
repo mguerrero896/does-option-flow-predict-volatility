@@ -14,6 +14,8 @@ Requirements-consistency and preregistration gates pass.
 | [68–84](#decision-68) | RP2 inference and repairs; [decision 75](#decision-75) corrects B0 market control. |
 | [85–96](#decision-85) | RP2-v3 forensic findings, rebuilds and reporting corrections. |
 | [97–126](#decision-97) | Phase 8/9 collection, rebuild, power, deadline, exploratory closeout, RP2 timing/role remediation, publication-custody audit, hardening, successor-v2 closeout and PR #55 remediation. |
+| [128–128](#decision-128) | RP4 owner-directed fixed-split walk-forward design and metadata-only inventory stop. |
+| [129–129](#decision-129) | RP4 v1 specification; owner authorizes full execution and a draft PR. |
 
 <a id="decision-1"></a>
 
@@ -1460,7 +1462,7 @@ Requirements-consistency and preregistration gates pass.
 
 100. **Phase 9 remains a 60-session one-read follow-up and no longer gates the academic
      delivery (2026-08-28).** The owner requested a design reassessment because waiting
-     until November is incompatible with the capstone calendar. The existing frozen
+     until November is incompatible with the study calendar. The existing frozen
      protocol already targets 60 complete sessions; reducing it "to 60" therefore changes
      nothing. `docs/phase9_academic_reporting_policy_v1.md` records the resolution before
      any outcome read: submit and defend from the evidence available at the manuscript
@@ -1482,7 +1484,7 @@ Requirements-consistency and preregistration gates pass.
      most 19 complete sessions and therefore zero scored sessions, so no valid Phase 9
      result can exist for the academic deadline. The 60-session endpoint is retained,
      RP2, RP3 sizing and this audit now share the same long-run-variance MDE producer,
-     no interim is activated, the capstone proceeds from current evidence plus any
+     no interim is activated, the study proceeds from current evidence plus any
      separately authorized exploratory Phase 8 bridge, and `sealed_cohorts_read=0`.
 
 102. **The sole Phase 8A exploratory read is consumed and reconciled
@@ -2169,7 +2171,7 @@ Requirements-consistency and preregistration gates pass.
      ```powershell
      $ErrorActionPreference = "Stop"
      $PSNativeCommandUseErrorActionPreference = $true
-     $dataRoot = "D:/MDS650"
+     $dataRoot = "private-input/841df58180063dcccac1"
      $outputRoot = Join-Path $dataRoot "registered_runs/rp2_v3"
      $runId = "<NEW_REGISTERED_RUN_ID>"
      $sourceRun = (Resolve-Path "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation").Path
@@ -2314,7 +2316,7 @@ Requirements-consistency and preregistration gates pass.
      | Reproduction identity | **THE TWELVE HEADLINE AGGREGATES REPRODUCE EXACTLY IN THE LICENSED EXTRACTION.** The registered-run extraction compares twelve values over `{b1_over_b0, b2_over_b1}` with maximum absolute difference `0.0`; its maximum serialized session-mean difference is `4.336808689942018e-19`. The public aggregate carries the resulting identity metadata and the six session series required for `b2_over_b1`; it cannot independently recompute the other six values without the licensed run. The complete inference artifact contains 24 contrasts (four contrasts × three families × two roles), seven with `|estimate| > MDE` (the directional `estimate >= MDE` count is six). The twelve headline contrasts are a subset: two exceed in absolute value, both are state contrasts, and no flow contrast exceeds. The canonical `rp2-v3-20260831-b1-spot-cutoff-remediation` manifest is unchanged at file SHA-256 `95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a`; it still records its own code commit `b70c54ba14fdda2197efd6bcf0aa676c4ba3d4f1` and scientific SHA-256 `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`. |
      | Tier 2 | **SEVEN OF SEVEN GATES PASSED WITH THE LICENSED OPT-OUTS ABSENT AFTER BOTH SOURCE-INPUT GUARDS.** `scripts/run_local_evidence_gates.py` constructs an explicit inherited environment after removing `MDS650_PANEL_GUARD_MAY_SKIP` and `MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP` case-insensitively for every licensed gate; it also creates receipts exclusively and refuses overwrite. Only the hermetic CI replica declares both opt-outs as `1`. At `2026-09-01T22:42:18.690833+00:00`, public implementation commit `2b6ff8c472a79898fb9a3d9adc9fde87d02b27b1` (tree `30e789a41665d5d73e9eab46f4b24baefb403a9f`) returned code zero for `versioned-hook`, `ruff`, `mypy`, `full-pytest`, `ci-sim`, `gated-hashes` and `access-posture`; merged PR #70 commit `7256eab4289efc8a47d735f2ba467f462d8877d4` is the required ancestor. The current immutable receipt is `artifacts/local_evidence_gates/pr55_remediation_20260902_v10.json`, canonical LF SHA-256 `fefdd1f5586d1d13484fdadab415037633041a16017a7f3fd2a22ea006be3dbb`. Receipts v6 and v7 remain immutable but are superseded because their tested trees preceded, respectively, the source-inventory and source-tape-fingerprint P1 corrections; v8 remains immutable but is superseded because its tested tree preceded merged PR #70. v1/v2 are superseded local records whose tested commits were never public, v3 is an earlier rebased receipt, local v4/v5 remain outside Git as superseded diagnostics, and local v9 records the failed post-rebase environment diagnostic before the clean v10 run. A receipt cannot include the hash of the commit that first adds itself; the sole post-test overlay is therefore restricted by contract to this receipt, its registry/generator/canonical outputs, this decision, STATUS and the overlay contract itself, and hosted PR checks cover that overlay. |
      | UW freshness needed by Tier 2 | **NO FROZEN SNAPSHOT WAS OVERWRITTEN.** The first 2026-09-02 snapshot recorded 12 collected, six reconciled and six unreconciled sessions; v2 recorded the 2026-09-01 collector summary and v3 its later capture report. After PR #66 landed the maturity guard, the 2026-08-25 reconciliation became eligible and the inventory advanced to 12 collected, seven reconciled and five unreconciled sessions. Current authority therefore advances additively to `uw_latency_campaign_20260902_v4.json` (file SHA-256 `e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c`, semantic SHA-256 `0b7174255a74d4b3c622cee2ea3bc9f03eb85eea451c7b94dd277d128129b81c`) and `uw_latency_campaign_state_20260902_v4.json` (file SHA-256 `6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721`, semantic SHA-256 `b49fe5eb4f45000e7f4907b78173de03a7649a40d40974563552692341c56deb`). Contract-window support is 2,846/2,846; six clean sessions contribute 2,196 first receipts. Every earlier pair remains frozen. No provider row is versioned and `sealed_cohort_read=false`. |
-     | PR #55 publication record | **THE HEAD AND SQUASH HAVE DIFFERENT CHECK COUNTS.** PR head `1deac71f` had five successful check runs: CodeQL, hermetic, quality, analyze and scientific-contracts. Squash `6c309db5` has four successful runs: analyze, hermetic, scientific-contracts and quality; the separate CodeQL run did not recur. Both SHAs also have `claude` and `supabase` suites permanently `queued`, conclusion `null`, with zero check runs, so those suites are neither failures nor green. `6c309db5` is a single-parent squash whose parent is `b8657bfa`, not a two-parent merge. PR #55 also legitimately regenerated `data/CANONICAL_STATE.json` in two hunks; only the canonical scientific bundle and `artifacts/target_blind_v22/` remained byte-unchanged. |
+     | PR #55 publication record | **THE HEAD AND SQUASH HAVE DIFFERENT CHECK COUNTS.** PR head `1deac71f` had five successful check runs: CodeQL, hermetic, quality, analyze and scientific-contracts. Squash `6c309db5` has four successful runs: analyze, hermetic, scientific-contracts and quality; the separate CodeQL run did not recur. Both SHAs also have `contributor` and `supabase` suites permanently `queued`, conclusion `null`, with zero check runs, so those suites are neither failures nor green. `6c309db5` is a single-parent squash whose parent is `b8657bfa`, not a two-parent merge. PR #55 also legitimately regenerated `data/CANONICAL_STATE.json` in two hunks; only the canonical scientific bundle and `artifacts/target_blind_v22/` remained byte-unchanged. |
 
      A public clone regenerates the figure byte for byte and verifies its public aggregate
      contract without the licensed run:
@@ -2358,3 +2360,78 @@ Requirements-consistency and preregistration gates pass.
      `artifacts/target_blind_v22/`. It creates no new eligibility, causal, decay or
      investment claim; `capital_go=false`, `RESEARCH_ONLY`, and
      `NOT INVESTMENT ADVICE` remain binding.
+
+<a id="decision-128"></a>
+
+128. **RP4: decisiones del propietario antes de especificar o evaluar
+     (2026-09-07, Australia/Sydney).** Autorizado por **Miguel, propietario**, mediante
+     instrucción explícita en esta conversación. Esta es la constancia de su autorización,
+     no una firma criptográfica ni una firma manuscrita creada por el asistente.
+
+     - Partición de calendario: **2026-08-01**. Desarrollo: 2024-08-02 a 2026-07-31;
+       evaluación posterior: desde 2026-08-03. Esta fecha reemplaza la propuesta
+       2026-07-20 del inventario entregado por el propietario.
+     - Fase 9 se retira como cohorte sellada para RP4 y sus sesiones quedan autorizadas
+       como entradas de esa evaluación. Se conservan intactos sus protocolos, artefactos,
+       contadores y raíz; este registro no los reescribe ni ejecuta accesos. **C10 no se
+       activa.** RP4 no exige campaña prospectiva, cohorte sellada ni espera de sesiones.
+     - Etiqueta solicitada: **"fuera de muestra walk-forward, partición fijada
+       2026-09-07"**. La evaluación primaria será walk-forward por sesión dentro del
+       desarrollo; la posterior aplicará la misma especificación sin ajustes sobre sus
+       resultados. Una única especificación precederá a cualquier evaluación RP4.
+     - Divulgación solicitada por el propietario, que se cotejará con sus fuentes antes
+       de presentarla como hecho verificado: "La ventana 20 de julio a 28 de agosto fue
+       leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de
+       tiempo fuente a 120 s, como en la literatura."
+     - Se utilizarán los conjuntos enriquecidos B0 más HARQ, B1 de superficie más rejilla
+       IV y B2 de flujo más medidas derivadas de OI/gamma. Familias: log-OLS HARQ y
+       LightGBM con objetivo QLIKE; Gamma sobre niveles crudos queda fuera de RP4.
+       Partición, purga/embargo de 60 minutos, hiperparámetros e inferencia deben quedar
+       especificados y hash-vinculados antes de calcular resultados. Se reportará
+       cualquier signo, con sus limitaciones, sin modificar artefactos congelados.
+     - Entregables y orden solicitados: A1 especificación; A2 variables de desarrollo
+       sin objetivos; B1 adquisición acotada y panel; B2 evaluación primaria; B3
+       evaluación posterior sin cambios; B4 informe y colector con nombre/raíz nuevos,
+       sin tocar `phase9`. No se autoriza publicación.
+     - **Punto de parada de este turno:** la última instrucción del propietario pide
+       primero los archivos registrados, hashes y columnas exactas B0/B1/B2, y
+       "Detente ahí". Se entregará ese inventario sin ejecutar A1, A2, descargas,
+       entrenamiento, evaluación, activación ni cambios de automatización.
+
+     Límite de interpretación: una partición fijada hoy no elimina la exposición ni
+     las decisiones metodológicas previas sobre datos históricos, y ningún proxy de
+     timestamp demuestra por sí solo recepción histórica por el cliente.
+
+<a id="decision-129"></a>
+
+129. **RP4 ejecución completa, autorización del propietario (2026-09-07).**
+     Miguel autoriza en esta conversación A1, A2, B1, B2, B3 y B4 de corrido,
+     descargas acotadas, copia por hash de Fase 9 sin modificarla, colector diario
+     nuevo RP4 y un PR en borrador. Esta autorización sustituye el punto de parada
+     del turno anterior en la decisión 128, no su partición 2026-08-01.
+     No se inventa una firma criptográfica del propietario. Las verificaciones
+     que aporta se atribuyen a su instrucción; se distinguen de mediciones ejecutadas.
+
+     La especificación inmutable está en `docs/rp4/specification_v1.md`, SHA256
+     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, y su contrato ejecutable en
+     `artifacts/rp4_a1/specification.json`, SHA256
+     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; ambos se fijan en
+     `artifacts/rp4_a1/freeze.json` antes de reconstruir objetivos o evaluar RP4.
+     Las listas nominales 22/28/68 se conservan y se excluyen explícitamente
+     diagnósticos de calidad, edad y latencia según la regla del propietario,
+     dando conjuntos anidados de 29/71/136 entradas más efectos de activo.
+     Solo las 25 celdas IV nuevas admiten NaN con el tratamiento fijado.
+     La convención call-largo/put-corto es un proxy, no inventario observado.
+     Las nuevas griegas usan tasa/dividendo exógenos reales; no se reescriben
+     griegas antiguas. El hueco UW 2025-01-25–2025-02-24 no se rellena.
+     Tasas oficiales 2024 y reparación UW 2026-08-26 son insumos auxiliares
+     acotados detectados antes de evaluar; no modifican phase9.
+
+     Se reconstruye RV30 por clave con horizonte30 y se compara con lo existente;
+     todas las diferencias y exclusiones se informan. Walk-forward expansivo,
+     primeras60 sesiones entrenamiento, validación interna últimas10, purga y
+     embargo60min; log-OLS HARQ y LightGBM QLIKE sin Gamma crudo. Una sola regla
+     y reporte de cualquier signo; bootstrap sesiones y Holm4 por ventana.
+     GW-HAC se presenta como diagnóstico asintótico, no como garantía de la
+     teoría original de ventana fija. No se declara independencia nueva por
+     reutilización de datos. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.
