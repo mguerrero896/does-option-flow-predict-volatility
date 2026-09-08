@@ -33,6 +33,7 @@ private evidence settings automatically; it records both declared opt-outs.
 ```sh
 uv run --frozen python scripts/build_rp4_english_defense.py --check
 uv run --frozen python -m scripts.build_rp4_v5_english
+uv run --frozen python -m scripts.build_rp4_universe_english
 uv run --frozen python -m scripts.build_rp4_v5_public_receipt
 uv run --frozen python scripts/verify_rp4_public_metadata.py
 uv run --frozen pytest tests/contract/test_canonical_state_current.py -q

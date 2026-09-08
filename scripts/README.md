@@ -285,6 +285,7 @@ with an external log directory. `scripts/rp4_archive_sources.py` resolves histor
 sources and archive links. `scripts/build_rp4_english_defense.py` reproduces the
 English defense claim bindings from stored evidence.
 `scripts/build_rp4_v5_english.py` verifies or regenerates the complete English
+| `scripts/build_rp4_universe_english.py` | Public presentation | Render or verify the closed eight-asset English report from pinned public aggregates; no scientific execution. |
 presentation of the closed exploratory extension from its preserved originals.
 `scripts/verify_rp4_public_metadata.py` checks the original protocol pins and
 logical parent identities without importing a scientific executor or reading panels.
