@@ -42,7 +42,7 @@ def test_public_commit_provenance_does_not_claim_reachability() -> None:
     assert len(translation["historical_sanitized_commit_reference"]) == 40
 
 
-def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
+def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
     bundle = state["scientific_bundle"]
 
@@ -57,7 +57,14 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     )
     assert bundle["eligibility"]["status"] == "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM"
     assert bundle["eligibility"]["reasons"] == ["SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2"]
-    canonical = state["canonical_results"]
+    assert state["canonical_results"]["status"] == "RP4_V4_SCIENTIFIC_PROGRAM_CLOSED"
+    assert state["canonical_results"]["decision"] == "RV15_LINEAR_FIXED_SEQUENCE_REJECTED_BOTH"
+    assert state["canonical_results"]["capital_go"] is False
+    assert state["canonical_results"]["independent_global_confirmation"] is False
+    assert len(state["canonical_results"]["table"]) == 40
+    assert state["current_report"]["source"]["path"] == "docs/rp4/RESULTADO_FINAL.md"
+    assert state["current_report"]["evidence_cutoff"] == "2026-09-04"
+    canonical = state["history"]["canonical_results"]
     assert canonical["status"] == "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED"
     assert canonical["run_id"] == "pit-v22-successor-evaluation-v2-20260902"
     assert canonical["decision"] == "GLOBAL_EDGE_NOT_CONFIRMED"
@@ -100,9 +107,7 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
         "development_excluded_origins": 6,
         "development_predictor_complete_origins": 37_312,
     }
-    assert successor["custody_audit"]["status"] == (
-        "PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT"
-    )
+    assert successor["custody_audit"]["status"] == ("PASS_INDEPENDENT_POST_OOS_CUSTODY_AUDIT")
     gamma = successor["registered_contrasts"]["gamma_glm_confirmatory"]
     assert gamma["delta_b1v2"]["estimate"] == 0.008171247318411104
     assert gamma["delta_b1v2"]["p_value_holm"] == 0.008399160083991601
@@ -114,10 +119,7 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     assert redactions["artifact_count"] == 14
     assert state["external_publication"]["supabase"] == {
         "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
-        "status": (
-            "NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_"
-            "DATASET_REGISTRY_EXACT"
-        ),
+        "status": ("NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT"),
         "writes": {
             "schema_migrations_committed": 19,
             "catalog_syncs_committed": 1,
@@ -127,7 +129,7 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     }
     phase8 = next(
         protocol
-        for protocol in state["active_protocols"]
+        for protocol in state["history"]["active_protocols"]
         if protocol["id"] == "phase8-prospective-bridge"
     )
     assert phase8["state"] == (
@@ -135,9 +137,7 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
         "AND_DISPERSION_AUDIT_AND_POSTHOC_MATERIALIZED_REMEDIATION"
     )
     assert phase8["sealed_cohorts_read"] == 1
-    assert phase8["result"]["artifact"] == (
-        "artifacts/phase8_bridge/result_20260830_v1.json"
-    )
+    assert phase8["result"]["artifact"] == ("artifacts/phase8_bridge/result_20260830_v1.json")
     assert phase8["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert phase8["result"]["confirmatory_promotion_allowed"] is False
     assert phase8["dispersion_audit"]["artifact"] == (
@@ -157,14 +157,14 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
     assert remediation["result"]["overall_classification"] == "MIXED_EXPLORATORY"
     assert remediation["result"]["primary_b1_inclusive_cells"] == 8
     assert remediation["result"]["primary_b1_inclusive_cells_improved"] == 1
-    assert state["current_report"]["phase8_addendum"]["path"] == (
+    assert state["history"]["current_report"]["phase8_addendum"]["path"] == (
         "reports/phase8a_exploratory_bridge_addendum_v13.md"
     )
-    assert state["current_report"]["evidence_cutoff"] == "2026-08-31"
+    assert state["history"]["current_report"]["evidence_cutoff"] == "2026-08-31"
     assert all("Phase 8" not in campaign for campaign in state["future_campaigns"])
     phase9 = next(
         protocol
-        for protocol in state["active_protocols"]
+        for protocol in state["history"]["active_protocols"]
         if protocol["id"] == "phase9-total-contribution"
     )
     reporting = phase9["academic_reporting"]
@@ -181,6 +181,32 @@ def test_scientific_bundle_preserves_history_and_successor_is_current() -> None:
 def test_generated_paths_are_platform_independent() -> None:
     state = _module.build_state()
     assert all("\\" not in path for path in state["authorized_sources"])
+
+
+def test_publication_contract_preserves_base_and_does_not_authorize_remote_execution() -> None:
+    closeout = _module.build_state()["publication_closeout"]
+    assert closeout["contract"] == "NEW_MATERIAL_ONLY_EXISTING_HISTORY_PRESERVED"
+    assert closeout["publication_branch"] == "rp4/walkforward-v1-v4"
+    assert closeout["publication_base"] == "origin/main"
+    assert closeout["technical_package_identifier_allowed"] is True
+    assert closeout["remote_history_migration_authorized"] is False
+    assert closeout["remote_commands_executor"] == "Miguel"
+    assert closeout["remote_writes_executed"] is False
+    assert closeout["cleanup_deletions_authorized"] is False
+
+
+def test_rp4_front_page_and_status_repeat_the_exact_final_table() -> None:
+    def table(name: str) -> list[str]:
+        return [
+            line
+            for line in (REPO / name).read_text(encoding="utf-8").splitlines()
+            if line.startswith("|")
+        ]
+
+    expected = table("docs/rp4/RESULTADO_FINAL.md")
+    assert len(expected) == 7
+    assert table("README.md") == expected
+    assert table("STATUS.md") == expected
 
 
 def test_generated_public_state_does_not_catalog_internal_working_material() -> None:

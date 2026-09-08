@@ -108,9 +108,16 @@ def test_contract_provenance_has_no_phase8_payload_input() -> None:
 
 def test_canonical_state_points_to_the_frozen_bridge() -> None:
     state = json.loads((REPO / "data" / "CANONICAL_STATE.json").read_text(encoding="utf-8"))
-    bridge = next(
-        row for row in state["active_protocols"] if row["id"] == "phase8-prospective-bridge"
-    )
+    bridges = [
+        row
+        for row in state["history"]["active_protocols"]
+        if row["id"] == "phase8-prospective-bridge"
+    ]
+    assert len(bridges) == 1, "the historical frozen bridge must remain uniquely auditable"
+    assert not any(
+        row["id"] == "phase8-prospective-bridge" for row in state["active_protocols"]
+    ), "preserving the historical bridge must not reactivate it"
+    bridge = bridges[0]
     assert bridge["document"] == "docs/phase8_bridge_protocol_v2.md"
     assert bridge["artifact"] == "artifacts/phase8_bridge/bridge_contract_v2.json"
     assert bridge["evaluator"]["artifact"] == (
@@ -165,8 +172,8 @@ def test_published_result_contains_every_registered_outcome_without_private_path
         b2 = cell["windows"]["primary_20"]["delta_b2_given_b1"]
         assert b2["ci_low"] <= 0 <= b2["ci_high"]
     encoded = json.dumps(result)
-    assert "C:\\" not in encoded
-    assert "D:\\" not in encoded
+    assert "private-input/77a21ec4f7934cdbc426" not in encoded
+    assert "private-input/8d10eace3eede3521e71" not in encoded
 
 
 def test_bridge_inputs_and_outputs_are_in_the_append_only_registry() -> None:

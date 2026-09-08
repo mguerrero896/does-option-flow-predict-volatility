@@ -1,0 +1,70 @@
+{
+  "schema": "rp4-closeout-stage1-audit-supplement-v1",
+  "status": "PASS",
+  "earlier_stage1_receipt_preserved": true,
+  "frozen_scientific_results_unchanged": true,
+  "model_fits": 0,
+  "new_bootstraps": 0,
+  "scope": "Integrate descriptive audit and first observed listing dates; public aggregate allowlists only.",
+  "commands": [
+    {
+      "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_closeout_audit_code/test_audit_closed.py artifacts/rp4_market_audit_code/test_audit.py artifacts/rp4_market_audit_code/test_report.py -q -p no:cacheprovider\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_audit_code artifacts/rp4_market_audit_code\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_closeout_audit_code artifacts/rp4_market_audit_code",
+      "result": {
+        "chunk_id": "ec5aa7",
+        "wall_time_seconds": 2.5686054,
+        "exit_code": 0,
+        "original_token_count": 94,
+        "output": "{\"final_report_sha256\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\r\n.........                                                                [100%]\r\nAll checks passed!\n9 files already formatted\n"
+      }
+    }
+  ],
+  "upstream_receipts": [
+    "artifacts/rp4_closeout_audit/public_checks_receipt.json",
+    "artifacts/rp4_market_audit/receipt.json"
+  ],
+  "outputs_sha256": {
+    "artifacts/rp4_closeout_audit_code/audit_closed.py": "6957164cb688be290cdd4797ef9f6966c071c3934fd8ba93c66f09ca9c9d6fee",
+    "artifacts/rp4_closeout_audit_code/audit_metadata.py": "4ef42a23fd625aa4ad1b07b5a1d1ecc29a9e914b7324373232bbe406f0325085",
+    "artifacts/rp4_closeout_audit_code/public_projection_v2.py": "dac662eb91c154113b3c11f3a67aa7b75d81d935b262d2a0b5b9dd3ae57ed596",
+    "artifacts/rp4_closeout_audit_code/public_projection.py": "847bea25bc2b3cd5adce64ce8e9f9a01ef12f822ef3dfa1fae2e34867e0f99c4",
+    "artifacts/rp4_closeout_audit_code/test_audit_closed.py": "f2ec4730ee8624284f63741c30942fc50361a9449f59cef152059af90987e450",
+    "artifacts/rp4_closeout_audit/.gitignore": "ecfb46f2bc22d5238a913c9b35b745a59a98b1d893599f8279acd86507cb6a82",
+    "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be",
+    "artifacts/rp4_closeout_audit/b2_presence_coefficient_summary.csv": "9d4fc01b00af2ea25ab34b44276c481cf963be83edcc8f4b31ad114e1e6ab5e7",
+    "artifacts/rp4_closeout_audit/descriptive_profiles.csv": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd",
+    "artifacts/rp4_closeout_audit/findings.json": "f655a556f78a0d5ec2d45ddc6273191e26f95bb274cb8dba2512dc1234aaed4a",
+    "artifacts/rp4_closeout_audit/forecast_equality_summary.csv": "0913e49973c306c3204b6d92c0ea78a4e1a8285a9e29c86789d294e43a8f9e7d",
+    "artifacts/rp4_closeout_audit/loss_tails_and_rounds_summary.csv": "4a0f1b69fddc87caadbb30a5891c4dde8f0336ab47ba0dad38435706c9384647",
+    "artifacts/rp4_closeout_audit/metadata_findings.json": "7f6af54c8755e16a1638b8882d7cb5d5999aa837d3435d175b3494e281fb3ab3",
+    "artifacts/rp4_closeout_audit/public_checks_receipt.json": "d8869f330916517aec8561cb600363ef0e29afa947030b07ba6f6ddd05facae0",
+    "artifacts/rp4_closeout_audit/public_manifest_v2.json": "f91bd5ab48bdacc8e5bfebd146efa2fa086a326bd3ff3ca37f484e67b014f6c1",
+    "artifacts/rp4_closeout_audit/public_manifest.json": "a5e969d43b2944f96856b9fa05616607a0e7f31e1343da137a3ba7996eefb7a7",
+    "artifacts/rp4_closeout_audit/REPORT.md": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+    "artifacts/rp4_closeout_audit/ridge_bounds_pruning_summary.csv": "20f4b1c1b1022d7bba0318e9c4ac4b720ac6fce7a10bb5bbb875f1bca5d18c4e",
+    "artifacts/rp4_closeout_audit/ridge_lambda_counts.csv": "493b20562708215bf5ff74cf0f5fe621b6f4cfa20f1730bd9d224f659ac2ffea",
+    "artifacts/rp4_closeout_audit/selected_target_endpoint_clock_census.csv": "bfa986708fe70943a991825e0d43b19a1f14a0999527ceb02966c46a55048edd",
+    "artifacts/rp4_closeout_audit/training_end_clock_census.csv": "16d0c05e56d6e62a3fab8e695ac3071170aaf03a1de135feab094aa5f3a35592",
+    "artifacts/rp4_market_audit_code/audit.py": "e6a63a086d793dffc8ed98f4b5dce08b5c9e6240c82e64d4d15b40e875023c2b",
+    "artifacts/rp4_market_audit_code/report.py": "5d6c50f1aaad2f22f3eb7cac7968674f5b1bbe6cafd9eb7811ac378a55c34079",
+    "artifacts/rp4_market_audit_code/test_audit.py": "3675820e280b0d55405eca286aee30fda3e67bd6e3733bc215a923f79b574f41",
+    "artifacts/rp4_market_audit_code/test_report.py": "c3986f5cf3c24ef6aca932e2cd6ea4806aa0efe9b9a1ca7ac34d0e16c702d79d",
+    "artifacts/rp4_market_audit/.gitignore": "900a7669a83b7d1f39a84bcb43489125244ef13945312de3eec942769035cbab",
+    "artifacts/rp4_market_audit/coverage_public.csv": "e665b8653989e865d2736b685b1c7fbdba8d1d6db228a671e50e9ab81afce2b0",
+    "artifacts/rp4_market_audit/coverage_weekday.csv": "e347f76f648da1511eb54a56e853d2ab656b28388de5d0acff70090e95f314a6",
+    "artifacts/rp4_market_audit/expiry_daily_public.csv": "f770d2e9532d10deb7e23591d5a2994108f42f318a0239ffb6e4aa8649686b5a",
+    "artifacts/rp4_market_audit/expiry_daily.csv": "06809853d3e7b62d1342ee6d6779d86447b09c800f59397dd04f88ca160c235d",
+    "artifacts/rp4_market_audit/expiry_first_observed.csv": "8604ccb92868703f614dee3255099594c356b44eed193acdfda3a440974a007e",
+    "artifacts/rp4_market_audit/publication_projection.json": "c73b688aeb521d978f3c4bcc934ce8f63c724731ad5fc612404e38a70b2dc1b8",
+    "artifacts/rp4_market_audit/receipt.json": "956d17a5887644ffe61a3bbf1208638f116f8a700e2a44fb36f95f73d504a105",
+    "artifacts/rp4_market_audit/REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "artifacts/rp4_market_audit/sources.json": "629d89256015b5743614e7cf10e8b8bf9c29d2fc56b857b3ee073d1ce996b5f9",
+    "artifacts/rp4_market_audit/summary.json": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+    "docs/rp4/RESULTADO_FINAL.md": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19"
+  },
+  "hash_verification": {
+    "exit_code": 0,
+    "tool_chunk_id": "198479",
+    "allowlisted_source_outputs_verified": 20
+  },
+  "excluded": "Per-origin forecasts, minute bars, per-session coefficient matrix and private operational receipts are not staged."
+}

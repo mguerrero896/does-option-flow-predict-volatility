@@ -1,0 +1,530 @@
+[
+  {
+    "N_sessions": 419,
+    "axis_high": 1.076678237806708,
+    "axis_low": -0.3623498729638378,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.6772346035243704,
+    "horizon_minutes": 15,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 1.076678237806708,
+    "axis_low": -0.3623498729638378,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": 0.9203834795877439,
+    "horizon_minutes": 15,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.20201794629423261,
+    "axis_low": -0.014964292318091306,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.010405630548522546,
+    "horizon_minutes": 15,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.20201794629423261,
+    "axis_low": -0.014964292318091306,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": 0.18705365397614132,
+    "horizon_minutes": 15,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 1.0125862055772752,
+    "axis_low": -0.1359122355104545,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.5515757038766456,
+    "horizon_minutes": 5,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 1.0125862055772752,
+    "axis_low": -0.1359122355104545,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": 0.7931402693764704,
+    "horizon_minutes": 5,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.14918989981698197,
+    "axis_low": -0.020500284583547176,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 9.000172227496828e-05,
+    "horizon_minutes": 5,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.14918989981698197,
+    "axis_low": -0.020500284583547176,
+    "contrast": "B1_over_B0",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": 0.13748712847901445,
+    "horizon_minutes": 5,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 0.5408661511641082,
+    "axis_low": -0.23978104489432003,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.4750452971596971,
+    "horizon_minutes": 15,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 0.5408661511641082,
+    "axis_low": -0.23978104489432003,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": -0.08920638707048253,
+    "horizon_minutes": 15,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.1384216547178422,
+    "axis_low": -0.07127366761111228,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.11918283137061729,
+    "horizon_minutes": 15,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.1384216547178422,
+    "axis_low": -0.07127366761111228,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": -0.056811921243598185,
+    "horizon_minutes": 15,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 0.4435183439824277,
+    "axis_low": -0.34373089076072494,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.37333555865784007,
+    "horizon_minutes": 5,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 419,
+    "axis_high": 0.4435183439824277,
+    "axis_low": -0.34373089076072494,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2025-04-07",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-04-09",
+        "in_session_csv": true,
+        "label": "semana arancelaria; contexto, no causalidad",
+        "marker": "A"
+      },
+      {
+        "date": "2025-05-15",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "B"
+      },
+      {
+        "date": "2025-09-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "C"
+      },
+      {
+        "date": "2025-09-18",
+        "in_session_csv": true,
+        "label": "indisponibilidad del proveedor",
+        "marker": "D"
+      },
+      {
+        "date": "2026-06-17",
+        "in_session_csv": true,
+        "label": "FOMC",
+        "marker": "E"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": 0.23630420255754453,
+    "horizon_minutes": 5,
+    "window": "primary"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.15208767424394531,
+    "axis_low": -0.12390415188612353,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "log_ridge_harq",
+    "final_cumulative_delta": 0.12769384873894712,
+    "horizon_minutes": 5,
+    "window": "confirmation"
+  },
+  {
+    "N_sessions": 25,
+    "axis_high": 0.15208767424394531,
+    "axis_low": -0.12390415188612353,
+    "contrast": "B2_over_B1",
+    "events": [
+      {
+        "date": "2026-08-31",
+        "in_session_csv": true,
+        "label": "AMZN: choque observado; noticia/earnings no demostrados",
+        "marker": "F"
+      }
+    ],
+    "family": "lightgbm_qlike",
+    "final_cumulative_delta": -0.10406424016452148,
+    "horizon_minutes": 5,
+    "window": "confirmation"
+  }
+]

@@ -1,0 +1,164 @@
+{
+  "schema": "rp4_closeout_descriptive_public_checks_receipt_v1",
+  "status": "PASS_WITH_EXPLICIT_DESCRIPTIVE_LIMITS",
+  "created_at_utc": "2026-09-07T21:43:28Z",
+  "receipt_scope": "Public projection of actual audit commands and outputs; no licensed origin-level records or machine paths. The full command environments and source identities are retained privately.",
+  "private_execution_receipt_sha256": "af70df59e2017afbcf754a0930a7dad49a89e102a0f22f0972eb6ad36c11c71a",
+  "public_manifest_v2_sha256": "f91bd5ab48bdacc8e5bfebd146efa2fa086a326bd3ff3ca37f484e67b014f6c1",
+  "report_sha256": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+  "scope": {
+    "horizons_minutes": [
+      30,
+      15,
+      5
+    ],
+    "windows": [
+      "primary",
+      "confirmation"
+    ],
+    "closed_session_runs": 1332,
+    "primary_each": {
+      "sessions": 419,
+      "origins": 160832
+    },
+    "confirmation_each": {
+      "sessions": 25,
+      "origins": 9750
+    },
+    "model_fits": 0,
+    "new_p_values": 0,
+    "new_auc_computations": 0,
+    "bootstrap_runs": 0,
+    "raw_tape_reads": 0,
+    "maximum_numeric_threads": 2,
+    "commits": 0,
+    "pushes": 0,
+    "publication_actions": 0
+  },
+  "results": {
+    "coefficient_rows": 336996,
+    "coefficient_summary_rows": 1518,
+    "coefficient_presence_summary_rows": 654,
+    "forecast_asset_session_family_units": 15984,
+    "stored_session_qlike_comparisons": 7992,
+    "max_session_qlike_absolute_difference": 6.661338147750939e-16,
+    "minimum_recorded_conservative_embargo_minutes": 1090,
+    "bindings_constant_by_closed_window": 6,
+    "public_aggregate_outputs": 12,
+    "private_origin_exports_allowlisted": 0,
+    "private_paths_in_allowlisted_files": 0,
+    "original_audit_producer_pins_unchanged": true
+  },
+  "configured_numeric_thread_limit": 2,
+  "code_sha256": {
+    "artifacts/rp4_closeout_audit_code/audit_closed.py": "6957164cb688be290cdd4797ef9f6966c071c3934fd8ba93c66f09ca9c9d6fee",
+    "artifacts/rp4_closeout_audit_code/audit_metadata.py": "4ef42a23fd625aa4ad1b07b5a1d1ecc29a9e914b7324373232bbe406f0325085",
+    "artifacts/rp4_closeout_audit_code/public_projection_v2.py": "dac662eb91c154113b3c11f3a67aa7b75d81d935b262d2a0b5b9dd3ae57ed596",
+    "artifacts/rp4_closeout_audit_code/public_projection.py": "847bea25bc2b3cd5adce64ce8e9f9a01ef12f822ef3dfa1fae2e34867e0f99c4",
+    "artifacts/rp4_closeout_audit_code/test_audit_closed.py": "f2ec4730ee8624284f63741c30942fc50361a9449f59cef152059af90987e450"
+  },
+  "actual_execution": [
+    {
+      "stage": "descriptive_closed_extraction",
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_audit_code/audit_closed.py",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "DESCRIPTIVE_CLOSED_WINDOW:RV30:primary:419:160832\r\nDESCRIPTIVE_CLOSED_WINDOW:RV30:confirmation:25:9750\r\nDESCRIPTIVE_CLOSED_WINDOW:RV15:primary:419:160832\r\nDESCRIPTIVE_CLOSED_WINDOW:RV15:confirmation:25:9750\r\nDESCRIPTIVE_CLOSED_WINDOW:RV5:primary:419:160832\r\nDESCRIPTIVE_CLOSED_WINDOW:RV5:confirmation:25:9750\r\n{\r\n  \"status\": \"PASS_DESCRIPTIVE_EXTRACTION\",\r\n  \"windows\": [\r\n    {\r\n      \"horizon_minutes\": 30,\r\n      \"window\": \"primary\",\r\n      \"N_sessions\": 419,\r\n      \"N_origins\": 160832\r\n    },\r\n    {\r\n      \"horizon_minutes\": 30,\r\n      \"window\": \"confirmation\",\r\n      \"N_sessions\": 25,\r\n      \"N_origins\": 9750\r\n    },\r\n    {\r\n      \"horizon_minutes\": 15,\r\n      \"window\": \"primary\",\r\n      \"N_sessions\": 419,\r\n      \"N_origins\": 160832\r\n    },\r\n    {\r\n      \"horizon_minutes\": 15,\r\n      \"window\": \"confirmation\",\r\n      \"N_sessions\": 25,\r\n      \"N_origins\": 9750\r\n    },\r\n    {\r\n      \"horizon_minutes\": 5,\r\n      \"window\": \"primary\",\r\n      \"N_sessions\": 419,\r\n      \"N_origins\": 160832\r\n    },\r\n    {\r\n      \"horizon_minutes\": 5,\r\n      \"window\": \"confirmation\",\r\n      \"N_sessions\": 25,\r\n      \"N_origins\": 9750\r\n    }\r\n  ],\r\n  \"coefficient_rows\": 336996,\r\n  \"coefficient_summary_rows\": 1518,\r\n  \"forecast_asset_session_family_units\": 15984,\r\n  \"stored_session_qlike_comparisons\": 7992,\r\n  \"max_session_qlike_absolute_difference\": 6.661338147750939e-16,\r\n  \"model_fits\": 0,\r\n  \"new_p_values\": 0,\r\n  \"bootstrap_runs\": 0,\r\n  \"raw_tape_reads\": 0,\r\n  \"threads_max\": 2,\r\n  \"elapsed_seconds\": 23.658884699994815,\r\n  \"coefficient_semantics\": \"Coefficient on train-only centered/population-SD-scaled, clipped [-5,5] pointwise transformed input. No restandardization after clipping. Log-target mean fit before Duan smear and nonlinear output bounds. Dropped column 0 means no contribution in that fitted representation, not estimated null effect.\",\r\n  \"presence_semantics\": \"presence:<exact raw column> indicates finiteness before train-only median imputation; it is not the raw column slope.\",\r\n  \"intraday_semantics\": \"First market hour origin<60; first observed hour35<=origin<95. Registered last_hour is origin>=300, not the final market hour origin>=330.\",\r\n  \"inference_limit\": \"Post-hoc descriptive strata and associations; no ablations, causal interpretation, new p-values or rescue of the registered primary decision.\"\r\n}\r\n",
+      "tool_chunk_ids": [
+        "ac9dcf",
+        "d3d7eb"
+      ]
+    },
+    {
+      "stage": "metadata_custody_temporal_and_rounds",
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_audit_code/audit_metadata.py",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "{\r\n  \"status\": \"PASS_METADATA_ONLY\",\r\n  \"sessions\": 1332,\r\n  \"binding_constants\": 6,\r\n  \"actual_embargo_min_minutes\": 1090.0,\r\n  \"cross_horizon_keys_training_metadata_exact\": true,\r\n  \"rv15_rv5_bit_masks_exact\": true,\r\n  \"rv30_bit_masks\": \"Not persisted: keys, training-session count, last date and target-end metadata compared instead.\",\r\n  \"model_fits\": 0,\r\n  \"new_p_values\": 0,\r\n  \"bootstrap_runs\": 0\r\n}\r\n",
+      "tool_chunk_ids": [
+        "4f9262",
+        "a4d198"
+      ]
+    },
+    {
+      "stage": "synthetic_unit_tests",
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_closeout_audit_code/test_audit_closed.py -q -p no:cacheprovider",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": ".....                                                                    [100%]\r\n",
+      "tool_chunk_ids": [
+        "d67450"
+      ]
+    },
+    {
+      "stage": "final_ruff",
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_audit_code",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "tool_chunk_ids": [
+        "da6f1c"
+      ]
+    },
+    {
+      "stage": "final_format",
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_closeout_audit_code",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "5 files already formatted\n",
+      "tool_chunk_ids": [
+        "cd4f3d"
+      ]
+    },
+    {
+      "stage": "final_mypy",
+      "command": "uv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent --ignore-missing-imports artifacts/rp4_closeout_audit_code/audit_closed.py artifacts/rp4_closeout_audit_code/audit_metadata.py artifacts/rp4_closeout_audit_code/public_projection.py artifacts/rp4_closeout_audit_code/public_projection_v2.py",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 4 source files\r\n",
+      "tool_chunk_ids": [
+        "c63581"
+      ]
+    },
+    {
+      "stage": "public_report_projection_verified_idempotent",
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_audit_code/public_projection.py",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "{\r\n  \"status\": \"PASS_PUBLIC_PROJECTION\",\r\n  \"public_output_count\": 3,\r\n  \"neutral_source_aliases\": 2710,\r\n  \"new_model_fits\": 0,\r\n  \"new_p_values\": 0,\r\n  \"private_origin_exports_published\": 0,\r\n  \"report_sha256\": \"93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412\",\r\n  \"public_manifest_sha256\": \"a5e969d43b2944f96856b9fa05616607a0e7f31e1343da137a3ba7996eefb7a7\"\r\n}\r\n",
+      "tool_chunk_ids": [
+        "1b6fa2"
+      ]
+    },
+    {
+      "stage": "public_aggregate_allowlist_v2",
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_audit_code/public_projection_v2.py",
+      "command_disclosure": "Exact invoked relative command; machine-specific environment omitted.",
+      "exit_code": 0,
+      "stdout": "{\r\n  \"status\": \"PASS_AGGREGATE_ONLY_PUBLIC_PROJECTION_V2\",\r\n  \"public_outputs\": 12,\r\n  \"prior_manifest_unchanged_sha256\": \"a5e969d43b2944f96856b9fa05616607a0e7f31e1343da137a3ba7996eefb7a7\",\r\n  \"public_manifest_v2_sha256\": \"f91bd5ab48bdacc8e5bfebd146efa2fa086a326bd3ff3ca37f484e67b014f6c1\",\r\n  \"model_fits\": 0,\r\n  \"new_p_values\": 0\r\n}\r\n",
+      "tool_chunk_ids": [
+        "87f4ef"
+      ]
+    },
+    {
+      "stage": "public_private_hash_and_content_checks",
+      "command": null,
+      "command_disclosure": "Exact command retained only in the private receipt because its path-denylist literals are private.",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"public_aggregate_outputs_verified\": 12, \"private_origins_allowlisted\": 0, \"private_paths_in_public_files\": 0, \"original_audit_producer_pins_unchanged\": true, \"fits\": 0, \"new_p_values\": 0}\r\n",
+      "tool_chunk_ids": [
+        "e7da44"
+      ]
+    }
+  ],
+  "limits": [
+    "All calculations are descriptive on already fixed forecasts and coefficients; no model was fitted, and no new p-value, bootstrap interval, AUC or causal effect was computed.",
+    "Zero stored coefficients for removed columns mean no contribution in the fitted representation, not an estimated zero population effect.",
+    "Separate pooled-origin from equal-session/equal-asset means and first observed hour from first market hour.",
+    "RV15/RV5 saved bit masks match; RV30 binary masks were not persisted, so RV30 comparison is limited to exact keys and saved training metadata.",
+    "Selected-horizon target endpoints and the conservative inherited RV30 causal guard are distinct; daylight saving time and early closes change UTC clock labels.",
+    "The current data-output allowlist contains twelve aggregate files. This checks receipt is an additional metadata-only artifact, not an amendment to any frozen scientific result."
+  ],
+  "publication_actions": 0,
+  "research_status": "RESEARCH_ONLY; NOT INVESTMENT ADVICE; capital_go=false"
+}

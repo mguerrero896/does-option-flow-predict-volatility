@@ -1,0 +1,298 @@
+{
+  "schema_version": "rp4-v3-secondary-closeout-independent-peer-audit-v1",
+  "status": "PASS",
+  "created_at_utc": "2026-09-07 21:07:57 UTC",
+  "scope": "Closed RP4 v3 revision2 presentation, four closed secondary receipts, stored statistics, immutable primary rows and exact component reuse. This is not a new evaluation or inferential analysis.",
+  "workdir": "private-input/0ec5f26c567f416b9513",
+  "protected_artifacts_sha256": {
+    "docs/rp4/results_v3_revision2.md": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e",
+    "artifacts/rp4_v3_secondary_closeout/evidence.json": "e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1",
+    "artifacts/rp4_v3_secondary_closeout/receipt.json": "551ebd5dab1ee5d7e4aa781eae9da9c48b1a2b642c52d6b51165aee7ccaaf1dd"
+  },
+  "model_fits": 0,
+  "model_refits": 0,
+  "new_auc_estimates": 0,
+  "bootstrap_runs": 0,
+  "new_inference_calculations": 0,
+  "threads_max": 1,
+  "code_or_report_modifications": 0,
+  "files_created_by_this_audit": [
+    "artifacts/rp4_v3_secondary_closeout/peer_audit_receipt.json"
+  ],
+  "commands": [
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONIOENCODING='utf-8'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:MKL_NUM_THREADS='1'\n$env:NUMEXPR_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\n@'\nimport collections, datetime, hashlib, json, math, re, time\nfrom pathlib import Path\nstart=time.perf_counter()\nrepo=Path.cwd()\nfirst=Path(\"private-input/e90b04c9636db3ce4b5d\")\nnewton=first/\"newton_failed_only_v1\"\nchecked={}\ndef sha(path):\n    path=Path(path)\n    h=hashlib.sha256()\n    with path.open(\"rb\") as f:\n        for block in iter(lambda:f.read(1048576),b\"\"): h.update(block)\n    return h.hexdigest()\ndef pin(path, expected):\n    path=Path(path)\n    key=str(path.resolve())\n    actual=checked.get(key)\n    if actual is None:\n        actual=sha(path);checked[key]=actual\n    assert actual==expected,(\"HASH_MISMATCH\",key,expected,actual)\n    return path\ndef read(path): return json.loads(Path(path).read_text(encoding=\"utf-8\"))\nrp=repo/\"docs/rp4/results_v3_revision2.md\"\nep=repo/\"artifacts/rp4_v3_secondary_closeout/evidence.json\"\ncp=repo/\"artifacts/rp4_v3_secondary_closeout/receipt.json\"\npin(rp,\"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\")\npin(ep,\"e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1\")\npin(cp,\"551ebd5dab1ee5d7e4aa781eae9da9c48b1a2b642c52d6b51165aee7ccaaf1dd\")\ne=read(ep);close=read(cp);report=rp.read_text(encoding=\"utf-8\")\nassert close[\"status\"]==\"COMPLETE\" and close[\"exit_code\"]==0\nassert close[\"model_fits\"]==close[\"new_inference_calculations\"]==0\nfor path,digest in e[\"input_sha256\"].items(): pin(path,digest)\nfor path,digest in close[\"artifacts_sha256\"].items(): pin(path,digest)\npin(repo/close[\"producer_path\"],close[\"producer_sha256\"])\npin(repo/\"artifacts/rp4_v3_secondary_closeout/report_revision2.py\",close[\"prior_generator_sha256\"])\npin(repo/\"artifacts/rp4_v3_secondary_closeout/test_report_newton_revision2.py\",close[\"test_sha256\"])\ndef primary_block(raw):\n    lines=raw.splitlines(keepends=True)\n    indices=[i for i,line in enumerate(lines) if line.startswith(b\"| Ventana | Familia | Contraste | Delta |\")]\n    assert len(indices)==1\n    i=indices[0];j=i+1\n    while j<len(lines) and lines[j].startswith(b\"|\"):j+=1\n    assert j-i==10\n    return b\"\".join(lines[i:j])\nblock=primary_block(rp.read_bytes())\nassert block==primary_block((repo/\"docs/rp4/results_v3_revision1.md\").read_bytes())\nblocksha=hashlib.sha256(block).hexdigest()\nassert blocksha==e[\"primary_block_sha256\"]==\"3812b6a1a881c1ed06dc17f84fc47971d44452c19b4d21a0e3ca4c8af7f0e921\"\nassert e[\"primary_rows\"]==8 and e[\"primary_block_byte_preserved\"] is True\nassert e[\"prior_primary_changed\"] is False and e[\"v4_changed\"] is False\ntables=[]\nfor part in re.findall(r\"(?:^\\|.*(?:\\n|$))+\",report,re.M):\n    rows=[[v.strip() for v in line.strip().strip(\"|\").split(\"|\")] for line in part.strip().splitlines()]\n    if len(rows)>2: tables.append((rows[0],rows[2:]))\ndef table(header):\n    selected=[rows for h,rows in tables if header in h]\n    assert len(selected)==1,(header,len(selected))\n    return selected[0]\nwindows={\"Primaria\":\"primary\",\"Confirmación\":\"confirmation\"}\nfamilies={\"Lineal (logit)\":\"log_ridge_harq\",\"LightGBM (binary)\":\"lightgbm_qlike\"}\nfmt=lambda x: \"NO VERIFICABLE\" if x is None else f\"{x:.8g}\"\ninterval=lambda row:f\"[{fmt(row['ci_low'])}, {fmt(row['ci_high'])}]\"\ndata={};receipts={};census={};durations={};recorded_pins={}\nfor version,base,bundle in [(\"first\",first,\"first_pass\"),(\"newton\",newton,\"newton_final\")]:\n    data[version]={};receipts[version]={};census[version]={};durations[version]={}\n    for window in [\"primary\",\"confirmation\"]:\n        folder=base/\"evaluation\"/window\n        rec=read(folder/\"receipt.json\");s=read(folder/\"summary.json\")\n        pin(folder/\"receipt.json\",close[\"source_receipt_sha256\"][version][window])\n        assert rec[\"status\"]==\"COMPLETE\" and rec[\"exit_code\"]==0 and rec[\"window\"]==window\n        assert \"--worker\" in rec[\"command\"] and f\"--window {window}\" in rec[\"command\"]\n        assert (\"jump_newton_runner\" if version==\"newton\" else \"jump_runner\") in rec[\"command\"]\n        expected_release=close[\"newton_release_sha256\" if version==\"newton\" else \"first_release_sha256\"]\n        actual_release=rec[\"binding\"][\"release_sha256\"] if \"binding\" in rec else rec[\"release_sha256\"]\n        assert actual_release==s[\"binding\"][\"release_sha256\"]==expected_release\n        assert s[\"binding\"][\"window\"]==window and s[\"binding\"][\"endpoint\"]==\"jump\"\n        pin(rec[\"log\"],rec[\"log_sha256\"])\n        for path,digest in rec[\"artifacts_sha256\"].items():pin(path,digest)\n        for path,digest in rec[\"code_sha256\"].items():pin(repo/path,digest)\n        assert e[bundle][window][\"summary\"]==s and e[bundle][window][\"receipt\"]==rec\n        assert s[\"resources\"][\"threads_total_max\"]==2 and str(s[\"resources\"][\"priority\"])==\"16384\"\n        assert all(s[k] is False for k in [\"primary_changed\",\"quantile_changed\",\"mz_changed\",\"capital_go\"])\n        assert s[\"RESEARCH_ONLY\"] is True\n        if version==\"newton\":\n            assert s[\"successful_components_refitted\"]==0 and s[\"prior_attempts_preserved\"] is True\n        j=s[\"jump_secondary\"]\n        expectedN=(418,160442) if version==\"first\" and window==\"primary\" else (419,160832) if window==\"primary\" else (25,9750)\n        assert (j[\"N_sessions\"],j[\"N_origins\"])==expectedN\n        assert j[\"positive_labels\"]+j[\"negative_labels\"]==j[\"N_origins\"]\n        assert j[\"inference_role\"]==\"SECONDARY\" and j[\"sequence\"][\"global_joint_reject\"] is False\n        assert j[\"sequence\"][\"any_family_claim_allowed\"] is False\n        assert len(j[\"excluded_sessions\"])==(1 if version==\"first\" and window==\"primary\" else 0)\n        for f in j[\"families\"]:\n            assert f[\"invalid_class_resamples\"]==0 and f[\"bootstrap_repetitions\"]==9999\n            assert f[\"N_sessions\"]==j[\"N_sessions\"] and f[\"N_origins\"]==j[\"N_origins\"]\n        for c in j[\"contrasts\"]:\n            assert c[\"sign\"]==\"richer_minus_base\" and c[\"rejected\"] is False\n            if c[\"contrast\"]==\"B1_over_B0\":\n                assert c[\"p_for_decision\"]==c[\"p_raw\"] and c[\"hypothesis_status\"]==\"NOT_REJECTED\"\n            else:\n                assert c[\"p_for_decision\"] is None and c[\"hypothesis_status\"]==\"NOT_TESTED\"\n        data[version][window]=s;receipts[version][window]=rec\n        census[version][window]={k:j[k] for k in [\"N_sessions\",\"N_origins\",\"positive_labels\",\"negative_labels\"]}\n        durations[version][window]=rec[\"elapsed_seconds\"]\n        recorded_pins[version+\"_\"+window]={\"receipt\":sha(folder/\"receipt.json\"),\"summary\":sha(folder/\"summary.json\"),\"log\":rec[\"log_sha256\"]}\naucrows=contrasts=0\nfor version,label in [(\"newton\",\"AUC final\"),(\"first\",\"AUC\")]:\n    rows=table(label);assert len(rows)==12\n    keys=set()\n    for row in rows:\n        w=windows[row[0]];f=families[row[1]];info=row[2]\n        j=data[version][w][\"jump_secondary\"];family=next(v for v in j[\"families\"] if v[\"family\"]==f)\n        value=family[\"auc\"][info]\n        assert row[3:9]==[fmt(value[\"estimate\"]),interval(value),str(j[\"N_sessions\"]),str(j[\"N_origins\"]),\"0\",\"COMPUTED\"],row\n        assert row[9]==\"—\"\n        keys.add((w,f,info));aucrows+=1\n    assert len(keys)==12\nfor version,label in [(\"newton\",\"Delta AUC final\"),(\"first\",\"Delta AUC\")]:\n    rows=table(label);assert len(rows)==8\n    for row in rows:\n        w=windows[row[0]];f=families[row[1]];cname={\"B1/B0\":\"B1_over_B0\",\"B2/B1\":\"B2_over_B1\"}[row[2]]\n        c=next(v for v in data[version][w][\"jump_secondary\"][\"contrasts\"] if v[\"family\"]==f and v[\"contrast\"]==cname)\n        assert row[3:7]==[f\"{c['estimate']:+.8g}\",interval(c),fmt(c[\"p_raw\"]),fmt(c[\"p_for_decision\"])],row\n        assert row[8:]==[str(c[\"N_sessions\"]),str(c[\"N_origins\"])]\n        assert row[7]==(\"No rechazada\" if cname==\"B1_over_B0\" else \"H2 no abierta; p crudo sólo diagnóstico\")\n        # Difference of already stored AUCs only: no AUC estimation or resampling.\n        fam=next(v for v in data[version][w][\"jump_secondary\"][\"families\"] if v[\"family\"]==f)\n        richer,base=(\"B1\",\"B0\") if cname==\"B1_over_B0\" else (\"B2\",\"B1\")\n        assert abs((fam[\"auc\"][richer][\"estimate\"]-fam[\"auc\"][base][\"estimate\"])-c[\"estimate\"])<=1e-15\n        contrasts+=1\nassert data[\"newton\"][\"confirmation\"][\"jump_secondary\"]==data[\"first\"][\"confirmation\"][\"jump_secondary\"]\nprimaryrows=table(\"Reducción %\");assert len(primaryrows)==8\nfor row in primaryrows:\n    w=windows[row[0]];s=read(repo/(\"artifacts/rp4_v3_b2/summary.json\" if w==\"primary\" else \"artifacts/rp4_v3_b3/summary.json\"))\n    f=\"log_ridge_harq\" if row[1]==\"Ridge\" else \"lightgbm_qlike\"\n    name={\"B1/B0\":\"B1_over_B0\",\"B2/B1\":\"B2_over_B1\"}[row[2]]\n    c=next(v for v in s[\"contrasts\"] if (v[\"family\"],v[\"contrast\"])==(f,name))\n    assert row[3:7]==[f\"{c['estimate']:+.10f}\",f\"[{c['ci_low']:.10f}, {c['ci_high']:.10f}]\",f\"{c['qlike_reduction_percent']:+.7f}\",f\"{c['p_raw']:.4f}\"]\n    assert row[8]==f\"{c['N_sessions']}/{c['N_origins']}\"\n    assert s[\"global_joint_reject\"] is False and s[\"secondary_can_rescue_primary\"] is False\nmzprimary=read(repo/\"artifacts/rp4_v3_b4/mz_identity_receipt.json\")\nmzconf=read(repo/\"artifacts/rp4_v3_secondary_mz_audit/confirmation_summary.json\")\nassert mzprimary[\"exit_code\"]==0 and mzprimary[\"stdout\"][\"models_fitted\"]==0\nassert mzconf[\"status\"]==\"NO_ARITHMETICAL_BUG\" and mzconf[\"models_fitted\"]==0 and mzconf[\"mz_fallback_status\"]==\"NO_VERIFICABLE\"\nmz={}\nfor row in table(\"QLIKE MZ diagnóstico\"):\n    w=windows[row[0]];info=row[1]\n    source=(mzprimary[\"stdout\"] if w==\"primary\" else mzconf)[\"results\"][info]\n    assert row[2:10]==[fmt(source[\"raw_qlike_recomputed\"]),fmt(source[\"mz_qlike_recomputed\"]),str(source[\"N_origins\"]),str(source[\"strictly_negative_affine\"]),str(source[\"floor_hits\"]),fmt(source[\"floor_loss_share_percent\"]),fmt(source[\"formula_stored_max_abs_difference\"]),\"NO VERIFICABLE\"],row\n    assert source[\"formula_stored_max_abs_difference\"]==0 and source[\"floor_counter_disagreements\"]==0\n    mz[w+\"_\"+info]={k:source[k] for k in [\"N_origins\",\"floor_hits\",\"floor_loss_share_percent\",\"formula_stored_max_abs_difference\"]}\nassert e[\"mz_status\"]==\"NO_VERIFICABLE_NO_ARITHMETICAL_BUG_DEMONSTRATED\"\nassert \"No se demostró un error aritmético\" in report and \"Ningún secundario sustituye la media\" in report\nassert \"not inversion of centered-null p\" in data[\"newton\"][\"primary\"][\"jump_secondary\"][\"contrasts\"][0][\"interval\"]\nfor label,version in [(\"Segundos\",\"first\"),(\"Segundos segundo pase\",\"newton\")]:\n    rows=table(label);assert len(rows)==2\n    for row in rows:\n        w=windows[row[0]];rec=receipts[version][w]\n        offset=0 if version==\"newton\" else 1\n        assert row[1:3]==[\"2\",\"16384\"]\n        assert row[3+offset]==\"0\" and row[4+offset]==fmt(rec[\"elapsed_seconds\"])\n        assert row[5+offset]==rec[\"started_at_utc\"] and row[6+offset]==rec[\"completed_at_utc\"]\nfirst_finish=max(datetime.datetime.fromisoformat(r[\"completed_at_utc\"]) for r in receipts[\"first\"].values())\nnewton_start=min(datetime.datetime.fromisoformat(r[\"started_at_utc\"]) for r in receipts[\"newton\"].values())\nassert first_finish<newton_start\nfor recs in receipts.values():\n    assert datetime.datetime.fromisoformat(recs[\"primary\"][\"completed_at_utc\"])<datetime.datetime.fromisoformat(recs[\"confirmation\"][\"started_at_utc\"])\nlinks=re.findall(r\"\\[[^\\]]+\\]\\(([^)]+)\\)\",report)\nassert all((rp.parent/link).resolve().is_file() for link in links if not link.startswith(\"http\"))\nprint(json.dumps({\"status\":\"PASS\",\"scope\":\"CLOSED_V3_SECONDARY_REPORT_TABLES_CUSTODY_ONLY\",\"model_fits\":0,\"new_auc_estimates\":0,\"bootstrap_runs\":0,\"threads_max\":1,\"input_pins\":len(e[\"input_sha256\"]),\"unique_file_hashes_verified\":len(checked),\"primary_rows\":8,\"primary_block_sha256\":blocksha,\"auc_table_rows\":aucrows,\"delta_auc_table_rows\":contrasts,\"mz_table_rows\":len(mz),\"links_checked\":len(links),\"census\":census,\"source_receipt_summary_log_sha256\":recorded_pins,\"execution_elapsed_seconds_preserved\":durations,\"execution_elapsed_seconds_sum\":sum(sum(v.values()) for v in durations.values()),\"final_confirmation_auc_and_inference_identical_to_first\":True,\"secondary_H1_rejected\":0,\"secondary_H2_opened\":0,\"primary_global_joint_reject\":False,\"mz_diagnostics\":mz,\"elapsed_audit_seconds\":time.perf_counter()-start},ensure_ascii=False,indent=2))\n\n'@ | uv run --offline --frozen --no-sync python -B -",
+      "exit_code": 0,
+      "tool_chunk_id": "c4befe",
+      "wall_time_seconds": 0.9467465,
+      "stdout": "{\r\n  \"status\": \"PASS\",\r\n  \"scope\": \"CLOSED_V3_SECONDARY_REPORT_TABLES_CUSTODY_ONLY\",\r\n  \"model_fits\": 0,\r\n  \"new_auc_estimates\": 0,\r\n  \"bootstrap_runs\": 0,\r\n  \"threads_max\": 1,\r\n  \"input_pins\": 71,\r\n  \"unique_file_hashes_verified\": 76,\r\n  \"primary_rows\": 8,\r\n  \"primary_block_sha256\": \"3812b6a1a881c1ed06dc17f84fc47971d44452c19b4d21a0e3ca4c8af7f0e921\",\r\n  \"auc_table_rows\": 24,\r\n  \"delta_auc_table_rows\": 16,\r\n  \"mz_table_rows\": 6,\r\n  \"links_checked\": 11,\r\n  \"census\": {\r\n    \"first\": {\r\n      \"primary\": {\r\n        \"N_sessions\": 418,\r\n        \"N_origins\": 160442,\r\n        \"positive_labels\": 102077,\r\n        \"negative_labels\": 58365\r\n      },\r\n      \"confirmation\": {\r\n        \"N_sessions\": 25,\r\n        \"N_origins\": 9750,\r\n        \"positive_labels\": 6268,\r\n        \"negative_labels\": 3482\r\n      }\r\n    },\r\n    \"newton\": {\r\n      \"primary\": {\r\n        \"N_sessions\": 419,\r\n        \"N_origins\": 160832,\r\n        \"positive_labels\": 102301,\r\n        \"negative_labels\": 58531\r\n      },\r\n      \"confirmation\": {\r\n        \"N_sessions\": 25,\r\n        \"N_origins\": 9750,\r\n        \"positive_labels\": 6268,\r\n        \"negative_labels\": 3482\r\n      }\r\n    }\r\n  },\r\n  \"source_receipt_summary_log_sha256\": {\r\n    \"first_primary\": {\r\n      \"receipt\": \"61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b\",\r\n      \"summary\": \"8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79\",\r\n      \"log\": \"18676f73275e6f4a8e02dd1a182fc7b99ac5d592dd23d82dd00ecb2ba5fd64a6\"\r\n    },\r\n    \"first_confirmation\": {\r\n      \"receipt\": \"d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed\",\r\n      \"summary\": \"2c902790a9055dd6ec3dde6877636b15c2bf8cc62025722ddf5fe28386e974ad\",\r\n      \"log\": \"fa449c159f3a6540b76d167232a43cdf2b8b40d4b0bd1e8cd7d1bb63f75cc1f9\"\r\n    },\r\n    \"newton_primary\": {\r\n      \"receipt\": \"5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26\",\r\n      \"summary\": \"0381df3c2104538686ba25c540704c12f7c088ecc3c86fdab070a30dadaf4e61\",\r\n      \"log\": \"0a651ce1d9c0d3081e3578088c9e52734c38c3d34ae8332fc133d05ecd735ad4\"\r\n    },\r\n    \"newton_confirmation\": {\r\n      \"receipt\": \"0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542\",\r\n      \"summary\": \"6fbd55318dcfb9486947b97fa734ca6016ff876151249431ba8badb338245dd3\",\r\n      \"log\": \"64a009a1226b0e6b69799eefd51756b19038d228f6038b02df46a8dc69b7d2aa\"\r\n    }\r\n  },\r\n  \"execution_elapsed_seconds_preserved\": {\r\n    \"first\": {\r\n      \"primary\": 8648.049853499993,\r\n      \"confirmation\": 882.6176358999946\r\n    },\r\n    \"newton\": {\r\n      \"primary\": 30.29132980000577,\r\n      \"confirmation\": 14.068069199987804\r\n    }\r\n  },\r\n  \"execution_elapsed_seconds_sum\": 9575.026888399982,\r\n  \"final_confirmation_auc_and_inference_identical_to_first\": true,\r\n  \"secondary_H1_rejected\": 0,\r\n  \"secondary_H2_opened\": 0,\r\n  \"primary_global_joint_reject\": false,\r\n  \"mz_diagnostics\": {\r\n    \"primary_B0\": {\r\n      \"N_origins\": 160832,\r\n      \"floor_hits\": 18631,\r\n      \"floor_loss_share_percent\": 99.99979773376258,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    },\r\n    \"primary_B1\": {\r\n      \"N_origins\": 160832,\r\n      \"floor_hits\": 20834,\r\n      \"floor_loss_share_percent\": 99.99947621066642,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    },\r\n    \"primary_B2\": {\r\n      \"N_origins\": 160832,\r\n      \"floor_hits\": 21100,\r\n      \"floor_loss_share_percent\": 99.99980229848325,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    },\r\n    \"confirmation_B0\": {\r\n      \"N_origins\": 9750,\r\n      \"floor_hits\": 0,\r\n      \"floor_loss_share_percent\": 0,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    },\r\n    \"confirmation_B1\": {\r\n      \"N_origins\": 9750,\r\n      \"floor_hits\": 9,\r\n      \"floor_loss_share_percent\": 99.98963269280883,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    },\r\n    \"confirmation_B2\": {\r\n      \"N_origins\": 9750,\r\n      \"floor_hits\": 11,\r\n      \"floor_loss_share_percent\": 99.99030139854364,\r\n      \"formula_stored_max_abs_difference\": 0\r\n    }\r\n  },\r\n  \"elapsed_audit_seconds\": 0.5612280999921495\r\n}\r\n",
+      "checks": {
+        "status": "PASS",
+        "scope": "CLOSED_V3_SECONDARY_REPORT_TABLES_CUSTODY_ONLY",
+        "model_fits": 0,
+        "new_auc_estimates": 0,
+        "bootstrap_runs": 0,
+        "threads_max": 1,
+        "input_pins": 71,
+        "unique_file_hashes_verified": 76,
+        "primary_rows": 8,
+        "primary_block_sha256": "3812b6a1a881c1ed06dc17f84fc47971d44452c19b4d21a0e3ca4c8af7f0e921",
+        "auc_table_rows": 24,
+        "delta_auc_table_rows": 16,
+        "mz_table_rows": 6,
+        "links_checked": 11,
+        "census": {
+          "first": {
+            "primary": {
+              "N_sessions": 418,
+              "N_origins": 160442,
+              "positive_labels": 102077,
+              "negative_labels": 58365
+            },
+            "confirmation": {
+              "N_sessions": 25,
+              "N_origins": 9750,
+              "positive_labels": 6268,
+              "negative_labels": 3482
+            }
+          },
+          "newton": {
+            "primary": {
+              "N_sessions": 419,
+              "N_origins": 160832,
+              "positive_labels": 102301,
+              "negative_labels": 58531
+            },
+            "confirmation": {
+              "N_sessions": 25,
+              "N_origins": 9750,
+              "positive_labels": 6268,
+              "negative_labels": 3482
+            }
+          }
+        },
+        "source_receipt_summary_log_sha256": {
+          "first_primary": {
+            "receipt": "61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b",
+            "summary": "8bc27d3913bf55ee3e856458a2c6334634e24efbaff9af3ea846278640389c79",
+            "log": "18676f73275e6f4a8e02dd1a182fc7b99ac5d592dd23d82dd00ecb2ba5fd64a6"
+          },
+          "first_confirmation": {
+            "receipt": "d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed",
+            "summary": "2c902790a9055dd6ec3dde6877636b15c2bf8cc62025722ddf5fe28386e974ad",
+            "log": "fa449c159f3a6540b76d167232a43cdf2b8b40d4b0bd1e8cd7d1bb63f75cc1f9"
+          },
+          "newton_primary": {
+            "receipt": "5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26",
+            "summary": "0381df3c2104538686ba25c540704c12f7c088ecc3c86fdab070a30dadaf4e61",
+            "log": "0a651ce1d9c0d3081e3578088c9e52734c38c3d34ae8332fc133d05ecd735ad4"
+          },
+          "newton_confirmation": {
+            "receipt": "0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542",
+            "summary": "6fbd55318dcfb9486947b97fa734ca6016ff876151249431ba8badb338245dd3",
+            "log": "64a009a1226b0e6b69799eefd51756b19038d228f6038b02df46a8dc69b7d2aa"
+          }
+        },
+        "execution_elapsed_seconds_preserved": {
+          "first": {
+            "primary": 8648.049853499993,
+            "confirmation": 882.6176358999946
+          },
+          "newton": {
+            "primary": 30.29132980000577,
+            "confirmation": 14.068069199987804
+          }
+        },
+        "execution_elapsed_seconds_sum": 9575.026888399982,
+        "final_confirmation_auc_and_inference_identical_to_first": true,
+        "secondary_H1_rejected": 0,
+        "secondary_H2_opened": 0,
+        "primary_global_joint_reject": false,
+        "mz_diagnostics": {
+          "primary_B0": {
+            "N_origins": 160832,
+            "floor_hits": 18631,
+            "floor_loss_share_percent": 99.99979773376258,
+            "formula_stored_max_abs_difference": 0
+          },
+          "primary_B1": {
+            "N_origins": 160832,
+            "floor_hits": 20834,
+            "floor_loss_share_percent": 99.99947621066642,
+            "formula_stored_max_abs_difference": 0
+          },
+          "primary_B2": {
+            "N_origins": 160832,
+            "floor_hits": 21100,
+            "floor_loss_share_percent": 99.99980229848325,
+            "formula_stored_max_abs_difference": 0
+          },
+          "confirmation_B0": {
+            "N_origins": 9750,
+            "floor_hits": 0,
+            "floor_loss_share_percent": 0,
+            "formula_stored_max_abs_difference": 0
+          },
+          "confirmation_B1": {
+            "N_origins": 9750,
+            "floor_hits": 9,
+            "floor_loss_share_percent": 99.98963269280883,
+            "formula_stored_max_abs_difference": 0
+          },
+          "confirmation_B2": {
+            "N_origins": 9750,
+            "floor_hits": 11,
+            "floor_loss_share_percent": 99.99030139854364,
+            "formula_stored_max_abs_difference": 0
+          }
+        },
+        "elapsed_audit_seconds": 0.5612280999921495
+      }
+    },
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONIOENCODING='utf-8'\n$env:PYTHONDONTWRITEBYTECODE='1'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\n$env:MKL_NUM_THREADS='1'\n$env:NUMEXPR_NUM_THREADS='1'\n$env:POLARS_MAX_THREADS='1'\n@'\nimport collections, hashlib, json, time\nfrom pathlib import Path\nstart=time.perf_counter()\nrepo=Path.cwd()\nfirst=Path(\"private-input/e90b04c9636db3ce4b5d\")\nnewton=first/\"newton_failed_only_v1\"\noriginal=Path(\"private-input/c43ac6756d25b8e9ea94\")\ndef read(p):return json.loads(Path(p).read_text(encoding=\"utf-8\"))\ndef sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()\ne=read(repo/\"artifacts/rp4_v3_secondary_closeout/evidence.json\")\ninventory=read(first/\"jump_inventory.json\")\nassert sha(first/\"jump_inventory.json\")==\"a7f0bd85aa2d817cfc7d1da7b463fc7c8751ee7e966b13fb662a63e403731c38\"\ncensus={};reused=missing=preserved=newcalls=0;certificates=[]\nfor window in [\"primary\",\"confirmation\"]:\n fdir=first/\"evaluation\"/window;ndir=newton/\"evaluation\"/window\n manifest=read(fdir/\"component_manifest.json\");final=read(ndir/\"component_manifest.json\")\n inv=next(x for x in inventory[\"windows\"] if x[\"window\"]==window)\n oldmap={(x[\"session\"],x[\"model\"]):x for x in inv[\"components\"]}\n firstmap={(x[\"session\"],x[\"model\"]):x for x in manifest}\n assert len(firstmap)==len(manifest)==(2514 if window==\"primary\" else 150)\n counts=collections.Counter()\n for item in final:\n  key=(item[\"session\"],item[\"model\"]);old=firstmap[key]\n  fpath=fdir/\"components\"/key[0]/(key[1]+\".json\")\n  freceipt=fdir/\"component_receipts\"/key[0]/(key[1]+\".json\")\n  assert sha(fpath)==old[\"component_sha256\"]==item[\"first_component_sha256\"]\n  assert sha(freceipt)==old[\"receipt_sha256\"]==item[\"first_component_receipt_sha256\"]\n  comp=read(fpath)\n  assert (comp[\"session\"],comp[\"model\"],comp[\"status\"])==(key[0],key[1],old[\"status\"])\n  assert comp[\"binding\"][\"window\"]==window\n  assert read(freceipt)[\"sha256\"]==old[\"component_sha256\"]\n  counts[(item[\"lineage\"],item[\"status\"])]+=1\n  if old[\"provenance\"]==\"REUSED_FROZEN_V3\":\n   orig=oldmap[key];opath=original/orig[\"relative_path\"]\n   assert sha(opath)==orig[\"component_sha256\"]==old[\"original_component_sha256\"]\n   assert sha(opath.parent.parent/\"session_receipts\"/opath.name)==orig[\"receipt_sha256\"]\n   oc=read(opath)\n   assert oc[\"forecast\"]==comp[\"forecast\"] and oc[\"fit\"]==comp[\"fit\"]\n   assert comp[\"keys_sha256\"]==orig[\"keys_sha256\"] and comp[\"labels_sha256\"]==orig[\"labels_sha256\"]\n   reused+=1\n  else:missing+=1\n  if item[\"lineage\"]!=\"NEWTON_FAILED_ONLY_ATTEMPT\":\n   assert Path(item[\"path\"])==fpath and item[\"sha256\"]==old[\"component_sha256\"]\n   assert item[\"component_receipt_sha256\"]==old[\"receipt_sha256\"]\n   assert item[\"status\"]==old[\"status\"]==\"COMPUTED\"\n   preserved+=1\n  else:\n   assert window==\"primary\" and key==(\"2025-03-26\",\"jump__log_ridge_harq__B2\")\n   assert old[\"status\"]==\"NO VERIFICABLE\" and item[\"status\"]==\"COMPUTED\" and item[\"outcome\"]==\"RECOVERED\"\n   npath=Path(item[\"path\"]);assert sha(npath)==item[\"sha256\"]\n   nreceipt=ndir/\"component_receipts\"/key[0]/(key[1]+\".json\")\n   assert sha(nreceipt)==item[\"component_receipt_sha256\"]\n   nc=read(npath)\n   for field in [\"N_origins\",\"keys_sha256\",\"labels_sha256\",\"session\",\"model\"]:\n    assert nc[field]==comp[field]\n   fit=nc[\"fit\"];assert fit[\"lambda_grid\"]==[0.0001,0.01,1.0,100.0,10000.0]\n   solvers=[x[\"solver\"] for x in fit[\"candidates\"]]+[fit[\"solver_refit\"]]\n   assert len(solvers)==6\n   for solver in solvers:\n    assert solver[\"converged\"] is True and solver[\"gradient_inf_norm_objective_over_n\"]<=1e-8\n    assert solver[\"intercept_penalized\"] is False and solver[\"maxiter\"]==1000\n    assert solver[\"iterations\"]<=1000\n   assert sum(x[\"newton\"][\"accepted_steps\"] for x in solvers)==1\n   assert sum(x[\"newton\"][\"iterations\"] for x in solvers)==1\n   certificates=[{\"lambda\":x[\"lambda\"],\"lbfgs_iterations\":x[\"lbfgs_iterations\"],\"accepted_newton_steps\":x[\"newton\"][\"accepted_steps\"],\"gradient\":x[\"gradient_inf_norm_objective_over_n\"]} for x in solvers]\n   assert len(nc[\"forecast\"])==nc[\"N_origins\"]==390 and all(0<p<1 for p in nc[\"forecast\"])\n   newcalls+=1\n expected=collections.Counter({(x[\"lineage\"],x[\"status\"]):x[\"N\"] for x in read(ndir/\"summary.json\")[\"component_counts\"]})\n assert counts==expected\n census[window]=[{\"lineage\":k[0],\"status\":k[1],\"components\":v} for k,v in sorted(counts.items())]\nassert (reused,missing,preserved,newcalls)==(962,1702,2663,1)\nassert len(e[\"newton_final\"][\"primary\"][\"solver_audit\"])==7 and not e[\"newton_final\"][\"confirmation\"][\"solver_audit\"]\nprint(json.dumps({\"status\":\"PASS\",\"scope\":\"CLOSED_COMPONENT_MANIFEST_LINEAGE_AND_REUSE_ONLY\",\"model_fits\":0,\"new_auc_estimates\":0,\"bootstrap_runs\":0,\"threads_max\":1,\"original_components_hash_and_forecast_fit_parity\":reused,\"first_missing_components_attempted\":missing,\"first_successful_components_referenced_unchanged\":preserved,\"newton_components_attempted\":newcalls,\"newton_model\":\"jump__log_ridge_harq__B2\",\"newton_session\":\"2025-03-26\",\"newton_origin_count\":390,\"newton_solver_calls\":6,\"newton_polish_accepted_steps\":1,\"newton_certificates_saved\":certificates,\"component_census\":census,\"elapsed_audit_seconds\":time.perf_counter()-start},ensure_ascii=False,indent=2))\n\n'@ | uv run --offline --frozen --no-sync python -B -",
+      "exit_code": 0,
+      "tool_chunk_id": "217ad2",
+      "wall_time_seconds": 2.2106983,
+      "stdout": "{\r\n  \"status\": \"PASS\",\r\n  \"scope\": \"CLOSED_COMPONENT_MANIFEST_LINEAGE_AND_REUSE_ONLY\",\r\n  \"model_fits\": 0,\r\n  \"new_auc_estimates\": 0,\r\n  \"bootstrap_runs\": 0,\r\n  \"threads_max\": 1,\r\n  \"original_components_hash_and_forecast_fit_parity\": 962,\r\n  \"first_missing_components_attempted\": 1702,\r\n  \"first_successful_components_referenced_unchanged\": 2663,\r\n  \"newton_components_attempted\": 1,\r\n  \"newton_model\": \"jump__log_ridge_harq__B2\",\r\n  \"newton_session\": \"2025-03-26\",\r\n  \"newton_origin_count\": 390,\r\n  \"newton_solver_calls\": 6,\r\n  \"newton_polish_accepted_steps\": 1,\r\n  \"newton_certificates_saved\": [\r\n    {\r\n      \"lambda\": 0.0001,\r\n      \"lbfgs_iterations\": 27,\r\n      \"accepted_newton_steps\": 1,\r\n      \"gradient\": 6.956944578837251e-15\r\n    },\r\n    {\r\n      \"lambda\": 0.01,\r\n      \"lbfgs_iterations\": 12,\r\n      \"accepted_newton_steps\": 0,\r\n      \"gradient\": 7.390758806307177e-09\r\n    },\r\n    {\r\n      \"lambda\": 1.0,\r\n      \"lbfgs_iterations\": 10,\r\n      \"accepted_newton_steps\": 0,\r\n      \"gradient\": 5.876426046073566e-10\r\n    },\r\n    {\r\n      \"lambda\": 100.0,\r\n      \"lbfgs_iterations\": 5,\r\n      \"accepted_newton_steps\": 0,\r\n      \"gradient\": 9.306400829546362e-10\r\n    },\r\n    {\r\n      \"lambda\": 10000.0,\r\n      \"lbfgs_iterations\": 4,\r\n      \"accepted_newton_steps\": 0,\r\n      \"gradient\": 3.054634562871597e-09\r\n    },\r\n    {\r\n      \"lambda\": 10000.0,\r\n      \"lbfgs_iterations\": 4,\r\n      \"accepted_newton_steps\": 0,\r\n      \"gradient\": 4.1647856114344906e-09\r\n    }\r\n  ],\r\n  \"component_census\": {\r\n    \"primary\": [\r\n      {\r\n        \"lineage\": \"NEWTON_FAILED_ONLY_ATTEMPT\",\r\n        \"status\": \"COMPUTED\",\r\n        \"components\": 1\r\n      },\r\n      {\r\n        \"lineage\": \"REUSED_FIRST_REPAIR_SUCCESS\",\r\n        \"status\": \"COMPUTED\",\r\n        \"components\": 1601\r\n      },\r\n      {\r\n        \"lineage\": \"REUSED_ORIGINAL_V3\",\r\n        \"status\": \"COMPUTED\",\r\n        \"components\": 912\r\n      }\r\n    ],\r\n    \"confirmation\": [\r\n      {\r\n        \"lineage\": \"REUSED_FIRST_REPAIR_SUCCESS\",\r\n        \"status\": \"COMPUTED\",\r\n        \"components\": 100\r\n      },\r\n      {\r\n        \"lineage\": \"REUSED_ORIGINAL_V3\",\r\n        \"status\": \"COMPUTED\",\r\n        \"components\": 50\r\n      }\r\n    ]\r\n  },\r\n  \"elapsed_audit_seconds\": 1.8078665000066394\r\n}\r\n",
+      "checks": {
+        "status": "PASS",
+        "scope": "CLOSED_COMPONENT_MANIFEST_LINEAGE_AND_REUSE_ONLY",
+        "model_fits": 0,
+        "new_auc_estimates": 0,
+        "bootstrap_runs": 0,
+        "threads_max": 1,
+        "original_components_hash_and_forecast_fit_parity": 962,
+        "first_missing_components_attempted": 1702,
+        "first_successful_components_referenced_unchanged": 2663,
+        "newton_components_attempted": 1,
+        "newton_model": "jump__log_ridge_harq__B2",
+        "newton_session": "2025-03-26",
+        "newton_origin_count": 390,
+        "newton_solver_calls": 6,
+        "newton_polish_accepted_steps": 1,
+        "newton_certificates_saved": [
+          {
+            "lambda": 0.0001,
+            "lbfgs_iterations": 27,
+            "accepted_newton_steps": 1,
+            "gradient": 6.956944578837251e-15
+          },
+          {
+            "lambda": 0.01,
+            "lbfgs_iterations": 12,
+            "accepted_newton_steps": 0,
+            "gradient": 7.390758806307177e-09
+          },
+          {
+            "lambda": 1,
+            "lbfgs_iterations": 10,
+            "accepted_newton_steps": 0,
+            "gradient": 5.876426046073566e-10
+          },
+          {
+            "lambda": 100,
+            "lbfgs_iterations": 5,
+            "accepted_newton_steps": 0,
+            "gradient": 9.306400829546362e-10
+          },
+          {
+            "lambda": 10000,
+            "lbfgs_iterations": 4,
+            "accepted_newton_steps": 0,
+            "gradient": 3.054634562871597e-09
+          },
+          {
+            "lambda": 10000,
+            "lbfgs_iterations": 4,
+            "accepted_newton_steps": 0,
+            "gradient": 4.1647856114344906e-09
+          }
+        ],
+        "component_census": {
+          "primary": [
+            {
+              "lineage": "NEWTON_FAILED_ONLY_ATTEMPT",
+              "status": "COMPUTED",
+              "components": 1
+            },
+            {
+              "lineage": "REUSED_FIRST_REPAIR_SUCCESS",
+              "status": "COMPUTED",
+              "components": 1601
+            },
+            {
+              "lineage": "REUSED_ORIGINAL_V3",
+              "status": "COMPUTED",
+              "components": 912
+            }
+          ],
+          "confirmation": [
+            {
+              "lineage": "REUSED_FIRST_REPAIR_SUCCESS",
+              "status": "COMPUTED",
+              "components": 100
+            },
+            {
+              "lineage": "REUSED_ORIGINAL_V3",
+              "status": "COMPUTED",
+              "components": 50
+            }
+          ]
+        },
+        "elapsed_audit_seconds": 1.8078665000066394
+      }
+    }
+  ],
+  "audit_harness_initial_failure": {
+    "command_identity": "First successful command above with NOT_TESTED replaced by NOT_TESTED_PREVIOUS_NOT_REJECTED in the H2 stored-status assertion.",
+    "exit_code": 1,
+    "tool_chunk_id": "cc8a56",
+    "stdout": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 101, in <module>\r\nAssertionError\r\n",
+    "cause": "The audit harness initially expected a nonexistent status spelling. Read-only schema inspection verified the stored status is NOT_TESTED and p_for_decision is null; the audit assertion was corrected. No producer, input, decision threshold or report was changed."
+  },
+  "conclusion": {
+    "material_defects_found": [],
+    "primary_rows_preserved_byte_for_byte": 8,
+    "primary_block_sha256": "3812b6a1a881c1ed06dc17f84fc47971d44452c19b4d21a0e3ca4c8af7f0e921",
+    "auc_rows_match_closed_summaries": 24,
+    "delta_auc_rows_match_closed_summaries": 16,
+    "first_pass_primary": {
+      "N_sessions": 418,
+      "N_origins": 160442
+    },
+    "final_primary": {
+      "N_sessions": 419,
+      "N_origins": 160832
+    },
+    "final_confirmation": {
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    "original_frozen_components_reused_with_exact_forecast_and_fit": 962,
+    "first_pass_missing_components_attempted": 1702,
+    "first_pass_successful_components_preserved_by_reference": 2663,
+    "newton_failed_only_components_attempted": 1,
+    "newton_scope": "Primary 2025-03-26 jump__log_ridge_harq__B2; five lambda candidates plus one refit; only the lambda=0.0001 candidate required one accepted Newton step. No successful component was reopened.",
+    "newton_targeted_candidate_gradient": 6.956944578837251e-15,
+    "secondary_H1_rejected": 0,
+    "secondary_H2_opened": 0,
+    "primary_global_joint_reject": false,
+    "final_confirmation_auc_and_inference_identical_to_first": true,
+    "mz_status": "NO_VERIFICABLE_NO_ARITHMETICAL_BUG_DEMONSTRATED",
+    "mz_scope": "Six displayed rows match already executed identity audits. Stored formula/forecast maximum differences are zero. Negative affine predictions and the preserved 1e-12 floor explain the documented QLIKE instability; no formula was changed or independently recomputed here.",
+    "execution_cost_seconds_sum": 9575.026888399982,
+    "cost_scope": "Sum of the four stored process elapsed_seconds. All four costs remain visible separately; not a claim that only one Newton step accounts for total repair cost.",
+    "interval_p_caveat": "Bilateral percentile intervals are not inversions of the one-sided centered-null p-values. An unopened H2 has no sequential decision p; its nominal p remains diagnostic, never zero.",
+    "claims_scope": "PASS means presentation/custody consistency only. No secondary rescues the failed primary conjunction and overlapping windows are not independent replications.",
+    "limitations": "The audit verifies saved diagnostics and immutable dataflow, not the optimizer or inferential mathematics by a new fit/resampling run. Original components retain their original convergence contract, including disclosed gradients above the later certificate threshold."
+  },
+  "skills_used": [
+    {
+      "name": "Model Evaluator",
+      "effect": "Compared metric direction, samples and provenance against closed artifacts; did not train or tune models."
+    }
+  ],
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

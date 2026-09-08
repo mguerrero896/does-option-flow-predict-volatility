@@ -1,0 +1,144 @@
+{
+  "stage": "V3_SECONDARY_NEWTON_PRIMARY_CLOSEOUT",
+  "status": "COMPLETE_ALL_COMPONENTS_COMPUTED",
+  "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='2'\n$env:OMP_NUM_THREADS='2'\n$env:POLARS_MAX_THREADS='2'\n$env:MKL_NUM_THREADS='2'\n$env:NUMEXPR_NUM_THREADS='2'\n[System.Diagnostics.Process]::GetCurrentProcess().PriorityClass='BelowNormal'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_secondary_repair.jump_newton_runner --window primary --addendum artifacts/rp4_v3_secondary_newton_a1/addendum.json --expected-addendum-sha 529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa\nexit $LASTEXITCODE",
+  "exit_code": 0,
+  "verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$rp4Root='private-input/0ec5f26c567f416b9513'\n$rp4Stage='private-input/4320e763f1eefe8087a1'\n$rp4Receipt=Get-Content -LiteralPath \"$rp4Stage/receipt.json\" -Raw | ConvertFrom-Json -AsHashtable\n$rp4Checked=0\nforeach($rp4Pair in $rp4Receipt.artifacts_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath $rp4Pair.Key -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'ARTIFACT_HASH_MISMATCH'}; $rp4Checked++ }\nforeach($rp4Pair in $rp4Receipt.code_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath \"$rp4Root/$($rp4Pair.Key)\" -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'SOURCE_HASH_MISMATCH'}; $rp4Checked++ }\nif ((Get-FileHash -LiteralPath $rp4Receipt.log -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Receipt.log_sha256) {throw 'LOG_HASH_MISMATCH'}\nif($rp4Receipt.status -ne 'COMPLETE' -or $rp4Receipt.exit_code -ne 0) {throw 'INCOMPLETE_RECEIPT'}\n[pscustomobject]@{status='PASS';artifact_and_code_hashes_checked=$rp4Checked;log_hash_verified=$true;worker_exit_code=$rp4Receipt.exit_code;endpoint_scores_consulted=$false} | ConvertTo-Json -Compress",
+    "chunk_id": "c5b84b",
+    "wall_time_seconds": 0.5220115,
+    "exit_code": 0,
+    "original_token_count": 35,
+    "output": "{\"status\":\"PASS\",\"artifact_and_code_hashes_checked\":23,\"log_hash_verified\":true,\"worker_exit_code\":0,\"endpoint_scores_consulted\":false}\r\n"
+  },
+  "certification": {
+    "eligible_newton_components": 1,
+    "successful_components_refitted": 0,
+    "prior_attempts_preserved": true,
+    "gradient_diagnostics": [
+      {
+        "N_components": 456,
+        "candidate_gradient_max": 1.8975255030322134e-06,
+        "candidate_gradients_above_1e_minus8": 2265,
+        "candidate_gradients_available": 2280,
+        "candidate_gradients_missing_or_single_class": 0,
+        "gradient_threshold": 1e-08,
+        "new_certificate_required": false,
+        "provenance": "REUSED_FROZEN_V3",
+        "refit_gradient_max": 1.3219122702029972e-06,
+        "refit_gradients_above_1e_minus8": 446,
+        "refit_gradients_available": 456,
+        "refit_gradients_missing_or_single_class": 0
+      },
+      {
+        "N_components": 801,
+        "candidate_gradient_max": 9.976924802916402e-09,
+        "candidate_gradients_above_1e_minus8": 0,
+        "candidate_gradients_available": 4005,
+        "candidate_gradients_missing_or_single_class": 0,
+        "gradient_threshold": 1e-08,
+        "new_certificate_required": true,
+        "provenance": "NEW_MISSING_COMPONENT",
+        "refit_gradient_max": 9.089416733490846e-09,
+        "refit_gradients_above_1e_minus8": 0,
+        "refit_gradients_available": 801,
+        "refit_gradients_missing_or_single_class": 0
+      }
+    ]
+  },
+  "scheduled_sessions": 419,
+  "component_counts": [
+    {
+      "N": 1,
+      "lineage": "NEWTON_FAILED_ONLY_ATTEMPT",
+      "status": "COMPUTED"
+    },
+    {
+      "N": 1601,
+      "lineage": "REUSED_FIRST_REPAIR_SUCCESS",
+      "status": "COMPUTED"
+    },
+    {
+      "N": 912,
+      "lineage": "REUSED_ORIGINAL_V3",
+      "status": "COMPUTED"
+    }
+  ],
+  "resources": {
+    "arrow_cpu_threads": 2,
+    "arrow_io_threads": 1,
+    "parquet_use_threads": false,
+    "priority": "16384",
+    "process_id": 21256,
+    "threadpools": [
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      },
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      }
+    ],
+    "threads_total_max": 2
+  },
+  "private_stage_root": "private-input/4320e763f1eefe8087a1",
+  "artifacts_sha256": {
+    "summary.json": "0381df3c2104538686ba25c540704c12f7c088ecc3c86fdab070a30dadaf4e61",
+    "receipt.json": "5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26",
+    "component_manifest.json": "2ef2e788291d056197aa5c63a395f05dddbd2a1c77a06505c9ad3c49acf7beef",
+    "fit_diagnostics.json": "28309cb688ae69cf15ce4f2876d4c582ad59fc3c08fcc4a1294935950d8bf5ad",
+    "summary_receipt.json": "fac11a444689fc072ed69dcee50313d94376f13a5c886925c9ec9547075ea02f"
+  },
+  "closed_worker_receipt": {
+    "artifacts_sha256": {
+      "private-input/a657110caf6a920f54f9": "2ef2e788291d056197aa5c63a395f05dddbd2a1c77a06505c9ad3c49acf7beef",
+      "private-input/970753338532737a1bf4": "28309cb688ae69cf15ce4f2876d4c582ad59fc3c08fcc4a1294935950d8bf5ad",
+      "private-input/f4637ce7597e48aac287": "0381df3c2104538686ba25c540704c12f7c088ecc3c86fdab070a30dadaf4e61",
+      "private-input/4c9ce0362cae668d4db1": "fac11a444689fc072ed69dcee50313d94376f13a5c886925c9ec9547075ea02f"
+    },
+    "binding": {
+      "endpoint": "jump",
+      "release_sha256": "721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74",
+      "window": "primary"
+    },
+    "code_sha256": {
+      "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+      "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+      "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+      "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+      "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_secondary_repair/jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+      "artifacts/rp4_v3_secondary_repair/jump_newton.py": "65c62a7ef6b23bb8aac78e87a8f1d087017418430a16d0af6aa241721f80b675",
+      "artifacts/rp4_v3_secondary_repair/jump_newton_runner.py": "2c8e928da522567a928d8b9b1832c739dc43c2dfa5000c1349b6e22a5b5c6201",
+      "artifacts/rp4_v3_secondary_repair/jump_repair.py": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+      "artifacts/rp4_v3_secondary_repair/jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+      "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+      "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+    },
+    "command": "private-input/685006c6a456a68f7a2e",
+    "completed_at_utc": "2026-09-08T06:53:29.469787+10:00",
+    "elapsed_seconds": 30.29132980000577,
+    "exit_code": 0,
+    "log": "private-input/973c1fcc072c4af34182",
+    "log_sha256": "0a651ce1d9c0d3081e3578088c9e52734c38c3d34ae8332fc133d05ecd735ad4",
+    "started_at_utc": "2026-09-08T06:52:59.178662+10:00",
+    "status": "COMPLETE",
+    "window": "primary"
+  },
+  "interpretation": "Only the previously uncertified linear component was newly attempted and is now COMPUTED under the unchanged objective and numerical certificate. All 2513 prior successful components were reused. Original successful components retain their original stopping rule and are not retrospectively certified to the stricter repair gradient threshold. The old failed attempt remains intact.",
+  "primary_changed": false,
+  "quantile_changed": false,
+  "mz_changed": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

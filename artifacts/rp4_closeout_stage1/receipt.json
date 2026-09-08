@@ -1,0 +1,78 @@
+{
+  "stage": "PUBLICATION_CLOSEOUT_1",
+  "status": "PASS",
+  "qa": {
+    "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_code/check_final.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_closeout_code/check_final.py\nexit $LASTEXITCODE",
+    "chunk_id": "64bf3c",
+    "wall_time_seconds": 0.6693643,
+    "exit_code": 0,
+    "original_token_count": 74,
+    "output": "{\"final_report_sha256\": \"cf43dead56bd895b9af515943df0f1303806116b40c6aa7b38a19de54bd949c7\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\r\nAll checks passed!\n1 file already formatted\n"
+  },
+  "initial_failed_qa": {
+    "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_code/check_final.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_closeout_code/check_final.py\nexit $LASTEXITCODE",
+    "chunk_id": "73ebf8",
+    "wall_time_seconds": 0.4816495,
+    "exit_code": 1,
+    "original_token_count": 554,
+    "output": "Warning: truncated output (original token count: 554)\nTotal output lines: 34\n\n{\"final_report_sha256\": \"4fa6c4416acacbfb0edb30e8e966c7777b6eb977b07a1b6e1e2d1b0b100e162f\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\r\nE501 Line too long (107 > 100)\n  --> artifacts\\rp4_closeout_code\\check_final.py:14:101\n   |\n12 | PINS = {\n13 |     \"docs/rp4/results_v4.md\": \"c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7\",\n14 |     \"docs/rp4/results_v3_revision2.md\": \"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\",\n   |                                                                                                     ^^^^^^^\n15 |     \"artifacts/rp4_v4_b4/robustness.csv\": \"09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb\",\n16 |     \"artifacts/rp4_v4_b4/distribution_secondary.csv\": \"62312356720ac370fe3928eb5212db5a99ad7aa63f8ce4fe568ae149faed96cb\",\n   |\n\nE501 Line too long (109 > 100)\n  --> artifacts\\rp4_closeout_code\\ch…54 tokens truncated…343eb85d5a30601e8a0f142e\",\n15 |     \"artifacts/rp4_v4_b4/robustness.csv\": \"09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb\",\n   |                                                                                                     ^^^^^^^^^\n16 |     \"artifacts/rp4_v4_b4/distribution_secondary.csv\": \"62312356720ac370fe3928eb5212db5a99ad7aa63f8ce4fe568ae149faed96cb\",\n17 | }\n   |\n\nE501 Line too long (121 > 100)\n  --> artifacts\\rp4_closeout_code\\check_final.py:16:101\n   |\n14 |     \"docs/rp4/results_v3_revision2.md\": \"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\",\n15 |     \"artifacts/rp4_v4_b4/robustness.csv\": \"09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb\",\n16 |     \"artifacts/rp4_v4_b4/distribution_secondary.csv\": \"62312356720ac370fe3928eb5212db5a99ad7aa63f8ce4fe568ae149faed96cb\",\n   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^\n17 | }\n   |\n\nFound 3 errors.\n"
+  },
+  "artifacts": [
+    {
+      "path": "docs/rp4/RESULTADO_FINAL.md",
+      "sha256": "cf43dead56bd895b9af515943df0f1303806116b40c6aa7b38a19de54bd949c7"
+    },
+    {
+      "path": "artifacts/rp4_closeout_code/check_final.py",
+      "sha256": "6cd799270fc602acf2f5a17bb10178674b7c45981a5fd3f5882408b3bea49c23"
+    },
+    {
+      "path": "docs/rp4/results_v1.md",
+      "sha256": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26"
+    },
+    {
+      "path": "docs/rp4/results_v2.md",
+      "sha256": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf"
+    },
+    {
+      "path": "docs/rp4/results_v3.md",
+      "sha256": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f"
+    },
+    {
+      "path": "docs/rp4/results_v3_revision2.md",
+      "sha256": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e"
+    },
+    {
+      "path": "docs/rp4/results_v4.md",
+      "sha256": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7"
+    },
+    {
+      "path": "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv",
+      "sha256": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be"
+    },
+    {
+      "path": "artifacts/rp4_closeout_audit/descriptive_profiles.csv",
+      "sha256": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd"
+    }
+  ],
+  "scope": "New reader-facing synthesis. All old scientific reports remain intact. Descriptive audit has no new fits or p values.",
+  "sources": [
+    {
+      "url": "https://www.nasdaqtrader.com/MicroNews.aspx?id=OTA2026-2",
+      "published": "2026-01-16",
+      "supports": "Listing of Monday and Wednesday expirations starts January26, not necessarily the first observed tape availability."
+    },
+    {
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm",
+      "supports": "FOMC 2025-09-17."
+    },
+    {
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomcpresconf20260617.htm",
+      "supports": "FOMC 2026-06-17."
+    }
+  ],
+  "model_fits": 0,
+  "new_bootstraps": 0,
+  "publication": false,
+  "capital_go": false
+}

@@ -1,0 +1,33 @@
+{
+  "RESEARCH_ONLY": true,
+  "artifacts_sha256": {
+    "private-input/08fdde350b2d0d733975": "e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1",
+    "private-input/7ee39ad8eb2d7bef35b3": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e"
+  },
+  "capital_go": false,
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_secondary_closeout/report_newton_revision2.py --newton-release-sha256 721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74 --first-primary-receipt-sha256 61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b --first-confirmation-receipt-sha256 d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed --newton-primary-receipt-sha256 5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26 --newton-confirmation-receipt-sha256 0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542",
+  "completed_at_utc": "2026-09-07T20:56:54.634622+00:00",
+  "exit_code": 0,
+  "first_release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+  "model_fits": 0,
+  "new_inference_calculations": 0,
+  "newton_release_sha256": "721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74",
+  "primary_block_byte_preserved": true,
+  "prior_generator_sha256": "e4d4d9ed795334f3c4128539fb6fd9ce614efac98e210729f945600c9f5889f2",
+  "producer_path": "artifacts/rp4_v3_secondary_closeout/report_newton_revision2.py",
+  "producer_sha256": "4345a4cc1fb7b3069f70c2ac619dd79cc815b19c93c364cff66857f4dbd6447e",
+  "source_receipt_sha256": {
+    "first": {
+      "confirmation": "d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed",
+      "primary": "61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b"
+    },
+    "newton": {
+      "confirmation": "0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542",
+      "primary": "5d1d1ef3f90471da482b7198d09499e9f03c880cc2d475b8dc4dbfd34aeeed26"
+    }
+  },
+  "stage": "RP4_V3_B4_REVISION2_TWO_PASS_CLOSEOUT",
+  "started_at_utc": "2026-09-07T20:56:50.583182+00:00",
+  "status": "COMPLETE",
+  "test_sha256": "a61e2dea0234f287583a06f6e83c009e3a2844f2239f81658459684de85568ff"
+}

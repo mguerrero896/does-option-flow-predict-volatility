@@ -1,0 +1,112 @@
+{
+  "artifacts_sha256": {
+    "artifacts/rp4_closeout_figures/README.md": "51f46c4a6f1d00c320e7b01922cf9cf0ebb84b99c05d5540729d3a86bf1b8b4b",
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "artifacts/rp4_closeout_figures/panel_metadata.json": "3c9f14d12874c86e1a1defa7e91abf4f7343207702d3f89818a28c650f07ef79",
+    "artifacts/rp4_closeout_figures/sources.json": "8926d4a20e789dbdf4922802de3ae88a473dded97df0a90800ef6fe885940cc6",
+    "docs/figures/rp4/comparison_v1_v4.png": "d16927b7b98b9426894f74be544b75a7f7ba6d9f89a0a1455b36f6b352aa9804",
+    "docs/figures/rp4/comparison_v1_v4.svg": "1489b479e9e28bc5fc7cb87be9a1339f6b1cc84eac4ce8e03904875a4efca0cd",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative.png": "490a1dc1d4a240db50cd83feb1fb20eb36ed397c4948edcbf20ecafee466f974",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative.svg": "4356930ae601fd73c8b48d9a8b5d4bcab3b16a4ddc0150eee6829b5016cde6db",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative.png": "28fa8544df8725e362eea1e0c3f088198c2a8bd88a73f7907cba96caad2307d2",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative.svg": "3550d7ada0edf1b261d7a0f1b20c0e801dd9cdff0d36667a84674901c2252f3e"
+  },
+  "axes": "independent_per_panel_explicitly_labeled",
+  "capital_go": false,
+  "code_sha256": {
+    "artifacts/rp4_closeout_figures_code/build.py": "47500aae9b906ab3b0f1e6aa8806853ba8ed02650bf8379e7ba51a97e5cbe03b",
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
+    "artifacts/rp4_closeout_figures_code/test_build.py": "e41a9391bac44bcbdef63c6ec967a3ac0079ef4e5bf0acfe97ac3fcc26c4e34e"
+  },
+  "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_closeout_figures_code.build",
+  "comparison_rows": 40,
+  "completed_at_utc": "2026-09-07T21:33:30.790051+00:00",
+  "curve_panels": 8,
+  "downloads": 0,
+  "elapsed_seconds": 1.25313019999885,
+  "event_annotations": [
+    {
+      "date": "2025-04-07",
+      "description": "semana arancelaria; contexto, no causalidad",
+      "marker": "A"
+    },
+    {
+      "date": "2025-04-09",
+      "description": "semana arancelaria; contexto, no causalidad",
+      "marker": "A"
+    },
+    {
+      "date": "2025-05-15",
+      "description": "indisponibilidad del proveedor",
+      "marker": "B"
+    },
+    {
+      "date": "2025-09-17",
+      "description": "FOMC",
+      "marker": "C"
+    },
+    {
+      "date": "2025-09-18",
+      "description": "indisponibilidad del proveedor",
+      "marker": "D"
+    },
+    {
+      "date": "2026-06-17",
+      "description": "FOMC",
+      "marker": "E"
+    },
+    {
+      "date": "2026-08-31",
+      "description": "AMZN: choque observado; noticia/earnings no demostrados",
+      "marker": "F"
+    }
+  ],
+  "exit_code": 0,
+  "interval": "saved_delta_CI_scaled_by_observed_denominator_not_ratio_CI",
+  "model_fits": 0,
+  "new_bootstrap_repetitions": 0,
+  "prior_artifacts_modified": false,
+  "private_origin_data_read": false,
+  "public_identity_guard": "PASS",
+  "publication": false,
+  "renderers": [
+    {
+      "density": 96,
+      "format": "png",
+      "height": 1813,
+      "metadata_copied": false,
+      "path": "docs/figures/rp4/v4_B1_over_B0_cumulative.png",
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    {
+      "density": 96,
+      "format": "png",
+      "height": 1813,
+      "metadata_copied": false,
+      "path": "docs/figures/rp4/v4_B2_over_B1_cumulative.png",
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    },
+    {
+      "density": 96,
+      "format": "png",
+      "height": 2267,
+      "metadata_copied": false,
+      "path": "docs/figures/rp4/comparison_v1_v4.png",
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2800
+    }
+  ],
+  "research_only": true,
+  "schema": "closeout-figures-v1",
+  "source_receipt_sha256": "8926d4a20e789dbdf4922802de3ae88a473dded97df0a90800ef6fe885940cc6",
+  "started_at_utc": "2026-09-07T21:33:29.537255+00:00",
+  "status": "COMPLETE"
+}

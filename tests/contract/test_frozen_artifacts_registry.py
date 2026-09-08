@@ -238,18 +238,50 @@ def test_registry_cli_verifier_uses_the_same_redaction_and_withdrawal_rules() ->
     assert f"{count}/{count} intact" in completed.stdout
 
 
+def _sidecar_artifact_and_digest(sidecar: Path) -> tuple[Path, str]:
+    """Resolve legacy JSON hashes or a GNU checksum naming one local file."""
+    content = sidecar.read_text(encoding="utf-8").strip()
+    if re.fullmatch(r"[0-9a-fA-F]{64}", content):
+        artifact, digest = sidecar.with_suffix(".json"), content
+    else:
+        match = re.fullmatch(r"([0-9a-fA-F]{64}) [ *]([^\r\n]+)", content)
+        if match is None:
+            raise ValueError("SIDECAR_FORMAT_INVALID")
+        digest, filename = match.groups()
+        if (
+            filename in {".", ".."}
+            or filename != filename.strip()
+            or any(character in filename for character in "/\\:")
+        ):
+            raise ValueError("SIDECAR_TARGET_UNSAFE")
+        artifact = sidecar.parent / filename
+    resolved = artifact.resolve()
+    if (
+        resolved.parent != sidecar.parent.resolve()
+        or not resolved.is_relative_to(REPO.resolve())
+    ):
+        raise ValueError("SIDECAR_TARGET_UNSAFE")
+    return artifact, digest.lower()
+
+
 def test_gate_sidecars_agree_with_registry() -> None:
-    """Every results.sha256 sidecar value equals the registered digest of its JSON."""
+    """Every checksum names a safe, registered artifact with the same digest."""
     registered = {str(entry["path"]): str(entry["sha256"]) for entry in _entries()}
     redactions = _redactions()
     disagreements = []
     for sidecar in REPO.glob("artifacts/**/*.sha256"):
-        artifact = sidecar.with_suffix(".json")
+        try:
+            artifact, sidecar_digest = _sidecar_artifact_and_digest(sidecar)
+        except ValueError as error:
+            disagreements.append(f"{error} {sidecar.relative_to(REPO).as_posix()}")
+            continue
         relative = artifact.relative_to(REPO).as_posix()
         if relative not in registered:
             disagreements.append(f"UNREGISTERED {relative}")
             continue
-        sidecar_digest = sidecar.read_text(encoding="utf-8").strip()
+        if not artifact.is_file():
+            disagreements.append(f"MISSING {relative}")
+            continue
         actual = _sha(artifact)
         redaction = redactions.get(relative)
         if actual != registered[relative] and (
@@ -258,20 +290,74 @@ def test_gate_sidecars_agree_with_registry() -> None:
             or redaction["redacted_sha256"] != actual
         ):
             disagreements.append(f"REGISTRY_MISMATCH {relative}")
-        if sidecar_digest and sidecar_digest != actual:
+        if sidecar_digest != actual:
             # sidecars hash the LF payload string at write time; LF-normalized
             # file bytes must agree — divergence means real content drift
             disagreements.append(f"SIDECAR_MISMATCH {relative}")
     assert not disagreements, disagreements
 
 
+@pytest.mark.parametrize("filename", ["results.json", "producer.py", "protocol.md"])
+def test_checksum_formats_preserve_exact_registered_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, filename: str
+) -> None:
+    monkeypatch.setitem(globals(), "REPO", tmp_path)
+    directory = tmp_path / "artifacts" / "fixture"
+    directory.mkdir(parents=True)
+    artifact = directory / filename
+    artifact.write_text("immutable fixture\n", encoding="utf-8")
+    digest = _sha(artifact)
+    legacy = filename == "results.json"
+    sidecar = directory / ("results.sha256" if legacy else f"{filename}.sha256")
+    sidecar.write_text(digest if legacy else f"{digest}  {filename}\n", encoding="utf-8")
+    relative = artifact.relative_to(tmp_path).as_posix()
+    monkeypatch.setitem(globals(), "_entries", lambda: [{"path": relative, "sha256": digest}])
+    monkeypatch.setitem(globals(), "_redactions", lambda: {})
+
+    assert _sidecar_artifact_and_digest(sidecar) == (artifact, digest)
+    test_gate_sidecars_agree_with_registry()
+    artifact.write_text("changed fixture\n", encoding="utf-8")
+    with pytest.raises(AssertionError, match="REGISTRY_MISMATCH.*SIDECAR_MISMATCH"):
+        test_gate_sidecars_agree_with_registry()
+
+
+@pytest.mark.parametrize(
+    "filename", ["../outside.py", "..\\outside.py", "/outside.py", "C:outside.py"]
+)
+def test_checksum_rejects_nonlocal_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, filename: str
+) -> None:
+    monkeypatch.setitem(globals(), "REPO", tmp_path)
+    sidecar = tmp_path / "fixture.sha256"
+    sidecar.write_text(f"{'0' * 64}  {filename}\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="SIDECAR_TARGET_UNSAFE"):
+        _sidecar_artifact_and_digest(sidecar)
+
+
+def test_checksum_rejects_unregistered_gnu_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setitem(globals(), "REPO", tmp_path)
+    monkeypatch.setitem(globals(), "_entries", lambda: [])
+    monkeypatch.setitem(globals(), "_redactions", lambda: {})
+    directory = tmp_path / "artifacts" / "fixture"
+    directory.mkdir(parents=True)
+    artifact = directory / "producer.py"
+    artifact.write_text("immutable fixture\n", encoding="utf-8")
+    (directory / "producer.py.sha256").write_text(
+        f"{_sha(artifact)}  producer.py\n", encoding="utf-8"
+    )
+    with pytest.raises(AssertionError, match="UNREGISTERED artifacts/fixture/producer.py"):
+        test_gate_sidecars_agree_with_registry()
+
+
 def test_public_metadata_redactions_preserve_scientific_payloads() -> None:
     registered = {str(entry["path"]): str(entry["sha256"]) for entry in _entries()}
     personal_roots = (
-        "C:/" + "Users/mguer",
-        "C:\\\\" + "Users\\\\mguer",
-        "D:/" + "MDS650",
-        "D:\\\\" + "MDS650",
+        "private-input/8545a81f99f36eda523c" + "Users/mguer",
+        "private-input/d247e805a1908d0cd891" + "Users\\\\mguer",
+        "private-input/d0023e7cb6a981751ef5" + "MDS650",
+        "private-input/206ab07395a1306a361d" + "MDS650",
     )
     for relative, redaction in _redactions().items():
         path = REPO / relative

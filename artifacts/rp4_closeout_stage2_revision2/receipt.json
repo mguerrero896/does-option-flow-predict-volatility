@@ -1,0 +1,72 @@
+{
+  "schema": "rp4-closeout-stage2-revision2-receipt",
+  "status": "PASS",
+  "requested_adjustments": 4,
+  "model_fits": 0,
+  "new_bootstraps": 0,
+  "published": false,
+  "prior_figure_outputs_preserved": true,
+  "visual_review": {
+    "images_seen": 3,
+    "result": "Legible; no label collisions; session ticks, G and F verified."
+  },
+  "commands": [
+    {
+      "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\nuv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_closeout_figures_code/test_build.py artifacts/rp4_closeout_figures_code/test_additions.py -q -p no:cacheprovider\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_closeout_figures_code\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff format --check artifacts/rp4_closeout_figures_code\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync mypy --follow-imports=silent --ignore-missing-imports artifacts/rp4_closeout_figures_code/additions.py",
+      "result": {
+        "chunk_id": "d307b4",
+        "wall_time_seconds": 6.1203956,
+        "exit_code": 0,
+        "original_token_count": 43,
+        "output": ".............................                                            [100%]\r\nAll checks passed!\n4 files already formatted\nSuccess: no issues found in 1 source file\r\n"
+      }
+    },
+    {
+      "cmd": "$taskPaths = @('artifacts/rp4_closeout_figures/manifest.json','artifacts/rp4_closeout_figures_revision2/manifest.json')\n$taskCount = 0\nforeach ($taskPath in $taskPaths) { $taskManifest = Get-Content -LiteralPath $taskPath -Raw | ConvertFrom-Json -AsHashtable; foreach ($taskMap in @('source_sha256','code_sha256','artifacts_sha256')) { foreach ($taskPair in $taskManifest[$taskMap].GetEnumerator()) { if ((Get-FileHash -LiteralPath $taskPair.Key -Algorithm SHA256).Hash.ToLower() -ne $taskPair.Value) { throw ('Hash drift: ' + $taskPair.Key) }; $taskCount++ } } }\n@{status='PASS';hashes_verified=$taskCount;models_refit=0} | ConvertTo-Json\nGet-Content -LiteralPath 'artifacts/rp4_market_audit/manifest.json' -TotalCount 24",
+      "result": {
+        "chunk_id": "6f81c2",
+        "wall_time_seconds": 0.4218608,
+        "exit_code": 0,
+        "original_token_count": 273,
+        "output": "InvalidOperation: \r\nLine |\r\n   4 |  … foreach ($taskPair in $taskManifest[$taskMap].GetEnumerator()) { if ( …\r\n     |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | You cannot call a method on a null-valued expression.\r\n{\r\n  \"hashes_verified\": 63,\r\n  \"status\": \"PASS\",\r\n  \"models_refit\": 0\r\n}\r\n{\r\n  \"artifacts_sha256\": {\r\n    \"bar_event_windows.csv\": \"ae1f0c54f1ebaab8889c0aa840965ab2d48d946e484955cd9b9be38405d774cc\",\r\n    \"coverage_weekday.csv\": \"e347f76f648da1511eb54a56e853d2ab656b28388de5d0acff70090e95f314a6\",\r\n    \"expiry_daily.csv\": \"06809853d3e7b62d1342ee6d6779d86447b09c800f59397dd04f88ca160c235d\",\r\n    \"feature_daily.csv\": \"761ae9fee8f074581fd44910e8124bdbdacc6606ad6af215c5a9bee5c993d23e\",\r\n    \"sources.json\": \"629d89256015b5743614e7cf10e8b8bf9c29d2fc56b857b3ee073d1ce996b5f9\",\r\n    \"summary.json\": \"f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb\"\r\n  },\r\n  \"code_sha256\": \"e6a63a086d793dffc8ed98f4b5dce08b5c9e6240c82e64d4d15b40e875023c2b\",\r\n  \"only_new_outputs_written\": true,\r\n  \"source_count\": 149,\r\n  \"status\": \"COMPLETE\"\r\n}\r\n"
+      }
+    },
+    {
+      "cmd": "$ErrorActionPreference = 'Stop'\n$taskSpecs = @(@{path='artifacts/rp4_closeout_figures/manifest.json';maps=@('source_receipt_sha256','code_sha256','artifacts_sha256')},@{path='artifacts/rp4_closeout_figures_revision2/manifest.json';maps=@('source_sha256','code_sha256','artifacts_sha256')})\n$taskCount = 0\nforeach ($taskSpec in $taskSpecs) { $taskManifest = Get-Content -LiteralPath $taskSpec.path -Raw | ConvertFrom-Json -AsHashtable; foreach ($taskMap in $taskSpec.maps) { foreach ($taskPair in $taskManifest[$taskMap].GetEnumerator()) { if ((Get-FileHash -LiteralPath $taskPair.Key -Algorithm SHA256).Hash.ToLower() -ne $taskPair.Value) { throw ('Hash drift: ' + $taskPair.Key) }; $taskCount++ } } }\n@{status='PASS';hashes_verified=$taskCount;models_refit=0} | ConvertTo-Json",
+      "result": {
+        "chunk_id": "f8cd12",
+        "wall_time_seconds": 0.3989554,
+        "exit_code": 1,
+        "original_token_count": 65,
+        "output": "Get-FileHash: \r\nLine |\r\n   5 |  … tEnumerator()) { if ((Get-FileHash -LiteralPath $taskPair.Key -Algori …\r\n     |                                                    ~~~~~~~~~~~~~\r\n     | Cannot bind argument to parameter 'LiteralPath' because it is null.\r\n"
+      }
+    },
+    {
+      "cmd": "$ErrorActionPreference = 'Stop'\n$taskOld = Get-Content -LiteralPath 'artifacts/rp4_closeout_figures/manifest.json' -Raw | ConvertFrom-Json -AsHashtable\n$taskNew = Get-Content -LiteralPath 'artifacts/rp4_closeout_figures_revision2/manifest.json' -Raw | ConvertFrom-Json -AsHashtable\n$taskSources = Get-Content -LiteralPath 'artifacts/rp4_closeout_figures/sources.json' -Raw | ConvertFrom-Json -AsHashtable\nif ((Get-FileHash -LiteralPath 'artifacts/rp4_closeout_figures/sources.json' -Algorithm SHA256).Hash.ToLower() -ne $taskOld.source_receipt_sha256) { throw 'Source receipt drift' }\n$taskCount = 1\nforeach ($taskMap in @($taskOld.code_sha256,$taskOld.artifacts_sha256,$taskSources.input_sha256,$taskNew.source_sha256,$taskNew.code_sha256,$taskNew.artifacts_sha256)) { foreach ($taskPair in $taskMap.GetEnumerator()) { if ((Get-FileHash -LiteralPath $taskPair.Key -Algorithm SHA256).Hash.ToLower() -ne $taskPair.Value) { throw ('Hash drift: ' + $taskPair.Key) }; $taskCount++ } }\n@{status='PASS';hashes_verified=$taskCount;models_refit=0} | ConvertTo-Json",
+      "result": {
+        "chunk_id": "6dc286",
+        "wall_time_seconds": 0.3717673,
+        "exit_code": 0,
+        "original_token_count": 19,
+        "output": "{\r\n  \"hashes_verified\": 95,\r\n  \"models_refit\": 0,\r\n  \"status\": \"PASS\"\r\n}\r\n"
+      }
+    }
+  ],
+  "diagnostic_errors": "First ad-hoc hash command incorrectly treated a hash string as a map; its PASS line was not accepted. Final command checks the explicit source-receipt schema and exits on any error.",
+  "outputs_sha256": {
+    "artifacts/rp4_closeout_figures_code/additions.py": "0e85e3c908d50c5cb7afdd08766d6ad54226b8a46da616e522a48d6ffcd4260f",
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
+    "artifacts/rp4_closeout_figures_code/test_additions.py": "37c3ea14f745e45e2e73e795603978de57beba0a6cdac38cb833b7113053adbf",
+    "artifacts/rp4_closeout_figures_revision2/annotation_sources.json": "234499333d79ae4c5461aa1b6072e015af76a9baba3844eefef7cd4f6bd90d52",
+    "artifacts/rp4_closeout_figures_revision2/clipping_census.csv": "40cfeb38aa2cacfb6a93dc5baeba9db1861c04a1980cb93df0aaafb23937d461",
+    "artifacts/rp4_closeout_figures_revision2/manifest.json": "a7c6c8533f32acbae30bc34567e1306699255f6b84a3c2a898746c25613796c0",
+    "artifacts/rp4_closeout_figures_revision2/panel_metadata.json": "db3614f32c99159b1d9475d322106fa5d831acb5b4718e436c499dc62d5100f2",
+    "artifacts/rp4_market_audit/manifest.json": "f52c37e95f9ebe9961d2d42e1e6719ffbf823a0a7a0128fb5d029407d507219f",
+    "docs/figures/rp4/thesis_summary.png": "5de17e799480022ab48b3b0db2ebef6f3cc7e9cda73b2a4f7b5dde5c4f94b83f",
+    "docs/figures/rp4/thesis_summary.svg": "5eb8d21dcce001821cea1bed1ec7c73ba7ca098479c21e76489931b346353c9b",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.png": "f8c2e491ddd9bd014a7e93ad7d1e56057a2b78510c32ef7847d03dc9a4b6836a",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg": "705371d5e7cf8b859585527b82d1a444aeff58451610bda4c47f00f0000a842e",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "baa2191fc5a2a51d7ec1fd3ee1f06d3d1f9d532aae8aa6fac9cede193854e4b0",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "f16c4aca2380b78ebb4a354a8c4c76226c09b94f0f3f7b822b5d1c53c637c830"
+  }
+}

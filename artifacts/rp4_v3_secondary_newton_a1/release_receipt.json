@@ -1,0 +1,135 @@
+{
+  "stage": "V3_SECONDARY_NEWTON_CODE_TEST_RELEASE",
+  "status": "PINNED_BEFORE_EMPIRICAL_REFINEMENT",
+  "prepare": {
+    "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='2'\n$env:OMP_NUM_THREADS='2'\n$env:POLARS_MAX_THREADS='2'\n$env:MKL_NUM_THREADS='2'\n$env:NUMEXPR_NUM_THREADS='2'\n[System.Diagnostics.Process]::GetCurrentProcess().PriorityClass='BelowNormal'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_secondary_repair.jump_newton_runner --prepare-only --addendum artifacts/rp4_v3_secondary_newton_a1/addendum.json --expected-addendum-sha 529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa\nexit $LASTEXITCODE",
+    "chunk_id": "86b747",
+    "wall_time_seconds": 9.0312897,
+    "exit_code": 0,
+    "original_token_count": 35,
+    "output": "{\"status\": \"NEWTON_RELEASE_PINNED\", \"release_sha256\": \"721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74\", \"real_fits\": 0}\r\n"
+  },
+  "release_path": "private-input/f86d4101c0376c2e325e",
+  "release_sha256": "721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74",
+  "release": {
+    "RESEARCH_ONLY": true,
+    "addendum_path": "artifacts\\rp4_v3_secondary_newton_a1\\addendum.json",
+    "addendum_sha256": "529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa",
+    "capital_go": false,
+    "code_sha256": {
+      "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+      "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+      "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+      "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+      "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_secondary_repair/jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+      "artifacts/rp4_v3_secondary_repair/jump_newton.py": "65c62a7ef6b23bb8aac78e87a8f1d087017418430a16d0af6aa241721f80b675",
+      "artifacts/rp4_v3_secondary_repair/jump_newton_runner.py": "2c8e928da522567a928d8b9b1832c739dc43c2dfa5000c1349b6e22a5b5c6201",
+      "artifacts/rp4_v3_secondary_repair/jump_repair.py": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+      "artifacts/rp4_v3_secondary_repair/jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+      "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+      "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+    },
+    "first_release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+    "inventory_sha256": "f0ec76711a5122a61b6b330a2381fae525ea881fcdd46fc5e0d9f1be40d08ab3",
+    "iteration_budget_applies_to_each_new_solver_call_not_prior_preserved_attempt": true,
+    "original_inventory_sha256": "a7f0bd85aa2d817cfc7d1da7b463fc7c8751ee7e966b13fb662a63e403731c38",
+    "prior_attempts_preserved": true,
+    "qa_receipt_sha256": "48a6104c490b1ab10ac33b5779ec90b813a28abe2c4724324dd20b9df5a9f126",
+    "rules": {
+      "armijo": 0.0001,
+      "base_first_repair_release_sha256": "7565795ddd4938f4c84068b2c2bb30c01905092150fb78c56aefa7626ca46bed",
+      "gradient_equivalence_absolute_tolerance": 1e-10,
+      "max_halvings": 20,
+      "max_newton_steps": 8,
+      "mean_refits": false,
+      "mz_refits": false,
+      "objective_equivalence_relative_tolerance": 1e-10,
+      "objective_increase_tolerance": 1e-12,
+      "original_gradient_inf_tolerance": 1e-08,
+      "preserve_all_computed_components": true,
+      "quantile_refits": false,
+      "require_both_first_pass_windows_complete": true,
+      "require_separate_code_test_release_before_empirical_refinement": true,
+      "solver_total_maxiter": 1000,
+      "threads_total_max": 2
+    },
+    "schema_version": "rp4-v3-jump-newton-failed-only-release-v1",
+    "successful_components_refitted": 0,
+    "test_sha256": {
+      "artifacts/rp4_v3_secondary_repair/test_jump_newton.py": "37109eb83ca33fbf7edd02ea8635aa9b46de6df9d7870bde6607912ab8d76775",
+      "artifacts/rp4_v3_secondary_repair/test_jump_newton_runner.py": "a2873e51b9a66ed65a76c677e420f3dc0bfc31f484f39913414c8e68ddc97cd6"
+    },
+    "verified_first_inputs": {
+      "dependencies": {
+        "lightgbm": "4.7.0",
+        "numpy": "2.5.2",
+        "pandas": "3.0.5",
+        "psutil": "7.2.2",
+        "pyarrow": "25.0.1",
+        "scipy": "1.18.0",
+        "threadpoolctl": "3.6.0"
+      },
+      "lockfile_sha256": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+      "panel_sha256": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+      "python_version": "3.12.12 (main, Dec 17 2025, 21:10:14) [MSC v.1944 64 bit (AMD64)]"
+    }
+  },
+  "verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$rp4Newton='private-input/6b4b036daf2cde056f1c'\n$rp4Repo='private-input/0ec5f26c567f416b9513'\n$rp4Release=Get-Content -LiteralPath \"$rp4Newton/release.json\" -Raw | ConvertFrom-Json -AsHashtable\nif ((Get-FileHash -Algorithm SHA256 -LiteralPath \"$rp4Newton/release.json\").Hash.ToLowerInvariant() -ne '721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74') {throw 'RELEASE_HASH_DRIFT'}\nforeach($rp4Field in @('code_sha256','test_sha256')) { foreach($rp4Pair in $rp4Release[$rp4Field].GetEnumerator()) {if((Get-FileHash -Algorithm SHA256 -LiteralPath \"$rp4Repo/$($rp4Pair.Key)\").Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'SOURCE_DRIFT'} } }\nforeach($rp4Name in @('inventory','qa_receipt')) { if ((Get-FileHash -Algorithm SHA256 -LiteralPath \"$rp4Newton/$rp4Name.json\").Hash.ToLowerInvariant() -ne $rp4Release[($rp4Name+'_sha256')]) {throw 'INPUT_DRIFT'} }\n$rp4Inventory=Get-Content -LiteralPath \"$rp4Newton/inventory.json\" -Raw | ConvertFrom-Json -AsHashtable\n[pscustomobject]@{status='PASS';source_hashes_checked=($rp4Release.code_sha256.Count+$rp4Release.test_sha256.Count);inventory_keys=@($rp4Inventory.Keys);window_keys=@($rp4Inventory.windows.Keys);primary_keys=@($rp4Inventory.windows.primary.Keys);confirmation_keys=@($rp4Inventory.windows.confirmation.Keys);release_sha256='721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74';inventory_sha256=$rp4Release.inventory_sha256} | ConvertTo-Json -Depth 5",
+    "chunk_id": "89ec27",
+    "wall_time_seconds": 0.3918588,
+    "exit_code": 0,
+    "original_token_count": 179,
+    "output": "{\r\n  \"status\": \"PASS\",\r\n  \"source_hashes_checked\": 21,\r\n  \"inventory_keys\": [\r\n    \"first_release_sha256\",\r\n    \"schema_version\",\r\n    \"windows\"\r\n  ],\r\n  \"window_keys\": [\r\n    \"N_sessions\",\r\n    \"components\",\r\n    \"eligible_components\",\r\n    \"first_receipt_sha256\",\r\n    \"first_session_sha256\",\r\n    \"window\",\r\n    \"N_sessions\",\r\n    \"components\",\r\n    \"eligible_components\",\r\n    \"first_receipt_sha256\",\r\n    \"first_session_sha256\",\r\n    \"window\"\r\n  ],\r\n  \"primary_keys\": [\r\n    null\r\n  ],\r\n  \"confirmation_keys\": [\r\n    null\r\n  ],\r\n  \"release_sha256\": \"721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74\",\r\n  \"inventory_sha256\": \"f0ec76711a5122a61b6b330a2381fae525ea881fcdd46fc5e0d9f1be40d08ab3\"\r\n}\r\n"
+  },
+  "eligibility_census": [
+    {
+      "window": "primary",
+      "N_sessions": 419,
+      "eligible_components": 1,
+      "component_count": 2514,
+      "first_receipt_sha256": "61959786d4c972581af31ff307a44098eda2864ad76e6e0ddc46924bb008349b"
+    },
+    {
+      "window": "confirmation",
+      "N_sessions": 25,
+      "eligible_components": 0,
+      "component_count": 150,
+      "first_receipt_sha256": "d863038b27c6ddc767283fb6705669ac7203ce7f78e28981c20fa67142187bed"
+    }
+  ],
+  "qa_root_verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$rp4QaRoot='private-input/6b4b036daf2cde056f1c'\n$rp4Repo='private-input/0ec5f26c567f416b9513'\nforeach($rp4Name in @('qa_receipt.json','qa_newton_execution_receipt.json')) {\n$rp4Qa=Get-Content -LiteralPath \"$rp4QaRoot/$rp4Name\" -Raw | ConvertFrom-Json -AsHashtable\n$rp4Count=0\nforeach($rp4Pair in $rp4Qa.source_sha256.GetEnumerator()) { if ((Get-FileHash -Algorithm SHA256 -LiteralPath \"$rp4Repo/$($rp4Pair.Key)\").Hash.ToLowerInvariant() -ne $rp4Pair.Value) { throw 'QA_SOURCE_HASH_DRIFT' }; $rp4Count++ }\n[pscustomobject]@{file=$rp4Name;source_hashes_checked=$rp4Count;numeric_threads_max=$rp4Qa.numeric_threads_max;numeric_process_priority=$rp4Qa.numeric_process_priority;junit=$rp4Qa.junit;command_payload_keys=@($rp4Qa.commands[0].Keys);environment=$rp4Qa.environment} | ConvertTo-Json -Depth 8\n}\nforeach($rp4XmlName in @('qa_newton.junit.xml','qa_report_newton_execution.junit.xml')) {\n[xml]$rp4Xml=Get-Content -LiteralPath \"$rp4QaRoot/$rp4XmlName\" -Raw\n$rp4Suite=$rp4Xml.testsuites.testsuite\nif([int]$rp4Suite.failures -ne 0 -or [int]$rp4Suite.errors -ne 0 -or [int]$rp4Suite.skipped -ne 0) {throw 'QA_JUNIT_FAILED_OR_SKIPPED'}\n[pscustomobject]@{junit=$rp4XmlName;sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath \"$rp4QaRoot/$rp4XmlName\").Hash.ToLowerInvariant();tests=$rp4Suite.tests;failures=$rp4Suite.failures;errors=$rp4Suite.errors;skipped=$rp4Suite.skipped;timestamp=$rp4Suite.timestamp;seconds=$rp4Suite.time} | ConvertTo-Json -Compress\n}",
+    "chunk_id": "7d2d62",
+    "wall_time_seconds": 0.6388114,
+    "exit_code": 0,
+    "original_token_count": 738,
+    "output": "{\r\n  \"file\": \"qa_receipt.json\",\r\n  \"source_hashes_checked\": 21,\r\n  \"numeric_threads_max\": 2,\r\n  \"numeric_process_priority\": \"BELOW_NORMAL_PRIORITY_CLASS\",\r\n  \"junit\": {\r\n    \"path\": \"private-input/4f0cd8d61760f3d5d2da\",\r\n    \"sha256\": \"89895bbe5ee7d5d3ea4295f203730bfaf1aeb25cbbbee2c11383fa37216b2842\",\r\n    \"tests\": 19,\r\n    \"failures\": 0,\r\n    \"errors\": 0,\r\n    \"skipped\": 0,\r\n    \"time_seconds\": 1.115,\r\n    \"timestamp\": \"2026-09-08T06:32:31.532696+10:00\"\r\n  },\r\n  \"command_payload_keys\": [\r\n    \"kind\",\r\n    \"command\",\r\n    \"exit_code\",\r\n    \"stdout\",\r\n    \"tests\",\r\n    \"failures\",\r\n    \"errors\",\r\n    \"skipped\"\r\n  ],\r\n  \"environment\": {\r\n    \"UV_PROJECT_ENVIRONMENT\": \"private-input/4b06809c9ca2d51ba83b\",\r\n    \"PYTHONPATH\": \"private-input/6dcfa312bcd83d83c817\",\r\n    \"MYPYPATH\": \"private-input/6dcfa312bcd83d83c817\",\r\n    \"OPENBLAS_NUM_THREADS\": \"2\",\r\n    \"OMP_NUM_THREADS\": \"2\",\r\n    \"MKL_NUM_THREADS\": \"2\",\r\n    \"NUMEXPR_NUM_THREADS\": \"2\",\r\n    \"POLARS_MAX_THREADS\": \"2\"\r\n  }\r\n}\r\n{\r\n  \"file\": \"qa_newton_execution_receipt.json\",\r\n  \"source_hashes_checked\": 4,\r\n  \"numeric_threads_max\": 2,\r\n  \"numeric_process_priority\": \"BELOW_NORMAL_PRIORITY_CLASS\",\r\n  \"junit\": {\r\n    \"path\": \"private-input/fcc5228dea6d455f077b\",\r\n    \"sha256\": \"0ddb0cea0fe7214b4cfeee4141196f74f4f8dbe7ec6fc668385e557547fad898\",\r\n    \"tests\": 43,\r\n    \"failures\": 0,\r\n    \"errors\": 0,\r\n    \"skipped\": 0,\r\n    \"time_seconds\": 1.072,\r\n    \"timestamp\": \"2026-09-08T06:33:07.351737+10:00\"\r\n  },\r\n  \"command_payload_keys\": [\r\n    \"kind\",\r\n    \"command\",\r\n    \"exit_code\",\r\n    \"stdout\",\r\n    \"tests\",\r\n    \"failures\",\r\n    \"errors\",\r\n    \"skipped\"\r\n  ],\r\n  \"environment\": null\r\n}\r\n{\"junit\":\"qa_newton.junit.xml\",\"sha256\":\"89895bbe5ee7d5d3ea4295f203730bfaf1aeb25cbbbee2c11383fa37216b2842\",\"tests\":\"19\",\"failures\":\"0\",\"errors\":\"0\",\"skipped\":\"0\",\"timestamp\":\"2026-09-08T06:32:31.532696+10:00\",\"seconds\":\"1.115\"}\r\n{\"junit\":\"qa_report_newton_execution.junit.xml\",\"sha256\":\"0ddb0cea0fe7214b4cfeee4141196f74f4f8dbe7ec6fc668385e557547fad898\",\"tests\":\"43\",\"failures\":\"0\",\"errors\":\"0\",\"skipped\":\"0\",\"timestamp\":\"2026-09-08T06:33:07.351737+10:00\",\"seconds\":\"1.072\"}\r\n"
+  },
+  "qa_receipts": {
+    "solver": {
+      "path": "private-input/efc122e7df9f2cecff39",
+      "sha256": "48a6104c490b1ab10ac33b5779ec90b813a28abe2c4724324dd20b9df5a9f126",
+      "tests": 19
+    },
+    "report": {
+      "path": "private-input/4720b01000ed51e4a304",
+      "sha256": "42aa8288691c9c5f38651ad2c4f0be411af1ae4a5d6af99b177a29023565114c",
+      "tests": 43,
+      "typing_scope": "Initial mypy exit 1 preserved; final exit 0 disables only import-untyped for the two report generators because threadpoolctl has no installed stubs. No source changed."
+    }
+  },
+  "new_empirical_refinement_fits": 0,
+  "successful_components_to_refit": 0,
+  "primary_changed": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

@@ -1,0 +1,139 @@
+{
+  "stage": "V3_SECONDARY_NEWTON_CONFIRMATION_CLOSEOUT",
+  "status": "COMPLETE_ALL_COMPONENTS_REUSED_WITHOUT_REFIT",
+  "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='2'\n$env:OMP_NUM_THREADS='2'\n$env:POLARS_MAX_THREADS='2'\n$env:MKL_NUM_THREADS='2'\n$env:NUMEXPR_NUM_THREADS='2'\n[System.Diagnostics.Process]::GetCurrentProcess().PriorityClass='BelowNormal'\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_secondary_repair.jump_newton_runner --window confirmation --addendum artifacts/rp4_v3_secondary_newton_a1/addendum.json --expected-addendum-sha 529067473ff602d47e0466426ce2af2e0f525d1ac5e42b4fd4230e38d17c52fa\nexit $LASTEXITCODE",
+  "exit_code": 0,
+  "verification": {
+    "cmd": "$ErrorActionPreference='Stop'\n$rp4Root='private-input/0ec5f26c567f416b9513'\n$rp4Stage='private-input/595b28b5dd5bf7bb1198'\n$rp4Receipt=Get-Content -LiteralPath \"$rp4Stage/receipt.json\" -Raw | ConvertFrom-Json -AsHashtable\n$rp4Checked=0\nforeach($rp4Pair in $rp4Receipt.artifacts_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath $rp4Pair.Key -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'ARTIFACT_HASH_MISMATCH'}; $rp4Checked++ }\nforeach($rp4Pair in $rp4Receipt.code_sha256.GetEnumerator()) { if ((Get-FileHash -LiteralPath \"$rp4Root/$($rp4Pair.Key)\" -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pair.Value) {throw 'SOURCE_HASH_MISMATCH'}; $rp4Checked++ }\nif ((Get-FileHash -LiteralPath $rp4Receipt.log -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Receipt.log_sha256) {throw 'LOG_HASH_MISMATCH'}\nif($rp4Receipt.status -ne 'COMPLETE' -or $rp4Receipt.exit_code -ne 0) {throw 'INCOMPLETE_RECEIPT'}\n[pscustomobject]@{status='PASS';artifact_and_code_hashes_checked=$rp4Checked;log_hash_verified=$true;worker_exit_code=$rp4Receipt.exit_code;endpoint_scores_consulted=$false} | ConvertTo-Json -Compress",
+    "chunk_id": "3e19c1",
+    "wall_time_seconds": 0.3783836,
+    "exit_code": 0,
+    "original_token_count": 35,
+    "output": "{\"status\":\"PASS\",\"artifact_and_code_hashes_checked\":23,\"log_hash_verified\":true,\"worker_exit_code\":0,\"endpoint_scores_consulted\":false}\r\n"
+  },
+  "certification": {
+    "eligible_newton_components": 0,
+    "successful_components_refitted": 0,
+    "prior_attempts_preserved": true,
+    "gradient_diagnostics": [
+      {
+        "N_components": 25,
+        "candidate_gradient_max": 1.5913539889297248e-06,
+        "candidate_gradients_above_1e_minus8": 125,
+        "candidate_gradients_available": 125,
+        "candidate_gradients_missing_or_single_class": 0,
+        "gradient_threshold": 1e-08,
+        "new_certificate_required": false,
+        "provenance": "REUSED_FROZEN_V3",
+        "refit_gradient_max": 1.179985070995195e-06,
+        "refit_gradients_above_1e_minus8": 25,
+        "refit_gradients_available": 25,
+        "refit_gradients_missing_or_single_class": 0
+      },
+      {
+        "N_components": 50,
+        "candidate_gradient_max": 8.82471979585795e-09,
+        "candidate_gradients_above_1e_minus8": 0,
+        "candidate_gradients_available": 250,
+        "candidate_gradients_missing_or_single_class": 0,
+        "gradient_threshold": 1e-08,
+        "new_certificate_required": true,
+        "provenance": "NEW_MISSING_COMPONENT",
+        "refit_gradient_max": 3.6456437699943813e-09,
+        "refit_gradients_above_1e_minus8": 0,
+        "refit_gradients_available": 50,
+        "refit_gradients_missing_or_single_class": 0
+      }
+    ]
+  },
+  "scheduled_sessions": 25,
+  "component_counts": [
+    {
+      "N": 100,
+      "lineage": "REUSED_FIRST_REPAIR_SUCCESS",
+      "status": "COMPUTED"
+    },
+    {
+      "N": 50,
+      "lineage": "REUSED_ORIGINAL_V3",
+      "status": "COMPUTED"
+    }
+  ],
+  "resources": {
+    "arrow_cpu_threads": 2,
+    "arrow_io_threads": 1,
+    "parquet_use_threads": false,
+    "priority": "16384",
+    "process_id": 63552,
+    "threadpools": [
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      },
+      {
+        "internal_api": "openblas",
+        "num_threads": 2,
+        "user_api": "blas"
+      }
+    ],
+    "threads_total_max": 2
+  },
+  "private_stage_root": "private-input/595b28b5dd5bf7bb1198",
+  "artifacts_sha256": {
+    "component_manifest.json": "ff3f8109737b243e99984606db65c79a0e62d156cdcefedbe546be51da346836",
+    "fit_diagnostics.json": "476e3ed2e2a84a8c4ed5a00fb758607bfc084fe8ebad5ccf103104cf63dde324",
+    "receipt.json": "0abb395e75f9ec9f30e1eb3ee7fc362e75f80252775e5ebdd26d72456d5ec542",
+    "summary.json": "6fbd55318dcfb9486947b97fa734ca6016ff876151249431ba8badb338245dd3",
+    "summary_receipt.json": "59ec9b7f421f30baa4944c89766102b997a9dbc9d51e16b9d6e825aaeb1f5e0e"
+  },
+  "closed_worker_receipt": {
+    "artifacts_sha256": {
+      "private-input/1d42d49f7de42d277814": "ff3f8109737b243e99984606db65c79a0e62d156cdcefedbe546be51da346836",
+      "private-input/ca472b1d3f052735425b": "476e3ed2e2a84a8c4ed5a00fb758607bfc084fe8ebad5ccf103104cf63dde324",
+      "private-input/f6441b91dfa9c81b9b6a": "6fbd55318dcfb9486947b97fa734ca6016ff876151249431ba8badb338245dd3",
+      "private-input/a6963733a21538ab6004": "59ec9b7f421f30baa4944c89766102b997a9dbc9d51e16b9d6e825aaeb1f5e0e"
+    },
+    "binding": {
+      "endpoint": "jump",
+      "release_sha256": "721bcac42d45c88d0d7362dc560097433e12a5161f02ecb82d1c2991eae76b74",
+      "window": "confirmation"
+    },
+    "code_sha256": {
+      "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+      "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+      "artifacts/rp4_v2_code/execute.py": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+      "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+      "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+      "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_secondary_repair/jump_inventory.py": "538dbc70a09e1da3855767d9baaa90cab4e00ed5cd225e3b49019db8ba0577a1",
+      "artifacts/rp4_v3_secondary_repair/jump_newton.py": "65c62a7ef6b23bb8aac78e87a8f1d087017418430a16d0af6aa241721f80b675",
+      "artifacts/rp4_v3_secondary_repair/jump_newton_runner.py": "2c8e928da522567a928d8b9b1832c739dc43c2dfa5000c1349b6e22a5b5c6201",
+      "artifacts/rp4_v3_secondary_repair/jump_repair.py": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+      "artifacts/rp4_v3_secondary_repair/jump_runner.py": "461a79e06ef4932ef205fddaae2ade539010a5dbee2612f7eb8f284f3493eeb9",
+      "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+      "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+      "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+    },
+    "command": "private-input/40b9e584ac939ddac4b0",
+    "completed_at_utc": "2026-09-08T06:55:23.367332+10:00",
+    "elapsed_seconds": 14.068069199987804,
+    "exit_code": 0,
+    "log": "private-input/fa8529c3fcac79a6230c",
+    "log_sha256": "64a009a1226b0e6b69799eefd51756b19038d228f6038b02df46a8dc69b7d2aa",
+    "started_at_utc": "2026-09-08T06:55:09.298621+10:00",
+    "status": "COMPLETE",
+    "window": "confirmation"
+  },
+  "interpretation": "No confirmation component was eligible for numerical refinement. All 150 components and their forecasts are preserved from the first pass/original v3, with zero refits; this stage closes the combined provenance and summary.",
+  "primary_changed": false,
+  "quantile_changed": false,
+  "mz_changed": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

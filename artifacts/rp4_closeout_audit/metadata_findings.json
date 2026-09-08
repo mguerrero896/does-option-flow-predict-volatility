@@ -1,0 +1,12 @@
+{
+  "status": "PASS_METADATA_ONLY",
+  "sessions": 1332,
+  "binding_constants": 6,
+  "actual_embargo_min_minutes": 1090.0,
+  "cross_horizon_keys_training_metadata_exact": true,
+  "rv15_rv5_bit_masks_exact": true,
+  "rv30_bit_masks": "Not persisted: keys, training-session count, last date and target-end metadata compared instead.",
+  "model_fits": 0,
+  "new_p_values": 0,
+  "bootstrap_runs": 0
+}

@@ -1,0 +1,177 @@
+{
+  "schema": "rp4-cleanup-review-receipt-v1",
+  "status": "PASS_SCOPED_METADATA_AND_DOCUMENTATION_REVIEW",
+  "created_at_utc": "2026-09-07 22:18:06 UTC",
+  "working_directory_alias": "checkout_current",
+  "environment": {
+    "python_environment_alias": "existing_locked_python_environment",
+    "UV_PROJECT_ENVIRONMENT": "locally configured existing environment; not installed or changed",
+    "PYTHONPATH": "$repositoryRoot;$repositoryRoot/src;$repositoryRoot/scripts;$repositoryRoot/artifacts/rp4_code",
+    "OMP_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "RP4_ARTIFACTS_ROOT": "physical_artifacts_root",
+    "RP4_PRIMARY_REPOSITORY": "related_repository_01",
+    "RP4_ORIGINAL_REPOSITORY": "related_repository_02"
+  },
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -q -o addopts='' -p no:cacheprovider artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 0,
+      "stdout": ".....                                                                    [100%]\r\n5 passed in 0.25s\r\n",
+      "elapsed_seconds": 0.9271912
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "elapsed_seconds": 0.361511
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 0,
+      "stdout": "2 files already formatted\n",
+      "elapsed_seconds": 0.398947
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 0,
+      "stdout": "Success: no issues found in 2 source files\r\n",
+      "elapsed_seconds": 1.0117402
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_cleanup_review/inventory_review.py --verify-public",
+      "exit_code": 0,
+      "stdout_artifact": "artifacts/rp4_cleanup_review/verification_results.json",
+      "stdout_key": "public",
+      "elapsed_seconds": 0.4309859
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_cleanup_review/inventory_review.py --verify-licensed",
+      "exit_code": 0,
+      "stdout_artifact": "artifacts/rp4_cleanup_review/verification_results.json",
+      "stdout_key": "licensed",
+      "elapsed_seconds": 0.8422861
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_cleanup_review/inventory_review.py --inventory --physical-artifacts-root $env:RP4_ARTIFACTS_ROOT --related-repository $env:RP4_PRIMARY_REPOSITORY --related-repository $env:RP4_ORIGINAL_REPOSITORY",
+      "exit_code": 0,
+      "stdout_structured_artifact": "artifacts/rp4_cleanup_review/inventory.json",
+      "elapsed_seconds": 1.9140986
+    }
+  ],
+  "initial_qa_failures_preserved": [
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 1,
+      "stdout": "Warning: truncated output (original token count: 3538)\nTotal output lines: 228\n\nI001 [*] Import block is un-sorted or un-formatted\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:3:1\n   |\n 1 |   \"\"\"Read-only reference inventory and byte-custody checks; no model imports.\"\"\"\n 2 |\n 3 | / from __future__ import annotations\n 4 | |\n 5 | | import argparse\n 6 | | import csv\n 7 | | import datetime as dt\n 8 | | import hashlib\n 9 | | import json\n10 | | from pathlib import Path\n11 | | import re\n12 | | import subprocess\n13 | | from typing import Any\n   | |______________________^\n14 |\n15 |   ROOT = Path(__file__).resolve().parents[2]\n   |\nhelp: Organize imports\n\nE501 Line too long (102 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:17:101\n   |\n15 | ROOT = Path(__file__).resolve().parents[2]\n16 | PINS = {\n17 |     \"docs/rp4/RESULTADO_FINAL.md\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\",\n   |                                                                                                     ^^\n18 |     \"docs/rp4/data_and_execution_v1.md\": \"33f1ecc18aedc6ef0831bf237da4db4be0edf531a6421329b507bff82ef7f6dd\",\n19 |     \"docs/rp4/results_v2.md\": \"8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf\",\n   |\n\nE501 Line too long (108 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:18:101\n   |\n16 | PINS = {\n17 |     \"docs/rp4/RESULTADO_FINAL.md\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\",\n18 |     \"docs/rp4/data_and_execution_v1.md\": \"33f1ecc18aedc6ef0831bf237da4db4be0edf531a6421329b507bff82ef7f6dd\",\n   |                                                                                                     ^^^^^^^^\n19 |     \"docs/rp4/results_v2.md\": \"8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf\",\n20 |     \"docs/rp4/results_v3.md\": \"86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f\",\n   |\n\nE501 Line too long (107 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:21:101\n   |\n19 |     \"docs/rp4/results_v2.md\": \"8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf\",\n20 |     \"docs/rp4/results_v3.md\": \"86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f\",\n21 |     \"docs/rp4/results_v3_revision2.md\": \"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\",\n   |                                                                                                     ^^^^^^^\n22 |     \"artifacts/rp4_v3_a1_empty_window/specification.json\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\",\n23 |     \"artifacts/rp4_v3_a2/evaluation_release.json\": \"5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb\",\n   |\n\nE501 Line too long (126 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:22:101\n   |\n20 |     \"docs/rp4/results_v3.md\": \"86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f\",\n21 |     \"docs/rp4/results_v3_revision2.md\": \"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\",\n22 |     \"artifacts/rp4_v3_a1_empty_window/specification.json\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\",\n   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n23 |     \"artifacts/rp4_v3_a2/evaluation_release.json\": \"5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb\",\n24 |     \"artifacts/rp4_v3_b2/receipt.json\": \"60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af\",\n   |\n\nE501 Line too long (118 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:23:101\n   |\n21 |     \"docs/rp4/results_v3_revision2.md\": \"05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e\",\n22 |     \"artifacts/rp4_v3_a1_empty_window/specification.json\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\",\n23 |     \"artifacts/rp4_v3_a2/evaluation_release.json\": \"5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb\",\n   |                                                                                                     ^^^^^^^^^^^^^^^^^^\n24 |     \"artifacts/rp4_v3_b2/receipt.json\": \"60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af\",\n25 |     \"artifacts/rp4_v3_b3/receipt.json\": \"698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635\",\n   |\n\nE501 Line too long (107 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:24:101\n   |\n22 |     \"artifacts/rp4_v3_a1_empty_window/specification.json\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\",\n23 |     \"artifacts/rp4_v3_a2/evaluation_release.json\": \"5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb\",\n24 |     \"artifacts/rp4_v3_b2/receipt.json\": \"60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af\",\n   |                                                                                                     ^^^^^^^\n25 |     \"artifacts/rp4_v3_b3/receipt.json\": \"698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635\",\n26 |     \"artifacts/rp4_v4_a…1038 tokens truncated…rp4_v4_b2_rv5/receipt.json\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\",\n   |\n\nE501 Line too long (112 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:30:101\n   |\n28 |     \"artifacts/rp4_v4_a2/evaluation_release_rv5.json\": \"efeb22b33d992d453a4d766c93b5434e4f3f73271f350b50268a8289c365b08d\",\n29 |     \"artifacts/rp4_v4_b2_rv15/receipt.json\": \"d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93\",\n30 |     \"artifacts/rp4_v4_b3_rv15/receipt.json\": \"b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb\",\n   |                                                                                                     ^^^^^^^^^^^^\n31 |     \"artifacts/rp4_v4_b2_rv5/receipt.json\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\",\n32 |     \"artifacts/rp4_v4_b3_rv5/receipt.json\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\",\n   |\n\nE501 Line too long (111 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:31:101\n   |\n29 |     \"artifacts/rp4_v4_b2_rv15/receipt.json\": \"d67cb9611e4630accba768b1a25bfbb04768702d4c2da8e78a17ab63cc5a8b93\",\n30 |     \"artifacts/rp4_v4_b3_rv15/receipt.json\": \"b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb\",\n31 |     \"artifacts/rp4_v4_b2_rv5/receipt.json\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\",\n   |                                                                                                     ^^^^^^^^^^^\n32 |     \"artifacts/rp4_v4_b3_rv5/receipt.json\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\",\n33 |     \"artifacts/rp4_v4_b4/timing.csv\": \"b23fcdcc6ffcabb088176e678a95829ea255b9db148d47fe448958112658e483\",\n   |\n\nE501 Line too long (111 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:32:101\n   |\n30 |     \"artifacts/rp4_v4_b3_rv15/receipt.json\": \"b8b5571b8d251ffcb0a458f2404b363bb2fc519402c880c4ccad6e6fa3108ecb\",\n31 |     \"artifacts/rp4_v4_b2_rv5/receipt.json\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\",\n32 |     \"artifacts/rp4_v4_b3_rv5/receipt.json\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\",\n   |                                                                                                     ^^^^^^^^^^^\n33 |     \"artifacts/rp4_v4_b4/timing.csv\": \"b23fcdcc6ffcabb088176e678a95829ea255b9db148d47fe448958112658e483\",\n34 |     \"artifacts/rp4_closeout_audit/b2_coefficient_summary.csv\": \"150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be\",\n   |\n\nE501 Line too long (105 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:33:101\n   |\n31 |     \"artifacts/rp4_v4_b2_rv5/receipt.json\": \"737ca5daa6f9d06cc212dee2449944fae87aba8ca51e2940a313c22f2b612365\",\n32 |     \"artifacts/rp4_v4_b3_rv5/receipt.json\": \"556ef30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\",\n33 |     \"artifacts/rp4_v4_b4/timing.csv\": \"b23fcdcc6ffcabb088176e678a95829ea255b9db148d47fe448958112658e483\",\n   |                                                                                                     ^^^^^\n34 |     \"artifacts/rp4_closeout_audit/b2_coefficient_summary.csv\": \"150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be\",\n35 |     \"artifacts/rp4_closeout_audit/b2_presence_coefficient_summary.csv\": \"9d4fc01b00af2ea25ab34b44276c481cf963be83edcc8f4b31ad114e1e6ab…\n   |\n\nE501 Line too long (130 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:34:101\n   |\n32 | …f30116e9756ac553116fdd3bd48b96f5b4543a39d0ec63f4a5cc0634a769\",\n33 | …fcabb088176e678a95829ea255b9db148d47fe448958112658e483\",\n34 | …summary.csv\": \"150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be\",\n   |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n35 | …fficient_summary.csv\": \"9d4fc01b00af2ea25ab34b44276c481cf963be83edcc8f4b31ad114e1e6ab5e7\",\n36 | …ceab4e6658357f089f2b9aa159d61d0\",\n   |\n\nE501 Line too long (139 > 100)\n  --> artifacts\\rp4_cleanup_review\\inventory_review.py:35:101\n   |\n33 | …b088176e678a95829ea255b9db148d47fe448958112658e483\",\n34 | …ary.csv\": \"150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be\",\n35 | …ient_summary.csv\": \"9d4fc01b00af2ea25ab34b44276c481cf963be83edcc8f4b31ad114e1e6ab5e7\",\n   |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n36 | …4e6658357f089f2b9aa159d61d0\",\n37 | …\n   |\n\nI001 [*] Import block is un-sorted or un-formatted\n  --> artifacts\\rp4_cleanup_review\\test_inventory_review.py:3:1\n   |\n 1 |   \"\"\"Synthetic metadata fixtures only; no scientific runtime imports.\"\"\"\n 2 |\n 3 | / from __future__ import annotations\n 4 | |\n 5 | | import json\n 6 | | from pathlib import Path\n 7 | |\n 8 | | import pytest\n 9 | |\n10 | | from artifacts.rp4_cleanup_review import inventory_review as audit\n   | |__________________________________________________________________^\n   |\nhelp: Organize imports\n\nFound 19 errors.\n[*] 2 fixable with the `--fix` option.\n",
+      "reason": "Imports and long pin literals in new documentation verifier; fixed without scientific changes."
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_cleanup_review/inventory_review.py artifacts/rp4_cleanup_review/test_inventory_review.py",
+      "exit_code": 1,
+      "stdout": "artifacts\\rp4_cleanup_review\\inventory_review.py:88: error: Need type annotation for \"branches\" (hint: \"branches: list[<type>] = ...\")  [var-annotated]\r\nartifacts\\rp4_cleanup_review\\inventory_review.py:110: error: Need type annotation for \"worktrees\" (hint: \"worktrees: list[<type>] = ...\")  [var-annotated]\r\nartifacts\\rp4_cleanup_review\\inventory_review.py:133: error: Need type annotation for \"scanned\" (hint: \"scanned: list[<type>] = ...\")  [var-annotated]\r\nFound 3 errors in 1 file (checked 2 source files)\r\n",
+      "reason": "Three local container annotations absent; added before final QA."
+    }
+  ],
+  "inspection_issue_preserved": {
+    "exit_code": 1,
+    "stdout": "ParserError: \r\nLine |\r\n   3 |  … h $reviewPath -Algorithm SHA256).Hash.ToLowerInvariant()} } | Convert …\r\n     |                                                                ~\r\n     | An empty pipe element is not allowed.\r\n",
+    "resolution": "PowerShell metadata enumeration corrected by collecting the array before the pipeline."
+  },
+  "checks": {
+    "synthetic_tests_passed": 5,
+    "public_byte_custody_checks": 140,
+    "licensed_byte_custody_checks": 192,
+    "scanned_text_files": 1803,
+    "scanned_json_files": 726,
+    "physical_directories": 8,
+    "current_clone_worktrees": 1,
+    "related_worktrees_unique": 45,
+    "related_shared_git_directories": 1,
+    "global_reference_graph_complete": false,
+    "orphan_confirmed_count": 0,
+    "deletion_authorized_count": 0
+  },
+  "artifact_sha256": {
+    "docs/rp4/RUNBOOK.md": "d030e7301defaedda3f1e723f564460f32ab0b4fa166d7beb4b09be74d09dbbb",
+    "docs/rp4/CLEANUP_REVIEW.md": "30d62c7faaef2c03538a0eb40b162c11c7953bbfbe8a282f8387e08fe7fb5a88",
+    "artifacts/rp4_cleanup_review/inventory.json": "16632ca4388e075f17e0a88f8efb7a30fbf207ec06baf7a7c7202551644ff531",
+    "artifacts/rp4_cleanup_review/inventory_review.py": "6c0dcbc3930f4c3fd8066ad61232cf1cd67dd2e1ac3b001bf928f329323d8f61",
+    "artifacts/rp4_cleanup_review/test_inventory_review.py": "5022d19c79280ad8f7f8e5c906a31958dcf1587c7001fec97c33c76a8798990b",
+    "artifacts/rp4_cleanup_review/verification_results.json": "2b25807021d0f2da8ce559c99c0ad2f93b6ca9d8d67920a57ac5fb13af6038cf",
+    "artifacts/rp4_cleanup_review/.gitignore": "9d1f88839e24407937c0d6cb5c6df5a81a283524b18c668421d401625ba7223f"
+  },
+  "private_locator": {
+    "alias": "excluded_local_path_locator",
+    "sha256": "882343dfacc02329774d094dc54aef30c34c5beca45b1613173a0d3305500957",
+    "public": false
+  },
+  "boundaries": {
+    "model_fits": 0,
+    "inference_runs": 0,
+    "bootstrap_runs": 0,
+    "downloads": 0,
+    "files_deleted": 0,
+    "git_mutations": 0,
+    "published": false,
+    "frozen_artifacts_modified": false,
+    "raw_data_contents_read": false,
+    "physical_directory_contents_read": false,
+    "full_replay_executed": false
+  },
+  "RESEARCH_ONLY": true,
+  "capital_go": false,
+  "source_snapshot_at_utc": "2026-09-07T22:12:43.808868+00:00",
+  "documentation_checks": {
+    "relative_links": {
+      "command": "$reviewDocs = @('docs/rp4/RUNBOOK.md','docs/rp4/CLEANUP_REVIEW.md')\n$reviewLinks = @(foreach ($reviewDoc in $reviewDocs) { $reviewText = Get-Content -LiteralPath $reviewDoc -Raw; foreach ($reviewMatch in [regex]::Matches($reviewText,'\\[[^\\]]+\\]\\(([^)]+)\\)')) { $reviewTarget=$reviewMatch.Groups[1].Value.Split('#')[0]; if ($reviewTarget -notmatch '^[a-z]+:') { $reviewAbsolute=[IO.Path]::GetFullPath((Join-Path (Split-Path $reviewDoc) $reviewTarget)); [PSCustomObject]@{document=$reviewDoc; target=$reviewTarget; exists=(Test-Path -LiteralPath $reviewAbsolute)} } } })\n$reviewLinks | ConvertTo-Json\nif (@($reviewLinks | Where-Object { -not $_.exists }).Count -gt 0) { exit 1 }",
+      "exit_code": 0,
+      "links_checked": 26,
+      "missing": 0
+    },
+    "public_prose_and_paths": {
+      "command_alias": "read_only_literal_pattern_scan",
+      "exit_code": 0,
+      "stdout": "PASS_NO_FORBIDDEN_PROSE_OR_PRIVATE_PATHS\r\n",
+      "raw_predicate_not_reproduced_in_public_record": true
+    },
+    "private_locator_excluded": {
+      "command": "git check-ignore -v artifacts/rp4_cleanup_review/private_paths.json",
+      "exit_code": 0,
+      "stdout": "artifacts/rp4_cleanup_review/.gitignore:1:private_paths.json\tartifacts/rp4_cleanup_review/private_paths.json\n"
+    },
+    "coefficient_csv_metadata": {
+      "command": "$reviewTables = @('artifacts/rp4_closeout_audit/b2_coefficient_summary.csv','artifacts/rp4_closeout_audit/b2_presence_coefficient_summary.csv')\n$reviewCounts = @(foreach ($reviewTable in $reviewTables) { $reviewRows = @(Import-Csv -LiteralPath $reviewTable); [PSCustomObject]@{path=$reviewTable;rows=$reviewRows.Count;horizons=@($reviewRows.horizon_minutes | Sort-Object -Unique);windows=@($reviewRows.window | Sort-Object -Unique)} })\n$reviewCounts | ConvertTo-Json",
+      "exit_code": 0,
+      "stdout": [
+        {
+          "path": "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv",
+          "rows": 1518,
+          "horizons": [
+            "15",
+            "30",
+            "5"
+          ],
+          "windows": [
+            "confirmation",
+            "primary"
+          ]
+        },
+        {
+          "path": "artifacts/rp4_closeout_audit/b2_presence_coefficient_summary.csv",
+          "rows": 654,
+          "horizons": [
+            "15",
+            "30",
+            "5"
+          ],
+          "windows": [
+            "confirmation",
+            "primary"
+          ]
+        }
+      ]
+    }
+  }
+}

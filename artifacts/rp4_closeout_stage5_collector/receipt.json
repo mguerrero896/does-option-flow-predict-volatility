@@ -1,0 +1,46 @@
+{
+  "schema": "rp4-closeout-stage5-disabled-collector-receipt-v1",
+  "status": "PASS_CREATED_DISABLED_NOT_LIVE_COLLECTION",
+  "public_manifest_sha256": "f8ba2321a70a466408ab60203ea025be6b74ad806f2a35b3f77010da620b4e09",
+  "public_receipt_sha256": "eb385a82a8c4f3c4a6aa06e5bdd5cbd0c42a5c7108258646dd925ac172bb9fc5",
+  "main_review": {
+    "command_context": "Existing configured Python environment; synthetic tests prohibit real network.",
+    "commands": [
+      "uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_daily_collector_code/test_collector.py -q -p no:cacheprovider --basetemp artifacts/rp4_daily_collector_setup/test_tmp/main_review",
+      "uv run --offline --frozen --no-sync ruff check artifacts/rp4_daily_collector_code",
+      "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_daily_collector_code",
+      "uv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent --ignore-missing-imports artifacts/rp4_daily_collector_code/collector.py"
+    ],
+    "result": {
+      "chunk_id": "1a04d7",
+      "wall_time_seconds": 4.5865860000000005,
+      "exit_code": 0,
+      "original_token_count": 43,
+      "output": "..........                                                               [100%]\r\nAll checks passed!\n2 files already formatted\nSuccess: no issues found in 1 source file\r\n"
+    }
+  },
+  "independent_native_and_hash_check": {
+    "cmd": "$ErrorActionPreference='Stop'\n$manifest=Get-Content -Raw artifacts/rp4_daily_collector_setup/public_manifest.json | ConvertFrom-Json -AsHashtable\n$count=0\nforeach ($name in @('outputs_sha256','source_pins_sha256')) { foreach ($entry in $manifest[$name].GetEnumerator()) { $actual=(Get-FileHash -LiteralPath $entry.Key -Algorithm SHA256).Hash.ToLowerInvariant(); if ($actual -ne $entry.Value) { throw \"COLLECTOR_HASH_MISMATCH:$($entry.Key)\" }; $count++ } }\nforeach ($script in @('artifacts/rp4_daily_collector_code/launch.ps1','artifacts/rp4_daily_collector_code/register_disabled.ps1')) { $parseTokens=$null; $parseErrors=$null; [void][System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path -LiteralPath $script),[ref]$parseTokens,[ref]$parseErrors); if ($parseErrors.Count -ne 0) { throw 'POWERSHELL_PARSE_FAILED' } }\n$task=Get-ScheduledTask -TaskName 'OptionsVolatility-Daily-Collection'\nif ($task.State -ne 'Disabled' -or $task.Settings.Enabled -or $task.Settings.AllowDemandStart -or @($task.Triggers | Where-Object Enabled).Count -ne 0) { throw 'TASK_NOT_DISABLED' }\nif (Test-Path -LiteralPath 'private-input/21d33a47d00d81c7f6df') { throw 'UNEXPECTED_DATA_ROOT' }\n[pscustomobject]@{Status='PASS';HashChecks=$count;PowerShellParsed=2;TaskState=[string]$task.State;TaskEnabled=$task.Settings.Enabled;TriggerEnabled=$task.Triggers[0].Enabled;AllowDemandStart=$task.Settings.AllowDemandStart;DataRootExists=$false} | ConvertTo-Json",
+    "result": {
+      "chunk_id": "a224c1",
+      "wall_time_seconds": 1.3576019,
+      "exit_code": 0,
+      "original_token_count": 53,
+      "output": "{\r\n  \"Status\": \"PASS\",\r\n  \"HashChecks\": 23,\r\n  \"PowerShellParsed\": 2,\r\n  \"TaskState\": \"Disabled\",\r\n  \"TaskEnabled\": false,\r\n  \"TriggerEnabled\": false,\r\n  \"AllowDemandStart\": false,\r\n  \"DataRootExists\": false\r\n}\r\n"
+    }
+  },
+  "scope": {
+    "task_and_trigger_enabled": false,
+    "network_collection": 0,
+    "provider_credential_reads": 0,
+    "target_reads": 0,
+    "new_model_fits": 0,
+    "new_inference": 0,
+    "cleanup_deletions": 0
+  },
+  "limits": [
+    "NO VERIFICABLE: live provider entitlement, credentials and download operation were not exercised.",
+    "InteractiveToken requires a logged-in user.",
+    "The task remains disabled; activation is reserved to Miguel."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "status": "PASS_DESCRIPTIVE_EXTRACTION",
+  "windows": [
+    {
+      "horizon_minutes": 30,
+      "window": "primary",
+      "N_sessions": 419,
+      "N_origins": 160832
+    },
+    {
+      "horizon_minutes": 30,
+      "window": "confirmation",
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    {
+      "horizon_minutes": 15,
+      "window": "primary",
+      "N_sessions": 419,
+      "N_origins": 160832
+    },
+    {
+      "horizon_minutes": 15,
+      "window": "confirmation",
+      "N_sessions": 25,
+      "N_origins": 9750
+    },
+    {
+      "horizon_minutes": 5,
+      "window": "primary",
+      "N_sessions": 419,
+      "N_origins": 160832
+    },
+    {
+      "horizon_minutes": 5,
+      "window": "confirmation",
+      "N_sessions": 25,
+      "N_origins": 9750
+    }
+  ],
+  "coefficient_rows": 336996,
+  "coefficient_summary_rows": 1518,
+  "forecast_asset_session_family_units": 15984,
+  "stored_session_qlike_comparisons": 7992,
+  "max_session_qlike_absolute_difference": 6.661338147750939e-16,
+  "model_fits": 0,
+  "new_p_values": 0,
+  "bootstrap_runs": 0,
+  "raw_tape_reads": 0,
+  "threads_max": 2,
+  "elapsed_seconds": 23.658884699994815,
+  "coefficient_semantics": "Coefficient on train-only centered/population-SD-scaled, clipped [-5,5] pointwise transformed input. No restandardization after clipping. Log-target mean fit before Duan smear and nonlinear output bounds. Dropped column 0 means no contribution in that fitted representation, not estimated null effect.",
+  "presence_semantics": "presence:<exact raw column> indicates finiteness before train-only median imputation; it is not the raw column slope.",
+  "intraday_semantics": "First market hour origin<60; first observed hour35<=origin<95. Registered last_hour is origin>=300, not the final market hour origin>=330.",
+  "inference_limit": "Post-hoc descriptive strata and associations; no ablations, causal interpretation, new p-values or rescue of the registered primary decision."
+}

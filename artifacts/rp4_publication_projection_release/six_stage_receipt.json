@@ -1,0 +1,71 @@
+{
+  "status": "LOCAL_SIX_STAGE_PREPARATION_VERIFIED",
+  "scope": "Archived six-stage state before a separately recorded seventh editorial commit; not a claim about the current branch tip.",
+  "contract": "NEW_MATERIAL_ONLY",
+  "branch": "rp4/walkforward-v1-v4",
+  "base_commit_sha1": "6f219d436018a5b0f239aadd801ec3e8e70877bf",
+  "six_stage_tip_sha1": "8e8348b45ace3f92e2f826740403cedadc99c280",
+  "six_stage_tree_sha1": "81b1dfc356b0d5e57d80fb8c5a0f32ef23936c45",
+  "new_linear_commits": 6,
+  "inherited_commits": 77,
+  "source_release_receipt_sha256": "e88e878eb60b932a707f55ef40de8b4c53002c1e3da24e9481adf6a1bc8b9c6a",
+  "source_producer_sha256": "30b650e6fd9b1a70e2eb7b6944b4c4964484a4e0d0129e58639f706196109688",
+  "source_output_log_sha256": "579e8dd9493f110d95b8c6faa35ba7b2e18342b91046726ae6ff9aa1b088d240",
+  "source_output_log_kind": "verbatim_join_of_returned_process_stdout_chunks",
+  "exit_code": 0,
+  "snapshots": [
+    {
+      "stage": "v1",
+      "source_commit_sha1": "cf26fc3b5d295ea9f2a2f9a6a6af75c023e1a23c",
+      "public_commit_sha1": "859aa655c2c65b348618d80b747f03e031a09eed",
+      "snapshot_manifest_sha256": "1a0a452c1f2ab30657045a865f83808c392602dd96ded657757ed2bfca3da99b"
+    },
+    {
+      "stage": "v2",
+      "source_commit_sha1": "89499f8a06d5e4c3f2abbea917a3cfb738ea6775",
+      "public_commit_sha1": "2c0c2f936c6fb7bd0054a0725b78786f9c437892",
+      "snapshot_manifest_sha256": "381edbea816f8fd9a5f67e7d7b79059f8ed113956b88f807269f93517f57dd34"
+    },
+    {
+      "stage": "v3",
+      "source_commit_sha1": "25c6ec7c73ae6efa9045783e3b9821c945fe827e",
+      "public_commit_sha1": "abb554ec2d7b2bb6ae6e25f6dec4f8e5fbb48da3",
+      "snapshot_manifest_sha256": "b10b566d30900f962f10955cf918807939a705be8b28848432a6635c66471b1d"
+    },
+    {
+      "stage": "v4",
+      "source_commit_sha1": "0d5db0ea33d2bb072499506a5a2b51aac5f3023a",
+      "public_commit_sha1": "63664481c2102faff9ab5a4f71790e8e569555ae",
+      "snapshot_manifest_sha256": "ccc75cf4060a7d67d412026f001cb4978fa8d7761c42c469dfaa9c1354a29ac5"
+    },
+    {
+      "stage": "closeout",
+      "source_commit_sha1": "b795152eb3989f09aac354542f51881ee471871f",
+      "public_commit_sha1": "f6fb3de9cc88a0b8b49edc97e394d1deb84eab17",
+      "snapshot_manifest_sha256": "643a421315059dd47e4b8c135b7dfe7f493c1c6a5cc3df4c61446cb2eb153b8c"
+    },
+    {
+      "stage": "stage5",
+      "source_commit_sha1": "38eacaa606be7b84b4f59baee6d66a18dc9a1e30",
+      "public_commit_sha1": "8e8348b45ace3f92e2f826740403cedadc99c280",
+      "snapshot_manifest_sha256": "458c2ba8944dbfc22f022c421b4f0b5367ff00026fb28d02dc8438f7ec16aa95"
+    }
+  ],
+  "qa": {
+    "projection_tests_passed": 21,
+    "focused_public_tests_passed": 12,
+    "ruff_exit_code": 0,
+    "mypy_exit_code": 0,
+    "canonical_regenerations_exit_zero": 6,
+    "mirror_scope": "PASS_EXACT_PREPARED_TREE_PATHS",
+    "focused_junit_sha256": "baf4b5cd694ae493d74822d3386f7c4065bc697a26da30dd080bb885bdd7f289",
+    "temporary_focused_outputs_retained": false,
+    "historical_technical_paths_identical": 126,
+    "changed_paths_against_base": 383
+  },
+  "remote_writes": 0,
+  "checkout_operations": 0,
+  "model_fits": 0,
+  "bootstrap_runs": 0,
+  "cold_replay": "NO VERIFICABLE from this public copy alone without original authorized inputs; focused checks do not constitute full CI."
+}

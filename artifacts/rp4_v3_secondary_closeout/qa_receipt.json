@@ -1,0 +1,65 @@
+{
+  "stage": "RP4_V3_REVISION2_REPORT_GENERATOR_ONLY",
+  "status": "PASS_FOCUSED_QA_REAL_REPORT_NOT_GENERATED",
+  "model_fits": 0,
+  "new_jump_summaries_read": 0,
+  "new_report_generated": false,
+  "mz_audit_reruns": 0,
+  "new_inference_calculations": 0,
+  "frozen_artifacts_changed": false,
+  "v4_changed": false,
+  "git_commits_by_this_agent": 0,
+  "source_sha256": {
+    "report_revision2.py": "e4d4d9ed795334f3c4128539fb6fd9ce614efac98e210729f945600c9f5889f2",
+    "test_report_revision2.py": "ab1314621b003001d813309586749f30e2df1af751220a61f36e304dd5af755c",
+    "qa_tests.xml": "14c0026adc207db4bfb8a4878dc32f3b3a8026fea50f4447334bb7d1c779a1b1"
+  },
+  "qa": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -q -o addopts='' artifacts/rp4_v3_secondary_closeout/test_report_revision2.py --junitxml=artifacts/rp4_v3_secondary_closeout/qa_tests.xml",
+      "exit_code": 0,
+      "tests": 32,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.22
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_v3_secondary_closeout/report_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_revision2.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff format --check artifacts/rp4_v3_secondary_closeout/report_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_revision2.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m mypy --explicit-package-bases --follow-imports=silent --ignore-missing-imports artifacts/rp4_v3_secondary_closeout/report_revision2.py artifacts/rp4_v3_secondary_closeout/test_report_revision2.py",
+      "exit_code": 0,
+      "modules": 2
+    }
+  ],
+  "frozen_source_preflight": {
+    "command": "uv run --offline --frozen --no-sync python -B -c 'import hashlib,json; from artifacts.rp4_v3_secondary_closeout import report_revision2 as r; pins={}; [r.verified(r.ROOT / p,h,pins) for p,h in r.FROZEN_PINS.items()]; originals={w:r.read_json(r.ROOT / (\"artifacts/rp4_v3_\"+s+\"/summary.json\")) for w,s in ((\"primary\",\"b2\"),(\"confirmation\",\"b3\"))}; block=r.primary_block((r.ROOT / \"docs/rp4/results_v3_revision1.md\").read_bytes()); r.verify_primary_table(block,originals); print(json.dumps({\"frozen_pins_verified\":len(pins),\"primary_rows\":8,\"primary_block_sha256\":hashlib.sha256(block).hexdigest(),\"new_jump_summaries_read\":0,\"new_report_generated\":False,\"model_fits\":0}))'",
+    "exit_code": 0,
+    "frozen_pins_verified": 12,
+    "primary_rows": 8,
+    "primary_block_sha256": "3812b6a1a881c1ed06dc17f84fc47971d44452c19b4d21a0e3ca4c8af7f0e921"
+  },
+  "draft_diagnostics_resolved": {
+    "initial_ruff_exit_code": 1,
+    "initial_ruff_issue": "E501 formatting of literal table and hash pins",
+    "initial_mypy_exit_code": 1,
+    "initial_mypy_issues": 5,
+    "resolution": "Local variable types and helper re-export clarified; literals formatted without changing bytes; focused QA repeated successfully. No numerical methodology was changed."
+  },
+  "resource_environment": {
+    "UV_PROJECT_ENVIRONMENT": "private-input/4b06809c9ca2d51ba83b",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "POLARS_MAX_THREADS": "1"
+  },
+  "skills_used": "Model Evaluator: identical primary evidence and separate reporting of unavailable metrics; no new empirical analysis",
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

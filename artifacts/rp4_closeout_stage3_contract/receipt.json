@@ -1,0 +1,27 @@
+{
+  "schema": "rp4-closeout-stage3-contract-receipt-v2",
+  "status": "PASS",
+  "scope": "Explicit reduced publication contract; existing public history preserved; no remote execution.",
+  "previous_precheck_commit": "128e26f",
+  "command_context": "Commands executed in the existing checkout and already configured Python environment; machine-specific environment values are omitted.",
+  "command": "$ErrorActionPreference='Stop'\nuv run --offline --frozen --no-sync ruff format scripts/generate_canonical_state.py tests/contract/test_canonical_state_current.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync python -B scripts/generate_canonical_state.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync python -B -m pytest tests/contract/test_canonical_state_current.py tests/contract/test_coverage_floor_is_stated_once.py -q -p no:cacheprovider\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check scripts/generate_canonical_state.py tests/contract/test_canonical_state_current.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff format --check scripts/generate_canonical_state.py tests/contract/test_canonical_state_current.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync mypy --follow-imports=silent scripts/generate_canonical_state.py",
+  "result": {
+    "chunk_id": "823b04",
+    "wall_time_seconds": 2.0320494,
+    "exit_code": 0,
+    "original_token_count": 65,
+    "output": "2 files left unchanged\n[state] wrote CANONICAL_STATE.json + STATUS.md (at commit c4d4d29)\r\n.............                                                            [100%]\r\nAll checks passed!\n2 files already formatted\nSuccess: no issues found in 1 source file\r\n"
+  },
+  "focused_tests": 13,
+  "new_model_fits": 0,
+  "new_inference": 0,
+  "remote_writes": 0,
+  "local_cleanup_deletions": 0,
+  "artifacts_sha256": {
+    "docs/rp4/publication_contract_v2.md": "e485afd87d22b595e2b9a97c3cc13917e24be9dd61ab7b3382977d13bc5285a2",
+    "scripts/generate_canonical_state.py": "7c3ae73bedb2c8a9f3ca7f2585c9803a9910889ced057d214392dc1866184769",
+    "tests/contract/test_canonical_state_current.py": "47b6c68b518201bd5e9fc166176cc0f0eb64cf5a164473c5d3962f91dc50b002",
+    "data/CANONICAL_STATE.json": "0a2031b0a30a20ec26cee2d42f60bf15cbccb89b3250e29ce099a6b51e57b19a",
+    "STATUS.md": "5aa7c26f5e7b666874edeb3f3a15a591c52201c60f055c9ae4d0a22d185d3a90"
+  }
+}
