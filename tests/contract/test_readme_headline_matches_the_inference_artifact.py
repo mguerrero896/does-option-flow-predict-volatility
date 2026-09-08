@@ -138,12 +138,12 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
     text = _prose(readme)
     history = _prose(_section(readme, "Results"))
     assert "one-sided sequence at 5% per family" in history
-    assert "H2 opened only if H1 rejects" in history
+    assert "second test opened only if the first rejects" in history
     assert "Cross-version search is not adjusted" in text
     closure = _summary(PRIMARY["v4 · RV15, primary"])["predeclared_closure"]
     assert closure["satisfied"] is True
     assert closure["successful_families"] == [LINEAR]
-    assert "v4 supplies the headline" in history
+    assert "the fourth specification supplies the headline" in history
     results = _section(readme, "Results")
     artifact = _summary(PRIMARY["v4 · RV15, primary"])
     for family, label in ((LINEAR, "Linear"), (TREES, "Trees")):

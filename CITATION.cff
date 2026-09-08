@@ -28,3 +28,6 @@ abstract: >-
   at 15 minutes over 419 historical sessions, with 5 minutes secondary, no
   full-sequence confirmation in the final window, and prospective replication
   pending. Forecast-loss reduction is not evidence of trading profitability.
+notes: >-
+  Companion final report: Can option trading improve short-term volatility forecasts? Comparing 15-minute forecasts for six U.S. stocks
+  (Miguel Antonio Guerrero Quijano, Sydney Polytechnic Institute, September 2026).

@@ -77,8 +77,8 @@
     "scripts/build_rp4_v5_english.py": "8e65e1b8a232e5b15dfd2a249751a12592e3b31dd2d2191d3ad3cb7b3d9b7810",
     "tests/contract/test_rp4_v5_english.py": "0f7edaeac9ea66a447426c0c106fe96374ac1f6ec7cc4ade202a9a2823460330",
     "tests/contract/rp4_translation_checks.py": "a071888ef92f5a198648e01f90018e2aba4ad4bd55c4192a498175e065c3e778",
-    "scripts/build_rp4_v5_public_receipt.py": "1c4df05d03692cd7ba842c3e9a4356e14a304f8aa04dbbfabb0c2ea58e733fbc",
-    "tests/contract/test_rp4_v5_public_receipt.py": "9ae1c63a9a201eb22a379653c1c89e7c66db77f9ca306aa6854202e3c161e766"
+    "scripts/build_rp4_v5_public_receipt.py": "fe92c159d29a85a56ef98e18a6ea9289592344454f624eca946637afd56291f3",
+    "tests/contract/test_rp4_v5_public_receipt.py": "e2f4696cd81e18262e7656dde6810acb9dd6b1e522c0af73c61d089f0d23cea9"
   },
   "editorial_changes": [
     "English notation for decimal and grouping marks; values unchanged.",

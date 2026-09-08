@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import importlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -25,10 +26,58 @@ SOURCE_SIDECAR_SHA256 = "6e46fa9c24e28dce380f5ad72b60331abd9214e679819c29ee66360
 PUBLIC = "artifacts/rp4_v5_part34/public_receipt_v3.json"
 PUBLIC_SIDECAR = "artifacts/rp4_v5_part34/public_receipt_v3.sha256"
 PRIVATE = "artifacts/rp4_v5_a3_operations/inbox_ledger.json"
+METHODOLOGY = "docs/methodology_decisions.md"
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def authenticated_frozen_public_receipt() -> dict[str, Any] | None:
+    """Read a stored public reference only after authenticating its frozen bytes."""
+    registry = json.loads((ROOT / "data/FROZEN_ARTIFACTS.json").read_bytes())
+    pins = [row for row in registry["entries"] if row["path"] == PUBLIC]
+    if not pins:
+        return None  # Initial rendering before this public receipt is registered.
+    if len(pins) != 1 or not re.fullmatch(r"[0-9a-f]{64}", str(pins[0].get("sha256", ""))):
+        raise ValueError("FROZEN_PUBLIC_RECEIPT_PIN_INVALID")
+    payload = (ROOT / PUBLIC).read_bytes()
+    if hashlib.sha256(payload).hexdigest() != pins[0]["sha256"]:
+        raise ValueError("FROZEN_PUBLIC_RECEIPT_AUTHENTICATION_FAILED")
+    result: dict[str, Any] = json.loads(payload)
+    return result
+
+
+def public_reference_sha256(logical: str, path: Path, historical_hash: str) -> str:
+    """Keep the frozen ledger reference bound to its exact public snapshot.
+
+    The later English ledger has its own translation receipt. The stored public
+    path in v3 remains its publication-time identity; the archive helper resolves
+    that identity to the byte-exact public baseline, never to a redacted substitute.
+    Every other reference continues to hash its physical public file.
+    """
+    if logical != METHODOLOGY:
+        return sha256(path)
+    stored = authenticated_frozen_public_receipt()
+    if stored is None:
+        return sha256(path)
+    references = [row for row in stored["references"] if row["source_path"] == logical]
+    if len(references) != 1:
+        raise ValueError("FROZEN_PUBLIC_METHODOLOGY_REFERENCE_INVALID")
+    reference = references[0]
+    expected = reference["public_sha256"]
+    if (
+        reference["original_sha256"] != historical_hash
+        or reference["public_path"] != path.relative_to(ROOT).as_posix()
+        or not isinstance(expected, str)
+        or not re.fullmatch(r"[0-9a-f]{64}", expected)
+    ):
+        raise ValueError("FROZEN_PUBLIC_METHODOLOGY_REFERENCE_INVALID")
+    baseline = _archive.frozen_public_baseline_path(path, expected)
+    actual = sha256(baseline)
+    if actual != expected:
+        raise ValueError("FROZEN_PUBLIC_METHODOLOGY_REFERENCE_CHANGED")
+    return actual
 
 
 def source_receipt() -> dict[str, Any]:
@@ -70,7 +119,7 @@ def public_receipt() -> dict[str, Any]:
             path = _archive.public_path(logical)
             assert path.is_relative_to(ROOT), "Public reference leaves the repository"
             if path.is_file():
-                public_hash = sha256(path)
+                public_hash = public_reference_sha256(logical, path, historical_hash)
                 entry.update(
                     public_path=path.relative_to(ROOT).as_posix(),
                     public_sha256=public_hash,
@@ -151,9 +200,7 @@ def rendered_files() -> dict[str, bytes]:
 
 def write_files(expected: dict[str, bytes]) -> None:
     registry = ROOT / "data/FROZEN_ARTIFACTS.json"
-    pins = {
-        row["path"]: row["sha256"] for row in json.loads(registry.read_bytes())["entries"]
-    }
+    pins = {row["path"]: row["sha256"] for row in json.loads(registry.read_bytes())["entries"]}
     for relative, payload in expected.items():
         if relative in pins:
             if hashlib.sha256(payload).hexdigest() != pins[relative]:

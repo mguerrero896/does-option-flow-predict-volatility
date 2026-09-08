@@ -27,7 +27,9 @@
   "docs/methodology_decisions.md": {
     "sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
     "public_path": "docs/methodology_decisions.md",
-    "archive_path": "docs/archive/public_refresh_baseline/docs__methodology_decisions.md.original"
+    "archive_path": "docs/archive/public_refresh_baseline/docs__methodology_decisions.md.original",
+    "public_baseline_path": "docs/archive/public_refresh_baseline/part44_inputs/docs__methodology_decisions.md.original",
+    "public_baseline_sha256": "92c301e596223deb24c0139cb8e371a479d1f8fec34cece96890c797d0c9d2a4"
   },
   "docs/AI_ASSISTANCE_STATEMENT.md": {
     "sha256": "56fcfea60df952b36347bcb7662a7d6a1b41dce0c33e46f6a5d92a163cddcc15",

@@ -2366,75 +2366,75 @@ pending and seal statements below must not be mistaken for today's status.
 
 <a id="decision-128"></a>
 
-128. **RP4: decisions before specification or evaluation
-     (2026-09-07, Australia/Sydney).** Explicit authorisation by **Miguel, the research author**,
-     recorded in the instruction. This records that authorisation;
-     it does not create a cryptographic or handwritten signature.
+128. **RP4: decisiones del propietario antes de especificar o evaluar
+     (2026-09-07, Australia/Sydney).** Autorizado por **Miguel, propietario**, mediante
+     instrucción explícita en esta conversación. Esta es la constancia de su autorización,
+     no una firma criptográfica ni una firma manuscrita creada por el asistente.
 
-     - Calendar split: **2026-08-01**. Development: 2024-08-02 to 2026-07-31;
-       subsequent evaluation: from 2026-08-03. This date replaces the proposed
-       2026-07-20 date in the supplied inventory.
-     - Phase 9 is withdrawn as a sealed cohort for RP4, and its sessions are authorised
-       as inputs to that evaluation. Its protocols, artifacts,
-       counters and root remain intact; this record neither rewrites them nor accesses them. **C10 is not
-       activated.** RP4 does not require a prospective campaign, a sealed cohort or a wait for sessions.
-     - Requested label: **"out-of-sample walk-forward, split fixed
-       2026-09-07"**. The primary evaluation will use walk-forward by session within
-       development; the subsequent evaluation will apply the same specification without adjustments based on its
-       results. A single specification will precede any RP4 evaluation.
-     - Requested disclosure, to be checked against its sources before
-       being presented as a verified fact: "The July 20 to August 28 window was
-       read once by the Phase 8 bridge under another specification. PIT is a
-       source-time proxy at 120 s, as in the literature."
-     - The enriched sets will be B0 plus HARQ, B1 surface plus IV
-       grid, and B2 flow plus OI/gamma-derived measures. Families: log-OLS HARQ and
-       LightGBM with the QLIKE objective; Gamma on raw levels is excluded from RP4.
-       The split, 60-minute purge/embargo, hyperparameters and inference must be
-       specified and bound by hashes before results are calculated. Every
-       sign will be reported, with its limitations, without changing frozen artifacts.
-     - Requested deliverables and sequence: A1 specification; A2 development features
-       without targets; B1 bounded acquisition and panel; B2 primary evaluation; B3
-       unchanged subsequent evaluation; B4 report and collector with a new name/root,
-       leaving `phase9` untouched. Publication is not authorised.
-     - **Initial authorisation boundary:** the instruction first requests
-       the registered files, hashes and exact B0/B1/B2 columns, and
-       "Stop there". That inventory will be delivered without executing A1, A2, downloads,
-       training, evaluation, activation or automation changes.
+     - Partición de calendario: **2026-08-01**. Desarrollo: 2024-08-02 a 2026-07-31;
+       evaluación posterior: desde 2026-08-03. Esta fecha reemplaza la propuesta
+       2026-07-20 del inventario entregado por el propietario.
+     - Fase 9 se retira como cohorte sellada para RP4 y sus sesiones quedan autorizadas
+       como entradas de esa evaluación. Se conservan intactos sus protocolos, artefactos,
+       contadores y raíz; este registro no los reescribe ni ejecuta accesos. **C10 no se
+       activa.** RP4 no exige campaña prospectiva, cohorte sellada ni espera de sesiones.
+     - Etiqueta solicitada: **"fuera de muestra walk-forward, partición fijada
+       2026-09-07"**. La evaluación primaria será walk-forward por sesión dentro del
+       desarrollo; la posterior aplicará la misma especificación sin ajustes sobre sus
+       resultados. Una única especificación precederá a cualquier evaluación RP4.
+     - Divulgación solicitada por el propietario, que se cotejará con sus fuentes antes
+       de presentarla como hecho verificado: "La ventana 20 de julio a 28 de agosto fue
+       leída una vez por el puente de Fase 8 con otra especificación. El PIT es proxy de
+       tiempo fuente a 120 s, como en la literatura."
+     - Se utilizarán los conjuntos enriquecidos B0 más HARQ, B1 de superficie más rejilla
+       IV y B2 de flujo más medidas derivadas de OI/gamma. Familias: log-OLS HARQ y
+       LightGBM con objetivo QLIKE; Gamma sobre niveles crudos queda fuera de RP4.
+       Partición, purga/embargo de 60 minutos, hiperparámetros e inferencia deben quedar
+       especificados y hash-vinculados antes de calcular resultados. Se reportará
+       cualquier signo, con sus limitaciones, sin modificar artefactos congelados.
+     - Entregables y orden solicitados: A1 especificación; A2 variables de desarrollo
+       sin objetivos; B1 adquisición acotada y panel; B2 evaluación primaria; B3
+       evaluación posterior sin cambios; B4 informe y colector con nombre/raíz nuevos,
+       sin tocar `phase9`. No se autoriza publicación.
+     - **Punto de parada de este turno:** la última instrucción del propietario pide
+       primero los archivos registrados, hashes y columnas exactas B0/B1/B2, y
+       "Detente ahí". Se entregará ese inventario sin ejecutar A1, A2, descargas,
+       entrenamiento, evaluación, activación ni cambios de automatización.
 
-     Interpretation limit: fixing a split today does not remove prior exposure or
-     methodological decisions concerning historical data, and no timestamp
-     proxy alone demonstrates historical receipt by the client.
+     Límite de interpretación: una partición fijada hoy no elimina la exposición ni
+     las decisiones metodológicas previas sobre datos históricos, y ningún proxy de
+     timestamp demuestra por sí solo recepción histórica por el cliente.
 
 <a id="decision-129"></a>
 
-129. **RP4 complete execution, research authorisation (2026-09-07).**
-     Miguel authorises A1, A2, B1, B2, B3 and B4 in sequence,
-     bounded downloads, a copy of Phase 9 verified by hash without modifying it, a new RP4 daily
-     collector and a draft PR. This authorisation supersedes the initial execution
-     boundary in decision 128, while retaining its 2026-08-01 split.
-     No cryptographic signature is invented. The supplied
-     checks are attributed to the instruction and distinguished from executed measurements.
+129. **RP4 ejecución completa, autorización del propietario (2026-09-07).**
+     Miguel autoriza en esta conversación A1, A2, B1, B2, B3 y B4 de corrido,
+     descargas acotadas, copia por hash de Fase 9 sin modificarla, colector diario
+     nuevo RP4 y un PR en borrador. Esta autorización sustituye el punto de parada
+     del turno anterior en la decisión 128, no su partición 2026-08-01.
+     No se inventa una firma criptográfica del propietario. Las verificaciones
+     que aporta se atribuyen a su instrucción; se distinguen de mediciones ejecutadas.
 
-     The immutable specification is in `docs/rp4/specification_v1.md`, SHA256
-     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, and its executable contract is in
+     La especificación inmutable está en `docs/rp4/specification_v1.md`, SHA256
+     `24a0fe96ba917bf284cbc0eda3f64f7ab3f41ede665f7021a9be20bdbeebd03d`, y su contrato ejecutable en
      `artifacts/rp4_a1/specification.json`, SHA256
-     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; both are fixed in
-     `artifacts/rp4_a1/freeze.json` before rebuilding targets or evaluating RP4.
-     The nominal 22/28/68 lists are preserved, and quality, age and latency
-     diagnostics are explicitly excluded under the authorised rule,
-     yielding nested sets of 29/71/136 inputs plus asset effects.
-     Only the 25 new IV cells permit NaN under the fixed treatment.
-     The long-call/short-put convention is a proxy, not observed inventory.
-     The new Greeks use real exogenous rates/dividends; existing Greeks
-     are not rewritten. The UW gap 2025-01-25–2025-02-24 is not filled.
-     Official 2024 rates and the UW repair for 2026-08-26 are bounded auxiliary
-     inputs identified before evaluation; they do not modify phase9.
+     `865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5`; ambos se fijan en
+     `artifacts/rp4_a1/freeze.json` antes de reconstruir objetivos o evaluar RP4.
+     Las listas nominales 22/28/68 se conservan y se excluyen explícitamente
+     diagnósticos de calidad, edad y latencia según la regla del propietario,
+     dando conjuntos anidados de 29/71/136 entradas más efectos de activo.
+     Solo las 25 celdas IV nuevas admiten NaN con el tratamiento fijado.
+     La convención call-largo/put-corto es un proxy, no inventario observado.
+     Las nuevas griegas usan tasa/dividendo exógenos reales; no se reescriben
+     griegas antiguas. El hueco UW 2025-01-25–2025-02-24 no se rellena.
+     Tasas oficiales 2024 y reparación UW 2026-08-26 son insumos auxiliares
+     acotados detectados antes de evaluar; no modifican phase9.
 
-     RV30 is rebuilt by key with horizon 30 and compared with the existing values;
-     every difference and exclusion is reported. Expanding walk-forward,
-     first 60 sessions for training, last 10 for internal validation, purge and
-     embargo of 60 min; log-OLS HARQ and LightGBM QLIKE without raw Gamma. A single rule
-     and reporting of every sign; session bootstrap and Holm over 4 contrasts per window.
-     GW-HAC is presented as an asymptotic diagnostic, not a guarantee of the
-     original fixed-window theory. Data reuse does not establish new
-     independence. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.
+     Se reconstruye RV30 por clave con horizonte30 y se compara con lo existente;
+     todas las diferencias y exclusiones se informan. Walk-forward expansivo,
+     primeras60 sesiones entrenamiento, validación interna últimas10, purga y
+     embargo60min; log-OLS HARQ y LightGBM QLIKE sin Gamma crudo. Una sola regla
+     y reporte de cualquier signo; bootstrap sesiones y Holm4 por ventana.
+     GW-HAC se presenta como diagnóstico asintótico, no como garantía de la
+     teoría original de ventana fija. No se declara independencia nueva por
+     reutilización de datos. RESEARCH_ONLY, NOT INVESTMENT ADVICE, capital_go=false.

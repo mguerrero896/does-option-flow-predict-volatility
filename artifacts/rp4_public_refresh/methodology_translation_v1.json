@@ -1,0 +1,117 @@
+{
+  "schema_version": "methodology-english-translation-v1",
+  "status": "PASS_TRANSLATION_AND_FOCUSED_VERIFICATION",
+  "logical_path": "docs/methodology_decisions.md",
+  "decisions_translated": [
+    128,
+    129
+  ],
+  "original_public_baseline": {
+    "path": "docs/archive/public_refresh_baseline/part44_inputs/docs__methodology_decisions.md.original",
+    "sha256": "92c301e596223deb24c0139cb8e371a479d1f8fec34cece96890c797d0c9d2a4",
+    "bytes": 205940
+  },
+  "english_sha256": "2758b04fa08caf4cb58b9d5776052ed32e89eb4a6dfc625f87269006e5aba2b2",
+  "hash_scope": "Exact raw bytes; both active English document and archived public baseline use LF. The translation does not inherit the historical hash.",
+  "historical_source_pin_unchanged": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+  "archive_mapping": "docs/archive/public_refresh_baseline/original_paths.json",
+  "numeric_tokens_in_translated_block": 131,
+  "numeric_tokens_same_order": true,
+  "sha256_literals_unchanged": 2,
+  "inline_code_references_unchanged": 6,
+  "prefix_before_decision_128_byte_identical": true,
+  "frozen_registry_entry_count": 159,
+  "before_sha256": {
+    "data/FROZEN_ARTIFACTS.json": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681",
+    "artifacts/rp4_public_refresh/archive_redactions.json": "5ab6af620e70912014a7a3c806b7082bbdd081a1685790c59937fc9d1a8ba3d2",
+    "artifacts/rp4_v5_part34/public_receipt_v1.json": "f121e3d8a1a8577db9c6640974cb533ffbc53157de2e4e6be00f7a81ca9987a8",
+    "artifacts/rp4_v5_part34/public_receipt_v2.json": "6d963bc85cfa4ed688316c9dbc60cc247372e98c4e3b3a7327216ea2f1ec67c7",
+    "artifacts/rp4_v5_part34/public_receipt_v3.json": "dcfff68230045ee3ff48ec0d68f88bda1b8e986135a2da28cd00089b7b3106ce",
+    "artifacts/rp4_v5_part34/public_receipt_v3.sha256": "1291264088bf1ee3f308efcf1e2c9aee066180e33128032d875dd7fa420e94c1",
+    "docs/rp4/v5_translation_receipt.json": "15413bec10a7e1f5f170a0e65ca0e6ed201e22f49292deb3e7444543a16dd22d",
+    "docs/archive/public_refresh_baseline/original_paths.json": "7d611b625042f81514dc8839502e4f4d594201e0857cfe8bb8192318fba5cee5",
+    "scripts/build_rp4_v5_public_receipt.py": "1c4df05d03692cd7ba842c3e9a4356e14a304f8aa04dbbfabb0c2ea58e733fbc",
+    "tests/contract/test_rp4_v5_public_receipt.py": "9ae1c63a9a201eb22a379653c1c89e7c66db77f9ca306aa6854202e3c161e766",
+    "docs/rp4/results_v5.md": "0b416763caa841f4b3312dc4cece4fa88a56a1bacb0b129c1a2aa9dc18eb142e",
+    "docs/rp4/specification_v5.md": "d5f693b3726ee63dff4b76adc994bab85c77c47a2ece8c44dd71742b3754dea9",
+    "docs/rp4/specification_v5_technical_amendment_2.md": "a3af515de3e0140dfb60ae9f59da868d8f7c057b76f0c4ca4b3cc2905e698bab",
+    "docs/rp4/prospective_combination_decision_136.md": "4b749c97490d3970d9ed2e27380a7ac139ef2fdd94df76110edd0e702cb8fdca"
+  },
+  "scientific_evaluations": 0,
+  "prospective_data_reads": 0,
+  "v5_receipt_scope": "The frozen v3 receipt remains a historical public snapshot. Its methodology reference resolves to the exact archived public baseline using the digest authenticated against the frozen-artifact registry. The active English ledger is a separately hashed translation.",
+  "presentation_receipt_update": "Only the presentation producer may refresh its mutable presentation_and_contracts_sha256 fields; all four English documents must remain byte-identical.",
+  "after_sha256": {
+    "data/FROZEN_ARTIFACTS.json": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681",
+    "artifacts/rp4_public_refresh/archive_redactions.json": "5ab6af620e70912014a7a3c806b7082bbdd081a1685790c59937fc9d1a8ba3d2",
+    "artifacts/rp4_v5_part34/public_receipt_v1.json": "f121e3d8a1a8577db9c6640974cb533ffbc53157de2e4e6be00f7a81ca9987a8",
+    "artifacts/rp4_v5_part34/public_receipt_v2.json": "6d963bc85cfa4ed688316c9dbc60cc247372e98c4e3b3a7327216ea2f1ec67c7",
+    "artifacts/rp4_v5_part34/public_receipt_v3.json": "dcfff68230045ee3ff48ec0d68f88bda1b8e986135a2da28cd00089b7b3106ce",
+    "artifacts/rp4_v5_part34/public_receipt_v3.sha256": "1291264088bf1ee3f308efcf1e2c9aee066180e33128032d875dd7fa420e94c1",
+    "docs/rp4/v5_translation_receipt.json": "41b4daa4c8b1faaf395b73cb61b39fc3c9319bdf7cbe6eca0735d3dc547e54db",
+    "docs/archive/public_refresh_baseline/original_paths.json": "6c187d9e9d1fca087d72e54284ee3e52ff3c5b32c7b4123db45d553c59425013",
+    "scripts/build_rp4_v5_public_receipt.py": "fe92c159d29a85a56ef98e18a6ea9289592344454f624eca946637afd56291f3",
+    "tests/contract/test_rp4_v5_public_receipt.py": "e2f4696cd81e18262e7656dde6810acb9dd6b1e522c0af73c61d089f0d23cea9",
+    "docs/rp4/results_v5.md": "0b416763caa841f4b3312dc4cece4fa88a56a1bacb0b129c1a2aa9dc18eb142e",
+    "docs/rp4/specification_v5.md": "d5f693b3726ee63dff4b76adc994bab85c77c47a2ece8c44dd71742b3754dea9",
+    "docs/rp4/specification_v5_technical_amendment_2.md": "a3af515de3e0140dfb60ae9f59da868d8f7c057b76f0c4ca4b3cc2905e698bab",
+    "docs/rp4/prospective_combination_decision_136.md": "4b749c97490d3970d9ed2e27380a7ac139ef2fdd94df76110edd0e702cb8fdca"
+  },
+  "unchanged_frozen_registry_and_receipts": [
+    "data/FROZEN_ARTIFACTS.json",
+    "artifacts/rp4_public_refresh/archive_redactions.json",
+    "artifacts/rp4_v5_part34/public_receipt_v1.json",
+    "artifacts/rp4_v5_part34/public_receipt_v2.json",
+    "artifacts/rp4_v5_part34/public_receipt_v3.json",
+    "artifacts/rp4_v5_part34/public_receipt_v3.sha256"
+  ],
+  "unchanged_english_documents": [
+    "docs/rp4/results_v5.md",
+    "docs/rp4/specification_v5.md",
+    "docs/rp4/specification_v5_technical_amendment_2.md",
+    "docs/rp4/prospective_combination_decision_136.md"
+  ],
+  "english_bytes": 205663,
+  "verification": {
+    "focused_tests": {
+      "command": "uv run --frozen --no-sync pytest -q tests/contract/test_rp4_v5_public_receipt.py tests/contract/test_rp4_v5_english.py tests/contract/test_canonical_state_current.py tests/contract/test_canonical_documentation.py tests/contract/test_frozen_artifacts_registry.py --disable-warnings --maxfail=1",
+      "exit_code": 0,
+      "passed": 47,
+      "scope": "Presentation, archived baseline custody, receipt authentication, numeric/reference invariance and canonical-state contracts; no scientific re-evaluation."
+    },
+    "red_before_green": {
+      "test": "test_public_hashes_are_distinct_and_withheld_sources_supply_no_bytes",
+      "exit_code": 1,
+      "reason": "Direct hashing of the English ledger differed from the frozen public baseline; the original sealed reference was retained."
+    },
+    "mutation_cases": [
+      "Changed archived baseline is rejected",
+      "Changed mapping digest is rejected",
+      "Changed stored receipt is rejected before archive resolution"
+    ],
+    "receipt_render": {
+      "command": "uv run --frozen --no-sync python -m scripts.build_rp4_v5_public_receipt",
+      "exit_code": 0,
+      "closed_historical_references": 25
+    },
+    "ruff": {
+      "files": [
+        "scripts/build_rp4_v5_public_receipt.py",
+        "tests/contract/test_rp4_v5_public_receipt.py"
+      ],
+      "exit_code": 0
+    },
+    "language_scan": {
+      "method": "Existing scripts.verify_public_projection.language_counts applied to individual paragraphs; Spanish count >= 5 and greater than English count",
+      "active_markdown_documents": 376,
+      "spanish_majority_paragraphs": 0,
+      "archive_excluded": true,
+      "public_protocol_markdown_included": true,
+      "prospective_data_inputs_read": false
+    }
+  },
+  "producers_executed": [
+    "uv run --frozen --no-sync python -m scripts.build_rp4_v5_english --write",
+    "uv run --frozen --no-sync python scripts/generate_canonical_state.py"
+  ]
+}
