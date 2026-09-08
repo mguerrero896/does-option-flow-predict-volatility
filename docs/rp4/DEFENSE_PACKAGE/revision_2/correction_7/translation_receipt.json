@@ -1,0 +1,96 @@
+{
+  "schema": "rp4-english-defense-translation-receipt-v1",
+  "scope": "Presentation translation; no scientific registration or result superseded.",
+  "historical_receipt_sha256": "1fbb975a1011a5b9207d219cb95108a34d192bd3ab4624d753daaa23ba962c6e",
+  "historical_verification_sha256": "6d5b356eaab06701aa7d4427c651173998b6a4c3cef0c5f59b963cb96d03dbc6",
+  "original_files": {
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/.gitattributes": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/.gitattributes",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/.gitattributes",
+      "sha256": "917a2f08d6ebabcd636e41086e390526347fa2770be1660166b1949cc6aab964"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/claims_matrix.csv": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/claims_matrix.csv",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/claims_matrix.csv",
+      "sha256": "ba55658de19b42fd810c9f558dad023b94a7befc3f81c93e356f5e8e37f1bb97"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/defense_slides.md": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/defense_slides.md.original",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/defense_slides.md",
+      "sha256": "379f303bc124ee4c514ceaa9de25ce73d18212d893ab86b9f79872207a2e573c"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/evidence_manifest.json": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/evidence_manifest.json",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/evidence_manifest.json",
+      "sha256": "5cc863f729e104b28b9bf6fbe96d2d79775e16178b9723330dccde640bc58552"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md.original",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md",
+      "sha256": "5420240d727f13e4fbf2db2d95437e6af40aa1483958b96e7fb13a171946d13d"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.md": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.md.original",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.md",
+      "sha256": "4e7411b7cc87d95ad09ccb683d7efac6c27e53b6fa5783b6b5698fda94e87523"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.pdf": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.pdf",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/executive_summary.pdf",
+      "sha256": "d0a750bcf8e5acf91175fe480fd255ef6f073a7645a76d4911748e71163c9500"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/horizon_pit_evidence.json": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/horizon_pit_evidence.json",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/horizon_pit_evidence.json",
+      "sha256": "9449f0564efa738adf9ca51beebc83b983747a2b905f77c0939584b838b10ad8"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md.original",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md",
+      "sha256": "5ccd47f0935fc3fb928ee1511c7ccee8e802ee6169a393771db7756310ae75f0"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/receipt.json": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/receipt.json",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/receipt.json",
+      "sha256": "1fbb975a1011a5b9207d219cb95108a34d192bd3ab4624d753daaa23ba962c6e"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/SHA256SUMS": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/SHA256SUMS",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/SHA256SUMS",
+      "sha256": "9e01f145ed18adab23b093afa52cdc0f7ee7c758c23e299b1dd3a1d24e5fc494"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/summary_layout_receipt.json": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/summary_layout_receipt.json",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/summary_layout_receipt.json",
+      "sha256": "b5cbde3e48f5aa4b68688b3396ed9e6772cb7a56ffc0a582c11b6a7bbba1f479"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.json": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.json",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.json",
+      "sha256": "6d5b356eaab06701aa7d4427c651173998b6a4c3cef0c5f59b963cb96d03dbc6"
+    },
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.sha256": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.sha256",
+      "public_path": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/verification_receipt.sha256",
+      "sha256": "a483b3fc850e4cf379ae20be8b5d3cc8cae379ec1132105ccc49be524f933de8"
+    },
+    "tests/contract/test_rp4_horizon_pit_narrative.py": {
+      "archive_path": "docs/archive/rp4/DEFENSE_PACKAGE/revision_2/correction_7/test_rp4_horizon_pit_narrative.py.original",
+      "sha256": "56f167cae8c12aa245414266fc28ecaba5ee2706d6b7c0e2159434c1501b6c02"
+    }
+  },
+  "evidence_manifest_sha256": "953a8710dd987682f381f9662cf004821c2feb0760e83481533fc2a183ee5e8b",
+  "document_sha256": {
+    "executive_summary.md": "f4d64fe7e63eeb677ca879dff2b50f36ab83a6b2c43a1cbac732ee14dc652fdf",
+    "examiner_qa.md": "87bb78ec01e70095abca856a059723cd34cfda8564e08673552425af92a496ef",
+    "defense_slides.md": "0f84c393b3afb999abfae5666ce634c0aa515cb91e10d7616ab40c400e024b46",
+    "claims_matrix.csv": "819cd9e099fb4befa41726eaefaab3f3919165b275610e1e8fc5bbcce49aca83"
+  },
+  "numeric_bindings_retained": 1944,
+  "visible_numeric_occurrences": 1709,
+  "omitted_visible_spanish_duplicates": 80,
+  "new_statistical_results": 0,
+  "sealed_payloads_read": 0,
+  "research_only": true,
+  "capital_go": false
+}

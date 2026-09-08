@@ -1,0 +1,59 @@
+{
+  "schema": "rp4-english-defense-verification-v1",
+  "verified_at_utc": "2026-09-08T16:55:20.951417+00:00",
+  "python_version": "3.12.12",
+  "checks": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/contract/test_rp4_english_defense.py",
+        "tests/contract/test_rp4_horizon_pit_narrative.py",
+        "tests/contract/test_rp4_public_metadata.py",
+        "-o",
+        "addopts=",
+        "-q",
+        "-rs",
+        "--confcutdir=.",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "pytest_timeout"
+      ],
+      "exit_code": 0,
+      "stdout": ".........                                                                [100%]\n9 passed in 2.36s\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/build_rp4_english_defense.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"changed\": []}\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "Eight English presentation/historical defense contracts and one independent public metadata contract; not frozen executor acceptance or the complete repository suite.",
+  "numeric_bindings_preserved": 1944,
+  "visible_numeric_occurrences": 1709,
+  "pdf_pages": 1,
+  "pdf_complete_text_and_numeric_sequence_verified": true,
+  "pdf_visual_review": "One English page inspected after rendering; readable two-column layout, no clipped text observed.",
+  "historical_verification_receipt_sha256": "6d5b356eaab06701aa7d4427c651173998b6a4c3cef0c5f59b963cb96d03dbc6",
+  "sealed_payloads_read": 0,
+  "scientific_fits": 0,
+  "scientific_bootstraps": 0,
+  "research_only": true,
+  "capital_go": false
+}
