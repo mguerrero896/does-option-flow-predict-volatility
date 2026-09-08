@@ -85,6 +85,11 @@ is 0.249 and does not pass; it does not correct all adaptive search.
 The disclosed post hoc averaging analysis also reuses these historical sessions.
 It motivates secondary prospective comparisons and supplies no new confirmation.
 
+The [eight-asset extension (registered, closed)](docs/rp4/results_universe_v1.md)
+adds SPY/QQQ as targets: linear option state and flow improve QLIKE by **1.40%**
+(p = 0.0208) and **0.56%** (p = 0.0093). Trees fail H1; the joint claim across both
+families fails. It reuses the historical period and preserves the v4 headline.
+
 ![RP4 forecast-loss comparisons and uncertainty](docs/figures/rp4/thesis_summary.svg)
 
 The final 25-session window does not confirm the full sequence. RV5 is secondary:

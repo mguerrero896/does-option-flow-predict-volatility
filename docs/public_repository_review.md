@@ -29,3 +29,7 @@ Scientific quantities come from saved project evidence, not from presentation gu
 - The subsequently authorized, closed v5 extension is supplementary. Its failed
   primary selector, favorable top2 secondary and explicitly post hoc averages are
   reported together; v4 retains the headline.
+- The subsequently authorized eight-asset extension is registered and closed.
+  Its sealed report counts six historical reads for the original six names and
+  the first target evaluation for SPY/QQQ. That dated accounting is retained;
+  successful linear tests do not imply success of the two-family joint claim.

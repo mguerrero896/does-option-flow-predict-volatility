@@ -38,8 +38,8 @@ Frozen evidence: 158 artifacts registered.
 
 ## Publication and access
 
-V4 remains the headline; the closed registered exploratory v5 extension
-is reported separately. Unreviewed experiments have no public result here.
+V4 remains the headline; the closed v5 and eight-asset extensions
+are reported separately. Unreviewed experiments have no public result here.
 Public history is preserved. Merge requires five passing CI checks and
 written external review. The generated state itself is not proof of a CI run.
 The three saved v4 aggregate tables have verified public readback; licensed

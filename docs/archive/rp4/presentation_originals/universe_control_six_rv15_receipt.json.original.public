@@ -1,0 +1,32 @@
+{
+  "all_numeric_session_cells_compared": 5447,
+  "bootstrap_reruns": 0,
+  "checkpoint_and_receipt_hashes_verified": true,
+  "exact_keys_and_targets": true,
+  "historical_mask_hashes_compared": true,
+  "horizon_minutes": 15,
+  "lock_custody": {
+    "all_release_runtime_dependency_versions_equal": true,
+    "current_CRLF_count": 0,
+    "current_path": "private-input/e67cfca277f4dd1fef71",
+    "current_sha256": "4378aff67e029d2147e9fbcdbd02d1363b857853d05bae1827c4b64cf8993939",
+    "dependency_content_changed": false,
+    "difference": "CRLF_TO_LF_ONLY",
+    "historical_CRLF_count": 1509,
+    "historical_path": "private-input/eace78e1669947ac50ab",
+    "historical_sha256": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0"
+  },
+  "mask_scope": "All four native masks match historical hashes/counts",
+  "max_abs_session_delta_difference": 0.0,
+  "max_abs_session_qlike_difference": 0.0,
+  "model_fits": 0,
+  "new_evaluation": false,
+  "origins": 160832,
+  "session_deltas_compared": 1676,
+  "session_loss_cells_compared": 2514,
+  "sessions": 419,
+  "source_release_sha256": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+  "source_version": "v4",
+  "status": "EXACT_ZERO_DIFFERENCE",
+  "window": "primary"
+}

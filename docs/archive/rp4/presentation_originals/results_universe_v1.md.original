@@ -1,0 +1,150 @@
+# Universo de ocho activos: resultados RV15 bajo v4
+
+Evaluación RV15 completa: 419 sesiones por familia y 214.209 orígenes. Ridge mejora B1 sobre B0 y B2 sobre B1 según la secuencia registrada. LightGBM no rechaza H1 (p=0,0794); H2 queda sin prueba formal y su delta medio es negativo. **No se satisface la afirmación conjunta de ambas familias.**
+
+El campo heredado v4 `predeclared_closure.satisfied=true` exige éxito en al menos una familia y lo cumple Ridge. La especificación del universo exige las dos familias para una afirmación conjunta; `global_joint_reject=false`. Ambos campos se conservan sin reinterpretar el criterio después de ver resultados.
+
+Finalización nativa: 2026-09-08T17:31:43.093588+00:00. Es una extensión posterior a v4: sexta lectura para los seis nombres y primera evaluación como objetivos para SPY/QQQ; no es confirmación independiente ni sustituye el resultado de seis activos.
+
+## Resultados agrupados de los ocho activos
+
+| Familia | Contraste | Delta QLIKE | Reducción relativa | IC95% delta | p unilateral | Estado H1→H2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ridge | B1_over_B0 | 0.00274973 | 1.4042% | [0.00091204, 0.00535212] | 0.0208 | REJECTED |
+| Ridge | B2_over_B1 | 0.00108789 | 0.5634% | [0.00022321, 0.00197850] | 0.0093 | REJECTED |
+| LightGBM | B1_over_B0 | 0.00216036 | 1.0830% | [-0.00041481, 0.00532034] | 0.0794 | NOT_REJECTED |
+| LightGBM | B2_over_B1 | -0.00029303 | -0.1485% | [-0.00186356, 0.00101312] | 0.6738 | NOT_TESTED |
+
+Delta = pérdida base menos pérdida ampliada; positivo favorece añadir información. Reducción relativa = 100 × media del delta de sesión / media de pérdida base. QLIKE(y,f)=y/f−log(y/f)−1: son pérdidas de pronóstico, no rentabilidad de una estrategia. `REJECTED` significa rechazo de la nula delta≤0; `NOT_REJECTED`, evidencia insuficiente; `NOT_TESTED`, puerta H1 cerrada. El p=0,6738 de H2 LightGBM es exclusivamente nominal diagnóstico.
+
+Bootstrap circular pareado de bloques de cinco sesiones, 9.999 réplicas, semilla 20260907; IC95% percentil bilateral y p unilateral centrado bajo la nula con corrección +1. El intervalo no es inversión del p. H1→H2 al 5% por familia. Estos p no corrigen búsqueda entre versiones, universos, horizontes o familias; no se afirma control global al 5% por elegir la familia favorable.
+
+## Muestra, pesos y datos materializados
+
+Ventana fuente primaria 2024-08-02–2026-07-31: 479 sesiones comunes, primeras 60 de calentamiento; evaluación 2024-10-28–2026-07-31. Los ocho activos están presentes en las 419 sesiones: 3.352 activo-sesiones y peso 1/8 cada uno por sesión. Primero se promedian orígenes dentro de activo/sesión y luego activos y sesiones con pesos iguales. Los paneles combinados contienen 247.639 filas antes de excluir calentamiento y aplicar elegibilidad.
+
+| Activo | Orígenes RV15 | Sesiones | Peso por sesión |
+| --- | --- | --- | --- |
+| AAPL | 26898 | 419 | 12,5% |
+| AMZN | 26743 | 419 | 12,5% |
+| META | 26853 | 419 | 12,5% |
+| MSFT | 26729 | 419 | 12,5% |
+| NVDA | 26764 | 419 | 12,5% |
+| QQQ | 26586 | 419 | 12,5% |
+| SPY | 26791 | 419 | 12,5% |
+| TSLA | 26845 | 419 | 12,5% |
+
+B0/B1/B2 conservan 29/69/138 predictores más siete efectos de activo, AAPL referencia. Walk-forward expansivo, últimas diez sesiones elegibles para validación interna, purga/embargo de 60 minutos y proxy de tiempo fuente de 120 segundos. RV15 conserva la elegibilidad y máscara común, y la purga usa el fin de intervalo RV30; el objetivo RV15 termina a +15 minutos: no se recorta la muestra para mejorar resultados. No se usaron cohortes posteriores a 2026-07-31.
+
+## Todos los activos: resultados secundarios
+
+Cada fila usa 419 sesiones. Los intervalos y p son nominales, sin corrección conjunta de estos 32 contrastes; no rescatan el primario ni autorizan selección de activos.
+
+| Activo | Familia | Contraste | Delta QLIKE | Reducción relativa | IC95% delta | p unilateral |
+| --- | --- | --- | --- | --- | --- | --- |
+| AAPL | Ridge | B1_over_B0 | 0.00291086 | 1.4906% | [0.00089979, 0.00557910] | 0.0163 |
+| AAPL | Ridge | B2_over_B1 | 0.00187061 | 0.9724% | [0.00024883, 0.00353859] | 0.0134 |
+| AAPL | LightGBM | B1_over_B0 | 0.00061586 | 0.3135% | [-0.00232038, 0.00388139] | 0.3441 |
+| AAPL | LightGBM | B2_over_B1 | -0.00030347 | -0.1550% | [-0.00281795, 0.00145252] | 0.6404 |
+| AMZN | Ridge | B1_over_B0 | 0.00254935 | 1.4132% | [0.00047407, 0.00531130] | 0.0330 |
+| AMZN | Ridge | B2_over_B1 | 0.00002626 | 0.0148% | [-0.00122892, 0.00123158] | 0.4882 |
+| AMZN | LightGBM | B1_over_B0 | 0.00201682 | 1.1031% | [-0.00059431, 0.00565882] | 0.1152 |
+| AMZN | LightGBM | B2_over_B1 | -0.00073012 | -0.4038% | [-0.00279326, 0.00098263] | 0.7828 |
+| META | Ridge | B1_over_B0 | 0.00263693 | 1.3570% | [0.00048937, 0.00527580] | 0.0253 |
+| META | Ridge | B2_over_B1 | -0.00046133 | -0.2407% | [-0.00182024, 0.00082297] | 0.7620 |
+| META | LightGBM | B1_over_B0 | 0.00195288 | 0.9755% | [-0.00087536, 0.00499945] | 0.0937 |
+| META | LightGBM | B2_over_B1 | 0.00059840 | 0.3019% | [-0.00195402, 0.00321094] | 0.3143 |
+| MSFT | Ridge | B1_over_B0 | 0.00131639 | 0.7357% | [-0.00093261, 0.00368277] | 0.1323 |
+| MSFT | Ridge | B2_over_B1 | -0.00020206 | -0.1138% | [-0.00237895, 0.00213205] | 0.5682 |
+| MSFT | LightGBM | B1_over_B0 | 0.00307914 | 1.6822% | [-0.00089174, 0.00907650] | 0.1216 |
+| MSFT | LightGBM | B2_over_B1 | -0.00078843 | -0.4381% | [-0.00281897, 0.00092126] | 0.8053 |
+| NVDA | Ridge | B1_over_B0 | 0.00168095 | 0.9240% | [0.00030913, 0.00314908] | 0.0139 |
+| NVDA | Ridge | B2_over_B1 | 0.00203137 | 1.1270% | [0.00104411, 0.00305627] | 0.0001 |
+| NVDA | LightGBM | B1_over_B0 | 0.00294496 | 1.5965% | [0.00014891, 0.00642173] | 0.0430 |
+| NVDA | LightGBM | B2_over_B1 | 0.00011529 | 0.0635% | [-0.00116284, 0.00143365] | 0.4209 |
+| TSLA | Ridge | B1_over_B0 | 0.00124627 | 0.7052% | [-0.00038861, 0.00311400] | 0.0855 |
+| TSLA | Ridge | B2_over_B1 | 0.00130951 | 0.7462% | [-0.00001047, 0.00270318] | 0.0325 |
+| TSLA | LightGBM | B1_over_B0 | 0.00560891 | 3.0443% | [0.00108961, 0.01197470] | 0.0393 |
+| TSLA | LightGBM | B2_over_B1 | 0.00061116 | 0.3421% | [-0.00315383, 0.00347942] | 0.3835 |
+| SPY | Ridge | B1_over_B0 | 0.00614639 | 2.5381% | [0.00055842, 0.01414243] | 0.0572 |
+| SPY | Ridge | B2_over_B1 | 0.00296940 | 1.2581% | [0.00067842, 0.00581398] | 0.0204 |
+| SPY | LightGBM | B1_over_B0 | -0.00007924 | -0.0317% | [-0.00759281, 0.00668782] | 0.5317 |
+| SPY | LightGBM | B2_over_B1 | -0.00246732 | -0.9878% | [-0.00873280, 0.00284229] | 0.8019 |
+| QQQ | Ridge | B1_over_B0 | 0.00351070 | 1.6190% | [0.00085549, 0.00631590] | 0.0086 |
+| QQQ | Ridge | B2_over_B1 | 0.00115936 | 0.5434% | [-0.00041470, 0.00278847] | 0.0843 |
+| QQQ | LightGBM | B1_over_B0 | 0.00114356 | 0.5322% | [-0.00408233, 0.00587200] | 0.3236 |
+| QQQ | LightGBM | B2_over_B1 | 0.00062026 | 0.2902% | [-0.00221887, 0.00338059] | 0.3416 |
+
+## Seis activos originales: control exacto y comparación
+
+Resultados RV15 originales v4, reproducidos desde checkpoints sellados sin reajustar modelos ni repetir bootstrap:
+
+| Familia | Contraste | Delta QLIKE | Reducción relativa | IC95% delta | p unilateral | Estado H1→H2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ridge | B1_over_B0 | 0.00161631 | 0.8801% | [0.00025299, 0.00345353] | 0.0390 | REJECTED |
+| Ridge | B2_over_B1 | 0.00113376 | 0.6228% | [0.00033504, 0.00193216] | 0.0032 | REJECTED |
+| LightGBM | B1_over_B0 | 0.00219662 | 1.1700% | [0.00061099, 0.00410267] | 0.0135 | REJECTED |
+| LightGBM | B2_over_B1 | -0.00021290 | -0.1147% | [-0.00204412, 0.00110417] | 0.6280 | NOT_REJECTED |
+
+La invariancia verifica 419 sesiones y 160.832 orígenes por horizonte histórico; diferencia máxima de QLIKE y delta por sesión = 0. Los tres controles RV15/RV30/RV5 suman 5.028 deltas idénticos. RV15 y RV5 tienen hashes históricos de las cuatro máscaras coincidentes; RV30 v3 carecía de ese vector de hashes: se reconstruyeron máscaras con fuentes fijadas y se verificaron claves, objetivos, conteos y límites temporales. No se presenta esa reconstrucción como un hash histórico inexistente. Estos controles no son nuevas evaluaciones del universo de ocho en RV30/RV5.
+
+Comparación descriptiva separada: predicciones del nuevo modelo de ocho restringidas a los seis nombres, con peso 1/6 por sesión:
+
+| Familia | Contraste | Delta QLIKE | Reducción relativa |
+| --- | --- | --- | --- |
+| Ridge | B1_over_B0 | 0.00205679 | 1.1142% |
+| Ridge | B2_over_B1 | 0.00076239 | 0.4177% |
+| LightGBM | B1_over_B0 | 0.00270309 | 1.4337% |
+| LightGBM | B2_over_B1 | -0.00008286 | -0.0446% |
+
+Esta restricción mide transporte del modelo ampliado, no invariancia: cambian entrenamiento y efectos de activo. No se recalculan p para este descriptivo ni se atribuyen causalmente las diferencias a los ETF.
+
+## Distribución y límites de la media
+
+| Familia | Contraste | Mediana del delta | Media recortada 5% por cola |
+| --- | --- | --- | --- |
+| Ridge | B1_over_B0 | 0.00135209 | 0.00153356 |
+| Ridge | B2_over_B1 | 0.00079190 | 0.00084314 |
+| LightGBM | B1_over_B0 | 0.00112998 | 0.00107910 |
+| LightGBM | B2_over_B1 | 0.00031828 | 0.00042264 |
+
+Son descriptivos secundarios; no cambian el contraste primario. Los bloques cronológicos, exclusión de bloques, últimas 30 sesiones, regímenes y sesiones de mayor pérdida quedan íntegros en `evaluation/rv15/summary.json`. Los resultados son dependientes de familia y no demuestran beneficio económico después de costes.
+
+## Concentración y solapamiento de SPY/QQQ
+
+FMP licenciado, dos respuestas HTTP200 obtenidas el 2026-09-08 alrededor de 19:14 Sídney. El proveedor declara actualización 2026-09-07 (SPY 13:47:52; QQQ 13:35:08) sin zona horaria ni fecha de valoración explícitas. Son tenencias actuales descriptivas, no pesos históricos ni inputs del modelo.
+
+| Orden | SPY | Peso SPY | QQQ | Peso QQQ |
+| --- | --- | --- | --- | --- |
+| 1 | NVDA | 8.29230915% | NVDA | 8.85364871% |
+| 2 | AAPL | 7.22428441% | AAPL | 7.46370418% |
+| 3 | MSFT | 5.67890696% | MSFT | 5.89512879% |
+| 4 | AMZN | 3.79829953% | MU | 5.02648013% |
+| 5 | GOOGL | 3.00772889% | AMZN | 4.41644432% |
+| 6 | AVGO | 2.53432871% | AMD | 3.41429633% |
+| 7 | GOOG | 2.40026314% | GOOGL | 3.13059877% |
+| 8 | META | 2.00981691% | GOOG | 2.90549461% |
+| 9 | MU | 1.61931764% | META | 2.90070744% |
+| 10 | TSLA | 1.58787257% | TSLA | 2.80917119% |
+
+Peso sumado de los seis nombres: SPY **28.59148953%**, QQQ **32.33880463%**. Top diez: SPY 38.15312791%, QQQ 46.81567447%. Sumas calculadas sin renormalizar; se preservan efectivo, futuros y la contrapartida negativa QQQ. El solapamiento impide tratar los ETF como ocho exposiciones independientes; la ponderación estadística 1/8 no elimina esa dependencia económica.
+
+## Incidencias, recursos y límites de procedencia
+
+Materialización 958/958 ETF-sesiones. D02 deduplicó sólo barras observadas totalmente idénticas; duplicados incompatibles se rechazan. D03 restituyó el valor implícito de elegibilidad de los seis cuando la columna no existía antes de concatenar, sin modificar valores presentes ni relajar el censo. La verificación directa AAPL/SPY 2024-08-09 encontró 65 filas cada uno; se preservaron los 958 recibos sin rematerializar. La ausencia de barras SPY 2026-03-09 conserva seis orígenes inválidos.
+
+El manifiesto registra dividendos ETF faltantes en las 958 ETF-sesiones y `etf_gamma_numeric_valid_rows=0` sobre 61.910 filas ETF materializadas. Es el contador nativo de validez numérica gamma, no una afirmación de que cada columna gamma sea NaN; las diferencias de B2 no se atribuyen a una señal gamma ETF observada. Los dividendos faltantes permanecen NaN, no cero; identidad histórica del overlay de volumen no demostrada aunque sus bytes están fijados. La pertenencia ETF al estrato heredado `high_flow` es desconocida. Los proxies de agresor/dealer, gamma y disponibilidad histórica no son observación de identidades o inventario real. Estos límites autorizados no se convierten en evidencia positiva.
+
+CPU determinista. Se comprobó ausencia del proceso C antes de habilitar 24 CPU. Admisión LightGBM: tres fragmentos de ocho hilos con commit disponible 19.274.883.072 bytes y pico piloto working set 3.498.246.144 bytes; floor(0,7×commit/pico)=3. Working set no equivale a pico de commit. Pilotos reutilizados sin refit: Ridge un hilo y LightGBM cuatro; sesiones restantes siguen su plan sellado. GPU descartada porque diferencia QLIKE B2=0,00055754 superó 1e-6.
+
+A las 01:50 Sídney del 2026-09-09 un worker falló al reservar 1,27 MiB; 338 sesiones completas quedaron preservadas y la reanudación completó las pendientes. No hubo medición de commit en el instante del fallo. D05 reutilizó la admisión inicial: ese reinicio careció de un recibo nuevo previo. D07 registra explícitamente el hueco y añade medición/hash antes de futuros despachos; no fabrica autorización retrospectiva. El supervisor se sustituyó sin detener coordinador ni workers vivos. Los resultados y productores anteriores permanecieron sellados.
+
+## Custodia, verificación y alcance cerrado
+
+Especificación universo SHA256 `aafde61fa8a5373c88cd4a21199fff86cfb69f7448d70197729bed0c17686d9a`; v4 SHA256 `0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04`. Recibo materializado SHA256 `36c0f212c8af0f2466b6b704f4d53e096cb1ec4cf5e549968ff1f4394b2f3387`. Resultado RV15 SHA256 `9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988`. Control seis SHA256 `536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2`. Tenencias SHA256 `ef9066a23ef30f20472b5dca168281a3847a5fd678add74a6c7c85be90346da2`.
+
+La auditoría independiente verificó 838 sesiones familiares, 2.514 componentes, 19 artefactos del control y 2.581 hashes; consta en `phase2/independent_final_audit.json`. La verificación nativa comprueba binding, fuentes/runtime fijados, hashes de resultados y 419 sesiones agregadas, sin fits. El cierre del informe exige coincidencia exacta entre los dos parciales y el agregado, 32 contrastes secundarios en total, pesos y conteos, registros D04–D07, control seis y recibos de tenencias. Evidencia detallada: `phase2/final_report_receipt.json`, `phase2/rv15_accelerated/execution_receipt.json`, `phase2/AMEND_D04/receipt.json`, `phase2/AMEND_D05/receipt.json`, `phase2/part23_verification/receipt.json` y `phase2/AMEND_D07/verification.json`. Los 4.729 recibos individuales de materialización, familias, componentes y agregado están archivados en `phase2/receipts_rv15.zip`, con índice SHA256 en `phase2/receipt_archive_manifest.json`; no contiene paneles ni predicciones por origen. El parcial Ridge previo conserva snapshot y auditoría independientes.
+
+Reproducir únicamente comprobación e informe: Python CPU del runbook, `-B artifacts/rp4_universe_code/final_report.py`. La repetición verifica hashes y no reescribe un informe cerrado. Decisión 135 documentada en `docs/methodology_decisions.md`. Código, informes y recibos en commit local; sin push. RV30 y RV5 del universo ampliado permanecen diferidos y no se arrancan automáticamente; selector v5 y ventana final no ejecutados.
+
+RESEARCH_ONLY. NOT INVESTMENT ADVICE. capital_go=false.

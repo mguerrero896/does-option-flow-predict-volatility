@@ -87,6 +87,18 @@ five-family RV15 comparison and its distinct inferential scopes. V4 remains prim
 | Some proposed models were not evaluated in the completed run | Five families completed RV15; MLP, RV5 and RV30 were deferred in A3. | No missing results are imputed. Earlier partial hardware probes do not establish completed scientific evaluation. |
 | Prospective combinations are secondary | [Decision 136](rp4/prospective_combination_decision_136.md) adds top2 and the four-family mean, retaining v4 as primary and the exact 20/40/45/335 roles. | Registered future evidence, not a reported prospective outcome. |
 
+## Eight-asset extension (registered, closed)
+
+The [closed English report](rp4/results_universe_v1.md) and its
+[aggregate import receipt](../artifacts/rp4_universe_public_v1/import_receipt.json)
+retain the source commit and explicit public selection. V4 remains the headline.
+
+| Finding | Evidence and quantity | Status today and next implication |
+| --- | --- | --- |
+| Ridge passes both links with eight assets | RV15, 419 sessions and 214,209 origins: option state +1.4042%, p = 0.0208; flow +0.5634%, p = 0.0093. | Registered closed extension; six historical reads for the original stocks and the first target evaluation of SPY/QQQ. No independent replication. |
+| The joint claim across families fails | Trees: option state +1.0830%, p = 0.0794; flow −0.1485%, nominal p = 0.6738, with H2 unopened. `global_joint_reject=false`. | The inherited at-least-one-family closure field is true, while the registered both-family joint claim remains false. These rules are not interchangeable. |
+| ETF and stock flow effects are heterogeneous | Ridge flow: SPY +1.26%, p = 0.020; QQQ +0.54%, p = 0.084; positive signs in 6/8 assets, with META/MSFT slightly negative. | Asset-level diagnostics are not eight independent confirmations. The original-six control exactly recovers the v4 primary comparison; the expanded model's six-stock subset is a different comparison. |
+
 ## Reconciling the apparent contradictions
 
 **537 sessions versus 335.** The RP2 figure uses its observed LightGBM effect,

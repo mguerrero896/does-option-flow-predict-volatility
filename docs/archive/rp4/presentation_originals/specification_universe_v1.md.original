@@ -1,0 +1,160 @@
+# RP4 — extensión registrada a ocho activos, versión 1
+
+Registro local del 2026-09-08. RESEARCH_ONLY. NOT INVESTMENT ADVICE. capital_go=false.
+Es una extensión posterior a v4: sexta lectura de las mismas sesiones para los
+seis nombres y primera evaluación como objetivos para SPY y QQQ. No es una muestra
+nueva, una confirmación independiente ni una autorización de inversión.
+
+## Alcance y autorización
+
+La instrucción de Miguel de este hilo autoriza únicamente la fase 1: censo,
+elegibilidad, coste y especificación. La fase 2 requiere una autorización escrita
+posterior en este mismo hilo. Este registro no la concede. No hay push,
+publicación, descarga, entrenamiento ni evaluación esta noche.
+
+El microbenchmark solicitado se limita a cinco fechas por ETF: cálculo efímero
+en memoria de las funciones heredadas y descarte inmediato, sin escribir paneles
+B0/B1/B2, objetivos, matrices de modelos ni predicciones. La comprobación de
+elegibilidad puede calcular en memoria los obligatorios y la validez de RV30;
+sólo se conservan conteos y máscaras resumidas por sesión. El censo conserva
+presencia de celdas y conteos, no valores de IV por origen. Ningún resultado de
+pronóstico se usa para elegir reglas o fechas.
+
+Máximo cuatro CPU lógicas y prioridad de proceso inferior a la normal durante
+la fase 1; una sola sesión-activo en ejecución a la vez. La estimación a ocho
+núcleos será una extrapolación identificada, no una medición a ocho núcleos.
+
+## Contratos heredados
+
+Se heredan íntegramente `artifacts/rp4_v4_a1/specification.json`,
+`docs/rp4/specification_v4.md`, la especificación efectiva v3 y la decisión 132.
+El sidecar fija sus SHA-256 y los productores. Ante una discrepancia se detiene
+el componente afectado; no se redefine el contrato por los resultados del censo.
+
+Único cambio del universo objetivo: AAPL, AMZN, META, MSFT, NVDA, TSLA, SPY, QQQ,
+en ese orden. B0/B1/B2 mantienen exactamente las listas anidadas v4 de 29/69/138
+predictores y sus transformaciones. Los efectos de activo pasan de cinco a siete,
+con AAPL como referencia, fuera del conteo de predictores. Los controles históricos
+SPY/QQQ de B0 se conservan incluso en las filas ETF; son conocidos al corte y no
+son objetivos futuros. El filtro QR de entrenamiento resuelve dependencias exactas
+en la familia lineal sin cambiar la lista registrada.
+
+Se mantienen las dos familias de v4, ridge logarítmica winsorizada y LightGBM
+QLIKE. RV15 es primario; RV5 es secundario y sólo se ejecutará si la autorización
+de fase 2 lo incluye. RV30 conserva su función de máscara de soporte y control
+temporal. El torneo v5 se presupuestará por separado; no sustituye las dos
+familias ni se ejecuta mediante esta especificación.
+
+## Tiempo, fuentes, celdas y ausencia
+
+Mismo proxy de tiempo fuente de 120 segundos. La superficie procede de UW y del
+spot FMP. No se introduce un tercer proveedor. IV finita en [0.03,3] antes de
+agregar, con los filtros nativos de cada productor. No se unifican artificialmente
+los filtros distintos del snapshot B1, la rejilla IV, el flujo y la gamma v3.
+
+La rejilla tiene 25 celdas: DTE calendario 0–1, 2–7, 8–30, 31–90, >90; K/S <0.90,
+[0.90,0.97), [0.97,1.03), [1.03,1.10], >1.10. Usa las observaciones válidas en
+(corte−5 minutos,corte], mediana ponderada por size y spot cierre del minuto
+origen−3, exactamente `build_new_option_features` precedido por el filtro IV v2.
+ATM 0–1DTE significa la celda 0–1DTE y K/S en [0.97,1.03), no una nueva sonrisa
+ajustada. El snapshot B1 restante conserva su ventana de 30 minutos, último
+registro válido por contrato y su productor original.
+
+El censo de ventanas B2 usa created_at hasta el corte y el límite inferior de
+executed_at, según el productor heredado; no reemplaza la lógica por un simple
+conteo sobre created_at. Gamma v3 conserva ambos relojes, primeras versiones
+disponibles y sus reglas de historia elegible. Un contador conocido igual a cero
+activa la decisión 132: sólo los ratios/formas/innovaciones enumerados pasan a
+NaN, las magnitudes quedan intactas, y se añaden dos indicadores. Contador
+desconocido produce indicador desconocido. No se excluyen filas ni sesiones
+por celdas ausentes o ventanas vacías y no se imputa la cinta.
+
+## Partición y elegibilidad
+
+Partición calendario 2026-08-01. Primaria: 2024-08-02 a 2026-07-31, las mismas
+479 sesiones heredadas, primeras 60 sólo calentamiento y 419 programadas después.
+El hueco aceptado 2025-01-25–2025-02-24 no se rellena. Las primeras 60 son las
+fechas del calendario común, no 60 fechas escogidas después de filtrar cada activo.
+Se conserva la definición de ventana final 2026-08-03–2026-09-04, 25 sesiones,
+sin certificar esta noche la cobertura ETF de esa ventana ni autorizar su lectura.
+Su ejecución queda condicionada a autorización y verificación previa separadas.
+
+Rejilla real XNYS, incluidos cambios DST y cierres anticipados. Se reutilizan
+normalización, deduplicación, reparación de volumen ya registrada y rejilla FMP.
+Fill share máximo 5%; nunca completar desde el futuro. Un origen RV30 requiere
+31 cierres realmente observados, finitos y positivos desde origen hasta origen+30,
+y RV30 finito positivo. Una barra ausente puede invalidar algunos orígenes sin
+eliminar toda la sesión. Obligatorios: los 29 B0, incluido HARQ, todos finitos;
+`rp4_eligible` cuando exista debe ser verdadero. Los opcionales de B1/B2 pueden
+ser NaN: mediana/indicadores aprendidos sólo en entrenamiento para ridge, NaN
+nativo para árboles. Las máscaras son comunes a los tres conjuntos y dos familias.
+RV15/RV5 inválido dentro de la máscara RV30 detiene ese horizonte; no recorta
+silenciosamente su muestra.
+
+Walk-forward expansivo. Entrenamiento anterior a la sesión pronosticada y con
+fin de RV30 al menos 60 minutos anterior al primer origen de prueba. Últimas diez
+sesiones elegibles del entrenamiento para validación interna; misma separación
+de 60 minutos entre inner_fit y validación. Requiere más de diez fechas elegibles
+de entrenamiento e inner_fit no vacío. No se eliminan 60 sesiones adicionales
+por purga ni se usa información futura para seleccionar configuraciones.
+
+## Estimandos y control de invariancia
+
+Primarios, reportados conjuntamente sin sustitución:
+
+1. Deltas de QLIKE B1−sobre−B0 y B2−sobre−B1 del modelo agrupado de ocho activos:
+   pérdida base menos pérdida ampliada. Media por origen dentro de activo/sesión,
+   después igual peso entre activos presentes y entre sesiones, como v4. Se
+   publican explícitamente activos ausentes y pesos efectivos; con ocho presentes
+   cada activo pesa 1/8. La máscara de cada contraste es pareada y común.
+2. Deltas originales de seis activos reproducidos como control desde los
+   checkpoints o pérdidas agregadas ya sellados de v4, verificando custodia,
+   claves, máscaras y la agregación original. No se reajustan los seis modelos
+   para este control. Debe reproducir el original bajo la identidad numérica
+   del release. Un fallo bloquea la declaración de invariancia y se investiga.
+
+La extensión no sustituye el resultado de seis activos; se reporta junto a él.
+El modelo agrupado de ocho cambia el entrenamiento, efectos de activo y ajustes.
+Por eso restringir sus predicciones a los seis nombres no es un control de
+invariancia: sólo podrá informarse como secundario de transporte, separado del
+control original. SPY y QQQ por activo son secundarios, con todos los signos;
+no se promueven a primarios tras observarlos.
+
+QLIKE(y,f)=y/f−log(y/f)−1. Reducción porcentual=100×media(delta de sesión)/media
+de pérdida base de sesión. Misma ponderación por origen al ajustar. La evaluación
+conserva la rejilla de hiperparámetros, preprocesamiento, cotas, Duan, desempates,
+parada y semillas completas de v4, sin reajustar por el censo.
+
+Bootstrap circular de bloques cronológicos de cinco sesiones, 9.999 réplicas,
+semilla 20260907, mínimo diez sesiones. Remuestreo pareado, IC95% percentil
+bilateral y p unilateral centrado `(1+count(T*−T >= T))/10000`. Por familia y
+ventana: H1 exige delta>0 y p≤0.05; H2 sólo se prueba formalmente si H1 rechaza,
+con la misma regla. H2 cerrada puede mostrar p nominal diagnóstico, nunca rechazo
+formal. Los secundarios v4 mantienen su etiqueta y no rescatan el primario.
+Los dos universos no son replicaciones independientes; estos p no corrigen la
+búsqueda entre versiones, universos, horizontes o familias. Afirmación conjunta
+de ambas familias exige rechazo de H1 y H2 en ambas.
+
+## Diferencias ETF, coste y cierre de fase 2
+
+SPY/QQQ son ETF de índice: vencimientos diarios, mayor volumen y composición
+del flujo distinta a acciones individuales pueden cambiar la superficie y el
+mecanismo. Se cuantifican cobertura, 0–1DTE y volumen desde los datos disponibles;
+no se atribuyen identidades de participantes ni inventario real de dealers.
+Los proxies de agresor, dealer y disponibilidad histórica conservan sus límites.
+
+Las cinco fechas de coste se fijan por índices 0,119,239,359,478 del calendario
+común ordenado, para ambos ETF, antes de medir. Se reportan tiempos por componente,
+CPU/afinidad, filas, memoria y tamaño serializado sólo a memoria. Proyección a
+479 fechas por activo mediante 479×media de cinco tiempos, y escenario ideal de
+ocho workers de un hilo, con sensibilidad a concurrencia y E/S; no es un SLA.
+Los costes de evaluación se derivan de recibos históricos sin nuevos ajustes.
+
+Antes de fase 2: comprobar autorización escrita, todos los hashes, espacio,
+matriz de elegibilidad, disponibilidad de exógenas por ETF y paridad del censo.
+No inventar dividendos/tasas ni sustituir faltantes por cero. Un faltante permitido
+en el contrato permanece NaN y se divulga; si es obligatorio bloquea.
+Materializar bajo una raíz nueva; conservar byte por byte los paneles de seis
+activos, recibos, resultados y checkpoints. Registrar código y entradas antes
+de ajustar, y guardar recibos por etapa, hashes, recursos y todos los signos.
+No repetir componentes completos de evaluaciones consumidas para hacer pruebas.

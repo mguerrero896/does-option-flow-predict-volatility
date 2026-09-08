@@ -48,6 +48,9 @@ Primary means, bilateral/Holm comparisons and secondary medians are separate ana
 The [closed registered exploratory v5 extension](rp4/results_v5.md) and its
 [specification](rp4/specification_v5.md) are supplementary. Its primary selector
 fails H1; the secondary top2 result and post hoc averaging do not replace v4.
+The [registered, closed eight-asset extension](rp4/results_universe_v1.md) adds
+SPY/QQQ as targets; its eight-row appendix and exact six-asset control retain
+the distinction between the successful linear sequence and failed joint claim.
 
 ## 05 — Robustness and limits
 

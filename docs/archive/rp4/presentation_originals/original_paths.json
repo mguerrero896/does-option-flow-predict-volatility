@@ -309,5 +309,51 @@
   "tests/contract/test_rp4_prospective_amendment_3.py": {
     "archive_path": "docs/archive/rp4/presentation_originals/test_rp4_prospective_amendment_3.py.original",
     "sha256": "62fc4ca692e9882d299f8272f2e4fc7af5b288f3556f35c292b9118b9e51e689"
+  },
+  "docs/rp4/results_universe_v1.md": {
+    "archive_path": "docs/archive/rp4/presentation_originals/results_universe_v1.md.original",
+    "sha256": "1a0418e2d6f74c39bd1bfb63ec24133d885b008aa0afeb67260588a8811851b2",
+    "public_path": "docs/rp4/results_universe_v1.md"
+  },
+  "docs/rp4/specification_universe_v1.md": {
+    "archive_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.md.original",
+    "sha256": "aafde61fa8a5373c88cd4a21199fff86cfb69f7448d70197729bed0c17686d9a"
+  },
+  "docs/rp4/specification_universe_v1.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.json.original",
+    "sha256": "b59e0cfbc7ee9d78766743709c358f9264b5ee317cc2f8ec588fc5ca0de1dcc1"
+  },
+  "docs/rp4/specification_universe_v1.sha256": {
+    "archive_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.sha256.original",
+    "sha256": "3bc9bf2dd52859ada4d70211e06cea0d73b92459317aca2ec316294e23859fb1"
+  },
+  "artifacts/rp4_universe_v1/phase2/final_report_receipt.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_final_report_receipt.json.original",
+    "sha256": "6608f2ce63953554097a03c8e1e82c08b37ace5c18a14da59856c313ecaadefd"
+  },
+  "artifacts/rp4_universe_v1/phase2/independent_final_audit.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_independent_final_audit.json.original",
+    "sha256": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4"
+  },
+  "artifacts/rp4_universe_v1/phase2/evaluation/rv15/receipt.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_evaluation_receipt.json.original",
+    "sha256": "9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988"
+  },
+  "artifacts/rp4_universe_v1/phase2/control_six/receipt.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_control_six_receipt.json.original",
+    "sha256": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2"
+  },
+  "artifacts/rp4_universe_v1/phase2/control_six/rv15/receipt.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_control_six_rv15_receipt.json.original",
+    "sha256": "d0dcc77753a2a67b0471a185c21218880474574a6c444d753d7c6cd9d6f47c3f"
+  },
+  "artifacts/rp4_universe_v1/phase2/closure_verification.json": {
+    "archive_path": "docs/archive/rp4/presentation_originals/universe_closure_verification.json.original",
+    "sha256": "0223bab9e601eb185b691129c9313af9360d62b3e647c696abe8c970c97ad8a1"
+  },
+  "artifacts/rp4_universe_v1/phase2/evaluation/rv15/by_asset.csv": {
+    "archive_path": "artifacts/rp4_universe_public_v1/by_asset.csv",
+    "public_path": "artifacts/rp4_universe_public_v1/by_asset.csv",
+    "sha256": "31de38a31c38a245544c96aa2ff7a336cacf3349f7eb77804f6df498ad2dead2"
   }
 }

@@ -915,7 +915,7 @@ def build_state() -> dict[str, Any]:
         "edge_claim_eligible": False,
         "capital_go": False,
         "research_only": True,
-        "public_presentation": "V4_HEADLINE_WITH_CLOSED_REGISTERED_EXPLORATORY_V5_EXTENSION",
+        "public_presentation": "V4_HEADLINE_WITH_CLOSED_REGISTERED_EXTENSIONS",
         "headline_claims": [
             "Option state improves mean RV30/RV15 in both families in registered v3/v4 tests.",
             "Linear flow increment: RV15 +0.623%; RV5 secondary +0.256%.",
@@ -935,6 +935,7 @@ def build_state() -> dict[str, Any]:
     state["current_report"] = {
         "source": {"path": final, "sha256": _sha(REPO / final)},
         "full_result": "docs/rp4/results_v4.md",
+        "supplementary_reports": ["docs/rp4/results_v5.md", "docs/rp4/results_universe_v1.md"],
         "secondary_correction": "docs/rp4/results_v3_revision2.md",
         "evidence_cutoff": "2026-09-04",
     }
@@ -1039,8 +1040,8 @@ def render_status(state: dict[str, Any]) -> str:
         "",
         "## Publication and access",
         "",
-        "V4 remains the headline; the closed registered exploratory v5 extension",
-        "is reported separately. Unreviewed experiments have no public result here.",
+        "V4 remains the headline; the closed v5 and eight-asset extensions",
+        "are reported separately. Unreviewed experiments have no public result here.",
         "Public history is preserved. Merge requires five passing CI checks and",
         "written external review. The generated state itself is not proof of a CI run.",
         "The three saved v4 aggregate tables have verified public readback; licensed",

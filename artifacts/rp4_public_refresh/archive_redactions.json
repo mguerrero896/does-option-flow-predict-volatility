@@ -322,6 +322,14 @@
       "numeric_invariant": true
     },
     {
+      "logical_path": "docs/rp4/specification_universe_v1.json",
+      "original_sha256": "b59e0cfbc7ee9d78766743709c358f9264b5ee317cc2f8ec588fc5ca0de1dcc1",
+      "public_path": "docs/archive/rp4/presentation_originals/specification_universe_v1.json.original.public",
+      "public_sha256": "16c420889026aa72ec018b8200a7bdeb3c3aadf7409a51699517ee751924d741",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
       "logical_path": "docs/rp4/specification_v4.md",
       "original_sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
       "public_path": "docs/archive/rp4/presentation_originals/specification_v4.md.original.public",
@@ -334,6 +342,54 @@
       "original_sha256": "6ffdfe97de0660515b2f3d79b15b985e398060cf59d74b7c1adf33e379aa63da",
       "public_path": "docs/archive/rp4/presentation_originals/specification_v5.md.original.public",
       "public_sha256": "5cf4149f7077ef35af3dfae5afcdeeb9c25cc5df3c304cd5a1dfddaf5e5d6cf9",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/closure_verification.json",
+      "original_sha256": "0223bab9e601eb185b691129c9313af9360d62b3e647c696abe8c970c97ad8a1",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_closure_verification.json.original.public",
+      "public_sha256": "d606e11d869fd1cc68afe4d166c2847405168e692d307b2c6a54de08565d5fc6",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/control_six/receipt.json",
+      "original_sha256": "536a602d2e6fe0a07aac8f309409e15cb4f499bdc27c86a3cbe4d45df64090a2",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_control_six_receipt.json.original.public",
+      "public_sha256": "8a6dfe8fa0b76bff0af751d7f65490e728b3ec1bbd5d979b9af5525d26e88093",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/control_six/rv15/receipt.json",
+      "original_sha256": "d0dcc77753a2a67b0471a185c21218880474574a6c444d753d7c6cd9d6f47c3f",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_control_six_rv15_receipt.json.original.public",
+      "public_sha256": "03f64ea8c0eb64e97a20183ffda07cfb1003092df40cf61ff584b5f82c953c36",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/evaluation/rv15/receipt.json",
+      "original_sha256": "9d8739e168caad455cad2fe033f9037ba12673749c9c892d32bd2033026af988",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_evaluation_receipt.json.original.public",
+      "public_sha256": "8cd1b82040b7914eba2f388f35db5eb9f2cfc395951610bdf2276fe073976161",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/final_report_receipt.json",
+      "original_sha256": "6608f2ce63953554097a03c8e1e82c08b37ace5c18a14da59856c313ecaadefd",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_final_report_receipt.json.original.public",
+      "public_sha256": "7279a593bf32c4a5b73d684ead24b00cf9e8d613993965212af27e35c3f1d39d",
+      "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
+      "numeric_invariant": true
+    },
+    {
+      "logical_path": "artifacts/rp4_universe_v1/phase2/independent_final_audit.json",
+      "original_sha256": "d480d509c31202749b57ed19a0abac6686fb2c34b47be5ad6ae83704656a62f4",
+      "public_path": "docs/archive/rp4/presentation_originals/universe_independent_final_audit.json.original.public",
+      "public_sha256": "74c3c1b8e777d7bd29c9226302420c6e7ab17bf7e190e96e0ffdc4374df77801",
       "rule": "Private locator and internal presentation labels removed; numeric and selector contracts required",
       "numeric_invariant": true
     },
