@@ -1,7 +1,7 @@
 {
   "contract": "NEW_MATERIAL_ONLY",
   "base_commit_sha1": "6f219d436018a5b0f239aadd801ec3e8e70877bf",
-  "stage": "closeout",
+  "stage": "stage5",
   "source_commit_sha1": "39446dca1ba551c68692a09e8c2bc94dcc99de24",
   "included": [
     {
@@ -3362,6 +3362,14 @@
     "stdout_sha256": "e12c83094030004dbab985627f69e635a369c69aae45c200334c037881862256",
     "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "historical_hash_functions_modified": false
+  },
+  "focused_public_qa": {
+    "exit_code": 0,
+    "tests": 8,
+    "stdout_sha256": "b3f363fc61420f83576b0b639aab5a098ce98c454c3e4a81afd953f4bc98ad23",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "junit_sha256": "f2f0748540560b70b628e73da1ac5d23be3d21eb14ab443a24a78734179ea0cf",
+    "mirror_prose_and_filename_checks": "PASS_EXACT_PREPARED_TREE_PATHS"
   },
   "public_checks": {
     "projected_files_checked": 390,
