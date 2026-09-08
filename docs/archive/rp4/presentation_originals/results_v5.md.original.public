@@ -1,0 +1,341 @@
+# RP4 v5 — intento A3, enmienda técnica 2
+
+Estado: **COMPLETE**. Actualizado: 2026-09-08T15:31:33.840073+00:00. RV15 solamente.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+## Cobertura y progreso
+
+Calendario exacto de 419 sesiones del preflight A1. Se mantienen las mismas claves, objetivos y conjuntos B0/B1/B2. PARTIAL contiene sólo sesiones terminadas; las familias pueden cubrir fechas distintas y no se declara un ganador con esa muestra incompleta.
+
+| horizon_minutes | family | N_sessions | N_calendar | N_remaining | N_origins | cpu_seconds | status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 15 | seasonal_persistence | 419 | 419 | 0 | 160832 | 186.84375 | COMPLETE |
+| 15 | log_har | 419 | 419 | 0 | 160832 | 13088.141 | COMPLETE |
+| 15 | log_ridge_harq | 419 | 419 | 0 | 160832 | 9645.5 | COMPLETE |
+| 15 | log_elastic_net | 419 | 419 | 0 | 160832 | 13735.031 | COMPLETE |
+| 15 | lightgbm_qlike | 419 | 419 | 0 | 160832 | 101485.89 | COMPLETE |
+
+## Métricas por familia y conjunto
+
+QLIKE y MAE promedian orígenes dentro de activo/sesión y dan igual peso a activos y sesiones. RMSE aplica la raíz después de promediar el error cuadrático.
+
+| version | horizon_minutes | family | information_set | qlike | mae | rmse | N_sessions | N_origins | N_asset_sessions | N_calendar | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| v5 | 15 | seasonal_persistence | B0 | 0.41705236 | 6.9665818e-06 | 3.7487636e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | seasonal_persistence | B1 | 0.41705236 | 6.9665818e-06 | 3.7487636e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | seasonal_persistence | B2 | 0.41705236 | 6.9665818e-06 | 3.7487636e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_har | B0 | 0.18322849 | 4.6689574e-06 | 3.3623951e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_har | B1 | 0.18220759 | 4.7215803e-06 | 3.3537769e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_har | B2 | 0.18067891 | 4.6949872e-06 | 3.3512211e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_ridge_harq | B0 | 0.18366037 | 4.6811776e-06 | 3.3641832e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_ridge_harq | B1 | 0.18205096 | 4.7191701e-06 | 3.3551349e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_ridge_harq | B2 | 0.18091349 | 4.6910489e-06 | 3.3519003e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_elastic_net | B0 | 0.18350021 | 4.6577801e-06 | 3.3650313e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_elastic_net | B1 | 0.18224496 | 4.6863855e-06 | 3.3559636e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | log_elastic_net | B2 | 0.1809996 | 4.6542663e-06 | 3.352214e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | lightgbm_qlike | B0 | 0.18775026 | 4.737404e-06 | 3.4772374e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | lightgbm_qlike | B1 | 0.18555364 | 4.7704735e-06 | 3.4857009e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | lightgbm_qlike | B2 | 0.18576654 | 4.7803196e-06 | 3.487629e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | selector_primary | B0 | 0.18433699 | 4.6534259e-06 | 3.3680118e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | selector_primary | B1 | 0.1838239 | 4.7217884e-06 | 3.4272834e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | selector_primary | B2 | 0.18124475 | 4.6583347e-06 | 3.3542048e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | ensemble_top2 | B0 | 0.1824836 | 4.6471938e-06 | 3.3657977e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | ensemble_top2 | B1 | 0.18107002 | 4.6727522e-06 | 3.3869828e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | ensemble_top2 | B2 | 0.18023514 | 4.6451389e-06 | 3.3916121e-05 | 419 | 160832 | 2514 | 419 | COMPLETE |
+| v5 | 15 | mlp_log | B0 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | 0 | 0 | 0 | 419 | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+| v5 | 15 | mlp_log | B1 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | 0 | 0 | 0 | 419 | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+| v5 | 15 | mlp_log | B2 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | 0 | 0 | 0 | 419 | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+
+MLP: diferida por coste, no evaluada en esta corrida A3. Su estado es DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN; no se imputan pérdidas ni frecuencias de selección. A1 sí ajustó la red en un componente parcial y A2 la ajustó en la sesión de prueba de memoria/GPU. No se afirma que nunca se evaluó. RV5 y RV30 quedan diferidos.
+
+## Referencia histórica v4, RV15
+
+| version | horizon_minutes | family | information_set | qlike | mae | N_sessions | N_origins | rmse | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| v4 | 15 | lightgbm_qlike | B0 | 0.18775026 | 4.737404e-06 | 419 | 160832 | 3.4772374e-05 | EXISTING_HISTORICAL_RESULT |
+| v4 | 15 | lightgbm_qlike | B1 | 0.18555364 | 4.7704735e-06 | 419 | 160832 | 3.4857009e-05 | EXISTING_HISTORICAL_RESULT |
+| v4 | 15 | lightgbm_qlike | B2 | 0.18576654 | 4.7803196e-06 | 419 | 160832 | 3.487629e-05 | EXISTING_HISTORICAL_RESULT |
+| v4 | 15 | log_ridge_harq | B0 | 0.18366037 | 4.6811776e-06 | 419 | 160832 | 3.3641832e-05 | EXISTING_HISTORICAL_RESULT |
+| v4 | 15 | log_ridge_harq | B1 | 0.18204406 | 4.7195749e-06 | 419 | 160832 | 3.3551646e-05 | EXISTING_HISTORICAL_RESULT |
+| v4 | 15 | log_ridge_harq | B2 | 0.1809103 | 4.6911436e-06 | 419 | 160832 | 3.3519018e-05 | EXISTING_HISTORICAL_RESULT |
+
+Los comparadores conservan las 419 sesiones. Una tabla PARTIAL no constituye una comparación pareada contra ellos. v4 conserva el titular; no hay prueba directa v5/v4.
+
+## Selector e inferencia
+
+El selector y el conjunto top2 usan las cinco familias: persistencia, HAR, ridge, Elastic Net y LightGBM. Se eligen exclusivamente por QLIKE de validación temporal, con desempate en ese orden; top2 promedia niveles con pesos 0,5/0,5. Sólo se calculan cuando las cinco familias completan las 419 sesiones.
+
+| family | contrast | estimate | ci_low | ci_high | p_nominal | p_for_decision | p_bonferroni5 | hypothesis_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| selector_primary | B1_over_B0 | 0.00051309616 | -0.0022070785 | 0.0025541992 | 0.3594 | 0.3594 | 1 | NOT_REJECTED |
+| selector_primary | B2_over_B1 | 0.002579149 | 0.00030468091 | 0.0062202819 | 0.0692 | NO DISPONIBLE | 0.346 | NOT_TESTED |
+| ensemble_top2 | B1_over_B0 | 0.0014135833 | 0.00018892871 | 0.0028089323 | 0.0236 | 0.0236 | 0.118 | REJECTED |
+| ensemble_top2 | B2_over_B1 | 0.00083487248 | -3.3644923e-05 | 0.0016685559 | 0.0249 | 0.0249 | 0.1245 | REJECTED |
+
+| family | q_chain | p_holm_chain | p_holm_chain_bonferroni5 | chain_holm_rejected |
+| --- | --- | --- | --- | --- |
+| selector_primary | 0.3594 | 0.3594 | 1 | no |
+| ensemble_top2 | 0.0249 | 0.0498 | 0.249 | sí |
+
+Se mantiene H1→H2: H2 sólo se abre tras rechazar H1 positivamente al 5%. Su p nominal se divulga aun cerrada la puerta. Cada cadena usa max(pH1,pH2), Holm entre los dos selectores y Bonferroni ×5 como cota declarada entre versiones. Bootstrap de sesiones: bloque 5, 9.999 repeticiones, semilla 20260908; intervalos puntuales bilaterales del 95%. Las enmiendas de coste son lecturas históricas divulgadas; ×5 no corrige toda la búsqueda adaptativa ni convierte estos resultados en confirmación prospectiva.
+
+Regla nominal RV15 B2/B1 del selector: NOT_SATISFIED. Requiere delta positivo, p unilateral <0,05 e intervalo 95% que excluya cero. Se reporta separadamente del resultado de H1 y Holm.
+
+## Frecuencias del selector y familia diferida
+
+| horizon_minutes | information_set | family | selected_sessions | N_sessions | selection_frequency | top2_sessions | mean_top2_weight | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 15 | B0 | seasonal_persistence | 0 | 419 | 0 | 2 | 0.0023866348 | COMPLETE |
+| 15 | B0 | log_har | 29 | 419 | 0.069212411 | 72 | 0.085918854 | COMPLETE |
+| 15 | B0 | log_ridge_harq | 68 | 419 | 0.16229117 | 240 | 0.28639618 | COMPLETE |
+| 15 | B0 | log_elastic_net | 119 | 419 | 0.28400955 | 299 | 0.35680191 | COMPLETE |
+| 15 | B0 | lightgbm_qlike | 203 | 419 | 0.48448687 | 225 | 0.26849642 | COMPLETE |
+| 15 | B0 | mlp_log | NO DISPONIBLE | 0 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+| 15 | B1 | seasonal_persistence | 0 | 419 | 0 | 1 | 0.0011933174 | COMPLETE |
+| 15 | B1 | log_har | 23 | 419 | 0.054892601 | 73 | 0.087112172 | COMPLETE |
+| 15 | B1 | log_ridge_harq | 77 | 419 | 0.18377088 | 248 | 0.29594272 | COMPLETE |
+| 15 | B1 | log_elastic_net | 107 | 419 | 0.25536993 | 293 | 0.349642 | COMPLETE |
+| 15 | B1 | lightgbm_qlike | 212 | 419 | 0.50596659 | 223 | 0.26610979 | COMPLETE |
+| 15 | B1 | mlp_log | NO DISPONIBLE | 0 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+| 15 | B2 | seasonal_persistence | 0 | 419 | 0 | 1 | 0.0011933174 | COMPLETE |
+| 15 | B2 | log_har | 37 | 419 | 0.088305489 | 93 | 0.11097852 | COMPLETE |
+| 15 | B2 | log_ridge_harq | 48 | 419 | 0.11455847 | 231 | 0.27565632 | COMPLETE |
+| 15 | B2 | log_elastic_net | 146 | 419 | 0.34844869 | 302 | 0.36038186 | COMPLETE |
+| 15 | B2 | lightgbm_qlike | 188 | 419 | 0.44868735 | 211 | 0.25178998 | COMPLETE |
+| 15 | B2 | mlp_log | NO DISPONIBLE | 0 | NO DISPONIBLE | NO DISPONIBLE | NO DISPONIBLE | DEFERRED_COST_NOT_EVALUATED_IN_THIS_RUN |
+
+## Elastic Net: candidatos y exclusiones por etapa
+
+| horizon_minutes | information_set | family | stage | alpha | l1_ratio | N_sessions | N_calendar | eligible_sessions | attempted_sessions | converged_sessions | excluded_sessions | active_after_stage_sessions | not_attempted_sessions | selected_sessions | exclusion_frequency | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 15 | B0 | log_elastic_net | inner_fit | 0.0001 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 77 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.0001 | 0.1 | 419 | 419 | 419 | 77 | 77 | 0 | 419 | 342 | 77 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 0.0001 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 15 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.0001 | 0.5 | 419 | 419 | 419 | 15 | 15 | 0 | 419 | 404 | 15 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 0.0001 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 167 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.0001 | 0.9 | 419 | 419 | 419 | 167 | 167 | 0 | 419 | 252 | 167 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 0.01 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 62 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.01 | 0.1 | 419 | 419 | 419 | 62 | 62 | 0 | 419 | 357 | 62 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 0.01 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 21 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.01 | 0.5 | 419 | 419 | 419 | 21 | 21 | 0 | 419 | 398 | 21 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 0.01 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 73 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 0.01 | 0.9 | 419 | 419 | 419 | 73 | 73 | 0 | 419 | 346 | 73 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 1 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 3 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 1 | 0.1 | 419 | 419 | 419 | 3 | 3 | 0 | 419 | 416 | 3 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 1 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 1 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 1 | 0.5 | 419 | 419 | 419 | 1 | 1 | 0 | 419 | 418 | 1 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | inner_fit | 1 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 0 | 0 | COMPLETE |
+| 15 | B0 | log_elastic_net | refit | 1 | 0.9 | 419 | 419 | 419 | 0 | 0 | 0 | 419 | 419 | 0 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.0001 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 103 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.0001 | 0.1 | 419 | 419 | 419 | 103 | 103 | 0 | 419 | 316 | 103 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.0001 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 37 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.0001 | 0.5 | 419 | 419 | 419 | 37 | 37 | 0 | 419 | 382 | 37 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.0001 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 109 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.0001 | 0.9 | 419 | 419 | 419 | 109 | 109 | 0 | 419 | 310 | 109 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.01 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 57 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.01 | 0.1 | 419 | 419 | 419 | 57 | 57 | 0 | 419 | 362 | 57 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.01 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 25 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.01 | 0.5 | 419 | 419 | 419 | 25 | 25 | 0 | 419 | 394 | 25 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 0.01 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 74 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 0.01 | 0.9 | 419 | 419 | 419 | 74 | 74 | 0 | 419 | 345 | 74 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 1 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 14 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 1 | 0.1 | 419 | 419 | 419 | 14 | 14 | 0 | 419 | 405 | 14 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 1 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 0 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 1 | 0.5 | 419 | 419 | 419 | 0 | 0 | 0 | 419 | 419 | 0 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | inner_fit | 1 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 0 | 0 | COMPLETE |
+| 15 | B1 | log_elastic_net | refit | 1 | 0.9 | 419 | 419 | 419 | 0 | 0 | 0 | 419 | 419 | 0 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.0001 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 127 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.0001 | 0.1 | 419 | 419 | 419 | 127 | 127 | 0 | 419 | 292 | 127 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.0001 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 30 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.0001 | 0.5 | 419 | 419 | 419 | 30 | 30 | 0 | 419 | 389 | 30 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.0001 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 63 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.0001 | 0.9 | 419 | 419 | 419 | 63 | 63 | 0 | 419 | 356 | 63 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.01 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 70 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.01 | 0.1 | 419 | 419 | 419 | 70 | 70 | 0 | 419 | 349 | 70 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.01 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 54 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.01 | 0.5 | 419 | 419 | 419 | 54 | 54 | 0 | 419 | 365 | 54 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 0.01 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 62 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 0.01 | 0.9 | 419 | 419 | 419 | 62 | 62 | 0 | 419 | 357 | 62 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 1 | 0.1 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 13 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 1 | 0.1 | 419 | 419 | 419 | 13 | 13 | 0 | 419 | 406 | 13 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 1 | 0.5 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 0 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 1 | 0.5 | 419 | 419 | 419 | 0 | 0 | 0 | 419 | 419 | 0 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | inner_fit | 1 | 0.9 | 419 | 419 | 419 | 419 | 419 | 0 | 419 | 0 | 0 | 0 | COMPLETE |
+| 15 | B2 | log_elastic_net | refit | 1 | 0.9 | 419 | 419 | 419 | 0 | 0 | 0 | 419 | 419 | 0 | 0 | COMPLETE |
+
+### Exclusiones por sesión
+
+NO DISPONIBLE.
+
+## Coste, entorno y custodia
+
+[Enmienda técnica 2](specification_v5_technical_amendment_2.md). LightGBM vuelve al productor CPU congelado rp4_v2_code.models.fit_lightgbm, con hojas [15,31,63], semilla 20260908 y deterministic=True. A3 no ajusta MLP ni usa GPU.
+
+La Parte 18 comunicó aproximadamente 193 segundos por sesión para LightGBM GPU en A2 y extrapolaciones RV15 de 22,49 h para LightGBM GPU y 28,22 h para MLP GPU. Son mediciones/extrapolaciones de A2, no tiempos A3 observados; motivaron el recorte. La instrucción posterior fija margen de memoria del 15%: se utiliza 0,85 de la memoria asignable para calcular fragmentos con el pico nuevo medido.
+
+| campo | valor |
+| --- | --- |
+| dependencies | {<br>  "lightgbm": "4.7.0",<br>  "numpy": "2.5.2",<br>  "pandas": "3.0.5",<br>  "polars": "1.44.1",<br>  "psutil": "7.2.2",<br>  "pyarrow": "25.0.1",<br>  "scikit-learn": "1.9.0",<br>  "scipy": "1.18.0",<br>  "threadpoolctl": "3.6.0",<br>  "torch": null<br>} |
+| device | "CPU_ONLY" |
+| lightgbm_binary | {<br>  "path": "private-input/d483d3898cf27f985e70",<br>  "sha256": "7e366d2e49cd061aac3ab21676b2f99b0c7a758dc3e888d4b23812af1b7d301c"<br>} |
+| prior_gpu_probe_sha256 | "f6d9053f9b27786bf799bd6dc7fec9d2d3759b9a0d55a8652b09504aff07eea0" |
+| prior_gpu_seconds_per_session_three_sets | {<br>  "lightgbm_qlike": 193.20759619999444,<br>  "mlp_log": 242.4896918000013<br>} |
+| python_executable | "private-input/e372242bfa65f25c3c7e" |
+
+Los intentos A1/A2, sus sellos, pruebas y recibos quedan conservados. La ejecución A3 es independiente del chat, conserva recibos por sesión y actualiza progress.json al menos cada cinco minutos. Cada publicación guarda snapshot y recibo inmutables.
+
+Binding: {
+  "execution_sha256": "5cd6b4a92f3319d12f20044f32e9b87d8cc3ae731ce5cde66780d9fd2a9befb4",
+  "release_sha256": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855",
+  "specification_sha256": "a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e"
+}
+
+Calendario SHA256: 284b64adef635ce2db53a8ea54fedac981feaeece13b6161d8464bd886b5d925. Registros SHA256: 0e846be59bdfecc48d5cb793fbe816d953ed35404172967adb85257c360006b3.
+
+## Incidencias y reanudaciones operativas (enmienda técnica 3)
+
+El 8 de septiembre de 2026, a las 21:54 de Sídney, Windows rechazó el reemplazo
+de progress.json (WinError 5). Se reanudó a las 21:59 con 1.193 recibos conservados;
+la verificación posterior confirmó sus hashes sin cambios. A las 22:58:44 se
+repitió el mismo fallo de escritura, conservando 1.634 recibos, incluidos 377 de
+ElasticNet. La segunda reanudación queda fechada y verificada en
+artifacts/rp4_v5_a3_operations/resume_part27/verification.json.
+
+Estas interrupciones fueron de escritura del estado, no de ajuste de modelos.
+No se identificó el lector causante. La enmienda técnica 3 implementa 60 intentos
+separados por 250 ms, escritura en sitio como respaldo y aviso sin interrumpir
+el cálculo si ambos mecanismos fallan. Los checkpoints y sellos científicos
+originales se preservan. El snapshot científico base permanece inmutable;
+report_annotation_<update_id>.json distingue su hash del de esta copia anotada.
+El reparto de LightGBM se registra antes de iniciarlo en lightgbm_part21.json.
+
+
+## Sensibilidad post hoc: combinar en vez de elegir
+
+**POST HOC.** Procedimientos escogidos después de ver los resultados históricos;
+los p siguientes no controlan la búsqueda ni sustituyen el titular v4 o el
+selector registrado. Sólo se combinan pronósticos guardados, sin reajustar modelos.
+Se verificaron 2.095 registros/recibos y las 419 sesiones, con claves y objetivos
+comunes. El recálculo de las pérdidas de las cinco familias y los dos selectores
+coincide con el informe cerrado: error absoluto máximo
+4.44e-16. Las frecuencias B0 se reproducen:
+LightGBM 203, ElasticNet 119, ridge 68 y HAR 29. No se detecta error del selector.
+
+La combinación es la media aritmética de los niveles positivos antes de QLIKE.
+Se utiliza el productor canónico: pesos iguales por activo/sesión, luego por
+sesión; bootstrap circular de bloque 5, 9.999 réplicas, semilla histórica v5
+20260908, nula centrada, corrección +1, una cola. H1 compara B1/B0; H2 B2/B1.
+Reducción = 100 × media(pérdida base − ampliada) / media(pérdida base).
+
+| Procedimiento | B0 | B1 | B2 | H1 | H2 |
+|---|---:|---:|---:|---:|---:|
+| Ridge recalculada en v5 (referencia v4) | 0.183660372 | 0.182050961 | 0.180913492 | +0.876 %, p=0.0383 | +0.625 %, p=0.0032 |
+| Promedio HAR/ridge/ElasticNet | 0.183103100 | 0.181502807 | 0.180338627 | +0.874 %, p=0.0355 | +0.641 %, p=0.0018 |
+| Promedio de cuatro con LightGBM | 0.181840402 | 0.180002994 | 0.179102244 | +1.010 %, p=0.0214 | +0.500 %, p=0.0037 |
+
+El promedio de cuatro tiene el menor QLIKE B2 entre los procedimientos de esta
+comparación histórica: 0.999 % por debajo de la ridge v4 original
+y 0.629 % por debajo de top2, calculados como
+100 × (1 − QLIKE combinación / QLIKE referencia). No demuestra superioridad
+estadística entre modelos ni éxito prospectivo. Las tres cadenas nominales de
+esta sensibilidad pasan H1→H2, sin corrección por su búsqueda post hoc.
+
+### Diagnosis y alcance
+
+Brecha B2 = pérdida realizada menos QLIKE de validación interna, promediada
+entre sesiones. La validación usa pesos iguales por activo/sesión; la segunda
+columna cambia sólo la pérdida realizada a pesos iguales por origen dentro
+de sesión y reproduce las cifras aproximadas del auditor:
+
+| Familia | Brecha canónica | Brecha con realizado por origen |
+|---|---:|---:|
+| lightgbm_qlike | +0.001069393 | +0.000979818 |
+| log_elastic_net | +0.000373013 | +0.000290751 |
+| log_ridge_harq | -0.000626224 | -0.000717045 |
+| log_har | -0.001638082 | -0.001707866 |
+
+Esto documenta optimismo histórico relativo de la validación para LightGBM y
+pesimismo para HAR/ridge. Es compatible con una selección demasiado favorable
+a los árboles en esta muestra; no prueba un sesgo causal universal de ventanas
+de diez sesiones. La diversidad puede aprovecharse promediando pronósticos,
+sin exigir acertar el ganador diario.
+
+El oráculo ex post toma la menor pérdida de las **cinco** familias por sesión,
+incluida persistencia: B2 canónico 0.174352218
+frente a mejor fija HAR 0.180678912.
+Con realizado por origen: 0.174274154
+y 0.180609128, que reproducen 0,1743 y 0,1806
+del auditor al redondear. Es un límite con conocimiento del resultado, no una
+estrategia disponible antes de la sesión. No se excluye persistencia del oráculo.
+
+La parte 34 también informa estos filtros post hoc con ponderación por origen:
+selección por QLIKE realizado previo de 10/20/40/60 sesiones,
+0,1833/0,1834/0,1811/0,1809; histéresis 0,002/0,005/0,01,
+0,1834/0,1833/0,1819; selector de tres lineales, 0,1810; referencia ridge fija,
+0,180823. Se consignan como **resultados atribuidos al auditor, no reproducidos
+en este recibo**: la orden no aporta su implementación, inicialización o regla
+exacta de histéresis. No justifican afirmar que ningún filtro pueda funcionar;
+describen únicamente los candidatos que informó. No se mezclan con la tabla
+canónica ni se usan para cambiar el selector o el registro.
+
+### Conciliación con la auditoría independiente
+
+Todas las pérdidas de la tabla solicitada coinciden dentro de 1e-4. Las
+reducciones porcentuales son compatibles con su redondeo a tres decimales:
+diferencias de hasta 0,0005 puntos porcentuales; por ejemplo, H1 del promedio
+de cuatro es 1,0104506 % frente al 1,010 % informado. Los p difieren más allá de
+1e-4. Se conserva la receta ejecutable registrada, sin escoger una semilla por
+su significación. El contraste adicional con semilla del auditor permite
+separar su efecto; cambiar también la ponderación no reproduce sus p:
+
+| Contraste | p informado auditor | Canónico 20260908 | Canónico 20260907 | Por origen 20260907 |
+|---|---:|---:|---:|---:|
+| Ridge recalculada en v5 (referencia v4) H1 | 0.0460 | 0.0383 | 0.0400 | 0.0361 |
+| Ridge recalculada en v5 (referencia v4) H2 | 0.0023 | 0.0032 | 0.0037 | 0.0038 |
+| Promedio HAR/ridge/ElasticNet H1 | 0.0420 | 0.0355 | 0.0372 | 0.0343 |
+| Promedio HAR/ridge/ElasticNet H2 | 0.0007 | 0.0018 | 0.0016 | 0.0014 |
+| Promedio de cuatro con LightGBM H1 | 0.0250 | 0.0214 | 0.0219 | 0.0200 |
+| Promedio de cuatro con LightGBM H2 | 0.0028 | 0.0037 | 0.0034 | 0.0033 |
+
+La semilla explica la diferencia entre las dos columnas canónicas, pero no
+toda la discrepancia con el auditor. Sin su código, vector de contrastes e
+índices de remuestreo, **no puedo confirmar la causa exacta de esa discrepancia**.
+No se atribuye exclusivamente al redondeo o a la ponderación. El recibo deja
+los vectores por sesión, los parámetros, p, excedencias e IC completos para
+compararlos. El IC percentil bilateral no invierte el p unilateral centrado.
+
+### Deriva numérica ridge frente a v4
+
+| Conjunto | Ridge v4 | Ridge v5 | v5 − v4 |
+|---|---:|---:|---:|
+| B0 | 0,1836603717937846 | 0,18366037179378455 | ≈ 0 |
+| B1 | 0,1820440600908625 | 0,18205096062361725 | +0,000006900532755 |
+| B2 | 0,1809103004317701 | 0,18091349242944227 | +0,000003191997672 |
+
+LightGBM coincide a ocho decimales en B0/B1/B2 (diferencias de redondeo del CSV).
+La parte 34 atribuye la deriva ridge a Gram de la enmienda técnica 1. La revisión
+del código no acredita esa atribución: `precompute=True` se introduce para
+ElasticNet en `artifacts/rp4_v5_a2_code/models.py::_elastic_candidate`; ridge
+sigue llamando a `artifacts/rp4_v3_code/models.py::fit_ridge`, que ya calculaba
+Gram. El origen causal exacto de las millonésimas no queda aislado por esta
+auditoría sin reajustes. Se divulga la diferencia medida; no se inventa su causa
+ni se presenta la ridge recalculada como reproducción idéntica de v4.
+
+### Registro prospectivo y recibo de esta sensibilidad
+
+La [decisión 136](prospective_combination_decision_136.md), SHA-256
+`e500c487b015b7662c52a7f381180996d740c88d1d317debf594330c3ddf15b0`, incorpora top2 y combinación de cuatro como secundarios;
+v4 sigue primario. Lecturas 20/40/45/335 con sus cohortes exactas y reglas
+H1→H2; 45 = 25 históricas + 20 prospectivas. Registro sellado antes de cualquier
+lectura prospectiva en esta tarea, sin afirmar el conocimiento de terceros.
+
+La evidencia está en [summary.json](../../artifacts/rp4_v5_part34/summary.json),
+[tabla](../../artifacts/rp4_v5_part34/table.csv),
+[recibo con hashes](../../artifacts/rp4_v5_part34/receipt.json) y
+[productor reproducible](../../artifacts/rp4_v5_part34/audit.py).
+Se preserva byte por byte el
+[informe anterior](../../artifacts/rp4_v5_part34/results_v5_before_part34.md),
+además del snapshot 5_control y sus recibos. La rutina antigua de publicación
+reconstruye sólo ese informe anterior: esta sección se repone con el productor
+`artifacts/rp4_v5_part34/publish.py`, sin cambiar los resultados congelados.

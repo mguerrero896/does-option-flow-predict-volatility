@@ -1,0 +1,771 @@
+{
+  "schema": "rp4-defense-revision-2-audit-correction-1",
+  "research_only": true,
+  "capital_go": false,
+  "prior_receipt_sha256": "595e2a9873c13096e802a8d137949f1293544dbf2ef7e8168dff794e7f7d1383",
+  "prior_manifest_sha256": "9fc9a262dfa0b0036bd58224b45f3a94430e109f3ac8d120f95dbf20aea62b58",
+  "source_documents": [
+    "README.md",
+    "docs/rp4/RESULTADO_FINAL_revision_1.md"
+  ],
+  "source_claims": 129,
+  "package_number_occurrences": 456,
+  "source_sha256": {
+    "README.md": "f5f4ca20883d44cbece6e3293aa17868881812a0b6d976c7f51c42f53422ac6e",
+    "artifacts/rp4_b2/summary.json": "d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2",
+    "artifacts/rp4_b3/summary.json": "76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7",
+    "artifacts/rp4_closeout_audit/REPORT.md": "93ba2ae3f561d1e88bc2706d5cede0fcd504c4c5790453cb2dc0a32f5c11c412",
+    "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be",
+    "artifacts/rp4_closeout_audit/descriptive_profiles.csv": "426bbe8b329ba936a5f7d8307f2bb7dd2373ac6dfe7fe39f855516e1fc0eddcd",
+    "artifacts/rp4_closeout_audit/findings.json": "f655a556f78a0d5ec2d45ddc6273191e26f95bb274cb8dba2512dc1234aaed4a",
+    "artifacts/rp4_closeout_audit/ridge_bounds_pruning_summary.csv": "20f4b1c1b1022d7bba0318e9c4ac4b720ac6fce7a10bb5bbb875f1bca5d18c4e",
+    "artifacts/rp4_closeout_audit/ridge_lambda_counts.csv": "493b20562708215bf5ff74cf0f5fe621b6f4cfa20f1730bd9d224f659ac2ffea",
+    "artifacts/rp4_closeout_audit_code/audit_closed.py": "6957164cb688be290cdd4797ef9f6966c071c3934fd8ba93c66f09ca9c9d6fee",
+    "artifacts/rp4_closeout_code/check_final.py": "6cd799270fc602acf2f5a17bb10178674b7c45981a5fd3f5882408b3bea49c23",
+    "artifacts/rp4_closeout_figures/README.md": "51f46c4a6f1d00c320e7b01922cf9cf0ebb84b99c05d5540729d3a86bf1b8b4b",
+    "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+    "artifacts/rp4_closeout_figures/manifest.json": "15bae2d6eeda608cecc6d24cbc34a9c0174eb2ae6a3a319d9e22519930b88c04",
+    "artifacts/rp4_closeout_figures_revision2/annotation_sources.json": "234499333d79ae4c5461aa1b6072e015af76a9baba3844eefef7cd4f6bd90d52",
+    "artifacts/rp4_closeout_figures_revision2/manifest.json": "a7c6c8533f32acbae30bc34567e1306699255f6b84a3c2a898746c25613796c0",
+    "artifacts/rp4_market_audit/REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "artifacts/rp4_market_audit/coverage_weekday.csv": "e347f76f648da1511eb54a56e853d2ab656b28388de5d0acff70090e95f314a6",
+    "artifacts/rp4_market_audit/expiry_first_observed.csv": "8604ccb92868703f614dee3255099594c356b44eed193acdfda3a440974a007e",
+    "artifacts/rp4_market_audit/sources.json": "629d89256015b5743614e7cf10e8b8bf9c29d2fc56b857b3ee073d1ce996b5f9",
+    "artifacts/rp4_market_audit/summary.json": "f59a01f7819b36c7ee726b0f47541a0f0a4c17868b8d3d6035cc083d72fc3fdb",
+    "artifacts/rp4_v2_b2/summary.json": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693",
+    "artifacts/rp4_v2_b3/summary.json": "7ac5591b18c12e86165e80d9c6adf906ba19a2d1e502eb163b154c9eb74e83af",
+    "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "artifacts/rp4_v3_secondary_closeout/evidence.json": "e5951301b649caed3270906aa38c86831b28de8ad218eba5a899ad0397167cd1",
+    "artifacts/rp4_v4_a1/freeze_manifest.json": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+    "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+    "artifacts/rp4_v4_a2/evaluation_release_rv15.json": "7b5499579a66a468f040966d22824501ec1c65c29fefb848b40366bfd1f2351a",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+    "artifacts/rp4_v4_b3_rv15/summary.json": "1a544479c861bfcb8201cd6ae95702f7cf3de08f4d824d1dc488ec159a36ab9c",
+    "artifacts/rp4_v4_b3_rv5/summary.json": "d48b8054b3bd33fda7627fb454728ebb05bbe0956e59f9732b7a6f1e835340bb",
+    "artifacts/rp4_v4_b4/coverage.csv": "67941d02647ae329fcc704a0b109949ab4312cb6915006302186b21770e853ef",
+    "artifacts/rp4_v4_b4/distribution_secondary.csv": "62312356720ac370fe3928eb5212db5a99ad7aa63f8ce4fe568ae149faed96cb",
+    "artifacts/rp4_v4_b4/empty_census.csv": "40969c25526b8a831a011aec8e03fae00c74adc7ee90e8ee1d84edd976219555",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_v4_b4/report_manifest.json": "a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f",
+    "artifacts/rp4_v4_b4/robustness.csv": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb",
+    "artifacts/rp4_v4_b4/top_loss_sessions.csv": "32ef18130c638d1f2b54fa2e6ed9badf38a156ae5d68c6220a4c8d1c9d98b486",
+    "data/DATA_ACCESS.md": "aaa68a4b94af5bfa7059b11c18f400b680ec322edb641c382e56b6e3d034e66a",
+    "docs/figures/rp4/comparison_v1_v4.svg": "1489b479e9e28bc5fc7cb87be9a1339f6b1cc84eac4ce8e03904875a4efca0cd",
+    "docs/figures/rp4/thesis_summary.svg": "5eb8d21dcce001821cea1bed1ec7c73ba7ca098479c21e76489931b346353c9b",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative.svg": "4356930ae601fd73c8b48d9a8b5d4bcab3b16a4ddc0150eee6829b5016cde6db",
+    "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg": "705371d5e7cf8b859585527b82d1a444aeff58451610bda4c47f00f0000a842e",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative.svg": "3550d7ada0edf1b261d7a0f1b20c0e801dd9cdff0d36667a84674901c2252f3e",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "f16c4aca2380b78ebb4a354a8c4c76226c09b94f0f3f7b822b5d1c53c637c830",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/additions_evidence.json": "10085a652cf82144a3ba0a7f9fe632bd95fe910862c5780f2a5c687b43d61389",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735",
+    "docs/rp4/RESULTADO_FINAL.md": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19",
+    "docs/rp4/RESULTADO_FINAL_revision_1.md": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05",
+    "docs/rp4/RESULTADO_FINAL_revision_1_receipt.json": "9ac1d6005b431e750572ce0190705704907535c74b65b8e84048515f1db355c2",
+    "docs/rp4/RUNBOOK.md": "5890e0f3d68d34be9cb40575d6c1905da90dfd0574e00e1eeb7b9295d16ece31",
+    "docs/rp4/prospective_confirmation_v1.md": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "docs/rp4/prospective_confirmation_v1_amendment_1.md": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "docs/rp4/prospective_confirmation_v1_amendment_1_receipt.json": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837",
+    "docs/rp4/prospective_confirmation_v1_amendment_2.md": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+    "docs/rp4/prospective_confirmation_v1_receipt.json": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+    "docs/rp4/publication_projection_v1.md": "98bd85355f3fe6ce8cbf155f232c78405e542ba2ad11eeb6f954f1bdf6114976",
+    "docs/rp4/results_v2.md": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf",
+    "docs/rp4/results_v3_revision2.md": "05f263b019a74a8591f3840d69aa86947f5cc9bf343eb85d5a30601e8a0f142e",
+    "docs/rp4/results_v4.md": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7",
+    "docs/rp4/specification_v4.md": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+    "docs/rp4/v3_window_empty_addendum.md": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803"
+  },
+  "document_sha256": {
+    "executive_summary.md": "82b4cea48209b0342983674b2b340a84662d42fc9c5bd4a19860f1280a73c5b5",
+    "examiner_qa.md": "bbf084f0b937178b1a268a6f72fbee7a44dd453e0e024103b1af164c26f09630",
+    "defense_slides.md": "90a26e920e1341882432da501538d1ff9e3df35ca297dcd6fa3fbc47f0e2ac6a",
+    "claims_matrix.csv": "ce143ae77aeff89507843f5b1b2ff431ac8ca88decd1bec54e7ca9d0dc1b419a",
+    "audit_evidence.json": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735"
+  },
+  "audited_binding_changes": [
+    "source_claim_0041",
+    "source_claim_0125",
+    "package_number_0134",
+    "package_number_0135",
+    "package_number_0140",
+    "package_number_0157",
+    "package_number_0162",
+    "package_number_0163",
+    "package_number_0165",
+    "package_number_0166",
+    "package_number_0174",
+    "package_number_0175",
+    "package_number_0180",
+    "package_number_0198",
+    "package_number_0203",
+    "package_number_0204",
+    "package_number_0206",
+    "package_number_0207",
+    "package_number_0256",
+    "package_number_0257",
+    "package_number_0264",
+    "package_number_0286",
+    "package_number_0287",
+    "package_number_0288",
+    "package_number_0292",
+    "package_number_0320",
+    "package_number_0330",
+    "package_number_0359",
+    "package_number_0417",
+    "package_number_0418",
+    "package_number_0419",
+    "package_number_0420",
+    "package_number_0421",
+    "package_number_0422",
+    "package_number_0424",
+    "package_number_0511",
+    "package_number_0512",
+    "package_number_0519",
+    "package_number_0520",
+    "package_number_0522",
+    "package_number_0533",
+    "package_number_0550",
+    "package_number_0551",
+    "package_number_0556",
+    "package_number_0557",
+    "package_number_0559",
+    "package_number_0560",
+    "package_number_0561"
+  ],
+  "circular_evidence_declared": [
+    {
+      "claim_id": "package_number_0162",
+      "claim": "20",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0163",
+      "claim": "28",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0203",
+      "claim": "20",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0204",
+      "claim": "28",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0287",
+      "claim": "20",
+      "source_document": "examiner_qa.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0288",
+      "claim": "28",
+      "source_document": "examiner_qa.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0424",
+      "claim": "1",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/specification_v4.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: constante normativa 1 de la definición QLIKE, no una cifra estimada ni una observación.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0556",
+      "claim": "20",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0557",
+      "claim": "28",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    }
+  ],
+  "supporting_assertions": [
+    {
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "specification_sha256"
+      ],
+      "equals_artifact_sha256": "artifacts/rp4_v4_a1/specification.json"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "asof_date"
+      ],
+      "equals": "2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "label"
+      ],
+      "equals": "fuera de muestra walk-forward, partición fijada 2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "preregistration",
+        "independent_timestamp_verified"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "inference",
+        "fixed_sequence",
+        "alpha"
+      ],
+      "equals": 0.05
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_receipt.json",
+      "selector": [
+        "alpha"
+      ],
+      "equals": 0.05
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json",
+      "selector": [
+        "primary_look_sessions"
+      ],
+      "equals": 20
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json",
+      "selector": [
+        "primary_unchanged"
+      ],
+      "equals": true
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "specification_sha256"
+      ],
+      "equals_artifact_sha256": "artifacts/rp4_v4_a1/specification.json"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "asof_date"
+      ],
+      "equals": "2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "label"
+      ],
+      "equals": "fuera de muestra walk-forward, partición fijada 2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "preregistration",
+        "independent_timestamp_verified"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "inference",
+        "fixed_sequence",
+        "alpha"
+      ],
+      "equals": 0.05
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_receipt.json",
+      "selector": [
+        "alpha"
+      ],
+      "equals": 0.05
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json",
+      "selector": [
+        "primary_look_sessions"
+      ],
+      "equals": 20
+    },
+    {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_2_receipt.json",
+      "selector": [
+        "primary_unchanged"
+      ],
+      "equals": true
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_figures/manifest.json",
+      "selector": [
+        "event_annotations",
+        2,
+        "marker"
+      ],
+      "equals": "B"
+    },
+    {
+      "artifact": "docs/rp4/v3_window_empty_addendum.md",
+      "role": "Mantener la limitación de atribución no verificada; el censo mide ventanas vacías."
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_figures/manifest.json",
+      "selector": [
+        "event_annotations",
+        4,
+        "marker"
+      ],
+      "equals": "D"
+    },
+    {
+      "artifact": "docs/rp4/v3_window_empty_addendum.md",
+      "role": "Mantener la limitación de atribución no verificada; el censo mide ventanas vacías."
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "selector": [
+        "first_observed_mon_or_wed_expiry_by_asset"
+      ],
+      "all_values_equal": "2026-01-26",
+      "keys_equal": [
+        "AAPL",
+        "AMZN",
+        "META",
+        "MSFT",
+        "NVDA",
+        "TSLA"
+      ]
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/expiry_first_observed.csv",
+      "role": "Todos los activos registran first_observed_session=2026-01-26."
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "specification_sha256"
+      ],
+      "equals_artifact_sha256": "artifacts/rp4_v4_a1/specification.json"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "asof_date"
+      ],
+      "equals": "2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "label"
+      ],
+      "equals": "fuera de muestra walk-forward, partición fijada 2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "preregistration",
+        "independent_timestamp_verified"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "specification_sha256"
+      ],
+      "equals_artifact_sha256": "artifacts/rp4_v4_a1/specification.json"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "asof_date"
+      ],
+      "equals": "2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "label"
+      ],
+      "equals": "fuera de muestra walk-forward, partición fijada 2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "preregistration",
+        "independent_timestamp_verified"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_audit/descriptive_profiles.csv",
+      "rows": [
+        73,
+        77,
+        377,
+        381
+      ],
+      "fields_equal": {
+        "window": "primary",
+        "profile": "month",
+        "family": "log_ridge_harq",
+        "contrast": "B2_over_B1"
+      },
+      "strata": [
+        "2025-10",
+        "2025-11",
+        "2025-10",
+        "2025-11"
+      ],
+      "horizons": [
+        "30",
+        "30",
+        "15",
+        "15"
+      ],
+      "negative_field": "delta_equal_session_asset"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/freeze_manifest.json",
+      "selector": [
+        "specification_sha256"
+      ],
+      "equals_artifact_sha256": "artifacts/rp4_v4_a1/specification.json"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "asof_date"
+      ],
+      "equals": "2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "label"
+      ],
+      "equals": "fuera de muestra walk-forward, partición fijada 2026-09-07"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "preregistration",
+        "independent_timestamp_verified"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_audit/descriptive_profiles.csv",
+      "rows": [
+        73,
+        77,
+        377,
+        381
+      ],
+      "fields_equal": {
+        "window": "primary",
+        "profile": "month",
+        "family": "log_ridge_harq",
+        "contrast": "B2_over_B1"
+      },
+      "strata": [
+        "2025-10",
+        "2025-11",
+        "2025-10",
+        "2025-11"
+      ],
+      "horizons": [
+        "30",
+        "30",
+        "15",
+        "15"
+      ],
+      "negative_field": "delta_equal_session_asset"
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "selector": [
+        "bars",
+        0,
+        "asset"
+      ],
+      "equals": "AMZN"
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_figures/manifest.json",
+      "selector": [
+        "event_annotations",
+        2,
+        "marker"
+      ],
+      "equals": "B"
+    },
+    {
+      "artifact": "docs/rp4/v3_window_empty_addendum.md",
+      "role": "Mantener la limitación de atribución no verificada; el censo mide ventanas vacías."
+    },
+    {
+      "artifact": "artifacts/rp4_closeout_figures/manifest.json",
+      "selector": [
+        "event_annotations",
+        4,
+        "marker"
+      ],
+      "equals": "D"
+    },
+    {
+      "artifact": "docs/rp4/v3_window_empty_addendum.md",
+      "role": "Mantener la limitación de atribución no verificada; el censo mide ventanas vacías."
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/summary.json",
+      "selector": [
+        "first_observed_mon_or_wed_expiry_by_asset"
+      ],
+      "all_values_equal": "2026-01-26",
+      "keys_equal": [
+        "AAPL",
+        "AMZN",
+        "META",
+        "MSFT",
+        "NVDA",
+        "TSLA"
+      ]
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/expiry_first_observed.csv",
+      "role": "Todos los activos registran first_observed_session=2026-01-26."
+    },
+    {
+      "artifact": "artifacts/rp4_market_audit/REPORT.md",
+      "role": "Narrativa directa del salto de celdas del 29 de enero; la auditoría entrante confirma que esta afirmación no requiere cambio de contenido."
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "accepted_tape_gap",
+        "fill"
+      ],
+      "equals": false
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "bridge_prior_read"
+      ],
+      "equals": "2026-07-20 through 2026-08-28 once under different specification"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "owner_attestations",
+        "source_status"
+      ],
+      "equals": "OWNER_PROVIDED_NOT_AGENT_MEASURED"
+    },
+    {
+      "artifact": "artifacts/rp4_v4_a1/specification.json",
+      "selector": [
+        "inference",
+        "loss"
+      ],
+      "equals": "ratio_minus_log_ratio_minus_one"
+    }
+  ]
+}

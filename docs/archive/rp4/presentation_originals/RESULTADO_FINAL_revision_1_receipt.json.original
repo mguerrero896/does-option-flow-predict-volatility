@@ -1,0 +1,18 @@
+{
+  "schema": "rp4-final-documentary-revision-1",
+  "sealed_at_utc": "2026-09-08T06:28:25.863996+00:00",
+  "original_document": "docs/rp4/RESULTADO_FINAL.md",
+  "original_sha256": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19",
+  "document": "docs/rp4/RESULTADO_FINAL_revision_1.md",
+  "document_sha256": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05",
+  "change": "Specify five-minute buy, passive and sell premium proportions in the primary RV15 linear coefficient description; preserve every original result and table.",
+  "source_sha256": {
+    "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be",
+    "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_1/audit_evidence.json": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735"
+  },
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "historical_results_changed": false,
+  "research_only": true,
+  "capital_go": false
+}

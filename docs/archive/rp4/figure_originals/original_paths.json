@@ -1,0 +1,62 @@
+{
+  "docs/figures/rp4/comparison_v1_v4.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/comparison_v1_v4.png.original",
+    "public_path": "docs/figures/rp4/comparison_v1_v4.png",
+    "sha256": "d16927b7b98b9426894f74be544b75a7f7ba6d9f89a0a1455b36f6b352aa9804"
+  },
+  "docs/figures/rp4/comparison_v1_v4.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/comparison_v1_v4.svg.original",
+    "public_path": "docs/figures/rp4/comparison_v1_v4.svg",
+    "sha256": "1489b479e9e28bc5fc7cb87be9a1339f6b1cc84eac4ce8e03904875a4efca0cd"
+  },
+  "docs/figures/rp4/thesis_summary.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/thesis_summary.png.original",
+    "public_path": "docs/figures/rp4/thesis_summary.png",
+    "sha256": "5de17e799480022ab48b3b0db2ebef6f3cc7e9cda73b2a4f7b5dde5c4f94b83f"
+  },
+  "docs/figures/rp4/thesis_summary.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/thesis_summary.svg.original",
+    "public_path": "docs/figures/rp4/thesis_summary.svg",
+    "sha256": "5eb8d21dcce001821cea1bed1ec7c73ba7ca098479c21e76489931b346353c9b"
+  },
+  "docs/figures/rp4/v4_B1_over_B0_cumulative.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B1_over_B0_cumulative.png.original",
+    "public_path": "docs/figures/rp4/v4_B1_over_B0_cumulative.png",
+    "sha256": "490a1dc1d4a240db50cd83feb1fb20eb36ed397c4948edcbf20ecafee466f974"
+  },
+  "docs/figures/rp4/v4_B1_over_B0_cumulative.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B1_over_B0_cumulative.svg.original",
+    "public_path": "docs/figures/rp4/v4_B1_over_B0_cumulative.svg",
+    "sha256": "4356930ae601fd73c8b48d9a8b5d4bcab3b16a4ddc0150eee6829b5016cde6db"
+  },
+  "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B1_over_B0_cumulative_v2.png.original",
+    "public_path": "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.png",
+    "sha256": "f8c2e491ddd9bd014a7e93ad7d1e56057a2b78510c32ef7847d03dc9a4b6836a"
+  },
+  "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B1_over_B0_cumulative_v2.svg.original",
+    "public_path": "docs/figures/rp4/v4_B1_over_B0_cumulative_v2.svg",
+    "sha256": "705371d5e7cf8b859585527b82d1a444aeff58451610bda4c47f00f0000a842e"
+  },
+  "docs/figures/rp4/v4_B2_over_B1_cumulative.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B2_over_B1_cumulative.png.original",
+    "public_path": "docs/figures/rp4/v4_B2_over_B1_cumulative.png",
+    "sha256": "28fa8544df8725e362eea1e0c3f088198c2a8bd88a73f7907cba96caad2307d2"
+  },
+  "docs/figures/rp4/v4_B2_over_B1_cumulative.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B2_over_B1_cumulative.svg.original",
+    "public_path": "docs/figures/rp4/v4_B2_over_B1_cumulative.svg",
+    "sha256": "3550d7ada0edf1b261d7a0f1b20c0e801dd9cdff0d36667a84674901c2252f3e"
+  },
+  "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B2_over_B1_cumulative_v2.png.original",
+    "public_path": "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png",
+    "sha256": "baa2191fc5a2a51d7ec1fd3ee1f06d3d1f9d532aae8aa6fac9cede193854e4b0"
+  },
+  "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": {
+    "archive_path": "docs/archive/rp4/figure_originals/v4_B2_over_B1_cumulative_v2.svg.original",
+    "public_path": "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg",
+    "sha256": "f16c4aca2380b78ebb4a354a8c4c76226c09b94f0f3f7b822b5d1c53c637c830"
+  }
+}

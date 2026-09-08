@@ -1,0 +1,380 @@
+# Defensa — información de opciones y volatilidad intradía
+
+Guion de presentación con cifras congeladas y notas para responder al examen.
+Las figuras enlazadas se conservan tal como fueron producidas; sus hashes y
+fuentes están en el [manifiesto de figuras revisadas](../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json).
+La [matriz de afirmaciones](claims_matrix.csv) y las [preguntas del examinador](examiner_qa.md)
+completan la trazabilidad. Los rótulos de las diapositivas son orden de exposición,
+no nuevas versiones científicas.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+## 1. La respuesta tiene un alcance preciso
+
+**Mensaje.** El estado de opciones mejora el pronóstico medio; el incremento del
+flujo depende de la familia, el horizonte y el estadístico.
+
+**Contenido para proyectar.**
+
+- Pregunta: ¿las opciones añaden información predictiva sobre la variación
+  realizada intradía más allá de precios e historia de volatilidad?
+- B1 > B0: ambas familias, 30 y 15 minutos.
+- B2 > B1 > B0: familia lineal, 15 y 5 minutos, bajo secuencia predeclarada;
+  RV15 primario y RV5 secundario.
+- Árboles: B1 > B0 a 30/15 minutos; B2 ≥ B1 en mediana descriptiva a 15/5,
+  sin confirmación de la media.
+
+**Notas del orador.** Definir “mayor” como menor pérdida de pronóstico en el
+contraste correspondiente, no mayor rendimiento financiero. La jerarquía no
+afirma mejora en cada fecha, activo o régimen. “B2 ≥ B1 en mediana” resume el signo
+de la mediana de diferencias pareadas; no es una prueba de equivalencia ni de
+dominancia general de los árboles. El cierre histórico se alcanza en la familia
+lineal a 15 minutos; la ventana final no constituye una confirmación independiente.
+
+**Evidencia.** [Conclusión y límites](../../../../rp4/RESULTADO_FINAL.md) ·
+[Contrastes de ambas ventanas](../../../../rp4/results_v4.md).
+
+## 2. Qué se compara y cómo se protege el tiempo
+
+**Mensaje.** Los contrastes cambian el conjunto de información dentro de un
+procedimiento temporal común.
+
+**Contenido para proyectar.**
+
+- Activos: AAPL, AMZN, META, MSFT, NVDA, TSLA.
+- B0 ⊂ B1 ⊂ B2: 29/69/138 predictores; historia → estado/superficie →
+  composición/actividad/desbalance.
+- Familias: lineal winsorizada con filtro de rango; LightGBM.
+- Entrenamiento expansivo, pasado exclusivamente; 60 sesiones iniciales.
+- Selección: últimas diez sesiones de entrenamiento; purga/embargo de 60 minutos.
+- Primaria v2–v4: 419 sesiones; 160.832 orígenes.
+- Ventana final: 25 sesiones; 9.750 orígenes.
+- Partición: 2026-08-01, fijada el 2026-09-07.
+
+**Notas del orador.** El desarrollo comprende 2024-08-02–2026-07-31 y la ventana
+final 2026-08-03–2026-09-04. El calentamiento pertenece al entrenamiento; no
+convierte todas las sesiones del calendario en observaciones evaluadas. Los
+conteos de predictores preceden a los efectos de activo e indicadores que
+corresponden a cada familia. Para aislar el cambio de horizonte, v4 conserva las
+claves elegibles y las máscaras causales del objetivo original de 30 minutos:
+RV15/RV5 no reciben una muestra ampliada por ser más cortos. El tiempo fuente
+es una aproximación a la disponibilidad; esta disciplina temporal no demuestra
+qué recibió históricamente un cliente.
+
+**Evidencia.** [Diseño completo](../../../../rp4/specification_v4.md) ·
+[Muestra y cobertura](../../../../rp4/results_v4.md) ·
+[Contrato ejecutable](../../../../../artifacts/rp4_v4_a1/specification.json).
+
+## 3. Qué prueba el contraste y qué no prueba
+
+**Mensaje.** La decisión responde a diferencias medias de QLIKE dentro de cada
+familia; no certifica una estrategia ni controla toda la búsqueda histórica.
+
+**Contenido para proyectar.**
+
+- QLIKE = y/f − log(y/f) − 1; delta = pérdida base − pérdida ampliada.
+- Promedio por activo/sesión y pesos iguales entre activos y sesiones.
+- H1: B1/B0, unilateral al 5 %; sólo si rechaza se abre H2: B2/B1 al 5 %.
+- Bootstrap circular: bloques de cinco sesiones, 9.999 réplicas.
+- La regla histórica “al menos una familia” es operativa; no ofrece control
+  global al 5 % entre familias ni entre versiones.
+
+**Notas del orador.** Rechazar significa evidencia de diferencia media positiva
+con el procedimiento registrado; no rechazar no prueba ausencia. H2 cerrada
+conserva únicamente un p nominal diagnóstico. El intervalo publicado es
+percentil bilateral del 95 % y el p primario usa una nula centrada unilateral:
+no son una pareja de intervalos y pruebas construida por inversión exacta, por
+lo que una discrepancia aparente se explica por sus recetas, no cambiando la
+regla. QLIKE evalúa escala de varianza pronosticada; no incorpora reglas de
+operación, costes, exposición ni resultados de una cartera. Las pruebas por
+familia tampoco eliminan el efecto de haber revisado las mismas ventanas.
+
+**Evidencia.** [Inferencia registrada](../../../../rp4/specification_v4.md) ·
+[Productor de inferencia](../../../../../artifacts/rp4_v3_code/inference.py) ·
+[Decisiones y p formales](../../../../rp4/results_v4.md).
+
+## 4. Las cuatro versiones se muestran completas
+
+**Mensaje.** La historia contiene correcciones y adaptación; los signos adversos
+se mantienen a la vista.
+
+**Contenido para proyectar.** Tabla reproducida literalmente del README; cada
+celda muestra reducción porcentual de QLIKE (p).
+
+| Versión / objetivo | Lineal B1/B0 | Lineal B2/B1 | Árboles B1/B0 | Árboles B2/B1 | Sesiones |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| v1 · RV30 | +0,290 % (1,000) | −167.448,32 % (1,000) | +1,204 % (0,4724) | −0,073 % (1,000) | 418 |
+| v2 · RV30 | +1,715 % (0,1842) | −8,714 % (0,3752) | +2,091 % (0,0264) | −0,063 % (0,8858) | 419 |
+| v3 · RV30 | +1,729 % (0,0439) | +0,554 % (0,0525) | +2,091 % (0,0053) | −0,159 % (0,6631) | 419 |
+| v4 · RV15, primario | +0,880 % (0,0390) | +0,623 % (0,0032) | +1,170 % (0,0135) | −0,115 % (0,6280) | 419 |
+| v4 · RV5, secundario | +0,377 % (0,0092) | +0,256 % (0,0172) | +0,536 % (0,0608) | +0,160 % (no abierta; nominal 0,1927) | 419 |
+
+**Notas del orador.** v1 conserva su fallo numérico y sus 92.261 orígenes; no
+representa una estimación estable del efecto económico del flujo. v2 cambia
+cobertura, capacidad y estabilidad; v3 añade desbalance y el tratamiento de
+ventanas vacías; v4 cambia el horizonte mediante un antecedente condicional.
+La familia lineal pasa de log-OLS en v1 a ridge nominal en las versiones
+posteriores. En v1/v2 los p son bilaterales con Holm; en v3/v4 son unilaterales
+secuenciales. Cambian muestra, procedimiento y objetivo: las filas no aíslan
+causalmente el beneficio de cada modificación y sus p no son intercambiables.
+La mejora lineal de v3 en B2/B1 queda en p = 0,0525; no se redondea a rechazo.
+El programa histórico termina en v4, sin v5.
+
+**Evidencia.** [Tabla original](../../../../../README.md) ·
+[Datos agregados y hashes de sus fuentes](../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) ·
+[Auditoría de instrumento y modelos](../../../../../artifacts/rp4_closeout_audit/REPORT.md).
+
+## 5. Magnitud, incertidumbre y discrepancia entre familias
+
+**Mensaje.** El incremento lineal del flujo es pequeño y medible; la media de los
+árboles no reproduce ese resultado.
+
+**Contenido para proyectar.**
+
+![Síntesis: reducción de QLIKE por versión, familia y contraste, con intervalos y extremos señalados](../../../../figures/rp4/thesis_summary.svg)
+
+- Lineal B2/B1 a 15 minutos: +0,623 %; IC95 % de delta QLIKE
+  [0,000335; 0,001932]; p = 0,0032.
+- Lineal B2/B1 a 5 minutos: +0,256 %; resultado secundario.
+- Árboles B2/B1 a 15 minutos: −0,115 %; p = 0,6280.
+- Mediana pareada de árboles a 15/5 minutos: p bilateral 0,0435/0,0038;
+  Holm 0,0870/0,0096.
+
+**Notas del orador.** La escala de síntesis va de −3 % a +3 %; los valores fuera
+de escala se señalan con flechas y su magnitud real. No leer el desastre numérico
+de v1 como una pérdida limitada al borde del gráfico. El anexo completo conserva
+los intervalos sin recorte. Los bigotes porcentuales son el IC guardado de delta
+multiplicado por 100 y dividido por la pérdida base media observada: no son
+intervalos bootstrap de un cociente con denominador incierto. El IC citado
+arriba permanece en unidades QLIKE. Una mediana positiva puede coexistir con
+una media adversa; son estimandos distintos y esta diferencia no autoriza
+descartar las sesiones de mayor pérdida. A 15 minutos, la mediana de árboles
+no rechaza tras Holm; a 5 sí, como secundario. No convertir ese secundario en
+confirmación de la media.
+
+**Evidencia.** [Resultados con intervalos](../../../../rp4/results_v4.md) ·
+[Manifiesto de síntesis y censo de recortes](../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json) ·
+[Anexo completo](../../../../figures/rp4/comparison_v1_v4.svg) ·
+[Definición del intervalo porcentual](../../../../../artifacts/rp4_closeout_figures/README.md).
+
+## 6. El estado de opciones a través del tiempo
+
+**Mensaje.** La ventaja media de B1 no significa una ganancia uniforme desde el
+inicio del entrenamiento.
+
+**Contenido para proyectar.**
+
+![Diferencia acumulada B1/B0 en RV15 y RV5, primaria y ventana final, con calendario y sucesos anotados](../../../../figures/rp4/v4_B1_over_B0_cumulative_v2.svg)
+
+- Curva = suma de diferencias QLIKE por sesión; signo positivo favorece B1.
+- Ejes verticales propios por panel: comparar valores, no alturas.
+- Las fechas anotadas dan contexto; no cambian la muestra ni atribuyen causas.
+
+**Notas del orador.** Guiar primero por RV15 primaria y después por la ventana
+final; no sumar ambas como si fuesen réplicas independientes. El tramo evaluado
+de octubre de 2024 a febrero de 2025 contiene 64 sesiones, equivalentes a
+15,27 % de las 419, y tiene ganancia lineal B1 negativa. El denominador de
+15,27 % es 100 × 64 / 419, redondeado; no son todas las sesiones del calendario.
+El tamaño de entrenamiento crece con el tiempo y coincide con cambios de
+régimen: esta curva no demuestra que prolongar el aprendizaje habría causado
+una mejora. La marca del 26 de enero de 2026 señala el cambio de vencimientos;
+no identifica por sí sola su efecto sobre la curva. Conservar visibles los
+tramos adversos y la separación entre ventanas.
+
+**Evidencia.** [Auditoría descriptiva y denominadores](../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Perfiles por mes y entrenamiento](../../../../../artifacts/rp4_closeout_audit/descriptive_profiles.csv) ·
+[Fuentes de las anotaciones](../../../../../artifacts/rp4_closeout_figures_revision2/annotation_sources.json).
+
+## 7. El flujo no gana en todas las sesiones
+
+**Mensaje.** La trayectoria de B2 permite examinar concentración y fragilidad
+sin borrar días que incomodan a la conclusión.
+
+**Contenido para proyectar.**
+
+![Diferencia acumulada B2/B1 en RV15 y RV5, primaria y ventana final, con interrupciones, cambio de vencimientos y choque observado anotados](../../../../figures/rp4/v4_B2_over_B1_cumulative_v2.svg)
+
+- Lineal: incremento positivo en los tres bloques de ambos horizontes.
+- Por activo: seis de seis positivos a 15 minutos; tres de seis a 5 minutos.
+- Octubre y noviembre de 2025 son negativos para B2 lineal en RV30 y RV15.
+
+**Notas del orador.** La robustez por bloques y por activos es descriptiva y no
+equivale a estabilidad mensual completa. Las marcas de abril identifican
+contexto temporal, sin probar causalidad arancelaria. La marca AMZN del
+31 de agosto de 2026 conserva un choque observado: −152 y +71 puntos básicos
+desde las 14:00 ET, con volumen del minuto siguiente cercano a 11 veces la
+mediana de la sesión. La auditoría comprueba consistencia interna de las barras
+del proveedor, no validación independiente del precio ni una noticia causal.
+No retirar esa sesión ni recalcular un p “limpio”. Un salto visual de la
+acumulada tampoco sustituye la secuencia formal de la ventana final. Las
+coordenadas de las curvas originales se preservan en la versión anotada.
+
+**Evidencia.** [Resultado por bloques y activos](../../../../rp4/RESULTADO_FINAL.md) ·
+[Perfiles y pérdidas adversas](../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Verificación del choque y límites](../../../../../artifacts/rp4_market_audit/REPORT.md) ·
+[Custodia de las curvas](../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json).
+
+## 8. Instrumento, régimen y estabilidad numérica
+
+**Mensaje.** Las limitaciones observadas se cuantifican y permanecen dentro del
+resultado.
+
+**Contenido para proyectar.**
+
+- Incidencias del instrumento: 2025-05-15 y 2025-09-18 figuran como
+  indisponibilidad del proveedor; quedan 412 ventanas vacías de cinco minutos
+  en primaria, ninguna en confirmación.
+- Cambio de vencimientos: listado desde 2026-01-26; cobertura media
+  20,04 → 23,10 celdas por origen; la ventana final pertenece al régimen nuevo.
+- Ridge nominal: lambda 0,0001 elegida en 111/419 sesiones B2; poda de
+  88–97 columnas; la rejilla no garantiza estabilidad de coeficientes correlacionados.
+
+**Notas del orador.** Las fechas conservan la etiqueta del manifiesto de
+anotaciones; el censo acredita ventanas vacías, no una causa externa verificada
+de forma independiente. La actividad cero se conserva, las formas y ratios sin
+operaciones se vuelven indefinidos y se añaden indicadores; ninguna ventana
+se excluye para mejorar el signo. En filas vacías, QLIKE lineal pasa de 0,103
+en B1 a 0,202 en B2 con igual peso por sesión/activo; es un denominador distinto
+del promedio por origen. Para vencimientos, distinguir listado y primera
+presencia el 26 de enero, salto de celdas el 29 y primeras expiraciones de
+lunes/miércoles el 2/4 de febrero. La penalización ridge se aplica a la suma
+de errores, sin dividir por N; en muestras grandes puede resultar muy débil.
+Las columnas podadas incluyen presencias y colinealidad: no son “88 constantes”.
+Estas observaciones delimitan la interpretación; no autorizan cambiar la rejilla,
+el calentamiento ni las exclusiones de una prueba ya cerrada.
+
+**Evidencia.** [Límites con cifras y definiciones](../../../../rp4/RESULTADO_FINAL.md) ·
+[Auditoría de vacíos](../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Selección de lambda](../../../../../artifacts/rp4_closeout_audit/ridge_lambda_counts.csv) ·
+[Censo del cambio de mercado](../../../../../artifacts/rp4_market_audit/REPORT.md).
+
+## 9. Qué aporta B2 y qué mecanismo queda sin identificar
+
+**Mensaje.** Una mejora predictiva del conjunto no identifica la contribución
+causal del desbalance gamma.
+
+**Contenido para proyectar.**
+
+- En RV15 lineal, las tres proporciones de prima tienen coeficientes medios
+  absolutos de 0,250–0,312, frente a 0,00489 para desbalance gamma total.
+- El conteo de operaciones con dirección identificada tiene pendiente media
+  −0,04271; cuenta operaciones, no un saldo firmado.
+- Composición y actividad del flujo son interpretaciones descriptivas del
+  ajuste; falta una ablación prospectiva para aislar el bloque registrado.
+
+**Notas del orador.** Las magnitudes corresponden a variables transformadas,
+escaladas con entrenamiento y winsorizadas; no son elasticidades comparables
+sin considerar esas transformaciones. La colinealidad y el filtrado de rango
+impiden leer un coeficiente pequeño o podado como efecto verdadero nulo.
+El conjunto puede mejorar una predicción sin verificar inventarios de
+intermediarios ni cobertura causal. La enmienda prospectiva compara B2 completo
+con B2 sin las cuatro columnas del bloque de desbalance gamma y sus indicadores:
+134 frente a 138 predictores antes de efectos e indicadores. Conserva las tres
+columnas históricas de exposición gamma. Por tanto, incluso un rechazo futuro
+respondería al aporte conjunto del bloque retirado, que incluye un conteo de
+operaciones, y no demostraría “el mecanismo gamma” de forma aislada.
+
+**Evidencia.** [Interpretación publicada](../../../../rp4/RESULTADO_FINAL.md) ·
+[Coeficientes por columna y horizonte](../../../../../artifacts/rp4_closeout_audit/b2_coefficient_summary.csv) ·
+[Límites de interpretación de coeficientes](../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Ablación registrada](../../../../rp4/prospective_confirmation_v1_amendment_1.md).
+
+## 10. Las 25 sesiones finales no confirman
+
+**Mensaje.** Una estimación favorable del segundo contraste no basta cuando
+el primer escalón no rechaza.
+
+**Contenido para proyectar.**
+
+- RV15 lineal: H1 p = 0,3908; H2 no abierta, nominal 0,1758; no confirma.
+- RV15 LightGBM: H1 p = 0,0568; H2 no abierta, nominal 0,7554; no confirma.
+
+Muestra: 25 sesiones, 9.750 orígenes; 2026-08-03–2026-09-04.
+
+**Notas del orador.** En la familia lineal, el delta B2/B1 a 15 minutos es
++0,0047673133, con IC95 % [−0,0011087291; 0,014742153]; contiene incertidumbre
+material y no habilita H2 al fallar H1. No presentar el término “confirmación”
+del archivo como prueba confirmada ni atribuir el no rechazo exclusivamente
+a falta de potencia: también cambian el régimen y la composición de la ventana.
+Parte del calendario fue leída con otra especificación y la partición se fijó
+posteriormente; eso limita la independencia del ejercicio. RV5 y sus
+secundarios no rescatan RV15. Los intervalos no prueban equivalencia a cero.
+
+**Evidencia.** [Comparación de confirmación y recetas de p/IC](../../../../rp4/results_v4.md) ·
+[Resumen agregado RV15 final](../../../../../artifacts/rp4_v4_b3_rv15/summary.json) ·
+[Divulgaciones y ruptura de régimen](../../../../rp4/RESULTADO_FINAL.md).
+
+## 11. Cuatro divulgaciones en cuatro frases
+
+**Mensaje.** Estas restricciones forman parte de la conclusión defendida.
+
+**Contenido para proyectar.**
+
+1. Es la cuarta evaluación de las mismas ventanas, con adaptaciones entre v1–v4 y búsqueda no corregida entre versiones; RV5 es secundario, no réplica independiente.
+2. La ventana del 20 de julio al 28 de agosto fue leída previamente con otra especificación.
+3. El PIT es un proxy de tiempo fuente a 120 segundos y no demuestra disponibilidad histórica al cliente.
+4. Se conserva el hueco del proveedor 2025-01-25–2025-02-24, sin relleno.
+
+**Notas del orador.** Leer las frases completas. El registro condicional de v4
+limita la discrecionalidad del último cambio, pero no borra la adaptación previa
+ni constituye un sello temporal independiente de terceros. El control temporal
+del código y los hashes acreditan propiedades concretas; no acreditan recepción
+histórica por un cliente. Un hueco declarado sigue siendo una limitación de
+cobertura. La investigación cerrada puede sostener una conclusión delimitada
+sin prometer generalización universal ni utilidad financiera.
+
+**Evidencia.** [Cuatro divulgaciones del resultado final](../../../../rp4/RESULTADO_FINAL.md) ·
+[Antecedente condicional y límites de v4](../../../../rp4/specification_v4.md).
+
+## 12. Qué cambiaría con una réplica prospectiva
+
+**Mensaje.** La siguiente evidencia procede de sesiones nuevas bajo reglas
+fijadas antes de sus pérdidas, conservando el resultado histórico.
+
+**Contenido para proyectar.**
+
+- Decisión principal: primeras 20 sesiones completas; confirma sólo si H1 y H2
+  rechazan en la familia lineal RV15 al 5 %.
+- Seguimiento: primeras 40 sesiones acumuladas, si el calendario lo permite;
+  estabilidad, sin rescate ni independencia.
+- Secundario A: RV15 lineal, B2 completo frente a B2 sin cuatro columnas de
+  desbalance gamma y sus indicadores.
+- Secundario B: RV15 LightGBM, mediana de las diferencias pareadas B2/B1;
+  p bilateral.
+- Secundario C: RV15 LightGBM, media de deltas pareados recortada al 5 %
+  por cada cola; p bilateral. A/B/C comparten Holm al 5 % y signo positivo.
+- Secundario D: 25 sesiones históricas observadas más 20 nuevas = 45;
+  secuencia lineal RV15 propia, secundaria. Ningún secundario rescata el primario.
+- A/B/C/D tienen una lectura única al completar las 20 prospectivas.
+
+**Notas del orador.** El registro original permanece íntegro y las enmiendas tienen
+hashes y recibos propios, anteriores a la primera adquisición observada; son
+constancias locales, no sellos independientes. El colector está habilitado,
+con primera ejecución prevista el 2026-09-09 a las 10:00 de Australia/Sydney
+para la sesión neoyorquina del 2026-09-08. Un recibo de descarga correcto no
+equivale a una sesión científicamente completa: se comprobarán cobertura,
+claves y elegibilidad sin consultar resultados. No hay resultados prospectivos
+disponibles en este paquete.
+
+El primario conserva conjuntos, familias, máscaras y procedimiento v4, RV15
+primario y RV5 secundario; no es v5. La nueva ablación se ajusta con la misma
+selección temporal y máscara común, retirando sólo el bloque fijado, sin
+seleccionar variables según el resultado. La mediana es la mediana de los
+deltas por sesión, no la diferencia de dos medianas. Los secundarios se
+leen aunque el primario falle; no se vuelven a contrastar a 40 ni se reclama
+control global al 5 % sobre la unión del primario y los secundarios.
+
+Si la lectura principal no confirma, se publica ese resultado con efectos
+e intervalos y la lectura de estabilidad no lo transforma en confirmación.
+Una réplica favorable reforzaría generalización temporal; no demostraría
+recepción histórica por el cliente, cobertura causal ni rentabilidad. La
+conclusión disponible sigue siendo una mejora pequeña del flujo lineal a
+15 minutos dentro de un diseño con límites explícitos.
+
+**Evidencia.** [Registro original](../../../../rp4/prospective_confirmation_v1.md) ·
+[Enmienda de secundarios y horario](../../../../rp4/prospective_confirmation_v1_amendment_1.md) ·
+[Recibo original](../../../../rp4/prospective_confirmation_v1_receipt.json) ·
+[Recibo de la enmienda](../../../../rp4/prospective_confirmation_v1_amendment_1_receipt.json) ·
+[Enmienda 2: agrupación y recorte](../../../../rp4/prospective_confirmation_v1_amendment_2.md) ·
+[Recibo de la enmienda 2](../../../../rp4/prospective_confirmation_v1_amendment_2_receipt.json) ·
+[Resultado histórico que permanece cerrado](../../../../rp4/RESULTADO_FINAL.md).

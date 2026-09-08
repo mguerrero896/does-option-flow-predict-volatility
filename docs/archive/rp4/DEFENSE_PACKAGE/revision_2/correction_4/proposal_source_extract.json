@@ -1,0 +1,194 @@
+{
+  "schema": "rp4-original-proposal-scientific-excerpts-v1",
+  "projected_at_utc": "2026-09-08T09:07:58.983768+00:00",
+  "selection_basis": "Section numbering and scientific wording match the request. This identifies local copies, not independently authenticated submission to a supervisor.",
+  "source_file_status": "Local proposal copies, declared date only; not an independently time-stamped preregistration.",
+  "sources": {
+    "en": {
+      "docx_sha256": "6f50797daec4f6108862122cd77f791efbf347912f3b1f74f6a3dc55449b3662",
+      "document_xml_sha256": "c1038a97de4e6ed292d4e83fced584f7fa409878480678c95808c28cab747631",
+      "paragraph_count": 101,
+      "declared_date_iso": "2026-07-26",
+      "declared_date_literal": "Date: 26 July 2026",
+      "paragraphs": {
+        "7": {
+          "text": "Date: 26 July 2026",
+          "text_sha256": "82b6e7f3a7b502d38293954866b60190b710a99d57687e947252ef727787fd3f"
+        },
+        "31": {
+          "text": "Commercial unusual-options alerts are widely interpreted as early warnings, but they may reflect hedging, liquidity demand, position closing, or information already incorporated into option prices. This project will evaluate whether point-in-time options activity improves forecasts of the underlying asset’s unannualised realised variance over the next 30 minutes. The study will compare three nested information sets: underlying-market variables, conventional option-state variables, and trade-derived options-activity variables. Data from Financial Modeling Prep, Massive, and Unusual Whales will be aligned at five-minute forecast origins and evaluated through chronological walk-forward testing. QLIKE will be the primary forecast loss, supported by error metrics, day-block uncertainty intervals, and stability checks. The outcome will be a reproducible assessment of incremental risk information, not a trading recommendation, causal claim, or promise of profitability.",
+          "text_sha256": "154f443e21573e9b3f05092a18aa91379aa9a45b2f6c049fe0cc455a18b5513e"
+        },
+        "37": {
+          "text": "Visually striking option trades are monitored by investors and risk teams, yet they may duplicate information already reflected in the underlying asset or conventional option quotes. The dependent variable in this study is the underlying asset’s realised variance during the next 30 minutes; it is not stock direction, option profitability, earnings, or dividend outcomes. The study seeks a measurable answer based on identical forecast origins and future-period evaluation rather than anecdotal examples.",
+          "text_sha256": "e63fc07f6b7c3df7a71c3bccd9445f260f724540c2f767a88e5268daaffaa9db"
+        },
+        "39": {
+          "text": "The research aim is to determine whether point-in-time options activity provides statistically and practically meaningful information for forecasting 30-minute realised variance beyond underlying-market and conventional option-state information.",
+          "text_sha256": "9eb461630d0791f342469bf4091bb68f39d84648c0d81fa13fc0ccdceef0e5d2"
+        },
+        "40": {
+          "text": "2.3 Research Questions",
+          "text_sha256": "74fc3bc7a66466d939c4de703e53134c425b5f42cfd7ae8b4ddd381fb5dc5c93"
+        },
+        "41": {
+          "text": "Does conventional option-state information improve RV30 forecasts relative to an underlying-market benchmark?",
+          "text_sha256": "b6d2a0151fb8a951604d65ce358ca5bc13ff41b1c702d7690493d913e7de9b2e"
+        },
+        "42": {
+          "text": "Does trade-derived options activity add incremental predictive value beyond that conventional option-state benchmark?",
+          "text_sha256": "2cd8f0a8ae1a23f236191f4b54984a601481a7c95f6fb1e6ce73c3bc7397bb75"
+        },
+        "43": {
+          "text": "Are any improvements stable across assets, time-of-day segments, volatility regimes, and conservative timing assumptions?",
+          "text_sha256": "298fd5facebbc9a41880f7f157704f468af274473e5bb954765c03ae5a5bf296"
+        },
+        "45": {
+          "text": "The initial universe comprises SPY, QQQ, AAPL, MSFT, NVDA, TSLA, AMZN, and META during regular United States market hours. Retention will depend only on historical coverage, timestamp integrity, liquidity, and completeness—not predictive performance. Five-minute origins will be used to forecast unannualised RV30. A bounded pilot across five sessions has already produced 2,840 valid origins and confirmed that the three licensed sources can be aligned; this evidence demonstrates feasibility only and will not support final predictive claims. The project excludes directional-price prediction, execution or profit optimisation, causal or insider-trading inference, unrestricted full-market OPRA reconstruction, and redistribution of licensed raw data. Limitations include commercial API changes, imperfect historical availability timestamps, missing observations, storage requirements, and the ten-week delivery period.",
+          "text_sha256": "83cbe8a7eeaa154159e9c75fb7b1e18dc11fb1de3398305e50443541ea1ef555"
+        },
+        "49": {
+          "text": "First, I will conduct a structured review of at least ten peer-reviewed studies, prioritising 2024–2026 publications. A literature matrix will compare research questions, datasets, forecast horizons, feature groups, model families, validation designs, metrics, findings, and limitations. Foundational methods will be retained only where recent applications demonstrate continuing relevance.",
+          "text_sha256": "9f2e1eb2a82a2fe521da4b80860e49b1702fe9e4909be29257e99f65f7204aed"
+        },
+        "51": {
+          "text": "Second, the three licensed datasets will be audited for entitlement, history, timestamps, pagination, schema stability, missingness, and licensing constraints. One-minute underlying data will come from Financial Modeling Prep; historical option contracts and quotes from Massive; and transaction-level options activity from Unusual Whales. Raw files will be cached, hashed, and transformed into a traceable panel without future-data leakage.",
+          "text_sha256": "ddd214c0303576152925860c8fa4b7e0ba0d5887ac2c7b88764510a9cd7251bb"
+        },
+        "59": {
+          "text": "Lagged returns, realised variance, range, volume, market context, and intraday seasonality.",
+          "text_sha256": "6fedc8f67e2e3cb12c354df2607ee46711273673de845641024bbe967e34d340"
+        },
+        "62": {
+          "text": "B0 plus at-the-money implied volatility, skew, quote age, spread, and term structure when available.",
+          "text_sha256": "a7ca87561b0390df5d0591555ae91e8fbfa7de47577826a6d88f2515cf5ad263"
+        },
+        "65": {
+          "text": "B1 plus activity surprises defined from prior data only: trade intensity, premium, size, concentration, and contract composition.",
+          "text_sha256": "f17f231fe7b739c264a18408294b094eb5c177993ed846024037c643b7764d04"
+        },
+        "69": {
+          "text": "Third, the analysis will construct nested benchmarks on the same rows: B0 will contain underlying-market controls; B1 will add conventional option-state measures such as at-the-money implied volatility, skew, quote age, and spread; B2 will add continuous trade-activity surprises, concentration, premium, size, and contract-composition measures. Seasonal persistence, HAR-RV (Corsi, 2009), a regularised linear model, and gradient-boosted trees will be compared under the same protocol.",
+          "text_sha256": "da49d00bb01c312882d76711718e9d866c0b7c9d50d9feae930bf9b3188ce5a3"
+        },
+        "71": {
+          "text": "Notation: t = forecast origin after the five-minute interval closes; j = future minute (1–30); C(t+j) and C(t+j−1) = consecutive closing prices of the underlying asset; ln = natural logarithm; Σ = summation; RV(t,t+30) = unannualized realized variance over the next 30 minutes. The exponent 2 measures magnitude, not direction.",
+          "text_sha256": "f7ae53e870e4cf15cbfd888a9b4f8fb3da0a6fe74279a0d2af6932953e8b2d94"
+        },
+        "72": {
+          "text": "C denotes the one-minute close. Equation 1 uses 31 prices to form 30 squared log returns; the target measures movement intensity, not direction.",
+          "text_sha256": "2bb995fe805adf515cf776e93d04506e9d23111a302c96bb1a1ee7b3181eb867"
+        },
+        "74": {
+          "text": "Finally, expanding walk-forward validation will preserve chronology and keep all preprocessing within training histories. QLIKE (Patton, 2011) will be the primary loss because the target is variance; MAE and RMSE will provide secondary interpretation. Day-block bootstrap intervals, timing sensitivities, placebo tests, and asset/regime analyses will distinguish stable incremental information from noise. Model choice will follow benchmark performance and simplicity, not whether B2 produces a favourable sign.",
+          "text_sha256": "26afec1a3cb131b35176abd53e848a88018f787f40e764998223e903abd8f133"
+        },
+        "76": {
+          "text": "For the same realised variance y, lower QLIKE is better. Incremental value is assessed from the paired loss difference between B1 and B2.",
+          "text_sha256": "aadea53a48c923597ac0b1e37cb11c9d7b88e3775913f3f995ce352138f7d1ab"
+        },
+        "79": {
+          "text": "The project will deliver a final research report, presentation, literature matrix, data dictionary, reproducible extraction and quality-control code, versioned analytical panel, model-comparison tables, uncertainty intervals, robustness analyses, and an examiner-facing notebook. Its principal contribution will be a defensible answer to whether options activity contains incremental short-horizon risk information. A positive result would justify further investigation of B2 as one input to risk monitoring; a null or negative result would be equally informative because it would show that commercial flow signals do not outperform stronger controls under realistic validation. The wider value is a reusable, leakage-resistant protocol for evaluating heterogeneous market data across other liquid assets.",
+          "text_sha256": "9219d31b2c0d30fd9c93f202aa87170b20ec111ff1804788726784a694ad26ab"
+        }
+      },
+      "selection_scope": "Scientific clauses and declared date only; cover identifiers, contents pagination and unneeded sections omitted.",
+      "equation_1_image_sha256": "3abb7e24dae83049ee5076793a85eb6a936c7923f3bb7bb42bc4420ab519e93e"
+    },
+    "es": {
+      "docx_sha256": "b65776432e805872b79ddbefc74ebe2d7d49ff56f0edfb05f65e7919f7a104ca",
+      "document_xml_sha256": "8ca3fe15173ac80fb70b724ea431fdc323e0a30739f51fe60c43e20282c44994",
+      "paragraph_count": 104,
+      "declared_date_iso": "2026-07-26",
+      "declared_date_literal": "Fecha: 26 de julio de 2026",
+      "paragraphs": {
+        "7": {
+          "text": "Fecha: 26 de julio de 2026",
+          "text_sha256": "39266db4a98b5c14d48bd5233edb8c9a8f85870990e967e79f8994005175da29"
+        },
+        "32": {
+          "text": "Las alertas comerciales de actividad inusual en opciones suelen interpretarse como señales tempranas, aunque pueden reflejar cobertura, liquidez, cierre de posiciones o información ya incorporada en sus precios. Este proyecto evaluará si la actividad de opciones disponible al momento del pronóstico mejora la predicción de la varianza realizada no anualizada del activo subyacente durante los siguientes 30 minutos. El estudio comparará tres conjuntos anidados: variables del mercado subyacente, variables convencionales del estado de opciones y variables derivadas de las operaciones. Los datos de Financial Modeling Prep, Massive y Unusual Whales se alinearán en orígenes de cinco minutos y se evaluarán mediante validación cronológica walk-forward. QLIKE será la pérdida principal, acompañada por métricas de error, intervalos por día y pruebas de estabilidad. El resultado será una evaluación reproducible de información incremental de riesgo, no una recomendación de trading, afirmación causal o promesa de rentabilidad.",
+          "text_sha256": "75c382422bb087e860ea0c0104615eab754c1a825d4c12da79901c765918ce47"
+        },
+        "38": {
+          "text": "Las operaciones llamativas en opciones son vigiladas por inversionistas y equipos de riesgo, pero pueden duplicar información ya reflejada en el activo subyacente o en las cotizaciones convencionales de opciones. La variable dependiente será la varianza realizada del subyacente durante los siguientes 30 minutos; no se predecirá dirección del precio, rentabilidad de opciones, resultados financieros ni dividendos. El estudio buscará una respuesta medible, basada en orígenes idénticos y evaluación sobre periodos futuros, en lugar de ejemplos anecdóticos.",
+          "text_sha256": "2ecbe052436bdd91dc4d058264779e7ddabaca168a4d27827dc7316a6ed44ded"
+        },
+        "40": {
+          "text": "El objetivo general es determinar si la actividad de opciones disponible al momento del pronóstico aporta información estadística y prácticamente relevante para predecir la varianza realizada a 30 minutos, más allá del mercado subyacente y del estado convencional de opciones.",
+          "text_sha256": "1344a4c217ad2bfab9cd3ba07fc7249de2978eefb6e998325277d43bc3a665d5"
+        },
+        "41": {
+          "text": "2.3 Preguntas de investigación",
+          "text_sha256": "a8895c119dd150333dff4e3f2412092e59ad5959df83d6a2f24f2eb3fc551d7a"
+        },
+        "42": {
+          "text": "¿La información convencional del estado de opciones mejora RV30 frente a un benchmark del mercado subyacente?",
+          "text_sha256": "200b6cd8d18bf2927df5e1eeca95c3a73fd7c1404735f43712ff723a7986243e"
+        },
+        "43": {
+          "text": "¿La actividad derivada de operaciones agrega valor predictivo incremental sobre ese benchmark convencional de opciones?",
+          "text_sha256": "7dd8541d3d803c6cd1695688a3c6388757b357513060509d95e1c0ea0e5fcb01"
+        },
+        "44": {
+          "text": "¿Las mejoras son estables entre activos, segmentos horarios, regímenes de volatilidad y supuestos temporales conservadores?",
+          "text_sha256": "3df23b3c1e2dca13d484bb55ce0c372ba98b207daa7842de1c4d1999893e5b7c"
+        },
+        "46": {
+          "text": "El universo inicial incluye SPY, QQQ, AAPL, MSFT, NVDA, TSLA, AMZN y META durante el horario regular del mercado estadounidense. La permanencia de cada activo dependerá únicamente de cobertura histórica, integridad temporal, liquidez y completitud, nunca de su rendimiento predictivo. Se utilizarán orígenes de cinco minutos para pronosticar RV30 no anualizada. Un piloto acotado de cinco sesiones ya produjo 2.840 orígenes válidos y confirmó que las tres fuentes licenciadas pueden alinearse; esta evidencia demuestra factibilidad, pero no respaldará afirmaciones predictivas finales. Se excluyen la predicción direccional, la ejecución o optimización de beneficios, inferencias causales o de insider trading, la reconstrucción irrestricta de OPRA y la redistribución de datos licenciados. Las limitaciones incluyen cambios de API, timestamps históricos imperfectos, observaciones faltantes, almacenamiento y el plazo de diez semanas.",
+          "text_sha256": "232ac375b98af6a96ddd936d716935c98176a39d1749a2f4fc0c42c70f16173f"
+        },
+        "50": {
+          "text": "Primero, el investigador realizará una revisión estructurada de al menos diez estudios revisados por pares, priorizando publicaciones de 2024–2026. Una matriz comparará preguntas, datasets, horizontes, grupos de variables, familias de modelos, validación, métricas, hallazgos y limitaciones. Los métodos fundacionales se conservarán únicamente cuando aplicaciones recientes demuestren su vigencia.",
+          "text_sha256": "ad49f99ffee510ea8bd828a7c8070f807fea2862ba7de766f1617d6c1ec69a21"
+        },
+        "52": {
+          "text": "Segundo, las tres fuentes licenciadas serán auditadas en cuanto a permisos, historia, timestamps, paginación, estabilidad de esquemas, datos faltantes y restricciones de licencia. Financial Modeling Prep aportará datos del subyacente a un minuto; Massive, contratos y cotizaciones históricas; y Unusual Whales, actividad transaccional en opciones. Los archivos crudos serán cacheados, hasheados y transformados en un panel trazable sin información futura.",
+          "text_sha256": "3cb68181c03bf2fb167b7f7c541929e1e500e62b6d1b59fa054b47a2e056b353"
+        },
+        "60": {
+          "text": "Retornos rezagados, varianza realizada, rango, volumen, contexto de mercado y estacionalidad intradía.",
+          "text_sha256": "00d2577c779dab811063a0ed70213e912336f7ebb9c49947a5aa6aced1fa74cf"
+        },
+        "63": {
+          "text": "B0 más volatilidad implícita at-the-money, skew, edad de cotización, spread y estructura temporal cuando exista.",
+          "text_sha256": "2bd301dc581ecc87ab3d2b36b37c9b50af9bc991af0dc919bb58a0717f58f504"
+        },
+        "66": {
+          "text": "B1 más sorpresas definidas solo con datos previos: intensidad, prima, tamaño, concentración y composición contractual.",
+          "text_sha256": "3b141e40308a57c7233c20ad1c711404ce704a36143a8f2d311426bd3ca0adff"
+        },
+        "70": {
+          "text": "Tercero, se construirán benchmarks anidados sobre las mismas filas: B0 incluirá controles del mercado subyacente; B1 añadirá medidas convencionales de opciones, como volatilidad implícita at-the-money, skew, edad de la cotización y spread; B2 agregará sorpresas continuas de actividad, concentración, prima, tamaño y composición contractual. Se compararán persistencia estacional, HAR-RV (Corsi, 2009), un modelo lineal regularizado y árboles con gradient boosting bajo el mismo protocolo.",
+          "text_sha256": "28f03d24c7ba33aa92c8d884c6a363b56667be8e7cd1443183a63b5d1f97df7e"
+        },
+        "72": {
+          "text": "C representa el cierre de un minuto. La Ecuación 1 usa 31 precios para formar 30 retornos logarítmicos al cuadrado; mide intensidad, no dirección.",
+          "text_sha256": "f337fb3a4862f8f5864069ba0f3f0abff0808bc7fa355578c73bb7cb9f76e0f0"
+        },
+        "74": {
+          "text": "Finalmente, la validación walk-forward expansiva respetará el orden temporal y ajustará todo el preprocesamiento solo dentro de la historia de entrenamiento. QLIKE (Patton, 2011) será la pérdida principal por tratarse de un objetivo de varianza; MAE y RMSE facilitarán la interpretación secundaria. Intervalos bootstrap por día, sensibilidades temporales, placebos y análisis por activo y régimen distinguirán información incremental estable de ruido. La elección del modelo dependerá del benchmark y de la simplicidad, no de que B2 produzca un signo favorable.",
+          "text_sha256": "aeec0fb8122e08fc5000cc479b0f72f4b144354b51a5fb0d2b8de4ae493e090c"
+        },
+        "76": {
+          "text": "Para la misma varianza realizada y, un QLIKE menor es mejor. El valor incremental se evalúa mediante la diferencia emparejada entre B1 y B2.",
+          "text_sha256": "bfea8351158cb49a9d18d27b8e663c8cb12625d4eda37adbaef80e5865912b85"
+        },
+        "79": {
+          "text": "El proyecto entregará un informe final, presentación, matriz de literatura, diccionario de datos, código reproducible de extracción y control de calidad, panel analítico versionado, tablas comparativas de modelos, intervalos de incertidumbre, análisis de robustez y un notebook para el evaluador. Su contribución principal será responder de forma defendible si la actividad de opciones contiene información incremental de riesgo a corto plazo. Un resultado positivo justificaría investigar B2 como insumo de monitoreo; un resultado nulo o negativo sería igualmente valioso porque mostraría que las señales comerciales no superan controles más fuertes bajo una validación realista. El valor adicional será un protocolo reutilizable y resistente a fuga de información para evaluar datos financieros heterogéneos.",
+          "text_sha256": "d2f61f57444b4578aaa49d5ea15d6e2e537d8b1172b5e9d6edafd7e46210d9c6"
+        }
+      },
+      "selection_scope": "Scientific clauses and declared date only; cover identifiers, contents pagination and unneeded sections omitted.",
+      "equation_1_image_sha256": null
+    }
+  },
+  "exact_english_commitment": "Model choice will follow benchmark performance and simplicity, not whether B2 produces a favourable sign.",
+  "exact_spanish_commitment": "La elección del modelo dependerá del benchmark y de la simplicidad, no de que B2 produzca un signo favorable.",
+  "exact_english_null_clause": "a null or negative result would be equally informative",
+  "exact_spanish_null_clause": "un resultado nulo o negativo sería igualmente valioso",
+  "equation_1_visual_check": "The embedded equation is an unannualised sum of thirty squared future one-minute log returns; the companion paragraph explicitly specifies thirty-one prices.",
+  "research_only": true,
+  "capital_go": false,
+  "new_scientific_calculations": 0
+}

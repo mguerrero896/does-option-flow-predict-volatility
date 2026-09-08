@@ -1,0 +1,28 @@
+# Antecedente histórico de potencia — adenda documental a la enmienda 3
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+**Registro local: 2026-09-08T08:36:37.886015+00:00.** Se añade contexto histórico a la [enmienda 3](prospective_confirmation_v1_amendment_3.md), sellada el 2026-09-08T06:56:21.897094+00:00 con SHA-256 `4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6`. Se conserva ese documento byte por byte. No modifica hipótesis, umbrales, muestras ni lecturas; tampoco añade una enmienda inferencial ni una nueva versión científica. Este registro precede a la primera adquisición programada del 2026-09-09 a las 10:00 Australia/Sydney; no aporta una marca de tiempo de un tercero.
+
+## La advertencia de potencia precede a RP4
+
+El [bloque 12 de RP2](../rp2/block12_prospective_protocol_v1.md) figura como diseñado el 2026-08-19; su [artefacto de diseño](../../artifacts/rp2_block12_prospective/design.json) conserva generación UTC 2026-08-18T18:18:30.733580+00:00. Son fechas documentales distintas, no fechas de una nueva ejecución. La falta de potencia de ventanas cortas ya se había descrito antes de RP4; no apareció por primera vez al preparar la lectura actual de 20 sesiones.
+
+| Diseño histórico, desarrollo | Valor guardado, redondeado |
+|---|---:|
+| LightGBM, B2 sobre B1, efecto medio QLIKE | +0,00322 |
+| Dispersión por sesión, sigma | 0,02043 |
+| MDE con 60 sesiones | 0,00962 |
+| Sesiones para el efecto observado | 537,3386 |
+| Alfa unilateral de planificación | 0,0025 |
+| Potencia objetivo | 0,80 |
+
+El documento muestra **537** como redondeo del requisito continuo guardado, no como mínimo entero conservador. LightGBM B2/B1 es el contraste con menor requisito finito; no es el único contraste con tamaño finito: también aparecen Gamma B1/B0 en desarrollo y Gamma B2/B1 en validación. No se transportan estos efectos históricos a la especificación actual, ni se recupera con ellos una afirmación científica sustituida.
+
+El protocolo describió una campaña de 60–120 sesiones para ese efecto y bajo esa regla como «no es una prueba» —traducción del original «is not a test»—. Es una advertencia histórica de potencia insuficiente, no una afirmación matemática de potencia cero ni de que todo resultado de una muestra corta deba ser nulo. Su alfa más exigente, objetivo RV30, LightGBM y efectos de otra versión impiden equiparar directamente sus tamaños con los de la réplica actual.
+
+## Relación con la lectura ya registrada
+
+La enmienda 3 conserva una lectura temprana de 20 prospectivas y una final acumulada de 335 bajo la secuencia primaria lineal RV15, H1→H2. El recibo ya guardado da potencia marginal aproximada H2 de 14,99 % a 20 y 80,05 % a 335; H1 a 335 tiene 54,98 %, que también limita superiormente la potencia conjunta bajo esas aproximaciones. El antecedente justifica tomar en serio la limitación de potencia; **no demuestra 80 % para la secuencia completa**, ni convierte las dos campañas en diseños equivalentes.
+
+Se transcriben cifras ya guardadas; no se vuelve a estimar dispersión, MDE, potencia ni efecto. El primario, los secundarios, las lecturas de estabilidad y sus veredictos permanecen tal como constan en la [cadena de sellados](prospective_confirmation_v1_amendment_3_receipt.json). No hay rescate ni nueva lectura autorizada por esta adenda. [Recibo propio](prospective_confirmation_v1_amendment_3_context_1_receipt.json) · [Sidecar](prospective_confirmation_v1_amendment_3_context_1.sha256).

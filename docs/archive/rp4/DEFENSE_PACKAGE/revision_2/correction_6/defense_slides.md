@@ -1,0 +1,672 @@
+# Defensa — información de opciones y volatilidad intradía
+
+Guion de presentación con cifras congeladas y notas para responder al examen.
+Las figuras enlazadas se conservan tal como fueron producidas; sus hashes y
+fuentes están en el [manifiesto de figuras revisadas](../../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json).
+La [matriz de afirmaciones](claims_matrix.csv) y las [preguntas del examinador](examiner_qa.md)
+completan la trazabilidad. Los rótulos de las diapositivas son orden de exposición,
+no nuevas versiones científicas.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+## 1. La respuesta tiene un alcance preciso
+
+**Mensaje.** En la muestra de desarrollo se detecta mejora del pronóstico medio
+al añadir estado de opciones; el incremento del flujo depende de la familia,
+el horizonte y el estadístico.
+
+**Contenido para proyectar.**
+
+- Pregunta: ¿las opciones añaden información predictiva sobre la variación
+  realizada intradía más allá de precios e historia de volatilidad?
+- B1 > B0: ambas familias, 30 y 15 minutos.
+- B2 > B1 > B0: familia lineal, 15 y 5 minutos, bajo secuencia
+  pre-declarada y sellada localmente, sin marca de tiempo de un tercero;
+  RV15 primario y RV5 secundario, no réplica independiente.
+- Árboles: B1 > B0 a 30/15 minutos; B2 ≥ B1 en mediana descriptiva a 15/5,
+  sin confirmación de la media.
+
+**Notas del orador.** Definir “mayor” como menor pérdida de pronóstico en el
+contraste correspondiente, no mayor rendimiento financiero. La jerarquía no
+afirma mejora en cada fecha, activo o régimen. “B2 ≥ B1 en mediana” resume el signo
+de la mediana de diferencias pareadas; no es una prueba de equivalencia ni de
+dominancia general de los árboles. El cierre histórico se alcanza en la familia
+lineal a 15 minutos; la ventana final no constituye una confirmación independiente.
+
+H1 lineal es marginal: p = 0,0439 a RV30 y 0,0390 a RV15. No se detectó
+B1/B0 lineal bajo la regla formal de v1/v2 y los rechazos posteriores no
+sobreviven bajo la sensibilidad bilateral/Holm guardada de RV30/RV15, que
+deja sin rechazo a ambos H1 lineales; no se combina H1 de árboles con H2 lineal para
+abrir una secuencia. La conclusión procede de un diseño fijado con la muestra
+ya observada, aunque cada ajuste walk-forward utiliza sólo su pasado.
+
+**Evidencia.** [Conclusión y límites](../../../../../rp4/RESULTADO_FINAL_revision_2.md) ·
+[Contrastes de ambas ventanas](../../../../../rp4/results_v4.md).
+
+## 2. Qué se compara y cómo se protege el tiempo
+
+**Mensaje.** Los contrastes cambian el conjunto de información dentro de un
+procedimiento temporal común.
+
+**Contenido para proyectar.**
+
+- Activos: AAPL, AMZN, META, MSFT, NVDA, TSLA.
+- B0 ⊂ B1 ⊂ B2: 29/69/138 predictores; historia → estado/superficie →
+  composición/actividad/desbalance.
+- Familias: lineal winsorizada con filtro de rango; LightGBM.
+- Entrenamiento expansivo, pasado exclusivamente; 60 sesiones iniciales.
+- Selección: últimas diez sesiones de entrenamiento; purga/embargo de 60 minutos.
+- Primaria v2–v4: 419 sesiones; 160.832 orígenes.
+- Ventana final: 25 sesiones; 9.750 orígenes.
+- Partición: 2026-08-01, fijada el 2026-09-07 con la muestra ya observada.
+
+**Notas del orador.** El desarrollo comprende 2024-08-02–2026-07-31 y la ventana
+final 2026-08-03–2026-09-04. El calentamiento pertenece al entrenamiento; no
+convierte todas las sesiones del calendario en observaciones evaluadas. Los
+conteos de predictores preceden a los efectos de activo e indicadores que
+corresponden a cada familia. Para aislar el cambio de horizonte, v4 conserva las
+claves elegibles y las máscaras causales del objetivo original de 30 minutos:
+RV15/RV5 no reciben una muestra ampliada por ser más cortos. El tiempo fuente
+es una aproximación a la disponibilidad; esta disciplina temporal no demuestra
+qué recibió históricamente un cliente.
+
+B0 contiene varianzas realizadas pasadas a 5/15/30 minutos, acumulada de
+sesión, día previo y semana; cuatro componentes HAR logarítmicos y atenuación
+por cuarticidad; semivarianzas positivas/negativas, proxy de salto, Parkinson,
+retornos, volumen y volumen monetario; SPY/QQQ en retorno y varianza; día de
+semana, proximidad a apertura/cierre y términos de hora. Son 29 columnas
+registradas, antes de efectos e indicadores. El [registro ejecutable](../../../../../../artifacts/rp4_v4_a1/specification.json),
+el [productor de precios](../../../../../../scripts/rp2_block4_b0_panel.py),
+los [componentes HAR/HARQ](../../../../../../src/mds650/har.py) y su
+[integración](../../../../../../artifacts/rp4_code/materialize.py) verifican la
+composición; no se infiere por el nombre del modelo ni se afirma que todas
+las columnas sobrevivan la poda en cada ajuste. Es una adaptación intradía
+de antecedentes establecidos, no una réplica exacta de sus resultados.
+
+La etiqueta temporal completa es «fuera de muestra walk-forward, diseño
+fijado con la muestra ya observada y partición fijada 2026-09-07». El control
+temporal del entrenamiento no vuelve ciego el desarrollo retrospectivo.
+
+**Evidencia.** [Diseño completo](../../../../../rp4/specification_v4.md) ·
+[Muestra y cobertura](../../../../../rp4/results_v4.md) ·
+[Contrato ejecutable](../../../../../../artifacts/rp4_v4_a1/specification.json).
+
+## 3. Propuesta → entrega: responder primero al objetivo original
+
+**Mensaje.** La contribución incluye los no rechazos a RV30 y declara las diferencias entre la propuesta y la entrega.
+
+**Contenido para proyectar.**
+
+| Preguntas originales a RV30 | Respuesta con v3 |
+| --- | --- |
+| RQ1: estado de opciones sobre precios | **Sí**: H1 lineal p **0,0439**; árboles **0,0053**. |
+| RQ2: actividad sobre estado de opciones | **No detectado al 5 %**: H2 lineal **0,0525**; árboles **0,6631**. |
+| RQ3: estabilidad entre activos, horas, volatilidad y supuestos temporales | **Parcial**: signos B1 favorables por activo; aprendizaje, instrumento y vencimientos documentados; sin demostrar todos los regímenes ni variantes PIT. |
+
+| Propuesta → entrega | Estado |
+| --- | --- |
+| B0 ⊂ B1 ⊂ B2; barras, contratos/cotizaciones y actividad por operación | **ALINEADO** en tipos de información, sin afirmar fuentes independientes. |
+| Orígenes cada cinco minutos, walk-forward expansivo, QLIKE; bootstrap de **5 sesiones / 9.999 réplicas** | **ALINEADO**; parámetros del bootstrap fijados en el registro de ejecución. |
+| RV30 no anualizado → RV15 primario/RV5 secundario, después de leer RV30 | **DESVIACIÓN DECLARADA**, extensión v4 pre-declarada localmente. |
+| Ocho objetivos → seis acciones; SPY/QQQ como controles B0 | **DESVIACIÓN DECLARADA**; papel fijado, razón de reducción no localizada. |
+| Persistencia estacional/HAR-RV/lineal regularizado/árboles → lineal con filtro de rango y LightGBM | **DESVIACIÓN DECLARADA**; HAR/HARQ son predictores, comparaciones separadas **PENDIENTES**. |
+| Análisis por activo y régimen; MAE/RMSE, variantes PIT y placebo | Desgloses entregados **ALINEADOS**; las tres robusteces restantes **PENDIENTES**, sin ejecución. PIT actual: **120 segundos**. |
+
+**Notas del orador.** La ecuación original de RV30 suma treinta retornos logarítmicos de un minuto al cuadrado, sin raíz ni anualización. Contestar primero las preguntas de la propuesta evita hacer pasar la extensión favorable a otro horizonte por la respuesta al objetivo inicial. Los signos por activo no equivalen a rechazo individual: ninguno de los **12** contrastes B1 por activo/familia rechaza tras Holm dentro de su subconjunto de cuatro contrastes; mínimo **0,0624**. Los diagnósticos de aprendizaje, ventanas vacías y vencimientos no son tres regímenes predefinidos de volatilidad ni pruebas causales. El [inventario verificable](../correction_4/proposal_alignment_evidence.json) acota la búsqueda y las ausencias.
+
+El antecedente v4 declara **2026-09-07 20:20 Australia/Sydney** y el freeze ejecutable es **2026-09-08T02:37:21.501511+10:00**; las evaluaciones posteriores y la lectura previa RV30 están en la cronología de las [preguntas del examinador](examiner_qa.md). Esta secuencia explica la extensión; no borra la búsqueda histórica ni autentica el sello mediante un tercero.
+
+La propuesta dice **«La elección del modelo dependerá del benchmark y de la simplicidad, no de que B2 produzca un signo favorable.»** También: **«un resultado nulo o negativo sería igualmente valioso»**; el original inglés conserva **“a null or negative result would be equally informative”**. Junto a ello, el cierre v4 dice **«Si no: el proyecto se cierra con B1 > B0 como resultado principal y B2 como nulo informativo a 30, 15 y 5 minutos. No hay v5.»** Son compromisos de aceptar un resultado adverso, no reglas inferenciales idénticas: cambia de ambas familias en v3 a al menos una en v4. No rechazo no demuestra equivalencia a cero. [Citas originales](../correction_4/proposal_source_extract.json) · [Cierre registrado](../../../../../rp4/predeclaration_v4_text.md).
+
+**Inventario de entregables para el examen.**
+
+| Entregable | Estado y ruta |
+| --- | --- |
+| Informe final | **ALINEADO**: [informe](../../../../../rp4/RESULTADO_FINAL_revision_2.md) y [resumen](executive_summary.md). |
+| Presentación | **ALINEADO**: [guion](defense_slides.md) y [figuras](../../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json), sin acreditar formato nativo. |
+| Matriz de literatura | **ALINEADO**: [matriz](../../../../../literature_matrix.csv); la matriz por sí sola no acredita el requisito de revisión por pares e incluye working paper; no se amplía el censo editorial. |
+| Diccionario | **PENDIENTE** actualización RP4: [antecedente](../../../../../data_dictionary.md). |
+| Código reproducible | **ALINEADO** como código y procedimiento: [evaluador](../../../../../../artifacts/rp4_v4_code/evaluate_v4.py) y [runbook](../../../../../rp4/OPERATING_GUIDE.md); reproducción completa no ejecutada. |
+| Panel versionado | **DESVIACIÓN DECLARADA** de acceso: [release y hashes](../../../../../../artifacts/rp4_v4_a2/evaluation_release_rv15.json); payload bajo custodia privada por licencia. |
+| Tablas de comparación | **ALINEADO**: [tabla de versiones](../../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv). |
+| Intervalos | **ALINEADO**: [estadísticas](../../../../../../artifacts/rp4_v4_b4/primary_statistics.csv). |
+| Robustez | **ALINEADO** en análisis presentes: [desgloses](../../../../../../artifacts/rp4_v4_b4/robustness.csv); MAE/RMSE, PIT y placebo siguen pendientes. |
+| Cuaderno del examinador | **PENDIENTE** actualización RP4: [cuaderno anterior](../../../../../../notebooks/canonical_rv30_defense.ipynb), inspeccionado sin ejecutar. |
+
+**Evidencia.** [Propuesta y ecuación original](../correction_4/proposal_source_extract.json) · [RV30 guardado](../../../../../../artifacts/rp4_v3_b2/summary.json) · [Tabla completa con límites](examiner_qa.md#propuesta--entrega). No se ejecuta ninguno de los pendientes al preparar esta diapositiva.
+
+## 4. Qué prueba el contraste y qué no prueba
+
+**Mensaje.** La decisión responde a diferencias medias de QLIKE dentro de cada
+familia; no certifica una estrategia ni controla toda la búsqueda histórica.
+
+**Contenido para proyectar.**
+
+- QLIKE = y/f − log(y/f) − 1; delta = pérdida base − pérdida ampliada.
+- Promedio por activo/sesión y pesos iguales entre activos y sesiones.
+- H1: B1/B0, unilateral al 5 %; sólo si rechaza se abre H2: B2/B1 al 5 %.
+- Bootstrap circular: bloques de cinco sesiones, 9.999 réplicas.
+- La regla histórica “al menos una familia” es operativa; no ofrece control
+  global al 5 % entre familias ni entre versiones.
+
+**Notas del orador.** Rechazar significa evidencia de diferencia media positiva
+con el procedimiento registrado; no rechazar no prueba ausencia. H2 cerrada
+conserva únicamente un p nominal diagnóstico. El intervalo publicado es
+percentil bilateral del 95 % y el p primario usa una nula centrada unilateral:
+no son una pareja de intervalos y pruebas construida por inversión exacta, por
+lo que una discrepancia aparente se explica por sus recetas, no cambiando la
+regla. QLIKE evalúa escala de varianza pronosticada; no incorpora reglas de
+operación, costes, exposición ni resultados de una cartera. Las pruebas por
+familia tampoco eliminan el efecto de haber revisado las mismas ventanas.
+
+El punto de partida contiene persistencia multiescala HAR, adaptación a error
+de medición mediante cuarticidad y semivarianzas de retornos con distinto signo.
+El contraste B1/B0 no enfrenta un modelo ingenuo: sus antecedentes son
+[Corsi (2009)](https://doi.org/10.1093/jjfinec/nbp001),
+[Bollerslev, Patton y Quaedvlieg (2016)](https://scholars.duke.edu/publication/1072550)
+y [Patton y Sheppard (2015)](https://scholars.duke.edu/publication/1082826).
+Las referencias sustentan el tipo de controles, no un porcentaje de mejora
+comparable ni la fuerza empírica de este B0 en otra población. Para Corsi se
+verificó el artículo en la página institucional del autor y se leyó la
+[versión de trabajo de 2004](https://www.greta.it/old/jae/poster/06_1_Corsi.pdf);
+no se presenta esa lectura como texto completo de la versión publicada de 2009.
+
+Diagnósticos complementarios guardados, RV15 primaria, 419 sesiones;
+estadísticos y p redondeados a seis decimales:
+
+| Contraste | DM HAC(5), estadístico | p DM bilateral | GW, estadístico | p GW |
+| --- | ---: | ---: | ---: | ---: |
+| Lineal H1 | 1,911952 | 0,055882 | 7,029704 | 0,029752 |
+| Lineal H2 | 2,734853 | 0,006241 | 7,618946 | 0,022160 |
+| Árboles H1 | 2,425315 | 0,015295 | 7,128308 | 0,028321 |
+| Árboles H2 | −0,257628 | 0,796694 | 0,057964 | 0,971434 |
+
+DM es bilateral normal con HAC(5); GW usa constante y delta de la sesión
+anterior, HAC(5) y dos grados de libertad. No son la misma nula ni están
+ajustados aquí por multiplicidad. El bootstrap de bloques es la inferencia
+registrada; DM/GW no la sustituyen ni se elige el diagnóstico favorable.
+Por ejemplo, DM no rechaza H1 lineal, a diferencia del bootstrap unilateral.
+[Estadísticas originales](../../../../../../artifacts/rp4_v4_b4/primary_statistics.csv) ·
+[Fuentes, fórmulas y bibliografía verificada](../correction_2/examiner_evidence.json).
+
+**Evidencia.** [Inferencia registrada](../../../../../rp4/specification_v4.md) ·
+[Productor de inferencia](../../../../../../artifacts/rp4_v3_code/inference.py) ·
+[Decisiones y p formales](../../../../../rp4/results_v4.md).
+
+## 5. Las cuatro versiones se muestran completas
+
+**Mensaje.** La historia contiene correcciones y adaptación; los signos adversos
+se mantienen a la vista.
+
+**Contenido para proyectar.** Tabla reproducida literalmente del README; cada
+celda muestra reducción porcentual de QLIKE (p).
+
+| Versión / objetivo | Lineal B1/B0 | Lineal B2/B1 | Árboles B1/B0 | Árboles B2/B1 | Sesiones |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| v1 · RV30 | +0,290 % (1,000) | −167.448,32 % (1,000) | +1,204 % (0,4724) | −0,073 % (1,000) | 418 |
+| v2 · RV30 | +1,715 % (0,1842) | −8,714 % (0,3752) | +2,091 % (0,0264) | −0,063 % (0,8858) | 419 |
+| v3 · RV30 | +1,729 % (0,0439) | +0,554 % (0,0525) | +2,091 % (0,0053) | −0,159 % (0,6631) | 419 |
+| v4 · RV15, primario | +0,880 % (0,0390) | +0,623 % (0,0032) | +1,170 % (0,0135) | −0,115 % (0,6280) | 419 |
+| v4 · RV5, secundario | +0,377 % (0,0092) | +0,256 % (0,0172) | +0,536 % (0,0608) | +0,160 % (no abierta; nominal 0,1927) | 419 |
+
+**Notas del orador.** v1 conserva su fallo numérico y sus 92.261 orígenes; no
+representa una estimación estable del efecto económico del flujo. v2 cambia
+cobertura, capacidad y estabilidad; v3 añade desbalance y el tratamiento de
+ventanas vacías; v4 cambia el horizonte mediante un antecedente condicional.
+La familia lineal pasa de log-OLS en v1 a ridge nominal en las versiones
+posteriores. En v1/v2 los p son bilaterales con Holm; en v3/v4 son unilaterales
+secuenciales. Cambian muestra, procedimiento y objetivo: las filas no aíslan
+causalmente el beneficio de cada modificación y sus p no son intercambiables.
+La mejora lineal de v3 en B2/B1 queda en p = 0,0525; no se redondea a rechazo.
+El programa histórico termina en v4, sin v5.
+
+El cambio inferencial se registró en v3 antes de ejecutarla: pasar de p
+bilaterales/Holm de cuatro contrastes a unilateral secuencial por familia,
+sin Holm entre familias, hace menos exigente la decisión correspondiente.
+B2 incorporó desbalance gamma e indicadores después de fallar en v1/v2;
+la regla de ventana vacía se fijó tras el diagnóstico de v2. B1/B0 lineal
+no rechazó bajo la regla formal de v1/v2, aunque su estimación fuera positiva.
+
+La motivación de RV15 es una hipótesis de vida corta del flujo y cobertura
+en minutos, no un mecanismo demostrado; RV5 queda secundario. El antecedente
+está **pre-declarado y sellado localmente, sin marca de tiempo de un tercero**.
+La regla de cierre de la especificación v4 se conserva literalmente:
+
+> Si ninguna rechaza, se cierra la investigación de este mecanismo con B1>B0 como resultado principal observado a 30 minutos y B2 no detectado a 30/15/5 según cada estimación e intervalo. No rechazo no establece equivalencia a cero ni absorción causal; «nulo informativo» describe el cierre, no una prueba de ausencia.
+
+El antecedente añade «No hay v5». No se promueve RV5 para rescatar un RV15
+adverso. [Texto proyectado del antecedente](../../../../../rp4/predeclaration_v4_text.md) ·
+[Regla de v3](../../../../../rp4/specification_v3.md) · [Cierre v4](../../../../../rp4/specification_v4.md).
+
+Cronología completa de los recibos inspeccionados; las fechas sin reloj no reciben una hora inventada. Las columnas UTC y Australia/Sydney muestran conversiones del mismo instante, no sucesos distintos:
+
+| Acontecimiento y tipo de evidencia | UTC | Australia/Sydney | Fuente |
+| --- | --- | --- | --- |
+| Última sesión histórica: 2026-09-04 | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/summary.json) |
+| Partición 2026-08-01; diseño declarado 2026-09-07 | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_v4_a1/specification.json) |
+| Congelación v1: fecha 2026-09-07, sin hora/zona guardada | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_a1/freeze.json) |
+| Registro v3; v1/v2 ya conocidos | 2026-09-07T08:18:58.166170+00:00 | 2026-09-07T18:18:58.166170+10:00 | [Registro](../../../../../../artifacts/rp4_v3_a1/freeze.json) |
+| Registro de ventanas vacías v3 | 2026-09-07T08:30:43.053218+00:00 | 2026-09-07T18:30:43.053218+10:00 | [Registro](../../../../../../artifacts/rp4_v3_a1_empty_window/freeze.json) |
+| Antecedente condicional v4: hora declarada en el texto | 2026-09-07T10:20:00+00:00 | 2026-09-07T20:20:00+10:00 | [Registro](../../../../../rp4/predeclaration_v4_text_receipt.json) |
+| Verificación del cierre v3 | 2026-09-07T16:18:46+00:00 | 2026-09-08T02:18:46+10:00 | [Registro](../../../../../../artifacts/rp4_v3_b4/receipt.json) |
+| Congelación ejecutable v4 | 2026-09-07T16:37:21.501511+00:00 | 2026-09-08T02:37:21.501511+10:00 | [Registro](../../../../../../artifacts/rp4_v4_a1/freeze_manifest.json) |
+| Inicio RV15 primaria | 2026-09-07T17:24:29.535011+00:00 | 2026-09-08T03:24:29.535011+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv15/receipt.json) |
+| Fin RV15 primaria | 2026-09-07T18:13:29.790569+00:00 | 2026-09-08T04:13:29.790569+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv15/receipt.json) |
+| Inicio RV15 final | 2026-09-07T18:14:50.222385+00:00 | 2026-09-08T04:14:50.222385+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/receipt.json) |
+| Fin RV15 final | 2026-09-07T18:23:27.273395+00:00 | 2026-09-08T04:23:27.273395+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/receipt.json) |
+| Inicio RV5 primaria | 2026-09-07T18:24:38.947836+00:00 | 2026-09-08T04:24:38.947836+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv5/receipt.json) |
+| Fin RV5 primaria | 2026-09-07T19:16:40.533194+00:00 | 2026-09-08T05:16:40.533194+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv5/receipt.json) |
+| Inicio RV5 final | 2026-09-07T19:17:15.307438+00:00 | 2026-09-08T05:17:15.307438+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv5/receipt.json) |
+| Fin RV5 final | 2026-09-07T19:25:22.707101+00:00 | 2026-09-08T05:25:22.707101+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv5/receipt.json) |
+| Informe v4 generado a más tardar | 2026-09-07T19:26:27+00:00 | 2026-09-08T05:26:27+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b4/receipt.json) |
+| Registro prospectivo v1 | 2026-09-08T04:24:01.918499+00:00 | 2026-09-08T14:24:01.918499+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_receipt.json) |
+| Enmienda 1 | 2026-09-08T04:31:58.752153+00:00 | 2026-09-08T14:31:58.752153+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_1_receipt.json) |
+| Enmienda 2 | 2026-09-08T05:27:15.316335+00:00 | 2026-09-08T15:27:15.316335+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_2_receipt.json) |
+| Enmienda 3 | 2026-09-08T06:56:21.897094+00:00 | 2026-09-08T16:56:21.897094+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_3_receipt.json) |
+
+La hora 2026-09-07 20:20 de Australia/Sydney, equivalente a 10:20 UTC, es una **afirmación del texto** del antecedente; no está autenticada por un tercero ni se deduce del tiempo de modificación del archivo. La verificación de cierre v3 está registrada a las 16:18:46 UTC y el registro ejecutable v4 que enlaza el hash del antecedente se congeló después, a las 16:37:21.501511 UTC. Esa cadena permite seguir el contenido local, pero no prueba de forma independiente que el antecedente se escribiera antes de conocer v3. La proyección pública es posterior a los resultados y tiene hash propio; el hash sellado del original local es `6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee`.
+
+El registro de v3 ya declara conocidos los resultados de v1/v2; los recibos inspeccionados no permiten asignar una hora exacta de ejecución a cada uno. La muestra termina el 2026-09-04, antes de fijarse el diseño del 7 de septiembre. Por tanto, el entrenamiento temporal permanece separado de sus objetivos futuros, pero el diseño histórico fue fijado con la muestra ya observada; la réplica prospectiva establece otra relación entre registro y adquisición. [Selectores, hashes y límites de cada hora](../correction_2/examiner_evidence.json).
+
+La revisión del cajón de archivo es acotada y reproducible: buscar literalmente `rv_10|rv_20|rv_60|rv_45` en 62 archivos permitidos —27 de código y 35 de registros/agregados v3/v4— produjo cero coincidencias, salida y error estándar vacíos, con código de salida 1 de `rg` por ausencia de coincidencias. Los seis resúmenes de contrastes primarios sólo contienen las familias lineal y LightGBM; los registros fijan RV30 para v3 y RV15 primario/RV5 secundario para v4. No hay evidencia de otros horizontes o familias primarias en ese inventario. Esta búsqueda no prueba que nunca se haya realizado otro experimento fuera del alcance inspeccionado, ni niega los secundarios que sí se documentan. No se abrieron paneles, resultados reservados ni datos nuevos. [Inventario, patrones, comando y hashes de la búsqueda](../correction_2/examiner_evidence.json).
+
+**Evidencia.** [Tabla original](../../../../../../README.md) ·
+[Datos agregados y hashes de sus fuentes](../../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) ·
+[Auditoría de instrumento y modelos](../../../../../../artifacts/rp4_closeout_audit/REPORT.md).
+
+## 6. Magnitud, incertidumbre y discrepancia entre familias
+
+**Mensaje.** El incremento lineal del flujo es pequeño y medible; la media de los
+árboles no reproduce ese resultado.
+
+**Contenido para proyectar.**
+
+![Síntesis: reducción de QLIKE por versión, familia y contraste, con intervalos y extremos señalados](../../../../../figures/rp4/thesis_summary.svg)
+
+- Lineal B2/B1 a 15 minutos: +0,623 %; IC95 % de delta QLIKE
+  [0,000335; 0,001932]; p = 0,0032.
+- Lineal B2/B1 a 5 minutos: +0,256 %; resultado secundario.
+- Árboles B2/B1 a 15 minutos: −0,115 %; p = 0,6280.
+- Mediana pareada de árboles a 15/5 minutos: p bilateral 0,0435/0,0038;
+  Holm 0,0870/0,0096.
+
+**Notas del orador.** La escala de síntesis va de −3 % a +3 %; los valores fuera
+de escala se señalan con flechas y su magnitud real. No leer el desastre numérico
+de v1 como una pérdida limitada al borde del gráfico. El anexo completo conserva
+los intervalos sin recorte. Los bigotes porcentuales son el IC guardado de delta
+multiplicado por 100 y dividido por la pérdida base media observada: no son
+intervalos bootstrap de un cociente con denominador incierto. El IC citado
+arriba permanece en unidades QLIKE. Una mediana positiva puede coexistir con
+una media adversa; son estimandos distintos y esta diferencia no autoriza
+descartar las sesiones de mayor pérdida. A 15 minutos, la mediana de árboles
+no rechaza tras Holm; a 5 sí, como secundario. No convertir ese secundario en
+confirmación de la media.
+
+**Evidencia.** [Resultados con intervalos](../../../../../rp4/results_v4.md) ·
+[Manifiesto de síntesis y censo de recortes](../../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json) ·
+[Anexo completo](../../../../../figures/rp4/comparison_v1_v4.svg) ·
+[Definición del intervalo porcentual](../../../../../../artifacts/rp4_closeout_figures/README.md).
+
+## 7. El estado de opciones a través del tiempo
+
+**Mensaje.** La ventaja media de B1 no significa una ganancia uniforme desde el
+inicio del entrenamiento.
+
+**Contenido para proyectar.**
+
+![Diferencia acumulada B1/B0 en RV15 y RV5, primaria y ventana final, con calendario y sucesos anotados](../../../../../figures/rp4/v4_B1_over_B0_cumulative_v2.svg)
+
+- Curva = suma de diferencias QLIKE por sesión; signo positivo favorece B1.
+- Ejes verticales propios por panel: comparar valores, no alturas.
+- Las fechas anotadas dan contexto; no cambian la muestra ni atribuyen causas.
+
+**Notas del orador.** Guiar primero por RV15 primaria y después por la ventana
+final; no sumar ambas como si fuesen réplicas independientes. El tramo evaluado
+de octubre de 2024 a febrero de 2025 contiene 64 sesiones, equivalentes a
+15,27 % de las 419, y tiene ganancia lineal B1 negativa. El denominador de
+15,27 % es 100 × 64 / 419, redondeado; no son todas las sesiones del calendario.
+El tamaño de entrenamiento crece con el tiempo y coincide con cambios de
+régimen: esta curva no demuestra que prolongar el aprendizaje habría causado
+una mejora. La marca del 26 de enero de 2026 señala el cambio de vencimientos;
+no identifica por sí sola su efecto sobre la curva. Conservar visibles los
+tramos adversos y la separación entre ventanas.
+
+**Evidencia.** [Auditoría descriptiva y denominadores](../../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Perfiles por mes y entrenamiento](../../../../../../artifacts/rp4_closeout_audit/descriptive_profiles.csv) ·
+[Fuentes de las anotaciones](../../../../../../artifacts/rp4_closeout_figures_revision2/annotation_sources.json).
+
+## 8. El flujo no gana en todas las sesiones
+
+**Mensaje.** La trayectoria de B2 permite examinar concentración y fragilidad
+sin borrar días que incomodan a la conclusión.
+
+**Contenido para proyectar.**
+
+![Diferencia acumulada B2/B1 en RV15 y RV5, primaria y ventana final, con interrupciones, cambio de vencimientos y choque observado anotados](../../../../../figures/rp4/v4_B2_over_B1_cumulative_v2.svg)
+
+- Ventana primaria (419 sesiones), familia lineal: incremento positivo en los tres bloques de ambos horizontes.
+- Ventana primaria (419 sesiones), por activo: seis de seis positivos a 15 minutos; tres de seis a 5 minutos.
+- Octubre y noviembre de 2025 son negativos para B2 lineal en RV30 y RV15.
+
+**Notas del orador.** Los recuentos por bloques y activos corresponden exclusivamente a la ventana primaria (419 sesiones), aunque la figura muestra también la ventana final. La robustez por bloques y por activos es descriptiva y no
+equivale a estabilidad mensual completa. Las marcas de abril identifican
+contexto temporal, sin probar causalidad arancelaria. La marca AMZN del
+31 de agosto de 2026 conserva un choque observado: −152 y +71 puntos básicos
+desde las 14:00 ET, con volumen del minuto siguiente cercano a 11 veces la
+mediana de la sesión. La auditoría comprueba consistencia interna de las barras
+del proveedor, no validación independiente del precio ni una noticia causal.
+No retirar esa sesión ni recalcular un p “limpio”. Un salto visual de la
+acumulada tampoco sustituye la secuencia formal de la ventana final. Las
+coordenadas de las curvas originales se preservan en la versión anotada.
+
+Los seis activos son megacapitalizaciones estadounidenses vinculadas a
+tecnología y comparten factores de riesgo; no se presupone independencia
+entre sus varianzas ni se ha estimado aquí una correlación cruzada. «Seis de
+seis» a RV15 es consistencia en una muestra homogénea, no seis réplicas;
+a RV5 sólo tres de seis son positivos. La unidad de remuestreo es la sesión,
+con activos agregados conjuntamente, y no se reclama generalización a otros
+sectores, tamaños o mercados.
+
+En la ventana final, el 2026-08-31 aporta +0,1162479043 de +0,1191828314 de
+delta RV15 lineal B2/B1 acumulado: 100 × aporte / suma = 97,54 %, redondeado.
+Las otras 24 sesiones suman +0,0029349271. Es concentración aritmética de las
+pérdidas guardadas, no una nueva prueba eliminando el choque ni prueba de su
+causa. La trayectoria final favorable depende fuertemente de esa sesión.
+[Descomposición, denominadores y hashes](../correction_2/examiner_evidence.json).
+
+**Evidencia.** [Resultado por bloques y activos](../../../../../rp4/RESULTADO_FINAL_revision_2.md) ·
+[Perfiles y pérdidas adversas](../../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Verificación del choque y límites](../../../../../../artifacts/rp4_market_audit/REPORT.md) ·
+[Custodia de las curvas](../../../../../../artifacts/rp4_closeout_figures_revision2/manifest.json).
+
+## 9. Instrumento, régimen y estabilidad numérica
+
+**Mensaje.** Las limitaciones permanecen dentro del resultado; la sensibilidad
+bilateral/Holm de la regla antigua no acredita una secuencia completa en una familia.
+
+**Contenido para proyectar.**
+
+- Incidencias del instrumento: 2025-05-15 y 2025-09-18 figuran como
+  indisponibilidad del proveedor; quedan 412 ventanas vacías de cinco minutos
+  en primaria, ninguna en confirmación.
+- Cambio de vencimientos: listado desde 2026-01-26; cobertura media
+  20,04 → 23,10 celdas por origen; la ventana final pertenece al régimen nuevo.
+- Ridge nominal: lambda 0,0001 elegida en 111/419 sesiones B2; poda de
+  88–97 columnas; la rejilla no garantiza estabilidad de coeficientes correlacionados.
+
+**Notas del orador.** Las fechas conservan la etiqueta del manifiesto de
+anotaciones; el censo acredita ventanas vacías, no una causa externa verificada
+de forma independiente. La actividad cero se conserva, las formas y ratios sin
+operaciones se vuelven indefinidos y se añaden indicadores; ninguna ventana
+se excluye para mejorar el signo. En filas vacías, QLIKE lineal pasa de 0,103
+en B1 a 0,202 en B2 con igual peso por sesión/activo; es un denominador distinto
+del promedio por origen. Para vencimientos, distinguir listado y primera
+presencia el 26 de enero, salto de celdas el 29 y primeras expiraciones de
+lunes/miércoles el 2/4 de febrero. La penalización ridge se aplica a la suma
+de errores, sin dividir por N; en muestras grandes puede resultar muy débil.
+Las columnas podadas incluyen presencias y colinealidad: no son “88 constantes”.
+Estas observaciones delimitan la interpretación; no autorizan cambiar la rejilla,
+el calentamiento ni las exclusiones de una prueba ya cerrada.
+
+La sensibilidad a la regla antigua usa los p bilaterales guardados; no duplica automáticamente los unilaterales. Ventana primaria; RV5 conserva su papel secundario.
+
+| Horizonte | Familia / contraste | p unilateral registrado | p bilateral guardado | Holm bilateral sobre cuatro contrastes | Rechazo individual |
+| --- | --- | ---: | ---: | ---: | --- |
+| RV15 | Lineal B1/B0 | 0,0390 | 0,0459 | 0,0918 | No |
+| RV15 | Lineal B2/B1 | 0,0032 | 0,0062 | 0,0248 | Sí |
+| RV15 | Árboles B1/B0 | 0,0135 | 0,0149 | 0,0447 | Sí |
+| RV15 | Árboles B2/B1 | 0,6280 | 0,8048 | 0,8048 | No |
+| RV30 | Lineal B1/B0 | 0,0439 | 0,0467 | 0,1401 | No |
+| RV30 | Lineal B2/B1 | 0,0525 | 0,1013 | 0,2026 | No |
+| RV30 | Árboles B1/B0 | 0,0053 | 0,0066 | 0,0264 | Sí |
+| RV30 | Árboles B2/B1 | 0,6631 | 0,7249 | 0,7249 | No |
+| RV5 | Lineal B1/B0 | 0,0092 | 0,0099 | 0,0396 | Sí |
+| RV5 | Lineal B2/B1 | 0,0172 | 0,0343 | 0,1029 | No |
+| RV5 | Árboles B1/B0 | 0,0608 | 0,0731 | 0,1462 | No |
+| RV5 | Árboles B2/B1 | 0,1927 (nominal) | 0,4014 | 0,4014 | No |
+
+Bajo la sensibilidad a la regla bilateral/Holm de v1/v2, el flujo sobrevive sólo en la familia lineal a RV15 y el estado sobrevive en árboles a RV30 y RV15 y en la lineal a RV5. La secuencia lineal completa a RV15 no se habría abierto si se exigiera además H1 tras Holm, porque ese H1 no rechaza. V1/v2 no usaban H1→H2: la última frase es una interpretación condicional, no la atribución retrospectiva de una secuencia a esas versiones. Un rechazo H1 de árboles no abre H2 lineal.
+
+H2 árboles RV5 conserva sólo un p unilateral nominal; no se reabre su prueba registrada. La comparación posterior no corrige la búsqueda histórica ni crea una regla registrada nueva. [Filas fuente y límites](../correction_5/holm_evidence.json).
+
+**Evidencia.** [Límites con cifras y definiciones](../../../../../rp4/RESULTADO_FINAL_revision_2.md) ·
+[Auditoría de vacíos](../../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Selección de lambda](../../../../../../artifacts/rp4_closeout_audit/ridge_lambda_counts.csv) ·
+[Censo del cambio de mercado](../../../../../../artifacts/rp4_market_audit/REPORT.md).
+
+## 10. Qué aporta B2 y qué mecanismo queda sin identificar
+
+**Mensaje.** Una mejora predictiva del conjunto no identifica la contribución
+causal del desbalance gamma.
+
+**Contenido para proyectar.**
+
+- En RV15 lineal, en la ventana primaria, las tres proporciones de prima de 5 minutos (compra, pasiva y venta) tienen coeficientes medios
+  absolutos de 0,250–0,312, frente a 0,00489 para desbalance gamma total.
+- El conteo de operaciones con dirección identificada tiene pendiente media
+  −0,04271; cuenta operaciones, no un saldo firmado.
+- Composición y actividad del flujo son interpretaciones descriptivas del
+  ajuste; falta una ablación prospectiva para aislar el bloque registrado.
+
+**Notas del orador.** Las magnitudes corresponden a variables transformadas,
+escaladas con entrenamiento y winsorizadas; no son elasticidades comparables
+sin considerar esas transformaciones. La colinealidad y el filtrado de rango
+impiden leer un coeficiente pequeño o podado como efecto verdadero nulo.
+El conjunto puede mejorar una predicción sin verificar inventarios de
+intermediarios ni cobertura causal. La enmienda prospectiva compara B2 completo
+con B2 sin las cuatro columnas del bloque de desbalance gamma y sus indicadores:
+134 frente a 138 predictores antes de efectos e indicadores. Conserva las tres
+columnas históricas de exposición gamma. Por tanto, incluso un rechazo futuro
+respondería al aporte conjunto del bloque retirado, que incluye un conteo de
+operaciones, y no demostraría “el mecanismo gamma” de forma aislada.
+
+**Evidencia.** [Interpretación publicada](../../../../../rp4/RESULTADO_FINAL_revision_2.md) ·
+[Coeficientes por columna y horizonte](../../../../../../artifacts/rp4_closeout_audit/b2_coefficient_summary.csv) ·
+[Límites de interpretación de coeficientes](../../../../../../artifacts/rp4_closeout_audit/REPORT.md) ·
+[Ablación registrada](../../../../../rp4/prospective_confirmation_v1_amendment_1.md).
+
+## 11. Las 25 sesiones finales no confirman
+
+**Mensaje.** Una estimación favorable del segundo contraste no basta cuando
+el primer escalón no rechaza.
+
+**Contenido para proyectar.**
+
+- RV15 lineal: H1 p = 0,3908; H2 no abierta, nominal 0,1758; no confirma.
+- RV15 LightGBM: H1 p = 0,0568; H2 no abierta, nominal 0,7554; no confirma.
+
+Muestra: 25 sesiones, 9.750 orígenes; 2026-08-03–2026-09-04.
+
+**Notas del orador.** En la familia lineal, el delta B2/B1 a 15 minutos es
++0,0047673133, con IC95 % [−0,0011087291; 0,014742153]; contiene incertidumbre
+material y no habilita H2 al fallar H1. No presentar el término “confirmación”
+del archivo como prueba confirmada ni atribuir el no rechazo exclusivamente
+a falta de potencia: también cambian el régimen y la composición de la ventana.
+Parte del calendario fue leída con otra especificación y la partición se fijó
+posteriormente; eso limita la independencia del ejercicio. RV5 y sus
+secundarios no rescatan RV15. Los intervalos no prueban equivalencia a cero.
+
+El delta final lineal B2/B1 acumulado es +0,1191828314 y el 2026-08-31
+contribuye +0,1162479043, un 97,54 %; las otras 24 sesiones suman +0,0029349271.
+No retirar la sesión ni convertir la concentración en explicación causal.
+Los seis activos comparten factores y pertenecen a una muestra homogénea;
+no son seis réplicas independientes. Se remuestrean sesiones, no se multiplica
+la evidencia por el número de activos. [Concentración y procedencia](../correction_2/examiner_evidence.json).
+
+El solapamiento verificado por fechas es de 20 de las 25 sesiones finales, el 80 %: las sesiones del 2026-08-03 al 2026-08-28 están dentro de la ventana puente declarada; las cinco del 2026-08-31 al 2026-09-04 no lo están. Se cuenta únicamente `session_date` de los agregados finales, sin reabrir la evaluación puente. El [README histórico](../../../../../../README.md) declara apertura el 2026-08-30 y resultado mixto/exploratorio, no confirmatorio, sin cambio de agregación; una sensibilidad mejoró sólo una de ocho celdas primarias que incluyen B1. La presente revisión coteja esa declaración con el addendum y los agregados públicos conservados, sin repetir la evaluación ni verificar el conocimiento histórico de cada persona. El registro describe una lectura previa con otra especificación y la identifica como declaración del propietario; por sí sola no aporta verificación independiente del conocimiento de cada persona. Se divulga porque esas sesiones no eran desconocidas al fijarse la partición. [Fechas contadas, fuente de la declaración y límites](../correction_2/examiner_evidence.json).
+
+**Evidencia.** [Comparación de confirmación y recetas de p/IC](../../../../../rp4/results_v4.md) ·
+[Resumen agregado RV15 final](../../../../../../artifacts/rp4_v4_b3_rv15/summary.json) ·
+[Divulgaciones y ruptura de régimen](../../../../../rp4/RESULTADO_FINAL_revision_2.md).
+
+### Secundarios reparados: cálculo y utilidad
+
+**Nota del orador.** El AUC de saltos ya puede informarse en ambas ventanas y familias, pero ningún H1 rechaza y sus H2 permanecen sin prueba de decisión. La recalibración afín aplicada sólo a LightGBM reproduce la aritmética guardada y conserva su inestabilidad por salidas negativas llevadas al piso positivo. Un endpoint calculable no es una mejora demostrada. Los diagnósticos de calibración de pronósticos originales sí cubren ambas familias. [Resultados y límites de la reparación](../../../../../rp4/results_v3_revision3.md) · [Respuesta de examen](examiner_qa.md#28-qué-quedó-de-los-secundarios-que-fallaron-y-qué-significa-que-estén-reparados).
+
+### Convergencia del programa y sus límites
+
+| Programa y disposición histórica | Estimando, pérdida y ventana | Familia | ESTADO: B1 sobre B0 | FLUJO: B2 sobre B1 | Artefacto |
+|---|---|---|---|---|---|
+| RP2, histórico sustituido; sin afirmación vigente | Delta medio de QLIKE, RV30; roles D/V, 156/32 sesiones evaluadas | Ridge log, Gamma GLM y LightGBM | En D, positivo en las tres familias; en V, signos mixtos e intervalos que cruzan cero; Gamma D +0,002564 y V −0,001496 | Los seis intervalos D/V cruzan cero; sin incremento positivo confirmado | [Veredicto histórico](../../../../../rp2_v3/VERDICT.md), [inferencias](../../../../../../artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json), [sustituciones](../../../../../rp2_v3/SUPERSEDED_RESULTS.md) |
+| Sucesor PIT v2.2, `GLOBAL_EDGE_NOT_CONFIRMED` | Delta medio de QLIKE, RV30; holdout de 32 sesiones, lectura 2026-09-02 | Gamma GLM confirmatorio; LightGBM de robustez | Gamma B1a +0,008171, IC [0,002658; 0,014024], Holm 0,0084; base QLIKE 0,2129; efecto inferior a MDE 0,008416 | Gamma −0,003127, IC [−0,013923; 0,008609], Holm 0,5595; tampoco se confirma en árboles | [Resultado y límites](../../../../../pit_v22_claims_and_limitations_v2.md), [agregado](../../../../../../artifacts/target_blind_v22/successor_evaluation_result_v2.json) |
+| Fase 8A, `MIXED_EXPLORATORY`; apertura 2026-08-30 | Delta total primario; estado y flujo desagregados, QLIKE RV30; primaria 20 sesiones, 2026-08-03–2026-08-28; sensibilidad 30, 2026-07-20–2026-08-28 | Roles D/V de entrenamiento × Gamma GLM/LightGBM | Cuatro de cuatro celdas primarias positivas; Holm descriptivo < 0,05 en tres | Cuatro de cuatro intervalos primarios cruzan cero | [Addendum](../../../../../../reports/phase8a_exploratory_bridge_addendum_v13.md), [protocolo](../../../../../phase8_bridge_protocol_v2.md), [agregado](../../../../../../artifacts/phase8_bridge/materialized_remediation_20260831_v1.json) |
+| RP4 v3/v4, cierre histórico en desarrollo; ventana final sin confirmación | Delta medio de QLIKE; v3 RV30, v4 RV15 primario/RV5 secundario; 419 sesiones primarias y 25 finales | Lineal y LightGBM | Ambas familias: a 30 minutos +1,729 %/+2,091 %; a 15 +0,880 %/+1,170 %, en orden lineal/árboles | Lineal: +0,623 % a 15 y +0,256 % a 5 bajo H1→H2; a 30 no rechaza; árboles, media no confirmada y mediana positiva a 15/5 | [Tabla por versión](../../../../../rp4/RESULTADO_FINAL_revision_2.md), [contrastes](../../../../../rp4/results_v4.md), [agregados](../../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) |
+
+**Notas añadidas del orador.** Presentar convergencia, no réplica idéntica. RP2 no es uniformemente positivo en validación y el Gamma del sucesor es la misma evaluación PIT: no duplicarlo. Los contrastes de estado y flujo de Fase 8 son desagregaciones de su estimando principal de información total. Comparten veinte sesiones con la ventana final de RP4; no sumar evidencia como independiente. El bloque 12 ya advertía la falta de potencia; la lectura a 335 conserva la limitación conjunta de la enmienda vigente. RP3 mantiene su programa de largo plazo y su dependencia documentada con Fase 8; Fase 9 retirada para RP4 no cancela RP3, y C10 sigue inactiva. La [pregunta de convergencia](examiner_qa.md) distingue las máscaras Gamma, el tamaño primario del puente y las disposiciones del [Historial](../../../../../../README.md#history-and-prospective-replication).
+
+## 12. Cuatro divulgaciones en cuatro frases
+
+**Mensaje.** Estas restricciones forman parte de la conclusión defendida.
+
+**Contenido para proyectar.**
+
+1. Es la cuarta evaluación, con búsqueda histórica no corregida: (a) v1/v2 usaron bilateral/Holm de cuatro contrastes y v3/v4 unilateral secuencial al 5 % por familia, sin Holm entre familias, cambio menos exigente registrado antes de v3; (b) B2 añadió desbalance gamma e indicadores tras fallar en v1/v2; (c) la decisión 132 fijó ventanas vacías tras diagnosticar v2; (d) RV15 primario/RV5 secundario quedó pre-declarado y sellado localmente, sin marca de tiempo de un tercero; (e) la partición 2026-08-01 se fijó el 2026-09-07 con los datos observados, con cierre «Si ninguna rechaza, se cierra la investigación de este mecanismo con B1>B0 como resultado principal observado a 30 minutos y B2 no detectado a 30/15/5 según cada estimación e intervalo» y «No hay v5»; la sensibilidad bilateral/Holm guardada retiene flujo lineal RV15 y estado de árboles RV30/RV15 y lineal RV5, sin secuencia lineal completa RV15.
+2. La ventana 2026-07-20–2026-08-28 se había leído con otra especificación y solapa 20/25 sesiones finales; el README histórico informa resultado mixto/exploratorio, una sensibilidad favorable en una de ocho celdas con B1 y ninguna modificación de agregación, sin confirmación independiente.
+3. El PIT es un proxy de tiempo fuente a 120 segundos y no demuestra disponibilidad histórica al cliente.
+4. Se conserva el hueco del proveedor 2025-01-25–2025-02-24, sin relleno.
+
+**Notas del orador.** Leer las frases completas. El registro condicional de v4
+limita la discrecionalidad del último cambio, pero no borra la adaptación previa
+ni constituye un sello temporal independiente de terceros. El control temporal
+del código y los hashes acreditan propiedades concretas; no acreditan recepción
+histórica por un cliente. Un hueco declarado sigue siendo una limitación de
+cobertura. La investigación cerrada puede sostener una conclusión delimitada
+sin prometer generalización universal ni utilidad financiera.
+
+La primera divulgación identifica qué cambió, cuándo se fijó la partición y
+qué regla impedía otra versión. La regla de cierre de v4 dice literalmente:
+
+> Si ninguna rechaza, se cierra la investigación de este mecanismo con B1>B0 como resultado principal observado a 30 minutos y B2 no detectado a 30/15/5 según cada estimación e intervalo. No rechazo no establece equivalencia a cero ni absorción causal; «nulo informativo» describe el cierre, no una prueba de ausencia.
+
+El texto original añade «No hay v5». La lectura previa del puente tiene
+resultado mixto/exploratorio según el README histórico, sin cambio de
+agregación; se cotejaron documentación y agregados públicos, sin reabrir
+ni recalcular la evaluación para redactar este paquete. [Pre-declaración proyectada](../../../../../rp4/predeclaration_v4_text.md) ·
+[Solapamiento y límites de la fuente](../correction_2/examiner_evidence.json).
+
+Cronología completa de los recibos inspeccionados; las fechas sin reloj no reciben una hora inventada. Las columnas UTC y Australia/Sydney muestran conversiones del mismo instante, no sucesos distintos:
+
+| Acontecimiento y tipo de evidencia | UTC | Australia/Sydney | Fuente |
+| --- | --- | --- | --- |
+| Última sesión histórica: 2026-09-04 | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/summary.json) |
+| Partición 2026-08-01; diseño declarado 2026-09-07 | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_v4_a1/specification.json) |
+| Congelación v1: fecha 2026-09-07, sin hora/zona guardada | No consta hora | No consta hora | [Registro](../../../../../../artifacts/rp4_a1/freeze.json) |
+| Registro v3; v1/v2 ya conocidos | 2026-09-07T08:18:58.166170+00:00 | 2026-09-07T18:18:58.166170+10:00 | [Registro](../../../../../../artifacts/rp4_v3_a1/freeze.json) |
+| Registro de ventanas vacías v3 | 2026-09-07T08:30:43.053218+00:00 | 2026-09-07T18:30:43.053218+10:00 | [Registro](../../../../../../artifacts/rp4_v3_a1_empty_window/freeze.json) |
+| Antecedente condicional v4: hora declarada en el texto | 2026-09-07T10:20:00+00:00 | 2026-09-07T20:20:00+10:00 | [Registro](../../../../../rp4/predeclaration_v4_text_receipt.json) |
+| Verificación del cierre v3 | 2026-09-07T16:18:46+00:00 | 2026-09-08T02:18:46+10:00 | [Registro](../../../../../../artifacts/rp4_v3_b4/receipt.json) |
+| Congelación ejecutable v4 | 2026-09-07T16:37:21.501511+00:00 | 2026-09-08T02:37:21.501511+10:00 | [Registro](../../../../../../artifacts/rp4_v4_a1/freeze_manifest.json) |
+| Inicio RV15 primaria | 2026-09-07T17:24:29.535011+00:00 | 2026-09-08T03:24:29.535011+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv15/receipt.json) |
+| Fin RV15 primaria | 2026-09-07T18:13:29.790569+00:00 | 2026-09-08T04:13:29.790569+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv15/receipt.json) |
+| Inicio RV15 final | 2026-09-07T18:14:50.222385+00:00 | 2026-09-08T04:14:50.222385+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/receipt.json) |
+| Fin RV15 final | 2026-09-07T18:23:27.273395+00:00 | 2026-09-08T04:23:27.273395+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv15/receipt.json) |
+| Inicio RV5 primaria | 2026-09-07T18:24:38.947836+00:00 | 2026-09-08T04:24:38.947836+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv5/receipt.json) |
+| Fin RV5 primaria | 2026-09-07T19:16:40.533194+00:00 | 2026-09-08T05:16:40.533194+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b2_rv5/receipt.json) |
+| Inicio RV5 final | 2026-09-07T19:17:15.307438+00:00 | 2026-09-08T05:17:15.307438+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv5/receipt.json) |
+| Fin RV5 final | 2026-09-07T19:25:22.707101+00:00 | 2026-09-08T05:25:22.707101+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b3_rv5/receipt.json) |
+| Informe v4 generado a más tardar | 2026-09-07T19:26:27+00:00 | 2026-09-08T05:26:27+10:00 | [Registro](../../../../../../artifacts/rp4_v4_b4/receipt.json) |
+| Registro prospectivo v1 | 2026-09-08T04:24:01.918499+00:00 | 2026-09-08T14:24:01.918499+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_receipt.json) |
+| Enmienda 1 | 2026-09-08T04:31:58.752153+00:00 | 2026-09-08T14:31:58.752153+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_1_receipt.json) |
+| Enmienda 2 | 2026-09-08T05:27:15.316335+00:00 | 2026-09-08T15:27:15.316335+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_2_receipt.json) |
+| Enmienda 3 | 2026-09-08T06:56:21.897094+00:00 | 2026-09-08T16:56:21.897094+10:00 | [Registro](../../../../../rp4/prospective_confirmation_v1_amendment_3_receipt.json) |
+
+La hora 2026-09-07 20:20 de Australia/Sydney, equivalente a 10:20 UTC, es una **afirmación del texto** del antecedente; no está autenticada por un tercero ni se deduce del tiempo de modificación del archivo. La verificación de cierre v3 está registrada a las 16:18:46 UTC y el registro ejecutable v4 que enlaza el hash del antecedente se congeló después, a las 16:37:21.501511 UTC. Esa cadena permite seguir el contenido local, pero no prueba de forma independiente que el antecedente se escribiera antes de conocer v3. La proyección pública es posterior a los resultados y tiene hash propio; el hash sellado del original local es `6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee`.
+
+El registro de v3 ya declara conocidos los resultados de v1/v2; los recibos inspeccionados no permiten asignar una hora exacta de ejecución a cada uno. La muestra termina el 2026-09-04, antes de fijarse el diseño del 7 de septiembre. Por tanto, el entrenamiento temporal permanece separado de sus objetivos futuros, pero el diseño histórico fue fijado con la muestra ya observada; la réplica prospectiva establece otra relación entre registro y adquisición. [Selectores, hashes y límites de cada hora](../correction_2/examiner_evidence.json).
+
+**Evidencia.** [Cuatro divulgaciones del resultado final](../../../../../rp4/RESULTADO_FINAL_revision_2.md) ·
+[Antecedente condicional y límites de v4](../../../../../rp4/specification_v4.md).
+
+## 13. Qué cambiaría con una réplica prospectiva
+
+**Mensaje.** La siguiente evidencia procede de sesiones nuevas bajo reglas
+fijadas antes de sus pérdidas, conservando el resultado histórico.
+
+**Contenido para proyectar.**
+
+- Consistencia primaria temprana: primeras 20 sesiones completas; confirma sólo si H1 y H2
+  rechazan en la familia lineal RV15 al 5 %.
+- Seguimiento: primeras 40 sesiones acumuladas, si el calendario lo permite;
+  estabilidad, sin rescate ni independencia.
+- Secundario A: RV15 lineal, B2 completo frente a B2 sin cuatro columnas de
+  desbalance gamma y sus indicadores.
+- Secundario B: RV15 LightGBM, mediana de las diferencias pareadas B2/B1;
+  p bilateral.
+- Secundario C: RV15 LightGBM, media de deltas pareados recortada al 5 %
+  por cada cola; p bilateral. Los tres secundarios A/B/C comparten Holm al 5 % y signo positivo.
+- Secundario D: 25 sesiones históricas observadas más 20 nuevas = 45;
+  secuencia lineal RV15 propia, secundaria. Ningún secundario rescata el primario.
+- A/B/C/D tienen una lectura única al completar las 20 prospectivas.
+- Lectura final: primeras 335 prospectivas, una sola vez; misma secuencia lineal
+  RV15 al 5 %, sin rescatar el veredicto de 20 ni elegir éxito entre lecturas.
+
+**Notas del orador.** El registro original permanece íntegro y las enmiendas tienen
+hashes y recibos propios, anteriores a la primera adquisición observada; son
+constancias locales, no sellos independientes. El colector está habilitado,
+con primera ejecución prevista el 2026-09-09 a las 10:00 de Australia/Sydney
+para la sesión neoyorquina del 2026-09-08. Un recibo de descarga correcto no
+equivale a una sesión científicamente completa: se comprobarán cobertura,
+claves y elegibilidad sin consultar resultados. No hay resultados prospectivos
+disponibles en este paquete.
+
+El primario conserva conjuntos, familias, máscaras y procedimiento v4, RV15
+primario y RV5 secundario; no es v5. La nueva ablación se ajusta con la misma
+selección temporal y máscara común, retirando sólo el bloque fijado, sin
+seleccionar variables según el resultado. La mediana es la mediana de los
+deltas por sesión, no la diferencia de dos medianas. Los secundarios se
+leen aunque el primario falle; no se vuelven a contrastar a 40 ni a 335 ni se reclama
+control global al 5 % sobre la unión del primario y los secundarios.
+
+Si la lectura principal no confirma, se publica ese resultado con efectos
+e intervalos y la lectura de estabilidad no lo transforma en confirmación.
+Una réplica favorable reforzaría generalización temporal; no demostraría
+recepción histórica por el cliente, cobertura causal ni rentabilidad. La
+conclusión disponible sigue siendo una mejora pequeña del flujo lineal a
+15 minutos dentro de un diseño con límites explícitos.
+
+La enmienda 3 registra potencia de planificación desde los intervalos
+históricos guardados, sin nuevos ajustes ni bootstrap. Las lecturas de
+20, 40 y 45 son comprobaciones de consistencia con potencia limitada, no
+pruebas diseñadas para alta potencia; conservan sus reglas y veredictos.
+
+| Sesiones supuestas | Potencia marginal H2 | Potencia marginal H1 | Papel |
+| --- | ---: | ---: | --- |
+| 20 | 14,99 % | 11,27 % | Consistencia primaria temprana |
+| 40 | 21,62 % | 15,08 % | Estabilidad acumulada |
+| 45 | 23,18 % | 15,96 % | Hipótesis de sesiones nuevas; no potencia de D |
+| 120 | 43,81 % | 27,91 % | Planificación; sin lectura |
+| 146 | 49,91 % | 31,69 % | Planificación; sin lectura |
+| 335 | 80,05 % | 54,98 % | Lectura final; 80 % sólo para H2 aislada |
+
+Para H2 se aproxima SE419 = anchura del IC / (2 × Φ⁻¹(0,975)), dando
+0,000407437235805319; el efecto/SE es 2,7826608848143843. Se escala por
+√(419/n) y se aplica Φ(efecto/SE(n) − Φ⁻¹(0,95)). La receta normal no invierte
+exactamente el p bootstrap centrado. Supone efecto, dependencia y composición
+estables pese a la selección histórica; el efecto observado puede ser optimista.
+
+**335 no ofrece 80 % de potencia conjunta:** H1 alcanza 54,98 %, que acota
+superiormente la potencia de la secuencia bajo esta aproximación. Se lee
+una sola vez al completar ese número de prospectivas elegibles, aproximadamente
+enero de 2028 si el colector y la cobertura lo permiten. La lectura es acumulada,
+no independiente de 20/40; conserva el resultado temprano, no permite éxito
+por cualquiera de las lecturas y no reclama control global al 5 % entre ellas.
+No hay lecturas a 120/146 ni inspecciones intermedias adicionales.
+
+Las 45 de la tabla son nuevas sólo hipotéticamente: D contiene 25 ya observadas
+y 20 nuevas y no posee esa potencia condicional. No hay potencia justificada
+para A ni para B/C con Holm. Una sensibilidad binomial de signos, distinta de
+la mediana bootstrap, con probabilidad positiva 0,59 e independencia supuesta,
+da 10,79 % a 20 y 27,95 % a 45; con 249/419 da 11,52 % y 29,95 %. No registra
+una prueba adicional. En 20 sesiones caben cuatro longitudes de bloque de cinco,
+y estos cálculos no validan la calibración finita de la inferencia.
+
+[Enmienda 3: lectura final, límites y cadena de sellado](../../../../../rp4/prospective_confirmation_v1_amendment_3.md) ·
+[Recibo de cálculos y estado previo a adquisición](../../../../../rp4/prospective_confirmation_v1_amendment_3_receipt.json).
+
+**Evidencia.** [Registro original](../../../../../rp4/prospective_confirmation_v1.md) ·
+[Enmienda de secundarios y horario](../../../../../rp4/prospective_confirmation_v1_amendment_1.md) ·
+[Recibo original](../../../../../rp4/prospective_confirmation_v1_receipt.json) ·
+[Recibo de la enmienda](../../../../../rp4/prospective_confirmation_v1_amendment_1_receipt.json) ·
+[Enmienda 2: agrupación y recorte](../../../../../rp4/prospective_confirmation_v1_amendment_2.md) ·
+[Recibo de la enmienda 2](../../../../../rp4/prospective_confirmation_v1_amendment_2_receipt.json) ·
+[Resultado histórico que permanece cerrado](../../../../../rp4/RESULTADO_FINAL_revision_2.md).

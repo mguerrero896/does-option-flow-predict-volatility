@@ -1,0 +1,90 @@
+# RP4 v5 — enmienda técnica 2, intento A3
+
+Miguel, 2026-09-08. Partes 18→17→17b leídas completas en ese orden y mensaje
+directo posterior: reserva de memoria del 15%. Registro nuevo antes de la sonda
+CPU y del relanzamiento. RESEARCH_ONLY; NOT INVESTMENT ADVICE; capital_go=false.
+
+Se conservan byte a byte decisión 134, especificación v5, A1, enmienda 1/A2 y sus
+resultados. El registro anterior no se reinterpreta. v4 conserva el titular;
+v5 sigue siendo desarrollo histórico, con enmiendas de coste divulgadas.
+
+## Cambios autorizados y alcance de esta corrida
+
+Sólo RV15 y cinco familias, por este orden: persistencia estacional, log-HAR,
+log-ridge-HARQ, log-ElasticNet y LightGBM-QLIKE. Selector y ensemble top2 usan
+únicamente esas cinco familias. La red densa queda **diferida por coste, no
+evaluada en A3**; métricas y frecuencias no disponibles, nunca cero rendimiento.
+A1 sí tuvo un ajuste parcial y A2 una sonda de red: ambos quedan divulgados.
+RV5/RV30 se difieren; un posible anexo posterior con red exige resultados
+separados de los cinco actuales y queda fuera de este lanzamiento.
+
+LightGBM vuelve al productor CPU original `rp4_v2_code.models.fit_lightgbm`,
+rejilla de v4 `[15,31,63]`, `deterministic=True`, mismos demás parámetros v5
+y semilla 20260908. Hilos por estimador=floor(32/F). A2 GPU midió 193,2075962 s
+por sesión con los tres conjuntos y extrapoló 22,49 h para RV15; la red midió
+242,4896918 s y extrapoló 28,22 h. GPU se descarta por coste. La comparación
+citada de v4 (~19 s por sesión y conjunto) tiene otro alcance de medición:
+no se atribuye aceleración hasta observar la nueva sonda CPU.
+
+ElasticNet conserva `precompute=True`, `max_iter=500000`, `tol=1e-6`, selección
+cíclica, alpha=[0.0001,0.01,1] y l1_ratio=[0.1,0.5,0.9]. A1 ya precalculaba
+Gram; no es una mejora nueva atribuible a A3. Se heredan de A2 las exclusiones
+por no convergencia sólo para alpha 0.0001, con etapa/causa/iteraciones/dual gap,
+y el siguiente candidato convergente en la misma clasificación interna para
+reajuste. Otros alpha no reciben esa excepción. Se registran todas las celdas.
+Las configuraciones de MLP heredadas en JSON son archivo de parámetros del
+anexo; el adaptador rechaza su ajuste en esta corrida.
+
+## Invariantes científicos
+
+Sin cambios en activos, paneles, B0/B1/B2 (29/69/138 variables), elegibilidad,
+máscara común RV30, PIT 120 s, partición 2026-08-01, calentamiento 60 sesiones,
+419 sesiones de desarrollo, purga 60 min ni validación interna de 10 sesiones.
+Se materializa sólo train|test; cada selección/preprocesamiento usa únicamente
+entrenamiento/validación anteriores. Se conservan QLIKE, agregación igual por
+activo/sesión, bootstrap circular bloque 5/9999/semilla 20260908, H1→H2,
+Holm entre dos cadenas y cota Bonferroni×5. Esta cota no corrige toda la búsqueda
+adaptativa; ninguna enmienda convierte desarrollo en confirmación prospectiva.
+
+## Memoria y estimación registrada
+
+Matrices y objetivos de A2 se verifican por SHA256 y abren como mmap de sólo
+lectura, compartidos entre procesos; sólo se copia la ventana de sesión y el
+conjunto necesario. Se libera entre conjuntos y sesiones. Sin cargar Torch.
+Sonda: RV15/2026-07-31, cinco familias y B0/B1/B2, 32 hilos, afinidad CPU 0–23.
+No se reutilizan sus predicciones como registros del torneo. Pico es el máximo
+working set del proceso, corroborado con muestras RSS cada 10 ms.
+
+Asignable=min(RAM física libre,commit libre Windows). El mensaje directo
+sustituye 0,7 por 0,85: **F=min(8,floor(0.85×asignable/pico medido))**.
+Se registran bytes, redondeo y F; si F<1 no se asigna un trabajador imposible.
+Si F=1 se ejecuta con 32 hilos. La afinidad propia CPU 0–23 respeta CPU 24–31
+reservadas por el hilo paralelo; 32 hilos software no implican 32 CPU disponibles.
+
+Estimación previa: segundos medidos por familia×419/F. Rango de referencia
+1–2 veces, sin promesa de cota; tamaño de ventana, hilos y carga ajena afectan
+el tiempo real. `execution.json` fija F/hilos/medidas; `estimate_reported.json`
+vincula el aviso al usuario. Enmienda y código se commitean localmente antes
+de la corrida. No se retocan parámetros al observar los resultados.
+
+## Ejecución desatendida y entregas
+
+Lanzamiento independiente mediante Start-Process oculto, log bajo
+`artifacts/rp4_v5_run_a3_20260908/logs/`. `progress.json` en esa raíz informa
+running/done/failed, error, hora, recuentos por familia/RV15, F/hilos y ETA.
+Actualización ordinaria cada 10 segundos (máximo 5 min requerido). Recibos por
+sesión verifican identidad, hash y sello; mismo comando reanuda sin reajustar
+sesiones completas. Exclusión mutua por corrida y fragmento. Hasta 3 intentos
+por trabajador con registro de cada error; fallo persistente requiere diagnóstico.
+
+Cada familia publica tabla parcial tras 419 sesiones, con snapshot/recibo/hash.
+Inferencia de selectores sólo tras 419×5 registros. Control final: repetir la
+primera sesión RV15/2024-10-28 en otra identidad de fragmento con igual F/hilos
+para las cinco familias; se exige identidad binaria de pronósticos CPU.
+Control CPU/GPU no aplica a A3 porque no ajusta en GPU. Se divulga la sonda A2.
+Se escribe recibo final y se informa avance horario, terminación o fallo.
+
+No se leen cohortes prospectivas o selladas. No se hace push. El informe vivo
+`results_v5.md` se actualiza conservando cada snapshot previo y el archivo
+histórico A1. Código, especificación, autorizaciones y entorno quedan ligados
+por hashes en `artifacts/rp4_v5_a3/freeze.json`.

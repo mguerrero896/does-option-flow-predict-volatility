@@ -1,0 +1,305 @@
+{
+  "schema": "rp4-defense-additions-evidence-v1",
+  "research_only": true,
+  "capital_go": false,
+  "bonferroni_parameters": {
+    "factors": [2, 4],
+    "cap": 1,
+    "role": "Declared descriptive sensitivity constants, not historical study parameters"
+  },
+  "atm_definition": {
+    "dte_min": 0,
+    "dte_max": 1,
+    "tenor": "dte_0_1",
+    "source": "artifacts/rp4_v4_a1/specification.json",
+    "selector": ["grid", "tenors", 0]
+  },
+  "source_sha256": {
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_market_audit/feature_daily.csv": "761ae9fee8f074581fd44910e8124bdbdacc6606ad6af215c5a9bee5c993d23e",
+    "artifacts/rp4_market_audit/bar_event_windows.csv": "ae1f0c54f1ebaab8889c0aa840965ab2d48d946e484955cd9b9be38405d774cc",
+    "artifacts/rp4_v4_b4/top_loss_sessions.csv": "32ef18130c638d1f2b54fa2e6ed9badf38a156ae5d68c6220a4c8d1c9d98b486",
+    "artifacts/rp4_v4_b2_rv15/session_losses.csv": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_market_audit/REPORT.md": "74c6d6e5aaa43c51e73b0cacc8bde6a569aa1093686bafd5c10973d1abe3dcab",
+    "docs/rp4/results_v3.md": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f",
+    "docs/rp4/results_v4.md": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7"
+  },
+  "bonferroni": [
+    {
+      "horizon_minutes": "30",
+      "family": "log_ridge_harq",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 0,
+      "p_raw": 0.0439,
+      "times_2": 0.0878,
+      "times_4": 0.1756,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "30",
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "NOT_REJECTED",
+      "source_row_zero_based": 1,
+      "p_raw": 0.0525,
+      "times_2": 0.105,
+      "times_4": 0.21,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "30",
+      "family": "lightgbm_qlike",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 2,
+      "p_raw": 0.0053,
+      "times_2": 0.0106,
+      "times_4": 0.0212,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "30",
+      "family": "lightgbm_qlike",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "NOT_REJECTED",
+      "source_row_zero_based": 3,
+      "p_raw": 0.6631,
+      "times_2": 1.0,
+      "times_4": 1.0,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "15",
+      "family": "log_ridge_harq",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 8,
+      "p_raw": 0.039,
+      "times_2": 0.078,
+      "times_4": 0.156,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "15",
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 9,
+      "p_raw": 0.0032,
+      "times_2": 0.0064,
+      "times_4": 0.0128,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "15",
+      "family": "lightgbm_qlike",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 10,
+      "p_raw": 0.0135,
+      "times_2": 0.027,
+      "times_4": 0.054,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "15",
+      "family": "lightgbm_qlike",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "NOT_REJECTED",
+      "source_row_zero_based": 11,
+      "p_raw": 0.628,
+      "times_2": 1.0,
+      "times_4": 1.0,
+      "in_declared_primary_pair": true
+    },
+    {
+      "horizon_minutes": "5",
+      "family": "log_ridge_harq",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 16,
+      "p_raw": 0.0092,
+      "times_2": 0.0184,
+      "times_4": 0.0368,
+      "in_declared_primary_pair": false
+    },
+    {
+      "horizon_minutes": "5",
+      "family": "log_ridge_harq",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "REJECTED",
+      "source_row_zero_based": 17,
+      "p_raw": 0.0172,
+      "times_2": 0.0344,
+      "times_4": 0.0688,
+      "in_declared_primary_pair": false
+    },
+    {
+      "horizon_minutes": "5",
+      "family": "lightgbm_qlike",
+      "contrast": "B1_over_B0",
+      "window": "primary",
+      "hypothesis_status": "NOT_REJECTED",
+      "source_row_zero_based": 18,
+      "p_raw": 0.0608,
+      "times_2": 0.1216,
+      "times_4": 0.2432,
+      "in_declared_primary_pair": false
+    },
+    {
+      "horizon_minutes": "5",
+      "family": "lightgbm_qlike",
+      "contrast": "B2_over_B1",
+      "window": "primary",
+      "hypothesis_status": "NOT_TESTED",
+      "source_row_zero_based": 19,
+      "p_raw": 0.1927,
+      "times_2": 0.3854,
+      "times_4": 0.7708,
+      "in_declared_primary_pair": false
+    }
+  ],
+  "events": [
+    {
+      "session_date": "2025-04-07",
+      "window": "primary",
+      "feature_source_rows": [
+        888,
+        889,
+        890,
+        891,
+        892,
+        893
+      ],
+      "assets": 6,
+      "surface_cells_min": 19.96923076923077,
+      "surface_cells_max": 20.0,
+      "atm_presence_min_percent": 0.0,
+      "atm_presence_max_percent": 0.0,
+      "origins_per_asset_min": 65,
+      "origins_per_asset_max": 65,
+      "deltas": [
+        {
+          "family": "log_ridge_harq",
+          "horizon_minutes": 15,
+          "contrast": "B2_over_B1",
+          "source_row_zero_based": 23,
+          "delta": 0.011539429478403918
+        },
+        {
+          "family": "lightgbm_qlike",
+          "horizon_minutes": 15,
+          "contrast": "B2_over_B1",
+          "source_row_zero_based": 51,
+          "delta": -0.34441720048388613
+        }
+      ]
+    },
+    {
+      "session_date": "2026-08-31",
+      "window": "confirmation",
+      "feature_source_rows": [
+        2994,
+        2995,
+        2996,
+        2997,
+        2998,
+        2999
+      ],
+      "assets": 6,
+      "surface_cells_min": 20.415384615384614,
+      "surface_cells_max": 24.015384615384615,
+      "atm_presence_min_percent": 100.0,
+      "atm_presence_max_percent": 100.0,
+      "origins_per_asset_min": 65,
+      "origins_per_asset_max": 65,
+      "deltas": [
+        {
+          "family": "log_ridge_harq",
+          "horizon_minutes": 15,
+          "contrast": "B2_over_B1",
+          "source_row_zero_based": 80,
+          "delta": 0.11624790425816478
+        },
+        {
+          "family": "lightgbm_qlike",
+          "horizon_minutes": 15,
+          "contrast": "B2_over_B1",
+          "source_row_zero_based": 110,
+          "delta": -0.07987767540643143
+        }
+      ],
+      "AMZN_event": [
+        {
+          "source_row_zero_based": 10,
+          "bar_start_ny": "2026-08-31T14:00:00-04:00",
+          "minutes_from_event": 0,
+          "return_bp": -151.6788694132191,
+          "volume_over_session_median": 3.0185943673203086
+        },
+        {
+          "source_row_zero_based": 11,
+          "bar_start_ny": "2026-08-31T14:01:00-04:00",
+          "minutes_from_event": 1,
+          "return_bp": 71.30154984591269,
+          "volume_over_session_median": 11.146145202798216
+        }
+      ]
+    }
+  ],
+  "frequency": {
+    "family": "log_ridge_harq",
+    "horizon_minutes": 15,
+    "contrast": "B2_over_B1",
+    "window": "primary",
+    "sessions": 419,
+    "favorable_sessions": 249,
+    "adverse_sessions": 170,
+    "tied_sessions": 0,
+    "favorable_percent": 59.427207637231504,
+    "positive_assets": 6,
+    "assets": 6,
+    "positive_blocks": 3,
+    "blocks": 3
+  },
+  "bonferroni_scope": "Deterministic sensitivity conditional on a fixed finite set of comparisons; not a new registered decision, cross-family rescue or proof of global error control for adaptive selection.",
+  "event_scope": "Two different windows; within-provider consistency, not independent price validation, proof of market cause or proof of extrapolation.",
+  "source_access": "Daily feature and bar-event source files are local evidence excluded from the existing publication projection. Only requested aggregate facts are transcribed here, not complete source files.",
+  "literature": {
+    "authors": [
+      "Tim Bollerslev",
+      "Andrew J. Patton",
+      "Rogier Quaedvlieg"
+    ],
+    "year": 2016,
+    "title": "Exploiting the errors: A simple approach for improved volatility forecasting",
+    "doi": "10.1016/j.jeconom.2015.10.007",
+    "url": "https://public.econ.duke.edu/~ap172/BPQ_Exploiting_Errors_JoE_2016.pdf",
+    "metadata_url": "https://scholars.duke.edu/publication/1072550",
+    "sections": [
+      "2.3",
+      "3.1",
+      "3.3",
+      "3.5"
+    ],
+    "comparison": "Qualitative only: measurement-error-aware volatility forecasting; daily and longer horizons against HAR are not a directly equivalent incremental B2/B1 intraday QLIKE benchmark.",
+    "comparable_percent_verified": false,
+    "percentage_from_paper_reported": null,
+    "retrieved_date": "2026-09-08"
+  },
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "historical_results_changed": false
+}

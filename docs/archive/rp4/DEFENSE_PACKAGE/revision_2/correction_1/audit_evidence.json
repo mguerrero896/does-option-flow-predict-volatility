@@ -1,0 +1,45 @@
+{
+  "schema": "rp4-defense-documentary-audit-correction-1",
+  "research_only": true,
+  "capital_go": false,
+  "premium_proportions": {
+    "source": "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv",
+    "source_sha256": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be",
+    "horizon_minutes": 15,
+    "window": "primary",
+    "lookback_minutes": 5,
+    "all_premium_share_columns": 14,
+    "selected_columns": [
+      {
+        "source_row_zero_based": 811,
+        "column": "b2_5m_buy_premium_share",
+        "lookback_minutes": 5,
+        "absolute_mean": 0.2515121989354961,
+        "N_sessions": 419
+      },
+      {
+        "source_row_zero_based": 826,
+        "column": "b2_5m_passive_premium_share",
+        "lookback_minutes": 5,
+        "absolute_mean": 0.31208149610061164,
+        "N_sessions": 419
+      },
+      {
+        "source_row_zero_based": 829,
+        "column": "b2_5m_sell_premium_share",
+        "lookback_minutes": 5,
+        "absolute_mean": 0.2498454749290096,
+        "N_sessions": 419
+      }
+    ]
+  },
+  "source_sha256": {
+    "artifacts/rp4_closeout_audit/b2_coefficient_summary.csv": "150fdf4398072496ef64547df580053907a117921d2c214f9b3c82446254e9be",
+    "artifacts/rp4_v4_b2_rv15/summary.json": "451e53869bb5f5058a635302bb08ad920ce11b8771fd2c6780545255b1ac25f4",
+    "artifacts/rp4_v4_b2_rv5/summary.json": "4c90d85e81933f9b96a5f03f5faa3673ff31043f2442ac3e45893a5c7e59c8fe",
+    "artifacts/rp4_closeout_audit_code/audit_closed.py": "6957164cb688be290cdd4797ef9f6966c071c3934fd8ba93c66f09ca9c9d6fee"
+  },
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "historical_results_changed": false
+}

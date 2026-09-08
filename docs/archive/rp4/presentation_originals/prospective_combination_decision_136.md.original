@@ -1,0 +1,111 @@
+# Decisión 136 — secundarios prospectivos top2 y combinación de cuatro familias
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+Registro nuevo autorizado por Miguel mediante la parte 34 del 2026-09-09 y su
+instrucción en este hilo. Su recibo y sidecar fijan los bytes y la hora UTC local.
+No se modifican los registros anteriores, la decisión 134 ni el borrador de
+enmienda 4, que sigue sin sellar. La selección de estos candidatos se hizo después
+de observar resultados históricos de desarrollo: no es confirmación histórica.
+
+**v4 ridge RV15 sigue siendo el primario. Top2 y la combinación a pesos iguales
+de HAR, ridge, elastic net y LightGBM son secundarios registrados ahora.**
+La orden 34 amplía expresamente su alcance a las lecturas 20/40/45/335; no se
+presenta top2 como ya sellado en el borrador 4 anterior.
+
+## Pronósticos fijados
+
+Para cada clave activo/sesión/origen y cada conjunto B0/B1/B2, la combinación es
+`(f_HAR + f_ridge + f_elastic_net + f_LightGBM) / 4`, sobre **niveles positivos
+de varianza**, antes de calcular QLIKE. No se promedian logaritmos, pérdidas ni
+p-valores. Los pesos son siempre 0,25: no se estiman ni se eligen por sesión.
+
+Top2 conserva la regla A3: ordenar las cinco familias seasonal_persistence,
+log_har, log_ridge_harq, log_elastic_net, lightgbm_qlike por QLIKE de validación
+interna, con ese mismo orden para empates, y promediar los dos pronósticos
+seleccionados en niveles con pesos 0,5. La selección y los hiperparámetros sólo
+usan las últimas diez sesiones de entrenamiento causal; nunca las pérdidas
+de la sesión predicha ni el rendimiento prospectivo agregado.
+
+Ambos secundarios heredan íntegramente el contrato científico A3
+`artifacts/rp4_v5_a3/specification.json`, SHA-256
+`a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e`,
+y los productores fijados por `artifacts/rp4_v5_a3/freeze.json`, SHA-256
+`69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855`.
+Se conservan rejillas, transformaciones, calibraciones y límites por familia,
+ElasticNet con Gram precalculada, max_iter 500000 y tolerancia 1e-6, LightGBM
+CPU con rejilla v4 y semillas científicas A3. No se incorpora la red diferida.
+La inferencia prospectiva usa la semilla 20260907 del registro prospectivo,
+distinta de la semilla 20260908 del informe histórico v5.
+
+Alcance: RV15; conjuntos anidados 29/69/138; seis activos AAPL, AMZN, META,
+MSFT, NVDA y TSLA; máscaras comunes, PIT proxy fuente 120 s, purga/embargo
+60 minutos y entrenamiento expansivo heredados. No se amplían activos ni
+horizontes. Cada familia conserva su aprendizaje causal y los objetivos
+anteriores sólo entran cuando son observables según las máscaras registradas.
+Si falta un pronóstico o no cumple integridad, no se redistribuyen los pesos
+ni se sustituyen familias: la lectura afectada queda NO VERIFICABLE.
+
+## Cohortes y lecturas
+
+Se incorpora la definición de elegibilidad completa del registro prospectivo
+v1 y sus enmiendas 1–3. Se comienza con sesiones XNYS desde 2026-09-08,
+adquisición prevista desde 2026-09-09 10:00 Australia/Sydney según enmienda 1.
+Un PASS de adquisición no equivale a elegibilidad científica. El censo registra
+ausencias y fallos sin elegir fechas por pérdidas, signos o significación.
+
+| Lectura | Cohorte exacta y papel |
+|---|---|
+| 20 | Primeras 20 prospectivas completas: consistencia temprana; v4 conserva su decisión primaria original. |
+| 40 | Primeras 40 prospectivas acumuladas: estabilidad; misma condición administrativa del v1 fijada antes de abrir 20; sin fecha administrativa, prevista al llegar a 40. No rescata 20. |
+| 45 | Las 25 históricas de 2026-08-03 a 2026-09-04 y las primeras 20 prospectivas, una sola lectura al llegar a 20 nuevas. Peso 1/45 por sesión. No son 45 prospectivas; análisis parcialmente observado. |
+| 335 | Primeras 335 prospectivas acumuladas, sin las 25 históricas, una sola vez cualquiera sea el resultado anterior. No reescribe 20. |
+
+Para 45 se requiere un manifiesto propio de pronósticos HAR/ridge/ElasticNet/
+LightGBM y validaciones de esas mismas 25 fechas, con código y entradas
+congelados antes de su cómputo/lectura. Este registro no afirma que existan ni
+autoriza sustituirlos por las pérdidas ridge v4. Si no están disponibles o no
+puede acreditarse su procedencia, se informa NOT_AVAILABLE para el secundario
+afectado, sin reemplazar fechas ni convertir la muestra en 45 prospectivas.
+
+## Inferencia y comparación fijadas antes de lecturas prospectivas
+
+QLIKE = y/f − log(y/f) − 1; media por activo dentro de sesión y pesos iguales
+entre sesiones. Delta = pérdida base − ampliada; reducción porcentual =
+100 × media(delta) / media(pérdida base). En cada candidato y lectura se aplica
+la misma secuencia **H1 B1/B0 → H2 B2/B1**, con estimando positivo y p unilateral
+≤ 0,05 para rechazar; H2 sólo se abre tras rechazo de H1 en esa misma muestra.
+Si H1 falla, el p de H2 sólo es diagnóstico. No se añade un requisito basado
+en el IC. Bootstrap circular por sesiones, bloques de cinco, 9.999 réplicas,
+semilla 20260907, nula centrada y corrección +1; IC percentil bilateral 95 %.
+Se hereda `artifacts/rp4_v3_code/inference.py::session_contrast` sin cambios.
+
+Cada nuevo secundario tiene su secuencia nominal separada. No modifica el
+Holm A/B/C ni la secuencia D, ni la decisión primaria v4. **No se reclama
+control global al 5 % entre candidatos, lecturas acumuladas o búsqueda
+histórica**; los p nominales no corrigen la elección post hoc de candidatos.
+No hay criterio de éxito por rechazar en cualquiera de las lecturas, parada
+por significación ni inspecciones adicionales en 120/146 u otros umbrales.
+Los resultados adversos o no computables se informan sin repetición discrecional.
+
+Se publicarán las pérdidas B0/B1/B2 y ambas cadenas para los tres procedimientos
+en las mismas claves elegibles. Si la combinación tiene el menor QLIKE B2
+prospectivo, se reportará como ganadora descriptiva de esa comparación
+registrada, con diferencias absolutas/relativas frente a v4 y top2, incluso si
+contradice el ranking histórico. Esto no implica superioridad estadística entre
+modelos: H1/H2 evalúan información dentro del modelo. Se informa por separado
+si su cadena nominal rechaza. v4 conserva el rol primario y ningún ranking
+reescribe veredictos anteriores ni demuestra rentabilidad o causalidad.
+
+## Custodia
+
+El recibo nuevo conserva hashes de los antecedentes, de la orden y de los
+productores, sin sobrescribirlos. Antes de ejecutar pronósticos prospectivos se
+sellará un manifiesto nuevo de entradas, calendario, código, entorno y recursos
+deterministas; salidas nuevas, sin reutilizar ejecuciones cerradas. Este registro
+no ejecuta modelos ni abre almacenes prospectivos. En esta tarea sólo se han
+leído documentos de registro y resultados históricos 2024-10-28–2026-07-31.
+La ausencia de lectura acreditada aquí se limita a esta tarea; no se afirma
+conocimiento global de terceros ni ausencia actual de datos por no haberlos
+inspeccionado. El hash y la hora local no son firma del propietario ni sello
+temporal externo. Sin push ni publicación externa.

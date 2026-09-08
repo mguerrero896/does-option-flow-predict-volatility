@@ -1,0 +1,11 @@
+# Defensa — edición canónica de la revisión del examinador
+
+Esta entrega integra la revisión independiente y su segunda parte. El [resumen bilingüe](executive_summary.md), las [preguntas y respuestas](examiner_qa.md), la [matriz de afirmaciones](claims_matrix.csv) y el [guion de diapositivas](defense_slides.md) son los documentos vigentes para preparar la defensa. El [recibo de custodia](receipt.json), el [manifiesto](evidence_manifest.json) y [SHA256SUMS](SHA256SUMS) identifican sus bytes y fuentes. El [recibo posterior de comprobaciones](verification_receipt.json), con [sello propio](verification_receipt.sha256), registra los comandos, salidas y límites de la validación ejecutada sobre esa entrega sellada.
+
+Las [cifras y derivaciones documentales](examiner_evidence.json) conservan los estimandos originales y distinguen las sensibilidades añadidas: potencia aproximada a partir de intervalos guardados, ajuste de Holm sobre p bilaterales ya calculados y suma de pérdidas por sesión ya guardadas. No hay nuevos ajustes ni remuestreos científicos. La revisión corrige también el alcance del [resultado final](../../../RESULTADO_FINAL_revision_2.md).
+
+La [primera entrega de esta revisión](../receipt.json), la [corrección anterior](../correction_1/receipt.json) y el [paquete inicial](../../receipt.json) son antecedentes históricos con sellos intactos. La [tercera enmienda prospectiva](../../../prospective_confirmation_v1_amendment_3.md) se selló antes de elaborar esta entrega, preservando la secuencia de registros y las decisiones ya fijadas.
+
+El alcance científico es el de una muestra de desarrollo cuyo diseño se fijó con los datos ya observados. La cronología local no proporciona una marca de tiempo de un tercero. La proyección de seguimiento aplica la [adenda de exclusiones administrativas](../../../publication_contract_v2_addendum_1.md).
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

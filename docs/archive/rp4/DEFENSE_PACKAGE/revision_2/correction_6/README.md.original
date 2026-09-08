@@ -1,0 +1,7 @@
+# Defensa — secundarios reparados y límites
+
+Esta edición conserva la [sensibilidad bilateral/Holm](../correction_5/README.md) y añade la proyección verificable de los secundarios de v3. Documentos de lectura: [resumen bilingüe](executive_summary.md), [preguntas del examinador](examiner_qa.md), [matriz de afirmaciones](claims_matrix.csv) y [diapositivas](defense_slides.md).
+
+La [revisión aditiva de resultados](../../../results_v3_revision3.md) distingue AUC calculable sin rechazo y recalibración reproducible sin utilidad demostrada. La [proyección de fuentes](../../../../../artifacts/rp4_v3_secondary_repair/evidence.json) contiene sólo agregados y selectores públicos. El [recibo](receipt.json), el [manifiesto](evidence_manifest.json) y [SHA256SUMS](SHA256SUMS) fijan el contenido; la verificación tiene un recibo separado con comandos y salidas.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

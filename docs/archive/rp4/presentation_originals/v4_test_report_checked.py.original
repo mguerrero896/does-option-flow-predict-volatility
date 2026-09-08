@@ -1,0 +1,227 @@
+"""Synthetic report checks: targets, decisions, and cumulative SVG endpoints."""
+
+from __future__ import annotations
+
+import copy
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+from itertools import accumulate
+from pathlib import Path
+from typing import Any
+
+import pytest
+from artifacts.rp4_v4_code import report_v4_checked as report
+from artifacts.rp4_v4_code.aggregate_v4 import aggregate_records
+from artifacts.rp4_v4_code.test_aggregate import OPTIONS, synthetic_records
+
+
+@pytest.fixture(scope="module")
+def result_set() -> report.Results:
+    output = {}
+    for h in report.LABELS:
+        summary, frame = aggregate_records(synthetic_records(horizon=5 if h == 5 else 15), OPTIONS)
+        rows = frame.to_dict("records")
+        for window in report.WINDOWS:
+            s = copy.deepcopy(summary)
+            s.update(window=window, horizon_minutes=h, target_key=f"rv_{h}")
+            s["binding"] = {"specification_sha256": report.SPEC_SHA}
+            s["completed_session_sha256"] = {r["session_date"] + ".json": "SYNTHETIC" for r in rows}
+            output[h, window] = s, rows
+    return output
+
+
+def test_report_checks_means_targets_and_gate(result_set: report.Results) -> None:
+    for (h, window), (summary, rows) in result_set.items():
+        report.verify_results(summary, rows, h, window)
+    summary, rows = copy.deepcopy(result_set[15, "primary"])
+    summary["target_key"] = "rv30"
+    with pytest.raises(ValueError, match="WRONG_TARGET"):
+        report.verify_results(summary, rows, 15, "primary")
+    summary["target_key"] = "rv_15"
+    summary["contrasts"][0]["estimate"] += 1
+    with pytest.raises(ValueError, match="V4_ESTIMATE"):
+        report.verify_results(summary, rows, 15, "primary")
+
+
+def test_svg_contains_all_windows_families_horizons_and_exact_endpoints(
+    result_set: report.Results,
+) -> None:
+    for contrast, base, richer in report.inf.CONTRASTS:
+        svg = ET.fromstring(report.figure(result_set, contrast, base, richer))
+        curves = svg.findall(".//{http://www.w3.org/2000/svg}path")
+        assert len(curves) == 12
+        seen = set()
+        for curve in curves:
+            h = int(curve.attrib["data-horizon"])
+            window, family = curve.attrib["data-window"], curve.attrib["data-family"]
+            seen.add((h, window, family))
+            rows = result_set[h, window][1]
+            expected = list(accumulate(report.differences(rows, family, base, richer)))[-1]
+            assert float(curve.attrib["data-endpoint"]) == expected
+            assert int(curve.attrib["data-sessions"]) == len(rows)
+        assert len(seen) == 12
+
+
+def test_tables_separate_secondary_and_diagnostic_p(result_set: report.Results) -> None:
+    summary, _ = result_set[5, "confirmation"]
+    original = copy.deepcopy(summary)
+    try:
+        summary["contrasts"][1]["p_for_decision"] = None
+        summary["contrasts"][1]["hypothesis_status"] = "NOT_TESTED"
+        text = report.main_table(result_set, "confirmation")
+        assert "NO ABIERTA" in text
+        assert "v4 RV5 secundario" in text
+        assert "v4 RV15 primario" in text
+        assert "v3 RV30" in text
+    finally:
+        summary.clear()
+        summary.update(original)
+
+
+def test_bound_counts_preserve_missing_and_reject_impossible() -> None:
+    row = {
+        "horizon_minutes": 15,
+        "window": "primary",
+        "information_set": "B2",
+        "family": "log_ridge_harq",
+        "prediction_rows": 12,
+        "count_low": 1,
+        "count_high": 2,
+        "validation_rows": 100,
+        "validation_count_low": 3,
+        "validation_count_high": 4,
+    }
+    counts = report.bound_rows([row, row])
+    assert counts[0]["N_predictions"] == 24
+    assert counts[0]["count_low"] == 2
+    unknown = {**row, "count_high": None}
+    assert report.bound_rows([unknown])[0]["status"] == "NO VERIFICABLE"
+    assert report.bound_rows([unknown])[0]["count_low"] is None
+    with pytest.raises(ValueError, match="COUNTS_INVALID"):
+        report.bound_rows([{**row, "count_low": 20}])
+
+
+def completed_receipt(horizon: int, window: str) -> dict[str, Any]:
+    """Literal command layout used by the frozen execute._run_window_locked producer."""
+    common = [
+        sys.executable,
+        "-B",
+        "-m",
+        "artifacts.rp4_v4_code.evaluate_v4",
+        "--spec",
+        str(report.ROOT / "artifacts/rp4_v4_a1/specification.json"),
+        "--spec-sha256",
+        report.SPEC_SHA,
+        "--release",
+        str(report.ROOT / "artifacts/rp4_v4_a2" / f"evaluation_release_rv{horizon}.json"),
+        "--horizon",
+        str(horizon),
+        "--window",
+        window,
+        "--threads",
+        "4",
+        "--shard-count",
+        "8",
+    ]
+    commands = [common + ["--shard-index", str(i)] for i in range(8)]
+    commands.append(common + ["--aggregate-only"])
+    return {
+        "status": "COMPLETE",
+        "exit_code": 0,
+        "stage": "B2" if window == "primary" else "B3",
+        "window": window,
+        "horizon_minutes": horizon,
+        "target_key": f"rv_{horizon}",
+        "commands": [{"command": subprocess.list2cmdline(c), "exit_code": 0} for c in commands],
+    }
+
+
+@pytest.mark.parametrize("horizon", [5, 15])
+@pytest.mark.parametrize("window", ["primary", "confirmation"])
+def test_completed_receipt_identity_and_exact_disjoint_command_order(
+    horizon: int, window: str
+) -> None:
+    receipt = completed_receipt(horizon, window)
+    report.verify_receipt_identity(receipt, horizon, window)
+    for key, bad in (
+        ("status", "FAILED_ATTEMPT_PRESERVED"),
+        ("exit_code", 1),
+        ("stage", "WRONG"),
+        ("window", "WRONG"),
+        ("horizon_minutes", 999),
+        ("target_key", "rv30"),
+    ):
+        with pytest.raises(ValueError, match="RECEIPT_IDENTITY"):
+            report.verify_receipt_identity({**receipt, key: bad}, horizon, window)
+    for defect in ("duplicate", "order", "missing", "extra", "failed", "target", "aggregate"):
+        changed = copy.deepcopy(receipt)
+        commands = changed["commands"]
+        if defect == "duplicate":
+            commands[1] = commands[0]
+        elif defect == "order":
+            commands[0], commands[1] = commands[1], commands[0]
+        elif defect == "missing":
+            commands.pop()
+        elif defect == "extra":
+            commands.append(commands[-1])
+        elif defect == "failed":
+            commands[0]["exit_code"] = 1
+        elif defect == "target":
+            commands[0]["command"] = commands[0]["command"].replace(
+                f"--horizon {horizon}", "--horizon 30"
+            )
+        else:
+            commands[-1] = commands[0]
+        with pytest.raises(ValueError, match="COMMAND_IDENTITY"):
+            report.verify_receipt_identity(changed, horizon, window)
+
+
+def test_invalid_receipt_rejected_before_any_v4_result_payload(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt = completed_receipt(15, "primary")
+    receipt["window"] = "confirmation"
+    reads: list[Path] = []
+    monkeypatch.setattr(report, "LABELS", {15: "synthetic"})
+    monkeypatch.setattr(report, "V3_PINS", {})
+    monkeypatch.setattr(report, "sha256", lambda _: report.SPEC_SHA)
+
+    def read(path: Path) -> dict[str, Any]:
+        reads.append(path)
+        if path.name == "specification.json":
+            return {"data_root": "D:/SYNTHETIC_NO_READ"}
+        if path.name == "receipt.json":
+            return receipt
+        raise AssertionError("A result payload must not be read")
+
+    monkeypatch.setattr(report, "read_json", read)
+    with pytest.raises(ValueError, match="RECEIPT_IDENTITY"):
+        report.run()
+    assert [p.name for p in reads] == ["specification.json", "receipt.json"]
+
+
+def test_timing_preserves_observed_resources_without_inventing_missing_measurements() -> None:
+    receipt = {
+        **completed_receipt(15, "primary"),
+        "elapsed_seconds": 12.5,
+        "started_at_utc": "2025-01-01T00:00:00+00:00",
+        "completed_at_utc": "2025-01-01T00:00:12.5+00:00",
+        "resources": {
+            "logical_cpu_count": 64,
+            "physical_memory_bytes": 68719476736,
+            "memory_status": "VERIFIED",
+            "os": "SYNTHETIC_OS",
+            "session_shards": 8,
+            "threads_per_model": 4,
+            "maximum_model_threads": 32,
+            "blas_threads_per_child": 4,
+        },
+    }
+    row = report.timing_row(receipt, 15, "primary")
+    assert row["elapsed_seconds"] == 12.5
+    assert all(row[key] == value for key, value in receipt["resources"].items())
+    encoded = report.csv_bytes([row]).decode()
+    assert "physical_memory_bytes" in encoded and "68719476736" in encoded
+    unavailable = report.timing_row({}, 5, "confirmation")
+    assert unavailable["logical_cpu_count"] is unavailable["physical_memory_bytes"] is None

@@ -1,0 +1,88 @@
+{
+  "archive_maps": {
+    "docs/archive/public_history/original_paths.json": {
+      "entries": 50,
+      "sha256": "d6d037ad5440811cb461a2f5adf3181feb3ce454c6579ada027842f1c882e09e"
+    },
+    "docs/archive/rp4/DEFENSE_PACKAGE/original_paths.json": {
+      "entries": 97,
+      "sha256": "93894043ed864b1ed6ed9ab2ddd0ad12565d618ac34bce7ac7f6543dc219b0cd"
+    },
+    "docs/archive/rp4/figure_originals/original_paths.json": {
+      "entries": 12,
+      "sha256": "c050bbd4d958731facb98cb6b3375fed336abd687c10118578bc24ce5be2d897"
+    }
+  },
+  "base_commit": "c560b73558b1d9b9cf24129ad6373a091a9ad365",
+  "capital_go": false,
+  "checks": {
+    "archive_helper_mypy": "PASS",
+    "archive_helper_ruff": "PASS",
+    "english_figures": {
+      "current_svg_png_hashes_verified": 12,
+      "numeric_tokens_preserved": 1033,
+      "original_svg_byte_matches": 6,
+      "receipt": "docs/figures/rp4/translation_receipt.json",
+      "receipt_sha256": "30cb16365462a9aed6542022011e334f5923dc6de62c72ee16df277f4340ddc1",
+      "unchanged_svg_elements_and_attributes": 1395,
+      "visual_review": "All six current PNGs inspected; no clipping or text overlap observed."
+    },
+    "independent_candidate_links": {
+      "disposition": "Three missing destinations and eight heading fragments corrected in this source delivery. The remaining private-producer reference was reported to the repository integrator.",
+      "markdown_files": 513,
+      "markdown_heading_fragments_checked": 43,
+      "missing_destinations": 4,
+      "outdated_heading_fragments": 8,
+      "outside_repository": 0,
+      "relative_links_checked": 4362,
+      "snapshot_scope": "Preliminary candidate before copying the latest source updates; not final acceptance"
+    },
+    "programme_diagrams": {
+      "archify_validation": "Four diagrams: zero errors or warnings, nine showcase checks passed per diagram; deliver and visual-check completed. Contact sheets inspected.",
+      "manifest": "docs/figures/public_refresh/manifest.json",
+      "manifest_sha256": "b072c717a3f1f9441d234ff64b0e96e1cebcb33dcc4b0cb4d63c322b8625237a",
+      "sources_and_outputs_verified": 12
+    },
+    "selected_pytest": {
+      "command_prefix": "uv run --frozen --no-sync pytest -o addopts= -q",
+      "failed": 0,
+      "passed": 125,
+      "paths": [
+        "tests/contract/test_rp4_defense_package.py",
+        "tests/contract/test_rp4_defense_additions.py",
+        "tests/contract/test_rp4_defense_audit_corrections.py",
+        "tests/contract/test_rp4_defense_examiner_revision.py",
+        "tests/contract/test_rp4_program_convergence.py",
+        "tests/contract/test_rp4_proposal_alignment.py",
+        "tests/contract/test_rp4_saved_holm_closeout.py",
+        "tests/contract/test_rp4_v3_secondary_projection.py",
+        "tests/contract/test_rp4_public_archive.py",
+        "tests/unit/test_generate_date_level_pit_preflight_plan_v1.py",
+        "tests/unit/test_date_level_pit_preflight_request_budget_v1.py",
+        "tests/contract/test_block7_narrative_matches_artifact.py",
+        "tests/contract/test_rp4_figure_english.py",
+        "artifacts/rp4_closeout_figures_code/test_build.py",
+        "artifacts/rp4_closeout_figures_code/test_additions.py"
+      ],
+      "seconds": 21.19,
+      "skip_reason": "Existing optional local licensed aggregate audit inputs are excluded from the publication projection.",
+      "skipped": 1
+    }
+  },
+  "current_english_research_svgs": 6,
+  "custody_contract": "Exact originals retain their recorded content hashes. Public redaction requires a distinct public-byte hash and explicit original-provenance pin. Explicitly withheld operational sources validate only hashed path identity, historical content pin and absence. Every source selected for a number or quote must remain readable and separately checked.",
+  "defense_layers": 8,
+  "exact_archived_figure_objects": 12,
+  "helper_sha256": "ea72a112a8f8bbaf1504effcc89d3959aaad20799dd2302731beaf357e475669",
+  "historical_defense_reading_documents": 30,
+  "other_historical_documents": 50,
+  "research_status": "RESEARCH_ONLY",
+  "schema_version": "rp4-public-archive-relocation-v1",
+  "scientific_actions": {
+    "new_bootstrap_repetitions": 0,
+    "new_evaluations": 0,
+    "new_model_fits": 0,
+    "reserved_cohorts_read": 0
+  },
+  "scope": "Documentation relocation, English historical summaries and figure presentation. The recorded tests validate this working-tree subset; final public-projection acceptance is a separate check."
+}

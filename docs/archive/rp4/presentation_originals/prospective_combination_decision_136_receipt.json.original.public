@@ -1,0 +1,24 @@
+{
+  "global_third_party_exposure": "NOT_ASSERTED",
+  "status": "SEALED_BEFORE_ANY_PROSPECTIVE_READ_IN_THIS_TASK",
+  "instruction_sha256": "a88f36db15fa7459c462662fc200b0c51eadc41bc3bd07c4a0bafe61664ea402",
+  "document_sha256": "e500c487b015b7662c52a7f381180996d740c88d1d317debf594330c3ddf15b0",
+  "prospective_data_reads_in_this_task": 0,
+  "antecedent_sha256": {
+    "private-input/ca471f454414a6654b47": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "private-input/f7c6fbfecb997b25fc53": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "private-input/8e234b2d50d8b75ccfd1": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    "private-input/f6bcaa39400cece2cb56": "39943794e7f3908acd0c1f668d1fdcfcc9ab687b97b5a7eee3185d93d8e609d1",
+    "private-input/3eaddc5bb0663c2e11b5": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "private-input/37acda35eedbb1d2173b": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837",
+    "private-input/10a187c1e434487333c4": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+    "private-input/27776eea6dd8efbd7861": "6097fe9eefb04772d654dc444834958312747829c69d80e127d323551f6594e3",
+    "private-input/556deac13a605306de99": "056a22ac8edbb72571ede41c0853beab7082f81e05036f3133853afb1183887f",
+    "private-input/e31e1290c67a62bebd8b": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+    "private-input/cab35fcd3d6e14d63068": "a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e",
+    "private-input/71309db6772eb94992d9": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+    "private-input/f7462fdfc59862dbd6f2": "d035233b835bdec0fa7942b316468552f1fd472e96bcaea9c1220eead03c1ab5",
+    "private-input/0f15ce9ab6a4bc9438ab": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855"
+  },
+  "sealed_at_utc": "2026-09-08T16:06:39.6529353Z"
+}

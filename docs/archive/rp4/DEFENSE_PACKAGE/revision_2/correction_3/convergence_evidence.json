@@ -1,0 +1,1414 @@
+{
+  "schema": "rp4-program-convergence-documentary-v1",
+  "research_only": true,
+  "capital_go": false,
+  "documented_phase8_holm_threshold": 0.05,
+  "threshold_transcription_source": "reports/phase8a_exploratory_bridge_addendum_v13.md",
+  "threshold_transcription_selector": "tokens[2], decimal parse only; no new inference",
+  "new_statistical_calculations": 0,
+  "sealed_payloads_read": 0,
+  "independent_replication_count": null,
+  "programs": [
+    {
+      "id": "RP2",
+      "result_identity": "rp2-v3-20260831-b1-spot-cutoff-remediation",
+      "disposition": "HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM",
+      "scope": "Historical D/V: state positive in development, mixed in validation; no confirmed incremental flow."
+    },
+    {
+      "id": "PIT_v2.2",
+      "result_identity": "pit-v22-successor-evaluation-v2-20260902",
+      "disposition": "GLOBAL_EDGE_NOT_CONFIRMED",
+      "scope": "Gamma is the confirmatory family of this same successor; B1b/B1c are robustness variants, not separate programs."
+    },
+    {
+      "id": "Phase8A",
+      "result_identity": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "disposition": "MIXED_EXPLORATORY",
+      "scope": "Primary total-information estimand; state/flow decompositions on primary_20, not uniform on sensitivity_30."
+    },
+    {
+      "id": "RP4",
+      "result_identity": "RP4_v3_RV30_v4_RV15_RV5",
+      "disposition": "DEVELOPMENT_CLOSURE_FINAL_WINDOW_NOT_CONFIRMED",
+      "scope": "Saved v3/v4 inference unchanged; primary linear RV15 sequence and secondary RV5."
+    }
+  ],
+  "facts": {
+    "rp2_D_ridge_log_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "ridge_log",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.004369129955752289,
+        "ci_low": 0.001529133409222245,
+        "clark_west_applicable": true,
+        "clark_west_mean": 0.006909512760720564,
+        "clark_west_p_one_sided": 1.5327669094540953e-11,
+        "clark_west_t": 7.15852851527789,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.0014616905233765269,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": 0.0028693093008414724,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 1.9620797468457967e-05,
+        "giacomini_white_wald": 29.369532698263097,
+        "mde": 0.00207213565474867,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 9.463046688936156e-05,
+        "p_value": 0.0009995002498750624,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0004997501249375312
+      }
+    },
+    "rp2_D_ridge_log_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "ridge_log",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.000875703321694129,
+        "ci_low": -0.000289763137108434,
+        "clark_west_applicable": true,
+        "clark_west_mean": 0.0002969752733282723,
+        "clark_west_p_one_sided": 0.25147873807847787,
+        "clark_west_t": 0.6714120338172358,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.001432306571973355,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": true,
+        "estimate": 0.000282639765694009,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 0.0009124829141712722,
+        "giacomini_white_wald": 20.726063779181544,
+        "mde": 0.0008399734583116126,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 0.3427896056780738,
+        "p_value": 0.3868065967016492,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.3868065967016492
+      }
+    },
+    "rp2_D_gamma_glm_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "gamma_glm",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.004169908725282132,
+        "ci_low": 0.000997889440695954,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.0014563493933005699,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": 0.0025639982914761753,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 0.0010335891748783855,
+        "giacomini_white_wald": 20.438798079236058,
+        "mde": 0.0023266385566231896,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 0.0018902380961164605,
+        "p_value": 0.004997501249375313,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0014992503748125937
+      }
+    },
+    "rp2_D_gamma_glm_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "gamma_glm",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0006865767927483279,
+        "ci_low": -0.0003923555396241111,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.0014299578291813012,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": true,
+        "estimate": 0.00012249251000936656,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 0.00015309524201170097,
+        "giacomini_white_wald": 24.788043971275453,
+        "mde": 0.0007631421427452478,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 0.6508848342516338,
+        "p_value": 0.6586706646676662,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.7261369315342329
+      }
+    },
+    "rp2_D_lightgbm_qlike_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "lightgbm_qlike",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.005896225120568674,
+        "ci_low": 0.0010558011493318564,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.001428391672877161,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": 0.0032003429488117506,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 0.11122023570414527,
+        "giacomini_white_wald": 8.946425605279774,
+        "mde": 0.003603758016025554,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.012289206595567865,
+        "p_value": 0.0009995002498750624,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.0014992503748125937
+      }
+    },
+    "rp2_D_lightgbm_qlike_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "D",
+        "nested_tests",
+        "lightgbm_qlike",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.0011139551813292702,
+        "ci_low": -0.00013059951008675638,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "06301423a7ce35c2b177c468699a721a0b89d89d13baac0792ec87821aecd046",
+        "equivalence_bound": 0.0013961677450839473,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": true,
+        "estimate": 0.0005205742246090278,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 2.3338135269926297e-20,
+        "giacomini_white_wald": 101.68390721883479,
+        "mde": 0.000887242132839889,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.0980877050630012,
+        "p_value": 0.11094452773613193,
+        "sessions": 156,
+        "wild_cluster_p_value": 0.11494252873563218
+      }
+    },
+    "rp2_V_ridge_log_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "ridge_log",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.0015576839012468513,
+        "ci_low": -0.0031468339772326506,
+        "clark_west_applicable": true,
+        "clark_west_mean": -0.0021507816556273185,
+        "clark_west_p_one_sided": 0.8282690594766684,
+        "clark_west_t": -0.9620647345538852,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.0018724146130338717,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": -0.0008763831523285352,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 0.10988981154609742,
+        "giacomini_white_wald": 7.5415775659965005,
+        "mde": 0.003150383784822676,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 0.420963369681322,
+        "p_value": 0.4877561219390305,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.544727636181909
+      }
+    },
+    "rp2_V_ridge_log_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "ridge_log",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.000505223714698545,
+        "ci_low": -0.006742202437757895,
+        "clark_west_applicable": true,
+        "clark_west_mean": 0.0014528932678046424,
+        "clark_west_p_one_sided": 0.1648458752676019,
+        "clark_west_t": 0.990306067696297,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.0018811784445571579,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": -0.002503250947805831,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 0.5998598085271082,
+        "giacomini_white_wald": 2.7536495407215344,
+        "mde": 0.0053304815648397485,
+        "model_family": "ridge_log",
+        "newey_west_p_value": 0.17429587632088006,
+        "p_value": 0.14592703648175911,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.19540229885057472
+      }
+    },
+    "rp2_V_gamma_glm_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "gamma_glm",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.002240640892747994,
+        "ci_low": -0.005106063296289848,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.0018346843253443002,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": -0.0014957704208387985,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 0.0013287439959888364,
+        "giacomini_white_wald": 17.83571626117574,
+        "mde": 0.005062564656229831,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 0.39270457118411717,
+        "p_value": 0.4367816091954023,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.5387306346826587
+      }
+    },
+    "rp2_V_gamma_glm_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "gamma_glm",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 1.5433187400518537e-05,
+        "ci_low": -0.005858314702439941,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.0018496420295526883,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": -0.002635234963296121,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 0.3945444431839016,
+        "giacomini_white_wald": 4.085604862369396,
+        "mde": 0.004373582424938237,
+        "model_family": "gamma_glm",
+        "newey_west_p_value": 0.08132266349356312,
+        "p_value": 0.051974012993503245,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.03948025987006497
+      }
+    },
+    "rp2_V_lightgbm_qlike_b1_over_b0": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "lightgbm_qlike",
+        "b1_over_b0"
+      ],
+      "value": {
+        "base_information_set": "B0",
+        "block_length": 5,
+        "ci_high": 0.01030228354359797,
+        "ci_low": -0.005179842914267104,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.0021303739128706364,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": 0.0028022776274997324,
+        "expanded_information_set": "B0+B1",
+        "giacomini_white_p": 2.7472809633548674e-05,
+        "giacomini_white_wald": 26.304365291593164,
+        "mde": 0.011979682620597242,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.49859567232738355,
+        "p_value": 0.4827586206896552,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.384807596201899
+      }
+    },
+    "rp2_V_lightgbm_qlike_b2_over_b1": {
+      "artifact": "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/rp2_block10_inference/inference.json",
+      "sha256": "121dea99af13aca8909b5570fa28765839d2e453ea80919c613b11c8969cdda2",
+      "selector": [
+        "V",
+        "nested_tests",
+        "lightgbm_qlike",
+        "b2_over_b1"
+      ],
+      "value": {
+        "base_information_set": "B0+B1",
+        "block_length": 5,
+        "ci_high": 0.008291782391507565,
+        "ci_low": -0.0027577370388206634,
+        "clark_west_applicable": false,
+        "clark_west_mean": null,
+        "clark_west_p_one_sided": null,
+        "clark_west_t": null,
+        "common_mask_sha256": "1602ec4b57cc9cf7298199a5b51fdc46222c7a0ba2ab416679a6cdb88ce81c22",
+        "equivalence_bound": 0.002102351136595639,
+        "equivalence_interpretation": "EXPLORATORY_BOOTSTRAP_CI_WITHIN_MARGIN_NOT_TOST",
+        "equivalent": false,
+        "estimate": 0.0019790672702443076,
+        "expanded_information_set": "B0+B1+B2",
+        "giacomini_white_p": 0.9148028164836537,
+        "giacomini_white_wald": 0.9666986585430709,
+        "mde": 0.00908004487686229,
+        "model_family": "lightgbm_qlike",
+        "newey_west_p_value": 0.5283499820161248,
+        "p_value": 0.55872063968016,
+        "sessions": 32,
+        "wild_cluster_p_value": 0.4962518740629685
+      }
+    },
+    "pit_gamma_glm_confirmatory_delta_b1v2": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "evaluation",
+        "global",
+        "gamma_glm_confirmatory",
+        "delta_b1v2"
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.21291611253740725,
+        "ci_high": 0.014024232307083271,
+        "ci_low": 0.0026577746715989023,
+        "clusters": 32,
+        "contrast": "delta_b1v2",
+        "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+        "estimate": 0.008171247318411104,
+        "expanded_mean_qlike": 0.20474486521899615,
+        "model_role": "gamma_glm_confirmatory",
+        "observations": 12640,
+        "p_value_holm": 0.008399160083991601,
+        "p_value_raw": 0.004199580041995801,
+        "p_value_two_sided": 0.004199580041995801,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "POSITIVE",
+        "seed": 650
+      }
+    },
+    "pit_gamma_glm_confirmatory_delta_b2v2": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "evaluation",
+        "global",
+        "gamma_glm_confirmatory",
+        "delta_b2v2"
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.20474486521899615,
+        "ci_high": 0.008608549835794906,
+        "ci_low": -0.013923357122674115,
+        "clusters": 32,
+        "contrast": "delta_b2v2",
+        "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+        "estimate": -0.0031266210509440827,
+        "expanded_mean_qlike": 0.2078714862699402,
+        "model_role": "gamma_glm_confirmatory",
+        "observations": 12640,
+        "p_value_holm": 0.5595440455954405,
+        "p_value_raw": 0.5595440455954405,
+        "p_value_two_sided": 0.5595440455954405,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "NEGATIVE",
+        "seed": 650
+      }
+    },
+    "pit_lightgbm_robustness_delta_b1v2": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "evaluation",
+        "global",
+        "lightgbm_robustness",
+        "delta_b1v2"
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.15569428970751786,
+        "ci_high": 0.0071251569526431845,
+        "ci_low": 0.001381712462904281,
+        "clusters": 32,
+        "contrast": "delta_b1v2",
+        "definition": "QLIKE(B0v2)-QLIKE(B1v2a)",
+        "estimate": 0.004175806123377246,
+        "expanded_mean_qlike": 0.1515184835841406,
+        "model_role": "lightgbm_robustness",
+        "observations": 12640,
+        "p_value_raw": 0.0023997600239976003,
+        "p_value_two_sided": 0.0023997600239976003,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "POSITIVE",
+        "seed": 650
+      }
+    },
+    "pit_lightgbm_robustness_delta_b2v2": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "evaluation",
+        "global",
+        "lightgbm_robustness",
+        "delta_b2v2"
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.1515184835841406,
+        "ci_high": 0.0036821862450517493,
+        "ci_low": -0.0006242036721119073,
+        "clusters": 32,
+        "contrast": "delta_b2v2",
+        "definition": "QLIKE(B1v2a)-QLIKE(B2v2)",
+        "estimate": 0.001368014097550589,
+        "expanded_mean_qlike": 0.15015046948659003,
+        "model_role": "lightgbm_robustness",
+        "observations": 12640,
+        "p_value_raw": 0.20177982201779823,
+        "p_value_two_sided": 0.20177982201779823,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "POSITIVE",
+        "seed": 650
+      }
+    },
+    "pit_identity": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "run_id"
+      ],
+      "value": "pit-v22-successor-evaluation-v2-20260902"
+    },
+    "pit_decision": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "evaluation",
+        "decision"
+      ],
+      "value": "GLOBAL_EDGE_NOT_CONFIRMED"
+    },
+    "pit_final_eligibility": {
+      "artifact": "artifacts/target_blind_v22/pit_v22_claim_ledger_v2.json",
+      "sha256": "292751bec10f347cf5b3abcb29be840e3b7b7c95e63f9f9b60ab39eb83962a88",
+      "selector": [
+        "eligibility"
+      ],
+      "value": {
+        "capital_eligible": false,
+        "capital_go": false,
+        "edge_claim_eligible": false,
+        "edge_claim_reason": "NO_BINARY_EDGE_PROMOTION_RULE_IN_SIGNED_SUCCESSOR_FREEZE",
+        "research_only": true,
+        "scientific_result_eligible": true,
+        "scientific_result_reason": "PASS_POST_OOS_CUSTODY_VALIDATION"
+      }
+    },
+    "pit_robustness_2": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "b1_information_set_robustness",
+        2
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.2140054968402885,
+        "ci_high": 0.03140950634990483,
+        "ci_low": 0.013791296073971627,
+        "clusters": 32,
+        "contrast": "b1v2b_over_b0",
+        "definition": "QLIKE(B0v2_on_B1v2b_sample)-QLIKE(B1v2b)",
+        "estimate": 0.02233552919335931,
+        "evaluation_scope": "HOLDOUT_ONLY",
+        "expanded_mean_qlike": 0.1916699676469292,
+        "model_role": "gamma_glm_confirmatory",
+        "observations": 12545,
+        "p_value_raw": 0.00019998000199980003,
+        "p_value_two_sided": 0.00019998000199980003,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "POSITIVE",
+        "robustness_sample": "B1v2b",
+        "seed": 650
+      }
+    },
+    "pit_robustness_4": {
+      "artifact": "artifacts/target_blind_v22/successor_evaluation_result_v2.json",
+      "sha256": "ddad159bc02067fd14ef1f7b1c35b9ed02eef26ebd5d19e9e88c5838d6b97775",
+      "selector": [
+        "b1_information_set_robustness",
+        4
+      ],
+      "value": {
+        "baseline_mean_qlike": 0.2137561615814861,
+        "ci_high": 0.04115093817257024,
+        "ci_low": 0.019193104373574382,
+        "clusters": 32,
+        "contrast": "b1v2c_over_b0",
+        "definition": "QLIKE(B0v2_on_B1v2c_sample)-QLIKE(B1v2c)",
+        "estimate": 0.02997018170363194,
+        "evaluation_scope": "HOLDOUT_ONLY",
+        "expanded_mean_qlike": 0.1837859798778542,
+        "model_role": "gamma_glm_confirmatory",
+        "observations": 12543,
+        "p_value_raw": 0.00019998000199980003,
+        "p_value_two_sided": 0.00019998000199980003,
+        "positive_direction": "EXPANDED_INFORMATION_SET_BETTER",
+        "repetitions": 10000,
+        "result_sign": "POSITIVE",
+        "robustness_sample": "B1v2c",
+        "seed": 650
+      }
+    },
+    "phase8_D_gamma_glm_delta_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "D",
+        "gamma_glm",
+        "windows",
+        "primary_20",
+        "delta_b1"
+      ],
+      "value": {
+        "ci_high": 0.008303514041665091,
+        "ci_low": -0.005457352764512755,
+        "estimate": 0.001412616326244986,
+        "newey_west_p_value": 0.6005853993899242,
+        "p_value_holm_descriptive": 1.0,
+        "p_value_raw": 0.7535,
+        "sessions": 20
+      }
+    },
+    "phase8_D_gamma_glm_delta_b2_given_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "D",
+        "gamma_glm",
+        "windows",
+        "primary_20",
+        "delta_b2_given_b1"
+      ],
+      "value": {
+        "ci_high": 0.0008711080498034149,
+        "ci_low": -0.002155208387156289,
+        "estimate": -0.0006383941357415034,
+        "newey_west_p_value": 0.21148910079574657,
+        "p_value_holm_descriptive": 1.0,
+        "p_value_raw": 0.3868,
+        "sessions": 20
+      }
+    },
+    "phase8_D_lightgbm_delta_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "D",
+        "lightgbm",
+        "windows",
+        "primary_20",
+        "delta_b1"
+      ],
+      "value": {
+        "ci_high": 0.0071765180653911255,
+        "ci_low": 0.001387039684894556,
+        "estimate": 0.004267050980081708,
+        "newey_west_p_value": 6.738492778928213e-05,
+        "p_value_holm_descriptive": 0.0164,
+        "p_value_raw": 0.0041,
+        "sessions": 20
+      }
+    },
+    "phase8_D_lightgbm_delta_b2_given_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "D",
+        "lightgbm",
+        "windows",
+        "primary_20",
+        "delta_b2_given_b1"
+      ],
+      "value": {
+        "ci_high": 0.010861933550883433,
+        "ci_low": -0.0011455677255165471,
+        "estimate": 0.004845552238838912,
+        "newey_west_p_value": 0.15840498661584568,
+        "p_value_holm_descriptive": 0.44099999999999995,
+        "p_value_raw": 0.2449,
+        "sessions": 20
+      }
+    },
+    "phase8_V_gamma_glm_delta_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "V",
+        "gamma_glm",
+        "windows",
+        "primary_20",
+        "delta_b1"
+      ],
+      "value": {
+        "ci_high": 0.007910246428146844,
+        "ci_low": 0.0007985192439258254,
+        "estimate": 0.004317154834277294,
+        "newey_west_p_value": 0.0007235565071435499,
+        "p_value_holm_descriptive": 0.035,
+        "p_value_raw": 0.0071,
+        "sessions": 20
+      }
+    },
+    "phase8_V_gamma_glm_delta_b2_given_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "V",
+        "gamma_glm",
+        "windows",
+        "primary_20",
+        "delta_b2_given_b1"
+      ],
+      "value": {
+        "ci_high": 0.0010267377221676857,
+        "ci_low": -0.0002792497010204542,
+        "estimate": 0.00037372737681317454,
+        "newey_west_p_value": 0.11272907957121034,
+        "p_value_holm_descriptive": 0.3186,
+        "p_value_raw": 0.3186,
+        "sessions": 20
+      }
+    },
+    "phase8_V_lightgbm_delta_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "V",
+        "lightgbm",
+        "windows",
+        "primary_20",
+        "delta_b1"
+      ],
+      "value": {
+        "ci_high": 0.00841026043006466,
+        "ci_low": 0.002150338421755043,
+        "estimate": 0.005252934044461348,
+        "newey_west_p_value": 2.3061936908648336e-06,
+        "p_value_holm_descriptive": 0.0055000000000000005,
+        "p_value_raw": 0.0011,
+        "sessions": 20
+      }
+    },
+    "phase8_V_lightgbm_delta_b2_given_b1": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "V",
+        "lightgbm",
+        "windows",
+        "primary_20",
+        "delta_b2_given_b1"
+      ],
+      "value": {
+        "ci_high": 0.0029966214497475015,
+        "ci_low": -0.0019258941149899221,
+        "estimate": 0.0005298360727649898,
+        "newey_west_p_value": 0.6420194889532997,
+        "p_value_holm_descriptive": 1.0,
+        "p_value_raw": 0.927,
+        "sessions": 20
+      }
+    },
+    "phase8_sensitivity_D_gamma_state": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "evaluation",
+        "D",
+        "gamma_glm",
+        "windows",
+        "sensitivity_30",
+        "delta_b1"
+      ],
+      "value": {
+        "ci_high": 0.0035548047787450254,
+        "ci_low": -0.00933129459457575,
+        "estimate": -0.002883419720342393,
+        "newey_west_p_value": 0.45806063944015585,
+        "p_value_holm_descriptive": 1.0,
+        "p_value_raw": 0.3939,
+        "sessions": 30
+      }
+    },
+    "phase8_comparison_0": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "forecast_comparison",
+        "mean_qlike_cells",
+        0
+      ],
+      "value": {
+        "historical_full_grid_mean_qlike": 0.1431498357131888,
+        "historical_full_grid_origins": 7917,
+        "historical_minus_remediated_mean_qlike": -0.0040578589340434235,
+        "historical_paired_mean_qlike": 0.14384074388529466,
+        "improved": false,
+        "information_set": "B0",
+        "model_family": "gamma_glm",
+        "paired_common_origins": 7800,
+        "remediated_paired_mean_qlike": 0.1478986028193381,
+        "training_role": "D",
+        "window": "primary_20"
+      }
+    },
+    "phase8_comparison_16": {
+      "artifact": "artifacts/phase8_bridge/materialized_remediation_20260831_v1.json",
+      "sha256": "bda8f8ca2b4a4a3158bc8842e599ca1295abd855a1c56b26741e1e3a3fc366df",
+      "selector": [
+        "forecast_comparison",
+        "mean_qlike_cells",
+        16
+      ],
+      "value": {
+        "historical_full_grid_mean_qlike": 0.132711032623312,
+        "historical_full_grid_origins": 11875,
+        "historical_minus_remediated_mean_qlike": -0.0033872837877163553,
+        "historical_paired_mean_qlike": 0.13345997744321364,
+        "improved": false,
+        "information_set": "B0",
+        "model_family": "gamma_glm",
+        "paired_common_origins": 11700,
+        "remediated_paired_mean_qlike": 0.13684726123093,
+        "training_role": "D",
+        "window": "sensitivity_30"
+      }
+    },
+    "phase8_window": {
+      "artifact": "docs/phase8_bridge_protocol_v2.md",
+      "sha256": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
+      "selector": [],
+      "quote": "| Primary | 20 | 2026-08-03..2026-08-28 | Strictly unobserved; descriptive/exploratory evidence |\n| Sensitivity | 30 | 2026-07-20..2026-08-28 | Includes the 10 C2-overlap sessions; robustness only |"
+    },
+    "phase8_estimand": {
+      "artifact": "docs/phase8_bridge_protocol_v2.md",
+      "sha256": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
+      "selector": [],
+      "quote": "The primary estimand is the current total-information contrast\n`Delta_Total = L(B0) - L(B0+B1+B2)`, where positive means that the complete option\ninformation set lowers QLIKE. The other four decision-65 quantities are always reported\nbeside it: `Delta_B1`, `Delta_B2|B1`, `Delta_B2|B0` and `Delta_Interaction`. No favorable\ncontrast may be selected after the read while unfavorable ones are omitted."
+    },
+    "phase8_scope": {
+      "artifact": "reports/phase8a_exploratory_bridge_addendum_v13.md",
+      "sha256": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
+      "selector": [],
+      "quote": "The scientific pattern nevertheless survives the repair. All four primary ΔB1 estimates\nremain positive and three of four have descriptive Holm p-values below 0.05. Every\nΔB2 conditional on B1 interval crosses zero and none has a descriptive Holm p-value below\n0.05. The evidence still locates the prospective contribution in the B1 option-state\nblock, not in an established incremental B2 flow effect."
+    },
+    "phase8_origin_wording": {
+      "artifact": "reports/phase8a_exploratory_bridge_addendum_v13.md",
+      "sha256": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
+      "selector": [],
+      "quote": "The table compares the historical and remediated forecasts only on the 11,700 common\norigin keys. `Historical − remediated > 0` means the remediation lowered QLIKE."
+    },
+    "saved_overlap": {
+      "artifact": "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_2/examiner_evidence.json",
+      "sha256": "5bd7d7a6e85899d0542a4797671b14c534099e8806506b4fff06dd3da46143a4",
+      "selector": [
+        "prior_bridge"
+      ],
+      "value": {
+        "window_start": "2026-07-20",
+        "window_end": "2026-08-28",
+        "window_source": "artifacts/rp4_v4_a1/specification.json",
+        "window_selector": [
+          "owner_attestations",
+          "bridge_prior_read"
+        ],
+        "owner_source_status": "OWNER_PROVIDED_NOT_AGENT_MEASURED",
+        "prior_read_independently_verified": false,
+        "final_window_session_source": "artifacts/rp4_v4_b3_rv15/session_losses.csv",
+        "final_window_sessions": [
+          "2026-08-03",
+          "2026-08-04",
+          "2026-08-05",
+          "2026-08-06",
+          "2026-08-07",
+          "2026-08-10",
+          "2026-08-11",
+          "2026-08-12",
+          "2026-08-13",
+          "2026-08-14",
+          "2026-08-17",
+          "2026-08-18",
+          "2026-08-19",
+          "2026-08-20",
+          "2026-08-21",
+          "2026-08-24",
+          "2026-08-25",
+          "2026-08-26",
+          "2026-08-27",
+          "2026-08-28",
+          "2026-08-31",
+          "2026-09-01",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04"
+        ],
+        "overlap_sessions": [
+          "2026-08-03",
+          "2026-08-04",
+          "2026-08-05",
+          "2026-08-06",
+          "2026-08-07",
+          "2026-08-10",
+          "2026-08-11",
+          "2026-08-12",
+          "2026-08-13",
+          "2026-08-14",
+          "2026-08-17",
+          "2026-08-18",
+          "2026-08-19",
+          "2026-08-20",
+          "2026-08-21",
+          "2026-08-24",
+          "2026-08-25",
+          "2026-08-26",
+          "2026-08-27",
+          "2026-08-28"
+        ],
+        "nonoverlap_sessions": [
+          "2026-08-31",
+          "2026-09-01",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04"
+        ],
+        "overlap_count": 20,
+        "final_count": 25,
+        "overlap_percent": 80.0,
+        "calculation": "Count only saved final-window session_date values satisfying 2026-07-20 <= date <= 2026-08-28; 20/25*100=80.",
+        "public_readme_passages": [
+          {
+            "start_line": 96,
+            "end_line": 97,
+            "text": "- El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones\n  descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md)."
+          },
+          {
+            "start_line": 118,
+            "end_line": 121,
+            "text": "El puente Fase 8 conserva `MIXED_EXPLORATORY`: su auditoría concluyó\n«no aggregation change» y «not confirmatory»; la sensibilidad materializada\nmejoró sólo «one of eight B1-inclusive primary cells». Son diagnósticos\nhistóricos, no la conclusión del programa cerrado en v4."
+          }
+        ],
+        "reported_opened_date": "2026-08-30",
+        "reported_result": "MIXED_EXPLORATORY; no aggregation change; not confirmatory; sensitivity improved only one of eight B1-inclusive primary cells.",
+        "public_wording_es": "La ventana puente declarada se solapa con 20 de las 25 sesiones finales, el 80 %. El README histórico describe su resultado como mixto y exploratorio, no confirmatorio, sin cambio de agregación; una sensibilidad sólo mejoró una de ocho celdas primarias que incluyen B1. Es una declaración histórica pública, no una nueva auditoría de ese puente.",
+        "protected_bridge_artifacts_opened": false,
+        "previous_threads_read": false,
+        "linked_addendum_not_opened": true,
+        "no_fresh_validation_of_prior_result": true
+      }
+    },
+    "block12_generated_at_utc": {
+      "artifact": "artifacts/rp2_block12_prospective/design.json",
+      "sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+      "selector": [
+        "generated_at_utc"
+      ],
+      "value": "2026-08-18T18:18:30.733580+00:00"
+    },
+    "block12_measured_dispersion": {
+      "artifact": "artifacts/rp2_block12_prospective/design.json",
+      "sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+      "selector": [
+        "measured_dispersion"
+      ],
+      "value": {
+        "D": {
+          "gamma_glm": {
+            "delta_b1_observed_mean": 0.0011778744032316347,
+            "delta_b1_session_sigma": 0.01828763627185435,
+            "delta_b2_given_b1_observed_mean": -0.0011489537999198702,
+            "delta_b2_given_b1_session_sigma": 0.012506377330658945,
+            "evaluation_sessions": 92.0
+          },
+          "lightgbm": {
+            "delta_b1_observed_mean": -0.001777660636247259,
+            "delta_b1_session_sigma": 0.01916476050457372,
+            "delta_b2_given_b1_observed_mean": 0.003215849912324614,
+            "delta_b2_given_b1_session_sigma": 0.020430876539202555,
+            "evaluation_sessions": 92.0
+          }
+        },
+        "V": {
+          "gamma_glm": {
+            "delta_b1_observed_mean": -0.002250793443855295,
+            "delta_b1_session_sigma": 0.010029225069301703,
+            "delta_b2_given_b1_observed_mean": 0.0002667974059690491,
+            "delta_b2_given_b1_session_sigma": 0.008881577091771132,
+            "evaluation_sessions": 32.0
+          },
+          "lightgbm": {
+            "delta_b1_observed_mean": -0.0017865516744646974,
+            "delta_b1_session_sigma": 0.024573510542988904,
+            "delta_b2_given_b1_observed_mean": -0.0049454821398289845,
+            "delta_b2_given_b1_session_sigma": 0.029346720065225446,
+            "evaluation_sessions": 32.0
+          }
+        }
+      }
+    },
+    "block12_minimum_detectable_effects": {
+      "artifact": "artifacts/rp2_block12_prospective/design.json",
+      "sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+      "selector": [
+        "minimum_detectable_effects"
+      ],
+      "value": {
+        "D": {
+          "gamma_glm": {
+            "delta_b1_mde_n120": 0.006091156429677059,
+            "delta_b1_mde_n180": 0.004973408398727254,
+            "delta_b1_mde_n60": 0.008614196033385377,
+            "delta_b1_mde_n90": 0.00703346160870034,
+            "delta_b1_sessions_for_observed_effect": 3209.0965510544656,
+            "delta_b2_given_b1_mde_n120": 0.004165562982398832,
+            "delta_b2_given_b1_mde_n180": 0.0034011679327677472,
+            "delta_b2_given_b1_mde_n60": 0.005890995664627746,
+            "delta_b2_given_b1_mde_n90": 0.004809977818428611,
+            "delta_b2_given_b1_sessions_for_observed_effect": null
+          },
+          "lightgbm": {
+            "delta_b1_mde_n120": 0.006383304678380848,
+            "delta_b1_mde_n180": 0.0052119464449179205,
+            "delta_b1_mde_n60": 0.009027356048925824,
+            "delta_b1_mde_n90": 0.007370805348765161,
+            "delta_b1_sessions_for_observed_effect": null,
+            "delta_b2_given_b1_mde_n120": 0.006805016413588312,
+            "delta_b2_given_b1_mde_n180": 0.0055562726348519125,
+            "delta_b2_given_b1_mde_n60": 0.009623746504268109,
+            "delta_b2_given_b1_mde_n90": 0.007857756116450067,
+            "delta_b2_given_b1_sessions_for_observed_effect": 537.3386219094264
+          }
+        },
+        "V": {
+          "gamma_glm": {
+            "delta_b1_mde_n120": 0.0033404852249590915,
+            "delta_b1_mde_n180": 0.0027274947648186837,
+            "delta_b1_mde_n60": 0.004724159510044086,
+            "delta_b1_mde_n90": 0.003857260087708198,
+            "delta_b1_sessions_for_observed_effect": null,
+            "delta_b2_given_b1_mde_n120": 0.002958232250685977,
+            "delta_b2_given_b1_mde_n180": 0.002415386518275232,
+            "delta_b2_given_b1_mde_n60": 0.0041835721695695945,
+            "delta_b2_given_b1_mde_n90": 0.003415872372517963,
+            "delta_b2_given_b1_sessions_for_observed_effect": 14753.075860187764
+          },
+          "lightgbm": {
+            "delta_b1_mde_n120": 0.008184824682566061,
+            "delta_b1_mde_n180": 0.006682881368808049,
+            "delta_b1_mde_n60": 0.011575090071730985,
+            "delta_b1_mde_n90": 0.009451021467498818,
+            "delta_b1_sessions_for_observed_effect": null,
+            "delta_b2_given_b1_mde_n120": 0.009774661960569773,
+            "delta_b2_given_b1_mde_n180": 0.007980978070529523,
+            "delta_b2_given_b1_mde_n60": 0.01382345951225016,
+            "delta_b2_given_b1_mde_n90": 0.011286807428345107,
+            "delta_b2_given_b1_sessions_for_observed_effect": null
+          }
+        }
+      }
+    },
+    "block12_alpha_one_sided": {
+      "artifact": "artifacts/rp2_block12_prospective/design.json",
+      "sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+      "selector": [
+        "alpha_one_sided"
+      ],
+      "value": 0.0025
+    },
+    "block12_power": {
+      "artifact": "artifacts/rp2_block12_prospective/design.json",
+      "sha256": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+      "selector": [
+        "power"
+      ],
+      "value": 0.8
+    },
+    "block12_design_date": {
+      "artifact": "docs/rp2/block12_prospective_protocol_v1.md",
+      "sha256": "38ecf9d361fed798a7abe29a854d26a1b65fdf388c6c5f303c09ba1db389adc5",
+      "selector": [],
+      "quote": "**Status:** `DESIGNED — 2026-08-19` · label `PROSPECTIVE_DESIGN`"
+    },
+    "block12_warning": {
+      "artifact": "docs/rp2/block12_prospective_protocol_v1.md",
+      "sha256": "38ecf9d361fed798a7abe29a854d26a1b65fdf388c6c5f303c09ba1db389adc5",
+      "selector": [],
+      "quote": "> **Design conclusion.** A 60–120 session prospective test of Δ_B2|B1 is not a test. It is\n> underpowered by a factor of roughly 4.5 to 9 against the effect sizes this program actually\n> measured, and it would return a null whether or not the effect is real. Running it and\n> reporting \"no evidence\" would be a foregone conclusion dressed as a finding."
+    },
+    "current_marginal_power": {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json",
+      "sha256": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2",
+      "selector": [
+        "normal_approximation",
+        "rows"
+      ],
+      "value": [
+        {
+          "hypothesis": "H1",
+          "n": 20,
+          "se_n": 0.003737130698602657,
+          "normal_noncentrality": 0.4325007159975637,
+          "power": 0.11268865900599329,
+          "power_percent": 11.268865900599328,
+          "power_percent_rounded_integer": 11,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H1",
+          "n": 40,
+          "se_n": 0.0026425504591623583,
+          "normal_noncentrality": 0.6116483782998288,
+          "power": 0.15075392858286019,
+          "power_percent": 15.075392858286019,
+          "power_percent_rounded_integer": 15,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H1",
+          "n": 45,
+          "se_n": 0.002491420465735105,
+          "normal_noncentrality": 0.6487510739963455,
+          "power": 0.15960015979098474,
+          "power_percent": 15.960015979098474,
+          "power_percent_rounded_integer": 16,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H1",
+          "n": 120,
+          "se_n": 0.0015256772189445567,
+          "normal_noncentrality": 1.0594060675824126,
+          "power": 0.2791234089207011,
+          "power_percent": 27.91234089207011,
+          "power_percent_rounded_integer": 28,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H1",
+          "n": 146,
+          "se_n": 0.0013831741269773321,
+          "normal_noncentrality": 1.1685525859670833,
+          "power": 0.3169299619366851,
+          "power_percent": 31.69299619366851,
+          "power_percent_rounded_integer": 32,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H1",
+          "n": 335,
+          "se_n": 0.0009131263618703546,
+          "normal_noncentrality": 1.7700854672637387,
+          "power": 0.5498299946324863,
+          "power_percent": 54.982999463248625,
+          "power_percent_rounded_integer": 55,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 20,
+          "se_n": 0.0018648878970271181,
+          "normal_noncentrality": 0.6079505695220184,
+          "power": 0.14989051945197684,
+          "power_percent": 14.989051945197684,
+          "power_percent_rounded_integer": 15,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 40,
+          "se_n": 0.0013186748781405951,
+          "normal_noncentrality": 0.8597719406704858,
+          "power": 0.2162028382574162,
+          "power_percent": 21.62028382574162,
+          "power_percent_rounded_integer": 22,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 45,
+          "se_n": 0.001243258598018079,
+          "normal_noncentrality": 0.9119258542830275,
+          "power": 0.23180124154302711,
+          "power_percent": 23.18012415430271,
+          "power_percent_rounded_integer": 23,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 120,
+          "se_n": 0.0007613372958680696,
+          "normal_noncentrality": 1.4891686841633758,
+          "power": 0.4381406831782344,
+          "power_percent": 43.81406831782344,
+          "power_percent_rounded_integer": 44,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 146,
+          "se_n": 0.0006902259773375224,
+          "normal_noncentrality": 1.6425919862734235,
+          "power": 0.499097736679633,
+          "power_percent": 49.9097736679633,
+          "power_percent_rounded_integer": 50,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        },
+        {
+          "hypothesis": "H2",
+          "n": 335,
+          "se_n": 0.00045566463633320314,
+          "normal_noncentrality": 2.4881449396992443,
+          "power": 0.8004672299156971,
+          "power_percent": 80.04672299156971,
+          "power_percent_rounded_integer": 80,
+          "role": "Analytic approximation under a constant historical effect and long-run variance; not a new evaluation."
+        }
+      ]
+    },
+    "current_joint_power_limit": {
+      "artifact": "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json",
+      "sha256": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2",
+      "selector": [
+        "sequence_power"
+      ],
+      "value": {
+        "actual_joint_power_estimated": false,
+        "dependence_assumed_independent": false,
+        "logical_bounds_formula": "max(0,power_H1+power_H2-1) <= power(H1 AND H2) <= min(power_H1,power_H2), conditional on the marginal approximations.",
+        "bounds": [
+          {
+            "n": 20,
+            "lower_under_approximated_marginals": 0,
+            "upper_under_approximated_marginals": 0.11268865900599329,
+            "lower_percent": 0,
+            "upper_percent": 11.268865900599328,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          },
+          {
+            "n": 40,
+            "lower_under_approximated_marginals": 0,
+            "upper_under_approximated_marginals": 0.15075392858286019,
+            "lower_percent": 0,
+            "upper_percent": 15.075392858286019,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          },
+          {
+            "n": 45,
+            "lower_under_approximated_marginals": 0,
+            "upper_under_approximated_marginals": 0.15960015979098474,
+            "lower_percent": 0,
+            "upper_percent": 15.960015979098474,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          },
+          {
+            "n": 120,
+            "lower_under_approximated_marginals": 0,
+            "upper_under_approximated_marginals": 0.2791234089207011,
+            "lower_percent": 0,
+            "upper_percent": 27.91234089207011,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          },
+          {
+            "n": 146,
+            "lower_under_approximated_marginals": 0,
+            "upper_under_approximated_marginals": 0.3169299619366851,
+            "lower_percent": 0,
+            "upper_percent": 31.69299619366851,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          },
+          {
+            "n": 335,
+            "lower_under_approximated_marginals": 0.35029722454818346,
+            "upper_under_approximated_marginals": 0.5498299946324863,
+            "lower_percent": 35.02972245481835,
+            "upper_percent": 54.982999463248625,
+            "not_a_confidence_interval": true,
+            "not_an_estimate_of_actual_joint_power": true
+          }
+        ],
+        "at_335_conclusion": "Approximately 80.0467 percent is the marginal H2 approximation. H1 is approximately 54.9830 percent; consequently the registered H1-to-H2 sequence does not have demonstrated 80 percent power at 335.",
+        "n80_H1_is_not_joint_n80": true
+      }
+    },
+    "rp3_seal": {
+      "artifact": "docs/methodology_decisions.md",
+      "sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+      "selector": [],
+      "quote": "93. **A confirmation program is sealed before its window exists, and its preferred\n    candidate is killed by measurement before sealing (2026-08-24)** — RP3,\n    `docs/rp3/PREREGISTRATION.md`, SHA-256\n    `66906a88b0d8ff76d9bbc6556e0aa64e32de494254d2ebdccc49140fce7f77e7`. A closed list of\n    two hypotheses on sessions ≥ 2026-07-18: primary, the prospective replication of the\n    one development cell that cleared decision 64's budget (ΔB2\\|B1 via a single frozen\n    linear index, RV30, `lightgbm_qlike`, +0.00101 in D), one read at 662 evaluable\n    sessions (estimated 2029-01-30), alpha 0.05 under fixed-sequence gatekeeping;\n    secondary, direction at 120 minutes, tested only if the primary rejects. The index is\n    frozen in `artifacts/rp3/b2_index_theta.json` (self-hash `d3140451…9365d6`; 15 design\n    columns — 12 registered B2 features plus the 3 train-absence indicators the fold\n    preprocessor emits, because that is the design the index was fitted on). Sizing is\n    winner's-curse-halved and lives in `artifacts/rp3/sizing.json`."
+    },
+    "rp3_size": {
+      "artifact": "docs/rp3/EXECUTION_GUIDE.md",
+      "sha256": "1d107f20ff620a94739bcf9bab5902b8b5a347e674c774ced28c9adfeef13c49",
+      "selector": [],
+      "quote": "| Sizing (N = 662, read ≈ 2029-01-30) | `artifacts/rp3/sizing.json` | self-hash + coherence tests (`tests/unit/test_rp3_sizing.py`) |"
+    },
+    "rp3_counter_documented": {
+      "artifact": "docs/rp3/EXECUTION_GUIDE.md",
+      "sha256": "1d107f20ff620a94739bcf9bab5902b8b5a347e674c774ced28c9adfeef13c49",
+      "selector": [],
+      "quote": "| Look counter | `artifacts/rp3/look_counter.json` | pinned to 0 until the read |"
+    },
+    "rp3_overlap_eligibility": {
+      "artifact": "docs/rp3/EXECUTION_GUIDE.md",
+      "sha256": "1d107f20ff620a94739bcf9bab5902b8b5a347e674c774ced28c9adfeef13c49",
+      "selector": [],
+      "quote": "   sessions 2026-07-20..2026-08-28 are the Phase 8 prospective cohort\n   (`docs/phase8_bridge_protocol_v2.md`, separate one-shot authorization required), and\n   `sealed_cohorts_read = 0` admits no acquisition-time exception. The acquirer refuses\n   them until the calendar passes the read date **and** receives the self-hashed result\n   written by the evaluator after the authorized read. A boolean operator attestation is\n   insufficient. The first legal batch is therefore 2026-08-30 or later, and one run can\n   process the whole backlog after that result exists:"
+    },
+    "phase9_scope": {
+      "artifact": "docs/methodology_decisions.md",
+      "sha256": "0d49c411d273e5bbc8bd7b89a88f32d6bab6a855c4453988009faad282ce2daf",
+      "selector": [],
+      "quote": "     - Fase 9 se retira como cohorte sellada para RP4 y sus sesiones quedan autorizadas\n       como entradas de esa evaluación. Se conservan intactos sus protocolos, artefactos,\n       contadores y raíz; este registro no los reescribe ni ejecuta accesos. **C10 no se\n       activa.** RP4 no exige campaña prospectiva, cohorte sellada ni espera de sesiones.\n"
+    },
+    "readme_history": {
+      "artifact": "README.md",
+      "sha256": "f5f4ca20883d44cbece6e3293aa17868881812a0b6d976c7f51c42f53422ac6e",
+      "selector": [],
+      "quote": "## Historial: resultados y correcciones conservados\n\n- El programa de 2024 y RP2 distinguió superficie y flujo con resultados\n  dependientes de modelo y muestra; su señal se estudió como absorbida por\n  información de estado, no se presenta como réplica de RP4.\n  [Registro de resultados anteriores](docs/rp2_v3/SUPERSEDED_RESULTS.md).\n- El sucesor PIT v2.2 tiene una lectura de evaluación fechada 2026-09-02,\n  cifras favorables y adversas y disposición histórica\n  `GLOBAL_EDGE_NOT_CONFIRMED`.\n  [Resultado y límites originales](docs/pit_v22_claims_and_limitations_v2.md).\n- El puente Fase 8 se abrió el 2026-08-30, con resultado mixto y correcciones\n  descriptivas preservadas. [Addendum](reports/phase8a_exploratory_bridge_addendum_v13.md).\n- RP3 conserva su protocolo, contador de lectura cero y fecha **prevista**\n  2029-01-30; esa fecha no es una lectura realizada. [Prerregistro](docs/rp3/PREREGISTRATION.md).\n  C10 permanece inactivo por decisión 128: no se inventa fecha de lectura.\n  Fase 9 dejó de ser cohorte sellada para RP4; sus originales no se modifican.\n- v1 conserva su fallo numérico; v2 conserva sus resultados; la regla de ventana\n  vacía de v3 acotó los apagones del proveedor sin eliminar todo el daño.\n  [Auditoría de instrumento y modelos](artifacts/rp4_closeout_audit/REPORT.md).\n  El cambio de vencimientos del 26 de enero de 2026 y los extremos AMZN/TSLA\n  se documentan con límites de verificación.\n  [Censo y barras](artifacts/rp4_market_audit/REPORT.md).\n"
+    },
+    "readme_dispositions": {
+      "artifact": "README.md",
+      "sha256": "f5f4ca20883d44cbece6e3293aa17868881812a0b6d976c7f51c42f53422ac6e",
+      "selector": [],
+      "quote": "El registro histórico `rp2-v3-20260831-b1-spot-cutoff-remediation` conserva el\nhash científico `033f2eb6be35e5db06aec2f9e01ef5f3379a8be68b0372087f24e40fa681bea4`.\nSu disposición es `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM`, por\n`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`; no se presenta como una réplica de RP4.\nEl puente Fase 8 conserva `MIXED_EXPLORATORY`: su auditoría concluyó\n«no aggregation change» y «not confirmatory»; la sensibilidad materializada\nmejoró sólo «one of eight B1-inclusive primary cells». Son diagnósticos\nhistóricos, no la conclusión del programa cerrado en v4."
+    },
+    "rp2_historical_disposition": {
+      "artifact": "docs/rp2_v3/VERDICT.md",
+      "sha256": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
+      "selector": [],
+      "quote": "> **HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM.** The partition-role and market-clock\n> defects are repaired and the complete rebuild finished. Decision 124 now makes the\n> separately frozen PIT v2.2 successor-v2 result current; no number below is promoted into\n> that result or a current headline."
+    }
+  },
+  "scope_limits": [
+    "Common loss QLIKE, different estimands, horizons, information sets, fitting procedures and masks; no pooled inference.",
+    "Four programs are not four independent or uniformly positive replications; the PIT Gamma run cannot be counted twice.",
+    "Saved overlap is reused. Public Phase8 protocol confirms its primary dates; no new session count or cohort payload read.",
+    "RP3 zero counter and intended window are documentary metadata; actual bank inclusion and live counter were not verified.",
+    "The old power calculation is historical and uses a different alpha, family and horizon. It is not joint-power validation for RP4.",
+    "RP2 and PIT date endpoints are not inferred from role counts; no panel was opened to recover dates.",
+    "Prior evidence fields describing what was not inspected apply to that prior revision; this revision reads the explicitly authorized public documents and aggregates."
+  ],
+  "corrections_to_request": [
+    "Gamma +0.008171 belongs to the PIT successor, not an additional independent result.",
+    "RP2 validation state signs are mixed; the requested uniformly positive four-design claim is not supported.",
+    "QLIKE is shared; a claim of convergence across different losses is unsupported here.",
+    "B1b/B1c are same-run robustness variants with different masks and baseline losses.",
+    "537 rounds the stored continuous requirement 537.3386219094264; other contrasts also have finite requirements.",
+    "Phase8 primary paired comparisons contain 7800 origins; 11700 belongs to the full/sensitivity grid. Frozen addendum retained.",
+    "Decision 128 releases Phase9 for RP4; it does not cancel RP3. Bank independence is not asserted."
+  ],
+  "review_receipt_sha256": {
+    "rp2_pit_review.json": "b0ceb6f5d370e6dbfb21677daf1143758c3a0e2fea980a29ed336ba3dcf1c28a",
+    "phase8_rp3_review.json": "48795ae902fc9c8d623db0cfc0ae03e1d73f9c1c58e9cb98456dfa168b3bbca8",
+    "block12_power_review.json": "3e960d675e7aa0506925dc2b6bf6a68d643b0f14a726c46295b59efdb3e4a03c"
+  }
+}

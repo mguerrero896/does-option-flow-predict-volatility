@@ -1,0 +1,261 @@
+> Copia pública saneada; no es un nuevo congelamiento ni una nueva ejecución.
+> SHA-256 del original conservado: `72b01276f465423164d94ad6ec71854c023f2f832a7657acd611952a246fcd09`.
+> Los hashes y comandos históricos describen el original; [correspondencia de bytes](../../../../../artifacts/rp4_publication_v1/manifest.json).
+
+# RP4 — archivos y columnas antes de A1
+
+2026-09-07, Australia/Sydney. **Inventario verificado; A1 no ejecutado.**
+Punto de parada solicitado por Miguel: archivos registrados, hashes y columnas.
+No hay resultados RP4, entrenamiento, descargas, lectura de valores del objetivo,
+gasto de alfa ni cambios del colector en este trabajo.
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+
+## Decisión del propietario
+
+La [decisión 128](../../../../methodology_decisions.md)
+registra la autorización explícita de Miguel en la conversación, sin atribuirle
+una firma criptográfica o manuscrita inexistente. Conserva la partición 2026-08-01,
+desarrollo 2024-08-02–2026-07-31 y evaluación posterior desde 2026-08-03; el retiro
+del carácter sellado de Fase 9 para RP4; C10 inactivo; las familias, entregables y
+divulgación solicitados. La última orden de detenerse en este inventario prevalece
+sobre la ejecución de A1 y las etapas siguientes en este turno.
+
+Etiqueta solicitada para los resultados futuros: **fuera de muestra walk-forward,
+partición fijada 2026-09-07**. Este documento no es un resultado de esa evaluación.
+
+## Archivos registrados que servirán de entrada
+
+Raíz exacta: `private-input/cae7797a616552255aa6`.
+Se utilizarán estos archivos como fuentes, sin sobrescribirlos; no se ha aprobado
+todavía su reutilización directa como matrices RP4 con corte a 120 segundos.
+
+| Entrada | Archivo, relativo a la raíz | Filas del footer | Columnas | SHA-256 de los bytes |
+| --- | --- | ---: | ---: | --- |
+| B0 | `rp2_block4_b0/b0_panel.parquet` | 181829 | 30 | `52d58fc297ee04aeec041d58657c7dd414c726f9a2b7b9a5c92bbd7e881e5e20` |
+| Superficie B1 | `rp2_block5_surface/b1_surface_panel.parquet` | 181829 | 114 | `7e022d2845a4300be5f7d286337ec6ee4c0e5614fa00cacbc386924be3b37f33` |
+| Flujo B2 | `rp2_block6_flow/b2_flow_panel.parquet` | 181829 | 141 | `61c9843d79c6b63472e547b50334859c268183bdf1dee8864de6130491f465c6` |
+| Objetivos, para la etapa autorizada correspondiente | `rp2_block3_target/target_panel.parquet` | 111348 | 52 | `fdab55c524a6ee2cd94bb3f1f544dec527e1c8813f9a03d6e17ed8029f842831` |
+
+Los cuatro hashes se calcularon leyendo los bytes y se compararon con
+`run_identity.json`; coinciden. Solo se decodificaron esquemas y metadatos Parquet,
+no páginas de datos. En los cuatro archivos, las estadísticas del footer abarcan
+**2024-08-02–2026-07-17**, no hasta el 31 de julio.
+
+El manifiesto declara 389 sesiones D y 80 V: 469 por suma de esos metadatos,
+no un conteo nuevo de sesiones únicas, completas y elegibles. No acredita por sí
+solo más de 450 sesiones de predicciones fuera de muestra.
+
+El archivo de objetivos tiene **70481 filas menos** que cada panel de entradas
+(181829 − 111348). Esto no demuestra por sí solo un defecto: requiere reconciliar
+claves y reglas de origen antes de evaluar. No se unirán archivos por posición.
+La clave común nominal es `(asset, session_date, origin_minute)`; unicidad,
+correspondencia temporal y cobertura real quedan **NO VERIFICABLES** con una
+inspección exclusivamente de footers.
+
+## Columnas exactas: qué existe y qué significa el conteo
+
+La jerarquía solicitada es acumulativa: **B0; B0 + superficie; B0 + superficie + flujo**.
+Las siguientes listas documentan las entradas disponibles para A1, no una selección
+hecha mirando resultados ni una lista RP4 ya congelada. Los esquemas completos,
+tipos, registro CORE/RICH y exclusiones están en
+[COLUMNS.md](COLUMNS.md).
+
+### B0: 22 columnas registradas, un campo temporal adicional y HARQ
+
+Las 22 columnas del registro existente son:
+
+```text
+QQQ_ret_30, QQQ_rv_30, SPY_ret_30, SPY_rv_30,
+day_of_week, dollar_volume_30, jump_back_30,
+minutes_since_open, minutes_to_close, parkinson_30,
+ret_30, ret_5, rq_back_30, rs_down_back_30, rs_up_back_30,
+rv_back_15, rv_back_30, rv_back_5, rv_prev_day,
+rv_session_to_date, rv_week, volume_30
+```
+
+El campo adicional del archivo es `minute_bucket`, usado actualmente por el
+productor como bucket temporal, no incluido en el registro de predictores.
+Conservarlo en el inventario no equivale a introducirlo silenciosamente al modelo.
+
+El productor existente `mds650.har` entrega estas siete columnas HARQ:
+
+```text
+log_rv_30m, log_rv_session, log_rv_day, log_rv_week,
+minute_fraction, minute_fraction_sq, rq_attenuation
+```
+
+No están materializadas en este panel: deberán construirse y alinearse al corte
+de información en A2. Su disponibilidad y cobertura RP4 no se han medido aquí.
+
+No entran como predictores `asset`, `session_date`, `origin_minute` (claves),
+`role`, `source` (metadatos), ni **`rv30`, `jump30` (objetivos futuros)**.
+Descomposición del archivo: 30 = 22 registradas + 1 bucket + 3 claves + 2 metadatos
++ 2 objetivos. Las 30 columnas físicas no son 30 predictores.
+
+### B1: 28 registradas; reconstrucción explícita del número 34
+
+CORE + RICH del registro contiene estas **28**, no 34:
+
+```text
+b1_iv_30d, b1_iv_60d, b1_iv_7d, b1_iv_minus_trailing_rv_30d,
+b1_median_quote_age_s, b1_median_relative_spread,
+b1_risk_reversal_25, b1_smile_level, b1_surface_coverage, b1_term_slope,
+b1_butterfly_25, b1_butterfly_violations, b1_expiries,
+b1_forward_expiries_fitted, b1_implied_dividend_yield, b1_implied_rate,
+b1_iv_14d, b1_iv_90d, b1_max_log_moneyness, b1_mfiv,
+b1_min_log_moneyness, b1_pcp_residual, b1_smile_curvature,
+b1_smile_residual, b1_smile_slope, b1_strikes,
+b1_term_convexity, b1_zero_dte_contracts
+```
+
+Para reconstruir 34 desde el esquema se suman estas seis:
+
+```text
+b1_contracts, b1_p95_quote_age_s, b1_spans_call_wing,
+b1_spans_put_wing, b1_calendar_violations,
+b1_rows_dropped_for_rate_or_dividend
+```
+
+Esta reconstrucción **es una inferencia de conteo, no una lista oficial encontrada**.
+Incluye calidad de superficie; el productor actual asigna literalmente `0.0` a
+`b1_rows_dropped_for_rate_or_dividend`. No prueba 34 señales económicas variables.
+No se ha consultado la distribución del valor de esa columna en el panel.
+
+Fuera de esa reconstrucción quedan las tres claves, los 74 histogramas
+`b1_quote_age_bin_0` a `b1_quote_age_bin_73`, y:
+
+```text
+b1_quote_duplicates_dropped, b1_post_cutoff_selected,
+b1_duplicate_contracts_remaining
+```
+
+Descomposición: 114 = 3 claves + 74 histogramas + 28 registradas + 9 adicionales.
+La decisión de qué diagnósticos entran en X se debe hacer explícita en A1;
+no he reemplazado el pedido de 34 por 28 sin advertirlo.
+
+La nueva rejilla pedida de **5 vencimientos × 5 moneyness = 25 celdas** no está
+materializada en este archivo. Es nueva construcción, no una columna registrada
+que pueda señalar aquí con hash. Nombres finales, agregación y archivo propio
+corresponden a A1/A2; no he iniciado esos entregables.
+
+### B2: 68 registradas; reconstrucción exacta del número 74
+
+La lista nominal de 74 se puede describir sin abreviaturas ambiguas así:
+cada uno de los siguientes **34 sufijos** aparece con **ambos prefijos**,
+`b2_5m_` y `b2_30m_`:
+
+```text
+trades, contracts, size, premium,
+vega_flow, gamma_flow, delta_flow, vega_flow_abs,
+vega_flow_call, vega_flow_put, vega_flow_short_dte, vega_flow_long_dte,
+otm_premium_share, buy_premium_share, sell_premium_share,
+passive_premium_share, sweep_premium_share,
+multileg_size_share, multileg_premium_share,
+d_iv, d_mid_rel, d_spread,
+decay_intensity_last, decay_intensity_innovation,
+rate_per_second, observed_span_s, is_empty_window,
+mean_age_s, mean_provider_latency_s, late_arrival_share,
+p95_provider_latency_s,
+zero_dte_premium_share, zero_dte_signed_premium, zero_dte_trade_share
+```
+
+Se añaden estas seis columnas con nombre completo:
+
+```text
+b2_5m_strike_hhi, b2_5m_expiry_hhi,
+b2_5m_contract_entropy, b2_5m_interarrival_cv,
+b2_zero_dte_trades, b2_counting_trades
+```
+
+Total: 34 × 2 + 6 = **74**. La lista expandida, una columna por línea, está en
+[COLUMNS.md:466](COLUMNS.md).
+Es también una **reconstrucción de conteo**, distinta de las 68 CORE/RICH del registro:
+incluye antigüedad, latencia y otros diagnósticos, no exclusivamente flujo económico.
+
+Fuera de esas 74 quedan las tres claves, los 61 histogramas `b2_latency_bin_0`
+a `b2_latency_bin_60`, y:
+
+```text
+b2_pit_violations, b2_counting_mean_latency_s, b2_counting_p95_latency_s
+```
+
+Descomposición del archivo: 141 = 3 claves + 61 histogramas + 68 registradas
++ 9 adicionales. Las listas completas del registro y adicionales están separadas
+en el inventario; no se eliminaron variables ni se cambiaron productores.
+
+Las medidas nuevas de OI × gamma × S² por strike, exposición neta y distancia al
+strike de máxima gamma **no están materializadas en este panel**. El flujo gamma
+actual pondera operaciones por tamaño, dirección y multiplicador; no por OI.
+El OI por sí solo no identifica el inventario neto efectivo de los dealers:
+ese nombre requiere una convención explícita de proxy, todavía no definida en A1.
+
+## Correcciones al documento de entrada sustentadas en código
+
+El inventario del propietario se leyó completo. SHA-256 del archivo original:
+`25fb0389f27b1d88d21dfc4937794e6bf036c14e51ceca4d80f1979420b0dc85`.
+
+- Las griegas existentes se calculan con Black-Scholes e IV suministrada al
+  productor; el código actual fija **r = q = 0**, no extrae tasa/dividendo de B1.
+  Fuente: [flow.py:56](../../../../../src/mds650/rp2/flow.py)
+  y [productor:434](../../../../../scripts/rp2_block6_flow_panel.py).
+- `gamma_flow` usa `gamma × size × 100 × direction × spot²`.
+  No equivale al posicionamiento gamma por OI solicitado.
+  Fuente: [productor:447](../../../../../scripts/rp2_block6_flow_panel.py).
+- La intensidad existente es actividad con decaimiento y parámetros suministrados,
+  no un proceso Hawkes estimado; así lo dice el productor.
+  Fuente: [flow.py:96](../../../../../src/mds650/rp2/flow.py).
+- Los diagnósticos se distinguen explícitamente en el contrato actual;
+  este inventario no convierte su presencia en autorización automática para
+  entrenar con ellos. Fuente:
+  [contrato:50](../../../../../tests/contract/test_feature_registry_reaches_the_panel.py).
+
+**NO VERIFICABLE en este alcance:** cobertura por activo/celda, disponibilidad
+histórica efectiva del OI, continuidad completa del tape, alineación de objetivos,
+la afirmación de más de 450 sesiones OOS elegibles y las dos frases de divulgación
+como hechos comprobados. No se inspeccionaron valores, resultados previos para
+decidir variables, ni todos los archivos crudos de D: para establecerlo.
+
+## Verificación ejecutada
+
+Directorio de trabajo: `REPOSITORY_ROOT`.
+Python 3.12 existente, sin sincronización ni acceso a proveedores.
+
+| Comando | Código de salida | Resultado |
+| --- | ---: | --- |
+| `uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_inventory_v1/inspect_panels.py` | 0 | All checks passed |
+| `uv run --offline --frozen --no-sync python -B artifacts/rp4_inventory_v1/inspect_panels.py --write` | 0 | Cuatro paneles y manifiesto verificados; creación exclusiva |
+| `uv run --offline --frozen --no-sync python -B artifacts/rp4_inventory_v1/inspect_panels.py` | 0 | Segunda verificación idéntica, sin sobrescribir |
+| `uv run --offline --frozen --no-sync python -B scripts/generate_canonical_state.py` | 0 | Proyección regenerada tras añadir la decisión |
+| `uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q -p no:cacheprovider tests/contract/test_documentation_references.py tests/contract/test_canonical_state_current.py` | 0 | 20 pruebas aprobadas |
+
+La primera revisión de estilo detectó líneas largas; se corrigieron antes de esta
+verificación final. La instantánea anterior a esas correcciones se conservó en
+`precheck/` y no es la entrega vigente. `inspect_panels.py` no verifica por sí solo
+el código fuente antiguo conservado allí. No se declaró una suite global aprobada.
+
+| Artefacto vigente | SHA-256 |
+| --- | --- |
+| `inventory.json` | `71cec7160292ea3f873d2268006a0fe853e3258a0b7ae145c3ee948614fb7ce3` |
+| `COLUMNS.md` | `bc65296d403eeb976a722fa42862f5884a0b08137734120215b20c3bf2e3974f` |
+| `inspect_panels.py` | `dbdfc56ae75c9c14e9ac257770981091085aaa7e4e1901c60bf80916733a91b7` |
+| `docs/methodology_decisions.md` tras la decisión 128 | `47817ae84ab6b8e037a2880d7ac9481c950c3015f3095a6bd07b8bbf34758b4d` |
+| `run_identity.json` registrado | `5a21709cf7557cb54c244ada00df5de8798f502ebfcc7f1c4a1884a2c811d4eb` |
+| `input_manifest.json`, bytes | `4259514d74ca32be9704f5e55174690892d8834a0d4043c788dbc4cb2e377f08` |
+| Manifiesto, hash semántico según el productor registrado | `1f66706599a5c6b8a52b2c515da5922b4eaa49132cc5797689fa357b8e2ef232` |
+| Respaldo previo `decision_state_before.zip` | `000cf338085b7d1811648e275fc60425b3511cfd4c4707946d8288275c520597` |
+
+El hash semántico del manifiesto excluye el identificador de la corrida fuente,
+como el productor existente; no es su hash de bytes. Ambos están documentados
+para no confundir esa diferencia con una alteración del archivo.
+
+Los artefactos registrados no se modificaron. La única edición documental de
+gobierno fue añadir la decisión 128; la proyección pública se regeneró mediante su
+productor, no a mano. El respaldo permite recuperar las versiones anteriores.
+No se cambió código de predicción ni archivos congelados, ni se publicó nada.
+
+## Limitación de interpretación
+
+La partición fijada hoy no elimina la exposición ni las decisiones previas sobre
+datos históricos, y el proxy de tiempo fuente no prueba recepción histórica por el cliente.
+
+**Parada cumplida: inventario entregado; A1 y todas las etapas posteriores sin iniciar.**

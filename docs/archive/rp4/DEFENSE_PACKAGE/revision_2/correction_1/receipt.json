@@ -1,0 +1,449 @@
+{
+  "schema": "rp4-defense-revision-2-audit-correction-1-receipt",
+  "sealed_at_utc": "2026-09-08T06:40:47.692314+00:00",
+  "status": "DOCUMENTARY_CORRECTIONS_COMPLETE_LOCAL",
+  "research_only": true,
+  "capital_go": false,
+  "request": {
+    "name": "20260908_1545_auditoria_paquete_defensa.md",
+    "sha256": "3f136db3d71fe75a72eccbf96df27c3507c6e7e57b2c5ccfd246193cc7ec411d",
+    "read_completely_before_actions": true,
+    "incoming_audit_base_commit": "680f146",
+    "applied_after_commit": "e402fe4e4a606d23e6e13177a6aefd8f57b6258c"
+  },
+  "prior_receipt_sha256": "595e2a9873c13096e802a8d137949f1293544dbf2ef7e8168dff794e7f7d1383",
+  "prior_manifest_sha256": "9fc9a262dfa0b0036bd58224b45f3a94430e109f3ac8d120f95dbf20aea62b58",
+  "prior_sealed_packets_preserved": true,
+  "deliverable_sha256": {
+    "executive_summary.md": "82b4cea48209b0342983674b2b340a84662d42fc9c5bd4a19860f1280a73c5b5",
+    "examiner_qa.md": "bbf084f0b937178b1a268a6f72fbee7a44dd453e0e024103b1af164c26f09630",
+    "claims_matrix.csv": "ce143ae77aeff89507843f5b1b2ff431ac8ca88decd1bec54e7ca9d0dc1b419a",
+    "defense_slides.md": "90a26e920e1341882432da501538d1ff9e3df35ca297dcd6fa3fbc47f0e2ac6a"
+  },
+  "evidence_manifest_sha256": "649642529797363832c3249d44d7b02c863e5147d5764a10e8ac5a6e38140ee6",
+  "audit_evidence_sha256": "1e7056c0170ae66831ba17475a9f87c3fc4a2646b530dd0822e85cbc9a522735",
+  "contract_sha256": {
+    "tests/contract/test_rp4_defense_package.py": "d8b97a79349908dc3c8aaad2f3c2711951c286d9a117c963d8e4df48116ee455",
+    "tests/contract/test_rp4_defense_additions.py": "aa08f78e376f93868452dcfc6c2ea6d268c04a0234e58dc6dcc65bf46aaefeb2",
+    "tests/contract/test_rp4_prospective_registration.py": "eece949430ba4668aaa20dea8846a165db8b2db59aa4cb42a63cf0778caf5610",
+    "tests/contract/test_rp4_defense_audit_corrections.py": "97dce8c002794267db15cd3fe7c8112cfe045410b8419ac254e54e03e4da9a35"
+  },
+  "final_revision": {
+    "document": "docs/rp4/RESULTADO_FINAL_revision_1.md",
+    "document_sha256": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05",
+    "receipt": "docs/rp4/RESULTADO_FINAL_revision_1_receipt.json",
+    "receipt_sha256": "9ac1d6005b431e750572ce0190705704907535c74b65b8e84048515f1db355c2",
+    "original_sha256": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19"
+  },
+  "preserved_administrative_and_prospective_sha256": {
+    "administrative_verification_20260908.md": "286c32d3c29eaf17e135ad755b022db95e7c7569e06dec9cc8e60e422e438c1b",
+    "administrative_verification_20260908.sha256": "95bc6d6eac43d923f4e9fdb33646e2acddf28a201dad33cdb92a4bff2c1e0045",
+    "administrative_verification_20260908_receipt_v2.json": "7ef7ef7db43df2e4c78b63fd6b1c7b8b89ad293f196ddd6b15e0283699a5e3dd",
+    "prospective_confirmation_v1.md": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+    "prospective_confirmation_v1.sha256": "39943794e7f3908acd0c1f668d1fdcfcc9ab687b97b5a7eee3185d93d8e609d1",
+    "prospective_confirmation_v1_amendment_1.md": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+    "prospective_confirmation_v1_amendment_1.sha256": "056a22ac8edbb72571ede41c0853beab7082f81e05036f3133853afb1183887f",
+    "prospective_confirmation_v1_amendment_1_receipt.json": "ac3cc92dc48a0b2250be81500cc23d735283a31a951909c917dabcf8092f1837",
+    "prospective_confirmation_v1_amendment_2.md": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    "prospective_confirmation_v1_amendment_2.sha256": "d035233b835bdec0fa7942b316468552f1fd472e96bcaea9c1220eead03c1ab5",
+    "prospective_confirmation_v1_amendment_2_receipt.json": "eeeff2504758294cd973e898bcc5ff8f43d2ff5be89f31b3dec8e1d22a5d7f95",
+    "prospective_confirmation_v1_receipt.json": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66"
+  },
+  "coverage": {
+    "source_passages": 129,
+    "number_occurrences": 456,
+    "source_files": 66,
+    "slides": 12,
+    "examiner_questions": 26,
+    "new_typed_quantity_insertions": 4,
+    "existing_numeric_values_changed": 0,
+    "typed_or_structured_rebindings_from_two_prose_sources": 30,
+    "new_contract_cases": 9,
+    "stale_secondary_count_mutations_rejected": 4
+  },
+  "corrections": [
+    {
+      "point": 1,
+      "status": "CURRENT_RULE_ALREADY_CORRECT_AND_NOW_REGRESSION_GUARDED",
+      "change": "The current A/B/C Holm family has three members; D is a separate 45-session pooled secondary. Slide twelve now also spells out three. The contract rejects stale two-secondary counts, allowing only the exact historical seal-change sentence.",
+      "incoming_ids_are_stale": {
+        "package_number_0159": "Now A/B/C reading at 20 bound to amendment 2 secondary_single_look_at_prospective_sessions.",
+        "package_number_0198": "Now English primary reading 20; unrelated to number of secondaries.",
+        "package_number_0288": "Now day 28 of the prior bridge window.",
+        "package_number_0456": "Now 419 sessions in the version-comparison table."
+      }
+    },
+    {
+      "point": 2,
+      "status": "CORRECTED",
+      "claim_ids": [
+        "package_number_0140",
+        "package_number_0180"
+      ],
+      "change": "Primary alpha points to the original registration receipt. The already-correct slide anchor is retained; equality with the historical specification alpha is checked."
+    },
+    {
+      "point": 3,
+      "status": "CORRECTED",
+      "claim_ids": [
+        "package_number_0157",
+        "package_number_0198",
+        "package_number_0330",
+        "package_number_0359",
+        "package_number_0561"
+      ],
+      "change": "Every identified primary twenty-session reading uses original primary_look_sessions; secondary readings retain their own fields."
+    },
+    {
+      "point": 4,
+      "status": "CORRECTED",
+      "change": "Spanish summary explicitly says positive paired medians, consistent with English and the stored paired statistic."
+    },
+    {
+      "point": 5,
+      "status": "CORRECTED",
+      "change": "Both slide-seven bullets and the speaker note identify the primary window of 419 sessions. Counts are checked against both horizon summaries."
+    },
+    {
+      "point": 6,
+      "status": "CORRECTED",
+      "change": "Slide nine and a new final-report revision identify five-minute buy, passive and sell premium proportions. The three columns are checked among fourteen premium-share columns; the original report is intact."
+    },
+    {
+      "point": 7,
+      "status": "CORRECTED_WITH_EXPLICIT_EVIDENCE_LIMITS",
+      "change": "Thirty of thirty-nine prose-backed numbers now use structured fields. The nine remaining numbers are listed as evidencia circular declarada. Every displayed provider-gap date and both source claims use accepted_tape_gap."
+    }
+  ],
+  "evidencia_circular_declarada": [
+    {
+      "claim_id": "package_number_0162",
+      "claim": "20",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0163",
+      "claim": "28",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0203",
+      "claim": "20",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0204",
+      "claim": "28",
+      "source_document": "executive_summary.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0287",
+      "claim": "20",
+      "source_document": "examiner_qa.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0288",
+      "claim": "28",
+      "source_document": "examiner_qa.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0424",
+      "claim": "1",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/specification_v4.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: constante normativa 1 de la definición QLIKE, no una cifra estimada ni una observación.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0556",
+      "claim": "20",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    },
+    {
+      "claim_id": "package_number_0557",
+      "claim": "28",
+      "source_document": "defense_slides.md",
+      "artifact": "docs/rp4/RESULTADO_FINAL.md",
+      "selector": "[]",
+      "context": "Evidencia circular declarada: día de una lectura puente previa comunicado en la prosa pública. No se ha auditado la lectura ni se ha abierto su cohorte. Existe una atestación adicional del titular, no una medición independiente.",
+      "evidence_status": "reported_prose_circular_declared"
+    }
+  ],
+  "circular_evidence_limits": [
+    "Eight date-day occurrences repeat a disclosed prior reading, supported by an owner attestation rather than an independently audited access event.",
+    "The remaining one is the normative constant in the QLIKE formula, not an empirical result. No new empirical evidence is claimed by restating that formula."
+  ],
+  "independent_semantic_review_sha256": "a5ec5409618c21c001b86b5cae5ad6549efb3182886bd3966f133ef2d24792af",
+  "verification_commands": [
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "ruff",
+        "check",
+        "src",
+        "scripts",
+        "tests"
+      ],
+      "command": "uv run --offline --frozen --no-sync ruff check src scripts tests",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "tests/contract/test_rp4_defense_package.py",
+        "tests/contract/test_rp4_defense_additions.py",
+        "tests/contract/test_rp4_prospective_registration.py",
+        "tests/contract/test_rp4_defense_audit_corrections.py"
+      ],
+      "command": "uv run --offline --frozen --no-sync ruff format --check tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_defense_additions.py tests/contract/test_rp4_prospective_registration.py tests/contract/test_rp4_defense_audit_corrections.py",
+      "exit_code": 0,
+      "stdout": "4 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "ruff",
+        "format",
+        "--check",
+        "src",
+        "scripts",
+        "tests"
+      ],
+      "command": "uv run --offline --frozen --no-sync ruff format --check src scripts tests",
+      "exit_code": 1,
+      "stdout": "Would reformat: scripts\\acquire_b1_independent_replication_b1q.py\nWould reformat: scripts\\acquire_b1_independent_replication_full_tape.py\nWould reformat: scripts\\acquire_b1v3_confirmation_full_tape.py\nWould reformat: scripts\\acquire_gate3_dev_bars.py\nWould reformat: scripts\\build_b1_independent_replication_b1v3.py\nWould reformat: scripts\\build_b1_independent_replication_b2.py\nWould reformat: scripts\\build_b1_independent_replication_base.py\nWould reformat: scripts\\build_b1_replication_fmp_delay2.py\nWould reformat: scripts\\build_b1v3_confirmation_b1.py\nWould reformat: scripts\\build_b1v3_confirmation_b2.py\nWould reformat: scripts\\build_b1v3_confirmation_base.py\nWould reformat: scripts\\build_b1v3_confirmation_common.py\nWould reformat: scripts\\build_b1v3_target_blind.py\nWould reformat: scripts\\build_b2_confirmation_inputs.py\nWould reformat: scripts\\build_canonical_defense_package.py\nWould reformat: scripts\\build_confirmation_readiness_v2.py\nWould reformat: scripts\\build_phase8_bridge_dispersion_audit_v1.py\nWould reformat: scripts\\build_phase9_power_deadline_audit.py\nWould reformat: scripts\\build_pit_v22_claim_ledger.py\nWould reformat: scripts\\download_calibration_20d.py\nWould reformat: scripts\\evaluate_b2_confirmation_blocks.py\nWould reformat: scripts\\evaluate_phase8_bridge_v2.py\nWould reformat: scripts\\fetch_gated_data.py\nWould reformat: scripts\\finalize_calibration_20d.py\nWould reformat: scripts\\freeze_b1_independent_replication_method.py\nWould reformat: scripts\\freeze_b1v3_method.py\nWould reformat: scripts\\freeze_phase8_bridge_evaluator_v3.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v1.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v2.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v3.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v4.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v5.py\nWould reformat: scripts\\freeze_phase8_dispersion_audit_producer_v6.py\nWould reformat: scripts\\harvest_uw_latency_campaign.py\nWould reformat: scripts\\load_supabase_datasets.py\nWould reformat: scripts\\phase9_collect.py\nWould reformat: scripts\\plan_b1_independent_replication.py\nWould reformat: scripts\\prepare_b1_independent_replication_access.py\nWould reformat: scripts\\prepare_b1v3_confirmation_acquisition.py\nWould reformat: scripts\\publish_ancestry_guard.py\nWould reformat: scripts\\publish_rp2_v3_supabase.py\nWould reformat: scripts\\render_cumulative_loss_figure.py\nWould reformat: scripts\\render_figures.py\nWould reformat: scripts\\replay_phase8_materialized_remediation_v1.py\nWould reformat: scripts\\rp2_b2_autopsy_extension.py\nWould reformat: scripts\\rp2_b2_exploratory_campaign.py\nWould reformat: scripts\\rp2_b2_exploratory_v2.py\nWould reformat: scripts\\rp2_block10_inference.py\nWould reformat: scripts\\rp2_block11_economics.py\nWould reformat: scripts\\rp2_block11b_forward_economics.py\nWould reformat: scripts\\rp2_block12_prospective_design.py\nWould reformat: scripts\\rp2_block2_pit_ledger.py\nWould reformat: scripts\\rp2_block5_surface_panel.py\nWould reformat: scripts\\rp2_block5b_independent_surface.py\nWould reformat: scripts\\rp2_block6_flow_panel.py\nWould reformat: scripts\\rp2_block7_dml.py\nWould reformat: scripts\\rp2_block8_ladder.py\nWould reformat: scripts\\rp2_block9_generalization.py\nWould reformat: scripts\\rp2_ext12_level4_and_tensor.py\nWould reformat: scripts\\rp2_ext1_directional_v2.py\nWould reformat: scripts\\rp2_ext2_tape_tensors.py\nWould reformat: scripts\\rp2_ext3_acquire_missing_bars.py\nWould reformat: scripts\\rp2_ext4_power_both_contrasts.py\nWould reformat: scripts\\rp2_repair_contradicted_volume.py\nWould reformat: scripts\\rp2_verdict_tables.py\nWould reformat: scripts\\rp3_acquire_batch.py\nWould reformat: scripts\\rp3_build_eval_panels.py\nWould reformat: scripts\\rp3_freeze_b2_index.py\nWould reformat: scripts\\rp3_score_batch.py\nWould reformat: scripts\\rp3_sizing.py\nWould reformat: scripts\\run_b1_diagnostics.py\nWould reformat: scripts\\run_b1_independent_replication_once.py\nWould reformat: scripts\\run_b1_independent_replication_provider_preflight.py\nWould reformat: scripts\\run_b1_replication_market_control_preflight.py\nWould reformat: scripts\\run_b1v3_confirmation_once.py\nWould reformat: scripts\\run_corrected_independent_replication.py\nWould reformat: scripts\\run_economic_significance.py\nWould reformat: scripts\\run_gate11_era_map.py\nWould reformat: scripts\\run_gate12_harq_hardening.py\nWould reformat: scripts\\run_gate2_calibration.py\nWould reformat: scripts\\run_gate3_har.py\nWould reformat: scripts\\run_gate4_decay_power.py\nWould reformat: scripts\\run_gate5_bar_reconciliation.py\nWould reformat: scripts\\run_gate6_regimes.py\nWould reformat: scripts\\run_gate8_selection.py\nWould reformat: scripts\\run_gate9_localization.py\nWould reformat: scripts\\run_global_multiplicity.py\nWould reformat: scripts\\run_local_evidence_gates.py\nWould reformat: scripts\\run_rp2_v3_pipeline.py\nWould reformat: scripts\\scan_public_secrets.py\nWould reformat: scripts\\seal_b1_independent_replication_b1q_source.py\nWould reformat: scripts\\seal_b1v3_confirmation_b1q_source.py\nWould reformat: scripts\\seal_b1v3_preregistration.py\nWould reformat: scripts\\seal_corrected_independent_preregistration_v1.py\nWould reformat: scripts\\sync_supabase_catalog.py\nWould reformat: scripts\\sync_supabase_rp2_blocks.py\nWould reformat: scripts\\uw_latency_reconcile.py\nWould reformat: scripts\\uw_latency_verify.py\nWould reformat: scripts\\verify_access_posture.py\nWould reformat: scripts\\verify_scheduled_tasks.py\nWould reformat: src\\mds650\\b1_diagnostics.py\nWould reformat: src\\mds650\\b1_independent_replication.py\nWould reformat: src\\mds650\\b1_replication_access.py\nWould reformat: src\\mds650\\b1_replication_b1q_source.py\nWould reformat: src\\mds650\\b1_replication_b2.py\nWould reformat: src\\mds650\\b1_replication_build.py\nWould reformat: src\\mds650\\b1_replication_common.py\nWould reformat: src\\mds650\\b1_replication_evaluation.py\nWould reformat: src\\mds650\\b1v3_b1q_source.py\nWould reformat: src\\mds650\\b1v3_b2_confirmation.py\nWould reformat: src\\mds650\\b1v3_confirmation.py\nWould reformat: src\\mds650\\b1v3_confirmation_acquisition.py\nWould reformat: src\\mds650\\b1v3_confirmation_build.py\nWould reformat: src\\mds650\\b1v3_confirmation_common.py\nWould reformat: src\\mds650\\b1v3_confirmation_evaluation.py\nWould reformat: src\\mds650\\b1v3_confirmation_panel.py\nWould reformat: src\\mds650\\b1v3_confirmation_run.py\nWould reformat: src\\mds650\\b1v3_evaluation.py\nWould reformat: src\\mds650\\b1v3_massive_sensitivity.py\nWould reformat: src\\mds650\\b1v3_method_freeze.py\nWould reformat: src\\mds650\\b1v3_timing_panel.py\nWould reformat: src\\mds650\\har.py\nWould reformat: src\\mds650\\independent_corrected_reevaluation_v1.py\nWould reformat: src\\mds650\\inference.py\nWould reformat: src\\mds650\\pit_v22_claim_ledger.py\nWould reformat: src\\mds650\\rp2\\feature_registry.py\nWould reformat: src\\mds650\\rp2\\ladder.py\nWould reformat: src\\mds650\\rp2\\option_clock.py\nWould reformat: src\\mds650\\rp2\\provenance.py\nWould reformat: src\\mds650\\rp2\\run_manifest.py\nWould reformat: src\\mds650\\rp2\\scorecard.py\nWould reformat: src\\mds650\\rp3\\frozen_forecasters.py\nWould reformat: src\\mds650\\sealed.py\nWould reformat: src\\mds650\\sequential.py\nWould reformat: src\\mds650\\storage.py\nWould reformat: src\\mds650\\target_blind_panel_b1q_eligibility_v1.py\nWould reformat: src\\mds650\\uw_latency_campaign.py\nWould reformat: tests\\contract\\test_access_posture_matches_documentation.py\nWould reformat: tests\\contract\\test_alert_popup_isolation.py\nWould reformat: tests\\contract\\test_b1v3_confirmation_base_artifact.py\nWould reformat: tests\\contract\\test_b2_autopsy_doc_matches_artifact.py\nWould reformat: tests\\contract\\test_b2_exploratory_doc_matches_artifact.py\nWould reformat: tests\\contract\\test_block7_narrative_matches_artifact.py\nWould reformat: tests\\contract\\test_calibration_20d.py\nWould reformat: tests\\contract\\test_canonical_defense_package.py\nWould reformat: tests\\contract\\test_cumulative_loss_figure.py\nWould reformat: tests\\contract\\test_current_report_docx.py\nWould reformat: tests\\contract\\test_documentation_references.py\nWould reformat: tests\\contract\\test_exchange_clock_contract.py\nWould reformat: tests\\contract\\test_feature_registry_reaches_the_panel.py\nWould reformat: tests\\contract\\test_frozen_artifacts_registry.py\nWould reformat: tests\\contract\\test_phase4a_artifacts.py\nWould reformat: tests\\contract\\test_phase5_development_evaluation.py\nWould reformat: tests\\contract\\test_phase5_storage.py\nWould reformat: tests\\contract\\test_phase6_acquisition_manifest.py\nWould reformat: tests\\contract\\test_phase6_b0_artifacts.py\nWould reformat: tests\\contract\\test_phase6_preregistration.py\nWould reformat: tests\\contract\\test_phase6_results.py\nWould reformat: tests\\contract\\test_phase8_bridge_contract_v2.py\nWould reformat: tests\\contract\\test_phase8_bridge_dispersion_audit.py\nWould reformat: tests\\contract\\test_phase8_bridge_evaluator_v2.py\nWould reformat: tests\\contract\\test_pilot_v2_artifacts.py\nWould reformat: tests\\contract\\test_pit_gate_artifacts.py\nWould reformat: tests\\contract\\test_progress_video_script.py\nWould reformat: tests\\contract\\test_publish_ancestry_guard.py\nWould reformat: tests\\contract\\test_rp2_train_share_authority.py\nWould reformat: tests\\contract\\test_rp2_v3_feature_registry.py\nWould reformat: tests\\contract\\test_rp2_v3_research_contract.py\nWould reformat: tests\\contract\\test_scheduled_task_liveness.py\nWould reformat: tests\\contract\\test_supabase_migrations_present.py\nWould reformat: tests\\contract\\test_supabase_schema_preflight.py\nWould reformat: tests\\contract\\test_uw_collector_resume.py\nWould reformat: tests\\contract\\test_uw_latency_campaign_current.py\nWould reformat: tests\\contract\\test_uw_latency_campaign_publication.py\nWould reformat: tests\\contract\\test_verdict_matches_artifact.py\nWould reformat: tests\\e2e\\test_rp2_b1_contemporaneous.py\nWould reformat: tests\\e2e\\test_rp2_b2_point_in_time.py\nWould reformat: tests\\test_gated_history_contract.py\nWould reformat: tests\\test_gated_publish_contract.py\nWould reformat: tests\\test_har.py\nWould reformat: tests\\test_inference.py\nWould reformat: tests\\test_mirror_internal_docs_contract.py\nWould reformat: tests\\unit\\test_acquire_b1v3_confirmation_b1q.py\nWould reformat: tests\\unit\\test_acquire_b1v3_confirmation_full_tape.py\nWould reformat: tests\\unit\\test_b1_replication_access.py\nWould reformat: tests\\unit\\test_b1_replication_b1q_source.py\nWould reformat: tests\\unit\\test_b1_replication_b2.py\nWould reformat: tests\\unit\\test_b1_replication_build.py\nWould reformat: tests\\unit\\test_b1_replication_common.py\nWould reformat: tests\\unit\\test_b1_replication_evaluation.py\nWould reformat: tests\\unit\\test_b1v3.py\nWould reformat: tests\\unit\\test_b1v3_b2_confirmation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_acquisition.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_build.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_common.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_evaluation.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_panel.py\nWould reformat: tests\\unit\\test_b1v3_confirmation_run.py\nWould reformat: tests\\unit\\test_b1v3_evaluation.py\nWould reformat: tests\\unit\\test_b1v3_method_freeze.py\nWould reformat: tests\\unit\\test_b1v3_timing_panel.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_b1.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_common.py\nWould reformat: tests\\unit\\test_build_b1v3_confirmation_timing.py\nWould reformat: tests\\unit\\test_build_b1v3_target_blind.py\nWould reformat: tests\\unit\\test_data_root_config.py\nWould reformat: tests\\unit\\test_evidence_gates_env.py\nWould reformat: tests\\unit\\test_evidence_line_ending_contract.py\nWould reformat: tests\\unit\\test_freeze_b1_independent_replication_method.py\nWould reformat: tests\\unit\\test_freeze_b1v3_confirmation_plan.py\nWould reformat: tests\\unit\\test_phase5_study_design.py\nWould reformat: tests\\unit\\test_phase9_power_deadline_audit.py\nWould reformat: tests\\unit\\test_pit_v22_claim_ledger.py\nWould reformat: tests\\unit\\test_plan_b1_independent_replication.py\nWould reformat: tests\\unit\\test_property_core.py\nWould reformat: tests\\unit\\test_publish_rp2_v3_supabase.py\nWould reformat: tests\\unit\\test_rp2_baseline.py\nWould reformat: tests\\unit\\test_rp2_block4_causal_ewma.py\nWould reformat: tests\\unit\\test_rp2_block_evaluation_mask.py\nWould reformat: tests\\unit\\test_rp2_ext1_directional_v2.py\nWould reformat: tests\\unit\\test_rp2_flow.py\nWould reformat: tests\\unit\\test_rp2_ladder.py\nWould reformat: tests\\unit\\test_rp2_ladder_level_weighting.py\nWould reformat: tests\\unit\\test_rp2_level4_pooling.py\nWould reformat: tests\\unit\\test_rp2_option_clock.py\nWould reformat: tests\\unit\\test_rp2_panel.py\nWould reformat: tests\\unit\\test_rp2_preprocessing.py\nWould reformat: tests\\unit\\test_rp2_provenance.py\nWould reformat: tests\\unit\\test_rp2_run_invariants.py\nWould reformat: tests\\unit\\test_rp2_scorecard_full.py\nWould reformat: tests\\unit\\test_rp3_acquire_batch.py\nWould reformat: tests\\unit\\test_rp3_eval_inventory.py\nWould reformat: tests\\unit\\test_rp3_frozen_forecasters.py\nWould reformat: tests\\unit\\test_rp3_score_batch.py\nWould reformat: tests\\unit\\test_scan_public_secrets.py\nWould reformat: tests\\unit\\test_seal_b1v3_access_ledger.py\nWould reformat: tests\\unit\\test_seal_b1v3_preregistration.py\nWould reformat: tests\\unit\\test_sealed_gate.py\nWould reformat: tests\\unit\\test_supabase_auth.py\nWould reformat: tests\\unit\\test_supabase_producers.py\nWould reformat: tests\\unit\\test_target_blind_panel_b1q_eligibility_v1.py\nWould reformat: tests\\unit\\test_target_blind_provenance_v23.py\nWould reformat: tests\\unit\\test_uw_latency_campaign.py\n244 files would be reformatted, 432 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-B",
+        "artifacts/rp4_closeout_code/check_final.py"
+      ],
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_closeout_code/check_final.py",
+      "exit_code": 0,
+      "stdout": "{\"final_report_sha256\": \"6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19\", \"new_bootstraps\": 0, \"new_fits\": 0, \"rv15_positive_assets\": 6, \"rv5_positive_assets\": 3, \"source_pins\": 4, \"status\": \"PASS\", \"stored_contrasts_checked\": 16}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/contract/test_rp4_defense_package.py",
+        "tests/contract/test_rp4_defense_additions.py",
+        "tests/contract/test_rp4_prospective_registration.py",
+        "tests/contract/test_rp4_defense_audit_corrections.py",
+        "tests/contract/test_readme_headline_matches_the_inference_artifact.py",
+        "tests/contract/test_canonical_state_current.py::test_rp4_front_page_and_status_repeat_the_exact_final_table",
+        "artifacts/rp4_cleanup_review/test_inventory_review.py",
+        "artifacts/rp4_closeout_figures_code",
+        "-o",
+        "addopts=",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest tests/contract/test_rp4_defense_package.py tests/contract/test_rp4_defense_additions.py tests/contract/test_rp4_prospective_registration.py tests/contract/test_rp4_defense_audit_corrections.py tests/contract/test_readme_headline_matches_the_inference_artifact.py tests/contract/test_canonical_state_current.py::test_rp4_front_page_and_status_repeat_the_exact_final_table artifacts/rp4_cleanup_review/test_inventory_review.py artifacts/rp4_closeout_figures_code -o addopts= -q -p no:cacheprovider",
+      "exit_code": 0,
+      "stdout": "...............................................................          [100%]\n63 passed in 3.51s\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uv",
+        "run",
+        "--offline",
+        "--frozen",
+        "--no-sync",
+        "python",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/contract",
+        "-q",
+        "-ra",
+        "--confcutdir=.",
+        "-p",
+        "no:cacheprovider",
+        "-p",
+        "pytest_timeout",
+        "-m",
+        "not live and not evidence",
+        "--ignore=tests/contract/test_rp3_program_guards.py",
+        "--ignore=tests/contract/test_phase5_holdout_acquisition.py",
+        "--deselect=tests/contract/test_frozen_artifacts_registry.py::test_every_frozen_artifact_is_physically_intact",
+        "--deselect=tests/contract/test_frozen_artifacts_registry.py::test_registry_cli_verifier_uses_the_same_redaction_and_withdrawal_rules",
+        "--deselect=tests/contract/test_frozen_artifacts_registry.py::test_gate_sidecars_agree_with_registry",
+        "--deselect=tests/contract/test_frozen_artifacts_registry.py::test_public_metadata_redactions_preserve_scientific_payloads",
+        "--deselect=tests/contract/test_document_references_resolve.py::test_every_sealed_exemption_is_actually_hashed_into_a_contract",
+        "--deselect=tests/contract/test_documentation_references.py::test_every_digest_quoted_in_a_block_document_is_one_the_repository_holds",
+        "--deselect=tests/contract/test_uw_latency_campaign_current.py::test_uw_latency_snapshot_matches_live_regeneration",
+        "--deselect=tests/contract/test_panel_identity.py::test_all_declared_panel_identities",
+        "--deselect=tests/contract/test_feature_registry_reaches_the_panel.py::test_every_registered_feature_exists_in_its_panel",
+        "--deselect=tests/contract/test_feature_registry_reaches_the_panel.py::test_no_panel_column_is_a_feature_nobody_registered",
+        "--deselect=tests/contract/test_rp2_v3_feature_registry.py::test_every_registered_feature_exists_in_its_panel",
+        "--deselect=tests/contract/test_rp2_v3_feature_registry.py::test_the_core_coverage_floors_hold_on_the_real_panels",
+        "--deselect=tests/contract/test_independent_replication_report.py::test_stability_artifact_contains_strata_and_hours",
+        "--deselect=tests/contract/test_phase5_storage.py::test_build_config_selects_only_55_missing_development_sessions",
+        "--deselect=tests/contract/test_phase5_storage.py::test_build_holdout_config_selects_exact_ten_sessions",
+        "--deselect=tests/contract/test_phase5_storage.py::test_build_holdout_config_rejects_manifest_hash_mismatch",
+        "--deselect=tests/contract/test_phase5_storage.py::test_downloader_loads_exact_missing_development_allowlist",
+        "--deselect=tests/contract/test_phase5_storage.py::test_downloader_loads_exact_holdout_allowlist",
+        "--deselect=tests/contract/test_phase5_storage.py::test_downloader_rejects_untrusted_reused_manifest",
+        "--deselect=tests/contract/test_phase5_storage.py::test_downloader_rejects_reused_manifest_hash_mismatch",
+        "--deselect=tests/contract/test_phase5_panel.py::test_source_reconciliation_is_exactly_25_plus_55_without_holdout"
+      ],
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest tests/contract -q -ra --confcutdir=. -p no:cacheprovider -p pytest_timeout -m \"not live and not evidence\" --ignore=tests/contract/test_rp3_program_guards.py --ignore=tests/contract/test_phase5_holdout_acquisition.py --deselect=tests/contract/test_frozen_artifacts_registry.py::test_every_frozen_artifact_is_physically_intact --deselect=tests/contract/test_frozen_artifacts_registry.py::test_registry_cli_verifier_uses_the_same_redaction_and_withdrawal_rules --deselect=tests/contract/test_frozen_artifacts_registry.py::test_gate_sidecars_agree_with_registry --deselect=tests/contract/test_frozen_artifacts_registry.py::test_public_metadata_redactions_preserve_scientific_payloads --deselect=tests/contract/test_document_references_resolve.py::test_every_sealed_exemption_is_actually_hashed_into_a_contract --deselect=tests/contract/test_documentation_references.py::test_every_digest_quoted_in_a_block_document_is_one_the_repository_holds --deselect=tests/contract/test_uw_latency_campaign_current.py::test_uw_latency_snapshot_matches_live_regeneration --deselect=tests/contract/test_panel_identity.py::test_all_declared_panel_identities --deselect=tests/contract/test_feature_registry_reaches_the_panel.py::test_every_registered_feature_exists_in_its_panel --deselect=tests/contract/test_feature_registry_reaches_the_panel.py::test_no_panel_column_is_a_feature_nobody_registered --deselect=tests/contract/test_rp2_v3_feature_registry.py::test_every_registered_feature_exists_in_its_panel --deselect=tests/contract/test_rp2_v3_feature_registry.py::test_the_core_coverage_floors_hold_on_the_real_panels --deselect=tests/contract/test_independent_replication_report.py::test_stability_artifact_contains_strata_and_hours --deselect=tests/contract/test_phase5_storage.py::test_build_config_selects_only_55_missing_development_sessions --deselect=tests/contract/test_phase5_storage.py::test_build_holdout_config_selects_exact_ten_sessions --deselect=tests/contract/test_phase5_storage.py::test_build_holdout_config_rejects_manifest_hash_mismatch --deselect=tests/contract/test_phase5_storage.py::test_downloader_loads_exact_missing_development_allowlist --deselect=tests/contract/test_phase5_storage.py::test_downloader_loads_exact_holdout_allowlist --deselect=tests/contract/test_phase5_storage.py::test_downloader_rejects_untrusted_reused_manifest --deselect=tests/contract/test_phase5_storage.py::test_downloader_rejects_reused_manifest_hash_mismatch --deselect=tests/contract/test_phase5_panel.py::test_source_reconciliation_is_exactly_25_plus_55_without_holdout",
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 13%]\n........................................................................ [ 27%]\n........................................................................ [ 41%]\n........................................................................ [ 55%]\n........................................................................ [ 69%]\n........................................................................ [ 83%]\n........................................................................ [ 97%]\n............                                                             [100%]\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "command": "git diff --check",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "contract_scope": {
+    "schema": "contract-scope-protected-input-exclusions",
+    "marker_expression": "not live and not evidence",
+    "ignore_paths": [
+      "tests/contract/test_rp3_program_guards.py",
+      "tests/contract/test_phase5_holdout_acquisition.py"
+    ],
+    "deselect_nodes": [
+      "tests/contract/test_frozen_artifacts_registry.py::test_every_frozen_artifact_is_physically_intact",
+      "tests/contract/test_frozen_artifacts_registry.py::test_registry_cli_verifier_uses_the_same_redaction_and_withdrawal_rules",
+      "tests/contract/test_frozen_artifacts_registry.py::test_gate_sidecars_agree_with_registry",
+      "tests/contract/test_frozen_artifacts_registry.py::test_public_metadata_redactions_preserve_scientific_payloads",
+      "tests/contract/test_document_references_resolve.py::test_every_sealed_exemption_is_actually_hashed_into_a_contract",
+      "tests/contract/test_documentation_references.py::test_every_digest_quoted_in_a_block_document_is_one_the_repository_holds",
+      "tests/contract/test_uw_latency_campaign_current.py::test_uw_latency_snapshot_matches_live_regeneration",
+      "tests/contract/test_panel_identity.py::test_all_declared_panel_identities",
+      "tests/contract/test_feature_registry_reaches_the_panel.py::test_every_registered_feature_exists_in_its_panel",
+      "tests/contract/test_feature_registry_reaches_the_panel.py::test_no_panel_column_is_a_feature_nobody_registered",
+      "tests/contract/test_rp2_v3_feature_registry.py::test_every_registered_feature_exists_in_its_panel",
+      "tests/contract/test_rp2_v3_feature_registry.py::test_the_core_coverage_floors_hold_on_the_real_panels",
+      "tests/contract/test_independent_replication_report.py::test_stability_artifact_contains_strata_and_hours",
+      "tests/contract/test_phase5_storage.py::test_build_config_selects_only_55_missing_development_sessions",
+      "tests/contract/test_phase5_storage.py::test_build_holdout_config_selects_exact_ten_sessions",
+      "tests/contract/test_phase5_storage.py::test_build_holdout_config_rejects_manifest_hash_mismatch",
+      "tests/contract/test_phase5_storage.py::test_downloader_loads_exact_missing_development_allowlist",
+      "tests/contract/test_phase5_storage.py::test_downloader_loads_exact_holdout_allowlist",
+      "tests/contract/test_phase5_storage.py::test_downloader_rejects_untrusted_reused_manifest",
+      "tests/contract/test_phase5_storage.py::test_downloader_rejects_reused_manifest_hash_mismatch",
+      "tests/contract/test_phase5_panel.py::test_source_reconciliation_is_exactly_25_plus_55_without_holdout"
+    ],
+    "reasons": [
+      "Do not traverse or rehash arbitrary artifact registries or all artifact JSON.",
+      "Do not inspect actual reserved-cohort seals, the ten-session holdout manifest, private panels or licensed stores.",
+      "Keep synthetic fixtures and explicitly simulated provider contracts.",
+      "Disable external plugin autoload and ancestor conftest discovery."
+    ],
+    "preexisting_code_inventory": {
+      "modules": 113,
+      "test_definitions": 557,
+      "sha256": "2b7eb55b729c30e4ee2d3e8fefc98b6e6ce38bcc75232d648831bd8b37a540b7"
+    },
+    "full_unfiltered_suite_executed": false
+  },
+  "contract_result": {
+    "passed_progress_items": 516,
+    "exit_code": 0,
+    "count_method": "Sum of pytest passed-item dots; every nonempty output line validated as passed-item dots plus an optional percentage; no failure, skip or xfail symbols."
+  },
+  "validation_summary": {
+    "packet_and_dependencies": "63 passed in 3.51s",
+    "safe_contract_suite_passed": true,
+    "unfiltered_contract_suite_executed": false,
+    "ruff_check_passed": true,
+    "four_contract_files_formatted": true,
+    "repository_format_passed": false,
+    "preexisting_files_needing_format": 244
+  },
+  "frozen_artifacts": {
+    "checked": 359,
+    "changed": [],
+    "baseline_inventory_sha256": "6827cf5f41887d14c0601347ebd03560ae6b5271847a7115d607a165bb140c70"
+  },
+  "operation_counts": {
+    "new_research_fits": 0,
+    "new_research_bootstraps": 0,
+    "reserved_cohort_reads": 0,
+    "provider_requests": 0,
+    "remote_mutations": 0,
+    "manual_collector_runs": 0,
+    "synthetic_fixture_contracts_executed": true
+  },
+  "limits": [
+    "The unfiltered contract suite would traverse protected evidence. The full audited safe selection was executed; ignored modules, deselected nodes and marker exclusions are recorded explicitly.",
+    "A structured field proves the value and context held by its artifact; local freeze timestamps, owner attestations and event annotations retain their stated evidential limits.",
+    "No prior seal or scientific result was overwritten. This correction is additive within revision_2.",
+    "The January cell-jump statement was retained; the incoming audit expressly found that statement supported."
+  ]
+}
