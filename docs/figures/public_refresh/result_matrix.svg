@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="730" viewBox="0 0 1200 730" role="img" aria-labelledby="result-matrix-title result-matrix-desc">
+<title id="result-matrix-title">Do options improve volatility forecasts?</title>
+<desc id="result-matrix-desc">Four saved comparisons for six stocks and 419 reused historical sessions. Linear option state and flow improve forecast loss; tree option flow does not show a clear improvement.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="54" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="32" fill="#1a2332" font-weight="600" text-anchor="start">Do options improve volatility forecasts?</text>
+<text x="40" y="87" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">Percentage reduction in forecast loss for the next 15 minutes</text>
+<text x="454" y="143" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">Option state</text>
+<text x="454" y="169" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#5a6570" font-weight="400" text-anchor="middle">Added to price history</text>
+<text x="920" y="143" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">Option flow</text>
+<text x="920" y="169" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#5a6570" font-weight="400" text-anchor="middle">Added to price history and option state</text>
+<text x="40" y="278" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="28" fill="#1a2332" font-weight="600" text-anchor="start">Linear</text>
+<text x="40" y="307" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="start">model family</text>
+<rect x="240" y="192" width="428" height="176" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="454" y="264" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="50" fill="#1a2332" font-weight="600" text-anchor="middle">+0.880%</text>
+<text x="454" y="302" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#5a6570" font-weight="400" text-anchor="middle">p = 0.0390</text>
+<text x="454" y="338" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="middle">Lower forecast loss</text>
+<rect x="706" y="192" width="428" height="176" rx="10" fill="#fdf6ea" stroke="#e8a33d" stroke-width="1.4"/>
+<text x="920" y="264" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="50" fill="#1a2332" font-weight="600" text-anchor="middle">+0.623%</text>
+<text x="920" y="302" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#5a6570" font-weight="400" text-anchor="middle">p = 0.0032</text>
+<text x="920" y="338" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="middle">Lower forecast loss</text>
+<text x="40" y="478" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="28" fill="#1a2332" font-weight="600" text-anchor="start">Tree</text>
+<text x="40" y="507" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="start">model family</text>
+<rect x="240" y="392" width="428" height="176" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="454" y="464" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="50" fill="#1a2332" font-weight="600" text-anchor="middle">+1.170%</text>
+<text x="454" y="502" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#5a6570" font-weight="400" text-anchor="middle">p = 0.0135</text>
+<text x="454" y="538" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="middle">Lower forecast loss</text>
+<rect x="706" y="392" width="428" height="176" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="920" y="464" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="50" fill="#1a2332" font-weight="600" text-anchor="middle">-0.115%</text>
+<text x="920" y="502" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#5a6570" font-weight="400" text-anchor="middle">p = 0.6280</text>
+<text x="920" y="538" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="middle">No clear improvement</text>
+<line x1="40" y1="612" x2="1160" y2="612" stroke="#e1e6ea" stroke-width="1"/>
+<text x="40" y="646" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" font-weight="600" text-anchor="start">Six stocks · 419 historical sessions · 15-minute forecasts</text>
+<text x="40" y="677" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="start">One-sided tests in sequence within each family. These sessions were reused across designs.</text>
+<text x="40" y="705" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#5a6570" font-weight="400" text-anchor="start">The final 25-session window does not confirm the full sequence. Forecast skill is not trading profit.</text>
+</svg>

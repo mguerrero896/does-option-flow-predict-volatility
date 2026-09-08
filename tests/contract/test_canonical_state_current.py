@@ -218,7 +218,8 @@ def test_rp4_front_page_and_status_repeat_the_exact_final_table() -> None:
 
     expected = table("docs/rp4/RESULTADO_FINAL.md")
     assert len(expected) == 7
-    assert table("README.md") == expected
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    assert "\n".join(expected) in readme
     assert table("STATUS.md") == expected
 
 
@@ -236,12 +237,15 @@ def test_generated_public_state_does_not_catalog_internal_working_material() -> 
         assert forbidden not in status_text
 
 
-def test_citation_does_not_claim_an_unpublished_release() -> None:
+def test_citation_names_the_author_and_publication_date_without_inventing_a_version() -> None:
     citation = (REPO / "CITATION.cff").read_text(encoding="utf-8")
     attributes = (REPO / ".gitattributes").read_text(encoding="utf-8")
 
     assert "\nversion:" not in citation
-    assert "\ndate-released:" not in citation
+    assert "\ndate-released: 2026-09-09\n" in citation
+    assert 'family-names: "Guerrero"' in citation
+    assert 'given-names: "Miguel"' in citation
+    assert 'title: "Options Order Flow and Intraday Volatility"' in citation
     assert "evidence-freeze-2026-08-18" not in citation
     assert "*.cff text eol=lf" in attributes
 

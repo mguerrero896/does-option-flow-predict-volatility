@@ -19,6 +19,25 @@ ARCHIVE = ROOT / "docs/archive/rp4/DEFENSE_PACKAGE"
 LINK = re.compile(r"!?\[([^\]]*)\]\(([^)]+)\)")
 
 
+def pin_receipt(receipt: Path) -> Path:
+    registry = archive.ROOT / "data/FROZEN_ARTIFACTS.json"
+    registry.parent.mkdir(exist_ok=True)
+    registry.write_text(
+        json.dumps(
+            {
+                "entries": [
+                    {
+                        "path": receipt.relative_to(archive.ROOT).as_posix(),
+                        "sha256": hashlib.sha256(receipt.read_bytes()).hexdigest(),
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    return registry
+
+
 def test_archive_map_preserves_original_bytes_and_identities() -> None:
     mapping = json.loads((ARCHIVE / "original_paths.json").read_text("utf-8"))
     assert len(mapping) >= 91
@@ -161,6 +180,7 @@ def redacted_archive(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         ],
     }
     receipt.write_text(json.dumps(data), encoding="utf-8")
+    pin_receipt(receipt)
     yield original, public, pin, receipt, data
     archive._paths.cache_clear()
     archive._redactions.cache_clear()
@@ -181,13 +201,48 @@ def test_public_redaction_never_claims_original_byte_equality_and_rejects_drift(
 
 
 def test_public_redaction_rejects_incompatible_receipt(redacted_archive) -> None:
-    original, _, pin, receipt, data = redacted_archive
+    original, _, _, _, _ = redacted_archive
     original.unlink()
-    data["entries"][0]["original_sha256"] = "0" * 64
-    receipt.write_text(json.dumps(data), encoding="utf-8")
-    archive._redactions.cache_clear()
     with pytest.raises(AssertionError, match="Incompatible original provenance pin"):
+        assert_historical_sha256("docs/example.md", "0" * 64)
+
+
+def test_redaction_and_receipt_cannot_be_rewritten_together(redacted_archive) -> None:
+    original, public, pin, receipt, data = redacted_archive
+    original.unlink()
+    registry = archive.ROOT / "data/FROZEN_ARTIFACTS.json"
+    frozen = registry.read_bytes()
+    assert assert_historical_sha256("docs/example.md", pin) == "public_redaction_provenance"
+    public.write_text("Directory: [redacted]. Sessions: 420.\n", encoding="utf-8")
+    data["entries"][0]["public_sha256"] = hashlib.sha256(public.read_bytes()).hexdigest()
+    data["entries"][0]["numeric_invariant"] = True
+    receipt.write_text(json.dumps(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="MANIFEST_HASH_MISMATCH"):
         assert_historical_sha256("docs/example.md", pin)
+    archive._paths.cache_clear()
+    archive._redactions.cache_clear()
+    archive._withheld_sources.cache_clear()
+    with pytest.raises(ValueError, match="MANIFEST_HASH_MISMATCH"):
+        assert_historical_sha256("docs/example.md", pin)
+    assert registry.read_bytes() == frozen
+
+
+@pytest.mark.parametrize("failure", ["missing_pin", "duplicate_pin", "bad_pin", "missing_receipt"])
+def test_redaction_manifest_requires_one_valid_present_pin(redacted_archive, failure: str) -> None:
+    _, _, _, receipt, _ = redacted_archive
+    registry = archive.ROOT / "data/FROZEN_ARTIFACTS.json"
+    data = json.loads(registry.read_bytes())
+    if failure == "missing_pin":
+        data["entries"] = []
+    elif failure == "duplicate_pin":
+        data["entries"] *= 2
+    elif failure == "bad_pin":
+        data["entries"][0]["sha256"] = "invalid"
+    else:
+        receipt.unlink()
+    registry.write_text(json.dumps(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="MANIFEST_(PIN_INVALID|MISSING)"):
+        archive.verified_redaction_receipt()
 
 
 @pytest.fixture
@@ -216,6 +271,7 @@ def withheld_archive(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         ),
         encoding="utf-8",
     )
+    pin_receipt(receipt)
     yield logical, pin
     archive._paths.cache_clear()
     archive._redactions.cache_clear()
@@ -241,4 +297,15 @@ def test_withheld_source_rejects_unregistered_missing_and_does_not_supply_values
 def test_withheld_source_rejects_an_incompatible_pin(withheld_archive) -> None:
     logical, _ = withheld_archive
     with pytest.raises(AssertionError, match="Incompatible withheld-source pin"):
+        assert_historical_sha256(logical, "b" * 64)
+
+
+def test_withheld_receipt_cannot_supply_a_rewritten_provenance_pin(withheld_archive) -> None:
+    logical, pin = withheld_archive
+    assert assert_historical_sha256(logical, pin) == "private_source_not_distributed"
+    receipt = archive.ROOT / "artifacts/rp4_public_refresh/archive_redactions.json"
+    data = json.loads(receipt.read_bytes())
+    data["withheld_sources"][0]["original_sha256"] = "b" * 64
+    receipt.write_text(json.dumps(data), encoding="utf-8")
+    with pytest.raises(ValueError, match="MANIFEST_HASH_MISMATCH"):
         assert_historical_sha256(logical, "b" * 64)

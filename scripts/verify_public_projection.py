@@ -26,6 +26,9 @@ ENGLISH_TEXT = (
 )
 SPANISH, ENGLISH = set(SPANISH_TEXT.split()), set(ENGLISH_TEXT.split())
 INTERNAL_LABEL = re.compile(r"\b(?:mds650|capstone|codex|claude|chatgpt)\b", re.I)
+COLLECTIVE_VOICE = re.compile(r"\b(?:[Ww]e|[Oo]ur|[Uu]s|[Tt]eam)\b")
+HISTORICAL_QUOTE_PATH = "docs/sequential_multiplicity_policy_v1.md"
+HISTORICAL_QUOTE_SHA256 = "32920643476da1ee7271acd5f25876a0d2e49bad0634c01e19219cc3d06ef38f"
 
 
 def prose_text(text: str) -> str:
@@ -41,6 +44,18 @@ def language_counts(text: str) -> tuple[int, int]:
     """Conservative prose inventory; short or mixed documents also need review."""
     words = re.findall(r"[a-záéíóúüñ]+", prose_text(text).lower())
     return sum(word in SPANISH for word in words), sum(word in ENGLISH for word in words)
+
+
+def collective_voice_tokens(name: str, content: str) -> list[str]:
+    # This exact hypothetical quote is bound by the frozen bridge-contract provenance.
+    if (
+        name == HISTORICAL_QUOTE_PATH
+        and hashlib.sha256(content.encode()).hexdigest() == HISTORICAL_QUOTE_SHA256
+    ):
+        content = content.replace('"we might run\n   another campaign after seeing this one"', "")
+    # Draft prose inside text/Markdown fences still has an author; executable examples do not.
+    content = re.sub(r"```(?:text|markdown)\s*\n(.*?)```", r"\1", content, flags=re.S)
+    return COLLECTIVE_VOICE.findall(prose_text(content))
 
 
 def main() -> None:
@@ -64,17 +79,21 @@ def main() -> None:
         ["git", "merge-base", "--is-ancestor", "origin/main", "HEAD"], cwd=root, check=True
     )
     documents = [
-        name for name in git("ls-files").splitlines()
+        name
+        for name in git("ls-files").splitlines()
         if name.endswith(".md") or ".md.original" in name
     ]
     language = []
     internal_labels = []
+    collective_voice = []
     for name in documents:
         content = (root / name).read_text("utf-8-sig")
         if INTERNAL_LABEL.search(prose_text(content)):
             internal_labels.append(name)
         if name.startswith("docs/archive/"):
             continue
+        if name.endswith(".md") and (tokens := collective_voice_tokens(name, content)):
+            collective_voice.append({"path": name, "tokens": tokens})
         spanish, english = language_counts(content)
         if spanish >= 5 and spanish > english:
             language.append({"path": name, "spanish_tokens": spanish, "english_tokens": english})
@@ -126,6 +145,14 @@ def main() -> None:
         "language_method": "Common-word screening; translation receipts verify numeric claims",
         "spanish_majority_documents_outside_archive": language,
         "internal_labels_in_markdown_prose": internal_labels,
+        "collective_author_voice_in_active_markdown": collective_voice,
+        "preserved_historical_hypothetical_quote": {
+            "path": HISTORICAL_QUOTE_PATH,
+            "sha256": HISTORICAL_QUOTE_SHA256,
+            "reason": (
+                "Exact quote in the frozen bridge-contract provenance; not current author voice"
+            ),
+        },
         "remote_writes": 0,
         "scientific_model_fits": 0,
         "synthetic_fixtures_may_fit_models": True,
@@ -136,7 +163,10 @@ def main() -> None:
     receipt["status"] = (
         "PASS"
         if (
-            receipt["clean_tree"] and not language and not internal_labels
+            receipt["clean_tree"]
+            and not language
+            and not internal_labels
+            and not collective_voice
             and all(row["exit_code"] == 0 for row in checks)
         )
         else "FAIL"

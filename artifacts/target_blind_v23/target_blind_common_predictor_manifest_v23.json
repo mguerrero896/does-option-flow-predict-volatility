@@ -20,8 +20,8 @@
     "row_count": 77328
   },
   "output_locations": {
-    "common_complete": "D:/MDS650/phase6/derived/target_blind_v23/target_blind_common_complete_v23.parquet",
-    "panel": "D:/MDS650/phase6/derived/target_blind_v23/target_blind_common_predictors_v23.parquet"
+    "common_complete": "private-input/phase6/derived/target_blind_v23/target_blind_common_complete_v23.parquet",
+    "panel": "private-input/phase6/derived/target_blind_v23/target_blind_common_predictors_v23.parquet"
   },
   "safe_to_reconcile_existing_results": "NO",
   "schema_version": "target-blind-common-predictor-manifest-v2.3",

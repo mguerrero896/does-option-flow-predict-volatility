@@ -11,9 +11,9 @@ Supabase bucket** actually expose, read against the exact public Terms of Servic
 the three data providers, retrieved 2026-08-18. This review covers the public
 self-service terms only; any account-specific addendum (order form, enterprise rider)
 in the owner's email or dashboard would supersede it. This is a documented reading by
-the research team, not legal advice.
+the author, not legal advice.
 
-## What we publish, factually
+## What is published, factually
 
 | Surface | Content | Raw provider values? |
 |---|---|---|
@@ -52,7 +52,7 @@ Exact clauses that bind:
   without FMP's prior written consent…" (drafted inside the security-incident section
   but worded generally).
 
-Reading vs what we publish: raw FMP bars are neither in the public repo nor in the
+Reading vs what is published: raw FMP bars are neither in the public repo nor in the
 bucket — compliant. The exposure is the broad "derived from" language (§2.2, §2.6.1):
 a maximal literal reading could reach even statistical aggregates; the ordinary
 academic reading (results of the customer's own analysis, no recoverable data values)
@@ -82,7 +82,7 @@ Exact clauses that bind:
 - SUSPENSION AND TERMINATION: "Upon termination … you must cease all use of the API
   and Data and delete any stored or cached Data in your possession."
 
-Reading vs what we publish: UW's is the most explicit "derived data" clause of the
+Reading vs what is published: UW's is the most explicit "derived data" clause of the
 three. Raw tape archives never leave the owner's machine — compliant. Per-origin
 derived rows are only in the private bucket (not published; each grant of access is an
 owner decision — see "Bucket access" below). Published aggregates (deltas, p-values)
@@ -109,7 +109,7 @@ Exact clauses that bind:
   investment strategy") "unless you are licensed to do so."
 - No academic/research carve-out exists in the document.
 
-Reading vs what we publish: Massive's §5(c) is the broadest clause in this review —
+Reading vs what is published: Massive's §5(c) is the broadest clause in this review —
 literally it covers "research … derived from the Market Data", which would include any
 published QLIKE table whose models consumed Massive quotes. The quote-level failure
 CSV found on the public mirror was the one concrete violation-shaped exposure under

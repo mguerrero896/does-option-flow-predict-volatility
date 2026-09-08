@@ -5,17 +5,35 @@ import json
 import re
 from functools import lru_cache
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal, cast
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def verified_redaction_receipt() -> dict[str, Any] | None:
+    """Authenticate the exact receipt bytes against the append-only registry."""
+    name = "artifacts/rp4_public_refresh/archive_redactions.json"
+    receipt = ROOT / name
+    registry = ROOT / "data/FROZEN_ARTIFACTS.json"
+    entries = json.loads(registry.read_bytes())["entries"] if registry.is_file() else []
+    pins = [entry for entry in entries if entry["path"] == name]
+    if not receipt.is_file() and not pins:
+        return None
+    if len(pins) != 1 or not re.fullmatch(r"[0-9a-f]{64}", str(pins[0].get("sha256", ""))):
+        raise ValueError("PUBLIC_REDACTION_MANIFEST_PIN_INVALID")
+    if not receipt.is_file():
+        raise ValueError("PUBLIC_REDACTION_MANIFEST_MISSING")
+    payload = receipt.read_bytes()
+    if hashlib.sha256(payload).hexdigest() != pins[0]["sha256"]:
+        raise ValueError("PUBLIC_REDACTION_MANIFEST_HASH_MISMATCH")
+    return cast(dict[str, Any], json.loads(payload))
+
+
 @lru_cache
 def _withheld_sources() -> dict[str, dict[str, str]]:
-    receipt = ROOT / "artifacts/rp4_public_refresh/archive_redactions.json"
-    if not receipt.is_file():
+    data = verified_redaction_receipt()
+    if data is None:
         return {}
-    data = json.loads(receipt.read_text("utf-8"))
     assert data["schema_version"] == "public-archive-redactions-v1"
     entries = data.get("withheld_sources", [])
     result = {}
@@ -32,10 +50,9 @@ def _withheld_sources() -> dict[str, dict[str, str]]:
 
 @lru_cache
 def _redactions() -> dict[str, dict[str, object]]:
-    receipt = ROOT / "artifacts/rp4_public_refresh/archive_redactions.json"
-    if not receipt.is_file():
+    data = verified_redaction_receipt()
+    if data is None:
         return {}
-    data = json.loads(receipt.read_text("utf-8"))
     assert data["schema_version"] == "public-archive-redactions-v1"
     entries = data["entries"]
     result = {entry["logical_path"]: entry for entry in entries}
@@ -166,6 +183,8 @@ def assert_historical_sha256(
     Explicitly withheld source metadata verifies only a historical provenance pin
     and present absence. It supplies no file, executable code or numerical value.
     """
+    # Recheck on every verification, even if routing dictionaries are cached.
+    verified_redaction_receipt()
     source = original_path(value)
     logical = logical_path(value)
     if logical.is_relative_to(ROOT):

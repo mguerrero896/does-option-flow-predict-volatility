@@ -1,11 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this repository or its methodology, please cite it as below."
-title: "Options Order Flow and Intraday Volatility: A Point-in-Time Forecasting Study"
+title: "Options Order Flow and Intraday Volatility"
 type: software
 authors:
   - family-names: "Guerrero"
     given-names: "Miguel"
-# Version and release date remain absent until this exact sanitized tree has a public release.
+    affiliation: "Sydney Polytechnic Institute"
+# Date of this public research snapshot; no tagged software version is claimed.
+date-released: 2026-09-09
 repository-code: "https://github.com/mguerrero896/does-option-flow-predict-volatility"
 keywords:
   - options order flow

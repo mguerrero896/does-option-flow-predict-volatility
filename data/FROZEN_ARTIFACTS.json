@@ -561,6 +561,11 @@
    "sha256": "096fd343e2caaf50206993c29e4e7e9e1209540e673f7f42d76b71432e440acf"
   },
   {
+   "bytes": 76313,
+   "path": "artifacts/rp4_public_refresh/archive_redactions.json",
+   "sha256": "5ab6af620e70912014a7a3c806b7082bbdd081a1685790c59937fc9d1a8ba3d2"
+  },
+  {
    "bytes": 15235,
    "path": "artifacts/rp4_v3_candidate/build_gamma_imbalance.py",
    "sha256": "595f50f42b877efa27bb91ed3345ddd6a3458c7b81c490049e50efb34e3da0b7"

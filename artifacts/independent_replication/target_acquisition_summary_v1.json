@@ -36,7 +36,7 @@
     "warmup_blocker": "2025-04-04 provider archive remains stable-corrupt across two body downloads; no retry was performed after the refresh probe."
   },
   "storage": {
-    "root": "D:/MDS650/independent_replication_30",
+    "root": "private-input/independent_replication_30",
     "free_space_gib_observed_after_completion": 597.18,
     "minimum_free_space_gib": 80.0
   }

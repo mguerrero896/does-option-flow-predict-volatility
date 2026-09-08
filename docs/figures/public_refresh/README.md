@@ -71,3 +71,62 @@ Generated contact sheets, screenshots and raw local tool receipts are excluded
 from version control. The manifest retains only sanitized receipts and hashes.
 The classic Archify style preserves rounded nodes, directional arrows and dashed
 boundaries; its semantic colors and typography are those of the installed renderer.
+
+## Figures for a first reading
+
+These figures introduce the question and results using ordinary model-family
+names. The programme identifiers remain in the historical timeline.
+
+| Figure | SVG | PNG fallback | Input |
+| --- | --- | --- | --- |
+| Four comparisons at 15 minutes | [SVG](result_matrix.svg) | [PNG](result_matrix.png) | [Saved primary statistics](../../../artifacts/rp4_v4_b4/primary_statistics.csv) |
+| Nested information sets: 29, 69 and 138 variables | [SVG](information_sets.svg) | [PNG](information_sets.png) | [Frozen design description](../../rp4/specification_v4.md) |
+| Cumulative option-flow loss difference for six stocks | [SVG](cumulative_by_asset_rv15.svg) | [PNG](cumulative_by_asset_rv15.png) | [Existing cumulative aggregate](../../../artifacts/rp4_readme_figures_v1/cumulative_by_asset_rv15.csv) |
+| Study design, evaluation and future replication | [SVG](proposal_to_replication_readme.workflow.svg) | [PNG](proposal_to_replication_readme.workflow.png) | Text adaptation of the versioned workflow above; geometry preserved |
+| Historical workflow | [SVG](proposal_to_replication.workflow.svg) | [PNG](proposal_to_replication.workflow.png) | Versioned Archify source above |
+| Programme timeline | [SVG](programme_timeline.architecture.svg) | [PNG](programme_timeline.architecture.png) | Versioned Archify source above |
+| Global cumulative differences | [SVG](../rp4/v4_B2_over_B1_cumulative_v2.svg) | [PNG](../rp4/v4_B2_over_B1_cumulative_v2.png) | Existing figure, preserved byte for byte |
+
+The [figure generator](render_readme_figures.py) reads saved public statistics and
+the already generated cumulative aggregate. It runs no model fitting, bootstrap,
+forecast generation or private-data producer. Every stock retains all 419 saved
+dates. Curves share the same vertical scale and report cumulative QLIKE loss
+differences, not percentage returns or trading profit.
+
+The [import receipt](../../../artifacts/rp4_readme_figures_v1/import_receipt.json)
+authenticates the existing aggregate bytes and its agreement with public controls.
+Its scope does not include independent reconstruction of the private checkpoints
+or per-origin calculations. Twelve endpoints match saved per-stock estimates and
+838 averaged curve points match public global losses, within an absolute tolerance
+of `5.001e-7`. Six-decimal rounding contributes at most `0.5e-6`; the additional
+`1e-10` covers floating-point summation.
+
+Verification requires Python and the repository's existing standard-library-based
+figure helper:
+
+```sh
+python docs/figures/public_refresh/render_readme_figures.py --verify
+```
+
+Regeneration also requires the existing Node.js and Sharp installation. Set
+`RP4_FIGURE_NODE` to the Node executable and `RP4_FIGURE_NODE_MODULES` to the
+directory containing the installed `sharp` package; then run:
+
+```sh
+python docs/figures/public_refresh/render_readme_figures.py --render
+python docs/figures/public_refresh/render_readme_figures.py --verify
+```
+
+The [README figure manifest](readme_figures_manifest.json) records the 13 source
+hashes, all seven SVG/PNG pairs, numerical controls and renderer versions. The
+manifest declares source hashes by type: Python and CommonJS code use UTF-8 bytes
+with CRLF converted to LF, so Git checkout line endings do not change their
+identity. CSV, JSON, Markdown and SVG inputs retain exact raw-byte hashes. Output
+hashes also use exact raw bytes.
+
+The
+archived browser SVG exports use CSS variables; the PNG producer resolves their
+existing light palette explicitly for compatibility with Sharp's SVG engine.
+This changes neither the original SVG bytes nor the diagram geometry. PNG checks
+reject blank images; visual review separately checks text, units, clipping,
+colours and routes. A fresh render resets the visual-review field to pending.

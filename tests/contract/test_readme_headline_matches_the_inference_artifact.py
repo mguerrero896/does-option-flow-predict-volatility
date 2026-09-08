@@ -8,6 +8,7 @@ separate requirements; a secondary median cannot replace the primary mean.
 
 from __future__ import annotations
 
+import csv
 import json
 import re
 from pathlib import Path
@@ -49,16 +50,22 @@ def _percent(cell: dict[str, Any]) -> str:
     return f"{cell['qlike_reduction_percent']:+.3f}".replace("-", "−")
 
 
-def _table_row(readme: str, label: str) -> list[str]:
+def _table_row(readme: str, label: str, columns: int = 6) -> list[str]:
     rows = [line for line in readme.splitlines() if line.startswith(f"| {label} |")]
     assert len(rows) == 1, f"Missing or duplicate headline table row: {label}"
     cells = [value.strip() for value in rows[0].strip("|").split("|")]
-    assert len(cells) == 6
+    assert len(cells) == columns
     return cells
 
 
 def _prose(readme: str) -> str:
     return " ".join(readme.replace("**", "").split())
+
+
+def _section(readme: str, title: str) -> str:
+    marker = f"## {title}\n"
+    assert readme.count(marker) == 1, f"Missing or duplicate section: {title}"
+    return readme.split(marker, 1)[1].split("\n## ", 1)[0]
 
 
 def test_the_readme_states_the_registered_surface_improvements() -> None:
@@ -71,8 +78,13 @@ def test_the_readme_states_the_registered_surface_improvements() -> None:
             assert cell["estimate"] > 0 and cell["rejected"] is True
             assert cell["hypothesis_status"] == "REJECTED"
             assert f"{_percent(cell)} %" in row[column]
-    headline = _prose(readme.split("## ", 1)[0])
-    assert re.search(r"RV30 and RV15.{0,60}in both families", headline)
+    results = _section(readme, "Results")
+    artifact = _summary(PRIMARY["v4 · RV15, primary"])
+    for family, label in ((LINEAR, "Linear"), (TREES, "Trees")):
+        cell = _cell(artifact, family, "B1_over_B0")
+        assert _table_row(results, label, 3)[1] == (
+            f"{_percent(cell)}% (p = {cell['p_for_decision']:.4f})"
+        )
 
 
 def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject() -> None:
@@ -84,9 +96,11 @@ def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject(
         assert cell["hypothesis_status"] == "NOT_REJECTED"
         assert artifact["global_joint_reject"] is False
         assert f"{_percent(cell)} %" in _table_row(readme, label)[4]
-    headline = _prose(readme.split("## ", 1)[0])
-    assert "In trees, flow does not pass the mean test" in headline
-    assert "neither a universal advantage nor evidence of profitability" in headline
+    headline = _prose(_section(readme, "Overview"))
+    assert "the tree model does not improve" in headline
+    limits = _prose(_section(readme, "Limits"))
+    assert "neither the dealer-hedging mechanism, economic alpha, profitability" in limits
+    assert "nor broader generalization" in limits
 
 
 def test_the_readme_names_the_registered_linear_flow_estimate_and_interval() -> None:
@@ -94,11 +108,14 @@ def test_the_readme_names_the_registered_linear_flow_estimate_and_interval() -> 
     cell = _cell(artifact, LINEAR, "B2_over_B1")
     assert 0 < cell["ci_low"] < cell["estimate"] < cell["ci_high"]
     assert cell["rejected"] is True
-    headline = _prose(README.read_text(encoding="utf-8").split("## ", 1)[0])
-    assert re.search(rf"15 minutes.{{0,30}}{re.escape(_percent(cell))} %", headline)
-    assert "positive 95% interval" in headline
+    readme = README.read_text(encoding="utf-8")
+    headline = _prose(_section(readme, "Overview"))
+    percent = f"{cell['qlike_reduction_percent']:.3f}"
+    assert re.search(rf"15-minute forecast loss by {re.escape(percent)}%", headline)
+    results = _prose(_section(readme, "Results"))
+    assert "positive 95% interval" in results
     interval = f"[{cell['ci_low']:.6f}; {cell['ci_high']:.6f}]"
-    assert f"QLIKE difference {interval}" in headline
+    assert f"{interval} in QLIKE units" in results
 
 
 def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparisons() -> None:
@@ -117,13 +134,39 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
             p_value = f"{cell['p_for_decision']:.4f}"
             assert row[column] == f"{_percent(cell)} % ({p_value})"
     text = _prose(readme)
-    assert "one-sided H1→H2 at 5% per family" in text
-    assert "H2 opens only when H1 rejects" in text
+    history = _prose(_section(readme, "History and prospective replication"))
+    assert "one-sided sequence at 5% per family" in history
+    assert "H2 opened only if H1 rejects" in history
     assert "Cross-version search is not adjusted" in text
     closure = _summary(PRIMARY["v4 · RV15, primary"])["predeclared_closure"]
     assert closure["satisfied"] is True
     assert closure["successful_families"] == [LINEAR]
-    assert "V4 remains the headline" in text
+    assert "v4 supplies the headline" in history
+    results = _section(readme, "Results")
+    artifact = _summary(PRIMARY["v4 · RV15, primary"])
+    for family, label in ((LINEAR, "Linear"), (TREES, "Trees")):
+        row = _table_row(results, label, 3)
+        for column, contrast in ((1, "B1_over_B0"), (2, "B2_over_B1")):
+            cell = _cell(artifact, family, contrast)
+            assert row[column] == f"{_percent(cell)}% (p = {cell['p_for_decision']:.4f})"
+    assert "p-values belong to the declared one-sided sequence" in _prose(results)
+    flow = _cell(artifact, LINEAR, "B2_over_B1")
+    with (REPO / "artifacts/rp4_v4_b4/primary_statistics.csv").open(encoding="utf-8") as file:
+        bilateral = [
+            row
+            for row in csv.DictReader(file)
+            if row["horizon_minutes"] == "15"
+            and row["window"] == "primary"
+            and row["family"] == LINEAR
+            and row["contrast"] == "B2_over_B1"
+        ]
+    assert len(bilateral) == 1
+    assert float(bilateral[0]["p_raw"]) == flow["p_for_decision"]
+    assert f"bilateral Holm-adjusted p = {float(bilateral[0]['p_holm_bilateral']):.4f}" in _prose(
+        results
+    )
+    assert "separate comparability analysis" in _prose(results)
+    assert "not another adjustment to the one-sided sequence" in _prose(results)
 
 
 def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence() -> None:
@@ -138,25 +181,52 @@ def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence()
     )
     text = _prose(README.read_text(encoding="utf-8"))
     assert (
-        f"The final {artifact['N_sessions']}-session window does not confirm the full sequence"
+        f"The final {artifact['N_sessions']}-session window does not confirm the full test sequence"
         in text
     )
 
 
 def test_the_readme_restores_the_existing_navigation_destinations() -> None:
     readme = README.read_text(encoding="utf-8")
-    section = readme.rsplit("## Navigation", 1)
-    assert len(section) == 2, "The final navigation section is missing."
-    links = set(re.findall(r"\[[^\]]+\]\(([^)]+)\)", section[1]))
+    links = set(re.findall(r"\[[^\]]+\]\(([^)]+)\)", readme))
     for target in (
+        "CITATION.cff",
         "CONTRIBUTING.md",
-        "docs/INDEX.md",
+        "LICENSE",
+        "SECURITY.md",
+        "STATUS.md",
+        "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
+        "artifacts/rp4_v4_b4/primary_statistics.csv",
+        "artifacts/rp4_v4_b4/robustness.csv",
+        "data/CANONICAL_STATE.json",
+        "data/DATA_ACCESS.md",
         "docs/AI_ASSISTANCE_STATEMENT.md",
+        "docs/DEVELOPER_GUIDE.md",
+        "docs/INDEX.md",
+        "docs/figures/rp4/thesis_summary.svg",
+        "docs/known_defects_and_resolutions.md",
+        "docs/pit_v22_claims_and_limitations.md",
+        "docs/reproduce.md",
+        "docs/reproducibility_contract_v1.md",
+        "docs/research_decisions_current.md",
+        "docs/rp2_v3/SUPERSEDED_RESULTS.md",
+        "docs/rp3/PREREGISTRATION.md",
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md",
+        "docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md",
+        "docs/rp4/results_universe_v1.md",
+        "docs/rp4/results_v4.md",
+        "docs/rp4/results_v5.md",
+        "docs/rp4/specification_v4.md",
+        "docs/scientific_findings_ledger.md",
         "docs/threats_to_validity_matrix_v1.md",
-        "scripts/README.md",
+        "https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml/badge.svg",
+        "https://github.com/mguerrero896/does-option-flow-predict-volatility/issues",
         "reports/INDEX.md",
+        "reports/phase8a_exploratory_bridge_addendum_v13.md",
+        "scripts/README.md",
         "supabase/README.md",
     ):
         assert target in links, f"Missing navigation link: {target}"
-        assert (REPO / target).is_file(), f"Broken navigation destination: {target}"
+        if not target.startswith("https://"):
+            assert (REPO / target).is_file(), f"Broken navigation destination: {target}"
     assert "https://github.com/mguerrero896/does-option-flow-predict-volatility/issues" in links

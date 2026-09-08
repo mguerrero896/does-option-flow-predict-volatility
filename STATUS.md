@@ -34,7 +34,7 @@ to be an RP4 sealed cohort under decision 128. C10 remains inactive.
 RP4 has registered 20/40/335-new-session checks; 45 means a secondary
 combination of 25 historical and 20 new sessions, not another independent read.
 Earlier decisions and quantities remain in the JSON's `history` field.
-Frozen evidence: 158 artifacts registered.
+Frozen evidence: 159 artifacts registered.
 
 ## Publication and access
 

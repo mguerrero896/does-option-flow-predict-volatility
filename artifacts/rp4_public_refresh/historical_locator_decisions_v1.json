@@ -1,0 +1,515 @@
+{
+  "schema_version": "historical-locator-decisions-v1",
+  "source_public_commit": "387d9552305bd729e6549b4152d3e37bc9c2ea10",
+  "created_at_utc": "2026-09-08T18:45:43.498973+00:00",
+  "scope": "Historical metadata locator-only publication corrections. Three hash-bound JSON artifacts preserve source checkout bytes and historical public Git blobs; machine locators are historical integrity exceptions, not executable access instructions.",
+  "hash_definitions": {
+    "original_git_blob_sha256": "SHA-256 of exact historical public Git blob bytes before checkout conversion.",
+    "original_git_blob_oid": "Git SHA-1 object identifier of that exact historical public blob.",
+    "original_source_checkout_sha256": "SHA-256 of original source working-file bytes.",
+    "original_public_checkout_sha256": "SHA-256 of original public-candidate working-file bytes, including checkout line endings.",
+    "public_sha256": "SHA-256 of LF-normalized publication bytes under existing JSON attributes or the explicitly scoped log attribute. Modified bytes never receive the original blob hash.",
+    "original_value_sha256": "SHA-256 of original decoded UTF-8 locator value or log-prefix bytes. Original strings are not repeated in this receipt."
+  },
+  "entries": [
+    {
+      "path": "artifacts/canonical_validation_v1/full_pytest.stdout.log",
+      "original_git_blob_sha256": "df233b8e8e5995b5555b2200d129ccb422ef03b67a5e869cf8bd894072e208ed",
+      "original_git_blob_oid": "fef417b440d7258d2bd3d5e1a167fb7c62ace470",
+      "original_source_checkout_sha256": "df233b8e8e5995b5555b2200d129ccb422ef03b67a5e869cf8bd894072e208ed",
+      "original_public_checkout_sha256": "c4382b8a3630fa770272d58f5e30289b8cec99ca4b17b9cf47139164fb594086",
+      "original_git_blob_bytes": 9009,
+      "original_source_checkout_bytes": 9009,
+      "original_public_checkout_bytes": 9150,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "text_log",
+      "decision": "REDACT_LOCATION_PREFIX_ONLY",
+      "seal_classification": "NO_FIXED_HASH_SEAL_FOUND",
+      "public_sha256": "26bc45c2b31c61f7119fb3310ab7bdc1c21936fe5bf16da21025319f04e49959",
+      "source_after_raw_sha256": "26bc45c2b31c61f7119fb3310ab7bdc1c21936fe5bf16da21025319f04e49959",
+      "location_prefix": {
+        "original_value_sha256": "9da1b1f3a04876532cdb87fa99ac754c9ed32825537df57262d15947f135bded",
+        "public_value": "historical-workspace/",
+        "occurrences": 4
+      },
+      "unchanged_content_canonical_sha256": "e2999b6156c907fcb794b99cb31290907290a378e930c79fd70116080f0dfec8",
+      "unchanged_content_rule": "LF-normalize and replace the four recorded location prefixes with <historical-location>/; every other byte remains identical.",
+      "changed_locator_values": 4,
+      "seal_evidence": []
+    },
+    {
+      "path": "artifacts/independent_replication/evaluation_incidents/20260811_bootstrap_contract.json",
+      "original_git_blob_sha256": "6731a904f19c76f01c64326c0fea3e626d92018a4f1cd80d1376b6393ca9079c",
+      "original_git_blob_oid": "ef7e1dbb8c1c3400635be4409f86aed93e69bc28",
+      "original_source_checkout_sha256": "6731a904f19c76f01c64326c0fea3e626d92018a4f1cd80d1376b6393ca9079c",
+      "original_public_checkout_sha256": "6731a904f19c76f01c64326c0fea3e626d92018a4f1cd80d1376b6393ca9079c",
+      "original_git_blob_bytes": 1133,
+      "original_source_checkout_bytes": 1133,
+      "original_public_checkout_bytes": 1133,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "REDACT_LOCATORS_ONLY",
+      "seal_classification": "NO_ENFORCED_HASH_SEAL_FOUND_IN_INSPECTED_BINDINGS",
+      "seal_evidence": [],
+      "observation_evidence": [
+        {
+          "path": "artifacts/independent_replication/evidence_index.csv",
+          "matching_rows": [
+            {
+              "artifact": "artifacts/independent_replication/evaluation_incidents/20260811_bootstrap_contract.json",
+              "category": "evaluation_incident",
+              "storage": "repository",
+              "bytes": "1133",
+              "sha256": "6731a904f19c76f01c64326c0fea3e626d92018a4f1cd80d1376b6393ca9079c",
+              "secrets_emitted": "False",
+              "personal_paths_emitted": "False"
+            }
+          ],
+          "classification": "GENERATED_OBSERVATIONAL_EVIDENCE_INDEX_NOT_AN_IMMUTABILITY_CONTRACT",
+          "producer": "scripts/report_independent_replication_30d.py:137-212",
+          "reason": "Producer hashes current files into a replaced CSV; no expected-pin comparison or frozen-registry entry for either input or this index was found."
+        },
+        {
+          "path": "tests/contract/test_independent_replication_report.py",
+          "lines": [
+            36,
+            41
+          ],
+          "classification": "FORMAT_AND_SANITIZATION_CHECK_ONLY",
+          "claim": "Checks unique entries and 64-character SHA strings; does not compare source-file bytes to indexed hash."
+        }
+      ],
+      "locator_fields": [
+        {
+          "pointer": "/quarantined_outputs/0/relative_path",
+          "original_value_sha256": "2d59189877f332a0db4861be251e10f7f11e730de9b08b394264be3800bd40a6",
+          "public_value": "private-input/independent_replication_30/derived/_failed_attempts/20260811_bootstrap_contract/independent_predictions.parquet"
+        },
+        {
+          "pointer": "/quarantined_outputs/1/relative_path",
+          "original_value_sha256": "e163609747e351953964b950d01d08e23338a15e8566a9721b626b2ef41f27ee",
+          "public_value": "private-input/independent_replication_30/derived/_failed_attempts/20260811_bootstrap_contract/independent_timing_predictions.parquet"
+        }
+      ],
+      "unchanged_content_canonical_sha256": "7c39abeb68cc7ed6472893b518eb50961ed0106af5091be7a8ce17f2ea168473",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "aeef3266963e37607456fae86003ab6f7566d363b3ce8798b8b881d512f7334a",
+      "source_after_raw_sha256": "aeef3266963e37607456fae86003ab6f7566d363b3ce8798b8b881d512f7334a",
+      "changed_locator_values": 2
+    },
+    {
+      "path": "artifacts/independent_replication/target_acquisition_summary_v1.json",
+      "original_git_blob_sha256": "8141d1da015b81bbcd39779d60c841f993d7f5278d1baceb353eb78851343d21",
+      "original_git_blob_oid": "32126ba30c6645fb4c6fa140054decc3075d4e09",
+      "original_source_checkout_sha256": "8141d1da015b81bbcd39779d60c841f993d7f5278d1baceb353eb78851343d21",
+      "original_public_checkout_sha256": "8141d1da015b81bbcd39779d60c841f993d7f5278d1baceb353eb78851343d21",
+      "original_git_blob_bytes": 1752,
+      "original_source_checkout_bytes": 1752,
+      "original_public_checkout_bytes": 1752,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "REDACT_LOCATORS_ONLY",
+      "seal_classification": "NO_ENFORCED_HASH_SEAL_FOUND_IN_INSPECTED_BINDINGS",
+      "seal_evidence": [],
+      "observation_evidence": [
+        {
+          "path": "artifacts/independent_replication/evidence_index.csv",
+          "matching_rows": [
+            {
+              "artifact": "artifacts/independent_replication/target_acquisition_summary_v1.json",
+              "category": "target_acquisition_summary",
+              "storage": "repository",
+              "bytes": "1752",
+              "sha256": "8141d1da015b81bbcd39779d60c841f993d7f5278d1baceb353eb78851343d21",
+              "secrets_emitted": "False",
+              "personal_paths_emitted": "False"
+            }
+          ],
+          "classification": "GENERATED_OBSERVATIONAL_EVIDENCE_INDEX_NOT_AN_IMMUTABILITY_CONTRACT",
+          "producer": "scripts/report_independent_replication_30d.py:137-212",
+          "reason": "Producer hashes current files into a replaced CSV; no expected-pin comparison or frozen-registry entry for either input or this index was found."
+        },
+        {
+          "path": "tests/contract/test_independent_replication_report.py",
+          "lines": [
+            36,
+            41
+          ],
+          "classification": "FORMAT_AND_SANITIZATION_CHECK_ONLY",
+          "claim": "Checks unique entries and 64-character SHA strings; does not compare source-file bytes to indexed hash."
+        }
+      ],
+      "locator_fields": [
+        {
+          "pointer": "/storage/root",
+          "original_value_sha256": "d90908d912a3eb8e671e3b02d892bd584d5c277a3f7e13dea6080c9f2b036c67",
+          "public_value": "private-input/independent_replication_30"
+        }
+      ],
+      "unchanged_content_canonical_sha256": "196deb1f53afd5a0fc44ed79396a9e57668ee52a12e576c96f8d28f32a9b5c51",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "56ac96e1987546fa756086323a8d50b092d398e5af102069972a1d7735031b7b",
+      "source_after_raw_sha256": "56ac96e1987546fa756086323a8d50b092d398e5af102069972a1d7735031b7b",
+      "changed_locator_values": 1
+    },
+    {
+      "path": "artifacts/rp2_block1_partition/partition.json",
+      "original_git_blob_sha256": "f85f13fb1c259922ee9c19c1324cbca9cc8f91036884b5e82cf362ffc87848d6",
+      "original_git_blob_oid": "42a0e4d669b78e800f20bbf2f75030ab423b61b1",
+      "original_source_checkout_sha256": "f85f13fb1c259922ee9c19c1324cbca9cc8f91036884b5e82cf362ffc87848d6",
+      "original_public_checkout_sha256": "f85f13fb1c259922ee9c19c1324cbca9cc8f91036884b5e82cf362ffc87848d6",
+      "original_git_blob_bytes": 1871,
+      "original_source_checkout_bytes": 1871,
+      "original_public_checkout_bytes": 1871,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "PRESERVE_BYTES_AND_EXPLAIN_ORIGINAL_MACHINE_LOCATORS",
+      "seal_classification": "VERIFIED_SELF_HASHED_FROZEN_PARTITION",
+      "seal_evidence": [
+        {
+          "path": "artifacts/rp2_block1_partition/partition.json",
+          "pointer": "/partition_sha256",
+          "expected": "93566e5771cb4eb7f4badf1bfc2c2cc9a491b45a4324fa141bd240f469b2a168",
+          "recomputed_match": true,
+          "coverage": "all fields except partition_sha256 and generated_at_utc, canonical sorted compact ASCII JSON"
+        },
+        {
+          "path": "scripts/rp2_block1_freeze_partition.py",
+          "lines": [
+            1,
+            55,
+            64
+          ],
+          "claim": "Explicit hash-frozen partition producer binds data_root before adding generation timestamp."
+        }
+      ],
+      "observation_evidence": [],
+      "locator_fields": [
+        {
+          "pointer": "/data_root",
+          "original_value_sha256": "841df58180063dcccac14bbb6cc4c1b08f63a0a7b94b16542d1efc32a1a3ed04",
+          "retained_by_seal": true
+        }
+      ],
+      "unchanged_content_canonical_sha256": "ccf19de60b1ed9d2baf5276413917376bf5881cb9e6090bae51a0d4ff1e4696a",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "f85f13fb1c259922ee9c19c1324cbca9cc8f91036884b5e82cf362ffc87848d6",
+      "source_after_raw_sha256": "f85f13fb1c259922ee9c19c1324cbca9cc8f91036884b5e82cf362ffc87848d6",
+      "changed_locator_values": 0,
+      "preservation_scope": "Source checkout bytes unchanged; historical public Git blob unchanged. Raw source seals and Git LF blob hashes remain separately identified."
+    },
+    {
+      "path": "artifacts/rp2_validation_market/acquisition.json",
+      "original_git_blob_sha256": "349951c7fe9fbfd50a933913299c5d34284a8fb81098aaa15be1a944405e60d2",
+      "original_git_blob_oid": "7fdc5d2637ec5774fcd8dfffd2300a210ae25919",
+      "original_source_checkout_sha256": "349951c7fe9fbfd50a933913299c5d34284a8fb81098aaa15be1a944405e60d2",
+      "original_public_checkout_sha256": "349951c7fe9fbfd50a933913299c5d34284a8fb81098aaa15be1a944405e60d2",
+      "original_git_blob_bytes": 612,
+      "original_source_checkout_bytes": 612,
+      "original_public_checkout_bytes": 612,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "REDACT_LOCATORS_ONLY",
+      "seal_classification": "NO_ENFORCED_HASH_SEAL_FOUND_IN_INSPECTED_BINDINGS",
+      "seal_evidence": [
+        {
+          "path": "scripts/rp2_acquire_validation_market_bars.py",
+          "lines": [
+            134,
+            150
+          ],
+          "claim": "combined_sha256 is computed from the combined parquet; acquisition.json is separately written without a document seal."
+        }
+      ],
+      "observation_evidence": [],
+      "locator_fields": [
+        {
+          "pointer": "/combined",
+          "original_value_sha256": "f67c0fd4326a47beeab3f82e3a4df724b09bdc696af9cf0dd0fb07c9e743bd2d",
+          "public_value": "private-input/data/fmp/rp2_validation_market/market_1min_validation.parquet"
+        }
+      ],
+      "unchanged_content_canonical_sha256": "c84e97e2797a440f2677a3336106b3438fe54248ed9d69655d99171a1724d9a7",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "46ffe6b5918638b0683a7483677628fdb1bc985ceabd6b5d9fb17bae9ed8ea85",
+      "source_after_raw_sha256": "46ffe6b5918638b0683a7483677628fdb1bc985ceabd6b5d9fb17bae9ed8ea85",
+      "changed_locator_values": 1
+    },
+    {
+      "path": "artifacts/target_blind_v22/target_blind_common_predictor_manifest_v22.json",
+      "original_git_blob_sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+      "original_git_blob_oid": "2d9b4529e325912bc60e04905b01b4001f9dbc79",
+      "original_source_checkout_sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+      "original_public_checkout_sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+      "original_git_blob_bytes": 3720,
+      "original_source_checkout_bytes": 3720,
+      "original_public_checkout_bytes": 3720,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "PRESERVE_BYTES_AND_EXPLAIN_ORIGINAL_MACHINE_LOCATORS",
+      "seal_classification": "TRANSITIVE_SELF_SEALED_EVIDENCE_PIN_NOT_FROZEN_REGISTRY",
+      "seal_evidence": [
+        {
+          "path": "artifacts/target_blind_v22/pit_v22_claim_ledger_v1.json",
+          "pointer": "/source_hashes/panel_manifest",
+          "expected": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+          "raw_pin_matches": true,
+          "container_self_sha256": "c20877a0a790c1878a561c4daf729856b391bfcb342d7fdb4573eda241dd6a7a",
+          "container_self_hash_verified": true
+        },
+        {
+          "path": "scripts/build_pit_v22_claim_ledger.py",
+          "lines": [
+            94,
+            127,
+            149
+          ],
+          "claim": "Hashes the complete manifest bytes into the claim ledger source_hashes."
+        },
+        {
+          "path": "src/mds650/pit_v22_claim_ledger.py",
+          "lines": [
+            135,
+            165,
+            605,
+            626
+          ],
+          "claim": "Self-hashes the ledger and repeats exact manifest source identity in each relevant claim."
+        },
+        {
+          "path": "tests/unit/test_pit_v22_claim_ledger.py",
+          "lines": [
+            225,
+            270
+          ],
+          "claim": "Tests canonical ledger self-hash and retention of the manifest source pin; does not prove a runtime comparison of the saved source file."
+        }
+      ],
+      "observation_evidence": [],
+      "locator_fields": [
+        {
+          "pointer": "/output_locations/common_complete",
+          "original_value_sha256": "07e4c232c6eb38e22008fb6760910ecbb343332ca5d24e2fcfef9e4b8fb2d97d",
+          "retained_by_seal": true
+        },
+        {
+          "pointer": "/output_locations/panel",
+          "original_value_sha256": "85eb5359ca63aa8484c6817fd186295a40613efadf261de866390b3b8aed6dbe",
+          "retained_by_seal": true
+        }
+      ],
+      "unchanged_content_canonical_sha256": "91ee9e6d6b1d54dfcc9f0c1266a6819f1316191bbd721871000ac9ab219ba6e5",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+      "source_after_raw_sha256": "b0e31927418b1768024db6f79d7c2492f01b1104e8500d903037745dae8fbfdd",
+      "changed_locator_values": 0,
+      "preservation_scope": "Source checkout bytes unchanged; historical public Git blob unchanged. Raw source seals and Git LF blob hashes remain separately identified."
+    },
+    {
+      "path": "artifacts/target_blind_v23/target_blind_common_predictor_manifest_v23.json",
+      "original_git_blob_sha256": "7a98f835b4e16b2604ddab1c5bb1b89b3b10d22ebc8aab3ce03ef9990b603002",
+      "original_git_blob_oid": "168b73d3e3f162d3af90e599d05b82d73f6417ed",
+      "original_source_checkout_sha256": "7a98f835b4e16b2604ddab1c5bb1b89b3b10d22ebc8aab3ce03ef9990b603002",
+      "original_public_checkout_sha256": "7a98f835b4e16b2604ddab1c5bb1b89b3b10d22ebc8aab3ce03ef9990b603002",
+      "original_git_blob_bytes": 4417,
+      "original_source_checkout_bytes": 4417,
+      "original_public_checkout_bytes": 4417,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "REDACT_LOCATORS_ONLY",
+      "seal_classification": "NO_ENFORCED_HASH_SEAL_FOUND_IN_INSPECTED_BINDINGS",
+      "seal_evidence": [
+        {
+          "path": "scripts/seal_target_blind_confirmation_preregistration_v3.py",
+          "lines": [
+            30,
+            34,
+            190
+          ],
+          "claim": "The actual fixed preregistration binding names the sourcebound variant, not this variant."
+        },
+        {
+          "path": "tests/unit/test_seal_target_blind_confirmation_preregistration_v3.py",
+          "lines": [
+            16,
+            22
+          ],
+          "claim": "Default sourcebound selection is asserted."
+        }
+      ],
+      "observation_evidence": [],
+      "locator_fields": [
+        {
+          "pointer": "/output_locations/common_complete",
+          "original_value_sha256": "18f1661612ab317edc6edd0e11767a7e9788913ab8c2fe1b24f6b1b3eb6b6ebe",
+          "public_value": "private-input/phase6/derived/target_blind_v23/target_blind_common_complete_v23.parquet"
+        },
+        {
+          "pointer": "/output_locations/panel",
+          "original_value_sha256": "c5b21c973d9284fef3d5727199d12d7235ddeb87dd92fc78245b99bb6e7c27a2",
+          "public_value": "private-input/phase6/derived/target_blind_v23/target_blind_common_predictors_v23.parquet"
+        }
+      ],
+      "unchanged_content_canonical_sha256": "3713606cf3aa4bb77421ff9d2a09be87c6c78171c28d4fa7e661da1b01fbb052",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "8ec09b8e2cddeac9d27e5721a8fc45d1b18250891788a88a9e86f6dfad761e3c",
+      "source_after_raw_sha256": "8ec09b8e2cddeac9d27e5721a8fc45d1b18250891788a88a9e86f6dfad761e3c",
+      "changed_locator_values": 2
+    },
+    {
+      "path": "artifacts/target_blind_v23_committed_20260812/target_blind_common_predictor_manifest_v23.json",
+      "original_git_blob_sha256": "c31427328bfd63de311fea3240430b7780385eedc2904daf258f20c0203c31c2",
+      "original_git_blob_oid": "3db5f627e52cd979093325bbc563484f2c820a58",
+      "original_source_checkout_sha256": "c31427328bfd63de311fea3240430b7780385eedc2904daf258f20c0203c31c2",
+      "original_public_checkout_sha256": "c31427328bfd63de311fea3240430b7780385eedc2904daf258f20c0203c31c2",
+      "original_git_blob_bytes": 4455,
+      "original_source_checkout_bytes": 4455,
+      "original_public_checkout_bytes": 4455,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": false,
+      "format": "json",
+      "decision": "REDACT_LOCATORS_ONLY",
+      "seal_classification": "NO_ENFORCED_HASH_SEAL_FOUND_IN_INSPECTED_BINDINGS",
+      "seal_evidence": [
+        {
+          "path": "scripts/seal_target_blind_confirmation_preregistration_v3.py",
+          "lines": [
+            30,
+            34,
+            190
+          ],
+          "claim": "The actual fixed preregistration binding names the sourcebound variant, not this variant."
+        },
+        {
+          "path": "tests/unit/test_seal_target_blind_confirmation_preregistration_v3.py",
+          "lines": [
+            16,
+            22
+          ],
+          "claim": "Default sourcebound selection is asserted."
+        }
+      ],
+      "observation_evidence": [],
+      "locator_fields": [
+        {
+          "pointer": "/output_locations/common_complete",
+          "original_value_sha256": "ec5d6dcdad09f261073fc0d181dcd95da55867cfd5ce6119c5372dfb98e9567f",
+          "public_value": "private-input/phase6/derived/target_blind_v23_committed_20260812/target_blind_common_complete_v23.parquet"
+        },
+        {
+          "pointer": "/output_locations/panel",
+          "original_value_sha256": "c02e396bdb773ad69e67b67b15e6db26da2f96e518ce90ecaeea9a6f2f5226db",
+          "public_value": "private-input/phase6/derived/target_blind_v23_committed_20260812/target_blind_common_predictors_v23.parquet"
+        }
+      ],
+      "unchanged_content_canonical_sha256": "d37c4fcde5a0c045fd3cda1db46c90754b9804672b5c93049e139aed58122d3c",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "427d11ddc5fcd52796ecd3e21f4121b68187ecfb4c98631effe36777ce47530a",
+      "source_after_raw_sha256": "427d11ddc5fcd52796ecd3e21f4121b68187ecfb4c98631effe36777ce47530a",
+      "changed_locator_values": 2
+    },
+    {
+      "path": "artifacts/target_blind_v23_sourcebound_20260812/target_blind_common_predictor_manifest_v23.json",
+      "original_git_blob_sha256": "3fefae030e81138822a2057b3a5ff7a82d16d234e18340987690b585538c223e",
+      "original_git_blob_oid": "d605d8b6f19d87afc8bcee091a932ec01eb7e8ea",
+      "original_source_checkout_sha256": "803ec776afe24d6550c5acc85e971e8a812e4d187e3ccc13c3d35eab915914f8",
+      "original_public_checkout_sha256": "803ec776afe24d6550c5acc85e971e8a812e4d187e3ccc13c3d35eab915914f8",
+      "original_git_blob_bytes": 4459,
+      "original_source_checkout_bytes": 4556,
+      "original_public_checkout_bytes": 4556,
+      "hash_mode": "lf_normalized_text",
+      "original_checkout_differs_from_blob_only_by_crlf": true,
+      "format": "json",
+      "decision": "PRESERVE_BYTES_AND_EXPLAIN_ORIGINAL_MACHINE_LOCATORS",
+      "seal_classification": "VERIFIED_RAW_FILE_HASH_PREREGISTRATION_BINDING",
+      "seal_evidence": [
+        {
+          "path": "artifacts/target_blind_v23_sourcebound_20260812/next_confirmation_preregistration_v3.json",
+          "pointer": "/bound_panel/panel_manifest_sha256",
+          "expected": "803ec776afe24d6550c5acc85e971e8a812e4d187e3ccc13c3d35eab915914f8",
+          "raw_pin_matches": true,
+          "container_self_sha256": "8ca462bd6624426233be339f0e08e40fedfcce74fa6f50c41aaec01e499dce08",
+          "container_self_hash_verified": true
+        },
+        {
+          "path": "src/mds650/confirmation_readiness_v2.py",
+          "lines": [
+            131,
+            145,
+            147
+          ],
+          "claim": "Computes current file SHA and adds bound-panel-manifest mismatch blocker if unequal."
+        },
+        {
+          "path": "scripts/seal_target_blind_confirmation_preregistration_v3.py",
+          "lines": [
+            190,
+            247
+          ],
+          "claim": "Sealer binds raw manifest bytes."
+        },
+        {
+          "path": "src/mds650/target_blind_preregistration_v3.py",
+          "lines": [
+            94,
+            123
+          ],
+          "claim": "Sealed preregistration contains raw manifest hash and its own canonical self-hash."
+        }
+      ],
+      "observation_evidence": [
+        {
+          "path": "artifacts/target_blind_v23_sourcebound_20260812/confirmation_readiness_v2.json",
+          "pointer": "/bound_artifact_integrity/panel_manifest_sha256_observed",
+          "hash": "803ec776afe24d6550c5acc85e971e8a812e4d187e3ccc13c3d35eab915914f8",
+          "classification": "CORROBORATING_OBSERVATION_NOT_THE_SEAL"
+        }
+      ],
+      "locator_fields": [
+        {
+          "pointer": "/output_locations/common_complete",
+          "original_value_sha256": "2bf6bc5db36b4fe8753e3d0687c50cb7709f206133438262f16cc324d772b741",
+          "retained_by_seal": true
+        },
+        {
+          "pointer": "/output_locations/panel",
+          "original_value_sha256": "f2e4c6397f5abf03711a6804b5728651a32ccdbe51ade772550f2ca72d410b87",
+          "retained_by_seal": true
+        }
+      ],
+      "unchanged_content_canonical_sha256": "e799fcdd920fe4aa001b383fe1dac2e4c709dab4b3ee330d399b54f00d3ca2d8",
+      "unchanged_content_rule": "Canonical sorted compact ASCII JSON after replacing only listed JSON-pointer values with <historical-locator>; all remaining values, types, keys and array order are unchanged.",
+      "public_sha256": "3fefae030e81138822a2057b3a5ff7a82d16d234e18340987690b585538c223e",
+      "source_after_raw_sha256": "803ec776afe24d6550c5acc85e971e8a812e4d187e3ccc13c3d35eab915914f8",
+      "changed_locator_values": 0,
+      "preservation_scope": "Source checkout bytes unchanged; historical public Git blob unchanged. Raw source seals and Git LF blob hashes remain separately identified."
+    }
+  ],
+  "validation": {
+    "files": 9,
+    "preserved_json_files": 3,
+    "redacted_json_files": 5,
+    "redacted_json_locator_values": 8,
+    "redacted_log_prefix_occurrences": 4,
+    "unchanged_content_checks_passed": 9,
+    "scientific_values_changed": false,
+    "new_frozen_registry_entries": 0,
+    "models_or_inference_executed": false,
+    "prospective_reads": 0,
+    "licensed_bodies_read": 0,
+    "originals_retained_privately": true,
+    "focused_contract": "tests/contract/test_historical_locator_decisions.py",
+    "focused_contract_result": "2 passed",
+    "ruff_check": "PASS",
+    "candidate_and_clean_clone": "Pending separate publication integration"
+  },
+  "line_ending_boundary": "The sourcebound manifest already had CRLF checkout bytes and a distinct LF public Git blob before this correction. Both historical hashes remain explicit. Preserving its locators does not assert equality of these distinct byte representations or repair a raw source-seal portability mismatch.",
+  "verification_boundary": "Historical observational indices identify original source bytes. This receipt separately identifies public derivatives; it does not rerun, repair, reopen or newly authorize historical research."
+}

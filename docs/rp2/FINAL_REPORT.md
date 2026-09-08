@@ -71,7 +71,7 @@ too small to overcome estimation cost, let alone frictions).
 
 **The 60-second point-in-time cutoff is not valid.** Measured over **1,461,521,313 option
 trades across 469 sessions**: provider ingestion latency P50 0.073 s, P95 0.979 s, P99 4.76 s,
-max 23,995 s. Local receipt latency P95 57.5 s — which is our own 60-second polling cadence,
+max 23,995 s. Local receipt latency P95 57.5 s — which is the study's own 60-second polling cadence,
 not a provider delay. End-to-end P95 = **58.53 s**, so a 60-second cutoff leaves 1.5 seconds
 of margin. The empirical cutoff is **120 s**. The registered "120 s sensitivity" was always
 the correct primary convention.

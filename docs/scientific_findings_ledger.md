@@ -8,6 +8,11 @@ earlier null or turn an exploratory comparison into replication.
 
 ## RP2: nulls, corrections and scope
 
+The [canonical state](../data/CANONICAL_STATE.json) retains the historical bundle's
+machine status `HISTORICAL_MEASUREMENT_NOT_CURRENT_CLAIM` and reason
+`SUPERSEDED_BY_PIT_V22_SUCCESSOR_V2`. The README preserves its identity and explains
+that its measurements are superseded; these machine labels belong in this ledger.
+
 | Finding | Evidence and quantity | Status today and connection to the next step |
 | --- | --- | --- |
 | Original prospective nested comparisons were null | [Historical reconciliation](results_reconciliation_v2.md), [methodology decision 53](methodology_decisions.md) | Retained historical null. Later sample reuse cannot change its evidentiary status. |

@@ -1,0 +1,186 @@
+{
+  "capital_go": false,
+  "curve_controls": {
+    "absolute_tolerance": 5.001e-07,
+    "endpoints": 12,
+    "global_points": 838,
+    "maximum_endpoint_difference": 4.548023851969063e-07,
+    "maximum_global_difference": 3.4686042485465585e-07
+  },
+  "method": "Saved public statistics and existing rounded cumulative aggregates; original figure style and Sharp rasterizer. The README workflow changes labels and accessibility text only in the existing Archify export. Archify PNGs resolve the existing light palette to explicit CSS values for librsvg compatibility, preserving SVG geometry and text.",
+  "new_inference_runs": 0,
+  "new_model_fits": 0,
+  "output_sha256": {
+    "docs/figures/public_refresh/cumulative_by_asset_rv15.png": "c4b28d58a7036ce28d39756e675856c8838e60c552f755dfa1d7bdfb7dbb46cd",
+    "docs/figures/public_refresh/cumulative_by_asset_rv15.svg": "b863a9a68c2dbb130bcd0be9d9513bb582067e4389d399662f0c1934e203c3bd",
+    "docs/figures/public_refresh/information_sets.png": "8479bc08f6428fc1d4d7e9caff24e569b4823c8be0127229dee40cd1eac91611",
+    "docs/figures/public_refresh/information_sets.svg": "1985db4a947d7aa7b8ef31bd751ab88b6d7d6f41cca7df5c949028af1597ff7b",
+    "docs/figures/public_refresh/programme_timeline.architecture.png": "0e57c507e3ef4b1bfb7c911217adf92a4c80c8443c8fd00dc130c5ee202da595",
+    "docs/figures/public_refresh/programme_timeline.architecture.svg": "a5ebd2974c0d4eb0db28d027c674bd26cc129b5992b6713c5cdd158a40e0da1e",
+    "docs/figures/public_refresh/proposal_to_replication.workflow.png": "7c74bf24eedb992afa62948e685b86aeebc0fe2ae38af44e4d840c8f5f086a65",
+    "docs/figures/public_refresh/proposal_to_replication.workflow.svg": "7884805c3adb9e8a36fd7f75a3e587311129e0dceadba56208e6bed8843bc1a6",
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "bda3257d07ceb070b00760fd60b3c6cce464c095b4f035e045378c29dbb88346",
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg": "f8bbff61a67d875c7d7250605dd02a6f652aa4964948b91bcc840acebd553ebd",
+    "docs/figures/public_refresh/result_matrix.png": "1249622428e1f6ced19b39391d8fa4de198f2c7980d1c8b389acbdeaebfd83e3",
+    "docs/figures/public_refresh/result_matrix.svg": "d88e5970bccae16aac14f7a7a7c55c9de5fc4a4ecbf3fd420052e8fc4e97194b",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "7e2ae7ebb01570cc92ed207ae7a1818c7598c5d398d98fbbe41e9156d5f1803c",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "b7359b9217e8d261563dd07c6f440ed0d2d6501c0c23dc5bc1fcd9b2fcdf6c00"
+  },
+  "png_renderers": {
+    "docs/figures/public_refresh/cumulative_by_asset_rv15.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1275,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        237,
+        220,
+        205
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1600
+    },
+    "docs/figures/public_refresh/information_sets.png": {
+      "density": 96,
+      "format": "png",
+      "height": 949,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        237,
+        220,
+        205
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1600
+    },
+    "docs/figures/public_refresh/programme_timeline.architecture.png": {
+      "density": 96,
+      "format": "png",
+      "height": 867,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        249,
+        228,
+        211
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1813
+    },
+    "docs/figures/public_refresh/proposal_to_replication.workflow.png": {
+      "density": 96,
+      "format": "png",
+      "height": 933,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        249,
+        228,
+        212
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1540
+    },
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": {
+      "density": 96,
+      "format": "png",
+      "height": 933,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        249,
+        228,
+        212
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1540
+    },
+    "docs/figures/public_refresh/result_matrix.png": {
+      "density": 96,
+      "format": "png",
+      "height": 973,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        229,
+        220,
+        205
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1600
+    },
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": {
+      "density": 96,
+      "format": "png",
+      "height": 1973,
+      "metadata_copied": false,
+      "nonblank_rgb_ranges": [
+        255,
+        220,
+        255
+      ],
+      "renderer_threads": 1,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 2453
+    }
+  },
+  "private_forecast_or_raw_inputs_read": 0,
+  "render_command": "python docs/figures/public_refresh/render_readme_figures.py --render",
+  "schema_version": "public-readme-figures-v1",
+  "source_hash_mode": {
+    "by_suffix": {
+      ".cjs": "utf8-text-crlf-to-lf",
+      ".py": "utf8-text-crlf-to-lf"
+    },
+    "default": "raw-bytes"
+  },
+  "source_sha256": {
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
+    "artifacts/rp4_readme_figures_v1/cumulative_by_asset_rv15.csv": "764e4fdaefdd2e4ba0d81f83da7a6fa243601116d796671c47481266a722aa52",
+    "artifacts/rp4_readme_figures_v1/import_receipt.json": "aa7e29cce0c54fdd2478eb044bff5eaffcd83207d75700a60b256762815ab6c8",
+    "artifacts/rp4_universe_public_v1/control_six_rv15_losses.csv": "e2bbc69a355c755f06aad9e671a8c3273c151f348c5614ab9a63cf5dafaa601b",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_v4_b4/robustness.csv": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb",
+    "docs/figures/public_refresh/programme_timeline.architecture.svg": "a5ebd2974c0d4eb0db28d027c674bd26cc129b5992b6713c5cdd158a40e0da1e",
+    "docs/figures/public_refresh/proposal_to_replication.workflow.svg": "7884805c3adb9e8a36fd7f75a3e587311129e0dceadba56208e6bed8843bc1a6",
+    "docs/figures/public_refresh/render_readme_figures.py": "4b444703a40db62f6276c78e91b0a9fb121df76b72cff7ef22798342bc1b36b1",
+    "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "b7359b9217e8d261563dd07c6f440ed0d2d6501c0c23dc5bc1fcd9b2fcdf6c00",
+    "docs/rp4/specification_v4.md": "d89ae98c21b6f901342a12c00726832bf34d6922e02c7d8e435e1f6de872008d",
+    "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
+    "scripts/verify_public_projection.py": "e5d2e4aba057fe4a63f0f9d861eb74dcbdc1fe19fb6a73dc140cf341a15bb932"
+  },
+  "verification_command": "python docs/figures/public_refresh/render_readme_figures.py --verify",
+  "visual_review": {
+    "checked": [
+      "labels and numerical units",
+      "no clipped or overlapping text",
+      "shared six-stock vertical scale",
+      "all saved dates retained",
+      "nested-set inclusion and total counts",
+      "workflow direction and complete arrows",
+      "no programme codes before the historical figures"
+    ],
+    "limit": "Static SVGs and PNG fallbacks are presentation derivatives; no new scientific evaluation or private checkpoint reconstruction.",
+    "method": "Direct image inspection of all seven generated PNGs; separate static-resource, contrast and numerical checks.",
+    "reviewed_png_sha256": {
+      "docs/figures/public_refresh/cumulative_by_asset_rv15.png": "c4b28d58a7036ce28d39756e675856c8838e60c552f755dfa1d7bdfb7dbb46cd",
+      "docs/figures/public_refresh/information_sets.png": "8479bc08f6428fc1d4d7e9caff24e569b4823c8be0127229dee40cd1eac91611",
+      "docs/figures/public_refresh/programme_timeline.architecture.png": "0e57c507e3ef4b1bfb7c911217adf92a4c80c8443c8fd00dc130c5ee202da595",
+      "docs/figures/public_refresh/proposal_to_replication.workflow.png": "7c74bf24eedb992afa62948e685b86aeebc0fe2ae38af44e4d840c8f5f086a65",
+      "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "bda3257d07ceb070b00760fd60b3c6cce464c095b4f035e045378c29dbb88346",
+      "docs/figures/public_refresh/result_matrix.png": "1249622428e1f6ced19b39391d8fa4de198f2c7980d1c8b389acbdeaebfd83e3",
+      "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "7e2ae7ebb01570cc92ed207ae7a1818c7598c5d398d98fbbe41e9156d5f1803c"
+    },
+    "status": "PASS",
+    "workflow_geometry_elements_unchanged": 122
+  }
+}

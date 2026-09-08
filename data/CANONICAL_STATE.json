@@ -71,7 +71,7 @@
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
   "artifacts/target_blind_v22/successor_owner_authorization_v2.json": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1",
-  "data/FROZEN_ARTIFACTS.json": "06ea5659ee08408961203a48d1ade76a69efc863019f13990b3d3ae97ee2c3fb",
+  "data/FROZEN_ARTIFACTS.json": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
@@ -83,7 +83,7 @@
   "docs/phase9_academic_reporting_policy_v2.md": "8eabcc5980374ce0c029e167772df5bbd08181ed3185a7bb56712ee4ff895726",
   "docs/pit_v22_claims_and_limitations.md": "2f9f678f29f39791e8a2be4a1eaeb445637da5a4eb13d8ab4bfd07df163352cb",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
-  "docs/provider_license_review_v1.md": "e37a20cabfffd2bba23d81c358d186cb84b73497765fcaa2dd9b2d00c88340fc",
+  "docs/provider_license_review_v1.md": "56ae919315cd814ff2e3f9951b08cd18eab65329f6f3950344e2ed31ef4bb310",
   "docs/research_decisions_current.md": "dcdc92da332332afe69d84bed4f45aacecfc38369db3a75024a8702c21446265",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
@@ -1389,16 +1389,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 158,
+  "artifact_count": 159,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 156,
+  "physical_artifact_count": 157,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "06ea5659ee08408961203a48d1ade76a69efc863019f13990b3d3ae97ee2c3fb"
+  "registry_sha256": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681"
  },
  "future_campaigns": [
   "RP4 registered prospective replication",

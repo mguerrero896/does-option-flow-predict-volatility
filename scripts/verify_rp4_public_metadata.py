@@ -168,10 +168,7 @@ def verify_metadata(
 
     reference = None
     if records[V4]["verification"] == "public_redaction_provenance":
-        receipt = json.loads(
-            (ROOT / "artifacts/rp4_public_refresh/archive_redactions.json").read_text("utf-8")
-        )
-        entry = next(item for item in receipt["entries"] if item["logical_path"] == V4)
+        entry = archive._redactions()[V4]
         reference = entry.get("logical_references", {}).get("parent_specification")
     identity = parent_identity(v4["parent_specification"]["path"], redacted_reference=reference)
     for key in ("windows", "assets", "purge_minutes", "embargo_minutes", "source_cutoff_seconds"):

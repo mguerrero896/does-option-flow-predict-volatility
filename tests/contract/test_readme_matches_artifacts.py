@@ -8,18 +8,21 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 README = REPO / "README.md"
 STATE = REPO / "data" / "CANONICAL_STATE.json"
+FINDINGS = REPO / "docs" / "scientific_findings_ledger.md"
 
 
 def test_readme_resolves_the_single_scientific_bundle() -> None:
     state = json.loads(STATE.read_text(encoding="utf-8"))
     bundle = state["scientific_bundle"]
     readme = README.read_text(encoding="utf-8")
+    findings = FINDINGS.read_text(encoding="utf-8")
 
     assert bundle["run_id"] in readme
     assert bundle["manifest"]["scientific_sha256"] in readme
-    assert bundle["eligibility"]["status"] in readme
+    assert bundle["eligibility"]["status"] in findings
     for reason in bundle["eligibility"]["reasons"]:
-        assert reason in readme
+        assert reason in findings
+    assert "docs/scientific_findings_ledger.md" in readme
 
 
 def test_readme_contains_no_withdrawn_headline_figures() -> None:
@@ -39,11 +42,15 @@ def test_readme_contains_no_withdrawn_headline_figures() -> None:
 
 def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> None:
     readme = README.read_text(encoding="utf-8")
-    assert "MIXED_EXPLORATORY" in readme
+    findings = FINDINGS.read_text(encoding="utf-8")
+    assert "MIXED_EXPLORATORY" in findings
+    history = readme.split("## History and prospective replication", 1)[1]
+    assert "exploratory 20-session bridge" in history
+    assert "produced mixed findings" in history
     assert "reports/phase8a_exploratory_bridge_addendum_v13.md" in readme
     assert "Holm" in readme
     assert "no aggregation change" in readme
-    assert "not confirmatory" in readme
+    assert "These outcomes remain distinct from" in history
     assert "one of eight B1-inclusive primary cells" in readme
 
 

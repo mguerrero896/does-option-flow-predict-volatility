@@ -2,7 +2,13 @@
 
 from pathlib import Path
 
-from scripts.verify_public_projection import INTERNAL_LABEL, language_counts, prose_text
+from scripts.verify_public_projection import (
+    HISTORICAL_QUOTE_PATH,
+    INTERNAL_LABEL,
+    collective_voice_tokens,
+    language_counts,
+    prose_text,
+)
 
 
 def test_dry_run_exits_before_the_existing_publication_path() -> None:
@@ -22,7 +28,26 @@ def test_dry_run_exits_before_the_existing_publication_path() -> None:
     )
     assert english > spanish
     assert INTERNAL_LABEL.search(prose_text("The MDS650 capstone report."))
-    assert not INTERNAL_LABEL.search(prose_text(
-        "Run `python -m mds650.cli`; see [code](../src/mds650/cli.py)."
-    ))
+    assert not INTERNAL_LABEL.search(
+        prose_text("Run `python -m mds650.cli`; see [code](../src/mds650/cli.py).")
+    )
     assert not INTERNAL_LABEL.search(prose_text("The historical mds650.har module."))
+
+
+def test_author_voice_screen_covers_prose_templates_and_preserves_only_the_frozen_quote() -> None:
+    assert collective_voice_tokens("README.md", "We use our team's findings.") == [
+        "We",
+        "our",
+        "team",
+    ]
+    assert collective_voice_tokens("docs/request.md", "```text\nWe request an answer.\n```") == [
+        "We"
+    ]
+    assert (
+        collective_voice_tokens("README.md", "US equities; this study uses `our_variable`.") == []
+    )
+    source = Path(__file__).resolve().parents[2] / HISTORICAL_QUOTE_PATH
+    original = source.read_text("utf-8")
+    assert collective_voice_tokens(HISTORICAL_QUOTE_PATH, original) == []
+    assert collective_voice_tokens(HISTORICAL_QUOTE_PATH, original + " Changed.") == ["we"]
+    assert collective_voice_tokens("docs/another.md", original) == ["we"]

@@ -700,7 +700,7 @@ artifacts/schemas/
 This repository studies whether information from the US equity-options market
 improves forecasts of next-30-minute realized variance for six liquid equities.
 
-We compare three nested information sets:
+The study compares three nested information sets:
 
 | Set | Information available at the forecast origin |
 |---|---|
