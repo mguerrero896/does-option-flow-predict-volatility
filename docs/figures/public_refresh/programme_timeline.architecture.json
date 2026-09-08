@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "One programme timeline: past measurements and unopened replication",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "viewBox": [
+      1360,
+      650
+    ],
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "frontend": {
+          "label": "Published record"
+        },
+        "backend": {
+          "label": "Computation"
+        },
+        "security": {
+          "label": "Gate"
+        },
+        "database": {
+          "label": "Data"
+        },
+        "external": {
+          "label": "Study question"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "rp2",
+      "type": "backend",
+      "label": "RP2",
+      "sublabel": "Aug 2026 · nulls",
+      "pos": [
+        30,
+        120
+      ],
+      "size": [
+        134,
+        90
+      ],
+      "tag": "HISTORICAL"
+    },
+    {
+      "id": "rp3",
+      "type": "security",
+      "label": "RP3 registered",
+      "sublabel": "24 Aug · sealed",
+      "pos": [
+        196,
+        390
+      ],
+      "size": [
+        134,
+        90
+      ],
+      "tag": "SEALED"
+    },
+    {
+      "id": "phase8",
+      "type": "backend",
+      "label": "Phase 8 bridge",
+      "sublabel": "30 Aug · mixed",
+      "pos": [
+        362,
+        120
+      ],
+      "size": [
+        134,
+        90
+      ],
+      "tag": "READ ONCE"
+    },
+    {
+      "id": "pit",
+      "type": "backend",
+      "label": "PIT successor",
+      "sublabel": "02 Sep · unconfirmed",
+      "pos": [
+        528,
+        390
+      ],
+      "size": [
+        134,
+        90
+      ]
+    },
+    {
+      "id": "rp4v1",
+      "type": "backend",
+      "label": "RP4 v1 · RV30",
+      "sublabel": "Sep · unstable",
+      "pos": [
+        694,
+        120
+      ],
+      "size": [
+        134,
+        90
+      ]
+    },
+    {
+      "id": "rp4v2",
+      "type": "backend",
+      "label": "RP4 v2 · RV30",
+      "sublabel": "Sep · repairs",
+      "pos": [
+        860,
+        390
+      ],
+      "size": [
+        134,
+        90
+      ]
+    },
+    {
+      "id": "rp4v3",
+      "type": "backend",
+      "label": "RP4 v3 · RV30",
+      "sublabel": "Sep · no flow signal",
+      "pos": [
+        1026,
+        120
+      ],
+      "size": [
+        134,
+        90
+      ]
+    },
+    {
+      "id": "rp4v4",
+      "type": "frontend",
+      "label": "RP4 v4 · RV15",
+      "sublabel": "Sep · RV15 flow",
+      "pos": [
+        1192,
+        390
+      ],
+      "size": [
+        134,
+        90
+      ],
+      "tag": "CURRENT"
+    }
+  ],
+  "connections": [
+    {
+      "id": "rp2-to-rp3",
+      "from": "rp2",
+      "to": "rp3"
+    },
+    {
+      "id": "rp3-to-phase8",
+      "from": "rp3",
+      "to": "phase8"
+    },
+    {
+      "id": "phase8-to-pit",
+      "from": "phase8",
+      "to": "pit"
+    },
+    {
+      "id": "pit-to-rp4v1",
+      "from": "pit",
+      "to": "rp4v1"
+    },
+    {
+      "id": "rp4v1-to-rp4v2",
+      "from": "rp4v1",
+      "to": "rp4v2"
+    },
+    {
+      "id": "rp4v2-to-rp4v3",
+      "from": "rp4v2",
+      "to": "rp4v3"
+    },
+    {
+      "id": "rp4v3-to-rp4v4",
+      "from": "rp4v3",
+      "to": "rp4v4"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Chronology, not independent replications",
+      "items": [
+        "Equal spacing is chronology, not elapsed time. RP4 v1–v4 reuse evaluation windows.",
+        "V5 at RV15 is closed and exploratory; v4 remains the headline. No independent replication or v5/v4 test."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Unopened evidence extends beyond this axis",
+      "items": [
+        "RP3 remains sealed: 662 evaluable sessions, estimated read 2029-01-30.",
+        "RP4 prospective replication is registered separately; a planned future read is not a result."
+      ]
+    }
+  ]
+}

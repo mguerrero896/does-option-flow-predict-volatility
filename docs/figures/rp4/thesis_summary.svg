@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1840" height="1030" viewBox="0 0 1840 1030" role="img" aria-labelledby="thesis-summary-title thesis-summary-desc">
-<title id="thesis-summary-title">Síntesis de tesis · reducción de QLIKE en la evaluación primaria</title>
-<desc id="thesis-summary-desc">Dos contrastes, cinco versiones/objetivos, dos familias; eje común de menos tres a más tres por ciento con todos los recortes marcados.</desc>
-<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="105" y="278" width="758" height="460" fill="#f5f7f9"/>
-<line x1="105.000" y1="738.000" x2="863.000" y2="738.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="105.000" y1="661.333" x2="863.000" y2="661.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="105.000" y1="584.667" x2="863.000" y2="584.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="105.000" y1="508.000" x2="863.000" y2="508.000" stroke="#5a6570" stroke-width="1.6" stroke-dasharray=""/>
-<line x1="105.000" y1="431.333" x2="863.000" y2="431.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="105.000" y1="354.667" x2="863.000" y2="354.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="105.000" y1="278.000" x2="863.000" y2="278.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<rect x="1010" y="278" width="758" height="460" fill="#f5f7f9"/>
-<line x1="1010.000" y1="738.000" x2="1768.000" y2="738.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="1010.000" y1="661.333" x2="1768.000" y2="661.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="1010.000" y1="584.667" x2="1768.000" y2="584.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="1010.000" y1="508.000" x2="1768.000" y2="508.000" stroke="#5a6570" stroke-width="1.6" stroke-dasharray=""/>
-<line x1="1010.000" y1="431.333" x2="1768.000" y2="431.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="1010.000" y1="354.667" x2="1768.000" y2="354.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<line x1="1010.000" y1="278.000" x2="1768.000" y2="278.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray=""/>
-<text x="40.00" y="45.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="29" fill="#1a2332" font-weight="600">Síntesis de tesis · reducción de QLIKE en la evaluación primaria</text>
-<text x="40.00" y="80.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >Misma escala Y: −3 % a +3 %. Positivo = menor pérdida al añadir información. Sólo la ventana primaria.</text>
-<text x="40.00" y="112.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Flechas = punto o límite del IC fuera de escala; se imprime su valor real. No se presenta el recorte como un resultado de ±3 %.</text>
-<line x1="42.000" y1="147.000" x2="90.000" y2="147.000" stroke="#0072B2" stroke-width="3" stroke-dasharray=""/>
-<circle cx="66" cy="147" r="5" fill="#0072B2"/>
-<text x="102.00" y="154.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#1a2332" >Lineal: log-OLS v1; ridge v2–v4</text>
-<line x1="422.000" y1="147.000" x2="470.000" y2="147.000" stroke="#D55E00" stroke-width="3" stroke-dasharray=""/>
-<circle cx="446" cy="147" r="5" fill="#D55E00"/>
-<text x="482.00" y="154.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#1a2332" >LightGBM</text>
+<title id="thesis-summary-title">Thesis summary · QLIKE reduction in the primary evaluation</title>
+<desc id="thesis-summary-desc">Two contrasts, five versions/targets, two families; a common axis from minus three to plus three percent, with all clipped values marked.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570" /></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d" /></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69" /></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff" />
+<rect x="105" y="278" width="758" height="460" fill="#f5f7f9" />
+<line x1="105.000" y1="738.000" x2="863.000" y2="738.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="105.000" y1="661.333" x2="863.000" y2="661.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="105.000" y1="584.667" x2="863.000" y2="584.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="105.000" y1="508.000" x2="863.000" y2="508.000" stroke="#5a6570" stroke-width="1.6" stroke-dasharray="" />
+<line x1="105.000" y1="431.333" x2="863.000" y2="431.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="105.000" y1="354.667" x2="863.000" y2="354.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="105.000" y1="278.000" x2="863.000" y2="278.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<rect x="1010" y="278" width="758" height="460" fill="#f5f7f9" />
+<line x1="1010.000" y1="738.000" x2="1768.000" y2="738.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="1010.000" y1="661.333" x2="1768.000" y2="661.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="1010.000" y1="584.667" x2="1768.000" y2="584.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="1010.000" y1="508.000" x2="1768.000" y2="508.000" stroke="#5a6570" stroke-width="1.6" stroke-dasharray="" />
+<line x1="1010.000" y1="431.333" x2="1768.000" y2="431.333" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="1010.000" y1="354.667" x2="1768.000" y2="354.667" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<line x1="1010.000" y1="278.000" x2="1768.000" y2="278.000" stroke="#e1e6ea" stroke-width="1" stroke-dasharray="" />
+<text x="40.00" y="45.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="29" fill="#1a2332" font-weight="600">Thesis summary · QLIKE reduction in the primary evaluation</text>
+<text x="40.00" y="80.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">Common Y scale: −3 % to +3 %. Positive = lower loss after adding information. Primary window only.</text>
+<text x="40.00" y="112.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Arrows mark points or CI limits outside the scale and print their actual values. Clipping is not presented as a result of ±3 %.</text>
+<line x1="42.000" y1="147.000" x2="90.000" y2="147.000" stroke="#0072B2" stroke-width="3" stroke-dasharray="" />
+<circle cx="66" cy="147" r="5" fill="#0072B2" />
+<text x="102.00" y="154.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#1a2332">Linear: log-OLS v1; ridge v2–v4</text>
+<line x1="422.000" y1="147.000" x2="470.000" y2="147.000" stroke="#D55E00" stroke-width="3" stroke-dasharray="" />
+<circle cx="446" cy="147" r="5" fill="#D55E00" />
+<text x="482.00" y="154.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#1a2332">LightGBM</text>
 <text x="105.00" y="206.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="27" fill="#1a2332" font-weight="600">B1 / B0</text>
-<text x="105.00" y="234.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >100 × [QLIKE(B0) − QLIKE(B1)] / QLIKE(B0) observado</text>
+<text x="105.00" y="234.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">100 × [QLIKE(B0) − QLIKE(B1)] / QLIKE(B0) observed</text>
 <text x="93.00" y="744.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-3%</text>
 <text x="93.00" y="667.33" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-2%</text>
 <text x="93.00" y="590.67" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-1%</text>
@@ -38,61 +38,61 @@
 <text x="93.00" y="360.67" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">+2%</text>
 <text x="93.00" y="284.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">+3%</text>
 <text x="180.80" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v1 · RV30</text>
-<line x1="156.800" y1="596.252" x2="156.800" y2="383.254" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="150.800" y1="596.252" x2="162.800" y2="596.252" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="150.800" y1="383.254" x2="162.800" y2="383.254" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="156.800" cy="485.743" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="204.800" y1="527.256" x2="204.800" y2="296.457" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="198.800" y1="527.256" x2="210.800" y2="527.256" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="198.800" y1="296.457" x2="210.800" y2="296.457" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="204.800" cy="415.724" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="156.800" y1="596.252" x2="156.800" y2="383.254" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="150.800" y1="596.252" x2="162.800" y2="596.252" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="150.800" y1="383.254" x2="162.800" y2="383.254" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="156.800" cy="485.743" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="204.800" y1="527.256" x2="204.800" y2="296.457" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="198.800" y1="527.256" x2="210.800" y2="527.256" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="198.800" y1="296.457" x2="210.800" y2="296.457" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="204.800" cy="415.724" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="180.80" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 418</text>
 <text x="332.40" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v2 · RV30</text>
-<line x1="308.400" y1="488.619" x2="308.400" y2="278.000" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="302.400" y1="488.619" x2="314.400" y2="488.619" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="up" points="308.40,273.00 303.40,283.00 313.40,283.00" fill="white" stroke="#0072B2" stroke-width="1.8"/>
-<text x="308.40" y="264.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">IC +3.9077</text>
-<circle cx="308.400" cy="376.495" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="356.400" y1="455.888" x2="356.400" y2="278.000" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="350.400" y1="455.888" x2="362.400" y2="455.888" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="up" points="356.40,273.00 351.40,283.00 361.40,283.00" fill="white" stroke="#D55E00" stroke-width="1.8"/>
-<text x="356.40" y="245.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#D55E00" text-anchor="middle">IC +3.6741</text>
-<circle cx="356.400" cy="347.676" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="308.400" y1="488.619" x2="308.400" y2="278.000" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="302.400" y1="488.619" x2="314.400" y2="488.619" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="up" points="308.40,273.00 303.40,283.00 313.40,283.00" fill="white" stroke="#0072B2" stroke-width="1.8" />
+<text x="308.40" y="264.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">CI +3.9077</text>
+<circle cx="308.400" cy="376.495" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="356.400" y1="455.888" x2="356.400" y2="278.000" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="350.400" y1="455.888" x2="362.400" y2="455.888" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="up" points="356.40,273.00 351.40,283.00 361.40,283.00" fill="white" stroke="#D55E00" stroke-width="1.8" />
+<text x="356.40" y="245.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#D55E00" text-anchor="middle">CI +3.6741</text>
+<circle cx="356.400" cy="347.676" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="332.40" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="484.00" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v3 · RV30</text>
-<line x1="460.000" y1="479.010" x2="460.000" y2="278.000" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="454.000" y1="479.010" x2="466.000" y2="479.010" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="up" points="460.00,273.00 455.00,283.00 465.00,283.00" fill="white" stroke="#0072B2" stroke-width="1.8"/>
-<text x="460.00" y="264.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">IC +3.7613</text>
-<circle cx="460.000" cy="375.445" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="508.000" y1="455.888" x2="508.000" y2="278.000" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="502.000" y1="455.888" x2="514.000" y2="455.888" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="up" points="508.00,273.00 503.00,283.00 513.00,283.00" fill="white" stroke="#D55E00" stroke-width="1.8"/>
-<text x="508.00" y="245.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#D55E00" text-anchor="middle">IC +3.6741</text>
-<circle cx="508.000" cy="347.676" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="460.000" y1="479.010" x2="460.000" y2="278.000" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="454.000" y1="479.010" x2="466.000" y2="479.010" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="up" points="460.00,273.00 455.00,283.00 465.00,283.00" fill="white" stroke="#0072B2" stroke-width="1.8" />
+<text x="460.00" y="264.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">CI +3.7613</text>
+<circle cx="460.000" cy="375.445" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="508.000" y1="455.888" x2="508.000" y2="278.000" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="502.000" y1="455.888" x2="514.000" y2="455.888" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="up" points="508.00,273.00 503.00,283.00 513.00,283.00" fill="white" stroke="#D55E00" stroke-width="1.8" />
+<text x="508.00" y="245.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#D55E00" text-anchor="middle">CI +3.6741</text>
+<circle cx="508.000" cy="347.676" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="484.00" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="635.60" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV15</text>
-<line x1="611.600" y1="497.439" x2="611.600" y2="363.837" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="605.600" y1="497.439" x2="617.600" y2="497.439" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="605.600" y1="363.837" x2="617.600" y2="363.837" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="611.600" cy="440.529" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="659.600" y1="483.051" x2="659.600" y2="340.470" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="653.600" y1="483.051" x2="665.600" y2="483.051" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="653.600" y1="340.470" x2="665.600" y2="340.470" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="659.600" cy="418.302" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="611.600" y1="497.439" x2="611.600" y2="363.837" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="605.600" y1="497.439" x2="617.600" y2="497.439" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="605.600" y1="363.837" x2="617.600" y2="363.837" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="611.600" cy="440.529" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="659.600" y1="483.051" x2="659.600" y2="340.470" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="653.600" y1="483.051" x2="665.600" y2="483.051" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="653.600" y1="340.470" x2="665.600" y2="340.470" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="659.600" cy="418.302" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="635.60" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="787.20" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV5</text>
-<line x1="763.200" y1="497.751" x2="763.200" y2="455.799" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="757.200" y1="497.751" x2="769.200" y2="497.751" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="757.200" y1="455.799" x2="769.200" y2="455.799" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="763.200" cy="479.076" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="811.200" y1="504.170" x2="811.200" y2="413.098" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="805.200" y1="504.170" x2="817.200" y2="504.170" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="805.200" y1="413.098" x2="817.200" y2="413.098" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="811.200" cy="466.924" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="763.200" y1="497.751" x2="763.200" y2="455.799" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="757.200" y1="497.751" x2="769.200" y2="497.751" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="757.200" y1="455.799" x2="769.200" y2="455.799" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="763.200" cy="479.076" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="811.200" y1="504.170" x2="811.200" y2="413.098" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="805.200" y1="504.170" x2="817.200" y2="504.170" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="805.200" y1="413.098" x2="817.200" y2="413.098" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="811.200" cy="466.924" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="787.20" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="1010.00" y="206.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="27" fill="#1a2332" font-weight="600">B2 / B1</text>
-<text x="1010.00" y="234.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >100 × [QLIKE(B1) − QLIKE(B2)] / QLIKE(B1) observado</text>
+<text x="1010.00" y="234.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">100 × [QLIKE(B1) − QLIKE(B2)] / QLIKE(B1) observed</text>
 <text x="998.00" y="744.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-3%</text>
 <text x="998.00" y="667.33" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-2%</text>
 <text x="998.00" y="590.67" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">-1%</text>
@@ -101,61 +101,61 @@
 <text x="998.00" y="360.67" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">+2%</text>
 <text x="998.00" y="284.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="17" fill="#1a2332" text-anchor="end">+3%</text>
 <text x="1085.80" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v1 · RV30</text>
-<line x1="1061.800" y1="738.000" x2="1061.800" y2="383.964" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<polygon data-out-of-scale="down" points="1061.80,743.00 1056.80,733.00 1066.80,733.00" fill="white" stroke="#0072B2" stroke-width="1.8"/>
-<text x="1061.80" y="756.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">IC −502347.25</text>
-<line x1="1055.800" y1="383.964" x2="1067.800" y2="383.964" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="down" points="1061.80,746.00 1053.80,730.00 1069.80,730.00" fill="#0072B2" stroke="#0072B2" stroke-width="1.8"/>
+<line x1="1061.800" y1="738.000" x2="1061.800" y2="383.964" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<polygon data-out-of-scale="down" points="1061.80,743.00 1056.80,733.00 1066.80,733.00" fill="white" stroke="#0072B2" stroke-width="1.8" />
+<text x="1061.80" y="756.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">CI −502347.25</text>
+<line x1="1055.800" y1="383.964" x2="1067.800" y2="383.964" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="down" points="1061.80,746.00 1053.80,730.00 1069.80,730.00" fill="#0072B2" stroke="#0072B2" stroke-width="1.8" />
 <text x="1085.80" y="829.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#0072B2" font-weight="600" text-anchor="middle">▼ −167448.32 %</text>
-<line x1="1109.800" y1="559.544" x2="1109.800" y2="472.492" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1103.800" y1="559.544" x2="1115.800" y2="559.544" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1103.800" y1="472.492" x2="1115.800" y2="472.492" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1109.800" cy="513.578" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="1109.800" y1="559.544" x2="1109.800" y2="472.492" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1103.800" y1="559.544" x2="1115.800" y2="559.544" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1103.800" y1="472.492" x2="1115.800" y2="472.492" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1109.800" cy="513.578" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="1085.80" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 418</text>
 <text x="1237.40" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v2 · RV30</text>
-<line x1="1213.400" y1="738.000" x2="1213.400" y2="458.913" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<polygon data-out-of-scale="down" points="1213.40,743.00 1208.40,733.00 1218.40,733.00" fill="white" stroke="#0072B2" stroke-width="1.8"/>
-<text x="1213.40" y="756.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">IC −24.818</text>
-<line x1="1207.400" y1="458.913" x2="1219.400" y2="458.913" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<polygon data-out-of-scale="down" points="1213.40,746.00 1205.40,730.00 1221.40,730.00" fill="#0072B2" stroke="#0072B2" stroke-width="1.8"/>
+<line x1="1213.400" y1="738.000" x2="1213.400" y2="458.913" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<polygon data-out-of-scale="down" points="1213.40,743.00 1208.40,733.00 1218.40,733.00" fill="white" stroke="#0072B2" stroke-width="1.8" />
+<text x="1213.40" y="756.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#0072B2" text-anchor="middle">CI −24.818</text>
+<line x1="1207.400" y1="458.913" x2="1219.400" y2="458.913" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<polygon data-out-of-scale="down" points="1213.40,746.00 1205.40,730.00 1221.40,730.00" fill="#0072B2" stroke="#0072B2" stroke-width="1.8" />
 <text x="1237.40" y="829.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" fill="#0072B2" font-weight="600" text-anchor="middle">▼ −8.7135 %</text>
-<line x1="1261.400" y1="585.796" x2="1261.400" y2="457.982" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1255.400" y1="585.796" x2="1267.400" y2="585.796" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1255.400" y1="457.982" x2="1267.400" y2="457.982" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1261.400" cy="512.804" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="1261.400" y1="585.796" x2="1261.400" y2="457.982" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1255.400" y1="585.796" x2="1267.400" y2="585.796" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1255.400" y1="457.982" x2="1267.400" y2="457.982" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1261.400" cy="512.804" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="1237.40" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="1389.00" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v3 · RV30</text>
-<line x1="1365.000" y1="516.126" x2="1365.000" y2="414.071" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1359.000" y1="516.126" x2="1371.000" y2="516.126" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1359.000" y1="414.071" x2="1371.000" y2="414.071" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1365.000" cy="465.504" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="1413.000" y1="594.403" x2="1413.000" y2="464.370" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1407.000" y1="594.403" x2="1419.000" y2="594.403" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1407.000" y1="464.370" x2="1419.000" y2="464.370" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1413.000" cy="520.200" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="1365.000" y1="516.126" x2="1365.000" y2="414.071" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1359.000" y1="516.126" x2="1371.000" y2="516.126" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1359.000" y1="414.071" x2="1371.000" y2="414.071" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1365.000" cy="465.504" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="1413.000" y1="594.403" x2="1413.000" y2="464.370" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1407.000" y1="594.403" x2="1419.000" y2="594.403" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1407.000" y1="464.370" x2="1419.000" y2="464.370" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1413.000" cy="520.200" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="1389.00" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="1540.60" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV15</text>
-<line x1="1516.600" y1="493.890" x2="1516.600" y2="426.628" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1510.600" y1="493.890" x2="1522.600" y2="493.890" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1510.600" y1="426.628" x2="1522.600" y2="426.628" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1516.600" cy="460.252" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="1564.600" y1="592.459" x2="1564.600" y2="462.378" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1558.600" y1="592.459" x2="1570.600" y2="592.459" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1558.600" y1="462.378" x2="1570.600" y2="462.378" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1564.600" cy="516.797" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="1516.600" y1="493.890" x2="1516.600" y2="426.628" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1510.600" y1="493.890" x2="1522.600" y2="493.890" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1510.600" y1="426.628" x2="1522.600" y2="426.628" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1516.600" cy="460.252" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="1564.600" y1="592.459" x2="1564.600" y2="462.378" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1558.600" y1="592.459" x2="1570.600" y2="592.459" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1558.600" y1="462.378" x2="1570.600" y2="462.378" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1564.600" cy="516.797" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="1540.60" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
 <text x="1692.20" y="788.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV5</text>
-<line x1="1668.200" y1="506.433" x2="1668.200" y2="470.555" stroke="#0072B2" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1662.200" y1="506.433" x2="1674.200" y2="506.433" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1662.200" y1="470.555" x2="1674.200" y2="470.555" stroke="#0072B2" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1668.200" cy="488.349" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1"/>
-<line x1="1716.200" y1="528.190" x2="1716.200" y2="465.313" stroke="#D55E00" stroke-width="2.4" stroke-dasharray=""/>
-<line x1="1710.200" y1="528.190" x2="1722.200" y2="528.190" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<line x1="1710.200" y1="465.313" x2="1722.200" y2="465.313" stroke="#D55E00" stroke-width="2.2" stroke-dasharray=""/>
-<circle cx="1716.200" cy="495.696" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1"/>
+<line x1="1668.200" y1="506.433" x2="1668.200" y2="470.555" stroke="#0072B2" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1662.200" y1="506.433" x2="1674.200" y2="506.433" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1662.200" y1="470.555" x2="1674.200" y2="470.555" stroke="#0072B2" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1668.200" cy="488.349" r="5.6" fill="#0072B2" stroke="white" stroke-width="1.1" />
+<line x1="1716.200" y1="528.190" x2="1716.200" y2="465.313" stroke="#D55E00" stroke-width="2.4" stroke-dasharray="" />
+<line x1="1710.200" y1="528.190" x2="1722.200" y2="528.190" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<line x1="1710.200" y1="465.313" x2="1722.200" y2="465.313" stroke="#D55E00" stroke-width="2.2" stroke-dasharray="" />
+<circle cx="1716.200" cy="495.696" r="5.6" fill="#D55E00" stroke="white" stroke-width="1.1" />
 <text x="1692.20" y="810.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="middle">N = 419</text>
-<text x="40.00" y="902.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Bigotes = IC95% guardado de la diferencia × 100 / pérdida base observada; NO son intervalos bootstrap del cociente.</text>
-<text x="40.00" y="933.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >v1 usa 92 261 orígenes; las demás versiones, 160 832. Los horizontes son objetivos distintos y no son réplicas independientes.</text>
-<text x="40.00" y="964.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >La figura completa sin recortes y las cifras exactas permanecen en comparison_v1_v4.svg y comparison_v1_v4.csv.</text>
-<text x="40.00" y="995.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Escala resumida solicitada para lectura comparativa; los puntos adversos y todos los límites fuera de escala se conservan con flechas.</text>
+<text x="40.00" y="902.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Whiskers = saved 95% CI of the difference × 100 / observed baseline loss; NOT bootstrap intervals of the ratio.</text>
+<text x="40.00" y="933.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">v1 uses 92 261 origins; other versions use 160 832. Horizons are distinct targets, not independent replications.</text>
+<text x="40.00" y="964.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">The complete, unclipped figure and exact values remain in comparison_v1_v4.svg and comparison_v1_v4.csv.</text>
+<text x="40.00" y="995.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">The compact scale supports comparison; adverse points and all out-of-scale limits remain visible through arrows.</text>
 </svg>

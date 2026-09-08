@@ -1,0 +1,226 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Registration, calculation, authorized reading and correction",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "frontend": {
+          "label": "Published record"
+        },
+        "backend": {
+          "label": "Computation"
+        },
+        "security": {
+          "label": "Gate"
+        },
+        "database": {
+          "label": "Data"
+        },
+        "external": {
+          "label": "Study question"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "record",
+      "label": "Before evaluation"
+    },
+    {
+      "id": "execute",
+      "label": "Gated execution"
+    },
+    {
+      "id": "reporting",
+      "label": "Public record"
+    }
+  ],
+  "mainPath": [
+    "registration",
+    "freeze",
+    "gate",
+    "calculate",
+    "read",
+    "report",
+    "correction"
+  ],
+  "nodes": [
+    {
+      "id": "registration",
+      "lane": "record",
+      "col": 0,
+      "type": "external",
+      "label": "Register the question",
+      "sublabel": "Endpoint, model and decision rule",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "freeze",
+      "lane": "record",
+      "col": 1,
+      "type": "security",
+      "label": "Freeze and hash",
+      "sublabel": "Bind code, inputs and protocol",
+      "tag": "IMMUTABLE",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "gate",
+      "lane": "record",
+      "col": 2,
+      "type": "security",
+      "label": "Check the read gate",
+      "sublabel": "Maturity + explicit authorization",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "retain",
+      "lane": "execute",
+      "col": 1,
+      "type": "security",
+      "label": "Keep sealed",
+      "sublabel": "No authorized read",
+      "tag": "STOP",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "calculate",
+      "lane": "execute",
+      "col": 2,
+      "type": "backend",
+      "label": "Calculate once",
+      "sublabel": "Use only the registered design",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "read",
+      "lane": "execute",
+      "col": 3,
+      "type": "security",
+      "label": "Consume authorized look",
+      "sublabel": "Record outcome and read count",
+      "tag": "ONE LOOK",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "report",
+      "lane": "reporting",
+      "col": 3,
+      "type": "frontend",
+      "label": "Publish bounded claims",
+      "sublabel": "Aggregates, hashes and limits",
+      "width": 178,
+      "height": 78
+    },
+    {
+      "id": "correction",
+      "lane": "reporting",
+      "col": 4,
+      "type": "frontend",
+      "label": "Numbered correction",
+      "sublabel": "Append evidence and traceability",
+      "tag": "ADDITIVE",
+      "width": 178,
+      "height": 78
+    }
+  ],
+  "edges": [
+    {
+      "id": "registration-to-freeze",
+      "from": "registration",
+      "to": "freeze",
+      "role": "main"
+    },
+    {
+      "id": "freeze-to-gate",
+      "from": "freeze",
+      "to": "gate",
+      "role": "main"
+    },
+    {
+      "id": "gate-to-calculate",
+      "from": "gate",
+      "to": "calculate",
+      "label": "pass",
+      "role": "main"
+    },
+    {
+      "id": "gate-to-retain",
+      "from": "gate",
+      "to": "retain",
+      "label": "not ready",
+      "role": "branch"
+    },
+    {
+      "id": "calculate-to-read",
+      "from": "calculate",
+      "to": "read",
+      "role": "main"
+    },
+    {
+      "id": "read-to-report",
+      "from": "read",
+      "to": "report",
+      "role": "main"
+    },
+    {
+      "id": "report-to-correction",
+      "from": "report",
+      "to": "correction",
+      "role": "main"
+    }
+  ],
+  "semanticChecks": {
+    "allowedRoots": [
+      "registration"
+    ],
+    "allowedTerminals": [
+      "retain",
+      "correction"
+    ],
+    "requiredPaths": [
+      {
+        "from": "registration",
+        "to": "read"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "What the seal does",
+      "items": [
+        "The original registered bytes and historical results stay intact.",
+        "A hash proves byte identity. A local seal alone does not prove an independent timestamp."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "What a correction does",
+      "items": [
+        "A new numbered layer records the reason, evidence, scope and superseded claim.",
+        "A correction does not reset a consumed read or turn reused data into a new replication."
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "Separate protocols",
+      "items": [
+        "RP4: only its registered consistency, stability and final looks.",
+        "RP3: 662 evaluable sessions; 2029-01-30 is an estimated date, not a completed read."
+      ]
+    }
+  ]
+}

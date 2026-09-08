@@ -1,574 +1,574 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1700" viewBox="0 0 2100 1700" role="img" aria-labelledby="comparison-title comparison-desc">
-<title id="comparison-title">Comparación completa: reducción de QLIKE por versión</title>
-<desc id="comparison-desc">Cuarenta facetas independientes, con todos los intervalos guardados y sin truncar resultados adversos.</desc>
-<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
-<rect width="100%" height="100%" fill="#ffffff"/>
-<rect x="310" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="310" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="665" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1020" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1375" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<rect x="1730" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea"/>
-<text x="35.00" y="46.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="29" fill="#1a2332" font-weight="600">Versiones y horizontes · reducción de QLIKE con incertidumbre guardada</text>
-<text x="35.00" y="80.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >Cada mini-panel tiene un eje X independiente. Las longitudes NO son comparables entre paneles: lea los valores y sus ejes.</text>
-<text x="35.00" y="112.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Barra: 100 × diferencia media / QLIKE base observado. Bigote: IC95% de la diferencia reescalado; NO es un IC bootstrap del cociente.</text>
+<title id="comparison-title">Complete comparison: QLIKE reduction by version</title>
+<desc id="comparison-desc">Forty independent facets, with all saved intervals and adverse results shown in full.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570" /></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d" /></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69" /></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff" />
+<rect x="310" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="310" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="665" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1020" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1375" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="200" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="368" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="536" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="704" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="872" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="1040" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="1208" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<rect x="1730" y="1376" width="331" height="156" fill="#f5f7f9" stroke="#e1e6ea" />
+<text x="35.00" y="46.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="29" fill="#1a2332" font-weight="600">Versions and horizons · QLIKE reduction with saved uncertainty</text>
+<text x="35.00" y="80.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">Each small panel has its own X axis. Lengths are NOT comparable across panels: read the values and axes.</text>
+<text x="35.00" y="112.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Bar: 100 × mean difference / observed baseline QLIKE. Whisker: rescaled 95% CI of the difference; NOT a bootstrap CI of the ratio.</text>
 <text x="475.00" y="157.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">v1 · RV30</text>
-<text x="475.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">lineal: log-OLS</text>
-<text x="35.00" y="230.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primaria</text>
-<text x="35.00" y="259.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2" >Lineal</text>
-<text x="35.00" y="288.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B1 / B0</text>
-<text x="35.00" y="315.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="475.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">linear: log-OLS</text>
+<text x="35.00" y="230.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primary</text>
+<text x="35.00" y="259.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2">Linear</text>
+<text x="35.00" y="288.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B1 / B0</text>
+<text x="35.00" y="315.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="224.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.2903 %</text>
-<text x="325.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.1511, 1.6271] %</text>
-<line x1="454.955" y1="258.000" x2="454.955" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="454.955" y="275" width="25.060" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="355.585" y1="284.000" x2="595.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="278.000" x2="355.585" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="278.000" x2="595.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="480.015" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="313.000" x2="617.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.1511, 1.6271] %</text>
+<line x1="454.955" y1="258.000" x2="454.955" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="454.955" y="275" width="25.060" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="355.585" y1="284.000" x2="595.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="278.000" x2="355.585" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="278.000" x2="595.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="480.015" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="313.000" x2="617.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.4012%</text>
 <text x="617.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.8772%</text>
-<text x="325.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 418 sesiones / 92261 orígenes</text>
-<text x="35.00" y="398.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primaria</text>
-<text x="35.00" y="427.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2" >Lineal</text>
-<text x="35.00" y="456.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B2 / B1</text>
-<text x="35.00" y="483.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 418 sessions / 92261 origins</text>
+<text x="35.00" y="398.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primary</text>
+<text x="35.00" y="427.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2">Linear</text>
+<text x="35.00" y="456.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B2 / B1</text>
+<text x="35.00" y="483.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="392.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">−1.6745e+05 %</text>
-<text x="325.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−5.0235e+05, 1.6179] %</text>
-<line x1="595.414" y1="426.000" x2="595.414" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="515.472" y="443" width="79.943" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="355.585" y1="452.000" x2="595.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="446.000" x2="355.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="446.000" x2="595.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="515.472" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="481.000" x2="617.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−5.0235e+05, 1.6179] %</text>
+<line x1="595.414" y1="426.000" x2="595.414" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="515.472" y="443" width="79.943" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="355.585" y1="452.000" x2="595.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="446.000" x2="355.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="446.000" x2="595.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="515.472" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="481.000" x2="617.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−5.4756e+05%</text>
 <text x="617.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">45213%</text>
-<text x="325.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 418 sesiones / 92261 orígenes</text>
-<text x="35.00" y="566.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primaria</text>
-<text x="35.00" y="595.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00" >LightGBM</text>
-<text x="35.00" y="624.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B1 / B0</text>
-<text x="35.00" y="651.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 418 sessions / 92261 origins</text>
+<text x="35.00" y="566.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primary</text>
+<text x="35.00" y="595.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00">LightGBM</text>
+<text x="35.00" y="624.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B1 / B0</text>
+<text x="35.00" y="651.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="560.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+1.2036 %</text>
-<text x="325.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.25116, 2.7593] %</text>
-<line x1="375.594" y1="594.000" x2="375.594" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="375.594" y="611" width="95.887" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="355.585" y1="620.000" x2="595.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="614.000" x2="355.585" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="614.000" x2="595.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="471.481" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="649.000" x2="617.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.25116, 2.7593] %</text>
+<line x1="375.594" y1="594.000" x2="375.594" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="375.594" y="611" width="95.887" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="355.585" y1="620.000" x2="595.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="614.000" x2="355.585" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="614.000" x2="595.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="471.481" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="649.000" x2="617.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.5221%</text>
 <text x="617.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">3.0302%</text>
-<text x="325.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 418 sesiones / 92261 orígenes</text>
-<text x="35.00" y="734.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primaria</text>
-<text x="35.00" y="763.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00" >LightGBM</text>
-<text x="35.00" y="792.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B2 / B1</text>
-<text x="35.00" y="819.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 418 sessions / 92261 origins</text>
+<text x="35.00" y="734.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Primary</text>
+<text x="35.00" y="763.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00">LightGBM</text>
+<text x="35.00" y="792.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B2 / B1</text>
+<text x="35.00" y="819.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="728.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−0.07276 %</text>
-<text x="325.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.67232, 0.46314] %</text>
-<line x1="497.591" y1="762.000" x2="497.591" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="482.222" y="779" width="15.368" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="355.585" y1="788.000" x2="595.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="782.000" x2="355.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="782.000" x2="595.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="482.222" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="817.000" x2="617.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.67232, 0.46314] %</text>
+<line x1="497.591" y1="762.000" x2="497.591" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="482.222" y="779" width="15.368" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="355.585" y1="788.000" x2="595.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="782.000" x2="355.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="782.000" x2="595.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="482.222" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="817.000" x2="617.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.77451%</text>
 <text x="617.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.56534%</text>
-<text x="325.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 418 sesiones / 92261 orígenes</text>
-<text x="35.00" y="902.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmación</text>
-<text x="35.00" y="931.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2" >Lineal</text>
-<text x="35.00" y="960.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B1 / B0</text>
-<text x="35.00" y="987.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 418 sessions / 92261 origins</text>
+<text x="35.00" y="902.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmation</text>
+<text x="35.00" y="931.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2">Linear</text>
+<text x="35.00" y="960.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B1 / B0</text>
+<text x="35.00" y="987.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="896.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+2.6647 %</text>
-<text x="325.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.0736, 8.3784] %</text>
-<line x1="382.826" y1="930.000" x2="382.826" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="382.826" y="947" width="67.614" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="355.585" y1="956.000" x2="595.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="950.000" x2="355.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="950.000" x2="595.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="450.440" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="985.000" x2="617.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.0736, 8.3784] %</text>
+<line x1="382.826" y1="930.000" x2="382.826" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="382.826" y="947" width="67.614" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="355.585" y1="956.000" x2="595.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="950.000" x2="355.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="950.000" x2="595.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="450.440" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="985.000" x2="617.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.9243%</text>
 <text x="617.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">9.229%</text>
-<text x="325.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 5360 orígenes</text>
-<text x="35.00" y="1070.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmación</text>
-<text x="35.00" y="1099.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2" >Lineal</text>
-<text x="35.00" y="1128.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B2 / B1</text>
-<text x="35.00" y="1155.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 5360 origins</text>
+<text x="35.00" y="1070.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmation</text>
+<text x="35.00" y="1099.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#0072B2">Linear</text>
+<text x="35.00" y="1128.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B2 / B1</text>
+<text x="35.00" y="1155.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="1064.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+4.1837 %</text>
-<text x="325.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.26712, 11.215] %</text>
-<line x1="355.585" y1="1098.000" x2="355.585" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="355.585" y="1115" width="89.465" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="361.297" y1="1124.000" x2="595.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="361.297" y1="1118.000" x2="361.297" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="1118.000" x2="595.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="445.050" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="1153.000" x2="617.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.26712, 11.215] %</text>
+<line x1="355.585" y1="1098.000" x2="355.585" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="355.585" y="1115" width="89.465" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="361.297" y1="1124.000" x2="595.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="361.297" y1="1118.000" x2="361.297" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="1118.000" x2="595.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="445.050" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="1153.000" x2="617.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.0094%</text>
 <text x="617.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">12.225%</text>
-<text x="325.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 5360 orígenes</text>
-<text x="35.00" y="1238.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmación</text>
-<text x="35.00" y="1267.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00" >LightGBM</text>
-<text x="35.00" y="1296.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B1 / B0</text>
-<text x="35.00" y="1323.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 5360 origins</text>
+<text x="35.00" y="1238.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmation</text>
+<text x="35.00" y="1267.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00">LightGBM</text>
+<text x="35.00" y="1296.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B1 / B0</text>
+<text x="35.00" y="1323.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="1232.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+4.4713 %</text>
-<text x="325.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.79828, 10.239] %</text>
-<line x1="355.585" y1="1266.000" x2="355.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="355.585" y="1283" width="104.736" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="374.284" y1="1292.000" x2="595.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="374.284" y1="1286.000" x2="374.284" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="1286.000" x2="595.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="460.320" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="1321.000" x2="617.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.79828, 10.239] %</text>
+<line x1="355.585" y1="1266.000" x2="355.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="355.585" y="1283" width="104.736" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="374.284" y1="1292.000" x2="595.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="374.284" y1="1286.000" x2="374.284" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="1286.000" x2="595.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="460.320" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="1321.000" x2="617.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.92147%</text>
 <text x="617.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">11.16%</text>
-<text x="325.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 5360 orígenes</text>
-<text x="35.00" y="1406.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmación</text>
-<text x="35.00" y="1435.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00" >LightGBM</text>
-<text x="35.00" y="1464.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" >B2 / B1</text>
-<text x="35.00" y="1491.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" >Positivo = mejora</text>
+<text x="325.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 5360 origins</text>
+<text x="35.00" y="1406.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="600">Confirmation</text>
+<text x="35.00" y="1435.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#D55E00">LightGBM</text>
+<text x="35.00" y="1464.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332">B2 / B1</text>
+<text x="35.00" y="1491.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570">Positive = improvement</text>
 <text x="325.00" y="1400.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−1.8127 %</text>
-<text x="325.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−5.4884, 0.24458] %</text>
-<line x1="585.184" y1="1434.000" x2="585.184" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="509.353" y="1451" width="75.831" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="355.585" y1="1460.000" x2="595.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="355.585" y1="1454.000" x2="355.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="595.415" y1="1454.000" x2="595.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="509.353" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="334.000" y1="1489.000" x2="617.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="325.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−5.4884, 0.24458] %</text>
+<line x1="585.184" y1="1434.000" x2="585.184" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="509.353" y="1451" width="75.831" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="355.585" y1="1460.000" x2="595.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="355.585" y1="1454.000" x2="355.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="595.415" y1="1454.000" x2="595.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="509.353" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="334.000" y1="1489.000" x2="617.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="334.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−6.0043%</text>
 <text x="617.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.76054%</text>
-<text x="325.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 5360 orígenes</text>
+<text x="325.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 5360 origins</text>
 <text x="830.00" y="157.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">v2 · RV30</text>
-<text x="830.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">lineal: ridge</text>
+<text x="830.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">linear: ridge</text>
 <text x="680.00" y="224.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.7153 %</text>
-<text x="680.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.2528, 3.9077] %</text>
-<line x1="710.585" y1="258.000" x2="710.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="710.585" y="275" width="105.274" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="726.100" y1="284.000" x2="950.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="726.100" y1="278.000" x2="726.100" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="278.000" x2="950.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="815.859" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="313.000" x2="972.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.2528, 3.9077] %</text>
+<line x1="710.585" y1="258.000" x2="710.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="710.585" y="275" width="105.274" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="726.100" y1="284.000" x2="950.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="726.100" y1="278.000" x2="726.100" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="278.000" x2="950.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="815.859" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="313.000" x2="972.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.35169%</text>
 <text x="972.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.2594%</text>
-<text x="680.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="680.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="680.00" y="392.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">−8.7135 %</text>
-<text x="680.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−24.818, 0.64026] %</text>
-<line x1="944.384" y1="426.000" x2="944.384" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="862.296" y="443" width="82.087" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="710.585" y1="452.000" x2="950.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="446.000" x2="710.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="446.000" x2="950.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="862.296" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="481.000" x2="972.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−24.818, 0.64026] %</text>
+<line x1="944.384" y1="426.000" x2="944.384" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="862.296" y="443" width="82.087" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="710.585" y1="452.000" x2="950.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="446.000" x2="710.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="446.000" x2="950.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="862.296" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="481.000" x2="972.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−27.109%</text>
 <text x="972.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.9315%</text>
-<text x="680.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="680.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="680.00" y="560.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+2.0912 %</text>
-<text x="680.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.67972, 3.6741] %</text>
-<line x1="710.585" y1="594.000" x2="710.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="710.585" y="611" width="136.505" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="754.955" y1="620.000" x2="950.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="754.955" y1="614.000" x2="754.955" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="614.000" x2="950.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="847.090" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="649.000" x2="972.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.67972, 3.6741] %</text>
+<line x1="710.585" y1="594.000" x2="710.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="710.585" y="611" width="136.505" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="754.955" y1="620.000" x2="950.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="754.955" y1="614.000" x2="754.955" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="614.000" x2="950.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="847.090" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="649.000" x2="972.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.33067%</text>
 <text x="972.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.0047%</text>
-<text x="680.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="680.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="680.00" y="728.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−0.062665 %</text>
-<text x="680.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.0147, 0.6524] %</text>
-<line x1="856.562" y1="762.000" x2="856.562" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="847.547" y="779" width="9.015" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="710.585" y1="788.000" x2="950.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="782.000" x2="710.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="782.000" x2="950.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="847.547" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="817.000" x2="972.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.0147, 0.6524] %</text>
+<line x1="856.562" y1="762.000" x2="856.562" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="847.547" y="779" width="9.015" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="710.585" y1="788.000" x2="950.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="782.000" x2="710.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="782.000" x2="950.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="847.547" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="817.000" x2="972.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.1648%</text>
 <text x="972.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.80245%</text>
-<text x="680.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="680.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="680.00" y="896.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.37644 %</text>
-<text x="680.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.6392, 2.0828] %</text>
-<line x1="816.210" y1="930.000" x2="816.210" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="816.210" y="947" width="24.257" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="710.585" y1="956.000" x2="950.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="950.000" x2="710.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="950.000" x2="950.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="840.467" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="985.000" x2="972.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.6392, 2.0828] %</text>
+<line x1="816.210" y1="930.000" x2="816.210" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="816.210" y="947" width="24.257" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="710.585" y1="956.000" x2="950.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="950.000" x2="710.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="950.000" x2="950.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="840.467" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="985.000" x2="972.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.9742%</text>
 <text x="972.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.4177%</text>
-<text x="680.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="680.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="680.00" y="1064.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.8635 %</text>
-<text x="680.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.34396, 5.6963] %</text>
-<line x1="724.242" y1="1098.000" x2="724.242" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="724.242" y="1115" width="73.989" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="710.585" y1="1124.000" x2="950.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="1118.000" x2="710.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="1118.000" x2="950.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="798.231" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="1153.000" x2="972.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.34396, 5.6963] %</text>
+<line x1="724.242" y1="1098.000" x2="724.242" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="724.242" y="1115" width="73.989" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="710.585" y1="1124.000" x2="950.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="1118.000" x2="710.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="1118.000" x2="950.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="798.231" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="1153.000" x2="972.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.88759%</text>
 <text x="972.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">6.2399%</text>
-<text x="680.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="680.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="680.00" y="1232.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+1.6658 %</text>
-<text x="680.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.96335, 4.2427] %</text>
-<line x1="754.964" y1="1266.000" x2="754.964" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="754.964" y="1283" width="76.740" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="710.585" y1="1292.000" x2="950.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="1286.000" x2="710.585" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="1286.000" x2="950.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="831.704" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="1321.000" x2="972.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.96335, 4.2427] %</text>
+<line x1="754.964" y1="1266.000" x2="754.964" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="754.964" y="1283" width="76.740" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="710.585" y1="1292.000" x2="950.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="1286.000" x2="710.585" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="1286.000" x2="950.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="831.704" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="1321.000" x2="972.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.4319%</text>
 <text x="972.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.7112%</text>
-<text x="680.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="680.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="680.00" y="1400.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−1.1635 %</text>
-<text x="680.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−4.6463, 0.95482] %</text>
-<line x1="909.532" y1="1434.000" x2="909.532" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="859.713" y="1451" width="49.819" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="710.585" y1="1460.000" x2="950.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="710.585" y1="1454.000" x2="710.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="950.415" y1="1454.000" x2="950.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="859.713" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="689.000" y1="1489.000" x2="972.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="680.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−4.6463, 0.95482] %</text>
+<line x1="909.532" y1="1434.000" x2="909.532" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="859.713" y="1451" width="49.819" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="710.585" y1="1460.000" x2="950.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="710.585" y1="1454.000" x2="710.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="950.415" y1="1454.000" x2="950.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="859.713" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="689.000" y1="1489.000" x2="972.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="689.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−5.1504%</text>
 <text x="972.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.4589%</text>
-<text x="680.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="680.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1185.00" y="157.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">v3 · RV30</text>
-<text x="1185.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">lineal: ridge</text>
+<text x="1185.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">linear: ridge</text>
 <text x="1035.00" y="224.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.729 %</text>
-<text x="1035.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.37813, 3.7613] %</text>
-<line x1="1065.585" y1="258.000" x2="1065.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1065.585" y="275" width="110.243" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1089.695" y1="284.000" x2="1305.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1089.695" y1="278.000" x2="1089.695" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="278.000" x2="1305.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1175.827" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="313.000" x2="1327.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.37813, 3.7613] %</text>
+<line x1="1065.585" y1="258.000" x2="1065.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1065.585" y="275" width="110.243" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1089.695" y1="284.000" x2="1305.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1089.695" y1="278.000" x2="1089.695" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="278.000" x2="1305.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1175.827" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="313.000" x2="1327.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.33852%</text>
 <text x="1327.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.0999%</text>
-<text x="1035.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1035.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1035.00" y="392.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.55429 %</text>
-<text x="1035.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.10599, 1.2252] %</text>
-<line x1="1084.681" y1="426.000" x2="1084.681" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1084.681" y="443" width="99.865" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1065.585" y1="452.000" x2="1305.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="446.000" x2="1065.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="446.000" x2="1305.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1184.546" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="481.000" x2="1327.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.10599, 1.2252] %</text>
+<line x1="1084.681" y1="426.000" x2="1084.681" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1084.681" y="443" width="99.865" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1065.585" y1="452.000" x2="1305.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="446.000" x2="1065.585" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="446.000" x2="1305.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1184.546" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="481.000" x2="1327.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.2258%</text>
 <text x="1327.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.345%</text>
-<text x="1035.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1035.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1035.00" y="560.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+2.0912 %</text>
-<text x="1035.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.67972, 3.6741] %</text>
-<line x1="1065.585" y1="594.000" x2="1065.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1065.585" y="611" width="136.505" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1109.955" y1="620.000" x2="1305.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1109.955" y1="614.000" x2="1109.955" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="614.000" x2="1305.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1202.090" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="649.000" x2="1327.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.67972, 3.6741] %</text>
+<line x1="1065.585" y1="594.000" x2="1065.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1065.585" y="611" width="136.505" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1109.955" y1="620.000" x2="1305.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1109.955" y1="614.000" x2="1109.955" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="614.000" x2="1305.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1202.090" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="649.000" x2="1327.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.33067%</text>
 <text x="1327.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.0047%</text>
-<text x="1035.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1035.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1035.00" y="728.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−0.15914 %</text>
-<text x="1035.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.127, 0.56908] %</text>
-<line x1="1224.945" y1="762.000" x2="1224.945" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1202.443" y="779" width="22.502" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1065.585" y1="788.000" x2="1305.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="782.000" x2="1065.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="782.000" x2="1305.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1202.443" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="817.000" x2="1327.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.127, 0.56908] %</text>
+<line x1="1224.945" y1="762.000" x2="1224.945" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1202.443" y="779" width="22.502" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1065.585" y1="788.000" x2="1305.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="782.000" x2="1065.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="782.000" x2="1305.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1202.443" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="817.000" x2="1327.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.2796%</text>
 <text x="1327.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.72173%</text>
-<text x="1035.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1035.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1035.00" y="896.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.5011 %</text>
-<text x="1035.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.5546, 2.1705] %</text>
-<line x1="1165.673" y1="930.000" x2="1165.673" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1165.673" y="947" width="32.262" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1065.585" y1="956.000" x2="1305.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="950.000" x2="1065.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="950.000" x2="1305.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1197.935" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="985.000" x2="1327.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.5546, 2.1705] %</text>
+<line x1="1165.673" y1="930.000" x2="1165.673" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1165.673" y="947" width="32.262" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1065.585" y1="956.000" x2="1305.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="950.000" x2="1065.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="950.000" x2="1305.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1197.935" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="985.000" x2="1327.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.8898%</text>
 <text x="1327.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.5057%</text>
-<text x="1035.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1035.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1035.00" y="1064.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.8605 %</text>
-<text x="1035.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.41129, 5.6489] %</text>
-<line x1="1081.861" y1="1098.000" x2="1081.861" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1081.861" y="1115" width="73.629" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1065.585" y1="1124.000" x2="1305.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="1118.000" x2="1065.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="1118.000" x2="1305.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1155.491" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="1153.000" x2="1327.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.41129, 5.6489] %</text>
+<line x1="1081.861" y1="1098.000" x2="1081.861" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1081.861" y="1115" width="73.629" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1065.585" y1="1124.000" x2="1305.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="1118.000" x2="1065.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="1118.000" x2="1305.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1155.491" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="1153.000" x2="1327.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.95671%</text>
 <text x="1327.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">6.1944%</text>
-<text x="1035.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1035.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1035.00" y="1232.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+1.6658 %</text>
-<text x="1035.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.96335, 4.2427] %</text>
-<line x1="1109.964" y1="1266.000" x2="1109.964" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1109.964" y="1283" width="76.740" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1065.585" y1="1292.000" x2="1305.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="1286.000" x2="1065.585" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="1286.000" x2="1305.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1186.704" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="1321.000" x2="1327.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.96335, 4.2427] %</text>
+<line x1="1109.964" y1="1266.000" x2="1109.964" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1109.964" y="1283" width="76.740" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1065.585" y1="1292.000" x2="1305.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="1286.000" x2="1065.585" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="1286.000" x2="1305.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1186.704" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="1321.000" x2="1327.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.4319%</text>
 <text x="1327.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">4.7112%</text>
-<text x="1035.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1035.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1035.00" y="1400.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−2.4139 %</text>
-<text x="1035.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−6.0333, 0.014485] %</text>
-<line x1="1304.841" y1="1434.000" x2="1304.841" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1209.115" y="1451" width="95.726" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1065.585" y1="1460.000" x2="1305.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1065.585" y1="1454.000" x2="1065.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1305.415" y1="1454.000" x2="1305.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1209.115" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1044.000" y1="1489.000" x2="1327.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1035.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−6.0333, 0.014485] %</text>
+<line x1="1304.841" y1="1434.000" x2="1304.841" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1209.115" y="1451" width="95.726" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1065.585" y1="1460.000" x2="1305.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1065.585" y1="1454.000" x2="1065.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1305.415" y1="1454.000" x2="1305.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1209.115" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1044.000" y1="1489.000" x2="1327.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1044.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−6.5776%</text>
 <text x="1327.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.55878%</text>
-<text x="1035.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1035.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1540.00" y="157.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV15</text>
-<text x="1540.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">lineal: ridge</text>
+<text x="1540.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">linear: ridge</text>
 <text x="1390.00" y="224.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.88005 %</text>
-<text x="1390.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.13775, 1.8804] %</text>
-<line x1="1420.585" y1="258.000" x2="1420.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1420.585" y="275" width="112.245" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1438.153" y1="284.000" x2="1660.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1438.153" y1="278.000" x2="1438.153" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="278.000" x2="1660.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1532.829" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="313.000" x2="1682.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.13775, 1.8804] %</text>
+<line x1="1420.585" y1="258.000" x2="1420.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1420.585" y="275" width="112.245" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1438.153" y1="284.000" x2="1660.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1438.153" y1="278.000" x2="1438.153" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="278.000" x2="1660.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1532.829" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="313.000" x2="1682.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.16924%</text>
 <text x="1682.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.0496%</text>
-<text x="1390.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1390.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1390.00" y="392.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.62279 %</text>
-<text x="1390.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.18404, 1.0614] %</text>
-<line x1="1420.585" y1="426.000" x2="1420.585" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1420.585" y="443" width="140.728" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1462.171" y1="452.000" x2="1660.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1462.171" y1="446.000" x2="1462.171" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="446.000" x2="1660.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1561.313" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="481.000" x2="1682.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.18404, 1.0614] %</text>
+<line x1="1420.585" y1="426.000" x2="1420.585" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1420.585" y="443" width="140.728" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1462.171" y1="452.000" x2="1660.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1462.171" y1="446.000" x2="1462.171" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="446.000" x2="1660.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1561.313" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="481.000" x2="1682.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.095523%</text>
 <text x="1682.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.1569%</text>
-<text x="1390.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1390.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1390.00" y="560.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+1.17 %</text>
-<text x="1390.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.32543, 2.1852] %</text>
-<line x1="1420.585" y1="594.000" x2="1420.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1420.585" y="611" width="128.408" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1456.302" y1="620.000" x2="1660.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1456.302" y1="614.000" x2="1456.302" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="614.000" x2="1660.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1548.993" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="649.000" x2="1682.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.32543, 2.1852] %</text>
+<line x1="1420.585" y1="594.000" x2="1420.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1420.585" y="611" width="128.408" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1456.302" y1="620.000" x2="1660.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1456.302" y1="614.000" x2="1456.302" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="614.000" x2="1660.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1548.993" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="649.000" x2="1682.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.19667%</text>
 <text x="1682.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.3818%</text>
-<text x="1390.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1390.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1390.00" y="728.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−0.11474 %</text>
-<text x="1390.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−1.1016, 0.59507] %</text>
-<line x1="1576.302" y1="762.000" x2="1576.302" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1560.083" y="779" width="16.219" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1420.585" y1="788.000" x2="1660.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1420.585" y1="782.000" x2="1420.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="782.000" x2="1660.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1560.083" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="817.000" x2="1682.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−1.1016, 0.59507] %</text>
+<line x1="1576.302" y1="762.000" x2="1576.302" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1560.083" y="779" width="16.219" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1420.585" y1="788.000" x2="1660.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1420.585" y1="782.000" x2="1420.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="782.000" x2="1660.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1560.083" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="817.000" x2="1682.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.2543%</text>
 <text x="1682.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.74777%</text>
-<text x="1390.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1390.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1390.00" y="896.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.17408 %</text>
-<text x="1390.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.92374, 1.2037] %</text>
-<line x1="1524.719" y1="930.000" x2="1524.719" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1524.719" y="947" width="19.624" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1420.585" y1="956.000" x2="1660.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1420.585" y1="950.000" x2="1420.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="950.000" x2="1660.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1544.343" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="985.000" x2="1682.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.92374, 1.2037] %</text>
+<line x1="1524.719" y1="930.000" x2="1524.719" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1524.719" y="947" width="19.624" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1420.585" y1="956.000" x2="1660.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1420.585" y1="950.000" x2="1420.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="950.000" x2="1660.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1544.343" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="985.000" x2="1682.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.1152%</text>
 <text x="1682.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.3952%</text>
-<text x="1390.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1390.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1390.00" y="1064.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.9974 %</text>
-<text x="1390.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.46453, 6.1765] %</text>
-<line x1="1437.360" y1="1098.000" x2="1437.360" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1437.360" y="1115" width="72.131" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1420.585" y1="1124.000" x2="1660.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1420.585" y1="1118.000" x2="1420.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="1118.000" x2="1660.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1509.492" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="1153.000" x2="1682.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.46453, 6.1765] %</text>
+<line x1="1437.360" y1="1098.000" x2="1437.360" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1437.360" y="1115" width="72.131" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1420.585" y1="1124.000" x2="1660.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1420.585" y1="1118.000" x2="1420.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="1118.000" x2="1660.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1509.492" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="1153.000" x2="1682.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−1.0622%</text>
 <text x="1682.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">6.7742%</text>
-<text x="1390.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1390.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1390.00" y="1232.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+3.1626 %</text>
-<text x="1390.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.69506, 7.1042] %</text>
-<line x1="1420.585" y1="1266.000" x2="1420.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1420.585" y="1283" width="106.767" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1444.049" y1="1292.000" x2="1660.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1444.049" y1="1286.000" x2="1444.049" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="1286.000" x2="1660.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1527.352" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="1321.000" x2="1682.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.69506, 7.1042] %</text>
+<line x1="1420.585" y1="1266.000" x2="1420.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1420.585" y="1283" width="106.767" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1444.049" y1="1292.000" x2="1660.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1444.049" y1="1286.000" x2="1444.049" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="1286.000" x2="1660.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1527.352" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="1321.000" x2="1682.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.63938%</text>
 <text x="1682.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">7.7436%</text>
-<text x="1390.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1390.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1390.00" y="1400.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−0.99192 %</text>
-<text x="1390.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−3.9599, 0.9582] %</text>
-<line x1="1613.689" y1="1434.000" x2="1613.689" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1565.317" y="1451" width="48.371" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1420.585" y1="1460.000" x2="1660.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1420.585" y1="1454.000" x2="1420.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1660.415" y1="1454.000" x2="1660.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1565.317" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1399.000" y1="1489.000" x2="1682.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1390.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−3.9599, 0.9582] %</text>
+<line x1="1613.689" y1="1434.000" x2="1613.689" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1565.317" y="1451" width="48.371" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1420.585" y1="1460.000" x2="1660.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1420.585" y1="1454.000" x2="1420.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1660.415" y1="1454.000" x2="1660.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1565.317" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1399.000" y1="1489.000" x2="1682.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1399.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−4.4025%</text>
 <text x="1682.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.4008%</text>
-<text x="1390.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1390.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1895.00" y="157.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">v4 · RV5</text>
-<text x="1895.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">lineal: ridge</text>
+<text x="1895.00" y="182.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="16" fill="#5a6570" text-anchor="middle">linear: ridge</text>
 <text x="1745.00" y="224.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.37726 %</text>
-<text x="1745.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.13368, 0.68088] %</text>
-<line x1="1775.585" y1="258.000" x2="1775.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1775.585" y="275" width="132.886" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1822.671" y1="284.000" x2="2015.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1822.671" y1="278.000" x2="1822.671" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="278.000" x2="2015.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1908.471" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="313.000" x2="2037.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="248.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.13368, 0.68088] %</text>
+<line x1="1775.585" y1="258.000" x2="1775.585" y2="308.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1775.585" y="275" width="132.886" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1822.671" y1="284.000" x2="2015.415" y2="284.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1822.671" y1="278.000" x2="1822.671" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="278.000" x2="2015.415" y2="290.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1908.471" cy="284" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="313.000" x2="2037.000" y2="313.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.061279%</text>
 <text x="2037.00" y="332.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.74216%</text>
-<text x="1745.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1745.00" y="350.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1745.00" y="392.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.25632 %</text>
-<text x="1745.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.020438, 0.48841] %</text>
-<line x1="1775.585" y1="426.000" x2="1775.585" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1775.585" y="443" width="125.862" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1785.621" y1="452.000" x2="2015.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1785.621" y1="446.000" x2="1785.621" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="446.000" x2="2015.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1901.447" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="481.000" x2="2037.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="416.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.020438, 0.48841] %</text>
+<line x1="1775.585" y1="426.000" x2="1775.585" y2="476.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1775.585" y="443" width="125.862" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1785.621" y1="452.000" x2="2015.415" y2="452.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1785.621" y1="446.000" x2="1785.621" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="446.000" x2="2015.415" y2="458.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1901.447" cy="452" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="481.000" x2="2037.000" y2="481.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.043957%</text>
 <text x="2037.00" y="500.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.53237%</text>
-<text x="1745.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1745.00" y="518.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1745.00" y="560.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+0.53578 %</text>
-<text x="1745.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.049951, 1.2379] %</text>
-<line x1="1775.585" y1="594.000" x2="1775.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1775.585" y="611" width="103.805" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1785.263" y1="620.000" x2="2015.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1785.263" y1="614.000" x2="1785.263" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="614.000" x2="2015.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1879.390" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="649.000" x2="2037.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.049951, 1.2379] %</text>
+<line x1="1775.585" y1="594.000" x2="1775.585" y2="644.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1775.585" y="611" width="103.805" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1785.263" y1="620.000" x2="2015.415" y2="620.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1785.263" y1="614.000" x2="1785.263" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="614.000" x2="2015.415" y2="626.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1879.390" cy="620" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="649.000" x2="2037.000" y2="649.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.11141%</text>
 <text x="2037.00" y="668.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">1.3493%</text>
-<text x="1745.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1745.00" y="686.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1745.00" y="728.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+0.16049 %</text>
-<text x="1745.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.26334, 0.55679] %</text>
-<line x1="1852.594" y1="762.000" x2="1852.594" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1852.594" y="779" width="46.931" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1775.585" y1="788.000" x2="2015.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1775.585" y1="782.000" x2="1775.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="782.000" x2="2015.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1899.525" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="817.000" x2="2037.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="752.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.26334, 0.55679] %</text>
+<line x1="1852.594" y1="762.000" x2="1852.594" y2="812.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1852.594" y="779" width="46.931" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1775.585" y1="788.000" x2="2015.415" y2="788.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1775.585" y1="782.000" x2="1775.585" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="782.000" x2="2015.415" y2="794.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1899.525" cy="788" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="817.000" x2="2037.000" y2="817.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.33715%</text>
 <text x="2037.00" y="836.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.6306%</text>
-<text x="1745.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 419 sesiones / 160832 orígenes</text>
+<text x="1745.00" y="854.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 419 sessions / 160832 origins</text>
 <text x="1745.00" y="896.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+0.00086581 %</text>
-<text x="1745.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.62142, 0.61205] %</text>
-<line x1="1896.411" y1="930.000" x2="1896.411" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1896.411" y="947" width="0.168" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1775.585" y1="956.000" x2="2015.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1775.585" y1="950.000" x2="1775.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="950.000" x2="2015.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1896.579" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="985.000" x2="2037.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="920.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.62142, 0.61205] %</text>
+<line x1="1896.411" y1="930.000" x2="1896.411" y2="980.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1896.411" y="947" width="0.168" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1775.585" y1="956.000" x2="2015.415" y2="956.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1775.585" y1="950.000" x2="1775.585" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="950.000" x2="2015.415" y2="962.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1896.579" cy="956" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="985.000" x2="2037.000" y2="985.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.73243%</text>
 <text x="2037.00" y="1004.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.72306%</text>
-<text x="1745.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1745.00" y="1022.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1745.00" y="1064.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#0072B2" font-weight="600">+1.2284 %</text>
-<text x="1745.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−0.185, 3.4828] %</text>
-<line x1="1787.681" y1="1098.000" x2="1787.681" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1787.681" y="1115" width="80.323" height="18" fill="#0072B2" fill-opacity="0.55"/>
-<line x1="1775.585" y1="1124.000" x2="2015.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1775.585" y1="1118.000" x2="1775.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="1118.000" x2="2015.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1868.005" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="1153.000" x2="2037.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="1088.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−0.185, 3.4828] %</text>
+<line x1="1787.681" y1="1098.000" x2="1787.681" y2="1148.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1787.681" y="1115" width="80.323" height="18" fill="#0072B2" fill-opacity="0.55" />
+<line x1="1775.585" y1="1124.000" x2="2015.415" y2="1124.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1775.585" y1="1118.000" x2="1775.585" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="1118.000" x2="2015.415" y2="1130.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1868.005" cy="1124" r="4.5" fill="#0072B2" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="1153.000" x2="2037.000" y2="1153.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.5151%</text>
 <text x="2037.00" y="1172.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">3.8129%</text>
-<text x="1745.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1745.00" y="1190.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1745.00" y="1232.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">+1.3305 %</text>
-<text x="1745.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [0.3146, 2.6285] %</text>
-<line x1="1775.585" y1="1266.000" x2="1775.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1775.585" y="1283" width="121.402" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1804.290" y1="1292.000" x2="2015.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1804.290" y1="1286.000" x2="1804.290" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="1286.000" x2="2015.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1896.986" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="1321.000" x2="2037.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="1256.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [0.3146, 2.6285] %</text>
+<line x1="1775.585" y1="1266.000" x2="1775.585" y2="1316.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1775.585" y="1283" width="121.402" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1804.290" y1="1292.000" x2="2015.415" y2="1292.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1804.290" y1="1286.000" x2="1804.290" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="1286.000" x2="2015.415" y2="1298.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1896.986" cy="1292" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="1321.000" x2="2037.000" y2="1321.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−0.23656%</text>
 <text x="2037.00" y="1340.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">2.865%</text>
-<text x="1745.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
+<text x="1745.00" y="1358.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
 <text x="1745.00" y="1400.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#D55E00" font-weight="600">−1.0207 %</text>
-<text x="1745.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" >IC reescalado [−3.5367, 0.53421] %</text>
-<line x1="1983.943" y1="1434.000" x2="1983.943" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray=""/>
-<rect x="1923.814" y="1451" width="60.130" height="18" fill="#D55E00" fill-opacity="0.55"/>
-<line x1="1775.585" y1="1460.000" x2="2015.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="1775.585" y1="1454.000" x2="1775.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<line x1="2015.415" y1="1454.000" x2="2015.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray=""/>
-<circle cx="1923.814" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1"/>
-<line x1="1754.000" y1="1489.000" x2="2037.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray=""/>
+<text x="1745.00" y="1424.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570">Rescaled CI [−3.5367, 0.53421] %</text>
+<line x1="1983.943" y1="1434.000" x2="1983.943" y2="1484.000" stroke="#707A84" stroke-width="1.2" stroke-dasharray="" />
+<rect x="1923.814" y="1451" width="60.130" height="18" fill="#D55E00" fill-opacity="0.55" />
+<line x1="1775.585" y1="1460.000" x2="2015.415" y2="1460.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="1775.585" y1="1454.000" x2="1775.585" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<line x1="2015.415" y1="1454.000" x2="2015.415" y2="1466.000" stroke="#1a2332" stroke-width="2" stroke-dasharray="" />
+<circle cx="1923.814" cy="1460" r="4.5" fill="#D55E00" stroke="white" stroke-width="1" />
+<line x1="1754.000" y1="1489.000" x2="2037.000" y2="1489.000" stroke="#5a6570" stroke-width="1" stroke-dasharray="" />
 <text x="1754.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="start">−3.9031%</text>
 <text x="2037.00" y="1508.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="14" fill="#5a6570" text-anchor="end">0.9006%</text>
-<text x="1745.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570" >N = 25 sesiones / 9750 orígenes</text>
-<text x="35.00" y="1584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >No se omiten resultados adversos: los extremos de v1 se representan completos en su propia escala, sin corte en −100 %.</text>
-<text x="35.00" y="1619.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Muestras, familias lineales e inferencia cambian entre versiones; RV30, RV15 y RV5 son objetivos distintos. No son réplicas independientes.</text>
-<text x="35.00" y="1654.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" >Datos, intervalos, p, tamaños muestrales y hashes exactos: comparison_v1_v4.csv. No se entrenó ni se ejecutó bootstrap nuevo.</text>
+<text x="1745.00" y="1526.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="13" fill="#5a6570">N = 25 sessions / 9750 origins</text>
+<text x="35.00" y="1584.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Adverse results are retained: v1 extremes appear in full on their own scale, without a cutoff at −100 %.</text>
+<text x="35.00" y="1619.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Samples, linear families and inference change across versions; RV30, RV15 and RV5 are distinct targets, not independent replications.</text>
+<text x="35.00" y="1654.00" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570">Exact data, intervals, p values, sample sizes and hashes: comparison_v1_v4.csv. No new model training or bootstrap was run.</text>
 </svg>

@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "What can be reproduced with public material",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "animation": "none",
+    "viewBox": [
+      1100,
+      610
+    ],
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "frontend": {
+          "label": "Published record"
+        },
+        "backend": {
+          "label": "Computation"
+        },
+        "security": {
+          "label": "Gate"
+        },
+        "database": {
+          "label": "Data"
+        },
+        "external": {
+          "label": "Study question"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "figures",
+      "type": "frontend",
+      "label": "Regenerate figures",
+      "sublabel": "Public CSV + versioned source",
+      "pos": [
+        60,
+        140
+      ],
+      "size": [
+        220,
+        82
+      ]
+    },
+    {
+      "id": "public",
+      "type": "database",
+      "label": "Public repository",
+      "sublabel": "Code, aggregate results, hashes",
+      "pos": [
+        420,
+        140
+      ],
+      "size": [
+        220,
+        82
+      ]
+    },
+    {
+      "id": "checks",
+      "type": "backend",
+      "label": "Verify public artifacts",
+      "sublabel": "Contracts, claims and hash pins",
+      "pos": [
+        780,
+        140
+      ],
+      "size": [
+        220,
+        82
+      ]
+    },
+    {
+      "id": "originals",
+      "type": "database",
+      "label": "Licensed originals",
+      "sublabel": "Provider data and granular panels",
+      "pos": [
+        60,
+        420
+      ],
+      "size": [
+        220,
+        82
+      ],
+      "tag": "PRIVATE"
+    },
+    {
+      "id": "rebuild",
+      "type": "backend",
+      "label": "Registered reproduction",
+      "sublabel": "Pinned inputs, code and environment",
+      "pos": [
+        420,
+        420
+      ],
+      "size": [
+        220,
+        82
+      ]
+    },
+    {
+      "id": "aggregate",
+      "type": "security",
+      "label": "Publication boundary",
+      "sublabel": "Export aggregates and hashes only",
+      "pos": [
+        780,
+        420
+      ],
+      "size": [
+        220,
+        82
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "PUBLIC MATERIAL · NO PROVIDER ENTITLEMENTS NEEDED",
+      "wraps": [
+        "figures",
+        "public",
+        "checks"
+      ],
+      "pad": 32
+    },
+    {
+      "kind": "security-group",
+      "label": "LICENSED MATERIAL · CONTROLLED ACCESS",
+      "wraps": [
+        "originals",
+        "rebuild",
+        "aggregate"
+      ],
+      "pad": 32
+    }
+  ],
+  "connections": [
+    {
+      "id": "public-figures",
+      "from": "public",
+      "to": "figures",
+      "label": "render"
+    },
+    {
+      "id": "public-checks",
+      "from": "public",
+      "to": "checks",
+      "label": "check"
+    },
+    {
+      "id": "originals-rebuild",
+      "from": "originals",
+      "to": "rebuild",
+      "label": "licensed inputs"
+    },
+    {
+      "id": "rebuild-aggregate",
+      "from": "rebuild",
+      "to": "aggregate",
+      "label": "summarize"
+    },
+    {
+      "id": "aggregate-public",
+      "from": "aggregate",
+      "to": "public",
+      "label": "public outputs",
+      "fromSide": "top",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "slate",
+      "title": "Public verification is executable",
+      "items": [
+        "Check the committed contract tests, claims, figures and artifact fingerprints.",
+        "Passing these checks does not validate absent licensed input values or establish a fresh model evaluation."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Full reproduction has additional requirements",
+      "items": [
+        "Provider entitlements, the original granular inputs and the recorded environment are required.",
+        "Private storage stays closed with controlled access. A public code license grants no market-data rights."
+      ]
+    }
+  ]
+}

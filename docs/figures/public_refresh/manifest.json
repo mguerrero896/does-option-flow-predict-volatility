@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "renderer": {
+    "name": "Archify",
+    "version": "2.16",
+    "node": "24.11.1",
+    "chrome": "152.0.7977.77",
+    "quality": "showcase",
+    "preset": "classic",
+    "svg_export": "native canonical auto-theme"
+  },
+  "reproduction": "node docs/figures/public_refresh/reproduce.mjs --render",
+  "verification": "node docs/figures/public_refresh/reproduce.mjs --verify",
+  "source_scope": "Published protocols and aggregate results only; no prospective observations, licensed raw inputs or new model fits.",
+  "diagrams": [
+    {
+      "id": "proposal_to_replication",
+      "diagram_type": "workflow",
+      "source": {
+        "path": "proposal_to_replication.workflow.json",
+        "sha256": "f2dba31240eebbc20ad2a12ca18b3f2e4d0541e30d0841f61b80635617ae4ed2",
+        "bytes": 4605
+      },
+      "html": {
+        "path": "proposal_to_replication.workflow.html",
+        "sha256": "bba13a90289d9ad3af513a7754e96d503699e11a55c1bc18b682ae610f64ac9f",
+        "bytes": 724640
+      },
+      "svg": {
+        "path": "proposal_to_replication.workflow.svg",
+        "sha256": "7884805c3adb9e8a36fd7f75a3e587311129e0dceadba56208e6bed8843bc1a6",
+        "bytes": 52926
+      },
+      "validation": {
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true
+          },
+          {
+            "name": "finite_svg",
+            "ok": true
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true
+          }
+        ],
+        "quality": "showcase",
+        "errors": 0,
+        "warnings": 0
+      },
+      "visual": {
+        "automated_status": "pass",
+        "automated_visual_review": "pending",
+        "visual_review": "passed",
+        "reviewed": "Light and dark contact sheets inspected for labels, routes, node and card fit, containment and balance.",
+        "viewports": [
+          {
+            "width": 1440,
+            "height": 900,
+            "scrollWidth": 1440,
+            "scrollHeight": 900,
+            "ok": true
+          },
+          {
+            "width": 1600,
+            "height": 1000,
+            "scrollWidth": 1600,
+            "scrollHeight": 1000,
+            "ok": true
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "scrollWidth": 1920,
+            "scrollHeight": 1080,
+            "ok": true
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "scrollWidth": 2048,
+            "scrollHeight": 1320,
+            "ok": true
+          }
+        ],
+        "captures": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "sha256": "7a71cff62bdf6f78f3018831a81d6dcafcef8e15c96f217e8976a957ad5335e3"
+          },
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "dark",
+            "sha256": "a081b2982d59f61fa4cb6fdff43b30bd9fc5ae29c895ded131bcb293560de0d1"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "sha256": "a7af37b6128d76c915f53aff68ba4d9b1d25d561281ac8ac12818f0cce83ffde"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "dark",
+            "sha256": "5a1c46c78bd930797e317e59b1c128488eb17dc28690b936db4f420088854731"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reproducibility_map",
+      "diagram_type": "architecture",
+      "source": {
+        "path": "reproducibility_map.architecture.json",
+        "sha256": "8d9b3c2e58977122ccc92564eda716f44797f38f507495a1a94cc2be871fd421",
+        "bytes": 4000
+      },
+      "html": {
+        "path": "reproducibility_map.architecture.html",
+        "sha256": "478640156391b1d6ac16b2b1ecb2b7a773de3712ccb4851e46c9cbf10da87fa8",
+        "bytes": 724070
+      },
+      "svg": {
+        "path": "reproducibility_map.architecture.svg",
+        "sha256": "f126c03fa43d8261eca17ba459c366be07fba727ec161c94470df1b7eea98646",
+        "bytes": 52766
+      },
+      "validation": {
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true
+          },
+          {
+            "name": "finite_svg",
+            "ok": true
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true
+          }
+        ],
+        "quality": "showcase",
+        "errors": 0,
+        "warnings": 0
+      },
+      "visual": {
+        "automated_status": "pass",
+        "automated_visual_review": "pending",
+        "visual_review": "passed",
+        "reviewed": "Light and dark contact sheets inspected for labels, routes, node and card fit, containment and balance.",
+        "viewports": [
+          {
+            "width": 1440,
+            "height": 900,
+            "scrollWidth": 1440,
+            "scrollHeight": 900,
+            "ok": true
+          },
+          {
+            "width": 1600,
+            "height": 1000,
+            "scrollWidth": 1600,
+            "scrollHeight": 1000,
+            "ok": true
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "scrollWidth": 1920,
+            "scrollHeight": 1080,
+            "ok": true
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "scrollWidth": 2048,
+            "scrollHeight": 1320,
+            "ok": true
+          }
+        ],
+        "captures": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "sha256": "469f58281771a68144a5ec8d02a172ae7aab6b567cfaf32795bfdba8802801b6"
+          },
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "dark",
+            "sha256": "7a1b016202201eefdcc6904bf84956ea60d675fbb6127be68ce8ed3ecc5dd1f7"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "sha256": "95f2a654e62d1eb485ba1636fbe3e957bc488f3f51113b14937cf9ffb62132a3"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "dark",
+            "sha256": "bae0334f396efb17f3074e25ff721e381e81b98341e6c8a62b31c2f69d9a4564"
+          }
+        ]
+      }
+    },
+    {
+      "id": "programme_timeline",
+      "diagram_type": "architecture",
+      "source": {
+        "path": "programme_timeline.architecture.json",
+        "sha256": "d379813be6bcede0bae6ef23b4e1339cd0de8f7a3caee25bd6af2175988e7bd3",
+        "bytes": 3872
+      },
+      "html": {
+        "path": "programme_timeline.architecture.html",
+        "sha256": "ac2a78140a7cbeee40e84f3ca0fe4be11fc2ac052021fe3cddea8f4c9da6da44",
+        "bytes": 722553
+      },
+      "svg": {
+        "path": "programme_timeline.architecture.svg",
+        "sha256": "a5ebd2974c0d4eb0db28d027c674bd26cc129b5992b6713c5cdd158a40e0da1e",
+        "bytes": 51249
+      },
+      "validation": {
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true
+          },
+          {
+            "name": "finite_svg",
+            "ok": true
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true
+          }
+        ],
+        "quality": "showcase",
+        "errors": 0,
+        "warnings": 0
+      },
+      "visual": {
+        "automated_status": "pass",
+        "automated_visual_review": "pending",
+        "visual_review": "passed",
+        "reviewed": "Light and dark contact sheets inspected for labels, routes, node and card fit, containment and balance.",
+        "viewports": [
+          {
+            "width": 1440,
+            "height": 900,
+            "scrollWidth": 1440,
+            "scrollHeight": 900,
+            "ok": true
+          },
+          {
+            "width": 1600,
+            "height": 1000,
+            "scrollWidth": 1600,
+            "scrollHeight": 1000,
+            "ok": true
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "scrollWidth": 1920,
+            "scrollHeight": 1080,
+            "ok": true
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "scrollWidth": 2048,
+            "scrollHeight": 1320,
+            "ok": true
+          }
+        ],
+        "captures": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "sha256": "26078e456e0657ae68b92e108c658a829fa6cf9e58f24fc5246f7e2102164a55"
+          },
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "dark",
+            "sha256": "fae9ded1c1a4332d2e064ff0f3b7c067d225a03fca1f1c5d7943f2d6f7b846a0"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "sha256": "1825132a19a0ea3aee7b18debf9b9a1d200bd3794af411331f73990f6d5a3a05"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "dark",
+            "sha256": "d4915d0006c347fd679826d2523fce3c03cd4b1df7da238f436f6aad0ef43ade"
+          }
+        ]
+      }
+    },
+    {
+      "id": "registration_seals",
+      "diagram_type": "workflow",
+      "source": {
+        "path": "registration_seals.workflow.json",
+        "sha256": "d30f803316f5339372be8a249c5e2f39c3698965d90679bd4d2a2392c617b8c5",
+        "bytes": 4887
+      },
+      "html": {
+        "path": "registration_seals.workflow.html",
+        "sha256": "291f9717dcde9fd5bd573b1688ea50b2fae24d0acb29c3b44332f92ea51823fc",
+        "bytes": 725460
+      },
+      "svg": {
+        "path": "registration_seals.workflow.svg",
+        "sha256": "617c4e3d81e6443d60be6ec962e87f11f0e49337efbd8413d893084f0bf1b03f",
+        "bytes": 53736
+      },
+      "validation": {
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true
+          },
+          {
+            "name": "finite_svg",
+            "ok": true
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true
+          }
+        ],
+        "quality": "showcase",
+        "errors": 0,
+        "warnings": 0
+      },
+      "visual": {
+        "automated_status": "pass",
+        "automated_visual_review": "pending",
+        "visual_review": "passed",
+        "reviewed": "Light and dark contact sheets inspected for labels, routes, node and card fit, containment and balance.",
+        "viewports": [
+          {
+            "width": 1440,
+            "height": 900,
+            "scrollWidth": 1440,
+            "scrollHeight": 900,
+            "ok": true
+          },
+          {
+            "width": 1600,
+            "height": 1000,
+            "scrollWidth": 1600,
+            "scrollHeight": 1000,
+            "ok": true
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "scrollWidth": 1920,
+            "scrollHeight": 1080,
+            "ok": true
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "scrollWidth": 2048,
+            "scrollHeight": 1320,
+            "ok": true
+          }
+        ],
+        "captures": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "sha256": "24eae603d081eaee482f572cd30e8d6758e1f09c5b0b5df1bb8c24f51e37ccda"
+          },
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "dark",
+            "sha256": "79ce35979c12420b1b700047979e996c71e784490a35276ee5f727655cda9f60"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "sha256": "f50c208ed1f14a789c6c77d98688e162f4e8a3cb998375f16ced69c9f07ab988"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "dark",
+            "sha256": "481d5f237f0610dee2c59ef4d3173fe24668be3c1307ac83cd8dd86280663bac"
+          }
+        ]
+      }
+    }
+  ]
+}
