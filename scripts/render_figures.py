@@ -487,7 +487,7 @@ def pipeline() -> Canvas:
     plane(canvas, 56, 216, 768, 216, "private licensed-data storage plane")
     plane(canvas, 56, 468, 768, 96, "public aggregates and hashes · public record", amber=True)
 
-    node(canvas, 264, 120, 352, 60, "Market data providers", "FMP · Massive · Unusual Whales")
+    node(canvas, 264, 120, 352, 60, "Market data providers", "FMP · Unusual Whales")
     node(canvas, 264, 244, 352, 60, "Point-in-time panel", "what was knowable at the time")
     node(canvas, 264, 352, 352, 60, "Frozen models and inference", "scored, then error bars")
     node(canvas, 264, 488, 352, 60, "Published record", "summary results and fingerprints",

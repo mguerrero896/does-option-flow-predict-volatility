@@ -11,11 +11,13 @@
   "new_scientific_evaluations": 0,
   "original_svg_sha256": "93270259a3700312f911a86c8a3b4a41ee5ecf2400a2b4f009e59c1019dd11ee",
   "output_sha256": {
-    "docs/figures/data-pipeline.png": "5e25800a2e685b3782d09917918911ad765283fcd96939f71d7548b5fc6813d2",
-    "docs/figures/data-pipeline.svg": "dd6fa069ab7ee8079afe1a5657e4b1f8b1175433b03e66872be38f32b30ca622"
+    "docs/figures/data-pipeline.png": "92e6c953b07edddd3d019e97a6c35734be22ec66921d69de39e38ca0ec7039c4",
+    "docs/figures/data-pipeline.svg": "22849bb96750c0b52fce7919227585f64c5828d57633879f59584b5641529aaf"
   },
   "png_method": "Pass the SVG bytes to the existing rasterize.cjs on stdin; write its stdout bytes as PNG. Supply the path to the installed sharp package as the sole argument.",
-  "reason": "Align the data-publication boundary with DATA_ACCESS: licensed data may use controlled private storage and individually permitted signed-URL access; it is not limited to one machine.",
+  "previous_receipt_sha256": "2c7a1cbc74993edb099cdc607a5708f3408c6a427ea185a7253ba5980a530e06",
+  "prior_public_svg_sha256": "dd6fa069ab7ee8079afe1a5657e4b1f8b1175433b03e66872be38f32b30ca622",
+  "reason": "Preserve the private licensed-storage boundary and correct the reported input providers to FMP and Unusual Whales. Massive was audited, but its directed option-trade endpoint was unauthorized and is not a source for these results.",
   "renderer": {
     "density": 96,
     "height": 816,
@@ -29,6 +31,14 @@
   },
   "schema_version": "data-flow-presentation-receipt-v1",
   "source_sha256": {
+    "artifacts/provider_audit/2026-07-20/provider_audit_manifest.json": {
+      "hash_mode": "raw_bytes",
+      "sha256": "231c182678cccfec02878c74ddf673cef6a64060c0a4f032b76cada437858d22"
+    },
+    "artifacts/provider_audit/2026-07-20/provider_audit_summary.md": {
+      "hash_mode": "raw_bytes",
+      "sha256": "f7658bbb5180298d809ec621d6c3b093333a43d0f31268acc73ce91bd892aa68"
+    },
     "artifacts/rp4_closeout_figures_code/rasterize.cjs": {
       "hash_mode": "utf8_crlf_to_lf",
       "sha256": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69"
@@ -43,7 +53,7 @@
     },
     "scripts/render_figures.py": {
       "hash_mode": "utf8_crlf_to_lf",
-      "sha256": "e8e768b2d4bc266353797a67591f142d8a4c6102e2f4f9b63c61cf627bcd66d1"
+      "sha256": "a8539cdfdc3cce0219dc496c6d7cd39248a800f1e19b741fb8b24d70e36c25a7"
     }
   },
   "svg_command": "python -c \"from scripts.render_figures import pipeline; from pathlib import Path; Path('docs/figures/data-pipeline.svg').write_bytes((pipeline().render() + '\\n').encode('utf-8'))\"",
@@ -54,13 +64,14 @@
       "no clipping or overlap",
       "four nodes and three arrows preserved",
       "private storage and public aggregates distinguished",
-      "no one-machine-only claim"
+      "no one-machine-only claim",
+      "only FMP and Unusual Whales appear as result-input providers"
     ],
     "dimensions": [
       1173,
       816
     ],
-    "method": "Direct image inspection after the policy correction",
+    "method": "Direct image inspection after provider-label correction",
     "status": "PASS"
   }
 }

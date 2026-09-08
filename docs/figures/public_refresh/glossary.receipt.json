@@ -1,0 +1,53 @@
+{
+  "schema_version": "public-glossary-render-v1",
+  "input_sha256": {
+    "docs/figures/public_refresh/glossary.json": "459031d0004ae8dde9d17a080028b1ba3cffd21ebb9c2531403e6a9b2291f843",
+    "docs/figures/public_refresh/glossary.py": "92a1f0f981ac4af3e5d236a79c4d25309f4e7ea56eb4e1676ea646be78f3105c",
+    "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
+    "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
+    "docs/pit_v22_claims_and_limitations.md": "2f9f678f29f39791e8a2be4a1eaeb445637da5a4eb13d8ab4bfd07df163352cb",
+    "docs/rp4/prospective_confirmation_v1.md": "7f9ceb4cb8ecb92820ee0796c1c2c916499bd605b5b9fbc1642ee5a30c28077b",
+    "docs/rp4/prospective_confirmation_v1_amendment_3.md": "6b523e4d6aac2287e8aa3730cfc80ac6820e09200fc251a597ed57cd04afe1d2",
+    "docs/rp4/results_v4.md": "808ae63d0d2d3eeab8c68b5aa0c81d4db0902a331c1abe889b2935cc66747bc9",
+    "docs/rp4/specification_v4.md": "d89ae98c21b6f901342a12c00726832bf34d6922e02c7d8e435e1f6de872008d"
+  },
+  "input_hash_mode": {
+    "code": "utf8-crlf-to-lf",
+    "other": "raw-bytes"
+  },
+  "output_sha256": {
+    "docs/glossary.md": "9068d58194c34873d7ecb42892ab952c5b2fdff84cd23fe51f14b9cdcd222e2d",
+    "docs/figures/public_refresh/glossary.svg": "835c408d016961bd0e2a708bc2359c430ea25a46b27f0b8405c9b19a5420ba20",
+    "docs/figures/public_refresh/glossary.png": "26721282917e3f2183c9c4fae27761f065ae19091b424ea3fc482f19f677520d"
+  },
+  "readability": {
+    "available_width_px": 838,
+    "intrinsic_width_px": 1676,
+    "minimum_text_px": 20.0,
+    "text_elements": 63,
+    "external_resources": 0
+  },
+  "png_renderer": {
+    "sharp": "0.35.4",
+    "vips": "8.18.6",
+    "width": 1676,
+    "height": 2560,
+    "format": "png",
+    "renderer_threads": 1,
+    "density": 96,
+    "metadata_copied": false,
+    "font_stack": "'Segoe UI',Helvetica,Arial,sans-serif",
+    "font_environment": "Installed Segoe UI on Windows; other font environments may change PNG bytes."
+  },
+  "visual_review": {
+    "status": "PASS",
+    "method": "Direct inspection of the complete 838-pixel PNG and browser SVG capture; twelve cards, all headings and qualifiers visible without clipping or overlap.",
+    "reviewed_png_sha256": "26721282917e3f2183c9c4fae27761f065ae19091b424ea3fc482f19f677520d",
+    "reviewed_svg_sha256": "835c408d016961bd0e2a708bc2359c430ea25a46b27f0b8405c9b19a5420ba20",
+    "browser_width_px": 838,
+    "browser_minimum_text_px": 20,
+    "card_overflow_count": 0,
+    "small_intrinsic_and_small_font_fixtures_rejected": 2
+  },
+  "scope": "Definitions and presentation only; no new empirical results or scientific execution."
+}

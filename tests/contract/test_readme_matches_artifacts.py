@@ -44,8 +44,8 @@ def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> Non
     readme = README.read_text(encoding="utf-8")
     findings = FINDINGS.read_text(encoding="utf-8")
     assert "MIXED_EXPLORATORY" in findings
-    history = readme.split("## How this project was carried out\n", 1)[1].split("\n## ", 1)[0]
-    assert "exploratory 20-session bridge" in history
+    history = readme.split("## Research timeline\n", 1)[1].split("\n## ", 1)[0]
+    assert "exploratory 20-session prospective check" in history
     assert "produced mixed findings" in history
     assert "reports/phase8a_exploratory_bridge_addendum_v13.md" in readme
     assert "Holm" in readme
