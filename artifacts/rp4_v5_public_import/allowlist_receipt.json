@@ -1,0 +1,258 @@
+{
+  "schema_version": "rp4-v5-public-import-allowlist-v1",
+  "source_git_head": "810faff2f83b0c15a8eb5265dd9e797a9bddc2f1",
+  "source_result_sha256": "0561551a2938796baf4e7e705b082fc24ee09be0a069596802285cf018b1973c",
+  "source_part34_receipt_sha256": "cdbf75390600b8ae72d7303d535de9dc6c4d3dd915fb06c61b64f5e16a550b6c",
+  "source_part34_created_at_utc": "2026-09-08T16:13:31.990091+00:00",
+  "source_part34_receipt_entries_verified": 25,
+  "closed_5_control_outputs_verified": 9,
+  "source_bytes_stable_during_copy": true,
+  "allowlist": [
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/receipt.json",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/receipt.json",
+      "sha256": "2cc2d34f702229a3ddfa5666d4bd0431dc70aaa592712a849ce98356cfdc2d7c",
+      "bytes": 1417,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/summary.json",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/summary.json",
+      "sha256": "a5073c1dc82bdad9a3a28124298a3441011f22bbe0b666625d52141ae5babbac",
+      "bytes": 22250,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/table.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/table.csv",
+      "sha256": "d4b60406fad82772021f9c6b8edcd3a4cc66554d9377abc5d82a6171d06844dd",
+      "bytes": 2793,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/comparison.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/comparison.csv",
+      "sha256": "66c7786bfb5ae1ce5b8936584e7cc049d1fd73962c7892ffe0c270bfcdf897e5",
+      "bytes": 847,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/progress.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/progress.csv",
+      "sha256": "ca14e6e44cc276d2f75f9b440c735687780b02910c65b7821d3b890aef3f7c57",
+      "bytes": 362,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/frequencies.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/frequencies.csv",
+      "sha256": "39d44bb115b124a0ddf7d8dba9478b96e69489b895164451e113df0dac2e6e30",
+      "bytes": 1518,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/candidate_frequencies.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/candidate_frequencies.csv",
+      "sha256": "48defbc07c7f4cb7ef0f2474199524d1125e78e5cc39c4ad69a0477ea3451e82",
+      "bytes": 4740,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/exclusions.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/exclusions.csv",
+      "sha256": "060946bc394e83a6fe79bf51a9bcff83bae12beec7c5ca6d81fa3f2be6fa2fe0",
+      "bytes": 92,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/losses.csv",
+      "public_worktree_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/losses.csv",
+      "sha256": "e0238c86cecc3769668b626b77545d7eb06e26f618ec5e4f09537785d4aa4402",
+      "bytes": 902537,
+      "classification": "saved aggregate or closed report metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/summary.json",
+      "public_worktree_path": "artifacts/rp4_v5_part34/summary.json",
+      "sha256": "e84c852ed8bed5fb2e7c561f913193ee692a23f68c1148f15d74e206887b6404",
+      "bytes": 17544,
+      "classification": "saved historical post hoc aggregate or custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/table.csv",
+      "public_worktree_path": "artifacts/rp4_v5_part34/table.csv",
+      "sha256": "48e9b6e604dec88cc5a9b2dddc5e43c3b4bea9b46a1d1c76c7b0cd5142880d88",
+      "bytes": 700,
+      "classification": "saved historical post hoc aggregate or custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/receipt.json",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_part34_receipt.json.original",
+      "sha256": "cdbf75390600b8ae72d7303d535de9dc6c4d3dd915fb06c61b64f5e16a550b6c",
+      "bytes": 3418,
+      "classification": "byte-preserved historical receipt or sidecar; separate public LF receipt has its own hash"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/receipt.sha256",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_part34_receipt.sha256.original",
+      "sha256": "6e46fa9c24e28dce380f5ad72b60331abd9214e679819c29ee66360f0ad1e56d",
+      "bytes": 80,
+      "classification": "byte-preserved historical receipt or sidecar; separate public LF receipt has its own hash"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/diagnostics.csv",
+      "public_worktree_path": "artifacts/rp4_v5_part34/diagnostics.csv",
+      "sha256": "f8d25bfbaca89439efe622d19acac512653fdc0424302eb39df94d8bc1d45810",
+      "bytes": 677,
+      "classification": "saved historical post hoc aggregate or custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/session_losses.csv",
+      "public_worktree_path": "artifacts/rp4_v5_part34/session_losses.csv",
+      "sha256": "8118182b98da3c636a498d43b474fcb98fb09f37463408d24869afa4bc99564b",
+      "bytes": 1397591,
+      "classification": "saved historical post hoc aggregate or custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/input_hashes.json",
+      "public_worktree_path": "artifacts/rp4_v5_part34/input_hashes.json",
+      "sha256": "7a407cafd024519a0632301247a41fa8c1864eb0f9717dd01a28b607eed7a1cd",
+      "bytes": 649455,
+      "classification": "saved historical post hoc aggregate or custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/audit.py",
+      "public_worktree_path": "artifacts/rp4_v5_part34/audit.py",
+      "sha256": "2d47813b704e08ef91b63ee0588992e42a5ed34d3e75326a995bdb8b805c8b24",
+      "bytes": 9398,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/publish.py",
+      "public_worktree_path": "artifacts/rp4_v5_part34/publish.py",
+      "sha256": "ebae072eed98c7db9dfc8da1a3c97b6e345127f1f6e9fd3ec8c1c1372193cf83",
+      "bytes": 13904,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_a3_code/reporting.py",
+      "public_worktree_path": "artifacts/rp4_v5_a3_code/reporting.py",
+      "sha256": "abc269e4db7e8ff7ca379129663c1764cf85264d1e742bc860d3119388712f82",
+      "bytes": 21269,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_a2_code/reporting.py",
+      "public_worktree_path": "artifacts/rp4_v5_a2_code/reporting.py",
+      "sha256": "d95386adbded47bdeaae19d584eb2108151a3a604283001e134875659f72bb51",
+      "bytes": 42788,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_a2_code/models.py",
+      "public_worktree_path": "artifacts/rp4_v5_a2_code/models.py",
+      "sha256": "3c948081cf11493a6488567f50c6a9a93da5acfe9e871d892949866cf6208ced",
+      "bytes": 16553,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_code/report.py",
+      "public_worktree_path": "artifacts/rp4_v5_code/report.py",
+      "sha256": "a7fd3917295758ff1ed90b467af47295c6ba57f8f1d562a070c13149868dcee0",
+      "bytes": 24529,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_code/models.py",
+      "public_worktree_path": "artifacts/rp4_v5_code/models.py",
+      "sha256": "273b3bc38618fd5a2f9d7bc45e1dbf9bd8a7e39954b1baa4387823b85f9cfe76",
+      "bytes": 18047,
+      "classification": "frozen source code, copied for inspection; not executed"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_a3/specification.json",
+      "public_worktree_path": "artifacts/rp4_v5_a3/specification.json",
+      "sha256": "a318736f7e5a08e21c089b59ec90aae1c5bccb015cb6d286bb59dd078fd2ee3e",
+      "bytes": 28583,
+      "classification": "frozen scientific specification or operational custody metadata"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_a3/freeze.json",
+      "public_worktree_path": "artifacts/rp4_v5_a3/freeze.json",
+      "sha256": "69db4672b7ad705300c820b42abb8f8430d8380a3f0360e2d1008b7b10b7f855",
+      "bytes": 5350,
+      "classification": "frozen scientific specification or operational custody metadata"
+    },
+    {
+      "source_relative_path": "docs/rp4/prospective_combination_decision_136_receipt.json",
+      "public_worktree_path": "docs/rp4/prospective_combination_decision_136_receipt.json",
+      "sha256": "4003ccdfd6d203798d44308fa3fffa695c519e1a78fcb585023619b604d75af4",
+      "bytes": 2838,
+      "classification": "original new-registration receipt; no prospective execution"
+    },
+    {
+      "source_relative_path": "docs/rp4/prospective_combination_decision_136.sha256",
+      "public_worktree_path": "docs/rp4/prospective_combination_decision_136.sha256",
+      "sha256": "9bff3ecb33c449239b72b5a1c9945f096f9ab6f716a04a06c8ec043616bcca81",
+      "bytes": 107,
+      "classification": "original new-registration seal"
+    },
+    {
+      "source_relative_path": "docs/rp4/specification_v5.sha256",
+      "public_worktree_path": "docs/rp4/specification_v5.sha256",
+      "sha256": "53892a061a5d7b65cb6ca86055a04c7dc1c7a7332ff23e600e665816a9a8a0dc",
+      "bytes": 86,
+      "classification": "original specification seal"
+    },
+    {
+      "source_relative_path": "docs/rp4/specification_v5_technical_amendment_2.sha256",
+      "public_worktree_path": "docs/rp4/specification_v5_technical_amendment_2.sha256",
+      "sha256": "491f9441765e669bf67fa698f3a0887df4f8a299718c682d87084d38f082960f",
+      "bytes": 108,
+      "classification": "original technical amendment seal"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_run_a3_20260908/reports/5_control/results_v5.md",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_5_control_results_v5.md.original",
+      "sha256": "9384c1a333acc2ad122e915fdd7ef1ab35fa0dcbc48ec9fda2fb118f522632b3",
+      "bytes": 18616,
+      "classification": "byte-preserved historical document; not active English narrative"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/results_v5_before_part34.md",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_before_part34_results_v5.md.original",
+      "sha256": "76209f47ee8cbf84ddf9c3f6b9d77a0f1037de809a425526f16c8c1125a6cd01",
+      "bytes": 19695,
+      "classification": "byte-preserved historical document; not active English narrative"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/sensitivity_section.md",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_part34_sensitivity_section.md.original",
+      "sha256": "c7e05a9a8a7ea9acbbf22d1be49fdc18b58a22e028185bd74cc33f30f7cfebda",
+      "bytes": 7758,
+      "classification": "byte-preserved historical document; not active English narrative"
+    },
+    {
+      "source_relative_path": "artifacts/rp4_v5_part34/antecedent_prospective_amendment_3.md",
+      "public_worktree_path": "docs/archive/rp4/presentation_originals/v5_part34_antecedent_prospective_amendment_3.md.original",
+      "sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+      "bytes": 8722,
+      "classification": "byte-preserved historical document; not active English narrative"
+    }
+  ],
+  "private_inputs_copied": false,
+  "per_origin_forecasts_copied": false,
+  "per_session_coefficients_or_fit_bounds_copied": false,
+  "prospective_data_reads": 0,
+  "empirical_model_fits": 0,
+  "inference_reruns": 0,
+  "publication_note": "These are local byte-exact custody copies. A separate public projection must redact local paths with an explicit receipt; changed public bytes do not acquire the historical source hash.",
+  "excluded_operational_files": [
+    "artifacts/rp4_v5_a3_operations/report_annotation_5_control.json",
+    "artifacts/rp4_v5_a3_operations/resume_part27/verification.json"
+  ],
+  "operational_or_worker_receipts_copied": false,
+  "derived_public_receipt": "artifacts/rp4_v5_part34/public_receipt_v1.json",
+  "derived_public_receipt_builder": "scripts/build_rp4_v5_public_receipt.py",
+  "public_receipt_hash_scope": "The source receipt and sidecar are archived unchanged locally. The new LF public receipt retains all 25 original pins, declares unavailable/private references, and records separate hashes for distributed derivatives. Regenerate it after final path projection and append only its new path to the public frozen registry; earlier entries stay unchanged. The public base contains historical entries absent from this import source, so this import does not replace that registry."
+}
