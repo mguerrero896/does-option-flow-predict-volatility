@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1676" height="2560" viewBox="0 0 838 1280" role="img" aria-labelledby="public-glossary-title public-glossary-desc">
+<title id="public-glossary-title">Reading the research</title>
+<desc id="public-glossary-desc">Twelve definitions for reading a study of options and volatility. The text version provides expanded definitions, qualifications and sources.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="24" y="46" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#1a2332">Reading the research</text>
+<text x="24" y="79" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#5a6570">Twelve terms used in the study</text>
+<g id="volatility-and-realized-variance" data-glossary-card="true"><rect x="24" y="106" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Volatility / realized variance</text>
+<text x="42" y="172" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Volatility describes price variation.</text>
+<text x="42" y="196" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Realized variance sums squared</text>
+<text x="42" y="220" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">returns over a window. This study</text>
+<text x="42" y="244" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">forecasts variance, not direction.</text>
+</g>
+<g id="option-state-and-option-flow" data-glossary-card="true"><rect x="429" y="106" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Option state / option flow</text>
+<text x="447" y="172" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">State: current option-market</text>
+<text x="447" y="196" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">conditions. Flow: recent trading</text>
+<text x="447" y="220" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">activity, composition and signed</text>
+<text x="447" y="244" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">imbalance. These are different inputs.</text>
+</g>
+<g id="b0-b1-and-b2" data-glossary-card="true"><rect x="24" y="290" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="322" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">B0 / B1 / B2: nested inputs</text>
+<text x="42" y="356" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B0: price and volatility history.</text>
+<text x="42" y="380" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B1: B0 plus option state.</text>
+<text x="42" y="404" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B2: B1 plus option flow.</text>
+<text x="42" y="428" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Each set keeps the earlier inputs.</text>
+</g>
+<g id="qlike-forecast-loss" data-glossary-card="true"><rect x="429" y="290" width="385" height="168" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="322" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">QLIKE: forecast loss</text>
+<text x="447" y="356" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A loss for variance forecasts:</text>
+<text x="447" y="380" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">smaller means less forecast error</text>
+<text x="447" y="404" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">under this score. A loss reduction</text>
+<text x="447" y="428" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is not a trading profit.</text>
+</g>
+<g id="ridge-and-tree-models" data-glossary-card="true"><rect x="24" y="474" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="506" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Ridge / tree models</text>
+<text x="42" y="540" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Ridge: a linear model with shrunk</text>
+<text x="42" y="564" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">coefficients. Trees split inputs</text>
+<text x="42" y="588" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">into regions and combine rules.</text>
+<text x="42" y="612" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Agreement is not guaranteed.</text>
+</g>
+<g id="walk-forward-evaluation" data-glossary-card="true"><rect x="429" y="474" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="506" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Walk-forward evaluation</text>
+<text x="447" y="540" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Train on earlier observations;</text>
+<text x="447" y="564" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">evaluate at later forecast times.</text>
+<text x="447" y="588" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Keep model selection inside the</text>
+<text x="447" y="612" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">permitted training window.</text>
+</g>
+<g id="point-in-time-pit" data-glossary-card="true"><rect x="24" y="658" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="690" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Point-in-time (PIT)</text>
+<text x="42" y="724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Use information available by the</text>
+<text x="42" y="748" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">forecast's time cutoff. Source time</text>
+<text x="42" y="772" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is a proxy here; it does not prove</text>
+<text x="42" y="796" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">that a client received the record.</text>
+</g>
+<g id="h1-and-h2" data-glossary-card="true"><rect x="429" y="658" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="690" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">H1 / H2: ordered questions</text>
+<text x="447" y="724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H1: state improves B1 over B0.</text>
+<text x="447" y="748" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H2: flow improves B2 over B1.</text>
+<text x="447" y="772" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H2 opens only if H1 passes.</text>
+<text x="447" y="796" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">This sequence applies per family.</text>
+</g>
+<g id="p-values-and-confidence-intervals" data-glossary-card="true"><rect x="24" y="842" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="874" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">p-value / confidence interval</text>
+<text x="42" y="908" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">p: a tail probability under the null.</text>
+<text x="42" y="932" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">It is not a hypothesis probability.</text>
+<text x="42" y="956" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">CI: an interval for an effect, with</text>
+<text x="42" y="980" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">repeated-sampling interpretation.</text>
+</g>
+<g id="block-bootstrap" data-glossary-card="true"><rect x="429" y="842" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="874" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Block bootstrap</text>
+<text x="447" y="908" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Resample blocks of sessions to</text>
+<text x="447" y="932" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">estimate uncertainty while keeping</text>
+<text x="447" y="956" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">some dependence in the data.</text>
+<text x="447" y="980" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Resampling creates no new evidence.</text>
+</g>
+<g id="multiple-testing" data-glossary-card="true"><rect x="24" y="1026" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="42" y="1058" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Multiple testing</text>
+<text x="42" y="1092" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">More tests create more chances</text>
+<text x="42" y="1116" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">of a false positive. Adjustments</text>
+<text x="42" y="1140" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">cover stated test families;</text>
+<text x="42" y="1164" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">they do not erase past search.</text>
+</g>
+<g id="prospective-replication" data-glossary-card="true"><rect x="429" y="1026" width="385" height="168" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.2"/>
+<text x="447" y="1058" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Prospective replication</text>
+<text x="447" y="1092" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Test fixed rules on new sessions.</text>
+<text x="447" y="1116" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Reusing historical windows is</text>
+<text x="447" y="1140" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">not independent replication.</text>
+<text x="447" y="1164" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A planned test is not a result.</text>
+</g>
+<line x1="24" y1="1226" x2="814" y2="1226" stroke="#c9d2da" stroke-width="1"/>
+<text x="24" y="1260" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">Definitions explain the method; they do not certify a result.</text>
+</svg>
