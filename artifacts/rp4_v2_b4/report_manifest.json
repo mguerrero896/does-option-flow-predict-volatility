@@ -1,0 +1,57 @@
+{
+  "RESEARCH_ONLY": true,
+  "capital_go": false,
+  "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v2_code.report_v2 --spec-sha256 08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+  "high_flow_reference": {
+    "panel_sha256": "ecb1c6cce76cb6464d3cdf3d4ef409c60e204adf2df22fba6851e32199819d93",
+    "reference_panel_opened_by_report": false,
+    "source": "frozen_specification.input_panels.combined.sha256",
+    "threshold_eligibility": "original_v1",
+    "threshold_recomputed_with_v2_eligibility": false
+  },
+  "inputs_sha256": {
+    "artifacts/rp4_a1/specification.json": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+    "artifacts/rp4_b2/session_losses.csv": "345889fb42e9681ba3e530edcd712f41c22cd9976a4f7c3fbcb1ef52030fc4bc",
+    "artifacts/rp4_b2/summary.json": "d311d2773ae195968a59cea7d4e0c68dcf35d5d80e005c6cc0f1e028496d2eb2",
+    "artifacts/rp4_b3/session_losses.csv": "468a00fdaa6666b4cb5b2585bae8b7601a9326e8b4d95cd176febd58cf698ae2",
+    "artifacts/rp4_b3/summary.json": "76816cf06a6483c009f9f148728c02ee39d065e7926fbf44dd80fa27dbf29ad7",
+    "artifacts/rp4_code/report.py": "9aae55e8488ebe8b69504dc104a0cf3b077e510b279384d5e5e1988c3bb7e668",
+    "artifacts/rp4_v2_a1/freeze.json": "248abbedd5267552272da1a9f7c1d4d3cefd99ef4d3fdd7b4c1b8a2f10ef41d2",
+    "artifacts/rp4_v2_a1/specification.json": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+    "artifacts/rp4_v2_audit/audit.json": "fe1023c142e72c080ef1a9afa3cac1193d544f6faec4b2fb0f9af64bf1fadee5",
+    "artifacts/rp4_v2_b2/session_losses.csv": "c01bee110fe1a46d2e67b1261b1c865d3634c5ca8deda8af8ef5b69a70cc50c4",
+    "artifacts/rp4_v2_b2/summary.json": "4d2ac494feecf154e47c0191db8e0fba8dd1e62e6f3794ab2525acebbba36693",
+    "artifacts/rp4_v2_b3/session_losses.csv": "ac2f39206de4f5b9025bed10f0f87a5980536d0e913015fe8d5beb54e178ad76",
+    "artifacts/rp4_v2_b3/summary.json": "7ac5591b18c12e86165e80d9c6adf906ba19a2d1e502eb163b154c9eb74e83af",
+    "artifacts/rp4_v2_code/report_v2.py": "8ad2131dee31a3f424fd4e3bf581bdfc32d00f04f5223cc552761b045021d5f1",
+    "docs/rp4/decision_130_v2.md": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98",
+    "docs/rp4/results_v1.md": "77f7de950386f13b80800c78a77fba8f1db4c33a486217eea3d248d15bf02b26",
+    "docs/rp4/specification_v2.md": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+    "private/evaluation/confirmation/fit_diagnostics.json": "5ac7335884bbbf8cd292726bff5115c36573a0ec9d494be0b189d79301145efb",
+    "private/evaluation/primary/fit_diagnostics.json": "56804f0d6ca1407ab3c2a6085ebe035a973a3695e6197fbe183a488371156dd5",
+    "private/materialized/iv_filter_counts.csv": "387431b76da024ea09a8a5c953928af3d381d2ca34cee0a6dfa5197acd9198c2",
+    "private/materialized/manifest.json": "ba409cf18bb38c4025e602a68177d01a1197229881d0de442bbc6355d220d807",
+    "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6"
+  },
+  "iv_count_accounting": {
+    "denominator": "all_original_UW_asset_rows_before_NBBO_size_session_filters",
+    "incremental_rejected": "old_[0.01,5]_eligible_minus_new_[0.03,3]_eligible",
+    "total_rejected_includes_missing_and_nonfinite": true
+  },
+  "models_fitted": 0,
+  "outputs_sha256": {
+    "artifacts/rp4_v2_b4/B1_over_B0.svg": "f2a0b7aabb9fd70ae6e333ea382e6b6cc4b7c892f39464f9fb62863af3f04f43",
+    "artifacts/rp4_v2_b4/B2_over_B1.svg": "4de164ecdbae02b1e5c2d75e6871c3fa5257f40d28a36988e61090bc6672e89a",
+    "artifacts/rp4_v2_b4/fit_selection.csv": "cb935a1846ab5122fb772cd9edfea7d6c3c9cdacb3a2c895220baff99db07bbb",
+    "artifacts/rp4_v2_b4/iv_filter_counts.csv": "9ed987a5557957155166c709f30e3be06209194026f79694ceb743b3a84f9968",
+    "artifacts/rp4_v2_b4/secondary_and_robustness.csv": "66c305c43fd22abcc159de638b7f6c7c03d0b61cc14f90a935da1562e2b5eb10",
+    "artifacts/rp4_v2_b4/top_loss_confirmation.csv": "3864e4bebbc2356f16980fbf0fcd5f7964ce9d611116ae7069c6065f94c9c6d7",
+    "artifacts/rp4_v2_b4/top_loss_primary.csv": "e6d9a24a20fd9acb261445b7fab5539a1d7774904b0ba2042f99077412623ff3",
+    "docs/rp4/results_v2.md": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf"
+  },
+  "parent_specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "published": false,
+  "raw_or_origin_data_read": false,
+  "schema_version": "rp4-v2-report-v1",
+  "specification_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5"
+}

@@ -1,0 +1,2 @@
+# Preserve the exact evaluation bytes bound by receipt.json.
+session_losses.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

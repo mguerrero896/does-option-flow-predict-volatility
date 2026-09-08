@@ -1,0 +1,10 @@
+{
+  "capital_go": false,
+  "decision_sha256": "0b7ca149f8a72ae93bfdf1bea112a56212d0899640a8644d7bdb209f8a0fee98",
+  "models_fitted": 0,
+  "parent_specification_sha256": "865865558087108356f4eb6da7f9d431f1c4d32fd330f20ea78eb126ec6462a5",
+  "schema_version": "rp4-v2-freeze-v1",
+  "specification_md_sha256": "3f360466d5730defbf14e4d16b9904cdf381624f33215d5ff611f55ea0d2e54c",
+  "specification_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+  "target_values_read": 0
+}

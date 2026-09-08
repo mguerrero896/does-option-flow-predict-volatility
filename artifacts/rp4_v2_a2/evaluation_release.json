@@ -1,0 +1,34 @@
+{
+  "RESEARCH_ONLY": true,
+  "aggregation_rule": "all completed checkpoints verified; no fit in aggregate-only",
+  "capital_go": false,
+  "dependencies": {
+    "lightgbm": "4.7.0",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "polars": "1.44.1",
+    "pyarrow": "25.0.1",
+    "scipy": "1.18.0"
+  },
+  "evaluation_code_sha256": {
+    "artifacts/rp4_code/evaluate.py": "0064e37bebb00a0fb2550682e0c5590d64f16d88b2dfd9a4403b9ea82946ff14",
+    "artifacts/rp4_v2_code/evaluate_v2.py": "2ecf51fe33e6753a89e0ef68590921c7d6776790883d390dd984e82d1e57ad37",
+    "artifacts/rp4_v2_code/freeze.py": "c624a1fa085ca8e548bf055b289eef4be97de3b0b6f72a8790a3730fcde0fff3",
+    "artifacts/rp4_v2_code/models.py": "8a4b41490bd376b75bc9fc471e6c6d1a7ede5badc2210dca59e51b9364e2df46",
+    "src/mds650/metrics.py": "a2641344e84a0dbe5bd849c7c658e73c1c20a5f3ec77ea9bc92a2080e1090b75",
+    "src/mds650/rp2/inference.py": "5274666fdcbf634f8ca1db1fac2697a75e883f67bc9c780b1de5c439d1795917",
+    "src/mds650/rp2/qlike_objective.py": "3263601c46337760233c3f3f93f00180dcbe545299e8895069788e8b0d899585"
+  },
+  "execution": {
+    "session_shards": 4,
+    "threads_per_model": 4
+  },
+  "launcher_sha256": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+  "lockfile_sha256": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+  "materialization_manifest_sha256": "ba409cf18bb38c4025e602a68177d01a1197229881d0de442bbc6355d220d807",
+  "panel_sha256": "5b7dd5cc4b2b1e64446d305a5ee0de92f6d18e790f94b5840664947da00fd19d",
+  "python_version": "3.12.12",
+  "schema_version": "rp4-v2-evaluation-release-v1",
+  "shard_rule": "sorted_scheduled_sessions[index::4]; every session uses full past panel",
+  "specification_sha256": "08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5"
+}

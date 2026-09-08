@@ -1,0 +1,183 @@
+{
+  "schema_version": "rp4-v2-b4-delivery-receipt-v1",
+  "stage": "B4",
+  "status": "COMPLETE",
+  "exit_code": 0,
+  "branch": "research/rp4-v2-20260907",
+  "report_label": "fuera de muestra walk-forward, partición fijada 2026-09-07",
+  "working_directory": "private-input/0ec5f26c567f416b9513",
+  "environment": {
+    "UV_PROJECT_ENVIRONMENT": "private-input/4b06809c9ca2d51ba83b",
+    "PYTHONPATH": "private-input/0d2012363c94bcf4a831",
+    "MYPYPATH": "private-input/bbc02ee35008fa94ea90",
+    "POLARS_MAX_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "OMP_NUM_THREADS": "4",
+    "python_version": "3.12.12",
+    "dependency_release": "artifacts/rp4_v2_a2/evaluation_release.json"
+  },
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v2_code.report_v2 --spec-sha256 08a749049f56a0d1dda09cef1f280328e7c84d59fc39d57e71c48caee81670a5",
+      "exit_code": 0,
+      "report_sha256": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -o addopts= -q artifacts/rp4_v2_code/test_models.py artifacts/rp4_v2_code/test_evaluate_v2.py artifacts/rp4_v2_code/test_materialize_iv.py artifacts/rp4_v2_code/test_report_v2.py artifacts/rp4_v2_code/test_runtime_v2.py artifacts/rp4_code/test_evaluate.py artifacts/rp4_code/test_report.py",
+      "exit_code": 0,
+      "tests_passed": 91
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v2_code",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v2_code",
+      "exit_code": 0,
+      "files_already_formatted": 11
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync mypy --follow-imports=skip artifacts/rp4_v2_code/evaluate_v2.py artifacts/rp4_v2_code/models.py artifacts/rp4_v2_code/materialize_iv.py artifacts/rp4_v2_code/report_v2.py artifacts/rp4_v2_code/execute.py",
+      "exit_code": 0,
+      "sources_checked": 5
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_code/verify_delivery.py --original-root private-input/3a1de7fd2c89b7059465",
+      "exit_code": 0,
+      "status": "PASS_RP4_PUBLIC_PROJECTION",
+      "v1_files_verified": 65,
+      "v1_figure_endpoints_verified": 8,
+      "live_collector_verified": false
+    },
+    {
+      "command": "& 'private-input/ee2260aecd0f080d2217' -e \"const sharp=require('private-input/e21fa9007c3e05406e48');const fs=require('fs');const root='private-input/698eeac9ae526777eb0f';Promise.all(['B1_over_B0','B2_over_B1'].map(async name=>{const out=root+'/'+name+'_preview.png';if(fs.existsSync(out))throw new Error('PREVIEW_EXISTS');const info=await sharp('artifacts/rp4_v2_b4/'+name+'.svg').png().toFile(out);return {file:out,...info};})).then(result=>console.log(JSON.stringify({sharp:sharp.versions.sharp,result},null,2))).catch(error=>{console.error(error);process.exit(1);});\"",
+      "exit_code": 0,
+      "sharp_version": "0.35.4",
+      "purpose": "Raster previews only; SVG data and sources unchanged. Preview generation refuses to overwrite existing previews."
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -c \"import hashlib,json,subprocess; from pathlib import Path; base='cf26fc3b5d295ea9f2a2f9a6a6af75c023e1a23c'; changes=subprocess.check_output(['git','diff','--cached','--name-status',base],text=True).splitlines(); assert all(line.startswith('A\\t') for line in changes), 'NON_ADDITIVE_CHANGE'; paths=[line.split('\\t',1)[1] for line in changes if line.split('\\t',1)[1]!='artifacts/rp4_v2_b4/receipt.json']; assert all(p.startswith('artifacts/rp4_v2_') or p.startswith('docs/rp4/') for p in paths), 'OUT_OF_SCOPE_CHANGE'; verified={p:hashlib.sha256(subprocess.check_output(['git','show',':'+p])).hexdigest() for p in paths}; assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in verified.items()),'GIT_WORKING_BYTES_DRIFT'; print(json.dumps({'status':'PASS_ADDITIVE_V2_GIT_BYTE_CUSTODY','files':len(paths),'baseline':base,'closure_receipt_excluded_to_avoid_self_reference':True},indent=2))\"",
+      "exit_code": 0,
+      "status": "PASS_ADDITIVE_V2_GIT_BYTE_CUSTODY",
+      "files_verified_excluding_this_receipt": 45
+    },
+    {
+      "command": "git diff --cached --check",
+      "exit_code": 0
+    }
+  ],
+  "artifacts_sha256": {
+    "artifacts/rp4_v2_b4/B1_over_B0.svg": "f2a0b7aabb9fd70ae6e333ea382e6b6cc4b7c892f39464f9fb62863af3f04f43",
+    "artifacts/rp4_v2_b4/B2_over_B1.svg": "4de164ecdbae02b1e5c2d75e6871c3fa5257f40d28a36988e61090bc6672e89a",
+    "artifacts/rp4_v2_b4/confirmation_audit.json": "2615dda07cc35e35fa6f94c8ff32fc25b0f2af34b7e9b59825dec45e9d9e2de5",
+    "artifacts/rp4_v2_b4/fit_selection.csv": "cb935a1846ab5122fb772cd9edfea7d6c3c9cdacb3a2c895220baff99db07bbb",
+    "artifacts/rp4_v2_b4/iv_filter_counts.csv": "9ed987a5557957155166c709f30e3be06209194026f79694ceb743b3a84f9968",
+    "artifacts/rp4_v2_b4/primary_audit.json": "8b4da5a9c75073ac7b72c88e39c1d74066008a60747a7f7e486c08972520d290",
+    "artifacts/rp4_v2_b4/report_audit.json": "10056a581d03ac70e344865e577af48791df3abfc350561ce3c50267cf7a1ae2",
+    "artifacts/rp4_v2_b4/report_manifest.json": "2ba6b2611be4a4dd1e0cfd031a5f50680c96d665f603386522a9af0c21610083",
+    "artifacts/rp4_v2_b4/secondary_and_robustness.csv": "66c305c43fd22abcc159de638b7f6c7c03d0b61cc14f90a935da1562e2b5eb10",
+    "artifacts/rp4_v2_b4/top_loss_confirmation.csv": "3864e4bebbc2356f16980fbf0fcd5f7964ce9d611116ae7069c6065f94c9c6d7",
+    "artifacts/rp4_v2_b4/top_loss_primary.csv": "e6d9a24a20fd9acb261445b7fab5539a1d7774904b0ba2042f99077412623ff3",
+    "docs/rp4/results_v2.md": "8e940aac0660c5027b1ffd4b7d9abcf59ec8fe2e2156d7010b18a227b459a4cf"
+  },
+  "stage_receipts_sha256": {
+    "artifacts/rp4_v2_a1/receipt.json": "3ef75cccae763bad156ed3b4c4c178256013032cb7f08bb8eec71a95f9afdc2d",
+    "artifacts/rp4_v2_a2/receipt.json": "23d4cccd2c153dacc6a14870e903ce3d2d9fa6720f95e8859628a1e6eebbd0e4",
+    "artifacts/rp4_v2_b2/receipt.json": "d6c24541807f3a9088f3e6e203fbbd4e430815baeccbcca1d4a3aef973c006aa",
+    "artifacts/rp4_v2_b2/git_custody.json": "8e060acd3a4b354282cc00dbf80511bfb671bf467b1e54f404ba0241253cc1cc",
+    "artifacts/rp4_v2_b3/receipt.json": "6f1305e8b57b6c4744996c88dec045554aee9c2034fa6b9ca492b680a40dde73"
+  },
+  "additional_private_artifacts_sha256": {
+    "private-input/255b5c45bdf5bf636372": "f84d9e8ddd13e5b39e4d847c32d01ed00e2588bf3e332af2623fdf0d7bc54d6e",
+    "private-input/467f68f596fe4b8078c7": "a41d0db45ff39ba3496f73f89bdb4a85c77570302d76078742930c66f02a0e40",
+    "private-input/6863b7a689de162161ff": "b9fba92713fcbaec765c489dc31581657085ed4e191633abb49492c26cde915c"
+  },
+  "prior_stage_commits": {
+    "A1": "1711fe40c0c80a9345fa8384f7314c0042a43712",
+    "A2": "bfae40f410782dea0ad624d7f07c7f5b1096738a",
+    "B2": "e8204b640c44944fc8baa673c4295090b26ca17f",
+    "B2_git_custody": "a50821e4ec44ebe4c8d17822d809a4b8b4fb375d",
+    "B3": "44144d99474ce216c96212d95a31e0fae8b00935"
+  },
+  "verification": {
+    "primary": {
+      "checkpoints": 419,
+      "origins": 160832,
+      "all_summary_fields_reproduced_exactly": true,
+      "csv_bytes_reproduced_exactly": true,
+      "independent_qlike_max_absolute_difference": 4.440892098500626e-16
+    },
+    "confirmation": {
+      "checkpoints": 25,
+      "origins": 9750,
+      "all_summary_fields_reproduced_exactly": true,
+      "csv_bytes_reproduced_exactly": true,
+      "independent_qlike_max_absolute_difference": 2.220446049250313e-16
+    },
+    "report": {
+      "checks": 39739,
+      "discrepancies": 0,
+      "fit_records": 2664,
+      "svg_endpoints": 16,
+      "visual_review_of_both_rendered_figures": true
+    },
+    "real_model_refits_by_audits": 0,
+    "report_generator_model_fits": 0,
+    "predictive_evaluation_passes": {
+      "primary": 1,
+      "confirmation": 1
+    }
+  },
+  "coverage": [
+    {
+      "stage": "b2",
+      "version": "v1",
+      "scheduled_origins": 162329,
+      "eligible_origins": 92261,
+      "coverage_percent": 56.83580875875537,
+      "sessions": 418
+    },
+    {
+      "stage": "b2",
+      "version": "v2",
+      "scheduled_origins": 162329,
+      "eligible_origins": 160832,
+      "coverage_percent": 99.07779879134351,
+      "sessions": 419
+    },
+    {
+      "stage": "b3",
+      "version": "v1",
+      "scheduled_origins": 9750,
+      "eligible_origins": 5360,
+      "coverage_percent": 54.97435897435897,
+      "sessions": 25
+    },
+    {
+      "stage": "b3",
+      "version": "v2",
+      "scheduled_origins": 9750,
+      "eligible_origins": 9750,
+      "coverage_percent": 100,
+      "sessions": 25
+    }
+  ],
+  "disclosures": [
+    "v1 is preserved. The erratum reports the two observed_span_s diagnostics actually active, not the other seven already excluded.",
+    "Percentile confidence intervals and the centered bootstrap test are not dual; a positive interval alone does not imply Holm rejection.",
+    "v2 was specified following observed v1 results; this report is not an independent replication and Holm within each version does not control the adaptive search across versions.",
+    "Receipts bind SHA256 hashes; they are not digital signatures.",
+    "The completed B2 CSV retains its original CRLF bytes in Git through scoped attributes, without changing values, models, predictions or result receipts."
+  ],
+  "not_verified": [
+    "NO VERIFICABLE in this v2 audit: live collector execution was not re-verified or changed because it is outside this scope."
+  ],
+  "scientific_result": "LightGBM B1_over_B0 is positive and Holm-significant in primary only; the full B2 > B1 > B0 hierarchy is not confirmed.",
+  "new_downloads": 0,
+  "v1_modified": false,
+  "phase9_modified": false,
+  "collector_modified": false,
+  "published": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}
