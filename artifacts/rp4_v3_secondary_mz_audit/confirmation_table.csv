@@ -1,0 +1,5 @@
+information_set,N_origins,N_sessions,raw_qlike_recomputed,mz_qlike_recomputed,mz_qlike_published,published_minus_recomputed,floor_hits,strictly_negative_affine,floor_hit_percent,sessions_with_floor_hits,floor_loss_share_percent,formula_stored_max_abs_difference,scale_relative_error_max,closed_form_intercept_abs_error_max,closed_form_slope_abs_error_max,validation_init_score_parity_abs_difference_max,nonfinite_origin_fallbacks,training_identity_fallbacks
+B0,9750,25,0.17494027080363075,0.18623061852624623,0.18623061852624623,0,0,0,0,0,0,0,0,1.8634724839594607e-20,1.3322676295501878e-15,1.734723475976807e-15,0,0
+B1,9750,25,0.1720261126706135,1988.1772826909294,1988.1772826909291,-2.2737367544323206e-13,9,9,0.09230769230769231,1,99.98963269280883,0,0,2.202285662861181e-20,1.1102230246251565e-15,1.3183898417423734e-15,0,0
+B2,9750,25,0.17617863412042645,2400.2188304772276,2400.2188304772276,0,11,11,0.11282051282051282,2,99.99030139854364,0,0,1.3552527156068805e-20,1.3322676295501878e-15,1.304512053934559e-15,0,0
+

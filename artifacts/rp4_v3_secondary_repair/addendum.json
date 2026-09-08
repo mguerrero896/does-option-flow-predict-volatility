@@ -1,0 +1,51 @@
+{
+  "schema_version": "rp4-v3-secondary-implementation-repair-v1",
+  "status": "FROZEN_BEFORE_NEW_SECONDARY_FITS",
+  "frozen_at_utc": "2026-09-07T17:37:31Z",
+  "authorization": "Miguel: explicit v3 secondary implementation repair after v4 start, no mean refits; MZ one-hour fallback",
+  "document_path": "docs/rp4/v3_secondary_implementation_addendum_v1.md",
+  "document_sha256": "c89b63598f9d9a2aff2a76e0f09ed303653ffac83f8c4e5d50f128dcc04dafd7",
+  "solver_path": "artifacts/rp4_v3_secondary_repair/jump_repair.py",
+  "solver_sha256": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+  "test_sha256": "2fb30317265699947e0a6ce703aaf982725f652272045c074fc40e797241f727",
+  "parent_spec_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "base_panel_sha256": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+  "output_root": "private-input/e90b04c9636db3ce4b5d",
+  "threads_total_max": 2,
+  "process_priority": "BELOW_NORMAL_OR_IDLE",
+  "preexisting_successful_components": {
+    "primary": 912,
+    "confirmation": 50
+  },
+  "missing_components": {
+    "primary": {
+      "log_ridge_harq": 801,
+      "lightgbm_qlike": 801
+    },
+    "confirmation": {
+      "log_ridge_harq": 50,
+      "lightgbm_qlike": 50
+    }
+  },
+  "reuse_successful_components": true,
+  "refit_mean": false,
+  "refit_quantile": false,
+  "refit_mz": false,
+  "solver_lambda_grid": [
+    0.0001,
+    0.01,
+    1,
+    100,
+    10000
+  ],
+  "solver_total_maxiter": 1000,
+  "original_gradient_inf_tolerance": 1e-08,
+  "preconditioner": "initial_training_Fisher_Cholesky_no_jitter",
+  "validation": "unchanged_v3_last_10_training_sessions_logloss",
+  "auc_inference": "unchanged_v3_jump_secondary_9999_session_blocks",
+  "mz_status": "NO_VERIFICABLE_NO_ARITHMETICAL_BUG_DEMONSTRATED",
+  "mz_confirmation_audit_receipt_sha256": "ebe38763e180d6676e57d13fd65b22df2f9ec537985d8768466ffb7434ee6b4b",
+  "new_empirical_fits_before_freeze": 0,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

@@ -1,0 +1,25 @@
+{
+  "stage": "V3_SECONDARY_ADDENDUM",
+  "status": "PASS_SYNTHETIC_AND_CUSTODY_CHECKS_NO_NEW_EMPIRICAL_FITS",
+  "verification": {
+    "cmd": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$env:PYTHONPATH += ';private-input/f0b09867706f786297b8;private-input/e5ce4022c3bb83280dee'\n$env:PYTHONIOENCODING='utf-8'\n$env:OPENBLAS_NUM_THREADS='1'\n$env:OMP_NUM_THREADS='1'\nuv run --offline --frozen --no-sync pytest -o addopts='' -q artifacts/rp4_v3_secondary_repair/test_jump_repair.py artifacts/rp4_v3_secondary_mz_audit/test_audit_contract.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v4_code/test_report_checked.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_secondary_repair/jump_repair.py artifacts/rp4_v3_secondary_repair/test_jump_repair.py artifacts/rp4_v3_secondary_mz_audit artifacts/rp4_v4_code/report_v4_checked.py artifacts/rp4_v4_code/test_report_checked.py\nif ($LASTEXITCODE -ne 0) {exit $LASTEXITCODE}\nuv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v3_secondary_repair/jump_repair.py artifacts/rp4_v4_code/report_v4_checked.py\nexit $LASTEXITCODE",
+    "chunk_id": "9aa201",
+    "wall_time_seconds": 10.0007637,
+    "session_id": 24352,
+    "original_token_count": 5,
+    "output": ".................",
+    "completion": {
+      "chunk_id": "ce0e72",
+      "wall_time_seconds": 3.3e-06,
+      "exit_code": 0,
+      "original_token_count": 37,
+      "output": "..........                                              [100%]\r\n27 passed in 9.02s\r\nAll checks passed!\nSuccess: no issues found in 2 source files\r\n"
+    }
+  },
+  "document_sha256": "c89b63598f9d9a2aff2a76e0f09ed303653ffac83f8c4e5d50f128dcc04dafd7",
+  "solver_sha256": "d21a3c06520cd4ad6369e82afc5c89a8b8845ca728173754fff0a45709e2f570",
+  "model_fits": 0,
+  "mz_confirmation_receipt_sha256": "ebe38763e180d6676e57d13fd65b22df2f9ec537985d8768466ffb7434ee6b4b",
+  "report_checked_qa_scope": "Identity/commands/resources/SVG on synthetic inputs, no v4 estimates",
+  "new_report_checked_sha256": "17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c"
+}

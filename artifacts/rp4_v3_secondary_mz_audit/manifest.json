@@ -1,0 +1,30 @@
+{
+  "schema_version": "rp4-v3-secondary-mz-confirmation-audit-v1",
+  "scope": "25_closed_confirmation_sessions_saved_primary_forecasts_and_calibration_only",
+  "status": "NO_ARITHMETICAL_BUG",
+  "mz_secondary_use_status": "NO_VERIFICABLE_INSTABILITY_FROM_NEGATIVE_AFFINE_FLOOR",
+  "exit_code": 0,
+  "model_fits": 0,
+  "audit_code_sha256": "23c717e3e7da9e97b30f22cf4b4fa7805046ae29b72f5385f0f72c68f38ad1bc",
+  "output_sha256": {
+    "confirmation_summary.json": "c185a396d59c35b5be81cc09406541c67c33dc60de80e713657b7283b66f9b71",
+    "confirmation_table.csv": "566bfa73fab1d4d86afea923bab80dd3f3c6233fc57f87db8679678b6c279981",
+    "test_audit_contract.py": "cafca155e6166bc47637940b96eb7e53c923484a8fd341c6522ae5abf2576d0e",
+    "receipt.json": "ebe38763e180d6676e57d13fd65b22df2f9ec537985d8768466ffb7434ee6b4b",
+    "audit_mz_identity.py": "23c717e3e7da9e97b30f22cf4b4fa7805046ae29b72f5385f0f72c68f38ad1bc",
+    "REPORT.md": "06aaa5ca529f3d3f9ce4fc1716e54ffcede848d91062b8e3c168649480bffa30"
+  },
+  "private_evidence": {
+    "path": "private-input/62a559cfecd96b9985d5",
+    "sha256": "835c404a24e7513270f25172286dc50cbf8fe5753dd576b179456e0fcca5edce"
+  },
+  "source_verified": {
+    "sessions": 25,
+    "evaluation_code_files": 13,
+    "postrun_unique_other_pins": 33
+  },
+  "no_frozen_artifact_changes": true,
+  "no_v4_changes": true,
+  "no_commits_by_this_agent": true,
+  "no_new_formula": true
+}

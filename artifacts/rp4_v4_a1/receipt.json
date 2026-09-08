@@ -1,0 +1,48 @@
+{
+  "stage": "V4_A1",
+  "status": "FROZEN_AND_VERIFIED",
+  "commands": [
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\nuv run --offline --frozen --no-sync ruff format artifacts/rp4_v4_code/freeze.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v4_code/freeze.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.freeze\nexit $LASTEXITCODE",
+      "chunk_id": "977206",
+      "wall_time_seconds": 0.4090174,
+      "exit_code": 1,
+      "original_token_count": 480,
+      "output": "1 file reformatted\nE501 Line too long (113 > 100)\n  --> artifacts\\rp4_v4_code\\freeze.py:26:101\n   |\n24 |         panel: \"a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637\",\n25 |         root\n26 |         / \"artifacts/rp4_v3_b2/summary.json\": \"645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d\",\n   |                                                                                                     ^^^^^^^^^^^^^\n27 |     }\n28 |     for path, expected in pins.items():\n   |\n\nE501 Line too long (141 > 100)\n  --> artifacts\\rp4_v4_code\\freeze.py:58:101\n   |\n56 | …usal_end_require_selected_target_finite_positive\",\n57 | …\n58 | …rp2-v3-20260901-flow-session-loss-registration/rp2_block3_target/target_panel.parquet\",\n   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n59 | …527e1c8813f9a03d6e17ed8029f842831\",\n60 | …\n   |\n\nUP017 [*] Use `datetime.UTC` alias\n  --> artifacts\\rp4_v4_code\\freeze.py:78:40\n   |\n76 |             \"sidecar_sha256\": sha(prior.with_suffix(\".sha256\")),\n77 |             \"local_mtime_utc\": datetime.fromtimestamp(\n78 |                 prior.stat().st_mtime, timezone.utc\n   |                                        ^^^^^^^^^^^^\n79 |             ).isoformat(),\n80 |             \"independent_timestamp_verified\": False,\n   |\nhelp: Convert to `datetime.UTC` alias\n\nUP017 [*] Use `datetime.UTC` alias\n   --> artifacts\\rp4_v4_code\\freeze.py:115:39\n    |\n113 |         \"stage\": \"A1\",\n114 |         \"status\": \"FROZEN_BEFORE_TARGET_MATERIALIZATION_AND_FITS\",\n115 |         \"frozen_at_utc\": datetime.now(timezone.utc).isoformat(),\n    |                                       ^^^^^^^^^^^^\n116 |         \"input_sha256\": {str(path): value for path, value in pins.items()},\n117 |         \"specification_sha256\": sha(contract),\n    |\nhelp: Convert to `datetime.UTC` alias\n\nFound 4 errors.\n[*] 2 fixable with the `--fix` option.\n"
+    },
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\nuv run --offline --frozen --no-sync ruff format artifacts/rp4_v4_code/freeze.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync ruff check artifacts/rp4_v4_code/freeze.py\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v4_code.freeze\nexit $LASTEXITCODE",
+      "chunk_id": "213277",
+      "wall_time_seconds": 0.6242329,
+      "exit_code": 0,
+      "original_token_count": 323,
+      "output": "1 file reformatted\nAll checks passed!\n{\"decision_sha256\": \"1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804\", \"freeze_code_sha256\": \"c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b\", \"frozen_at_utc\": \"2026-09-07T16:37:21.501511+00:00\", \"input_sha256\": {\"private-input/476c5f527f1b8addb7d4\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\", \"private-input/e6f4ac884e3b24d1d147\": \"645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d\", \"private-input/ad5d9652af11ae5ac3ab\": \"a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637\", \"private-input/500e563da2aed626b4d7\": \"6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee\"}, \"model_fits\": 0, \"new_targets_opened\": 0, \"specification_md_sha256\": \"443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9\", \"specification_sha256\": \"0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04\", \"stage\": \"A1\", \"status\": \"FROZEN_BEFORE_TARGET_MATERIALIZATION_AND_FITS\"}\r\n"
+    },
+    {
+      "command": "$rp4Parent = Get-Content -LiteralPath 'artifacts/rp4_v3_a1_empty_window/specification.json' -Raw | ConvertFrom-Json -AsHashtable; $rp4New = Get-Content -LiteralPath 'artifacts/rp4_v4_a1/specification.json' -Raw | ConvertFrom-Json -AsHashtable; foreach($rp4Key in @('feature_sets','feature_transforms','mandatory_predictors','missing_allowed','windows','purge_minutes','embargo_minutes')) { if(($rp4Parent[$rp4Key] | ConvertTo-Json -Depth 30 -Compress) -cne ($rp4New[$rp4Key] | ConvertTo-Json -Depth 30 -Compress)) { throw \"CONTRACT_CHANGED:$rp4Key\" } }; foreach($rp4Key in @('target_reference','bar_input_pins')) { if((Get-FileHash -LiteralPath $rp4New[$rp4Key].path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4New[$rp4Key].sha256) { throw \"INPUT_PIN_CHANGED:$rp4Key\" } }; $rp4Artifacts = @('docs/rp4/specification_v4.md','docs/rp4/decision_133_v4.md','artifacts/rp4_v4_a1/specification.json','artifacts/rp4_v4_a1/freeze_manifest.json','artifacts/rp4_v4_code/freeze.py'); $rp4Hashes = [ordered]@{}; foreach($rp4Path in $rp4Artifacts) { $rp4Hashes[$rp4Path]=(Get-FileHash -LiteralPath $rp4Path -Algorithm SHA256).Hash.ToLowerInvariant() }; [ordered]@{status='A1_VERIFIED'; output_hashes=$rp4Hashes; feature_counts=@(29,69,138); model_fits=0} | ConvertTo-Json -Depth 8",
+      "chunk_id": "d7264e",
+      "wall_time_seconds": 0.3837116,
+      "exit_code": 0,
+      "original_token_count": 172,
+      "output": "{\r\n  \"status\": \"A1_VERIFIED\",\r\n  \"output_hashes\": {\r\n    \"docs/rp4/specification_v4.md\": \"443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9\",\r\n    \"docs/rp4/decision_133_v4.md\": \"1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804\",\r\n    \"artifacts/rp4_v4_a1/specification.json\": \"0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04\",\r\n    \"artifacts/rp4_v4_a1/freeze_manifest.json\": \"830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a\",\r\n    \"artifacts/rp4_v4_code/freeze.py\": \"c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b\"\r\n  },\r\n  \"feature_counts\": [\r\n    29,\r\n    69,\r\n    138\r\n  ],\r\n  \"model_fits\": 0\r\n}\r\n"
+    }
+  ],
+  "validation": {
+    "status": "A1_VERIFIED",
+    "output_hashes": {
+      "docs/rp4/specification_v4.md": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+      "docs/rp4/decision_133_v4.md": "1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804",
+      "artifacts/rp4_v4_a1/specification.json": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+      "artifacts/rp4_v4_a1/freeze_manifest.json": "830a87bd9c091d897739cbab2160d49ab32ae08550d5d4e4dd0bc8e8fc32468a",
+      "artifacts/rp4_v4_code/freeze.py": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b"
+    },
+    "feature_counts": [
+      29,
+      69,
+      138
+    ],
+    "model_fits": 0
+  },
+  "initial_failure": "Ruff formatting/line length/UTC lint only; freeze not executed until corrected",
+  "prior_commit": "ea4ef2c4639b01276faba490d05f761fa3169522"
+}

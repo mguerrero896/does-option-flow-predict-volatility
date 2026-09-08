@@ -1,0 +1,9 @@
+{
+  "public_path": "artifacts/rp4_v4_prereg/protocol.md",
+  "original_sha256": "6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee",
+  "public_sha256": "4ef4a84f14179312635e01afdbe5df6cc2f50c1f81b4d53f534c1fabb362bd08",
+  "historical_timestamp_verified": false,
+  "original_sidecar_sha256": "bb94a5661019a2cb7df352910419a5f772d8a3c12ce505ff57a4d8cf32ab04f1",
+  "independent_timestamp_verified": false,
+  "source_alias": "private-input/9b1a3a4cf6930a3a3f4e"
+}

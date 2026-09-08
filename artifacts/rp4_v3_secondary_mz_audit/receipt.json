@@ -1,0 +1,98 @@
+{
+  "stage": "SECONDARY_MZ_CONFIRMATION_ARITHMETIC_AUDIT",
+  "status": "COMPLETE_NO_ARITHMETICAL_BUG_MZ_REMAINS_NO_VERIFICABLE",
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_secondary_mz_audit/audit_mz_identity.py",
+  "exit_code": 0,
+  "window": "confirmation",
+  "models_fitted": 0,
+  "calibration_formula_changed": false,
+  "stored_forecasts_changed": false,
+  "frozen_artifacts_changed": false,
+  "evaluation_v4_touched": false,
+  "primary_records_read": 0,
+  "confirmation_records_read": 25,
+  "runtime": {
+    "started_at_utc": "2026-09-07T17:31:45.966762+00:00",
+    "deadline_utc": "2026-09-07T18:25:00+00:00",
+    "process_priority": "BELOW_NORMAL_PRIORITY_CLASS",
+    "priority_class": 16384,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "POLARS_MAX_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "loaded_thread_pools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "prefix": "libscipy_openblas",
+        "filepath": "private-input/c24d459f4689d9fc9ba3",
+        "version": "0.3.34.0.0",
+        "threading_layer": "pthreads",
+        "architecture": "SkylakeX"
+      }
+    ],
+    "completed_at_utc": "2026-09-07T17:31:47.069666+00:00"
+  },
+  "numpy_version": "2.5.2",
+  "python_executable": "private-input/481110a47b20f5baf341",
+  "audit_output_path": "private-input/62a559cfecd96b9985d5",
+  "audit_output_sha256": "835c404a24e7513270f25172286dc50cbf8fe5753dd576b179456e0fcca5edce",
+  "source_sha256": {
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "artifacts/rp4_v3_b3/receipt.json": "698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+    "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+    "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+    "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "artifacts/rp4_v3_secondary_mz_audit/audit_mz_identity.py": "23c717e3e7da9e97b30f22cf4b4fa7805046ae29b72f5385f0f72c68f38ad1bc",
+    "artifacts/rp4_v3_b4/audit_mz_identity.py": "0875b9d7d59ddc638c8ea368a8f200029f14ed3a07b798345488793053d3ddf4"
+  },
+  "closed_artifact_sha256": {
+    "artifacts/rp4_v3_b3/session_losses.csv": "1798a86cde522b2e7e44bbd69dc758da40ff15ba62c951eea2032100d2782725",
+    "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+    "private/evaluation/confirmation/fit_diagnostics.json": "b062d56bb8548bd655d0fe11da2de08e1fc53e34987f660f4ba2474bb28b06de"
+  },
+  "release_input_sha256": {
+    "private-input/b14e0b3549c1758a0e04": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+    "private-input/db7425b0533fe75e90f5": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+    "private-input/0b464891a5b6b2844558": "e3a76fecf274d6233c1059221b9755297f5854a6c4519b2b806344008bec59e3",
+    "private-input/4811f94a92eb8e73774d": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "private-input/bda0ad390a002ced0045": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6",
+    "private-input/eace78e1669947ac50ab": "960c8a2638cdf39be44acb6d06b0e355eceab4e6658357f089f2b9aa159d61d0",
+    "private-input/94e848ce5f0e0abad7cf": "fb6b01b42f62c24ec2a87f83e0338e1b36f0e609b3938cf92c76365a08505ff9",
+    "private-input/49665a42b6cb17beb734": "3a2a12d37315188e767cc336988b499647c1a4217f840c6bfb00a242f2df22a9",
+    "private-input/d957fad184a68b3b6d47": "51a0b33ea8558685f2e98f0f168b3946e0abab131a13b1202d81f550b33725df",
+    "private-input/3c5f1a9e909b5916f05c": "c7a7027f7647c53cbc257f14214f1551cb2339a014c8b524bd00f31a89fbebde",
+    "private-input/3707176d27947a98a2a2": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+    "private-input/a42d0462f3e67f693d40": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697",
+    "private-input/d80a88941c76e05f09b0": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803",
+    "private-input/07de2d7e91e86f818b31": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189"
+  },
+  "postrun_original_input_hashes_verified": 33,
+  "postrun_evaluation_code_hashes_verified": 13,
+  "session_hashes_verified_before_and_after": 25,
+  "qa": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m ruff check artifacts/rp4_v3_secondary_mz_audit/audit_mz_identity.py artifacts/rp4_v3_secondary_mz_audit/test_audit_contract.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m pytest -q artifacts/rp4_v3_secondary_mz_audit/test_audit_contract.py",
+      "exit_code": 0,
+      "tests": 3,
+      "failed": 0,
+      "assertion": "Original arithmetic AST unchanged; no training or optimization; confirmation and resource guards explicit."
+    }
+  ],
+  "test_sha256": "cafca155e6166bc47637940b96eb7e53c923484a8fd341c6522ae5abf2576d0e",
+  "full_tape_or_bar_reconstruction": 0,
+  "status_reason": "Stored affine calibration, nonfinite fallback and 1e-12 floor reproduce every saved origin exactly. Negative affine outputs, not an arithmetic scale error, cause the calibrated QLIKE instability.",
+  "limitations": "This audits already-saved results; it neither establishes predictive validity nor changes the MZ methodology. No raw provider inputs were reprocessed.",
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

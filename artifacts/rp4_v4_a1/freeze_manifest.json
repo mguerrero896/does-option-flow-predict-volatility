@@ -1,0 +1,17 @@
+{
+  "decision_sha256": "1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804",
+  "freeze_code_sha256": "c114b23f80a35b93db7fec49066f313c9e745baa7312717af70e25d32d8f286b",
+  "frozen_at_utc": "2026-09-07T16:37:21.501511+00:00",
+  "input_sha256": {
+    "private-input/4811f94a92eb8e73774d": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "private-input/5f6976a896df4fca8f1f": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+    "private-input/db7425b0533fe75e90f5": "a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637",
+    "private-input/85bba815f3835112c16c": "6f8ad8d53a8f4336851415a99c25b316bf44db74165e29246110a3bb133eabee"
+  },
+  "model_fits": 0,
+  "new_targets_opened": 0,
+  "specification_md_sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9",
+  "specification_sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+  "stage": "A1",
+  "status": "FROZEN_BEFORE_TARGET_MATERIALIZATION_AND_FITS"
+}

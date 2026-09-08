@@ -1,0 +1,27 @@
+{
+  "stage": "V3_B4_REVISION1",
+  "status": "COMPLETE_PRESENTATION_ONLY",
+  "verified_at_utc": "2026-09-07 16:33:36 UTC",
+  "prior_b4_commit": "25c6ec7c73ae6efa9045783e3b9821c945fe827e",
+  "command": "$rp4Pins = @{ 'docs/rp4/results_v3.md'='86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f'; 'artifacts/rp4_v3_b2/summary.json'='645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d'; 'artifacts/rp4_v3_b3/summary.json'='64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b'; 'artifacts/rp4_v3_b4/mz_identity_receipt.json'='cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4' }; foreach($rp4Path in $rp4Pins.Keys) { if((Get-FileHash -LiteralPath $rp4Path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $rp4Pins[$rp4Path]) { throw \"PIN_MISMATCH:$rp4Path\" } }; $rp4Report = Get-Content -LiteralPath 'docs/rp4/results_v3_revision1.md' -Raw; if($rp4Report -notmatch 'NO VERIFICABLE' -or $rp4Report -notmatch '0.0525' -or $rp4Report -notmatch '0.6631') { throw 'REPORT_CONTRACT_FAILED' }; [ordered]@{status='PRESENTATION_CLOSED_PRIMARY_BYTES_UNCHANGED'; input_hashes=$rp4Pins; outputs=@{'docs/rp4/results_v3_revision1.md'=(Get-FileHash -LiteralPath 'docs/rp4/results_v3_revision1.md' -Algorithm SHA256).Hash.ToLowerInvariant()}} | ConvertTo-Json -Depth 8",
+  "exit_code": 0,
+  "validation": {
+    "status": "PRESENTATION_CLOSED_PRIMARY_BYTES_UNCHANGED",
+    "input_hashes": {
+      "artifacts/rp4_v3_b3/summary.json": "64af964691d1127df7b3e2e0f05395c810719f2fe4e5ba3fa0207fcc8e15591b",
+      "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "docs/rp4/results_v3.md": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f",
+      "artifacts/rp4_v3_b4/mz_identity_receipt.json": "cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4"
+    },
+    "outputs": {
+      "docs/rp4/results_v3_revision1.md": "f209a54519298d8ee7308a8dc20b5c293d0da4fbad807709aed8aca2feb1db03"
+    }
+  },
+  "limitations": [
+    "MZ arithmetic matches frozen specification; scale bug not demonstrated",
+    "Jump primary one session is insufficient, confirmation has none"
+  ],
+  "new_fits": 0,
+  "downloads": 0,
+  "publication": false
+}

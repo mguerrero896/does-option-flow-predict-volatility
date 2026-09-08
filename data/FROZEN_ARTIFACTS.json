@@ -769,6 +769,11 @@
       "bytes": 15235,
       "path": "artifacts/rp4_v3_candidate/build_gamma_imbalance.py",
       "sha256": "595f50f42b877efa27bb91ed3345ddd6a3458c7b81c490049e50efb34e3da0b7"
+    },
+    {
+      "bytes": 2867,
+      "path": "artifacts/rp4_v4_prereg/protocol.md",
+      "sha256": "4ef4a84f14179312635e01afdbe5df6cc2f50c1f81b4d53f534c1fabb362bd08"
     }
   ],
   "note": "Append-only registry of frozen evidence. Entries are never edited or removed; amendments are new paths. Physical mutation of any listed file fails the test suite (tests/contract/test_frozen_artifacts_registry.py).",
