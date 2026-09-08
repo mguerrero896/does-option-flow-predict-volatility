@@ -152,7 +152,7 @@ def test_github_squash_identity_requires_a_valid_platform_signature(
         content.replace(b"parent ", b"parent " + b"3" * 40 + b"\nparent ", 1)
     )
     forged_merge = content.replace(
-        b"parent ", b"parent " + b"3" * 40 + b"\nparent ", 1
+        b"parent ", f"parent {parent}\nparent ".encode(), 1
     ).replace(b"research: result (#16)", b"Merge pull request #16 from user/branch")
     forged_id = subprocess.run(
         ["git", "-C", str(repo), "hash-object", "-t", "commit", "-w", "--stdin"],
@@ -160,6 +160,7 @@ def test_github_squash_identity_requires_a_valid_platform_signature(
     ).stdout.decode().strip()
     _git(repo, "update-ref", "refs/remotes/origin/main", forged_id)
     assert _has_github_pull_request_shape(forged_merge)
+    assert _is_published_main_commit(repo, forged_id)
     assert not _is_verified_github_squash(repo, forged_id, forged_merge)
 
 
