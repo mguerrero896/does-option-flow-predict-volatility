@@ -7,7 +7,7 @@
     "chrome": "152.0.7977.77",
     "quality": "showcase",
     "preset": "classic",
-    "svg_export": "native canonical auto-theme"
+    "svg_export": "native canonical auto-theme; compact exports set a 1662-pixel intrinsic canvas without changing the viewBox"
   },
   "reproduction": "node docs/figures/public_refresh/reproduce.mjs --render",
   "verification": "node docs/figures/public_refresh/reproduce.mjs --verify",
@@ -266,18 +266,18 @@
       "diagram_type": "architecture",
       "source": {
         "path": "programme_timeline.architecture.json",
-        "sha256": "15e88e63831147a35b9722bc7d892e58b542a519d390cb0df58ebcd00a3e8c09",
-        "bytes": 3871
+        "sha256": "ebdfebfe483e53b40d8fadcc2837fb1120c254203ec89d3bd23446ca2cb344f2",
+        "bytes": 3131
       },
       "html": {
         "path": "programme_timeline.architecture.html",
-        "sha256": "0f5e08b9a0e3aac7600384218f96a8aa12db7cfc3d82a3fe9ec4d2e44c24e06a",
-        "bytes": 722549
+        "sha256": "fd6fccddfb8f9a3fc9ffff1499f6b9269dd57da7d246fcfadbd876f51725c55d",
+        "bytes": 721332
       },
       "svg": {
         "path": "programme_timeline.architecture.svg",
-        "sha256": "eb907759575e707372da175b2c7d70f5d15fc466ca20dd2dab50a7007252703a",
-        "bytes": 51245
+        "sha256": "0cc0af93ef1ff9bf37054fcf3bd2845c51c56638c3c990e6395f09143208068b",
+        "bytes": 49027
       },
       "validation": {
         "checks": [
@@ -326,11 +326,12 @@
         "automated_status": "pass",
         "automated_visual_review": "pending",
         "visual_review": "passed",
-        "reviewed": "Corrected RP3 date bound and unconfirmed-flow wording; light/dark contact sheet and PNG inspected for complete labels, unchanged routes and no clipping.",
+        "reviewed": "Light and dark contact sheets inspected; compact two-column routes and dates checked at 831-pixel README width.",
         "viewports": [
           {
             "width": 1440,
             "height": 900,
+            "theme": "light",
             "scrollWidth": 1440,
             "scrollHeight": 900,
             "ok": true
@@ -338,6 +339,7 @@
           {
             "width": 1600,
             "height": 1000,
+            "theme": "light",
             "scrollWidth": 1600,
             "scrollHeight": 1000,
             "ok": true
@@ -345,6 +347,7 @@
           {
             "width": 1920,
             "height": 1080,
+            "theme": "light",
             "scrollWidth": 1920,
             "scrollHeight": 1080,
             "ok": true
@@ -352,6 +355,7 @@
           {
             "width": 2048,
             "height": 1320,
+            "theme": "light",
             "scrollWidth": 2048,
             "scrollHeight": 1320,
             "ok": true
@@ -362,31 +366,31 @@
             "width": 1440,
             "height": 900,
             "theme": "light",
-            "sha256": "afaf01788ac5141e4ebcb6a5223a59789678563dd17bc2902c1eaf144d2bd966"
+            "sha256": "013062dc7cede8f5dc6f3b9dd166ffe20567d77f254ae6cec8707e8cc62c0fd1"
           },
           {
             "width": 1440,
             "height": 900,
             "theme": "dark",
-            "sha256": "f4a761c3ed444984fd4132e3da1c54ab9f63195008f84038a961ab12b5d62b85"
+            "sha256": "38246d91fdb6732ce8bb6fb8a613bfc7613c7b000f8fb7c1000b3baf2fd6f9c4"
           },
           {
             "width": 2048,
             "height": 1320,
             "theme": "light",
-            "sha256": "c559adfbc8a5fbf74dac2cdcc49e5c0088ce2807f73227d585e190ffbbb9688e"
+            "sha256": "2aeb31e06da2602a57e70bef9fd1065120c822a2f4816f8c810386d822396bbf"
           },
           {
             "width": 2048,
             "height": 1320,
             "theme": "dark",
-            "sha256": "b8438335d7a32bc41849e0574838b86b861801437b73552a69dfc925b6c5a38a"
+            "sha256": "d2df0a5d3f2ced9472f4d86662fe42a7209799caa231a59a537bc3118eca3d40"
           }
         ]
       },
       "label_correction": {
         "rp3": {
-          "text": "Before 29 Aug",
+          "text": "Before 29 Aug · sealed",
           "source": "docs/rp3/PREREGISTRATION.md",
           "source_sha256": "66906a88b0d8ff76d9bbc6556e0aa64e32de494254d2ebdccc49140fce7f77e7",
           "scope": "The protocol declares sealing before 2026-08-29; this is not an independently authenticated exact sealing date."
@@ -396,9 +400,83 @@
           "source": "docs/rp4/results_v3.md",
           "source_sha256": "ebacdde7cca5c3ebdf18bedf40dc4c433ec1a578681dff2d7c8379e120f5cbe1",
           "scope": "The saved linear B2/B1 primary p-value is 0.0525 with NOT_REJECTED. Non-rejection does not establish absence of a signal."
-        },
-        "geometry_elements_unchanged": 107
-      }
+        }
+      },
+      "readability": {
+        "available_width_px": 831,
+        "intrinsic_width_px": 1662.0,
+        "display_width_px": 831,
+        "minimum_required_px": 18,
+        "minimum_effective_px": 23.371875,
+        "labels": [
+          {
+            "text": "RP2",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Aug 2026 · nulls",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "RP3 registered",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Before 29 Aug · sealed",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Phase 8 bridge",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "30 Aug · mixed; 1 read",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "PIT successor",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "02 Sep · unconfirmed",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "RP4 v1 · RV30",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Sep · unstable",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "RP4 v2 · RV30",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Sep · repairs",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "RP4 v3 · RV30",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Sep · unconfirmed flow",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Current v4 · RV15",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Sep · RV15 flow",
+            "effective_px": 23.371875
+          }
+        ]
+      },
+      "html_delivery": "Native Archify showcase delivery, followed by the reproducible outer-reader width adapter; no SVG clipping, geometry or font changes.",
+      "intrinsic_canvas": "1662 pixels wide, with the native viewBox and aspect ratio preserved. GitHub max-width reduces this to the available README width; no browser upscaling is assumed."
     },
     {
       "id": "registration_seals",
@@ -523,6 +601,194 @@
           }
         ]
       }
+    },
+    {
+      "id": "proposal_to_replication_readme",
+      "diagram_type": "architecture",
+      "source": {
+        "path": "proposal_to_replication_readme.workflow.json",
+        "sha256": "4aec935ed9f844de703d6986ae300d0fd454bd1e410cb93c60fc2abb778646fd",
+        "bytes": 2272
+      },
+      "html": {
+        "path": "proposal_to_replication_readme.workflow.html",
+        "sha256": "7a0acce98bb24d80e13281cc5f3f970ea72974b29d0cee37747dbc556853f189",
+        "bytes": 718660
+      },
+      "svg": {
+        "path": "proposal_to_replication_readme.workflow.svg",
+        "sha256": "a1a75a2f4f11cf5a8b37fb43ca0630e7b191758a680d2a096f2f9df8439cb502",
+        "bytes": 46912
+      },
+      "validation": {
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true
+          },
+          {
+            "name": "finite_svg",
+            "ok": true
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true
+          }
+        ],
+        "quality": "showcase",
+        "errors": 0,
+        "warnings": 0
+      },
+      "visual": {
+        "automated_status": "pass",
+        "automated_visual_review": "pending",
+        "visual_review": "passed",
+        "reviewed": "Light and dark contact sheets inspected; compact two-column routes and dates checked at 831-pixel README width.",
+        "viewports": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "scrollWidth": 1440,
+            "scrollHeight": 900,
+            "ok": true
+          },
+          {
+            "width": 1600,
+            "height": 1000,
+            "theme": "light",
+            "scrollWidth": 1600,
+            "scrollHeight": 1000,
+            "ok": true
+          },
+          {
+            "width": 1920,
+            "height": 1080,
+            "theme": "light",
+            "scrollWidth": 1920,
+            "scrollHeight": 1080,
+            "ok": true
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "scrollWidth": 2048,
+            "scrollHeight": 1320,
+            "ok": true
+          }
+        ],
+        "captures": [
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "light",
+            "sha256": "fcfc57a53a142f004bbf26411944e72373d7a21a412a65183680fc5f8ed73489"
+          },
+          {
+            "width": 1440,
+            "height": 900,
+            "theme": "dark",
+            "sha256": "6e6ff2ec5aa8d3eacb269f526a32eb42e5427b553ddfde2592dcba484baaaa2b"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "light",
+            "sha256": "d0fdfc8eaa9ab71632cdc4265d34d70c2d0bd81bbec383eb33038b3f8678d642"
+          },
+          {
+            "width": 2048,
+            "height": 1320,
+            "theme": "dark",
+            "sha256": "836f42f5dac8096b856cfaedfcd26e118f5a078b8d856b3ee750c499038c12cf"
+          }
+        ]
+      },
+      "readability": {
+        "available_width_px": 831,
+        "intrinsic_width_px": 1662.0,
+        "display_width_px": 831,
+        "minimum_required_px": 18,
+        "minimum_effective_px": 23.371875,
+        "labels": [
+          {
+            "text": "Licensed inputs",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Do options help?",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Point-in-time",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "History → state → flow",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Mixed past evidence",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "419 reused sessions",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Linear flow gain",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "+0.623%; conditional",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Register rules",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "Fixed before new data",
+            "effective_px": 23.371875
+          },
+          {
+            "text": "Authorized reads",
+            "effective_px": 28.565625
+          },
+          {
+            "text": "20 / 40 / 335 sessions",
+            "effective_px": 23.371875
+          }
+        ]
+      },
+      "html_delivery": "Native Archify showcase delivery, followed by the reproducible outer-reader width adapter; no SVG clipping, geometry or font changes.",
+      "intrinsic_canvas": "1662 pixels wide, with the native viewBox and aspect ratio preserved. GitHub max-width reduces this to the available README width; no browser upscaling is assumed."
     }
-  ]
+  ],
+  "compact_reader": "The README workflow and timeline reflow into two columns. The architecture engine renders their narrow source canvases; the historical workflow source is unchanged."
 }

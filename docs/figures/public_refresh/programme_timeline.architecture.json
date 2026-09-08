@@ -2,33 +2,16 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "One programme timeline: past measurements and unopened replication",
+    "title": "Research programme timeline",
     "locale": "en",
     "quality_profile": "showcase",
     "animation": "none",
     "viewBox": [
-      1360,
-      650
+      320,
+      440
     ],
     "legend": {
-      "mode": "auto",
-      "entries": {
-        "frontend": {
-          "label": "Published record"
-        },
-        "backend": {
-          "label": "Computation"
-        },
-        "security": {
-          "label": "Gate"
-        },
-        "database": {
-          "label": "Data"
-        },
-        "external": {
-          "label": "Study question"
-        }
-      }
+      "mode": "hidden"
     }
   },
   "components": [
@@ -38,44 +21,41 @@
       "label": "RP2",
       "sublabel": "Aug 2026 · nulls",
       "pos": [
-        30,
-        120
+        12,
+        28
       ],
       "size": [
-        134,
-        90
-      ],
-      "tag": "HISTORICAL"
+        136,
+        72
+      ]
     },
     {
       "id": "rp3",
       "type": "security",
       "label": "RP3 registered",
-      "sublabel": "Before 29 Aug",
+      "sublabel": "Before 29 Aug · sealed",
       "pos": [
-        196,
-        390
+        172,
+        28
       ],
       "size": [
-        134,
-        90
-      ],
-      "tag": "SEALED"
+        136,
+        72
+      ]
     },
     {
       "id": "phase8",
       "type": "backend",
       "label": "Phase 8 bridge",
-      "sublabel": "30 Aug · mixed",
+      "sublabel": "30 Aug · mixed; 1 read",
       "pos": [
-        362,
-        120
+        172,
+        134
       ],
       "size": [
-        134,
-        90
-      ],
-      "tag": "READ ONCE"
+        136,
+        72
+      ]
     },
     {
       "id": "pit",
@@ -83,12 +63,12 @@
       "label": "PIT successor",
       "sublabel": "02 Sep · unconfirmed",
       "pos": [
-        528,
-        390
+        12,
+        134
       ],
       "size": [
-        134,
-        90
+        136,
+        72
       ]
     },
     {
@@ -97,12 +77,12 @@
       "label": "RP4 v1 · RV30",
       "sublabel": "Sep · unstable",
       "pos": [
-        694,
-        120
+        12,
+        240
       ],
       "size": [
-        134,
-        90
+        136,
+        72
       ]
     },
     {
@@ -111,12 +91,12 @@
       "label": "RP4 v2 · RV30",
       "sublabel": "Sep · repairs",
       "pos": [
-        860,
-        390
+        172,
+        240
       ],
       "size": [
-        134,
-        90
+        136,
+        72
       ]
     },
     {
@@ -125,28 +105,27 @@
       "label": "RP4 v3 · RV30",
       "sublabel": "Sep · unconfirmed flow",
       "pos": [
-        1026,
-        120
+        172,
+        346
       ],
       "size": [
-        134,
-        90
+        136,
+        72
       ]
     },
     {
       "id": "rp4v4",
       "type": "frontend",
-      "label": "RP4 v4 · RV15",
+      "label": "Current v4 · RV15",
       "sublabel": "Sep · RV15 flow",
       "pos": [
-        1192,
-        390
+        12,
+        346
       ],
       "size": [
-        134,
-        90
-      ],
-      "tag": "CURRENT"
+        136,
+        72
+      ]
     }
   ],
   "connections": [
@@ -189,18 +168,11 @@
   "cards": [
     {
       "dot": "slate",
-      "title": "Chronology, not independent replications",
+      "title": "Interpretation",
       "items": [
-        "Equal spacing is chronology, not elapsed time. RP4 v1–v4 reuse evaluation windows.",
-        "V5 at RV15 is closed and exploratory; v4 remains the headline. No independent replication or v5/v4 test."
-      ]
-    },
-    {
-      "dot": "amber",
-      "title": "Unopened evidence extends beyond this axis",
-      "items": [
-        "RP3 remains sealed: 662 evaluable sessions, estimated read 2029-01-30.",
-        "RP4 prospective replication is registered separately; a planned future read is not a result."
+        "Reused windows are not independent replication. V5 is exploratory; v4 stays the headline.",
+        "No direct v5/v4 test. RP3 is sealed: 662 sessions; estimated read 2029-01-30.",
+        "Future replication is registered separately. Planned reads are not results."
       ]
     }
   ]

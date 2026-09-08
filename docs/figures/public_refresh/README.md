@@ -1,12 +1,13 @@
 # Public research diagrams
 
-These four diagrams describe the published research programme and its reproduction
+These five diagrams describe the published research programme and its reproduction
 boundary. The JSON files are the versioned Archify sources. The SVG files are
 static exports for Markdown; each HTML file is a standalone reader with light and
 dark themes, zoom and export controls.
 
 | Diagram | Static figure | Source | Standalone reader |
 | --- | --- | --- | --- |
+| README question to future replication | [SVG](proposal_to_replication_readme.workflow.svg) | [JSON](proposal_to_replication_readme.workflow.json) | [HTML](proposal_to_replication_readme.workflow.html) |
 | Original question to prospective replication | [SVG](proposal_to_replication.workflow.svg) | [JSON](proposal_to_replication.workflow.json) | [HTML](proposal_to_replication.workflow.html) |
 | Public verification and licensed reproduction | [SVG](reproducibility_map.architecture.svg) | [JSON](reproducibility_map.architecture.json) | [HTML](reproducibility_map.architecture.html) |
 | Programme timeline through RP4 v4, with the closed v5 extension noted | [SVG](programme_timeline.architecture.svg) | [JSON](programme_timeline.architecture.json) | [HTML](programme_timeline.architecture.html) |
@@ -42,7 +43,7 @@ From the repository root, with Node.js installed:
 node docs/figures/public_refresh/reproduce.mjs --verify
 ```
 
-This checks all 12 source/HTML/SVG hashes and byte counts in the
+This checks all 15 source/HTML/SVG hashes and byte counts in the
 [manifest](manifest.json), without any additional package or market-data access.
 
 Regeneration additionally requires an existing **Archify 2.16** installation and
@@ -67,6 +68,22 @@ inspected separately for labels, routes, node fit and balance. The manifest reco
 these results; automated `visual-check` receipts correctly keep visual review
 pending until a person or image-capable reviewer inspects the captures.
 
+The README workflow and timeline use two columns. At the observed GitHub image
+width of 831 pixels, every visible label and date is at least 23.37 pixels tall
+in CSS font-size units (minimum required: 18). Unlabeled arrows retain explicit
+direction. Their SVG intrinsic canvases and PNG fallbacks are 1662 pixels wide.
+GitHub can reduce them to the available width; browser upscaling is not assumed.
+The check uses `min(831, intrinsic_width)` and rejects the old 320-pixel canvas. The standalone HTML reader
+uses a reproducible outer-width adapter to fit desktop viewports; its native
+Archify delivery is kept separately during regeneration. The adapter does not
+clip content or alter SVG geometry or font sizes.
+
+Regenerate only these two diagrams with:
+
+```sh
+node docs/figures/public_refresh/reproduce.mjs --render proposal_to_replication_readme.workflow programme_timeline.architecture
+```
+
 Generated contact sheets, screenshots and raw local tool receipts are excluded
 from version control. The manifest retains only sanitized receipts and hashes.
 The classic Archify style preserves rounded nodes, directional arrows and dashed
@@ -82,7 +99,7 @@ names. The programme identifiers remain in the historical timeline.
 | Four comparisons at 15 minutes | [SVG](result_matrix.svg) | [PNG](result_matrix.png) | [Saved primary statistics](../../../artifacts/rp4_v4_b4/primary_statistics.csv) |
 | Nested information sets: 29, 69 and 138 variables | [SVG](information_sets.svg) | [PNG](information_sets.png) | [Frozen design description](../../rp4/specification_v4.md) |
 | Cumulative option-flow loss difference for six stocks | [SVG](cumulative_by_asset_rv15.svg) | [PNG](cumulative_by_asset_rv15.png) | [Existing cumulative aggregate](../../../artifacts/rp4_readme_figures_v1/cumulative_by_asset_rv15.csv) |
-| Study design, evaluation and future replication | [SVG](proposal_to_replication_readme.workflow.svg) | [PNG](proposal_to_replication_readme.workflow.png) | Text adaptation of the versioned workflow above; geometry preserved |
+| Study design, evaluation and future replication | [SVG](proposal_to_replication_readme.workflow.svg) | [PNG](proposal_to_replication_readme.workflow.png) | [Dedicated compact Archify source](proposal_to_replication_readme.workflow.json) |
 | Historical workflow | [SVG](proposal_to_replication.workflow.svg) | [PNG](proposal_to_replication.workflow.png) | Versioned Archify source above |
 | Programme timeline | [SVG](programme_timeline.architecture.svg) | [PNG](programme_timeline.architecture.png) | Versioned Archify source above |
 | Global cumulative differences | [SVG](../rp4/v4_B2_over_B1_cumulative_v2.svg) | [PNG](../rp4/v4_B2_over_B1_cumulative_v2.png) | Existing figure, preserved byte for byte |
@@ -117,9 +134,9 @@ python docs/figures/public_refresh/render_readme_figures.py --render
 python docs/figures/public_refresh/render_readme_figures.py --verify
 ```
 
-The [README figure manifest](readme_figures_manifest.json) records the 13 source
+The [README figure manifest](readme_figures_manifest.json) records the 16 source
 hashes, all seven SVG/PNG pairs, numerical controls and renderer versions. The
-manifest declares source hashes by type: Python and CommonJS code use UTF-8 bytes
+manifest declares source hashes by type: Python, CommonJS and ES module code use UTF-8 bytes
 with CRLF converted to LF, so Git checkout line endings do not change their
 identity. CSV, JSON, Markdown and SVG inputs retain exact raw-byte hashes. Output
 hashes also use exact raw bytes.

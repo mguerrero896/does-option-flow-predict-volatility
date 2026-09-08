@@ -7,7 +7,7 @@
     "maximum_endpoint_difference": 4.548023851969063e-07,
     "maximum_global_difference": 3.4686042485465585e-07
   },
-  "method": "Saved public statistics and existing rounded cumulative aggregates; original figure style and Sharp rasterizer. The README workflow changes labels and accessibility text only in the existing Archify export. Archify PNGs resolve the existing light palette to explicit CSS values for librsvg compatibility, preserving SVG geometry and text.",
+  "method": "Saved public statistics and existing rounded cumulative aggregates; original figure style and Sharp rasterizer. The README workflow and timeline use dedicated compact Archify sources, checked at 831 pixels wide. Archify PNGs resolve the existing light palette to explicit CSS values for librsvg compatibility, preserving SVG geometry and text.",
   "new_inference_runs": 0,
   "new_model_fits": 0,
   "output_sha256": {
@@ -15,12 +15,12 @@
     "docs/figures/public_refresh/cumulative_by_asset_rv15.svg": "b863a9a68c2dbb130bcd0be9d9513bb582067e4389d399662f0c1934e203c3bd",
     "docs/figures/public_refresh/information_sets.png": "8479bc08f6428fc1d4d7e9caff24e569b4823c8be0127229dee40cd1eac91611",
     "docs/figures/public_refresh/information_sets.svg": "1985db4a947d7aa7b8ef31bd751ab88b6d7d6f41cca7df5c949028af1597ff7b",
-    "docs/figures/public_refresh/programme_timeline.architecture.png": "09d0ea4b691056ab553cfeb066c972575d800964b6cc2c140dfac23968e51347",
-    "docs/figures/public_refresh/programme_timeline.architecture.svg": "eb907759575e707372da175b2c7d70f5d15fc466ca20dd2dab50a7007252703a",
+    "docs/figures/public_refresh/programme_timeline.architecture.png": "d1f2704e66cfded7986b7a9ccacfbcd3ba2b5c6c71e5ec234d1af9f06e6de0be",
+    "docs/figures/public_refresh/programme_timeline.architecture.svg": "0cc0af93ef1ff9bf37054fcf3bd2845c51c56638c3c990e6395f09143208068b",
     "docs/figures/public_refresh/proposal_to_replication.workflow.png": "7c74bf24eedb992afa62948e685b86aeebc0fe2ae38af44e4d840c8f5f086a65",
     "docs/figures/public_refresh/proposal_to_replication.workflow.svg": "7884805c3adb9e8a36fd7f75a3e587311129e0dceadba56208e6bed8843bc1a6",
-    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "bda3257d07ceb070b00760fd60b3c6cce464c095b4f035e045378c29dbb88346",
-    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg": "f8bbff61a67d875c7d7250605dd02a6f652aa4964948b91bcc840acebd553ebd",
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "cb4bef95fce5bae08b06edd198df24bf5732d7b7a4249bb125de5edc3615418c",
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg": "a1a75a2f4f11cf5a8b37fb43ca0630e7b191758a680d2a096f2f9df8439cb502",
     "docs/figures/public_refresh/result_matrix.png": "1249622428e1f6ced19b39391d8fa4de198f2c7980d1c8b389acbdeaebfd83e3",
     "docs/figures/public_refresh/result_matrix.svg": "d88e5970bccae16aac14f7a7a7c55c9de5fc4a4ecbf3fd420052e8fc4e97194b",
     "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "7e2ae7ebb01570cc92ed207ae7a1818c7598c5d398d98fbbe41e9156d5f1803c",
@@ -58,19 +58,19 @@
       "width": 1600
     },
     "docs/figures/public_refresh/programme_timeline.architecture.png": {
-      "density": 96,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1662,
+      "height": 2285,
       "format": "png",
-      "height": 867,
+      "renderer_threads": 1,
+      "density": 96,
       "metadata_copied": false,
       "nonblank_rgb_ranges": [
         249,
-        228,
-        211
-      ],
-      "renderer_threads": 1,
-      "sharp": "0.35.4",
-      "vips": "8.18.6",
-      "width": 1813
+        227,
+        210
+      ]
     },
     "docs/figures/public_refresh/proposal_to_replication.workflow.png": {
       "density": 96,
@@ -88,19 +88,19 @@
       "width": 1540
     },
     "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": {
-      "density": 96,
+      "sharp": "0.35.4",
+      "vips": "8.18.6",
+      "width": 1662,
+      "height": 1766,
       "format": "png",
-      "height": 933,
+      "renderer_threads": 1,
+      "density": 96,
       "metadata_copied": false,
       "nonblank_rgb_ranges": [
         249,
-        228,
+        227,
         212
-      ],
-      "renderer_threads": 1,
-      "sharp": "0.35.4",
-      "vips": "8.18.6",
-      "width": 1540
+      ]
     },
     "docs/figures/public_refresh/result_matrix.png": {
       "density": 96,
@@ -137,11 +137,12 @@
   "render_command": "python docs/figures/public_refresh/render_readme_figures.py --render",
   "schema_version": "public-readme-figures-v1",
   "source_hash_mode": {
+    "default": "raw-bytes",
     "by_suffix": {
+      ".py": "utf8-text-crlf-to-lf",
       ".cjs": "utf8-text-crlf-to-lf",
-      ".py": "utf8-text-crlf-to-lf"
-    },
-    "default": "raw-bytes"
+      ".mjs": "utf8-text-crlf-to-lf"
+    }
   },
   "source_sha256": {
     "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
@@ -150,13 +151,16 @@
     "artifacts/rp4_universe_public_v1/control_six_rv15_losses.csv": "e2bbc69a355c755f06aad9e671a8c3273c151f348c5614ab9a63cf5dafaa601b",
     "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
     "artifacts/rp4_v4_b4/robustness.csv": "09925f9cefe4fcf2c19f4a915ad2994c125bbafdb94dfd332cc821ce1f180acb",
-    "docs/figures/public_refresh/programme_timeline.architecture.svg": "eb907759575e707372da175b2c7d70f5d15fc466ca20dd2dab50a7007252703a",
+    "docs/figures/public_refresh/programme_timeline.architecture.svg": "0cc0af93ef1ff9bf37054fcf3bd2845c51c56638c3c990e6395f09143208068b",
     "docs/figures/public_refresh/proposal_to_replication.workflow.svg": "7884805c3adb9e8a36fd7f75a3e587311129e0dceadba56208e6bed8843bc1a6",
-    "docs/figures/public_refresh/render_readme_figures.py": "4b444703a40db62f6276c78e91b0a9fb121df76b72cff7ef22798342bc1b36b1",
+    "docs/figures/public_refresh/render_readme_figures.py": "484626dd47bce22f67508ae5c2238c8003484a994ab066b9fac832b661d15e10",
     "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg": "b7359b9217e8d261563dd07c6f440ed0d2d6501c0c23dc5bc1fcd9b2fcdf6c00",
     "docs/rp4/specification_v4.md": "d89ae98c21b6f901342a12c00726832bf34d6922e02c7d8e435e1f6de872008d",
     "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
-    "scripts/verify_public_projection.py": "e5d2e4aba057fe4a63f0f9d861eb74dcbdc1fe19fb6a73dc140cf341a15bb932"
+    "scripts/verify_public_projection.py": "e5d2e4aba057fe4a63f0f9d861eb74dcbdc1fe19fb6a73dc140cf341a15bb932",
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg": "a1a75a2f4f11cf5a8b37fb43ca0630e7b191758a680d2a096f2f9df8439cb502",
+    "docs/figures/public_refresh/manifest.json": "6d35fd2c0b5f25f44eba8ff866630f7b0c8afce8f35361dc19b72f6f91480166",
+    "docs/figures/public_refresh/reproduce.mjs": "b25d6acb4b13b455cc993ce53e0ad61ac0827208d98176f096d2c6ac1a186b33"
   },
   "verification_command": "python docs/figures/public_refresh/render_readme_figures.py --verify",
   "visual_review": {
@@ -174,13 +178,145 @@
     "reviewed_png_sha256": {
       "docs/figures/public_refresh/cumulative_by_asset_rv15.png": "c4b28d58a7036ce28d39756e675856c8838e60c552f755dfa1d7bdfb7dbb46cd",
       "docs/figures/public_refresh/information_sets.png": "8479bc08f6428fc1d4d7e9caff24e569b4823c8be0127229dee40cd1eac91611",
-      "docs/figures/public_refresh/programme_timeline.architecture.png": "09d0ea4b691056ab553cfeb066c972575d800964b6cc2c140dfac23968e51347",
+      "docs/figures/public_refresh/programme_timeline.architecture.png": "d1f2704e66cfded7986b7a9ccacfbcd3ba2b5c6c71e5ec234d1af9f06e6de0be",
       "docs/figures/public_refresh/proposal_to_replication.workflow.png": "7c74bf24eedb992afa62948e685b86aeebc0fe2ae38af44e4d840c8f5f086a65",
-      "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "bda3257d07ceb070b00760fd60b3c6cce464c095b4f035e045378c29dbb88346",
+      "docs/figures/public_refresh/proposal_to_replication_readme.workflow.png": "cb4bef95fce5bae08b06edd198df24bf5732d7b7a4249bb125de5edc3615418c",
       "docs/figures/public_refresh/result_matrix.png": "1249622428e1f6ced19b39391d8fa4de198f2c7980d1c8b389acbdeaebfd83e3",
       "docs/figures/rp4/v4_B2_over_B1_cumulative_v2.png": "7e2ae7ebb01570cc92ed207ae7a1818c7598c5d398d98fbbe41e9156d5f1803c"
     },
     "status": "PASS",
-    "workflow_geometry_elements_unchanged": 122
+    "compact_diagrams": "Two reflowed diagrams inspected in light/dark contact sheets and at 831 pixels wide; all other figure hashes remain unchanged."
+  },
+  "readability": {
+    "docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg": {
+      "available_width_px": 831,
+      "intrinsic_width_px": 1662.0,
+      "display_width_px": 831,
+      "minimum_required_px": 18,
+      "minimum_effective_px": 23.371875,
+      "labels": [
+        {
+          "text": "Licensed inputs",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Do options help?",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Point-in-time",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "History → state → flow",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Mixed past evidence",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "419 reused sessions",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Linear flow gain",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "+0.623%; conditional",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Register rules",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Fixed before new data",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Authorized reads",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "20 / 40 / 335 sessions",
+          "effective_px": 23.371875
+        }
+      ]
+    },
+    "docs/figures/public_refresh/programme_timeline.architecture.svg": {
+      "available_width_px": 831,
+      "intrinsic_width_px": 1662.0,
+      "display_width_px": 831,
+      "minimum_required_px": 18,
+      "minimum_effective_px": 23.371875,
+      "labels": [
+        {
+          "text": "RP2",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Aug 2026 · nulls",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "RP3 registered",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Before 29 Aug · sealed",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Phase 8 bridge",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "30 Aug · mixed; 1 read",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "PIT successor",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "02 Sep · unconfirmed",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "RP4 v1 · RV30",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Sep · unstable",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "RP4 v2 · RV30",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Sep · repairs",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "RP4 v3 · RV30",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Sep · unconfirmed flow",
+          "effective_px": 23.371875
+        },
+        {
+          "text": "Current v4 · RV15",
+          "effective_px": 28.565625
+        },
+        {
+          "text": "Sep · RV15 flow",
+          "effective_px": 23.371875
+        }
+      ]
+    }
   }
 }
