@@ -39,7 +39,7 @@ def add_compact_b2_features(frame: pl.DataFrame) -> pl.DataFrame:
     Raises
     ------
     ValueError
-        If a required raw activity aggregate is absent.
+        If a required raw activity aggregate is absent, null, negative or non-finite.
     """
     missing = sorted(RAW_B2_COLUMNS - set(frame.columns))
     if missing:
@@ -47,7 +47,9 @@ def add_compact_b2_features(frame: pl.DataFrame) -> pl.DataFrame:
     invalid = frame.select(
         pl.any_horizontal(
             [
-                ~pl.col(column).cast(pl.Float64).is_finite() | (pl.col(column).cast(pl.Float64) < 0)
+                pl.col(column).is_null()
+                | ~pl.col(column).cast(pl.Float64).is_finite()
+                | (pl.col(column).cast(pl.Float64) < 0)
                 for column in sorted(RAW_B2_COLUMNS)
             ]
         ).any()

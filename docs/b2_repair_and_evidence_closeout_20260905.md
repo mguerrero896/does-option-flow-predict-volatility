@@ -18,8 +18,9 @@ ese mismo productor y reciben la reparación. La prueba del productor real fall�
 antes y pasó después. Otra prueba verifica el fallback por activo ante un cambio
 sintético de 1e9 exclusivamente en una fila excluida.
 
-Los demás callers se revisaron: source-time, extensión local/legacy y multiscale
-ya pasan el sidecar; la replicación independiente elimina las sesiones incidentadas
+Los callers de main y cbb6 se revisaron estáticamente: source-time, extensión
+local/legacy y multiscale ya pasan el sidecar; la replicación independiente elimina
+las sesiones incidentadas
 antes de normalizar. La ruta B1v3 usa transformaciones compactas por fila, no esta
 normalización histórica. No se modificaron sus modelos ni se imputaron sus faltantes.
 
@@ -34,7 +35,8 @@ compararlo con la reparación; no se leyeron targets en esta etapa.
 | B2, 180 sesiones y 77.328 orígenes totales | 68.237 / 68.237 | 27.153 | 244.377 |
 | Panel predictor común publicado, 159 sesiones | 62.266 / 62.266 | 24.604 | 221.436 |
 
-451 filas inelegibles afectaban historial posterior. En el panel común, la
+La reparación excluye 451 filas inelegibles del historial; el impacto se mide
+conjuntamente, no atribuye un efecto individual a cada fila. En el panel común, la
 proporción modificada es `24.604 / 62.266 × 100 = 39,51 %`. Se preservan todas las
 filas completas; no hubo selección por el signo del resultado.
 
@@ -126,14 +128,35 @@ de auditoría la distinción entre hash semántico y hash de archivo del preregi
 La auditoría de custodia original acredita el hash de archivo correcto. No cambió
 ningún dato archivado por esa corrección del lector.
 
-Comandos ejecutados desde cbb6:
+Comandos históricos ejecutados desde cbb6 (no son un procedimiento de replay
+desde main ni se volvieron a ejecutar durante la revisión independiente):
 
 ```powershell
+Set-Location -LiteralPath '<ruta local del checkout cbb6 retenido>'
 uv run python -X utf8 -m scripts.audit_b2_history_repair_v1 features
 uv run python -X utf8 -m scripts.audit_b2_history_repair_v1 evaluate
 uv run python -m scripts.audit_harq_existing_forecasts_v1 --verify
 uv run pytest tests/unit/test_audit_b2_history_repair_v1.py tests/unit/test_build_target_blind_common_panel_v22.py tests/unit/test_build_target_blind_common_panel_v23.py tests/unit/test_build_target_blind_common_panel_v24.py tests/unit/test_target_blind_panel_v22.py tests/unit/test_phase6_b2.py tests/unit/test_harq_existing_forecasts_audit_v1.py
 ```
+
+El auditor HARQ y sus dependencias experimentales permanecen en ese checkout;
+`scripts.audit_harq_existing_forecasts_v1` no está integrado en main. El comando
+abre los pronósticos existentes y verifica sus identidades: no equivale a leer
+solamente este reporte. Los originales HARQ `result.json` y
+`selection_disclosure.json` también se conservan bajo
+`artifacts/harq_fixed_specialist_v6_posthoc` de ese checkout retenido. La copia publicada
+`artifacts/harq_existing_forecasts_audit_v1/result.json` redacta únicamente metadatos de
+ruta (claves de `input_sha256` y `worktree_snapshot`); ningún hash que contiene cambia, y el
+SHA-256 del archivo original sin redactar es
+`f79e00e39bd568a584e3033e82c3b67ef89c84458cca9e44f55803473af980ad`.
+
+El protocolo B2 registra los hashes exactos del runtime. En particular,
+`src/mds650/phase6_evaluation.py` de main difiere de la versión usada en cbb6.
+El SHA de una rama por sí solo no reconstruye ese runtime con WIP: hay que
+comparar los archivos con `evaluation_protocol.json`. Integrar los agregados y
+el auditor B2 en main no acredita un replay idéntico desde main. Esta dependencia
+del checkout conservado sigue siendo una deuda de reproducción; no se corrige
+reescribiendo recibos ni copiando dependencias sin verificar.
 
 Verificación final: **79 pruebas focalizadas en cbb6 y 73 en main**, todas
 aprobadas; Ruff y tipado focalizado de los productores modificados, aprobados.
@@ -149,3 +172,45 @@ defecto, controles negativos y comparación de varias métricas en la misma mues
 Alfa gastado: **0**; peticiones a proveedores: **0**. Reutilizar estos datos no
 requiere presentar un gasto de alfa como si recuperara independencia. Se mantiene
 `RESEARCH_ONLY`, `NOT INVESTMENT ADVICE`, `capital_go=false`.
+
+## 7. Revisión independiente posterior a e4dd32ab
+
+La revisión encontró un defecto residual distinto de la historia inelegible:
+`add_compact_b2_features` no rechazaba explícitamente los nulos. Polars podía
+propagarlos en la validación y las ramas de cocientes podían convertirlos en cero.
+En una reproducción sintética de la ruta B2v2, `call_premium_5m=null` y
+`total_premium_5m=null` llegaron a producir nueve features finitas y
+`b2v2_complete=true`. Esto demuestra el defecto del productor; no demuestra que
+ocurriera en los datos reales de todas las campañas.
+
+La inspección posterior de los inputs exactos de la reparación encontró **cero
+nulos, no finitos o negativos** en las 11 columnas raw de 77.328 filas y 180
+archivos. El digest conjunto coincidió con `feature_impact.json` antes y después
+de leerlas (`a3466e656ce6bc0397c2bed1f24472a5523f3ae8ffc986312f340d4b9f6c782b`).
+Por tanto, el defecto de nulos no se materializa en ese conjunto congelado; esto
+no certifica las otras campañas ni la procedencia temporal de esos datos.
+El check y los conteos agregados se conservan como `audit_b2_raw_values.py` y
+`audit_b2_raw_values.json` en el directorio local de esta auditoría, fuera del
+repositorio (no publicado).
+
+La función compartida ahora rechaza los nulos con
+`B2_RAW_FEATURE_VALUES_INVALID`, conservando los ceros válidos. La prueba
+existente cubre las 11 columnas con nulo, negativo, NaN e infinitos: antes de la
+corrección fallaron los 11 casos nulos; después pasaron. No se imputan faltantes.
+La verificación final de main pasó **156 pruebas focalizadas** de features,
+callers, paneles y clasificación de evidencia. Ruff aprobó los dos archivos
+modificados y mypy aprobó el módulo compartido. No se ejecutó toda la suite.
+
+También se verificaron los cuatro manifiestos agregados de impacto, protocolo,
+sensibilidad B2 y comparación HARQ. El renderer original reprodujo exactamente
+el reporte HARQ desde su JSON. Esta revisión de integridad no volvió a ajustar
+modelos, leer targets ni ejecutar `--verify` sobre los pronósticos. Los controles
+de igualdad B0/B1 y de máscara son comprobaciones del recibo liberado, no una
+segunda ejecución experimental.
+
+Los resultados de las secciones 2–4 preceden a esta corrección de nulos. No se
+les atribuye una mejora adicional por cambiar el guard. La evidencia sigue
+permitiendo mejoras descriptivas en muestras concretas, con signos diferentes
+entre modelos y regímenes. No permite declarar una jerarquía global robusta
+B2 > B1 > B0. RV30 es la variable que se pronostica; su predictibilidad descriptiva
+y la ganancia incremental de opciones son preguntas distintas.

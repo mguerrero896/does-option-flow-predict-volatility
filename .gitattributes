@@ -109,3 +109,4 @@ artifacts/rp3/frozen/freeze_manifest.json -text
 supabase/migrations/*.sql -text
 supabase/drafts/*.sql -text
 supabase/migrations_pending/*.sql -text
+/.gitignore text eol=lf
