@@ -126,7 +126,8 @@ def test_historical_claim_ledgers_cannot_authorize_current_results() -> None:
 
 def test_current_threats_and_reports_match_corrected_evidence() -> None:
     matrix = _read("docs/threats_to_validity_matrix_v1.md")
-    assert "CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED" in matrix
+    assert "CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE" in matrix
+    assert "PASS_RETROSPECTIVE_EXPOSURE_VERIFIED" in matrix
     assert "PIT_V22_RECONCILIATION_BLOCKED" not in matrix
     assert "timing-sensitivity forecasts were not evaluated" in matrix
     assert "Phase 8 consumed its sole exploratory" in matrix

@@ -510,16 +510,15 @@ def eligibility() -> Canvas:
 
     checks = [
         (
-            "Is the one-shot scientific result reportable?",
+            "Is the retrospective scientific result reportable?",
             successor["scientific_result"]["eligible"],
-            "Yes. Frozen result, log, ledger, and content-addressed payloads passed "
-            "custody validation.",
+            "Yes. Frozen outputs passed custody validation; all 32 holdout sessions were exposed.",
         ),
         (
             "Does it establish a global option-information edge?",
             successor["edge_claim_eligible"],
-            "No. No registered estimate met its frozen MDE; no binary edge-promotion "
-            "rule was registered.",
+            "No. Reusing exposed outcomes supports descriptive evidence, "
+            "not independent confirmation.",
         ),
         (
             "May it authorize capital or live trading?",
@@ -535,15 +534,15 @@ def eligibility() -> Canvas:
         WIDTH,
         height,
         "The three permissions this project checks before a number becomes a claim",
-        "The scientific result is reportable after custody validation; edge and capital "
-        "promotion remain withheld.",
+        "The exposed 32-session holdout is a retrospective descriptive result; "
+        "edge and capital promotion remain withheld.",
         "eligibility-gates",
     )
     header(
         canvas,
         "why you can trust it",
-        "One reportable result; no edge or capital promotion",
-        "The one-shot result stays visible without being promoted beyond its frozen rules.",
+        "Retrospective result; no independent confirmation",
+        "All 32 holdout sessions overlap earlier development calendars.",
     )
 
     for index, (question, granted, why) in enumerate(checks):
@@ -572,18 +571,22 @@ def eligibility() -> Canvas:
     )
     canvas.front(
         f'<text x="70" y="{band + 26}" fill="{INK}" font-family="{SANS}" font-size="15" '
-        f'font-weight="600">Scientific result eligible; global edge not confirmed.</text>'
+        f'font-weight="600">Descriptive result; global edge not confirmed.</text>'
         f'<text x="70" y="{band + 47}" fill="{MUTED}" font-family="{SANS}" font-size="12.5">'
-        f'One authorized OOS read, zero retuning, and no second execution permitted.</text>'
+        f'One-shot records access custody; it cannot undo earlier outcome exposure.</text>'
     )
     footnote(
         canvas,
         height - 34,
-        "Every number stays auditable; scientific eligibility does not imply an edge or "
-        "capital claim.",
+        "Every number stays auditable; the current interpretation is exploratory and descriptive.",
         x=40,
     )
-    footnote(canvas, height - 16, f"Machine status: {headline}.", x=40)
+    footnote(
+        canvas,
+        height - 16,
+        f"Machine status: {headline}.",
+        x=40,
+    )
     return canvas
 
 

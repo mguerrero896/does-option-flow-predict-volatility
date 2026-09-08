@@ -109,6 +109,9 @@ artifacts/rp3/eval_panels/
 graphify-out/
 scripts/gbrain_sync.ps1
 .local-runtime/
+.mds650-brain/
+knowledge-internal/
+.codex/
 .githooks/
 
 # Agent operating instructions and operator runbooks: they belong to how this
@@ -120,3 +123,4 @@ scripts/gbrain_sync.ps1
 /docs/superpowers/
 /docs/rp2_v3/GITHUB_SUPPORT_TICKET_DRAFT.md
 /docs/rp2_v3/MIRROR_HAZARD.md
+.gbrain/

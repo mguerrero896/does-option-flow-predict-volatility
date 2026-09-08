@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from mds650.phase6 import build_b2v2_from_activity  # noqa: E402
 from mds650.target_blind_panel_v22 import (  # noqa: E402
     B2_PRIMARY_VARIANT,
+    KEY_COLUMNS,
     adapt_b1q_source_to_v22,
     apply_b2_availability_mask_v22,
     build_target_blind_b0_v22,
@@ -171,7 +172,14 @@ def build_panel(
 
     b0 = build_target_blind_b0_v22(bars, origins, delay_minutes=1)
     b1 = adapt_b1q_source_to_v22(origins, b1_source)
-    b2_unmasked = build_b2v2_from_activity(activity, origins)
+    # Exclusions must apply to history too; masking normalized outputs is too late.
+    b2_unmasked = build_b2v2_from_activity(
+        activity,
+        origins,
+        history_eligibility=availability.filter(
+            pl.col("canonical_variant") == B2_PRIMARY_VARIANT
+        ).select(*KEY_COLUMNS, "eligible_for_corrected_pit_panel"),
+    )
     b2 = apply_b2_availability_mask_v22(
         b2_unmasked,
         availability,

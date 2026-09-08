@@ -84,6 +84,8 @@ POWERSHELL_QUERY = (
     "WorkingDirectory=[string]$_.Actions[0].WorkingDirectory; "
     "RestartCount=[int]$_.Settings.RestartCount; "
     "RestartInterval=[string]$_.Settings.RestartInterval; "
+    "DisallowStartIfOnBatteries=[bool]$_.Settings.DisallowStartIfOnBatteries; "
+    "StopIfGoingOnBatteries=[bool]$_.Settings.StopIfGoingOnBatteries; "
     "LastResult=('0x{0:X8}' -f $i.LastTaskResult) } } | ConvertTo-Json -Depth 3"
 )
 
@@ -159,6 +161,11 @@ def reasons(
             or str(task.get("RestartInterval", "")) != "PT5M"
         ):
             found.append(f"{name} restart policy is not 3 attempts at PT5M")
+        if str(name).startswith("MDS650_UW_") and (
+            task.get("DisallowStartIfOnBatteries")
+            or task.get("StopIfGoingOnBatteries")
+        ):
+            found.append(f"{name} can skip or stop collection while on battery")
         if not str(task.get("Next", "")).strip():
             found.append(
                 f"{name} is enabled with no next run: its trigger has expired and it "

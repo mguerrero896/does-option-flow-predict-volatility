@@ -4,6 +4,13 @@ Status: Phase 5 design approved, 2026-07-29. Earlier bounded phase restrictions 
 historical controls; current acquisition, modeling and QLIKE authority begins only after
 Requirements-consistency and preregistration gates pass.
 
+**Exposure correction, 2026-09-05:** the [PIT v2.2 holdout-exposure addendum](pit_v22_claims_and_limitations_v3.md)
+applies to the current interpretation of the successor result. Its 32/32 holdout sessions
+overlap earlier development calendars; one-shot custody does not imply independent evidence.
+The result and original numbered decisions remain intact. The canonical producer applies
+`EXPLORATORY_DESCRIPTIVE` and exposes no current confirmatory contrasts. This named addendum
+avoids renumbering the different decisions already recorded in retained worktrees.
+
 ## Decision index
 
 | Range | Topics |

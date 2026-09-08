@@ -2,9 +2,9 @@
 
 This is a researcher-facing map, not a second source of scientific truth. The single
 machine-readable authority is `data/CANONICAL_STATE.json`; `STATUS.md` is generated from it.
-The current state is `CURRENT_ELIGIBLE_SCIENTIFIC_RESULT_EDGE_NOT_CONFIRMED`: the
-successor-v2 result is reportable, while the RP2-v3 bundle remains historical and no global
-edge or capital claim is eligible.
+The current state is `RP4_V4_SCIENTIFIC_PROGRAM_CLOSED`. The PIT v2.2 successor-v2 result is
+retained under `history` as `CURRENT_RETROSPECTIVE_REMEASUREMENT_EXPLORATORY_DESCRIPTIVE`,
+the RP2-v3 bundle remains historical, and no global edge or capital claim is eligible.
 
 ## Start here
 
@@ -23,6 +23,7 @@ edge or capital claim is eligible.
 | --- | --- |
 | [`docs/DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) | Onboarding, source-of-truth hierarchy, safe commands and change workflow. |
 | [`docs/architecture.md`](architecture.md) | Current code, evidence, canonical-state and live-operation architecture. |
+| [`docs/operational_control_board_proposal.md`](operational_control_board_proposal.md) | Four-section proposal that projects existing custody, task-health, experiment and claim authorities without a new state store. |
 | [`scripts/README.md`](../scripts/README.md) | Lifecycle and purpose of every top-level executable script. |
 | [`reports/INDEX.md`](../reports/INDEX.md) | Current submission source and historical report packages. |
 | [`supabase/README.md`](../supabase/README.md) | Reproducible database structure, migration order and access boundaries. |
