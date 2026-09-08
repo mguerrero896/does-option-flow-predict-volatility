@@ -20,7 +20,7 @@ from artifacts.rp4_v3_code import inference as inf
 
 ROOT = Path(__file__).resolve().parents[2]
 LEGACY_MANIFEST_SHA = "2ba6b2611be4a4dd1e0cfd031a5f50680c96d665f603386522a9af0c21610083"
-WINDOWS = {"primary": "Primaria", "confirmation": "Confirmación"}
+WINDOWS = {"primary": "Primary", "confirmation": "Confirmation"}
 VERSIONS = ("v1", "v2", "v3")
 FAMILIES = {"v1": ("log_ols_harq", "lightgbm_qlike"), "v2": inf.FAMILIES, "v3": inf.FAMILIES}
 type Rows = list[dict[str, Any]]
@@ -49,22 +49,30 @@ def number(value: Any, *, signed: bool = False) -> str:
     return (
         format(float(value), "+.8g" if signed else ".8g")
         if value is not None and math.isfinite(float(value))
-        else "NO VERIFICABLE"
+        else "UNVERIFIABLE"
     )
 
 
 def family_label(family: str, endpoint: str = "qlike_mean") -> str:
     if endpoint in ("quantile", "quantile_pinball_log_rv"):
-        return "Lineal (cuantil)" if family == "log_ridge_harq" else "LightGBM (quantile)"
+        return "Linear (quantile)" if family == "log_ridge_harq" else "LightGBM (quantile)"
     if endpoint in ("jump", "jump_auc"):
-        return "Lineal (logit)" if family == "log_ridge_harq" else "LightGBM (binary)"
+        return "Linear (logit)" if family == "log_ridge_harq" else "LightGBM (binary)"
     return family
 
 
 def table(headers: list[str], rows: list[list[str]]) -> str:
     def line(values: list[str]) -> str:
         return (
-            "| " + " | ".join(str(v).replace("|", "\\|").replace("\n", " ") for v in values) + " |"
+            "| "
+            + " | ".join(
+                str(v)
+                .replace("NO VERIFICABLE", "UNVERIFIABLE")
+                .replace("|", "\\|")
+                .replace("\n", " ")
+                for v in values
+            )
+            + " |"
         )
 
     return "\n".join([line(headers), line(["---"] * len(headers)), *map(line, rows)])
@@ -606,24 +614,26 @@ def raw_census_table(comparison: Rows | None, spec: dict[str, Any], window: str)
             )
     return "\n\n".join(
         [
-            "Censo fuente frente a la muestra evaluada, mismas sesiones programadas:",
+            "Source census versus evaluated sample, for the same scheduled sessions:",
             table(
                 [
-                    "Horizonte",
-                    "Activo",
-                    "Fuente orígenes",
-                    "Fuente vacíos",
-                    "Fuente desconocidos",
-                    "Evaluados",
-                    "Evaluados vacíos",
-                    "Evaluados desconocidos",
+                    "Horizon",
+                    "Asset",
+                    "Source origins",
+                    "Source empty",
+                    "Source unknown",
+                    "Evaluated",
+                    "Evaluated empty",
+                    "Evaluated unknown",
                 ],
                 rows,
             ),
-            "[Censo por activo, sesión y horizonte]"
-            "(../../artifacts/rp4_v3_b4/empty_window_census.csv). "
-            "Las primeras 60 sesiones de entrenamiento no cuentan como evaluación primaria. "
-            "[Conversiones a NaN por columna](../../artifacts/rp4_v3_b4/empty_window_recode.csv).",
+            (
+                "[Census by asset, session and "
+                "horizon](../../artifacts/rp4_v3_b4/empty_window_census.csv). The first 60 "
+                "training sessions do not count as primary evaluation. [Conversions to NaN by "
+                "column](../../artifacts/rp4_v3_b4/empty_window_recode.csv)."
+            ),
         ]
     )
 
@@ -635,13 +645,15 @@ def cumulative_figure(windows: Comparison, contrast: str, base: str, richer: str
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 '
         f'{width} {height}" role="img">',
         f"<title>RP4 v1/v2/v3: {html.escape(contrast)}</title>",
-        "<desc>Doce paneles, escalas independientes. Suma de QLIKE base menos ampliado; positivo "
-        "favorece al conjunto rico.</desc>",
+        "<desc>Twelve panels, independent scales. Sum of baseline minus expanded-model QLIKE; "
+        "positive values favour the richer set.</desc>",
         '<rect width="100%" height="100%" fill="white"/>',
         '<g font-family="Segoe UI,Arial,sans-serif" fill="#1a2332">',
-        f'<text x="52" y="43" font-size="25">RP4 v1 / v2 / v3 · {richer} sobre {base}</text>',
-        '<text x="52" y="72" font-size="14">Suma de [QLIKE base − ampliado]. Escala '
-        "independiente por panel; todas las sesiones y extremos.</text>",
+        f'<text x="52" y="43" font-size="25">RP4 v1 / v2 / v3 · {richer} over {base}</text>',
+        (
+            '<text x="52" y="72" font-size="14">Sum of [baseline − expanded-model QLIKE]. '
+            "Independent scale per panel; all sessions and extremes.</text>"
+        ),
     ]
     for column, version in enumerate(VERSIONS):
         for wi, window in enumerate(WINDOWS):
@@ -663,10 +675,10 @@ def cumulative_figure(windows: Comparison, contrast: str, base: str, richer: str
                 ) -> float:
                     return bottom - (value - low) * (bottom - top) / (high - low)
 
-                label = f"{version} · {WINDOWS[window]} · {'Lineal' if fi == 0 else 'LightGBM'}"
+                label = f"{version} · {WINDOWS[window]} · {'Linear' if fi == 0 else 'LightGBM'}"
                 content += [
                     f'<text x="{left}" y="{top - 37}" font-size="16">{html.escape(label)}</text>',
-                    f'<text x="{left}" y="{top - 16}" font-size="12">{len(rows)} sesiones · '
+                    f'<text x="{left}" y="{top - 16}" font-size="12">{len(rows)} sessions · '
                     f"final {curve[-1]:+.8g}</text>",
                 ]
                 for index in range(5):
@@ -704,9 +716,9 @@ def cumulative_figure(windows: Comparison, contrast: str, base: str, richer: str
     return "\n".join(content + ["</g></svg>", ""])
 
 
-def _inference_table(records: Rows, *, p_label: str = "p nominal") -> str:
+def _inference_table(records: Rows, *, p_label: str = "nominal p") -> str:
     return table(
-        ["Familia", "Contraste", "Delta", "IC95%", p_label, "p Holm", "N sesiones", "Estado"],
+        ["Family", "Contrast", "Delta", "95% CI", p_label, "Holm p", "N sessions", "Status"],
         [
             [
                 family_label(r.get("family", "lightgbm_qlike"), r.get("endpoint", "qlike_mean")),
@@ -714,9 +726,9 @@ def _inference_table(records: Rows, *, p_label: str = "p nominal") -> str:
                 number(r.get("estimate"), signed=True),
                 f"[{number(r.get('ci_low'))}, {number(r.get('ci_high'))}]",
                 number(r.get("p_raw")),
-                number(r.get("p_holm")) if "p_holm" in r else "no aplica",
-                str(r.get("N_sessions", "NO VERIFICABLE")),
-                str(r.get("hypothesis_status", r.get("status", "NO VERIFICABLE"))),
+                number(r.get("p_holm")) if "p_holm" in r else "not applicable",
+                str(r.get("N_sessions", "UNVERIFIABLE")),
+                str(r.get("hypothesis_status", r.get("status", "UNVERIFIABLE"))),
             ]
             for r in records
         ],
@@ -724,11 +736,11 @@ def _inference_table(records: Rows, *, p_label: str = "p nominal") -> str:
 
 
 def comparison_table(windows: Comparison, window: str) -> str:
-    columns = ["Delta", "IC95%", "p bilateral", "Holm", "Reducción %", "N sesiones", "N orígenes"]
+    columns = ["Delta", "95% CI", "two-sided p", "Holm", "Reduction %", "N sessions", ("N origins")]
     output = []
     for index in range(2):
         for contrast, _, _ in inf.CONTRASTS:
-            row = ["Lineal OLS v1 / ridge v2–v3" if index == 0 else "LightGBM QLIKE", contrast]
+            row = ["Linear OLS v1 / ridge v2–v3" if index == 0 else "LightGBM QLIKE", contrast]
             for version in VERSIONS:
                 summary = windows[version][window][0]
                 records = (
@@ -749,7 +761,7 @@ def comparison_table(windows: Comparison, window: str) -> str:
                     str(r["N_origins"]),
                 ]
             output.append(row)
-    return table(["Familia", "Contraste"] + [f"{v} {c}" for v in VERSIONS for c in columns], output)
+    return table(["Family", "Contrast"] + [f"{v} {c}" for v in VERSIONS for c in columns], output)
 
 
 def render_report(
@@ -762,51 +774,61 @@ def render_report(
     baseline_parity: Rows | None = None,
 ) -> str:
     parts = [
-        "# RP4 — resultados v3 y comparación v1/v2",
+        "# RP4 — v3 results and v1/v2 comparison",
         "",
-        spec["label"] + ".",
+        spec["label"].replace(
+            "fuera de muestra walk-forward, partición fijada ",
+            "out-of-sample walk-forward, split fixed ",
+        )
+        + ".",
         "",
         "RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.",
         "",
-        "Delta QLIKE = pérdida base menos ampliada: positivo favorece B1 sobre B0 o B2 sobre B1. "
-        "Cada activo pesa igual dentro de su sesión y cada sesión pesa igual. Reducción % = 100 "
-        "× media(delta) / media(pérdida base).",
+        (
+            "Delta QLIKE = baseline loss minus expanded-model loss: positive values favour B1 "
+            "over B0 or B2 over B1. Assets receive equal weight within each session, and "
+            "sessions receive equal weight. Reduction % = 100 × mean(delta) / mean(baseline "
+            "loss)."
+        ),
         "",
-        "La decisión primaria v3 es unilateral: H1 y luego H2, alfa 0,05 por familia y ventana; "
-        "la conjunción exige ambas hipótesis en ambas familias. Un H2 no abierto conserva su p "
-        "nominal "
-        "sólo como diagnóstico no promovible. El IC95% es percentil bilateral, no la inversión "
-        "de esa prueba unilateral.",
+        (
+            "The v3 primary decision is one-sided: H1 followed by H2, alpha 0.05 per family "
+            "and window; the conjunction requires both hypotheses in both families. An "
+            "unopened H2 retains its nominal p-value only as a diagnostic that cannot be "
+            "promoted to primary evidence. The 95% CI is a two-sided percentile interval, not "
+            "the inversion of that one-sided test."
+        ),
         "",
-        "La tabla comparable mantiene p bilaterales y Holm de cuatro contrastes; no es la regla "
-        "decisoria v3. "
-        "Los secundarios, la recalibración MZ y una familia favorable no rescatan una conjunción "
-        "primaria fallida. "
-        "El bootstrap circular usa bloques de cinco sesiones, 9.999 réplicas y semilla 20260907.",
+        (
+            "The comparability table retains two-sided p-values and Holm adjustment over four "
+            "contrasts; it is not the v3 decision rule. Secondary analyses, MZ recalibration "
+            "and one favourable family cannot rescue a failed primary conjunction. The "
+            "circular bootstrap uses five-session blocks, 9,999 resamples and seed 20260907."
+        ),
     ]
     for window, label in WINDOWS.items():
         summary, _ = windows["v3"][window]
         outcome = (
-            "SATISFECHA EN ESTA VENTANA"
+            "SATISFIED IN THIS WINDOW"
             if summary["primary_sequence"]["global_joint_reject"]
-            else "NO SATISFECHA EN ESTA VENTANA"
+            else "NOT SATISFIED IN THIS WINDOW"
         )
         parts += [
             "",
             f"## {label}",
             "",
-            f"Conjunción primaria registrada: **{outcome}**. "
-            "Esto describe el criterio de esta especificación, no una garantía de edge "
-            "financiero ni estabilidad universal.",
+            f"Registered primary conjunction: **{outcome}**. "
+            "This describes the criterion of this specification, not a guarantee "
+            "of a financial edge or universal stability.",
             "",
             comparison_table(windows, window),
             "",
-            "### Decisión unilateral v3",
+            "### One-sided v3 decision",
             "",
-            _inference_table(summary["contrasts"], p_label="p unilateral nominal"),
+            _inference_table(summary["contrasts"], p_label="nominal one-sided p"),
             "",
             table(
-                ["Familia", "Contraste", "p formal", "Uso del p nominal", "Rechazo"],
+                ["Family", "Contrast", "formal p", "Nominal p role", "Rejection"],
                 [
                     [
                         r["family"],
@@ -819,7 +841,7 @@ def render_report(
                 ],
             ),
             "",
-            "### Cobertura de orígenes por activo",
+            "### Origin coverage by asset",
             "",
         ]
         coverage = []
@@ -833,17 +855,15 @@ def render_report(
                     str(r["eligible_rows"]),
                     number(100 * r["eligible_rows"] / r["scheduled_rows"])
                     if r["scheduled_rows"]
-                    else "NO VERIFICABLE",
+                    else "UNVERIFIABLE",
                 ]
-            row.append(
-                str(summary.get("executed_origins_by_asset", {}).get(asset, "NO VERIFICABLE"))
-            )
+            row.append(str(summary.get("executed_origins_by_asset", {}).get(asset, "UNVERIFIABLE")))
             coverage.append(row)
         parts += [
             table(
-                ["Activo"]
-                + [f"{v} {c}" for v in VERSIONS for c in ("programados", "elegibles", "%")]
-                + ["v3 ejecutados"],
+                ["Asset"]
+                + [f"{v} {c}" for v in VERSIONS for c in ("scheduled", "eligible", "%")]
+                + ["v3 executed"],
                 coverage,
             ),
             "",
@@ -852,35 +872,36 @@ def render_report(
             current = windows[version][window][0]
             skipped = (
                 "; ".join(f"{r['session']}: {r['reason']}" for r in current["skipped_sessions"])
-                or "ninguna"
+                or "none"
             )
             parts += [
-                f"{version}: {current['N_sessions']} sesiones ejecutadas / "
-                f"{current['scheduled_sessions']} programadas; "
-                f"{current['first_session']}–{current['last_session']}. Omitidas: {skipped}.",
+                f"{version}: {current['N_sessions']} executed sessions / "
+                f"{current['scheduled_sessions']} scheduled; "
+                f"{current['first_session']}–{current['last_session']}. Skipped: {skipped}.",
                 "",
             ]
         parts += [
-            "La columna de compuerta opcional rp4_eligible "
+            "The optional gate column rp4_eligible "
             + (
-                "está ausente: se conserva el fallback heredado; no se afirma haber aplicado una "
-                "compuerta nueva."
+                "is absent: the inherited fallback is retained; no new gate is claimed to have "
+                "been applied."
                 if summary.get("quality_gate_column_present") is False
-                else "está presente."
+                else "is present."
                 if summary.get("quality_gate_column_present") is True
-                else "es NO VERIFICABLE."
+                else "is UNVERIFIABLE."
             ),
             "",
-            "### Mediana, recortada y probabilidad condicional",
+            "### Median, trimmed mean and conditional probability",
             "",
-            "Mediana de diferencias no equivale a diferencia de medianas. El recorte elimina "
-            "floor(0,05 N) "
-            "sesiones por cada cola sólo para ese secundario; ningún día sale de la media "
-            "primaria.",
+            (
+                "The median of differences is not the difference of medians. Trimming removes "
+                "floor(0.05 N) sessions from each tail only for that secondary analysis; no "
+                "day is removed from the primary mean."
+            ),
         ]
         for statistic, title in (
-            ("median", "Mediana pareada"),
-            ("trimmed_mean_5pct", "Media recortada 5% por cola"),
+            ("median", "Paired median"),
+            ("trimmed_mean_5pct", "Mean trimmed by 5% per tail"),
         ):
             parts += [
                 "",
@@ -888,13 +909,13 @@ def render_report(
                 "",
                 _inference_table(
                     [r for r in summary["distribution_secondary"] if r["statistic"] == statistic],
-                    p_label="p bilateral",
+                    p_label="two-sided p",
                 ),
             ]
         parts += [
             "",
             table(
-                ["Familia", "Contraste", "P(delta>0)", "HAC SE", "N", "Estado"],
+                ["Family", "Contrast", "P(delta>0)", "HAC SE", "N", "Status"],
                 [
                     [
                         r["family"],
@@ -908,20 +929,21 @@ def render_report(
                 ],
             ),
             "",
-            "P(delta>0) es una aproximación gaussiana condicional: verosimilitud de la media con "
-            "varianza HAC5/N "
-            "plug-in y prior plano. Requiere CLT de la media, dependencia de memoria corta y "
-            "varianza finita; "
-            "no integra incertidumbre de la varianza ni es frecuencia de signos del bootstrap.",
+            (
+                "P(delta>0) is a conditional Gaussian approximation: a likelihood for the "
+                "mean with plug-in HAC5/N variance and a flat prior. It requires a CLT for "
+                "the mean, short-memory dependence and finite variance; it does not integrate "
+                "variance uncertainty and is not the bootstrap sign frequency."
+            ),
             "",
-            "### Cuantil 0,90 de log(RV30)",
+            "### Quantile 0.90 of log(RV30)",
             "",
             _inference_table(
-                summary["quantile_secondary"]["contrasts"], p_label="p unilateral secundario"
+                summary["quantile_secondary"]["contrasts"], p_label="secondary one-sided p"
             ),
             "",
             table(
-                ["Familia", "Conjunto", "Pérdida pinball media"],
+                ["Family", "Set", "Mean pinball loss"],
                 [
                     [
                         family_label(r["family"], "quantile"),
@@ -932,24 +954,26 @@ def render_report(
                 ],
             ),
             "",
-            "### Salto: AUC fuera de muestra",
+            "### Jump: out-of-sample AUC",
             "",
-            "AUC agrupada por origen, peso uno, empates 0,5; mejora = AUC rica − AUC base. El "
-            "remuestreo "
-            "duplica sesiones enteras y conserva comparaciones entre ellas. Una réplica "
-            "monoclase hace "
-            "NO VERIFICABLES todos sus IC/p; no se redibuja ni se descarta silenciosamente.",
+            (
+                "AUC is pooled over origins with unit weights and ties weighted 0.5; "
+                "improvement = richer-set AUC − baseline AUC. Resampling duplicates whole "
+                "sessions and preserves comparisons between them. A single-class resample "
+                "makes all its CIs/p-values UNVERIFIABLE; it is neither redrawn nor silently "
+                "discarded."
+            ),
             "",
             table(
                 [
-                    "Familia",
-                    "Conjunto",
+                    "Family",
+                    "Set",
                     "AUC",
-                    "IC95%",
-                    "Réplicas monoclase",
-                    "N sesiones",
-                    "N orígenes",
-                    "Estado",
+                    "95% CI",
+                    "Single-class resamples",
+                    "N sessions",
+                    "N origins",
+                    "Status",
                 ],
                 [
                     [
@@ -968,33 +992,33 @@ def render_report(
             ),
             "",
             _inference_table(
-                summary["jump_secondary"]["contrasts"], p_label="p unilateral secundario"
+                summary["jump_secondary"]["contrasts"], p_label="secondary one-sided p"
             ),
         ]
         for section in ("quantile_secondary", "jump_secondary"):
             r = summary[section]
             excluded = (
                 "; ".join(f"{e['session']}: {e['reason']}" for e in r["excluded_sessions"])
-                or "ninguna"
+                or "none"
             )
             parts += [
                 "",
-                f"{section}: N={r['N_sessions']} sesiones, {r['N_origins']} orígenes. "
-                f"Sesiones excluidas únicamente de este endpoint: {excluded}.",
+                f"{section}: N={r['N_sessions']} sessions, {r['N_origins']} origins. "
+                f"Sessions excluded only from this endpoint: {excluded}.",
             ]
         parts += [
             "",
-            "### MZ: recalibración secundaria sólo LightGBM",
+            "### MZ: secondary recalibration for LightGBM only",
             "",
             table(
                 [
-                    "Conjunto",
-                    "QLIKE original",
-                    "QLIKE recalibrado",
-                    "Mejora por recalibración",
-                    "Reducción %",
-                    "N sesiones",
-                    "N orígenes",
+                    "Set",
+                    "Original QLIKE",
+                    "Recalibrated QLIKE",
+                    "Recalibration improvement",
+                    "Reduction %",
+                    "N sessions",
+                    "N origins",
                 ],
                 [
                     [
@@ -1011,18 +1035,20 @@ def render_report(
             ),
             "",
             _inference_table(
-                summary["mz_secondary"]["contrasts"], p_label="p bilateral nominal secundario"
+                summary["mz_secondary"]["contrasts"], p_label="secondary nominal two-sided p"
             ),
             "",
-            "La calibración usa diez medias de validación predichas por el candidato entrenado "
-            "antes de ellas, "
-            "no valores ajustados del refit. No reemplaza los pronósticos primarios. "
-            "[Coeficientes y fallbacks por sesión](../../artifacts/rp4_v3_b4/mz_calibration.csv).",
+            (
+                "Calibration uses ten validation means predicted by the candidate trained "
+                "before those sessions, not fitted values from the refit. It does not replace "
+                "the primary forecasts. [Coefficients and fallbacks by "
+                "session](../../artifacts/rp4_v3_b4/mz_calibration.csv)."
+            ),
             "",
-            "### Ventanas de flujo vacías",
+            "### Empty flow windows",
             "",
             table(
-                ["Horizonte", "Activo", "Orígenes", "Vacíos", "No vacíos", "Desconocidos"],
+                ["Horizon", "Asset", "Origins", "Empty", "Nonempty", "Unknown"],
                 [
                     [
                         r["horizon"],
@@ -1043,14 +1069,14 @@ def render_report(
             "",
             table(
                 [
-                    "Grupo",
-                    "Familia",
+                    "Group",
+                    "Family",
                     "Delta B2/B1",
-                    "IC95%",
-                    "p bilateral",
+                    "95% CI",
+                    "two-sided p",
                     "Holm4",
-                    "N sesiones",
-                    "N orígenes",
+                    "N sessions",
+                    "N origins",
                 ],
                 [
                     [
@@ -1068,25 +1094,26 @@ def render_report(
                 ],
             ),
             "",
-            "Membresía desconocida no equivale a ventana no vacía. Medianas, recortadas, IC y "
-            "estados completos "
-            "se conservan en el CSV de regímenes; ceros de actividad no se confunden con formas "
-            "observadas.",
+            (
+                "Unknown membership does not mean a nonempty window. Medians, trimmed means, "
+                "CIs and complete statuses are retained in the regime CSV; zero activity is "
+                "not confused with observed shapes."
+            ),
             "",
             raw_census_table(empty_comparison, spec, window),
             "",
-            "### Regímenes, interacción gamma y días extremos",
+            "### Regimes, gamma interaction and extreme days",
             "",
             table(
                 [
-                    "Grupo",
-                    "Familia",
-                    "Contraste",
-                    "Media Δ",
-                    "Mediana Δ",
-                    "Recortada Δ",
-                    "N sesiones",
-                    "N desconocidos",
+                    "Group",
+                    "Family",
+                    "Contrast",
+                    "Mean Δ",
+                    "Median Δ",
+                    "Trimmed Δ",
+                    "N sessions",
+                    "N unknown",
                 ],
                 [
                     [
@@ -1124,30 +1151,31 @@ def render_report(
                 ],
             ),
             "",
-            "Alto flujo hereda el umbral aprendido con la máscara original v1, como v2. Alto "
-            "gamma usa "
-            "sólo el umbral del entrenamiento previo del mismo activo. Alto gamma menos resto "
-            "compara "
-            "incrementos en activo-sesiones con ambos grupos conocidos, luego promedia por sesión; "
-            "no compara muestras temporales distintas ni rellena un grupo ausente.",
+            (
+                "High flow inherits the threshold learned with the original v1 mask, as in "
+                "v2. High gamma uses only the preceding training threshold for the same "
+                "asset. High gamma minus the rest compares increments within asset-sessions "
+                "where both groups are known, then averages by session; it neither compares "
+                "different time samples nor fills in an absent group."
+            ),
             "",
             _inference_table(
                 [r for r in summary["high_gamma_vs_rest"] if r["statistic"] == "mean"],
-                p_label="p bilateral interacción",
+                p_label="two-sided interaction p",
             ),
             "",
-            f"[Todos los regímenes, activos, bloques, leave-one-block-out y últimas 30 sesiones: "
-            f"medias, medianas, recortadas e IC]"
+            f"[All regimes, assets, blocks, leave-one-block-out and last 30 sessions: "
+            f"means, medians, trimmed means and CIs]"
             f"(../../artifacts/rp4_v3_b4/regimes_{window}.csv). "
-            f"[Interacción gamma "
-            f"completa](../../artifacts/rp4_v3_b4/high_gamma_vs_rest_{window}.csv). "
-            f"[Diez días de mayor pérdida de cada modelo, con signos de ambos "
-            f"contrastes](../../artifacts/rp4_v3_b4/top_loss_{window}.csv).",
+            f"[Full gamma "
+            f"interaction](../../artifacts/rp4_v3_b4/high_gamma_vs_rest_{window}.csv). "
+            f"[Ten highest-loss days for each model, with signs of both "
+            f"contrasts](../../artifacts/rp4_v3_b4/top_loss_{window}.csv).",
             "",
-            "### Diagnósticos DM, GW y MZ",
+            "### DM, GW and MZ diagnostics",
             "",
             table(
-                ["Familia", "Contraste", "DM", "p DM", "GW", "p GW"],
+                ["Family", "Contrast", "DM", "p DM", "GW", "p GW"],
                 [
                     [
                         r["family"],
@@ -1167,7 +1195,7 @@ def render_report(
             ),
             "",
             table(
-                ["Modelo", "Intercepto", "Pendiente", "p a=0,b=1", "Estado"],
+                ["Model", "Intercept", "Slope", "p a=0,b=1", "Status"],
                 [
                     [
                         name,
@@ -1180,19 +1208,22 @@ def render_report(
                 ],
             ),
             "",
-            "DM y GW conservan exactamente el diagnóstico asintótico HAC de v2; GW no adquiere "
-            "la garantía del diseño original con memoria fija. MZ evalúa medias de sesión en "
-            "niveles.",
+            (
+                "DM and GW retain exactly the v2 asymptotic HAC diagnostic; GW does not "
+                "acquire the guarantee of the original fixed-memory design. MZ evaluates "
+                "session means in levels."
+            ),
         ]
     parts += [
         "",
-        "## Selección y estabilidad numérica",
+        "## Selection and numerical stability",
         "",
-        "Ridge estandariza con entrenamiento, winsoriza a ±5 SD y usa cotas RV30 [0,5 × p1; 2 × "
-        "p99] "
-        "del entrenamiento correspondiente. No se winsoriza RV30 ni la pérdida observada. "
-        "[Rondas, lambda y cotas por "
-        "sesión/endpoint](../../artifacts/rp4_v3_b4/fit_selection.csv).",
+        (
+            "Ridge standardises using training data, winsorises at ±5 SD and uses RV30 bounds "
+            "[0.5 × p1; 2 × p99] from the corresponding training data. Neither RV30 nor "
+            "observed loss is winsorised. [Rounds, lambda and bounds by "
+            "session/endpoint](../../artifacts/rp4_v3_b4/fit_selection.csv)."
+        ),
         "",
     ]
     selection = []
@@ -1213,10 +1244,10 @@ def render_report(
                         "; ".join(f"{k:g}:{v}" for k, v in sorted(counts.items()))
                         if choice == "selected_lambda"
                         else (
-                            f"mín {min(values)}; mediana {statistics.median(values):g}; máx "
-                            f"{max(values)}; tope 2000: {counts[2000]}"
+                            f"min {min(values)}; median {statistics.median(values):g}; max "
+                            f"{max(values)}; cap 2000: {counts[2000]}"
                             if values
-                            else "NO VERIFICABLE"
+                            else "UNVERIFIABLE"
                         )
                     )
                     selection.append(
@@ -1226,35 +1257,35 @@ def render_report(
                             family,
                             name,
                             str(len(rows)),
-                            text or "NO VERIFICABLE",
+                            text or "UNVERIFIABLE",
                         ]
                     )
     parts += [
         table(
             [
-                "Ventana",
+                "Window",
                 "Endpoint",
-                "Familia",
-                "Conjunto",
-                "Registros",
-                "Lambda/rondas",
+                "Family",
+                "Set",
+                "Records",
+                "Lambda/rounds",
             ],
             selection,
         ),
         "",
         table(
             [
-                "Ventana",
+                "Window",
                 "Endpoint",
-                "Familia",
-                "Conjunto",
-                "Fase",
-                "Acotamiento",
-                "N predicciones",
-                "Cota baja",
-                "% baja",
-                "Cota alta",
-                "% alta",
+                "Family",
+                "Set",
+                "Phase",
+                "Bounding",
+                "N predictions",
+                "Lower bound",
+                "% lower",
+                "Upper bound",
+                "% upper",
             ],
             [
                 [
@@ -1274,17 +1305,19 @@ def render_report(
             ],
         ),
         "",
-        "Los porcentajes usan las predicciones de su propia fase: validación del candidato "
-        "seleccionado o evaluación del refit. No se imputan contadores ausentes como cero. "
-        "P1/P99, L/U de inner_fit y refit, N y columnas eliminadas se conservan por sesión en "
-        "el CSV de selección. [Resumen de cotas](../../artifacts/rp4_v3_b4/bound_counts.csv). "
-        "[Winsorización por columna, fase y partición]"
-        "(../../artifacts/rp4_v3_b4/winsor_counts.csv): "
-        "suma de aplicaciones a través de ajustes; un dato histórico puede aparecer varias veces. "
-        "El detalle por sesión sigue vinculado en los diagnósticos de ajuste originales.",
+        (
+            "Percentages use predictions from their own phase: validation of the selected "
+            "candidate or evaluation of the refit. Missing counters are not imputed as zero. "
+            "P1/P99, inner_fit and refit L/U, N and dropped columns are retained by session "
+            "in the selection CSV. [Bound "
+            "summary](../../artifacts/rp4_v3_b4/bound_counts.csv). [Winsorisation by column, "
+            "phase and split](../../artifacts/rp4_v3_b4/winsor_counts.csv): applications are "
+            "summed across fits; one historical observation can appear several times. "
+            "Session-level details remain linked in the original fit diagnostics."
+        ),
         "",
         table(
-            ["Ventana", "Conjunto", "Fallback entrenamiento", "Fallback orígenes", "Piso MZ"],
+            ["Window", "Set", "Training fallback", "Origin fallback", "MZ floor"],
             [
                 [
                     window,
@@ -1316,10 +1349,10 @@ def render_report(
             ],
         ),
         "",
-        "## Derivación y custodia de los datos",
+        "## Data derivation and custody",
         "",
         table(
-            ["Ventana", "Serie LightGBM B0/B1 sin cambiar", "N", "Máx. diferencia v2/v3"],
+            ["Window", "Unchanged LightGBM B0/B1 series", "N", "Max. v2/v3 difference"],
             [
                 [
                     r["window"],
@@ -1331,89 +1364,109 @@ def render_report(
             ],
         ),
         "",
-        "La paridad anterior se verifica por fecha sobre pérdidas y pronósticos de sesión; "
-        "no se presupone a partir del nombre del modelo ni requiere reajustarlo.",
+        (
+            "The parity above is verified by date on session losses and forecasts; it is not "
+            "assumed from the model name and does not require refitting."
+        ),
         "",
-        "[Comparación por columna: candidato, derivación independiente y puentes de IV/causalidad]"
-        "(../../artifacts/rp4_v3_b4/gamma_comparison.csv). "
-        "[Cobertura de gamma/jump](../../artifacts/rp4_v3_b4/gamma_coverage.csv). "
-        "[Conteos de IV, duplicados y "
-        "disponibilidad](../../artifacts/rp4_v3_b4/materialization_counts.csv). "
-        "Estas son auditorías de construcción, no modelos elegidos por su resultado.",
+        (
+            "[Column-level comparison: candidate, independent derivation and IV/causality "
+            "bridges](../../artifacts/rp4_v3_b4/gamma_comparison.csv). [Gamma/jump "
+            "coverage](../../artifacts/rp4_v3_b4/gamma_coverage.csv). [IV, duplicate and "
+            "availability counts](../../artifacts/rp4_v3_b4/materialization_counts.csv). "
+            "These are construction audits, not models selected for their results."
+        ),
         "",
-        "[Cierre A2: atribución de las discrepancias del candidato y regla de ventanas vacías]"
-        "(../../artifacts/rp4_v3_a2/REPORT.md).",
+        (
+            "[A2 closeout: attribution of candidate discrepancies and the empty-window "
+            "rule](../../artifacts/rp4_v3_a2/REPORT.md)."
+        ),
         "",
-        "Alineación RV30 reconstruida frente al panel conservado: "
+        "Reconstructed RV30 alignment against the retained panel: "
         + json.dumps(
-            materialization.get("rv30_alignment", {"status": "NO VERIFICABLE"}),
+            materialization.get("rv30_alignment", {"status": "UNVERIFIABLE"}),
             sort_keys=True,
             ensure_ascii=False,
         )
         + ".",
         "",
-        "## Evolución acumulada",
+        "## Cumulative evolution",
         "",
-        "Cada figura conserva doce series (tres versiones × dos ventanas × dos familias), con "
-        "escalas "
-        "independientes y todos los valores adversos. El eje temporal usa fechas reales.",
+        (
+            "Each figure retains twelve series (three versions × two windows × two families), "
+            "with independent scales and all adverse values. The time axis uses actual dates."
+        ),
         "",
-        "![B1 sobre B0](../../artifacts/rp4_v3_b4/B1_over_B0.svg)",
+        "![B1 over B0](../../artifacts/rp4_v3_b4/B1_over_B0.svg)",
         "",
-        "![B2 sobre B1](../../artifacts/rp4_v3_b4/B2_over_B1.svg)",
+        "![B2 over B1](../../artifacts/rp4_v3_b4/B2_over_B1.svg)",
         "",
-        "## Fe de erratas heredada y divulgación",
+        "## Inherited errata and disclosure",
         "",
-        "En v1 sí entraban b2_5m_observed_span_s y b2_30m_observed_span_s; los otros siete "
-        "diagnósticos "
-        "señalados ya estaban excluidos, incluido b1_median_quote_age_s, al igual que "
-        "b1_pcp_residual. "
-        "Los dos observed_span salen en v2 y siguen fuera; los nuevos indicadores de ventana vacía "
-        "están explícitamente autorizados por el addendum v3, no se presentan como existentes en "
-        "v1.",
+        (
+            "v1 did include b2_5m_observed_span_s and b2_30m_observed_span_s; the other seven "
+            "flagged diagnostics were already excluded, including b1_median_quote_age_s, as "
+            "was b1_pcp_residual. The two observed_span predictors are removed in v2 and "
+            "remain excluded; the new empty-window indicators are explicitly authorised by "
+            "the v3 addendum and are not presented as having existed in v1."
+        ),
         "",
-        "La ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8 con "
-        "otra especificación. "
-        "El PIT es proxy de tiempo fuente a 120 s, como en la literatura.",
+        (
+            "The window from 20 July to 28 August was read once by the Phase 8 bridge under "
+            "another specification. PIT uses a source-time proxy at 120 s, as in the "
+            "literature."
+        ),
         "",
-        "Hueco aceptado UW: 2025-01-25 a 2025-02-24, sin relleno. El desbalance gamma firmado es "
-        "proxy "
-        "de actividad de opciones, no inventario observado de dealers ni prueba causal sobre RV30.",
+        (
+            "Accepted UW gap: 2025-01-25 to 2025-02-24, without filling. Signed gamma "
+            "imbalance is a proxy for options activity, not observed dealer inventory or "
+            "causal evidence about RV30."
+        ),
         "",
-        "Limitación: v3 responde a resultados anteriores conocidos; fijar el código y ejecutar "
-        "una vez "
-        "no elimina selección adaptativa entre versiones, y ni Holm ni la secuencia dentro de "
-        "una versión "
-        "corrigen esa búsqueda ni convierten el tiempo fuente en disponibilidad histórica "
-        "demostrada.",
+        (
+            "Limitation: v3 responds to known earlier results; freezing the code and "
+            "executing once does not remove adaptive selection between versions, and neither "
+            "Holm nor the within-version sequence corrects that search or turns source time "
+            "into demonstrated historical availability."
+        ),
         "",
-        "Un contraste no rechazado no demuestra absorción de la información ni equivalencia a "
-        "cero. "
-        "No se repitieron v1/v2, no se ocultaron signos negativos y no se declara edge "
-        "financiero garantizado.",
+        (
+            "A non-rejected contrast does not demonstrate information absorption or "
+            "equivalence to zero. v1/v2 were not rerun, negative signs were not hidden and no "
+            "guaranteed financial edge is claimed."
+        ),
         "",
-        "## Trazabilidad",
+        "## Traceability",
         "",
-        "[Especificación original v3](specification_v3.md) · [Decisión 131](decision_131_v3.md) · "
-        "[Informe v1 intacto](results_v1.md) · [Informe v2 intacto](results_v2.md) · "
-        "[Manifiesto del informe y especificación "
-        "efectiva](../../artifacts/rp4_v3_b4/report_manifest.json).",
+        (
+            "[Original v3 specification](specification_v3.md) · [Decision "
+            "131](decision_131_v3.md) · [Unchanged v1 report](results_v1.md) · [Unchanged v2 "
+            "report](results_v2.md) · [Report manifest and effective "
+            "specification](../../artifacts/rp4_v3_b4/report_manifest.json)."
+        ),
         "",
-        "Recibos con comandos, salidas y hashes: [A1](../../artifacts/rp4_v3_a1/receipt.json) · "
-        "[A2](../../artifacts/rp4_v3_a2/receipt.json) · "
-        "[B2](../../artifacts/rp4_v3_b2/receipt.json) · "
-        "[B3](../../artifacts/rp4_v3_b3/receipt.json) · "
-        "[B4](../../artifacts/rp4_v3_b4/receipt.json). "
-        "El recibo B4 se emite después de salida 0 del generador para evitar un hash "
-        "autorreferente.",
+        (
+            "Receipts with commands, outputs and hashes: "
+            "[A1](../../artifacts/rp4_v3_a1/receipt.json) · "
+            "[A2](../../artifacts/rp4_v3_a2/receipt.json) · "
+            "[B2](../../artifacts/rp4_v3_b2/receipt.json) · "
+            "[B3](../../artifacts/rp4_v3_b3/receipt.json) · "
+            "[B4](../../artifacts/rp4_v3_b4/receipt.json). The B4 receipt is issued after "
+            "generator exit 0 to avoid a self-referential hash."
+        ),
         "",
-        "[Adición A1B: ventanas vacías](v3_window_empty_addendum.md) · "
-        "[Decisión 132](decision_132_v3_empty_windows.md) · "
-        "[Registro efectivo](../../artifacts/rp4_v3_a1_empty_window/specification.json) · "
-        "[Recibo A1B](../../artifacts/rp4_v3_a1_empty_window/receipt.json).",
+        (
+            "[A1B addendum: empty windows](v3_window_empty_addendum.md) · [Decision "
+            "132](decision_132_v3_empty_windows.md) · [Effective "
+            "registration](../../artifacts/rp4_v3_a1_empty_window/specification.json) · [A1B "
+            "receipt](../../artifacts/rp4_v3_a1_empty_window/receipt.json)."
+        ),
         "",
-        "El generador valida recibos y hashes de agregados terminados; no ajusta modelos, no abre "
-        "paneles por origen, no descarga datos, no activa colectores y no publica resultados.",
+        (
+            "The generator validates receipts and hashes of completed aggregates; it does not "
+            "fit models, open origin-level panels, download data, activate collectors or "
+            "publish results."
+        ),
         "",
     ]
     return "\n".join(parts)

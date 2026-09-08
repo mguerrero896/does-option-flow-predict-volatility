@@ -1,0 +1,137 @@
+{
+  "schema": "rp4-protocol-english-translation-v1",
+  "documents": [
+    {
+      "path": "docs/rp4/RUNBOOK.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/RUNBOOK.md.original",
+        "sha256": "cc0c398f832e267c16feb0ab762a1b95f6152544ca37d439b054ac068b2ef4d0"
+      },
+      "translation_sha256": "bb42b4dc013ceac2996df681972f532a53a4243f5577051f45e50ef25f8ca15e",
+      "numeric_prose_values_in_same_order": 117,
+      "inline_identifiers_in_same_order": 37,
+      "link_targets_in_same_order": 16
+    },
+    {
+      "path": "docs/rp4/data_and_execution_v1.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/data_and_execution_v1.md.original",
+        "sha256": "33f1ecc18aedc6ef0831bf237da4db4be0edf531a6421329b507bff82ef7f6dd"
+      },
+      "translation_sha256": "d49cfa7664d2d726253ffc34d522cfee03df41fd9757a91687b0f026d342c363",
+      "numeric_prose_values_in_same_order": 223,
+      "inline_identifiers_in_same_order": 3,
+      "link_targets_in_same_order": 11
+    },
+    {
+      "path": "docs/rp4/specification_v4.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/specification_v4.md.original",
+        "sha256": "443a0c2628d80f82b0f1a90a7ce7f7c3a8caac38a505c8d12366c7c1c81d6ee9"
+      },
+      "translation_sha256": "d89ae98c21b6f901342a12c00726832bf34d6922e02c7d8e435e1f6de872008d",
+      "numeric_prose_values_in_same_order": 159,
+      "inline_identifiers_in_same_order": 12,
+      "link_targets_in_same_order": 0
+    },
+    {
+      "path": "docs/rp4/decision_133_v4.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/decision_133_v4.md.original",
+        "sha256": "1003da2864d09b94f0a0f86a0a37b823a55447f28cfbe2b91b61a06ed48a3804"
+      },
+      "translation_sha256": "b9012d4eefd8cbad8304553fbf72d764d32d999d53050cf9929e84c8f361af51",
+      "numeric_prose_values_in_same_order": 14,
+      "inline_identifiers_in_same_order": 2,
+      "link_targets_in_same_order": 0
+    },
+    {
+      "path": "docs/rp4/prospective_confirmation_v1.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_confirmation_v1.md.original",
+        "sha256": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d"
+      },
+      "translation_sha256": "7f9ceb4cb8ecb92820ee0796c1c2c916499bd605b5b9fbc1642ee5a30c28077b",
+      "numeric_prose_values_in_same_order": 79,
+      "inline_identifiers_in_same_order": 5,
+      "link_targets_in_same_order": 5
+    },
+    {
+      "path": "docs/rp4/prospective_confirmation_v1_amendment_1.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_confirmation_v1_amendment_1.md.original",
+        "sha256": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3"
+      },
+      "translation_sha256": "1141a013b41a4c9c43c12c7b68308f6b5dea7f0e538e28af5da4a15a51fec47c",
+      "numeric_prose_values_in_same_order": 123,
+      "inline_identifiers_in_same_order": 13,
+      "link_targets_in_same_order": 6
+    },
+    {
+      "path": "docs/rp4/prospective_confirmation_v1_amendment_2.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_confirmation_v1_amendment_2.md.original",
+        "sha256": "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9"
+      },
+      "translation_sha256": "023da081d0161af853b52d6e12c961e18db1f9d456fcb06099b291760f4cca71",
+      "numeric_prose_values_in_same_order": 120,
+      "inline_identifiers_in_same_order": 5,
+      "link_targets_in_same_order": 6
+    },
+    {
+      "path": "docs/rp4/prospective_confirmation_v1_amendment_3.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_confirmation_v1_amendment_3.md.original",
+        "sha256": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6"
+      },
+      "translation_sha256": "6b523e4d6aac2287e8aa3730cfc80ac6820e09200fc251a597ed57cd04afe1d2",
+      "numeric_prose_values_in_same_order": 170,
+      "inline_identifiers_in_same_order": 4,
+      "link_targets_in_same_order": 6
+    },
+    {
+      "path": "docs/rp4/prospective_confirmation_v1_amendment_3_context_1.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_confirmation_v1_amendment_3_context_1.md.original",
+        "sha256": "ce1372ab888a52a18cae425cf02c526a1d68cbccebcb30137d365d16cebf6cc0"
+      },
+      "translation_sha256": "c53dfb48712442c01264d4c1f25a3daa614843f09ff802ae9bb497d9d31bba6e",
+      "numeric_prose_values_in_same_order": 74,
+      "inline_identifiers_in_same_order": 1,
+      "link_targets_in_same_order": 6
+    }
+  ],
+  "verification": {
+    "command": "uv run --frozen --no-sync python -m pytest artifacts/rp4_v3_code/test_aggregate_v3.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v4_code/test_report_checked.py tests/contract/test_rp4_results_v3_english.py tests/contract/test_rp4_presentation_english.py tests/contract/test_rp4_protocol_english.py tests/contract/test_rp4_report_figure_english.py tests/contract/test_rp4_v5_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 43
+  },
+  "proof_contract_sha256": "206ca705b7e84b0927cfe1c65b0e903c8a6a0550cecd8f9b6d326d6e7c636f02",
+  "scope": {
+    "full_document_translation": true,
+    "empirical_model_fits": 0,
+    "scientific_evaluations_run": 0,
+    "sealed_or_prospective_data_read": false,
+    "research_only": true,
+    "capital_go": false
+  },
+  "custody_note": "Historical seals authenticate the preserved original bytes, not the later English presentation. Separate publication sanitisation receipts must identify any public redaction of local originals.",
+  "explicit_editorial_changes": [
+    "English translation notice added; original scientific registration preserved.",
+    "Two private local source paths in specification_v4 replaced by descriptive source labels; dates and hashes preserved.",
+    "Runbook PowerShell messages and one comment translated; executable commands and pins unchanged."
+  ],
+  "numeric_prose_values_total": 1079,
+  "command_blocks_equal_except_display_messages_and_comments": true,
+  "latest_focused_verification": {
+    "command": "uv run --frozen --no-sync python -m pytest tests/contract/test_rp4_prospective_registration.py tests/contract/test_rp4_prospective_amendment_3.py tests/contract/test_rp4_v5_english.py tests/contract/test_rp4_v5_public_receipt.py tests/contract/test_rp4_protocol_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 13
+  },
+  "historical_contracts_sha256": {
+    "tests/contract/test_rp4_prospective_registration.py": "0c11c96c3fd9c8cce5e748279fec1d2bca028aaa2764708412f75e88b84426da",
+    "tests/contract/test_rp4_prospective_amendment_3.py": "1fbc5e1090027a83910b758edd04cfd30f7f44aab54e33bbcab691425faa6b66"
+  },
+  "historical_contract_scope": "Immutable original receipt pins and both coordinated document/sidecar mutation checks remain enforced through the shared archive resolver. The current English display is not used as a historical seal.",
+  "runbook_original_eol_scope": "The translation receipt preserves its LF input; a later historical closure independently pins the original CRLF copy. Their text is equal after line-ending normalization; their byte hashes are distinct."
+}

@@ -1,0 +1,110 @@
+{
+  "schema": "rp4-prospective-confirmation-v1-amendment-1",
+  "sealed_at_utc": "2026-09-08T04:31:58.752153+00:00",
+  "original_document_sha256": "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+  "original_sealed_at_utc": "2026-09-08T04:24:01.918499+00:00",
+  "original_receipt_sha256": "18d3fff1995532a4ff44cf4ae90d1917631798353aa314a24dd14f30d7bd4a66",
+  "amendment_sha256": "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+  "v4_sha256": "0a45b0a608110e2ca0dcf38accc2a0c2521ebbe9d223eb002e36ec51f78afd04",
+  "primary_unchanged": true,
+  "primary_look_sessions": 20,
+  "secondary_look_sessions": 20,
+  "secondary_read_count_planned": 1,
+  "secondary_at_40": false,
+  "primary_stability_at_40_unchanged": true,
+  "ablated_columns": [
+    "rp4_gamma_imb_total",
+    "rp4_gamma_imb_near_spot",
+    "rp4_gamma_imb_near_short",
+    "rp4_gamma_imb_signed_trades"
+  ],
+  "ablated_predictors": 134,
+  "full_predictors": 138,
+  "remove_presence_indicators": true,
+  "retain_dealer_columns": [
+    "rp4_dealer_gamma_net",
+    "rp4_dealer_gamma_near_spot",
+    "rp4_dealer_max_gamma_distance"
+  ],
+  "secondary_a": {
+    "family": "log_ridge_harq",
+    "horizon_minutes": 15,
+    "statistic": "mean",
+    "alternative": "greater",
+    "positive_delta": "loss_B2_without_gamma_imbalance_minus_loss_full_B2"
+  },
+  "secondary_b": {
+    "family": "lightgbm_qlike",
+    "horizon_minutes": 15,
+    "statistic": "median_of_paired_session_deltas",
+    "alternative": "two_sided",
+    "positive_delta": "loss_B1_minus_loss_B2"
+  },
+  "secondary_multiplicity": {
+    "method": "Holm",
+    "family_size": 2,
+    "alpha": 0.05,
+    "unavailable_p_for_adjustment_only": 1
+  },
+  "bootstrap": {
+    "block_length": 5,
+    "ci": "percentile_95",
+    "kind": "circular_session_blocks",
+    "p_value": "greater_centered_null_plus_one",
+    "replications": 9999,
+    "seed": 20260907
+  },
+  "collector_registration_receipt_sha256": "ce29d453944c220ab05860d2c21f17fcd2a838e9a7af42fd050ea2bb6ea80d4f",
+  "collector": {
+    "state": "Ready",
+    "enabled": true,
+    "start_boundary": "2026-09-09T10:00:00",
+    "next_run": "2026-09-09T10:00:00.0000000+10:00",
+    "timezone_id": "AUS Eastern Standard Time",
+    "powershell_version_observed": "7.6.3",
+    "powershell_sha256": "8737aa78bdbe2941083c2c3674da3a9c3ab4cabd2cac040d39d1d0c19f9fc20d",
+    "wake_to_run": false,
+    "start_when_available": true,
+    "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+    "dry_run_before": {
+      "stdout": [
+        "{\"calendar\": \"XNYS\", \"close_grace_minutes\": 30, \"close_utc\": \"2026-09-04T20:00:00+00:00\", \"credential_reads\": 0, \"fmp_one_minute_assets\": [\"AAPL\", \"AMZN\", \"META\", \"MSFT\", \"NVDA\", \"TSLA\", \"SPY\", \"QQQ\"], \"model_fits\": 0, \"network_requests\": 0, \"numeric_thread_limit\": 2, \"session_date\": \"2026-09-04\", \"session_timezone\": \"America/New_York\", \"status\": \"DRY_RUN_NO_NETWORK\", \"target_reads\": 0, \"uw_full_tape_sessions\": 1}"
+      ],
+      "exit_code": 0
+    },
+    "dry_run_after": {
+      "stdout": [
+        "{\"calendar\": \"XNYS\", \"close_grace_minutes\": 30, \"close_utc\": \"2026-09-04T20:00:00+00:00\", \"credential_reads\": 0, \"fmp_one_minute_assets\": [\"AAPL\", \"AMZN\", \"META\", \"MSFT\", \"NVDA\", \"TSLA\", \"SPY\", \"QQQ\"], \"model_fits\": 0, \"network_requests\": 0, \"numeric_thread_limit\": 2, \"session_date\": \"2026-09-04\", \"session_timezone\": \"America/New_York\", \"status\": \"DRY_RUN_NO_NETWORK\", \"target_reads\": 0, \"uw_full_tape_sessions\": 1}"
+      ],
+      "exit_code": 0
+    },
+    "data_root_exists_before": false,
+    "data_root_exists_after": false,
+    "start_scheduled_task_called": false
+  },
+  "regimes": [
+    {
+      "ny_previous_day_hour": 20,
+      "regime": "EDT/AEST",
+      "hours_after_1600_close": 4
+    },
+    {
+      "ny_previous_day_hour": 19,
+      "regime": "EDT/AEDT",
+      "hours_after_1600_close": 3
+    },
+    {
+      "ny_previous_day_hour": 18,
+      "regime": "EST/AEDT",
+      "hours_after_1600_close": 2
+    },
+    {
+      "ny_previous_day_hour": 19,
+      "regime": "EST/AEST",
+      "hours_after_1600_close": 3
+    }
+  ],
+  "independent_timestamp": false,
+  "new_data_before_or_after_seal": false,
+  "capital_go": false
+}

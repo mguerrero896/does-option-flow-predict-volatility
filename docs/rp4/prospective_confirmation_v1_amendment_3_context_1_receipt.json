@@ -1,0 +1,20 @@
+{
+  "schema": "rp4-prospective-historical-context-1",
+  "recorded_at_utc": "2026-09-08T08:36:37.886015+00:00",
+  "document_sha256": "ce1372ab888a52a18cae425cf02c526a1d68cbccebcb30137d365d16cebf6cc0",
+  "scientific_rules_changed": false,
+  "new_reading_authorized": false,
+  "new_statistical_calculations": 0,
+  "prospective_data_read": false,
+  "sealed_payloads_read": 0,
+  "independent_timestamp": false,
+  "first_scheduled_acquisition_sydney": "2026-09-09T10:00:00+10:00",
+  "source_sha256": {
+    "docs/rp2/block12_prospective_protocol_v1.md": "38ecf9d361fed798a7abe29a854d26a1b65fdf388c6c5f303c09ba1db389adc5",
+    "artifacts/rp2_block12_prospective/design.json": "3f8cd58596fea85428c01f57ced4e6beed072d53701509cf3eb168b3b549bd97",
+    "docs/rp4/prospective_confirmation_v1_amendment_3.md": "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6",
+    "docs/rp4/prospective_confirmation_v1_amendment_3_receipt.json": "d7541b8d1ba6297199a2e96d2ddf85446b424330db50737ea7c30bb04c370ff2"
+  },
+  "research_only": true,
+  "capital_go": false
+}

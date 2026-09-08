@@ -1,0 +1,53 @@
+{
+  "schema": "rp4-v3-english-publication-translation-v1",
+  "source_report_sha256": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f",
+  "source_renderer_sha256": "bb5b7d574207e8307a1b31800e689166583851161365fd94b689f94fce7be356",
+  "preserved_originals_sha256": {
+    "receipt.json": "799b97749e1c15e5e2fd1b18ac4ad4a680192fa6521b168d52fa830205b9f1b5",
+    "report_manifest.json": "a9346a7fc0e40bf23c3431f22756d69a82151b0ea184d4fd5929a4ea1166b6bd",
+    "report_v3.py.original": "bb5b7d574207e8307a1b31800e689166583851161365fd94b689f94fce7be356",
+    "results_v3.md.original": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f"
+  },
+  "translated_and_verification_files_sha256": {
+    "docs/rp4/results_v3.md": "1283967fb7bed57299377041836d512c09feb0e654dc7b434e5406b04b21b8fd",
+    "artifacts/rp4_v3_code/report_v3.py": "c3408f6db6255bea64d6c9100b5d8bdc9ece5781b679d1bb97455c93fd1ab080",
+    "artifacts/rp4_v3_code/test_aggregate_v3.py": "1367a8148789ff8cdca6b9aafeb5db6ab0e33432d045c1b44315ec2d5a7004ea",
+    "tests/contract/test_rp4_results_v3_english.py": "a1688c66276653f4734599d8681a7895521d4dcedf96b3b488792cadfac1aad3"
+  },
+  "verification": {
+    "command": "uv run --frozen --no-sync python -m pytest artifacts/rp4_v3_code/test_aggregate_v3.py tests/contract/test_rp4_results_v3_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 22,
+    "numeric_tokens": 9371,
+    "numeric_token_sequence_equal_after_locale_normalization": true,
+    "locale_changes": [
+      "decimal comma to decimal point in prose",
+      "9.999 resamples to 9,999 resamples"
+    ],
+    "markdown_lines_before_and_after": 661,
+    "link_targets_before_and_after": 35,
+    "link_target_sequence_equal": true,
+    "convergence_diagnostic_json_records_before_and_after": 443,
+    "convergence_diagnostic_json_exact": true
+  },
+  "scope": {
+    "full_document_translation": true,
+    "models_fitted": 0,
+    "scientific_evaluations_run": 0,
+    "sealed_or_prospective_data_read": false,
+    "historical_receipts_modified": false,
+    "research_only": true,
+    "capital_go": false
+  },
+  "custody_note": "Historic report manifests authenticate archived original bytes; this separate receipt authenticates the English presentation and its checks.",
+  "latest_combined_verification": {
+    "command": "uv run --frozen --no-sync python -m pytest artifacts/rp4_v3_code/test_aggregate_v3.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v4_code/test_report_checked.py tests/contract/test_rp4_results_v3_english.py tests/contract/test_rp4_presentation_english.py tests/contract/test_rp4_protocol_english.py tests/contract/test_rp4_report_figure_english.py tests/contract/test_rp4_v5_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 43
+  },
+  "public_projection_link_exception": {
+    "target": "artifacts/rp4_v3_b4/fit_selection.csv",
+    "reason": "Licensed fit-bound source is not a permitted public link. Its descriptive text and scientific assertions are retained.",
+    "comparison": "All other references compare by historical identity after relocation; numeric assertions exclude reference addresses; convergence JSON remains exact."
+  }
+}

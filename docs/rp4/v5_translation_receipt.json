@@ -1,0 +1,116 @@
+{
+  "schema_version": "rp4-v5-english-translation-v1",
+  "documents": [
+    {
+      "path": "docs/rp4/results_v5.md",
+      "original": {
+        "archive_path": "docs/archive/rp4/presentation_originals/results_v5.md.original",
+        "sha256": "0561551a2938796baf4e7e705b082fc24ee09be0a069596802285cf018b1973c"
+      },
+      "english_sha256": "0b416763caa841f4b3312dc4cece4fa88a56a1bacb0b129c1a2aa9dc18eb142e",
+      "numeric_values_in_same_order_excluding_reference_addresses": 1651,
+      "original_paragraph_blocks": 56,
+      "english_paragraph_blocks_including_translation_notice": 57,
+      "original_link_targets": 7,
+      "translation_source_english_sha256": "f1777d3ebdb1faba30e15c0ea6ff0d8a480a62efe9773be75f0c601f5a33f820"
+    },
+    {
+      "path": "docs/rp4/specification_v5.md",
+      "original": {
+        "archive_path": "docs/archive/rp4/presentation_originals/specification_v5.md.original",
+        "sha256": "6ffdfe97de0660515b2f3d79b15b985e398060cf59d74b7c1adf33e379aa63da"
+      },
+      "english_sha256": "d5f693b3726ee63dff4b76adc994bab85c77c47a2ece8c44dd71742b3754dea9",
+      "numeric_values_in_same_order_excluding_reference_addresses": 280,
+      "original_paragraph_blocks": 31,
+      "english_paragraph_blocks_including_translation_notice": 32,
+      "original_link_targets": 0,
+      "translation_source_english_sha256": "b4e1aba98a81354627ec80484383f0744d33344f4f968834d615669b9c19c1e3"
+    },
+    {
+      "path": "docs/rp4/specification_v5_technical_amendment_2.md",
+      "original": {
+        "archive_path": "docs/archive/rp4/presentation_originals/specification_v5_technical_amendment_2.md.original",
+        "sha256": "ae11741488eeec0ef1f81353225cb80edeb09a91aa374b326eea13503a1f3843"
+      },
+      "english_sha256": "a3af515de3e0140dfb60ae9f59da868d8f7c057b76f0c4ca4b3cc2905e698bab",
+      "numeric_values_in_same_order_excluding_reference_addresses": 127,
+      "original_paragraph_blocks": 17,
+      "english_paragraph_blocks_including_translation_notice": 18,
+      "original_link_targets": 0,
+      "translation_source_english_sha256": "b470110031fa7d032e4e1558c9603c4b773784e899b081b40583b6c384afdbfe"
+    },
+    {
+      "path": "docs/rp4/prospective_combination_decision_136.md",
+      "original": {
+        "archive_path": "docs/archive/rp4/presentation_originals/prospective_combination_decision_136.md.original",
+        "sha256": "e500c487b015b7662c52a7f381180996d740c88d1d317debf594330c3ddf15b0"
+      },
+      "english_sha256": "4b749c97490d3970d9ed2e27380a7ac139ef2fdd94df76110edd0e702cb8fdca",
+      "numeric_values_in_same_order_excluding_reference_addresses": 159,
+      "original_paragraph_blocks": 19,
+      "english_paragraph_blocks_including_translation_notice": 20,
+      "original_link_targets": 0,
+      "translation_source_english_sha256": "e8f062903a2b597bea168d4e8cdc1c127ac9b1fa8da5f94e9ee3a4aea101d46b"
+    }
+  ],
+  "scope": {
+    "registered_exploratory_extension": true,
+    "v4_headline_retained": true,
+    "later_part34_explicitly_post_hoc": true,
+    "full_translation_not_summary": true,
+    "scientific_data_changed": false,
+    "empirical_model_fits": 0,
+    "inference_reruns": 0,
+    "prospective_data_reads": 0,
+    "capital_go": false
+  },
+  "verification": {
+    "command": "uv run --frozen --no-sync python -m pytest artifacts/rp4_v3_code/test_aggregate_v3.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v4_code/test_report_checked.py tests/contract/test_rp4_results_v3_english.py tests/contract/test_rp4_presentation_english.py tests/contract/test_rp4_protocol_english.py tests/contract/test_rp4_report_figure_english.py tests/contract/test_rp4_v5_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 43,
+    "scope": "Historical focused translation checks before final projection; current candidate gates are reported separately."
+  },
+  "numeric_prose_and_table_values_total_excluding_reference_addresses": 2217,
+  "public_import_receipt_sha256": "e5cbb2892636a761ef73e453732e4898cf855cd6bec43923f56577b1a1cc95d5",
+  "presentation_and_contracts_sha256": {
+    "scripts/build_rp4_v5_english.py": "8e65e1b8a232e5b15dfd2a249751a12592e3b31dd2d2191d3ad3cb7b3d9b7810",
+    "tests/contract/test_rp4_v5_english.py": "0f7edaeac9ea66a447426c0c106fe96374ac1f6ec7cc4ade202a9a2823460330",
+    "tests/contract/rp4_translation_checks.py": "a071888ef92f5a198648e01f90018e2aba4ad4bd55c4192a498175e065c3e778",
+    "scripts/build_rp4_v5_public_receipt.py": "1c4df05d03692cd7ba842c3e9a4356e14a304f8aa04dbbfabb0c2ea58e733fbc",
+    "tests/contract/test_rp4_v5_public_receipt.py": "9ae1c63a9a201eb22a379653c1c89e7c66db77f9ca306aa6854202e3c161e766"
+  },
+  "editorial_changes": [
+    "English notation for decimal and grouping marks; values unchanged.",
+    "Historical document paragraphs remain complete, with one translation notice added.",
+    "Local instruction, panel and executable paths replaced by descriptive source labels; binary and registration hashes retained.",
+    "Historical report reference resolves to its preserved archive copy.",
+    "Historical Part 34 receipt link resolves to its separate public LF receipt; original receipt and sidecar remain archived, with 25 source pins retained and distributed hashes distinguished.",
+    "Two historical specification references explicitly marked outside the public release; citation names and quantitative assertions retained.",
+    "Authorship disclaimer uses maintainer signature terminology; the absence of a signature or external timestamp remains explicit."
+  ],
+  "custody_note": "Original identities and byte hashes remain separate from English output hashes. Any public redaction must retain its own explicit provenance receipt; public redactions do not acquire original byte hashes.",
+  "latest_focused_verification": {
+    "command": "uv run --frozen --no-sync python -m pytest tests/contract/test_rp4_prospective_registration.py tests/contract/test_rp4_prospective_amendment_3.py tests/contract/test_rp4_v5_english.py tests/contract/test_rp4_v5_public_receipt.py tests/contract/test_rp4_protocol_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 13,
+    "scope": "Historical focused translation checks before final projection; current candidate gates are reported separately."
+  },
+  "type_check": {
+    "command": "uv run --frozen --no-sync mypy scripts/build_rp4_v5_english.py scripts/build_rp4_v5_public_receipt.py",
+    "exit_code": 0,
+    "source_files_checked": 2
+  },
+  "public_part34_receipt_sha256": "d0b6680b0c68405fd5fb0573c22bba79dbed08951e22039c2249b6886781c8da",
+  "public_part34_receipt_sidecar_sha256": "543774c118eb9c822aaffe024af7ad0519e04abcd0f883b4d0c81d99dbd1512d",
+  "line_ending_preservation_sha256": {
+    "artifacts/rp4_v5_run_a3_20260908/reports/5_control/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_part34/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_a3/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_a3_code/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_a2_code/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_code/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+    "artifacts/rp4_v5_public_import/.gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+  },
+  "current_presentation_hash_scope": "LF-normalized text, matching Git text attributes"
+}

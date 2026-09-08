@@ -1,0 +1,121 @@
+{
+  "schema": "rp4-presentation-english-translation-v1",
+  "documents": [
+    {
+      "path": "docs/rp4/results_v4.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/results_v4.md.original",
+        "sha256": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7"
+      },
+      "translation_sha256": "808ae63d0d2d3eeab8c68b5aa0c81d4db0902a331c1abe889b2935cc66747bc9",
+      "numeric_values_in_same_order": 1996,
+      "link_targets_in_same_order": 17
+    },
+    {
+      "path": "docs/rp4/RESULTADO_FINAL.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/RESULTADO_FINAL.md.original",
+        "sha256": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19"
+      },
+      "translation_sha256": "3be1c50bd474390b67afb99d103f08b35aae75e84eb26df07edfe9c01ca1ea6d",
+      "numeric_values_in_same_order": 246,
+      "link_targets_in_same_order": 10
+    },
+    {
+      "path": "docs/rp4/RESULTADO_FINAL_revision_1.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/RESULTADO_FINAL_revision_1.md.original",
+        "sha256": "2db7a84d19e48a88a8b0221591f91add6b48d52a8c0afbc028e306655cd42c05"
+      },
+      "translation_sha256": "70d189200dd814162e04b893354d0d5fd9fbbfe7d5fd31d7524a9f005556f675",
+      "numeric_values_in_same_order": 269,
+      "link_targets_in_same_order": 13
+    },
+    {
+      "path": "docs/rp4/RESULTADO_FINAL_revision_2.md",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/RESULTADO_FINAL_revision_2.md.original",
+        "sha256": "aa50957b2626c85bc14fe7c70c1a71a4592f15f479ad76f36cd3b094070e8ce5"
+      },
+      "translation_sha256": "99dd763af4da8cc3625fb6f6c0361a45bbdb9a0040ff3963af30f3c189c16b78",
+      "numeric_values_in_same_order": 322,
+      "link_targets_in_same_order": 18
+    }
+  ],
+  "figures": [
+    {
+      "path": "artifacts/rp4_v3_b4/B1_over_B0.svg",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/v3_B1_over_B0.svg.original",
+        "sha256": "ec15fc913d06f54ea6030eee87aaa3b669b4f17fb42de382e97b913825f3b475"
+      },
+      "translation_sha256": "d1ef45f1298449609250904cb9454f83ceee80f1053253c5340e0ac8e97814a9",
+      "element_and_attribute_pairs_identical": 199,
+      "source_data": "Previously public aggregate session_losses.csv files; no raw inputs or forecasts read."
+    },
+    {
+      "path": "artifacts/rp4_v3_b4/B2_over_B1.svg",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/v3_B2_over_B1.svg.original",
+        "sha256": "7770504771be1a8ba74e658582d0073e74ea4755803976187195fd813dccf1d2"
+      },
+      "translation_sha256": "f12f116fc13ab9f00de1ba20dae3b86a137196eb1580045d20951c6e5552ad66",
+      "element_and_attribute_pairs_identical": 199,
+      "source_data": "Previously public aggregate session_losses.csv files; no raw inputs or forecasts read."
+    },
+    {
+      "path": "artifacts/rp4_v4_b4/B1_over_B0.svg",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/v4_B1_over_B0.svg.original",
+        "sha256": "115d606b2025f7f9b8f1816ae4189080121da599787ab8f3f3c976872adad05e"
+      },
+      "translation_sha256": "f10cf6b0d6e903f67c57d116cbc6f5a6d7c92eead2576748314d9360ca05e0d4",
+      "element_and_attribute_pairs_identical": 199,
+      "source_data": "Previously public aggregate session_losses.csv files; no raw inputs or forecasts read."
+    },
+    {
+      "path": "artifacts/rp4_v4_b4/B2_over_B1.svg",
+      "source": {
+        "archive_path": "docs/archive/rp4/presentation_originals/v4_B2_over_B1.svg.original",
+        "sha256": "cc60a522ca2cabe3edca9a799db1f1101aa46812a0097828d81d55b20d2fe5e5"
+      },
+      "translation_sha256": "6f12c000438f3dbb338f98faa9e45c52d792f70e95688c32dc6d7241192ae862",
+      "element_and_attribute_pairs_identical": 199,
+      "source_data": "Previously public aggregate session_losses.csv files; no raw inputs or forecasts read."
+    }
+  ],
+  "presentation_and_checks_sha256": {
+    "artifacts/rp4_v4_code/report_v4.py": "770d69976667e8f2bd81a789385f3f38f38fb1f9c8543478fc9921de337c6a00",
+    "artifacts/rp4_v4_code/report_v4_checked.py": "5b595d1c00245ee964b3d48e07c038eebb1e843947b9ce1751d0cc39e69ebca5",
+    "artifacts/rp4_v4_code/test_report.py": "609ca6a05049a9d30a74c913ceb8d88604bfe564ff58f2631ac4bf3d89450810",
+    "artifacts/rp4_v4_code/test_report_checked.py": "0adf36699e8206a48c17c5c6af272c99bce28f95a83c7a61e1f9a890cd00fce9",
+    "tests/contract/test_rp4_presentation_english.py": "918ae205c87ad706d23c4e26aafe335f04ab810260f64d8c36d6e57d05755d26",
+    "tests/contract/test_rp4_report_figure_english.py": "4fe6e8b8405386ca475c289c45d70e24a1dbab5d57027bb417f1476536930d4a"
+  },
+  "verification": {
+    "command": "uv run --frozen --no-sync python -m pytest artifacts/rp4_v3_code/test_aggregate_v3.py artifacts/rp4_v4_code/test_report.py artifacts/rp4_v4_code/test_report_checked.py tests/contract/test_rp4_results_v3_english.py tests/contract/test_rp4_presentation_english.py tests/contract/test_rp4_protocol_english.py tests/contract/test_rp4_report_figure_english.py tests/contract/test_rp4_v5_english.py -q",
+    "exit_code": 0,
+    "tests_passed": 43
+  },
+  "scope": {
+    "full_document_translation": true,
+    "empirical_model_fits": 0,
+    "scientific_evaluations_run": 0,
+    "sealed_or_prospective_data_read": false,
+    "research_only": true,
+    "capital_go": false
+  },
+  "custody_note": "Historical seals authenticate the preserved original bytes, not the later English presentation. Separate publication sanitisation receipts must identify any public redaction of local originals.",
+  "figure_visual_review": {
+    "status": "PASS",
+    "reviewer": "independent publication diagram review",
+    "renderer": "Sharp 0.35.4; vips 8.18.6",
+    "files": [
+      "artifacts/rp4_v3_b4/B1_over_B0.svg",
+      "artifacts/rp4_v3_b4/B2_over_B1.svg",
+      "artifacts/rp4_v4_b4/B1_over_B0.svg",
+      "artifacts/rp4_v4_b4/B2_over_B1.svg"
+    ],
+    "observations": "All four full images inspected. English headings, panel labels, numeric values, dates and legends are readable; no clipping or overlap. Historical adverse v1 curves retain their separate scale. Original SVG sources were not changed during preview."
+  }
+}

@@ -1,140 +1,57 @@
-fuera de muestra walk-forward, partición fijada 2026-09-07.
+Out-of-sample walk-forward evaluation; partition fixed on 2026-09-07.
 
-# ¿Las opciones mejoran el pronóstico de volatilidad intradía?
+# Do options improve intraday volatility forecasts?
 
-Sí para el estado de opciones; para el flujo, la respuesta depende del horizonte,
-la familia y el estadístico. La regla de cierre de RP4 se cumplió en RV15 con la
-familia lineal. El programa científico termina en v4, sin una v5.
+Yes for option-state information; for flow, the answer depends on the horizon, family and statistic. The RP4 closeout rule was met at RV15 in the linear family. The scientific programme ends at v4, without a v5.
 
-## Pregunta y prueba
+## Question and test
 
-Se pronostica la variación realizada de AAPL, AMZN, META, MSFT, NVDA y TSLA con
-barras de un minuto y operaciones de opciones. Los tres conjuntos son anidados:
-B0 usa precios e historia de volatilidad; B1 añade estado y superficie de opciones;
-B2 añade composición, actividad y desbalance firmado del flujo. En v3/v4 tienen
-29, 69 y 138 predictores, respectivamente, más los efectos de activo y los
-indicadores de presencia que corresponden a cada familia.
+Realised variation is forecast for AAPL, AMZN, META, MSFT, NVDA and TSLA using one-minute bars and options trades. The three sets are nested: B0 uses prices and volatility history; B1 adds option-state and options-surface information; B2 adds flow composition, activity and signed imbalance. In v3/v4 they have 29, 69 and 138 predictors, respectively, plus the asset effects and presence indicators appropriate to each family.
 
-El desarrollo abarca 2024-08-02–2026-07-31. La partición de calendario es
-2026-08-01, fijada el 2026-09-07. Cada sesión se predice con entrenamiento
-expansivo exclusivamente anterior, después de 60 sesiones de calentamiento,
-con selección en las últimas diez sesiones de entrenamiento y purga/embargo de
-60 minutos. La primaria v2–v4 tiene 419 sesiones y 160.832 orígenes; la ventana
-denominada confirmación, 2026-08-03–2026-09-04, tiene 25 sesiones y 9.750 orígenes.
+Development spans 2024-08-02–2026-07-31. The calendar split is 2026-08-01, fixed on 2026-09-07. Each session is predicted using exclusively earlier expanding training data, after 60 warm-up sessions, with selection on the last ten training sessions and a purge/embargo of 60 minutes. The v2–v4 primary window has 419 sessions and 160,832 origins; the window termed confirmation, 2026-08-03–2026-09-04, has 25 sessions and 9,750 origins.
 
-Se comparan una familia lineal y LightGBM. En v3/v4 la lineal es un **modelo
-lineal winsorizado con filtro de rango (ridge nominal)**. La pérdida QLIKE mide
-error de pronóstico, no rentabilidad. En v3/v4, H1 prueba B1 sobre B0 al 5 %
-unilateral; sólo si rechaza se prueba H2, B2 sobre B1, también al 5 %. La regla
-de cierre exige la secuencia en al menos una familia, no en ambas. El bootstrap
-usa bloques de cinco sesiones; los p no corrigen la búsqueda entre versiones.
+A linear family and LightGBM are compared. In v3/v4 the linear family is a **winsorised linear model with a rank filter (nominal ridge)**. QLIKE loss measures forecast error, not profitability. In v3/v4, H1 tests B1 over B0 at one-sided 5%; only if it rejects is H2, B2 over B1, tested, also at 5%. The closeout rule requires the sequence in at least one family, not both. The bootstrap uses five-session blocks; the p-values do not correct the search across versions.
 
-## Resultado primario de cada versión
+## Primary result for each version
 
-Cada celda muestra **reducción porcentual de QLIKE (p)**. Un signo negativo
-significa empeoramiento. En v1/v2, p es bilateral con Holm; en v3/v4 es unilateral
-secuencial. Por tanto, los p de distintas versiones no son intercambiables.
+Each cell shows **percentage reduction in QLIKE (p)**. A negative sign means deterioration. In v1/v2, p is two-sided with Holm adjustment; in v3/v4 it is sequential and one-sided. The p-values from different versions are therefore not interchangeable.
 
-| Versión / objetivo | Lineal B1/B0 | Lineal B2/B1 | Árboles B1/B0 | Árboles B2/B1 | Sesiones |
+| Version / target | Linear B1/B0 | Linear B2/B1 | Trees B1/B0 | Trees B2/B1 | Sessions |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| v1 · RV30 | +0,290 % (1,000) | −167.448,32 % (1,000) | +1,204 % (0,4724) | −0,073 % (1,000) | 418 |
-| v2 · RV30 | +1,715 % (0,1842) | −8,714 % (0,3752) | +2,091 % (0,0264) | −0,063 % (0,8858) | 419 |
-| v3 · RV30 | +1,729 % (0,0439) | +0,554 % (0,0525) | +2,091 % (0,0053) | −0,159 % (0,6631) | 419 |
-| v4 · RV15, primario | +0,880 % (0,0390) | +0,623 % (0,0032) | +1,170 % (0,0135) | −0,115 % (0,6280) | 419 |
-| v4 · RV5, secundario | +0,377 % (0,0092) | +0,256 % (0,0172) | +0,536 % (0,0608) | +0,160 % (no abierta; nominal 0,1927) | 419 |
+| v1 · RV30 | +0.290 % (1.0000) | −167,448.32 % (1.0000) | +1.204 % (0.4724) | −0.073 % (1.0000) | 418 |
+| v2 · RV30 | +1.715 % (0.1842) | −8.714 % (0.3752) | +2.091 % (0.0264) | −0.063 % (0.8858) | 419 |
+| v3 · RV30 | +1.729 % (0.0439) | +0.554 % (0.0525) | +2.091 % (0.0053) | −0.159 % (0.6631) | 419 |
+| v4 · RV15, primary | +0.880 % (0.0390) | +0.623 % (0.0032) | +1.170 % (0.0135) | −0.115 % (0.6280) | 419 |
+| v4 · RV5, secondary | +0.377 % (0.0092) | +0.256 % (0.0172) | +0.536 % (0.0608) | +0.160 % (not opened; nominal 0.1927) | 419 |
 
-v1 conserva su fallo numérico adverso y sus 92.261 orígenes. Las versiones
-cambian cobertura y especificación; esta tabla no es una comparación controlada
-que aísle el efecto de cada corrección. [v1](results_v1.md), [v2](results_v2.md),
-[v3](results_v3.md) y [v4 con intervalos, N y ambas ventanas](results_v4.md)
-conservan todos los signos.
+v1 retains its adverse numerical failure and its 92,261 origins. The versions change coverage and specification; this table is not a controlled comparison that isolates the effect of each correction. [v1](results_v1.md), [v2](results_v2.md), [v3](results_v3.md) and [v4 with intervals, N and both windows](results_v4.md) retain every sign.
 
-## Conclusión en tres frases
+## Conclusion in three sentences
 
-El estado y la superficie de opciones mejoran el pronóstico medio de RV30 y RV15
-en ambas familias bajo las pruebas registradas de v3/v4, sin que ello signifique
-mejora en todos los meses ni confirmación independiente en las 25 sesiones finales.
-El flujo añade una mejora pequeña en la familia lineal a 15 minutos (+0,623 %,
-IC95 % de la diferencia QLIKE [0,000335; 0,001932]) y a 5 minutos (+0,256 %,
-secundario): es positiva en los tres bloques de ambos horizontes y en los seis
-activos a 15 minutos, **pero sólo en tres de los seis a 5 minutos**.
-En árboles, B2 no supera la prueba de la media; la mediana pareada es positiva
-a 15 y 5 minutos, con p bilateral 0,0435/0,0038 y Holm 0,0870/0,0096, un
-secundario que no sustituye la prueba primaria.
+Option-state and options-surface information improve mean RV30 and RV15 forecasts in both families under the registered v3/v4 tests, without implying improvement in every month or independent confirmation in the final 25 sessions. Flow adds a small improvement in the linear family at 15 minutes (+0.623%, 95% CI for the QLIKE difference [0.000335; 0.001932]) and at 5 minutes (+0.256%, secondary): it is positive in all three blocks at both horizons and in all six assets at 15 minutes, **but in only three of the six at 5 minutes**. In trees, B2 does not pass the mean test; the paired median is positive at 15 and 5 minutes, with two-sided p-values 0.0435/0.0038 and Holm 0.0870/0.0096, a secondary that does not replace the primary test.
 
-## Qué explica el resultado y qué no
+## What explains the result and what does not
 
-La composición del flujo tiene mayor peso en la representación lineal que las
-exposiciones gamma: en RV15, las tres shares de prima tienen coeficientes medios
-absolutos de 0,250–0,312, frente a 0,00489 para desbalance gamma total; el conteo
-de operaciones con dirección identificada tiene pendiente media −0,04271; cuenta
-operaciones, no su saldo firmado. Esto no identifica una contribución causal
-ni reemplaza una ablación: el mecanismo de cobertura de dealers no queda probado.
-[Coeficientes por columna y horizonte](../../artifacts/rp4_closeout_audit/b2_coefficient_summary.csv).
-Los perfiles intradía, meses y tamaños de entrenamiento son descriptivos: se
-distingue la primera hora de mercado del primer tramo observable, y el bloque
-registrado `origin_minute >= 300` de la última hora real, `>= 330`.
+Flow composition carries more weight in the linear representation than gamma exposures: in RV15, the three premium shares have mean absolute coefficients of 0.250–0.312, compared with 0.00489 for total gamma imbalance; the count of trades with identified direction has mean slope −0.04271; it counts trades, not their signed balance. This does not identify a causal contribution or replace an ablation: the dealer-hedging mechanism remains unproven. [Coefficients by column and horizon](../../artifacts/rp4_closeout_audit/b2_coefficient_summary.csv). Intraday, monthly and training-size profiles are descriptive: the first market hour is distinguished from the first observable period, and the registered block `origin_minute >= 300` from the actual last hour, `>= 330`.
 
-Las interrupciones de publicación del proveedor de 2025-05-15 y 2025-09-18
-son hallazgos del instrumento. La regla v3 conserva actividad cero, vuelve
-indefinidas las formas/ratios sin operaciones y añade indicadores; acota el daño
-sin eliminarlo. Quedan 412 ventanas vacías de cinco minutos en la primaria y
-ninguna en confirmación. No se excluyen para mejorar el resultado.
-En esas filas, el QLIKE lineal pasa de 0,103 en B1 a 0,202 en B2 con igual peso
-por sesión/activo; la reparación limita el daño, no lo elimina.
+The provider publication interruptions on 2025-05-15 and 2025-09-18 are findings about the measurement instrument. The v3 rule retains zero activity, makes shapes/ratios undefined when there are no trades and adds indicators; it bounds the harm without eliminating it. There remain 412 empty five-minute windows in the primary sample and none in confirmation. They are not excluded to improve the result. In those rows, linear QLIKE rises from 0.103 in B1 to 0.202 in B2 with equal session/asset weights; the repair limits the harm rather than eliminating it.
 
-Existe una ruptura de estructura de mercado documentada: Nasdaq anunció el
-inicio de vencimientos de lunes y miércoles para estos nombres el **2026-01-26**.
-La cinta verifica esa primera presencia en los seis activos; el salto de celdas
-se observa el 29 de enero y los primeros lunes/miércoles 0DTE el 2/4 de febrero.
-La cobertura media por origen pasa de 20,04 a 23,10 celdas antes/después del 26.
-La confirmación está enteramente en el régimen nuevo, con entrenamiento en gran
-parte del anterior: no es una réplica bajo una estructura de mercado estable.
-[Aviso de Nasdaq del 16 de enero](https://www.nasdaqtrader.com/MicroNews.aspx?id=OTA2026-2)
-y [censo diario y cobertura por día de semana](../../artifacts/rp4_market_audit/REPORT.md).
+There is a documented market-structure break: Nasdaq announced the start of Monday and Wednesday expirations for these names on **2026-01-26**. The tape verifies that first presence for all six assets; the jump in cells is observed on 29 January and the first Monday/Wednesday 0DTE on 2/4 February. Mean coverage per origin rises from 20.04 to 23.10 cells before/after the 26th. The confirmation window is entirely in the new regime, with training largely from the preceding regime: it is not a replication under a stable market structure. [Nasdaq notice of 16 January](https://www.nasdaqtrader.com/MicroNews.aspx?id=OTA2026-2) and [daily census and coverage by weekday](../../artifacts/rp4_market_audit/REPORT.md).
 
-La penalización lineal se aplica a suma de errores, sin dividirla por N; la rejilla
-es poco restrictiva en muestras grandes y no garantiza estabilidad de coeficientes
-correlacionados. B2 eligió lambda 0,0001 en 111/419 sesiones; las podas fueron
-88–97 columnas, incluidas presencias, no 88 constantes. Las cotas superiores tocaron 223/324/302 pronósticos RV15 de
-B0/B1/B2: más contactos en conjuntos ricos no prueban por sí solos la dirección
-del sesgo. Cambiar la escala de penalización, adaptar la rejilla al ciclo de
-vencimientos y distinguir indisponibilidad del proveedor de actividad nula quedan
-como trabajo futuro, sin reejecutar esta prueba.
+The linear penalty is applied to the sum of errors, without dividing by N; the grid is weakly restrictive in large samples and does not guarantee stability of correlated coefficients. B2 selected lambda 0.0001 in 111/419 sessions; pruning removed 88–97 columns, including presence indicators, not 88 constants. Upper bounds were hit by 223/324/302 RV15 forecasts from B0/B1/B2: more hits in richer sets do not by themselves establish the direction of bias. Changing the penalty scale, adapting the grid to the expiration cycle and distinguishing provider unavailability from zero activity remain future work, without rerunning this test.
 
-El tramo octubre de 2024–febrero de 2025 contiene 64 sesiones evaluadas (15,27 %),
-no 84: la ganancia temprana de B1 lineal RV15 es negativa. El tiempo de aprendizaje
-y el régimen de mercado cambian juntos; no se identifica por separado que ampliar
-el calentamiento causaría una ventaja mayor. Se conservan los meses negativos.
-Los [perfiles por mes y tercil de entrenamiento](../../artifacts/rp4_closeout_audit/descriptive_profiles.csv)
-incluyen octubre/noviembre de 2025, negativos para B2 lineal tanto en RV30 como
-en RV15. La [auditoría descriptiva](../../artifacts/rp4_closeout_audit/REPORT.md)
-separa también los 288 orígenes de la primera hora **observable** de la semana
-arancelaria (0,18 % de la muestra, contraste B2 de árboles −0,3221 por origen)
-de la primera hora de mercado, que tiene otro denominador. No se excluye ninguno.
+The period from October 2024 to February 2025 contains 64 evaluated sessions (15.27%), not 84: the early gain from linear B1 at RV15 is negative. Learning time and the market regime change together; the study does not separately identify whether extending warm-up would cause a larger advantage. Negative months are retained. The [profiles by month and training tercile](../../artifacts/rp4_closeout_audit/descriptive_profiles.csv) include October/November 2025, which are negative for linear B2 at both RV30 and RV15. The [descriptive audit](../../artifacts/rp4_closeout_audit/REPORT.md) also distinguishes the 288 origins in the first **observable** hour of tariff week (0.18% of the sample, tree B2 contrast −0.3221 per origin) from the first market hour, which has a different denominator. None is excluded.
 
-Los movimientos extremos de AMZN (31 de agosto, −152/+71 puntos básicos desde
-las 14:00 ET; volumen siguiente 11 veces la mediana) y TSLA (17 de agosto) se
-reprodujeron en barras de un minuto y volumen. Es consistencia interna de FMP,
-no validación independiente del precio; la causa no está identificada.
+The extreme moves in AMZN (31 August, −152/+71 basis points from 14:00 ET; subsequent volume 11 times the median) and TSLA (17 August) were reproduced in one-minute bars and volume. This is internal FMP consistency, not independent price validation; the cause is unidentified.
 
-El secundario de saltos final usa 419 sesiones, no el cierre parcial de 418;
-su etiqueta `jump30 > 0` no es un test de salto significativo. Sus AUC cercanas a
-0,52 no demuestran ausencia de información sobre saltos económicamente importantes.
-La recalibración MZ permanece NO VERIFICABLE como resultado útil; no afecta la
-primaria. [Cierre corregido de secundarios](results_v3_revision2.md).
+The final jump secondary uses 419 sessions, not the partial closeout of 418; its label `jump30 > 0` is not a test of a significant jump. Its AUCs near 0.52 do not demonstrate absence of information about economically important jumps. MZ recalibration remains UNVERIFIABLE as a useful result; it does not affect the primary analysis. [Corrected secondary closeout](results_v3_revision2.md).
 
-## Cuatro divulgaciones
+## Four disclosures
 
-Esta es la cuarta evaluación de las mismas ventanas: v1 inicial; v2 corrige
-cobertura/capacidad/estabilidad; v3 añade desbalance y regla de ventanas vacías;
-v4 cambia el horizonte mediante un antecedente condicional predeclarado. RV5 es
-secundario, no una réplica adicional; la búsqueda entre versiones no está corregida.
+This is the fourth evaluation of the same windows: v1 is the initial design; v2 corrects coverage/capacity/stability; v3 adds imbalance and the empty-window rule; v4 changes the horizon through a predeclared conditional antecedent. RV5 is secondary, not an additional replication; the search across versions is not corrected.
 
-La ventana 20 de julio a 28 de agosto fue leída una vez por el puente de Fase 8
-con otra especificación. El PIT es proxy de tiempo fuente a 120 s, como en la
-literatura; no prueba la disponibilidad histórica al cliente.
+The window from 20 July to 28 August was read once by the Phase 8 bridge under another specification. PIT uses a source-time proxy at 120 s, as in the literature; it does not prove historical availability to the client.
 
-El hueco UW 2025-01-25–2025-02-24 se acepta y se declara, sin relleno.
+The UW gap 2025-01-25–2025-02-24 is accepted and disclosed, without filling.
 
 RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
