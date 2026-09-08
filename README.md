@@ -15,7 +15,7 @@ Author: Miguel Guerrero · Master of Data Science research project, Sydney Polyt
 *Primary 15-minute results: percentage reduction in forecast loss, with the declared one-sided p-values.*
 [PNG alternative](docs/figures/public_refresh/result_matrix.png) · [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv).
 
-[Key terms explained](docs/glossary.md) · [Visual glossary (PNG)](docs/figures/public_refresh/glossary.png).
+[Glossary of labels and option-market terms](docs/glossary.md) · [Visual glossary (PNG)](docs/figures/public_refresh/glossary.png).
 
 <a id="history-and-prospective-replication"></a>
 
@@ -46,7 +46,11 @@ The timeline also includes a separately registered long-run study (RP3), whose e
 *The sequence preserves nulls, technical corrections, changed specifications and prospective gates as distinct events.*
 [PNG alternative](docs/figures/public_refresh/programme_timeline.architecture.png).
 
+<a id="question-and-data"></a>
+
 ## Data and point-in-time discipline
+
+[Glossary of labels and option-market terms](docs/glossary.md) · [PNG reference sheet](docs/figures/public_refresh/glossary.png).
 
 The six stocks are **AAPL, AMZN, META, MSFT, NVDA and TSLA**. Licensed one-minute bars come from FMP and options records from Unusual Whales. A third provider, Massive, was audited; its option-trade endpoint was not authorised and it does not feed the reported results. The primary source window spans **2024-08-02–2026-07-31**; after warm-up and eligibility checks, it supplies **419 evaluated sessions** and **160,832 forecast origins** in each of the second, third and fourth specifications (the first evaluated **418 sessions** and **92,261 origins**). The separate **25-session** final historical window ends on **2026-09-04**. [Coverage](artifacts/rp4_v4_b4/coverage.csv) · [Registered windows](artifacts/rp4_v4_a1/specification.json).
 

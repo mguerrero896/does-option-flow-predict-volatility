@@ -1,94 +1,452 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1676" height="2560" viewBox="0 0 838 1280" role="img" aria-labelledby="public-glossary-title public-glossary-desc">
-<title id="public-glossary-title">Reading the research</title>
-<desc id="public-glossary-desc">Twelve definitions for reading a study of options and volatility. The text version provides expanded definitions, qualifications and sources.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1676" height="10764" viewBox="0 0 838 5382" role="img" aria-labelledby="public-glossary-title public-glossary-desc">
+<title id="public-glossary-title">Glossary of labels and option-market terms</title>
+<desc id="public-glossary-desc">Four reference tables containing the complete supplied wording for 36 entries, with four footers and a separate timing clarification.</desc>
 <defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="24" y="46" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#1a2332">Reading the research</text>
-<text x="24" y="79" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#5a6570">Twelve terms used in the study</text>
-<g id="volatility-and-realized-variance" data-glossary-card="true"><rect x="24" y="106" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Volatility / realized variance</text>
-<text x="42" y="172" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Volatility describes price variation.</text>
-<text x="42" y="196" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Realized variance sums squared</text>
-<text x="42" y="220" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">returns over a window. This study</text>
-<text x="42" y="244" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">forecasts variance, not direction.</text>
+<g data-glossary-field="title">
+<text x="24" y="52" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="30" font-weight="600" fill="#1a2332">Glossary of labels and option-market terms</text>
 </g>
-<g id="option-state-and-option-flow" data-glossary-card="true"><rect x="429" y="106" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Option state / option flow</text>
-<text x="447" y="172" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">State: current option-market</text>
-<text x="447" y="196" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">conditions. Flow: recent trading</text>
-<text x="447" y="220" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">activity, composition and signed</text>
-<text x="447" y="244" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">imbalance. These are different inputs.</text>
+<g data-glossary-section="1" data-section-top="94" data-section-bottom="1318"><rect x="24" y="94" width="790" height="54" fill="#eef5fb"/>
+<g data-glossary-field="section-title">
+<text x="40" y="128" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" font-weight="600" fill="#123c69">Project labels you will see on files and charts</text>
 </g>
-<g id="b0-b1-and-b2" data-glossary-card="true"><rect x="24" y="290" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="322" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">B0 / B1 / B2: nested inputs</text>
-<text x="42" y="356" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B0: price and volatility history.</text>
-<text x="42" y="380" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B1: B0 plus option state.</text>
-<text x="42" y="404" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">B2: B1 plus option flow.</text>
-<text x="42" y="428" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Each set keeps the earlier inputs.</text>
+<text x="40" y="177" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Label</text>
+<text x="266" y="177" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Meaning in this study</text>
+<g data-glossary-row="1"><rect x="24" y="192" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="192" x2="250" y2="302" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="222" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">RP4</text>
 </g>
-<g id="qlike-forecast-loss" data-glossary-card="true"><rect x="429" y="290" width="385" height="168" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="322" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">QLIKE: forecast loss</text>
-<text x="447" y="356" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A loss for variance forecasts:</text>
-<text x="447" y="380" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">smaller means less forecast error</text>
-<text x="447" y="404" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">under this score. A loss reduction</text>
-<text x="447" y="428" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is not a trading profit.</text>
+<g data-glossary-field="meaning">
+<text x="266" y="222" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The current historical experiment: does option</text>
+<text x="266" y="248" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">information improve short-term variance forecasts?</text>
+<text x="266" y="274" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Five saved versions, v1–v5.</text>
 </g>
-<g id="ridge-and-tree-models" data-glossary-card="true"><rect x="24" y="474" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="506" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Ridge / tree models</text>
-<text x="42" y="540" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Ridge: a linear model with shrunk</text>
-<text x="42" y="564" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">coefficients. Trees split inputs</text>
-<text x="42" y="588" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">into regions and combine rules.</text>
-<text x="42" y="612" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Agreement is not guaranteed.</text>
 </g>
-<g id="walk-forward-evaluation" data-glossary-card="true"><rect x="429" y="474" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="506" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Walk-forward evaluation</text>
-<text x="447" y="540" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Train on earlier observations;</text>
-<text x="447" y="564" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">evaluate at later forecast times.</text>
-<text x="447" y="588" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Keep model selection inside the</text>
-<text x="447" y="612" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">permitted training window.</text>
+<g data-glossary-row="2"><rect x="24" y="302" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="302" x2="250" y2="412" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="332" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">RP3</text>
 </g>
-<g id="point-in-time-pit" data-glossary-card="true"><rect x="24" y="658" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="690" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Point-in-time (PIT)</text>
-<text x="42" y="724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Use information available by the</text>
-<text x="42" y="748" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">forecast's time cutoff. Source time</text>
-<text x="42" y="772" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is a proxy here; it does not prove</text>
-<text x="42" y="796" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">that a client received the record.</text>
+<g data-glossary-field="meaning">
+<text x="266" y="332" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A separately registered long-run study with its</text>
+<text x="266" y="358" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">own rule; its first reading is estimated for</text>
+<text x="266" y="384" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">January 2029. Not this experiment.</text>
 </g>
-<g id="h1-and-h2" data-glossary-card="true"><rect x="429" y="658" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="690" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">H1 / H2: ordered questions</text>
-<text x="447" y="724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H1: state improves B1 over B0.</text>
-<text x="447" y="748" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H2: flow improves B2 over B1.</text>
-<text x="447" y="772" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">H2 opens only if H1 passes.</text>
-<text x="447" y="796" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">This sequence applies per family.</text>
 </g>
-<g id="p-values-and-confidence-intervals" data-glossary-card="true"><rect x="24" y="842" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="874" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">p-value / confidence interval</text>
-<text x="42" y="908" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">p: a tail probability under the null.</text>
-<text x="42" y="932" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">It is not a hypothesis probability.</text>
-<text x="42" y="956" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">CI: an interval for an effect, with</text>
-<text x="42" y="980" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">repeated-sampling interpretation.</text>
+<g data-glossary-row="3"><rect x="24" y="412" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="412" x2="250" y2="522" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="442" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">RP2</text>
 </g>
-<g id="block-bootstrap" data-glossary-card="true"><rect x="429" y="842" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="874" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Block bootstrap</text>
-<text x="447" y="908" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Resample blocks of sessions to</text>
-<text x="447" y="932" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">estimate uncertainty while keeping</text>
-<text x="447" y="956" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">some dependence in the data.</text>
-<text x="447" y="980" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Resampling creates no new evidence.</text>
+<g data-glossary-field="meaning">
+<text x="266" y="442" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The earlier validation study (finished August</text>
+<text x="266" y="468" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">2026) that found no usable improvement. Its</text>
+<text x="266" y="494" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">results are history, not current claims.</text>
 </g>
-<g id="multiple-testing" data-glossary-card="true"><rect x="24" y="1026" width="385" height="168" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="42" y="1058" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Multiple testing</text>
-<text x="42" y="1092" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">More tests create more chances</text>
-<text x="42" y="1116" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">of a false positive. Adjustments</text>
-<text x="42" y="1140" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">cover stated test families;</text>
-<text x="42" y="1164" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">they do not erase past search.</text>
 </g>
-<g id="prospective-replication" data-glossary-card="true"><rect x="429" y="1026" width="385" height="168" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.2"/>
-<text x="447" y="1058" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#123c69">Prospective replication</text>
-<text x="447" y="1092" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Test fixed rules on new sessions.</text>
-<text x="447" y="1116" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Reusing historical windows is</text>
-<text x="447" y="1140" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">not independent replication.</text>
-<text x="447" y="1164" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A planned test is not a result.</text>
+<g data-glossary-row="4"><rect x="24" y="522" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="522" x2="250" y2="658" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="552" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Phase 5 / 8A / 9</text>
 </g>
-<line x1="24" y1="1226" x2="814" y2="1226" stroke="#c9d2da" stroke-width="1"/>
-<text x="24" y="1260" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">Definitions explain the method; they do not certify a result.</text>
+<g data-glossary-field="meaning">
+<text x="266" y="552" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Workstreams of the earlier programme: Phase 5</text>
+<text x="266" y="578" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">registered and read the thirty-minute study; Phase</text>
+<text x="266" y="604" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">8A recorded a small exploratory bridge; Phase 9</text>
+<text x="266" y="630" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">collected the sessions later reused here.</text>
+</g>
+</g>
+<g data-glossary-row="5"><rect x="24" y="658" width="790" height="136" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="658" x2="250" y2="794" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="688" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">v1–v5</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="688" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Saved revisions of RP4: v1 diagnosis, v2 data and</text>
+<text x="266" y="714" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">fitting repair, v3 refined option flow, v4 the</text>
+<text x="266" y="740" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">fifteen-minute test (headline), v5 the</text>
+<text x="266" y="766" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">model-combination companion study.</text>
+</g>
+</g>
+<g data-glossary-row="6"><rect x="24" y="794" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="794" x2="250" y2="904" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="824" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">B0 · B1 · B2</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="824" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The three nested information sets: B0 market</text>
+<text x="266" y="850" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">history (29 predictors), B1 adds option state</text>
+<text x="266" y="876" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">(69), B2 adds option flow (138).</text>
+</g>
+</g>
+<g data-glossary-row="7"><rect x="24" y="904" width="790" height="136" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="904" x2="250" y2="1040" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="934" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">H1 · H2</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="934" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The two ordered tests: H1 asks whether option</text>
+<text x="266" y="960" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">state beats market history; H2 asks whether option</text>
+<text x="266" y="986" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">flow beats option state, and only counts if H1</text>
+<text x="266" y="1012" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">passed.</text>
+</g>
+</g>
+<g data-glossary-row="8"><rect x="24" y="1040" width="790" height="84" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1040" x2="250" y2="1124" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1070" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">RV30 · RV15 ·</text>
+<text x="40" y="1096" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">RV5</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1070" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Realised variance over the next 30, 15 or 5</text>
+<text x="266" y="1096" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">minutes. RV15 is the primary target of v4.</text>
+</g>
+</g>
+<g data-glossary-row="9"><rect x="24" y="1124" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1124" x2="250" y2="1234" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1154" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Decision 128 /</text>
+<text x="40" y="1180" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">136</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1154" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Numbered entries in the project's decision log:</text>
+<text x="266" y="1180" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">128 fixed the 1 August 2026 split; 136 registered</text>
+<text x="266" y="1206" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">the four-model average as a secondary candidate.</text>
+</g>
+</g>
+<g data-glossary-field="footer">
+<text x="40" y="1264" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">Labels identify parts of this project. None of them is an option-pricing</text>
+<text x="40" y="1290" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">concept.</text>
+</g>
+</g>
+<g data-glossary-section="2" data-section-top="1350" data-section-bottom="2438"><rect x="24" y="1350" width="790" height="54" fill="#eef5fb"/>
+<g data-glossary-field="section-title">
+<text x="40" y="1384" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" font-weight="600" fill="#123c69">Option-market terms used in this study</text>
+</g>
+<text x="40" y="1433" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Label</text>
+<text x="266" y="1433" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Meaning in this study</text>
+<g data-glossary-row="1"><rect x="24" y="1448" width="790" height="136" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1448" x2="250" y2="1584" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1478" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Option</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1478" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A contract giving the right to buy (call) or sell</text>
+<text x="266" y="1504" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">(put) a stock at a set price before a set date.</text>
+<text x="266" y="1530" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Its price reflects how much movement the market</text>
+<text x="266" y="1556" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">expects.</text>
+</g>
+</g>
+<g data-glossary-row="2"><rect x="24" y="1584" width="790" height="84" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1584" x2="250" y2="1668" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1614" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Strike</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1614" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The exercise price written in the contract. Not a</text>
+<text x="266" y="1640" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">forecast or a price target.</text>
+</g>
+</g>
+<g data-glossary-row="3"><rect x="24" y="1668" width="790" height="84" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1668" x2="250" y2="1752" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1698" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Expiry · DTE ·</text>
+<text x="40" y="1724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">0DTE</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1698" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The contract's end date; DTE is calendar days to</text>
+<text x="266" y="1724" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">expiry; 0DTE expires the same day.</text>
+</g>
+</g>
+<g data-glossary-row="4"><rect x="24" y="1752" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1752" x2="250" y2="1862" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1782" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Premium</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1782" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The price paid for the contract, in dollars.</text>
+<text x="266" y="1808" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">"Premium share" is the fraction of premium on one</text>
+<text x="266" y="1834" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">side (buys, sells, out-of-the-money, same-day).</text>
+</g>
+</g>
+<g data-glossary-row="5"><rect x="24" y="1862" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1862" x2="250" y2="1972" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="1892" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Bid · Ask ·</text>
+<text x="40" y="1918" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Aggressor</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="1892" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Best buy and sell quotes. The aggressor is the</text>
+<text x="266" y="1918" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">side inferred to have initiated the trade; it is a</text>
+<text x="266" y="1944" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">proxy, not an observed identity.</text>
+</g>
+</g>
+<g data-glossary-row="6"><rect x="24" y="1972" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="1972" x2="250" y2="2108" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2002" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Implied</text>
+<text x="40" y="2028" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">volatility (IV)</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2002" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The level of future movement implied by option</text>
+<text x="266" y="2028" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">prices. The surface is IV across strikes and</text>
+<text x="266" y="2054" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">expiries; smile, skew, term slope, risk reversal</text>
+<text x="266" y="2080" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">and butterfly describe its shape.</text>
+</g>
+</g>
+<g data-glossary-row="7"><rect x="24" y="2108" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2108" x2="250" y2="2218" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Option state</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2138" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Measurements of the option market at the forecast</text>
+<text x="266" y="2164" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">time: IV levels and the shape of the surface.</text>
+<text x="266" y="2190" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Slow-moving, price-based.</text>
+</g>
+</g>
+<g data-glossary-row="8"><rect x="24" y="2218" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2218" x2="250" y2="2354" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2248" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Option flow</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2248" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Recent option transactions: counts, premium,</text>
+<text x="266" y="2274" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">buy/sell split, sweeps, multileg trades, same-day</text>
+<text x="266" y="2300" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">contracts and sensitivity flows. Fast-moving,</text>
+<text x="266" y="2326" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">trade-based.</text>
+</g>
+</g>
+<g data-glossary-field="footer">
+<text x="40" y="2384" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">State comes from option prices; flow comes from option trades. The study</text>
+<text x="40" y="2410" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">tests them in that order.</text>
+</g>
+</g>
+<g data-glossary-section="3" data-section-top="2470" data-section-bottom="3668"><rect x="24" y="2470" width="790" height="54" fill="#eef5fb"/>
+<g data-glossary-field="section-title">
+<text x="40" y="2504" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" font-weight="600" fill="#123c69">Sensitivities, trade types and market words</text>
+</g>
+<text x="40" y="2553" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Label</text>
+<text x="266" y="2553" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Meaning in this study</text>
+<g data-glossary-row="1"><rect x="24" y="2568" width="790" height="136" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2568" x2="250" y2="2704" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2598" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Delta · Gamma ·</text>
+<text x="40" y="2624" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Vega</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2598" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">How an option's price responds to the stock price</text>
+<text x="266" y="2624" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">(delta), how delta itself changes (gamma), and how</text>
+<text x="266" y="2650" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">the price responds to volatility (vega). "Flow"</text>
+<text x="266" y="2676" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">versions add these up over recent trades.</text>
+</g>
+</g>
+<g data-glossary-row="2"><rect x="24" y="2704" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2704" x2="250" y2="2814" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2734" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Dealer gamma</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2734" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A proxy for the position held by market makers.</text>
+<text x="266" y="2760" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Hedging that position can move the stock; the</text>
+<text x="266" y="2786" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">study measures a proxy, not actual dealer books.</text>
+</g>
+</g>
+<g data-glossary-row="3"><rect x="24" y="2814" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2814" x2="250" y2="2924" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2844" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Hedging ·</text>
+<text x="40" y="2870" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Liquidity</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2844" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Trading to offset an existing risk rather than to</text>
+<text x="266" y="2870" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">bet; how easily a contract can be traded. Both can</text>
+<text x="266" y="2896" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">create trades that carry no forecast.</text>
+</g>
+</g>
+<g data-glossary-row="4"><rect x="24" y="2924" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="2924" x2="250" y2="3060" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="2954" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Sweep · Multileg</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="2954" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A sweep executes one order across several</text>
+<text x="266" y="2980" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">exchanges at once; a multileg trade combines</text>
+<text x="266" y="3006" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">several contracts (a spread). Both are recorded</text>
+<text x="266" y="3032" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">trade types, not signals by themselves.</text>
+</g>
+</g>
+<g data-glossary-row="5"><rect x="24" y="3060" width="790" height="84" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3060" x2="250" y2="3144" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3090" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Moneyness</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3090" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Strike relative to the current stock price (strike</text>
+<text x="266" y="3116" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">divided by spot); near one means at the money.</text>
+</g>
+</g>
+<g data-glossary-row="6"><rect x="24" y="3144" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3144" x2="250" y2="3280" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3174" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Session · Origin</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3174" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">A session is one trading day, 9:30 to 16:00 New</text>
+<text x="266" y="3200" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">York time. An origin is one forecast case: a</text>
+<text x="266" y="3226" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">stock, a day and a minute (10:05 to 15:25, every</text>
+<text x="266" y="3252" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">five minutes; 65 per stock per day).</text>
+</g>
+</g>
+<g data-glossary-row="7"><rect x="24" y="3280" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3280" x2="250" y2="3390" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3310" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">SPY · QQQ</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3310" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Exchange-traded funds that track the S&amp;P 500 and</text>
+<text x="266" y="3336" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Nasdaq-100 indices. Used as market controls, and</text>
+<text x="266" y="3362" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">as two extra targets in the eight-asset extension.</text>
+</g>
+</g>
+<g data-glossary-row="8"><rect x="24" y="3390" width="790" height="84" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3390" x2="250" y2="3474" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3420" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">AAPL AMZN META</text>
+<text x="40" y="3446" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">MSFT NVDA TSLA</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3420" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Ticker symbols of Apple, Amazon, Meta, Microsoft,</text>
+<text x="266" y="3446" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Nvidia and Tesla.</text>
+</g>
+</g>
+<g data-glossary-row="9"><rect x="24" y="3474" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3474" x2="250" y2="3584" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3504" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">FMP · UW</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3504" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Financial Modeling Prep supplies one-minute</text>
+<text x="266" y="3530" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">prices; Unusual Whales supplies the option</text>
+<text x="266" y="3556" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">records.</text>
+</g>
+</g>
+<g data-glossary-field="footer">
+<text x="40" y="3614" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">Sensitivities and trade types are inputs; the study does not identify who</text>
+<text x="40" y="3640" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">traded or why.</text>
+</g>
+</g>
+<g data-glossary-section="4" data-section-top="3700" data-section-bottom="5190"><rect x="24" y="3700" width="790" height="54" fill="#eef5fb"/>
+<g data-glossary-field="section-title">
+<text x="40" y="3734" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" font-weight="600" fill="#123c69">Measures and checks specific to variance forecasting</text>
+</g>
+<text x="40" y="3783" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Label</text>
+<text x="266" y="3783" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Meaning in this study</text>
+<g data-glossary-row="1"><rect x="24" y="3798" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3798" x2="250" y2="3908" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3828" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Realised</text>
+<text x="40" y="3854" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">variance (RV)</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3828" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The sum of squared one-minute log returns over the</text>
+<text x="266" y="3854" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">next interval. It is variance, not its square root</text>
+<text x="266" y="3880" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">(volatility), and not a return.</text>
+</g>
+</g>
+<g data-glossary-row="2"><rect x="24" y="3908" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="3908" x2="250" y2="4044" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="3938" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">QLIKE</text>
+<text x="40" y="3964" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">(pronounced</text>
+<text x="40" y="3990" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">"cue-like")</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="3938" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The loss used to score variance forecasts: y/f −</text>
+<text x="266" y="3964" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">log(y/f) − 1. It punishes under-forecasting a big</text>
+<text x="266" y="3990" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">move much more than over-forecasting a small one.</text>
+<text x="266" y="4016" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Lower is better.</text>
+</g>
+</g>
+<g data-glossary-row="3"><rect x="24" y="4044" width="790" height="136" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4044" x2="250" y2="4180" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4074" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Persistence ·</text>
+<text x="40" y="4100" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">HAR · HARQ</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4074" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Reference forecasts: persistence repeats the</text>
+<text x="266" y="4100" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">previous session's pattern; HAR combines past</text>
+<text x="266" y="4126" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">variance over several time scales; HARQ adds a</text>
+<text x="266" y="4152" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">measurement-noise adjustment.</text>
+</g>
+</g>
+<g data-glossary-row="4"><rect x="24" y="4180" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4180" x2="250" y2="4290" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4210" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">MAE · RMSE</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4210" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Mean absolute error and root mean squared error,</text>
+<text x="266" y="4236" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">in variance units. Reported as complements; QLIKE</text>
+<text x="266" y="4262" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is the declared measure.</text>
+</g>
+</g>
+<g data-glossary-row="5"><rect x="24" y="4290" width="790" height="162" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4290" x2="250" y2="4452" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4320" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Linear</text>
+<text x="40" y="4346" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">(log-ridge) ·</text>
+<text x="40" y="4372" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Trees (LightGBM)</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4320" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">The two model families. The linear model fits log</text>
+<text x="266" y="4346" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">variance with a penalty ("shrinkage strength 100"</text>
+<text x="266" y="4372" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">on the receipts); the trees are gradient-boosted</text>
+<text x="266" y="4398" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">with leaves and stopping rounds chosen on earlier</text>
+<text x="266" y="4424" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">data.</text>
+</g>
+</g>
+<g data-glossary-row="6"><rect x="24" y="4452" width="790" height="136" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4452" x2="250" y2="4588" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4482" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Point-in-time</text>
+<text x="40" y="4508" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">(PIT)</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4482" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Only records with a source timestamp at least 120</text>
+<text x="266" y="4508" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">seconds before the forecast time are allowed. It</text>
+<text x="266" y="4534" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is a rule on source clocks, not proof of when a</text>
+<text x="266" y="4560" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">client received the data.</text>
+</g>
+</g>
+<g data-glossary-row="7"><rect x="24" y="4588" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4588" x2="250" y2="4698" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4618" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Purge · Embargo</text>
+<text x="40" y="4644" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">· Warm-up</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4618" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Training rows whose outcome ends within 60 minutes</text>
+<text x="266" y="4644" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">of validation or forecasting are excluded; the</text>
+<text x="266" y="4670" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">first 60 sessions are reserved to build histories.</text>
+</g>
+</g>
+<g data-glossary-row="8"><rect x="24" y="4698" width="790" height="188" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4698" x2="250" y2="4886" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4728" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Block bootstrap</text>
+<text x="40" y="4754" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">· One-sided p</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4728" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Groups of five consecutive sessions are resampled</text>
+<text x="266" y="4754" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">9,999 times with a fixed seed; the interval</text>
+<text x="266" y="4780" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">describes the estimated difference and the</text>
+<text x="266" y="4806" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">one-sided test asks whether it improves at the 5 %</text>
+<text x="266" y="4832" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">rule. Holm is the stricter correction for several</text>
+<text x="266" y="4858" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">tests.</text>
+</g>
+</g>
+<g data-glossary-row="9"><rect x="24" y="4886" width="790" height="110" fill="#f5f7f9" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4886" x2="250" y2="4996" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="4916" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Placebo · Delay</text>
+<text x="40" y="4942" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">sensitivity</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="4916" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Follow-up checks: shuffled option flow should not</text>
+<text x="266" y="4942" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">look better than nothing; stricter delays (300 and</text>
+<text x="266" y="4968" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">60 seconds) test the timing rule.</text>
+</g>
+</g>
+<g data-glossary-row="10"><rect x="24" y="4996" width="790" height="110" fill="#ffffff" stroke="#e1e6ea" stroke-width="1"/><line x1="250" y1="4996" x2="250" y2="5106" stroke="#e1e6ea"/>
+<g data-glossary-field="label">
+<text x="40" y="5026" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Receipt ·</text>
+<text x="40" y="5052" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">Manifest ·</text>
+<text x="40" y="5078" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="600" fill="#1a2332">SHA-256</text>
+</g>
+<g data-glossary-field="meaning">
+<text x="266" y="5026" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Files that record inputs, outputs, times and</text>
+<text x="266" y="5052" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">content hashes so that every number can be traced</text>
+<text x="266" y="5078" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">to its file.</text>
+</g>
+</g>
+<g data-glossary-field="footer">
+<text x="40" y="5136" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">These are the measures behind every percentage in the video; none of them is</text>
+<text x="40" y="5162" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#5a6570">a trading return.</text>
+</g>
+</g>
+<rect x="24" y="5222" width="790" height="136" fill="#fdf6ea" stroke="#ecd9b6"/>
+<g data-glossary-field="reading-note">
+<text x="40" y="5252" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">Timing clarification: the supplied wording calls both 300 and 60 seconds</text>
+<text x="40" y="5278" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">stricter delays. Relative to the registered 120-second cutoff, 300 seconds</text>
+<text x="40" y="5304" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">is stricter and 60 seconds is less strict. The reference definitions above</text>
+<text x="40" y="5330" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#1a2332">are reproduced verbatim.</text>
+</g>
 </svg>
