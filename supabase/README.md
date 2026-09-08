@@ -1,4 +1,23 @@
-# supabase/ — schema history, reconciled 2026-08-28
+# supabase/ — schema history and public v4 results
+
+The 2026-09-09 Sydney refresh adds only three public aggregate tables:
+`rp4_v4_primary_statistics` (24 rows), `rp4_v4_coverage` (36), and
+`rp4_v4_horizons` (3). Nine aggregate/registry tables are now public. The existing
+four curated `api` views and private storage bucket are unchanged.
+[Before/after schema and anonymous-read receipt](../artifacts/rp4_public_refresh/supabase_receipt.json).
+
+Migration `20260908153626_rp4_v4_public_aggregate_results` is the twentieth applied
+migration. It grants readers SELECT only and enables RLS with `public_read` on each
+new table. `uv run python scripts/sync_supabase_catalog.py --rp4-v4 --dry-run`
+validates the saved CSVs; removing `--dry-run` publishes only these three sources
+with source hashes and complete read-back checks. The private dataset loader is separate.
+
+The earlier migration draft is historical design, partly superseded by applied
+migrations. Remaining type/key work is deferred outside this refresh; no signature
+is needed to publish the already authorized v4 aggregate tables. Never execute the
+mixed draft wholesale.
+
+## Earlier reconciliation (2026-08-28)
 
 `migrations/` holds the migrations Supabase records as applied to project
 `eqpyjikcewqaegnbaemf`, retrieved VERBATIM from
@@ -7,7 +26,7 @@ header). This closes the audit finding that the remote schema could not be
 rebuilt from git: `supabase db reset` against these files reproduces the applied
 DDL history in order.
 
-The directory contains all 19 live migrations through
+At that reconciliation the directory contained all 19 live migrations through
 `20260828020327_close_service_role_sensitive_mutation_paths`. The corresponding read-only
 live audit is `artifacts/supabase_schema_audit_20260828.json`: the four versioned result
 tables and four current views contain zero current rows, `publish_rp2_v3(jsonb)` is not

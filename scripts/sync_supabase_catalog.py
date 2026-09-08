@@ -14,6 +14,8 @@ Run:  $env:SUPABASE_SERVICE_KEY set, then  uv run python scripts/sync_supabase_c
 from __future__ import annotations
 
 import argparse
+import csv
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -27,6 +29,70 @@ from mds650.supabase_auth import api_key_headers
 REPO = Path(__file__).resolve().parents[1]
 PROJECT_REF = "eqpyjikcewqaegnbaemf"
 REST = f"https://{PROJECT_REF}.supabase.co/rest/v1"
+
+RP4_SOURCES = {
+    "rp4_v4_primary_statistics": (
+        "artifacts/rp4_v4_b4/primary_statistics.csv",
+        "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    ),
+    "rp4_v4_coverage": (
+        "artifacts/rp4_v4_b4/coverage.csv",
+        "67941d02647ae329fcc704a0b109949ab4312cb6915006302186b21770e853ef",
+    ),
+    "rp4_v4_horizons": ("artifacts/rp4_public_refresh/horizon_reference.csv", None),
+}
+
+
+def rp4_rows(root: Path = REPO) -> dict[str, list[dict[str, Any]]]:
+    """Map only the saved public v4 CSVs; preserve every cell's exact decimal text."""
+    guard_sealed_access(list(RP4_SOURCES), operation="public v4 aggregate sync")
+    payload = {}
+    for table, (relative, expected) in RP4_SOURCES.items():
+        path = (root / relative).resolve()
+        if not path.is_relative_to(root.resolve()):
+            raise ValueError("RP4_SOURCE_ESCAPES_ROOT")
+        content = path.read_bytes()
+        digest = hashlib.sha256(content).hexdigest()
+        if expected is not None and digest != expected:
+            raise ValueError(f"RP4_SOURCE_HASH_MISMATCH:{relative}")
+        data = list(csv.DictReader(content.decode("utf-8-sig").splitlines()))
+        if not data or any(None in row or None in row.values() for row in data):
+            raise ValueError(f"RP4_INVALID_CSV:{relative}")
+        if table == "rp4_v4_horizons" and data != [
+            {"horizon_minutes": "30", "version": "v3", "role": "historical_reference",
+             "source": "docs/rp4/specification_v3.md"},
+            {"horizon_minutes": "15", "version": "v4", "role": "primary",
+             "source": "docs/rp4/specification_v4.md"},
+            {"horizon_minutes": "5", "version": "v4", "role": "secondary",
+             "source": "docs/rp4/specification_v4.md"},
+        ]:
+            raise ValueError("RP4_HORIZON_REFERENCE_DRIFT")
+        payload[table] = [
+            {"source_path": relative, "source_sha256": digest, "row_number": i,
+             "horizon_minutes": int(row["horizon_minutes"]), "result": row}
+            for i, row in enumerate(data, 1)
+        ]
+    return payload
+
+
+def sync_rp4(client: httpx.Client, payload: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
+    """Upsert digest-keyed aggregates, then compare every returned cell with the source."""
+    if set(payload) != set(RP4_SOURCES):
+        raise ValueError("RP4_TABLE_SCOPE_MISMATCH")
+    receipt = {}
+    for table, rows in payload.items():
+        _upsert(client, table, rows, "source_sha256,row_number")
+        response = client.get(
+            f"{REST}/{table}",
+            params={"select": "*", "source_sha256": f"eq.{rows[0]['source_sha256']}",
+                    "order": "row_number.asc"},
+        )
+        if response.status_code != 200 or response.json() != rows:
+            raise RuntimeError(f"RP4_DATABASE_CONTENT_MISMATCH:{table}")
+        receipt[table] = {"rows": len(rows), "source_path": rows[0]["source_path"],
+                          "source_sha256": rows[0]["source_sha256"],
+                          "all_cells_equal": True}
+    return receipt
 
 
 def _upsert(client: httpx.Client, table: str, rows: list[dict[str, Any]], conflict: str) -> None:
@@ -158,7 +224,30 @@ def build_rows(
 
 
 def main(argv: list[str] | None = None) -> None:
-    argparse.ArgumentParser(description=__doc__).parse_args(argv)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rp4-v4", action="store_true", help="only saved public v4 aggregates")
+    parser.add_argument("--dry-run", action="store_true", help="validate v4 sources without writes")
+    parser.add_argument("--receipt", type=Path, help="write the verified v4 upload receipt")
+    args = parser.parse_args(argv)
+    if (args.dry_run or args.receipt) and not args.rp4_v4:
+        parser.error("--dry-run and --receipt require --rp4-v4")
+    if args.rp4_v4:
+        payload = rp4_rows()
+        if args.dry_run:
+            print(json.dumps({table: {"rows": len(rows),
+                                     "source_sha256": rows[0]["source_sha256"]}
+                              for table, rows in payload.items()}, indent=2))
+            return
+        key = os.environ.get("SUPABASE_SERVICE_KEY")
+        if not key:
+            raise SystemExit("SUPABASE_SERVICE_KEY_MISSING")
+        with httpx.Client(timeout=120, headers=api_key_headers(key)) as client:
+            receipt = sync_rp4(client, payload)
+        encoded = json.dumps({"status": "VERIFIED", "datasets": receipt}, indent=2) + "\n"
+        if args.receipt:
+            args.receipt.write_text(encoded, encoding="utf-8", newline="\n")
+        print(encoded)
+        return
     key = os.environ.get("SUPABASE_SERVICE_KEY")
     if not key:
         raise SystemExit("SUPABASE_SERVICE_KEY missing (User env var; see DATA_ACCESS.md).")
