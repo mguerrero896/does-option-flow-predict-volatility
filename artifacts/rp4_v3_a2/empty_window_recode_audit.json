@@ -1,0 +1,212 @@
+[
+  {
+    "column": "b2_5m_buy_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_d_iv",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_decay_intensity_innovation",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_multileg_size_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_strike_hhi",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_zero_dte_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_contract_entropy",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_d_mid_rel",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_d_spread",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_expiry_hhi",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_interarrival_cv",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_multileg_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_otm_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_passive_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_sell_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_sweep_premium_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_5m_zero_dte_trade_share",
+    "empty_rows": 424,
+    "finite_values_replaced": 424,
+    "unknown_count_rows": 0,
+    "window_minutes": 5
+  },
+  {
+    "column": "b2_30m_buy_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_d_iv",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_d_mid_rel",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_d_spread",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_decay_intensity_innovation",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_multileg_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_multileg_size_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_otm_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_passive_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_sell_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_sweep_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_zero_dte_premium_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  },
+  {
+    "column": "b2_30m_zero_dte_trade_share",
+    "empty_rows": 396,
+    "finite_values_replaced": 396,
+    "unknown_count_rows": 0,
+    "window_minutes": 30
+  }
+]

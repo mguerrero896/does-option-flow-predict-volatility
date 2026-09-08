@@ -1,0 +1,9 @@
+window,column,N_sessions,maximum_absolute_difference,exact
+primary,loss__lightgbm_qlike__B0,419,0.0,True
+primary,forecast__lightgbm_qlike__B0,419,0.0,True
+primary,loss__lightgbm_qlike__B1,419,0.0,True
+primary,forecast__lightgbm_qlike__B1,419,0.0,True
+confirmation,loss__lightgbm_qlike__B0,25,0.0,True
+confirmation,forecast__lightgbm_qlike__B0,25,0.0,True
+confirmation,loss__lightgbm_qlike__B1,25,0.0,True
+confirmation,forecast__lightgbm_qlike__B1,25,0.0,True

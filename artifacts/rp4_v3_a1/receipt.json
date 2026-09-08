@@ -1,0 +1,23 @@
+{
+  "stage": "A1",
+  "status": "COMPLETE",
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_code/freeze.py",
+  "exit_code": 0,
+  "working_directory": "private-input/0ec5f26c567f416b9513",
+  "validation": {
+    "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_code/freeze.py",
+    "exit_code": 0
+  },
+  "artifacts_sha256": {
+    "docs/rp4/specification_v3.md": "efb9ecf8130b422cb458ae924e85a9482c32c9c10741f7e1d33d21d812be0566",
+    "docs/rp4/decision_131_v3.md": "ce62e6b6aefa6dc5f5d7a46f5ddef7e58d09a1419334f8c8af7da8e51bdcf697",
+    "artifacts/rp4_v3_a1/specification.json": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+    "artifacts/rp4_v3_a1/freeze.json": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d",
+    "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea"
+  },
+  "independent_review": "causal duplicate revision defect corrected before freeze; no remaining A1 blocker",
+  "v3_models_fitted": 0,
+  "v3_materialization_executed_at_freeze": false,
+  "prior_v1_v2_results_known": true,
+  "capital_go": false
+}

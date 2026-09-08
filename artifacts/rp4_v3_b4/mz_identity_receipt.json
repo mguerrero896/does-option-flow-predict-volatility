@@ -1,0 +1,342 @@
+{
+  "schema_version": "rp4-v3-mz-identity-audit-receipt-v1",
+  "status": "PASS",
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_b4/audit_mz_identity.py",
+  "exit_code": 0,
+  "elapsed_seconds": 8.5539199,
+  "workdir": "private-input/0ec5f26c567f416b9513",
+  "environment": {
+    "UV_PROJECT_ENVIRONMENT": "private-input/4b06809c9ca2d51ba83b",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "stdout_capture": "structured JSON from the successful execution already captured; no reexecution",
+  "stdout": {
+    "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_b4/audit_mz_identity.py",
+    "models_fitted": 0,
+    "files_written": 0,
+    "closed_artifact_sha256": {
+      "artifacts/rp4_v3_b2/session_losses.csv": "8eb70bfe30c60a9cc1dd6802dd711e506cb4582ae172fdfbe9fee9f9ddc5064f",
+      "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "private/evaluation/primary/fit_diagnostics.json": "e130ab1cd54226d2f7ea99fa504643a1fe43cae9ffd6d476bdcd24516952d713"
+    },
+    "scope": "PRIMARY_CLOSED_ARITHMETIC_ONLY",
+    "no_model_refits": true,
+    "confirmation_reads": 0,
+    "session_hashes_verified": 419,
+    "source_sha256": {
+      "artifacts/rp4_v3_b2/summary.json": "645d319f4b5b283a2b1bc6ecda1a185650b8436cdbf3b319e9debfc41210ef1d",
+      "artifacts/rp4_v3_b2/receipt.json": "60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af",
+      "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+      "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+      "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+      "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "artifacts/rp4_v3_b4/audit_mz_identity.py": "0875b9d7d59ddc638c8ea368a8f200029f14ed3a07b798345488793053d3ddf4"
+    },
+    "results": {
+      "B0": {
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "floor_hits": 18631,
+        "strictly_negative_affine": 18631,
+        "exact_zero_affine": 0,
+        "positive_at_or_below_floor": 0,
+        "nonfinite_origin_fallbacks": 0,
+        "training_identity_fallbacks": 0,
+        "coefficient_negative_intercept_sessions": 391,
+        "coefficient_negative_slope_sessions": 0,
+        "formula_stored_max_abs_difference": 0,
+        "floor_counter_disagreements": 0,
+        "scale_relative_error_max": 0,
+        "closed_form_intercept_abs_error_max": 1.1519648082658485e-19,
+        "closed_form_slope_abs_error_max": 3.774758283725532e-15,
+        "validation_init_score_parity_abs_difference_max": 6.994405055138486e-15,
+        "floor_hit_percent": 11.584137485077596,
+        "sessions_with_floor_hits": 246,
+        "first_floor_session": "2024-10-28",
+        "last_floor_session": "2026-07-28",
+        "raw_qlike_recomputed": 0.14931695344824814,
+        "mz_qlike_recomputed": 635736.3616719762,
+        "mz_qlike_published": 635736.3616719762,
+        "published_minus_recomputed": 0,
+        "floor_weighted_qlike_contribution": 635735.0757919574,
+        "floor_loss_share_percent": 99.99979773376258,
+        "nonfloor_weighted_qlike_contribution": 1.2858800187241286,
+        "top5_sessions_by_mz_loss": [
+          {
+            "session": "2025-04-16",
+            "N_origins": 390,
+            "floor_hits": 249,
+            "raw_qlike": 0.18272019408659565,
+            "recalibrated_qlike": 14874424.136721378,
+            "floor_qlike_contribution": 14874423.689557528,
+            "minimum_affine": -7.585472053670003e-05,
+            "intercept": -9.987510154577158e-05,
+            "slope": 3.1624324081110116
+          },
+          {
+            "session": "2025-04-22",
+            "N_origins": 390,
+            "floor_hits": 255,
+            "raw_qlike": 0.30384129511520963,
+            "recalibrated_qlike": 14827727.725572305,
+            "floor_qlike_contribution": 14827727.275871709,
+            "minimum_affine": -5.717970912072761e-05,
+            "intercept": -7.226067344428183e-05,
+            "slope": 2.9311368406842497
+          },
+          {
+            "session": "2025-04-15",
+            "N_origins": 390,
+            "floor_hits": 264,
+            "raw_qlike": 0.0799489118304348,
+            "recalibrated_qlike": 13214705.316642135,
+            "floor_qlike_contribution": 13214704.877541667,
+            "minimum_affine": -7.752632795161018e-05,
+            "intercept": -0.00010089246205926541,
+            "slope": 3.1647287961207082
+          },
+          {
+            "session": "2025-04-17",
+            "N_origins": 390,
+            "floor_hits": 213,
+            "raw_qlike": 0.09763617614179776,
+            "recalibrated_qlike": 13175157.108619982,
+            "floor_qlike_contribution": 13175156.15416062,
+            "minimum_affine": -6.810261033968518e-05,
+            "intercept": -9.326859700396741e-05,
+            "slope": 3.12554210537078
+          },
+          {
+            "session": "2025-04-21",
+            "N_origins": 390,
+            "floor_hits": 310,
+            "raw_qlike": 0.04372432645168021,
+            "recalibrated_qlike": 10426253.367871122,
+            "floor_qlike_contribution": 10426251.962230127,
+            "minimum_affine": -7.052472250840857e-05,
+            "intercept": -8.441108670379241e-05,
+            "slope": 2.938932178625669
+          }
+        ]
+      },
+      "B1": {
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "floor_hits": 20834,
+        "strictly_negative_affine": 20834,
+        "exact_zero_affine": 0,
+        "positive_at_or_below_floor": 0,
+        "nonfinite_origin_fallbacks": 0,
+        "training_identity_fallbacks": 0,
+        "coefficient_negative_intercept_sessions": 395,
+        "coefficient_negative_slope_sessions": 0,
+        "formula_stored_max_abs_difference": 0,
+        "floor_counter_disagreements": 0,
+        "scale_relative_error_max": 0,
+        "closed_form_intercept_abs_error_max": 2.0328790734103208e-19,
+        "closed_form_slope_abs_error_max": 3.552713678800501e-15,
+        "validation_init_score_parity_abs_difference_max": 4.218847493575595e-15,
+        "floor_hit_percent": 12.953889773179467,
+        "sessions_with_floor_hits": 260,
+        "first_floor_session": "2024-10-28",
+        "last_floor_session": "2026-07-27",
+        "raw_qlike_recomputed": 0.14619446754529442,
+        "mz_qlike_recomputed": 711247.77708514,
+        "mz_qlike_published": 711247.77708514,
+        "published_minus_recomputed": 0,
+        "floor_weighted_qlike_contribution": 711244.0516451483,
+        "floor_loss_share_percent": 99.99947621066642,
+        "nonfloor_weighted_qlike_contribution": 3.725439991685562,
+        "top5_sessions_by_mz_loss": [
+          {
+            "session": "2025-04-17",
+            "N_origins": 390,
+            "floor_hits": 256,
+            "raw_qlike": 0.12210770050132243,
+            "recalibrated_qlike": 17219619.756219078,
+            "floor_qlike_contribution": 17219619.301874973,
+            "minimum_affine": -7.39362953768029e-05,
+            "intercept": -0.00010021422987148465,
+            "slope": 3.1790095966508867
+          },
+          {
+            "session": "2025-04-16",
+            "N_origins": 390,
+            "floor_hits": 253,
+            "raw_qlike": 0.22788097079438066,
+            "recalibrated_qlike": 15730922.552666644,
+            "floor_qlike_contribution": 15730922.211088942,
+            "minimum_affine": -9.451561135355644e-05,
+            "intercept": -0.0001171169147348412,
+            "slope": 3.281033244490936
+          },
+          {
+            "session": "2025-04-22",
+            "N_origins": 390,
+            "floor_hits": 258,
+            "raw_qlike": 0.24668810542087452,
+            "recalibrated_qlike": 14982405.244132645,
+            "floor_qlike_contribution": 14982404.954633614,
+            "minimum_affine": -7.217437854883226e-05,
+            "intercept": -9.054702767787487e-05,
+            "slope": 3.1512139380566326
+          },
+          {
+            "session": "2025-04-15",
+            "N_origins": 390,
+            "floor_hits": 277,
+            "raw_qlike": 0.09038131885676731,
+            "recalibrated_qlike": 14307764.070115106,
+            "floor_qlike_contribution": 14307763.717982858,
+            "minimum_affine": -9.198387368596563e-05,
+            "intercept": -0.00011582631324857144,
+            "slope": 3.2727862354985877
+          },
+          {
+            "session": "2025-04-24",
+            "N_origins": 390,
+            "floor_hits": 286,
+            "raw_qlike": 0.058530546715055594,
+            "recalibrated_qlike": 8716766.047170464,
+            "floor_qlike_contribution": 8716763.489058234,
+            "minimum_affine": -3.5293140795935595e-05,
+            "intercept": -4.423444940519493e-05,
+            "slope": 1.8112175393454448
+          }
+        ]
+      },
+      "B2": {
+        "N_origins": 160832,
+        "N_sessions": 419,
+        "floor_hits": 21100,
+        "strictly_negative_affine": 21100,
+        "exact_zero_affine": 0,
+        "positive_at_or_below_floor": 0,
+        "nonfinite_origin_fallbacks": 0,
+        "training_identity_fallbacks": 0,
+        "coefficient_negative_intercept_sessions": 397,
+        "coefficient_negative_slope_sessions": 0,
+        "formula_stored_max_abs_difference": 0,
+        "floor_counter_disagreements": 0,
+        "scale_relative_error_max": 0,
+        "closed_form_intercept_abs_error_max": 1.7618285302889447e-19,
+        "closed_form_slope_abs_error_max": 3.552713678800501e-15,
+        "validation_init_score_parity_abs_difference_max": 9.270362255620057e-15,
+        "floor_hit_percent": 13.119279745324313,
+        "sessions_with_floor_hits": 270,
+        "first_floor_session": "2024-10-28",
+        "last_floor_session": "2026-07-28",
+        "raw_qlike_recomputed": 0.14642711450008342,
+        "mz_qlike_recomputed": 730463.8553307459,
+        "mz_qlike_published": 730463.8553307459,
+        "published_minus_recomputed": 0,
+        "floor_weighted_qlike_contribution": 730462.4111926246,
+        "floor_loss_share_percent": 99.99980229848325,
+        "nonfloor_weighted_qlike_contribution": 1.4441381213255227,
+        "top5_sessions_by_mz_loss": [
+          {
+            "session": "2025-04-17",
+            "N_origins": 390,
+            "floor_hits": 262,
+            "raw_qlike": 0.12431403821887173,
+            "recalibrated_qlike": 17598512.95995932,
+            "floor_qlike_contribution": 17598512.605579548,
+            "minimum_affine": -7.953103715342729e-05,
+            "intercept": -0.00011155541766653174,
+            "slope": 3.532663288177317
+          },
+          {
+            "session": "2025-04-16",
+            "N_origins": 390,
+            "floor_hits": 250,
+            "raw_qlike": 0.2227881057311616,
+            "recalibrated_qlike": 15466776.068054134,
+            "floor_qlike_contribution": 15466775.87440966,
+            "minimum_affine": -9.802789638842531e-05,
+            "intercept": -0.00012388326393030026,
+            "slope": 3.6642309990212283
+          },
+          {
+            "session": "2025-04-22",
+            "N_origins": 390,
+            "floor_hits": 257,
+            "raw_qlike": 0.26336168397482235,
+            "recalibrated_qlike": 14829215.856756343,
+            "floor_qlike_contribution": 14829215.601430878,
+            "minimum_affine": -7.806959070444528e-05,
+            "intercept": -9.743392227766757e-05,
+            "slope": 3.4205610808593745
+          },
+          {
+            "session": "2025-04-15",
+            "N_origins": 390,
+            "floor_hits": 272,
+            "raw_qlike": 0.08028916950794578,
+            "recalibrated_qlike": 13834659.791756317,
+            "floor_qlike_contribution": 13834659.264227256,
+            "minimum_affine": -9.935684184112815e-05,
+            "intercept": -0.00012278187388023304,
+            "slope": 3.620456886261195
+          },
+          {
+            "session": "2025-04-24",
+            "N_origins": 390,
+            "floor_hits": 283,
+            "raw_qlike": 0.052842412495156595,
+            "recalibrated_qlike": 8496616.432481948,
+            "floor_qlike_contribution": 8496614.905445063,
+            "minimum_affine": -3.244525635721579e-05,
+            "intercept": -4.188657683247705e-05,
+            "slope": 1.7644613060388912
+          }
+        ]
+      }
+    },
+    "status": "PASS_NO_MZ_FORMULA_SCALE_LINKAGE_DEFECT_DEMONSTRATED"
+  },
+  "verifications": [
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "exit_code": 0,
+      "stdout": "1 file already formatted\n"
+    }
+  ],
+  "pre_execution_lint_history": [
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check --select I --fix artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "exit_code": 0,
+      "stdout": "Found 1 error (1 fixed, 0 remaining).\n"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "exit_code": 0,
+      "stdout": "1 file reformatted\n"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_b4/audit_mz_identity.py",
+      "exit_code": 1,
+      "errors": [
+        "B023: equal_asset_mean did not bind loop variable assets",
+        "B023: equal_asset_mean did not bind loop variable asset_names"
+      ],
+      "resolution": "Bound the current session arrays as default arguments using apply_patch before the one script execution; final lint passed."
+    }
+  ],
+  "reexecuted_to_write_receipt": false,
+  "models_fitted": 0,
+  "confirmation_reads": 0,
+  "RESEARCH_ONLY": true,
+  "capital_go": false,
+  "public_projection": {
+    "original_sha256": "cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4",
+    "removed_origin_examples": 3,
+    "redaction": "Three largest_floor_loss_example records omitted; session aggregates preserved without recomputation."
+  }
+}

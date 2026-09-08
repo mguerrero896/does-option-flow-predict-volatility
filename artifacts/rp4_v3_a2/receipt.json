@@ -1,0 +1,132 @@
+{
+  "stage": "A2",
+  "status": "COMPLETE",
+  "verified_at_sydney": "2026-09-07T20:26:34.4297299+10:00",
+  "branch": "research/rp4-v3-20260907",
+  "specification_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "release_sha256": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+  "commands": [
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_code/materialize_gamma.py --spec artifacts/rp4_v3_a1/specification.json --spec-sha256 49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b --output-root private-input/e63a7488cbab65e3773b --workers 4",
+      "exit_code": 0,
+      "log": "artifacts/rp4_v3_a2/gamma_materialization_v1.log"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B private-input/ed37db58efee0861709b",
+      "exit_code": 0,
+      "log": "artifacts/rp4_v3_a2/candidate_carry_audit.log",
+      "result": "PASS_EXACT_CANDIDATE_DIFFERENCE_ATTRIBUTION"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_code/empty_windows.py --spec-sha256 930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"RP4_V3_EMPTY_WINDOW_PANEL_COMPLETE\", \"spec_sha256\": \"930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\", \"base_panel_sha256\": \"5b7dd5cc4b2b1e64446d305a5ee0de92f6d18e790f94b5840664947da00fd19d\", \"source_gamma_panel_sha256\": \"ab2977127fde0c65458e15a984924b136b9bf88ba0588240d80bd6a81545dc45\", \"source_gamma_manifest_sha256\": \"1e6b5aeade5624bd12ced17d7a55e18b3102a7597ea0af559f5e0a8793b90eb0\", \"preserved_unaffected_values_exact_by_keys\": true, \"preserved_values_exact_by_keys\": false, \"changed_columns_only\": {\"30\": [\"b2_30m_buy_premium_share\", \"b2_30m_d_iv\", \"b2_30m_d_mid_rel\", \"b2_30m_d_spread\", \"b2_30m_decay_intensity_innovation\", \"b2_30m_multileg_premium_share\", \"b2_30m_multileg_size_share\", \"b2_30m_otm_premium_share\", \"b2_30m_passive_premium_share\", \"b2_30m_sell_premium_share\", \"b2_30m_sweep_premium_share\", \"b2_30m_zero_dte_premium_share\", \"b2_30m_zero_dte_trade_share\"], \"5\": [\"b2_5m_buy_premium_share\", \"b2_5m_d_iv\", \"b2_5m_decay_intensity_innovation\", \"b2_5m_multileg_size_share\", \"b2_5m_strike_hhi\", \"b2_5m_zero_dte_premium_share\", \"b2_5m_contract_entropy\", \"b2_5m_d_mid_rel\", \"b2_5m_d_spread\", \"b2_5m_expiry_hhi\", \"b2_5m_interarrival_cv\", \"b2_5m_multileg_premium_share\", \"b2_5m_otm_premium_share\", \"b2_5m_passive_premium_share\", \"b2_5m_sell_premium_share\", \"b2_5m_sweep_premium_share\", \"b2_5m_zero_dte_trade_share\"]}, \"changed_origins_only\": \"finite_corresponding_trade_count_equal_zero\", \"excluded_origins\": 0, \"excluded_sessions\": 0, \"model_fits\": 0, \"rows\": 195479, \"columns\": 179, \"recode_producer_sha256\": \"42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5\", \"artifacts\": {\"private-input/ad5d9652af11ae5ac3ab\": \"a63ff5e61092d2bc00917c5de4e0e73f928005acc475f46370348eaca6ad4637\", \"private-input/72ea034f264e4b4776c2\": \"c7a7027f7647c53cbc257f14214f1551cb2339a014c8b524bd00f31a89fbebde\", \"private-input/fbab3d5cecd5662fcb2d\": \"51a0b33ea8558685f2e98f0f168b3946e0abab131a13b1202d81f550b33725df\"}, \"capital_go\": false, \"manifest_sha256\": \"e3a76fecf274d6233c1059221b9755297f5854a6c4519b2b806344008bec59e3\"}"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_code.execute --spec-sha256 930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5 --prepare-only",
+      "exit_code": 0,
+      "stdout": "RP4_V3_RELEASE_PINNED:5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb"
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync pytest --import-mode=importlib artifacts/rp4_v3_code/test_aggregate_v3.py -q -o addopts='' --junitxml=artifacts/rp4_v3_a2/pytest_report_link.xml",
+      "exit_code": 0,
+      "passed": 21,
+      "seconds": 4.47
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_code/report_v3.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run --offline --frozen --no-sync ruff format --check artifacts/rp4_v3_code/report_v3.py",
+      "exit_code": 0
+    }
+  ],
+  "previous_verification": "artifacts/rp4_v3_a2/verification_before_fit.json",
+  "only_change_since_previous_verification": "report_v3.py adds a documentation link to the A2 closeout; no evaluation code changed. The original verification receipt and XML remain intact.",
+  "artifacts_sha256": {
+    "artifacts/rp4_v3_a2/audit_candidate_carry.py": "dccf6d542ef261e982124f22223148d4a8975899927f35c9e95bf5db2b399ace",
+    "artifacts/rp4_v3_a2/candidate_carry_audit.json": "be4fadcd9388f105b4ef96585b265644f05fc6af39c3e757127f637143659d44",
+    "artifacts/rp4_v3_a2/candidate_carry_audit.log": "469fe5f8070d6b2b51695a6c3429d7de31ab390acf73590f3b2c98ca6cc168a5",
+    "artifacts/rp4_v3_a2/empty_window_census.csv": "51a0b33ea8558685f2e98f0f168b3946e0abab131a13b1202d81f550b33725df",
+    "artifacts/rp4_v3_a2/empty_window_manifest.json": "e3a76fecf274d6233c1059221b9755297f5854a6c4519b2b806344008bec59e3",
+    "artifacts/rp4_v3_a2/empty_window_recode_audit.json": "c7a7027f7647c53cbc257f14214f1551cb2339a014c8b524bd00f31a89fbebde",
+    "artifacts/rp4_v3_a2/evaluation_release.json": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+    "artifacts/rp4_v3_a2/gamma_comparison.csv": "5df1c610dd6c0ff36ae300fe9bb7d36432479c3534fa9ad0f2e339089fa30597",
+    "artifacts/rp4_v3_a2/gamma_counts.csv": "5507b6008a4fb5d0c52287a5651224f406d063cc99e3b0ed3c04aec38b579b01",
+    "artifacts/rp4_v3_a2/gamma_coverage.csv": "78f972232a4441450655a7ea33a5f6413acc875f6af6990cd3bffe423712373f",
+    "artifacts/rp4_v3_a2/gamma_manifest.json": "1e6b5aeade5624bd12ced17d7a55e18b3102a7597ea0af559f5e0a8793b90eb0",
+    "artifacts/rp4_v3_a2/gamma_materialization_v1.log": "fd1ebbd7b11f9ee293c0bde9e38481cc60c3af12df15b13f3721e9778580a1c6",
+    "artifacts/rp4_v3_a2/pytest_before_fit.xml": "73030145e9013a960f2a55dbb11fa077ff322c51df042fc5dfc30d73027bee12",
+    "artifacts/rp4_v3_a2/pytest_report_link.xml": "4563403d2f5853b341f8c8dd70ccbfb74d5b552b47a73e99c948142ed3d6d394",
+    "artifacts/rp4_v3_a2/REPORT.md": "f07ecfe3202e4aaba7d7d2e23f308d86af9f12f012e741f5b2cbd63a4c3ff513",
+    "artifacts/rp4_v3_a2/verification_before_fit.json": "0a75fd79c57088d48f496835a0bb1010d19f764b1b0cefbddb700653f6f2657b",
+    "artifacts/rp4_v3_code/aggregate_v3.py": "9f4f7cc2fe402a8e55907ca21e4e384dabab18f8285760cbc797475c937da924",
+    "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+    "artifacts/rp4_v3_code/evaluate_v3.py": "5411ba65476fb48fd0b835619479dbf29c73b400e99aa0ae05544c47d3c5e025",
+    "artifacts/rp4_v3_code/execute.py": "fb6b01b42f62c24ec2a87f83e0338e1b36f0e609b3938cf92c76365a08505ff9",
+    "artifacts/rp4_v3_code/freeze.py": "ac7e80765b4e2b7b3e253a35b67e57feb29b5364d60097a9af57e58f26c663ea",
+    "artifacts/rp4_v3_code/inference.py": "698fe256e869e0627ece20ea9cce5c7c885ae7a1ac1a0c5434354dd2e480fe9d",
+    "artifacts/rp4_v3_code/materialize_gamma.py": "2f59184b5a36b301252bb11eaf779c8128cef0f45266368f44b1a7d35f3644a3",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e",
+    "artifacts/rp4_v3_code/report_v3.py": "bb5b7d574207e8307a1b31800e689166583851161365fd94b689f94fce7be356",
+    "artifacts/rp4_v3_code/test_aggregate_v3.py": "a985c7d6b7383d76ca3169fbb6c8785415354fdf001bbb39455264afe52d2a9c",
+    "artifacts/rp4_v3_code/test_empty_windows.py": "9b7e7a5d892c7dbbe97782ab2c329d523ed3ca33d18da6f792584a1ee2fdd843",
+    "artifacts/rp4_v3_code/test_evaluate_v3.py": "a26343dcbd264b8e3e9139805dde1e485cf7fa26b4db59a12bb8de66299ddd5a",
+    "artifacts/rp4_v3_code/test_inference.py": "d7a2caee560c7aa36218f3bccbeaa7f24993e5c77dc2189a00af2a87433990b1",
+    "artifacts/rp4_v3_code/test_materialize_gamma.py": "3fa8bef153ea8a7b5c84b9c4cd14d0d1ae3c471c6794c8181878cc3244460f6e",
+    "artifacts/rp4_v3_code/test_models.py": "56fb47cc9d73aafed1842ad6633dd0454f44e1a7341b00a5d50d0910a22fe4cc"
+  },
+  "private_artifact_manifests": [
+    "artifacts/rp4_v3_a2/gamma_manifest.json",
+    "artifacts/rp4_v3_a2/empty_window_manifest.json"
+  ],
+  "private_input_pins": {
+    "path": "private-input/31fd091340f440407b93",
+    "sha256": "ca610184b4ccffe2d5792e86d8babefc12ebee52b38e5b1d16f8c2f7465606db"
+  },
+  "rows": 195479,
+  "columns": 179,
+  "sessions": 504,
+  "asset_sessions": 3024,
+  "feature_set_counts": {
+    "B0": 29,
+    "B1": 69,
+    "B2": 138
+  },
+  "rv30_alignment": {
+    "finite_pairs": 195465,
+    "both_nonfinite": 14,
+    "maximum_absolute_difference": 0,
+    "mean_absolute_difference": 0
+  },
+  "candidate_derivation": {
+    "original_discrepant_origins": 455,
+    "cause": "Seven NVDA sessions use different dividend snapshots; v3 retains frozen v2 carry.",
+    "cash_only_attribution": {
+      "compared_rows": 195479,
+      "columns": 4,
+      "maximum_absolute_difference": 0,
+      "mean_absolute_difference": 0,
+      "remaining_discrepant_rows": 0
+    }
+  },
+  "empty_windows": {
+    "empty_5m": 424,
+    "empty_30m": 396,
+    "confirmation_empty_5m": 0,
+    "confirmation_empty_30m": 0,
+    "finite_shape_cells_recoded": 12356,
+    "unknown_counts": 0,
+    "excluded_origins": 0,
+    "excluded_sessions": 0,
+    "activity_values_exact": true
+  },
+  "real_model_fits": 0,
+  "provider_requests": 0,
+  "phase9_modified": false,
+  "v1_v2_modified": false,
+  "published": false,
+  "RESEARCH_ONLY": true,
+  "capital_go": false
+}

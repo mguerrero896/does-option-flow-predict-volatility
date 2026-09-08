@@ -1,0 +1,65 @@
+{
+  "addendum": {
+    "activity_values_unchanged": true,
+    "columns_to_nan": {
+      "30": [
+        "b2_30m_buy_premium_share",
+        "b2_30m_d_iv",
+        "b2_30m_d_mid_rel",
+        "b2_30m_d_spread",
+        "b2_30m_decay_intensity_innovation",
+        "b2_30m_multileg_premium_share",
+        "b2_30m_multileg_size_share",
+        "b2_30m_otm_premium_share",
+        "b2_30m_passive_premium_share",
+        "b2_30m_sell_premium_share",
+        "b2_30m_sweep_premium_share",
+        "b2_30m_zero_dte_premium_share",
+        "b2_30m_zero_dte_trade_share"
+      ],
+      "5": [
+        "b2_5m_buy_premium_share",
+        "b2_5m_d_iv",
+        "b2_5m_decay_intensity_innovation",
+        "b2_5m_multileg_size_share",
+        "b2_5m_strike_hhi",
+        "b2_5m_zero_dte_premium_share",
+        "b2_5m_contract_entropy",
+        "b2_5m_d_mid_rel",
+        "b2_5m_d_spread",
+        "b2_5m_expiry_hhi",
+        "b2_5m_interarrival_cv",
+        "b2_5m_multileg_premium_share",
+        "b2_5m_otm_premium_share",
+        "b2_5m_passive_premium_share",
+        "b2_5m_sell_premium_share",
+        "b2_5m_sweep_premium_share",
+        "b2_5m_zero_dte_trade_share"
+      ]
+    },
+    "counts": [
+      "b2_5m_trades",
+      "b2_30m_trades"
+    ],
+    "decision_path": "docs/rp4/decision_132_v3_empty_windows.md",
+    "decision_sha256": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189",
+    "diagnostics": "census_and_B2_over_B1_inside_outside",
+    "indicators": [
+      "b2_5m_window_empty",
+      "b2_30m_window_empty"
+    ],
+    "md_path": "docs/rp4/v3_window_empty_addendum.md",
+    "md_sha256": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803",
+    "no_origin_or_session_exclusion": true,
+    "unknown_count": "unknown_indicator_no_recode"
+  },
+  "capital_go": false,
+  "original_v3_freeze_sha256": "89083510a18483ab078d63da718412dad1bc26276e008f4d377d153f38d4c38d",
+  "original_v3_specification_sha256": "49b625a4dbca7b725a6b38defc25e76109be7b280d711355a55ce97a7443048b",
+  "producer_sha256": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+  "registered_at_utc": "2026-09-07T08:30:43.053218+00:00",
+  "schema_version": "rp4-v3-effective-empty-window-freeze-v1",
+  "specification_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "v3_materialization_executed": false,
+  "v3_models_fitted": 0
+}

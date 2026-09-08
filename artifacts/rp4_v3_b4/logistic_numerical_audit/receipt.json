@@ -1,0 +1,45 @@
+{
+  "RESEARCH_ONLY": true,
+  "artifacts_sha256": {
+    "private-input/48f0ea28e14e0c8cbf9f": "70dce8b3d5cfcf7c282606aa6cfed4beef98ddd677fa7f6e3b95833c448569a4",
+    "private-input/85ebeba3ebb6609680b2": "48a7ad27cf7bce948bf7c380ae3b2735c74a490812d68bf6a00fcad10ae76133"
+  },
+  "capital_go": false,
+  "command": "private-input/e298a99a7398d9830fe1",
+  "completed_empirical_components_refitted": false,
+  "completed_utc": "2026-09-07T11:05:40.883201+00:00",
+  "conclusion": "No demonstrated objective/gradient/stop bug in these checks. Poor conditioning causes nonconvergence within the unchanged cap in the synthetic case only; this does not establish the empirical cause.",
+  "elapsed_seconds": 2.180036799996742,
+  "empirical_observation": {
+    "empirical_conditioning_verified": false,
+    "reported": "Some running primary jump fits stop at registered maxiter=1000, status=1",
+    "source": "root agent report; not independently reopened in this audit"
+  },
+  "environment": {
+    "MKL_NUM_THREADS": "4",
+    "OMP_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "UV_PROJECT_ENVIRONMENT": "private-input/4b06809c9ca2d51ba83b"
+  },
+  "exit_code": 0,
+  "invocation": "uv run --offline --frozen --no-sync python -B private-input/48f0ea28e14e0c8cbf9f",
+  "methodology_changed": false,
+  "production_files_modified": 0,
+  "real_data_reads": 0,
+  "real_models_fitted": 0,
+  "schema_version": "rp4-v3-logistic-synthetic-audit-v1",
+  "scope": "SYNTHETIC_ONLY",
+  "sources_after_sha256": {
+    "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "artifacts/rp4_v3_a2/evaluation_release.json": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e"
+  },
+  "sources_before_sha256": {
+    "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "artifacts/rp4_v3_a2/evaluation_release.json": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+    "artifacts/rp4_v3_code/models.py": "006ffcb3663d0c9d4f17b2302fb30cfb784631781d3559b2ba8a0b2436abbc8e"
+  },
+  "started_utc": "2026-09-07T11:05:38.702127+00:00",
+  "status": "PASS_SYNTHETIC_AUDIT",
+  "workdir": "private-input/03fe4d7590ce6a40158c"
+}

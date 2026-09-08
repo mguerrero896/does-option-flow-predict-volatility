@@ -1,0 +1,24 @@
+{
+  "stage": "A1B",
+  "status": "COMPLETE",
+  "command": "uv run --offline --frozen --no-sync python -B artifacts/rp4_v3_code/empty_windows.py --register",
+  "exit_code": 0,
+  "validation": [
+    {"command": "uv run --offline --frozen --no-sync python -B -m pytest artifacts/rp4_v3_code/test_empty_windows.py -q", "exit_code": 0, "synthetic_tests": 2},
+    {"command": "uv run --offline --frozen --no-sync ruff check artifacts/rp4_v3_code/empty_windows.py artifacts/rp4_v3_code/test_empty_windows.py", "exit_code": 0},
+    {"command": "uv run --offline --frozen --no-sync mypy --explicit-package-bases --follow-imports=silent artifacts/rp4_v3_code/empty_windows.py", "exit_code": 0}
+  ],
+  "artifacts_sha256": {
+    "docs/rp4/v3_window_empty_addendum.md": "5502cc7dce7917b233e85c360e45f176b6742b6759d3543d1d60841c05df1803",
+    "docs/rp4/decision_132_v3_empty_windows.md": "857cc8290058b0e61b100f9cfa50b42befea5f275f38619d6fa8bd0ebcb79189",
+    "artifacts/rp4_v3_a1_empty_window/specification.json": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+    "artifacts/rp4_v3_a1_empty_window/freeze.json": "97e84fccde837b6cf2a45d11920282fb6067db64d4882295adb028547281aad6",
+    "artifacts/rp4_v3_code/empty_windows.py": "42c5bdc76fe1432a9d0fa2517ac157d4c02237da1ae8e0b331d1c960203564a5",
+    "artifacts/rp4_v3_code/test_empty_windows.py": "9b7e7a5d892c7dbbe97782ab2c329d523ed3ca33d18da6f792584a1ee2fdd843"
+  },
+  "prior_A1_preserved": true,
+  "v3_models_fitted_at_registration": 0,
+  "v3_materialization_executed_at_registration": false,
+  "target_blind_full_panel_census": {"origins": 195479, "empty_5m": 424, "empty_30m": 396, "nonfinite_counts": 0},
+  "capital_go": false
+}

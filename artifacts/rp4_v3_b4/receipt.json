@@ -1,0 +1,211 @@
+{
+  "schema_version": "rp4-v3-b4-closeout-v1",
+  "stage": "B4",
+  "status": "COMPLETE",
+  "verified_at_utc": "2026-09-07 16:18:46 UTC",
+  "branch": "research/rp4-v3-20260907",
+  "workdir": "private-input/0ec5f26c567f416b9513",
+  "entrypoint": "artifacts/rp4_v3_b4/README.md",
+  "specification_sha256": "930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5",
+  "evaluation_release_sha256": "5e3046af023c9f41380307d62537aa4e8fc7514b23d51a95ea1f960ee23fe5bb",
+  "prior_stage_commits": {
+    "A1": "1a7b21c",
+    "A1B": "b4e4cbf",
+    "A2": "0f0374a613a5c298764ab589b339bad2c732ac1e",
+    "B2": "6c8d29cde25e5134a64e5a2e43ff58fdaf242009",
+    "B3": "bde5d8cffd02af17f9a0551a48e8ab3daa267a65"
+  },
+  "prior_window_receipts_sha256": {
+    "artifacts/rp4_v3_b2/receipt.json": "60c6f893a9f1b3f23b6737e6f022766e5a603b4225b4292359337356288178af",
+    "artifacts/rp4_v3_b3/receipt.json": "698cd3067258f95c2ca3573618cda88f9fa1d3fda339def0f1455337767ac635"
+  },
+  "commands": [
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\nuv run --offline --frozen --no-sync python -B -m artifacts.rp4_v3_code.report_v3 --spec artifacts/rp4_v3_a1_empty_window/specification.json --spec-sha256 930f3ddb6ef6284f1129dda26ed705699a666ade005c6ad363cb67864794e6f5\nexit $LASTEXITCODE",
+      "exit_code": 0,
+      "elapsed_seconds": 5.0737233,
+      "stdout": {
+        "outputs_sha256": {
+          "artifacts/rp4_v3_b4/B1_over_B0.svg": "ec15fc913d06f54ea6030eee87aaa3b669b4f17fb42de382e97b913825f3b475",
+          "artifacts/rp4_v3_b4/B2_over_B1.svg": "7770504771be1a8ba74e658582d0073e74ea4755803976187195fd813dccf1d2",
+          "artifacts/rp4_v3_b4/bound_counts.csv": "317a4c09a8db079f810bbee1476d9b9b009883ee63566611eb23ed50e2a342aa",
+          "artifacts/rp4_v3_b4/empty_window_census.csv": "014bd94263ca2b6bdb8bb2f41b24b61fa6bf1f0826b97df1ab65f5b5c9c217a5",
+          "artifacts/rp4_v3_b4/empty_window_recode.csv": "154418ffa494f0ab6ca01cbaf1762e053443eeee253f6a9a85886bcb366fc79e",
+          "artifacts/rp4_v3_b4/fit_selection.csv": "dc68bbf65168ef01584fa10b9e6d9a999d219e167b2ef263b24930d498346bf1",
+          "artifacts/rp4_v3_b4/gamma_comparison.csv": "5df1c610dd6c0ff36ae300fe9bb7d36432479c3534fa9ad0f2e339089fa30597",
+          "artifacts/rp4_v3_b4/gamma_coverage.csv": "78f972232a4441450655a7ea33a5f6413acc875f6af6990cd3bffe423712373f",
+          "artifacts/rp4_v3_b4/high_gamma_vs_rest_confirmation.csv": "5af3d8d554a89abf619dde6033eeab06f374e4f250274fbf2641179c1640aaf9",
+          "artifacts/rp4_v3_b4/high_gamma_vs_rest_primary.csv": "b0ba315524a6a69f3c4ffa6308f9fbcc8a6f1f68384ac72b2adedd3b6d4ea8b1",
+          "artifacts/rp4_v3_b4/materialization_counts.csv": "5507b6008a4fb5d0c52287a5651224f406d063cc99e3b0ed3c04aec38b579b01",
+          "artifacts/rp4_v3_b4/mz_calibration.csv": "01dfa69991cbc4e6ae11b81039f6be15c3fe75091d36ef7db1120b5283415efc",
+          "artifacts/rp4_v3_b4/regimes_confirmation.csv": "26366a38c0c00f38a5772f3cb3fd2413089a5fce360cf4a9a175ed8442a0e5ae",
+          "artifacts/rp4_v3_b4/regimes_primary.csv": "bca26a2813f937a8f5382726a9146d561c375340587bd96dc01fa9237d69e16d",
+          "artifacts/rp4_v3_b4/top_loss_confirmation.csv": "97665d5d6ccd4ae45011adc300b6219966620aa7c7c0f9274c6130352384bdb4",
+          "artifacts/rp4_v3_b4/top_loss_primary.csv": "3e6be0b733727afb0105563afe8a1c6caae26d837ccf1fef047b2ffc6638122a",
+          "artifacts/rp4_v3_b4/unchanged_lgb_parity.csv": "112e9e471b20d775596f398c6c4e354e227b1e462b704a3a59beff6a7ce3e8bf",
+          "artifacts/rp4_v3_b4/winsor_counts.csv": "4e15e2076f8dfa757f5363094d698bd2a07576115034b6355ff50008224de72e",
+          "docs/rp4/results_v3.md": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f"
+        },
+        "status": "RP4_V3_REPORT_COMPLETE"
+      }
+    },
+    {
+      "command": "$rp4PreviewRoot = 'private-input/74505a07063f05bbf8f0'\nif (Test-Path -LiteralPath $rp4PreviewRoot) { throw 'PREVIEW_PATH_ALREADY_EXISTS' }\nNew-Item -Path $rp4PreviewRoot -ItemType Directory | Out-Null\n$rp4PreviewCode = @'\nconst fs=require(\"node:fs\");\nconst crypto=require(\"node:crypto\");\nconst sharp=require(\"private-input/e21fa9007c3e05406e48\");\n(async()=>{\n const result=[];\n for(const name of [\"B1_over_B0\",\"B2_over_B1\"]){\n  const input=\"private-input/41501f2ad7133ee02e73\"+name+\".svg\";\n  const output=\"private-input/03950049873df9831cfc\"+name+\".png\";\n  if(fs.existsSync(output)) throw new Error(\"IMMUTABLE_PREVIEW_EXISTS\");\n  const info=await sharp(input).png().toFile(output);\n  result.push({input,output,width:info.width,height:info.height,sha256:crypto.createHash(\"sha256\").update(fs.readFileSync(output)).digest(\"hex\")});\n }\n process.stdout.write(JSON.stringify({status:\"PREVIEWS_RENDERED\",files:result})+\"\\n\");\n})().catch(e=>{process.stderr.write(String(e));process.exitCode=1;});\n'@\n& 'private-input/ee2260aecd0f080d2217' -e $rp4PreviewCode\nexit $LASTEXITCODE",
+      "exit_code": 0,
+      "elapsed_seconds": 0.4933997,
+      "stdout": {
+        "status": "PREVIEWS_RENDERED",
+        "files": [
+          {
+            "input": "private-input/235bfe0fb0eee667aa9e",
+            "output": "private-input/8b64c13a54476e4b4686",
+            "width": 1670,
+            "height": 1510,
+            "sha256": "9ea1bb8b876e558dbc147da812bc0fe16f9b19262aa236a2e7f7e122d08ac6be"
+          },
+          {
+            "input": "private-input/c114dfffda76ff89117f",
+            "output": "private-input/d42040c98c0d5dd872de",
+            "width": 1670,
+            "height": 1510,
+            "sha256": "225d1a45e921631b50f519790023c964a4b669a8bf82181ce65f01d2d0e023bf"
+          }
+        ]
+      }
+    },
+    {
+      "command": "$env:UV_PROJECT_ENVIRONMENT='private-input/4b06809c9ca2d51ba83b'\n$env:PYTHONPATH='private-input/0d2012363c94bcf4a831'\n$env:OPENBLAS_NUM_THREADS='4'\n$env:OMP_NUM_THREADS='4'\n$env:POLARS_MAX_THREADS='4'\n\n$rp4B4Check = @'\nimport csv, hashlib, json, re, xml.etree.ElementTree as ET\nfrom pathlib import Path\nroot=Path.cwd()\nprivate=Path(\"private-input/e63a7488cbab65e3773b\")\nmanifest_path=root/\"artifacts/rp4_v3_b4/report_manifest.json\"\nmanifest=json.loads(manifest_path.read_bytes())\ndef sha(p):\n    with p.open(\"rb\") as f: return hashlib.file_digest(f,\"sha256\").hexdigest()\ndef resolve(label):\n    return private/label.removeprefix(\"private/\") if label.startswith(\"private/\") else root/label\nfor section in (\"inputs_sha256\",\"outputs_sha256\"):\n    for label, expected in manifest[section].items():\n        p=resolve(label)\n        assert p.is_file() and sha(p)==expected, (section,label)\nassert manifest[\"models_fitted\"]==0 and manifest[\"raw_or_origin_panels_read\"] is False\nassert manifest[\"capital_go\"] is False and manifest[\"published\"] is False\npublic=root/\"artifacts/rp4_v3_b4\"\ndocs=[root/\"docs/rp4/results_v3.md\",public/\"README.md\",public/\"READING_NOTES.md\",public/\"logistic_numerical_audit/README.md\"]\nchecked_links=0\npending=[]\nfor doc in docs:\n    for target in re.findall(r'!?\\[[^\\]]*\\]\\(([^)]*)\\)',doc.read_text(encoding=\"utf-8\")):\n        target=target.strip(\"<>\").split(\"#\")[0]\n        if not target or re.match(r\"^[a-z]+://\",target): continue\n        path=(doc.parent/target).resolve()\n        if path==public/\"receipt.json\" and not path.exists():\n            pending.append(str(path)); continue\n        assert path.exists(), (str(doc),target)\n        checked_links+=1\nfor contrast in (\"B1_over_B0\",\"B2_over_B1\"):\n    tree=ET.parse(public/(contrast+\".svg\"))\n    assert tree.getroot().tag.endswith(\"svg\")\n    assert not tree.findall(\".//{http://www.w3.org/2000/svg}script\")\nmz=json.loads((public/\"mz_identity_receipt.json\").read_bytes())\nassert mz[\"exit_code\"]==0 and mz[\"stdout\"][\"confirmation_reads\"]==0\nassert mz[\"stdout\"][\"session_hashes_verified\"]==419\nfor label, expected in mz[\"stdout\"][\"source_sha256\"].items():\n    assert sha(root/label)==expected, label\nfloors=list(csv.DictReader((public/\"mz_calibration.csv\").open(encoding=\"utf-8\",newline=\"\")))\nfor name, values in mz[\"stdout\"][\"results\"].items():\n    selected=[r for r in floors if r[\"window\"]==\"primary\" and r[\"information_set\"]==name]\n    assert len(selected)==419\n    assert sum(int(r[\"count_floor\"]) for r in selected)==values[\"floor_hits\"]\n    assert sum(int(r[\"prediction_rows\"]) for r in selected)==values[\"N_origins\"]\n    assert values[\"formula_stored_max_abs_difference\"]==0\n    assert values[\"published_minus_recomputed\"]==0\nartifacts=[root/\"docs/rp4/results_v3.md\"]+[p for p in sorted(public.rglob(\"*\")) if p.is_file() and p.name!=\"receipt.json\"]\n# Include the preserved nested logistic receipt; only the new top-level receipt omits itself.\nlogistic_receipt=public/\"logistic_numerical_audit/receipt.json\"\nassert logistic_receipt.is_file()\nartifacts.append(logistic_receipt)\nartifacts=sorted(set(artifacts))\nprint(json.dumps({\"status\":\"PASS_RP4_V3_B4_ARTIFACTS_AND_LINKS\",\"inputs_checked\":len(manifest[\"inputs_sha256\"]),\"outputs_checked\":len(manifest[\"outputs_sha256\"]),\"links_checked\":checked_links,\"pending_top_level_receipt_links\":pending,\"svg_files_checked\":2,\"models_fitted\":0,\"artifact_sha256\":{p.relative_to(root).as_posix():sha(p) for p in artifacts}},ensure_ascii=False))\n\n'@\nuv run --offline --frozen --no-sync python -B -c $rp4B4Check\nexit $LASTEXITCODE",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6824009,
+      "result": {
+        "status": "PASS_RP4_V3_B4_ARTIFACTS_AND_LINKS",
+        "inputs_checked": 38,
+        "outputs_checked": 19,
+        "links_checked": 67,
+        "svg_files_checked": 2,
+        "top_level_receipt_links_not_yet_present_during_precreation_check": [
+          "private-input/cf71cedf6c5ba050c631",
+          "private-input/cf71cedf6c5ba050c631"
+        ],
+        "models_fitted": 0
+      }
+    }
+  ],
+  "additional_executed_verification_receipts": [
+    "artifacts/rp4_v3_a2/verification_before_fit.json",
+    "artifacts/rp4_v3_a2/receipt.json",
+    "artifacts/rp4_v3_b4/logistic_numerical_audit/receipt.json",
+    "artifacts/rp4_v3_b4/mz_identity_receipt.json"
+  ],
+  "artifacts_sha256": {
+    "artifacts/rp4_v3_b4/audit_mz_identity.py": "0875b9d7d59ddc638c8ea368a8f200029f14ed3a07b798345488793053d3ddf4",
+    "artifacts/rp4_v3_b4/B1_over_B0.svg": "ec15fc913d06f54ea6030eee87aaa3b669b4f17fb42de382e97b913825f3b475",
+    "artifacts/rp4_v3_b4/B2_over_B1.svg": "7770504771be1a8ba74e658582d0073e74ea4755803976187195fd813dccf1d2",
+    "artifacts/rp4_v3_b4/bound_counts.csv": "317a4c09a8db079f810bbee1476d9b9b009883ee63566611eb23ed50e2a342aa",
+    "artifacts/rp4_v3_b4/empty_window_census.csv": "014bd94263ca2b6bdb8bb2f41b24b61fa6bf1f0826b97df1ab65f5b5c9c217a5",
+    "artifacts/rp4_v3_b4/empty_window_recode.csv": "154418ffa494f0ab6ca01cbaf1762e053443eeee253f6a9a85886bcb366fc79e",
+    "artifacts/rp4_v3_b4/fit_selection.csv": "dc68bbf65168ef01584fa10b9e6d9a999d219e167b2ef263b24930d498346bf1",
+    "artifacts/rp4_v3_b4/gamma_comparison.csv": "5df1c610dd6c0ff36ae300fe9bb7d36432479c3534fa9ad0f2e339089fa30597",
+    "artifacts/rp4_v3_b4/gamma_coverage.csv": "78f972232a4441450655a7ea33a5f6413acc875f6af6990cd3bffe423712373f",
+    "artifacts/rp4_v3_b4/high_gamma_vs_rest_confirmation.csv": "5af3d8d554a89abf619dde6033eeab06f374e4f250274fbf2641179c1640aaf9",
+    "artifacts/rp4_v3_b4/high_gamma_vs_rest_primary.csv": "b0ba315524a6a69f3c4ffa6308f9fbcc8a6f1f68384ac72b2adedd3b6d4ea8b1",
+    "artifacts/rp4_v3_b4/logistic_numerical_audit/audit.py": "70dce8b3d5cfcf7c282606aa6cfed4beef98ddd677fa7f6e3b95833c448569a4",
+    "artifacts/rp4_v3_b4/logistic_numerical_audit/README.md": "28e7b5af6662669e3120f421f00030b4b2073ab11786a85e83ffbad1ad6d064d",
+    "artifacts/rp4_v3_b4/logistic_numerical_audit/receipt.json": "be9f0efd24c27dda6d66a453c9e67b14ae7f021ae7fdb5aae1a8b73834fcd5f7",
+    "artifacts/rp4_v3_b4/logistic_numerical_audit/stdout.log": "48a7ad27cf7bce948bf7c380ae3b2735c74a490812d68bf6a00fcad10ae76133",
+    "artifacts/rp4_v3_b4/materialization_counts.csv": "5507b6008a4fb5d0c52287a5651224f406d063cc99e3b0ed3c04aec38b579b01",
+    "artifacts/rp4_v3_b4/mz_calibration.csv": "01dfa69991cbc4e6ae11b81039f6be15c3fe75091d36ef7db1120b5283415efc",
+    "artifacts/rp4_v3_b4/mz_identity_receipt.json": "cdce9bb0b4e82db62492034e3911748b8cc5bc4176f2e55ca49ad5264e993eb4",
+    "artifacts/rp4_v3_b4/READING_NOTES.md": "116e672b1852a256b2e7b164cdd8504d403191fb83fa4c3817ce7039de1c5488",
+    "artifacts/rp4_v3_b4/README.md": "c721843669087d152ac9cfe4e57462a9fb1f3ed808795aed5828a3c10014e87f",
+    "artifacts/rp4_v3_b4/regimes_confirmation.csv": "26366a38c0c00f38a5772f3cb3fd2413089a5fce360cf4a9a175ed8442a0e5ae",
+    "artifacts/rp4_v3_b4/regimes_primary.csv": "bca26a2813f937a8f5382726a9146d561c375340587bd96dc01fa9237d69e16d",
+    "artifacts/rp4_v3_b4/report_manifest.json": "a9346a7fc0e40bf23c3431f22756d69a82151b0ea184d4fd5929a4ea1166b6bd",
+    "artifacts/rp4_v3_b4/top_loss_confirmation.csv": "97665d5d6ccd4ae45011adc300b6219966620aa7c7c0f9274c6130352384bdb4",
+    "artifacts/rp4_v3_b4/top_loss_primary.csv": "3e6be0b733727afb0105563afe8a1c6caae26d837ccf1fef047b2ffc6638122a",
+    "artifacts/rp4_v3_b4/unchanged_lgb_parity.csv": "112e9e471b20d775596f398c6c4e354e227b1e462b704a3a59beff6a7ce3e8bf",
+    "artifacts/rp4_v3_b4/winsor_counts.csv": "4e15e2076f8dfa757f5363094d698bd2a07576115034b6355ff50008224de72e",
+    "docs/rp4/results_v3.md": "86703434ae2d1d8e2ef3a9c59ae9737f3a4e4c8460234076b794e04ac2deee1f"
+  },
+  "private_previews_sha256": {
+    "private-input/8b64c13a54476e4b4686": "9ea1bb8b876e558dbc147da812bc0fe16f9b19262aa236a2e7f7e122d08ac6be",
+    "private-input/d42040c98c0d5dd872de": "225d1a45e921631b50f519790023c964a4b669a8bf82181ce65f01d2d0e023bf"
+  },
+  "visual_inspection": {
+    "method": "Rendered both final SVG files with the installed Sharp runtime and inspected both local PNGs at original resolution.",
+    "figures": 2,
+    "panels_per_figure": 12,
+    "outcome": "Readable dates, series labels, independent scales, zero references and adverse extrema; no clipping or overlapping labels observed.",
+    "source_svg_bytes_unchanged": true
+  },
+  "scientific_outcome": {
+    "primary": {
+      "N_sessions": 419,
+      "N_origins": 160832,
+      "primary_joint_reject": false,
+      "quantile_completed_sessions": 419,
+      "jump_completed_sessions": 1,
+      "jump_incomplete_sessions": 418,
+      "jump_inference": "NO VERIFICABLE"
+    },
+    "confirmation": {
+      "N_sessions": 25,
+      "N_origins": 9750,
+      "primary_joint_reject": false,
+      "quantile_completed_sessions": 25,
+      "jump_completed_sessions": 0,
+      "jump_incomplete_sessions": 25,
+      "jump_inference": "NO VERIFICABLE"
+    },
+    "mechanism_hierarchy": "NOT_CONFIRMED_BY_REGISTERED_PRIMARY_SEQUENCE",
+    "nonrejection_is_not_equivalence_or_absorption": true,
+    "mz_secondary": "Adverse recalibration is reported unchanged; it never replaces primary forecasts.",
+    "version_selection": "The versions reuse data and adapt to previous results; nominal within-version inference does not adjust the full search history."
+  },
+  "closure_scope": {
+    "new_model_fits_in_B4": 0,
+    "new_evaluations_or_refits_of_v1_v2": 0,
+    "primary_v3_evaluations": 1,
+    "confirmation_v3_evaluations": 1,
+    "legacy_reports_unchanged": true,
+    "phase9_modified": false,
+    "new_downloads_in_B4": 0,
+    "new_recurring_jobs_in_v3_closeout": 0,
+    "published": false,
+    "full_repository_test_suite_claimed": false
+  },
+  "RESEARCH_ONLY": true,
+  "NOT_INVESTMENT_ADVICE": true,
+  "post_receipt_creation_validation": {
+    "command_reference": "commands[2].command",
+    "exit_code": 0,
+    "inputs_checked": 38,
+    "outputs_checked": 19,
+    "links_checked": 69,
+    "pending_links": 0,
+    "svg_files_checked": 2,
+    "models_fitted": 0
+  },
+  "formatting_verification": {
+    "default_git_diff_check_exit_code": 2,
+    "findings": [
+      {
+        "path": "artifacts/rp4_v3_b4/logistic_numerical_audit/stdout.log",
+        "reason": "Four original CRLF log lines are reported as trailing whitespace by the default check; exact captured bytes are preserved."
+      },
+      {
+        "path": "artifacts/rp4_v3_b4/mz_identity_receipt.json",
+        "reason": "One terminal blank line in the captured audit receipt is preserved with its recorded SHA-256."
+      }
+    ],
+    "final_command": "git diff --cached --check -- . ':(exclude)artifacts/rp4_v3_b4/logistic_numerical_audit/stdout.log' ':(exclude)artifacts/rp4_v3_b4/mz_identity_receipt.json'\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\ngit -c core.whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof diff --cached --check -- artifacts/rp4_v3_b4/logistic_numerical_audit/stdout.log artifacts/rp4_v3_b4/mz_identity_receipt.json\nif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\n'PASS_SCOPED_WHITESPACE_WITH_PRESERVED_AUDIT_CRLF_AND_TERMINAL_NEWLINE'\ngit diff --cached --stat",
+    "exit_code": 0,
+    "scope": "Default check for all other files; explicit CR-at-EOL and terminal-blank allowance only for these two preserved audit artifacts. No frozen bytes or repository-wide settings changed."
+  },
+  "independent_review": {
+    "result": "PASS",
+    "scope": "Closed confirmation CSV/JSON/report means, percentage reductions, fixed H1/H2 order, N=25/9750, exact v2/v3 LightGBM B0/B1 session parity, and unavailable jump endpoint; no refits or file changes.",
+    "model_fits": 0
+  },
+  "capital_go": false
+}
