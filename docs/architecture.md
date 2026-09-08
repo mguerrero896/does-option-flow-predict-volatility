@@ -1,4 +1,4 @@
-# MDS650 repository architecture
+# Research repository architecture
 
 This document describes the maintained repository structure. Scientific eligibility is not
 defined here: `data/CANONICAL_STATE.json` is the machine-readable authority and `STATUS.md`

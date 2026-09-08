@@ -6,7 +6,7 @@ The ten rows in `docs/literature_matrix.csv` were checked against Crossref
 metadata on 2026-07-21 (all ten DOI lookups returned HTTP 200). The evidence
 ledger distinguishes four rows with source-text coordinates, three rows with
 abstract-only support and three rows with publisher-record-only support. No row
-is treated as evidence of MDS650 predictive performance unless its coordinates
+is treated as evidence of this study’s predictive performance unless its coordinates
 and claim scope permit it.
 
 ## Ordinary option information
@@ -45,7 +45,7 @@ WTI. Li et al. (2024) compare standard HAR with LASSO and Elastic Net using
 cross-market predictors. These are exact model lists and study-specific
 results, not the prohibited generic claim that linear models are hard to beat.
 
-## Implication for MDS650
+## Implication for this study
 
 Pre-register HAR/HARQ/OLS and named ML comparators only after PIT, common
 history and asset gates pass. Keep B1 independent from B2; preserve the natural

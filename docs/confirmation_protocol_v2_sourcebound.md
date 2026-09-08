@@ -5,7 +5,7 @@
 
 ## Purpose
 
-This protocol binds the next MDS650 method-freeze decision to the corrected,
+This protocol binds the next research method-freeze decision to the corrected,
 source-bound B0/B1Q/B2 predictor panel. It is a planning and integrity
 artifact only. It does not authorize acquisition, model fitting, QLIKE,
 reconciliation of earlier results, or access to sealed OOS data.

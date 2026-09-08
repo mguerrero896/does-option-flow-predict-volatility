@@ -77,7 +77,7 @@ are validated.
     options tickers use the `O:` prefix (e.g. `O:AAPL240119C00190000`).
   - `GET /v3/trades/{contract_id}` — historical trades.
   - `GET /v3/quotes/{contract_id}` — historical quotes (NBBO).
-- MDS650 directed-quote contract: use the forecast-origin timestamp as a
+- Study directed-quote contract: use the forecast-origin timestamp as a
   positive, exactly 19-digit integer nanosecond value. The client rejects
   booleans, strings/ISO timestamps, nonpositive values, and other precisions
   before transport, then sends

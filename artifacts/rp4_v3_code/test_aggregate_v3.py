@@ -11,6 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import pytest
+
 from artifacts.rp4_v2_code import evaluate_v2 as v2
 from artifacts.rp4_v3_code import aggregate_v3 as agg
 from artifacts.rp4_v3_code import inference as inf
@@ -325,13 +326,14 @@ def test_report_validates_numbers_sequence_and_displays_all_signs(completed: tup
     output = report.render_report(
         windows, {"label": "SYNTHETIC ONLY", "assets": ["A", "B"]}, [], [], {}
     )
-    assert "NO SATISFECHA EN ESTA VENTANA" in output
-    assert "p unilateral nominal" in output and "p bilateral" in output
-    assert "diagnóstico no promovible" in output
-    assert "window_nonempty_5m" in output and "NO VERIFICABLE" in output
-    assert "no integra incertidumbre de la varianza" in output
+    assert "NOT SATISFIED IN THIS WINDOW" in output
+    assert "nominal one-sided p" in output and "two-sided p" in output
+    assert "diagnostic that cannot be promoted to primary evidence" in output
+    assert "window_nonempty_5m" in output and "UNVERIFIABLE" in output
+    assert "does not integrate variance uncertainty" in output
     assert "b2_5m_observed_span_s" in output and "capital_go=false" in output
-    assert "recalibrado" in output and "Mediana de diferencias" in output
+    assert "Recalibrated" in output and "The median of differences" in output
+    assert "The optional gate column rp4_eligible is absent" in output
     changed = copy.deepcopy(windows["v3"]["primary"][0])
     changed["contrasts"][0]["estimate"] += 1
     with pytest.raises(ValueError, match="ESTIMATE_MISMATCH"):
@@ -778,5 +780,5 @@ def test_synthetic_report_end_to_end_pins_both_manifests_without_panel_reads(
     assert all(r["maximum_absolute_difference"] == 0 for r in result["unchanged_lgb_parity"])
     assert report.run(args) == result
     rendered = (root / "docs/rp4/results_v3.md").read_text(encoding="utf-8")
-    assert "SYNTHETIC ONLY" in rendered and "Fuente desconocidos" in rendered
-    assert "Lineal (cuantil)" in rendered and "LightGBM (binary)" in rendered
+    assert "SYNTHETIC ONLY" in rendered and "Source unknown" in rendered
+    assert "Linear (quantile)" in rendered and "LightGBM (binary)" in rendered

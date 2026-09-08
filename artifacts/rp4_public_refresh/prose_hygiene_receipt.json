@@ -1,0 +1,202 @@
+{
+  "schema_version": "public-prose-hygiene-v1",
+  "scope": "Presentation wording only; scientific registrations, evaluators and namespaces unchanged.",
+  "files": [
+    {
+      "path": "artifacts/provider_audit/2026-07-20/provider_audit_summary.md",
+      "before_sha256": "970a48571457531b659d7f3c12f34089133337b0f2ed81a4e58eec70e82a2296",
+      "after_sha256": "f7658bbb5180298d809ec621d6c3b093333a43d0f31268acc73ce91bd892aa68",
+      "retained_input": "docs/archive/public_refresh_baseline/artifacts__provider_audit__2026-07-20__provider_audit_summary.md.original",
+      "numeric_tokens_unchanged": 25,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/architecture.md",
+      "before_sha256": "5e4be1fce2974b0f52a7dc53193be9c0112d6582918cdd7a882cbfa967591d0a",
+      "after_sha256": "47e81b93c1e0a46092dd997dee4c45f0fd06dbc98a8e4490be1c5c9143602b81",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__architecture.md.original",
+      "numeric_tokens_unchanged": 13,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/canonical_claims_and_limitations.md",
+      "before_sha256": "5150970893fe818dd2569d51c52d2a1359bd9e615c05372840a360d2aecb56fd",
+      "after_sha256": "62b1062cc6b628dc534e360761061dddd3e04f670adbd6b57f6bdcf10f44e314",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__canonical_claims_and_limitations.md.original",
+      "numeric_tokens_unchanged": 85,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/confirmation_protocol_v2_sourcebound.md",
+      "before_sha256": "af10efeac4537622281a695f5008b62030596fb1d708191cf4a850e3a9205ca7",
+      "after_sha256": "6dec87b45f617033acdec85029c99234948348b988fcb95cf30e5cd340b64cd6",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__confirmation_protocol_v2_sourcebound.md.original",
+      "numeric_tokens_unchanged": 14,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/data_dictionary.md",
+      "before_sha256": "e8c4991a29cb0de6e1671433158ba42fca182aceb8de05ed1a223a9bf240bfd1",
+      "after_sha256": "ac0bbeeaac7e0140ba262665a2cd3091107c0e5750fe793806dc85ad25629147",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__data_dictionary.md.original",
+      "numeric_tokens_unchanged": 7,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/literature_sources/README.md",
+      "before_sha256": "a8d99a296d08678d197bab8b3d33aabef3374abe2496c3a45162a7339e605bd1",
+      "after_sha256": "059fad422f379e70c1cb6cd88c856157165fe773613bfbf7c5190c1ddd1fa93b",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__literature_sources__README.md.original",
+      "numeric_tokens_unchanged": 70,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/literature_synthesis.md",
+      "before_sha256": "a42fbb5ceb5c233cad31e3891dccd6e413ee3e808d08f9e5d6644f199fa631ee",
+      "after_sha256": "f27465307a22f5ae05eaf979245a97367a78c4e7d593485c0506c5cf5e5dbee5",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__literature_synthesis.md.original",
+      "numeric_tokens_unchanged": 16,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/methodology_decisions.md",
+      "before_sha256": "aa8afbdc33c2624d83dc3baba9741bc8a724abbd468a2052ecaba8a58656082e",
+      "after_sha256": "7d132a64905732a2ad9f5a53c23bbd74e801a5cf7982f8ed46a8c44443b56b17",
+      "retained_input": "docs/archive/public_refresh_baseline/hygiene_inputs/docs__methodology_decisions.md.original",
+      "numeric_tokens_unchanged": 2250,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/phase9_academic_reporting_policy_v1.md",
+      "before_sha256": "3c7d03f555b958046006d34d4a47e719ed364cbd8b0f7d7b11ffb5d63622c567",
+      "after_sha256": "6e081716c8918230924e5d0fed767018d1470175983f2dcab23529ef371a8a6e",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v1.md.original",
+      "numeric_tokens_unchanged": 77,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/phase9_academic_reporting_policy_v2.md",
+      "before_sha256": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
+      "after_sha256": "8eabcc5980374ce0c029e167772df5bbd08181ed3185a7bb56712ee4ff895726",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__phase9_academic_reporting_policy_v2.md.original",
+      "numeric_tokens_unchanged": 85,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/pit_v22_claims_and_limitations.md",
+      "before_sha256": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
+      "after_sha256": "2f9f678f29f39791e8a2be4a1eaeb445637da5a4eb13d8ab4bfd07df163352cb",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__pit_v22_claims_and_limitations.md.original",
+      "numeric_tokens_unchanged": 22,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "docs/reference/provider_http_reference.md",
+      "before_sha256": "ec73b008169a3e12d5a7fbacc3e694c59e4086366f0376acc22bef0cca6b408c",
+      "after_sha256": "87e9a5e5e03c77c4c79bb2ffa9e393f842295d8758892c622fcaf23a978556e1",
+      "retained_input": "docs/archive/public_refresh_baseline/docs__reference__provider_http_reference.md.original",
+      "numeric_tokens_unchanged": 84,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "reports/final_report_draft_v2.md",
+      "before_sha256": "37605d07d45c9f77fcc99426deeb6a18dc5a3079a21a2dcafc7d8a69b7952bb1",
+      "after_sha256": "819ac57ccd7f15f462c08f46565ac90fe76fbfc97c260dc452325b2eec45b216",
+      "retained_input": "docs/archive/public_refresh_baseline/reports__final_report_draft_v2.md.original",
+      "numeric_tokens_unchanged": 469,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "specs/001-pit-options-rv30/checklists/research-quality.md",
+      "before_sha256": "bf91ebdfeedf3b973a331ed1fca144b9f63a01c4dbb9306c62b0d45cbc0f1bec",
+      "after_sha256": "ebaabc3bb3e356e7bc6ad35077a0107c1e97fe778938bf5b9a93d9aac834fa6b",
+      "retained_input": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__checklists__research-quality.md.original",
+      "numeric_tokens_unchanged": 6,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    },
+    {
+      "path": "specs/001-pit-options-rv30/spec.md",
+      "before_sha256": "d260b75c6ed3846804c51e96b3ef7e542319e63749249e8893dff51c6c48c9ef",
+      "after_sha256": "a80175e4102fd8460b30eccfdc9033753404489d13d9b0773ca36c819d52bd82",
+      "retained_input": "docs/archive/public_refresh_baseline/specs__001-pit-options-rv30__spec.md.original",
+      "numeric_tokens_unchanged": 643,
+      "code_fences_unchanged": true,
+      "prose_internal_labels": 0
+    }
+  ],
+  "frozen_registry_entries_changed": 0,
+  "scientific_runs": 0,
+  "prospective_reads": 0,
+  "frozen_registry_check": {
+    "source_registered_target_documents": 0,
+    "public_candidate_registered_target_documents": 0,
+    "registry_entries_edited": 0
+  },
+  "validation": {
+    "command": [
+      "uv",
+      "run",
+      "--frozen",
+      "--no-sync",
+      "python",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/contract/test_canonical_documentation.py",
+      "tests/contract/test_withdrawn_claims_are_labelled.py",
+      "tests/contract/test_document_references_resolve.py",
+      "tests/contract/test_documentation_references.py",
+      "tests/contract/test_sealed_cohort_publication_claims.py",
+      "tests/contract/test_frozen_artifacts_registry.py",
+      "tests/unit/test_pit_v22_claim_ledger.py",
+      "tests/unit/test_provider_timing_evidence_policy_gate_v1.py",
+      "-o",
+      "addopts=",
+      "-q",
+      "-rs",
+      "--confcutdir=.",
+      "-p",
+      "no:cacheprovider",
+      "-p",
+      "pytest_timeout"
+    ],
+    "environment": {
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "exit_code": 1,
+    "passed": 69,
+    "failed": 2,
+    "seconds": 6.76,
+    "failures": [
+      {
+        "node": "tests/contract/test_documentation_references.py::test_every_top_level_script_is_catalogued",
+        "cause": "The source worktree indexes six new scripts in documentation before those scripts are tracked; candidate integration must verify the tracked catalog."
+      },
+      {
+        "node": "tests/contract/test_frozen_artifacts_registry.py::test_gate_sidecars_agree_with_registry",
+        "cause": "Two unrelated new sidecars are not registered in the source worktree: a public v5 receipt and collector-registration metadata. No sidecar, registry or scientific file was changed by this prose task."
+      }
+    ],
+    "full_candidate_gate_claimed": false,
+    "prose_scanner": "scripts.verify_public_projection.prose_text + INTERNAL_LABEL",
+    "prose_internal_labels": 0,
+    "before_after_hashes_and_numeric_invariance": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "historical_renderer_boundary": "The PIT ledger renderer retains its registered historical source; only the current Markdown presentation heading changed, with the previous document archived byte for byte. No scientific producer was edited or run."
+}

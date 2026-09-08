@@ -1,0 +1,2 @@
+# Preserve the registered source digest on Windows and Unix checkouts.
+launch.ps1 text eol=lf

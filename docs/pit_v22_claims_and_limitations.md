@@ -1,4 +1,4 @@
-# MDS650 PIT v2.2 — Claims and Limitations Ledger
+# PIT v2.2 — Claims and Limitations Ledger
 
 ## Scope
 
