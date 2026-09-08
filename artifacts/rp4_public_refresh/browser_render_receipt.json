@@ -1,0 +1,110 @@
+{
+  "schema_version": "public-readme-browser-render-v1",
+  "recorded_at_utc": "2026-09-08T21:01:21.349042+00:00",
+  "content_commit": "a692fc9696a1895d53567056effe7736ecba42b1",
+  "readme_sha256": "b0d30218e6f3f4347f35c901462a9f760077d0b6c4162346438cda5dc4067834",
+  "browser_url": "https://github.com/mguerrero896/does-option-flow-predict-volatility/tree/a692fc9696a1895d53567056effe7736ecba42b1#readme",
+  "screenshot": {
+    "path": "docs/figures/public_refresh/readme_render_a692fc9.png",
+    "sha256": "ad0d36b4c9a68b0f57901075c201ca877af89608cc5fc30b61e7d950ee96b0d7"
+  },
+  "loaded_figures": 7,
+  "loaded_ci_badges": 1,
+  "image_measurements": [
+    {
+      "alt": "Four forecast-loss comparisons: option state improves both families; option flow improves the linear family only",
+      "height": 509.78125,
+      "loaded": true,
+      "naturalHeight": 730,
+      "naturalWidth": 1200,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/public_refresh/result_matrix.svg",
+      "top": 505.7890625,
+      "width": 837.9921875
+    },
+    {
+      "alt": "Research programme timeline from the earlier validation program through the point-in-time successor and the four walk-forward specifications",
+      "height": 1152.25,
+      "loaded": true,
+      "naturalHeight": 2285,
+      "naturalWidth": 1662,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/public_refresh/programme_timeline.architecture.svg",
+      "top": 2523.265625,
+      "width": 838
+    },
+    {
+      "alt": "Data workflow from licensed provider records through point-in-time panels and evaluation to public aggregates and hashes",
+      "height": 582.7890625,
+      "loaded": true,
+      "naturalHeight": 612,
+      "naturalWidth": 880,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/data-pipeline.svg",
+      "top": 4095.2109375,
+      "width": 837.9921875
+    },
+    {
+      "alt": "Three nested information sets with 29, 69 and 138 predictors",
+      "height": 497.2109375,
+      "loaded": true,
+      "naturalHeight": 712,
+      "naturalWidth": 1200,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/public_refresh/information_sets.svg",
+      "top": 5049.6953125,
+      "width": 837.9921875
+    },
+    {
+      "alt": "From the research question through data, chronological evaluation and prospective replication",
+      "height": 890.375,
+      "loaded": true,
+      "naturalHeight": 1766,
+      "naturalWidth": 1662,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/public_refresh/proposal_to_replication_readme.workflow.svg",
+      "top": 5856.40625,
+      "width": 838
+    },
+    {
+      "alt": "Accumulated daily forecast-loss difference after adding option flow",
+      "height": 674.0390625,
+      "loaded": true,
+      "naturalHeight": 1480,
+      "naturalWidth": 1840,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg",
+      "top": 7757.4765625,
+      "width": 837.9921875
+    },
+    {
+      "alt": "Cumulative option-flow forecast-loss differences for each of the six stocks",
+      "height": 667.6015625,
+      "loaded": true,
+      "naturalHeight": 956,
+      "naturalWidth": 1200,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/raw/a692fc9696a1895d53567056effe7736ecba42b1/docs/figures/public_refresh/cumulative_by_asset_rv15.svg",
+      "top": 8629.015625,
+      "width": 837.9921875
+    },
+    {
+      "alt": "Tier 1 CI",
+      "height": 20,
+      "loaded": true,
+      "naturalHeight": 20,
+      "naturalWidth": 117,
+      "src": "https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml/badge.svg",
+      "top": 10560.703125,
+      "width": 117
+    }
+  ],
+  "headings": [
+    "Options Order Flow and Intraday Volatility",
+    "In one minute",
+    "How this project was carried out",
+    "Data and point-in-time discipline",
+    "Method",
+    "Results",
+    "Limits",
+    "What would change the conclusion",
+    "Reproduce",
+    "Defects and corrections",
+    "Cite this work"
+  ],
+  "compact_diagram_effective_minimum_font_px": 23.56875,
+  "scope": "Actual GitHub render of the stated content commit; first screen captured. The following evidence-only commit does not change README or figure bytes. No scientific calculation or prospective read."
+}
