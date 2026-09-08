@@ -5,7 +5,27 @@
    "document": "docs/rp4/specification_v4.md",
    "id": "rp4-closed-v1-v4",
    "phase9_for_rp4": "RETIRED_AS_SEALED_COHORT_DECISION_128",
-   "state": "SCIENTIFIC_PROGRAM_CLOSED_NO_V5_NO_NEW_EVALUATION"
+   "state": "V1_V4_CLOSED_WITH_V4_HEADLINE"
+  },
+  {
+   "document": "docs/rp4/prospective_confirmation_v1.md",
+   "id": "rp4-prospective-replication",
+   "new_session_thresholds": [
+    20,
+    40,
+    335
+   ],
+   "secondary_combination": {
+    "historical_sessions": 25,
+    "new_sessions": 20
+   },
+   "state": "REGISTERED_FUTURE_EVIDENCE_NOT_READ_BY_PUBLIC_REFRESH"
+  },
+  {
+   "document": "docs/rp3/PREREGISTRATION.md",
+   "estimated_read_date": "2029-01-30",
+   "id": "rp3-prospective",
+   "state": "SEALED_PROTOCOL_NO_RESULT_REPORTED"
   }
  ],
  "authorized_sources": {
@@ -37,6 +57,7 @@
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/run_manifest.json": "95fa68ecfa2606b433c03c34c70d09c2d54f63438e86989f03613adedb29896a",
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
+  "artifacts/rp4_public_refresh/supabase_receipt.json": "b9f028742aca3a099321e4440f455091b5de9ee1cde6bb38d05f677eb6244b0f",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
   "artifacts/target_blind_v22/next_confirmation_preregistration_v2.json": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560",
   "artifacts/target_blind_v22/next_confirmation_preregistration_v3.json": "3dc3ca514f922f69b8b6bd124d2faa54a8797fdafec4cd85a636e107d44042f4",
@@ -50,26 +71,27 @@
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
   "artifacts/target_blind_v22/successor_owner_authorization_v2.json": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1",
-  "data/FROZEN_ARTIFACTS.json": "fd838efef27c23b96b085baa964c7fd899e778bd6691d2768a694c6dad6ad04f",
+  "data/FROZEN_ARTIFACTS.json": "06ea5659ee08408961203a48d1ade76a69efc863019f13990b3d3ae97ee2c3fb",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
   "docs/ci_contract_v1.md": "7b11bbd19f5a38be3882f79994b6e1465c4e37760b128c1c59033fbe87a6d8fc",
   "docs/evidence_immutability_v1.md": "3f81889b78ad30b41363611b432c9fcf945b0de20db2b00e66fe7f64845b7e53",
-  "docs/methodology_decisions.md": "ad1c0c9ced6eb0beedd3a92558d5db5b595a29c922de297c363764bc7d32e1c7",
+  "docs/methodology_decisions.md": "92c301e596223deb24c0139cb8e371a479d1f8fec34cece96890c797d0c9d2a4",
   "docs/model_naming_note_v1.md": "5172827089beae43fc097247f829f680b2595adb75a94fa93d1d44d3370f60e8",
   "docs/phase8_bridge_protocol_v2.md": "ebe5bf4d9759b50d617ae60e81cec31eec1b2229ac5373462481940a6e42b4c0",
-  "docs/phase9_academic_reporting_policy_v2.md": "5a7b4de3219a37a784fdda80544ba97536c2563c0db73abcd3c8dafa7b801dbf",
-  "docs/pit_v22_claims_and_limitations.md": "b8d8c0ceb3a991560a5c6765d48c7f1b075cb04442e32d3621bebef1486eb1e8",
+  "docs/phase9_academic_reporting_policy_v2.md": "8eabcc5980374ce0c029e167772df5bbd08181ed3185a7bb56712ee4ff895726",
+  "docs/pit_v22_claims_and_limitations.md": "2f9f678f29f39791e8a2be4a1eaeb445637da5a4eb13d8ab4bfd07df163352cb",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
-  "docs/provider_license_review_v1.md": "c69ebed18a26e768fb1d7b39e3a9d6d567a892382196554cfac219b256586b2b",
+  "docs/provider_license_review_v1.md": "e37a20cabfffd2bba23d81c358d186cb84b73497765fcaa2dd9b2d00c88340fc",
+  "docs/research_decisions_current.md": "8e18d7a3ff3fa8985d1f2321a827e4ef4d9a1cdb76a7db6732b4e0d12737a868",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
-  "docs/rp4/RESULTADO_FINAL.md": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19",
-  "docs/rp4/publication_contract_v2.md": "e485afd87d22b595e2b9a97c3cc13917e24be9dd61ab7b3382977d13bc5285a2",
-  "docs/rp4/results_v4.md": "c42316748a57cfc1ce73681a98bacb1fb157ee3ec13983e222e3494d1996a2c7",
+  "docs/rp4/RESULTADO_FINAL.md": "3be1c50bd474390b67afb99d103f08b35aae75e84eb26df07edfe9c01ca1ea6d",
+  "docs/rp4/publication_contract_v2.md": "44b87732383e517812d3692fb6cf33ecb9921cf51a38f125728a743cbc3c6022",
+  "docs/rp4/results_v4.md": "808ae63d0d2d3eeab8c68b5aa0c81d4db0902a331c1abe889b2935cc66747bc9",
   "reports/final_report_draft_v2.docx": "cb9e3d76a738a6aee79a9371b802480f4a586efc419af75c4b1629bce0fbf6c7",
-  "reports/final_report_draft_v2.md": "37605d07d45c9f77fcc99426deeb6a18dc5a3079a21a2dcafc7d8a69b7952bb1",
+  "reports/final_report_draft_v2.md": "819ac57ccd7f15f462c08f46565ac90fe76fbfc97c260dc452325b2eec45b216",
   "reports/phase8a_exploratory_bridge_addendum_v13.md": "5ace3b5ae54ad549979097b6478e1865bb12463d5bf969c943475d53e20153ca",
   "scripts/_gated_exclude_list.txt": "2c546a0c271834563d1bc208246849266865a6de3c5af61be1dc894f7a3285b9"
  },
@@ -89,7 +111,7 @@
    "Tree flow does not pass the primary mean test; medians are secondary."
   ],
   "independent_global_confirmation": false,
-  "label": "fuera de muestra walk-forward, partici\u00f3n fijada 2026-09-07.",
+  "label": "Out-of-sample walk-forward evaluation; partition fixed on 2026-09-07.",
   "limitations": [
    "Fourth evaluation of reused windows; cross-version search not adjusted.",
    "Phase 8 previously read July 20 to August 28 with another specification.",
@@ -101,6 +123,7 @@
    "2024-10-28",
    "2026-07-31"
   ],
+  "public_presentation": "V4_HEADLINE_WITH_CLOSED_REGISTERED_EXPLORATORY_V5_EXTENSION",
   "research_only": true,
   "run_id": "rp4-v1-v4-walkforward-20260907",
   "scientific_result_eligible": true,
@@ -1311,8 +1334,7 @@
   "table_source": {
    "path": "artifacts/rp4_closeout_figures/comparison_v1_v4.csv",
    "sha256": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba"
-  },
-  "v5_authorized": false
+  }
  },
  "ci": {
   "contract": "docs/ci_contract_v1.md",
@@ -1331,34 +1353,53 @@
   "secondary_correction": "docs/rp4/results_v3_revision2.md",
   "source": {
    "path": "docs/rp4/RESULTADO_FINAL.md",
-   "sha256": "6d629b2416601af39a6e7f4fc0f04db1455b6c20ba4c298e7fb21a6ed00b2b19"
+   "sha256": "3be1c50bd474390b67afb99d103f08b35aae75e84eb26df07edfe9c01ca1ea6d"
   }
  },
  "external_publication": {
   "supabase": {
-   "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
-   "status": "NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT",
-   "writes": {
-    "catalog_syncs_committed": 1,
-    "dataset_loads_committed": 6,
-    "schema_migrations_committed": 19,
-    "this_audit": 0
+   "licensed_bucket": "PRIVATE",
+   "receipt": "artifacts/rp4_public_refresh/supabase_receipt.json",
+   "receipt_sha256": "b9f028742aca3a099321e4440f455091b5de9ee1cde6bb38d05f677eb6244b0f",
+   "status": "RP4_V4_PUBLIC_AGGREGATES_READ_BACK_VERIFIED",
+   "tables": {
+    "rp4_v4_coverage": {
+     "all_cells_equal": true,
+     "rows": 36,
+     "source_path": "artifacts/rp4_v4_b4/coverage.csv",
+     "source_sha256": "67941d02647ae329fcc704a0b109949ab4312cb6915006302186b21770e853ef"
+    },
+    "rp4_v4_horizons": {
+     "all_cells_equal": true,
+     "rows": 3,
+     "source_path": "artifacts/rp4_public_refresh/horizon_reference.csv",
+     "source_sha256": "a5fc2b258c89110a125dec46252379a8cb44c5e399b4c401333d727b832c7eb6"
+    },
+    "rp4_v4_primary_statistics": {
+     "all_cells_equal": true,
+     "rows": 24,
+     "source_path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "source_sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
    }
   }
  },
  "frozen_evidence": {
-  "artifact_count": 155,
+  "artifact_count": 158,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 153,
+  "physical_artifact_count": 156,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "fd838efef27c23b96b085baa964c7fd899e778bd6691d2768a694c6dad6ad04f"
+  "registry_sha256": "06ea5659ee08408961203a48d1ade76a69efc863019f13990b3d3ae97ee2c3fb"
  },
- "future_campaigns": [],
+ "future_campaigns": [
+  "RP4 registered prospective replication",
+  "RP3 registered read gate"
+ ],
  "gated_data": {
   "file_count": 15,
   "pointer_file": "data/GATED_DATA_POINTERS.json",
@@ -1541,11 +1582,23 @@
    },
    "source": {
     "path": "reports/final_report_draft_v2.md",
-    "sha256": "37605d07d45c9f77fcc99426deeb6a18dc5a3079a21a2dcafc7d8a69b7952bb1"
+    "sha256": "819ac57ccd7f15f462c08f46565ac90fe76fbfc97c260dc452325b2eec45b216"
    },
    "submission_rendering": {
     "path": "reports/final_report_draft_v2.docx",
     "sha256": "cb9e3d76a738a6aee79a9371b802480f4a586efc419af75c4b1629bce0fbf6c7"
+   }
+  },
+  "external_publication": {
+   "supabase": {
+    "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
+    "status": "NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT",
+    "writes": {
+     "catalog_syncs_committed": 1,
+     "dataset_loads_committed": 6,
+     "schema_migrations_committed": 19,
+     "this_audit": 0
+    }
    }
   },
   "future_campaigns": [
@@ -1761,14 +1814,13 @@
  "publication_closeout": {
   "cleanup_deletions_authorized": false,
   "contract": "NEW_MATERIAL_ONLY_EXISTING_HISTORY_PRESERVED",
-  "contract_source": "docs/rp4/publication_contract_v2.md",
+  "contract_source": "docs/research_decisions_current.md",
   "publication_base": "origin/main",
-  "publication_branch": "rp4/walkforward-v1-v4",
-  "remote_commands_executor": "Miguel",
   "remote_history_migration_authorized": false,
-  "remote_writes_executed": false,
-  "status": "LOCAL_PREPARATION_NOT_PUBLISHED",
-  "technical_package_identifier_allowed": true
+  "required_passing_ci_checks": 5,
+  "status": "PUBLICATION_GATES_DOCUMENTED",
+  "technical_package_identifier_allowed": true,
+  "written_external_review_required": true
  },
  "schema_version": "canonical-state-v2.0-rp4-closeout",
  "scientific_bundle": {
