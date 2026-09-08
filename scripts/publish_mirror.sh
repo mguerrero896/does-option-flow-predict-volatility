@@ -6,6 +6,17 @@
 # their SHA-256 pointers in data/GATED_DATA_POINTERS.json instead.
 # See docs/consolidation_record_20260817.md for the graft rationale.
 set -euo pipefail
+# The public candidate is assembled on the existing public main lineage. This
+# mode verifies that clean projection only: it cannot enter the legacy publisher.
+if [[ "${1:-}" == "--dry-run" ]]; then
+    shift
+    uv run --frozen python scripts/verify_public_projection.py "$@"
+    exit 0
+fi
+if [[ $# -gt 0 ]]; then
+    echo "Unknown publication arguments" >&2
+    exit 2
+fi
 # Tier-2 preflight (decision 63): a publish is REFUSED unless the full local
 # gates pass, including the exact replica of the hosted hermetic job (ci-sim).
 # This is what keeps red runs — and their failure emails — off GitHub.

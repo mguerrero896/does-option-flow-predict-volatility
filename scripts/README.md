@@ -278,6 +278,19 @@ every producer receives the same run identity, configuration and invariant check
 
 ## Archived candidates (see scripts/archive/)
 
+Public presentation verification: `scripts/verify_public_projection.py` checks a
+clean candidate, preserved public ancestry, contracts, links, history, secrets and
+language screening through `bash scripts/publish_mirror.sh --dry-run --output-dir`
+with an external log directory. `scripts/rp4_archive_sources.py` resolves historical
+sources and archive links. `scripts/build_rp4_english_defense.py` reproduces the
+English defense claim bindings from stored evidence.
+`scripts/build_rp4_v5_english.py` verifies or regenerates the complete English
+presentation of the closed exploratory extension from its preserved originals.
+`scripts/verify_rp4_public_metadata.py` checks the original protocol pins and
+logical parent identities without importing a scientific executor or reading panels.
+`scripts/build_rp4_v5_public_receipt.py` binds the historical post hoc receipt to
+the separate public files and their actual hashes, without reading private inputs.
+
 | Script | Purpose |
 |---|---|
 | `scripts/archive/fix_fmp_missing_window.py` | One-off FMP missing-window repair superseded by the corrected pipeline. |

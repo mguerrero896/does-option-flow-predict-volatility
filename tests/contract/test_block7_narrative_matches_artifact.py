@@ -45,7 +45,7 @@ OUTCOME_KEY: Final = {
 REL_TOLERANCE: Final = 1e-3
 T_TOLERANCE: Final = 6e-4
 
-INDEX_ROW_PREFIX: Final = "| [`docs/rp2/block7_dml_v1.md`](rp2/block7_dml_v1.md)"
+INDEX_LINK: Final = "](rp2/block7_dml_v1.md)"
 
 
 def _number(text: str) -> float:
@@ -63,13 +63,15 @@ def _between_anchors(document: str, name: str) -> list[str]:
 
 
 def _index_row() -> str:
-    rows = [
-        line
-        for line in INDEX.read_text(encoding="utf-8").splitlines()
-        if line.startswith(INDEX_ROW_PREFIX)
+    passages = [
+        " ".join(paragraph.splitlines())
+        for paragraph in INDEX.read_text(encoding="utf-8").split("\n\n")
+        if INDEX_LINK in paragraph
     ]
-    assert len(rows) == 1, f"expected exactly one INDEX row for block 7, found {len(rows)}"
-    return rows[0]
+    assert len(passages) == 1, (
+        f"expected exactly one linked INDEX passage for block 7, found {len(passages)}"
+    )
+    return passages[0]
 
 
 @pytest.fixture(scope="module")

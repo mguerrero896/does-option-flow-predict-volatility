@@ -7,7 +7,10 @@
       "mcs_cells",
       "rp2_blocks",
       "rp2_extensions",
-      "rp2_power"
+      "rp2_power",
+      "rp4_v4_primary_statistics",
+      "rp4_v4_coverage",
+      "rp4_v4_horizons"
     ]
   },
   "anon_readable_views": {
@@ -65,5 +68,16 @@
   "writes": {
     "anon_may_write": false,
     "note": "No role but service_role can write. As of 20260826020000 anon and authenticated hold no INSERT/UPDATE/DELETE/TRUNCATE grant anywhere in `public`, and default privileges were revoked so new tables do not inherit any. RLS was already denying these writes; removing the grants removes the blast radius of a mistaken policy."
+  },
+  "rp4_aggregate_verification": {
+    "measured_at_utc": "2026-09-08T15:37:34.477265+00:00",
+    "receipt": "artifacts/rp4_public_refresh/supabase_receipt.json",
+    "public_tables_added": [
+      "rp4_v4_primary_statistics",
+      "rp4_v4_coverage",
+      "rp4_v4_horizons"
+    ],
+    "prior_schema_policy_grants_unchanged": true,
+    "scope": "The three new tables were re-read anonymously in full; earlier endpoint measurements retain their original date."
   }
 }

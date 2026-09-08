@@ -1,0 +1,149 @@
+"""Verify the additive registration and reproduce its analytic power sensitivity."""
+
+import csv
+import json
+from datetime import datetime
+from math import comb, isclose, sqrt
+from pathlib import Path
+from statistics import NormalDist
+
+import pytest
+from scripts.rp4_archive_sources import assert_historical_sha256, original_path
+
+ROOT = Path(__file__).resolve().parents[2]
+DOCS = ROOT / "docs/rp4"
+STEM = "prospective_confirmation_v1_amendment_3"
+DOCUMENT_SHA256 = "4981a6ff9c40f498b192628df9c20db7a5e4877468c1ca0587fd472dc31401d6"
+
+
+def receipt() -> dict:
+    return json.loads(original_path(DOCS / f"{STEM}_receipt.json").read_text(encoding="utf-8"))
+
+
+def test_amendment_3_preserves_seals_and_limits_every_reading() -> None:
+    record = receipt()
+    assert record["document_sha256"] == DOCUMENT_SHA256
+    assert_historical_sha256(DOCS / f"{STEM}.md", DOCUMENT_SHA256)
+    sidecar = original_path(DOCS / f"{STEM}.sha256").read_text(encoding="utf-8").splitlines()
+    assert len(sidecar) == 2
+    assert {line.split("  ", 1)[1] for line in sidecar} == {f"{STEM}.md", f"{STEM}_receipt.json"}
+    for line in sidecar:
+        expected, name = line.split("  ", 1)
+        assert Path(name).name == name
+        assert_historical_sha256(DOCS / name, expected)
+    for name, expected in record["source_sha256"].items():
+        assert_historical_sha256(ROOT / name, expected)
+    assert [r["sha256"] for r in record["chain"]] == [
+        "317530c37d2785bb0ce0bfd6a947fc034c78a02bbd5bb102fd17efe8f91b977d",
+        "036f81894975a1e452fb2817c7f3989ed89dd6fe601a9378587d70559d3c7bb3",
+        "b545c36faa4a48764a3433b008d859780a2116f5275a8553b95765d3a2d50cf9",
+    ]
+    assert record["primary_unchanged"] and record["primary_look_sessions"] == 20
+    assert record["authorized_prospective_read_counts"] == [20, 40, 335]
+    assert record["pooled_D_at_prospective_sessions"] == 20 and record["pooled_sessions"] == 45
+    assert not record["additional_intermediate_reads"]
+    assert not record["global_between_look_alpha_control_claimed"]
+    assert not record["success_at_either_look_rule"]
+    assert not record["power_for_actual_pooled_D_estimated"] and not record["ABC_power_available"]
+    final = record["additional_reading"]
+    assert final["sessions"] == 335 and final["horizon_minutes"] == 15
+    assert final["family"] == "log_ridge_harq"
+    assert final["sequence"] == ["B1_over_B0", "B2_over_B1"]
+    assert final["per_read_nominal_alpha"] == 0.05 and final["require_positive_estimates"]
+    for flag in (
+        "first_335_eligible_in_chronological_order",
+        "cumulative_including_early_prospective_sessions",
+        "no_historical_25_pooled",
+        "read_once_regardless_of_early_results",
+        "cannot_relabel_or_rescue_20",
+        "no_additional_intermediate_reads",
+    ):
+        assert final[flag]
+    assert not final["independent_of_20_or_40"]
+    original = json.loads(
+        original_path(DOCS / "prospective_confirmation_v1_amendment_2_receipt.json").read_text()
+    )
+    assert record["bootstrap"] == original["bootstrap"]
+    observed = record["collector_observation"]
+    times = [datetime.fromisoformat(r["sealed_at_utc"]) for r in record["chain"]]
+    times.extend(
+        [
+            datetime.fromisoformat(observed["observed_at_utc"]),
+            datetime.fromisoformat(record["sealed_at_utc"]),
+            datetime.fromisoformat(observed["next_run"]),
+        ]
+    )
+    assert times == sorted(times) and len(times) == len(set(times))
+    assert observed["last_task_result"] == 267011 and observed["state"] == "Ready"
+    assert observed["enabled"] and observed["start_boundary"] == "2026-09-09T10:00:00"
+    assert not observed["data_root_exists"] and not observed["start_scheduled_task_called"]
+    assert (
+        record["new_fits"] == record["new_bootstraps"] == 0 and not record["prospective_data_read"]
+    )
+
+
+def test_power_is_reproducible_from_saved_intervals_and_joint_limit_is_explicit() -> None:
+    record = receipt()
+    saved = json.loads(original_path(ROOT / "artifacts/rp4_v4_b2_rv15/summary.json").read_text())
+    normal = NormalDist()
+    rows = record["normal_approximation"]["rows"]
+    assert len(rows) == 12
+    powers = {}
+    for row in rows:
+        source = saved["contrasts"][0 if row["hypothesis"] == "H1" else 1]
+        assert source["family"] == "log_ridge_harq" and source["N_sessions"] == 419
+        se = (source["ci_high"] - source["ci_low"]) / (2 * normal.inv_cdf(0.975))
+        expected = normal.cdf(
+            source["estimate"] / (se * sqrt(419 / row["n"])) - normal.inv_cdf(0.95)
+        )
+        assert isclose(expected, row["power"], rel_tol=1e-13)
+        assert isclose(row["power_percent"], 100 * expected, rel_tol=1e-13)
+        powers[row["hypothesis"], row["n"]] = expected
+    assert [round(100 * powers["H2", n]) for n in (20, 40, 45, 120, 146, 335)] == [
+        15,
+        22,
+        23,
+        44,
+        50,
+        80,
+    ]
+    assert 0.80 < powers["H2", 335] < 0.81
+    assert 0.54 < powers["H1", 335] < 0.55
+    assert not record["sequence_power"]["actual_joint_power_estimated"]
+    assert not record["sequence_power"]["dependence_assumed_independent"]
+    for row in record["sequence_power"]["bounds"]:
+        marginals = [powers[h, row["n"]] for h in ("H1", "H2")]
+        assert isclose(row["upper_under_approximated_marginals"], min(marginals), abs_tol=1e-14)
+        assert isclose(
+            row["lower_under_approximated_marginals"], max(0, sum(marginals) - 1), abs_tol=1e-14
+        )
+    with original_path(ROOT / "artifacts/rp4_v4_b2_rv15/session_losses.csv").open(
+        encoding="utf-8", newline=""
+    ) as stream:
+        losses = list(csv.DictReader(stream))
+    count = sum(
+        float(r["loss__log_ridge_harq__B1"]) > float(r["loss__log_ridge_harq__B2"]) for r in losses
+    )
+    assert (count, len(losses)) == (249, 419)
+
+    def tail(n: int, k: int, p: float) -> float:
+        return sum(comb(n, j) * p**j * (1 - p) ** (n - j) for j in range(k, n + 1))
+
+    for row in record["binomial_sign_sensitivity"]["rows"]:
+        n, k = row["n"], row["rejection_threshold_positive_sessions"]
+        assert tail(n, k, 0.5) <= 0.05 < tail(n, k - 1, 0.5)
+        assert isclose(row["power_rounded_059"], tail(n, k, 0.59), abs_tol=2e-12)
+        assert isclose(
+            row["power_empirical_249_over_419"], tail(n, k, count / len(losses)), abs_tol=2e-12
+        )
+    assert not record["binomial_sign_sensitivity"]["new_registered_test"]
+
+
+def test_amendment_3_rejects_changed_document(monkeypatch: pytest.MonkeyPatch) -> None:
+    original = Path.read_bytes
+    path = original_path(DOCS / f"{STEM}.md")
+    changed = original(path).replace(b"335", b"120")
+    assert changed != original(path)
+    monkeypatch.setattr(Path, "read_bytes", lambda p: changed if p == path else original(p))
+    with pytest.raises(AssertionError):
+        test_amendment_3_preserves_seals_and_limits_every_reading()

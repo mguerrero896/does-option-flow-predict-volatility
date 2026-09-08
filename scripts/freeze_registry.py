@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib
 import json
 import stat
 import sys
@@ -110,15 +111,32 @@ def add(paths: list[str]) -> int:
 
 
 def verify() -> int:
+    # The public document baseline may have a byte-exact, explicitly mapped
+    # archive location. Add/lock and all writer protections keep their paths.
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    # Keep the existing namespace identity without duplicate mypy module discovery.
+    archive_sources = importlib.import_module("scripts.rp4_archive_sources")
+
     registry = _load()
     failures = 0
     accepted_redactions = 0
     accepted_withdrawals = 0
+    archived_public_baselines = 0
     redactions = _redactions()
     entries: list[dict[str, object]] = registry["entries"]  # type: ignore[assignment]
     for entry in entries:
         relative = str(entry["path"])
         path = REPO / relative
+        try:
+            located = archive_sources.frozen_public_baseline_path(path, str(entry["sha256"]))
+        except ValueError as error:
+            print(f"[freeze] {error} {relative}")
+            failures += 1
+            continue
+        if located != path.resolve():
+            archived_public_baselines += 1
+        path = located
         if not path.is_file():
             if _withdrawn(relative):
                 accepted_withdrawals += 1
@@ -140,7 +158,8 @@ def verify() -> int:
     print(
         f"[freeze] verify: {len(entries) - failures}/{len(entries)} intact "
         f"({accepted_redactions} public metadata redactions, "
-        f"{accepted_withdrawals} withdrawn)"
+        f"{accepted_withdrawals} withdrawn, "
+        f"{archived_public_baselines} archived public baselines)"
     )
     return 0 if failures == 0 else 1
 

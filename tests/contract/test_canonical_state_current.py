@@ -117,7 +117,7 @@ def test_scientific_bundle_preserves_history_and_rp4_is_current() -> None:
     redactions = state["frozen_evidence"]["public_metadata_redactions"]
     assert redactions["ledger"] == "data/PUBLIC_METADATA_REDACTIONS.json"
     assert redactions["artifact_count"] == 14
-    assert state["external_publication"]["supabase"] == {
+    assert state["history"]["external_publication"]["supabase"] == {
         "schema_evidence": "artifacts/supabase_schema_audit_20260828.json",
         "status": ("NO_CURRENT_RESULTS_PUBLICATION_AND_DIRECT_DML_DISABLED_DATASET_REGISTRY_EXACT"),
         "writes": {
@@ -183,16 +183,29 @@ def test_generated_paths_are_platform_independent() -> None:
     assert all("\\" not in path for path in state["authorized_sources"])
 
 
-def test_publication_contract_preserves_base_and_does_not_authorize_remote_execution() -> None:
+def test_publication_contract_preserves_base_and_requires_ci_and_external_review() -> None:
     closeout = _module.build_state()["publication_closeout"]
     assert closeout["contract"] == "NEW_MATERIAL_ONLY_EXISTING_HISTORY_PRESERVED"
-    assert closeout["publication_branch"] == "rp4/walkforward-v1-v4"
     assert closeout["publication_base"] == "origin/main"
     assert closeout["technical_package_identifier_allowed"] is True
     assert closeout["remote_history_migration_authorized"] is False
-    assert closeout["remote_commands_executor"] == "Miguel"
-    assert closeout["remote_writes_executed"] is False
+    assert closeout["required_passing_ci_checks"] == 5
+    assert closeout["written_external_review_required"] is True
     assert closeout["cleanup_deletions_authorized"] is False
+
+
+def test_current_database_state_is_bound_to_verified_public_results() -> None:
+    current = _module.build_state()["external_publication"]["supabase"]
+    receipt = json.loads((REPO / current["receipt"]).read_text(encoding="utf-8"))
+    assert current["tables"] == receipt["new_results"]
+    assert {name: data["rows"] for name, data in current["tables"].items()} == {
+        "rp4_v4_primary_statistics": 24,
+        "rp4_v4_coverage": 36,
+        "rp4_v4_horizons": 3,
+    }
+    assert all(row["all_cells_equal"] for row in receipt["anonymous_round_trip"].values())
+    assert all(row["removed_or_changed"] == 0 for row in receipt["schema_diff"].values())
+    assert current["licensed_bucket"] == "PRIVATE" and receipt["bucket_public"] is False
 
 
 def test_rp4_front_page_and_status_repeat_the_exact_final_table() -> None:

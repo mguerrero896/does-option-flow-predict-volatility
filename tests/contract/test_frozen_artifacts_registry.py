@@ -4,6 +4,10 @@ The registry data/FROZEN_ARTIFACTS.json pins every frozen artifact to its
 SHA-256 at freeze time. Any physical mutation — by any script, any tool, any
 direct filesystem write — fails this suite. Hermetic: every registered path is
 git-tracked, so the check runs identically on the hosted runner.
+
+A relocated public documentary baseline is accepted only through its explicit
+archive map and byte-exact public pin. This does not change a registry entry,
+writer protection, withdrawal rule or the original research-protocol identity.
 """
 
 from __future__ import annotations
@@ -17,6 +21,8 @@ from fnmatch import fnmatch
 from pathlib import Path
 
 import pytest
+from scripts import freeze_registry as freezer
+from scripts import rp4_archive_sources as archive_sources
 
 from mds650 import storage
 
@@ -112,9 +118,7 @@ def test_registry_is_append_only_and_living_counts_match() -> None:
     ).stdout.splitlines()
     assert history, f"{relative} has no reachable Git history"
 
-    def indexed(
-        snapshot: list[dict[str, object]], label: str
-    ) -> dict[str, dict[str, object]]:
+    def indexed(snapshot: list[dict[str, object]], label: str) -> dict[str, dict[str, object]]:
         paths = [str(entry["path"]) for entry in snapshot]
         assert len(paths) == len(set(paths)), f"duplicate registry paths at {label}"
         return {str(entry["path"]): entry for entry in snapshot}
@@ -162,9 +166,7 @@ def test_registry_is_append_only_and_living_counts_match() -> None:
                     f"{REGISTRY.relative_to(REPO).as_posix()} contains {expected}"
                 )
 
-    assert "STATUS.md" in claims, (
-        "STATUS.md must publish the generated frozen-artifact count"
-    )
+    assert "STATUS.md" in claims, "STATUS.md must publish the generated frozen-artifact count"
     assert not mismatches, "frozen-artifact documentation drift: " + "; ".join(mismatches)
 
 
@@ -209,6 +211,11 @@ def test_every_frozen_artifact_is_physically_intact() -> None:
     for entry in _entries():
         relative = str(entry["path"])
         path = REPO / relative
+        try:
+            path = archive_sources.frozen_public_baseline_path(path, str(entry["sha256"]))
+        except ValueError as error:
+            mutated.append(f"{error} {relative}")
+            continue
         if not path.is_file():
             if _is_withdrawn(relative, withdrawn):
                 continue  # stripped from the public mirror; verified locally (tier 2)
@@ -256,10 +263,7 @@ def _sidecar_artifact_and_digest(sidecar: Path) -> tuple[Path, str]:
             raise ValueError("SIDECAR_TARGET_UNSAFE")
         artifact = sidecar.parent / filename
     resolved = artifact.resolve()
-    if (
-        resolved.parent != sidecar.parent.resolve()
-        or not resolved.is_relative_to(REPO.resolve())
-    ):
+    if resolved.parent != sidecar.parent.resolve() or not resolved.is_relative_to(REPO.resolve()):
         raise ValueError("SIDECAR_TARGET_UNSAFE")
     return artifact, digest.lower()
 
@@ -279,6 +283,11 @@ def test_gate_sidecars_agree_with_registry() -> None:
         if relative not in registered:
             disagreements.append(f"UNREGISTERED {relative}")
             continue
+        try:
+            artifact = archive_sources.frozen_public_baseline_path(artifact, registered[relative])
+        except ValueError as error:
+            disagreements.append(f"{error} {relative}")
+            continue
         if not artifact.is_file():
             disagreements.append(f"MISSING {relative}")
             continue
@@ -295,6 +304,104 @@ def test_gate_sidecars_agree_with_registry() -> None:
             # file bytes must agree — divergence means real content drift
             disagreements.append(f"SIDECAR_MISMATCH {relative}")
     assert not disagreements, disagreements
+
+
+@pytest.fixture
+def archived_public_baseline(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    logical = "artifacts/fixture/protocol.md"
+    physical = tmp_path / logical
+    physical.parent.mkdir(parents=True)
+    physical.write_text("English reading route\n", encoding="utf-8")
+    baseline = tmp_path / "docs/archive/protocol.md.public_baseline.original"
+    baseline.parent.mkdir(parents=True)
+    baseline.write_bytes(b"Frozen public baseline: N = 419.\n")
+    expected = hashlib.sha256(baseline.read_bytes()).hexdigest()
+    record = {
+        "archive_path": "docs/archive/distinct_registered_original.md.original",
+        "public_baseline_path": baseline.relative_to(tmp_path).as_posix(),
+        "public_baseline_sha256": expected,
+    }
+    map_file = tmp_path / "docs/archive/public_history/original_paths.json"
+    map_file.parent.mkdir()
+    map_file.write_text(json.dumps({logical: record}), encoding="utf-8")
+    registry = tmp_path / "data/FROZEN_ARTIFACTS.json"
+    registry.parent.mkdir()
+    registry.write_text(
+        json.dumps({"entries": [{"path": logical, "sha256": expected}]}), encoding="utf-8"
+    )
+    (physical.parent / "protocol.md.sha256").write_text(
+        f"{expected}  protocol.md\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(archive_sources, "ROOT", tmp_path)
+    archive_sources._paths.cache_clear()
+    archive_sources._redactions.cache_clear()
+    monkeypatch.setattr(freezer, "REPO", tmp_path)
+    monkeypatch.setattr(freezer, "REGISTRY", registry)
+    monkeypatch.setattr(freezer, "REDACTIONS", tmp_path / "absent_redactions.json")
+    monkeypatch.setattr(freezer, "WITHDRAWAL_LISTS", ())
+    monkeypatch.setitem(globals(), "REPO", tmp_path)
+    monkeypatch.setitem(globals(), "REGISTRY", registry)
+    monkeypatch.setitem(globals(), "_redactions", lambda: {})
+    monkeypatch.setitem(globals(), "_withdrawn_paths", lambda: frozenset())
+    yield physical, baseline, expected, map_file, record, registry
+    archive_sources._paths.cache_clear()
+    archive_sources._redactions.cache_clear()
+
+
+def test_public_baseline_relocation_checks_exact_bytes_and_rejects_corruption(
+    archived_public_baseline,
+) -> None:
+    physical, baseline, expected, _, _, registry = archived_public_baseline
+    registry_before = registry.read_bytes()
+    assert archive_sources.frozen_public_baseline_path(physical, expected) == baseline
+    assert freezer.verify() == 0
+    test_every_frozen_artifact_is_physically_intact()
+    test_gate_sidecars_agree_with_registry()
+    baseline.write_bytes(b"Corrupted public baseline: N = 420.\n")
+    assert freezer.verify() == 1
+    with pytest.raises(AssertionError, match="FROZEN_PUBLIC_BASELINE_MUTATED"):
+        test_every_frozen_artifact_is_physically_intact()
+    with pytest.raises(AssertionError, match="FROZEN_PUBLIC_BASELINE_MUTATED"):
+        test_gate_sidecars_agree_with_registry()
+    assert registry.read_bytes() == registry_before
+
+
+def test_public_baseline_relocation_rejects_false_pin_and_nonarchive_path(
+    archived_public_baseline,
+) -> None:
+    physical, baseline, expected, map_file, record, registry = archived_public_baseline
+    registry_before = registry.read_bytes()
+    logical = physical.relative_to(REPO).as_posix()
+    record["public_baseline_sha256"] = "0" * 64
+    map_file.write_text(json.dumps({logical: record}), encoding="utf-8")
+    archive_sources._paths.cache_clear()
+    assert archive_sources.frozen_public_baseline_path(physical, expected) == physical
+    assert freezer.verify() == 1
+    with pytest.raises(AssertionError, match="MUTATED"):
+        test_every_frozen_artifact_is_physically_intact()
+    with pytest.raises(AssertionError, match="REGISTRY_MISMATCH.*SIDECAR_MISMATCH"):
+        test_gate_sidecars_agree_with_registry()
+    other_path = physical.parent / "same_bytes_outside_archive.md"
+    other_path.write_bytes(baseline.read_bytes())
+    record["public_baseline_sha256"] = expected
+    record["public_baseline_path"] = other_path.relative_to(REPO).as_posix()
+    map_file.write_text(json.dumps({logical: record}), encoding="utf-8")
+    archive_sources._paths.cache_clear()
+    assert freezer.verify() == 1
+    with pytest.raises(AssertionError, match="FROZEN_PUBLIC_BASELINE_PATH_UNSAFE"):
+        test_every_frozen_artifact_is_physically_intact()
+    assert archive_sources.frozen_public_baseline_path(other_path, expected) == other_path
+    assert registry.read_bytes() == registry_before
+
+
+def test_public_baseline_mapping_cannot_redirect_data_or_code(archived_public_baseline) -> None:
+    physical, _, expected, map_file, record, _ = archived_public_baseline
+    for suffix in (".json", ".py"):
+        scientific = physical.with_suffix(suffix)
+        logical = scientific.relative_to(REPO).as_posix()
+        map_file.write_text(json.dumps({logical: record}), encoding="utf-8")
+        archive_sources._paths.cache_clear()
+        assert archive_sources.frozen_public_baseline_path(scientific, expected) == scientific
 
 
 @pytest.mark.parametrize("filename", ["results.json", "producer.py", "protocol.md"])
@@ -354,10 +461,10 @@ def test_checksum_rejects_unregistered_gnu_target(
 def test_public_metadata_redactions_preserve_scientific_payloads() -> None:
     registered = {str(entry["path"]): str(entry["sha256"]) for entry in _entries()}
     personal_roots = (
-        "private-input/8545a81f99f36eda523c" + "Users/mguer",
-        "private-input/d247e805a1908d0cd891" + "Users\\\\mguer",
-        "private-input/d0023e7cb6a981751ef5" + "MDS650",
-        "private-input/206ab07395a1306a361d" + "MDS650",
+        "C:/" + "Users/mguer",
+        "C:\\\\" + "Users\\\\mguer",
+        "D:/" + "MDS650",
+        "D:\\\\" + "MDS650",
     )
     for relative, redaction in _redactions().items():
         path = REPO / relative

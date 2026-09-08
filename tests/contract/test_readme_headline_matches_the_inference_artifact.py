@@ -17,7 +17,7 @@ REPO = Path(__file__).resolve().parents[2]
 README = REPO / "README.md"
 PRIMARY: Final = {
     "v3 · RV30": "artifacts/rp4_v3_b2/summary.json",
-    "v4 · RV15, primario": "artifacts/rp4_v4_b2_rv15/summary.json",
+    "v4 · RV15, primary": "artifacts/rp4_v4_b2_rv15/summary.json",
 }
 LINEAR: Final = "log_ridge_harq"
 TREES: Final = "lightgbm_qlike"
@@ -46,7 +46,7 @@ def _cell(artifact: dict[str, Any], family: str, contrast: str) -> dict[str, Any
 
 
 def _percent(cell: dict[str, Any]) -> str:
-    return f"{cell['qlike_reduction_percent']:+.3f}".replace(".", ",").replace("-", "−")
+    return f"{cell['qlike_reduction_percent']:+.3f}".replace("-", "−")
 
 
 def _table_row(readme: str, label: str) -> list[str]:
@@ -72,7 +72,7 @@ def test_the_readme_states_the_registered_surface_improvements() -> None:
             assert cell["hypothesis_status"] == "REJECTED"
             assert f"{_percent(cell)} %" in row[column]
     headline = _prose(readme.split("## ", 1)[0])
-    assert re.search(r"RV30 y RV15.{0,60}en ambas familias", headline)
+    assert re.search(r"RV30 and RV15.{0,60}in both families", headline)
 
 
 def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject() -> None:
@@ -85,20 +85,20 @@ def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject(
         assert artifact["global_joint_reject"] is False
         assert f"{_percent(cell)} %" in _table_row(readme, label)[4]
     headline = _prose(readme.split("## ", 1)[0])
-    assert re.search(r"en árboles no supera la prueba de la media", headline)
-    assert "No es una ventaja universal ni evidencia de rentabilidad" in headline
+    assert "In trees, flow does not pass the mean test" in headline
+    assert "neither a universal advantage nor evidence of profitability" in headline
 
 
 def test_the_readme_names_the_registered_linear_flow_estimate_and_interval() -> None:
-    artifact = _summary(PRIMARY["v4 · RV15, primario"])
+    artifact = _summary(PRIMARY["v4 · RV15, primary"])
     cell = _cell(artifact, LINEAR, "B2_over_B1")
     assert 0 < cell["ci_low"] < cell["estimate"] < cell["ci_high"]
     assert cell["rejected"] is True
     headline = _prose(README.read_text(encoding="utf-8").split("## ", 1)[0])
-    assert re.search(rf"15 minutos.{{0,30}}{re.escape(_percent(cell))} %", headline)
-    assert "IC95 % positivo" in headline
-    interval = f"[{cell['ci_low']:.6f}; {cell['ci_high']:.6f}]".replace(".", ",")
-    assert f"diferencia QLIKE {interval}" in headline
+    assert re.search(rf"15 minutes.{{0,30}}{re.escape(_percent(cell))} %", headline)
+    assert "positive 95% interval" in headline
+    interval = f"[{cell['ci_low']:.6f}; {cell['ci_high']:.6f}]"
+    assert f"QLIKE difference {interval}" in headline
 
 
 def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparisons() -> None:
@@ -114,16 +114,16 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
         ):
             cell = _cell(artifact, family, contrast)
             assert cell["alternative"] == "greater" and cell["alpha"] == 0.05
-            p_value = f"{cell['p_for_decision']:.4f}".replace(".", ",")
+            p_value = f"{cell['p_for_decision']:.4f}"
             assert row[column] == f"{_percent(cell)} % ({p_value})"
     text = _prose(readme)
-    assert "H1→H2 unilateral al 5 % por familia" in text
-    assert "H2 sólo se abre cuando H1 rechaza" in text
-    assert "No se corrige la búsqueda entre versiones" in text
-    closure = _summary(PRIMARY["v4 · RV15, primario"])["predeclared_closure"]
+    assert "one-sided H1→H2 at 5% per family" in text
+    assert "H2 opens only when H1 rejects" in text
+    assert "Cross-version search is not adjusted" in text
+    closure = _summary(PRIMARY["v4 · RV15, primary"])["predeclared_closure"]
     assert closure["satisfied"] is True
     assert closure["successful_families"] == [LINEAR]
-    assert "El programa termina en v4, sin v5" in text
+    assert "V4 remains the headline" in text
 
 
 def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence() -> None:
@@ -138,14 +138,14 @@ def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence()
     )
     text = _prose(README.read_text(encoding="utf-8"))
     assert (
-        f"La ventana final de {artifact['N_sessions']} sesiones no confirma la secuencia completa"
+        f"The final {artifact['N_sessions']}-session window does not confirm the full sequence"
         in text
     )
 
 
 def test_the_readme_restores_the_existing_navigation_destinations() -> None:
     readme = README.read_text(encoding="utf-8")
-    section = readme.rsplit("## Navegación", 1)
+    section = readme.rsplit("## Navigation", 1)
     assert len(section) == 2, "The final navigation section is missing."
     links = set(re.findall(r"\[[^\]]+\]\(([^)]+)\)", section[1]))
     for target in (
