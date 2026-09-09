@@ -125,7 +125,7 @@ No code relocation is required to inspect or verify the published result. Moving
 
 ## Safety invariants
 
-- `capital_go=false`; the repository performs research, not order execution.
+- Research only. Not investment advice.
 - Licensed granular data never enters public Git history.
 - Sealed-cohort counters cannot change during method development, documentation or health
   checks.
