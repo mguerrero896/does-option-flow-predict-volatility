@@ -207,7 +207,7 @@ def test_reviewed_aggregate_exception_is_path_and_content_exact(
     outputs = iter([f"{oid} {path}\n", f"blob 4394422 {oid} {path}\n"])
 
     def run(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
-        return subprocess.CompletedProcess(args, 0, stdout=next(outputs), stderr="")
+        return subprocess.CompletedProcess("git", 0, stdout=next(outputs), stderr="")
 
     monkeypatch.setattr(subprocess, "run", run)
     assert bool(_granular_blobs("HEAD")) is not (same_path and same_blob)
