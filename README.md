@@ -16,7 +16,9 @@ Author: Miguel Guerrero · Master of Data Science research project, Sydney Polyt
 
 160,832 forecast origins are not 160,832 independent statistical observations: **160,832 origins → 2,514 asset-sessions → 419 calendar sessions → session-aware block-bootstrap inference**. The six stocks are correlated, not six independent replications.
 
-Read the [current scientific evidence](docs/CURRENT.md) for the concise result, adverse evidence and next test; use the [reading routes](docs/INDEX.md) for deeper inspection.
+Read the [current scientific evidence](docs/CURRENT.md) for the concise result, adverse evidence and next test.
+
+**Choose your route:** [2-minute overview](#in-one-minute) · [Scientific result](docs/CURRENT.md) · [Methodology](docs/rp4/specification_v4.md) · [Reproduce / inspect](docs/reproduce.md) · [Full audit trail](docs/EVIDENCE_MAP.md) · [Examiner questions](docs/FAQ.md).
 
 ![Four forecast-loss comparisons: option state improves both families; option flow improves the linear family only](docs/figures/public_refresh/result_matrix.svg)
 
@@ -196,6 +198,10 @@ Public aggregate CSVs support numerical cross-checks, figure regeneration and ar
 ## Defects and corrections
 
 Every documented defect has a recorded status, evidence and resolution or remaining scope in the [defects and resolutions register](docs/known_defects_and_resolutions.md), with the historical record retained for inspection.
+
+## Watch the project
+
+The full technical walkthrough runs 29 minutes 12 seconds and complements the written evidence. It is not distributed in the repository; the [chapter guide](docs/INDEX.md#video-chapter-guide) identifies the sections. A short 6–8 minute overview remains optional and has not been produced.
 
 ## Cite this work
 

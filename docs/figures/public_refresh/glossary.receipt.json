@@ -2,8 +2,8 @@
   "schema_version": "public-glossary-render-v2",
   "source_wording_sha256": "b72b1688cf4076d4a6d4b391e5a308c8ae6ca4202322a76ca8cd076bf8d1d644",
   "input_sha256": {
-    "docs/figures/public_refresh/glossary.json": "9fc8591012f0e5aad2ca085e0960ed7fa32db6a6df0b4938073488dfed2125a4",
-    "docs/figures/public_refresh/glossary.py": "67df0de873e35f5741f595f64e067d62147d983ee3aa24249a8738377a165a43",
+    "docs/figures/public_refresh/glossary.json": "a550755be9b121e09ab10b4a29b7ebdf6d9f776298cdab3cff97afc9fafa1d56",
+    "docs/figures/public_refresh/glossary.py": "868b46db2c687d39139b915d0ac8f4baa025ea0a169866c3e9e6f3ec84048a6d",
     "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
     "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
     "docs/rp4/specification_v4.md": "d89ae98c21b6f901342a12c00726832bf34d6922e02c7d8e435e1f6de872008d"
@@ -13,7 +13,7 @@
     "other": "raw-bytes"
   },
   "output_sha256": {
-    "docs/glossary.md": "f9af7e70fcb423504f174151d9af78184eaa9482efcc1e366a73dce176549979",
+    "docs/glossary.md": "069d87e34d01f545a5453dae5363a02a4bc87b619ba952691a60003f1cbcc108",
     "docs/figures/public_refresh/glossary.svg": "e8f0940671d4a0ad2e2c0021cbfdd9b3df672ac9b107def0f26b5d5976aff991",
     "docs/figures/public_refresh/glossary.png": "e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934"
   },
@@ -44,6 +44,10 @@
     "font_environment": "Installed Segoe UI on Windows; other font environments may change PNG bytes."
   },
   "visual_review": {
+    "status": "UNCHANGED_IMAGE_BYTES_PREVIOUSLY_REVIEWED",
+    "scope": "SVG and PNG hashes are unchanged. The added methodology table is Markdown only; the prior review below describes the original reference sheet."
+  },
+  "prior_visual_review": {
     "status": "PASS",
     "method": "Inspected all four complete browser captures and all four PNG crops at 838 pixels wide, covering the entire sheet without gaps; no clipped or overlapping text.",
     "reviewed_png_sha256": "e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934",

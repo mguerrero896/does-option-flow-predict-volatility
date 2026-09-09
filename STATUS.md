@@ -23,7 +23,7 @@ p: bilateral Holm in v1/v2; one-sided H1→H2 sequence in v3/v4.
 RV5 is secondary. Fourth evaluation of reused windows, without cross-version
 adjustment; the final report states the design disclosures and limitations.
 
-[Final result](docs/rp4/RESULTADO_FINAL.md) · [Full report](docs/rp4/results_v4.md) · [Reproduce](docs/reproduce.md)
+[Current evidence](docs/CURRENT.md) · [Evidence map](docs/EVIDENCE_MAP.md) · [Final result](docs/rp4/RESULTADO_FINAL.md) · [Full report](docs/rp4/results_v4.md) · [Reproduce](docs/reproduce.md)
 
 ## Preserved history and future evidence
 

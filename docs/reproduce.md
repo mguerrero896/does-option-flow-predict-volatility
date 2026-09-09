@@ -1,11 +1,26 @@
 # Reproduce public checks and figures
 
+**Status: CURRENT.**
+
 The public repository contains source code, aggregate results, registered protocols,
 translated reports and provenance records. The commands below verify those public
 materials. They do not fetch licensed observations, refit the scientific models or
 read a prospective cohort.
 
-## Clean environment and contracts
+## Reproduction boundaries
+
+| Route | Required inputs | What can be established | What it does not establish |
+| --- | --- | --- | --- |
+| Public verification | This clone, committed dependencies and saved public aggregates | Reporting consistency, artifact identities, contract behavior and figure reproducibility within the declared checks | A fresh fit from licensed observations or historical client receipt |
+| Licensed reconstruction | Original licensed observations, frozen identities, calendars and recorded environment | An authorized reconstruction can test the scientific pipeline against its registered inputs | Completion from public aggregates alone; a new authorization to replay a consumed evaluation |
+| Independent prospective replication | Newly collected eligible sessions and the registered protocol | A future authorized evaluation can assess generalization beyond historical development | An outcome before its registered look or a rescue of a historical result |
+
+See the [data access policy](../data/DATA_ACCESS.md),
+[historical execution guide](rp4/OPERATING_GUIDE.md) and
+[prospective restrictions](rp4/prospective_confirmation_v1_amendment_3.md).
+These routes answer different questions; success on one does not certify the others.
+
+## Quickstart: clean environment and public contracts
 
 Use Python 3.12, Git and an existing installation of `uv`. Clone the repository,
 enter its directory and install the committed dependency lock:
@@ -73,13 +88,13 @@ The first command checks hashes without writing; the second regenerates six SVGs
 from five CSVs. Optional PNG rendering uses the existing Sharp installation and
 recorded fonts described in the figure guide.
 
-The four new programme diagrams have versioned Archify JSON sources. With Node.js:
+The five programme diagrams have versioned Archify JSON sources. With Node.js:
 
 ```sh
 node docs/figures/public_refresh/reproduce.mjs --verify
 ```
 
-This checks all 12 JSON/HTML/SVG hashes. Regeneration also requires the recorded
+This checks all 15 JSON/HTML/SVG hashes. Regeneration also requires the recorded
 Archify installation and Chrome/Chromium, configured with `ARCHIFY_HOME`:
 
 ```sh

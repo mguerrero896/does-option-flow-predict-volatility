@@ -159,7 +159,10 @@ def render_markdown(source: dict) -> bytes:
         f"# {source['title']}",
         "",
         "Reference glossary of the labels and option-market terms used in the study. "
-        "The four tables preserve the supplied wording.",
+        "The four tables preserve the supplied wording. The methodology table adds "
+        "24 definitions; the reference image preserves the original 36 entries.",
+        "",
+        "**Status: CURRENT.** [Current scientific evidence](CURRENT.md).",
         "",
         "[Complete PNG sheet](figures/public_refresh/glossary.png) · "
         "[Scalable SVG](figures/public_refresh/glossary.svg) · [Study overview](../README.md)",
@@ -184,7 +187,25 @@ def render_markdown(source: dict) -> bytes:
         f"[Timing rule]({Path(*note_source.parts[1:]).as_posix()}).",
         "",
     ]
+    method_rows = source["method_rows"]
+    assert len(method_rows) == 24 and len({row["label"] for row in method_rows}) == 24
     lines += [
+        "## Methodology and evidence status",
+        "",
+        "| Term | Meaning in this study |",
+        "| --- | --- |",
+    ]
+    for row in method_rows:
+        assert "|" not in row["label"] + row["meaning"]
+        lines.append(f"| {row['label']} | {row['meaning']} |")
+    lines += [
+        "",
+        "OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. "
+        "Predictive information ≠ tradability. Statistical significance ≠ economic significance.",
+        "",
+        "B0, B1 and B2 are nested information sets, not necessarily independent economic feeds. "
+        "The B2/B1 comparison tests for incremental information beyond the implemented B1 representation.",
+        "",
         "<details>",
         "<summary>Reproduce and verify this reference sheet</summary>",
         "",

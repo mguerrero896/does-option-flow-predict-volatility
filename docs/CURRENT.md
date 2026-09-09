@@ -27,7 +27,7 @@ The six stocks are AAPL, AMZN, META, MSFT, NVDA and TSLA. FMP supplies one-minut
 
 **Historical development evidence. This is the fourth evaluation of overlapping historical data. Cross-version research search is not multiplicity-adjusted. Independent prospective confirmation is pending.**
 
-Option state historically improves both families. Incremental flow improves the linear mean but slightly worsens the tree mean. The linear B2/B1 difference is 0.0011337597 QLIKE units, with 95% interval **[0.000335; 0.001932]**. Percentage reduction is 100 × mean paired session loss difference / mean baseline loss. Positive values favor the richer information set. [Saved statistics](../artifacts/rp4_v4_b4/primary_statistics.csv) · [Full historical report](rp4/results_v4.md).
+Option state historically improves both families. Incremental flow improves the linear mean but slightly worsens the tree mean. The linear B2/B1 difference is 0.001134 QLIKE units, with 95% interval **[0.000335; 0.001932]**. Percentage reduction is 100 × mean paired session loss difference / mean baseline loss. Positive values favor the richer information set. [Saved statistics](../artifacts/rp4_v4_b4/primary_statistics.csv) · [Full historical report](rp4/results_v4.md).
 
 **Stricter sensitivity:** bilateral Holm p-values are linear **0.0918 / 0.0248**, LightGBM **0.0447 / 0.8048** (H1/H2). Neither model family passes both sequential steps under this stricter bilateral Holm sensitivity. This separate comparison does not replace the registered primary inference.
 
@@ -54,4 +54,4 @@ Successful registered evaluation on genuinely future sessions could support repl
 
 Before any headline or evidence-status change, verify the authorizing protocol, genuinely new data, open gate, specification changes, additional multiplicity and confirmatory/exploratory status. No script or documentation update can bypass these checks. The [existing canonical state](../data/CANONICAL_STATE.json) is the machine-readable authority; this page is its concise scientific reading surface. [Current decisions](research_decisions_current.md).
 
-Audit from [saved statistics](../artifacts/rp4_v4_b4/primary_statistics.csv) through the [report receipt](../artifacts/rp4_v4_b4/receipt.json), [executed code snapshot](../artifacts/rp4_v4_code/) and [reproduction guide](reproduce.md). Public aggregate checks are possible; complete scientific refits require licensed inputs. RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.
+The [evidence map](EVIDENCE_MAP.md) connects each claim to saved statistics, producer code, receipts and hashes. The [reproduction guide](reproduce.md) separates public aggregate checks from scientific refits requiring licensed inputs. Research only. Not investment advice.
