@@ -28,6 +28,7 @@ necessary evidence without representing the current conclusion.
 | Document or family | Status | Interpretation |
 | --- | --- | --- |
 | [Current evidence](CURRENT.md) and [findings ledger](scientific_findings_ledger.md) | CURRENT | Begin here for results, limitations and unresolved evidence boundaries. |
+| [Completed linear RV15 placebo report](rp4/robustness_committed_v1_placebo_linear_rv15.md), [summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv) and [provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json) | CURRENT | Closed post-primary robustness evidence; timely order flow is not demonstrated. The English report is a declared public derivative; other robustness stages are not certified by this closure. |
 | [RP4 v4 result](rp4/results_v4.md) and [specification](rp4/specification_v4.md) | CURRENT | Primary historical result and its design, read with the qualifications below. |
 | [Final narrative](rp4/RESULTADO_FINAL.md) | CURRENT | Public narrative accompanying the v4 result; current evidence and the ledger resolve older closeout wording. |
 | [Final narrative revision 1](rp4/RESULTADO_FINAL_revision_1.md) and [revision 2](rp4/RESULTADO_FINAL_revision_2.md) | HISTORICAL | Retained closeout accounts; their statements that the programme ends without v5 describe an earlier scope. |

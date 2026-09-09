@@ -119,4 +119,26 @@ registered interpretation without switching horizon, family, statistic or sessio
 selection to obtain a favorable verdict.
 [Registered decision rules](rp4/prospective_confirmation_v1_amendment_3.md), [known defects](known_defects_and_resolutions.md) and [claim-level evidence](scientific_findings_ledger.md).
 
+## 13. Does the placebo support timely flow information?
+
+No. The completed linear RV15 control shuffles the flow block jointly within each
+asset-session. Its mean increment is 0.000926 versus the observed 0.001134 QLIKE
+units, retaining about eighty percent (81.63%) of the observed gain. Twelve of 50
+permutations exceed the observed statistic: empirical p = (1 + 12) / (50 + 1) =
+0.255; the observed ascending rank is 39 of 51. The placebo distribution's
+2.5th/97.5th percentiles are 0.000456/0.001283, not an effect confidence interval.
+
+The control preserves the joint flow distribution within each asset-session but
+breaks alignment with forecast origins; it does not preserve the exact conditional
+profile by minute of day. Most of the gain survives that shuffle, consistent with
+session-level information, but the ratio is not a causal attribution. Timely order
+flow beyond this control is not demonstrated; non-rejection does not prove that
+all temporal information is absent. This robustness check was registered after
+the primary read, not on an independent prospective sample. The registered
+primary decision is unchanged; its interpretation is narrower. Point-in-time
+sensitivity at 300 and 60 seconds: not yet completed.
+[Saved summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv),
+[draws](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_draws.csv) and
+[source closure and hashes](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+
 Research only. Not investment advice.

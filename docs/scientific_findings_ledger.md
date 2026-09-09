@@ -74,6 +74,22 @@ not interchangeable p-values and do not adjust the search across versions.
 | Market structure changes limit transportability | [Market audit](../artifacts/rp4_market_audit/REPORT.md) documents the expiry-calendar change and source-consistent extreme moves. | Event coincidence is not causal attribution; source consistency is not independent price validation. |
 | Secondary convergence repairs have bounded claims | [Saved v3 secondary correction](rp4/results_v3_revision3.md), [defense](rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md). | Calibration/numerical diagnostics retain their own status and do not alter the v4 primary means. |
 
+## Completed linear RV15 placebo
+
+**Status: CURRENT.** This robustness check was registered after the primary read
+and does not replace the original v4 decision or provide prospective confirmation.
+The [closed summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv)
+reports observed B2/B1 delta 0.0011337596590923558 QLIKE and a mean within-asset-session
+shuffled-flow delta of 0.0009255190521628708: 81.63% is retained. Twelve of 50
+permutations exceed the observed; empirical p = 13/51 = 0.2549019607843137 and
+ascending rank = 39/51. Placebo percentiles 2.5/97.5 are
+0.0004563956748538585/0.0012831122415478523, not an effect confidence interval.
+Most of the gain survives the shuffle, consistent with session-level information;
+the control does not identify its causal source. Timely order flow is not
+demonstrated. Point-in-time sensitivity at 300 and 60 seconds: not yet completed.
+The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
+binds source closure, exact CSV copies and explicitly sanitized JSON derivatives.
+
 ## Closed registered exploratory v5 extension
 
 The [full English report](rp4/results_v5.md), [registered specification](rp4/specification_v5.md)

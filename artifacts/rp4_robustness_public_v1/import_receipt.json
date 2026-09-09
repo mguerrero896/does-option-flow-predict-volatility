@@ -1,0 +1,78 @@
+{
+  "schema_version": "rp4-placebo-public-import-v1",
+  "report": {
+    "path": "docs/rp4/robustness_committed_v1_placebo_linear_rv15.md",
+    "source_original_sha256": "687a60e09f23d101f89cba9e398ca856ef5488d40d574a984d3c47028ac5da63",
+    "public_sha256": "e7651c0b04c27f5d7969c7be6b419b4757bcee3bba0ec5029f30be1ade9b233d",
+    "byte_identical": false,
+    "transformations": [
+      "Condensed English public derivative; saved numerical results retained",
+      "Omit local coordination details and unavailable private links",
+      "Qualify session-level interpretation as consistent evidence, not causal attribution"
+    ]
+  },
+  "scope": "Closed linear RV15 placebo aggregates only; not other robustness stages",
+  "source_execution_commit": "fe64ee2e96dc8b87490ee3a87abb2fd97525a54b",
+  "source_close_sha256": "f350cded51a046c9df91adaecc47889788fe955ffb9fa994bf78c2d1fe1f73bf",
+  "source_close": {
+    "closed_at_utc": "2026-09-09T02:25:48.122150Z",
+    "code_commit": "fe64ee2e96dc8b87490ee3a87abb2fd97525a54b",
+    "contract_exit_code": 0,
+    "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+    "contract_row": "linear_rv15",
+    "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+    "receipt_sha256": "0a0d59e36d0d301e0547304488774ad51ed454136a3ef4a9d086662e1744d007",
+    "stage": "linear_rv15",
+    "status": "COMPLETE_CONTRACT_PASS",
+    "summary_sha256": "d6b6f4bddf766c8ba4ffd1f63a8401bd72660d9201f729de45dcc0c655050721"
+  },
+  "files": [
+    {
+      "path": "placebo_log_ridge_harq_rv15_summary.csv",
+      "source_sha256": "b02d927e789297f5667507c40320c2316f3f8a640de8a2852d048c64c2ef2e73",
+      "public_sha256": "b02d927e789297f5667507c40320c2316f3f8a640de8a2852d048c64c2ef2e73",
+      "byte_identical": true,
+      "transformations": []
+    },
+    {
+      "path": "placebo_log_ridge_harq_rv15_draws.csv",
+      "source_sha256": "3d5a8decdf511c04b225e49894b23f54996ea0ebfc6476f8d3ed4357469098c1",
+      "public_sha256": "3d5a8decdf511c04b225e49894b23f54996ea0ebfc6476f8d3ed4357469098c1",
+      "byte_identical": true,
+      "transformations": []
+    },
+    {
+      "path": "placebo_log_ridge_harq_rv15_session_deltas.csv",
+      "source_sha256": "243c8f43118b5d6bb0efb11173cd9c71fc50ee29620d4515546aa4772a6e68dc",
+      "public_sha256": "243c8f43118b5d6bb0efb11173cd9c71fc50ee29620d4515546aa4772a6e68dc",
+      "byte_identical": true,
+      "transformations": []
+    },
+    {
+      "path": "placebo_log_ridge_harq_rv15_summary.json",
+      "source_sha256": "d6b6f4bddf766c8ba4ffd1f63a8401bd72660d9201f729de45dcc0c655050721",
+      "public_sha256": "6458cf263ca134ca4f7beeb9a7e69945488d8fc554c099b1bae7934423278abc",
+      "byte_identical": false,
+      "transformations": [
+        "Translate label to English; numerical and scientific fields unchanged",
+        "Omit private source_manifest locator; retain its SHA-256"
+      ]
+    },
+    {
+      "path": "placebo_log_ridge_harq_rv15_complete_receipt.json",
+      "source_sha256": "0a0d59e36d0d301e0547304488774ad51ed454136a3ef4a9d086662e1744d007",
+      "public_sha256": "2b31ae4dea2999eb500b141c74f04a7bbbed071220ad32bda51c713b85ba2d4c",
+      "byte_identical": false,
+      "transformations": [
+        "Translate label to English; numerical and scientific fields unchanged",
+        "Omit command_argv, environment.executable and threadpools.filepath local paths"
+      ]
+    }
+  ],
+  "csv_label_policy": "Retain the recorded Spanish provenance label verbatim to preserve exact CSV bytes",
+  "source_protocol_policy": "Protocol and code hashes are recorded provenance; their private sources are not imported",
+  "public_json_policy": "Declared derivatives, not byte-identical originals; original files remain unchanged",
+  "scientific_model_fits_during_import": 0,
+  "licensed_granular_data_imported": false,
+  "primary_statistics_changed": false
+}

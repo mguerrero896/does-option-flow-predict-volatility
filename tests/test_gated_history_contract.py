@@ -19,7 +19,8 @@ tabular artifact reachable from `main` is 1.18 MB
 (`artifacts/provider_timing_v21/b2_canonical_traceability_v21.csv`, 5,401 rows of
 per-session-per-asset audit aggregates). The two leaked panels were 21.4 MB and
 12.2 MB. A 2 MB ceiling separates them by an order of magnitude in both
-directions, so it neither misses a granular panel nor nags about an aggregate.
+directions. Later reviewed aggregates above this ceiling require an exact
+path-and-blob exception; the threshold itself remains unchanged.
 """
 
 from __future__ import annotations
@@ -39,6 +40,12 @@ GRANULAR_MIN_BYTES = 2 * 1024 * 1024
 TABULAR_SUFFIXES = (".parquet", ".csv")
 #: Synthetic fixtures are committed on purpose: they contain no provider data.
 FIXTURE_PREFIXES = ("artifacts/pilot_preview/fixture_",)
+# 20,950 permutation/session mean-loss differences, no origin-level market rows.
+# Source SHA-256 and aggregation checks: test_current_scientific_claims.py.
+REVIEWED_AGGREGATE_BLOB = (
+    "artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_session_deltas.csv",
+    "124e50f827f6adf7021e571095d6d84ccbbabe88",
+)
 OPT_OUT = "MDS650_HISTORY_GUARD_MAY_SKIP"
 PERSONAL_PATHS = (
     "C:/" + "Users/mguer",
@@ -165,7 +172,7 @@ def _granular_blobs(ref: str) -> list[str]:
     if listing.returncode != 0:
         raise RuntimeError(f"HISTORY_GUARD_REF_UNREADABLE:{ref}")
     checked = subprocess.run(
-        ["git", "cat-file", "--batch-check=%(objecttype) %(objectsize) %(rest)"],
+        ["git", "cat-file", "--batch-check=%(objecttype) %(objectsize) %(objectname) %(rest)"],
         input=listing.stdout,
         capture_output=True,
         text=True,
@@ -174,16 +181,36 @@ def _granular_blobs(ref: str) -> list[str]:
     )
     found = []
     for line in checked.stdout.splitlines():
-        fields = line.split(maxsplit=2)
-        if len(fields) < 3 or fields[0] != "blob":
+        fields = line.split(maxsplit=3)
+        if len(fields) < 4 or fields[0] != "blob":
             continue
-        size, path = int(fields[1]), fields[2]
+        size, oid, path = int(fields[1]), fields[2], fields[3]
         if size <= GRANULAR_MIN_BYTES or not path.endswith(TABULAR_SUFFIXES):
             continue
         if path.startswith(FIXTURE_PREFIXES):
             continue
+        if (path, oid) == REVIEWED_AGGREGATE_BLOB:
+            continue
         found.append(f"{size / 1048576:.1f} MB  {path}")
     return sorted(set(found))
+
+
+@pytest.mark.parametrize("same_path,same_blob", [(True, True), (True, False), (False, True)])
+def test_reviewed_aggregate_exception_is_path_and_content_exact(
+    monkeypatch: pytest.MonkeyPatch, same_path: bool, same_blob: bool,
+) -> None:
+    path, oid = REVIEWED_AGGREGATE_BLOB
+    if not same_path:
+        path = "artifacts/rp2_block3_target/target_panel.parquet"
+    if not same_blob:
+        oid = "0" * 40
+    outputs = iter([f"{oid} {path}\n", f"blob 4394422 {oid} {path}\n"])
+
+    def run(*args: object, **kwargs: object) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess("git", 0, stdout=next(outputs), stderr="")
+
+    monkeypatch.setattr(subprocess, "run", run)
+    assert bool(_granular_blobs("HEAD")) is not (same_path and same_blob)
 
 
 def test_the_clone_is_deep_enough_for_this_guard_to_mean_anything() -> None:
