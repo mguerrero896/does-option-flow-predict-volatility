@@ -173,5 +173,103 @@
     }
   ],
   "reading_note": "Timing clarification: the supplied wording calls both 300 and 60 seconds stricter delays. Relative to the registered 120-second cutoff, 300 seconds is stricter and 60 seconds is less strict. The reference definitions above are reproduced verbatim.",
-  "reading_note_source": "docs/rp4/specification_v4.md"
+  "reading_note_source": "docs/rp4/specification_v4.md",
+  "method_rows": [
+    {
+      "label": "Forecast origin",
+      "meaning": "The time at which a forecast is issued. Only information eligible by that time can enter its predictors."
+    },
+    {
+      "label": "Session",
+      "meaning": "One exchange trading date. Primary uncertainty resamples blocks of sessions, preserving the joint composition of assets."
+    },
+    {
+      "label": "Asset-session",
+      "meaning": "One asset on one trading date. The 419-session, six-stock primary sample contains 2,514 asset-sessions; 160,832 intraday origins are not independent observations."
+    },
+    {
+      "label": "RV5",
+      "meaning": "Realized variance over the next five minutes; a secondary target in the current historical design."
+    },
+    {
+      "label": "RV15",
+      "meaning": "Realized variance over the next fifteen minutes; the primary target of RP4 v4."
+    },
+    {
+      "label": "RV30",
+      "meaning": "Realized variance over the next thirty minutes; the target in earlier historical versions, retained for comparison."
+    },
+    {
+      "label": "QLIKE",
+      "meaning": "Variance-forecast loss: for positive observed variance y and forecast h, y/h - log(y/h) - 1. Lower loss is better. Relative improvement is a loss reduction, not a trading return."
+    },
+    {
+      "label": "B0",
+      "meaning": "price and volatility history."
+    },
+    {
+      "label": "B1",
+      "meaning": "B0 + option state / implied-volatility surface."
+    },
+    {
+      "label": "B2",
+      "meaning": "B1 + trade-derived option flow, composition and imbalance information."
+    },
+    {
+      "label": "Point-in-time",
+      "meaning": "Eligibility using the information and timestamps available by the forecast origin. The historical 120-second source-time proxy does not establish actual client receipt."
+    },
+    {
+      "label": "Source timestamp",
+      "meaning": "The timestamp attached by the exchange or provider to a record. Its meaning depends on the field; event or creation time does not prove client receipt."
+    },
+    {
+      "label": "Receipt timestamp",
+      "meaning": "The time the client actually received a record, measured by the client. Historical source records alone do not supply this proof."
+    },
+    {
+      "label": "Purge",
+      "meaning": "Exclusion around a chronological split to prevent overlapping information or targets from contaminating training and evaluation."
+    },
+    {
+      "label": "Embargo",
+      "meaning": "A time separation around an evaluation boundary that restricts nearby training observations. The design specifies a 60-minute purge/embargo."
+    },
+    {
+      "label": "Walk-forward",
+      "meaning": "Fit and select using permitted earlier data, then forecast later observations, expanding the training history in time order. OOS fitting does not make the overall design prospective."
+    },
+    {
+      "label": "H1",
+      "meaning": "The first registered test: whether option state improves B1 relative to B0 in the specified family and sample."
+    },
+    {
+      "label": "H2",
+      "meaning": "The second registered test: whether flow improves B2 relative to B1. Its formal gate opens only after H1 rejects in that family and sample."
+    },
+    {
+      "label": "Fixed sequence",
+      "meaning": "The ordered H1 then H2 procedure. If H1 fails, a nominal H2 p-value does not constitute a formal rejection. Within-family control is not cross-version control."
+    },
+    {
+      "label": "Bootstrap block",
+      "meaning": "A consecutive group of sessions resampled together to retain temporal dependence. The primary circular bootstrap uses five-session blocks and 9,999 resamples."
+    },
+    {
+      "label": "Historical evaluation",
+      "meaning": "Evaluation on already available historical data. Chronological out-of-sample fitting does not erase earlier knowledge of that sample or specification search."
+    },
+    {
+      "label": "Prospective evaluation",
+      "meaning": "Evaluation under rules fixed before genuinely future eligible sessions arrive. The registered 20, 40 and 335-session reads are dependent cumulative checks, not three independent replications."
+    },
+    {
+      "label": "Exploratory",
+      "meaning": "Evidence used to develop or investigate a hypothesis, including the closed historical extensions. It cannot be promoted retrospectively to independent confirmation."
+    },
+    {
+      "label": "Confirmatory",
+      "meaning": "A claim evaluated under the applicable prior protocol, eligible new evidence and open decision gate. A favorable historical p-value alone does not establish independent prospective confirmation."
+    }
+  ]
 }

@@ -9,6 +9,33 @@ The current public result is **RP4 v4**, with 15-minute realized variance primar
 The [machine-readable state](../data/CANONICAL_STATE.json) and [generated status](../STATUS.md)
 retain prior results as history; older gate labels do not override the current report.
 
+## Choose your route
+
+| Reading goal | Start here |
+| --- | --- |
+| Understand the question and headline | [Research overview](../README.md) |
+| Assess current conclusions and limits | [Current evidence](CURRENT.md) |
+| Inspect the design and decision rules | [V4 specification](rp4/specification_v4.md) |
+| Run public checks and understand licensed requirements | [Reproduction guide](reproduce.md) |
+| Trace a claim to its supporting artifact | [Evidence map](EVIDENCE_MAP.md) |
+| Examine the main objections | [Research FAQ](FAQ.md) |
+
+## Video chapter guide
+
+The complete technical walkthrough is 29 minutes 12 seconds; it is a complement to the written evidence. The video is not included in this repository, and no public playback link is currently provided. A short 6–8 minute research overview has not been produced. The written [FAQ](FAQ.md) and [evidence map](EVIDENCE_MAP.md) provide the same entry route without requiring video access.
+
+| Start | Chapter |
+| --- | --- |
+| 0:00 | Introduction and the answer |
+| 4:30 | The question and the three information sets |
+| 5:57 | The data and one experimental row |
+| 8:17 | How the models learn: one example |
+| 10:27 | Results and what changed |
+| 14:40 | Limits on the conclusion |
+| 16:51 | What I learned and the next decisive test |
+| 20:24 | For verification: code and data checks |
+| 29:12 | End |
+
 ## 00 — Question and research design
 
 Start with the [research question and findings](../README.md), then the

@@ -1,6 +1,8 @@
 # Glossary of labels and option-market terms
 
-Reference glossary of the labels and option-market terms used in the study. The four tables preserve the supplied wording.
+Reference glossary of the labels and option-market terms used in the study. The four tables preserve the supplied wording. The methodology table adds 24 definitions; the reference image preserves the original 36 entries.
+
+**Status: CURRENT.** [Current scientific evidence](CURRENT.md).
 
 [Complete PNG sheet](figures/public_refresh/glossary.png) · [Scalable SVG](figures/public_refresh/glossary.svg) · [Study overview](../README.md)
 
@@ -71,6 +73,39 @@ These are the measures behind every percentage in the video; none of them is a t
 > Timing clarification: the supplied wording calls both 300 and 60 seconds stricter delays. Relative to the registered 120-second cutoff, 300 seconds is stricter and 60 seconds is less strict. The reference definitions above are reproduced verbatim.
 
 [Timing rule](rp4/specification_v4.md).
+
+## Methodology and evidence status
+
+| Term | Meaning in this study |
+| --- | --- |
+| Forecast origin | The time at which a forecast is issued. Only information eligible by that time can enter its predictors. |
+| Session | One exchange trading date. Primary uncertainty resamples blocks of sessions, preserving the joint composition of assets. |
+| Asset-session | One asset on one trading date. The 419-session, six-stock primary sample contains 2,514 asset-sessions; 160,832 intraday origins are not independent observations. |
+| RV5 | Realized variance over the next five minutes; a secondary target in the current historical design. |
+| RV15 | Realized variance over the next fifteen minutes; the primary target of RP4 v4. |
+| RV30 | Realized variance over the next thirty minutes; the target in earlier historical versions, retained for comparison. |
+| QLIKE | Variance-forecast loss: for positive observed variance y and forecast h, y/h - log(y/h) - 1. Lower loss is better. Relative improvement is a loss reduction, not a trading return. |
+| B0 | price and volatility history. |
+| B1 | B0 + option state / implied-volatility surface. |
+| B2 | B1 + trade-derived option flow, composition and imbalance information. |
+| Point-in-time | Eligibility using the information and timestamps available by the forecast origin. The historical 120-second source-time proxy does not establish actual client receipt. |
+| Source timestamp | The timestamp attached by the exchange or provider to a record. Its meaning depends on the field; event or creation time does not prove client receipt. |
+| Receipt timestamp | The time the client actually received a record, measured by the client. Historical source records alone do not supply this proof. |
+| Purge | Exclusion around a chronological split to prevent overlapping information or targets from contaminating training and evaluation. |
+| Embargo | A time separation around an evaluation boundary that restricts nearby training observations. The design specifies a 60-minute purge/embargo. |
+| Walk-forward | Fit and select using permitted earlier data, then forecast later observations, expanding the training history in time order. OOS fitting does not make the overall design prospective. |
+| H1 | The first registered test: whether option state improves B1 relative to B0 in the specified family and sample. |
+| H2 | The second registered test: whether flow improves B2 relative to B1. Its formal gate opens only after H1 rejects in that family and sample. |
+| Fixed sequence | The ordered H1 then H2 procedure. If H1 fails, a nominal H2 p-value does not constitute a formal rejection. Within-family control is not cross-version control. |
+| Bootstrap block | A consecutive group of sessions resampled together to retain temporal dependence. The primary circular bootstrap uses five-session blocks and 9,999 resamples. |
+| Historical evaluation | Evaluation on already available historical data. Chronological out-of-sample fitting does not erase earlier knowledge of that sample or specification search. |
+| Prospective evaluation | Evaluation under rules fixed before genuinely future eligible sessions arrive. The registered 20, 40 and 335-session reads are dependent cumulative checks, not three independent replications. |
+| Exploratory | Evidence used to develop or investigate a hypothesis, including the closed historical extensions. It cannot be promoted retrospectively to independent confirmation. |
+| Confirmatory | A claim evaluated under the applicable prior protocol, eligible new evidence and open decision gate. A favorable historical p-value alone does not establish independent prospective confirmation. |
+
+OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. Predictive information ≠ tradability. Statistical significance ≠ economic significance.
+
+B0, B1 and B2 are nested information sets, not necessarily independent economic feeds. The B2/B1 comparison tests for incremental information beyond the implemented B1 representation.
 
 <details>
 <summary>Reproduce and verify this reference sheet</summary>
