@@ -10,7 +10,7 @@ retain prior results as history; older gate labels do not override the current r
 Start with the [research question and findings](../README.md), then the
 [proposal, hypotheses and deviations](rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md)
 and [v4 specification](rp4/specification_v4.md).
-[Key terms explained](glossary.md) · [Visual glossary (PNG)](figures/public_refresh/glossary.png).
+[Glossary of labels and option-market terms](glossary.md) · [Visual glossary (PNG)](figures/public_refresh/glossary.png).
 The [program map](figures/public_refresh/proposal_to_replication.workflow.svg) connects design,
 evaluation, evidence and prospective replication.
 

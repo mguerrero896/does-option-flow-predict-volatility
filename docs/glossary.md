@@ -1,112 +1,81 @@
-# Glossary
+# Glossary of labels and option-market terms
 
-Plain-language definitions for reading *Options Order Flow and Intraday Volatility*. These terms explain the method and its limits; they do not add results or establish investment value.
+Reference glossary of the labels and option-market terms used in the study. The four tables preserve the supplied wording.
 
-![Twelve research terms, from volatility and option inputs to uncertainty and prospective replication](figures/public_refresh/glossary.png)
+[Complete PNG sheet](figures/public_refresh/glossary.png) · [Scalable SVG](figures/public_refresh/glossary.svg) · [Study overview](../README.md)
 
-[Scalable image](figures/public_refresh/glossary.svg) · [Study overview](../README.md) · [Current report](rp4/results_v4.md)
+## Project labels you will see on files and charts
 
-<a id="volatility-and-realized-variance"></a>
+| Label | Meaning in this study |
+| --- | --- |
+| RP4 | The current historical experiment: does option information improve short-term variance forecasts? Five saved versions, v1–v5. |
+| RP3 | A separately registered long-run study with its own rule; its first reading is estimated for January 2029. Not this experiment. |
+| RP2 | The earlier validation study (finished August 2026) that found no usable improvement. Its results are history, not current claims. |
+| Phase 5 / 8A / 9 | Workstreams of the earlier programme: Phase 5 registered and read the thirty-minute study; Phase 8A recorded a small exploratory bridge; Phase 9 collected the sessions later reused here. |
+| v1–v5 | Saved revisions of RP4: v1 diagnosis, v2 data and fitting repair, v3 refined option flow, v4 the fifteen-minute test (headline), v5 the model-combination companion study. |
+| B0 · B1 · B2 | The three nested information sets: B0 market history (29 predictors), B1 adds option state (69), B2 adds option flow (138). |
+| H1 · H2 | The two ordered tests: H1 asks whether option state beats market history; H2 asks whether option flow beats option state, and only counts if H1 passed. |
+| RV30 · RV15 · RV5 | Realised variance over the next 30, 15 or 5 minutes. RV15 is the primary target of v4. |
+| Decision 128 / 136 | Numbered entries in the project's decision log: 128 fixed the 1 August 2026 split; 136 registered the four-model average as a secondary candidate. |
 
-## Volatility / realized variance
+Labels identify parts of this project. None of them is an option-pricing concept.
 
-Volatility describes the magnitude of price variation, rather than whether prices rise or fall. Realized variance is a measurement constructed from squared returns over a stated window. Here the target sums squared future one-minute log returns; the square root of variance is a volatility measure. RV15 and RV5 identify the length of the future window in minutes, not annualized volatility or a predicted return.
+## Option-market terms used in this study
 
-Sources: [Target definition](rp4/specification_v4.md).
+| Label | Meaning in this study |
+| --- | --- |
+| Option | A contract giving the right to buy (call) or sell (put) a stock at a set price before a set date. Its price reflects how much movement the market expects. |
+| Strike | The exercise price written in the contract. Not a forecast or a price target. |
+| Expiry · DTE · 0DTE | The contract's end date; DTE is calendar days to expiry; 0DTE expires the same day. |
+| Premium | The price paid for the contract, in dollars. "Premium share" is the fraction of premium on one side (buys, sells, out-of-the-money, same-day). |
+| Bid · Ask · Aggressor | Best buy and sell quotes. The aggressor is the side inferred to have initiated the trade; it is a proxy, not an observed identity. |
+| Implied volatility (IV) | The level of future movement implied by option prices. The surface is IV across strikes and expiries; smile, skew, term slope, risk reversal and butterfly describe its shape. |
+| Option state | Measurements of the option market at the forecast time: IV levels and the shape of the surface. Slow-moving, price-based. |
+| Option flow | Recent option transactions: counts, premium, buy/sell split, sweeps, multileg trades, same-day contracts and sensitivity flows. Fast-moving, trade-based. |
 
-<a id="option-state-and-option-flow"></a>
+State comes from option prices; flow comes from option trades. The study tests them in that order.
 
-## Option state / option flow
+## Sensitivities, trade types and market words
 
-Option state describes market conditions, including the implied-volatility surface: option-implied volatility across strike prices and expiries. Option flow describes recent trading activity and its composition. In this study, flow is derived from reported trades and direction-based imbalances; it is not a complete record of every submitted or cancelled order. Signed measures are constructed indicators, not direct observations of intermediary inventories.
+| Label | Meaning in this study |
+| --- | --- |
+| Delta · Gamma · Vega | How an option's price responds to the stock price (delta), how delta itself changes (gamma), and how the price responds to volatility (vega). "Flow" versions add these up over recent trades. |
+| Dealer gamma | A proxy for the position held by market makers. Hedging that position can move the stock; the study measures a proxy, not actual dealer books. |
+| Hedging · Liquidity | Trading to offset an existing risk rather than to bet; how easily a contract can be traded. Both can create trades that carry no forecast. |
+| Sweep · Multileg | A sweep executes one order across several exchanges at once; a multileg trade combines several contracts (a spread). Both are recorded trade types, not signals by themselves. |
+| Moneyness | Strike relative to the current stock price (strike divided by spot); near one means at the money. |
+| Session · Origin | A session is one trading day, 9:30 to 16:00 New York time. An origin is one forecast case: a stock, a day and a minute (10:05 to 15:25, every five minutes; 65 per stock per day). |
+| SPY · QQQ | Exchange-traded funds that track the S&P 500 and Nasdaq-100 indices. Used as market controls, and as two extra targets in the eight-asset extension. |
+| AAPL AMZN META MSFT NVDA TSLA | Ticker symbols of Apple, Amazon, Meta, Microsoft, Nvidia and Tesla. |
+| FMP · UW | Financial Modeling Prep supplies one-minute prices; Unusual Whales supplies the option records. |
 
-Sources: [Information sets and inherited features](rp4/specification_v4.md).
+Sensitivities and trade types are inputs; the study does not identify who traded or why.
 
-<a id="b0-b1-and-b2"></a>
+## Measures and checks specific to variance forecasting
 
-## B0 / B1 / B2: nested inputs
+| Label | Meaning in this study |
+| --- | --- |
+| Realised variance (RV) | The sum of squared one-minute log returns over the next interval. It is variance, not its square root (volatility), and not a return. |
+| QLIKE (pronounced "cue-like") | The loss used to score variance forecasts: y/f − log(y/f) − 1. It punishes under-forecasting a big move much more than over-forecasting a small one. Lower is better. |
+| Persistence · HAR · HARQ | Reference forecasts: persistence repeats the previous session's pattern; HAR combines past variance over several time scales; HARQ adds a measurement-noise adjustment. |
+| MAE · RMSE | Mean absolute error and root mean squared error, in variance units. Reported as complements; QLIKE is the declared measure. |
+| Linear (log-ridge) · Trees (LightGBM) | The two model families. The linear model fits log variance with a penalty ("shrinkage strength 100" on the receipts); the trees are gradient-boosted with leaves and stopping rounds chosen on earlier data. |
+| Point-in-time (PIT) | Only records with a source timestamp at least 120 seconds before the forecast time are allowed. It is a rule on source clocks, not proof of when a client received the data. |
+| Purge · Embargo · Warm-up | Training rows whose outcome ends within 60 minutes of validation or forecasting are excluded; the first 60 sessions are reserved to build histories. |
+| Block bootstrap · One-sided p | Groups of five consecutive sessions are resampled 9,999 times with a fixed seed; the interval describes the estimated difference and the one-sided test asks whether it improves at the 5 % rule. Holm is the stricter correction for several tests. |
+| Placebo · Delay sensitivity | Follow-up checks: shuffled option flow should not look better than nothing; stricter delays (300 and 60 seconds) test the timing rule. |
+| Receipt · Manifest · SHA-256 | Files that record inputs, outputs, times and content hashes so that every number can be traced to its file. |
 
-B0, B1 and B2 name sets of predictors, not three model families. B0 contains price and volatility history. B1 retains B0 and adds option state; B2 retains B1 and adds option flow. Comparing B1 with B0 asks about the incremental contribution of state. Comparing B2 with B1 asks about the incremental contribution of flow. The added sets are evaluated within each model family.
+These are the measures behind every percentage in the video; none of them is a trading return.
 
-Sources: [Nested predictor specification](rp4/specification_v4.md).
+> Timing clarification: the supplied wording calls both 300 and 60 seconds stricter delays. Relative to the registered 120-second cutoff, 300 seconds is stricter and 60 seconds is less strict. The reference definitions above are reproduced verbatim.
 
-<a id="qlike-forecast-loss"></a>
+[Timing rule](rp4/specification_v4.md).
 
-## QLIKE: forecast loss
+<details>
+<summary>Reproduce and verify this reference sheet</summary>
 
-QLIKE is a quasi-likelihood loss used to compare variance forecasts. For positive observed realized variance y and positive forecast variance f, the registered score is y/f − log(y/f) − 1. Smaller values are better under this score. The reported loss difference is baseline loss minus the richer model's loss, so a positive difference favours the richer model. A percentage loss reduction is relative to baseline forecast loss; it is not a percentage investment return. Trading value would require separate evidence on a strategy, costs and execution.
-
-Sources: [Loss and aggregation rule](rp4/specification_v4.md) · [Reported comparisons and their interpretation](rp4/results_v4.md).
-
-<a id="ridge-and-tree-models"></a>
-
-## Ridge / tree models
-
-Ridge regression fits a linear relationship while penalizing large coefficients, which can reduce instability. The study's ridge model fits log variance and applies its registered transformations and forecast bounds. The tree family uses LightGBM, an ensemble of decision trees that can represent nonlinear relationships and interactions. These are different ways to map predictors to forecasts; an improvement in one family does not establish improvement in the other.
-
-Sources: [Model definitions](rp4/specification_v4.md).
-
-<a id="walk-forward-evaluation"></a>
-
-## Walk-forward evaluation
-
-A forecast origin is the time at which a prediction is made. Walk-forward evaluation moves those origins forward through time: each fitted model uses only its permitted past. Here training expands by session, with model selection and transformations confined to training data. Purge and embargo rules separate overlapping outcome windows around training and evaluation boundaries. Chronological execution controls one source of leakage; it does not make repeated reuse of the same evaluation history independent evidence.
-
-Sources: [Chronological training and temporal controls](rp4/specification_v4.md).
-
-<a id="point-in-time-pit"></a>
-
-## Point-in-time (PIT)
-
-Point-in-time discipline asks what information could have been available at each forecast origin. Exchange execution, provider creation and actual client receipt are different clocks. The study applies a conservative source-time proxy and eligibility rules, not proof of historical receipt by a trading client. A timestamp on an event alone does not establish that the forecaster could have used the record then.
-
-Sources: [Timing claims and limitations](pit_v22_claims_and_limitations.md) · [Availability rule in the study](rp4/specification_v4.md).
-
-<a id="h1-and-h2"></a>
-
-## H1 / H2: ordered questions
-
-In this repository, H1 labels the first comparison: does adding option state reduce mean forecast loss? H2 labels the second: does adding flow reduce loss beyond state? The registered sequence tests H2 formally only after the no-improvement null for H1 is rejected. These are repository labels for ordered questions, not a general convention that H1 means a null hypothesis. If H2 is not opened, a displayed nominal p-value is diagnostic and cannot be treated as a passed formal test.
-
-Sources: [Sequential decision rule](rp4/specification_v4.md) · [Meaning of an unopened test](rp4/results_v4.md).
-
-<a id="p-values-and-confidence-intervals"></a>
-
-## p-value / confidence interval
-
-Under a stated null model and its assumptions, a p-value is the probability of a test statistic at least as extreme as the observed statistic in the tested direction. Here the primary null is no positive improvement in mean loss. A p-value is not the probability that the null is true, nor the probability that a result will replicate. A large p-value does not prove no effect.
-
-A confidence interval (CI) comes from a procedure intended to cover the fixed effect at its stated long-run rate across repeated samples, under the procedure's assumptions. The report uses bootstrap percentile intervals. An interval conveys effect size and uncertainty; its confidence level is not a probability assigned to the truth of a hypothesis or to this one fixed interval.
-
-Sources: [Test direction and interval construction](rp4/specification_v4.md) · [Reported intervals and p-values](rp4/results_v4.md).
-
-<a id="block-bootstrap"></a>
-
-## Block bootstrap
-
-A bootstrap repeatedly resamples the observed data to approximate the uncertainty of an estimate under its assumptions. A block bootstrap resamples groups of adjacent sessions, instead of treating every forecast origin as independent. This study uses circular blocks and preserves the joint asset composition within a session. Block length and dependence assumptions matter; a bootstrap does not eliminate all possible dependence, validate data timing or create fresh observations.
-
-Sources: [Registered bootstrap construction](rp4/specification_v4.md).
-
-<a id="multiple-testing"></a>
-
-## Multiple testing
-
-Testing many questions increases the opportunity for a false positive. A correction or sequential rule controls a stated collection of tests under its assumptions. In the primary study, the H1-to-H2 sequence applies within each family. Separately reported Holm adjustments have their own defined scope; they do not automatically correct every historical version, model choice or adaptive search. A corrected p-value is meaningful only together with the set of tests it covers.
-
-Sources: [Multiplicity scope and limits](rp4/specification_v4.md) · [Results and historical reuse](rp4/results_v4.md).
-
-<a id="prospective-replication"></a>
-
-## Prospective replication
-
-Prospective replication evaluates rules fixed before acquiring the new evaluation observations, under the registered acquisition, analysis and reading conditions. The new evaluation observations are distinct from the reused historical evaluation windows. Training may still use the permitted earlier data, and temporal or cross-asset dependence still requires care. Recording rules and hashes supports traceability; it does not by itself supply an independent timestamp or establish what every person knew. A registered future read is a plan, not a completed confirmation.
-
-Sources: [Prospective protocol](rp4/prospective_confirmation_v1.md) · [Current scope and registered reads](rp4/prospective_confirmation_v1_amendment_3.md).
-
-## Reproduce this glossary
-
-The [versioned text source](figures/public_refresh/glossary.json) drives both this page and the image. The [producer](figures/public_refresh/glossary.py) uses the existing repository figure palette and SVG-to-PNG rasterizer. It reads public documents and creates no model fits, statistical tests, market-data requests or prospective observations.
+The [versioned text source](figures/public_refresh/glossary.json) drives both this page and the image. The [producer](figures/public_refresh/glossary.py) uses the existing repository figure palette and SVG-to-PNG rasterizer. Verification checks all 36 labels and meanings, the four section titles and footers, and the separate timing note against that source. No wording is shortened to fit the image. No model fits, statistical tests, market-data requests or prospective reads are run.
 
 From the repository root, source and output verification needs Python only:
 
@@ -124,3 +93,5 @@ python docs/figures/public_refresh/glossary.py --verify-raster
 The [render receipt](figures/public_refresh/glossary.receipt.json) records source and output hashes, dimensions, renderer versions and review status. Code-source hashes normalize CRLF to LF; other inputs and all outputs use exact bytes. The SVG has an intrinsic width of 1676 pixels and a viewBox width of 838. At 838 pixels of available page width, all visible text is at least 20 pixels. The PNG is 1676 pixels wide. SVG files contain no scripts or external resources.
 
 PNG byte reproduction depends on the recorded Sharp and libvips versions and the installed-font environment. Source and SVG verification is independent of the rasterizer. A fresh render resets visual review to pending; inspect the full-size image before recording a new review.
+
+</details>

@@ -9,6 +9,7 @@ import os
 import struct
 import subprocess
 import sys
+import textwrap
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -23,7 +24,8 @@ SVG = HERE / "glossary.svg"
 PNG = HERE / "glossary.png"
 MARKDOWN = ROOT / "docs/glossary.md"
 RASTERIZER = ROOT / "artifacts/rp4_closeout_figures_code/rasterize.cjs"
-WIDTH, HEIGHT = 838, 1280
+WIDTH = 838
+LINE_HEIGHT = 26
 TEXT_HASH_SUFFIXES = {".py", ".cjs"}
 
 
@@ -46,41 +48,107 @@ def text(canvas, x, y, value, size=20, weight="400", color=style.INK):
     )
 
 
+def wrap_exact(value: str, width: int) -> list[str]:
+    """Introduce line breaks without changing or deleting any supplied wording."""
+    lines = textwrap.wrap(value, width, break_long_words=False, break_on_hyphens=False)
+    assert " ".join(lines) == value, "Wrapping changed the supplied wording"
+    return lines
+
+
+def layout(source: dict) -> dict:
+    assert [len(s["rows"]) for s in source["sections"]] == [9, 8, 9, 10]
+    title = wrap_exact(source["title"], 48)
+    y = 28 + len(title) * 38 + 28
+    sections = []
+    for section in source["sections"]:
+        heading = wrap_exact(section["title"], 58)
+        start = y
+        header_height = 24 + len(heading) * 30
+        y += header_height + 44
+        rows = []
+        for row in section["rows"]:
+            label = wrap_exact(row["label"], 16)
+            meaning = wrap_exact(row["meaning"], 50)
+            height = 32 + max(len(label), len(meaning)) * LINE_HEIGHT
+            rows.append({"top": y, "height": height, "label": label, "meaning": meaning})
+            y += height
+        footer = wrap_exact(section["footer"], 76)
+        footer_top = y
+        y += 32 + len(footer) * LINE_HEIGHT
+        sections.append(
+            {
+                "top": start,
+                "bottom": y,
+                "heading": heading,
+                "header_height": header_height,
+                "rows": rows,
+                "footer": footer,
+                "footer_top": footer_top,
+            }
+        )
+        y += 32
+    note = wrap_exact(source["reading_note"], 76)
+    note_top = y
+    y += 32 + len(note) * LINE_HEIGHT + 24
+    return {"height": y, "title": title, "sections": sections, "note": note, "note_top": note_top}
+
+
+def field(canvas, name, lines, x, y, size=20, weight="400", color=style.INK):
+    canvas.front(f'<g data-glossary-field="{name}">')
+    for index, value in enumerate(lines):
+        text(canvas, x, y + index * LINE_HEIGHT, value, size, weight, color)
+    canvas.front("</g>")
+
+
 def render_svg(source: dict) -> bytes:
-    cards = source["cards"]
-    assert len(cards) == 12 and len({c["id"] for c in cards}) == 12
+    plan = layout(source)
+    height = plan["height"]
     canvas = style.Canvas(
         WIDTH,
-        HEIGHT,
+        height,
         source["title"],
-        "Twelve definitions for reading a study of options and volatility. "
-        "The text version provides expanded definitions, qualifications and sources.",
+        "Four reference tables containing the complete supplied wording for 36 entries, "
+        "with four footers and a separate timing clarification.",
         "public-glossary",
     )
-    text(canvas, 24, 46, source["title"], 34, "600")
-    text(canvas, 24, 79, source["subtitle"], 22, color=style.MUTED)
-    for index, card in enumerate(cards):
-        x, y = 24 + (index % 2) * 405, 106 + (index // 2) * 184
-        assert len(card["lines"]) == 4
-        fill = style.ACCENT_TINT if index in {3, 11} else style.PAPER_2
+    field(canvas, "title", plan["title"], 24, 52, 30, "600")
+    for section_index, section in enumerate(plan["sections"], 1):
+        top = section["top"]
         canvas.front(
-            f'<g id="{card["id"]}" data-glossary-card="true">'
-            f'<rect x="{x}" y="{y}" width="385" height="168" rx="10" '
-            f'fill="{fill}" stroke="{style.RULE_STRONG}" stroke-width="1.2"/>'
+            f'<g data-glossary-section="{section_index}" '
+            f'data-section-top="{top}" data-section-bottom="{section["bottom"]}">'
+            f'<rect x="24" y="{top}" width="790" height="{section["header_height"]}" '
+            f'fill="{style.LINK_TINT}"/>'
         )
-        text(canvas, x + 18, y + 32, card["title"], 22, "600", style.LINK)
-        for line, value in enumerate(card["lines"]):
-            text(canvas, x + 18, y + 66 + line * 24, value)
+        field(canvas, "section-title", section["heading"], 40, top + 34, 24, "600", style.LINK)
+        header_y = top + section["header_height"]
+        text(canvas, 40, header_y + 29, "Label", weight="600")
+        text(canvas, 266, header_y + 29, "Meaning in this study", weight="600")
+        for row_index, row in enumerate(section["rows"], 1):
+            fill = style.PAPER_2 if row_index % 2 else style.PAPER
+            canvas.front(
+                f'<g data-glossary-row="{row_index}">'
+                f'<rect x="24" y="{row["top"]}" width="790" height="{row["height"]}" '
+                f'fill="{fill}" stroke="{style.RULE}" stroke-width="1"/>'
+                f'<line x1="250" y1="{row["top"]}" x2="250" '
+                f'y2="{row["top"] + row["height"]}" stroke="{style.RULE}"/>'
+            )
+            field(canvas, "label", row["label"], 40, row["top"] + 30, weight="600")
+            field(canvas, "meaning", row["meaning"], 266, row["top"] + 30)
+            canvas.front("</g>")
+        field(
+            canvas, "footer", section["footer"], 40, section["footer_top"] + 30, color=style.MUTED
+        )
         canvas.front("</g>")
     canvas.front(
-        f'<line x1="24" y1="1226" x2="814" y2="1226" '
-        f'stroke="{style.RULE_STRONG}" stroke-width="1"/>'
+        f'<rect x="24" y="{plan["note_top"]}" width="790" '
+        f'height="{32 + len(plan["note"]) * LINE_HEIGHT}" '
+        f'fill="{style.ACCENT_TINT}" stroke="{style.ACCENT_RULE}"/>'
     )
-    text(canvas, 24, 1260, source["footer"], color=style.MUTED)
-    svg = canvas.render()
-    svg = svg.replace(
-        f'width="{WIDTH}" height="{HEIGHT}"',
-        f'width="{2 * WIDTH}" height="{2 * HEIGHT}"',
+    field(canvas, "reading-note", plan["note"], 40, plan["note_top"] + 30)
+    svg = canvas.render().replace(
+        f'width="{WIDTH}" height="{height}"',
+        f'width="{2 * WIDTH}" height="{2 * height}"',
         1,
     )
     return (svg + "\n").encode("utf-8")
@@ -88,35 +156,44 @@ def render_svg(source: dict) -> bytes:
 
 def render_markdown(source: dict) -> bytes:
     lines = [
-        "# Glossary",
+        f"# {source['title']}",
         "",
-        "Plain-language definitions for reading *Options Order Flow and Intraday Volatility*. "
-        "These terms explain the method and its limits; they do not add results or establish "
-        "investment value.",
+        "Reference glossary of the labels and option-market terms used in the study. "
+        "The four tables preserve the supplied wording.",
         "",
-        "![Twelve research terms, from volatility and option inputs to uncertainty and "
-        "prospective replication](figures/public_refresh/glossary.png)",
-        "",
-        "[Scalable image](figures/public_refresh/glossary.svg) · "
-        "[Study overview](../README.md) · [Current report](rp4/results_v4.md)",
+        "[Complete PNG sheet](figures/public_refresh/glossary.png) · "
+        "[Scalable SVG](figures/public_refresh/glossary.svg) · [Study overview](../README.md)",
         "",
     ]
-    for card in source["cards"]:
-        lines += [f'<a id="{card["id"]}"></a>', "", f"## {card['title']}", "", card["detail"], ""]
-        links = []
-        for source_link in card["sources"]:
-            path = Path(source_link["path"])
-            assert path.parts[0] == "docs" and (ROOT / path).is_file()
-            links.append(f"[{source_link['title']}]({Path(*path.parts[1:]).as_posix()})")
-        lines += ["Sources: " + " · ".join(links) + ".", ""]
+    for section in source["sections"]:
+        lines += [
+            f"## {section['title']}",
+            "",
+            "| Label | Meaning in this study |",
+            "| --- | --- |",
+        ]
+        for row in section["rows"]:
+            assert "|" not in row["label"] + row["meaning"]
+            lines.append(f"| {row['label']} | {row['meaning']} |")
+        lines += ["", section["footer"], ""]
+    note_source = Path(source["reading_note_source"])
+    assert note_source.parts[0] == "docs" and (ROOT / note_source).is_file()
     lines += [
-        "## Reproduce this glossary",
+        "> " + source["reading_note"],
+        "",
+        f"[Timing rule]({Path(*note_source.parts[1:]).as_posix()}).",
+        "",
+    ]
+    lines += [
+        "<details>",
+        "<summary>Reproduce and verify this reference sheet</summary>",
         "",
         "The [versioned text source](figures/public_refresh/glossary.json) drives both this "
         "page and the image. The [producer](figures/public_refresh/glossary.py) uses the "
-        "existing repository figure palette and SVG-to-PNG rasterizer. It reads public "
-        "documents and creates no model fits, statistical tests, market-data requests or "
-        "prospective observations.",
+        "existing repository figure palette and SVG-to-PNG rasterizer. Verification checks "
+        "all 36 labels and meanings, the four section titles and footers, and the separate "
+        "timing note against that source. No wording is shortened to fit the image. "
+        "No model fits, statistical tests, market-data requests or prospective reads are run.",
         "",
         "From the repository root, source and output verification needs Python only:",
         "",
@@ -146,11 +223,13 @@ def render_markdown(source: dict) -> bytes:
         "A fresh render resets visual review to pending; inspect the full-size image "
         "before recording a new review.",
         "",
+        "</details>",
+        "",
     ]
     return "\n".join(lines).encode("utf-8")
 
 
-def inspect_svg(data: bytes) -> dict:
+def inspect_svg(data: bytes, source: dict | None = None) -> dict:
     root = ET.fromstring(data)
     view_width = float(root.attrib["viewBox"].split()[2])
     available = min(838, float(root.attrib["width"]))
@@ -167,21 +246,44 @@ def inspect_svg(data: bytes) -> dict:
             effective = float(element.attrib["font-size"]) * available / view_width
             assert effective >= 20, "Text is too small at the available README width"
             fonts.append(effective)
-    assert len(fonts) == 63
+    assert fonts
+    sections = root.findall(".//*[@data-glossary-section]")
+    counts = [len(s.findall("./*[@data-glossary-row]")) for s in sections]
+    assert counts == [9, 8, 9, 10]
+    if source is not None:
+
+        def contents(parent, name):
+            matches = parent.findall(f'./*[@data-glossary-field="{name}"]')
+            assert len(matches) == 1
+            return " ".join("".join(t.itertext()) for t in matches[0])
+
+        assert contents(root, "title") == source["title"]
+        for actual, expected in zip(sections, source["sections"], strict=True):
+            assert contents(actual, "section-title") == expected["title"]
+            assert contents(actual, "footer") == expected["footer"]
+            for row, expected_row in zip(
+                actual.findall("./*[@data-glossary-row]"), expected["rows"], strict=True
+            ):
+                assert contents(row, "label") == expected_row["label"]
+                assert contents(row, "meaning") == expected_row["meaning"]
+        assert contents(root, "reading-note") == source["reading_note"]
     return {
         "available_width_px": available,
         "intrinsic_width_px": int(root.attrib["width"]),
         "minimum_text_px": min(fonts),
         "text_elements": len(fonts),
+        "section_rows": counts,
+        "verbatim_source_checked": source is not None,
         "external_resources": 0,
     }
 
 
 def rasterize(data: bytes) -> tuple[bytes, dict]:
+    height = int(ET.fromstring(data).attrib["viewBox"].split()[3])
     # The existing rasterizer uses 96 dpi: a 1.5x SVG input yields a 2x PNG.
     raster_input = data.replace(
-        f'width="{2 * WIDTH}" height="{2 * HEIGHT}"'.encode(),
-        f'width="{WIDTH * 1.5:g}" height="{HEIGHT * 1.5:g}"'.encode(),
+        f'width="{2 * WIDTH}" height="{2 * height}"'.encode(),
+        f'width="{WIDTH * 1.5:g}" height="{height * 1.5:g}"'.encode(),
         1,
     )
     node = os.environ["RP4_FIGURE_NODE"]
@@ -190,7 +292,7 @@ def rasterize(data: bytes) -> tuple[bytes, dict]:
         [node, str(RASTERIZER), str(sharp)], input=raster_input, capture_output=True, check=True
     )
     metadata = json.loads(result.stderr)
-    assert metadata["width"] == 2 * WIDTH and metadata["height"] == 2 * HEIGHT
+    assert metadata["width"] == 2 * WIDTH and metadata["height"] == 2 * height
     metadata["font_stack"] = style.SANS
     metadata["font_environment"] = (
         "Installed Segoe UI on Windows; other font environments may change PNG bytes."
@@ -206,11 +308,11 @@ def main() -> None:
     mode.add_argument("--verify-raster", action="store_true")
     args = parser.parse_args()
     source = json.loads(SOURCE.read_text("utf-8"))
-    assert source["schema_version"] == "public-glossary-v1"
+    assert source["schema_version"] == "public-glossary-v2"
     svg, markdown = render_svg(source), render_markdown(source)
-    readability = inspect_svg(svg)
+    readability = inspect_svg(svg, source)
     inputs = [SOURCE, Path(__file__), ROOT / "scripts/figure_style.py", RASTERIZER]
-    inputs += sorted({ROOT / link["path"] for c in source["cards"] for link in c["sources"]})
+    inputs.append(ROOT / source["reading_note_source"])
     hashes = {p.relative_to(ROOT).as_posix(): input_hash(p) for p in inputs}
     if args.render:
         png, renderer = rasterize(svg)
@@ -218,7 +320,8 @@ def main() -> None:
             assert not path.exists() or path.is_file()
             path.write_bytes(data)
         receipt = {
-            "schema_version": "public-glossary-render-v1",
+            "schema_version": "public-glossary-render-v2",
+            "source_wording_sha256": source["source_wording_sha256"],
             "input_sha256": hashes,
             "input_hash_mode": {"code": "utf8-crlf-to-lf", "other": "raw-bytes"},
             "output_sha256": {
@@ -228,13 +331,14 @@ def main() -> None:
             "png_renderer": renderer,
             "visual_review": {"status": "pending"},
             "scope": (
-                "Definitions and presentation only; no new empirical results "
-                "or scientific execution."
+                "Verbatim reference wording and a separately identified timing clarification; "
+                "no new empirical results or scientific execution."
             ),
         }
         RECEIPT.write_bytes((json.dumps(receipt, indent=2, ensure_ascii=False) + "\n").encode())
     else:
         receipt = json.loads(RECEIPT.read_text("utf-8"))
+        assert receipt["source_wording_sha256"] == source["source_wording_sha256"]
         assert hashes == receipt["input_sha256"], "Glossary input changed"
         assert svg == SVG.read_bytes() and markdown == MARKDOWN.read_bytes()
         assert readability == receipt["readability"]
@@ -245,7 +349,7 @@ def main() -> None:
             assert sha((ROOT / relative).read_bytes()) == expected, f"Output changed: {relative}"
         png = PNG.read_bytes()
         assert png[:8] == b"\x89PNG\r\n\x1a\n"
-        assert struct.unpack(">II", png[16:24]) == (2 * WIDTH, 2 * HEIGHT)
+        assert struct.unpack(">II", png[16:24]) == (2 * WIDTH, 2 * layout(source)["height"])
         if args.verify_raster:
             regenerated, renderer = rasterize(svg)
             assert regenerated == png, "PNG raster regeneration differs"

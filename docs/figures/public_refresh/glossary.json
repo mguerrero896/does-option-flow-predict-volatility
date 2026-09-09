@@ -1,92 +1,177 @@
 {
-  "schema_version": "public-glossary-v1",
-  "title": "Reading the research",
-  "subtitle": "Twelve terms used in the study",
-  "footer": "Definitions explain the method; they do not certify a result.",
-  "cards": [
+  "schema_version": "public-glossary-v2",
+  "title": "Glossary of labels and option-market terms",
+  "source_wording_sha256": "b72b1688cf4076d4a6d4b391e5a308c8ae6ca4202322a76ca8cd076bf8d1d644",
+  "sections": [
     {
-      "id": "volatility-and-realized-variance",
-      "title": "Volatility / realized variance",
-      "lines": ["Volatility describes price variation.", "Realized variance sums squared", "returns over a window. This study", "forecasts variance, not direction."],
-      "detail": "Volatility describes the magnitude of price variation, rather than whether prices rise or fall. Realized variance is a measurement constructed from squared returns over a stated window. Here the target sums squared future one-minute log returns; the square root of variance is a volatility measure. RV15 and RV5 identify the length of the future window in minutes, not annualized volatility or a predicted return.",
-      "sources": [{"title": "Target definition", "path": "docs/rp4/specification_v4.md"}]
+      "title": "Project labels you will see on files and charts",
+      "rows": [
+        {
+          "label": "RP4",
+          "meaning": "The current historical experiment: does option information improve short-term variance forecasts? Five saved versions, v1–v5."
+        },
+        {
+          "label": "RP3",
+          "meaning": "A separately registered long-run study with its own rule; its first reading is estimated for January 2029. Not this experiment."
+        },
+        {
+          "label": "RP2",
+          "meaning": "The earlier validation study (finished August 2026) that found no usable improvement. Its results are history, not current claims."
+        },
+        {
+          "label": "Phase 5 / 8A / 9",
+          "meaning": "Workstreams of the earlier programme: Phase 5 registered and read the thirty-minute study; Phase 8A recorded a small exploratory bridge; Phase 9 collected the sessions later reused here."
+        },
+        {
+          "label": "v1–v5",
+          "meaning": "Saved revisions of RP4: v1 diagnosis, v2 data and fitting repair, v3 refined option flow, v4 the fifteen-minute test (headline), v5 the model-combination companion study."
+        },
+        {
+          "label": "B0 · B1 · B2",
+          "meaning": "The three nested information sets: B0 market history (29 predictors), B1 adds option state (69), B2 adds option flow (138)."
+        },
+        {
+          "label": "H1 · H2",
+          "meaning": "The two ordered tests: H1 asks whether option state beats market history; H2 asks whether option flow beats option state, and only counts if H1 passed."
+        },
+        {
+          "label": "RV30 · RV15 · RV5",
+          "meaning": "Realised variance over the next 30, 15 or 5 minutes. RV15 is the primary target of v4."
+        },
+        {
+          "label": "Decision 128 / 136",
+          "meaning": "Numbered entries in the project's decision log: 128 fixed the 1 August 2026 split; 136 registered the four-model average as a secondary candidate."
+        }
+      ],
+      "footer": "Labels identify parts of this project. None of them is an option-pricing concept."
     },
     {
-      "id": "option-state-and-option-flow",
-      "title": "Option state / option flow",
-      "lines": ["State: current option-market", "conditions. Flow: recent trading", "activity, composition and signed", "imbalance. These are different inputs."],
-      "detail": "Option state describes market conditions, including the implied-volatility surface: option-implied volatility across strike prices and expiries. Option flow describes recent trading activity and its composition. In this study, flow is derived from reported trades and direction-based imbalances; it is not a complete record of every submitted or cancelled order. Signed measures are constructed indicators, not direct observations of intermediary inventories.",
-      "sources": [{"title": "Information sets and inherited features", "path": "docs/rp4/specification_v4.md"}]
+      "title": "Option-market terms used in this study",
+      "rows": [
+        {
+          "label": "Option",
+          "meaning": "A contract giving the right to buy (call) or sell (put) a stock at a set price before a set date. Its price reflects how much movement the market expects."
+        },
+        {
+          "label": "Strike",
+          "meaning": "The exercise price written in the contract. Not a forecast or a price target."
+        },
+        {
+          "label": "Expiry · DTE · 0DTE",
+          "meaning": "The contract's end date; DTE is calendar days to expiry; 0DTE expires the same day."
+        },
+        {
+          "label": "Premium",
+          "meaning": "The price paid for the contract, in dollars. \"Premium share\" is the fraction of premium on one side (buys, sells, out-of-the-money, same-day)."
+        },
+        {
+          "label": "Bid · Ask · Aggressor",
+          "meaning": "Best buy and sell quotes. The aggressor is the side inferred to have initiated the trade; it is a proxy, not an observed identity."
+        },
+        {
+          "label": "Implied volatility (IV)",
+          "meaning": "The level of future movement implied by option prices. The surface is IV across strikes and expiries; smile, skew, term slope, risk reversal and butterfly describe its shape."
+        },
+        {
+          "label": "Option state",
+          "meaning": "Measurements of the option market at the forecast time: IV levels and the shape of the surface. Slow-moving, price-based."
+        },
+        {
+          "label": "Option flow",
+          "meaning": "Recent option transactions: counts, premium, buy/sell split, sweeps, multileg trades, same-day contracts and sensitivity flows. Fast-moving, trade-based."
+        }
+      ],
+      "footer": "State comes from option prices; flow comes from option trades. The study tests them in that order."
     },
     {
-      "id": "b0-b1-and-b2",
-      "title": "B0 / B1 / B2: nested inputs",
-      "lines": ["B0: price and volatility history.", "B1: B0 plus option state.", "B2: B1 plus option flow.", "Each set keeps the earlier inputs."],
-      "detail": "B0, B1 and B2 name sets of predictors, not three model families. B0 contains price and volatility history. B1 retains B0 and adds option state; B2 retains B1 and adds option flow. Comparing B1 with B0 asks about the incremental contribution of state. Comparing B2 with B1 asks about the incremental contribution of flow. The added sets are evaluated within each model family.",
-      "sources": [{"title": "Nested predictor specification", "path": "docs/rp4/specification_v4.md"}]
+      "title": "Sensitivities, trade types and market words",
+      "rows": [
+        {
+          "label": "Delta · Gamma · Vega",
+          "meaning": "How an option's price responds to the stock price (delta), how delta itself changes (gamma), and how the price responds to volatility (vega). \"Flow\" versions add these up over recent trades."
+        },
+        {
+          "label": "Dealer gamma",
+          "meaning": "A proxy for the position held by market makers. Hedging that position can move the stock; the study measures a proxy, not actual dealer books."
+        },
+        {
+          "label": "Hedging · Liquidity",
+          "meaning": "Trading to offset an existing risk rather than to bet; how easily a contract can be traded. Both can create trades that carry no forecast."
+        },
+        {
+          "label": "Sweep · Multileg",
+          "meaning": "A sweep executes one order across several exchanges at once; a multileg trade combines several contracts (a spread). Both are recorded trade types, not signals by themselves."
+        },
+        {
+          "label": "Moneyness",
+          "meaning": "Strike relative to the current stock price (strike divided by spot); near one means at the money."
+        },
+        {
+          "label": "Session · Origin",
+          "meaning": "A session is one trading day, 9:30 to 16:00 New York time. An origin is one forecast case: a stock, a day and a minute (10:05 to 15:25, every five minutes; 65 per stock per day)."
+        },
+        {
+          "label": "SPY · QQQ",
+          "meaning": "Exchange-traded funds that track the S&P 500 and Nasdaq-100 indices. Used as market controls, and as two extra targets in the eight-asset extension."
+        },
+        {
+          "label": "AAPL AMZN META MSFT NVDA TSLA",
+          "meaning": "Ticker symbols of Apple, Amazon, Meta, Microsoft, Nvidia and Tesla."
+        },
+        {
+          "label": "FMP · UW",
+          "meaning": "Financial Modeling Prep supplies one-minute prices; Unusual Whales supplies the option records."
+        }
+      ],
+      "footer": "Sensitivities and trade types are inputs; the study does not identify who traded or why."
     },
     {
-      "id": "qlike-forecast-loss",
-      "title": "QLIKE: forecast loss",
-      "lines": ["A loss for variance forecasts:", "smaller means less forecast error", "under this score. A loss reduction", "is not a trading profit."],
-      "detail": "QLIKE is a quasi-likelihood loss used to compare variance forecasts. For positive observed realized variance y and positive forecast variance f, the registered score is y/f − log(y/f) − 1. Smaller values are better under this score. The reported loss difference is baseline loss minus the richer model's loss, so a positive difference favours the richer model. A percentage loss reduction is relative to baseline forecast loss; it is not a percentage investment return. Trading value would require separate evidence on a strategy, costs and execution.",
-      "sources": [{"title": "Loss and aggregation rule", "path": "docs/rp4/specification_v4.md"}, {"title": "Reported comparisons and their interpretation", "path": "docs/rp4/results_v4.md"}]
-    },
-    {
-      "id": "ridge-and-tree-models",
-      "title": "Ridge / tree models",
-      "lines": ["Ridge: a linear model with shrunk", "coefficients. Trees split inputs", "into regions and combine rules.", "Agreement is not guaranteed."],
-      "detail": "Ridge regression fits a linear relationship while penalizing large coefficients, which can reduce instability. The study's ridge model fits log variance and applies its registered transformations and forecast bounds. The tree family uses LightGBM, an ensemble of decision trees that can represent nonlinear relationships and interactions. These are different ways to map predictors to forecasts; an improvement in one family does not establish improvement in the other.",
-      "sources": [{"title": "Model definitions", "path": "docs/rp4/specification_v4.md"}]
-    },
-    {
-      "id": "walk-forward-evaluation",
-      "title": "Walk-forward evaluation",
-      "lines": ["Train on earlier observations;", "evaluate at later forecast times.", "Keep model selection inside the", "permitted training window."],
-      "detail": "A forecast origin is the time at which a prediction is made. Walk-forward evaluation moves those origins forward through time: each fitted model uses only its permitted past. Here training expands by session, with model selection and transformations confined to training data. Purge and embargo rules separate overlapping outcome windows around training and evaluation boundaries. Chronological execution controls one source of leakage; it does not make repeated reuse of the same evaluation history independent evidence.",
-      "sources": [{"title": "Chronological training and temporal controls", "path": "docs/rp4/specification_v4.md"}]
-    },
-    {
-      "id": "point-in-time-pit",
-      "title": "Point-in-time (PIT)",
-      "lines": ["Use information available by the", "forecast's time cutoff. Source time", "is a proxy here; it does not prove", "that a client received the record."],
-      "detail": "Point-in-time discipline asks what information could have been available at each forecast origin. Exchange execution, provider creation and actual client receipt are different clocks. The study applies a conservative source-time proxy and eligibility rules, not proof of historical receipt by a trading client. A timestamp on an event alone does not establish that the forecaster could have used the record then.",
-      "sources": [{"title": "Timing claims and limitations", "path": "docs/pit_v22_claims_and_limitations.md"}, {"title": "Availability rule in the study", "path": "docs/rp4/specification_v4.md"}]
-    },
-    {
-      "id": "h1-and-h2",
-      "title": "H1 / H2: ordered questions",
-      "lines": ["H1: state improves B1 over B0.", "H2: flow improves B2 over B1.", "H2 opens only if H1 passes.", "This sequence applies per family."],
-      "detail": "In this repository, H1 labels the first comparison: does adding option state reduce mean forecast loss? H2 labels the second: does adding flow reduce loss beyond state? The registered sequence tests H2 formally only after the no-improvement null for H1 is rejected. These are repository labels for ordered questions, not a general convention that H1 means a null hypothesis. If H2 is not opened, a displayed nominal p-value is diagnostic and cannot be treated as a passed formal test.",
-      "sources": [{"title": "Sequential decision rule", "path": "docs/rp4/specification_v4.md"}, {"title": "Meaning of an unopened test", "path": "docs/rp4/results_v4.md"}]
-    },
-    {
-      "id": "p-values-and-confidence-intervals",
-      "title": "p-value / confidence interval",
-      "lines": ["p: a tail probability under the null.", "It is not a hypothesis probability.", "CI: an interval for an effect, with", "repeated-sampling interpretation."],
-      "detail": "Under a stated null model and its assumptions, a p-value is the probability of a test statistic at least as extreme as the observed statistic in the tested direction. Here the primary null is no positive improvement in mean loss. A p-value is not the probability that the null is true, nor the probability that a result will replicate. A large p-value does not prove no effect.\n\nA confidence interval (CI) comes from a procedure intended to cover the fixed effect at its stated long-run rate across repeated samples, under the procedure's assumptions. The report uses bootstrap percentile intervals. An interval conveys effect size and uncertainty; its confidence level is not a probability assigned to the truth of a hypothesis or to this one fixed interval.",
-      "sources": [{"title": "Test direction and interval construction", "path": "docs/rp4/specification_v4.md"}, {"title": "Reported intervals and p-values", "path": "docs/rp4/results_v4.md"}]
-    },
-    {
-      "id": "block-bootstrap",
-      "title": "Block bootstrap",
-      "lines": ["Resample blocks of sessions to", "estimate uncertainty while keeping", "some dependence in the data.", "Resampling creates no new evidence."],
-      "detail": "A bootstrap repeatedly resamples the observed data to approximate the uncertainty of an estimate under its assumptions. A block bootstrap resamples groups of adjacent sessions, instead of treating every forecast origin as independent. This study uses circular blocks and preserves the joint asset composition within a session. Block length and dependence assumptions matter; a bootstrap does not eliminate all possible dependence, validate data timing or create fresh observations.",
-      "sources": [{"title": "Registered bootstrap construction", "path": "docs/rp4/specification_v4.md"}]
-    },
-    {
-      "id": "multiple-testing",
-      "title": "Multiple testing",
-      "lines": ["More tests create more chances", "of a false positive. Adjustments", "cover stated test families;", "they do not erase past search."],
-      "detail": "Testing many questions increases the opportunity for a false positive. A correction or sequential rule controls a stated collection of tests under its assumptions. In the primary study, the H1-to-H2 sequence applies within each family. Separately reported Holm adjustments have their own defined scope; they do not automatically correct every historical version, model choice or adaptive search. A corrected p-value is meaningful only together with the set of tests it covers.",
-      "sources": [{"title": "Multiplicity scope and limits", "path": "docs/rp4/specification_v4.md"}, {"title": "Results and historical reuse", "path": "docs/rp4/results_v4.md"}]
-    },
-    {
-      "id": "prospective-replication",
-      "title": "Prospective replication",
-      "lines": ["Test fixed rules on new sessions.", "Reusing historical windows is", "not independent replication.", "A planned test is not a result."],
-      "detail": "Prospective replication evaluates rules fixed before acquiring the new evaluation observations, under the registered acquisition, analysis and reading conditions. The new evaluation observations are distinct from the reused historical evaluation windows. Training may still use the permitted earlier data, and temporal or cross-asset dependence still requires care. Recording rules and hashes supports traceability; it does not by itself supply an independent timestamp or establish what every person knew. A registered future read is a plan, not a completed confirmation.",
-      "sources": [{"title": "Prospective protocol", "path": "docs/rp4/prospective_confirmation_v1.md"}, {"title": "Current scope and registered reads", "path": "docs/rp4/prospective_confirmation_v1_amendment_3.md"}]
+      "title": "Measures and checks specific to variance forecasting",
+      "rows": [
+        {
+          "label": "Realised variance (RV)",
+          "meaning": "The sum of squared one-minute log returns over the next interval. It is variance, not its square root (volatility), and not a return."
+        },
+        {
+          "label": "QLIKE (pronounced \"cue-like\")",
+          "meaning": "The loss used to score variance forecasts: y/f − log(y/f) − 1. It punishes under-forecasting a big move much more than over-forecasting a small one. Lower is better."
+        },
+        {
+          "label": "Persistence · HAR · HARQ",
+          "meaning": "Reference forecasts: persistence repeats the previous session's pattern; HAR combines past variance over several time scales; HARQ adds a measurement-noise adjustment."
+        },
+        {
+          "label": "MAE · RMSE",
+          "meaning": "Mean absolute error and root mean squared error, in variance units. Reported as complements; QLIKE is the declared measure."
+        },
+        {
+          "label": "Linear (log-ridge) · Trees (LightGBM)",
+          "meaning": "The two model families. The linear model fits log variance with a penalty (\"shrinkage strength 100\" on the receipts); the trees are gradient-boosted with leaves and stopping rounds chosen on earlier data."
+        },
+        {
+          "label": "Point-in-time (PIT)",
+          "meaning": "Only records with a source timestamp at least 120 seconds before the forecast time are allowed. It is a rule on source clocks, not proof of when a client received the data."
+        },
+        {
+          "label": "Purge · Embargo · Warm-up",
+          "meaning": "Training rows whose outcome ends within 60 minutes of validation or forecasting are excluded; the first 60 sessions are reserved to build histories."
+        },
+        {
+          "label": "Block bootstrap · One-sided p",
+          "meaning": "Groups of five consecutive sessions are resampled 9,999 times with a fixed seed; the interval describes the estimated difference and the one-sided test asks whether it improves at the 5 % rule. Holm is the stricter correction for several tests."
+        },
+        {
+          "label": "Placebo · Delay sensitivity",
+          "meaning": "Follow-up checks: shuffled option flow should not look better than nothing; stricter delays (300 and 60 seconds) test the timing rule."
+        },
+        {
+          "label": "Receipt · Manifest · SHA-256",
+          "meaning": "Files that record inputs, outputs, times and content hashes so that every number can be traced to its file."
+        }
+      ],
+      "footer": "These are the measures behind every percentage in the video; none of them is a trading return."
     }
-  ]
+  ],
+  "reading_note": "Timing clarification: the supplied wording calls both 300 and 60 seconds stricter delays. Relative to the registered 120-second cutoff, 300 seconds is stricter and 60 seconds is less strict. The reference definitions above are reproduced verbatim.",
+  "reading_note_source": "docs/rp4/specification_v4.md"
 }
