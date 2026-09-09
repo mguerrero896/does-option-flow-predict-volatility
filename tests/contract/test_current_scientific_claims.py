@@ -24,6 +24,11 @@ def _placebo_rows(suffix: str) -> list[dict[str, str]]:
 
 def test_placebo_import_preserves_closed_hashes_and_public_scope() -> None:
     receipt = json.loads((PLACEBO / "import_receipt.json").read_text("utf-8"))
+    report = receipt["report"]
+    assert (
+        hashlib.sha256((ROOT / report["path"]).read_bytes()).hexdigest() == report["public_sha256"]
+    )
+    assert report["byte_identical"] is False and report["transformations"]
     expected = {
         PLACEBO_PREFIX + name
         for name in (
@@ -111,14 +116,26 @@ def test_placebo_saved_aggregation_and_empirical_rank() -> None:
 
 def test_placebo_current_values_match_imported_summary_without_changing_headline() -> None:
     summary = _placebo_rows("summary.csv")[0]
+    report = (ROOT / "docs/rp4/robustness_committed_v1_placebo_linear_rv15.md").read_text("utf-8")
+    for field in (
+        "observed_delta",
+        "mean",
+        "median",
+        "sd",
+        "minimum",
+        "maximum",
+        "percentile_2_5",
+        "percentile_97_5",
+        "p_empirical",
+    ):
+        assert summary[field] in report
     current = (ROOT / "docs/CURRENT.md").read_text("utf-8").replace("**", "")
     paragraph = next(
         line for line in current.splitlines() if line.startswith("Placebo (completed):")
     )
     assert (
         f"placebo mean {float(summary['mean']):.6f} "
-        f"vs observed {float(summary['observed_delta']):.6f}"
-        in paragraph
+        f"vs observed {float(summary['observed_delta']):.6f}" in paragraph
     )
     assert f"empirical p = {float(summary['p_empirical']):.3f}" in paragraph
     assert f"{summary['exceedances']} of {summary['permutations']}" in paragraph

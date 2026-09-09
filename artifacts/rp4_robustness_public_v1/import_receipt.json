@@ -1,5 +1,16 @@
 {
   "schema_version": "rp4-placebo-public-import-v1",
+  "report": {
+    "path": "docs/rp4/robustness_committed_v1_placebo_linear_rv15.md",
+    "source_original_sha256": "687a60e09f23d101f89cba9e398ca856ef5488d40d574a984d3c47028ac5da63",
+    "public_sha256": "e7651c0b04c27f5d7969c7be6b419b4757bcee3bba0ec5029f30be1ade9b233d",
+    "byte_identical": false,
+    "transformations": [
+      "Condensed English public derivative; saved numerical results retained",
+      "Omit local coordination details and unavailable private links",
+      "Qualify session-level interpretation as consistent evidence, not causal attribution"
+    ]
+  },
   "scope": "Closed linear RV15 placebo aggregates only; not other robustness stages",
   "source_execution_commit": "fe64ee2e96dc8b87490ee3a87abb2fd97525a54b",
   "source_close_sha256": "f350cded51a046c9df91adaecc47889788fe955ffb9fa994bf78c2d1fe1f73bf",
