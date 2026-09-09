@@ -53,6 +53,11 @@ window. These clarifications do not amend the recorded results or their seals.
 
 ## Family inventory
 
+The [completed 300-second timing sensitivity](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv)
+and its [interpretation](FAQ.md#14-does-the-flow-result-survive-a-stricter-availability-cutoff)
+are **CURRENT**, with [import provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+This closure does not certify the 60-second cutoff, which is not yet completed.
+
 The baseline inventory contains 2,801 tracked files, including 528 Markdown files.
 Counting `.md`, `.rst`, `.txt`, `.pdf`, `.docx`, `.pptx`, `.html` and `.ipynb`
 as documents gives 558 documents before this map and other new documentation.

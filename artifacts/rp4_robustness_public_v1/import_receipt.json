@@ -11,7 +11,7 @@
       "Qualify session-level interpretation as consistent evidence, not causal attribution"
     ]
   },
-  "scope": "Closed linear RV15 placebo aggregates only; not other robustness stages",
+  "scope": "Closed placebo import above; closed PIT300 import appended below. No other stages certified.",
   "source_execution_commit": "fe64ee2e96dc8b87490ee3a87abb2fd97525a54b",
   "source_close_sha256": "f350cded51a046c9df91adaecc47889788fe955ffb9fa994bf78c2d1fe1f73bf",
   "source_close": {
@@ -74,5 +74,67 @@
   "public_json_policy": "Declared derivatives, not byte-identical originals; original files remain unchanged",
   "scientific_model_fits_during_import": 0,
   "licensed_granular_data_imported": false,
-  "primary_statistics_changed": false
+  "primary_statistics_changed": false,
+  "pit_300": {
+    "source_execution_commit": "6cd07a29bf603f5ce30de353291c1ab81b25cf65",
+    "source_close_sha256": "419e70fcf4011fd9b462c5fd7d1351040d03370c503efe513a7e42889f35165a",
+    "source_close": {
+      "closed_at_utc": "2026-09-09T05:38:08.326930Z",
+      "code_commit": "6cd07a29bf603f5ce30de353291c1ab81b25cf65",
+      "contract_exit_code": 0,
+      "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+      "contract_row": "pit300",
+      "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+      "receipt_sha256": "0de48ef42eef2c0da13717cc933c660507e34e0e4957bf2e50678bd2751f1df2",
+      "stage": "pit300",
+      "status": "COMPLETE_CONTRACT_PASS",
+      "summary_sha256": "3eb80322b27cd1d324a2391ee97148c6cebb6eb47a4542a92003a6ba18b5834f"
+    },
+    "files": [
+      {
+        "path": "pit_300_summary_receipt.json",
+        "source_sha256": "3eb80322b27cd1d324a2391ee97148c6cebb6eb47a4542a92003a6ba18b5834f",
+        "public_sha256": "7aaf7f801e44975ed88dae0a65f36d485f4e417ffd043cf192a2fb42e39ca737",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific fields unchanged"
+        ]
+      },
+      {
+        "path": "pit_300_contrasts.csv",
+        "source_sha256": "976c95b896f9f2a836ee53a985e8462f7a6cfe2139690d66e264367f1ab78df4",
+        "public_sha256": "976c95b896f9f2a836ee53a985e8462f7a6cfe2139690d66e264367f1ab78df4",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "pit_300_session_losses.csv",
+        "source_sha256": "553d035a0b087dbc0e48a1d8bf9c3bfdc4e2a725b7fef9c3e01182ba48997c56",
+        "public_sha256": "553d035a0b087dbc0e48a1d8bf9c3bfdc4e2a725b7fef9c3e01182ba48997c56",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "pit_300_availability.csv",
+        "source_sha256": "e5f4ffcbae3e319246040fea3251f1fd868789d2e34297be55f5fc01530f66bc",
+        "public_sha256": "e5f4ffcbae3e319246040fea3251f1fd868789d2e34297be55f5fc01530f66bc",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "pit_300_fit_receipt.json",
+        "source_sha256": "0de48ef42eef2c0da13717cc933c660507e34e0e4957bf2e50678bd2751f1df2",
+        "public_sha256": "2f884df957457f737d2456feb2a601b5d56ab0c2aa64e18263bd68e4ff7c5586",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific fields unchanged",
+          "Omit environment.executable local path"
+        ]
+      }
+    ],
+    "scientific_model_fits_during_import": 0,
+    "licensed_granular_data_imported": false,
+    "primary_statistics_changed": false,
+    "scope": "Closed post-primary RV15 linear source-time sensitivity; saved 120-second controls and 300-second results; 60 seconds not yet completed"
+  }
 }

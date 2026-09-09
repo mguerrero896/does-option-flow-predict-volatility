@@ -135,10 +135,36 @@ session-level information, but the ratio is not a causal attribution. Timely ord
 flow beyond this control is not demonstrated; non-rejection does not prove that
 all temporal information is absent. This robustness check was registered after
 the primary read, not on an independent prospective sample. The registered
-primary decision is unchanged; its interpretation is narrower. Point-in-time
-sensitivity at 300 and 60 seconds: not yet completed.
+primary decision is unchanged; its interpretation is narrower. The completed
+300-second timing sensitivity is discussed below; 60-second cutoff: not yet completed.
 [Saved summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv),
 [draws](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_draws.csv) and
 [source closure and hashes](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+
+## 14. Does the flow result survive a stricter availability cutoff?
+
+It is not statistically supported at 300 seconds in the completed linear RV15
+sensitivity. Option state remains supported: B1/B0 improves 0.912%, with mean
+QLIKE difference 0.001675, interval [0.000372; 0.003510] and nominal p = 0.0342.
+The flow increment falls to 0.194%: B2/B1 difference 0.000353, interval
+[-0.000445; 0.001150] and nominal p = 0.1948. Only 217 of 419 sessions favor
+flow; the interval crosses zero. This does not establish absence of all flow
+information or a statistically tested difference between the two cutoffs.
+
+The saved 120-second controls exactly reproduce the primary estimates, intervals,
+p-values and sample sizes. Both cutoffs cover 419 sessions and 160,832 origins.
+The 300-second percentages divide each paired mean loss difference by its own
+baseline mean loss: 0.18366037179378455 for B0 and 0.1819853987561403 for B1.
+The state result is still supported, not numerically unchanged from 120 seconds.
+
+The historical flow gain depends on the source-time availability assumption;
+stability under conservative timing assumptions is not established. These are
+post-primary sensitivity p-values, not a replacement primary decision or a
+prospective replication. Source timestamps still do not prove historical client
+receipt. **60-second cutoff: not yet completed.**
+[Contrasts](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv),
+[session losses](../artifacts/rp4_robustness_public_v1/pit_300_session_losses.csv),
+[availability changes](../artifacts/rp4_robustness_public_v1/pit_300_availability.csv)
+and [closed source provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
 
 Research only. Not investment advice.

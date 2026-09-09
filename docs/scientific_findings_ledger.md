@@ -86,9 +86,27 @@ ascending rank = 39/51. Placebo percentiles 2.5/97.5 are
 0.0004563956748538585/0.0012831122415478523, not an effect confidence interval.
 Most of the gain survives the shuffle, consistent with session-level information;
 the control does not identify its causal source. Timely order flow is not
-demonstrated. Point-in-time sensitivity at 300 and 60 seconds: not yet completed.
+demonstrated. The completed 300-second sensitivity is recorded below;
+60-second cutoff: not yet completed.
 The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
 binds source closure, exact CSV copies and explicitly sanitized JSON derivatives.
+
+## Completed 300-second source-time sensitivity
+
+**Status: CURRENT.** The [linear RV15 contrasts](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv)
+retain the exact 120-second primary controls. At 300 seconds, B1/B0 has mean
+QLIKE difference 0.0016749730376443763 (0.912%), interval
+[0.0003716566564679534; 0.0035104181544605784], nominal p = 0.0342.
+B2/B1 falls to 0.00035341060297070507 (0.194%), interval
+[-0.00044476664487292755; 0.0011497008367131625], nominal p = 0.1948;
+217 of 419 sessions favor flow, with 160,832 origins retained. Option state
+remains supported; the flow interval crosses zero. This does not prove no flow
+information or test the difference between cutoff effects. Stability under
+conservative timing assumptions is not established; the primary decision remains
+unchanged. This is post-primary source-time proxy sensitivity, not receipt proof
+or prospective confirmation. **60-second cutoff: not yet completed.**
+The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
+binds the three exact CSV copies and two declared JSON derivatives to source closure.
 
 ## Closed registered exploratory v5 extension
 
