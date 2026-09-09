@@ -191,7 +191,7 @@ jobs:
         run: |
           git config --local core.hooksPath scripts/hooks
           uv run python scripts/scan_public_secrets.py --check-hook
-      - name: RP2 scientific contracts
+      - name: Scientific and documentary contracts
         run: >
           uv run pytest
           tests/contract/test_rp2_v3_feature_registry.py
@@ -201,4 +201,7 @@ jobs:
           tests/e2e/test_rp2_b2_point_in_time.py
           tests/e2e/test_rp2_incremental_inference.py
           tests/e2e/test_run_rp2_v3_pipeline.py
+          tests/contract/test_current_scientific_claims.py
+          tests/contract/test_canonical_state_current.py
+          tests/contract/test_documentation_references.py
           -q

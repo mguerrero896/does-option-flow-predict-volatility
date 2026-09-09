@@ -29,7 +29,7 @@
   }
  ],
  "authorized_sources": {
-  ".github/workflows/ci.yml": "d5fab918f066795a244700d21cdc2c653e04fc80e12c0f284a9cec58295a76bf",
+  ".github/workflows/ci.yml": "4c7e469bb595548409e828646864ce33fb6ad0c8b14fd74436a165b9d4ab71fc",
   "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63",
   "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json": "e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c",
   "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json": "6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721",
@@ -58,6 +58,7 @@
   "artifacts/rp2_v3/rp2-v3-20260831-b1-spot-cutoff-remediation/scorecard.json": "64101bb9505e84d85d8042458c26c6f529078e6e2aac7f98d801bec63e4723d5",
   "artifacts/rp4_closeout_figures/comparison_v1_v4.csv": "0d9554e1fc5151b4eb7b149b7bc529bbdfee1d12e92883163087aedc6942a9ba",
   "artifacts/rp4_public_refresh/supabase_receipt.json": "b9f028742aca3a099321e4440f455091b5de9ee1cde6bb38d05f677eb6244b0f",
+  "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
   "artifacts/supabase_schema_audit_20260828.json": "910aa07b96df6a27e00602a5be5af1043111ab9dddef92b4ebc1314621b9d022",
   "artifacts/target_blind_v22/next_confirmation_preregistration_v2.json": "fb93036ce77a26eea1703a87ea7024afc069d81208157e68e110724c415e9560",
   "artifacts/target_blind_v22/next_confirmation_preregistration_v3.json": "3dc3ca514f922f69b8b6bd124d2faa54a8797fdafec4cd85a636e107d44042f4",
@@ -84,7 +85,7 @@
   "docs/pit_v22_claims_and_limitations.md": "2f9f678f29f39791e8a2be4a1eaeb445637da5a4eb13d8ab4bfd07df163352cb",
   "docs/pit_v22_claims_and_limitations_v2.md": "5e0a8768779f0bd9e3ae7efbb235e6a9f56c7d069b808f76e2848da8aec521b5",
   "docs/provider_license_review_v1.md": "56ae919315cd814ff2e3f9951b08cd18eab65329f6f3950344e2ed31ef4bb310",
-  "docs/research_decisions_current.md": "dcdc92da332332afe69d84bed4f45aacecfc38369db3a75024a8702c21446265",
+  "docs/research_decisions_current.md": "dfa45071f315639da48cf86948f6c5abe6bd57ffcc77b8d67fe0c34d204db6a7",
   "docs/rp2_v3/SUPERSEDED_RESULTS.md": "cd138ae2ad8e85fa1750b48f922ba0c567b1f2be8dd22b0ac487109541c93833",
   "docs/rp2_v3/VERDICT.md": "f7365007ada4969f5bfcfd560973376785a350a792bce6b37b41daf28c57ada5",
   "docs/rp4/RESULTADO_FINAL.md": "3be1c50bd474390b67afb99d103f08b35aae75e84eb26df07edfe9c01ca1ea6d",
@@ -98,6 +99,320 @@
  "canonical_results": {
   "calendar_partition": "2026-08-01",
   "capital_go": false,
+  "claims": [
+   {
+    "claim_id": "rp4-v4-rv15-primary-log_ridge_harq-B1_over_B0",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 2514,
+     "N_origins": 160832,
+     "N_sessions": 419,
+     "ci_high": 0.003453534376546728,
+     "ci_low": 0.0002529862671932415,
+     "estimate": 0.0016163117029221244,
+     "p_bilateral": 0.0459,
+     "p_for_decision": 0.039,
+     "p_holm_bilateral": 0.0918,
+     "p_raw": 0.039,
+     "qlike_reduction_percent": 0.8800546830738928
+    },
+    "scope": "HISTORICAL_PRIMARY",
+    "selector": {
+     "contrast": "B1_over_B0",
+     "family": "log_ridge_harq",
+     "horizon_minutes": 15,
+     "window": "primary"
+    },
+    "status": "REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-primary-log_ridge_harq-B2_over_B1",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 2514,
+     "N_origins": 160832,
+     "N_sessions": 419,
+     "ci_high": 0.0019321615865300122,
+     "ci_low": 0.00033503697025205506,
+     "estimate": 0.0011337596590923558,
+     "p_bilateral": 0.0062,
+     "p_for_decision": 0.0032,
+     "p_holm_bilateral": 0.0248,
+     "p_raw": 0.0032,
+     "qlike_reduction_percent": 0.622794096399778
+    },
+    "scope": "HISTORICAL_PRIMARY",
+    "selector": {
+     "contrast": "B2_over_B1",
+     "family": "log_ridge_harq",
+     "horizon_minutes": 15,
+     "window": "primary"
+    },
+    "status": "REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-primary-lightgbm_qlike-B1_over_B0",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 2514,
+     "N_origins": 160832,
+     "N_sessions": 419,
+     "ci_high": 0.004102668666212466,
+     "ci_low": 0.0006109899462962658,
+     "estimate": 0.0021966192830256415,
+     "p_bilateral": 0.0149,
+     "p_for_decision": 0.0135,
+     "p_holm_bilateral": 0.044700000000000004,
+     "p_raw": 0.0135,
+     "qlike_reduction_percent": 1.169968713660752
+    },
+    "scope": "HISTORICAL_PRIMARY",
+    "selector": {
+     "contrast": "B1_over_B0",
+     "family": "lightgbm_qlike",
+     "horizon_minutes": 15,
+     "window": "primary"
+    },
+    "status": "REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-primary-lightgbm_qlike-B2_over_B1",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 2514,
+     "N_origins": 160832,
+     "N_sessions": 419,
+     "ci_high": 0.0011041694991075965,
+     "ci_low": -0.002044124778251595,
+     "estimate": -0.00021290307176726115,
+     "p_bilateral": 0.8048,
+     "p_for_decision": 0.628,
+     "p_holm_bilateral": 0.8048,
+     "p_raw": 0.628,
+     "qlike_reduction_percent": -0.1147393674343757
+    },
+    "scope": "HISTORICAL_PRIMARY",
+    "selector": {
+     "contrast": "B2_over_B1",
+     "family": "lightgbm_qlike",
+     "horizon_minutes": 15,
+     "window": "primary"
+    },
+    "status": "NOT_REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-confirmation-log_ridge_harq-B1_over_B0",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 150,
+     "N_origins": 9750,
+     "N_sessions": 25,
+     "ci_high": 0.0028780554487611836,
+     "ci_low": -0.0022086272919664665,
+     "estimate": 0.00041622522194090185,
+     "p_bilateral": 0.766,
+     "p_for_decision": 0.3908,
+     "p_holm_bilateral": 1.0,
+     "p_raw": 0.3908,
+     "qlike_reduction_percent": 0.17408259647110502
+    },
+    "scope": "FINAL_HISTORICAL",
+    "selector": {
+     "contrast": "B1_over_B0",
+     "family": "log_ridge_harq",
+     "horizon_minutes": 15,
+     "window": "confirmation"
+    },
+    "status": "NOT_REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-confirmation-log_ridge_harq-B2_over_B1",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "NOT_OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 150,
+     "N_origins": 9750,
+     "N_sessions": 25,
+     "ci_high": 0.014742152610369255,
+     "ci_low": -0.0011087291167046942,
+     "estimate": 0.004767313254824691,
+     "p_bilateral": 0.36,
+     "p_for_decision": null,
+     "p_holm_bilateral": 1.0,
+     "p_raw": 0.1758,
+     "qlike_reduction_percent": 1.9973645698181244
+    },
+    "scope": "FINAL_HISTORICAL",
+    "selector": {
+     "contrast": "B2_over_B1",
+     "family": "log_ridge_harq",
+     "horizon_minutes": 15,
+     "window": "confirmation"
+    },
+    "status": "NOT_TESTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-confirmation-lightgbm_qlike-B1_over_B0",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 150,
+     "N_origins": 9750,
+     "N_sessions": 25,
+     "ci_high": 0.01680713671969026,
+     "ci_low": 0.001644364167826952,
+     "estimate": 0.007482146159045653,
+     "p_bilateral": 0.0568,
+     "p_for_decision": 0.0568,
+     "p_holm_bilateral": 0.2272,
+     "p_raw": 0.0568,
+     "qlike_reduction_percent": 3.162627461057245
+    },
+    "scope": "FINAL_HISTORICAL",
+    "selector": {
+     "contrast": "B1_over_B0",
+     "family": "lightgbm_qlike",
+     "horizon_minutes": 15,
+     "window": "confirmation"
+    },
+    "status": "NOT_REJECTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   },
+   {
+    "claim_id": "rp4-v4-rv15-confirmation-lightgbm_qlike-B2_over_B1",
+    "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+    "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+    "design_version": "RP4_V4",
+    "gate": "NOT_OPENED",
+    "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+    "limitations": [
+     "Reused historical data; cross-version search not multiplicity-adjusted.",
+     "Source-time proxy does not establish historical client receipt.",
+     "No demonstrated causality, economic value or independent replication.",
+     "The final historical window does not confirm either complete sequence."
+    ],
+    "numbers": {
+     "N_asset_sessions": 150,
+     "N_origins": 9750,
+     "N_sessions": 25,
+     "ci_high": 0.0021952091469455196,
+     "ci_low": -0.00907196547290959,
+     "estimate": -0.0022724768497439274,
+     "p_bilateral": 0.5323,
+     "p_for_decision": null,
+     "p_holm_bilateral": 1.0,
+     "p_raw": 0.7554,
+     "qlike_reduction_percent": -0.9919238217819006
+    },
+    "scope": "FINAL_HISTORICAL",
+    "selector": {
+     "contrast": "B2_over_B1",
+     "family": "lightgbm_qlike",
+     "horizon_minutes": 15,
+     "window": "confirmation"
+    },
+    "status": "NOT_TESTED",
+    "supporting_artifact": {
+     "path": "artifacts/rp4_v4_b4/primary_statistics.csv",
+     "sha256": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    }
+   }
+  ],
   "confirmation_window": [
    "2026-08-03",
    "2026-09-04"
@@ -1349,12 +1664,14 @@
  },
  "current_report": {
   "evidence_cutoff": "2026-09-04",
+  "evidence_map": "docs/EVIDENCE_MAP.md",
   "full_result": "docs/rp4/results_v4.md",
   "secondary_correction": "docs/rp4/results_v3_revision2.md",
   "source": {
    "path": "docs/rp4/RESULTADO_FINAL.md",
    "sha256": "3be1c50bd474390b67afb99d103f08b35aae75e84eb26df07edfe9c01ca1ea6d"
   },
+  "summary": "docs/CURRENT.md",
   "supplementary_reports": [
    "docs/rp4/results_v5.md",
    "docs/rp4/results_universe_v1.md"

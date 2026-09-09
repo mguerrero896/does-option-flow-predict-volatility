@@ -876,6 +876,74 @@ def build_historical_state() -> dict[str, Any]:
     }
 
 
+def build_current_claims() -> list[dict[str, Any]]:
+    """Project saved RV15 decisions without computing new inference."""
+    source = "artifacts/rp4_v4_b4/primary_statistics.csv"
+    digest = "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4"
+    if hashlib.sha256((REPO / source).read_bytes()).hexdigest() != digest:
+        raise ValueError("RP4_PRIMARY_STATISTICS_DRIFT")
+    with (REPO / source).open(encoding="utf-8", newline="") as stream:
+        rows = [row for row in csv.DictReader(stream) if row["horizon_minutes"] == "15"]
+    expected = {
+        (window, family, contrast)
+        for window in ("primary", "confirmation")
+        for family in ("log_ridge_harq", "lightgbm_qlike")
+        for contrast in ("B1_over_B0", "B2_over_B1")
+    }
+    if (
+        len(rows) != 8
+        or {(row["window"], row["family"], row["contrast"]) for row in rows} != expected
+    ):
+        raise ValueError("RP4_PRIMARY_STATISTICS_CARDINALITY")
+    claims = []
+    for row in rows:
+        claims.append(
+            {
+                "claim_id": f"rp4-v4-rv15-{row['window']}-{row['family']}-{row['contrast']}",
+                "status": row["hypothesis_status"],
+                "scope": "HISTORICAL_PRIMARY" if row["window"] == "primary" else "FINAL_HISTORICAL",
+                "dataset": "SIX_ASSET_MATCHED_HISTORICAL_SESSIONS",
+                "design_version": "RP4_V4",
+                "inference_rule": "ONE_SIDED_5_PERCENT_WITHIN_FAMILY_H1_THEN_H2",
+                "confirmatory_status": "NOT_INDEPENDENT_PROSPECTIVE_CONFIRMATION",
+                "supporting_artifact": {"path": source, "sha256": digest},
+                "selector": {
+                    "horizon_minutes": 15,
+                    "window": row["window"],
+                    "family": row["family"],
+                    "contrast": row["contrast"],
+                },
+                "numbers": {
+                    **{
+                        name: float(row[name]) if row[name] else None
+                        for name in (
+                            "estimate",
+                            "ci_low",
+                            "ci_high",
+                            "qlike_reduction_percent",
+                            "p_raw",
+                            "p_for_decision",
+                            "p_bilateral",
+                            "p_holm_bilateral",
+                        )
+                    },
+                    **{
+                        name: int(row[name])
+                        for name in ("N_origins", "N_asset_sessions", "N_sessions")
+                    },
+                },
+                "gate": "NOT_OPENED" if row["hypothesis_status"] == "NOT_TESTED" else "OPENED",
+                "limitations": [
+                    "Reused historical data; cross-version search not multiplicity-adjusted.",
+                    "Source-time proxy does not establish historical client receipt.",
+                    "No demonstrated causality, economic value or independent replication.",
+                    "The final historical window does not confirm either complete sequence.",
+                ],
+            }
+        )
+    return claims
+
+
 def build_state() -> dict[str, Any]:
     """Add the closed RP4 result without rewriting historical scientific records."""
     state = build_historical_state()
@@ -923,6 +991,7 @@ def build_state() -> dict[str, Any]:
             "Tree flow does not pass the primary mean test; medians are secondary.",
         ],
         "table": table,
+        "claims": build_current_claims(),
         "table_source": {"path": comparison, "sha256": expected},
         "limitations": [
             "Fourth evaluation of reused windows; cross-version search not adjusted.",
@@ -933,6 +1002,8 @@ def build_state() -> dict[str, Any]:
         ],
     }
     state["current_report"] = {
+        "summary": "docs/CURRENT.md",
+        "evidence_map": "docs/EVIDENCE_MAP.md",
         "source": {"path": final, "sha256": _sha(REPO / final)},
         "full_result": "docs/rp4/results_v4.md",
         "supplementary_reports": ["docs/rp4/results_v5.md", "docs/rp4/results_universe_v1.md"],
@@ -990,6 +1061,7 @@ def build_state() -> dict[str, Any]:
     for name in (
         final,
         comparison,
+        "artifacts/rp4_v4_b4/primary_statistics.csv",
         "docs/rp4/results_v4.md",
         "docs/rp4/publication_contract_v2.md",
         "docs/research_decisions_current.md",
@@ -1024,6 +1096,7 @@ def render_status(state: dict[str, Any]) -> str:
         "RV5 is secondary. Fourth evaluation of reused windows, without cross-version",
         "adjustment; the final report states the design disclosures and limitations.",
         "",
+        "[Current evidence](docs/CURRENT.md) · [Evidence map](docs/EVIDENCE_MAP.md) · "
         "[Final result](docs/rp4/RESULTADO_FINAL.md) · "
         "[Full report](docs/rp4/results_v4.md) · [Reproduce](docs/reproduce.md)",
         "",
