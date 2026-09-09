@@ -1,5 +1,8 @@
 # Research repository architecture
 
+**Status: CURRENT.** Read the [current scientific evidence](CURRENT.md) for the
+result and the RP4 implementation boundary below for its recorded code path.
+
 This document describes the maintained repository structure. Scientific eligibility is not
 defined here: `data/CANONICAL_STATE.json` is the machine-readable authority and `STATUS.md`
 is its generated human projection.
@@ -78,7 +81,7 @@ Four scheduled-task targets are intentionally local-only and absent from the pub
 The Phase 8 targets belong to retired tasks: their continued disabled state is the safety
 invariant, so their private files need not remain online.
 
-## Scientific flow
+## Historical RP2 scientific flow
 
 1. Provider inputs are normalized with source and timing provenance.
 2. Five-minute forecast origins are mapped to a 30-minute realized-variance target.
@@ -89,7 +92,36 @@ invariant, so their private files need not remain online.
 7. The canonical-state producer selects one run and publishes its blocking reasons.
 
 Development measurements remain historical when a later gate invalidates their eligibility.
-Phase 8 and Phase 9 have separate prospective collection and read contracts.
+Phase 8 and Phase 9 have separate collection and read contracts; this historical
+flow is not the current RP4 design. RP4 v4 uses RV15 primary and RV5 secondary
+targets, as specified in [current evidence](CURRENT.md).
+
+## RP4 implementation and execution boundary
+
+The current scientific result is RP4 v4, but there is no `src/mds650/rp4` package. Its recorded evaluation implementation lives in versioned snapshots under `artifacts/`, with explicit imports from earlier snapshots and shared `src/mds650` modules. The general scripts-to-package diagram above does not imply a maintained RP4 fitting entrypoint under `scripts/`.
+
+| Stage | Recorded implementation and entrypoint | Actual dependencies |
+| --- | --- | --- |
+| Target construction | [materialize_targets.py](../artifacts/rp4_v4_code/materialize_targets.py): `main()` calls `run()` | `panel_masks` from [evaluate_v2.py](../artifacts/rp4_v2_code/evaluate_v2.py); `BAR_SOURCES` and `SessionGrid` from [bars.py](../src/mds650/rp2/bars.py); `forward_measures` and `log_returns` from [realized.py](../src/mds650/rp2/realized.py). |
+| Window orchestration | [execute.py](../artifacts/rp4_v4_code/execute.py): `main()` and `run_window()` | v4 evaluator helpers, `select_bar_pins` from the target materializer, and `window_lock` from the [v2 executor](../artifacts/rp4_v2_code/execute.py). |
+| Chronological fitting | [evaluate_v4.py](../artifacts/rp4_v4_code/evaluate_v4.py): `main()` calls `run()` | Earlier evaluator modules; `fit_ridge` from [v3 models](../artifacts/rp4_v3_code/models.py); `fit_lightgbm` from [v2 models](../artifacts/rp4_v2_code/models.py). |
+| Saved inference | [aggregate_v4.py](../artifacts/rp4_v4_code/aggregate_v4.py): `aggregate_records()` | [v3 aggregation](../artifacts/rp4_v3_code/aggregate_v3.py), [v3 inference](../artifacts/rp4_v3_code/inference.py), and `holm_adjust` from [metrics.py](../src/mds650/metrics.py). This module is an imported aggregation function, not a separate CLI. |
+| Historical reporting | [report_v4_checked.py](../artifacts/rp4_v4_code/report_v4_checked.py): `run()` | Saved summaries, losses, diagnostics and receipts. Its historical reporting receipt records zero additional model fits and zero new inference. The public producer's bytes differ from the original execution hash; see the [evidence map](EVIDENCE_MAP.md). |
+| Maintained public state | [generate_canonical_state.py](../scripts/generate_canonical_state.py): `build_state()` and `build_current_claims()` | Saved aggregate evidence, including the pinned primary CSV. This is a reporting projection, not the RP4 fitting implementation. |
+
+The shared inference path imports `newey_west_variance` and `session_block_draws` from [RP2 inference](../src/mds650/rp2/inference.py). Both versioned model modules import `qlike_losses` from [metrics.py](../src/mds650/metrics.py) and `lightgbm_objective` from [qlike_objective.py](../src/mds650/rp2/qlike_objective.py). Reuse of the RP2 namespace identifies implementation ownership; it does not substitute RP2 results for RP4 evidence.
+
+### Identity and portability
+
+The evaluator's `evaluation_code_hashes()` records the explicit `SOURCE_PATHS` inherited from the earlier evaluator and extended for v4. The executor writes that mapping as `evaluation_code_sha256`. The target materializer separately pins shared bar/realized-variance sources and checks the loaded `forward_measures` implementation path. The [report manifest](../artifacts/rp4_v4_b4/report_manifest.json) records shared metrics, inference and objective inputs alongside snapshot hashes.
+
+Those pins matter when maintained shared code changes: a later package version cannot silently stand in for the code used to produce the historical result. The [evidence map](EVIDENCE_MAP.md) distinguishes calculated public-file hashes from historical recorded hashes; matching one module does not establish identity of the entire execution environment.
+
+The snapshot files retain execution-context assumptions, including private-input references. Their presence is not evidence that a clean public clone can rebuild licensed panels or rerun the scientific evaluation. The [reproduction guide](reproduce.md) describes public checks; the [historical operating guide](rp4/OPERATING_GUIDE.md) records the licensed execution boundary. A visible `main()` function is not authorization to rerun a registered evaluation.
+
+### Maintenance decision
+
+No code relocation is required to inspect or verify the published result. Moving snapshot implementations into a new package would change paths that are part of their recorded identity and introduce another implementation surface without demonstrating additional reproducibility. Keep the snapshots and shared imports intact for this release. A maintained RP4 execution package would be justified by a separately authorized execution requirement, with explicit provenance mapping, licensed-input resolution and parity checks against the recorded implementation before any new scientific read.
 
 ## Safety invariants
 

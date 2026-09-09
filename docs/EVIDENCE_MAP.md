@@ -99,4 +99,4 @@ The receipt records historical hashes `17c0c0fc67336aa945db9c156bf6f0e1043206391
 
 Public inspection can verify these CSV selectors, compare saved summaries, hash the available files and trace the cited functions. It cannot reconstruct licensed features or independently reproduce model fits without the exact entitled inputs and execution context. The [reproduction guide](reproduce.md) separates public checks from licensed reconstruction. Historical reuse, the source-time proxy and the failed final sequence remain substantive limitations even when every public file hash matches.
 
-RESEARCH_ONLY. NOT INVESTMENT ADVICE. capital_go=false.
+Research only. Not investment advice.
