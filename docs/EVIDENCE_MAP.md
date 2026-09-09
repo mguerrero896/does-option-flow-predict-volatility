@@ -4,7 +4,7 @@
 
 ## Claims and identifiable rows
 
-The source is [primary_statistics.csv](../artifacts/rp4_v4_b4/primary_statistics.csv). Select rows by `(horizon_minutes, window, family, contrast)`, not physical line numbers. Each selector below identifies one row. Percentages use `qlike_reduction_percent`; the registered decision uses `p_for_decision`, not an unopened hypothesis's `p_raw`. The [full report](rp4/results_v4.md) retains the historical narrative.
+Unless a different file is linked, the source is [primary_statistics.csv](../artifacts/rp4_v4_b4/primary_statistics.csv). Select rows by `(horizon_minutes, window, family, contrast)`, not physical line numbers. Each selector below identifies one row. Percentages use `qlike_reduction_percent`; the registered decision uses `p_for_decision`, not an unopened hypothesis's `p_raw`. The [full report](rp4/results_v4.md) retains the historical narrative.
 
 | Claim and result | CSV row selector | Required fields and interpretation |
 | --- | --- | --- |
@@ -16,6 +16,7 @@ The source is [primary_statistics.csv](../artifacts/rp4_v4_b4/primary_statistics
 | Final historical window does not confirm either complete sequence | `15, confirmation, log_ridge_harq, B1_over_B0` and `15, confirmation, lightgbm_qlike, B1_over_B0` | H1 `p_for_decision=0.3908/0.0568`; both `NOT_REJECTED` |
 | Final-window H2 is unopened in both families | `15, confirmation, log_ridge_harq, B2_over_B1` and `15, confirmation, lightgbm_qlike, B2_over_B1` | `p_for_decision` empty; `hypothesis_status=NOT_TESTED`. Nominal `p_raw=0.1758/0.7554` cannot supply formal rejection. |
 | RV5 is secondary | `5, primary, log_ridge_harq, B2_over_B1` | +0.2563185779%; `p_for_decision=0.0172`; `inference_role=SECONDARY` |
+| Timely order flow is not demonstrated by the completed linear RV15 placebo | [Placebo summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv): `horizon=15, family=log_ridge_harq` | `observed_delta=0.0011337596590923558`, `mean=0.0009255190521628708`, `permutations=50`, `exceedances=12`, `p_empirical=0.2549019607843137`, `observed_rank_ascending=39`; `percentile_2_5=0.0004563956748538585`, `percentile_97_5=0.0012831122415478523`. These are placebo distribution percentiles, not a confidence interval for the observed effect. No primary decision changes. |
 | Sample size is not an independent-observation count | Any RV15 primary row; any RV15 confirmation row | Primary: `N_origins=160832`, `N_asset_sessions=2514`, `N_sessions=419`. Final: `9750`, `150`, `25`. Inference preserves session dependence. |
 
 The [B4 receipt](../artifacts/rp4_v4_b4/receipt.json) records `successful_primary_rv15_families=[log_ridge_harq]`, `joint_across_both_families_confirmed=false` and `confirmation_window_sequence_satisfied=false`. The receipt reports a completed historical reporting stage, not prospective confirmation.
@@ -96,6 +97,8 @@ The following SHA-256 values were calculated from the public files' bytes for th
 The receipt records historical hashes `17c0c0fc67336aa945db9c156bf6f0e1043206391e3d3f0bb5873382c0424c7c` for the checked report producer and `a387b789158b78232b29911ae63638a0367ae3acb5a21e5672dbcfaec4cba56f` for the report manifest. These two values are transcribed provenance, not calculated identities of the current public files. The [reproducibility contract](reproducibility_contract_v1.md) explains the distinction between original and public-derivative identities.
 
 ## Verification boundary
+
+The [placebo import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json) binds five closed outputs to original and public SHA-256 values and records the source closure `COMPLETE_CONTRACT_PASS`. The three CSVs are byte-identical, including their original provenance labels. The summary JSON and completion receipt are declared public derivatives: labels are translated and private machine paths omitted; scientific values and execution hashes are retained. Recorded private protocol/code hashes are provenance, not proof that those sources are distributed here. The [50 draws](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_draws.csv) and [session deltas](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_session_deltas.csv) allow checking aggregation, rank and `(1 + exceedances) / (1 + permutations)` without model fitting. This post-primary registered robustness check is not independent prospective confirmation; it does not establish absence of all temporal information or isolate a causal mechanism.
 
 Public inspection can verify these CSV selectors, compare saved summaries, hash the available files and trace the cited functions. It cannot reconstruct licensed features or independently reproduce model fits without the exact entitled inputs and execution context. The [reproduction guide](reproduce.md) separates public checks from licensed reconstruction. Historical reuse, the source-time proxy and the failed final sequence remain substantive limitations even when every public file hash matches.
 

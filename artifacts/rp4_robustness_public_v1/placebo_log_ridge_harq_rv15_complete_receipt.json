@@ -1,0 +1,96 @@
+{
+  "amendment_sha256": "a8bb842dacc62643c336d88998d14dd9d825d4b2856b48435f8f690d139c05d2",
+  "benchmark_sha256": "2ed6b19fc5ef71723976595413edb70f557797f8dc47143f71f3aa9b314eb28f",
+  "completed_at_utc": "2026-09-09T02:24:28.610559+00:00",
+  "configuration_sha256": "8d8293a9bd98a905f4a615ecb00733a8c0f93a6c8b0202857dfc857450b25aad",
+  "count": 50,
+  "elapsed_seconds": 6502.284574599995,
+  "environment": {
+    "allocation": {
+      "cpu_indices": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "device": "cpu",
+      "logical_cpu_count": 32,
+      "process_mask": 4294901760,
+      "system_mask": 4294967295,
+      "thread_environment": {
+        "CUDA_VISIBLE_DEVICES": "-1",
+        "MKL_NUM_THREADS": "4",
+        "OMP_NUM_THREADS": "4",
+        "OPENBLAS_NUM_THREADS": "4",
+        "POLARS_MAX_THREADS": "4"
+      }
+    },
+    "cuda_visible_devices": "-1",
+    "device": "cpu",
+    "logical_cpus": 32,
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.12 (main, Dec 17 2025, 21:10:14) [MSC v.1944 64 bit (AMD64)]",
+    "threadpools": [
+      {
+        "architecture": "SkylakeX",
+        "internal_api": "openblas",
+        "num_threads": 4,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.34.0.0"
+      },
+      {
+        "architecture": "SkylakeX",
+        "internal_api": "openblas",
+        "num_threads": 4,
+        "prefix": "libscipy_openblas",
+        "threading_layer": "pthreads",
+        "user_api": "blas",
+        "version": "0.3.31.dev"
+      }
+    ],
+    "threads_per_fit": 4,
+    "versions": {
+      "exchange-calendars": "4.13.2",
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.2",
+      "pandas": "3.0.5",
+      "polars": "1.44.1",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0"
+    }
+  },
+  "family": "log_ridge_harq",
+  "horizon": 15,
+  "implementation": {
+    "amendment_5_sha256": "3f25af961d61adc86021201ff146b1af3e05dea27233f13ea0c077d3c144dd1c",
+    "cache_manifest_sha256": "a7eddedcbdce6b8a9d3bd37788d288a6767de41448eb7e182de4f00f3f85d644",
+    "code_sha256": {
+      "artifacts/rp4_robustness_committed_code/gram.py": "3977a7e88651daf415b6817e8a403464bc785d4874e7365a1101e0fabad60df0",
+      "artifacts/rp4_robustness_committed_code/gram_runner.py": "a33d7e85d32fd7dd05ec99501784a7ba83e703b792f6b19cc79b746d5789ae69"
+    }
+  },
+  "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+  "new_fits_this_attempt": 1543,
+  "protocol_sha256": "44f06908d1cd263154a77ae0af3c85f66dacfade0c52309aca0ffb5acf040821",
+  "reused_this_attempt": 19407,
+  "runner_sha256": "ed643f67a3fbd75078841384c03e00ff764b009224d95e2936b966a07c83ffed",
+  "scheduler_sha256": "ed643f67a3fbd75078841384c03e00ff764b009224d95e2936b966a07c83ffed",
+  "status": "COMPLETE",
+  "threads": 4,
+  "workers": 4
+}
