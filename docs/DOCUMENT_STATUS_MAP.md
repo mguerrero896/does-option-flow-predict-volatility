@@ -53,10 +53,11 @@ window. These clarifications do not amend the recorded results or their seals.
 
 ## Family inventory
 
-The [completed 300-second timing sensitivity](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv)
-and its [interpretation](FAQ.md#14-does-the-flow-result-survive-a-stricter-availability-cutoff)
+The completed [60-second](../artifacts/rp4_robustness_public_v1/pit_60_contrasts.csv)
+and [300-second timing sensitivities](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv), including their exact saved 120-second primary controls,
+and their [interpretation](FAQ.md#14-does-the-flow-result-survive-a-stricter-availability-cutoff)
 are **CURRENT**, with [import provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
-This closure does not certify the 60-second cutoff, which is not yet completed.
+The three-cutoff series is descriptive evidence of timing sensitivity, not a stronger registered finding or historical receipt proof. Tree-model placebos at RV15 and RV30 are deferred for cost; the linear RV30 placebo remains in progress and is not certified by this closure.
 
 The baseline inventory contains 2,801 tracked files, including 528 Markdown files.
 Counting `.md`, `.rst`, `.txt`, `.pdf`, `.docx`, `.pptx`, `.html` and `.ipynb`

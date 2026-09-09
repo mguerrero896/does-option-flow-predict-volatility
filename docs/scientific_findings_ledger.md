@@ -86,12 +86,11 @@ ascending rank = 39/51. Placebo percentiles 2.5/97.5 are
 0.0004563956748538585/0.0012831122415478523, not an effect confidence interval.
 Most of the gain survives the shuffle, consistent with session-level information;
 the control does not identify its causal source. Timely order flow is not
-demonstrated. The completed 300-second sensitivity is recorded below;
-60-second cutoff: not yet completed.
+demonstrated. The completed 60 / 120 / 300-second sensitivity is recorded below.
 The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
 binds source closure, exact CSV copies and explicitly sanitized JSON derivatives.
 
-## Completed 300-second source-time sensitivity
+## Completed 60 / 120 / 300-second source-time sensitivity
 
 **Status: CURRENT.** The [linear RV15 contrasts](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv)
 retain the exact 120-second primary controls. At 300 seconds, B1/B0 has mean
@@ -104,9 +103,26 @@ remains supported; the flow interval crosses zero. This does not prove no flow
 information or test the difference between cutoff effects. Stability under
 conservative timing assumptions is not established; the primary decision remains
 unchanged. This is post-primary source-time proxy sensitivity, not receipt proof
-or prospective confirmation. **60-second cutoff: not yet completed.**
+or prospective confirmation.
+
+The [closed 60-second contrasts](../artifacts/rp4_robustness_public_v1/pit_60_contrasts.csv)
+add B1/B0 mean QLIKE difference 0.0015451316625903163 (0.841%), interval
+[0.00019280807734032142; 0.003383983561590049], nominal p = 0.0460;
+B2/B1 is 0.002634716418246107 (1.447%), interval
+[0.0017097048946607982; 0.0035821943155032927], nominal p = 0.0001.
+There are 277 of 419 sessions favoring flow and 160,832 origins.
+The flow series at 60 / 120 / 300 seconds is 1.447% / 0.623% / 0.194%
+(p = 0.0001 / 0.0032 / 0.1948); state stays between 0.84% and 0.91%.
+Flow decreases monotonically as the assumption becomes more conservative, a
+descriptive ordering rather than a tested difference between cutoff effects.
+The 60-second result does not strengthen the registered finding: historical
+records cannot verify this less conservative assumption. The pattern is consistent
+with predictive flow information concentrated near the origin, not proof of that
+mechanism or actual receipt. Observed receipt times remain missing evidence.
 The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
-binds the three exact CSV copies and two declared JSON derivatives to source closure.
+binds three exact CSV copies and two declared JSON derivatives per sensitivity
+to their source closures. Tree-model placebos at RV15 and RV30 are deferred for
+cost; the linear RV30 placebo is in progress and is not certified by these closures.
 
 ## Closed registered exploratory v5 extension
 

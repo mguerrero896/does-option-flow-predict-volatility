@@ -141,7 +141,7 @@ def test_placebo_current_values_match_imported_summary_without_changing_headline
     assert f"{summary['exceedances']} of {summary['permutations']}" in paragraph
     assert "Timely order flow is not demonstrated" in paragraph
     assert "registered decision is unchanged" in paragraph
-    assert "60-second cutoff: not yet completed" in current
+    assert "60-second cutoff: not yet completed" not in current
     assert "does not identify its causal source" in paragraph
     primary = next(
         claim
@@ -177,16 +177,27 @@ def test_claims_preserve_saved_rows_and_closed_final_gates() -> None:
     assert state["canonical_results"]["independent_global_confirmation"] is False
 
 
-def test_pit300_import_is_closed_and_hash_bound() -> None:
-    imported = json.loads((PLACEBO / "import_receipt.json").read_text("utf-8"))["pit_300"]
+@pytest.mark.parametrize(
+    ("cutoff", "contrast_sha256"),
+    (
+        (60, "65cce2e2c23602249ce2eb1f1f00917729580689d14900134a59ded89bc0d698"),
+        (300, "976c95b896f9f2a836ee53a985e8462f7a6cfe2139690d66e264367f1ab78df4"),
+    ),
+)
+def test_pit_import_is_closed_and_hash_bound(cutoff: int, contrast_sha256: str) -> None:
+    prefix = f"pit_{cutoff}"
+    imported = json.loads((PLACEBO / "import_receipt.json").read_text("utf-8"))[prefix]
     entries = imported["files"]
     assert len(entries) == 5
     assert {entry["path"] for entry in entries} == {
-        "pit_300_summary_receipt.json",
-        "pit_300_contrasts.csv",
-        "pit_300_session_losses.csv",
-        "pit_300_availability.csv",
-        "pit_300_fit_receipt.json",
+        f"{prefix}_{suffix}"
+        for suffix in (
+            "summary_receipt.json",
+            "contrasts.csv",
+            "session_losses.csv",
+            "availability.csv",
+            "fit_receipt.json",
+        )
     }
     for entry in entries:
         assert (
@@ -198,56 +209,66 @@ def test_pit300_import_is_closed_and_hash_bound() -> None:
             assert entry["source_sha256"] == entry["public_sha256"]
         else:
             assert not entry["byte_identical"] and entry["transformations"]
-    assert hashlib.sha256((PLACEBO / "pit_300_contrasts.csv").read_bytes()).hexdigest() == (
-        "976c95b896f9f2a836ee53a985e8462f7a6cfe2139690d66e264367f1ab78df4"
+    assert (
+        hashlib.sha256((PLACEBO / f"{prefix}_contrasts.csv").read_bytes()).hexdigest()
+        == contrast_sha256
     )
     close = imported["source_close"]
     assert close["status"] == "COMPLETE_CONTRACT_PASS" and close["contract_exit_code"] == 0
     sources = {entry["path"]: entry["source_sha256"] for entry in entries}
-    assert close["receipt_sha256"] == sources["pit_300_fit_receipt.json"]
-    assert close["summary_sha256"] == sources["pit_300_summary_receipt.json"]
+    assert close["receipt_sha256"] == sources[f"{prefix}_fit_receipt.json"]
+    assert close["summary_sha256"] == sources[f"{prefix}_summary_receipt.json"]
     assert imported["scientific_model_fits_during_import"] == 0
     assert imported["licensed_granular_data_imported"] is False
     assert imported["primary_statistics_changed"] is False
-    summary = json.loads((PLACEBO / "pit_300_summary_receipt.json").read_text("utf-8"))
+    summary = json.loads((PLACEBO / f"{prefix}_summary_receipt.json").read_text("utf-8"))
     assert summary["status"] == "COMPLETE"
     for name, digest in summary["output_sha256"].items():
         assert digest == sources[name]
-    fit = json.loads((PLACEBO / "pit_300_fit_receipt.json").read_text("utf-8"))
-    assert fit["status"] == "COMPLETE" and fit["cutoff"] == 300
+    fit = json.loads((PLACEBO / f"{prefix}_fit_receipt.json").read_text("utf-8"))
+    assert fit["status"] == "COMPLETE" and fit["cutoff"] == cutoff
     assert "executable" not in fit["environment"]
 
 
-def test_pit300_current_matches_saved_contrasts_and_120_primary_control() -> None:
-    with (PLACEBO / "pit_300_contrasts.csv").open(encoding="utf-8", newline="") as stream:
+@pytest.mark.parametrize(("cutoff", "positive_sessions"), ((60, 277), (300, 217)))
+def test_pit_current_matches_saved_contrasts_and_120_primary_control(
+    cutoff: int, positive_sessions: int
+) -> None:
+    prefix = f"pit_{cutoff}"
+    with (PLACEBO / f"{prefix}_contrasts.csv").open(encoding="utf-8", newline="") as stream:
         rows = list(csv.DictReader(stream))
     contrasts = {(int(row["cutoff_seconds"]), row["contrast"]): row for row in rows}
     assert len(rows) == len(contrasts) == 4
     assert set(contrasts) == {
-        (cutoff, contrast) for cutoff in (120, 300) for contrast in ("B1_over_B0", "B2_over_B1")
+        (seconds, contrast)
+        for seconds in (120, cutoff)
+        for contrast in ("B1_over_B0", "B2_over_B1")
     }
-    with (PLACEBO / "pit_300_session_losses.csv").open(encoding="utf-8", newline="") as stream:
+    with (PLACEBO / f"{prefix}_session_losses.csv").open(encoding="utf-8", newline="") as stream:
         losses = list(csv.DictReader(stream))
     assert len(losses) == len({row["session_date"] for row in losses}) == 419
     means = {name: fmean(float(row[name]) for row in losses) for name in ("B0", "B1", "B2")}
-    assert sum(float(row["B1"]) > float(row["B2"]) for row in losses) == 217
+    assert sum(float(row["B1"]) > float(row["B2"]) for row in losses) == positive_sessions
     current = (ROOT / "docs/CURRENT.md").read_text("utf-8").replace("**", "")
     paragraph = next(
         line
         for line in current.splitlines()
-        if line.startswith("Point-in-time sensitivity (300 seconds, completed):")
+        if line.startswith("Point-in-time sensitivity (complete: 60, 120 and 300 seconds)")
     )
-    summary = json.loads((PLACEBO / "pit_300_summary_receipt.json").read_text("utf-8"))
+    table_row = next(line for line in current.splitlines() if line.startswith(f"| {cutoff} |"))
+    assert str(positive_sessions) in table_row
+    summary = json.loads((PLACEBO / f"{prefix}_summary_receipt.json").read_text("utf-8"))
     for saved in summary["summary"]:
         row = contrasts[(saved["cutoff_seconds"], saved["contrast"])]
         for name, value in saved.items():
             assert (float(row[name]) if isinstance(value, (int, float)) else row[name]) == value
     for contrast, baseline, richer in (("B1_over_B0", "B0", "B1"), ("B2_over_B1", "B1", "B2")):
-        row = contrasts[(300, contrast)]
+        row = contrasts[(cutoff, contrast)]
         delta = fmean(float(loss[baseline]) - float(loss[richer]) for loss in losses)
         assert delta == pytest.approx(float(row["estimate"]), abs=1e-15, rel=0)
-        assert f"{100 * delta / means[baseline]:.3f}%" in paragraph
-        assert f"nominal p = {float(row['p_raw']):.4f}" in paragraph
+        assert f"{100 * delta / means[baseline]:.3f}%" in table_row
+        assert f"{float(row['p_raw']):.4f}" in table_row
+        assert f"{float(row['estimate']):.6f}" in table_row
         control = contrasts[(120, contrast)]
         claim = next(
             claim
@@ -266,12 +287,54 @@ def test_pit300_current_matches_saved_contrasts_and_120_primary_control() -> Non
     for row in rows:
         assert row["N_sessions"] == "419" and row["N_origins"] == "160832"
         assert row["role"] == "POST_PRIMARY_SOURCE_TIME_PROXY_SENSITIVITY"
-    flow = contrasts[(300, "B2_over_B1")]
-    assert float(flow["ci_low"]) < 0 < float(flow["ci_high"])
-    assert f"[{float(flow['ci_low']):.6f}; {float(flow['ci_high']):.6f}]" in paragraph
-    assert "60-second cutoff: not yet completed" in paragraph
-    assert "change the registered primary decision" in paragraph
+    flow = contrasts[(cutoff, "B2_over_B1")]
+    assert (float(flow["ci_low"]) < 0) == (cutoff == 300)
+    assert float(flow["ci_high"]) > 0
+    assert f"[{float(flow['ci_low']):.6f}; {float(flow['ci_high']):.6f}]" in current
+    assert "60-second cutoff: not yet completed" not in current
+    assert "does not strengthen the registered finding" in paragraph
     assert "300 and 60 seconds: not yet completed" not in current
+
+
+def test_pit_three_cutoff_table_preserves_primary_and_monotone_flow_series() -> None:
+    current = (ROOT / "docs/CURRENT.md").read_text("utf-8")
+    primary_row = next(line for line in current.splitlines() if line.startswith("| 120 |"))
+    primary_flow_percent = 0.0
+    for claim in producer.build_current_claims():
+        selector = claim["selector"]
+        if selector["window"] != "primary" or selector["family"] != "log_ridge_harq":
+            continue
+        numbers = claim["numbers"]
+        assert (
+            f"+{numbers['estimate']:.6f} / {numbers['qlike_reduction_percent']:.3f}% / "
+            f"{numbers['p_for_decision']:.4f}" in primary_row
+        )
+        if selector["contrast"] == "B2_over_B1":
+            primary_flow_percent = numbers["qlike_reduction_percent"]
+    with (ROOT / "artifacts/rp4_v4_b2_rv15/session_losses.csv").open(
+        encoding="utf-8", newline=""
+    ) as stream:
+        losses = list(csv.DictReader(stream))
+    positive = sum(
+        float(row["loss__log_ridge_harq__B1"]) > float(row["loss__log_ridge_harq__B2"])
+        for row in losses
+    )
+    assert len(losses) == 419 and positive == 249
+    assert f"{positive}/{len(losses)}" in primary_row
+    flow_percent = {120: primary_flow_percent}
+    for cutoff in (60, 300):
+        with (PLACEBO / f"pit_{cutoff}_session_losses.csv").open(
+            encoding="utf-8", newline=""
+        ) as stream:
+            losses = list(csv.DictReader(stream))
+        flow_percent[cutoff] = (
+            100
+            * fmean(float(row["B1"]) - float(row["B2"]) for row in losses)
+            / fmean(float(row["B1"]) for row in losses)
+        )
+    assert flow_percent[60] > flow_percent[120] > flow_percent[300] > 0
+    assert "decreases monotonically" in current
+    assert "Stability across conservative timing assumptions is not established" in current
 
 
 def test_claims_reject_changed_source_bytes(
