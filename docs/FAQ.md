@@ -37,8 +37,8 @@ each origin as an independent replicate.
 Five sessions is the registered circular-block length, with 9,999 resamples. Blocks
 retain short-range temporal dependence that independent resampling would discard.
 This is a design choice, not proof that five captures all dependence or is optimal.
-Only four such block lengths fit in a 20-session look; saved power approximations
-do not validate that small-sample bootstrap's size or power.
+A 20-session read contains only four five-session blocks, so the saved power
+approximations do not validate the bootstrap's size or power at that sample size.
 [Registered inference](rp4/specification_v4.md) and [prospective power limitations](rp4/prospective_confirmation_v1_amendment_3.md).
 
 ## 5. Why does Ridge show B2 improvement but LightGBM does not?
@@ -119,4 +119,4 @@ registered interpretation without switching horizon, family, statistic or sessio
 selection to obtain a favorable verdict.
 [Registered decision rules](rp4/prospective_confirmation_v1_amendment_3.md), [known defects](known_defects_and_resolutions.md) and [claim-level evidence](scientific_findings_ledger.md).
 
-RESEARCH_ONLY. NOT INVESTMENT ADVICE. capital_go=false.
+Research only. Not investment advice.

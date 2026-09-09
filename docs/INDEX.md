@@ -115,11 +115,14 @@ across universes. Earlier numbers retain their supersession labels.
 [Current decisions](research_decisions_current.md).
 Twenty and forty are new-session checks; 45 combines 25 historical and 20 new
 sessions. RP3's 2029-01-30 date is estimated. No prospective outcome is reported here.
+The [future research priorities](rp4/PROSPECTIVE_RESEARCH.md) are proposals, not
+amendments to those registrations or authorization to execute new studies.
 
 ## 08 — Reproducibility
 
 [Executable reproduction guide](reproduce.md) ·
 [Historical execution record and licensed rebuild limits](rp4/OPERATING_GUIDE.md) ·
+[RP4 implementation and snapshot boundary](architecture.md#rp4-implementation-and-execution-boundary) ·
 [Public/licensed reproduction map](figures/public_refresh/reproducibility_map.architecture.svg) ·
 [Reproducibility contract](reproducibility_contract_v1.md) ·
 [CI contract](ci_contract_v1.md) ·
@@ -135,7 +138,9 @@ scientific rerun has a separate evidence and authorization boundary.
 [Methodology ledger](methodology_decisions.md) ·
 [Computational assistance](AI_ASSISTANCE_STATEMENT.md) ·
 [Security](../SECURITY.md) · [Citation](../CITATION.cff) ·
-[Publication design review](public_repository_review.md).
+[Publication design review](public_repository_review.md) ·
+[Four-profile review and twelve-question acceptance record](FINAL_REVIEW.md).
+The acceptance record is a documentary inspection, not a timed study with readers.
 
 ## 10 — Historical archive and supporting material
 

@@ -20,7 +20,7 @@ necessary evidence without representing the current conclusion.
 | HISTORICAL | Record of an earlier analysis, decision or implementation. |
 | SUPERSEDED | Earlier account replaced by a later account; retain for provenance. |
 | EXPLORATORY | Supplementary investigation whose outcome does not replace the primary result. |
-| PROSPECTIVE - NOT YET EVALUATED | Registered future evaluation; no prospective outcome is established here. |
+| PROSPECTIVE - NOT YET EVALUATED | Future evaluation or explicitly unregistered proposal; the document states which. No prospective outcome is established here. |
 | ARCHIVED EVIDENCE | Preserved source, correction, translation baseline or integrity record. |
 
 ## Results and protocols
@@ -38,6 +38,9 @@ necessary evidence without representing the current conclusion.
 | [Current English defense package](rp4/DEFENSE_PACKAGE/revision_2/correction_7/README.md) | CURRENT | Presentation of existing evidence, with a claims matrix and source bindings. |
 | [RP4 prospective protocol](rp4/prospective_confirmation_v1.md), [amendment 1](rp4/prospective_confirmation_v1_amendment_1.md), [amendment 2](rp4/prospective_confirmation_v1_amendment_2.md), [amendment 3](rp4/prospective_confirmation_v1_amendment_3.md) and [context](rp4/prospective_confirmation_v1_amendment_3_context_1.md) | PROSPECTIVE - NOT YET EVALUATED | Read the protocol together with its amendments; a registration or collection plan is not an evaluated outcome. |
 | [RP3 preregistration](rp3/PREREGISTRATION.md) | PROSPECTIVE - NOT YET EVALUATED | Separate prospective programme and its stated constraints. |
+| [Future research priorities](rp4/PROSPECTIVE_RESEARCH.md) | PROSPECTIVE - NOT YET EVALUATED | Unregistered proposals; no execution or amendment is authorized by this document. |
+| [Implementation boundary](architecture.md#rp4-implementation-and-execution-boundary) | CURRENT | Maps RP4 snapshot entrypoints and shared maintained imports without moving historical code. |
+| [Final documentary review](FINAL_REVIEW.md) | CURRENT | Four analytical perspectives and twelve located answers; no measured reader-comprehension or reading-time result. |
 | [RP2 report](rp2/FINAL_REPORT.md) and [RP2 v3 withdrawn results](rp2_v3/SUPERSEDED_RESULTS.md) | HISTORICAL / SUPERSEDED | Read each claim with its withdrawal or supersession disposition. |
 
 The v4 report's sentence **"There is no v5"** records its original closeout scope.
