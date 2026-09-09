@@ -11,7 +11,7 @@ Author: Miguel Guerrero · Master of Data Science research project, Sydney Polyt
 - **What was studied:** six stocks, roughly two years of historical data and **160,832 matched forecast origins**, with three nested information sets and two model families. Evaluation follows time order, with rules written before each calculation; the historical sample was already known when the final design was fixed.
 - **What was found:** option state improves both model families. Adding order flow gives a small improvement in the linear model at 15 minutes: **+0.62%** lower forecast loss, **p = 0.003**, with positive signs in **six of six assets**. The tree model does not improve, and no economic value is demonstrated. Exact estimates and uncertainty appear below.
 - **What remains:** prospective replication under rules fixed in advance, with **20 new sessions**, a **40-session** stability check and a **335-session** final extension. These are registered future checks, not completed confirmation.
-- **Timing limitation:** timely order flow is not demonstrated (placebo p = 0.255); most of the linear increment survives a within-asset-session flow shuffle. The linear flow gain is not statistically supported at a 300-second availability cutoff (p = 0.195). [Completed robustness evidence and interpretation](docs/CURRENT.md).
+- **Timing limitation:** timely order flow is not demonstrated (placebo p = 0.255); most of the linear increment survives a within-asset-session flow shuffle. Linear flow gains at 60 / 120 / 300 seconds decrease to 1.447% / 0.623% / 0.194% (p = 0.0001 / 0.0032 / 0.1948); the less conservative 60-second assumption does not strengthen the registered finding. [Completed robustness evidence and interpretation](docs/CURRENT.md).
 
 **Historical development evidence. This is the fourth evaluation of overlapping historical data. Cross-version research search is not multiplicity-adjusted. Independent prospective confirmation is pending.**
 
@@ -35,7 +35,7 @@ Read the [current scientific evidence](docs/CURRENT.md) for the concise result, 
 | Historical option-state improvement in both primary families | Causal dealer-hedging or informed-trading mechanisms |
 | Historical linear-model incremental flow information at RV15 | Profitable strategy or transaction-cost-adjusted alpha |
 | Preservation of failed and null versions | Six independent asset replications or an optimal horizon |
-| Reporting of the completed 300-second timing sensitivity | Stability of the flow increment under conservative timing assumptions |
+| Reporting of the completed 60 / 120 / 300-second timing sensitivity | Stability of the flow increment under conservative timing assumptions |
 
 **OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. Predictive information ≠ tradability. Statistical significance ≠ economic significance.**
 
