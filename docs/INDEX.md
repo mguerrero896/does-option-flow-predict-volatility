@@ -1,5 +1,9 @@
 # Research documentation
 
+**Status: CURRENT.** Start with [current scientific evidence](CURRENT.md).
+The [document status map](DOCUMENT_STATUS_MAP.md) distinguishes maintained guidance,
+historical reports, exploratory extensions and protected original evidence.
+
 The current public result is **RP4 v4**, with 15-minute realized variance primary and
 5 minutes secondary. Its improvement is conditional on family and historical window.
 The [machine-readable state](../data/CANONICAL_STATE.json) and [generated status](../STATUS.md)

@@ -1,5 +1,7 @@
 # Research Program v2 — final report
 
+**Status: HISTORICAL.** Retained account of the earlier validation study, including its corrections and limits. See the [current research summary](../CURRENT.md) for the active result.
+
 **Run:** 2026-08-18 → 2026-08-19, autonomous cascade, Blocks 1–18
 **Per-block documents:** `docs/rp2/block*.md`
 **Gates at close:** ruff clean · mypy --strict clean over 268 files · full pytest suite green

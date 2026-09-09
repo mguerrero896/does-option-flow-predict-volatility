@@ -1,5 +1,7 @@
 # Statement on computational assistance
 
+**Status: CURRENT.** Maintained assistance disclosure. See the [current research summary](CURRENT.md) for the active result and its evidence limits.
+
 **Author:** Miguel Guerrero. **Updated:** 2026-09-09.
 
 AI coding assistants were used in the implementation of this research: to write
