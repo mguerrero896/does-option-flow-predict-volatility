@@ -1,5 +1,7 @@
 # Known defects and resolutions
 
+**Status: CURRENT.** Maintained defect register. See the [current research summary](CURRENT.md) for the active result and its evidence limits.
+
 This register follows documented failures to their producers, callers and regression checks. It covers the [methodology decisions](methodology_decisions.md), the [RP2 validation audit](rp2/VALIDATION_REPORT.md), the [RP2 final report](rp2/FINAL_REPORT.md), the [PIT v2.1](pit_v21_decision_ledger.md) and [v2.2](pit_v22_decision_ledger.md) ledgers, the Phase 8 remediation, and the published RP4 materialization and closeout audits. Repeated reports of the same mechanism are combined. A repaired implementation does not make its earlier outputs valid: the original measurements, withdrawals and seals retain their recorded status.
 
 **Resolved** means that the current implementation contains the stated repair and the linked regression provides evidence for that mechanism. **Superseded** means that the historical implementation or interpretation is outside the registered v4 path; it does not mean its original bytes were repaired. **Open** identifies an unresolved defect, a missing verification, or an evidentiary limitation, with its scope stated explicitly. A limitation is not automatically a programming bug.

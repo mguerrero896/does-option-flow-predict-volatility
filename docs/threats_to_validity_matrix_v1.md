@@ -1,5 +1,7 @@
 # Threats to validity (current presentation: RP4 v4)
 
+**Status: CURRENT.** Maintained validity assessment. See the [current research summary](CURRENT.md) for the active result and its evidence limits.
+
 This matrix follows [canonical state](../data/CANONICAL_STATE.json). RP4 v4 has a
 small conditional linear forecasting improvement; independent global confirmation
 and economic alpha remain unestablished. Earlier RP2, PIT and Phase 8 evidence

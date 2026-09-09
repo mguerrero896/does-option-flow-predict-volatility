@@ -1,14 +1,22 @@
 # Options Order Flow and Intraday Volatility
 
-**Can options trading activity improve forecasts of how much a stock's price will move?**
+**Does option-market information improve intraday realized-volatility forecasts, and does trade-derived option flow add predictive information beyond option state?**
 
 Author: Miguel Guerrero · Master of Data Science research project, Sydney Polytechnic Institute, September 2026
 
 ## In one minute
 
+**Status: CURRENT. Historical evidence: completed. Independent prospective confirmation: pending. Economic/trading value: not demonstrated. Causality: not established.**
+
 - **What was studied:** six stocks, roughly two years of historical data and **160,832 matched forecast origins**, with three nested information sets and two model families. Evaluation follows time order, with rules written before each calculation; the historical sample was already known when the final design was fixed.
 - **What was found:** option state improves both model families. Adding order flow gives a small improvement in the linear model at 15 minutes: **+0.62%** lower forecast loss, **p = 0.003**, with positive signs in **six of six assets**. The tree model does not improve, and no economic value is demonstrated. Exact estimates and uncertainty appear below.
 - **What remains:** prospective replication under rules fixed in advance, with **20 new sessions**, a **40-session** stability check and a **335-session** final extension. These are registered future checks, not completed confirmation.
+
+**Historical development evidence. This is the fourth evaluation of overlapping historical data. Cross-version research search is not multiplicity-adjusted. Independent prospective confirmation is pending.**
+
+160,832 forecast origins are not 160,832 independent statistical observations: **160,832 origins → 2,514 asset-sessions → 419 calendar sessions → session-aware block-bootstrap inference**. The six stocks are correlated, not six independent replications.
+
+Read the [current scientific evidence](docs/CURRENT.md) for the concise result, adverse evidence and next test; use the [reading routes](docs/INDEX.md) for deeper inspection.
 
 ![Four forecast-loss comparisons: option state improves both families; option flow improves the linear family only](docs/figures/public_refresh/result_matrix.svg)
 
@@ -16,6 +24,19 @@ Author: Miguel Guerrero · Master of Data Science research project, Sydney Polyt
 [PNG alternative](docs/figures/public_refresh/result_matrix.png) · [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv).
 
 [Glossary of labels and option-market terms](docs/glossary.md) · [Visual glossary (PNG)](docs/figures/public_refresh/glossary.png).
+
+| What the project establishes | What it does not establish |
+| --- | --- |
+| Historical predictive comparison with chronological expanding walk-forward fitting | Independent prospective replication or universal market generalization |
+| Point-in-time eligibility discipline using a source-time proxy | Historical client receipt or execution feasibility |
+| Historical option-state improvement in both primary families | Causal dealer-hedging or informed-trading mechanisms |
+| Historical linear-model incremental flow information at RV15 | Profitable strategy or transaction-cost-adjusted alpha |
+| Preservation of failed and null versions | Six independent asset replications or an optimal horizon |
+
+**OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. Predictive information ≠ tradability. Statistical significance ≠ economic significance.**
+
+<details>
+<summary>Research history, data and method: inspect the supporting record</summary>
 
 <a id="history-and-prospective-replication"></a>
 
@@ -65,11 +86,11 @@ Availability uses a **120-second source-time proxy**. Records must satisfy the r
 
 The comparison adds information in three nested steps:
 
-- **B0 — 29 predictors:** price and volatility history.
-- **B1 — 69 predictors:** B0 plus the implied volatility surface and option state.
-- **B2 — 138 predictors:** B1 plus options order flow, composition and signed imbalance.
+- **B0:** price and volatility history.
+- **B1:** B0 + option state / implied-volatility surface.
+- **B2:** B1 + trade-derived option flow, composition and imbalance information.
 
-These counts precede family-specific indicators and asset effects. The baseline includes multiscale volatility and market context, so option information must improve on more than a simple last-value forecast. [Proposal alignment and deviations](docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
+The sets contain 29, 69 and 138 predictors before family-specific indicators and asset effects. They are nested information sets, not necessarily independent economic feeds. The B2/B1 comparison tests for incremental predictive information beyond the implemented B1 representation. The baseline includes multiscale volatility and market context. [Proposal alignment and deviations](docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
 
 ![Three nested information sets with 29, 69 and 138 predictors](docs/figures/public_refresh/information_sets.svg)
 
@@ -85,7 +106,27 @@ The two families are a winsorized ridge regression on log variance with rank fil
 *Training and evaluation follow time order; only the future registered sample can provide prospective replication.*
 [PNG alternative](docs/figures/public_refresh/proposal_to_replication_readme.workflow.png) · [Full report](docs/rp4/results_v4.md) · [Registered design](docs/rp4/specification_v4.md) · [Decisions and deviations](docs/research_decisions_current.md).
 
+</details>
+
 ## Results
+
+**Current primary historical result: RP4 v4, RV15.**
+
+| Model family | First test: option state, B1/B0 | Second test: option flow, B2/B1 |
+| --- | ---: | ---: |
+| Linear | +0.880% (p = 0.0390) | +0.623% (p = 0.0032) |
+| Trees | +1.170% (p = 0.0135) | −0.115% (p = 0.6280) |
+
+Historical development evidence on overlapping data; cross-version research search is not multiplicity-adjusted. Independent prospective confirmation is pending. Option state improves both families; the incremental flow finding is model-dependent.
+
+These p-values belong to the declared one-sided sequence. The linear flow difference has a positive **95% interval [0.000335; 0.001932]** in QLIKE units. Its **bilateral Holm-adjusted p = 0.0248** comes from a separate comparability analysis; it is not another adjustment to the one-sided sequence. [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv) · [Loss comparisons and uncertainty figure](docs/figures/rp4/thesis_summary.svg).
+
+**Stricter sensitivity:** bilateral Holm H1/H2 p-values are **0.0918 / 0.0248** for linear and **0.0447 / 0.8048** for LightGBM. Neither model family passes both sequential steps under this stricter bilateral Holm sensitivity. It does not replace the primary inference.
+
+**Final historical window:** 25 sessions, 9,750 origins. Linear H1 p = **0.3908**; LightGBM H1 p = **0.0568**; both H2 gates are closed. Linear H2's nominal +1.997% (p = 0.1758) is not a formal rejection, and 97.54% of its gain falls on 31 August 2026. The final historical window did not confirm the complete registered sequence. [Evidence and interpretation](docs/CURRENT.md).
+
+<details>
+<summary>Version timeline, secondary results and exploratory extensions</summary>
 
 The table retains all four historical specifications. Realized variance is measured over **30, 15 and 5 minutes** (RV30, RV15 and RV5, respectively). Cells show **percentage QLIKE reduction (p)**; negative values mean worse forecasts. The first two specifications use bilateral Holm-adjusted p-values. The third and fourth use the one-sided sequence at **5% per family**, with the **second test opened only if the first rejects**. Cross-version search is not adjusted; **the fourth specification supplies the headline**.
 
@@ -98,15 +139,6 @@ The table retains all four historical specifications. Realized variance is measu
 | v4 · RV5, secondary | +0.377 % (0.0092) | +0.256 % (0.0172) | +0.536 % (0.0608) | +0.160 % (not opened; nominal 0.1927) | 419 |
 
 [All 40 comparison cells and source hashes](artifacts/rp4_closeout_figures/comparison_v1_v4.csv). The first version's numerical failure is retained. Coverage and specification changed between versions; their differences do not isolate one repair's causal effect.
-
-For the current **15-minute primary target**, the four comparisons are:
-
-| Model family | First test: option state, B1/B0 | Second test: option flow, B2/B1 |
-| --- | ---: | ---: |
-| Linear | +0.880% (p = 0.0390) | +0.623% (p = 0.0032) |
-| Trees | +1.170% (p = 0.0135) | −0.115% (p = 0.6280) |
-
-These p-values belong to the declared one-sided sequence. The linear flow difference has a positive **95% interval [0.000335; 0.001932]** in QLIKE units. Its **bilateral Holm-adjusted p = 0.0248** comes from a separate comparability analysis; it is not another adjustment to the one-sided sequence. [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv) · [Loss comparisons and uncertainty figure](docs/figures/rp4/thesis_summary.svg).
 
 ![Accumulated daily forecast-loss difference after adding option flow](docs/figures/rp4/v4_B2_over_B1_cumulative_v2.svg)
 
@@ -126,7 +158,11 @@ Linear flow ends with a positive improvement in **six of six assets** at 15 minu
 
 **Eight-asset extension.** Adding SPY/QQQ as targets gives linear state/flow improvements of **1.40% / 0.56%** (p = **0.0208 / 0.0093**). Trees fail the first test, so the joint claim across both families fails. It reuses the historical period and preserves the six-asset headline. Both extensions motivate further tests and supply no independent confirmation. [Closed eight-asset report](docs/rp4/results_universe_v1.md) · [Saved aggregate results](artifacts/rp4_universe_public_v1/primary_summary.json).
 
+</details>
+
 ## Limits
+
+The v4 design was frozen at **2026-09-07T16:37Z (8 September 2026, 02:37 Australia/Sydney)** before its fits but after earlier historical results and the historical sample were known. The [current evidence page](docs/CURRENT.md) separates this specification history from prospective design.
 
 This is the **fourth evaluation of reused historical windows**: the design was fixed on **8 September 2026 (Australia/Sydney; 7 September UTC)**, after the historical sample had been observed, so chronology within each fit does not make the design an unseen-data preregistration.<br>
 The **final 25-session window does not confirm the full test sequence**, and prospective replication remains pending.<br>
