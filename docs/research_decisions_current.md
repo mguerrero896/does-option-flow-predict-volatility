@@ -1,7 +1,5 @@
 # Current research and publication decisions
 
-**Status: CURRENT.** Maintained decision register. See the [current research summary](CURRENT.md) for the active result and its evidence limits.
-
 This register separates active decisions from superseded planning language. It does
 not amend an old scientific registration or authorize an additional evaluation.
 
