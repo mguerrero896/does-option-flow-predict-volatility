@@ -7,7 +7,7 @@ import math
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 from docs.figures.public_refresh.render_readme_figures import (  # noqa: E402
     ASSETS,

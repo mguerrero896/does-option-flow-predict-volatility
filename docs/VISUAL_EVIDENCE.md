@@ -56,8 +56,8 @@ This motivates the visual design; it is not external validation of this study.
 From the repository root, using the existing Python environment:
 
 ```sh
-uv run --frozen python scripts/render_reader_diagnostics.py
-uv run --frozen python scripts/render_reader_diagnostics.py --check
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py --check
 uv run --frozen pytest -q tests/contract/test_reader_diagnostics.py
 ```
 

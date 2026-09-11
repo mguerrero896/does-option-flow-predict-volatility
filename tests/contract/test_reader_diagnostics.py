@@ -1,6 +1,6 @@
 """Public diagnostic graphics must reproduce from the saved aggregate evidence."""
 
-from scripts.render_reader_diagnostics import OUT, assets, comparisons, scatter
+from docs.figures.public_refresh.render_reader_diagnostics import OUT, assets, comparisons, scatter
 
 
 def test_reader_diagnostics_match_sources():
