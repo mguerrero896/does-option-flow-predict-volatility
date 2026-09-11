@@ -178,6 +178,10 @@ boundary; it does not refit the study or open prospective data. Skipped tests re
 skipped, not passed. [Exact scope and figure regeneration](docs/reproduce.md) ·
 [Reproducibility contract](docs/reproducibility_contract_v1.md).
 
+With the licensed evidence mounted, [complete the exact omitted contracts locally](docs/LOCAL_CONTRACT_VERIFICATION.md).
+That separate check requires every selected test to pass, with **zero skips**;
+it does not make restricted files part of the public clone.
+
 | Public and inspectable | Restricted or not yet established |
 | --- | --- |
 | Source code, specifications, aggregate losses, inference summaries and figure producers | Licensed observations and granular feature/forecast panels |

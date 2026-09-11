@@ -29,11 +29,26 @@ re-acquisition breaks this agreement.
 
 ## 5.2/5.3 — UW `created_at` latency campaign: RECONCILED_PARTIAL
 
-**Lifecycle authority refreshed 2026-09-02; hourly-latency correction dated 2026-09-01.** This section supersedes the 2026-08-18
+**Current operational revision: 2026-09-12 v5.** The same session window ending
+2026-09-02 now contains 13 collected and 13 reconciled sessions (zero unreconciled).
+The [v5 aggregate](../artifacts/gate5_pit/uw_latency_campaign_20260912_v5.json)
+and [v5 state](../artifacts/gate5_pit/uw_latency_campaign_state_20260912_v5.json)
+supersede v4 as operational authority. They include later-arriving reconciliations;
+they do not claim those reconciliations were available on September 2.
+Contract-window support is 6,872/6,872. Excluding the unchanged August 21 replay
+anomaly leaves 12 clean sessions and 6,171 first receipts. At the opening,
+19/1,282 receipts exceeded 60 seconds and 0/1,282 exceeded 120 seconds.
+The source-time, cross-channel and non-confirmatory limitations are unchanged.
+No collection, reconciliation, model fitting or sealed-data access was performed
+to produce this revision. See [local verification](LOCAL_CONTRACT_VERIFICATION.md).
+
+### Historical v4 measurement (preserved, not the current operational inventory)
+
+**Historical authority refreshed 2026-09-02; hourly-latency correction dated 2026-09-01.** This section supersedes the 2026-08-18
 `RUNNING (unattended)` label and its promise that five reconciled sessions would by
-themselves permit a claim upgrade. The machine authority is
+themselves permit a claim upgrade. The historical machine authority was
 `artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json`; the aggregate and
-anomaly disposition are in the two sibling versioned artifacts. The current inventory
+anomaly disposition are in the two sibling versioned artifacts. That historical inventory
 contains 12 collected sessions, seven reconciled sessions and five collected but not yet
 reconciled sessions. All 2026-09-01 artifacts and the 2026-09-02 v1/v2/v3 pairs remain
 immutable historical snapshots; v4 records the matured 2026-08-25 reconciliation without

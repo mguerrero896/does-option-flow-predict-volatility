@@ -3,6 +3,7 @@
 import csv
 import importlib.util
 import json
+import os
 import re
 from decimal import Decimal
 from pathlib import Path
@@ -24,6 +25,13 @@ LOCAL_AGGREGATES = {
     "artifacts/rp4_market_audit/feature_daily.csv",
     "artifacts/rp4_market_audit/bar_event_windows.csv",
 }
+
+
+def local_aggregate_path(name: str) -> Path:
+    """Route only the two withheld audit inputs; never redirect public evidence."""
+    assert name in LOCAL_AGGREGATES
+    configured = os.environ.get("MDS650_RP4_AUDIT_ROOT")
+    return Path(configured).resolve() / name if configured else original_path(ROOT / name)
 
 
 def test_revision_preserves_original_and_covers_every_claim_number_and_figure() -> None:
@@ -147,13 +155,21 @@ def test_bonferroni_is_arithmetic_on_saved_p_values_not_cross_family_rescue() ->
 
 
 @pytest.mark.skipif(
-    not all((original_path(ROOT / name)).is_file() for name in LOCAL_AGGREGATES),
+    not os.environ.get("MDS650_RP4_AUDIT_ROOT")
+    and not all(local_aggregate_path(name).is_file() for name in LOCAL_AGGREGATES),
     reason="Local licensed aggregate audit inputs are excluded from the publication projection.",
 )
 def test_event_transcription_matches_local_aggregates_and_separates_windows() -> None:
     evidence = defense.source(EVIDENCE_PATH)
-    daily = defense.source("artifacts/rp4_market_audit/feature_daily.csv")
-    bars = defense.source("artifacts/rp4_market_audit/bar_event_windows.csv")
+    local = {}
+    for name in sorted(LOCAL_AGGREGATES):
+        path = local_aggregate_path(name)
+        assert path.is_file(), "RP4_AUDIT_INPUT_MISSING"
+        assert_historical_sha256(path, evidence["source_sha256"][name])
+        with path.open(encoding="utf-8", newline="") as stream:
+            local[name] = list(csv.DictReader(stream))
+    daily = local["artifacts/rp4_market_audit/feature_daily.csv"]
+    bars = local["artifacts/rp4_market_audit/bar_event_windows.csv"]
     top = defense.source("artifacts/rp4_v4_b4/top_loss_sessions.csv")
     assert [(row["session_date"], row["window"]) for row in evidence["events"]] == [
         ("2025-04-07", "primary"),

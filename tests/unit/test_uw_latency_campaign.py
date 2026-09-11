@@ -303,6 +303,28 @@ def test_snapshot_excludes_sessions_after_as_of_date(tmp_path: Path) -> None:
     }
 
 
+def test_session_cutoff_does_not_freeze_later_reconciliation_arrival(tmp_path: Path) -> None:
+    for index, session in enumerate(DATES):
+        _write_clean_hourly_session(tmp_path, session)
+        if index:
+            _write_reconciliation(tmp_path, index)
+    anomaly = tmp_path / "anomaly.json"
+    anomaly.write_text(json.dumps(_anomaly_payload()), encoding="utf-8")
+    arguments = {
+        "external_root": tmp_path, "anomaly_artifact": anomaly,
+        "aggregate_path": "artifacts/snapshot.json", "as_of_date": "2026-09-01",
+    }
+    before, _ = build_snapshot(**arguments)
+    late = _write_reconciliation(tmp_path, 0)
+    payload = json.loads(late.read_text(encoding="utf-8"))
+    payload["reconciled_utc"] = "2026-09-10T21:00:00+00:00"
+    late.write_text(json.dumps(payload), encoding="utf-8")
+    after, _ = build_snapshot(**arguments)
+    assert before["contract_window_support"]["sessions_reconciled"] == 5
+    assert after["contract_window_support"]["sessions_reconciled"] == 6
+    assert before["self_sha256"] != after["self_sha256"]
+
+
 @pytest.mark.parametrize("future_input", ("session-dir", "reconciliation"))
 def test_explicit_input_after_as_of_date_fails_closed(
     tmp_path: Path, future_input: str
