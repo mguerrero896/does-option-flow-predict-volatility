@@ -56,7 +56,10 @@ receipt records the public source identity, endpoints and final video hash.
 Font and codec versions can affect raster/video bytes; this is not a claim of
 bitwise-identical video on every operating system.
 
-The README uses a finite-play animated preview linked to the MP4. The static
+The README uses a finite-play animated preview linked to a Higgsfield-hosted
+copy of the MP4, verified byte-for-byte against the committed video. GitHub's
+file page did not provide inline MP4 playback, so the direct media link is used
+for playback while the committed copy remains available for download. The static
 title and this transcript provide a non-motion alternative. Video playback and
 attachment behavior depend on the browser; see
 [GitHub's media guidance](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
