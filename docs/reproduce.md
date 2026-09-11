@@ -50,6 +50,9 @@ record for pass, skip and coverage counts. A coverage percentage measures exerci
 code under those tests, not scientific completeness. Installing the versioned
 pre-push hook is a contributor step in the [development guide](DEVELOPER_GUIDE.md),
 not a prerequisite for reading or checking the research.
+The public verifier deselects only the assertion that this reader's clone has that
+hook installed; it still runs the hook's positive/negative fixture tests and the
+secret scan, and records this boundary in its receipt.
 
 ## Reports, hashes and database inputs
 
