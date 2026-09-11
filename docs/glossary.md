@@ -87,7 +87,7 @@ These are the measures behind every percentage in the video; none of them is a t
 | QLIKE | Variance-forecast loss: for positive observed variance y and forecast h, y/h - log(y/h) - 1. Lower loss is better. Relative improvement is a loss reduction, not a trading return. |
 | B0 | price and volatility history. |
 | B1 | B0 + option state / implied-volatility surface. |
-| B2 | B1 + trade-derived option flow, composition and imbalance information. |
+| B2 | B1 + a heterogeneous option-information block: activity, composition, option-price/IV/spread changes, exposure proxies and empty-window representation. |
 | Point-in-time | Eligibility using the information and timestamps available by the forecast origin. The historical 120-second source-time proxy does not establish actual client receipt. |
 | Source timestamp | The timestamp attached by the exchange or provider to a record. Its meaning depends on the field; event or creation time does not prove client receipt. |
 | Receipt timestamp | The time the client actually received a record, measured by the client. Historical source records alone do not supply this proof. |

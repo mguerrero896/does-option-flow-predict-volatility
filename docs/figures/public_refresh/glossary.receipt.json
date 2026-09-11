@@ -2,7 +2,7 @@
   "schema_version": "public-glossary-render-v2",
   "source_wording_sha256": "b72b1688cf4076d4a6d4b391e5a308c8ae6ca4202322a76ca8cd076bf8d1d644",
   "input_sha256": {
-    "docs/figures/public_refresh/glossary.json": "a550755be9b121e09ab10b4a29b7ebdf6d9f776298cdab3cff97afc9fafa1d56",
+    "docs/figures/public_refresh/glossary.json": "2d569a868fc3be9e956fc362e102f2fe191f0e73dec54d110a0cd8191f8c337d",
     "docs/figures/public_refresh/glossary.py": "868b46db2c687d39139b915d0ac8f4baa025ea0a169866c3e9e6f3ec84048a6d",
     "scripts/figure_style.py": "139d363fbafb9f85b130114504f9d4036a2b5080dc6e1d2741014b84151042a6",
     "artifacts/rp4_closeout_figures_code/rasterize.cjs": "1bf9e8c6c3d2142780638349ed4652746c62aa61b545a9b6cbb5cbe871b37b69",
@@ -13,7 +13,7 @@
     "other": "raw-bytes"
   },
   "output_sha256": {
-    "docs/glossary.md": "069d87e34d01f545a5453dae5363a02a4bc87b619ba952691a60003f1cbcc108",
+    "docs/glossary.md": "7f86ca9f50e710c53a6529a0f591779d39050c04bf562f94bf363593723a9cf5",
     "docs/figures/public_refresh/glossary.svg": "e8f0940671d4a0ad2e2c0021cbfdd9b3df672ac9b107def0f26b5d5976aff991",
     "docs/figures/public_refresh/glossary.png": "e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934"
   },
@@ -45,35 +45,8 @@
   },
   "visual_review": {
     "status": "UNCHANGED_IMAGE_BYTES_PREVIOUSLY_REVIEWED",
-    "scope": "SVG and PNG hashes are unchanged. The added methodology table is Markdown only; the prior review below describes the original reference sheet."
+    "scope": "SVG and PNG hashes are unchanged. Only the Markdown methodology definition changed."
   },
-  "prior_visual_review": {
-    "status": "PASS",
-    "method": "Inspected all four complete browser captures and all four PNG crops at 838 pixels wide, covering the entire sheet without gaps; no clipped or overlapping text.",
-    "reviewed_png_sha256": "e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934",
-    "reviewed_svg_sha256": "e8f0940671d4a0ad2e2c0021cbfdd9b3df672ac9b107def0f26b5d5976aff991",
-    "browser_width_px": 838,
-    "browser_height_px": 5382,
-    "minimum_text_px": 20,
-    "text_elements": 201,
-    "section_rows": [
-      9,
-      8,
-      9,
-      10
-    ],
-    "text_overflows": 0,
-    "markdown_h2_sections": 4,
-    "verbatim_labels_and_meanings": 36,
-    "verbatim_footers": 4,
-    "separate_timing_note_preserved": true,
-    "small_intrinsic_small_font_and_changed_word_fixtures_rejected": 3,
-    "raster_crop_sha256": {
-      "1": "f3d0777d16832e9a4b491ca2f9064601846a1efcecf5123523656520c455f361",
-      "2": "452ced9a8a2603dde5687e020768fb0cd91a86dece2088c74633e7a417038df7",
-      "3": "57b66cde2f5c442e5f2c35f7b494afb2cc8b94f9b4552df583d99b4f2e68980f",
-      "4": "3db7bdef593ad00bc549a652cda050a7ebc6c8fb9c051988ea6a159bc5dac5f5"
-    }
-  },
+  "prior_visual_review": {"status":"PASS","method":"Inspected all four complete browser captures and all four PNG crops at 838 pixels wide, covering the entire sheet without gaps; no clipped or overlapping text.","reviewed_png_sha256":"e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934","reviewed_svg_sha256":"e8f0940671d4a0ad2e2c0021cbfdd9b3df672ac9b107def0f26b5d5976aff991","browser_width_px":838,"browser_height_px":5382,"minimum_text_px":20,"text_elements":201,"section_rows":[9,8,9,10],"text_overflows":0,"markdown_h2_sections":4,"verbatim_labels_and_meanings":36,"verbatim_footers":4,"separate_timing_note_preserved":true,"small_intrinsic_small_font_and_changed_word_fixtures_rejected":3,"raster_crop_sha256":{"1":"f3d0777d16832e9a4b491ca2f9064601846a1efcecf5123523656520c455f361","2":"452ced9a8a2603dde5687e020768fb0cd91a86dece2088c74633e7a417038df7","3":"57b66cde2f5c442e5f2c35f7b494afb2cc8b94f9b4552df583d99b4f2e68980f","4":"3db7bdef593ad00bc549a652cda050a7ebc6c8fb9c051988ea6a159bc5dac5f5"}},
   "scope": "Verbatim reference wording and a separately identified timing clarification; no new empirical results or scientific execution."
 }

@@ -105,6 +105,10 @@ def main() -> None:
             "tests/test_gated_history_contract.py",
             "tests/test_mirror_internal_docs_contract.py",
             "tests/contract",
+            # Reader verification must not install a publisher's local Git hook.
+            # Keep the hook's positive/negative fixture tests and the secret scan.
+            "--deselect=tests/contract/test_versioned_hook_installation.py"
+            "::test_this_clone_uses_the_versioned_hook",
             "--junitxml=" + str(output / "contracts.xml"),
         ],
         ["scripts/scan_public_secrets.py", "--include-tags"],
@@ -158,6 +162,7 @@ def main() -> None:
         "synthetic_fixtures_may_fit_models": True,
         "prospective_data_reads": 0,
         "licensed_evidence_mounted": False,
+        "publisher_local_hook_installation_checked": False,
         "declared_public_tier_optouts": ["PANEL_GUARD_MAY_SKIP", "UW_LATENCY_FRESHNESS_MAY_SKIP"],
     }
     receipt["status"] = (

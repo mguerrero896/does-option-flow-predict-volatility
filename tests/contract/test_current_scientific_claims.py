@@ -352,10 +352,11 @@ def test_current_surfaces_preserve_numbers_definitions_and_limits() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     current = (ROOT / "docs/CURRENT.md").read_text(encoding="utf-8")
     definitions = [line for line in current.splitlines() if line.startswith("- **B")]
-    assert definitions == [line for line in readme.splitlines() if line.startswith("- **B")]
     assert len(definitions) == 3
     assert "B0 + option state" in definitions[1]
-    assert "B1 + trade-derived option flow" in definitions[2]
+    assert "B1 + a heterogeneous option-information block" in definitions[2]
+    assert "docs/B2_INTERPRETATION.md" in readme
+    assert "mixed B2 block" in readme
     for claim in producer.build_current_claims():
         selector, numbers = claim["selector"], claim["numbers"]
         if selector["window"] != "primary":
@@ -376,14 +377,24 @@ def test_current_surfaces_preserve_numbers_definitions_and_limits() -> None:
             assert row.strip("|").split("|")[column].strip() == cell
     for text in (readme, current):
         prose = " ".join(text.replace("**", "").split())
-        for value in ("160,832", "2,514", "419", "25 sessions", "9,750", "0.3908", "0.0568"):
+        for value in ("160,832", "2,514", "419", "25 sessions"):
             assert value in prose
-        assert "both H2 gates are closed" in prose
         assert "Independent prospective confirmation" in prose
         assert "pending" in prose
         assert "[0.000335; 0.001932]" in prose
-        assert "0.0918 / 0.0248" in prose and "0.0447 / 0.8048" in prose
         assert "cross-version research search is not multiplicity-adjusted" in prose.lower()
+    # Detailed gate arithmetic stays on the linked evidence page, not mandatory front-page prose.
+    assert "docs/CURRENT.md" in readme
+    assert "H2 remains unopened" in readme
+    for value in (
+        "9,750",
+        "0.3908",
+        "0.0568",
+        "both H2 gates are closed",
+        "0.0918 / 0.0248",
+        "0.0447 / 0.8048",
+    ):
+        assert value in current.replace("**", "")
     assert "0.001134 QLIKE units" in current
 
 
@@ -403,7 +414,8 @@ def test_public_surfaces_keep_interpretation_boundaries_and_glossary_definitions
             "Predictive information \u2260 tradability",
             "Statistical significance \u2260 economic significance",
         ):
-            assert distinction in prose, (name, distinction)
+            if name != "README.md":
+                assert distinction in prose, (name, distinction)
     payload = json.loads((ROOT / "docs/figures/public_refresh/glossary.json").read_text("utf-8"))
     current = (ROOT / "docs/CURRENT.md").read_text("utf-8")
     glossary = (ROOT / "docs/glossary.md").read_text("utf-8")

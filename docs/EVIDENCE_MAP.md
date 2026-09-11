@@ -2,6 +2,12 @@
 
 **Status: CURRENT.** Navigation from the [current scientific summary](CURRENT.md) to saved results, identified rows and implementation provenance. This map describes historical evidence; it does not authorize another evaluation.
 
+“Flow” in historical row labels denotes the complete heterogeneous 69-column
+B2 increment. It does not identify informed trading, dealer inventory or the
+unique contribution of activity. The [B2 interpretation note](B2_INTERPRETATION.md)
+binds feature examples, final-window concentration, development leave-one-session-out
+arithmetic and the non-executable placebo boundary to public sources.
+
 ## Claims and identifiable rows
 
 Unless a different file is linked, the source is [primary_statistics.csv](../artifacts/rp4_v4_b4/primary_statistics.csv). Select rows by `(horizon_minutes, window, family, contrast)`, not physical line numbers. Each selector below identifies one row. Percentages use `qlike_reduction_percent`; the registered decision uses `p_for_decision`, not an unopened hypothesis's `p_raw`. The [full report](rp4/results_v4.md) retains the historical narrative.

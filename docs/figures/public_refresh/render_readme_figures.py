@@ -179,7 +179,7 @@ def information_sets() -> bytes:
         712,
         "Three nested information sets",
         "B0 has 29 price-history predictors. B1 contains B0 and adds option state for 69 total. "
-        "B2 contains B1 and adds option flow for 138 total, "
+        "B2 contains B1 and adds a mixed 69-column option-information block for 138 total, "
         "before family-specific indicators and asset effects.",
         "information-sets-current",
     )
@@ -188,14 +188,14 @@ def information_sets() -> bytes:
         c,
         40,
         87,
-        "Each step retains the previous predictors and adds one kind of information.",
+        "Each step retains prior predictors; added blocks do not isolate a causal mechanism.",
         20,
         style.MUTED,
     )
     box(c, 40, 130, 1120, 468, style.ACCENT_TINT, style.ACCENT)
-    label(c, 68, 174, "B2 · Price history + option state + option flow", 24, weight="600")
+    label(c, 68, 174, "B2 · Price history + option state + mixed flow block", 24, weight="600")
     label(c, 1130, 174, "138 total", 25, weight="600", anchor="end")
-    label(c, 68, 207, "Adds trading activity, composition and signed imbalance", 19, style.MUTED)
+    label(c, 68, 207, "Adds activity, IV / price / spread changes, exposure proxies and empty-window fields", 19, style.MUTED)
     box(c, 76, 240, 1048, 320, style.LINK_TINT, style.LINK)
     label(c, 104, 284, "B1 · Price history + option state", 24, weight="600")
     label(c, 1094, 284, "69 total", 25, weight="600", anchor="end")
@@ -594,7 +594,7 @@ def main() -> int:
             "private_forecast_or_raw_inputs_read": 0,
             "capital_go": False,
         }
-        MANIFEST.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        MANIFEST.write_bytes((json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode("utf-8"))
     else:
         manifest = json.loads(MANIFEST.read_text("utf-8"))
         assert manifest["source_hash_mode"] == SOURCE_HASH_MODE

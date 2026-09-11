@@ -54,12 +54,13 @@ information in every tree model.
 
 ## 6. What exactly does B2 measure?
 
-B2 adds trade-derived activity, composition and imbalance features to B1's option
-state and B0's price history. The result concerns that full implemented information
+B2 adds 69 columns covering activity, composition, option-price/IV/spread changes,
+exposure proxies and empty-window representation to B1's option state and B0's
+price history. The result concerns that full implemented information
 set, not an isolated gamma variable or observed dealer inventory. State and flow
 can share source records. The 120-second source-time proxy does not prove historical
 client receipt, and the accepted provider gap remains unfilled.
-[Variable specification](rp4/specification_v4.md) and [data and execution boundary](rp4/data_and_execution_v1.md).
+[Variable specification](rp4/specification_v4.md), [B2 interpretation and exact examples](B2_INTERPRETATION.md) and [data and execution boundary](rp4/data_and_execution_v1.md).
 
 ## 7. Can the coefficients be interpreted causally?
 
@@ -130,8 +131,10 @@ permutations exceed the observed statistic: empirical p = (1 + 12) / (50 + 1) =
 
 The control preserves the joint flow distribution within each asset-session but
 breaks alignment with forecast origins; it does not preserve the exact conditional
-profile by minute of day. Most of the gain survives that shuffle, consistent with
-session-level information, but the ratio is not a causal attribution. Timely order
+profile by minute of day. Most of the gain survives that shuffle, but the ratio
+is not a causal attribution or evidence of an exploitable daily signal. The
+whole-session shuffle can move later information before an origin; it is not an
+implementable real-time predictor. Timely order
 flow beyond this control is not demonstrated; non-rejection does not prove that
 all temporal information is absent. This robustness check was registered after
 the primary read, not on an independent prospective sample. The registered
@@ -171,9 +174,8 @@ The linear flow increment decreases monotonically as the availability assumption
 becomes more conservative. This is descriptive, not a statistical test of differences
 between cutoff effects. **The 60-second result does not strengthen the registered
 finding**: the shorter cutoff is a less conservative assumption that historical
-records cannot verify. The pattern is consistent with predictive flow information
-concentrated in the minutes immediately before the origin, but does not establish
-that mechanism or actual client receipt. Observed receipt times are the missing evidence.
+records cannot verify. This does not identify a causal cost per second of latency
+or establish actual client receipt. Observed receipt times are the missing evidence.
 The historical flow gain depends on the source-time availability assumption;
 stability under conservative timing assumptions is not established. These are
 post-primary sensitivity p-values, not a replacement primary decision or a
@@ -186,5 +188,9 @@ receipt.
 [session losses](../artifacts/rp4_robustness_public_v1/pit_300_session_losses.csv),
 [availability changes](../artifacts/rp4_robustness_public_v1/pit_300_availability.csv)
 and [closed source provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+
+The [B2 interpretation note](B2_INTERPRETATION.md) separates final-window
+concentration from development stability and describes proposed availability-safe
+controls; these are not completed experiments or changes to registered analyses.
 
 Research only. Not investment advice.

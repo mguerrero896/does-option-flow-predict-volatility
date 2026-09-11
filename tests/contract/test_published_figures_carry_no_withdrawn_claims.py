@@ -17,6 +17,7 @@ the historical measurements they were registered with.
 
 from __future__ import annotations
 
+import hashlib
 import re
 import subprocess
 from pathlib import Path
@@ -33,7 +34,20 @@ SVG_TEXT = re.compile(r">([^<>]{2,200})<")
 
 # Reviewed 2026-08-31 against data/CANONICAL_STATE.json: the diagram states structure and
 # custody rules only. It carries no effect size, p-value, date or eligibility claim.
-REVIEWED_RASTERS: frozenset[str] = frozenset({"docs/figures/system-architecture.png"})
+REVIEWED_RASTERS: frozenset[str] = frozenset(
+    {
+        "docs/figures/system-architecture.png",
+        "docs/figures/public_refresh/research_cover.png",
+    }
+)
+
+
+def test_reviewed_research_cover_identity() -> None:
+    # Reviewed 2026-09-12: six stocks, ETF extension, schematic only; no measured gain.
+    path = REPO / "docs/figures/public_refresh/research_cover.png"
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == (
+        "7d342319ccbdf324d6400f2ff27801d0d9b719769a74f1ad7ff6d7c159263a80"
+    )
 
 
 def _tracked(pattern: str) -> list[str]:

@@ -213,7 +213,7 @@
     },
     {
       "label": "B2",
-      "meaning": "B1 + trade-derived option flow, composition and imbalance information."
+      "meaning": "B1 + a heterogeneous option-information block: activity, composition, option-price/IV/spread changes, exposure proxies and empty-window representation."
     },
     {
       "label": "Point-in-time",

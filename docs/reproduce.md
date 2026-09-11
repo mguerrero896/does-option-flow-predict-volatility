@@ -29,19 +29,30 @@ enter its directory and install the committed dependency lock:
 git clone https://github.com/mguerrero896/does-option-flow-predict-volatility.git
 cd does-option-flow-predict-volatility
 uv sync --frozen
-git config --local core.hooksPath scripts/hooks
-uv run --frozen python scripts/scan_public_secrets.py --check-hook
-env -u MDS650_EVIDENCE_ROOT -u MDS650_EXTERNAL_ROOT -u MDS650_DATA_ROOT MDS650_PANEL_GUARD_MAY_SKIP=1 MDS650_UW_LATENCY_FRESHNESS_MAY_SKIP=1 uv run --frozen pytest tests/contract tests/test_gated_history_contract.py tests/test_mirror_internal_docs_contract.py -q
-uv run --frozen python scripts/scan_public_secrets.py --include-tags
+uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 ```
 
 Contract tests check artifact identities, scientific reporting, source timing,
 archived evidence, translated numerical claims and internal Markdown links. Some
 checks explicitly skip when their licensed oracle or optional training dependency
 is unavailable; a skip is not evidence that the missing computation passed.
-The `env` command uses the same public tier boundary as hosted CI and can be run
-in Git Bash on Windows. The publication dry run below also isolates inherited
-private evidence settings automatically; it records both declared opt-outs.
+The same commands work in PowerShell and POSIX shells. The verifier requires a clean
+committed checkout descended from `origin/main` and writes its logs outside the clone.
+It isolates inherited private evidence settings and records the two declared public-tier
+opt-outs. Its receipt identifies the checked commit and individual command exits.
+It runs the public contract subset and secret scan, **not the full hermetic suite or
+a coverage measurement**. Synthetic fixtures may fit small models; no scientific
+model fit or prospective data read is part of this route.
+
+The full hermetic suite is a separate [CI job](../.github/workflows/ci.yml), with its
+own coverage threshold and explicit licensed-test exclusion. Use its actual run
+record for pass, skip and coverage counts. A coverage percentage measures exercised
+code under those tests, not scientific completeness. Installing the versioned
+pre-push hook is a contributor step in the [development guide](DEVELOPER_GUIDE.md),
+not a prerequisite for reading or checking the research.
+The public verifier deselects only the assertion that this reader's clone has that
+hook installed; it still runs the hook's positive/negative fixture tests and the
+secret scan, and records this boundary in its receipt.
 
 ## Reports, hashes and database inputs
 

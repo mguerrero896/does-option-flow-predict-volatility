@@ -31,7 +31,8 @@ explicit treatment. [Current inference](specification_v4.md) and
 ## B2 block ablation
 
 A separately registered decomposition could compare activity/intensity,
-premium/composition, aggressor/direction, gamma/exposure and tenor/0DTE blocks.
+premium/composition, option-price/IV/spread changes, aggressor/direction,
+gamma/exposure, tenor/0DTE and empty-window/coverage representation blocks.
 Freeze the feature-to-block map, treatment of shared fields and presence
 indicators, comparators, sample eligibility, target, model selection and multiple
 comparison rule before evaluation. Fit each reduced model using its own eligible
@@ -45,6 +46,13 @@ This broader proposal does not amend or repeat the already registered gamma-bloc
 ablation or its single secondary look. [Existing ablation](prospective_confirmation_v1_amendment_1.md),
 [secondary decision rules](prospective_confirmation_v1_amendment_2.md) and
 [historical coefficient limits](../rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
+
+The whole-session placebo is not an implementable real-time control: it can move
+later information before an origin. A separately specified timing comparison
+should include activity accumulated only to the eligible cutoff, fixed prior
+windows and previous completed sessions. Apply the same availability rule and
+training-only transformations to each. These controls have not been reported as
+completed and are not authorized here. [Exact attribution boundary](../B2_INTERPRETATION.md).
 
 ## Receipt-time telemetry
 

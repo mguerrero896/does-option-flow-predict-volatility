@@ -220,8 +220,14 @@ def test_readme_links_every_maintainer_navigation_surface() -> None:
     """A new maintainer must not need to discover the repository by directory search."""
 
     readme = (REPO / "README.md").read_text(encoding="utf-8")
-    missing = [path for path in MAINTAINER_NAVIGATION if f"]({path})" not in readme]
-    assert not missing, f"README does not link maintainer navigation: {missing}"
+    assert "](docs/RESEARCH_WALKTHROUGH.md)" in readme
+    walkthrough = (REPO / "docs/RESEARCH_WALKTHROUGH.md").read_text(encoding="utf-8")
+    missing = [
+        path
+        for path in MAINTAINER_NAVIGATION
+        if f"]({path})" not in readme and f"](../{path})" not in walkthrough
+    ]
+    assert not missing, f"Reader route does not link maintainer navigation: {missing}"
     assert "[Issues](" in readme, "README does not link the public issue tracker"
 
 
@@ -253,9 +259,7 @@ def test_methodology_decision_index_covers_every_decision() -> None:
 
     indexed: list[int] = []
     targets: set[int] = set()
-    for first, last, anchor in re.findall(
-        r"\[(\d+)–(\d+)\]\(#decision-(\d+)\)", index
-    ):
+    for first, last, anchor in re.findall(r"\[(\d+)–(\d+)\]\(#decision-(\d+)\)", index):
         assert first == anchor
         targets.add(int(anchor))
         indexed.extend(range(int(first), int(last) + 1))
@@ -286,8 +290,7 @@ def test_every_top_level_script_is_catalogued() -> None:
     actual = {
         path
         for path in tracked
-        if Path(path).parent == Path("scripts")
-        and Path(path).suffix in {".py", ".ps1", ".sh"}
+        if Path(path).parent == Path("scripts") and Path(path).suffix in {".py", ".ps1", ".sh"}
     }
     indexed = {
         path
