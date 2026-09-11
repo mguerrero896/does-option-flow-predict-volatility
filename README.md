@@ -72,8 +72,10 @@ flowchart LR
     L --> E[Inference and public aggregates]
 ```
 
-This is a computational diagram, not a causal model. Future realized variance is
-used only for scoring. FMP supplies stock bars and Unusual Whales options records.
+This is a computational diagram, not a causal model. At each evaluation origin,
+subsequent realized variance is withheld from predictors and used to score that
+forecast; fitting uses only eligible historical targets. FMP supplies stock bars
+and Unusual Whales options records.
 The primary **120-second source-time cutoff** is an assumption about availability,
 not observed historical client receipt.
 
