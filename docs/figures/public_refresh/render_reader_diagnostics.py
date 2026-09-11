@@ -276,7 +276,15 @@ def timing_sensitivity() -> bytes:
                 box(c, x(cutoff) - 6, y(value) - 6, 12, 12, color, color, 0)
             else:
                 dot(c, x(cutoff), y(value), color, 7)
-            label(c, x(cutoff), y(value) - 17, f"{value:.3f}%", 22, color, anchor="middle")
+            label(
+                c,
+                x(cutoff) + (14 if cutoff == 60 else 0),
+                y(value) - 17,
+                f"{value:.3f}%",
+                22,
+                color,
+                anchor="start" if cutoff == 60 else "middle",
+            )
         line(c, legend_x, 658, legend_x + 35, 658, color, 3)
         label(c, legend_x + 50, 666, title, 23, color)
     label(
