@@ -91,6 +91,33 @@ bootstrap resamples of five-session blocks. [Design and data scope](docs/CURRENT
 
 ## Results
 
+### Read the evidence visually
+
+Start with the **interval plot**: a point to the right of zero means lower forecast
+loss after adding information. The interval shows uncertainty, not trading value.
+
+![Four RV15 comparisons with saved 95% bootstrap intervals. The linear and tree families respond differently to the added mixed B2 block.](docs/figures/public_refresh/effect_intervals.svg)
+
+Then inspect **where the average comes from**. Each heatmap cell is one stock and
+model family, on a common QLIKE scale. Positive cells favor B2; negative cells
+favor B1. These are descriptive averages, not separate confirmations.
+
+![Mean B1 minus B2 session loss for six stocks and two model families, with signed values and one symmetric color scale.](docs/figures/public_refresh/asset_heatmap.svg)
+
+<details>
+<summary>Inspect every historical session: paired loss scatter</summary>
+
+![419 paired session losses per family. Points below the equality line favor B2; points above favor B1. All points are retained and both panels use identical axes.](docs/figures/public_refresh/paired_session_losses.svg)
+
+Each point first averages losses within each asset/session, then equally across
+the six assets. It is not an individual forecast or a calibration observation.
+The cumulative chart in the overview shows how differences build through time;
+this scatter shows the paired session losses before accumulation.
+
+</details>
+
+[How to read, reproduce and verify these charts](docs/VISUAL_EVIDENCE.md).
+
 **Current primary historical result: RP4 v4, RV15.** Positive percentages mean
 lower mean QLIKE forecast loss; they are not investment returns.
 
