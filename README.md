@@ -58,7 +58,7 @@ an improvement from that complete block does not establish which columns are
 necessary. The comparison controls forecast origins, not causal attribution.
 
 ```mermaid
-flowchart LR
+flowchart TD
     P[Licensed stock bars] --> B0[B0: price history]
     O[Licensed option records] --> T[Source-time eligibility]
     B0 --> B1[B1: add option state]
