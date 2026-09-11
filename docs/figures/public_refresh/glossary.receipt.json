@@ -44,7 +44,9 @@
     "font_environment": "Installed Segoe UI on Windows; other font environments may change PNG bytes."
   },
   "visual_review": {
-    "status": "pending"
+    "status": "UNCHANGED_IMAGE_BYTES_PREVIOUSLY_REVIEWED",
+    "scope": "SVG and PNG hashes are unchanged. Only the Markdown methodology definition changed."
   },
+  "prior_visual_review": {"status":"PASS","method":"Inspected all four complete browser captures and all four PNG crops at 838 pixels wide, covering the entire sheet without gaps; no clipped or overlapping text.","reviewed_png_sha256":"e6a005a02bdc67b97697764fd0ba70a1d070dbc09c4c85664c0a39c187d15934","reviewed_svg_sha256":"e8f0940671d4a0ad2e2c0021cbfdd9b3df672ac9b107def0f26b5d5976aff991","browser_width_px":838,"browser_height_px":5382,"minimum_text_px":20,"text_elements":201,"section_rows":[9,8,9,10],"text_overflows":0,"markdown_h2_sections":4,"verbatim_labels_and_meanings":36,"verbatim_footers":4,"separate_timing_note_preserved":true,"small_intrinsic_small_font_and_changed_word_fixtures_rejected":3,"raster_crop_sha256":{"1":"f3d0777d16832e9a4b491ca2f9064601846a1efcecf5123523656520c455f361","2":"452ced9a8a2603dde5687e020768fb0cd91a86dece2088c74633e7a417038df7","3":"57b66cde2f5c442e5f2c35f7b494afb2cc8b94f9b4552df583d99b4f2e68980f","4":"3db7bdef593ad00bc549a652cda050a7ebc6c8fb9c051988ea6a159bc5dac5f5"}},
   "scope": "Verbatim reference wording and a separately identified timing clarification; no new empirical results or scientific execution."
 }

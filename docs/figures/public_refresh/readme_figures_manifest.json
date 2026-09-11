@@ -295,5 +295,5 @@
     "scripts/verify_public_projection.py": "e5d2e4aba057fe4a63f0f9d861eb74dcbdc1fe19fb6a73dc140cf341a15bb932"
   },
   "verification_command": "python docs/figures/public_refresh/render_readme_figures.py --verify",
-  "visual_review": "pending"
+  "visual_review": "Reviewed 2026-09-12: revised information-set PNG inspected at full size and in the rendered GitHub README. Labels fit; no numerical result changed. Other SVG/PNG output hashes remain unchanged from the prior published review."
 }
