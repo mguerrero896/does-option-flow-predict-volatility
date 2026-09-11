@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" role="img" aria-labelledby="does-the-added-block-help-every-stock?-title does-the-added-block-help-every-stock?-desc">
+<title id="does-the-added-block-help-every-stock?-title">Does the added block help every stock?</title>
+<desc id="does-the-added-block-help-every-stock?-desc">Mean session QLIKE difference: B1 − B2 · same 419 historical dates for each stock</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="52" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="30" fill="#1a2332" font-weight="600" text-anchor="start">Does the added block help every stock?</text>
+<text x="40" y="88" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#5a6570" font-weight="400" text-anchor="start">Mean session QLIKE difference: B1 − B2 · same 419 historical dates for each stock</text>
+<text x="267" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">AAPL</text>
+<text x="425" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">AMZN</text>
+<text x="583" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">META</text>
+<text x="741" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">MSFT</text>
+<text x="899" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">NVDA</text>
+<text x="1057" y="148" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="middle">TSLA</text>
+<text x="40" y="242" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">Linear</text>
+<rect x="192" y="175" width="150" height="110" rx="10" fill="#9bbfc3" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="267" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00153</text>
+<rect x="350" y="175" width="150" height="110" rx="10" fill="#dde9eb" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="425" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00051</text>
+<rect x="508" y="175" width="150" height="110" rx="10" fill="#fcfdfd" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="583" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00005</text>
+<rect x="666" y="175" width="150" height="110" rx="10" fill="#ccdee1" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="741" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00078</text>
+<rect x="824" y="175" width="150" height="110" rx="10" fill="#6a9fa6" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="899" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00228</text>
+<rect x="982" y="175" width="150" height="110" rx="10" fill="#92babe" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="1057" y="240" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00166</text>
+<text x="40" y="380" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">Trees</text>
+<rect x="192" y="313" width="150" height="110" rx="10" fill="#d6b291" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="267" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">-0.00174</text>
+<rect x="350" y="313" width="150" height="110" rx="10" fill="#fdfcfb" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="425" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">-0.00007</text>
+<rect x="508" y="313" width="150" height="110" rx="10" fill="#f0f5f6" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="583" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00023</text>
+<rect x="666" y="313" width="150" height="110" rx="10" fill="#efe0d4" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="741" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">-0.00069</text>
+<rect x="824" y="313" width="150" height="110" rx="10" fill="#bbd4d7" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="899" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">+0.00103</text>
+<rect x="982" y="313" width="150" height="110" rx="10" fill="#fefdfc" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="1057" y="378" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="25" fill="#1a2332" font-weight="600" text-anchor="middle">-0.00004</text>
+<text x="40" y="480" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#1a2332" font-weight="400" text-anchor="start">Teal / positive: lower loss with B2. Amber / negative: higher loss with B2.</text>
+<text x="40" y="515" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" font-weight="400" text-anchor="start">Color intensity uses one symmetric scale for all 12 cells; values are QLIKE, not percentages.</text>
+<text x="40" y="550" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" font-weight="400" text-anchor="start">Descriptive asset averages, not six independent replications or evidence of causal attribution.</text>
+<text x="40" y="585" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="18" fill="#5a6570" font-weight="400" text-anchor="start">Fixed ticker order; no clustering, fitted groups or significance labels.</text>
+</svg>
