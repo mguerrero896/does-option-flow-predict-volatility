@@ -209,7 +209,7 @@ def test_current_database_state_is_bound_to_verified_public_results() -> None:
     assert current["licensed_bucket"] == "PRIVATE" and receipt["bucket_public"] is False
 
 
-def test_front_page_explains_failure_and_preserves_other_table_cells() -> None:
+def test_linked_history_explains_failure_and_preserves_other_table_cells() -> None:
     def table(name: str) -> list[str]:
         return [
             line
@@ -239,8 +239,12 @@ def test_front_page_explains_failure_and_preserves_other_table_cells() -> None:
     ).replace("-", "−")
     expected_text = "\n".join(expected)
     assert expected_text.count(numeric_label) == 1
-    assert expected_text.replace(numeric_label, "numerical failure (retained in the CSV)") in readme
-    assert "artifacts/rp4_closeout_figures/comparison_v1_v4.csv" in readme
+    assert "docs/RESEARCH_WALKTHROUGH.md" in readme
+    history = (REPO / "docs/RESEARCH_WALKTHROUGH.md").read_text(encoding="utf-8")
+    assert (
+        expected_text.replace(numeric_label, "numerical failure (retained in the CSV)") in history
+    )
+    assert "../artifacts/rp4_closeout_figures/comparison_v1_v4.csv" in history
     assert table("STATUS.md") == expected
 
 
@@ -272,7 +276,9 @@ def test_citation_names_the_author_and_publication_date_without_inventing_a_vers
         "Comparing 15-minute forecasts for six U.S. stocks"
     )
     assert "notes: >-" in citation
-    for text in (citation, (REPO / "README.md").read_text(encoding="utf-8")):
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    assert "CITATION.cff" in readme
+    for text in (citation, (REPO / "docs/RESEARCH_WALKTHROUGH.md").read_text(encoding="utf-8")):
         assert companion_title in text
         assert "Miguel Antonio Guerrero Quijano" in text
     assert "evidence-freeze-2026-08-18" not in citation

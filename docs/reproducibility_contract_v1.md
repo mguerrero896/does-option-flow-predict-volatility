@@ -1,50 +1,65 @@
-# Reproducibility contract (v1, 2026-08-18 — decision 63)
+# Reproducibility: scope and limits
 
-Reviewer correction accepted: **computational reproducibility ≠ data
-reproducibility**, and the repo now states exactly which one a stranger gets.
+**Status: CURRENT.** This maintained account clarifies the boundaries of the
+original 18 August 2026 reproducibility contract. It does not replace historical
+execution receipts or their hashes.
 
-## What a third party CAN reproduce (no licenses, no local storage)
+The repository contains substantive scientific source code, saved aggregate
+evidence and provenance. **An independent, complete reconstruction of the current
+study from a portable public clone has not been established.** Licensed-data
+restrictions are one boundary; historical path bindings and execution custody are
+additional boundaries. Public checks must not be presented as a substitute.
 
-From a clean public clone with zero provider keys:
+## Three distinct checks
 
-1. **The hermetic suite** (coverage ≥ 90.00%): every methodological unit, property, schema
-   and synthetic end-to-end contract. The collected test count is reported by CI rather
-   than frozen in this document because the suite grows with maintained contracts.
-2. **The public demo pipeline** `scripts/run_public_repro_demo.py` — the complete
-   methodological chain on redistributable synthetic data:
-   PIT availability join (late quotes excluded, never hindsight) → feature
-   construction → purge/embargo split → gamma_glm / lightgbm / har_rv
-   (log-linear ext.) → QLIKE → wild + moving-block bootstrap → Model Confidence
-   Set → claim-ledger generation. Deterministic (seed 650); runs in CI on every
-   push (`tests/e2e/test_public_repro_demo.py`). Its numbers are synthetic and say
-   nothing about the licensed results.
+| Route | Available evidence | Limit |
+| --- | --- | --- |
+| Public contract verification | Tracked artifacts, claim checks, source hashes and history/secret screening | Does not refit the reported study; does not run every test or measure coverage |
+| Hermetic CI and synthetic demo | Unit, property and synthetic tests within the declared CI boundary | Skips and excluded licensed tests remain unverified; synthetic outcomes are not research results |
+| Licensed scientific reconstruction | Original observations, frozen panels, recorded environment and execution receipts | Requires licensed access and valid custody; complete independent portable execution is not demonstrated |
 
-Container:
+Start with the cross-platform [public verification commands](reproduce.md).
+The [CI workflow](../.github/workflows/ci.yml) defines the tested modules, coverage
+threshold and exclusions. A threshold is not an observed result: cite the actual
+run for its commit, pass/skip counts and measured coverage. Neither statement
+means that every methodological unit or scientific failure mode has been tested.
 
-The container is a **methodological smoke test**, not a full-suite runner. Its
-allowlisted build context intentionally omits the evidence and documentation tree as well
-as every licensed-derived file, so `docker run` executes the synthetic public demo only.
-Run the hermetic suite from a clean clone or GitHub Actions.
+## Synthetic demonstration
 
-```bash
-docker build -t mds650-repro .
-docker run --rm mds650-repro
+The [public demo](../scripts/run_public_repro_demo.py) is a **methodological smoke
+test** using redistributable synthetic inputs. It exercises selected methodological
+primitives, not the current RP4 acquisition, feature construction, model-fitting
+and publication pipeline end to end. Its numbers provide no evidence about the
+licensed observations or the size of the reported effect.
+
+The container's allowlisted context excludes licensed-derived data and the full
+evidence/documentation tree. It runs that demonstration, not the full suite:
+
+```sh
+docker build -t options-research-demo .
+docker run --rm options-research-demo
 ```
 
-## What requires the data custodian
+## Licensed inputs and portability
 
-Rebuilding the licensed panels and the registered numbers needs provider
-entitlements (FMP, Unusual Whales, Massive) and the local evidence store; the
-canonical route (`artifacts/canonical_validation_v1/reproduce.ps1`, tier-2 gates)
-validates hashes end-to-end for the custodian. Reviewers can additionally request
-gated derived files per `data/DATA_ACCESS.md` and verify them against published
-SHA-256 pointers.
+The current RP4 results use FMP one-minute bars and Unusual Whales option records.
+Massive was audited but does not supply the reported option-trade results; its
+entitlement is not a prerequisite for reproducing those results.
+See the [data access policy](../data/DATA_ACCESS.md) and
+[historical execution guide](rp4/OPERATING_GUIDE.md).
 
-## Windows-path residuals — honest status
+Source, panel and environment hashes identify the recorded inputs; they do not
+make missing data downloadable or prove an independent rerun. Public provenance
+derivatives with redacted locators have separately recorded hashes. Some historical
+supervisors obtain fixed roots from their frozen specifications and lack an
+output-root override. Those bindings must not be silently changed, nor their
+receipts deleted, to make an apparent rerun succeed.
 
-Hardcoded `<DATA_ROOT>` paths remain **only inside frozen-campaign scripts**, kept
-verbatim as the reproducibility record of what actually ran (editing frozen-era
-code would violate decision 62's spirit). Everything current is root-agnostic:
-`MDS650_EXTERNAL_ROOT` / `MDS650_EVIDENCE_ROOT` env vars, and the four tests that
-hard-require the local store are tier-2-only (`docs/ci_contract_v1.md`). The
-hermetic suite and the demo touch none of them — proven on every ubuntu run.
+The execution guide records the original commands, immutable receipts, remaining
+portability limits and the checks actually performed. It explicitly reports that
+a complete rerun from scratch was not performed in that review. A future clean
+reconstruction would need its own checked input-to-output record; a green public
+contract run cannot supply it. Closed one-shot evaluations and prospective cohorts
+retain their separate authorization rules.
+
+RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

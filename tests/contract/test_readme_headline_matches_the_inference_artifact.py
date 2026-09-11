@@ -16,6 +16,7 @@ from typing import Any, Final
 
 REPO = Path(__file__).resolve().parents[2]
 README = REPO / "README.md"
+WALKTHROUGH = REPO / "docs/RESEARCH_WALKTHROUGH.md"
 PRIMARY: Final = {
     "v3 · RV30": "artifacts/rp4_v3_b2/summary.json",
     "v4 · RV15, primary": "artifacts/rp4_v4_b2_rv15/summary.json",
@@ -72,7 +73,7 @@ def test_the_readme_states_the_registered_surface_improvements() -> None:
     readme = README.read_text(encoding="utf-8")
     for label, source in PRIMARY.items():
         artifact = _summary(source)
-        row = _table_row(readme, label)
+        row = _table_row(WALKTHROUGH.read_text(encoding="utf-8"), label)
         for family, column in ((LINEAR, 1), (TREES, 3)):
             cell = _cell(artifact, family, "B1_over_B0")
             assert cell["estimate"] > 0 and cell["rejected"] is True
@@ -95,7 +96,9 @@ def test_the_readme_does_not_claim_a_clean_sweep_when_tree_flow_does_not_reject(
         assert cell["estimate"] < 0 and cell["rejected"] is False
         assert cell["hypothesis_status"] == "NOT_REJECTED"
         assert artifact["global_joint_reject"] is False
-        assert f"{_percent(cell)} %" in _table_row(readme, label)[4]
+        assert (
+            f"{_percent(cell)} %" in _table_row(WALKTHROUGH.read_text(encoding="utf-8"), label)[4]
+        )
     headline = _prose(_section(readme, "In one minute"))
     assert "the tree model does not improve" in headline.lower()
     limits = _prose(_section(readme, "Limits"))
@@ -124,7 +127,7 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
     readme = README.read_text(encoding="utf-8")
     for label, source in PRIMARY.items():
         artifact = _summary(source)
-        row = _table_row(readme, label)
+        row = _table_row(WALKTHROUGH.read_text(encoding="utf-8"), label)
         for family, contrast, column in (
             (LINEAR, "B1_over_B0", 1),
             (LINEAR, "B2_over_B1", 2),
@@ -135,8 +138,8 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
             assert cell["alternative"] == "greater" and cell["alpha"] == 0.05
             p_value = f"{cell['p_for_decision']:.4f}"
             assert row[column] == f"{_percent(cell)} % ({p_value})"
-    text = _prose(readme)
-    history = _prose(_section(readme, "Results"))
+    text = _prose(WALKTHROUGH.read_text(encoding="utf-8"))
+    history = _prose(_section(WALKTHROUGH.read_text(encoding="utf-8"), "Results"))
     assert "one-sided sequence at 5% per family" in history
     assert "second test opened only if the first rejects" in history
     assert "Cross-version search is not adjusted" in text
@@ -167,8 +170,8 @@ def test_the_readme_keeps_sequential_p_values_distinct_from_bilateral_comparison
     assert f"bilateral Holm-adjusted p = {float(bilateral[0]['p_holm_bilateral']):.4f}" in _prose(
         results
     )
-    assert "separate comparability analysis" in _prose(results)
-    assert "not another adjustment to the one-sided sequence" in _prose(results)
+    assert "separate bilateral Holm-adjusted" in _prose(results)
+    assert "comparability analysis, not another adjustment to that sequence" in _prose(results)
 
 
 def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence() -> None:
@@ -191,6 +194,12 @@ def test_the_readme_states_that_the_final_window_does_not_confirm_the_sequence()
 def test_the_readme_restores_the_existing_navigation_destinations() -> None:
     readme = README.read_text(encoding="utf-8")
     links = set(re.findall(r"\[[^\]]+\]\(([^)]+)\)", readme))
+    assert "docs/RESEARCH_WALKTHROUGH.md" in links
+    # The reader reaches historical detail in one explicit step, not on the front page.
+    history_links = set(
+        re.findall(r"\[[^\]]+\]\(([^)]+)\)", WALKTHROUGH.read_text(encoding="utf-8"))
+    )
+    links.update(target.removeprefix("../") for target in history_links)
     for target in (
         "CITATION.cff",
         "CONTRIBUTING.md",

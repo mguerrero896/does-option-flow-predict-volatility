@@ -9,6 +9,7 @@ REPO = Path(__file__).resolve().parents[2]
 README = REPO / "README.md"
 STATE = REPO / "data" / "CANONICAL_STATE.json"
 FINDINGS = REPO / "docs" / "scientific_findings_ledger.md"
+WALKTHROUGH = REPO / "docs" / "RESEARCH_WALKTHROUGH.md"
 
 
 def test_readme_resolves_the_single_scientific_bundle() -> None:
@@ -17,8 +18,10 @@ def test_readme_resolves_the_single_scientific_bundle() -> None:
     readme = README.read_text(encoding="utf-8")
     findings = FINDINGS.read_text(encoding="utf-8")
 
-    assert bundle["run_id"] in readme
-    assert bundle["manifest"]["scientific_sha256"] in readme
+    assert "docs/RESEARCH_WALKTHROUGH.md" in readme
+    history = WALKTHROUGH.read_text(encoding="utf-8")
+    assert bundle["run_id"] in history
+    assert bundle["manifest"]["scientific_sha256"] in history
     assert bundle["eligibility"]["status"] in findings
     for reason in bundle["eligibility"]["reasons"]:
         assert reason in findings
@@ -44,18 +47,25 @@ def test_readme_routes_the_completed_phase8_bridge_without_promoting_it() -> Non
     readme = README.read_text(encoding="utf-8")
     findings = FINDINGS.read_text(encoding="utf-8")
     assert "MIXED_EXPLORATORY" in findings
-    history = readme.split("## Research timeline\n", 1)[1].split("\n## ", 1)[0]
+    assert "docs/RESEARCH_WALKTHROUGH.md" in readme
+    history = (
+        WALKTHROUGH.read_text(encoding="utf-8")
+        .split("## Research timeline\n", 1)[1]
+        .split("\n## ", 1)[0]
+    )
     assert "exploratory 20-session prospective check" in history
     assert "produced mixed findings" in history
-    assert "reports/phase8a_exploratory_bridge_addendum_v13.md" in readme
+    assert "../reports/phase8a_exploratory_bridge_addendum_v13.md" in history
     assert "Holm" in readme
-    assert "no aggregation change" in readme
+    assert "no aggregation change" in history
     assert "These outcomes remain distinct from" in history
-    assert "one of eight B1-inclusive primary cells" in readme
+    assert "one of eight B1-inclusive primary cells" in history
 
 
 def test_readme_routes_history_and_evidence_to_researcher_documents() -> None:
     readme = README.read_text(encoding="utf-8")
+    assert "docs/RESEARCH_WALKTHROUGH.md" in readme
+    history = WALKTHROUGH.read_text(encoding="utf-8")
     required = (
         "data/CANONICAL_STATE.json",
         "docs/pit_v22_claims_and_limitations.md",
@@ -64,7 +74,7 @@ def test_readme_routes_history_and_evidence_to_researcher_documents() -> None:
         "docs/reproducibility_contract_v1.md",
     )
     for relative in required:
-        assert relative in readme
+        assert relative in readme or f"../{relative}" in history
         assert (REPO / relative).is_file()
 
 

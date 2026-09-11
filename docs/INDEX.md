@@ -14,6 +14,8 @@ retain prior results as history; older gate labels do not override the current r
 | Reading goal | Start here |
 | --- | --- |
 | Understand the question and headline | [Research overview](../README.md) |
+| Follow the complete visual narrative and history | [Research walkthrough](RESEARCH_WALKTHROUGH.md) |
+| Understand what the mixed B2 block does and does not identify | [B2 interpretation](B2_INTERPRETATION.md) |
 | Assess current conclusions and limits | [Current evidence](CURRENT.md) |
 | Inspect the design and decision rules | [V4 specification](rp4/specification_v4.md) |
 | Run public checks and understand licensed requirements | [Reproduction guide](reproduce.md) |
