@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="930" viewBox="0 0 1200 930" role="img" aria-labelledby="repository-route-title repository-route-desc">
+<title id="repository-route-title">Follow a claim through the repository</title>
+<desc id="repository-route-desc">Read the question, inspect the method and saved statistics, reproduce the figures, then verify the public files. Licensed reconstruction is a separate route, not an outcome established by public checks.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="600" y1="216" x2="600" y2="235" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="600" y1="321" x2="600" y2="340" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="600" y1="426" x2="600" y2="445" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="600" y1="531" x2="600" y2="575" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="315" y1="575" x2="315" y2="603" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="885" y1="575" x2="885" y2="603" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="40" y="55" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="32" fill="#1a2332" font-weight="600" text-anchor="start">Follow a claim through the repository</text>
+<text x="40" y="96" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#5a6570" font-weight="400" text-anchor="start">Question → method → saved evidence → visible figure → verification</text>
+<rect x="40" y="135" width="1120" height="80" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="62" y="183" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">1 · Read the question</text>
+<text x="405" y="183" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Research overview</text>
+<rect x="40" y="240" width="1120" height="80" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="62" y="288" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">2 · Inspect the method</text>
+<text x="405" y="288" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Frozen methodology</text>
+<rect x="40" y="345" width="1120" height="80" rx="10" fill="#eef5fb" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="62" y="393" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">3 · Inspect the numbers</text>
+<text x="405" y="393" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Saved comparison statistics</text>
+<rect x="40" y="450" width="1120" height="80" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="62" y="498" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="600" text-anchor="start">4 · Recreate the charts</text>
+<text x="405" y="498" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Figure reproduction</text>
+<line x1="315" y1="575" x2="885" y2="575" stroke="#e1e6ea" stroke-width="1"/>
+<rect x="40" y="610" width="530" height="240" rx="10" fill="#eef5fb" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="64" y="655" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" fill="#1a2332" font-weight="600" text-anchor="start">5A · Public verification</text>
+<rect x="630" y="610" width="530" height="240" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="654" y="655" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" fill="#1a2332" font-weight="600" text-anchor="start">5B · Licensed reconstruction</text>
+<text x="64" y="700" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="400" text-anchor="start">Public verification guide</text>
+<text x="64" y="735" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Verification tool</text>
+<text x="64" y="778" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Output: receipt and logs outside the clone</text>
+<text x="64" y="820" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Checks public files; does not refit models</text>
+<text x="654" y="700" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="400" text-anchor="start">Data access and licensing</text>
+<text x="654" y="735" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Requires licensed inputs and frozen identities</text>
+<text x="654" y="778" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Separate reconstruction and authorization</text>
+<text x="654" y="820" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="21" fill="#1a2332" font-weight="400" text-anchor="start">Not demonstrated by a public check</text>
+<text x="40" y="898" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#5a6570" font-weight="400" text-anchor="start">Reading and rendering existing evidence does not open a prospective cohort.</text>
+</svg>

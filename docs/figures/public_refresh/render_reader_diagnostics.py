@@ -209,6 +209,97 @@ def scatter() -> bytes:
     return c.render().encode()
 
 
+def timing_points():
+    """Use each cutoff's own saved baseline; reconcile differences, never rerun inference."""
+    prefix = "artifacts/rp4_robustness_public_v1/pit_"
+    primary = read_csv(LOSSES)
+    points = {"B1_over_B0": [], "B2_over_B1": []}
+    for cutoff in (60, 120, 300):
+        losses = primary if cutoff == 120 else read_csv(f"{prefix}{cutoff}_session_losses.csv")
+        assert len(losses) == 419
+        assert [r["session_date"] for r in losses] == [r["session_date"] for r in primary]
+        source_cutoff = 60 if cutoff == 120 else cutoff
+        contrasts = read_csv(f"{prefix}{source_cutoff}_contrasts.csv")
+        for contrast, base, rich in (("B1_over_B0", "B0", "B1"), ("B2_over_B1", "B1", "B2")):
+            matches = [
+                r
+                for r in contrasts
+                if int(r["cutoff_seconds"]) == cutoff and r["contrast"] == contrast
+            ]
+            assert len(matches) == 1
+            row = matches[0]
+            assert row["family"] == "log_ridge_harq" and row["horizon"] == "15"
+            assert row["N_sessions"] == "419" and row["N_origins"] == "160832"
+            base_key = f"loss__log_ridge_harq__{base}" if cutoff == 120 else base
+            rich_key = f"loss__log_ridge_harq__{rich}" if cutoff == 120 else rich
+            baseline = math.fsum(float(r[base_key]) for r in losses) / 419
+            delta = math.fsum(float(r[base_key]) - float(r[rich_key]) for r in losses) / 419
+            assert baseline > 0 and math.isclose(delta, float(row["estimate"]), abs_tol=1e-14)
+            points[contrast].append(
+                (cutoff, 100 * float(row["estimate"]) / baseline, float(row["p_raw"]))
+            )
+    return points
+
+
+def timing_sensitivity() -> bytes:
+    points = timing_points()
+    c = canvas(
+        "How much does the availability assumption matter?",
+        "Linear model · 419 historical sessions · source-time cutoffs, not measured client receipt",
+        790,
+    )
+
+    def x(cutoff):
+        return 160 + (cutoff - 60) / 240 * 880
+
+    def y(value):
+        return 540 - value / 1.6 * 340
+
+    box(c, x(120) - 36, 185, 72, 355, s.PAPER_2)
+    label(c, x(120), 168, "Primary", 22, weight="600", anchor="middle")
+    for tick in (0, 0.4, 0.8, 1.2, 1.6):
+        line(c, 160, y(tick), 1040, y(tick))
+        label(c, 135, y(tick) + 7, f"{tick:.1f}%", 21, anchor="end")
+    for cutoff in (60, 120, 300):
+        label(c, x(cutoff), 575, str(cutoff), 23, anchor="middle")
+    label(c, 600, 614, "Assumed minimum source-time age (seconds)", 24, anchor="middle")
+    label(c, 40, 132, "Reduction in mean QLIKE loss", 22)
+    for contrast, color, title, legend_x in (
+        ("B1_over_B0", s.LINK, "Option state: B1 over B0", 40),
+        ("B2_over_B1", "#a8640a", "Mixed block: B2 over B1", 600),
+    ):
+        values = points[contrast]
+        for left, right in zip(values, values[1:], strict=False):
+            line(c, x(left[0]), y(left[1]), x(right[0]), y(right[1]), color, 3)
+        for cutoff, value, _ in values:
+            if contrast == "B1_over_B0":
+                box(c, x(cutoff) - 6, y(value) - 6, 12, 12, color, color, 0)
+            else:
+                dot(c, x(cutoff), y(value), color, 7)
+            label(c, x(cutoff), y(value) - 17, f"{value:.3f}%", 22, color, anchor="middle")
+        line(c, legend_x, 658, legend_x + 35, 658, color, 3)
+        label(c, legend_x + 50, 666, title, 23, color)
+    label(
+        c,
+        40,
+        714,
+        "Each percentage uses its own baseline. "
+        "Lines connect saved points; no causal slope is estimated.",
+        20,
+        s.MUTED,
+    )
+    label(
+        c,
+        40,
+        753,
+        "The 60-second sensitivity does not strengthen the primary finding. "
+        "No new tests or fitted curves.",
+        20,
+        s.MUTED,
+    )
+    return c.render().encode()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -219,6 +310,7 @@ def main():
         ("effect_intervals.svg", comparisons),
         ("asset_heatmap.svg", assets),
         ("paired_session_losses.svg", scatter),
+        ("timing_sensitivity.svg", timing_sensitivity),
     ):
         data = render()
         if args.check:

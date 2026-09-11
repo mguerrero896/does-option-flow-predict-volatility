@@ -29,8 +29,38 @@ enter its directory and install the committed dependency lock:
 git clone https://github.com/mguerrero896/does-option-flow-predict-volatility.git
 cd does-option-flow-predict-volatility
 uv sync --frozen
+```
+
+### First reproduce a figure you can inspect
+
+```sh
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py --check
+```
+
+Expected output: four `rendered` messages followed by four `verified` messages.
+Open these local SVG files in a browser:
+
+| Output | What to look for |
+| --- | --- |
+| [effect_intervals.svg](figures/public_refresh/effect_intervals.svg) | Linear and tree responses differ; the zero line means no mean loss difference. |
+| [asset_heatmap.svg](figures/public_refresh/asset_heatmap.svg) | Each stock/model cell retains its sign on one common scale. |
+| [paired_session_losses.svg](figures/public_refresh/paired_session_losses.svg) | 419 session pairs per family; below the diagonal favors B2. |
+| [timing_sensitivity.svg](figures/public_refresh/timing_sensitivity.svg) | The mixed-block gain depends more on the assumed source-time cutoff than the option-state gain. |
+
+No provider credentials are required. The producer reads committed aggregate CSVs,
+not private feature panels. It does not refit a model, recalculate inference or
+evaluate new sessions. [Definitions and exact transformations](VISUAL_EVIDENCE.md).
+
+### Then verify the public record
+
+```sh
 uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 ```
+
+Successful verification ends with `status: PASS`. The output directory contains
+the receipt, per-command logs and a JUnit test report. Keep the receipt with the
+commit you inspected; do not substitute a screenshot of a green badge.
 
 Contract tests check artifact identities, scientific reporting, source timing,
 archived evidence, translated numerical claims and internal Markdown links. Some
@@ -53,6 +83,18 @@ not a prerequisite for reading or checking the research.
 The public verifier deselects only the assertion that this reader's clone has that
 hook installed; it still runs the hook's positive/negative fixture tests and the
 secret scan, and records this boundary in its receipt.
+
+### When a command does not pass
+
+| Symptom | Next action |
+| --- | --- |
+| `uv` or Python is unavailable | Install the prerequisites before running repository commands; see the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/). |
+| An output directory already contains an earlier receipt | Choose a new sibling directory before running; the public verifier can overwrite logs at a reused path. |
+| Verifier reports a dirty checkout | Inspect `git status --short`. Preserve your changes; use a separate clean clone for verification rather than resetting work. |
+| A chart differs or an assertion fails | Keep the log and commit ID. Compare the [source mapping](VISUAL_EVIDENCE.md); do not update evidence hashes simply to pass. |
+| Licensed-input tests are skipped | These inputs are not distributed. Public skips are not passes; the [separate local route](LOCAL_CONTRACT_VERIFICATION.md) requires the correct licensed evidence. |
+
+![Map of public question, method, evidence, figures and verification, with a separate licensed reconstruction branch.](figures/public_refresh/repository_route.svg)
 
 ## Reports, hashes and database inputs
 

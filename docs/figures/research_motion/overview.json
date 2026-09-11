@@ -1,21 +1,39 @@
 {
-  "source": "artifacts/rp4_v4_b2_rv15/session_losses.csv",
-  "source_sha256": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
-  "sessions": 419,
-  "cumulative_endpoints": [
-    0.4750452971596971,
-    -0.08920638707048253
-  ],
-  "method": "Chronological cumulative sum of session mean loss B1 minus B2",
-  "new_model_fits": 0,
-  "private_data_reads": 0,
-  "duration_seconds": 30,
+  "sources": {
+    "artifacts/rp4_v4_a1/specification.json": "bc952677569591f588f47aac30d052a57621fc7f09faa53057c8e541130aefaf",
+    "artifacts/rp4_v4_b4/primary_statistics.csv": "5c215fc38344839ecedea7b27f69efcb85fbefea84f1367d06229cb7407902d4",
+    "artifacts/rp4_v4_b2_rv15/session_losses.csv": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+    "artifacts/rp4_v4_b3_rv15/session_losses.csv": "d3efc32f62b82feb581d38ec410290c2a421fd80642d3d69024d9ac3c997f231",
+    "artifacts/rp4_robustness_public_v1/pit_60_session_losses.csv": "96598b958628074403c82835dcaa6517d9c86dadd650e444ac11b6854a61b5f6",
+    "artifacts/rp4_robustness_public_v1/pit_300_session_losses.csv": "553d035a0b087dbc0e48a1d8bf9c3bfdc4e2a725b7fef9c3e01182ba48997c56",
+    "artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv": "b02d927e789297f5667507c40320c2316f3f8a640de8a2852d048c64c2ef2e73"
+  },
+  "seconds": 90,
   "fps": 24,
-  "fonts": [
-    "segoeui.ttf",
-    "georgia.ttf"
-  ],
+  "chapters": 8,
+  "values": {
+    "cutoff": 120,
+    "b0": 29,
+    "b1": 69,
+    "b2": 138,
+    "sessions": 419,
+    "origins": "160,832",
+    "linear": "0.623",
+    "trees": "-0.115",
+    "final_sessions": 25,
+    "final_p": "0.1758",
+    "pit60": "1.447",
+    "pit300": "0.194",
+    "retained": "81.63"
+  },
+  "private_reads": 0,
+  "new_model_fits": 0,
+  "mode": "video",
+  "storyboard_sha256": "71c28c34152bdb6e0d143a87e733930e7a5ae0d80af06facdf3aede69a8f574b",
+  "renderer_sha256": "7ee9d8384442d8d1de0873163589c932ea37266fc49147693d14d315539247bc",
+  "font_sha256": "8134dbcd09e7b123c9a7f229d49cffbcb01352cc72ea5e1076b65d0dca9f73cd",
+  "video_sha256": "f054d426db28963cb483d47044ff048c77df2871007e10c2380e58e6a7c61278",
   "title_sha256": "43b123c931c2639a26aea82ba9613b7f73cdc4efb0dd010709f5e56db0480eca",
-  "background_sha256": "132d268d3080fc22396a7dcb4f51eb305a2ff39245ff8f0b49ff00c8feb33038",
-  "video_sha256": "4004965f49529c662a88da8172db582f9c519aebb1dd5f5d0812f60a6d412b57"
+  "preview_sha256": "a2b26fee50530c51fdb53645cde2ca253622a277c0b76a8ecccdaff1a56deb07",
+  "subtitles_sha256": "394e781b92f15f76f80c2c79204e711d302bcd804d0dfcc49c9d50cbce0f0d98"
 }

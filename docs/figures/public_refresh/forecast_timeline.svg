@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="forecast-timeline-title forecast-timeline-desc">
+<title id="forecast-timeline-title">One forecast, in time order</title>
+<desc id="forecast-timeline-desc">Schematic, not observed prices. Eligible option source times precede t by at least 120 seconds. At t each model predicts the next 15 minutes of realized variance. The later observation scores the forecast; it is not an input to that forecast.</desc>
+<defs><marker id="head" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5a6570"/></marker><marker id="head-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e8a33d"/></marker><marker id="head-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#123c69"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="395" y1="250" x2="440" y2="250" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<line x1="755" y1="250" x2="800" y2="250" stroke="#5a6570" stroke-width="1.6" marker-end="url(#head)"/>
+<text x="40" y="55" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="32" fill="#1a2332" font-weight="600" text-anchor="start">One forecast, in time order</text>
+<text x="40" y="96" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#5a6570" font-weight="400" text-anchor="start">A timing schematic — no invented observations; horizontal spacing is not to scale.</text>
+<rect x="40" y="165" width="350" height="170" rx="10" fill="#eef5fb" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="60" y="208" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="start">1 · Admit past information</text>
+<text x="60" y="258" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="400" text-anchor="start">Option source time ≤ t − 120 s</text>
+<text x="60" y="302" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">Plus quality and eligibility rules</text>
+<rect x="445" y="165" width="305" height="170" rx="10" fill="#f5f7f9" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="465" y="208" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="start">2 · Forecast at t</text>
+<text x="465" y="258" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="400" text-anchor="start">B0 / B1 / B2</text>
+<text x="465" y="302" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">Linear and tree models</text>
+<rect x="805" y="165" width="355" height="170" rx="10" fill="#fdf6ea" stroke="#c9d2da" stroke-width="1.4"/>
+<text x="825" y="208" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="23" fill="#1a2332" font-weight="600" text-anchor="start">3 · Observe what follows</text>
+<text x="825" y="258" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="400" text-anchor="start">Next 15 minutes</text>
+<text x="825" y="302" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#5a6570" font-weight="400" text-anchor="start">Realized variance for scoring</text>
+<text x="40" y="386" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#123c69" font-weight="600" text-anchor="start">PAST</text>
+<text x="597" y="386" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="600" text-anchor="middle">FORECAST ORIGIN</text>
+<text x="1160" y="386" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#1a2332" font-weight="600" text-anchor="end">FUTURE TARGET</text>
+<line x1="40" y1="413" x2="1160" y2="413" stroke="#e1e6ea" stroke-width="1"/>
+<text x="40" y="462" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Training uses eligible historical targets, never this forecast's future target.</text>
+<text x="40" y="506" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="24" fill="#1a2332" font-weight="400" text-anchor="start">Compare forecast with later realized variance using QLIKE: lower loss is better.</text>
+<text x="40" y="565" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#5a6570" font-weight="400" text-anchor="start">The 120-second rule uses source timestamps, not measured client receipt.</text>
+<text x="40" y="609" font-family="'Segoe UI',Helvetica,Arial,sans-serif" font-size="22" fill="#5a6570" font-weight="400" text-anchor="start">Predicting variance means predicting the size of variation, not price direction.</text>
+</svg>

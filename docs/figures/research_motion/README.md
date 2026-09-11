@@ -1,80 +1,86 @@
-# Research motion overview
+# Watch the research, then inspect the evidence
 
-A 30-second silent explainer of the public RP4 v4 study. Motion is explanatory,
-not a live feed or an interactive neural network. B0/B1/B2 are nested information
-sets; the fitted families are log-ridge HARQ and LightGBM.
+The current overview is a **90-second, eight-chapter silent walkthrough** with
+on-screen captions and [downloadable subtitles](overview.srt). It follows one
+forecast from inputs to evaluation, then shows the public reproduction route.
+The [video](overview.mp4) uses saved public evidence; no new models or sessions
+were evaluated. The preview plays once and is not the full reading version.
 
-## Shot sequence and accessible transcript
+## Chapters and accessible transcript
 
-| Seconds | On screen | Meaning |
+| Time | Question | Explanation |
 | --- | --- | --- |
-| 0–3 | Title and six company logos; SPY/QQQ in a separate band | Six primary stocks; ETF context and extension |
-| 3–9 | Stock bars and option-contract cards move toward forecast origin | Options use a 120-second source-time assumption, not measured client receipt |
-| 9–18 | Nested 29/69/138-predictor boxes and two model families | B1 includes B0; B2 includes B1 and a heterogeneous 69-column addition; each family fits all three sets chronologically |
-| 18–26 | Forecast, subsequent realized variance and growing loss curves | Future observations score the forecast, never enter its predictors |
-| 26–30 | Complete historical curves and summary | Linear B2 gain +0.623%; trees −0.115%; final 25-session window did not confirm |
+| 0:00–0:10 | What is the forecast target? | The next 15 minutes of realized variance: magnitude of variation, not direction or a buy/sell signal. |
+| 0:10–0:20 | What enters the study? | Six primary stocks; stock bars and option records identified by underlying, call/put, strike and expiry. SPY/QQQ are separate ETF context/extension. |
+| 0:20–0:32 | What information is eligible? | Options source time must precede the origin by at least 120 seconds. The later target scores the forecast; it never enters that forecast's predictors. Source time is not observed client receipt. |
+| 0:32–0:44 | What changes between models? | B0/B1/B2 contain 29/69/138 predictors before family-specific indicators and effects. Both linear and tree families fit all three sets. B2 is mixed information, not an isolated mechanism or a neural layer. |
+| 0:44–0:56 | How is the comparison made? | Eligible historical training, chronological evaluation and paired losses on the same origins. Aggregate within asset/session, then equally across assets: 419 calendar sessions, not independent ticks. |
+| 0:56–1:08 | What was found? | Saved point estimates and 95% intervals share a QLIKE axis. State gains: linear +0.880%, trees +1.170%; mixed B2 gains: linear +0.623%, trees −0.115%. Percentages are loss reductions, not returns. Intervals are saved percentile intervals; decisions use the declared sequence. |
+| 1:08–1:20 | What limits the conclusion? | Final 25 sessions do not confirm; linear H2 nominal p = 0.1758. Cutoff sensitivity gives 1.447% / 0.623% / 0.194%. Whole-session shuffling retains 81.63% of the gain, without establishing exploitable daily information. |
+| 1:20–1:30 | What can a reader do next? | Read the question and method, trace claims to sources, clone and prepare the environment, recreate the visible figures, then verify the public record. Licensed reconstruction is separate. |
 
-The curves are cumulative sums of session-mean **QLIKE(B1) − QLIKE(B2)** from
-[the public loss table](../../../artifacts/rp4_v4_b2_rv15/session_losses.csv).
-They are not returns, an implied-volatility surface or an intraday price path.
-All 419 historical sessions are retained in chronological order. Final-window
-evidence remains separate. No models were refitted or private observations read.
+[Frame-by-frame captions](storyboard.json) are resolved against public values by
+the renderer. Technical filenames belong in these links and reproduction
+instructions, not on the image or video.
 
-## Visual production
+## Sources, design and boundaries
 
-The title card was edited with the built-in image generator from the existing
-cover: preserve title, subtitle and six logos; separate SPY/QQQ; remove the
-schematic IV surface, all diagrams, footer, degree, institution and date. Logos
-identify the researched companies and do not imply endorsement.
+The [rendering receipt](overview.json) identifies every public source by SHA-256,
+the renderer, storyboard, title, preview, subtitles and final video. The plot
+copies saved mean differences and intervals from
+[primary statistics](../../../artifacts/rp4_v4_b4/primary_statistics.csv).
+Timing percentages use each cutoff's own baseline. The
+[visual evidence guide](../../VISUAL_EVIDENCE.md) explains the four static charts.
 
-The decorative background was generated with Higgsfield Seedance 2.5, 10 seconds,
-1080p, no audio. Brief: locked camera, midnight navy, restrained cyan/amber
-particles at the lower/right edges, clean negative space; no text, logos, numbers,
-chart axes, volatility surfaces or neural-network claims. Background particles
-are illustrative, not data. Exact scientific text, moving arrows and curves are
-composited by [render.py](render.py); generation cannot change numerical labels.
+This is a visual explanation, not a fresh fit, independent replication, live
+data feed or interactive neural network. The closing 25-session window is
+separate from the 419 development sessions. The precise timing contribution of
+the heterogeneous B2 block is not isolated. Historical, causal and trading
+boundaries remain visible.
 
-Reference principles: [3Blue1Brown](https://www.3blue1brown.com/about/)—use motion
-to explain relationships rather than move text gratuitously—and
-[Apple Motion guidance](https://developer.apple.com/design/human-interface-guidelines/motion)—
-purposeful, restrained motion. These are design references, not copied assets.
+The opening reuses the reviewed [cover](title.png); company marks identify the
+assets and do not imply endorsement. No new paid generation was needed. The
+30-second predecessor's renderer and decorative background remain available for
+provenance, but the current overview uses a quiet canvas for legibility. Figure
+geometry and numbers are drawn deterministically, not generated by an image model.
 
-## Rebuild
+The design prioritizes one reader question per chapter, progressive disclosure,
+a consistent color vocabulary, explicit units, descriptive titles and static
+alternatives. It follows [Nature's figure guidance](https://research-figure-guide.nature.com/)
+and [purposeful motion guidance](https://developer.apple.com/design/human-interface-guidelines/motion).
+These references guide communication, not scientific validation.
 
-`render.py --check` uses only Python's standard library to verify the 419-session
-curve and its endpoints. Rendering additionally needs Pillow, FFmpeg, the supplied
-title/background files and explicit sans/serif font paths. No scientific runtime
-dependency or lockfile is changed for media production.
+## Rebuild and verify
+
+The scientific checks use only the Python standard library:
 
 ```sh
-python docs/figures/research_motion/render.py --check
-python docs/figures/research_motion/render.py --background background.mp4 --title docs/figures/research_motion/title.png --font /path/to/sans.ttf --serif-font /path/to/serif.ttf --output /path/to/new-output/overview.mp4
+uv run --frozen python docs/figures/research_motion/render_walkthrough.py --check
+uv run --frozen pytest -q tests/contract/test_research_motion.py
 ```
 
-Outputs must use a new path: rendering never overwrites reviewed media. The JSON
-receipt records the public source identity, endpoints and final video hash.
-Font and codec versions can affect raster/video bytes; this is not a claim of
-bitwise-identical video on every operating system.
+Media rendering additionally requires Pillow, FFmpeg and an explicit font.
+These are production tools, not new scientific runtime dependencies. Use a new
+output directory; the renderer refuses to overwrite an existing one.
 
-The README uses a finite-play animated preview linked to a Higgsfield-hosted
-copy of the MP4, verified byte-for-byte against the committed video. GitHub's
-file page did not provide inline MP4 playback, so the direct media link is used
-for playback while the committed copy remains available for download. The static
-title and this transcript provide a non-motion alternative. Video playback and
-attachment behavior depend on the browser; see
+```sh
+python docs/figures/research_motion/render_walkthrough.py --font /path/to/sans.ttf --title docs/figures/research_motion/title.png --output-dir /path/to/new-output
+```
+
+Add `--frames-only` to inspect all 24 caption states, a contact sheet and subtitles
+without encoding the MP4. The full output is 1600×900, 24 fps, H.264/yuv420p,
+90 seconds, with no audio track. Font and encoder versions can affect media
+bytes; the recorded output hash identifies this release rather than promising
+cross-platform bitwise video identity.
+
+The front-page preview is an eight-second excerpt, 800×450 at 5 fps with 48 colors:
+
+```sh
+ffmpeg -i overview.mp4 -t 8 -filter_complex "[0:v]fps=5,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=48:stats_mode=diff[p];[b][p]paletteuse=dither=none" -loop -1 preview.gif
+```
+
+The enlarged MP4 is the reading version. The README links to a hosted copy for
+playback and retains the committed download. Browser playback varies; see
 [GitHub's media guidance](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
-
-The MP4 is 1600×900 at 24 fps, H.264/yuv420p, 30 seconds, no audio, approximately
-4.55 MB. The 800×450 preview is 5 fps, 48-color GIF, approximately 7.48 MB;
-it plays once rather than looping indefinitely. The enlarged MP4 is the reading
-version. Production used Pillow 12.3.0 and FFmpeg 8.1.1 with Segoe UI / Georgia.
-
-```sh
-ffmpeg -i overview.mp4 -filter_complex "[0:v]fps=5,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=48:stats_mode=diff[p];[b][p]paletteuse=dither=none" -loop -1 preview.gif
-```
-
-Visual review covered the title and each explanatory stage, the shared model
-input bus, source-time wording, numerical curve endpoints and static alternative.
-The entire MP4 decoded without errors. [The receipt](overview.json) and
-[contract](../../../tests/contract/test_research_motion.py) bind the reviewed files
-to the public source table. Checks do not constitute a new scientific evaluation.
+The title, chapter table, subtitle file and written method offer alternatives
+to motion.

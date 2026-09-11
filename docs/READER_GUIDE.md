@@ -22,10 +22,16 @@ scientific result. The [overview](../README.md) leads to the [evidence](CURRENT.
 6. Use relative links, descriptive link text and image alternatives. Essential
    conclusions also appear as text and tables, so the cover is never required to
    understand the evidence. Keep chart units separate from trading returns.
+7. Give figures descriptive titles, not source filenames. Keep exact paths in
+   captions, links and reproduction instructions outside the image. Introduce a
+   single forecast before naming its model architecture or statistical test.
 
 These choices apply GitHub's recommendations on purpose, getting started and
 relative navigation, with detailed material off the entry page.
 [GitHub README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes).
+Purposeful hierarchy, readable labels and accessible color choices also follow
+the [Nature research figures guide](https://research-figure-guide.nature.com/).
+These are communication references, not validation of the research results.
 The explicit data-access and metadata boundary follows the distinction between
 open and restricted research objects described in
 [The Turing Way: research data management](https://book.the-turing-way.org/reproducible-research/rdm/).
@@ -33,9 +39,10 @@ open and restricted research objects described in
 ## Visual provenance
 
 The current motion overview has a [transcript, source and rendering procedure](figures/research_motion/README.md).
-It replaces the schematic surface with a chart reconstructed from public session
-loss aggregates. Generated particles remain decoration; labels and curves are
-rendered separately from the generative background.
+It follows a single forecast and ends with an actionable reproduction route.
+The current eight-chapter version shows saved estimates and uncertainty rather
+than treating a cumulative curve as a complete explanation. Descriptive chapter
+titles and captions are distinct from the exact source filenames documented below.
 
 The earlier [static cover](figures/public_refresh/research_cover.png) is an AI-assisted editorial
 illustration made with the built-in image-generation tool, not an empirical plot
