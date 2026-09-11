@@ -2,6 +2,7 @@
 *.json text eol=lf
 *.csv text eol=lf
 *.svg text eol=lf
+*.srt text eol=lf
 *.html text eol=lf
 *.txt text eol=lf
 *.md text eol=lf

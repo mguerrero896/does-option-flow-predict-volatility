@@ -46,7 +46,7 @@ Read the [current scientific evidence](../docs/CURRENT.md) for the concise resul
 **OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. Predictive information ≠ tradability. Statistical significance ≠ economic significance.**
 
 <details>
-<summary>Research history, data and method: inspect the supporting record</summary>
+<summary>Historical timeline: earlier studies and corrections</summary>
 
 <a id="history-and-prospective-replication"></a>
 
@@ -77,6 +77,35 @@ The timeline also includes a separately registered long-run study (RP3), whose e
 *The sequence preserves nulls, technical corrections, changed specifications and prospective gates as distinct events.*
 [PNG alternative](../docs/figures/public_refresh/programme_timeline.architecture.png).
 
+</details>
+
+## Follow one forecast from input to evidence
+
+At time **t**, the task is to forecast **realized variance over the next 15 minutes**:
+how much returns vary, not whether the stock price rises. At that origin, only
+eligible past information enters the models. The future target is observed later
+and used to score the forecast.
+
+![A schematic forecast origin separates eligible past options records, a 120-second source-time cutoff and the subsequent 15-minute target.](figures/public_refresh/forecast_timeline.svg)
+
+1. **Identify and align records.** Stock bars describe price history. Options
+   records identify underlying, call/put, strike and expiry, with quote and activity
+   fields. The primary universe is six stocks; SPY/QQQ have separate roles.
+2. **Construct three information sets.** B0 is price history; B1 adds option state;
+   B2 adds the mixed block. These are three inputs to compare, not neural layers.
+3. **Fit in time order.** Each of the linear and tree families fits all three sets
+   using permitted historical training information. Compare their forecasts on
+   matching origins and targets.
+4. **Score after the target is observed.** Lower QLIKE loss is better. Aggregate
+   within each asset/session, then equally across assets, before session-aware
+   inference. A positive B1-minus-B2 difference favors the added block.
+5. **Inspect the evidence and its limits.** Saved public CSVs support the charts
+   and comparisons below. Rebuilding private feature panels is a different task
+   from regenerating a chart.
+
+This schematic introduces the method; the [frozen specification](rp4/specification_v4.md)
+contains the exact eligibility, fitting and inference rules.
+
 <a id="question-and-data"></a>
 
 ## Data and point-in-time discipline
@@ -97,8 +126,9 @@ Availability uses a **120-second source-time proxy**. Records must satisfy the r
 The comparison adds information in three nested steps:
 
 - **B0:** price and volatility history.
-- **B1:** B0 + option state / implied-volatility surface.
-- **B2:** B1 + trade-derived option flow, composition and imbalance information.
+- **B1:** B0 + option state, including implied-volatility summaries.
+- **B2:** B1 + a mixed block of activity, option-price/IV/spread changes,
+  exposure proxies and empty-window handling; see [feature groups](B2_INTERPRETATION.md).
 
 The sets contain 29, 69 and 138 predictors before family-specific indicators and asset effects. They are nested information sets, not necessarily independent economic feeds. The B2/B1 comparison tests for incremental predictive information beyond the implemented B1 representation. The baseline includes multiscale volatility and market context. [Proposal alignment and deviations](../docs/rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
 
@@ -116,8 +146,6 @@ The two families are a winsorized ridge regression on log variance with rank fil
 
 *Training and evaluation follow time order; only the future registered sample can provide prospective replication.*
 [PNG alternative](../docs/figures/public_refresh/proposal_to_replication_readme.workflow.png) · [Full report](../docs/rp4/results_v4.md) · [Registered design](../docs/rp4/specification_v4.md) · [Decisions and deviations](../docs/research_decisions_current.md).
-
-</details>
 
 ## Results
 
@@ -194,11 +222,13 @@ Evidence of practical value would additionally require observed client availabil
 
 [![Tier 1 CI](https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml/badge.svg)](https://github.com/mguerrero896/does-option-flow-predict-volatility/actions/workflows/ci.yml)
 
-From a clean clone, use Python **3.12** and `uv`. These three commands install the locked environment, configure the repository hook and run the public verification:
+From a clean clone, use Python **3.12** and `uv`. First recreate the visible charts,
+then verify the public record. Readers do not need the contributor Git hook.
 
 ```sh
 uv sync --frozen
-git config --local core.hooksPath scripts/hooks
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py --check
 uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 ```
 
@@ -210,7 +240,12 @@ Every documented defect has a recorded status, evidence and resolution or remain
 
 ## Watch the project
 
-The full technical walkthrough runs 29 minutes 12 seconds and complements the written evidence. It is not distributed in the repository; the [chapter guide](../docs/INDEX.md#video-chapter-guide) identifies the sections. A short 6–8 minute overview remains optional and has not been produced.
+The [90-second public walkthrough](figures/research_motion/overview.mp4) introduces
+the question, inputs, timing, comparisons, evidence and reproduction route. It is
+silent with on-screen captions and [subtitles](figures/research_motion/overview.srt).
+The [chapter guide](figures/research_motion/README.md) supplies a non-motion
+transcript. The separate earlier 29-minute technical recording is retained only
+as a [historical chapter record](INDEX.md#video-chapter-guide), not the current introduction.
 
 ## Cite this work
 

@@ -2,12 +2,15 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-[![Watch the 30-second research overview: option records, source-time eligibility, nested B0/B1/B2 information sets, linear and tree models, and historical forecast-loss curves.](docs/figures/research_motion/preview.gif)](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/5c93baad-523f-46a3-bdeb-d20afba96e9b.mp4)
+[![Watch the 90-second research walkthrough: question, sources, one forecast, information sets, chronological comparison, results, limits and reproduction.](docs/figures/research_motion/preview.gif)](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4)
 
-[Play video · 30 seconds](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/5c93baad-523f-46a3-bdeb-d20afba96e9b.mp4) ·
+[Play video · 90 seconds](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4) ·
 [Download MP4](docs/figures/research_motion/overview.mp4) ·
 [Static cover](docs/figures/research_motion/title.png) ·
 [Transcript and chart sources](docs/figures/research_motion/README.md)
+
+Eight chapters, readable on-screen captions and [subtitles](docs/figures/research_motion/overview.srt).
+The preview is a short excerpt; open the full video to follow the research.
 
 Miguel Guerrero
 
@@ -30,6 +33,16 @@ research search is not multiplicity-adjusted.
 
 ## Start here
 
+**First visit?** Follow one of three routes; no knowledge of the project's history
+is required.
+
+- **Understand:** watch the overview, then follow [one forecast](#follow-one-forecast).
+- **Evaluate:** read the [results](#results), then inspect their [saved sources](docs/EVIDENCE_MAP.md).
+- **Reproduce:** [rebuild the visible charts](#reproduce--inspect), then run public verification.
+
+<details>
+<summary>Choose a more detailed reading route</summary>
+
 | Step | Reader's question | Read next |
 | --- | --- | --- |
 | 1 | What was compared, and what was found? | This page, below |
@@ -37,6 +50,8 @@ research search is not multiplicity-adjusted.
 | 3 | How did the study work? | [Illustrated research walkthrough](docs/RESEARCH_WALKTHROUGH.md) · [Frozen methodology](docs/rp4/specification_v4.md) |
 | 4 | Where are the numbers and their sources? | [Claim-to-artifact evidence map](docs/EVIDENCE_MAP.md) |
 | 5 | What can be reproduced without licensed data? | [Reproduction guide](docs/reproduce.md) |
+
+</details>
 
 The [examiner FAQ](docs/FAQ.md) answers the main objections. The
 [documentation index](docs/INDEX.md) holds the longer reading route; historical
@@ -55,6 +70,21 @@ option *state* describes the market snapshot; the added B2 block mixes activity,
 price changes, exposure proxies and empty-window handling. A contract's identity
 is not proof of the trader's intention or a dealer's inventory.
 [Contract terminology](docs/glossary.md) · [Feature definitions](docs/B2_INTERPRETATION.md).
+
+### Follow one forecast
+
+At a forecast origin **t**, each model estimates the variance of stock returns
+over the **next 15 minutes**. Variance describes the magnitude of movement, not
+whether the stock goes up or down. After that interval ends, the observed returns
+supply the target used to score the earlier forecast.
+
+![One schematic forecast: eligible past information, options source-time cutoff at t minus 120 seconds, forecast at t, then a separate future 15-minute scoring interval.](docs/figures/public_refresh/forecast_timeline.svg)
+
+The diagram is a timing explanation, not a simulated price series. The options
+cutoff does not prove when a customer received a record. Future target values
+are not inputs to that same forecast.
+
+### Change the information, keep the comparison aligned
 
 ![B0 has 29 predictors; B1 includes B0 and has 69; B2 includes B1 and has 138. B2 adds a heterogeneous block, not an isolated economic mechanism.](docs/figures/public_refresh/information_sets.svg)
 
@@ -93,6 +123,11 @@ bootstrap resamples of five-session blocks. [Design and data scope](docs/CURRENT
 
 ### Read the evidence visually
 
+**The decoding key:** lower forecast loss is better. A positive **B1 − B2**
+difference favors the added B2 information. **+0.623%** means a reduction relative
+to B1's average forecast loss—not a stock return or a 0.623-percentage-point gain
+in prediction accuracy.
+
 Start with the **interval plot**: a point to the right of zero means lower forecast
 loss after adding information. The interval shows uncertainty, not trading value.
 
@@ -126,6 +161,9 @@ lower mean QLIKE forecast loss; they are not investment returns.
 | Linear | +0.880% (p = 0.0390) | +0.623% (p = 0.0032) |
 | Trees | +1.170% (p = 0.0135) | −0.115% (p = 0.6280) |
 
+<details>
+<summary>How to interpret the tests and uncertainty</summary>
+
 The p-values belong to the declared one-sided sequence: test B2/B1 only after
 B1/B0 passes, at 5% within each family. The linear B2/B1 difference has a positive
 95% interval **[0.000335; 0.001932] in QLIKE units**. Its separate bilateral
@@ -133,7 +171,16 @@ Holm-adjusted p = **0.0248** is a comparability analysis, not another adjustment
 to that sequence. Neither family passes both steps under the stricter bilateral
 Holm sensitivity. [Saved statistics](artifacts/rp4_v4_b4/primary_statistics.csv).
 
+</details>
+
 ### Read the adverse evidence alongside the gain
+
+**Availability assumptions change the estimated gain.** The mixed B2 increment
+falls as the source-time cutoff becomes more conservative; the option-state
+increment changes less. These are saved historical comparisons, not measured
+delivery times or a causal latency experiment.
+
+![Linear-model percentage loss reduction at 60, 120 and 300-second source-time cutoffs; the 120-second setting is primary.](docs/figures/public_refresh/timing_sensitivity.svg)
 
 | Check | What the saved evidence shows | What it permits |
 | --- | --- | --- |
@@ -166,12 +213,35 @@ Existing prospective protocols and one-shot rules remain unchanged.
 executed scientific reproduction.** Public code, aggregates and provenance support
 inspection; public checks do not replace reconstruction from licensed observations.
 
-From a clean clone with Python 3.12 and `uv`:
+**First visible result: recreate the charts above.** With Git, Python 3.12 and
+`uv` installed, run:
 
 ```sh
+git clone https://github.com/mguerrero896/does-option-flow-predict-volatility.git
+cd does-option-flow-predict-volatility
 uv sync --frozen
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py
+uv run --frozen python docs/figures/public_refresh/render_reader_diagnostics.py --check
+```
+
+Open [effect_intervals.svg](docs/figures/public_refresh/effect_intervals.svg),
+[asset_heatmap.svg](docs/figures/public_refresh/asset_heatmap.svg) and
+[paired_session_losses.svg](docs/figures/public_refresh/paired_session_losses.svg)
+plus [timing_sensitivity.svg](docs/figures/public_refresh/timing_sensitivity.svg)
+in your local browser. The first command renders from saved public aggregates;
+the second checks the rendered bytes. No account, API key or licensed input is
+needed for these figures. This reproduces the **display**, not the model fits.
+
+**Then verify the public record** from the clean, unchanged checkout:
+
+```sh
 uv run --frozen python scripts/verify_public_projection.py --output-dir ../public-verification
 ```
+
+Success produces an external receipt with `status: PASS`, the checked commit and
+individual command exits. Use a fresh output directory for each verification.
+If the checkout is changed or a check fails, follow the [troubleshooting guide](docs/reproduce.md#when-a-command-does-not-pass);
+do not discard your changes merely to make the check green.
 
 This verifies public contracts, artifact references and the declared publication
 boundary; it does not refit the study or open prospective data. Skipped tests remain
@@ -190,6 +260,16 @@ it does not make restricted files part of the public clone.
 
 [Data access and licensing](data/DATA_ACCESS.md) explains the legitimate restriction.
 It does not make missing independent reproduction evidence disappear.
+
+### Where everything lives
+
+![Reader route from question and specification to saved statistics, regenerated figures and public verification; licensed reconstruction is a separate route.](docs/figures/public_refresh/repository_route.svg)
+
+Use the [evidence map](docs/EVIDENCE_MAP.md) to trace a number to a file, the
+[script index](scripts/README.md) to find an entry point, and the
+[reproduction guide](docs/reproduce.md) for exact commands and expected outputs.
+Start from the default `main` branch; development branches are not alternative
+scientific conclusions. Cite the commit you actually inspected.
 
 ## Explore and cite
 

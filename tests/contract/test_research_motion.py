@@ -3,6 +3,8 @@
 import hashlib
 import json
 import runpy
+import subprocess
+import sys
 from pathlib import Path
 
 
@@ -22,14 +24,24 @@ def test_reviewed_research_motion_identity() -> None:
     for key, filename in (
         ("video_sha256", "overview.mp4"),
         ("title_sha256", "title.png"),
-        ("background_sha256", "background.mp4"),
+        ("preview_sha256", "preview.gif"),
+        ("subtitles_sha256", "overview.srt"),
+        ("renderer_sha256", "render_walkthrough.py"),
+        ("storyboard_sha256", "storyboard.json"),
     ):
         assert hashlib.sha256((folder / filename).read_bytes()).hexdigest() == receipt[key]
-    assert (
-        hashlib.sha256((root / receipt["source"]).read_bytes()).hexdigest()
-        == receipt["source_sha256"]
+    for source, digest in receipt["sources"].items():
+        assert hashlib.sha256((root / source).read_bytes()).hexdigest() == digest
+    assert receipt["seconds"] == 90 and receipt["chapters"] == 8
+    assert receipt["private_reads"] == receipt["new_model_fits"] == 0
+    checked = subprocess.run(
+        [sys.executable, str(folder / "render_walkthrough.py"), "--check"],
+        check=True,
+        capture_output=True,
+        text=True,
     )
-    # Reviewed title, all three stages, exact curves and finite-play preview.
-    assert hashlib.sha256((folder / "preview.gif").read_bytes()).hexdigest() == (
-        "a9256f283c11bca6961e7a58da8c390ce794c77f5a1561068add8a228a709199"
-    )
+    assert json.loads(checked.stdout)["values"] == receipt["values"]
+    subtitles = (folder / "overview.srt").read_text(encoding="utf-8")
+    assert subtitles.count(" --> ") == 24
+    assert "00:01:30,000" in subtitles
+    assert all(suffix not in subtitles for suffix in (".csv", ".py", ".md"))

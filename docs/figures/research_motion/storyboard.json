@@ -1,0 +1,13 @@
+{
+  "title": "Options Order Flow & Intraday Volatility",
+  "chapters": [
+    {"seconds": 10, "title": "What is the forecast target?", "captions": ["Can options information help forecast stock movement?", "Forecast 15-minute variance, not price direction.", "Compare three information sets at the same origins."]},
+    {"seconds": 10, "title": "Two sources, six primary stocks", "captions": ["Stock bars provide the six stocks' price histories.", "Option identities link quotes and activity to underlying, type, strike and expiry.", "SPY and QQQ: market context and a separate ETF extension."]},
+    {"seconds": 12, "title": "Keep future information out", "captions": ["Options source timestamps must precede origin t by at least {cutoff} seconds.", "This assumes availability; customer receipt was not observed.", "Subsequent realized variance scores the forecast. It never enters its predictors."]},
+    {"seconds": 12, "title": "Add information, not neural layers", "captions": ["B0: {b0} predictors. Add option state for B1: {b1} total.", "Add mixed activity, price changes, exposure proxies and coverage: B2 has {b2} predictors.", "Both linear and tree families fit all three information sets."]},
+    {"seconds": 12, "title": "Compare fairly through time", "captions": ["Training and tuning use eligible history before each evaluation.", "Pair losses at identical origins; average within each asset-session.", "Equal asset and session averages yield {sessions} calendar sessions—not independent ticks."]},
+    {"seconds": 12, "title": "What did the historical comparison find?", "captions": ["Option state improves both families in this historical sample.", "Mixed B2: linear loss reduction {linear}%; trees {trees}%.", "QLIKE loss reductions are not investment returns or causal evidence."]},
+    {"seconds": 12, "title": "What prevents a stronger conclusion?", "captions": ["Final {final_sessions} sessions: no confirmation. Linear H2 nominal p = {final_p}.", "Assumed source-time cutoffs change the estimated gain substantially.", "Shuffling retains {retained}% of mean gain; timely flow is not isolated."]},
+    {"seconds": 10, "title": "Explore the evidence yourself", "captions": ["Research overview → evidence map → public tables and figures.", "Clone, install the locked environment, then recreate published figures.", "Next, verify public evidence. A raw-data rebuild requires licensed inputs."]}
+  ]
+}

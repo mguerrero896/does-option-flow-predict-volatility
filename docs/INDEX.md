@@ -24,7 +24,18 @@ retain prior results as history; older gate labels do not override the current r
 
 ## Video chapter guide
 
-The complete technical walkthrough is 29 minutes 12 seconds; it is a complement to the written evidence. The video is not included in this repository, and no public playback link is currently provided. A short 6–8 minute research overview has not been produced. The written [FAQ](FAQ.md) and [evidence map](EVIDENCE_MAP.md) provide the same entry route without requiring video access.
+Start with the [90-second public walkthrough](figures/research_motion/overview.mp4):
+question → sources → timing → information sets → evaluation → results → limits →
+reproduction. Its [eight chapters and transcript](figures/research_motion/README.md)
+and [subtitles](figures/research_motion/overview.srt) are public. The written
+[FAQ](FAQ.md) and [evidence map](EVIDENCE_MAP.md) remain usable without video.
+
+<details>
+<summary>Earlier technical walkthrough: chapter record</summary>
+
+The earlier complete technical walkthrough runs 29 minutes 12 seconds. That
+separate recording is not distributed here; the following historical chapter
+record does not describe the current 90-second introduction.
 
 | Start | Chapter |
 | --- | --- |
@@ -37,6 +48,8 @@ The complete technical walkthrough is 29 minutes 12 seconds; it is a complement 
 | 16:51 | What I learned and the next decisive test |
 | 20:24 | For verification: code and data checks |
 | 29:12 | End |
+
+</details>
 
 ## 00 — Question and research design
 

@@ -1,7 +1,7 @@
 # A visual reading of the evidence
 
 The figures answer different questions; visual variety is useful only when it
-reveals something that another figure hides. All three are deterministic views
+reveals something that another figure hides. All four are deterministic views
 of existing public historical aggregates, not new experiments.
 
 | Question | Figure | Read it as |
@@ -9,6 +9,7 @@ of existing public historical aggregates, not new experiments.
 | How large and uncertain is each information increment? | [Effect intervals](figures/public_refresh/effect_intervals.svg) | Saved mean differences with saved 95% percentile bootstrap intervals. The testing decision still uses the declared one-sided sequence. |
 | Is the average shared across stocks and models? | [Asset heatmap](figures/public_refresh/asset_heatmap.svg) | Signed mean QLIKE differences, fixed ticker order, one symmetric color scale. Not significance or causal attribution. |
 | What is concealed by accumulation? | [Paired session losses](figures/public_refresh/paired_session_losses.svg) | All 419 B1/B2 pairs per family; below equality favors B2. Identical axes, no point exclusions, no fitted trend. |
+| How dependent is the gain on assumed availability? | [Timing sensitivity](figures/public_refresh/timing_sensitivity.svg) | Saved linear-model comparisons at three source-time cutoffs, not measured delivery latency or a causal effect per second. |
 
 ## Sources and exact transformations
 
@@ -26,6 +27,16 @@ of existing public historical aggregates, not new experiments.
   averages forecast-origin losses within asset/session, then averages assets
   equally. Do not compute QLIKE from averaged forecasts and actuals: that would
   change the metric. Overlapping dots do not imply missing observations.
+- Timing: [60/120-second contrasts](../artifacts/rp4_robustness_public_v1/pit_60_contrasts.csv)
+  and [300/120-second contrasts](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv).
+  Use the saved linear B1/B0 and B2/B1 comparisons, each with its own baseline
+  denominator. The line segments connect only the three observed settings; they
+  do not estimate values between them. The 120-second cutoff remains primary.
+  Denominators are checked against [60-second session losses](../artifacts/rp4_robustness_public_v1/pit_60_session_losses.csv),
+  [300-second session losses](../artifacts/rp4_robustness_public_v1/pit_300_session_losses.csv)
+  and the primary session-loss table above; the mean paired differences must
+  match the saved contrast estimates.
+  [Interpretation and complete numerical table](B2_INTERPRETATION.md).
 
 These are the 419 development sessions, not the final 25-session window. The
 final window does not confirm the full sequence. None of these visualizations
@@ -52,6 +63,18 @@ between fitting and forecast evaluation in Hyndman and Athanasopoulos,
 This motivates the visual design; it is not external validation of this study.
 
 ## Reproduce
+
+Two additional diagrams explain the method and navigation without pretending to
+be measurements: [one forecast in time](figures/public_refresh/forecast_timeline.svg)
+and [repository route](figures/public_refresh/repository_route.svg). Their
+[producer](figures/public_refresh/render_reader_journey.py) uses the existing SVG
+style and checks the named repository paths. They contain no simulated market data.
+Visible labels use descriptive titles; technical filenames belong in these
+reproduction instructions and source links, not inside the figures.
+
+```sh
+uv run --frozen python docs/figures/public_refresh/render_reader_journey.py --check
+```
 
 From the repository root, using the existing Python environment:
 
