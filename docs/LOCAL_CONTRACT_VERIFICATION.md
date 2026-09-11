@@ -1,5 +1,11 @@
 # Completing the public report's omitted contracts locally
 
+**Local execution verified 2026-09-12: 69 selected, 69 passed, zero failures,
+errors or skips.** The [receipt](verification/local_contracts_20260912.json)
+identifies the clean code commit tested and all 69 selected node IDs. This receipt
+and this explanatory note were added afterward; it is a local validation result,
+not a claim that an independent reader has access to the licensed files.
+
 A clean public clone cannot inspect excluded licensed files. Its omissions are
 not passes. The matching local verification runs the exact omitted node IDs,
 with no skip exemptions, and fails unless every selected test passes.
