@@ -41,8 +41,8 @@ PHASE8_REMEDIATION_GRID_AMENDMENT = (
 )
 PHASE8_REMEDIATION_RESULT = PHASE8_DIR / "materialized_remediation_20260831_v1.json"
 PHASE8_ADDENDUM = Path("reports") / "phase8a_exploratory_bridge_addendum_v13.md"
-UW_LATENCY_AGGREGATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
-UW_LATENCY_STATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
+UW_LATENCY_AGGREGATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_20260912_v5.json"
+UW_LATENCY_STATE = Path("artifacts") / "gate5_pit" / "uw_latency_campaign_state_20260912_v5.json"
 UW_LATENCY_ANOMALY = Path("artifacts") / "gate5_pit" / "uw_latency_anomaly_20260821_v1.json"
 PIT_V22_DIR = Path("artifacts") / "target_blind_v22"
 PIT_V22_PREREGISTRATION = PIT_V22_DIR / "next_confirmation_preregistration_v2.json"
@@ -537,7 +537,7 @@ def build_historical_state() -> dict[str, Any]:
         or uw_latency_anomaly.get("self_sha256")
         != _canonical_sha(uw_latency_anomaly, omit="self_sha256")
         or uw_latency_state.get("state") != "RECONCILED_PARTIAL"
-        or uw_latency_state.get("counts") != {"collected": 12, "reconciled": 7, "unreconciled": 5}
+        or uw_latency_state.get("counts") != {"collected": 13, "reconciled": 13, "unreconciled": 0}
         or uw_latency_state.get("claim_classification") != "PROXY_ONLY_CROSS_CHANNEL"
         or uw_latency_state.get("artifact_lifecycle", {}).get("policy")
         != "IMMUTABLE_DATED_SNAPSHOT"
@@ -553,7 +553,7 @@ def build_historical_state() -> dict[str, Any]:
         .get("values", {})
         .get("9", {})
         .get("over_60_seconds", {})
-        != {"count": 8, "rate": 8 / 480}
+        != {"count": 19, "rate": 19 / 1282}
     ):
         raise ValueError("UW_LATENCY_CAMPAIGN_AUTHORITY_DRIFT")
     return {

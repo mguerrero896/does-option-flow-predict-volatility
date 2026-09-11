@@ -31,8 +31,8 @@
  "authorized_sources": {
   ".github/workflows/ci.yml": "4c7e469bb595548409e828646864ce33fb6ad0c8b14fd74436a165b9d4ab71fc",
   "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json": "c1b977c8b919f03a2cdc38de4e90b4a0cd282450eb95f9b13adc0fd4d6f39b63",
-  "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json": "e488ae6e54ddb99d0a379a276792fc40b23b0988b3f23ab7443666c070a3927c",
-  "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json": "6ef3ecb350b8c049af4397a0369282370e89e719c26e52bd942f45a53366a721",
+  "artifacts/gate5_pit/uw_latency_campaign_20260912_v5.json": "3e5cc5c8cacb1646c4d04bac765db61477151d16ef523d77488211b006382c17",
+  "artifacts/gate5_pit/uw_latency_campaign_state_20260912_v5.json": "25cedf6ce840a51d51a3115fcbb2a960f1294d6fe795b96e887310bf357849eb",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v1.json": "fdb96ec95738868a41a1c3296a88c5af7999573668cfbcd5f17b7d65b510aa60",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v10.json": "fefdd1f5586d1d13484fdadab415037633041a16017a7f3fd2a22ea006be3dbb",
   "artifacts/local_evidence_gates/pr55_remediation_20260902_v2.json": "cfc71d0dc41e75d1ab32bbf939a48ecd21d83faef172251698c3f98ef3d4d490",
@@ -72,7 +72,7 @@
   "artifacts/target_blind_v22/successor_method_freeze_v2.json": "d803083ccbbaa23889db8ecae7fa5ed8323dc42cb8ae4613edcad5faa404dc40",
   "artifacts/target_blind_v22/successor_owner_authorization_v1.json": "db2f243bd8201a3363624be7120b49affd30a13b21ad6ed4f481e69e7487eea2",
   "artifacts/target_blind_v22/successor_owner_authorization_v2.json": "b9176f7a0745ea7ba3bb0e1f7fbf796f4a6e01d5071cab6a65a15974193c81a1",
-  "data/FROZEN_ARTIFACTS.json": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681",
+  "data/FROZEN_ARTIFACTS.json": "d55fc32af6a19e3eedac0c3bdcf896ed099d5c8457024fe10d538f3255382cff",
   "data/GATED_DATA_POINTERS.json": "f6fbe1e0b9188d57cfb22b89dbd608cbb2aa10750783e3da3df50c5b6480b5d2",
   "data/PUBLIC_COMMIT_TRANSLATIONS.json": "96294b6677f98649109c7ef8ace3349c56a3a78ec5f379e32af66fcdb8713639",
   "data/PUBLIC_METADATA_REDACTIONS.json": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593",
@@ -1706,16 +1706,16 @@
   }
  },
  "frozen_evidence": {
-  "artifact_count": 159,
+  "artifact_count": 161,
   "external_custody_artifact_count": 2,
-  "physical_artifact_count": 157,
+  "physical_artifact_count": 159,
   "public_metadata_redactions": {
    "artifact_count": 14,
    "ledger": "data/PUBLIC_METADATA_REDACTIONS.json",
    "ledger_sha256": "9cdf3028d016dce42f772356d7989b0124c92a0ecee0d1d3e141ca94041e2593"
   },
   "registry": "data/FROZEN_ARTIFACTS.json",
-  "registry_sha256": "d2832234ea56ed7ce9cb277718637e4d59f048280d42978f991063d8c6d58681"
+  "registry_sha256": "d55fc32af6a19e3eedac0c3bdcf896ed099d5c8457024fe10d538f3255382cff"
  },
  "future_campaigns": [
   "RP4 registered prospective replication",
@@ -2182,8 +2182,8 @@
   }
  },
  "uw_latency_campaign": {
-  "aggregate_artifact": "artifacts/gate5_pit/uw_latency_campaign_20260902_v4.json",
-  "aggregate_self_sha256": "0b7174255a74d4b3c622cee2ea3bc9f03eb85eea451c7b94dd277d128129b81c",
+  "aggregate_artifact": "artifacts/gate5_pit/uw_latency_campaign_20260912_v5.json",
+  "aggregate_self_sha256": "5314c137c58a493b60df95fad8f059f90f685141a3b8e5e90aebe2ceada8a7da",
   "anomaly_artifact": "artifacts/gate5_pit/uw_latency_anomaly_20260821_v1.json",
   "anomaly_classification": "COLLECTOR_RESTART_REPLAY_DUPLICATION",
   "artifact_lifecycle": {
@@ -2197,27 +2197,27 @@
   },
   "claim_classification": "PROXY_ONLY_CROSS_CHANNEL",
   "counts": {
-   "collected": 12,
-   "reconciled": 7,
-   "unreconciled": 5
+   "collected": 13,
+   "reconciled": 13,
+   "unreconciled": 0
   },
   "opening_receipt_hour": {
-   "count": 480,
+   "count": 1282,
    "over_120_seconds": {
     "count": 0,
     "rate": 0.0
    },
    "over_60_seconds": {
-    "count": 8,
-    "rate": 0.016666666666666666
+    "count": 19,
+    "rate": 0.014820592823712949
    },
    "quantiles_seconds": {
-    "p10": 4.1518511,
-    "p50": 33.3110915,
-    "p90": 54.743225900000006,
-    "p99": 60.24905
+    "p10": 5.9236727999999985,
+    "p50": 30.010281499999998,
+    "p90": 53.93743440000001,
+    "p99": 60.35985267
    },
-   "session_count": 6
+   "session_count": 12
   },
   "revision": {
    "reason": "AGGREGATE_ALERT_VS_INDIVIDUAL_TRADE_NOT_COMPARABLE",
@@ -2226,7 +2226,7 @@
   "safe_to_open_or_evaluate_oos": "NO",
   "safe_to_reconcile_existing_results": "NO",
   "state": "RECONCILED_PARTIAL",
-  "state_artifact": "artifacts/gate5_pit/uw_latency_campaign_state_20260902_v4.json",
-  "state_self_sha256": "b49fe5eb4f45000e7f4907b78173de03a7649a40d40974563552692341c56deb"
+  "state_artifact": "artifacts/gate5_pit/uw_latency_campaign_state_20260912_v5.json",
+  "state_self_sha256": "4e6963ef634a24858f0f50dff00dff99c8a451def6296cb50ea782b25baa593d"
  }
 }

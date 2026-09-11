@@ -8,11 +8,13 @@ import subprocess
 from decimal import Decimal
 from pathlib import Path
 
+from scripts.generate_canonical_state import UW_LATENCY_AGGREGATE, UW_LATENCY_STATE
 from tests.withdrawn_claims import carries_supersession_notice, normalize
 
 from mds650.uw_latency_campaign import canonical_sha256
 
 REPO = Path(__file__).resolve().parents[2]
+# The report and original Gate5 table retain their historical v4 source, not v5 values.
 AGGREGATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_20260902_v4.json"
 STATE = REPO / "artifacts" / "gate5_pit" / "uw_latency_campaign_state_20260902_v4.json"
 SAME_DAY_PRIOR_AGGREGATE_V3 = (
@@ -85,6 +87,8 @@ def _asserts_outdated_campaign_state(text: str) -> bool:
 
 def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
     for path in (
+        REPO / UW_LATENCY_AGGREGATE,
+        REPO / UW_LATENCY_STATE,
         AGGREGATE,
         STATE,
         SAME_DAY_PRIOR_AGGREGATE_V3,
@@ -116,14 +120,26 @@ def test_campaign_artifacts_are_self_hashed_and_target_blind() -> None:
 
 
 def test_campaign_state_is_registered_canonical_authority() -> None:
-    state = _load(STATE)
+    state = _load(REPO / UW_LATENCY_STATE)
     canonical = _load(REPO / "data" / "CANONICAL_STATE.json")
     assert state["state"] == "RECONCILED_PARTIAL"
     assert canonical["uw_latency_campaign"]["state"] == state["state"]
     assert canonical["uw_latency_campaign"]["state_self_sha256"] == state["self_sha256"]
-    assert STATE.relative_to(REPO).as_posix() in canonical["authorized_sources"]
-    assert AGGREGATE.relative_to(REPO).as_posix() in canonical["authorized_sources"]
+    assert UW_LATENCY_STATE.as_posix() in canonical["authorized_sources"]
+    assert UW_LATENCY_AGGREGATE.as_posix() in canonical["authorized_sources"]
     assert ANOMALY.relative_to(REPO).as_posix() in canonical["authorized_sources"]
+
+
+def test_v5_revision_preserves_historical_report_and_current_inventory() -> None:
+    current = _load(REPO / UW_LATENCY_AGGREGATE)
+    state = _load(REPO / UW_LATENCY_STATE)
+    assert state["as_of_date"] == "2026-09-02"  # Session-end cutoff, not receipt cutoff.
+    assert state["counts"] == {"collected": 13, "reconciled": 13, "unreconciled": 0}
+    opening = current["operational_latency"]["by_ny_hour"]["values"]["9"]
+    assert opening["count"] == 1282 and opening["over_60_seconds"]["count"] == 19
+    assert _load(AGGREGATE)["operational_latency"]["by_ny_hour"]["values"]["9"]["count"] == 480
+    text = GATE5.read_text(encoding="utf-8")
+    assert "19/1,282" in text and "Historical v4 measurement" in text
 
 
 def test_published_campaign_state_is_current_or_explicitly_historical() -> None:

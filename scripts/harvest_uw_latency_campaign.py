@@ -31,7 +31,12 @@ def build_snapshot(
     aggregate_path: str,
     as_of_date: str,
 ) -> tuple[dict[str, object], dict[str, object]]:
-    """Regenerate one safe snapshot from the authorized UW session directory."""
+    """Observe the current store for session dates through ``as_of_date``.
+
+    This is not a knowledge-time replay: later reconciliations of those sessions
+    change the result. Publish changed observations at new dated paths; retain
+    earlier snapshots and their exact source hashes.
+    """
 
     sessions_root = external_root / "uw_latency" / "sessions"
     if not sessions_root.is_dir():
