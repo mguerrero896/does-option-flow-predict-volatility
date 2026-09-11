@@ -2,9 +2,9 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-[![Watch the 90-second research walkthrough: question, sources, one forecast, information sets, chronological comparison, results, limits and reproduction.](docs/figures/research_motion/preview.gif)](docs/figures/research_motion/overview.mp4)
+[![Watch the 90-second research walkthrough: question, sources, one forecast, information sets, chronological comparison, results, limits and reproduction.](docs/figures/research_motion/preview.gif)](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4)
 
-[Play video · 90 seconds](docs/figures/research_motion/overview.mp4) ·
+[Play video · 90 seconds](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4) ·
 [Download MP4](docs/figures/research_motion/overview.mp4) ·
 [Static cover](docs/figures/research_motion/title.png) ·
 [Transcript and chart sources](docs/figures/research_motion/README.md)
