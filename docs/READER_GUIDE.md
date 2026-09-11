@@ -32,7 +32,12 @@ open and restricted research objects described in
 
 ## Visual provenance
 
-The [cover](figures/public_refresh/research_cover.png) is an AI-assisted editorial
+The current motion overview has a [transcript, source and rendering procedure](figures/research_motion/README.md).
+It replaces the schematic surface with a chart reconstructed from public session
+loss aggregates. Generated particles remain decoration; labels and curves are
+rendered separately from the generative background.
+
+The earlier [static cover](figures/public_refresh/research_cover.png) is an AI-assisted editorial
 illustration made with the built-in image-generation tool, not an empirical plot
 or a model output. Company marks identify the six stocks; no affiliation or
 endorsement is implied. SPY and QQQ are labeled separately as index-tracking ETFs

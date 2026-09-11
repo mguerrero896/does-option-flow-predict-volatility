@@ -38,6 +38,7 @@ REVIEWED_RASTERS: frozenset[str] = frozenset(
     {
         "docs/figures/system-architecture.png",
         "docs/figures/public_refresh/research_cover.png",
+        "docs/figures/research_motion/preview.gif",
     }
 )
 

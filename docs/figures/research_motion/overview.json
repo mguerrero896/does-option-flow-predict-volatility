@@ -1,0 +1,21 @@
+{
+  "source": "artifacts/rp4_v4_b2_rv15/session_losses.csv",
+  "source_sha256": "28174eb5a4f032d0b31b6a7b65e76e05710168278419d87bf31a92ebec2d9ac1",
+  "sessions": 419,
+  "cumulative_endpoints": [
+    0.4750452971596971,
+    -0.08920638707048253
+  ],
+  "method": "Chronological cumulative sum of session mean loss B1 minus B2",
+  "new_model_fits": 0,
+  "private_data_reads": 0,
+  "duration_seconds": 30,
+  "fps": 24,
+  "fonts": [
+    "segoeui.ttf",
+    "georgia.ttf"
+  ],
+  "title_sha256": "43b123c931c2639a26aea82ba9613b7f73cdc4efb0dd010709f5e56db0480eca",
+  "background_sha256": "132d268d3080fc22396a7dcb4f51eb305a2ff39245ff8f0b49ff00c8feb33038",
+  "video_sha256": "4004965f49529c662a88da8172db582f9c519aebb1dd5f5d0812f60a6d412b57"
+}

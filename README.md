@@ -2,9 +2,14 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-![Six stocks, an options contract, three nested information sets and a 15-minute variance forecast. SPY and QQQ belong to a separate ETF extension. Illustrative cover, not measured results.](docs/figures/public_refresh/research_cover.png)
+[![Watch the 30-second research overview: option records, source-time eligibility, nested B0/B1/B2 information sets, linear and tree models, and historical forecast-loss curves.](docs/figures/research_motion/preview.gif)](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/5c93baad-523f-46a3-bdeb-d20afba96e9b.mp4)
 
-Miguel Guerrero · Master of Data Science · Sydney Polytechnic Institute · September 2026
+[Play video · 30 seconds](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/5c93baad-523f-46a3-bdeb-d20afba96e9b.mp4) ·
+[Download MP4](docs/figures/research_motion/overview.mp4) ·
+[Static cover](docs/figures/research_motion/title.png) ·
+[Transcript and chart sources](docs/figures/research_motion/README.md)
+
+Miguel Guerrero
 
 ## In one minute
 
