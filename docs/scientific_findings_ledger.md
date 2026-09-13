@@ -171,6 +171,19 @@ retain the source commit and explicit public selection. V4 remains the headline.
 | The joint claim across families fails | Trees: option state +1.0830%, p = 0.0794; flow −0.1485%, nominal p = 0.6738, with H2 unopened. `global_joint_reject=false`. | The inherited at-least-one-family closure field is true, while the registered both-family joint claim remains false. These rules are not interchangeable. |
 | ETF and stock flow effects are heterogeneous | Ridge flow: SPY +1.26%, p = 0.020; QQQ +0.54%, p = 0.084; positive signs in 6/8 assets, with META/MSFT slightly negative. | Asset-level diagnostics are not eight independent confirmations. The original-six control exactly recovers the v4 primary comparison; the expanded model's six-stock subset is a different comparison. |
 
+## Producer lineage after the B2 history-eligibility repair
+
+**Status: CURRENT, documentary.** Public commit 1c9db3e5 (pull request 103) repaired the B2
+producer: availability exclusions now apply before normalization, excluded or incomplete
+features stay null, and a row needs 20 eligible prior sessions with 80% eligible-origin
+coverage. The frozen RP4 v4 aggregates were produced by the earlier producer and have not
+been recomputed; the [closeout note](b2_repair_and_evidence_closeout_20260905.md) measured the
+repair on earlier campaigns only (27,153 changed origins in the 180-session B2 universe;
+Gamma B2/B1 -0.003127 to -0.002206; LightGBM +0.001368 to +0.001055; B1/B0 unchanged). The
+[lineage record](../data/b2_producer_lineage.json) pins the current producer hashes, and a
+contract fails whenever the producer changes without updating this statement. No result,
+frozen artifact or registered decision changes.
+
 ## Reconciling the apparent contradictions
 
 **537 sessions versus 335.** The RP2 figure uses its observed LightGBM effect,

@@ -1,0 +1,41 @@
+{
+  "schema": "b2-producer-lineage-v1",
+  "repaired_by_public_commit": "1c9db3e5",
+  "repair_pull_request": 103,
+  "closeout_document": "docs/b2_repair_and_evidence_closeout_20260905.md",
+  "closeout_measured_on": "earlier campaigns (180-session B2 universe; 159-session published common panel), not the RP4 v4 419-session panel",
+  "frozen_rp4_v4_aggregates_recomputed_with_repaired_producer": false,
+  "producer_sha256": {
+    "src/mds650/phase6.py": "40666a1f25b04c70891fc2924c3f75c62b89e308a3a375ca43efa1bacfb1dce8",
+    "src/mds650/phase5_features.py": "393a54902a7cce5fb70f39dac395c9881acc99302c301b21ac06b7dfc7bec37d",
+    "src/mds650/target_blind_panel_v22.py": "692a59915de3764613a71bef47fc4e0c7949dd4b8852365be93889092870d1d0",
+    "scripts/build_target_blind_common_panel_v22.py": "006267aaf05cc9163d536936e53ab6202018ddc8e5b3fd9e6a9064ada8587f23"
+  },
+  "measured_effect": {
+    "b2_universe_180_sessions": {
+      "total_origins": 77328,
+      "complete_before": 68237,
+      "complete_after": 68237,
+      "origins_with_changed_features": 27153,
+      "changed_cells": 244377
+    },
+    "published_common_panel_159_sessions": {
+      "complete_before": 62266,
+      "complete_after": 62266,
+      "origins_with_changed_features": 24604,
+      "changed_cells": 221436
+    },
+    "isolated_reevaluation_b2_over_b1_qlike_gain": {
+      "gamma": {
+        "previous": -0.003126621051,
+        "repaired": -0.002205552554
+      },
+      "lightgbm": {
+        "previous": 0.001368014098,
+        "repaired": 0.001055171107
+      }
+    },
+    "b1_over_b0_unchanged": true
+  },
+  "scope": "Documentary lineage record; it authorizes no re-evaluation and grants no scientific approval."
+}
