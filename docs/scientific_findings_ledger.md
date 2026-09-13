@@ -90,6 +90,22 @@ demonstrated. The completed 60 / 120 / 300-second sensitivity is recorded below.
 The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
 binds source closure, exact CSV copies and explicitly sanitized JSON derivatives.
 
+## Completed linear RV30 placebo
+
+**Status: CURRENT.** The [closed summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv30_summary.csv)
+reports observed B2/B1 delta 0.000802389659514178 QLIKE and mean within-asset-session
+shuffled-flow delta 0.001210658368310869, or 150.9% of the observed increment.
+Thirty-eight of 50 permutations exceed the observed, without ties:
+empirical p = 39/51 = 0.7647058823529411; ascending rank = 13/51.
+The joint 69-column flow block is shuffled across 419 sessions per permutation,
+with 20,950 fits. At 30 minutes, shuffled flow performs better on average than
+aligned flow, so the control does not support a minute-by-minute alignment
+advantage. This is consistent with the [registered v3 RV30 H2](rp4/results_v3.md)
+not rejecting (p = 0.0525). It is not a causal decomposition, an executable
+real-time information set, a joint test across horizons or a change to the RV15
+headline. The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
+binds exact CSV copies and declared JSON derivatives to the closed source.
+
 ## Completed 60 / 120 / 300-second source-time sensitivity
 
 **Status: CURRENT.** The [linear RV15 contrasts](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv)
@@ -121,8 +137,9 @@ with predictive flow information concentrated near the origin, not proof of that
 mechanism or actual receipt. Observed receipt times remain missing evidence.
 The [import receipt](../artifacts/rp4_robustness_public_v1/import_receipt.json)
 binds three exact CSV copies and two declared JSON derivatives per sensitivity
-to their source closures. Tree-model placebos at RV15 and RV30 are deferred for
-cost; the linear RV30 placebo is in progress and is not certified by these closures.
+to their source closures. The linear robustness campaign is complete: RV15 and
+RV30 placebos and 60 / 120 / 300-second timing comparisons. Tree-model placebos
+at RV15 and RV30 remain deferred for computational cost.
 
 ## Closed registered exploratory v5 extension
 
