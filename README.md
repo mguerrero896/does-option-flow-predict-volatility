@@ -206,6 +206,10 @@ profitability nor broader generalization. More independent evidence—not new pr
 or another interpretation of these same sessions—is needed for a stronger claim.
 [Proposed decisive controls, not executed experiments](docs/rp4/PROSPECTIVE_RESEARCH.md).
 Existing prospective protocols and one-shot rules remain unchanged.
+The frozen v4 aggregates were produced before the B2 history-eligibility repair
+of 13 September 2026; the current producer will not reproduce them byte-for-byte,
+and they have not been recomputed. [Code lineage](docs/CURRENT.md#history-and-interpretation-limits) ·
+[Defect D89](docs/known_defects_and_resolutions.md).
 
 ## Reproduce / inspect
 
