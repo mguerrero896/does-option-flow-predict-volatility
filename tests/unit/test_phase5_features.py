@@ -59,8 +59,10 @@ def test_compact_b2_features_are_target_blind() -> None:
     assert low.equals(high)
 
 
-def test_compact_b2_rejects_impossible_raw_aggregates() -> None:
-    invalid = {**_raw_row(), "option_trade_count_5m": -1.0}
+@pytest.mark.parametrize("column", sorted(_raw_row()))
+@pytest.mark.parametrize("value", [None, -1.0, math.nan, math.inf, -math.inf])
+def test_compact_b2_rejects_impossible_raw_aggregates(column: str, value: float | None) -> None:
+    invalid = {**_raw_row(), column: value}
 
     with pytest.raises(ValueError, match="B2_RAW_FEATURE_VALUES_INVALID"):
-        add_compact_b2_features(pl.DataFrame([invalid]))
+        add_compact_b2_features(pl.DataFrame([_raw_row(), invalid]))
