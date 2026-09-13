@@ -1,7 +1,7 @@
-# Auditoría del informe capstone — Overleaf en vivo vs. evidencia local
+# Auditoría del informe de tesis — Overleaf en vivo vs. evidencia local
 
 **Fecha:** 2026-09-11 · **Auditor:** revisor automatizado del propietario (registro local) · **Proyecto Overleaf:** `6aa05182e720e12c4f829a3e`
-**Contra:** `docs/CURRENT.md`, `artifacts/rp4_v4_b4/*`, `artifacts/rp4_robustness_public_v1/*`, plantilla del docente `hasanalikhattak/Sydney-Polytechnic-Institute-Capstone-Template-MDS65X`
+**Contra:** `docs/CURRENT.md`, `artifacts/rp4_v4_b4/*`, `artifacts/rp4_robustness_public_v1/*`, plantilla institucional del docente (repositorio de la plantilla de tesis)
 
 ---
 
@@ -12,7 +12,7 @@ Existen **dos objetos distintos**, y confundirlos lleva a conclusiones falsas:
 | Objeto | Qué es | Estado |
 |---|---|---|
 | `Sydney_Polytechnic_Institute_Capstone_SPI240339_MDS650 (2).pdf` (Descargas) | Foto compilada **vieja**, 66 páginas | Obsoleta |
-| Proyecto Overleaf `...SPI240339-MDS650` | Fuente **viva**, 69 páginas | **Canónica** |
+| Proyecto Overleaf del informe (fuente viva) | Fuente **viva**, 69 páginas | **Canónica** |
 | Proyecto Overleaf `...Template-MDS65X` | Plantilla del docente, compartida por enlace | No es una versión del paper |
 
 **Solo existe un paper.** La primera parte de esta auditoría se hizo contra el PDF; al abrir la fuente viva
