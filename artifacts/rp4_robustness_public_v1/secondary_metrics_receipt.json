@@ -1,0 +1,64 @@
+{
+  "elapsed_seconds": 18.16080320000765,
+  "environment": {
+    "cuda_visible_devices": "-1",
+    "device": "cpu",
+    "logical_cpus": 32,
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.12 (main, Dec 17 2025, 21:10:14) [MSC v.1944 64 bit (AMD64)]",
+    "threads_per_fit": 4,
+    "versions": {
+      "exchange-calendars": "4.13.2",
+      "lightgbm": "4.7.0",
+      "numpy": "2.5.2",
+      "pandas": "3.0.5",
+      "polars": "1.44.1",
+      "pyarrow": "25.0.1",
+      "scikit-learn": "1.9.0",
+      "scipy": "1.18.0"
+    }
+  },
+  "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+  "new_fits": 0,
+  "output_sha256": "66ba437b3878bb4b2c5241863236b0eaf59712eaf3be8a63bbe40a1baca56f88",
+  "protocol_sha256": "44f06908d1cd263154a77ae0af3c85f66dacfade0c52309aca0ffb5acf040821",
+  "saved_predictions": [
+    {
+      "N_origins": 160832,
+      "horizon": 15,
+      "sha256": "c11ed7317c132756cdb4c346b7bd5331add02842876e27c0b5d423ee0cca4eef",
+      "window": "primary"
+    },
+    {
+      "N_origins": 9750,
+      "horizon": 15,
+      "sha256": "c6300b47ad563717a7510edae27cb4cce28972d2ef06521150354a0d62ffaaed",
+      "window": "confirmation"
+    },
+    {
+      "N_origins": 160832,
+      "horizon": 30,
+      "sha256": "9284a1e3d3bccf63f695307d240b5fd1c7bcff52e247c4a2d9e32ee3b574205e",
+      "window": "primary"
+    },
+    {
+      "N_origins": 9750,
+      "horizon": 30,
+      "sha256": "03c64e641637847c3747dc61ba9fc5fda6db2a5a3fa77a7a7b033fb5851bdd2c",
+      "window": "confirmation"
+    },
+    {
+      "N_origins": 160832,
+      "horizon": 5,
+      "sha256": "292f66aaded2dcf85672c4ab9c3ce37fe6f2712fe97c3ddcc35ae592c9fd615b",
+      "window": "primary"
+    },
+    {
+      "N_origins": 9750,
+      "horizon": 5,
+      "sha256": "e104a45525b95a3397a3ebb6994f385320f29090541812639ee0d61af738507e",
+      "window": "confirmation"
+    }
+  ],
+  "status": "COMPLETE"
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "rp4-defense-reference-metrics-update-v1",
+  "scope": "Completed historical robustness presentation update; original presentation seals and numeric bindings retained unchanged.",
+  "documents": {
+    "examiner_qa.md": {
+      "before_sha256": "87bb78ec01e70095abca856a059723cd34cfda8564e08673552425af92a496ef",
+      "after_sha256": "be38e051b6148c86ae89794af880e55059cf7e11fa8f04554a8a28ff95f498e4",
+      "replacements": [
+        {
+          "before": "| Model comparison: seasonal persistence, Corsi HAR-RV, regularized linear models and trees | Winsorized linear model with rank filtering—nominal ridge—and LightGBM; HAR/HARQ and seasonality form part of B0. | **DECLARED DEVIATION** in the compared set; separate HAR-RV/seasonal-persistence comparisons remain **PENDING**. Including these predictors does not deliver those benchmark rows or make almost unpenalized ridge substantively regularized. | [Committed models](../../../../archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json) · [Implementation](../../../../../artifacts/rp4_v3_code/models.py) · [Version table](../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) |",
+          "after": "| Model comparison: seasonal persistence, Corsi HAR-RV, regularized linear models and trees | Winsorized linear model with rank filtering—nominal ridge—and LightGBM; separate HAR-RV/seasonal-persistence comparisons are now imported. | **COMPLETED** reference comparisons, nominal and post-primary; **DECLARED DEVIATION** in the original compared set remains. Including HAR/HARQ predictors does not make almost unpenalized ridge substantively regularized. Nothing changes the headline or registered sequence. | [Committed models](../../../../archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json) · [Reference aggregates](../../../../../artifacts/rp4_robustness_public_v1/reference_contrasts.csv) · [Current evidence](../../../../CURRENT.md) |"
+        },
+        {
+          "before": "| Secondary MAE and RMSE evaluation | Absent from the inspected RP4 results; shared functions could calculate them. | **PENDING**, without execution in this review. The absence concerns the examined RP4 workflow and outputs, not the entire repository. | [Commitment](../../../../archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json) · [Shared metrics](../../../../../src/mds650/metrics.py) · [Primary table](../../../../../artifacts/rp4_v4_b4/primary_statistics.csv) |",
+          "after": "| Secondary MAE and RMSE evaluation | Saved estimates from both historical windows and families, with independent recalculation recorded by the source closure and no new fits. | **COMPLETED**, descriptive without tests; no model selection, headline change or registered-sequence change. | [MAE/RMSE aggregates](../../../../../artifacts/rp4_robustness_public_v1/secondary_metrics.csv) · [Source closure](../../../../../artifacts/rp4_robustness_public_v1/close_secondary_metrics.json) · [Current evidence](../../../../CURRENT.md) |"
+        },
+        {
+          "before": "| Comparison tables | **ALIGNED** | [comparison_v1_v4.csv](../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) and [primary_statistics.csv](../../../../../artifacts/rp4_v4_b4/primary_statistics.csv): versions, windows, families, contrasts and adverse signs are included; pending separate benchmarks are not treated as delivered. |",
+          "after": "| Comparison tables | **ALIGNED** | [comparison_v1_v4.csv](../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv) and [primary_statistics.csv](../../../../../artifacts/rp4_v4_b4/primary_statistics.csv): versions, windows, families, contrasts and adverse signs are included; [separate reference comparisons](../../../../../artifacts/rp4_robustness_public_v1/reference_contrasts.csv) are now completed, nominal and post-primary. |"
+        },
+        {
+          "before": "| Robustness analysis | **ALIGNED** for the analyses present | [robustness.csv](../../../../../artifacts/rp4_v4_b4/robustness.csv), [regime_secondary.csv](../../../../../artifacts/rp4_v4_b4/regime_secondary.csv) and [audit report](../../../../../artifacts/rp4_closeout_audit/REPORT.md). These do not imply that MAE/RMSE, PIT variants, placebo or all of RQ3 were executed. |",
+          "after": "| Robustness analysis | **ALIGNED** for the analyses present | [robustness.csv](../../../../../artifacts/rp4_v4_b4/robustness.csv), [regime_secondary.csv](../../../../../artifacts/rp4_v4_b4/regime_secondary.csv) and [audit report](../../../../../artifacts/rp4_closeout_audit/REPORT.md). Separate references and descriptive MAE/RMSE are now completed. The PIT/placebo inventory retains its historical inspection status; [current evidence](../../../../CURRENT.md) resolves subsequent closures. All of RQ3 is not established. |"
+        },
+        {
+          "before": "**Documented outstanding work, without execution.** MAE/RMSE, PIT variants, placebo and separate HAR-RV/seasonal-persistence benchmarks remain committed robustness work outside this historical documentary review. Dictionary/notebook updates and verification of the bibliographic requirement are also documented; they were not silently completed during the alignment audit. This review adds text, tables and contracts over saved evidence; it adds no losses, fits, intervals or data and changes no prospective registration.",
+          "after": "**Completed references and metrics; remaining documentary work.** Separate HAR-RV/seasonal-persistence references and descriptive MAE/RMSE are now imported from their closed sources. The PIT/placebo rows retain the earlier documentary inspection status; [current evidence](../../../../CURRENT.md) resolves subsequent closures. Dictionary/notebook updates and verification of the bibliographic requirement remain documented work. This presentation update imports saved aggregates and adds no fits, resampling or prospective reading. References are nominal post-primary comparisons; MAE/RMSE are descriptive without tests; nothing changes the headline or registered sequence. [Source closures and hashes](../../../../../artifacts/rp4_robustness_public_v1/import_receipt.json)."
+        }
+      ]
+    },
+    "defense_slides.md": {
+      "before_sha256": "0f84c393b3afb999abfae5666ce634c0aa515cb91e10d7616ab40c400e024b46",
+      "after_sha256": "19bbca03930296bf8e7d601694ae9eb89ac950b2c10f3af22642ad87447328f8",
+      "replacements": [
+        {
+          "before": "| Seasonal persistence/HAR-RV/regularized linear/trees → rank-filtered linear and LightGBM | **DECLARED DEVIATION**; HAR/HARQ are predictors, separate comparisons **PENDING**. |",
+          "after": "| Seasonal persistence/HAR-RV/regularized linear/trees → rank-filtered linear and LightGBM | **DECLARED DEVIATION** in the original model set remains; separate reference comparisons **COMPLETED**, nominal and post-primary. [Aggregates](../../../../../artifacts/rp4_robustness_public_v1/reference_contrasts.csv) · [Current evidence](../../../../CURRENT.md). |"
+        },
+        {
+          "before": "| Asset/regime analysis; MAE/RMSE, PIT variants and placebo | Delivered breakdowns **ALIGNED**; the three remaining robustness checks **PENDING**, without execution. Current PIT: **120 seconds**. |",
+          "after": "| Asset/regime analysis; MAE/RMSE, PIT variants and placebo | Delivered breakdowns **ALIGNED**; descriptive MAE/RMSE **COMPLETED**. PIT/placebo retain their historical **PENDING** inspection status, resolved by [current evidence](../../../../CURRENT.md). Primary PIT: **120 seconds**. [MAE/RMSE aggregates](../../../../../artifacts/rp4_robustness_public_v1/secondary_metrics.csv). |"
+        },
+        {
+          "before": "| Robustness | **ALIGNED** for present analyses: [breakdowns](../../../../../artifacts/rp4_v4_b4/robustness.csv); MAE/RMSE, PIT and placebo remain pending. |",
+          "after": "| Robustness | References and descriptive MAE/RMSE **COMPLETED**; [breakdowns](../../../../../artifacts/rp4_v4_b4/robustness.csv), [secondary metrics](../../../../../artifacts/rp4_robustness_public_v1/secondary_metrics.csv) and [current evidence](../../../../CURRENT.md). PIT/placebo retain their historical pending inspection status. References are nominal post-primary comparisons; MAE/RMSE are descriptive without tests; nothing changes the headline or registered sequence. |"
+        }
+      ]
+    }
+  },
+  "preserved_seals_sha256": {
+    "evidence_manifest.json": "953a8710dd987682f381f9662cf004821c2feb0760e83481533fc2a183ee5e8b",
+    "translation_receipt.json": "f08afab3ee09f9fa243562a45cff4fe79ab497dc986035748c712b1473836b45",
+    "receipt.json": "f08afab3ee09f9fa243562a45cff4fe79ab497dc986035748c712b1473836b45",
+    "SHA256SUMS": "7930df73de993d6bd429825f01555d1bd8d83a88613da02d26ae705c215cee95"
+  },
+  "historical_producer_sha256": "03ce725c2e8b67eefe56e5ebf7dae5c39989b0fe24adbe6adf18b6dd0a34638a",
+  "source_artifact_sha256": {
+    "reference_contrasts.csv": "3e59dcbab5760464b0abf41ca2f748016e7d42a51542c195c3cee6687a2e862e",
+    "secondary_metrics.csv": "66ba437b3878bb4b2c5241863236b0eaf59712eaf3be8a63bbe40a1baca56f88",
+    "import_receipt.json": "09dc2a38a747838b0eded5bcef66575054cc89c0a56aa29852d9e93796524aad"
+  },
+  "new_fits": 0,
+  "new_bootstraps": 0,
+  "prospective_reads": 0,
+  "primary_unchanged": true
+}
