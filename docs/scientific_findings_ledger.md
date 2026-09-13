@@ -97,7 +97,7 @@ reports observed B2/B1 delta 0.000802389659514178 QLIKE and mean within-asset-se
 shuffled-flow delta 0.001210658368310869, or 150.9% of the observed increment.
 Thirty-eight of 50 permutations exceed the observed, without ties:
 empirical p = 39/51 = 0.7647058823529411; ascending rank = 13/51.
-The joint 69-column flow block is shuffled across 419 sessions per permutation,
+The joint 69-column flow block is shuffled within each asset-session, with 419 sessions per permutation,
 with 20,950 fits. At 30 minutes, shuffled flow performs better on average than
 aligned flow, so the control does not support a minute-by-minute alignment
 advantage. This is consistent with the [registered v3 RV30 H2](rp4/results_v3.md)
