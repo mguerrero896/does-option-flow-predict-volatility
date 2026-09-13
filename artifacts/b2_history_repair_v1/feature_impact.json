@@ -1,0 +1,121 @@
+{
+  "alpha_spent": 0,
+  "capital_go": false,
+  "corrected_features_sha256": "08cc686aeea7d4f267a5ba5954086b4b23e0c7dcc71670ed7402b5de3d2e9a9a",
+  "excluded_activity_origins": 451,
+  "historical_masked_features_reproduced_exactly": true,
+  "impact": {
+    "after_complete": 68237,
+    "before_complete": 68237,
+    "changed_common_cells": 244377,
+    "changed_common_rows": 27153,
+    "common_complete": 68237,
+    "features": {
+      "b2v2_deviation_call_put_premium_imbalance": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.9803878001059112
+      },
+      "b2v2_deviation_execution_side_premium_imbalance": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.3418015414587794
+      },
+      "b2v2_z_expiry_concentration": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.291464730200381
+      },
+      "b2v2_z_log_max_trade_premium": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.6711414667590336
+      },
+      "b2v2_z_log_mean_trade_premium": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.7811863874629381
+      },
+      "b2v2_z_log_trade_count": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.4338560641511475
+      },
+      "b2v2_z_repeated_contract_premium_share": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.7111633726417921
+      },
+      "b2v2_z_strike_concentration": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.40385850057531236
+      },
+      "b2v2_z_unique_contract_share": {
+        "changed_rows": 27153,
+        "max_abs_delta": 0.19178062120645434
+      }
+    },
+    "gained_complete": 0,
+    "lost_complete": 0,
+    "rows": 77328,
+    "sessions": 180
+  },
+  "impact_on_published_common_predictor_rows": {
+    "after_complete": 62266,
+    "before_complete": 62266,
+    "changed_common_cells": 221436,
+    "changed_common_rows": 24604,
+    "common_complete": 62266,
+    "features": {
+      "b2v2_deviation_call_put_premium_imbalance": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.9803878001059112
+      },
+      "b2v2_deviation_execution_side_premium_imbalance": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.3418015414587794
+      },
+      "b2v2_z_expiry_concentration": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.291464730200381
+      },
+      "b2v2_z_log_max_trade_premium": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.35084408632812014
+      },
+      "b2v2_z_log_mean_trade_premium": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.5370281602583322
+      },
+      "b2v2_z_log_trade_count": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.4338560641511475
+      },
+      "b2v2_z_repeated_contract_premium_share": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.7111633726417921
+      },
+      "b2v2_z_strike_concentration": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.40385850057531236
+      },
+      "b2v2_z_unique_contract_share": {
+        "changed_rows": 24604,
+        "max_abs_delta": 0.19178062120645434
+      }
+    },
+    "gained_complete": 0,
+    "lost_complete": 0,
+    "rows": 62266,
+    "sessions": 159
+  },
+  "manifest_sha256": "0c8a062c29a024972948ceaa62153e76a6e96d8291f43d1e63e04f83db47bee8",
+  "provider_requests": 0,
+  "runtime_hashes": {
+    "scripts/audit_b2_history_repair_v1.py": "eaa625d665a8db16985b27e31d338b2cd89946b4776f1d59f2a9873129f9e502",
+    "scripts/build_target_blind_common_panel_v22.py": "006267aaf05cc9163d536936e53ab6202018ddc8e5b3fd9e6a9064ada8587f23",
+    "src/mds650/phase6.py": "40666a1f25b04c70891fc2924c3f75c62b89e308a3a375ca43efa1bacfb1dce8",
+    "src/mds650/target_blind_panel_v22.py": "692a59915de3764613a71bef47fc4e0c7949dd4b8852365be93889092870d1d0"
+  },
+  "schema_version": "b2-history-repair-impact-1.0",
+  "source_hashes": {
+    "b2_availability_sidecar_sha256": "de3951a0dca73632c8fcbe0b92899c045d7096bf3eed81cf55f958f1009892de",
+    "b2_primary_inputs_sha256": "a3466e656ce6bc0397c2bed1f24472a5523f3ae8ffc986312f340d4b9f6c782b",
+    "origins_sha256": "636cc90d287aa634f7533d643d52dbbb2bea4c7295111163f9552944c7c1a880"
+  },
+  "status": "FEATURE_IMPACT_MEASURED",
+  "target_reads": 0
+}
