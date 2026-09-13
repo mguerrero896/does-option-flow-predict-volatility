@@ -367,8 +367,9 @@ def apply_b2_availability_mask_v22(
     Notes
     -----
     A delayed source record is an exclusion, not proof of no activity.  This
-    function therefore prevents the old zero-coding failure from propagating
-    into a future model matrix.
+    function prevents zero-coding in the output, but cannot repair normalization
+    that already used excluded history. Pass the same selected availability
+    sidecar to build_b2v2_from_activity before calling this output mask.
     """
     _assert_target_blind_columns({"b2": b2, "availability": availability})
     _require_columns(
