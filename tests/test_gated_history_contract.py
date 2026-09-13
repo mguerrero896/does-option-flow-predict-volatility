@@ -42,9 +42,15 @@ TABULAR_SUFFIXES = (".parquet", ".csv")
 FIXTURE_PREFIXES = ("artifacts/pilot_preview/fixture_",)
 # 20,950 permutation/session mean-loss differences, no origin-level market rows.
 # Source SHA-256 and aggregation checks: test_current_scientific_claims.py.
-REVIEWED_AGGREGATE_BLOB = (
-    "artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_session_deltas.csv",
-    "124e50f827f6adf7021e571095d6d84ccbbabe88",
+REVIEWED_AGGREGATE_BLOBS = (
+    (
+        "artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_session_deltas.csv",
+        "124e50f827f6adf7021e571095d6d84ccbbabe88",
+    ),
+    (
+        "artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv30_session_deltas.csv",
+        "f9e439764494ed45a154f59fe1a0afbae62b4b2c",
+    ),
 )
 OPT_OUT = "MDS650_HISTORY_GUARD_MAY_SKIP"
 PERSONAL_PATHS = (
@@ -189,17 +195,21 @@ def _granular_blobs(ref: str) -> list[str]:
             continue
         if path.startswith(FIXTURE_PREFIXES):
             continue
-        if (path, oid) == REVIEWED_AGGREGATE_BLOB:
+        if (path, oid) in REVIEWED_AGGREGATE_BLOBS:
             continue
         found.append(f"{size / 1048576:.1f} MB  {path}")
     return sorted(set(found))
 
 
 @pytest.mark.parametrize("same_path,same_blob", [(True, True), (True, False), (False, True)])
+@pytest.mark.parametrize("path,oid", REVIEWED_AGGREGATE_BLOBS)
 def test_reviewed_aggregate_exception_is_path_and_content_exact(
-    monkeypatch: pytest.MonkeyPatch, same_path: bool, same_blob: bool,
+    monkeypatch: pytest.MonkeyPatch,
+    same_path: bool,
+    same_blob: bool,
+    path: str,
+    oid: str,
 ) -> None:
-    path, oid = REVIEWED_AGGREGATE_BLOB
     if not same_path:
         path = "artifacts/rp2_block3_target/target_panel.parquet"
     if not same_blob:

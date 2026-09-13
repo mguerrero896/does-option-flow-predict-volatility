@@ -188,6 +188,7 @@ delivery times or a causal latency experiment.
 | Development stability, 419 sessions | Omitting each session individually leaves linear B2/B1 gains between **0.543% and 0.707%**. | The extreme one-day concentration is a final-window issue, not a description of the whole historical study. |
 | Assumed availability, 60 / 120 / 300 seconds | Linear B2/B1 gains **1.447% / 0.623% / 0.194%**; p = **0.0001 / 0.0032 / 0.1948**. | Sensitivity to source-time assumptions, not a measured or causal cost of delivery latency. The 60-second result does not strengthen the registered finding. |
 | Within-asset-session placebo | About **81.63%** of the gain survives; **12/50** permutations exceed aligned flow, empirical p = **0.255**. | Timely order flow is not demonstrated. Whole-session shuffling is not an executable information set or a causal attribution. |
+| RV30 within-asset-session placebo | Shuffled flow averages **150.9%** of the observed gain; **38/50** permutations exceed it, empirical p = **0.7647**. | No minute-by-minute alignment advantage is supported at 30 minutes; the RV15 headline is unchanged. |
 
 [Exact arithmetic, sources and missing controls](docs/B2_INTERPRETATION.md) ·
 [Full timing table and uncertainty](docs/CURRENT.md).

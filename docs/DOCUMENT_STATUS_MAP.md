@@ -29,6 +29,7 @@ necessary evidence without representing the current conclusion.
 | --- | --- | --- |
 | [Current evidence](CURRENT.md) and [findings ledger](scientific_findings_ledger.md) | CURRENT | Begin here for results, limitations and unresolved evidence boundaries. |
 | [Completed linear RV15 placebo report](rp4/robustness_committed_v1_placebo_linear_rv15.md), [summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv) and [provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json) | CURRENT | Closed post-primary robustness evidence; timely order flow is not demonstrated. The English report is a declared public derivative; other robustness stages are not certified by this closure. |
+| [Completed linear RV30 placebo summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv30_summary.csv), [interpretation](FAQ.md#13-does-the-placebo-support-timely-flow-information) and [provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json) | CURRENT | Shuffled flow performs better on average than aligned flow; no minute-by-minute alignment advantage is supported. Closed post-primary robustness evidence, not a causal decomposition or a changed RV15 headline. |
 | [RP4 v4 result](rp4/results_v4.md) and [specification](rp4/specification_v4.md) | CURRENT | Primary historical result and its design, read with the qualifications below. |
 | [Final narrative](rp4/RESULTADO_FINAL.md) | CURRENT | Public narrative accompanying the v4 result; current evidence and the ledger resolve older closeout wording. |
 | [Final narrative revision 1](rp4/RESULTADO_FINAL_revision_1.md) and [revision 2](rp4/RESULTADO_FINAL_revision_2.md) | HISTORICAL | Retained closeout accounts; their statements that the programme ends without v5 describe an earlier scope. |
@@ -57,7 +58,7 @@ The completed [60-second](../artifacts/rp4_robustness_public_v1/pit_60_contrasts
 and [300-second timing sensitivities](../artifacts/rp4_robustness_public_v1/pit_300_contrasts.csv), including their exact saved 120-second primary controls,
 and their [interpretation](FAQ.md#14-does-the-flow-result-survive-a-stricter-availability-cutoff)
 are **CURRENT**, with [import provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
-The three-cutoff series is descriptive evidence of timing sensitivity, not a stronger registered finding or historical receipt proof. Tree-model placebos at RV15 and RV30 are deferred for cost; the linear RV30 placebo remains in progress and is not certified by this closure.
+The three-cutoff series is descriptive evidence of timing sensitivity, not a stronger registered finding or historical receipt proof. The linear robustness campaign is complete: RV15 and RV30 placebos and 60 / 120 / 300-second timing comparisons. Tree-model placebos at RV15 and RV30 remain deferred for computational cost.
 
 The baseline inventory contains 2,801 tracked files, including 528 Markdown files.
 Counting `.md`, `.rst`, `.txt`, `.pdf`, `.docx`, `.pptx`, `.html` and `.ipynb`

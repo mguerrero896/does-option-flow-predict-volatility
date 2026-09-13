@@ -1,0 +1,2 @@
+label,horizon,family,permutations,observed_delta,exceedances,p_empirical,observed_rank_ascending,minimum,maximum,mean,sd,median,percentile_2_5,percentile_97_5
+"robustez comprometida en la propuesta, ejecutada después de la lectura primaria; no selecciona modelos ni cambia el titular; se reporta salga como salga",30,log_ridge_harq,50,0.000802389659514178,38,0.7647058823529411,13,0.0005395383606642487,0.0018079633796606138,0.001210658368310869,0.00037851612876045506,0.0013208759451633933,0.0005816035648690574,0.0017161749190053133

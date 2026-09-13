@@ -17,20 +17,36 @@ PLACEBO = ROOT / "artifacts/rp4_robustness_public_v1"
 PLACEBO_PREFIX = "placebo_log_ridge_harq_rv15_"
 
 
-def _placebo_rows(suffix: str) -> list[dict[str, str]]:
-    with (PLACEBO / (PLACEBO_PREFIX + suffix)).open(encoding="utf-8", newline="") as stream:
+def _placebo_rows(suffix: str, horizon: int = 15) -> list[dict[str, str]]:
+    with (PLACEBO / f"placebo_log_ridge_harq_rv{horizon}_{suffix}").open(
+        encoding="utf-8", newline=""
+    ) as stream:
         return list(csv.DictReader(stream))
 
 
-def test_placebo_import_preserves_closed_hashes_and_public_scope() -> None:
+@pytest.mark.parametrize(
+    ("horizon", "summary_sha256"),
+    (
+        (15, "b02d927e789297f5667507c40320c2316f3f8a640de8a2852d048c64c2ef2e73"),
+        (30, "d1cd88600a934e3900d3640b93adb2a62da1cc1d1193133b3dce211aa2b4fb69"),
+    ),
+)
+def test_placebo_import_preserves_closed_hashes_and_public_scope(
+    horizon: int, summary_sha256: str
+) -> None:
+    prefix = f"placebo_log_ridge_harq_rv{horizon}_"
     receipt = json.loads((PLACEBO / "import_receipt.json").read_text("utf-8"))
-    report = receipt["report"]
-    assert (
-        hashlib.sha256((ROOT / report["path"]).read_bytes()).hexdigest() == report["public_sha256"]
-    )
-    assert report["byte_identical"] is False and report["transformations"]
+    if horizon == 30:
+        receipt = receipt["placebo_rv30"]
+    else:
+        report = receipt["report"]
+        assert (
+            hashlib.sha256((ROOT / report["path"]).read_bytes()).hexdigest()
+            == report["public_sha256"]
+        )
+        assert report["byte_identical"] is False and report["transformations"]
     expected = {
-        PLACEBO_PREFIX + name
+        prefix + name
         for name in (
             "summary.csv",
             "summary.json",
@@ -46,46 +62,54 @@ def test_placebo_import_preserves_closed_hashes_and_public_scope() -> None:
             hashlib.sha256((PLACEBO / entry["path"]).read_bytes()).hexdigest()
             == entry["public_sha256"]
         )
-        if entry["byte_identical"]:
+        if entry["path"].endswith(".csv"):
+            assert entry["byte_identical"] is True
             assert entry["public_sha256"] == entry["source_sha256"]
             assert not entry["transformations"]
         else:
+            assert entry["byte_identical"] is False
             assert entry["transformations"] and entry["path"].endswith(".json")
-    assert hashlib.sha256(
-        (PLACEBO / (PLACEBO_PREFIX + "summary.csv")).read_bytes()
-    ).hexdigest() == ("b02d927e789297f5667507c40320c2316f3f8a640de8a2852d048c64c2ef2e73")
+    assert (
+        hashlib.sha256((PLACEBO / (prefix + "summary.csv")).read_bytes()).hexdigest()
+        == summary_sha256
+    )
     close = receipt["source_close"]
     assert close["status"] == "COMPLETE_CONTRACT_PASS" and close["contract_exit_code"] == 0
     sources = {entry["path"]: entry["source_sha256"] for entry in receipt["files"]}
-    assert close["summary_sha256"] == sources[PLACEBO_PREFIX + "summary.json"]
-    assert close["receipt_sha256"] == sources[PLACEBO_PREFIX + "complete_receipt.json"]
+    assert close["summary_sha256"] == sources[prefix + "summary.json"]
+    assert close["receipt_sha256"] == sources[prefix + "complete_receipt.json"]
     assert receipt["scientific_model_fits_during_import"] == 0
     assert receipt["primary_statistics_changed"] is False
     assert receipt["licensed_granular_data_imported"] is False
-    public_receipt = json.loads(
-        (PLACEBO / (PLACEBO_PREFIX + "complete_receipt.json")).read_text("utf-8")
-    )
+    public_receipt = json.loads((PLACEBO / (prefix + "complete_receipt.json")).read_text("utf-8"))
     assert public_receipt["status"] == "COMPLETE" and public_receipt["count"] == 50
     assert "command_argv" not in public_receipt
     assert "executable" not in public_receipt["environment"]
-    assert all("filepath" not in item for item in public_receipt["environment"]["threadpools"])
+    assert all(
+        "filepath" not in item for item in public_receipt["environment"].get("threadpools", [])
+    )
 
 
-def test_placebo_saved_aggregation_and_empirical_rank() -> None:
-    rows = _placebo_rows("summary.csv")
+@pytest.mark.parametrize(("horizon", "expected_exceedances", "rank"), ((15, 12, 39), (30, 38, 13)))
+def test_placebo_saved_aggregation_and_empirical_rank(
+    horizon: int, expected_exceedances: int, rank: int
+) -> None:
+    rows = _placebo_rows("summary.csv", horizon)
     assert len(rows) == 1
     summary = rows[0]
-    assert summary["horizon"] == "15" and summary["family"] == "log_ridge_harq"
-    draws = _placebo_rows("draws.csv")
+    assert summary["horizon"] == str(horizon) and summary["family"] == "log_ridge_harq"
+    draws = _placebo_rows("draws.csv", horizon)
     assert len(draws) == int(summary["permutations"]) == 50
     assert {int(row["k"]) for row in draws} == set(range(50))
     sessions: dict[int, dict[str, float]] = defaultdict(dict)
-    for row in _placebo_rows("session_deltas.csv"):
+    for row in _placebo_rows("session_deltas.csv", horizon):
+        assert row["horizon"] == str(horizon) and row["family"] == "log_ridge_harq"
         k = int(row["k"])
         assert row["session_date"] not in sessions[k]
         sessions[k][row["session_date"]] = float(row["delta"])
     assert set(sessions) == set(range(50))
     for row in draws:
+        assert row["horizon"] == str(horizon) and row["family"] == "log_ridge_harq"
         k = int(row["k"])
         assert int(row["seed"]) == 20260908 + k
         assert len(sessions[k]) == int(row["N_sessions"]) == 419
@@ -95,12 +119,12 @@ def test_placebo_saved_aggregation_and_empirical_rank() -> None:
     values = [float(row["delta"]) for row in draws]
     observed = float(summary["observed_delta"])
     exceedances = sum(value >= observed for value in values)
-    assert exceedances == int(summary["exceedances"]) == 12
+    assert exceedances == int(summary["exceedances"]) == expected_exceedances
     assert (1 + exceedances) / (len(values) + 1) == float(summary["p_empirical"])
     assert (
         1 + sum(value < observed for value in values)
         == int(summary["observed_rank_ascending"])
-        == 39
+        == rank
     )
     for field, actual in {
         "mean": fmean(values),
@@ -112,6 +136,32 @@ def test_placebo_saved_aggregation_and_empirical_rank() -> None:
         "percentile_97_5": quantiles(values, n=40, method="inclusive")[-1],
     }.items():
         assert actual == pytest.approx(float(summary[field]), abs=1e-15)
+
+
+def test_placebo_rv30_current_matches_summary_and_preserves_interpretation() -> None:
+    summary = _placebo_rows("summary.csv", 30)[0]
+    current = (ROOT / "docs/CURRENT.md").read_text("utf-8").replace("**", "")
+    paragraph = next(
+        line for line in current.splitlines() if line.startswith("Placebo (RV30, completed):")
+    )
+    observed, placebo_mean = float(summary["observed_delta"]), float(summary["mean"])
+    assert observed > 0 and placebo_mean > observed
+    for value in (
+        f"{observed:.7f}",
+        f"{placebo_mean:.7f}",
+        f"{100 * placebo_mean / observed:.1f}%",
+    ):
+        assert value in paragraph
+    assert (
+        f"empirical p = {int(summary['exceedances']) + 1}/{int(summary['permutations']) + 1} = "
+        f"{float(summary['p_empirical']):.4f}" in paragraph
+    )
+    assert f"{summary['exceedances']} of {summary['permutations']}" in paragraph
+    assert "does not support a minute-by-minute alignment advantage" in paragraph
+    assert "not a causal decomposition or a change to the RV15 headline" in paragraph
+    assert "in progress" not in paragraph
+    assert "The linear RV30 placebo is in progress" not in current
+    assert "deferred" in current and "tree" in current.lower()
 
 
 def test_placebo_current_values_match_imported_summary_without_changing_headline() -> None:

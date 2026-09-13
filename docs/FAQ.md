@@ -129,6 +129,18 @@ permutations exceed the observed statistic: empirical p = (1 + 12) / (50 + 1) =
 0.255; the observed ascending rank is 39 of 51. The placebo distribution's
 2.5th/97.5th percentiles are 0.000456/0.001283, not an effect confidence interval.
 
+The completed linear RV30 placebo has observed increment **0.0008024** QLIKE
+and shuffled mean **0.0012107**, or **150.9%** of the observed. **38 of 50**
+permutations exceed it, with no ties; empirical p = **39/51 = 0.7647** and
+observed ascending rank = 13 of 51. Each permutation covers the same 419 sessions,
+giving 20,950 fits. At 30 minutes, shuffled flow performs better on average than
+aligned flow: the control does not support an advantage of minute-by-minute
+alignment. This is consistent with the registered RV30 second test not rejecting
+in v3 (p = 0.0525), not a new joint test across horizons or a change to the RV15
+headline. [RV30 summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv30_summary.csv),
+[50 draws](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv30_draws.csv)
+and [registered RV30 result](rp4/results_v3.md).
+
 The control preserves the joint flow distribution within each asset-session but
 breaks alignment with forecast origins; it does not preserve the exact conditional
 profile by minute of day. Most of the gain survives that shuffle, but the ratio
@@ -140,6 +152,8 @@ all temporal information is absent. This robustness check was registered after
 the primary read, not on an independent prospective sample. The registered
 primary decision is unchanged; its interpretation is narrower. The completed
 60 / 120 / 300-second timing sensitivity is discussed below.
+The linear robustness campaign is complete at these two horizons and three
+cutoffs; tree-model placebos remain deferred for computational cost.
 [Saved summary](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_summary.csv),
 [draws](../artifacts/rp4_robustness_public_v1/placebo_log_ridge_harq_rv15_draws.csv) and
 [source closure and hashes](../artifacts/rp4_robustness_public_v1/import_receipt.json).
