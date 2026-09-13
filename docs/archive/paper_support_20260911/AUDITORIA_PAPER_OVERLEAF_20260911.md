@@ -1,6 +1,6 @@
 # Auditoría del informe capstone — Overleaf en vivo vs. evidencia local
 
-**Fecha:** 2026-09-11 · **Auditor:** Claude Opus 5 · **Proyecto Overleaf:** `6aa05182e720e12c4f829a3e`
+**Fecha:** 2026-09-11 · **Auditor:** revisor automatizado del propietario (registro local) · **Proyecto Overleaf:** `6aa05182e720e12c4f829a3e`
 **Contra:** `docs/CURRENT.md`, `artifacts/rp4_v4_b4/*`, `artifacts/rp4_robustness_public_v1/*`, plantilla del docente `hasanalikhattak/Sydney-Polytechnic-Institute-Capstone-Template-MDS65X`
 
 ---
