@@ -1,6 +1,8 @@
 # Research method film
 
-[Watch or download the original-quality MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) · [English subtitles](research-method.en.srt)
+https://github.com/user-attachments/assets/ff827b5e-f44d-4097-b54a-bc32145c1dd3
+
+Press Play above to watch the complete film here. [Download the original-quality MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) · [English subtitles](research-method.en.srt)
 
 The 125-second film explains the RP4 v4 method: FMP stock bars and Unusual Whales
 options records, eligibility, nested B0/B1/B2 inputs, chronological fitting,
@@ -31,8 +33,10 @@ The first 5 seconds use the original cover scaled to 4K; the remaining 120 secon
 retain the native 4K film. The original body frames and audio packets were preserved.
 Full video and audio decoding checks passed before upload.
 
-The MP4 is hosted as a GitHub release asset, so ordinary clones do not download
-its 37,448,361 bytes. This delivery preserves its bytes without regeneration.
+The inline GitHub attachment and downloadable release asset contain the same
+37,448,361-byte MP4. Ordinary clones do not download it. Both copies preserve
+its bytes without regeneration. GitHub's inline player starts with Play;
+automatic playback on scrolling is not enabled.
 
 SHA-256: `7ebcf684d6f4f3db222ff04ba785c42872d3774a5c5aa8fee1b81295e3d6c0cd`.
 

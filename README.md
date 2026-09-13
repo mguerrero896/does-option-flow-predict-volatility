@@ -2,9 +2,10 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-[![Watch the research method film: from market records through eligibility, information sets and models to a 15-minute variance forecast.](docs/media/research-method-cover.jpg)](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4)
+https://github.com/user-attachments/assets/ff827b5e-f44d-4097-b54a-bc32145c1dd3
 
-[Watch or download the method film · 2 min 5 sec · 4K](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) ·
+**Press Play above · 2 min 5 sec · 4K** ·
+[Download the original MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) ·
 [English subtitles](docs/media/research-method.en.srt) ·
 [Sources and video details](docs/media/research-method.md)
 
