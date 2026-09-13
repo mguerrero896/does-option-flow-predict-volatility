@@ -56,6 +56,9 @@ record does not describe the current 90-second introduction.
 Start with the [research question and findings](../README.md), then the
 [proposal, hypotheses and deviations](rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md)
 and [v4 specification](rp4/specification_v4.md).
+The defense presentation is a retained snapshot; read its
+[subsequent status correction](CURRENT.md#reading-the-retained-defense-package)
+for the completed linear placebos and timing checks.
 [Glossary of labels and option-market terms](glossary.md) · [Visual glossary (PNG)](figures/public_refresh/glossary.png).
 The [program map](figures/public_refresh/proposal_to_replication.workflow.svg) connects design,
 evaluation, evidence and prospective replication.

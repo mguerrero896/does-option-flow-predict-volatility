@@ -277,6 +277,11 @@ Use the [evidence map](docs/EVIDENCE_MAP.md) to trace a number to a file, the
 Start from the default `main` branch; development branches are not alternative
 scientific conclusions. Cite the commit you actually inspected.
 
+Historical PIT-v22 custody has a separate [exposure audit](artifacts/target_blind_v22/successor_holdout_exposure_v1.json):
+`PASS_RETROSPECTIVE_EXPOSURE_VERIFIED` confirms prior outcome exposure, so that
+measurement remains exploratory and descriptive. The [B2 repair note](docs/b2_repair_and_evidence_closeout_20260905.md)
+records its producer correction; neither record changes the RP4 v4 headline.
+
 ## Explore and cite
 
 [Evidence map](docs/EVIDENCE_MAP.md) · [Research history](docs/RESEARCH_WALKTHROUGH.md#research-timeline) ·

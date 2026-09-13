@@ -32,3 +32,8 @@ preserves earlier sample-specific quantities and dispositions.
 
 Decision 57's dated reference to “threat #8” identifies point-in-time availability,
 which is row 7 here. The row number does not change the named threat.
+
+The historical PIT-v22 [exposure audit](../artifacts/target_blind_v22/successor_holdout_exposure_v1.json)
+records `PASS_RETROSPECTIVE_EXPOSURE_VERIFIED`: all 32 holdout sessions intersect
+previously read outcomes. Its corrected status is exploratory and descriptive;
+an access-custody label or methodology override cannot restore unseen outcomes.
