@@ -1,0 +1,16 @@
+{
+  "artifact": "docs/rp4/volatility_regime_secondary_v1.md",
+  "sha256": "e4c6be7fb601b1a4d2daf54e3ac83bde3b0d6dc501e424312ffc81288fa11359",
+  "registered_utc": "2026-09-11T12:05:08.466934+00:00",
+  "role": "SECONDARY_NOMINAL",
+  "purpose": "RQ3 volatility-regime dimension; rule fixed before computation",
+  "input": "artifacts/rp4_v4_b2_rv15/session_losses.csv",
+  "computation_status": "COMPLETED",
+  "computed_utc": "2026-09-11T12:07:29.197202+00:00",
+  "output": "artifacts/rp4_v4_b4/volatility_regime_secondary.csv",
+  "output_sha256": "977f1726d6c5e940952d43b6bf6b04f54a179a9d242b00c8d97e4527f2b9681f",
+  "pipeline_validation": "Reproduced primary_statistics.csv Linear B2/B1: estimate to 19 dp, interval to 10 dp, p=0.0032 with 31 exceedances",
+  "headline": "Linear flow increment rises monotonically across volatility terciles (0.249/0.408/1.091 pct); vol_high survives Holm within its family of four (p_holm=0.0444); tree flow in vol_high is negative (-0.879 pct)",
+  "output_note": "Numeric cells rewritten as plain decimals; an earlier write emitted numpy repr wrappers. Values unchanged.",
+  "output_corrected_utc": "2026-09-11T13:09:11.172077+00:00"
+}
