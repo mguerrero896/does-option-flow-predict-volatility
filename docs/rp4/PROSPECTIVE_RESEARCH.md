@@ -4,7 +4,7 @@
 questions and the evidence needed to resolve them. They authorize no evaluation,
 collection, spending or change to an existing registration. The
 [registered prospective protocol](prospective_confirmation_v1.md) and its
-[current amendment](prospective_confirmation_v1_amendment_3.md) retain their
+[current amendment](prospective_confirmation_v1_amendment_4.md) retain their
 decision rules, sample restrictions and reading schedule. A proposed extension
 requires a separate specification before its evaluation data are observed.
 

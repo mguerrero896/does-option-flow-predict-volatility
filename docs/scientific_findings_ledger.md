@@ -211,6 +211,6 @@ prospective replication.
 **Prospective checks remain future evidence.** Twenty new sessions, forty-session
 stability, the secondary 25+20 combination, and the final 335-session extension have
 different roles. RP3 remains governed by its own registration. No prospective data
-were read to construct this ledger.
+were read to construct this ledger. [Amendment 4](rp4/prospective_confirmation_v1_amendment_4.md) records the September collector incident and authorises late acquisition conditionally on disk space. It changes no decision rule and supplies no prospective result.
 
 RESEARCH_ONLY · NOT INVESTMENT ADVICE · capital_go=false.

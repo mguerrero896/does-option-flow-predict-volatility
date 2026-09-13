@@ -84,7 +84,9 @@ protocol are unchanged.
 
 ## Next evidence and claim governance
 
-The [registered prospective protocol](rp4/prospective_confirmation_v1.md), with its [final amendment](rp4/prospective_confirmation_v1_amendment_3.md), fixes reads at **20** new sessions, **40** cumulative sessions for stability and **335** cumulative sessions for the final extension. Approximate marginal planning power at 20 is 11% for H1 / 15% for H2; at 335 it is 55% / 80%. These are assumption-dependent sensitivities; 80% for H2 is not 80% for the sequence. A favorable early read would be encouraging; a null cannot authorize redesign or a rescue at 40. Cumulative reads are dependent and do not have a claimed global 5% error rate.
+The [registered prospective protocol](rp4/prospective_confirmation_v1.md), with its [final amendment](rp4/prospective_confirmation_v1_amendment_4.md), fixes reads at **20** new sessions, **40** cumulative sessions for stability and **335** cumulative sessions for the final extension. Approximate marginal planning power at 20 is 11% for H1 / 15% for H2; at 335 it is 55% / 80%. These are assumption-dependent sensitivities; 80% for H2 is not 80% for the sequence. A favorable early read would be encouraging; a null cannot authorize redesign or a rescue at 40. Cumulative reads are dependent and do not have a claimed global 5% error rate.
+
+Amendment 4 records the September collector incident and owner-authorised late acquisition of 8–10 September, sealed before acquisition and any replication read. Acquisition remains **PENDING_DISK_SPACE** under the 105 GiB pre-session gate; counting currently starts with 11 September. Eligibility, source-time limits and decision rules remain unchanged.
 
 Successful registered evaluation on genuinely future sessions could support replication. Failure, inadequate coverage or instability would narrow the interpretation and remain recorded. Economic value requires a separately authorized study. No further retrospective specification search is authorized by this document.
 

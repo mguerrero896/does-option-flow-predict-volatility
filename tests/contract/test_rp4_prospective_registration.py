@@ -10,6 +10,70 @@ import pytest
 from scripts.rp4_archive_sources import assert_historical_sha256, original_path
 
 
+def test_amendment_4_binds_complete_chain_without_changing_decision_rules() -> None:
+    root = Path(__file__).resolve().parents[2]
+    docs = root / "docs/rp4"
+    stem = "prospective_confirmation_v1_amendment_4"
+    record = json.loads((docs / f"{stem}_receipt.json").read_bytes())
+    document = (docs / f"{stem}.md").read_bytes()
+    assert (
+        hashlib.sha256(document).hexdigest()
+        == record["document_sha256"]
+        == ("4bb563baafa0846d87fbddc10d551c1522256eaf2a54fedb10b469d649374ee8")
+    )
+    lines = (docs / f"{stem}.sha256").read_text().splitlines()
+    assert {line.split("  ", 1)[1] for line in lines} == {f"{stem}.md", f"{stem}_receipt.json"}
+    for line in lines:
+        expected, name = line.split("  ", 1)
+        assert Path(name).name == name
+        assert hashlib.sha256((docs / name).read_bytes()).hexdigest() == expected
+    for name, expected in record["source_sha256"].items():
+        assert hashlib.sha256((root / name).read_bytes()).hexdigest() == expected, name
+    assert len(record["chain"]) == 4
+    for n, entry in enumerate(record["chain"]):
+        prior_stem = "prospective_confirmation_v1" + (f"_amendment_{n}" if n else "")
+        prior = json.loads((docs / f"{prior_stem}_receipt.json").read_bytes())
+        assert entry["document"] == f"docs/rp4/{prior_stem}.md"
+        assert entry["sha256"] == prior["amendment_sha256" if n == 1 else "document_sha256"]
+        assert entry["sealed_at_utc"] == prior["sealed_at_utc" if n else "registered_at_utc"]
+        assert_historical_sha256(root / entry["document"], entry["sha256"])
+        assert datetime.fromisoformat(entry["sealed_at_utc"]) < datetime.fromisoformat(
+            record["sealed_at_utc"]
+        )
+    assert record["schema"] == "rp4-prospective-amendment-4"
+    for flag in (
+        "primary_unchanged",
+        "eligibility_unchanged",
+        "common_mask_unchanged",
+        "estimands_unchanged",
+        "tests_unchanged",
+        "reading_calendar_unchanged",
+    ):
+        assert record[flag] is True
+    assert record["authorized_prospective_read_counts"] == [20, 40, 335]
+    assert record["late_sessions"] == ["2026-09-08", "2026-09-09", "2026-09-10"]
+    assert record["late_acquisition_executed"] is False
+    assert record["late_acquisition_status_at_seal"] == "PENDING_DISK_SPACE"
+    assert record["required_pre_session_free_bytes"] == 105 * 1024**3
+    assert record["minimum_remaining_free_bytes"] == 100 * 1024**3
+    assert record["estimated_session_bytes"] == 1_700_000_000
+    assert record["unavailable_late_status"] == "UNAVAILABLE_LATE"
+    assert not record["imputation_or_substitution_allowed"]
+    assert (
+        not record["prospective_data_read"]
+        and record["prospective_replication_reads_reported"] == 0
+    )
+    assert record["new_fits"] == record["new_bootstraps"] == 0
+    incident = json.loads((docs / f"{stem}_incident.json").read_bytes())
+    assert incident["verified_source_pins"] == 16
+    assert incident["restored_manual_session"]["status"] == "PASS"
+    assert incident["restored_manual_session"]["target_reads"] == 0
+    assert incident["reported_failed_dates"] == [f"2026-09-{n:02}" for n in range(9, 14)]
+    assert incident["reported_launcher_exit_code"] == 2
+    assert {e["native_return_code"] for e in incident["task_event_observations"]} == {2147942402}
+    assert len(incident["task_event_observations"]) == 3 and incident["evidence_limit"]
+
+
 def test_rp4_prospective_registration_and_amendment_are_bound() -> None:
     root = Path(__file__).resolve().parents[2]
     docs = root / "docs/rp4"
