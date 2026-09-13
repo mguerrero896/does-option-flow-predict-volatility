@@ -2,15 +2,16 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-[![Watch the 90-second research walkthrough: question, sources, one forecast, information sets, chronological comparison, results, limits and reproduction.](docs/figures/research_motion/preview.gif)](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4)
+https://github.com/user-attachments/assets/ff827b5e-f44d-4097-b54a-bc32145c1dd3
 
-[Play video · 90 seconds](https://d2ol7oe51mr4n9.cloudfront.net/user_3Ht6KSRAaPnOiI0qd2pMhzDxB0H/44d921a7-ca70-445b-b71f-f8ac69e5a339.mp4) ·
-[Download MP4](docs/figures/research_motion/overview.mp4) ·
-[Static cover](docs/figures/research_motion/title.png) ·
-[Transcript and chart sources](docs/figures/research_motion/README.md)
+**Press Play above · 2 min 5 sec · 4K** ·
+[Download the original MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) ·
+[English subtitles](docs/media/research-method.en.srt) ·
+[Sources and video details](docs/media/research-method.md)
 
-Eight chapters, readable on-screen captions and [subtitles](docs/figures/research_motion/overview.srt).
-The preview is a short excerpt; open the full video to follow the research.
+A conceptual animation with English captions and ambient audio, without spoken
+narration or empirical result figures. The five-second cover introduces the
+method film. [Earlier 90-second results walkthrough](docs/figures/research_motion/README.md).
 
 Miguel Guerrero
 

@@ -1,0 +1,51 @@
+1
+00:00:05,000 --> 00:00:11,000
+From market records to a forecast of realized variance.
+A conceptual view of the RP4 v4 method.
+
+2
+00:00:11,000 --> 00:00:23,000
+FMP supplies one-minute stock bars. Unusual Whales supplies options records.
+Fields below are examples of inputs; no observed records are displayed.
+
+3
+00:00:23,000 --> 00:00:37,000
+Quality and source-time rules determine which records are eligible.
+The 120-second cutoff is an availability proxy, not verified client receipt.
+
+4
+00:00:37,000 --> 00:00:49,000
+Past closes become log returns, then squared returns and backward-looking sums.
+Volume, market controls and session timing complete B0.
+
+5
+00:00:49,000 --> 00:01:01,000
+Options are grouped by maturity and moneyness.
+Weighted IV summaries and smile measures extend B0 into B1.
+
+6
+00:01:01,000 --> 00:01:15,000
+B2 adds activity, option-state changes, exposure proxies and empty-window handling.
+A valid empty activity window is different from unavailable provider data.
+
+7
+00:01:15,000 --> 00:01:27,000
+Each row aligns an asset, a session and a forecast minute.
+The comparisons use nested inputs at matching forecast origins.
+
+8
+00:01:27,000 --> 00:01:41,000
+Log ridge combines transformed predictors with regularized weights.
+LightGBM builds additive trees. The two families produce separate forecasts.
+
+9
+00:01:41,000 --> 00:01:53,000
+Training expands through time; recent training sessions select settings.
+Training-only transformations and a 60-minute purge/embargo protect evaluation.
+
+10
+00:01:53,000 --> 00:02:05,000
+The forecast is fixed before future returns are revealed.
+Realized variance is then the sum of squared one-minute log returns.
+
+

@@ -39,6 +39,7 @@ REVIEWED_RASTERS: frozenset[str] = frozenset(
         "docs/figures/system-architecture.png",
         "docs/figures/public_refresh/research_cover.png",
         "docs/figures/research_motion/preview.gif",
+        "docs/media/research-method-cover.jpg",
     }
 )
 
@@ -48,6 +49,15 @@ def test_reviewed_research_cover_identity() -> None:
     path = REPO / "docs/figures/public_refresh/research_cover.png"
     assert hashlib.sha256(path.read_bytes()).hexdigest() == (
         "7d342319ccbdf324d6400f2ff27801d0d9b719769a74f1ad7ff6d7c159263a80"
+    )
+
+
+def test_reviewed_method_film_cover_identity() -> None:
+    # Reviewed 2026-09-13: original film cover, six stocks and separate ETF context;
+    # schematic surface, no empirical estimates or prospective confirmation claim.
+    path = REPO / "docs/media/research-method-cover.jpg"
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == (
+        "5db3dc12714cbbe96178e58a0a3c093020706efacad5935edbce8a6abe36dfd6"
     )
 
 
