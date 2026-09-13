@@ -79,10 +79,12 @@ above and in the [import provenance](../artifacts/rp4_robustness_public_v1/impor
 Their original text and frozen source hashes are preserved rather than rewritten
 as if those later checks had already existed at presentation time.
 
-This status correction does not mark the other proposal commitments complete.
-Tree-model placebos remain deferred. Separate benchmark, alternative-metric,
-volatility-regime, dictionary and examiner-notebook claims require their own
-verified evidence; the linear robustness closure does not establish them.
+The separate reference and descriptive MAE/RMSE closures are now imported above;
+the two corresponding presentation rows are explicitly updated through a
+[new additive receipt](rp4/DEFENSE_PACKAGE/revision_2/correction_7/reference_metrics_update_receipt.json),
+which preserves the earlier presentation seals and numeric bindings. Tree-model
+placebos remain deferred. Volatility-regime, dictionary and examiner-notebook
+claims still require their own verified evidence; these closures do not establish them.
 The registered primary result, historical-search limitations and prospective
 protocol are unchanged.
 

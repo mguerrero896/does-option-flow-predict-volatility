@@ -77,8 +77,7 @@ def test_english_summary_keeps_the_complete_original_english_pdf_page() -> None:
 
 
 def test_english_producer_rejects_a_changed_scientific_number(tmp_path: Path) -> None:
-    for name in (*producer.DOCUMENTS, "README.md", "executive_summary.pdf"):
-        shutil.copyfile(PACKAGE / name, tmp_path / name)
+    shutil.copytree(PACKAGE, tmp_path, dirs_exist_ok=True)
     path = tmp_path / "executive_summary.md"
     original = path.read_text("utf-8")
     assert "+0.623%" in original

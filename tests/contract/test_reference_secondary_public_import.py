@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import shutil
 from pathlib import Path
 from statistics import fmean
 
@@ -144,8 +145,7 @@ def test_secondary_claims_bind_all_saved_rows_and_keep_descriptive_limits() -> N
 
 
 def test_defense_update_rejects_unreceipted_status_changes(tmp_path: Path) -> None:
-    for name in defense.DOCUMENTS:
-        (tmp_path / name).write_bytes((defense.PACKAGE / name).read_bytes())
+    shutil.copytree(defense.PACKAGE, tmp_path, dirs_exist_ok=True)
     path = tmp_path / "examiner_qa.md"
     source = path.read_text("utf-8")
     assert "**COMPLETED** reference comparisons" in source
@@ -156,4 +156,15 @@ def test_defense_update_rejects_unreceipted_status_changes(tmp_path: Path) -> No
         encoding="utf-8",
     )
     with pytest.raises(AssertionError, match="examiner_qa.md"):
+        defense.build(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "name", ["reference_metrics_update_receipt.json", "evidence_manifest.json"]
+)
+def test_defense_update_checks_the_requested_package_custody(tmp_path: Path, name: str) -> None:
+    shutil.copytree(defense.PACKAGE, tmp_path, dirs_exist_ok=True)
+    path = tmp_path / name
+    path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(AssertionError, match=name):
         defense.build(tmp_path)

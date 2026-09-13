@@ -117,16 +117,16 @@ def build(package: Path = PACKAGE) -> dict[str, bytes]:
             bindings[document].append(row)
         output_rows.append(row)
     assert len(output_rows) == len(rows)
-    update_path = PACKAGE / "reference_metrics_update_receipt.json"
+    update_path = package / "reference_metrics_update_receipt.json"
     update = None
     if update_path.exists():
         assert (
             digest(update_path.read_bytes())
             == "0c5c7ea01db3bbf9dd4faf83b20a0307ec8ea3cd75db950fdedeec391849bab9"
-        )
+        ), update_path.name
         update = json.loads(update_path.read_text("utf-8"))
         for name, expected in update["preserved_seals_sha256"].items():
-            assert digest((PACKAGE / name).read_bytes()) == expected, name
+            assert digest((package / name).read_bytes()) == expected, name
         for name, expected in update["source_artifact_sha256"].items():
             assert (
                 digest((ROOT / "artifacts/rp4_robustness_public_v1" / name).read_bytes())
