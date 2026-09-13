@@ -62,6 +62,24 @@ The v4 design was frozen at **2026-09-07T16:37Z (8 September 2026, 02:37 Austral
 
 **OOS fitting ≠ prospective scientific design. Predictive information ≠ causality. Predictive information ≠ tradability. Statistical significance ≠ economic significance.** Correlated stocks are not six independent replications. Historical source timing does not demonstrate execution feasibility. Neither a causal dealer-hedging/informed-trading mechanism, profitable strategy, cost-adjusted alpha, broad-market generalization nor an optimal horizon is established. The ridge/tree discrepancy remains unresolved; additive signal, representation and regularization are hypotheses, not measured mechanisms. [Validity limits](threats_to_validity_matrix_v1.md).
 
+## Reading the retained defense package
+
+The [correction-7 slides](rp4/DEFENSE_PACKAGE/revision_2/correction_7/defense_slides.md)
+and [examiner answers](rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md)
+retain an earlier presentation and its translation bindings. Their “PENDING”
+labels for PIT sensitivity and placebo are historical: the linear RV15 and RV30
+placebos and the 60/120/300-second timing comparisons are now complete, as recorded
+above and in the [import provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+Their original text and frozen source hashes are preserved rather than rewritten
+as if those later checks had already existed at presentation time.
+
+This status correction does not mark the other proposal commitments complete.
+Tree-model placebos remain deferred. Separate benchmark, alternative-metric,
+volatility-regime, dictionary and examiner-notebook claims require their own
+verified evidence; the linear robustness closure does not establish them.
+The registered primary result, historical-search limitations and prospective
+protocol are unchanged.
+
 ## Next evidence and claim governance
 
 The [registered prospective protocol](rp4/prospective_confirmation_v1.md), with its [final amendment](rp4/prospective_confirmation_v1_amendment_3.md), fixes reads at **20** new sessions, **40** cumulative sessions for stability and **335** cumulative sessions for the final extension. Approximate marginal planning power at 20 is 11% for H1 / 15% for H2; at 335 it is 55% / 80%. These are assumption-dependent sensitivities; 80% for H2 is not 80% for the sequence. A favorable early read would be encouraging; a null cannot authorize redesign or a rescue at 40. Cumulative reads are dependent and do not have a claimed global 5% error rate.
