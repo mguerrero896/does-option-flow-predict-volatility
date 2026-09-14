@@ -110,3 +110,13 @@ artifacts/rp3/frozen/freeze_manifest.json -text
 supabase/migrations/*.sql -text
 supabase/drafts/*.sql -text
 supabase/migrations_pending/*.sql -text
+
+# Preserve byte-identical closed reference and secondary-metric CSV imports.
+/artifacts/rp4_robustness_public_v1/reference_qlike.csv -text
+/artifacts/rp4_robustness_public_v1/reference_contrasts.csv -text
+/artifacts/rp4_robustness_public_v1/reference_matched_observed_contrasts.csv -text
+/artifacts/rp4_robustness_public_v1/reference_session_losses_rv15_HAR_dwm.csv -text
+/artifacts/rp4_robustness_public_v1/reference_session_losses_rv15_seasonal_persistence.csv -text
+/artifacts/rp4_robustness_public_v1/reference_session_losses_rv30_HAR_dwm.csv -text
+/artifacts/rp4_robustness_public_v1/reference_session_losses_rv30_seasonal_persistence.csv -text
+/artifacts/rp4_robustness_public_v1/secondary_metrics.csv -text

@@ -207,4 +207,37 @@ The [B2 interpretation note](B2_INTERPRETATION.md) separates final-window
 concentration from development stability and describes proposed availability-safe
 controls; these are not completed experiments or changes to registered analyses.
 
+## 15. How do the models compare with HAR-RV and seasonal persistence?
+
+All 24 saved comparisons favor B0/B1/B2 over the two references at RV15/RV30,
+with nominal one-sided p = 0.0001. HAR mean QLIKE is 0.40806067 / 0.33962310
+and seasonal persistence is 0.55791697 / 0.40648313 at RV15 / RV30.
+Each model is compared on its reference's matched intersection: HAR retains
+419 sessions and 160,832 origins; seasonal persistence retains 417 sessions,
+excluding 1,778 origins at RV15 and 1,873 at RV30. Lower QLIKE is better.
+
+HAR is an intraday OLS adaptation in levels with asset effects and daily,
+weekly and monthly components. The monthly component uses 22 previous available
+daily observations; 252 of 2,514 evaluation asset-session monthly windows have
+gaps between XNYS record dates. This is not a claim of 22 consecutive exchange
+sessions. Seasonal persistence requires the immediately previous XNYS session
+and complete observed closes; no missing stretch is filled.
+
+These are nominal post-primary comparisons, not a new primary selection or
+universal superiority claim. The declared deviation from the proposal's original
+model comparison remains. Including HAR/HARQ predictors in B0 was not itself a
+separate benchmark comparison; these saved reference rows now supply that evidence.
+[Report and limits](../artifacts/rp4_robustness_public_v1/references.md),
+[reference contrasts](../artifacts/rp4_robustness_public_v1/reference_contrasts.csv)
+and [matched observed contrasts](../artifacts/rp4_robustness_public_v1/reference_matched_observed_contrasts.csv).
+
+The secondary table has 72 descriptive MAE/RMSE estimates from saved predictions,
+without new fits. At primary linear RV15, B0/B1/B2 MAE is
+4.6811776e-06 / 4.7195749e-06 / 4.6911436e-06 and RMSE is
+3.3641832e-05 / 3.3551646e-05 / 3.3519018e-05 in non-annualized realized-variance
+units. B2 has lower RMSE but higher MAE than B0, illustrating dependence on the
+metric. MAE/RMSE are descriptive without tests; nothing changes the headline or
+registered sequence. [Descriptive table](../artifacts/rp4_robustness_public_v1/secondary_metrics.csv)
+and [current evidence](CURRENT.md).
+
 Research only. Not investment advice.

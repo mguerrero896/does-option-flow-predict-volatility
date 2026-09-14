@@ -64,8 +64,8 @@ The complete temporal label is “walk-forward out of sample, design fixed with 
 | Five-minute origins, expanding walk-forward, QLIKE; bootstrap of **5 sessions / 9,999 replicates** | **ALIGNED**; bootstrap parameters fixed in the execution registration. |
 | Non-annualized RV30 → primary RV15/secondary RV5, after reading RV30 | **DECLARED DEVIATION**, locally pre-declared v4 extension. |
 | Eight targets → six equities; SPY/QQQ as B0 controls | **DECLARED DEVIATION**; roles fixed, reason for reduction not located. |
-| Seasonal persistence/HAR-RV/regularized linear/trees → rank-filtered linear and LightGBM | **DECLARED DEVIATION**; HAR/HARQ are predictors, separate comparisons **PENDING**. |
-| Asset/regime analysis; MAE/RMSE, PIT variants and placebo | Delivered breakdowns **ALIGNED**; the three remaining robustness checks **PENDING**, without execution. Current PIT: **120 seconds**. |
+| Seasonal persistence/HAR-RV/regularized linear/trees → rank-filtered linear and LightGBM | **DECLARED DEVIATION** in the original model set remains; separate reference comparisons **COMPLETED**, nominal and post-primary. [Aggregates](../../../../../artifacts/rp4_robustness_public_v1/reference_contrasts.csv) · [Current evidence](../../../../CURRENT.md). |
+| Asset/regime analysis; MAE/RMSE, PIT variants and placebo | Delivered breakdowns **ALIGNED**; descriptive MAE/RMSE **COMPLETED**. PIT/placebo retain their historical **PENDING** inspection status, resolved by [current evidence](../../../../CURRENT.md). Primary PIT: **120 seconds**. [MAE/RMSE aggregates](../../../../../artifacts/rp4_robustness_public_v1/secondary_metrics.csv). |
 
 **Speaker notes.** The original RV30 equation sums thirty squared one-minute log returns without a square root or annualization. Answering the proposal first avoids presenting a favorable extension to another horizon as the original objective's answer. Asset signs do not equal individual rejection: none of the **12** B1 asset/family contrasts rejects after Holm within its four-contrast subset; minimum **0.0624**. Learning, empty-window and expiry diagnostics are neither three predefined volatility regimes nor causal tests. The [verifiable inventory](../../../../archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_alignment_evidence.json) bounds the search and absences.
 
@@ -85,7 +85,7 @@ The proposal states, translated, **“Model choice will depend on the benchmark 
 | Versioned panel | **DECLARED DEVIATION** in access: [release and hashes](../../../../../artifacts/rp4_v4_a2/evaluation_release_rv15.json); payload privately held under its license. |
 | Comparison tables | **ALIGNED**: [version table](../../../../../artifacts/rp4_closeout_figures/comparison_v1_v4.csv). |
 | Intervals | **ALIGNED**: [statistics](../../../../../artifacts/rp4_v4_b4/primary_statistics.csv). |
-| Robustness | **ALIGNED** for present analyses: [breakdowns](../../../../../artifacts/rp4_v4_b4/robustness.csv); MAE/RMSE, PIT and placebo remain pending. |
+| Robustness | References and descriptive MAE/RMSE **COMPLETED**; [breakdowns](../../../../../artifacts/rp4_v4_b4/robustness.csv), [secondary metrics](../../../../../artifacts/rp4_robustness_public_v1/secondary_metrics.csv) and [current evidence](../../../../CURRENT.md). PIT/placebo retain their historical pending inspection status. References are nominal post-primary comparisons; MAE/RMSE are descriptive without tests; nothing changes the headline or registered sequence. |
 | Examiner notebook | RP4 update **PENDING**: [earlier notebook](../../../../../notebooks/canonical_rv30_defense.ipynb), inspected without execution. |
 
 **Evidence.** [Proposal and original equation](../../../../archive/rp4/DEFENSE_PACKAGE/revision_2/correction_4/proposal_source_extract.json) · [Saved RV30](../../../../../artifacts/rp4_v3_b2/summary.json) · [Complete table and limits](examiner_qa.md#proposal--delivery). Preparing this slide executes none of the outstanding analyses.
