@@ -82,7 +82,7 @@ flowchart LR
     B --> C[335 cumulative sessions: final extension]
 ```
 
-[Amendment 3](rp4/prospective_confirmation_v1_amendment_3.md) fixes these dependent reads. [Amendment 4](rp4/prospective_confirmation_v1_amendment_4.md) records the collector incident and conditional late acquisition without changing them; its [incident evidence](rp4/prospective_confirmation_v1_amendment_4_incident.json) separates reported causes from observed collection metadata. The first verdict is retained; later reads cannot rescue it. Planning power for H2 is not power for the full sequence. Existing figures remain available for audit; these seven views define the primary reading route.
+[Amendment 3](rp4/prospective_confirmation_v1_amendment_3.md) fixes these dependent reads. [Amendment 4](rp4/prospective_confirmation_v1_amendment_4.md) records the collector incident and conditional late acquisition without changing them; its [incident evidence](rp4/prospective_confirmation_v1_amendment_4_incident.json) separates reported causes from observed collection metadata. The [late-execution receipt](rp4/prospective_confirmation_v1_amendment_4_execution_receipt.json) records two collection passes and one incomplete session excluded without substitution; it is not prospective inference. The first verdict is retained; later reads cannot rescue it. Planning power for H2 is not power for the full sequence. Existing figures remain available for audit; these seven views define the primary reading route.
 
 ### Recorded implementation
 

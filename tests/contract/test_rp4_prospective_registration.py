@@ -10,6 +10,71 @@ import pytest
 from scripts.rp4_archive_sources import assert_historical_sha256, original_path
 
 
+def test_amendment_4_execution_follows_seal_and_disk_gates_without_rewriting_it() -> None:
+    docs = Path(__file__).resolve().parents[2] / "docs/rp4"
+    stem = "prospective_confirmation_v1_amendment_4"
+    seal_bytes = (docs / f"{stem}_receipt.json").read_bytes()
+    seal = json.loads(seal_bytes)
+    execution_bytes = (docs / f"{stem}_execution_receipt.json").read_bytes()
+    assert hashlib.sha256(execution_bytes).hexdigest() == (
+        "947623eb90c6bb04900065448786ecf2d91e5cbe3ddb1e4dd19f090386593a1e"
+    )
+    execution = json.loads(execution_bytes)
+    assert execution["amendment_receipt_sha256"] == hashlib.sha256(seal_bytes).hexdigest()
+    assert execution["amendment_document_sha256"] == seal["document_sha256"]
+    assert execution["amendment_sealed_at_utc"] == seal["sealed_at_utc"]
+    assert seal["late_acquisition_executed"] is False
+    assert execution["late_acquisition_executed"] is True
+    assert execution["seal_receipt_rewritten"] is False
+    assert (
+        not execution["imputation_or_substitution_performed"] and not execution["replay_performed"]
+    )
+    assert execution["primary_unchanged"] and execution["eligibility_unchanged"]
+    assert execution["prospective_replication_reads_reported"] == 0
+    assert execution["prospective_results_read_in_this_task"] is False
+    assert [r["session_date"] for r in execution["sessions"]] == seal["late_sessions"]
+    previous = datetime.fromisoformat(seal["sealed_at_utc"])
+    for row in execution["sessions"]:
+        started = datetime.fromisoformat(row["acquisition_started_at_utc"])
+        acquired = datetime.fromisoformat(row["acquired_at_utc"])
+        assert previous < started <= acquired
+        previous = acquired
+        assert row["execution_state"] == "EXECUTED" and row["acquired_late"]
+        assert row["component_count"] == 9
+        if row["session_date"] == "2026-09-10":
+            assert row["acquisition_status"] == "UNAVAILABLE_LATE"
+            assert row["missing_components"] == ["fmp_AAPL"]
+            assert row["incomplete_component_coverage"] == [
+                {
+                    "component": "fmp_AAPL",
+                    "observed_minutes": 389,
+                    "expected_minutes": 390,
+                    "missing_minutes": 1,
+                }
+            ]
+        else:
+            assert row["acquisition_status"] == "PASS" and not row["missing_components"]
+        assert row["target_reads"] == row["model_fits"] == 0
+        assert row["free_bytes_before"] >= seal["required_pre_session_free_bytes"]
+        assert row["estimated_free_bytes_after"] == (
+            row["free_bytes_before"] - seal["estimated_session_bytes"]
+        )
+        assert (
+            min(row["estimated_free_bytes_after"], row["free_bytes_after"])
+            >= (seal["minimum_remaining_free_bytes"])
+        )
+        assert row["config_sha256"] == (
+            "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6"
+        )
+        for field in (
+            "private_session_manifest_sha256",
+            "private_one_use_claim_sha256",
+            "disk_gate_receipt_sha256",
+            "procedure_sha256",
+        ):
+            assert len(row[field]) == 64 and int(row[field], 16) >= 0
+
+
 def test_amendment_4_binds_complete_chain_without_changing_decision_rules() -> None:
     root = Path(__file__).resolve().parents[2]
     docs = root / "docs/rp4"
