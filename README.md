@@ -2,16 +2,17 @@
 
 *Historical forecasting evidence under source-time assumptions.*
 
-https://github.com/user-attachments/assets/ff827b5e-f44d-4097-b54a-bc32145c1dd3
+https://github.com/user-attachments/assets/05bf1dc8-d37d-4e2e-b920-8e714880e6c4
 
-**Press Play above · 2 min 5 sec · 4K** ·
-[Download the original MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-4k.mp4) ·
+**Press Play above · 8 min 33 sec · 4K** ·
+[Download the original MP4](https://github.com/mguerrero896/does-option-flow-predict-volatility/releases/download/research-method-film-2026-09/research-method-animated-4k.mp4) ·
 [English subtitles](docs/media/research-method.en.srt) ·
 [Sources and video details](docs/media/research-method.md)
 
-A conceptual animation with English captions and ambient audio, without spoken
-narration or empirical result figures. The five-second cover introduces the
-method film. [Earlier 90-second results walkthrough](docs/figures/research_motion/README.md).
+An animated guide from market records to variance forecasts: real Apple price
+examples, named inputs, Log Ridge and LightGBM, and forecast evaluation. English
+on-screen explanations and ambient audio; no spoken narration.
+[Earlier 90-second results walkthrough](docs/figures/research_motion/README.md).
 
 Miguel Guerrero
 

@@ -1,51 +1,262 @@
 1
-00:00:05,000 --> 00:00:11,000
-From market records to a forecast of realized variance.
-A conceptual view of the RP4 v4 method.
+00:00:05,000 --> 00:00:13,000
+Start with stock prices, volume and records of options trading.
 
 2
-00:00:11,000 --> 00:00:23,000
-FMP supplies one-minute stock bars. Unusual Whales supplies options records.
-Fields below are examples of inputs; no observed records are displayed.
+00:00:13,000 --> 00:00:21,000
+Build price-history, option-state and activity features from eligible records.
 
 3
-00:00:23,000 --> 00:00:37,000
-Quality and source-time rules determine which records are eligible.
-The 120-second cutoff is an availability proxy, not verified client receipt.
+00:00:21,000 --> 00:00:29,000
+Fit log ridge and LightGBM; compare their variance forecasts with observed outcomes.
 
 4
-00:00:37,000 --> 00:00:49,000
-Past closes become log returns, then squared returns and backward-looking sums.
-Volume, market controls and session timing complete B0.
+00:00:29,000 --> 00:00:36,000
+FMP supplies one-minute stock bars: asset, time, close price and traded volume.
 
 5
-00:00:49,000 --> 00:01:01,000
-Options are grouped by maturity and moneyness.
-Weighted IV summaries and smile measures extend B0 into B1.
+00:00:36,000 --> 00:00:43,000
+Unusual Whales supplies options-trade records with contract details and attached
+quotes.
 
 6
-00:01:01,000 --> 00:01:15,000
-B2 adds activity, option-state changes, exposure proxies and empty-window handling.
-A valid empty activity window is different from unavailable provider data.
+00:00:43,000 --> 00:00:50,000
+Both sources are matched by underlying stock and time before features are built.
 
 7
-00:01:15,000 --> 00:01:27,000
-Each row aligns an asset, a session and a forecast minute.
-The comparisons use nested inputs at matching forecast origins.
+00:00:50,000 --> 00:00:57,000
+Apple, Amazon, Meta, Microsoft, Nvidia and Tesla are the stocks studied; SPY and QQQ
+are controls.
 
 8
-00:01:27,000 --> 00:01:41,000
-Log ridge combines transformed predictors with regularized weights.
-LightGBM builds additive trees. The two families produce separate forecasts.
+00:00:57,000 --> 00:01:05,000
+At a 10:00 forecast, the source-time cutoff is 09:58: two minutes earlier.
 
 9
-00:01:41,000 --> 00:01:53,000
-Training expands through time; recent training sessions select settings.
-Training-only transformations and a 60-minute purge/embargo protect evaluation.
+00:01:05,000 --> 00:01:13,000
+An earlier price bar or option record can enter only if it also passes quality
+checks.
 
 10
-00:01:53,000 --> 00:02:05,000
-The forecast is fixed before future returns are revealed.
-Realized variance is then the sum of squared one-minute log returns.
+00:01:13,000 --> 00:01:21,000
+A zero-size trade is rejected even before the cutoff; a later quote is too late for
+this forecast.
 
+11
+00:01:21,000 --> 00:01:29,000
+We filter individual records, not entire variables. Source time is an availability
+proxy.
 
+12
+00:01:29,000 --> 00:01:38,000
+These are sixteen observed Apple closes. The price falls from $332.88 to $330.27,
+with intermediate rebounds.
+
+13
+00:01:38,000 --> 00:01:47,000
+Each pair of adjacent closes produces one log return; a fall gives a negative return.
+
+14
+00:01:47,000 --> 00:01:56,000
+Squaring removes the sign. Larger price moves contribute more to the variance sum.
+
+15
+00:01:56,000 --> 00:02:05,000
+This past fifteen-minute component joins other history windows, volume, SPY/QQQ and
+session timing.
+
+16
+00:02:05,000 --> 00:02:17,000
+Locate the contract by days to expiry and strike divided by spot.
+
+17
+00:02:17,000 --> 00:02:29,000
+Within its cell, the size-weighted median summarizes implied volatility.
+
+18
+00:02:29,000 --> 00:02:39,000
+Count qualifying trades, sum their size and premium, and summarize side-tag
+composition.
+
+19
+00:02:39,000 --> 00:02:49,000
+Match the same contract across records to measure changes in IV, midpoint and spread.
+
+20
+00:02:49,000 --> 00:02:59,000
+Exposure proxies use calculated sensitivities; open interest is a separate snapshot
+input.
+
+21
+00:02:59,000 --> 00:03:11,000
+The same asset, session and origin identify each row; every forecast targets the next
+15 minutes.
+
+22
+00:03:11,000 --> 00:03:23,000
+Each larger set retains the preceding inputs. Compare forecasts at matching eligible
+origins.
+
+23
+00:03:23,000 --> 00:03:33,000
+Log the inputs, then use training means and standard deviations.
+
+24
+00:03:33,000 --> 00:03:43,000
+Choose regularization on past validation sessions; refit on the permitted past.
+
+25
+00:03:43,000 --> 00:03:53,000
+Multiply standardized inputs by fitted weights, then add the intercept.
+
+26
+00:03:53,000 --> 00:04:03,000
+Use training residuals to correct the exponential, then apply training bounds.
+
+27
+00:04:03,000 --> 00:04:13,000
+Tree 1 tests past variance, then implied volatility; the highlighted path selects a
+leaf.
+
+28
+00:04:13,000 --> 00:04:23,000
+Other trees test the same row and add their own learned contributions in log-variance
+units.
+
+29
+00:04:23,000 --> 00:04:33,000
+Add the contributions to the base, then exponentiate to obtain the RV15 variance
+forecast.
+
+30
+00:04:33,000 --> 00:04:40,000
+Training expands by session after an initial 60-session warm-up.
+
+31
+00:04:40,000 --> 00:04:47,000
+The last ten training sessions are used for internal selection.
+
+32
+00:04:47,000 --> 00:04:54,000
+A 60-minute purge and embargo separate potentially overlapping windows.
+
+33
+00:04:54,000 --> 00:05:01,000
+The model is refitted for each session without using future test outcomes.
+
+34
+00:05:01,000 --> 00:05:10,000
+Keep the forecast fixed before revealing the target observations. This is a new Apple
+window.
+
+35
+00:05:10,000 --> 00:05:19,000
+Observed closes arrive in order; each new return adds its square to the running
+variance sum.
+
+36
+00:05:19,000 --> 00:05:28,000
+Downward moves and upward moves both add variance. An unchanged close adds zero.
+
+37
+00:05:28,000 --> 00:05:37,000
+The completed RV15 is the observed outcome used to score forecasts; it is not a model
+prediction.
+
+38
+00:05:37,000 --> 00:05:46,000
+Subtract losses at matching forecast times: price history minus added option state.
+
+39
+00:05:46,000 --> 00:05:55,000
+Average minutes within each company and day, then give companies equal weight.
+
+40
+00:05:55,000 --> 00:06:04,000
+Resample five-session blocks to assess uncertainty in the mean loss improvement.
+
+41
+00:06:04,000 --> 00:06:13,000
+Test option state first; test added activity only if that first test passes.
+
+42
+00:06:13,000 --> 00:06:20,000
+Subtract forecast variance from observed variance at the same two forecast times.
+
+43
+00:06:20,000 --> 00:06:27,000
+MAE averages absolute errors; it describes their typical size.
+
+44
+00:06:27,000 --> 00:06:34,000
+RMSE squares errors before averaging, giving more weight to large errors.
+
+45
+00:06:34,000 --> 00:06:41,000
+These describe errors in variance units; QLIKE drives the primary comparison.
+
+46
+00:06:41,000 --> 00:06:48,500
+Match the company, session, forecast minute and fifteen-minute horizon.
+
+47
+00:06:48,500 --> 00:06:56,000
+Each information set predicts the same future realised variance.
+
+48
+00:06:56,000 --> 00:07:03,500
+QLIKE compares observed variance with forecast variance; lower is better.
+
+49
+00:07:03,500 --> 00:07:11,000
+Repeat this comparison separately for log ridge and LightGBM.
+
+50
+00:07:11,000 --> 00:07:18,000
+The primary historical study retains its original data, eligibility and saved
+results.
+
+51
+00:07:18,000 --> 00:07:25,000
+Feature repairs and robustness checks remain distinct from the primary results.
+
+52
+00:07:25,000 --> 00:07:32,000
+Additional model families were compared in a separate historical analysis.
+
+53
+00:07:32,000 --> 00:07:39,000
+ETF forecasting is a separate extension; none rewrites the original study.
+
+54
+00:07:39,000 --> 00:07:45,500
+A local variant studies options activity without the IV filter, under a separate
+scope.
+
+55
+00:07:45,500 --> 00:07:52,000
+The expanded design combines Massive features with Greeks from UW.
+
+56
+00:07:52,000 --> 00:07:58,500
+Massive covers a selected basket of up to twelve contracts, not the full chain.
+
+57
+00:07:58,500 --> 00:08:05,000
+These historical extensions have separate protocols; they preserve the primary study.
+
+58
+00:08:05,000 --> 00:08:12,000
+Start with price bars and option records, applying the source-time cutoff.
+
+59
+00:08:12,000 --> 00:08:19,000
+Build price-history, option-state and activity features from eligible observations.
+
+60
+00:08:19,000 --> 00:08:26,000
+Log ridge and LightGBM forecast variance; QLIKE, MAE and RMSE score the errors.
+
+61
+00:08:26,000 --> 00:08:33,000
+Compare matched forecasts by session and quantify uncertainty in the improvement.
