@@ -11,7 +11,7 @@
       "Qualify session-level interpretation as consistent evidence, not causal attribution"
     ]
   },
-  "scope": "Closed linear RV15/RV30 placebo and PIT300/PIT60 imports; tree-model placebos not certified.",
+  "scope": "Closed linear RV15/RV30 placebo, PIT300/PIT60, reference-model and descriptive secondary-metric imports; tree-model placebos not certified.",
   "source_execution_commit": "fe64ee2e96dc8b87490ee3a87abb2fd97525a54b",
   "source_close_sha256": "f350cded51a046c9df91adaecc47889788fe955ffb9fa994bf78c2d1fe1f73bf",
   "source_close": {
@@ -260,5 +260,173 @@
     "licensed_granular_data_imported": false,
     "primary_statistics_changed": false,
     "scope": "Closed post-primary linear RV30 within-asset-session placebo; no causal decomposition, horizon selection or change to RV15 headline"
+  },
+  "references": {
+    "source_execution_commit": "9f7d19fcf7de7c62820fc639f453a2a672dcec05",
+    "source_close_sha256": "0bc45e0c340a1d0489f8ef1544b00c1cdd5505d3476a3c72af2da77cd3cbffdf",
+    "source_close": {
+      "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+      "stage": "references",
+      "status": "COMPLETE_CONTRACT_PASS",
+      "closed_at_utc": "2026-09-08T08:23:23.3606859+00:00",
+      "receipt_sha256": "1abcb9559bfd5ebbd8170a95c82770f95961c853fb118d4fbe357a350e0f9c36",
+      "contract_row": "references",
+      "contract_exit_code": 0,
+      "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+      "presentation_sha256": "a6c7ae7f3c87abdad27ea6c22b17f93ac6b0365fd7c3e4e1d8cc82f33032c961",
+      "code_commit": "9f7d19fcf7de7c62820fc639f453a2a672dcec05"
+    },
+    "files": [
+      {
+        "path": "close_references.json",
+        "source_sha256": "0bc45e0c340a1d0489f8ef1544b00c1cdd5505d3476a3c72af2da77cd3cbffdf",
+        "public_sha256": "eaecc86e19af727b92933b48d9d4e6e73bec103d3965498eabb2d83722a2182c",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific values and recorded execution hashes retained"
+        ]
+      },
+      {
+        "path": "references_receipt.json",
+        "source_sha256": "1abcb9559bfd5ebbd8170a95c82770f95961c853fb118d4fbe357a350e0f9c36",
+        "public_sha256": "1ce376ba31f92fc44b37052170b56a0714ce10c7f7398515cbac0b5bf31b3f22",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific values and recorded execution hashes retained",
+          "Omit command_argv containing private machine paths",
+          "Omit environment.executable private machine path"
+        ]
+      },
+      {
+        "path": "reference_diagnostics_receipt.json",
+        "source_sha256": "e68ceab0fe2ef69388eb00f642ac11e4e503d749cce234b7f7ba34a7b37af775",
+        "public_sha256": "5471965e19ae6386d67f15054e10703f52741011d54b150ca0b5d243eec28ed4",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific values and recorded execution hashes retained"
+        ]
+      },
+      {
+        "path": "reference_qlike.csv",
+        "source_sha256": "af976a11074c144f024703c3d149a71103a6fde6bee11f7e43da64aeb19aacda",
+        "public_sha256": "af976a11074c144f024703c3d149a71103a6fde6bee11f7e43da64aeb19aacda",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_contrasts.csv",
+        "source_sha256": "3e59dcbab5760464b0abf41ca2f748016e7d42a51542c195c3cee6687a2e862e",
+        "public_sha256": "3e59dcbab5760464b0abf41ca2f748016e7d42a51542c195c3cee6687a2e862e",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_matched_observed_contrasts.csv",
+        "source_sha256": "fb3a53f94fe49a4b7a3410340c626c5c62336df413933ad7e6a68896118155c4",
+        "public_sha256": "fb3a53f94fe49a4b7a3410340c626c5c62336df413933ad7e6a68896118155c4",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_session_losses_rv15_HAR_dwm.csv",
+        "source_sha256": "fdb317410914dbf8362932abe6884b880dd7c776982262ac75ee2cdd37c58210",
+        "public_sha256": "fdb317410914dbf8362932abe6884b880dd7c776982262ac75ee2cdd37c58210",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_session_losses_rv15_seasonal_persistence.csv",
+        "source_sha256": "71020a3c95f99019875d9780b925ec7cfdeb17eb2fc83fb5d979522af9ad64a0",
+        "public_sha256": "71020a3c95f99019875d9780b925ec7cfdeb17eb2fc83fb5d979522af9ad64a0",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_session_losses_rv30_HAR_dwm.csv",
+        "source_sha256": "06ccd66c496abc2cc862f09a376e22f1e0f8f5edeecaebc2780c817e969cff4f",
+        "public_sha256": "06ccd66c496abc2cc862f09a376e22f1e0f8f5edeecaebc2780c817e969cff4f",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "reference_session_losses_rv30_seasonal_persistence.csv",
+        "source_sha256": "59e499225a23ee8345b57e709480d5c493397fdf49a7491bf17e5fe60c894f0b",
+        "public_sha256": "59e499225a23ee8345b57e709480d5c493397fdf49a7491bf17e5fe60c894f0b",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "references.md",
+        "source_sha256": "a6c7ae7f3c87abdad27ea6c22b17f93ac6b0365fd7c3e4e1d8cc82f33032c961",
+        "public_sha256": "a61f5d864f098d18bd16211dd9c274814d3cb0ec02fc670295d8481206514f35",
+        "byte_identical": false,
+        "transformations": [
+          "English public derivative; original numerical tables retained; clarify historical and inferential scope; omit private coordination and unavailable private links"
+        ]
+      }
+    ],
+    "scientific_model_fits_during_import": 0,
+    "licensed_granular_data_imported": false,
+    "primary_statistics_changed": false,
+    "scope": "Closed post-primary nominal reference comparisons; no change to headline or registered sequence."
+  },
+  "secondary_metrics": {
+    "source_execution_commit": "e8fe81a59645bc4a8b17054c337f40ec4c52cd22",
+    "source_close_sha256": "fda7cb6c37c62299990d4434444204dc123db1f6b69dc5d5d196724eeae215ec",
+    "source_close": {
+      "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+      "stage": "secondary_metrics",
+      "status": "COMPLETE_CONTRACT_PASS",
+      "closed_at_utc": "2026-09-08T08:24:19.0310088+00:00",
+      "receipt_sha256": "3afc91ab014c7c007b10693569ee1627e1e39d4d90ffeda3d03592a98deadd36",
+      "contract_row": "secondary_metrics",
+      "contract_exit_code": 0,
+      "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+      "presentation_sha256": "69010b273217c4edf9b11f6c9fb5abd7d4d5d609fd95c66190b5dd3c7a1da3ad",
+      "code_commit": "e8fe81a59645bc4a8b17054c337f40ec4c52cd22",
+      "new_fits": 0,
+      "verification": "72 estimates independently recalculated from verified saved predictions; original result receipt preserved"
+    },
+    "files": [
+      {
+        "path": "close_secondary_metrics.json",
+        "source_sha256": "fda7cb6c37c62299990d4434444204dc123db1f6b69dc5d5d196724eeae215ec",
+        "public_sha256": "a936da99c47f595c1318de5bbe35477fe6112a9f94efc04568010868400ab4b8",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific values and recorded execution hashes retained"
+        ]
+      },
+      {
+        "path": "secondary_metrics_receipt.json",
+        "source_sha256": "3afc91ab014c7c007b10693569ee1627e1e39d4d90ffeda3d03592a98deadd36",
+        "public_sha256": "10ac9426c1924cc10708cb854ca46a6d4d51c674d018361e4ba858f893a08007",
+        "byte_identical": false,
+        "transformations": [
+          "Translate provenance label to English; scientific values and recorded execution hashes retained",
+          "Omit environment.executable private machine path"
+        ]
+      },
+      {
+        "path": "secondary_metrics.csv",
+        "source_sha256": "66ba437b3878bb4b2c5241863236b0eaf59712eaf3be8a63bbe40a1baca56f88",
+        "public_sha256": "66ba437b3878bb4b2c5241863236b0eaf59712eaf3be8a63bbe40a1baca56f88",
+        "byte_identical": true,
+        "transformations": []
+      },
+      {
+        "path": "secondary_metrics.md",
+        "source_sha256": "69010b273217c4edf9b11f6c9fb5abd7d4d5d609fd95c66190b5dd3c7a1da3ad",
+        "public_sha256": "5cfdd8209a0e832c77336b966c76de36d175df1c2e41015976226e743279debf",
+        "byte_identical": false,
+        "transformations": [
+          "English public derivative; original numerical tables retained; clarify historical and inferential scope; omit private coordination and unavailable private links"
+        ]
+      }
+    ],
+    "scientific_model_fits_during_import": 0,
+    "licensed_granular_data_imported": false,
+    "primary_statistics_changed": false,
+    "scope": "Closed descriptive MAE/RMSE; no tests, new fits, model selection or change to headline or registered sequence."
   }
 }

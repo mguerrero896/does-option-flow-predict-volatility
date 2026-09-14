@@ -47,6 +47,10 @@ All three cutoffs cover 419 sessions and 160,832 origins. Percentages divide eac
 
 The linear robustness campaign is complete: RV15 and RV30 placebos and the 60 / 120 / 300-second timing comparisons. Tree-model placebo phases at RV15 and RV30 remain deferred for computational cost.
 
+**Reference models (completed):** all **24** saved B0/B1/B2 comparisons against seasonal persistence and HAR-RV at RV15/RV30 favor the existing models (nominal one-sided **p = 0.0001** in every row). Reference mean QLIKE is **0.55791697 / 0.40806067** at RV15 and **0.40648313 / 0.33962310** at RV30 (seasonal / HAR). Seasonal persistence covers **417 sessions**, excluding **1,778 / 1,873 origins** at RV15/RV30; HAR covers **419 sessions / 160,832 origins**. Each comparison uses its matched sample; the seasonal rows cannot be compared against unmatched full-sample model losses. HAR is an intraday OLS adaptation with daily/weekly/monthly components, the monthly component using previous available observations rather than necessarily consecutive exchange sessions. These references are **nominal post-primary comparisons**; nothing changes the headline or registered sequence. [Reference report](../artifacts/rp4_robustness_public_v1/references.md) · [QLIKE and intervals](../artifacts/rp4_robustness_public_v1/reference_qlike.csv) · [Contrasts](../artifacts/rp4_robustness_public_v1/reference_contrasts.csv) · [Import provenance](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+
+**Secondary metrics (completed, descriptive):** the saved table contains **72** MAE/RMSE estimates across RV5/RV15/RV30, both historical windows, both families and B0/B1/B2. The source closure records independent recalculation from saved predictions, with **zero new fits**. For primary linear RV15, B0/B1/B2 MAE is **4.6811776e-06 / 4.7195749e-06 / 4.6911436e-06**, and RMSE is **3.3641832e-05 / 3.3551646e-05 / 3.3519018e-05**, in non-annualized realized-variance units. These descriptive rankings depend on the metric: B2 has lower RMSE but higher MAE than B0. **MAE/RMSE are descriptive without tests**; nothing changes the headline or registered sequence. The historical "confirmation" label is not a prospective outcome. [Full descriptive table and intervals](../artifacts/rp4_robustness_public_v1/secondary_metrics.md) · [CSV](../artifacts/rp4_robustness_public_v1/secondary_metrics.csv) · [Source closure](../artifacts/rp4_robustness_public_v1/close_secondary_metrics.json).
+
 **Secondary and adverse evidence:** at RV5, linear B2/B1 improves 0.256% (p = 0.0172); tree H1 fails (p = 0.0608), closing H2. The **final historical window** has 25 sessions and 9,750 origins: linear H1 p = **0.3908**, tree H1 p = **0.0568**; both H2 gates are closed. Linear H2's +1.997% and nominal p = 0.1758 are not a formal rejection; 97.54% of its window gain comes from 31 August 2026. **The final historical window did not confirm the complete registered sequence.** Original files retain the historical label “confirmation”; it does not mean independent prospective replication. [Statistics](../artifacts/rp4_v4_b4/primary_statistics.csv) · [Concentration evidence](rp4/DEFENSE_PACKAGE/revision_2/correction_7/examiner_qa.md).
 
 ## History and interpretation limits
@@ -75,10 +79,12 @@ above and in the [import provenance](../artifacts/rp4_robustness_public_v1/impor
 Their original text and frozen source hashes are preserved rather than rewritten
 as if those later checks had already existed at presentation time.
 
-This status correction does not mark the other proposal commitments complete.
-Tree-model placebos remain deferred. Separate benchmark, alternative-metric,
-volatility-regime, dictionary and examiner-notebook claims require their own
-verified evidence; the linear robustness closure does not establish them.
+The separate reference and descriptive MAE/RMSE closures are now imported above;
+the two corresponding presentation rows are explicitly updated through a
+[new additive receipt](rp4/DEFENSE_PACKAGE/revision_2/correction_7/reference_metrics_update_receipt.json),
+which preserves the earlier presentation seals and numeric bindings. Tree-model
+placebos remain deferred. Volatility-regime, dictionary and examiner-notebook
+claims still require their own verified evidence; these closures do not establish them.
 The registered primary result, historical-search limitations and prospective
 protocol are unchanged.
 

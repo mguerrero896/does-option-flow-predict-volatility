@@ -117,9 +117,33 @@ def build(package: Path = PACKAGE) -> dict[str, bytes]:
             bindings[document].append(row)
         output_rows.append(row)
     assert len(output_rows) == len(rows)
+    update_path = package / "reference_metrics_update_receipt.json"
+    update = None
+    if update_path.exists():
+        assert (
+            digest(update_path.read_bytes())
+            == "0c5c7ea01db3bbf9dd4faf83b20a0307ec8ea3cd75db950fdedeec391849bab9"
+        ), update_path.name
+        update = json.loads(update_path.read_text("utf-8"))
+        for name, expected in update["preserved_seals_sha256"].items():
+            assert digest((package / name).read_bytes()) == expected, name
+        for name, expected in update["source_artifact_sha256"].items():
+            assert (
+                digest((ROOT / "artifacts/rp4_robustness_public_v1" / name).read_bytes())
+                == expected
+            )
+    current_documents = {}
     output = {}
     for name in DOCUMENTS:
         text = (package / name).read_text("utf-8")
+        if update and name in update["documents"]:
+            entry = update["documents"][name]
+            assert digest(text.encode()) == entry["after_sha256"], name
+            current_documents[name] = text.encode()
+            for replacement in reversed(entry["replacements"]):
+                assert text.count(replacement["after"]) == 1, name
+                text = text.replace(replacement["after"], replacement["before"], 1)
+            assert digest(text.encode()) == entry["before_sha256"], name
         matched = number_matches(text, reader)
         selected = bindings[name]
         assert len(matched) == len(selected), f"Numeric occurrence count changed: {name}"
@@ -147,7 +171,9 @@ def build(package: Path = PACKAGE) -> dict[str, bytes]:
         "source_package": ARCHIVE.relative_to(ROOT).as_posix(),
         "source_manifest_sha256": digest(original("evidence_manifest.json").read_bytes()),
         "producer": Path(__file__).relative_to(ROOT).as_posix(),
-        "producer_sha256": digest(Path(__file__).read_bytes()),
+        "producer_sha256": (
+            update["historical_producer_sha256"] if update else digest(Path(__file__).read_bytes())
+        ),
         "document_sha256": {name: digest(payload) for name, payload in output.items()},
         "readme_sha256": digest((package / "README.md").read_bytes()),
         "pdf_sha256": digest((package / "executive_summary.pdf").read_bytes()),
@@ -210,6 +236,11 @@ def build(package: Path = PACKAGE) -> dict[str, bytes]:
     output["SHA256SUMS"] = "".join(
         f"{digest(payload)}  {name}\n" for name, payload in sorted(sealed.items())
     ).encode()
+    if update:
+        # Retain the previous seals; the separately pinned update binds current prose.
+        for name, expected in update["preserved_seals_sha256"].items():
+            assert digest(output[name]) == expected, name
+        output.update(current_documents)
     return output
 
 

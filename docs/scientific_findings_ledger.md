@@ -141,6 +141,23 @@ to their source closures. The linear robustness campaign is complete: RV15 and
 RV30 placebos and 60 / 120 / 300-second timing comparisons. Tree-model placebos
 at RV15 and RV30 remain deferred for computational cost.
 
+## Completed reference models and descriptive secondary metrics
+
+**Status: CURRENT, post-primary.** The [reference comparisons](../artifacts/rp4_robustness_public_v1/reference_contrasts.csv)
+contain 24 nominal contrasts at RV15/RV30: each favors the existing B0/B1/B2 model
+with one-sided p = 0.0001. HAR covers 419 sessions / 160,832 origins; seasonal
+persistence covers 417 sessions, excluding 1,778 / 1,873 origins at RV15 / RV30.
+Comparisons use matched samples. [Reference assumptions and gaps](../artifacts/rp4_robustness_public_v1/references.md).
+
+The [secondary table](../artifacts/rp4_robustness_public_v1/secondary_metrics.csv)
+contains 72 MAE/RMSE estimates across three horizons, two historical windows,
+two families and three sets. The source closure records independent recalculation
+from saved predictions with zero new fits. MAE/RMSE are descriptive without tests;
+these references are nominal post-primary comparisons. Nothing changes the headline
+or registered sequence. The two source closures are COMPLETE_CONTRACT_PASS,
+at 2026-09-08T08:23:23.3606859+00:00 and 2026-09-08T08:24:19.0310088+00:00,
+respectively. [Original/public hashes and declared transformations](../artifacts/rp4_robustness_public_v1/import_receipt.json).
+
 ## Closed registered exploratory v5 extension
 
 The [full English report](rp4/results_v5.md), [registered specification](rp4/specification_v5.md)
