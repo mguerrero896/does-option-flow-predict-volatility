@@ -1,0 +1,119 @@
+{
+  "schema": "rp4-prospective-collector-incident-evidence-v1",
+  "recorded_at_utc": "2026-09-13T23:44:26.516817+00:00",
+  "reported_failed_dates": [
+    "2026-09-09",
+    "2026-09-10",
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13"
+  ],
+  "reported_schedule": "10:00 Australia/Sydney",
+  "reported_launcher_exit_code": 2,
+  "reported_launcher_status": "LAUNCHER_FAILED",
+  "reported_root_cause": "SOURCE_HASH_MISMATCH",
+  "reported_drift_commit": "20d2e80f",
+  "collector_setup_at_utc": "2026-09-07T22:07:00Z",
+  "reported_secondary_cause": "DAILY_INSUFFICIENT_FREE_SPACE",
+  "minimum_free_bytes": 107374182400,
+  "restored_pyproject_sha256": "f7a62af5dcb1a35ce4c4f52df305ed0f574a0fff7806aba4a07f957fd6fb4b56",
+  "verified_source_pins": 16,
+  "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+  "task_event_observations": [
+    {
+      "event_id": 201,
+      "time_utc": "2026-09-13T00:00:01.8579335Z",
+      "native_return_code": 2147942402
+    },
+    {
+      "event_id": 201,
+      "time_utc": "2026-09-12T00:00:01.9047016Z",
+      "native_return_code": 2147942402
+    },
+    {
+      "event_id": 201,
+      "time_utc": "2026-09-11T00:00:02.0091487Z",
+      "native_return_code": 2147942402
+    }
+  ],
+  "evidence_limit": "Retained event coverage is 11-13 September only; native return 2147942402 is not literal launcher exit 2. Five failures and reproduced hash/disk causes are reported by the incident author, not reconstructed from those events.",
+  "restored_manual_session": {
+    "capital_go": false,
+    "config_sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6",
+    "data_status": "PRIVATE_LICENSED_COLLECTION_ONLY",
+    "missing_components": [],
+    "model_fits": 0,
+    "phase9_reads_or_writes": 0,
+    "session_date": "2026-09-11",
+    "status": "PASS",
+    "target_reads": 0
+  },
+  "late_sessions": [
+    "2026-09-08",
+    "2026-09-09",
+    "2026-09-10"
+  ],
+  "prospective_replication_reads_reported": 0,
+  "prospective_results_inspected": false,
+  "custody_files": [
+    {
+      "name": "machine_config.json",
+      "sha256": "5e6ac9f09c5e2db74cae856f04ec74f5a56e80f3853a82138729d06ddcc160f6"
+    },
+    {
+      "name": "pyproject.toml",
+      "sha256": "f7a62af5dcb1a35ce4c4f52df305ed0f574a0fff7806aba4a07f957fd6fb4b56"
+    },
+    {
+      "name": "pyproject.public_checkout.20d2e80f.bak",
+      "sha256": "7ec27b9f7cdfea2e8dbe709c702c669180bb820796645076b89211821c3cd0dd"
+    },
+    {
+      "name": "DELETION_RECEIPT_20260914.json",
+      "sha256": "c7cbe8a49dcd752773e2747518085bf3aa7e86c6aa980ed6500459011542e32c"
+    },
+    {
+      "name": "2026-09-11.json",
+      "sha256": "88d4676f211cb0cfe0b6df4b2c8f6f21b21922e7e51fd990cee62bfb841fbb09"
+    },
+    {
+      "name": "task_events.json",
+      "sha256": "13750e9a593aae76892de346fdd2e00ebc1251e59973e9ca68eda3368d6ea414"
+    },
+    {
+      "name": "20260913T1949395245221Z.log",
+      "sha256": "0ce5828dd8da576115173ad4cd9c839f13fd1e0b3a6a0bc40d8d786d1c12d99a"
+    },
+    {
+      "name": "20260913T2002528680332Z.log",
+      "sha256": "c8cd0263cbb41dfe04f889f9ac14303b988d809c33df7c83042e8b8b90eaea0b"
+    },
+    {
+      "name": "20260913T195233695400Z.json",
+      "sha256": "4ac43974d248280b7a76358fe731a57aad90bdd058ebf88d824a751f90d90d8c"
+    },
+    {
+      "name": "20260913T200553703847Z.json",
+      "sha256": "88d4676f211cb0cfe0b6df4b2c8f6f21b21922e7e51fd990cee62bfb841fbb09"
+    },
+    {
+      "name": "execution_receipt.json",
+      "sha256": "757185ee83d19084864e3493deba43518a32713de216241bdfb93716c689480f"
+    },
+    {
+      "name": "task_info_observation.json",
+      "sha256": "2679beec0a0e93cfe655408029b661bbc0d0926c35cdd61f617dd259dc4ce618"
+    }
+  ],
+  "private_custody_files_distributed": false,
+  "incident_report_sha256": "593bdcf64c6976d664bef1abd168a816fbbe6c992825c611a560cef5bbb460fb",
+  "research_only": true,
+  "capital_go": false,
+  "task_info_observation": {
+    "observed_at_utc": "2026-09-13T23:44:45.7845428Z",
+    "last_run_utc": "2026-09-13T00:00:01.0000000Z",
+    "last_task_result": 2,
+    "next_run_utc": "2026-09-14T00:00:00.0000000Z"
+  },
+  "native_event_retention_start_utc": "2026-09-10T09:05:25.8004236Z"
+}

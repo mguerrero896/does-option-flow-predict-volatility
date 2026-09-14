@@ -110,6 +110,8 @@ artifacts/rp3/frozen/freeze_manifest.json -text
 supabase/migrations/*.sql -text
 supabase/drafts/*.sql -text
 supabase/migrations_pending/*.sql -text
+# Preserve the exact incident bytes committed by the amendment 4 seal.
+/docs/rp4/prospective_confirmation_v1_amendment_4_incident.json -text whitespace=cr-at-eol
 
 # Preserve byte-identical closed reference and secondary-metric CSV imports.
 /artifacts/rp4_robustness_public_v1/reference_qlike.csv -text
