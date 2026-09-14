@@ -7,7 +7,8 @@ the collector ran unwatched through the three sessions that truncated.
 
 For active tasks, the verifier also rejects a missing executable, missing working directory,
 wrong entrypoint, expired trigger, unhealthy last exit and the absence of the Phase 9 restart
-policy. Retired Phase 8 tasks instead fail if re-enabled after their one-shot read. A green
+policy. UW tasks also reject settings that can skip or stop collection on battery power.
+Retired Phase 8 tasks instead fail if re-enabled after their one-shot read. A green
 result therefore describes the configured task fleet, not merely the presence of task names.
 
 Usage:
@@ -84,6 +85,8 @@ POWERSHELL_QUERY = (
     "WorkingDirectory=[string]$_.Actions[0].WorkingDirectory; "
     "RestartCount=[int]$_.Settings.RestartCount; "
     "RestartInterval=[string]$_.Settings.RestartInterval; "
+    "DisallowStartIfOnBatteries=[bool]$_.Settings.DisallowStartIfOnBatteries; "
+    "StopIfGoingOnBatteries=[bool]$_.Settings.StopIfGoingOnBatteries; "
     "LastResult=('0x{0:X8}' -f $i.LastTaskResult) } } | ConvertTo-Json -Depth 3"
 )
 
@@ -148,17 +151,18 @@ def reasons(
             found.append(f"{name} action has no Python or PowerShell entrypoint")
         else:
             if expected_target and target.name.lower() != expected_target.lower():
-                found.append(
-                    f"{name} expected {expected_target} but action targets {target.name}"
-                )
+                found.append(f"{name} expected {expected_target} but action targets {target.name}")
             if not target.is_file():
                 found.append(f"{name} action target does not exist: {target}")
 
         if str(name) in ("MDS650_Phase9_Collector", "MDS650_Phase9_PostCheck") and (
-            int(task.get("RestartCount", 0)) < 3
-            or str(task.get("RestartInterval", "")) != "PT5M"
+            int(task.get("RestartCount", 0)) < 3 or str(task.get("RestartInterval", "")) != "PT5M"
         ):
             found.append(f"{name} restart policy is not 3 attempts at PT5M")
+        if str(name).startswith("MDS650_UW_") and (
+            task.get("DisallowStartIfOnBatteries") or task.get("StopIfGoingOnBatteries")
+        ):
+            found.append(f"{name} can skip or stop collection while on battery")
         if not str(task.get("Next", "")).strip():
             found.append(
                 f"{name} is enabled with no next run: its trigger has expired and it "

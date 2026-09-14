@@ -54,6 +54,8 @@ def _task(name: str, **overrides: Any) -> dict[str, Any]:
         "WorkingDirectory": str(ROOT),
         "RestartCount": 3,
         "RestartInterval": "PT5M",
+        "DisallowStartIfOnBatteries": False,
+        "StopIfGoingOnBatteries": False,
     }
     task.update(overrides)
     return task
@@ -82,18 +84,14 @@ def test_expired_trigger_is_reported() -> None:
 def test_short_repetition_one_shot_is_reported() -> None:
     """PT7H is what killed the UW watchdog: one window, then silence."""
     module = _load()
-    fleet = [
-        _task("MDS650_UW_LatencyWatchdog", Trigger="MSFT_TaskTimeTrigger", RepDuration="PT7H")
-    ]
+    fleet = [_task("MDS650_UW_LatencyWatchdog", Trigger="MSFT_TaskTimeTrigger", RepDuration="PT7H")]
     assert module.reasons(fleet, expected=[])
 
 
 def test_long_repetition_one_shot_is_not_reported() -> None:
     """MDS650_AlertForwarder uses P3650D and does not expire until 2036."""
     module = _load()
-    fleet = [
-        _task("MDS650_AlertForwarder", Trigger="MSFT_TaskTimeTrigger", RepDuration="P3650D")
-    ]
+    fleet = [_task("MDS650_AlertForwarder", Trigger="MSFT_TaskTimeTrigger", RepDuration="P3650D")]
     assert module.reasons(fleet, expected=[]) == []
 
 
@@ -150,9 +148,7 @@ def test_phase9_tasks_are_required() -> None:
 
 def test_phase8_health_and_isolated_knowledge_tasks_are_required() -> None:
     module = _load()
-    assert {"MDS650_Phase8A_HealthWatch", "MDS650_Knowledge_AutoSync"} <= set(
-        module.EXPECTED
-    )
+    assert {"MDS650_Phase8A_HealthWatch", "MDS650_Knowledge_AutoSync"} <= set(module.EXPECTED)
 
 
 def test_wrong_or_missing_action_target_is_reported() -> None:
@@ -169,15 +165,24 @@ def test_wrong_or_missing_action_target_is_reported() -> None:
 def test_missing_working_directory_is_reported(tmp_path: Path) -> None:
     module = _load()
     missing = _task("MDS650_Phase9_Collector", WorkingDirectory=str(tmp_path / "gone"))
-    assert any("working directory does not exist" in reason for reason in module.reasons(
-        [missing], expected=[]
-    ))
+    assert any(
+        "working directory does not exist" in reason
+        for reason in module.reasons([missing], expected=[])
+    )
 
 
 def test_phase9_requires_restart_after_transient_failure() -> None:
     module = _load()
     no_retry = _task("MDS650_Phase9_Collector", RestartCount=0, RestartInterval="")
     assert any("restart policy" in reason for reason in module.reasons([no_retry], expected=[]))
+
+
+def test_battery_stop_policy_is_reported() -> None:
+    module = _load()
+    unsafe = _task("MDS650_UW_LatencyCollector", StopIfGoingOnBatteries=True)
+    assert module.reasons([unsafe], expected=[]) == [
+        "MDS650_UW_LatencyCollector can skip or stop collection while on battery"
+    ]
 
 
 def test_phase9_registration_has_three_five_minute_retries() -> None:
