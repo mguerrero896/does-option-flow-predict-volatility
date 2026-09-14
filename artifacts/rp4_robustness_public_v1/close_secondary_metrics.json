@@ -1,0 +1,14 @@
+{
+  "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+  "stage": "secondary_metrics",
+  "status": "COMPLETE_CONTRACT_PASS",
+  "closed_at_utc": "2026-09-08T08:24:19.0310088+00:00",
+  "receipt_sha256": "3afc91ab014c7c007b10693569ee1627e1e39d4d90ffeda3d03592a98deadd36",
+  "contract_row": "secondary_metrics",
+  "contract_exit_code": 0,
+  "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+  "presentation_sha256": "69010b273217c4edf9b11f6c9fb5abd7d4d5d609fd95c66190b5dd3c7a1da3ad",
+  "code_commit": "e8fe81a59645bc4a8b17054c337f40ec4c52cd22",
+  "new_fits": 0,
+  "verification": "72 estimates independently recalculated from verified saved predictions; original result receipt preserved"
+}

@@ -1,0 +1,5 @@
+label,horizon,reference,N_origins,N_excluded,N_sessions,complete_419_session_mask,estimate,ci_low,ci_high
+"robustez comprometida en la propuesta, ejecutada después de la lectura primaria; no selecciona modelos ni cambia el titular; se reporta salga como salga",15,seasonal_persistence,159054,1778,417,False,0.5579169717380044,0.5139276457251003,0.605794392571893
+"robustez comprometida en la propuesta, ejecutada después de la lectura primaria; no selecciona modelos ni cambia el titular; se reporta salga como salga",15,HAR_dwm,160832,0,419,True,0.40806066950535047,0.36506839843299815,0.47747149600228816
+"robustez comprometida en la propuesta, ejecutada después de la lectura primaria; no selecciona modelos ni cambia el titular; se reporta salga como salga",30,seasonal_persistence,158959,1873,417,False,0.40648312602098446,0.36953655945487385,0.44629919485016434
+"robustez comprometida en la propuesta, ejecutada después de la lectura primaria; no selecciona modelos ni cambia el titular; se reporta salga como salga",30,HAR_dwm,160832,0,419,True,0.33962309578162636,0.30128494382665216,0.3994597497325885

@@ -1,0 +1,29 @@
+{
+  "amendment_sha256": "a8bb842dacc62643c336d88998d14dd9d825d4b2856b48435f8f690d139c05d2",
+  "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+  "note": "Supplementary binding of the preserved fit-diagnostics file after the original reference receipt; no new fits and no rewritten outputs.",
+  "source_sha256": "779005dd8a381eeec831b02db9979cac69240f1ec1a9cef4e05b862d5d05ab9b",
+  "status": "COMPLETE_DIAGNOSTIC_CENSUS",
+  "summary": [
+    {
+      "first_fit_train_available": 13260,
+      "fits": 419,
+      "floor_contacts": 0,
+      "horizon": 15,
+      "last_fit_train_available": 173702,
+      "test_unavailable": 0,
+      "train_unavailable_max": 8190,
+      "train_unavailable_min": 8190
+    },
+    {
+      "first_fit_train_available": 13260,
+      "fits": 419,
+      "floor_contacts": 0,
+      "horizon": 30,
+      "last_fit_train_available": 173702,
+      "test_unavailable": 0,
+      "train_unavailable_max": 8190,
+      "train_unavailable_min": 8190
+    }
+  ]
+}

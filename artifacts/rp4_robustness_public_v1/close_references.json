@@ -1,0 +1,12 @@
+{
+  "label": "Robustness committed in the proposal, executed after the primary read; does not select models or change the headline; reported regardless of outcome.",
+  "stage": "references",
+  "status": "COMPLETE_CONTRACT_PASS",
+  "closed_at_utc": "2026-09-08T08:23:23.3606859+00:00",
+  "receipt_sha256": "1abcb9559bfd5ebbd8170a95c82770f95961c853fb118d4fbe357a350e0f9c36",
+  "contract_row": "references",
+  "contract_exit_code": 0,
+  "contract_log_sha256": "914192d0b998765b000418f37d07a01536c2ae674628eb5a10b106f2b50ebb92",
+  "presentation_sha256": "a6c7ae7f3c87abdad27ea6c22b17f93ac6b0365fd7c3e4e1d8cc82f33032c961",
+  "code_commit": "9f7d19fcf7de7c62820fc639f453a2a672dcec05"
+}
