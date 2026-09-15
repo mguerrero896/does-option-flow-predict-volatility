@@ -159,6 +159,14 @@ See the [diagram guide](figures/public_refresh/README.md) for recorded renderer
 versions and visual validation. Different browser versions can change rendered
 bytes; inspect a difference before accepting a new manifest.
 
+## Recompute the report's tables in a notebook
+
+`notebooks/quick_verification.ipynb` and `notebooks/extended_walkthrough.ipynb` embed the
+public aggregate CSVs, check their SHA-256 against `artifacts/`, recompute the published
+contrasts and compare every printed report value in a claims ledger. They run in Colab or
+Jupyter without credentials; `tests/contract/test_verification_notebooks.py` keeps their
+embedded inputs tied to the repository files. See [`notebooks/README.md`](../notebooks/README.md).
+
 ## Verify a publication candidate without remote writes
 
 On a clean branch descending from `origin/main`, use an output directory outside
