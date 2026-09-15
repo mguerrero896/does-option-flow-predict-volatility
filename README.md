@@ -239,6 +239,14 @@ in your local browser. The first command renders from saved public aggregates;
 the second checks the rendered bytes. No account, API key or licensed input is
 needed for these figures. This reproduces the **display**, not the model fits.
 
+**Check the report's tables without installing anything.** Two self-contained notebooks
+recompute the published results from the aggregate files in this repository and end with
+a claims ledger and an execution receipt: [`notebooks/quick_verification.ipynb`](notebooks/quick_verification.ipynb)
+(about 10 minutes, also [on Colab](https://colab.research.google.com/drive/1k9eTbP5fv7LlWVEyP1Kydbonzif52rZC))
+and [`notebooks/extended_walkthrough.ipynb`](notebooks/extended_walkthrough.ipynb)
+(about 30 minutes, also [on Colab](https://colab.research.google.com/drive/1XhEt3VMt_wj7br8PRf3j88DTXFQhJ_rw)).
+See [`notebooks/README.md`](notebooks/README.md).
+
 **Then verify the public record** from the clean, unchanged checkout:
 
 ```sh
