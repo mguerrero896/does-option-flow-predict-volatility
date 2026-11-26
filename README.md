@@ -296,3 +296,4 @@ Use [CITATION.cff](CITATION.cff) and identify the commit when citing a result.
 [License](LICENSE) · [Security](SECURITY.md) · [Visual provenance and editorial method](docs/READER_GUIDE.md).
 
 Research only. Not investment advice. `capital_go=false`.
+
